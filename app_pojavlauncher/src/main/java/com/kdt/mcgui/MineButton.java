@@ -8,8 +8,7 @@ import androidx.core.content.res.ResourcesCompat;
 
 import net.kdt.pojavlaunch.R;
 
-public class MineButton extends androidx.appcompat.widget.AppCompatButton
-{
+public class MineButton extends androidx.appcompat.widget.AppCompatButton {
 	
 	public MineButton(Context ctx) {
 		this(ctx, null);

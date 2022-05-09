@@ -1,6 +1,7 @@
 package net.kdt.pojavlaunch;
 
 import static net.kdt.pojavlaunch.Architecture.archAsString;
+import static net.kdt.pojavlaunch.Tools.getFileName;
 
 import android.Manifest;
 import android.app.Activity;
@@ -9,10 +10,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
@@ -21,7 +19,6 @@ import android.text.Html;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.StyleSpan;
-import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,33 +47,41 @@ import net.kdt.pojavlaunch.authenticator.mojang.InvalidateTokenTask;
 import net.kdt.pojavlaunch.authenticator.mojang.LoginListener;
 import net.kdt.pojavlaunch.authenticator.mojang.LoginTask;
 import net.kdt.pojavlaunch.authenticator.mojang.RefreshListener;
+import net.kdt.pojavlaunch.colorselector.ColorSelector;
 import net.kdt.pojavlaunch.customcontrols.CustomControls;
 import net.kdt.pojavlaunch.multirt.MultiRTConfigDialog;
 import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.utils.LocaleUtils;
 import net.kdt.pojavlaunch.value.MinecraftAccount;
+import net.kdt.pojavlaunch.value.PerVersionConfig;
+import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
+import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 
+import org.apache.commons.compress.utils.IOUtils;
 import org.apache.commons.io.FileUtils;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Locale;
+import java.util.jar.Attributes;
+import java.util.jar.JarEntry;
+import java.util.jar.JarInputStream;
+import java.util.jar.JarOutputStream;
 
-public class PojavLoginActivity extends BaseActivity
-// MineActivity
-{
+public class PojavLoginActivity extends BaseActivity {
     private final Object mLockStoragePerm = new Object();
     private final Object mLockSelectJRE = new Object();
     
     private EditText edit2, edit3;
     private final int REQUEST_STORAGE_REQUEST_CODE = 1;
-    private CheckBox sRemember, sOffline;
+    private CheckBox sRemember, sLocal;
     private TextView startupTextView;
     private SharedPreferences firstLaunchPrefs;
     private MinecraftAccount mProfile = null;
@@ -172,7 +177,7 @@ public class PojavLoginActivity extends BaseActivity
         }
     }
     private void uiInit() {
-        setContentView(R.layout.launcher_login_v3);
+        setContentView(R.layout.activity_pojav_login);
 
         Spinner spinnerChgLang = findViewById(R.id.login_spinner_language);
 
@@ -241,16 +246,14 @@ public class PojavLoginActivity extends BaseActivity
             public void onNothingSelected(AdapterView<?> adapter) {}
         });
             
-        edit2 = (EditText) findViewById(R.id.login_edit_email);
-        edit3 = (EditText) findViewById(R.id.login_edit_password);
-        
+        edit2 = findViewById(R.id.login_edit_email);
+        edit3 = findViewById(R.id.login_edit_password);
         sRemember = findViewById(R.id.login_switch_remember);
-        sOffline  = findViewById(R.id.login_switch_offline);
-        sOffline.setOnCheckedChangeListener((p1, p2) -> {
+        sLocal = findViewById(R.id.login_switch_local);
+        sLocal.setOnCheckedChangeListener((p1, p2) -> {
             // May delete later
             edit3.setEnabled(!p2);
         });
-            
         isSkipInit = true;
     }
     
@@ -264,8 +267,41 @@ public class PojavLoginActivity extends BaseActivity
         PojavProfile.setCurrentProfile(this, null);
     }
 
-   
-    private void unpackComponent(AssetManager am, String component) throws IOException {
+    private void repackLWJGL3(boolean ignoreExistence) throws IOException {
+        File outFile = new File(Tools.DIR_GAME_HOME + "/lwjgl3/lwjgl-fat.jar");
+        File outTmpFile = new File(Tools.DIR_GAME_HOME + "/lwjgl3/lwjgl-fat.jar.tmp");
+        File[] innerFiles = outTmpFile.getParentFile().listFiles();
+
+        if (outFile.exists() && !ignoreExistence) {
+            return;
+        }
+        outFile.delete();
+        outTmpFile.delete();
+
+        java.util.jar.Manifest manifest = new java.util.jar.Manifest();
+        manifest.getMainAttributes().put(Attributes.Name.MANIFEST_VERSION, "1.0");
+        JarOutputStream outJar = new JarOutputStream(new FileOutputStream(outTmpFile), manifest);
+        outJar.setLevel(9);
+
+        for (File file : innerFiles) {
+            if (!file.getName().endsWith(".jar")) continue;
+            JarInputStream inJar = new JarInputStream(new FileInputStream(file));
+            JarEntry entry;
+            while ((entry = inJar.getNextJarEntry()) != null) {
+                // avoid some duplicated entries
+                if (entry.getSize() == 0 || entry.getName().equals("META-INF/INDEX.LIST") || entry.getName().startsWith("META-INF/versions")) continue;
+                outJar.putNextEntry(new JarEntry(entry.getName()));
+                IOUtils.copy(inJar, outJar);
+            }
+            inJar.close();
+            file.delete();
+        }
+
+        outJar.close();
+        outTmpFile.renameTo(outFile);
+    }
+
+    private boolean unpackComponent(AssetManager am, String component) throws IOException {
         File versionFile = new File(Tools.DIR_GAME_HOME + "/" + component + "/version");
         InputStream is = am.open("components/" + component + "/version");
         if(!versionFile.exists()) {
@@ -295,8 +331,10 @@ public class PojavLoginActivity extends BaseActivity
                 }
             } else {
                 Log.i("UnpackPrep", component + ": Pack is up-to-date with the launcher, continuing...");
+                return false;
             }
         }
+        return true;
     }
     public static void disableSplash(String dir) {
         mkdirs(dir + "/config");
@@ -339,16 +377,22 @@ public class PojavLoginActivity extends BaseActivity
             // TODO: Remove after implement.
             Tools.copyAssetFile(this, "launcher_profiles.json", Tools.DIR_GAME_NEW, false);
             Tools.copyAssetFile(this,"resolv.conf",Tools.DIR_DATA, true);
+            Tools.copyAssetFile(this,"arc_dns_injector.jar",Tools.DIR_DATA, true);
             AssetManager am = this.getAssets();
             
             unpackComponent(am, "caciocavallo");
-            unpackComponent(am, "lwjgl3");
+
+            // Since the Java module system doesn't allow multiple JARs to declare the same module,
+            // we repack them to a single file here
+            repackLWJGL3(unpackComponent(am, "lwjgl3"));
+
             if(!installRuntimeAutomatically(am,MultiRTUtils.getRuntimes().size() > 0)) {
                MultiRTConfigDialog.openRuntimeSelector(this, MultiRTConfigDialog.MULTIRT_PICK_RUNTIME_STARTUP);
                 synchronized (mLockSelectJRE) {
                     mLockSelectJRE.wait();
                 }
             }
+            migrateToProfiles();
             if(Build.VERSION.SDK_INT > 28) runOnUiThread(this::showStorageDialog);
             LauncherPreferences.loadPreferences(getApplicationContext());
         }
@@ -379,7 +423,7 @@ public class PojavLoginActivity extends BaseActivity
                     final Uri uri = data.getData();
                     Thread t = new Thread(() -> {
                         try {
-                            MultiRTUtils.installRuntimeNamed(getContentResolver().openInputStream(uri), BaseLauncherActivity.getFileName(this, uri),
+                            MultiRTUtils.installRuntimeNamed(getContentResolver().openInputStream(uri), getFileName(this, uri),
                                     (resid, stuff) -> PojavLoginActivity.this.runOnUiThread(
                                             () -> {
                                                 if (startupTextView != null)
@@ -401,6 +445,46 @@ public class PojavLoginActivity extends BaseActivity
             }
         }
     }
+
+    private void migrateToProfiles() {
+        try {
+            if(!PerVersionConfig.exists()) return;
+            LauncherProfiles.update();
+            PerVersionConfig.update();
+            if(PerVersionConfig.erase()) {
+                for (String version : PerVersionConfig.configMap.keySet()) {
+                    PerVersionConfig.VersionConfig config = PerVersionConfig.configMap.get(version);
+                    if(config == null) continue; // Skip the version
+
+                    // Replaced by gl4es_extra
+                    if(config.renderer != null) {
+                        if (config.renderer.contains("zink")) config.renderer = "opengles3_virgl";
+                        if (!config.renderer.contains("virgl")) config.renderer = null;
+                    }
+
+                    if(config.renderer == null && config.gamePath == null &&
+                        config.jvmArgs == null && config.selectedRuntime == null){
+                        continue; // Empty pvc, skip it.
+                    }
+
+                    MinecraftProfile profile = new MinecraftProfile();
+                    profile.lastVersionId = version;
+                    profile.name = getString(R.string.migrated_profile_str, version);
+                    profile.pojavRendererName = config.renderer;
+                    profile.gameDir = config.gamePath;
+                    profile.javaDir = Tools.LAUNCHERPROFILES_RTPREFIX + config.selectedRuntime;
+                    profile.javaArgs = config.jvmArgs;
+                    LauncherProfiles.mainProfileJson.profiles.put("pvc-migrated-" + version, profile);
+                }
+                LauncherProfiles.update();
+            }else{
+                Log.e("ProfileMigrator"," Unable to remove Per Version Config files.");
+            }
+        }catch (IOException e) {
+            Log.e("ProfileMigrator","Failed to migrate!",e);
+        }
+    }
+
     private boolean installRuntimeAutomatically(AssetManager am, boolean otherRuntimesAvailable) {
         /* Check if JRE is included */
         String rt_version = null;
@@ -410,11 +494,11 @@ public class PojavLoginActivity extends BaseActivity
         } catch (IOException e) {
             Log.e("JREAuto", "JRE was not included on this APK.", e);
         }
-        if(current_rt_version == null && otherRuntimesAvailable) return true; //Assume user maintains his own runtime
-        if(rt_version == null) return false;
+        if(current_rt_version == null && MultiRTUtils.getExactJreName(8) != null) return true; //Assume user maintains his own runtime
+        if(rt_version == null) return otherRuntimesAvailable; // On noruntime builds, skip if there is at least 1 runtime installed (no matter if it is 8 or not)
         if(!rt_version.equals(current_rt_version)) { //If we already have an integrated one installed, check if it's up-to-date
             try {
-                MultiRTUtils.installRuntimeNamedBinpack(am.open("components/jre/universal.tar.xz"), am.open("components/jre/bin-" + archAsString(Tools.DEVICE_ARCHITECTURE) + ".tar.xz"), "Internal", rt_version,
+                MultiRTUtils.installRuntimeNamedBinpack(getApplicationInfo().nativeLibraryDir, am.open("components/jre/universal.tar.xz"), am.open("components/jre/bin-" + archAsString(Tools.DEVICE_ARCHITECTURE) + ".tar.xz"), "Internal", rt_version,
                         (resid, vararg) -> runOnUiThread(()->{if(startupTextView!=null)startupTextView.setText(getString(resid,vararg));}));
                 MultiRTUtils.postPrepare(PojavLoginActivity.this,"Internal");
                 return true;
@@ -494,27 +578,21 @@ public class PojavLoginActivity extends BaseActivity
 
         final Dialog accountDialog = new Dialog(PojavLoginActivity.this);
 
-        accountDialog.setContentView(R.layout.simple_account_list_holder);
+        accountDialog.setContentView(R.layout.dialog_select_account);
 
         LinearLayout accountListLayout = accountDialog.findViewById(R.id.accountListLayout);
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
 
         for (int accountIndex = 0; accountIndex < accountArr.length; accountIndex++) {
             String s = accountArr[accountIndex];
-            View child = inflater.inflate(R.layout.simple_account_list_item, accountListLayout,false);
+            View child = inflater.inflate(R.layout.item_minecraft_account, accountListLayout,false);
             TextView accountName = child.findViewById(R.id.accountitem_text_name);
             ImageButton removeButton = child.findViewById(R.id.accountitem_button_remove);
             ImageView imageView = child.findViewById(R.id.account_head);
 
             String accNameStr = s.substring(0, s.length() - 5);
-            String skinFaceBase64 = MinecraftAccount.load(accNameStr).skinFaceBase64;
-            if (skinFaceBase64 != null) {
-                byte[] faceIconBytes = Base64.decode(skinFaceBase64, Base64.DEFAULT);
-                Bitmap bitmap = BitmapFactory.decodeByteArray(faceIconBytes, 0, faceIconBytes.length);
+            imageView.setImageBitmap(MinecraftAccount.load(accNameStr).getSkinFace());
 
-                imageView.setImageDrawable(new BitmapDrawable(getResources(),
-                        bitmap));
-            }
             accountName.setText(accNameStr);
 
             accountListLayout.addView(child);
@@ -542,8 +620,6 @@ public class PojavLoginActivity extends BaseActivity
                         if (acc.isMicrosoft){
                             new MicrosoftAuthTask(PojavLoginActivity.this, authListener)
                                     .execute("true", acc.msaRefreshToken);
-                        } else if (acc.accessToken.length() >= 5) {
-                            PojavProfile.updateTokens(PojavLoginActivity.this, selectedAccName, authListener);
                         } else {
                             accountDialog.dismiss();
                             PojavProfile.launch(PojavLoginActivity.this, selectedAccName);
@@ -584,7 +660,7 @@ public class PojavLoginActivity extends BaseActivity
         accountDialog.show();
     }
     
-    private MinecraftAccount loginOffline() {
+    private MinecraftAccount loginLocal() {
         new File(Tools.DIR_ACCOUNT_OLD).mkdir();
         
         String text = edit2.getText().toString();
@@ -594,8 +670,6 @@ public class PojavLoginActivity extends BaseActivity
             edit2.setError(getString(R.string.login_error_invalid_username));
         } else if (new File(Tools.DIR_ACCOUNT_NEW + "/" + text + ".json").exists()) {
             edit2.setError(getString(R.string.login_error_exist_username));
-        } else if (!edit3.getText().toString().isEmpty()) {
-            edit3.setError(getString(R.string.login_error_offline_password));
         } else {
             MinecraftAccount builder = new MinecraftAccount();
             builder.isMicrosoft = false;
@@ -605,47 +679,45 @@ public class PojavLoginActivity extends BaseActivity
         }
         return null;
     }
-    
+
 
     public void loginMC(final View v)
     {
-        
-        if (sOffline.isChecked()) {
-            mProfile = loginOffline();
+        if (sLocal.isChecked()) {
+            mProfile = loginLocal();
             playProfile(false);
         } else {
             ProgressBar prb = findViewById(R.id.launcherAccProgress);
             new LoginTask().setLoginListener(new LoginListener(){
 
 
-                    @Override
-                    public void onBeforeLogin() {
-                        v.setEnabled(false);
-                        prb.setVisibility(View.VISIBLE);
-                    }
+                @Override
+                public void onBeforeLogin() {
+                    v.setEnabled(false);
+                    prb.setVisibility(View.VISIBLE);
+                }
 
-                    @Override
-                    public void onLoginDone(String[] result) {
-                        if(result[0].equals("ERROR")){
-                            Tools.dialogOnUiThread(PojavLoginActivity.this,
+                @Override
+                public void onLoginDone(String[] result) {
+                    if(result[0].equals("ERROR")){
+                        Tools.dialogOnUiThread(PojavLoginActivity.this,
                                 getResources().getString(R.string.global_error), strArrToString(result));
-                        } else{
-                            MinecraftAccount builder = new MinecraftAccount();
-                            builder.accessToken = result[1];
-                            builder.clientToken = result[2];
-                            builder.profileId = result[3];
-                            builder.username = result[4];
-                            builder.selectedVersion = "1.12.2";
-                            builder.updateSkinFace();
-                            mProfile = builder;
-                        }
-                        runOnUiThread(() -> {
-                            v.setEnabled(true);
-                            prb.setVisibility(View.GONE);
-                            playProfile(false);
-                        });
+                    } else{
+                        MinecraftAccount builder = new MinecraftAccount();
+                        builder.accessToken = result[1];
+                        builder.clientToken = result[2];
+                        builder.profileId = result[3];
+                        builder.username = result[4];
+                        builder.updateSkinFace();
+                        mProfile = builder;
                     }
-                }).execute(edit2.getText().toString(), edit3.getText().toString());
+                    runOnUiThread(() -> {
+                        v.setEnabled(true);
+                        prb.setVisibility(View.GONE);
+                        playProfile(false);
+                    });
+                }
+            }).execute(edit2.getText().toString(), edit3.getText().toString());
         }
     }
     

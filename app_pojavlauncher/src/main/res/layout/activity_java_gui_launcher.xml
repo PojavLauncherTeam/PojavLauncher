@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_height="match_parent"
+	android:layout_width="match_parent">
+
+	<androidx.constraintlayout.widget.ConstraintLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:background="#000000">
+
+		<net.kdt.pojavlaunch.customcontrols.keyboard.TouchCharInput
+			android:id="@+id/awt_touch_char"
+			android:layout_width="1dp"
+			android:layout_height="1dp"
+			android:background="@android:color/darker_gray"
+			android:ems="10"
+			android:imeOptions="flagNoFullscreen|flagNoExtractUi|flagNoPersonalizedLearning|actionDone"
+			android:inputType="textFilter|textImeMultiLine|textAutoComplete|textAutoCorrect"
+			tools:ignore="TouchTargetSizeCheck"
+			/>
+
+		<net.kdt.pojavlaunch.AWTCanvasView
+			android:id="@+id/installmod_surfaceview"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:foregroundGravity="bottom"
+			app:layout_constraintBottom_toBottomOf="@+id/main_touchpad"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent" />
+
+		<LinearLayout
+			android:id="@+id/main_touchpad"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:orientation="vertical"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent">
+
+			<ImageView
+				android:id="@+id/main_mouse_pointer"
+				android:layout_width="18dp"
+				android:layout_height="27dp"
+				android:src="@drawable/ic_mouse_pointer" />
+
+		</LinearLayout>
+
+		<Button
+			android:id="@+id/installmod_btn2"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentRight="true"
+			android:background="@drawable/control_button"
+			android:onClick="forceClose"
+			android:text="@string/control_forceclose"
+			app:layout_constraintRight_toRightOf="parent"
+			app:layout_constraintTop_toTopOf="parent" />
+
+		<Button
+			android:id="@+id/installmod_btn3"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_toLeftOf="@id/installmod_btn2"
+			android:layout_marginTop="2dp"
+			android:background="@drawable/control_button"
+			android:onClick="openLogOutput"
+			android:text="@string/control_viewout"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintRight_toLeftOf="@id/installmod_btn2"
+			app:layout_constraintTop_toBottomOf="@+id/installmod_btn2" />
+
+		<Button
+			android:id="@+id/button2"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_toLeftOf="@id/installmod_btn3"
+			android:layout_marginTop="2dp"
+			android:background="@drawable/control_button"
+			android:onClick="toggleVirtualMouse"
+			android:text="@string/control_mouse"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintRight_toLeftOf="@id/installmod_btn3"
+			app:layout_constraintTop_toBottomOf="@+id/installmod_btn3" />
+
+		<Button
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="2dp"
+			android:background="@drawable/control_button"
+			android:text="Keyboard"
+			android:onClick="toggleKeyboard"/>
+
+		<Button
+			android:id="@+id/installmod_mouse_pri"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentBottom="true"
+			android:layout_marginBottom="2dp"
+			android:background="@drawable/control_button"
+			android:text="@string/control_primary"
+			app:layout_constraintBottom_toTopOf="@+id/installmod_mouse_sec"
+			app:layout_constraintStart_toStartOf="parent" />
+
+		<Button
+			android:id="@+id/installmod_mouse_sec"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentBottom="true"
+			android:layout_toRightOf="@id/installmod_mouse_pri"
+			android:background="@drawable/control_button"
+			android:text="@string/control_secondary"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintLeft_toRightOf="@id/installmod_mouse_pri"
+			app:layout_constraintStart_toStartOf="parent" />
+
+	</androidx.constraintlayout.widget.ConstraintLayout>
+
+	<com.kdt.LoggerView
+		android:id="@+id/launcherLoggerView"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:visibility="gone"
+		/>
+
+</FrameLayout>
+

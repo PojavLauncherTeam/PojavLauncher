@@ -3,9 +3,10 @@ package net.kdt.pojavlaunch;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.*;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 
-
-import androidx.annotation.Nullable;
 
 import net.kdt.pojavlaunch.customcontrols.*;
 import net.kdt.pojavlaunch.prefs.*;
@@ -14,58 +15,45 @@ import net.kdt.pojavlaunch.utils.MCOptionUtils;
 import java.io.*;
 
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.DEFAULT_PREF;
+import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_SUSTAINED_PERFORMANCE;
 
 public class MainActivity extends BaseMainActivity {
     public static ControlLayout mControlLayout;
 
-    private FileObserver fileObserver;
+    private MCOptionUtils.MCOptionListener optionListener;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initLayout(R.layout.main_with_customctrl);
-        super.ingameControlsEditorListener = menuItem -> {
-            switch (menuItem.getItemId()) {
-                case R.id.menu_ctrl_load:
-                    CustomControlsActivity.load(mControlLayout);
-                    break;
-                case R.id.menu_ctrl_add:
+
+        initLayout(R.layout.activity_basemain);
+
+        // Set the sustained performance mode for available APIs
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+            getWindow().setSustainedPerformanceMode(PREF_SUSTAINED_PERFORMANCE);
+        ingameControlsEditorArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.menu_customcontrol));
+        ingameControlsEditorListener = (parent, view, position, id) -> {
+            switch(position) {
+                case 0:
                     mControlLayout.addControlButton(new ControlData("New"));
                     break;
-                case R.id.menu_ctrl_add_drawer:
+                case 1:
                     mControlLayout.addDrawer(new ControlDrawerData());
                     break;
-                case R.id.menu_ctrl_selectdefault:
-                    CustomControlsActivity.dialogSelectDefaultCtrl(mControlLayout);
+                case 2:
+                    CustomControlsActivity.load(mControlLayout);
                     break;
-                case R.id.menu_ctrl_save:
+                case 3:
                     CustomControlsActivity.save(true,mControlLayout);
                     break;
+                case 4:
+                    CustomControlsActivity.dialogSelectDefaultCtrl(mControlLayout);
+                    break;
             }
-            //Toast.makeText(MainActivity.this, menuItem.getTitle() + ":" + menuItem.getItemId(), Toast.LENGTH_SHORT).show();
-            return true;
         };
-
-
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
-            fileObserver = new FileObserver(new File(Tools.DIR_GAME_NEW + "/options.txt"), FileObserver.MODIFY) {
-                @Override
-                public void onEvent(int i, @Nullable String s) {
-                    MCOptionUtils.load();
-                    getMcScale();
-                }
-            };
-        }else{
-            fileObserver = new FileObserver(Tools.DIR_GAME_NEW + "/options.txt", FileObserver.MODIFY) {
-                @Override
-                public void onEvent(int i, @Nullable String s) {
-                    MCOptionUtils.load();
-                    getMcScale();
-                }
-            };
-        }
-
-        fileObserver.startWatching();
+        // Recompute the gui scale when options are changed
+        optionListener = MCOptionUtils::getMcScale;
+        MCOptionUtils.addMCOptionListener(optionListener);
         
         mControlLayout = findViewById(R.id.main_control_layout);
         mControlLayout.setModifiable(false);

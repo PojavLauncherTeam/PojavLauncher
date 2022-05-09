@@ -7,4 +7,3 @@ public class RefreshResponse {
     public UUID clientToken;
     public Profile selectedProfile;
 }
-

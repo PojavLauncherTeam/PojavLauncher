@@ -1,16 +1,16 @@
 apply plugin: 'com.android.application'
 
-def getDate() { return new Date().format('yyyyMMdd')}
+static def getDate() { return new Date().format('yyyyMMdd')}
 
-def getDateSeconds() { 
-    if(System.getenv("GITHUB_ACTIONS").equals("true")) {
+static def getDateSeconds() {
+    if(System.getenv("GITHUB_ACTIONS") == "true") {
         return 9934841+Integer.parseInt(System.getenv("GITHUB_RUN_NUMBER"))
     }else{
         return 172005
     }
 }
 
-def getVersionName = {
+def getVersionName =  {
     // Get the last version tag, as well as the short head of the last commit
     ByteArrayOutputStream TAG = new ByteArrayOutputStream()
     ByteArrayOutputStream BRANCH = new ByteArrayOutputStream()
@@ -37,7 +37,7 @@ def getVersionName = {
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
     dexOptions {
         javaMaxHeapSize "4g"
     }
@@ -74,9 +74,15 @@ android {
         debug {
             applicationIdSuffix '.debug'
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.customDebug
             resValue 'string', 'storageProviderAuthorities', 'net.kdt.pojavlaunch.scoped.gamefolder.debug'
+        }
+        proguard {
+            initWith debug
+            minifyEnabled true
+            shrinkResources true
         }
 		
         release {
@@ -116,17 +122,14 @@ dependencies {
     implementation 'javax.annotation:javax.annotation-api:1.3.2'
     implementation 'commons-codec:commons-codec:1.14'
     // implementation 'com.wu-man:android-bsf-api:3.1.3'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.preference:preference:1.1.1'
-    implementation 'androidx.appcompat:appcompat:1.3.0'
-    implementation 'androidx.legacy:legacy-preference-v14:1.0.0'
-    implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.annotation:annotation:1.2.0'
-    implementation 'androidx.browser:browser:1.3.0'
+    //implementation 'androidx.core:core:1.7.0'
+    implementation 'androidx.drawerlayout:drawerlayout:1.1.1'
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
+    implementation 'androidx.annotation:annotation:1.3.0'
 
-    implementation "androidx.constraintlayout:constraintlayout:2.0.4"
+    implementation "androidx.constraintlayout:constraintlayout:2.1.2"
 
-    implementation 'com.rarepebble:colorpicker:3.0.1'
     implementation 'com.github.duanhong169:checkerboarddrawable:1.0.2'
 
     
@@ -134,8 +137,7 @@ dependencies {
     // implementation 'com.intuit.ssp:ssp-android:1.0.5'
 
     implementation 'org.tukaani:xz:1.8'
-    
-    implementation 'net.objecthunter:exp4j:0.4.8'
+    implementation 'com.github.PojavLauncherTeam:exp4j:master-SNAPSHOT'
     // implementation 'net.sourceforge.streamsupport:streamsupport-cfuture:1.7.0'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }

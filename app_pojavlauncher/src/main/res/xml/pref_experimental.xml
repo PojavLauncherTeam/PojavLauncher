@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app2="http://schemas.android.com/apk/res-auto">
+    <net.kdt.pojavlaunch.prefs.BackButtonPreference/>
+    <PreferenceCategory android:title="Experimental fuckury">
+
+        <androidx.preference.ListPreference
+            android:title="@string/gles_hack_title"
+            android:key="gl4es_shrink_hack"
+            android:defaultValue="0"
+            android:entryValues="@array/hack_gles_shrink_values"
+            android:entries="@array/hack_gles_shrink"
+            app2:useSimpleSummaryProvider="true"/>
+
+    </PreferenceCategory>
+</PreferenceScreen>

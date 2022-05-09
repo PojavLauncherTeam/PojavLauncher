@@ -2,7 +2,7 @@ package net.kdt.pojavlaunch.customcontrols;
 
 import com.google.gson.JsonSyntaxException;
 
-import net.kdt.pojavlaunch.LWJGLGLFWKeycode;
+import net.kdt.pojavlaunch.LwjglGlfwKeycode;
 import net.kdt.pojavlaunch.Tools;
 
 import org.json.JSONArray;
@@ -83,10 +83,10 @@ public class LayoutConverter {
         for(int i = 0; i < layoutMainArray.length(); i++) {
             JSONObject button = layoutMainArray.getJSONObject(i);
             ControlData n_button = new ControlData();
-            int[] keycodes = new int[] {LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN,
-                    LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN,
-                    LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN,
-                    LWJGLGLFWKeycode.GLFW_KEY_UNKNOWN};
+            int[] keycodes = new int[] {LwjglGlfwKeycode.GLFW_KEY_UNKNOWN,
+                    LwjglGlfwKeycode.GLFW_KEY_UNKNOWN,
+                    LwjglGlfwKeycode.GLFW_KEY_UNKNOWN,
+                    LwjglGlfwKeycode.GLFW_KEY_UNKNOWN};
             n_button.isDynamicBtn = button.getBoolean("isDynamicBtn");
             n_button.dynamicX = button.getString("dynamicX");
             n_button.dynamicY = button.getString("dynamicY");
@@ -116,9 +116,9 @@ public class LayoutConverter {
             }
             if(button.getBoolean("isRound")) { n_button.cornerRadius =  35f; }
             int next_idx = 0;
-            if(button.getBoolean("holdShift")) { keycodes[next_idx] = LWJGLGLFWKeycode.GLFW_KEY_LEFT_SHIFT; next_idx++; }
-            if(button.getBoolean("holdCtrl")) { keycodes[next_idx] = LWJGLGLFWKeycode.GLFW_KEY_LEFT_CONTROL; next_idx++; }
-            if(button.getBoolean("holdAlt")) { keycodes[next_idx] = LWJGLGLFWKeycode.GLFW_KEY_LEFT_ALT; next_idx++; }
+            if(button.getBoolean("holdShift")) { keycodes[next_idx] = LwjglGlfwKeycode.GLFW_KEY_LEFT_SHIFT; next_idx++; }
+            if(button.getBoolean("holdCtrl")) { keycodes[next_idx] = LwjglGlfwKeycode.GLFW_KEY_LEFT_CONTROL; next_idx++; }
+            if(button.getBoolean("holdAlt")) { keycodes[next_idx] = LwjglGlfwKeycode.GLFW_KEY_LEFT_ALT; next_idx++; }
             keycodes[next_idx] = button.getInt("keycode");
             n_button.keycodes = keycodes;
             empty.mControlDataList.add(n_button);

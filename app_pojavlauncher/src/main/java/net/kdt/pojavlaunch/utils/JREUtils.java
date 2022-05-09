@@ -1,9 +1,9 @@
 package net.kdt.pojavlaunch.utils;
 
 import static net.kdt.pojavlaunch.Architecture.ARCH_X86;
-import static net.kdt.pojavlaunch.Architecture.archAsString;
 import static net.kdt.pojavlaunch.Architecture.is64BitsDevice;
 import static net.kdt.pojavlaunch.Tools.LOCAL_RENDERER;
+import static net.kdt.pojavlaunch.Tools.currentDisplayMetrics;
 
 import android.app.*;
 import android.content.*;
@@ -16,6 +16,8 @@ import com.oracle.dalvik.*;
 import java.io.*;
 import java.util.*;
 import net.kdt.pojavlaunch.*;
+import net.kdt.pojavlaunch.extra.ExtraConstants;
+import net.kdt.pojavlaunch.extra.ExtraCore;
 import net.kdt.pojavlaunch.prefs.*;
 import org.lwjgl.glfw.*;
 
@@ -28,34 +30,20 @@ public class JREUtils {
     private JREUtils() {}
 
     public static String LD_LIBRARY_PATH;
-    private static String nativeLibDir;
+    public static Map<String, String> jreReleaseList;
+    public static String jvmLibraryPath;
+    private static String sNativeLibDir;
 
-    /**
-     * Checks if the java architecture is correct for the device architecture.
-     * @param act An Activity with logging capabilities
-     * @param jreArch The java architecture to compare as a String.
-     */
-    public static void checkJavaArchitecture(LoggableActivity act, String jreArch) {
-        act.appendlnToLog("Architecture: " + archAsString(Tools.DEVICE_ARCHITECTURE));
-        if(Tools.DEVICE_ARCHITECTURE == Architecture.archAsInt(jreArch)) return;
-
-        act.appendlnToLog("Architecture " + archAsString(Tools.DEVICE_ARCHITECTURE) + " is incompatible with Java Runtime " + jreArch);
-        throw new RuntimeException(act.getString(R.string.mcn_check_fail_incompatiblearch, archAsString(Tools.DEVICE_ARCHITECTURE), jreArch));
-
-    }
-    
     public static String findInLdLibPath(String libName) {
         if(Os.getenv("LD_LIBRARY_PATH")==null) {
             try {
                 if (LD_LIBRARY_PATH != null) {
                     Os.setenv("LD_LIBRARY_PATH", LD_LIBRARY_PATH, true);
-                }else{
-                    return libName;
                 }
             }catch (ErrnoException e) {
                 e.printStackTrace();
-                return libName;
             }
+            return libName;
         }
         for (String libPath : Os.getenv("LD_LIBRARY_PATH").split(":")) {
             File f = new File(libPath, libName);
@@ -65,18 +53,22 @@ public class JREUtils {
         }
         return libName;
     }
+
     public static ArrayList<File> locateLibs(File path) {
-        ArrayList<File> ret = new ArrayList<>();
+        ArrayList<File> returnValue = new ArrayList<>();
         File[] list = path.listFiles();
-        if(list != null) {for(File f : list) {
-            if(f.isFile() && f.getName().endsWith(".so")) {
-                ret.add(f);
-            }else if(f.isDirectory()) {
-                ret.addAll(locateLibs(f));
+        if(list != null) {
+            for(File f : list) {
+                if(f.isFile() && f.getName().endsWith(".so")) {
+                    returnValue.add(f);
+                }else if(f.isDirectory()) {
+                    returnValue.addAll(locateLibs(f));
+                }
             }
-        }}
-        return ret;
+        }
+        return returnValue;
     }
+
     public static void initJavaRuntime() {
         dlopen(findInLdLibPath("libjli.so"));
         if(!dlopen("libjvm.so")){
@@ -95,13 +87,19 @@ public class JREUtils {
         for(File f : locateLibs(new File(Tools.DIR_HOME_JRE + "/" + Tools.DIRNAME_HOME_JRE))) {
             dlopen(f.getAbsolutePath());
         }
-        dlopen(nativeLibDir + "/libopenal.so");
-
+        dlopen(sNativeLibDir + "/libopenal.so");
     }
 
     public static Map<String, String> readJREReleaseProperties() throws IOException {
+        return readJREReleaseProperties(Tools.DIR_HOME_JRE);
+    }
+
+    public static Map<String, String> readJREReleaseProperties(String name) throws IOException {
         Map<String, String> jreReleaseMap = new ArrayMap<>();
-        BufferedReader jreReleaseReader = new BufferedReader(new FileReader(Tools.DIR_HOME_JRE + "/release"));
+        if (!name.contains("/")) {
+            name = Tools.MULTIRT_HOME + "/" + name;
+        }
+        BufferedReader jreReleaseReader = new BufferedReader(new FileReader(name + "/release"));
         String currLine;
         while ((currLine = jreReleaseReader.readLine()) != null) {
             if (!currLine.isEmpty() || currLine.contains("=")) {
@@ -112,11 +110,11 @@ public class JREUtils {
         jreReleaseReader.close();
         return jreReleaseMap;
     }
-    public static String jvmLibraryPath;
-    public static void redirectAndPrintJRELog(final LoggableActivity act) {
+
+    public static void redirectAndPrintJRELog() {
         Log.v("jrelog","Log starts here");
-        JREUtils.logToActivity(act);
-        Thread t = new Thread(new Runnable(){
+        JREUtils.logToLogger(Logger.getInstance());
+        new Thread(new Runnable(){
             int failTime = 0;
             ProcessBuilder logcatPb;
             @Override
@@ -131,21 +129,11 @@ public class JREUtils {
                     Log.i("jrelog-logcat","Starting logcat");
                     java.lang.Process p = logcatPb.start();
 
-                    // idk which better, both have a bug that printf(\n) in a single line
-                    /*
-                     BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-                     String line;
-                     while ((line = reader.readLine()) != null) {
-                     act.appendlnToLog(line);
-                     }
-                     reader.close();
-                     */
-
                     byte[] buf = new byte[1024];
                     int len;
                     while ((len = p.getInputStream().read(buf)) != -1) {
                         String currStr = new String(buf, 0, len);
-                        act.appendToLog(currStr);
+                        Logger.getInstance().appendToLog(currStr);
                     }
                     
                     if (p.waitFor() != 0) {
@@ -155,17 +143,16 @@ public class JREUtils {
                         if (failTime <= 10) {
                             run();
                         } else {
-                            act.appendlnToLog("ERROR: Unable to get more log.");
+                            Logger.getInstance().appendToLog("ERROR: Unable to get more log.");
                         }
                         return;
                     }
                 } catch (Throwable e) {
                     Log.e("jrelog-logcat", "Exception on logging thread", e);
-                    act.appendlnToLog("Exception on logging thread:\n" + Log.getStackTraceString(e));
+                    Logger.getInstance().appendToLog("Exception on logging thread:\n" + Log.getStackTraceString(e));
                 }
             }
-        });
-        t.start();
+        }).start();
         Log.i("jrelog-logcat","Logcat thread started");
     }
     
@@ -175,7 +162,7 @@ public class JREUtils {
             JRE_ARCHITECTURE = "i386/i486/i586";
         }
         
-        nativeLibDir = ctx.getApplicationInfo().nativeLibraryDir;
+        sNativeLibDir = ctx.getApplicationInfo().nativeLibraryDir;
 
         for (String arch : JRE_ARCHITECTURE.split("/")) {
             File f = new File(Tools.DIR_HOME_JRE, "lib/" + arch);
@@ -194,28 +181,38 @@ public class JREUtils {
             "/system/" + libName + ":" +
             "/vendor/" + libName + ":" +
             "/vendor/" + libName + "/hw:" +
-            nativeLibDir
+                    sNativeLibDir
         );
         LD_LIBRARY_PATH = ldLibraryPath.toString();
     }
     
-    public static void setJavaEnvironment(LoggableActivity ctx) throws Throwable {
+    public static void setJavaEnvironment(Activity activity) throws Throwable {
         Map<String, String> envMap = new ArrayMap<>();
+        envMap.put("POJAV_NATIVEDIR", activity.getApplicationInfo().nativeLibraryDir);
         envMap.put("JAVA_HOME", Tools.DIR_HOME_JRE);
         envMap.put("HOME", Tools.DIR_GAME_NEW);
-        envMap.put("TMPDIR", ctx.getCacheDir().getAbsolutePath());
+        envMap.put("TMPDIR", activity.getCacheDir().getAbsolutePath());
         envMap.put("LIBGL_MIPMAP", "3");
-        
+
+        // On certain GLES drivers, overloading default functions shader hack fails, so disable it
+        envMap.put("LIBGL_NOINTOVLHACK", "1");
+
         // Fix white color on banner and sheep, since GL4ES 1.1.5
         envMap.put("LIBGL_NORMALIZE", "1");
+
+        // The OPEN GL version is changed according
+        envMap.put("LIBGL_ES", (String) ExtraCore.getValue(ExtraConstants.OPEN_GL_VERSION));
    
-        envMap.put("MESA_GLSL_CACHE_DIR", ctx.getCacheDir().getAbsolutePath());
-        envMap.put("MESA_GL_VERSION_OVERRIDE", "4.6");
-        envMap.put("MESA_GLSL_VERSION_OVERRIDE", "460");
+        envMap.put("MESA_GLSL_CACHE_DIR", activity.getCacheDir().getAbsolutePath());
+        if (LOCAL_RENDERER != null) {
+            envMap.put("MESA_GL_VERSION_OVERRIDE", LOCAL_RENDERER.equals("opengles3_virgl")?"4.3":"4.6");
+            envMap.put("MESA_GLSL_VERSION_OVERRIDE", LOCAL_RENDERER.equals("opengles3_virgl")?"430":"460");
+        }
         envMap.put("force_glsl_extensions_warn", "true");
         envMap.put("allow_higher_compat_version", "true");
         envMap.put("allow_glsl_extension_directive_midshader", "true");
         envMap.put("MESA_LOADER_DRIVER_OVERRIDE", "zink");
+        envMap.put("VTEST_SOCKET_NAME", activity.getCacheDir().getAbsolutePath() + "/.virgl_test");
 
         envMap.put("LD_LIBRARY_PATH", LD_LIBRARY_PATH);
         envMap.put("PATH", Tools.DIR_HOME_JRE + "/bin:" + Os.getenv("PATH"));
@@ -256,8 +253,12 @@ public class JREUtils {
             }
         }
         for (Map.Entry<String, String> env : envMap.entrySet()) {
-            ctx.appendlnToLog("Added custom env: " + env.getKey() + "=" + env.getValue());
-            Os.setenv(env.getKey(), env.getValue(), true);
+            Logger.getInstance().appendToLog("Added custom env: " + env.getKey() + "=" + env.getValue());
+            try {
+                Os.setenv(env.getKey(), env.getValue(), true);
+            }catch (NullPointerException exception){
+                Log.e("JREUtils", exception.toString());
+            }
         }
 
         File serverFile = new File(Tools.DIR_HOME_JRE + "/" + Tools.DIRNAME_HOME_JRE + "/server/libjvm.so");
@@ -269,8 +270,8 @@ public class JREUtils {
         // return ldLibraryPath;
     }
     
-    public static int launchJavaVM(final LoggableActivity ctx,final List<String> JVMArgs) throws Throwable {
-        JREUtils.relocateLibPath(ctx);
+    public static int launchJavaVM(final Activity activity,final List<String> JVMArgs) throws Throwable {
+        JREUtils.relocateLibPath(activity);
         // For debugging only!
 /*
         StringBuilder sbJavaArgs = new StringBuilder();
@@ -280,10 +281,10 @@ public class JREUtils {
         ctx.appendlnToLog("Executing JVM: \"" + sbJavaArgs.toString() + "\"");
 */
 
-        setJavaEnvironment(ctx);
+        setJavaEnvironment(activity);
         
         final String graphicsLib = loadGraphicsLibrary();
-         List<String> userArgs = getJavaArgs(ctx);
+         List<String> userArgs = getJavaArgs(activity);
 
         //Remove arguments that can interfere with the good working of the launcher
         purgeArg(userArgs,"-Xms");
@@ -298,19 +299,20 @@ public class JREUtils {
         if(LOCAL_RENDERER != null) userArgs.add("-Dorg.lwjgl.opengl.libname=" + graphicsLib);
 
         userArgs.addAll(JVMArgs);
-        ctx.runOnUiThread(() -> Toast.makeText(ctx, ctx.getString(R.string.autoram_info_msg,LauncherPreferences.PREF_RAM_ALLOCATION), Toast.LENGTH_SHORT).show());
+        activity.runOnUiThread(() -> Toast.makeText(activity, activity.getString(R.string.autoram_info_msg,LauncherPreferences.PREF_RAM_ALLOCATION), Toast.LENGTH_SHORT).show());
         System.out.println(JVMArgs);
         
         initJavaRuntime();
-        setupExitTrap(ctx.getApplication());
+        setupExitTrap(activity.getApplication());
         chdir(Tools.DIR_GAME_NEW);
+        userArgs.add(0,"java"); //argv[0] is the program name according to C standard.
 
         final int exitCode = VMLauncher.launchJVM(userArgs.toArray(new String[0]));
-        ctx.appendlnToLog("Java Exit code: " + exitCode);
+        Logger.getInstance().appendToLog("Java Exit code: " + exitCode);
         if (exitCode != 0) {
-            ctx.runOnUiThread(() -> {
-                AlertDialog.Builder dialog = new AlertDialog.Builder(ctx);
-                dialog.setMessage(ctx.getString(R.string.mcn_exit_title, exitCode));
+            activity.runOnUiThread(() -> {
+                AlertDialog.Builder dialog = new AlertDialog.Builder(activity);
+                dialog.setMessage(activity.getString(R.string.mcn_exit_title, exitCode));
 
                 dialog.setPositiveButton(android.R.string.ok, (p1, p2) -> BaseMainActivity.fullyExit());
                 dialog.show();
@@ -327,7 +329,10 @@ public class JREUtils {
      */
     public static List<String> getJavaArgs(Context ctx) {
         List<String> userArguments = parseJavaArguments(LauncherPreferences.PREF_CUSTOM_JAVA_ARGS);
-        String[] overridableArguments = new String[]{
+        String resolvFile;
+            resolvFile = new File(Tools.DIR_DATA,"resolv.conf").getAbsolutePath();
+
+        ArrayList<String> overridableArguments = new ArrayList<>(Arrays.asList(
                 "-Djava.home=" + Tools.DIR_HOME_JRE,
                 "-Djava.io.tmpdir=" + ctx.getCacheDir().getAbsolutePath(),
                 "-Duser.home=" + new File(Tools.DIR_GAME_NEW).getParent(),
@@ -342,30 +347,36 @@ public class JREUtils {
                 //"-Dorg.lwjgl.util.DebugFunctions=true",
                 //"-Dorg.lwjgl.util.DebugLoader=true",
                 // GLFW Stub width height
-                "-Dglfwstub.windowWidth=" + CallbackBridge.windowWidth,
-                "-Dglfwstub.windowHeight=" + CallbackBridge.windowHeight,
+                "-Dglfwstub.windowWidth=" + Tools.getDisplayFriendlyRes(currentDisplayMetrics.widthPixels, LauncherPreferences.PREF_SCALE_FACTOR/100F),
+                "-Dglfwstub.windowHeight=" + Tools.getDisplayFriendlyRes(currentDisplayMetrics.heightPixels, LauncherPreferences.PREF_SCALE_FACTOR/100F),
                 "-Dglfwstub.initEgl=false",
-
-                "-Dext.net.resolvPath=" +new File(Tools.DIR_DATA,"resolv.conf").getAbsolutePath(),
+                "-Dext.net.resolvPath=" +resolvFile,
+                "-Dlog4j2.formatMsgNoLookups=true", //Log4j RCE mitigation
 
                 "-Dnet.minecraft.clientmodname=" + Tools.APP_NAME,
                 "-Dfml.earlyprogresswindow=false" //Forge 1.14+ workaround
-        };
-
-
-        for (String userArgument : userArguments) {
-            for(int i=0; i < overridableArguments.length; ++i){
-                String overridableArgument = overridableArguments[i];
-                //Only java properties are considered overridable for now
-                if(userArgument.startsWith("-D") && userArgument.startsWith(overridableArgument.substring(0, overridableArgument.indexOf("=")))){
-                    overridableArguments[i] = ""; //Remove the argument since it is overridden
+        ));
+        if(LauncherPreferences.PREF_ARC_CAPES) {
+            overridableArguments.add("-javaagent:"+new File(Tools.DIR_DATA,"arc_dns_injector.jar").getAbsolutePath()+"=23.95.137.176");
+        }
+        List<String> additionalArguments = new ArrayList<>();
+        for(String arg : overridableArguments) {
+            String strippedArg = arg.substring(0,arg.indexOf('='));
+            boolean add = true;
+            for(String uarg : userArguments) {
+                if(uarg.startsWith(strippedArg)) {
+                    add = false;
                     break;
                 }
             }
+            if(add)
+                additionalArguments.add(arg);
+            else
+                Log.i("ArgProcessor","Arg skipped: "+arg);
         }
 
         //Add all the arguments
-        userArguments.addAll(Arrays.asList(overridableArguments));
+        userArguments.addAll(additionalArguments);
         return userArguments;
     }
 
@@ -381,20 +392,32 @@ public class JREUtils {
         ArrayList<String> parsedArguments = new ArrayList<>(0);
         args = args.trim().replace(" ", "");
         //For each prefixes, we separate args.
-        for(String prefix : new String[]{"-XX:-","-XX:+", "-XX:","-"}){
+        for(String prefix : new String[]{"-XX:-","-XX:+", "-XX:","--","-"}){
             while (true){
                 int start = args.indexOf(prefix);
                 if(start == -1) break;
                 //Get the end of the current argument
                 int end = args.indexOf("-", start + prefix.length());
                 if(end == -1) end = args.length();
+
                 //Extract it
                 String parsedSubString = args.substring(start, end);
                 args = args.replace(parsedSubString, "");
 
                 //Check if two args aren't bundled together by mistake
-                if(parsedSubString.indexOf('=') == parsedSubString.lastIndexOf('='))
+                if(parsedSubString.indexOf('=') == parsedSubString.lastIndexOf('=')) {
+                    int arraySize = parsedArguments.size();
+                    if(arraySize > 0){
+                        String lastString = parsedArguments.get(arraySize - 1);
+                        // Looking for list elements
+                        if(lastString.charAt(lastString.length() - 1) == ',' ||
+                                parsedSubString.contains(",")){
+                            parsedArguments.set(arraySize - 1, lastString + parsedSubString);
+                            continue;
+                        }
+                    }
                     parsedArguments.add(parsedSubString);
+                }
                 else Log.w("JAVA ARGS PARSER", "Removed improper arguments: " + parsedSubString);
             }
         }
@@ -410,11 +433,12 @@ public class JREUtils {
         if(LOCAL_RENDERER == null) return null;
         String renderLibrary;
         switch (LOCAL_RENDERER){
-            case "opengles2": renderLibrary = "libgl4es_114.so"; break;
-            case "opengles2_5": renderLibrary = "libgl4es_115.so"; break;
-            case "opengles3": renderLibrary = "libgl4es_115.so"; break;
+            case "opengles2":
+            case "opengles2_5":
+            case "opengles3":
+                renderLibrary = "libgl4es_114.so"; break;
+            case "opengles3_virgl":
             case "vulkan_zink": renderLibrary = "libOSMesa_8.so"; break;
-            case "opengles3_vgpu" : renderLibrary = "libvgpu.so"; break;
             default:
                 Log.w("RENDER_LIBRARY", "No renderer selected, defaulting to opengles2");
                 renderLibrary = "libgl4es_114.so";
@@ -425,7 +449,7 @@ public class JREUtils {
             Log.e("RENDER_LIBRARY","Failed to load renderer " + renderLibrary + ". Falling back to GL4ES 1.1.4");
             LOCAL_RENDERER = "opengles2";
             renderLibrary = "libgl4es_114.so";
-            dlopen(nativeLibDir + "/libgl4es_114.so");
+            dlopen(sNativeLibDir + "/libgl4es_114.so");
         }
         return renderLibrary;
     }
@@ -459,7 +483,8 @@ public class JREUtils {
         }
         return false;
     }
-    private static int getDetectedVersion() {
+
+    public static int getDetectedVersion() {
         /*
          * Get all the device configurations and check the EGL_RENDERABLE_TYPE attribute
          * to determine the highest ES version supported by any config. The
@@ -517,14 +542,14 @@ public class JREUtils {
         }
     }
     public static native int chdir(String path);
-    public static native void logToActivity(final LoggableActivity a);
+    public static native void logToLogger(final Logger logger);
     public static native boolean dlopen(String libPath);
     public static native void setLdLibraryPath(String ldLibraryPath);
     public static native void setupBridgeWindow(Object surface);
+    public static native void releaseBridgeWindow();
     public static native void setupExitTrap(Context context);
     // Obtain AWT screen pixels to render on Android SurfaceView
     public static native int[] renderAWTScreenFrame(/* Object canvas, int width, int height */);
-
     static {
         System.loadLibrary("pojavexec");
         System.loadLibrary("pojavexec_awt");

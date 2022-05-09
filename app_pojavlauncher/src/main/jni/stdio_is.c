@@ -38,12 +38,12 @@ static void *logger_thread() {
     (*_______jvm)->DetachCurrentThread(_______jvm);
 }
 JNIEXPORT void JNICALL
-Java_net_kdt_pojavlaunch_utils_JREUtils_logToActivity(JNIEnv *env, jclass clazz, jobject a) {
+Java_net_kdt_pojavlaunch_utils_JREUtils_logToLogger(JNIEnv *env, jclass clazz, jobject javaLogger) {
     // TODO: implement logToActivity()
-    jclass loggableActivityClass = (*env)->FindClass(env,"net/kdt/pojavlaunch/LoggableActivity");
-    _______method = (*env)->GetMethodID(env,loggableActivityClass,"appendlnToLog", "(Ljava/lang/String;)V");
+    jclass loggableActivityClass = (*env)->FindClass(env,"net/kdt/pojavlaunch/Logger");
+    _______method = (*env)->GetMethodID(env,loggableActivityClass,"appendToLog", "(Ljava/lang/String;)V");
     (*env)->GetJavaVM(env,&_______jvm);
-    _______obj = (*env)->NewGlobalRef(env,a);
+    _______obj = (*env)->NewGlobalRef(env, javaLogger);
 
     setvbuf(stdout, 0, _IOLBF, 0); // make stdout line-buffered
     setvbuf(stderr, 0, _IONBF, 0); // make stderr unbuffered

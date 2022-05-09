@@ -8,4 +8,3 @@ public class AuthenticateResponse {
     public UUID clientToken;
     public Profile selectedProfile;
 }
-

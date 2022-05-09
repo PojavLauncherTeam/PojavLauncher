@@ -37,7 +37,7 @@ typedef void GLFW_invoke_MouseButton_func(void* window, int button, int action, 
 typedef void GLFW_invoke_Scroll_func(void* window, double xoffset, double yoffset);
 typedef void GLFW_invoke_WindowSize_func(void* window, int width, int height);
 
-static int grabCursorX, grabCursorY, lastCursorX, lastCursorY;
+static float grabCursorX, grabCursorY, lastCursorX, lastCursorY;
 
 jclass inputBridgeClass_ANDROID, inputBridgeClass_JRE;
 jmethodID inputBridgeMethod_ANDROID, inputBridgeMethod_JRE;
@@ -159,14 +159,20 @@ void closeGLFWWindow() {
     exit(-1);
 }
 
+JNIEXPORT void JNICALL
+Java_org_lwjgl_glfw_CallbackBridge_nativeSetUseInputStackQueue(JNIEnv *env, jclass clazz,
+                                                               jboolean use_input_stack_queue) {
+    isUseStackQueueCall = (int) use_input_stack_queue;
+}
+
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeAttachThreadToOther(JNIEnv* env, jclass clazz, jboolean isAndroid, jboolean isUseStackQueueBool) {
 #ifdef DEBUG
-    LOGD("Debug: JNI attaching thread, isUseStackQueue=%d\n", isUseStackQueue);
+    LOGD("Debug: JNI attaching thread, isUseStackQueue=%d\n", isUseStackQueueBool);
 #endif
 
     jboolean result;
 
-    isUseStackQueueCall = (int) isUseStackQueueBool;
+    //isUseStackQueueCall = (int) isUseStackQueueBool;
     if (isAndroid) {
         result = attachThread(true, &runtimeJNIEnvPtr_ANDROID);
     } else {
@@ -255,8 +261,14 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendCursorEnter(
     }
 }
 */
-JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendCursorPos(JNIEnv* env, jclass clazz, jint x, jint y) {
+JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendCursorPos(JNIEnv* env, jclass clazz, jfloat x, jfloat y) {
+#ifdef DEBUG
+    LOGD("Sending cursor position \n");
+#endif
     if (GLFW_invoke_CursorPos && isInputReady) {
+#ifdef DEBUG
+        LOGD("GLFW_invoke_CursorPos && isInputReady \n");
+#endif
         if (!isCursorEntered) {
             if (GLFW_invoke_CursorEnter) {
                 isCursorEntered = true;
@@ -362,4 +374,21 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendScroll(JNIEn
 
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_GLFW_nglfwSetShowingWindow(JNIEnv* env, jclass clazz, jlong window) {
     showingWindow = (long) window;
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSetWindowAttrib(JNIEnv* env, jclass clazz, jint attrib, jint value) {
+    if (!showingWindow) {
+        return; // nothing to do yet
+    }
+
+    jclass glfwClazz = (*runtimeJNIEnvPtr_JRE)->FindClass(runtimeJNIEnvPtr_JRE, "org/lwjgl/glfw/GLFW");
+    assert(glfwClazz != NULL);
+    jmethodID glfwMethod = (*runtimeJNIEnvPtr_JRE)->GetStaticMethodID(runtimeJNIEnvPtr_JRE, glfwClazz, "glfwSetWindowAttrib", "(JII)V");
+    assert(glfwMethod != NULL);
+
+    (*runtimeJNIEnvPtr_JRE)->CallStaticVoidMethod(
+        runtimeJNIEnvPtr_JRE,
+        glfwClazz, glfwMethod,
+        (jlong) showingWindow, attrib, value
+    );
 }

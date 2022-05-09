@@ -1,9 +1,8 @@
 package org.lwjgl.glfw;
-import java.io.*;
-import java.nio.ByteBuffer;
-import java.nio.FloatBuffer;
-import java.util.*;
-import android.widget.*;
+
+import android.os.Handler;
+import android.os.Looper;
+
 import net.kdt.pojavlaunch.*;
 import android.content.*;
 
@@ -15,42 +14,35 @@ public class CallbackBridge {
     
     public static volatile int windowWidth, windowHeight;
     public static volatile int physicalWidth, physicalHeight;
-    public static int mouseX, mouseY;
+    public static float mouseX, mouseY;
     public static StringBuilder DEBUG_STRING = new StringBuilder();
-    
-    // volatile private static boolean isGrabbing = false;
-    public static class PusherRunnable implements Runnable {
-        int button; int x; int y;
-        public PusherRunnable(int button, int x, int y) {
-           this.button = button;
-           this.x = x;
-           this.y = y;
-        }
-        @Override
-        public void run() {
-            putMouseEventWithCoords(button, true, x, y);
-            try { Thread.sleep(40); } catch (InterruptedException e) {}
-            putMouseEventWithCoords(button, false, x, y);
-        }
-    }
-    public static void putMouseEventWithCoords(int button, int x, int y /* , int dz, long nanos */) {
-        new Thread(new PusherRunnable(button,x,y)).run();
+    private static boolean threadAttached;
+    public volatile static boolean holdingAlt, holdingCapslock, holdingCtrl,
+            holdingNumlock, holdingShift;
+
+
+    public static void putMouseEventWithCoords(int button, float x, float y) {
+        putMouseEventWithCoords(button, true, x, y);
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.postDelayed(() -> putMouseEventWithCoords(button, false, x, y), 22);
+
     }
     
-    public static void putMouseEventWithCoords(int button, boolean isDown, int x, int y /* , int dz, long nanos */) {
+    public static void putMouseEventWithCoords(int button, boolean isDown, float x, float y /* , int dz, long nanos */) {
         sendCursorPos(x, y);
         sendMouseKeycode(button, CallbackBridge.getCurrentMods(), isDown);
     }
 
-    private static boolean threadAttached;
+
     public static void sendCursorPos(float x, float y) {
         if (!threadAttached) {
+            nativeSetUseInputStackQueue(BaseMainActivity.isInputStackCall);
             threadAttached = CallbackBridge.nativeAttachThreadToOther(true, BaseMainActivity.isInputStackCall);
         }
-        
+
         DEBUG_STRING.append("CursorPos=").append(x).append(", ").append(y).append("\n");
-        mouseX = (int) x;
-        mouseY = (int) y;
+        mouseX = x;
+        mouseY = y;
         nativeSendCursorPos(mouseX, mouseY);
     }
     
@@ -82,6 +74,27 @@ public class CallbackBridge {
     public static void sendChar(char keychar, int modifiers){
         nativeSendCharMods(keychar,modifiers);
         nativeSendChar(keychar);
+    }
+
+    public static void sendKeyPress(int keyCode, int modifiers, boolean status) {
+        sendKeyPress(keyCode, 0, modifiers, status);
+    }
+
+    public static void sendKeyPress(int keyCode, int scancode, int modifiers, boolean status) {
+        sendKeyPress(keyCode, '\u0000', scancode, modifiers, status);
+    }
+
+    public static void sendKeyPress(int keyCode, char keyChar, int scancode, int modifiers, boolean status) {
+        CallbackBridge.sendKeycode(keyCode, keyChar, scancode, modifiers, status);
+    }
+
+    public static void sendKeyPress(int keyCode) {
+        sendKeyPress(keyCode, CallbackBridge.getCurrentMods(), true);
+        sendKeyPress(keyCode, CallbackBridge.getCurrentMods(), false);
+    }
+
+    public static void sendMouseButton(int button, boolean status) {
+        CallbackBridge.sendMouseKeycode(button, CallbackBridge.getCurrentMods(), status);
     }
 
     public static void sendMouseKeycode(int button, int modifiers, boolean isDown) {
@@ -126,13 +139,6 @@ public class CallbackBridge {
             default: return null;
         }
     }
-    public static void receiveCallback(int type, String data) {
-        switch (type) {
-            case ANDROID_TYPE_GRAB_STATE:
-                // isGrabbing = Boolean.parseBoolean(data);
-                break;
-        }
-    }
 /*
     private static String currData;
     public static void sendData(int type, Object... dataArr) {
@@ -152,48 +158,48 @@ public class CallbackBridge {
     private static native void nativeSendData(boolean isAndroid, int type, String data);
 */
 
-    public volatile static boolean holdingAlt, holdingCapslock, holdingCtrl,
-        holdingNumlock, holdingShift;
+
     public static int getCurrentMods() {
         int currMods = 0;
         if (holdingAlt) {
-            currMods |= LWJGLGLFWKeycode.GLFW_MOD_ALT;
+            currMods |= LwjglGlfwKeycode.GLFW_MOD_ALT;
         } if (holdingCapslock) {
-            currMods |= LWJGLGLFWKeycode.GLFW_MOD_CAPS_LOCK;
+            currMods |= LwjglGlfwKeycode.GLFW_MOD_CAPS_LOCK;
         } if (holdingCtrl) {
-            currMods |= LWJGLGLFWKeycode.GLFW_MOD_CONTROL;
+            currMods |= LwjglGlfwKeycode.GLFW_MOD_CONTROL;
         } if (holdingNumlock) {
-            currMods |= LWJGLGLFWKeycode.GLFW_MOD_NUM_LOCK;
+            currMods |= LwjglGlfwKeycode.GLFW_MOD_NUM_LOCK;
         } if (holdingShift) {
-            currMods |= LWJGLGLFWKeycode.GLFW_MOD_SHIFT;
+            currMods |= LwjglGlfwKeycode.GLFW_MOD_SHIFT;
         }
         return currMods;
     }
 
     public static void setModifiers(int keyCode, boolean isDown){
         switch (keyCode){
-            case LWJGLGLFWKeycode.GLFW_KEY_LEFT_SHIFT:
+            case LwjglGlfwKeycode.GLFW_KEY_LEFT_SHIFT:
                 CallbackBridge.holdingShift = isDown;
                 return;
 
-            case LWJGLGLFWKeycode.GLFW_KEY_LEFT_CONTROL:
+            case LwjglGlfwKeycode.GLFW_KEY_LEFT_CONTROL:
                 CallbackBridge.holdingCtrl = isDown;
                 return;
 
-            case LWJGLGLFWKeycode.GLFW_KEY_LEFT_ALT:
+            case LwjglGlfwKeycode.GLFW_KEY_LEFT_ALT:
                 CallbackBridge.holdingAlt = isDown;
                 return;
 
-            case LWJGLGLFWKeycode.GLFW_KEY_CAPS_LOCK:
+            case LwjglGlfwKeycode.GLFW_KEY_CAPS_LOCK:
                 CallbackBridge.holdingCapslock = isDown;
                 return;
 
-            case LWJGLGLFWKeycode.GLFW_KEY_NUM_LOCK:
+            case LwjglGlfwKeycode.GLFW_KEY_NUM_LOCK:
                 CallbackBridge.holdingNumlock = isDown;
                 return;
         }
     }
 
+    public static native void nativeSetUseInputStackQueue(boolean useInputStackQueue);
     public static native boolean nativeAttachThreadToOther(boolean isAndroid, boolean isUsePushPoll);
 
     private static native boolean nativeSendChar(char codepoint);
@@ -201,11 +207,12 @@ public class CallbackBridge {
     private static native boolean nativeSendCharMods(char codepoint, int mods);
     private static native void nativeSendKey(int key, int scancode, int action, int mods);
     // private static native void nativeSendCursorEnter(int entered);
-    private static native void nativeSendCursorPos(int x, int y);
+    private static native void nativeSendCursorPos(float x, float y);
     private static native void nativeSendMouseButton(int button, int action, int mods);
     private static native void nativeSendScroll(double xoffset, double yoffset);
     private static native void nativeSendScreenSize(int width, int height);
-    
+    public static native void nativeSetWindowAttrib(int attrib, int value);
+
     public static native boolean nativeIsGrabbing();
     static {
         System.loadLibrary("pojavexec");

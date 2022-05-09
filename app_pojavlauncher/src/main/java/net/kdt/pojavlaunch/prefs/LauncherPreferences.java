@@ -5,8 +5,8 @@ import net.kdt.pojavlaunch.*;
 import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.utils.JREUtils;
 
-public class LauncherPreferences
-{
+public class LauncherPreferences {
+    public static final String PREF_KEY_CURRENT_PROFILE = "currentProfile";
     public static SharedPreferences DEFAULT_PREF;
     public static String PREF_RENDERER = "opengles2";
 
@@ -29,6 +29,17 @@ public class LauncherPreferences
     public static float PREF_MOUSESPEED = 1f;
     public static int PREF_RAM_ALLOCATION;
     public static String PREF_DEFAULT_RUNTIME;
+    public static int PREF_CONTROL_TOP_OFFSET = 0;
+    public static int PREF_CONTROL_RIGHT_OFFSET = 0;
+    public static int PREF_CONTROL_BOTTOM_OFFSET = 0;
+    public static int PREF_CONTROL_LEFT_OFFSET = 0;
+    public static boolean PREF_SUSTAINED_PERFORMANCE = false;
+    public static boolean PREF_VIRTUAL_MOUSE_START = false;
+    public static boolean PREF_ARC_CAPES = false;
+    public static boolean PREF_USE_ALTERNATE_SURFACE = true;
+    public static int PREF_SCALE_FACTOR = 100;
+
+
     public static void loadPreferences(Context ctx) {
         //Required for the data folder.
         Tools.initContextConstants(ctx);
@@ -51,6 +62,16 @@ public class LauncherPreferences
         PREF_DISABLE_GESTURES = DEFAULT_PREF.getBoolean("disableGestures",false);
         PREF_RAM_ALLOCATION = DEFAULT_PREF.getInt("allocation", findBestRAMAllocation(ctx));
         PREF_CUSTOM_JAVA_ARGS = DEFAULT_PREF.getString("javaArgs", "");
+        PREF_CONTROL_TOP_OFFSET = DEFAULT_PREF.getInt("controlTopOffset", 0);
+        PREF_CONTROL_RIGHT_OFFSET = DEFAULT_PREF.getInt("controlRightOffset", 0);
+        PREF_CONTROL_BOTTOM_OFFSET = DEFAULT_PREF.getInt("controlBottomOffset", 0);
+        PREF_CONTROL_LEFT_OFFSET = DEFAULT_PREF.getInt("controlLeftOffset", 0);
+        PREF_SUSTAINED_PERFORMANCE = DEFAULT_PREF.getBoolean("sustainedPerformance", false);
+        PREF_VIRTUAL_MOUSE_START = DEFAULT_PREF.getBoolean("mouse_start", false);
+        PREF_ARC_CAPES = DEFAULT_PREF.getBoolean("arc_capes",false);
+        PREF_USE_ALTERNATE_SURFACE = DEFAULT_PREF.getBoolean("alternate_surface", false);
+        PREF_SCALE_FACTOR = DEFAULT_PREF.getInt("resolutionRatio", 100);
+
 /*
         if (PREF_CUSTOM_JAVA_ARGS.isEmpty()) {
             String DEFAULT_JAVA_ARGS = "";
@@ -79,9 +100,6 @@ public class LauncherPreferences
         }
 */
 
-        if (PREF_RENDERER.equals("2") || PREF_RENDERER.equals("3")) {
-            PREF_RENDERER = "opengles" + PREF_RENDERER;
-	    }
         String argLwjglLibname = "-Dorg.lwjgl.opengl.libname=";
         for (String arg : JREUtils.parseJavaArguments(PREF_CUSTOM_JAVA_ARGS)) {
             if (arg.startsWith(argLwjglLibname)) {

@@ -22,7 +22,7 @@ body:
       
       Tip: You can attach files by clicking this area to highlight it and then dragging files in or select them on 🖼 option at the toolbar.
   validations:
-    required: false
+    required: true
 
 - type: textarea
   attributes:

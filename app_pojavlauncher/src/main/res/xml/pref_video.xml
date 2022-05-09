@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app2="http://schemas.android.com/apk/res-auto">
+
+    <net.kdt.pojavlaunch.prefs.BackButtonPreference/>
+
+    <PreferenceCategory android:title="Video settings" >
+        <androidx.preference.ListPreference
+            android:title="@string/mcl_setting_category_renderer"
+            android:key="renderer"
+            android:defaultValue="opengles2"
+            android:entries="@array/renderer"
+            android:entryValues="@array/renderer_values"
+            app2:useSimpleSummaryProvider="true"/>
+
+        <androidx.preference.SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:key="ignoreNotch"
+            android:summary="@string/mcl_setting_subtitle_ignore_notch"
+            android:title="@string/mcl_setting_title_ignore_notch"
+            app2:icon="@drawable/ic_setting_ignore_notch" />
+
+        <net.kdt.pojavlaunch.prefs.CustomSeekBarPreference
+            android:key="resolutionRatio"
+            android:summary="@string/mcl_setting_subtitle_resolution_scaler"
+            android:title="@string/mcl_setting_title_resolution_scaler"
+            app2:showSeekBarValue="true"
+            app2:selectable="false"
+            app2:seekBarIncrement="5"
+            app2:icon="@drawable/ic_setting_resolution_scaler"/>
+
+        <androidx.preference.SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:key="alternate_surface"
+            android:summary="@string/mcl_setting_subtitle_use_surface_view"
+            android:title="@string/mcl_setting_title_use_surface_view"
+             />
+    </PreferenceCategory>
+</PreferenceScreen>

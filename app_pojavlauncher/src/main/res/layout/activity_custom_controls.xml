@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_height="match_parent"
+	android:layout_width="match_parent"
+	android:layout_alignParentRight="true"
+	android:id="@+id/customctrl_drawerlayout">
+
+	<RelativeLayout
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content">
+
+		<TextView
+			android:text="@string/hint_control_mapping"
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:layout_alignParentRight="true"/>
+
+		<net.kdt.pojavlaunch.customcontrols.ControlLayout
+			android:id="@+id/customctrl_controllayout"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent">
+
+		</net.kdt.pojavlaunch.customcontrols.ControlLayout>
+
+	</RelativeLayout>
+
+	<ListView
+		android:id="@+id/customctrl_navigation_view"
+		android:layout_width="200dp"
+		android:layout_height="match_parent"
+		android:layout_gravity="right"
+		android:background="?attr/colorBackgroundFloating"
+		android:fitsSystemWindows="false" />
+
+</androidx.drawerlayout.widget.DrawerLayout>
+

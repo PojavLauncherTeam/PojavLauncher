@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/vprof_editor_icon"
+        android:layout_width="0dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vprof_editor_toptxv"
+        app:srcCompat="@drawable/ic_menu_java" />
+
+    <TextView
+        android:id="@+id/vprof_editor_toptxv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/profiles_editing"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/vprof_editor_profile_name_sub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/profiles_profile_name"
+        app:layout_constraintBottom_toTopOf="@+id/vprof_editior_profile_name"
+        app:layout_constraintStart_toStartOf="@+id/vprof_editior_profile_name" />
+
+    <EditText
+        android:id="@+id/vprof_editior_profile_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:hint="@string/unnamed"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vprof_editor_icon" />
+
+    <Spinner
+        android:id="@+id/vprof_editor_version_spinner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vprof_editor_jre_args" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/profiles_profile_version"
+        app:layout_constraintBottom_toTopOf="@+id/vprof_editor_version_spinner"
+        app:layout_constraintStart_toStartOf="@+id/vprof_editor_version_spinner" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pedit_java_runtime"
+        app:layout_constraintBottom_toTopOf="@+id/vprof_editor_spinner_runtime"
+        app:layout_constraintStart_toStartOf="@+id/vprof_editor_spinner_runtime" />
+
+    <Spinner
+        android:id="@+id/vprof_editor_spinner_runtime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="@+id/vprof_editor_version_spinner"
+        app:layout_constraintStart_toStartOf="@+id/vprof_editor_version_spinner"
+        app:layout_constraintTop_toBottomOf="@+id/vprof_editor_version_spinner" />
+
+    <Spinner
+        android:id="@+id/vprof_editor_profile_renderer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="@+id/vprof_editor_spinner_runtime"
+        app:layout_constraintStart_toStartOf="@+id/vprof_editor_spinner_runtime"
+        app:layout_constraintTop_toBottomOf="@+id/vprof_editor_spinner_runtime" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pedit_renderer"
+        app:layout_constraintBottom_toTopOf="@+id/vprof_editor_profile_renderer"
+        app:layout_constraintStart_toStartOf="@+id/vprof_editor_profile_renderer" />
+
+    <EditText
+        android:id="@+id/vprof_editor_path"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:hint=".minecraft"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vprof_editior_profile_name" />
+
+    <TextView
+        android:id="@+id/vprof_editor_beginPathView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/vprof_editor_path"
+        app:layout_constraintStart_toStartOf="@+id/vprof_editor_path" />
+
+    <EditText
+        android:id="@+id/vprof_editor_jre_args"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vprof_editor_path" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pvc_jvmArgs"
+        app:layout_constraintBottom_toTopOf="@+id/vprof_editor_jre_args"
+        app:layout_constraintStart_toStartOf="@+id/vprof_editor_jre_args" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

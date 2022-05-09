@@ -11,23 +11,23 @@ public class LoginTask extends AsyncTask<String, Void, Void>
     private YggdrasilAuthenticator authenticator = new YggdrasilAuthenticator();
     //private String TAG = "MojangAuth-login";
     private LoginListener listener;
-    
+
     public LoginTask setLoginListener(LoginListener listener) {
         this.listener = listener;
         return this;
     }
-    
+
     private UUID getRandomUUID() {
         return UUID.randomUUID();
     }
-    
+
     @Override
     protected void onPreExecute() {
         listener.onBeforeLogin();
-        
+
         super.onPreExecute();
     }
-    
+
     @Override
     protected Void doInBackground(String[] args) {
         ArrayList<String> str = new ArrayList<String>();
@@ -49,7 +49,7 @@ public class LoginTask extends AsyncTask<String, Void, Void>
                     }
                 }
             }
-                //MainActivity.updateStatus(804);
+            //MainActivity.updateStatus(804);
             catch(Throwable e){
                 str.add(e.getMessage());
             }
@@ -57,12 +57,12 @@ public class LoginTask extends AsyncTask<String, Void, Void>
         catch(Exception e){
             str.add(e.getMessage());
         }
-        
+
         listener.onLoginDone(str.toArray(new String[0]));
-        
+
         return null;
     }
-    
+
     @Override
     protected void onPostExecute(Void result) {
         // listener.onLoginDone(result);

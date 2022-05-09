@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.8" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineBottom2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.9" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.23" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.86" />
+
+    <ImageView
+        android:id="@+id/launchermain_account_image"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="3dp"
+
+        android:src="@mipmap/ic_launcher"
+
+        app:layout_constraintEnd_toEndOf="@id/launchermain_spinner_account"
+        app:layout_constraintHorizontal_bias="0.00"
+
+        app:layout_constraintStart_toStartOf="@id/launchermain_spinner_account"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/launchermain_spinner_account"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@android:color/transparent"
+        android:spinnerMode="dropdown"
+        android:paddingLeft="43dp"
+
+        app:layout_constraintBottom_toBottomOf="@+id/launchermain_account_image"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/launchermain_account_image" />
+
+    <TextView
+        android:id="@+id/launchermain_text_accountstatus"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:text="@string/global_waiting"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/launchermain_spinner_account" />
+
+    <Button
+        android:id="@+id/btnTab1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+
+        android:drawableStart="@drawable/ic_menu_news"
+        android:focusable="true"
+        android:gravity="center"
+        android:onClick="onTabClicked"
+
+        android:paddingStart="12dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="0dp"
+        android:paddingBottom="10dp"
+        android:text="@string/mcl_tab_news"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+
+
+        app:layout_constraintEnd_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/launchermain_text_accountstatus" />
+
+
+    <Button
+        android:id="@+id/btnTab2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:drawableStart="@drawable/ic_menu_java"
+        android:focusable="true"
+
+        android:gravity="center"
+        android:onClick="onTabClicked"
+
+        android:paddingStart="12dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="0dp"
+        android:paddingBottom="10dp"
+        android:text="@string/mcl_tab_console"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+
+
+        app:layout_constraintEnd_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnTab1" />
+
+    <Button
+        android:id="@+id/btnTab3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:drawableStart="@drawable/ic_menu_warning"
+        android:focusable="true"
+
+        android:gravity="center"
+        android:onClick="onTabClicked"
+
+        android:paddingStart="12dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="0dp"
+        android:paddingBottom="10dp"
+        android:text="@string/mcl_tab_crash"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+
+
+        app:layout_constraintEnd_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnTab2" />
+
+    <Button
+        android:id="@+id/btnTab4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:drawableStart="@drawable/ic_menu_settings"
+
+        android:focusable="true"
+        android:gravity="center"
+
+        android:onClick="onTabClicked"
+        android:paddingStart="12dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="0dp"
+        android:paddingBottom="10dp"
+        android:text="@string/mcl_option_settings"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="#FFFFFF"
+
+
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guidelineBottom" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/launchermainTabPager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineBottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progressDownloadBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="10dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/progressDownloadText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/progressDownloadText"
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        android:background="#303030"
+        android:gravity="center_horizontal"
+        android:text="@string/global_waiting"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineBottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+        tools:visibility="visible" />
+
+
+    <Spinner
+        android:id="@+id/launchermain_spinner_version"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineBottom2"
+        app:layout_constraintEnd_toStartOf="@+id/launchermainPlayButton"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintTop_toTopOf="@+id/guidelineBottom" />
+
+    <Button
+
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="?attr/selectableItemBackground"
+
+        android:onClick="launchCustomControlsActivity"
+        android:text="@string/mcl_option_customcontrol"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/launchermainPlayButton"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintTop_toTopOf="@+id/guidelineBottom2" />
+
+    <com.kdt.mcgui.MineButton
+        android:id="@+id/launchermainPlayButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/mine_button_background"
+        android:onClick="launchGame"
+        android:text="@string/main_play"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
+        app:layout_constraintTop_toTopOf="@+id/guidelineBottom"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.25" />
+
+
+    <Button
+        android:id="@+id/installJarButton"
+
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="0dp"
+
+        android:layout_height="0dp"
+        android:background="?attr/selectableItemBackground"
+        android:onClick="installJarFile"
+        android:text="@string/main_install_jar_file"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/launchermainPlayButton"
+        app:layout_constraintTop_toTopOf="@+id/guidelineBottom2" />
+
+    <View
+        android:id="@+id/viewTabSelected"
+        android:layout_width="5dp"
+        android:layout_height="30dp"
+
+        android:background="@android:color/white"
+
+        app:layout_constraintBottom_toBottomOf="@+id/btnTab1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/launchermain_text_accountstatus" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

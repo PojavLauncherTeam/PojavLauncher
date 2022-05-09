@@ -16,8 +16,7 @@ import net.kdt.pojavlaunch.customcontrols.buttons.ControlSubButton;
 import net.kdt.pojavlaunch.customcontrols.handleview.HandleView;
 import net.kdt.pojavlaunch.prefs.*;
 
-public class ControlLayout extends FrameLayout
-{
+public class ControlLayout extends FrameLayout {
 	protected CustomControls mLayout;
 	private boolean mModifiable;
 	private CustomControlsActivity mActivity;
@@ -250,6 +249,13 @@ public class ControlLayout extends FrameLayout
 				children.add(((ControlButton) v));
 		}
 		return children;
+	}
+
+	public void refreshControlButtonPositions(){
+		for(ControlButton button : getButtonChildren()){
+			button.setDynamicX(button.getProperties().dynamicX);
+			button.setDynamicY(button.getProperties().dynamicY);
+		}
 	}
 
 	HashMap<View, ControlButton> mapTable = new HashMap<>();

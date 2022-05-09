@@ -2,20 +2,20 @@ package net.kdt.pojavlaunch.tasks;
 
 import android.app.*;
 import android.content.*;
-import android.content.res.AssetManager;
-import android.graphics.*;
 import android.os.*;
 import android.util.*;
-import com.google.gson.*;
+
 import java.io.*;
 import java.util.*;
 import java.util.concurrent.*;
 import net.kdt.pojavlaunch.*;
 import net.kdt.pojavlaunch.multirt.MultiRTUtils;
+import net.kdt.pojavlaunch.multirt.Runtime;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.utils.*;
 import net.kdt.pojavlaunch.value.*;
 import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
+import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 
 import org.apache.commons.io.*;
 
@@ -91,23 +91,24 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
 
                 //Now we have the reliable information to check if our runtime settings are good enough
                 if(verInfo.javaVersion != null) { //1.17+
-                    PerVersionConfig.update();
-                    PerVersionConfig.VersionConfig cfg = PerVersionConfig.configMap.get(p1[0]);
-                    if(cfg == null) {
-                        cfg = new PerVersionConfig.VersionConfig();
-                        PerVersionConfig.configMap.put(p1[0],cfg);
+                    LauncherProfiles.update();
+                    MinecraftProfile minecraftProfile = LauncherProfiles.mainProfileJson.profiles.get(LauncherPreferences.DEFAULT_PREF.getString(LauncherPreferences.PREF_KEY_CURRENT_PROFILE,""));
+                    if(minecraftProfile == null) throw new SilentException();
+                    String selectedRuntime = null;
+                    if(minecraftProfile.javaDir != null && minecraftProfile.javaDir.startsWith(Tools.LAUNCHERPROFILES_RTPREFIX)) {
+                        selectedRuntime = minecraftProfile.javaDir.substring(Tools.LAUNCHERPROFILES_RTPREFIX.length());
                     }
-                     MultiRTUtils.Runtime r = cfg.selectedRuntime != null?MultiRTUtils.read(cfg.selectedRuntime):MultiRTUtils.read(LauncherPreferences.PREF_DEFAULT_RUNTIME);
-                     if(r.javaVersion < verInfo.javaVersion.majorVersion) {
-                         String appropriateRuntime = MultiRTUtils.getNearestJREName(verInfo.javaVersion.majorVersion);
+                    Runtime runtime = selectedRuntime != null?MultiRTUtils.read(selectedRuntime):MultiRTUtils.read(LauncherPreferences.PREF_DEFAULT_RUNTIME);
+                    if(runtime.javaVersion < verInfo.javaVersion.majorVersion) {
+                         String appropriateRuntime = MultiRTUtils.getNearestJreName(verInfo.javaVersion.majorVersion);
                          if(appropriateRuntime != null) {
-                             cfg.selectedRuntime = appropriateRuntime;
-                             PerVersionConfig.update();
+                             minecraftProfile.javaDir = Tools.LAUNCHERPROFILES_RTPREFIX+appropriateRuntime;
+                             LauncherProfiles.update();
                          }else{
                              mActivity.runOnUiThread(()->{
                                  AlertDialog.Builder bldr = new AlertDialog.Builder(mActivity);
                                  bldr.setTitle(R.string.global_error);
-                                 bldr.setMessage(R.string.multirt_nocompartiblert);
+                                 bldr.setMessage(mActivity.getString(R.string.multirt_nocompartiblert, verInfo.javaVersion.majorVersion));
                                  bldr.setPositiveButton(android.R.string.ok,(dialog, which)->{
                                      dialog.dismiss();
                                  });
@@ -130,6 +131,36 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
 
                 File outLib;
 
+                // Patch the Log4J RCE (CVE-2021-44228)
+                if (verInfo.logging != null) {
+                    outLib = new File(Tools.DIR_GAME_NEW, verInfo.logging.client.file.id);
+                    if (outLib.exists()) {
+                        if(LauncherPreferences.PREF_CHECK_LIBRARY_SHA) {
+                            if(!Tools.compareSHA1(outLib,verInfo.logging.client.file.sha1)) {
+                                outLib.delete();
+                                publishProgress("0", mActivity.getString(R.string.dl_library_sha_fail,verInfo.logging.client.file.id));
+                            }else{
+                                publishProgress("0", mActivity.getString(R.string.dl_library_sha_pass,verInfo.logging.client.file.id));
+                            }
+                        } else if (outLib.length() != verInfo.logging.client.file.size) {
+                            // force updating anyways
+                            outLib.delete();
+                        }
+                    }
+                    if (!outLib.exists()) {
+                        publishProgress("0", mActivity.getString(R.string.mcl_launch_downloading, verInfo.logging.client.file.id));
+                        Tools.downloadFileMonitored(
+                            verInfo.logging.client.file.url,
+                            outLib.getAbsolutePath(),
+                            new Tools.DownloaderFeedback() {
+                                @Override
+                                public void updateProgress(int curr, int max) {
+                                    publishDownloadProgress(verInfo.logging.client.file.id, curr, max);
+                                }
+                            }
+                        );
+                    }
+                }
 
                 setMax(verInfo.libraries.length);
                 zeroProgress();
@@ -227,7 +258,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
             setMax(assets.objects.size());
             zeroProgress();
             try {
-                downloadAssets(assets, verInfo.assets, assets.map_to_resources ? new File(Tools.OBSOLETE_RESOURCES_PATH) : new File(Tools.ASSETS_PATH));
+                downloadAssets(assets, verInfo.assets, assets.mapToResources ? new File(Tools.OBSOLETE_RESOURCES_PATH) : new File(Tools.ASSETS_PATH));
             } catch (Exception e) {
                 e.printStackTrace();
 
@@ -324,12 +355,12 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
         }
 
         if (p1.length < 3) {
-            mActivity.mConsoleView.putLog(p1[1] + "\n");
+            //mActivity.mConsoleView.putLog(p1[1] + "\n");
         }
     }
 
     @Override
-    protected void onPostExecute(Throwable p1)
+    public void onPostExecute(Throwable p1)
     {
         mActivity.mPlayButton.setText("Play");
         mActivity.mPlayButton.setEnabled(true);
@@ -341,7 +372,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
             Tools.showError(mActivity, p1);
         }
         if(!launchWithError) {
-            mActivity.mCrashView.setLastCrash("");
+            //mActivity.mCrashView.setLastCrash("");
 
             try {
                 Intent mainIntent = new Intent(mActivity, MainActivity.class /* MainActivity.class */);
@@ -349,6 +380,8 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                 mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
                 mainIntent.addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
                 mActivity.startActivity(mainIntent);
+                mActivity.finish();
+                Log.i("ActCheck","mainActivity finishing="+mActivity.isFinishing()+", destroyed="+mActivity.isDestroyed());
             }
             catch (Throwable e) {
                 Tools.showError(mActivity, e);
@@ -397,8 +430,8 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
         LinkedBlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<>();
         final ThreadPoolExecutor executor = new ThreadPoolExecutor(10, 10, 500, TimeUnit.MILLISECONDS, workQueue);
         mActivity.mIsAssetsProcessing = true;
-        File hasDownloadedFile = new File(outputDir, "downloaded/" + assetsVersion + ".downloaded");
-        if (!hasDownloadedFile.exists()) {
+        //File hasDownloadedFile = new File(outputDir, "downloaded/" + assetsVersion + ".downloaded");
+        if (true) { //(!hasDownloadedFile.exists()) {
             System.out.println("Assets begin time: " + System.currentTimeMillis());
             Map<String, JAssetInfo> assetsObjects = assets.objects;
             int assetsSizeBytes=0;
@@ -411,7 +444,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                 JAssetInfo asset = assetsObjects.get(assetKey);
                 assetsSizeBytes+=asset.size;
                 String assetPath = asset.hash.substring(0, 2) + "/" + asset.hash;
-                File outFile = assets.map_to_resources?new File(objectsDir,"/"+assetKey):new File(objectsDir, assetPath);
+                File outFile = assets.mapToResources ?new File(objectsDir,"/"+assetKey):new File(objectsDir, assetPath);
                 boolean skip = outFile.exists();// skip if the file exists
                 if(LauncherPreferences.PREF_CHECK_LIBRARY_SHA)  //if sha checking is enabled
                     if(skip) skip = Tools.compareSHA1(outFile, asset.hash); //check hash
@@ -421,7 +454,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                     if(outFile.exists()) publishProgress("0",mActivity.getString(R.string.dl_library_sha_fail,assetKey));
                     executor.execute(()->{
                         try {
-                            if (!assets.map_to_resources) {
+                            if (!assets.mapToResources) {
                                 downloadAsset(asset, objectsDir, downloadedSize);
                             } else {
                                 downloadAssetMapped(asset, assetKey, outputDir, downloadedSize);
@@ -446,8 +479,8 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                 }
                 if(mActivity.mIsAssetsProcessing) {
                     System.out.println("Unskipped download done!");
-                    if(!hasDownloadedFile.getParentFile().exists())hasDownloadedFile.getParentFile().mkdirs();
-                    hasDownloadedFile.createNewFile();
+                    //if(!hasDownloadedFile.getParentFile().exists())hasDownloadedFile.getParentFile().mkdirs();
+                    //hasDownloadedFile.createNewFile();
                 }else{
                     System.out.println("Skipped!");
                 }

@@ -2,8 +2,10 @@ package net.kdt.pojavlaunch;
 
 import android.app.*;
 import android.content.*;
+import android.database.Cursor;
 import android.net.*;
 import android.os.*;
+import android.provider.OpenableColumns;
 import android.system.*;
 import android.util.*;
 import com.google.gson.*;
@@ -21,6 +23,7 @@ import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.utils.*;
 import net.kdt.pojavlaunch.value.*;
 import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
+import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -48,6 +51,7 @@ public final class Tools {
     public static String MULTIRT_HOME;
     public static String LOCAL_RENDERER = null;
     public static int DEVICE_ARCHITECTURE;
+    public static String LAUNCHERPROFILES_RTPREFIX = "pojav://";
 
     // New since 3.3.1
     public static String DIR_ACCOUNT_NEW;
@@ -97,14 +101,14 @@ public final class Tools {
     }
 
 
-    public static void launchMinecraft(final LoggableActivity ctx, MinecraftAccount profile, String versionName) throws Throwable {
+    public static void launchMinecraft(final Activity activity, MinecraftAccount profile, String versionName) throws Throwable {
         ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
-        ((ActivityManager)ctx.getSystemService(Context.ACTIVITY_SERVICE)).getMemoryInfo(mi);
+        ((ActivityManager)activity.getSystemService(Context.ACTIVITY_SERVICE)).getMemoryInfo(mi);
         if(LauncherPreferences.PREF_RAM_ALLOCATION > (mi.availMem/1048576L)) {
             Object memoryErrorLock = new Object();
-            ctx.runOnUiThread(() -> {
-                androidx.appcompat.app.AlertDialog.Builder b = new androidx.appcompat.app.AlertDialog.Builder(ctx)
-                        .setMessage(ctx.getString(R.string.memory_warning_msg,(mi.availMem/1048576L),LauncherPreferences.PREF_RAM_ALLOCATION))
+            activity.runOnUiThread(() -> {
+                androidx.appcompat.app.AlertDialog.Builder b = new androidx.appcompat.app.AlertDialog.Builder(activity)
+                        .setMessage(activity.getString(R.string.memory_warning_msg,(mi.availMem/1048576L),LauncherPreferences.PREF_RAM_ALLOCATION))
                         .setPositiveButton(android.R.string.ok, (dialogInterface, i) -> {synchronized(memoryErrorLock){memoryErrorLock.notifyAll();}})
                         .setOnCancelListener((i) -> {synchronized(memoryErrorLock){memoryErrorLock.notifyAll();}});
                 b.show();
@@ -115,15 +119,21 @@ public final class Tools {
         }
 
         JMinecraftVersionList.Version versionInfo = Tools.getVersionInfo(null,versionName);
-        PerVersionConfig.update();
-        PerVersionConfig.VersionConfig pvcConfig = PerVersionConfig.configMap.get(versionName);
-
-        String gamedirPath;
-        if(pvcConfig != null && pvcConfig.gamePath != null && !pvcConfig.gamePath.isEmpty()) gamedirPath = pvcConfig.gamePath;
-        else gamedirPath = Tools.DIR_GAME_NEW;
-        if(pvcConfig != null && pvcConfig.jvmArgs != null && !pvcConfig.jvmArgs.isEmpty()) LauncherPreferences.PREF_CUSTOM_JAVA_ARGS = pvcConfig.jvmArgs;
+        String gamedirPath = Tools.DIR_GAME_NEW;
+            if(activity instanceof BaseMainActivity) {
+                LauncherProfiles.update();
+                MinecraftProfile minecraftProfile = ((BaseMainActivity)activity).minecraftProfile;
+                if(minecraftProfile == null) throw new Exception("Launching empty Profile");
+                if(minecraftProfile.gameDir != null && minecraftProfile.gameDir.startsWith(Tools.LAUNCHERPROFILES_RTPREFIX))
+                    gamedirPath = minecraftProfile.gameDir.replace(Tools.LAUNCHERPROFILES_RTPREFIX,Tools.DIR_GAME_HOME+"/");
+                if(minecraftProfile.javaArgs != null && !minecraftProfile.javaArgs.isEmpty())
+                    LauncherPreferences.PREF_CUSTOM_JAVA_ARGS = minecraftProfile.javaArgs;
+            }
         PojavLoginActivity.disableSplash(gamedirPath);
         String[] launchArgs = getMinecraftClientArgs(profile, versionInfo, gamedirPath);
+
+        // Select the appropriate openGL version
+        OldVersionsUtils.selectOpenGlVersion(versionInfo);
 
         // ctx.appendlnToLog("Minecraft Args: " + Arrays.toString(launchArgs));
 
@@ -132,8 +142,11 @@ public final class Tools {
         List<String> javaArgList = new ArrayList<String>();
 
         // Only Java 8 supports headful AWT for now
-        if (ctx.jreReleaseList.get("JAVA_VERSION").equals("1.8.0")) {
+        if (JREUtils.jreReleaseList.get("JAVA_VERSION").equals("1.8.0")) {
             getCacioJavaArgs(javaArgList, false);
+        } else if (LauncherPreferences.PREF_ARC_CAPES) {
+            // Opens the java.net package to Arc DNS injector on Java 9+
+            javaArgList.add("--add-opens=java.base/java.net=ALL-UNNAMED");
         }
 
 /*
@@ -149,6 +162,9 @@ public final class Tools {
         }
 */
 
+        if (versionInfo.logging != null) {
+            javaArgList.add("-Dlog4j.configurationFile=" + Tools.DIR_GAME_NEW + "/" + versionInfo.logging.client.file.id);
+        }
         javaArgList.addAll(Arrays.asList(getMinecraftJVMArgs(versionName, gamedirPath)));
         javaArgList.add("-cp");
         javaArgList.add(getLWJGL3ClassPath() + ":" + launchClassPath);
@@ -156,13 +172,13 @@ public final class Tools {
         javaArgList.add(versionInfo.mainClass);
         javaArgList.addAll(Arrays.asList(launchArgs));
         // ctx.appendlnToLog("full args: "+javaArgList.toString());
-        JREUtils.launchJavaVM(ctx, javaArgList);
+        JREUtils.launchJavaVM(activity, javaArgList);
     }
     
     public static void getCacioJavaArgs(List<String> javaArgList, boolean isHeadless) {
         javaArgList.add("-Djava.awt.headless="+isHeadless);
         // Caciocavallo config AWT-enabled version
-        javaArgList.add("-Dcacio.managed.screensize=" + CallbackBridge.physicalWidth + "x" + CallbackBridge.physicalHeight);
+        javaArgList.add("-Dcacio.managed.screensize=" + AWTCanvasView.AWT_CANVAS_WIDTH + "x" + AWTCanvasView.AWT_CANVAS_HEIGHT);
         // javaArgList.add("-Dcacio.font.fontmanager=net.java.openjdk.cacio.ctc.CTCFontManager");
         javaArgList.add("-Dcacio.font.fontmanager=sun.awt.X11FontManager");
         javaArgList.add("-Dcacio.font.fontscaler=sun.font.FreetypeFontScaler");
@@ -271,14 +287,17 @@ public final class Tools {
                 }
             }
         }
+        /*
         minecraftArgs.add("--width");
         minecraftArgs.add(Integer.toString(CallbackBridge.windowWidth));
         minecraftArgs.add("--height");
         minecraftArgs.add(Integer.toString(CallbackBridge.windowHeight));
+
         minecraftArgs.add("--fullscreenWidth");
         minecraftArgs.add(Integer.toString(CallbackBridge.windowWidth));
         minecraftArgs.add("--fullscreenHeight");
         minecraftArgs.add(Integer.toString(CallbackBridge.windowHeight));
+        */
         
         String[] argsFromJson = JSONUtils.insertJSONValueList(
             splitAndFilterEmpty(
@@ -308,7 +327,7 @@ public final class Tools {
                 strList.add(arg);
             }
         }
-        strList.add("--fullscreen");
+        //strList.add("--fullscreen");
         return strList.toArray(new String[0]);
     }
 
@@ -378,51 +397,49 @@ public final class Tools {
         return libStr.toString();
     }
 
-    public static DisplayMetrics getDisplayMetrics(Activity ctx) {
+    public static DisplayMetrics getDisplayMetrics(Activity activity) {
         DisplayMetrics displayMetrics = new DisplayMetrics();
 
-        if(SDK_INT >= Build.VERSION_CODES.N && (ctx.isInMultiWindowMode() || ctx.isInPictureInPictureMode())
-        || PREF_NOTCH_SIZE == -1 ){
+        if(SDK_INT >= Build.VERSION_CODES.N && (activity.isInMultiWindowMode() || activity.isInPictureInPictureMode())){
             //For devices with free form/split screen, we need window size, not screen size.
-            displayMetrics = ctx.getResources().getDisplayMetrics();
+            displayMetrics = activity.getResources().getDisplayMetrics();
         }else{
             if (SDK_INT >= Build.VERSION_CODES.R) {
-                ctx.getDisplay().getRealMetrics(displayMetrics);
+                activity.getDisplay().getRealMetrics(displayMetrics);
             } else {
-                 ctx.getWindowManager().getDefaultDisplay().getRealMetrics(displayMetrics);
+                 activity.getWindowManager().getDefaultDisplay().getRealMetrics(displayMetrics);
             }
             if(!PREF_IGNORE_NOTCH){
                 //Remove notch width when it isn't ignored.
                 displayMetrics.widthPixels -= PREF_NOTCH_SIZE;
             }
         }
+        currentDisplayMetrics = displayMetrics;
+
         return displayMetrics;
     }
 
-    public static void setFullscreen(Activity act) {
-        final View decorView = act.getWindow().getDecorView();
-        decorView.setOnSystemUiVisibilityChangeListener (new View.OnSystemUiVisibilityChangeListener() {
-                @Override
-                public void onSystemUiVisibilityChange(int visibility) {
-                    if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
-                        decorView.setSystemUiVisibility(
-                            View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-                    }
-                }
-            });
+    public static void setFullscreen(Activity activity) {
+        final View decorView = activity.getWindow().getDecorView();
+        decorView.setOnSystemUiVisibilityChangeListener (visibility -> {
+            if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
+                decorView.setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+            }
+        });
     }
 
     public static DisplayMetrics currentDisplayMetrics;
 
-    public static void updateWindowSize(Activity ctx) {
-        currentDisplayMetrics = getDisplayMetrics(ctx);
+    public static void updateWindowSize(Activity activity) {
+        currentDisplayMetrics = getDisplayMetrics(activity);
 
-        CallbackBridge.physicalWidth = (int) (currentDisplayMetrics.widthPixels);
-        CallbackBridge.physicalHeight = (int) (currentDisplayMetrics.heightPixels);
+        CallbackBridge.physicalWidth = currentDisplayMetrics.widthPixels;
+        CallbackBridge.physicalHeight = currentDisplayMetrics.heightPixels;
     }
 
     public static float dpToPx(float dp) {
@@ -466,42 +483,37 @@ public final class Tools {
     private static void showError(final Context ctx, final int titleId, final Throwable e, final boolean exitIfOk, final boolean showMore) {
         e.printStackTrace();
         
-        Runnable runnable = new Runnable(){
-
-            @Override
-            public void run()
-            {
-                final String errMsg = showMore ? Log.getStackTraceString(e): e.getMessage();
-                AlertDialog.Builder builder = new AlertDialog.Builder((Context) ctx)
-                    .setTitle(titleId)
-                    .setMessage(errMsg)
-                    .setPositiveButton(android.R.string.ok, (DialogInterface.OnClickListener) (p1, p2) -> {
-                        if(exitIfOk) {
-                            if (ctx instanceof BaseMainActivity) {
-                                BaseMainActivity.fullyExit();
-                            } else if (ctx instanceof Activity) {
-                                ((Activity) ctx).finish();
-                            }
+        Runnable runnable = () -> {
+            final String errMsg = showMore ? Log.getStackTraceString(e): e.getMessage();
+            AlertDialog.Builder builder = new AlertDialog.Builder((Context) ctx)
+                .setTitle(titleId)
+                .setMessage(errMsg)
+                .setPositiveButton(android.R.string.ok, (DialogInterface.OnClickListener) (p1, p2) -> {
+                    if(exitIfOk) {
+                        if (ctx instanceof BaseMainActivity) {
+                            BaseMainActivity.fullyExit();
+                        } else if (ctx instanceof Activity) {
+                            ((Activity) ctx).finish();
                         }
-                    })
-                    .setNegativeButton(showMore ? R.string.error_show_less : R.string.error_show_more, (DialogInterface.OnClickListener) (p1, p2) -> showError(ctx, titleId, e, exitIfOk, !showMore))
-                    .setNeutralButton(android.R.string.copy, (DialogInterface.OnClickListener) (p1, p2) -> {
-                        ClipboardManager mgr = (ClipboardManager) ctx.getSystemService(Context.CLIPBOARD_SERVICE);
-                        mgr.setPrimaryClip(ClipData.newPlainText("error", Log.getStackTraceString(e)));
-                        if(exitIfOk) {
-                            if (ctx instanceof BaseMainActivity) {
-                                BaseMainActivity.fullyExit();
-                            } else {
-                                ((Activity) ctx).finish();
-                            }
+                    }
+                })
+                .setNegativeButton(showMore ? R.string.error_show_less : R.string.error_show_more, (DialogInterface.OnClickListener) (p1, p2) -> showError(ctx, titleId, e, exitIfOk, !showMore))
+                .setNeutralButton(android.R.string.copy, (DialogInterface.OnClickListener) (p1, p2) -> {
+                    ClipboardManager mgr = (ClipboardManager) ctx.getSystemService(Context.CLIPBOARD_SERVICE);
+                    mgr.setPrimaryClip(ClipData.newPlainText("error", Log.getStackTraceString(e)));
+                    if(exitIfOk) {
+                        if (ctx instanceof BaseMainActivity) {
+                            BaseMainActivity.fullyExit();
+                        } else {
+                            ((Activity) ctx).finish();
                         }
-                    })
-                    .setCancelable(!exitIfOk);
-                try {
-                    builder.show();
-                } catch (Throwable th) {
-                    th.printStackTrace();
-                }
+                    }
+                })
+                .setCancelable(!exitIfOk);
+            try {
+                builder.show();
+            } catch (Throwable th) {
+                th.printStackTrace();
             }
         };
 
@@ -512,8 +524,8 @@ public final class Tools {
         }
     }
 
-    public static void dialogOnUiThread(final Activity ctx, final CharSequence title, final CharSequence message) {
-        ctx.runOnUiThread(() -> new AlertDialog.Builder(ctx)
+    public static void dialogOnUiThread(final Activity activity, final CharSequence title, final CharSequence message) {
+        activity.runOnUiThread(() -> new AlertDialog.Builder(activity)
             .setTitle(title)
             .setMessage(message)
             .setPositiveButton(android.R.string.ok, null)
@@ -597,7 +609,7 @@ public final class Tools {
                    }catch(IOException e) {
                        throw new RuntimeException("Can't find the source version for "+ versionName +" (req version="+customVer.inheritsFrom+")");
                    }
-                inheritsVer.inheritsFrom = inheritsVer.id;
+                //inheritsVer.inheritsFrom = inheritsVer.id;
                 insertSafety(inheritsVer, customVer,
                              "assetIndex", "assets", "id",
                              "mainClass", "minecraftArguments",
@@ -693,45 +705,46 @@ public final class Tools {
     }
     
     public static String convertStream(InputStream inputStream, Charset charset) throws IOException {
-        String out = "";
+        StringBuilder out = new StringBuilder();
         int len;
         byte[] buf = new byte[512];
         while((len = inputStream.read(buf))!=-1) {
-            out += new String(buf,0,len,charset);
+            out.append(new String(buf, 0, len, charset));
         }
-        return out;
+        return out.toString();
     }
 
     public static File lastFileModified(String dir) {
         File fl = new File(dir);
 
-        File[] files = fl.listFiles(new FileFilter() {          
-                public boolean accept(File file) {
-                    return file.isFile();
-                }
-            });
-
+        File[] files = fl.listFiles(File::isFile);
+        if(files == null) {
+            return null;
+            // The patch was a bit wrong...
+            // So, this may be null, why? Because this folder may not exist yet
+            // Or it may not have any files...
+            // Doesn't matter. We must check for that in the crash fragment.
+        }
         long lastMod = Long.MIN_VALUE;
         File choice = null;
         for (File file : files) {
-            if (file.lastModified() > lastMod) {
-                choice = file;
-                lastMod = file.lastModified();
+             if (file.lastModified() > lastMod) {
+                 choice = file;
+                 lastMod = file.lastModified();
             }
         }
-
         return choice;
     }
 
 
     public static String read(InputStream is) throws IOException {
-        String out = "";
+        StringBuilder out = new StringBuilder();
         int len;
         byte[] buf = new byte[512];
         while((len = is.read(buf))!=-1) {
-            out += new String(buf,0,len);
+            out.append(new String(buf, 0, len));
         }
-        return out;
+        return out.toString();
     }
 
     public static String read(String path) throws IOException {
@@ -777,6 +790,7 @@ public final class Tools {
     public abstract static class DownloaderFeedback {
         public abstract void updateProgress(int curr, int max);
     }
+
     public static void downloadFileMonitored(String urlInput,String nameOutput, DownloaderFeedback monitor) throws IOException {
         File nameOutputFile = new File(nameOutput);
         if (!nameOutputFile.exists()) {
@@ -813,75 +827,6 @@ public final class Tools {
             return true;
         }
     }
-    public static class ZipTool
-    {
-        private ZipTool(){}
-        public static void zip(List<File> files, File zipFile) throws IOException {
-            final int BUFFER_SIZE = 2048;
-
-            BufferedInputStream origin = null;
-            ZipOutputStream out = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(zipFile)));
-
-            try {
-                byte data[] = new byte[BUFFER_SIZE];
-
-                for (File file : files) {
-                    FileInputStream fileInputStream = new FileInputStream( file );
-
-                    origin = new BufferedInputStream(fileInputStream, BUFFER_SIZE);
-
-                    try {
-                        ZipEntry entry = new ZipEntry(file.getName());
-
-                        out.putNextEntry(entry);
-
-                        int count;
-                        while ((count = origin.read(data, 0, BUFFER_SIZE)) != -1) {
-                            out.write(data, 0, count);
-                        }
-                    }
-                    finally {
-                        origin.close();
-                    }
-                }
-            } finally {
-                out.close();
-            }
-        }
-        public static void unzip(File zipFile, File targetDirectory) throws IOException {
-            final int BUFFER_SIZE = 1024;
-            ZipInputStream zis = new ZipInputStream(
-                new BufferedInputStream(new FileInputStream(zipFile)));
-            try {
-                ZipEntry ze;
-                int count;
-                byte[] buffer = new byte[BUFFER_SIZE];
-                while ((ze = zis.getNextEntry()) != null) {
-                    File file = new File(targetDirectory, ze.getName());
-                    File dir = ze.isDirectory() ? file : file.getParentFile();
-                    if (!dir.isDirectory() && !dir.mkdirs())
-                        throw new FileNotFoundException("Failed to ensure directory: " +
-                                                        dir.getAbsolutePath());
-                    if (ze.isDirectory())
-                        continue;
-                    FileOutputStream fout = new FileOutputStream(file);
-                    try {
-                        while ((count = zis.read(buffer)) != -1)
-                            fout.write(buffer, 0, count);
-                    } finally {
-                        fout.close();
-                    }
-                    /* if time should be restored as well
-                     long time = ze.getTime();
-                     if (time > 0)
-                     file.setLastModified(time);
-                     */
-                }
-            } finally {
-                zis.close();
-            }
-        }
-    }
 
     public static void ignoreNotch(boolean shouldIgnore, Activity ctx){
         if (SDK_INT >= P) {
@@ -913,5 +858,27 @@ public final class Tools {
         displaySideRes *= scaling;
         if(displaySideRes % 2 != 0) displaySideRes ++;
         return displaySideRes;
+    }
+
+    public static String getFileName(Context ctx, Uri uri) {
+        String result = null;
+        if (uri.getScheme().equals("content")) {
+            Cursor cursor = ctx.getContentResolver().query(uri, null, null, null, null);
+            try {
+                if (cursor != null && cursor.moveToFirst()) {
+                    result = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+                }
+            } finally {
+                cursor.close();
+            }
+        }
+        if (result == null) {
+            result = uri.getPath();
+            int cut = result.lastIndexOf('/');
+            if (cut != -1) {
+                result = result.substring(cut + 1);
+            }
+        }
+        return result;
     }
 }

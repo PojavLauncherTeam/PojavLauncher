@@ -1,17 +1,19 @@
 package net.kdt.pojavlaunch.utils;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.res.AssetManager;
 import android.util.Log;
 
 import androidx.appcompat.app.AlertDialog;
 
+import net.kdt.pojavlaunch.BaseLauncherActivity;
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.tasks.MinecraftDownloaderTask;
 import net.kdt.pojavlaunch.value.PerVersionConfig;
+import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
+import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 
 import org.apache.commons.io.IOUtils;
 
@@ -22,7 +24,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class V117CompatUtil {
@@ -92,48 +93,57 @@ public class V117CompatUtil {
         Log.i("V117CompatDebug",rawList);
         return new ArrayList<>(Arrays.asList(rawList.split(",")));
     }
+
     private static String regenPackList(List<String> packs) {
         if(packs.size()==0) return "[]";
-        String ret = "["+packs.get(0);
+        StringBuilder ret = new StringBuilder("[" + packs.get(0));
         for(int i = 1; i < packs.size(); i++) {
-            ret += ","+packs.get(i);
+            ret.append(",").append(packs.get(i));
         }
-        ret += "]";
-        return ret;
+        ret.append("]");
+        return ret.toString();
     }
-    public static void runCheck(String version, Activity ctx) throws Exception{
 
-        PerVersionConfig.VersionConfig cfg = PerVersionConfig.configMap.get(version);
+    public static void runCheck(String version, Activity activity) throws Exception{
+
+
         MCOptionUtils.load();
 
         List<String> packList =getTexturePackList(MCOptionUtils.get("resourcePacks"));
-        String renderer = cfg != null && cfg.renderer != null?cfg.renderer:LauncherPreferences.PREF_RENDERER;
+        String renderer;
+        String gamePath;
+        LauncherProfiles.update();
+        String selectedProfile = LauncherPreferences.DEFAULT_PREF.getString(LauncherPreferences.PREF_KEY_CURRENT_PROFILE,"");
+        MinecraftProfile prof = LauncherProfiles.mainProfileJson.profiles.get(selectedProfile);
+        if(prof == null) throw new MinecraftDownloaderTask.SilentException();
+        renderer = prof.pojavRendererName != null ? prof.pojavRendererName : LauncherPreferences.PREF_RENDERER;
+        gamePath = prof.gameDir != null && prof.gameDir.startsWith(Tools.LAUNCHERPROFILES_RTPREFIX) ? prof.gameDir.replace(Tools.LAUNCHERPROFILES_RTPREFIX,Tools.DIR_GAME_HOME + "/") : Tools.DIR_GAME_NEW;
 
-        if(renderer.equals("vulkan_zink")) return; //don't install for zink users;
-        if(packList.contains("\"assets-v0.zip\"") && renderer.equals("opengles3")) return;
+        //String
+
+        if(renderer.equals("vulkan_zink") || renderer.equals("opengles3_virgl")) return; //don't install for zink/virgl users;
+        if(packList.contains("\"assets-v0.zip\"")) return;
+        if(JREUtils.getDetectedVersion() >= 3) return; // GL4ES_extra supports 1.17+
 
         Object lock = new Object();
         AtomicInteger proceed = new AtomicInteger(0);
-        ctx.runOnUiThread(() -> {
-            AlertDialog.Builder bldr = new AlertDialog.Builder(ctx);
-            bldr.setTitle(R.string.global_warinng);
-            bldr.setMessage(R.string.compat_117_message);
-            bldr.setPositiveButton(android.R.string.ok, (dialog, which) -> {
+        activity.runOnUiThread(() -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+            builder.setTitle(R.string.global_warinng);
+            builder.setMessage(R.string.compat_117_message);
+            builder.setPositiveButton(android.R.string.ok, (dialog, which) -> {
                 proceed.set(1);
                 synchronized (lock) { lock.notifyAll(); }
-                dialog.dismiss();
             });
-            bldr.setNegativeButton(android.R.string.cancel, (dialog, which) -> {
+            builder.setNegativeButton(android.R.string.cancel, (dialog, which) -> {
                 synchronized (lock) { lock.notifyAll(); }
-                dialog.dismiss();
             });
-            bldr.setNeutralButton(R.string.compat_11x_playanyway, (dialog, which) -> {
+            builder.setNeutralButton(R.string.compat_11x_playanyway, (dialog, which) -> {
                 proceed.set(2);
                 synchronized (lock) { lock.notifyAll(); }
-                dialog.dismiss();
             });
-            bldr.setCancelable(false);
-            bldr.show();
+            builder.setCancelable(false);
+            builder.show();
         });
 
         synchronized (lock) {
@@ -141,23 +151,20 @@ public class V117CompatUtil {
         }
         switch(proceed.get()) {
             case 1:
-                if (cfg == null) {
-                    cfg = new PerVersionConfig.VersionConfig();
-                    PerVersionConfig.configMap.put(version, cfg);
-                }
-                cfg.renderer = "opengles3";
-                String path = Tools.DIR_GAME_NEW;
-                if(cfg.gamePath != null && !cfg.gamePath.isEmpty()) path = cfg.gamePath;
-                copyResourcePack(path,ctx.getAssets());
+                MinecraftProfile minecraftProfile = LauncherProfiles.mainProfileJson.profiles.get(selectedProfile);
+                if(minecraftProfile == null) throw new MinecraftDownloaderTask.SilentException();
+                minecraftProfile.pojavRendererName = "opengles2";
+                LauncherProfiles.update();
+                copyResourcePack(gamePath,activity.getAssets());
                 if(!packList.contains("\"assets-v0.zip\"")) packList.add(0,"\"assets-v0.zip\"");
                 MCOptionUtils.set("resourcePacks",regenPackList(packList));
                 MCOptionUtils.save();
-                PerVersionConfig.update();
                 break;
             case 0:
                 throw new MinecraftDownloaderTask.SilentException();
         }
     }
+
     public static void copyResourcePack(String gameDir, AssetManager am) throws IOException {
         File resourcepacksDir = new File(gameDir,"resourcepacks");
         if(!resourcepacksDir.exists()) resourcepacksDir.mkdirs();

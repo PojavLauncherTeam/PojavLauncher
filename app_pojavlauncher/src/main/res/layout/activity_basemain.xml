@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_height="match_parent"
+	android:layout_width="match_parent"
+	android:layout_alignParentRight="true"
+	android:id="@+id/main_drawer_options"
+	android:background="@drawable/no_focus_shown"
+	android:keepScreenOn="true">
+
+	<FrameLayout
+		android:id="@+id/content_frame"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+
+		<net.kdt.pojavlaunch.customcontrols.ControlLayout
+			android:id="@+id/main_control_layout"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent">
+
+			<net.kdt.pojavlaunch.MinecraftGLSurface
+				android:id="@+id/main_game_render_view"
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent"/>
+
+			<net.kdt.pojavlaunch.Touchpad
+				android:layout_height="match_parent"
+				android:layout_width="match_parent"
+				android:orientation="vertical"
+				android:id="@+id/main_touchpad"
+				android:elevation="1dp"
+				android:visibility="gone"/>
+
+
+			<net.kdt.pojavlaunch.customcontrols.keyboard.TouchCharInput
+				android:id="@+id/mainTouchCharInput"
+				android:layout_width="1dp"
+				android:layout_height="1dp"
+				android:background="@android:color/darker_gray"
+				android:ems="10"
+				android:imeOptions="flagNoFullscreen|flagNoExtractUi|flagNoPersonalizedLearning|actionDone"
+				android:inputType="textFilter|textImeMultiLine|textAutoComplete|textAutoCorrect"
+				tools:ignore="TouchTargetSizeCheck" />
+
+		</net.kdt.pojavlaunch.customcontrols.ControlLayout>
+
+		<com.kdt.LoggerView
+			android:id="@+id/mainLoggerView"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:visibility="gone"
+			/>
+
+	</FrameLayout>
+
+	<ListView
+		android:layout_width="200dp"
+		android:layout_height="match_parent"
+		android:layout_gravity="right"
+		android:background="?attr/colorBackgroundFloating"
+		android:fitsSystemWindows="false"
+		app:menu="@menu/menu_runopt"
+		android:id="@+id/main_navigation_view"/>
+
+</androidx.drawerlayout.widget.DrawerLayout>
+
