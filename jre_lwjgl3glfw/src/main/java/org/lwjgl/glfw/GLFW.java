@@ -12,7 +12,6 @@ import java.nio.*;
 import javax.annotation.*;
 
 import org.lwjgl.*;
-import org.lwjgl.opengl.GL;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.APIUtil.*;
@@ -1067,21 +1066,14 @@ public class GLFW
             mGLFWIsInputReady = true;
             mGLFWIsUseStackQueue = CallbackBridge.nativeSetInputReady(true);
         }
-
-        if (!CallbackBridge.PENDING_EVENT_READY) {
-            CallbackBridge.PENDING_EVENT_READY = true;
-            // nglfwSetInputReady();
+        CallbackBridge singleton = CallbackBridge.getSingleton();
+        if(!singleton.pendingEventReady) {
+            singleton.pendingEventReady = true;
         }
 
         // Indirect event
-        while (CallbackBridge.PENDING_EVENT_LIST.size() > 0) {
-            Integer[] dataArr = CallbackBridge.PENDING_EVENT_LIST.remove(0);
-
-            if (dataArr == null) { // It should not be null, but still should be catched
-                // System.out.println("GLFW: popped callback is null, skipping");
-                continue;
-            }
-
+        while (singleton.pendingEventList.size() > 0) {
+            Integer[] dataArr = CallbackBridge.getSingleton().pendingEventList.remove(0);
             for (Long ptr : mGLFWWindowMap.keySet()) {
                 try {
                     switch (dataArr[0]) {

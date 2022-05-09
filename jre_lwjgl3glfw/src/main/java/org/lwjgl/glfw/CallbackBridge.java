@@ -1,7 +1,5 @@
 package org.lwjgl.glfw;
-import java.io.*;
 import java.util.*;
-import android.util.*;
 
 public class CallbackBridge {
     public static final int CLIPBOARD_COPY = 2000;
@@ -20,8 +18,9 @@ public class CallbackBridge {
     public static final int ANDROID_TYPE_GRAB_STATE = 0;
 
     // Should pending events be limited?
-    volatile public static List<Integer[]> PENDING_EVENT_LIST = new ArrayList<>();
-    volatile public static boolean PENDING_EVENT_READY = false;
+    volatile public List<Integer[]> pendingEventList = new ArrayList<>();
+    volatile public boolean pendingEventReady = false;
+    private static CallbackBridge thisBridge = null;
     
     public static final boolean INPUT_DEBUG_ENABLED;
     
@@ -51,33 +50,38 @@ public class CallbackBridge {
         GLFW.mGLFWIsGrabbing = grab;
         nativeSetGrabbing(grab, xset, yset);
     }
-    
+    public static CallbackBridge getSingleton() {
+        if(thisBridge == null) {
+            thisBridge = new CallbackBridge();
+            initBridge(thisBridge);
+        }
+        return thisBridge;
+    }
 	// Called from Android side
-	public static void receiveCallback(int type, int i1, int i2, int i3, int i4) {
+    public void receiveCallback(int type, int i1, int i2, int i3, int i4) {
        /*
         if (INPUT_DEBUG_ENABLED) {
             System.out.println("LWJGL GLFW Callback received type=" + Integer.toString(type) + ", data=" + i1 + ", " + i2 + ", " + i3 + ", " + i4);
         }
         */
-        if (PENDING_EVENT_READY) {
+        if (pendingEventReady) {
             if (type == EVENT_TYPE_CURSOR_POS) {
                 GLFW.mGLFWCursorX = (double) i1;
                 GLFW.mGLFWCursorY = (double) i2;
             } else {
-                PENDING_EVENT_LIST.add(new Integer[]{type, (int) i1, (int)i2, i3, i4});
+                pendingEventList.add(new Integer[]{type, (int) i1, (int)i2, i3, i4});
             }
         } // else System.out.println("Event input is not ready yet!");
-	}
+    }
     
     public static void sendData(int type, String data) {
         nativeSendData(false, type, data);
     }
-    
     public static native void nativeSendData(boolean isAndroid, int type, String data);
     public static native boolean nativeSetInputReady(boolean ready);
     public static native String nativeClipboard(int action, String copy);
     public static native void nativeAttachThreadToOther(boolean isAndroid, boolean isUseStackQueueBool);
-    
     private static native void nativeSetGrabbing(boolean grab, int xset, int yset);
+    private static native void initBridge(CallbackBridge bridge);
 }
 
