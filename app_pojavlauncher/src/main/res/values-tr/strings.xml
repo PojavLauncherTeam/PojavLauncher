@@ -260,5 +260,6 @@
     <string name="global_delete">Sil</string>
     <string name="pedit_java_runtime">Java Runtime</string>
     <string name="pedit_renderer">İşleyici</string>
+    <string name="arc_capes_title">Turkish </string>
     <string name="migrated_profile_str">%s sürüm ayarlaması</string>
 </resources>
