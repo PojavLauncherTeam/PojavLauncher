@@ -267,40 +267,6 @@ public class PojavLoginActivity extends BaseActivity {
         PojavProfile.setCurrentProfile(this, null);
     }
 
-    private void repackLWJGL3(boolean ignoreExistence) throws IOException {
-        File outFile = new File(Tools.DIR_GAME_HOME + "/lwjgl3/lwjgl-fat.jar");
-        File outTmpFile = new File(Tools.DIR_GAME_HOME + "/lwjgl3/lwjgl-fat.jar.tmp");
-        File[] innerFiles = outTmpFile.getParentFile().listFiles();
-
-        if (outFile.exists() && !ignoreExistence) {
-            return;
-        }
-        outFile.delete();
-        outTmpFile.delete();
-
-        java.util.jar.Manifest manifest = new java.util.jar.Manifest();
-        manifest.getMainAttributes().put(Attributes.Name.MANIFEST_VERSION, "1.0");
-        JarOutputStream outJar = new JarOutputStream(new FileOutputStream(outTmpFile), manifest);
-        outJar.setLevel(9);
-
-        for (File file : innerFiles) {
-            if (!file.getName().endsWith(".jar")) continue;
-            JarInputStream inJar = new JarInputStream(new FileInputStream(file));
-            JarEntry entry;
-            while ((entry = inJar.getNextJarEntry()) != null) {
-                // avoid some duplicated entries
-                if (entry.getSize() == 0 || entry.getName().equals("META-INF/INDEX.LIST") || entry.getName().startsWith("META-INF/versions")) continue;
-                outJar.putNextEntry(new JarEntry(entry.getName()));
-                IOUtils.copy(inJar, outJar);
-            }
-            inJar.close();
-            file.delete();
-        }
-
-        outJar.close();
-        outTmpFile.renameTo(outFile);
-    }
-
     private boolean unpackComponent(AssetManager am, String component) throws IOException {
         File versionFile = new File(Tools.DIR_GAME_HOME + "/" + component + "/version");
         InputStream is = am.open("components/" + component + "/version");
@@ -384,7 +350,7 @@ public class PojavLoginActivity extends BaseActivity {
 
             // Since the Java module system doesn't allow multiple JARs to declare the same module,
             // we repack them to a single file here
-            repackLWJGL3(unpackComponent(am, "lwjgl3"));
+            unpackComponent(am, "lwjgl3");
 
             if(!installRuntimeAutomatically(am,MultiRTUtils.getRuntimes().size() > 0)) {
                MultiRTConfigDialog.openRuntimeSelector(this, MultiRTConfigDialog.MULTIRT_PICK_RUNTIME_STARTUP);
