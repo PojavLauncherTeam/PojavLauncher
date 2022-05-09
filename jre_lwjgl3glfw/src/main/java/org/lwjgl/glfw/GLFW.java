@@ -1073,7 +1073,7 @@ public class GLFW
 
         // Indirect event
         while (singleton.pendingEventList.size() > 0) {
-            Integer[] dataArr = CallbackBridge.getSingleton().pendingEventList.remove(0);
+            Integer[] dataArr = singleton.pendingEventList.remove(0);
             for (Long ptr : mGLFWWindowMap.keySet()) {
                 try {
                     switch (dataArr[0]) {
