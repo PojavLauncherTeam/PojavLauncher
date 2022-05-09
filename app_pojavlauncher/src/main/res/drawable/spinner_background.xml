@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@drawable/surface_button_background"/>
+
+    <item>
+        <bitmap
+            android:src="@drawable/spinner_arrow"
+            android:antialias="false"
+            android:filter="false"
+            android:dither="false"
+            android:gravity="right|center_horizontal"
+
+            />
+
+    </item>
+
+</layer-list>
