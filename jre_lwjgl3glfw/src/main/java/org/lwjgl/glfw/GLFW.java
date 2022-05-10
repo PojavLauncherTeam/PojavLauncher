@@ -523,7 +523,7 @@ public class GLFW
         } catch (UnsatisfiedLinkError e) {
             e.printStackTrace();
         }
-
+        CallbackBridge.setClass();
         mGLFWErrorCallback = GLFWErrorCallback.createPrint();
         mGLFWKeyCodes = new ArrayMap<>();
 
@@ -1066,14 +1066,13 @@ public class GLFW
             mGLFWIsInputReady = true;
             mGLFWIsUseStackQueue = CallbackBridge.nativeSetInputReady(true);
         }
-        CallbackBridge singleton = CallbackBridge.getSingleton();
-        if(!singleton.pendingEventReady) {
-            singleton.pendingEventReady = true;
+        if(!CallbackBridge.PENDING_EVENT_READY) {
+            CallbackBridge.PENDING_EVENT_READY = true;
         }
 
         // Indirect event
-        while (singleton.pendingEventList.size() > 0) {
-            Integer[] dataArr = singleton.pendingEventList.remove(0);
+        while (CallbackBridge.PENDING_EVENT_LIST.size() > 0) {
+            Integer[] dataArr = CallbackBridge.PENDING_EVENT_LIST.remove(0);
             for (Long ptr : mGLFWWindowMap.keySet()) {
                 try {
                     switch (dataArr[0]) {

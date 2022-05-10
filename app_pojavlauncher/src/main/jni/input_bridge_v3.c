@@ -41,7 +41,6 @@ static float grabCursorX, grabCursorY, lastCursorX, lastCursorY;
 
 jclass inputBridgeClass_ANDROID, inputBridgeClass_JRE;
 jmethodID inputBridgeMethod_ANDROID, inputBridgeMethod_JRE;
-jobject inputBridgeObject_ANDROID;
 jclass bridgeClazz;
 jboolean isGrabbing;
 
@@ -123,10 +122,10 @@ void sendData(int type, int i1, int i2, int i3, int i4) {
         LOGE("BUG: Input is ready but thread is not attached yet.");
         return;
     }
-    if(inputBridgeObject_ANDROID == NULL) return;
-    (*runtimeJNIEnvPtr_ANDROID)->CallVoidMethod(
+    if(inputBridgeClass_ANDROID == NULL) return;
+    (*runtimeJNIEnvPtr_ANDROID)->CallStaticVoidMethod(
         runtimeJNIEnvPtr_ANDROID,
-        inputBridgeObject_ANDROID,
+        inputBridgeClass_ANDROID,
         inputBridgeMethod_ANDROID,
         type,
         i1, i2, i3, i4
@@ -382,9 +381,8 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSetWindowAttrib(
 }
 
 JNIEXPORT void JNICALL
-Java_org_lwjgl_glfw_CallbackBridge_initBridge(JNIEnv *env, jclass clazz, jobject bridge) {
-    // Due to Forge's ability to create TWO static classes, we are doing this.
-    printf("%p\n",bridge);
-    inputBridgeMethod_ANDROID = (*env)->GetMethodID(env, clazz, "receiveCallback", "(IIIII)V");
-    inputBridgeObject_ANDROID = (*env)->NewGlobalRef(env, bridge);
+Java_org_lwjgl_glfw_CallbackBridge_setClass(JNIEnv *env, jclass clazz) {
+    // TODO: implement setClass()
+    inputBridgeMethod_ANDROID = (*env)->GetStaticMethodID(env, clazz, "receiveCallback", "(IIIII)V");
+    inputBridgeClass_ANDROID = (*env)->NewGlobalRef(env, clazz);
 }

@@ -18,9 +18,8 @@ public class CallbackBridge {
     public static final int ANDROID_TYPE_GRAB_STATE = 0;
 
     // Should pending events be limited?
-    volatile public List<Integer[]> pendingEventList = new ArrayList<>();
-    volatile public boolean pendingEventReady = false;
-    private static CallbackBridge thisBridge = null;
+    volatile public static List<Integer[]> PENDING_EVENT_LIST = new ArrayList<>();
+    volatile public static boolean PENDING_EVENT_READY = false;
     
     public static final boolean INPUT_DEBUG_ENABLED;
     
@@ -50,26 +49,19 @@ public class CallbackBridge {
         GLFW.mGLFWIsGrabbing = grab;
         nativeSetGrabbing(grab, xset, yset);
     }
-    public static CallbackBridge getSingleton() {
-        if(thisBridge == null) {
-            thisBridge = new CallbackBridge();
-            initBridge(thisBridge);
-        }
-        return thisBridge;
-    }
 	// Called from Android side
-    public void receiveCallback(int type, int i1, int i2, int i3, int i4) {
+    public static void receiveCallback(int type, int i1, int i2, int i3, int i4) {
        /*
         if (INPUT_DEBUG_ENABLED) {
             System.out.println("LWJGL GLFW Callback received type=" + Integer.toString(type) + ", data=" + i1 + ", " + i2 + ", " + i3 + ", " + i4);
         }
         */
-        if (pendingEventReady) {
+        if (PENDING_EVENT_READY) {
             if (type == EVENT_TYPE_CURSOR_POS) {
                 GLFW.mGLFWCursorX = (double) i1;
                 GLFW.mGLFWCursorY = (double) i2;
             } else {
-                pendingEventList.add(new Integer[]{type, (int) i1, (int)i2, i3, i4});
+                PENDING_EVENT_LIST.add(new Integer[]{type, (int) i1, (int)i2, i3, i4});
             }
         } // else System.out.println("Event input is not ready yet!");
     }
@@ -82,6 +74,6 @@ public class CallbackBridge {
     public static native String nativeClipboard(int action, String copy);
     public static native void nativeAttachThreadToOther(boolean isAndroid, boolean isUseStackQueueBool);
     private static native void nativeSetGrabbing(boolean grab, int xset, int yset);
-    private static native void initBridge(CallbackBridge bridge);
+    public static native void setClass();
 }
 
