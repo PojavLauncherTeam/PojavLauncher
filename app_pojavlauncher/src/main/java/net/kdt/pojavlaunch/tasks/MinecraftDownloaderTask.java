@@ -102,19 +102,16 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                     if(runtime.javaVersion < verInfo.javaVersion.majorVersion) {
                          String appropriateRuntime = MultiRTUtils.getNearestJreName(verInfo.javaVersion.majorVersion);
                          if(appropriateRuntime != null) {
+                             if(JRE17Util.isInternalNewJRE(appropriateRuntime)) {
+                                 JRE17Util.checkInternalNewJre(mActivity, ((resId, stuff) -> publishProgress(mActivity.getString(resId,stuff))));
+                             }
                              minecraftProfile.javaDir = Tools.LAUNCHERPROFILES_RTPREFIX+appropriateRuntime;
                              LauncherProfiles.update();
                          }else{
-                             mActivity.runOnUiThread(()->{
-                                 AlertDialog.Builder bldr = new AlertDialog.Builder(mActivity);
-                                 bldr.setTitle(R.string.global_error);
-                                 bldr.setMessage(mActivity.getString(R.string.multirt_nocompartiblert, verInfo.javaVersion.majorVersion));
-                                 bldr.setPositiveButton(android.R.string.ok,(dialog, which)->{
-                                     dialog.dismiss();
-                                 });
-                                 bldr.show();
-                             });
-                             throw new SilentException();
+                             if(verInfo.javaVersion.majorVersion <= 17) { // there's a chance we have an internal one for this case
+                                 if(!JRE17Util.checkInternalNewJre(mActivity, ((resId, stuff) -> publishProgress(mActivity.getString(resId,stuff)))))
+                                     showRuntimeFail();
+                             }else showRuntimeFail();
                          }
                      } //if else, we are satisfied
                 }
@@ -273,6 +270,18 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
             return throwable;
         }
     }
+     private void showRuntimeFail() throws SilentException{
+         mActivity.runOnUiThread(()->{
+             AlertDialog.Builder bldr = new AlertDialog.Builder(mActivity);
+             bldr.setTitle(R.string.global_error);
+             bldr.setMessage(mActivity.getString(R.string.multirt_nocompartiblert, verInfo.javaVersion.majorVersion));
+             bldr.setPositiveButton(android.R.string.ok,(dialog, which)->{
+                 dialog.dismiss();
+             });
+             bldr.show();
+         });
+         throw new SilentException();
+     }
     private int addProgress = 0;
     public static class SilentException extends Exception{}
     public void zeroProgress() {
