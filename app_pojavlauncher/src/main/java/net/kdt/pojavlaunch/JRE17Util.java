@@ -12,7 +12,7 @@ import net.kdt.pojavlaunch.multirt.Runtime;
 import java.io.IOException;
 
 public class JRE17Util {
-    private static final String NEW_JRE_NAME = "Internal-17";
+    public static final String NEW_JRE_NAME = "Internal-17";
     public static boolean checkInternalNewJre(Context context, MultiRTUtils.RuntimeProgressReporter reporter) {
         AssetManager assetManager = context.getAssets();
         String launcher_jre17_version;

@@ -111,6 +111,10 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                              if(verInfo.javaVersion.majorVersion <= 17) { // there's a chance we have an internal one for this case
                                  if(!JRE17Util.checkInternalNewJre(mActivity, ((resId, stuff) -> publishProgress("0",mActivity.getString(resId,stuff)))))
                                      showRuntimeFail();
+                                 else {
+                                     minecraftProfile.javaDir = Tools.LAUNCHERPROFILES_RTPREFIX+JRE17Util.NEW_JRE_NAME;
+                                     LauncherProfiles.update();
+                                 }
                              }else showRuntimeFail();
                          }
                      } //if else, we are satisfied
