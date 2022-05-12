@@ -562,19 +562,21 @@ public final class Tools {
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         act.startActivity(browserIntent);
     }
-
+    private static boolean checkRules(JMinecraftVersionList.Arguments.ArgValue.ArgRules[] rules) {
+        if(rules == null) return true; // always allow
+        for (JMinecraftVersionList.Arguments.ArgValue.ArgRules rule : rules) {
+            if (rule.action.equals("allow") && rule.os != null && rule.os.name.equals("osx")) {
+                Log.i("BehaviorLog","Library diallowed");
+                return false; //disallow
+            }
+        }
+        return true; // allow if none match
+    }
     public static String[] generateLibClasspath(JMinecraftVersionList.Version info) {
         List<String> libDir = new ArrayList<String>();
-
-        libLoop:
         for (DependentLibrary libItem: info.libraries) {
-            if (libItem.rules != null) {
-                for (JMinecraftVersionList.Arguments.ArgValue.ArgRules rule : libItem.rules) {
-                    if (rule.action.equals("allow") && rule.os != null && rule.os.name.equals("osx")) {
-                        continue libLoop;
-                    }
-                }
-            }
+            Log.i("BehaviorLog","Library: "+libItem.name);
+            if(!checkRules(libItem.rules)) continue;
             String[] libInfos = libItem.name.split(":");
             libDir.add(Tools.DIR_HOME_LIBRARY + "/" + Tools.artifactToPath(libInfos[0], libInfos[1], libInfos[2]));
         }

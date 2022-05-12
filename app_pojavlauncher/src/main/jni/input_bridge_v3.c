@@ -382,7 +382,6 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSetWindowAttrib(
 
 JNIEXPORT void JNICALL
 Java_org_lwjgl_glfw_CallbackBridge_setClass(JNIEnv *env, jclass clazz) {
-    // TODO: implement setClass()
     inputBridgeMethod_ANDROID = (*env)->GetStaticMethodID(env, clazz, "receiveCallback", "(IIIII)V");
     inputBridgeClass_ANDROID = (*env)->NewGlobalRef(env, clazz);
 }
