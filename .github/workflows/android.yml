@@ -73,6 +73,17 @@ jobs:
           name: jre8-pojav
           run_id: 2140559381
     
+    - name: Get JRE17
+      uses: dawidd6/action-download-artifact@v2
+      with:
+          github_token: ${{secrets.GITHUB_TOKEN}}
+          workflow: build.yml
+          path: app_pojavlauncher/src/main/assets/components/jre-new
+          workflow_conclusion: success
+          repo: PojavLauncherTeam/android-openjdk-build-multiarch
+          branch: jre17-size-testing
+          name: jre17-pojav
+    
     - name: Build JRE JAR files
       run: |
         cp -R gl4es/libs/* app_pojavlauncher/src/main/jniLibs/
