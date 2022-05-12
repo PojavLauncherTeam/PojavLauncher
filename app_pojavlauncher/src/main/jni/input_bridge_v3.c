@@ -114,18 +114,6 @@ jboolean attachThread(bool isAndroid, JNIEnv** secondJNIEnvPtr) {
     return JNI_FALSE;
 }
 
-void getJavaInputBridge(jclass* clazz, jmethodID* method) {
-#ifdef DEBUG
-    LOGD("Debug: Initializing input bridge, method.isNull=%d, jnienv.isNull=%d\n", *method == NULL, runtimeJNIEnvPtr_ANDROID == NULL);
-#endif
-    if (*method == NULL && runtimeJNIEnvPtr_ANDROID != NULL) {
-        *clazz = (*runtimeJNIEnvPtr_ANDROID)->FindClass(runtimeJNIEnvPtr_ANDROID, "org/lwjgl/glfw/CallbackBridge");
-        assert(*clazz != NULL);
-        *method = (*runtimeJNIEnvPtr_ANDROID)->GetStaticMethodID(runtimeJNIEnvPtr_ANDROID, *clazz, "receiveCallback", "(IIIII)V");
-        assert(*method != NULL);
-    }
-}
-
 void sendData(int type, int i1, int i2, int i3, int i4) {
 #ifdef DEBUG
     LOGD("Debug: Send data, jnienv.isNull=%d\n", runtimeJNIEnvPtr_ANDROID == NULL);
@@ -134,6 +122,7 @@ void sendData(int type, int i1, int i2, int i3, int i4) {
         LOGE("BUG: Input is ready but thread is not attached yet.");
         return;
     }
+    if(inputBridgeClass_ANDROID == NULL) return;
     (*runtimeJNIEnvPtr_ANDROID)->CallStaticVoidMethod(
         runtimeJNIEnvPtr_ANDROID,
         inputBridgeClass_ANDROID,
@@ -183,8 +172,6 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeAttachThread
     if (isUseStackQueueCall && isAndroid && result) {
         isPrepareGrabPos = true;
     }
-    getJavaInputBridge(&inputBridgeClass_ANDROID, &inputBridgeMethod_ANDROID);
-    
     return result;
 }
 
@@ -391,4 +378,10 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSetWindowAttrib(
         glfwClazz, glfwMethod,
         (jlong) showingWindow, attrib, value
     );
+}
+
+JNIEXPORT void JNICALL
+Java_org_lwjgl_glfw_CallbackBridge_setClass(JNIEnv *env, jclass clazz) {
+    inputBridgeMethod_ANDROID = (*env)->GetStaticMethodID(env, clazz, "receiveCallback", "(IIIII)V");
+    inputBridgeClass_ANDROID = (*env)->NewGlobalRef(env, clazz);
 }

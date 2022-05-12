@@ -58,16 +58,22 @@ import net.kdt.pojavlaunch.value.PerVersionConfig;
 import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
 import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 
+import org.apache.commons.compress.utils.IOUtils;
 import org.apache.commons.io.FileUtils;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Locale;
+import java.util.jar.Attributes;
+import java.util.jar.JarEntry;
+import java.util.jar.JarInputStream;
+import java.util.jar.JarOutputStream;
 
 public class PojavLoginActivity extends BaseActivity {
     private final Object mLockStoragePerm = new Object();
@@ -261,8 +267,7 @@ public class PojavLoginActivity extends BaseActivity {
         PojavProfile.setCurrentProfile(this, null);
     }
 
-   
-    private void unpackComponent(AssetManager am, String component) throws IOException {
+    private boolean unpackComponent(AssetManager am, String component) throws IOException {
         File versionFile = new File(Tools.DIR_GAME_HOME + "/" + component + "/version");
         InputStream is = am.open("components/" + component + "/version");
         if(!versionFile.exists()) {
@@ -292,8 +297,10 @@ public class PojavLoginActivity extends BaseActivity {
                 }
             } else {
                 Log.i("UnpackPrep", component + ": Pack is up-to-date with the launcher, continuing...");
+                return false;
             }
         }
+        return true;
     }
     public static void disableSplash(String dir) {
         mkdirs(dir + "/config");
@@ -340,7 +347,11 @@ public class PojavLoginActivity extends BaseActivity {
             AssetManager am = this.getAssets();
             
             unpackComponent(am, "caciocavallo");
+
+            // Since the Java module system doesn't allow multiple JARs to declare the same module,
+            // we repack them to a single file here
             unpackComponent(am, "lwjgl3");
+
             if(!installRuntimeAutomatically(am,MultiRTUtils.getRuntimes().size() > 0)) {
                MultiRTConfigDialog.openRuntimeSelector(this, MultiRTConfigDialog.MULTIRT_PICK_RUNTIME_STARTUP);
                 synchronized (mLockSelectJRE) {
