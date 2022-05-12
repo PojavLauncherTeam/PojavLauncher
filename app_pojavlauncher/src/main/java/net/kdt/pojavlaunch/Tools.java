@@ -566,7 +566,6 @@ public final class Tools {
         if(rules == null) return true; // always allow
         for (JMinecraftVersionList.Arguments.ArgValue.ArgRules rule : rules) {
             if (rule.action.equals("allow") && rule.os != null && rule.os.name.equals("osx")) {
-                Log.i("BehaviorLog","Library diallowed");
                 return false; //disallow
             }
         }
@@ -575,7 +574,6 @@ public final class Tools {
     public static String[] generateLibClasspath(JMinecraftVersionList.Version info) {
         List<String> libDir = new ArrayList<String>();
         for (DependentLibrary libItem: info.libraries) {
-            Log.i("BehaviorLog","Library: "+libItem.name);
             if(!checkRules(libItem.rules)) continue;
             String[] libInfos = libItem.name.split(":");
             libDir.add(Tools.DIR_HOME_LIBRARY + "/" + Tools.artifactToPath(libInfos[0], libInfos[1], libInfos[2]));
