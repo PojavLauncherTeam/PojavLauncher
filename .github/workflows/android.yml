@@ -81,7 +81,7 @@ jobs:
           path: app_pojavlauncher/src/main/assets/components/jre-new
           workflow_conclusion: success
           repo: PojavLauncherTeam/android-openjdk-build-multiarch
-          branch: jre17-size-testing
+          branch: buildjre17
           name: jre17-pojav
     
     - name: Build JRE JAR files
