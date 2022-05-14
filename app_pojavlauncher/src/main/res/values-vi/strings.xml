@@ -56,6 +56,8 @@
     <string name="mcl_option_customcontrol">Tùy chỉnh điều khiển</string>
     <string name="mcl_option_settings">Thiết lập</string>
     <string name="mcl_option_about">Giới thiệu</string>
+    <string name="mcl_setting_title_use_surface_view">Dùng cách kết xuất thay thế</string>
+    <string name="mcl_setting_subtitle_use_surface_view">Có thể cải thiện hiệu năng nếu GPU bị nghẽn cổ chai</string>
     <string name="mcl_setting_title_uninstalljre">Gỡ Java Runtime</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Đề nghị khởi động lại trình khởi chạy] Điều này cho phép bạn cài đặt lại Java Runtime</string>
     <string name="mcl_setting_title_freeform">Chạy Minecraft trong chế độ tự do</string>
