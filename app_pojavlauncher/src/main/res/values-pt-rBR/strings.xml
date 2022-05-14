@@ -19,14 +19,14 @@
     <string name="login_title_no_saved_account">Nenhuma conta encontrada!</string>
     <string name="login_dialog_no_saved_account">Você não tem nenhuma conta salva.\nUse a opção <b>\"Manter conectado\"</b> para salvar uma conta após o primeiro início de sessão.</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Deslize da direita para a esquerda para abrir o menu ◀\nSegure um botão para personalizar: editar, redimensionar ou remover."</string>
+    <string name="hint_control_mapping">"Deslize da direita para a esquerda para abrir o menu ◀ \nSegure um botão para personalizar: editar, redimensionar ou excluir."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Esta conta será removida!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Instalar Java Runtime %s (.tar.xz)</string>
     <string name="alerttitle_installmod">Selecione um instalador de mod</string>
     <!-- Error messages -->
-    <string name="error_fatal">O PojavLauncher fechou inesperadamente</string>
+    <string name="error_fatal">O PojavLauncher parou de funcionar inesperadamente</string>
     <string name="error_no_version">Nenhuma versão!</string>
     <string name="error_show_more">Mostrar mais</string>
     <string name="error_show_less">Mostrar menos</string>
@@ -40,7 +40,7 @@
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_news">Notícias</string>
     <string name="mcl_tab_console">Console de desenvolvedor</string>
-    <string name="mcl_tab_crash">Registro de falha</string>
+    <string name="mcl_tab_crash">Registro de falhas</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Conectado</string>
     <string name="mcl_account_offline">Offline</string>
@@ -58,36 +58,36 @@
     <string name="mcl_option_about">Sobre</string>
     <string name="mcl_setting_title_uninstalljre">Desinstalar Java Runtime</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Reinicialização necessária] Isto permite você reinstalar o Java Runtime</string>
-    <string name="mcl_setting_title_freeform">Iniciar o Minecraft no modo Livre</string>
+    <string name="mcl_setting_title_freeform">Iniciar o Minecraft no modo de janela flutuante</string>
     <string name="mcl_setting_subtitle_freeform">Executar o Minecraft em janela flutuante. Requer Android 7.0+</string>
     <string name="mcl_setting_title_hide_sidebar">Ocultar barra lateral</string>
-    <string name="mcl_setting_subtitle_hide_sidebar">Pessoal nostálgico preferindo a antiga interface v1 pode gostar disso. Dá a você uma experiência de tela cheia.</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">As pessoas nostálgicas que preferem a antiga UI v1 podem gostar disto. Dá a você uma experiência de tela cheia.</string>
     <string name="mcl_setting_title_ignore_notch">Ignorar entalhe</string>
     <string name="mcl_setting_subtitle_ignore_notch">Ignorar o entalhe e estender a tela por baixo dele.\nGarante uma experiência mais envolvente.</string>
     <string name="mcl_setting_title_resolution_scaler">Escala de resolução</string>
-    <string name="mcl_setting_subtitle_resolution_scaler">Permite que você reduza a resolução do jogo. 100% é resolução total</string>
-    <string name="mcl_setting_title_longpresstrigger">Tempo para iniciar função quando manter pressionado</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">Permite que você reduza a resolução do jogo. 100% é a resolução total</string>
+    <string name="mcl_setting_title_longpresstrigger">Quanto tempo será acionado depois de manter pressionado</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Tempo para acionar a função de destruir bloco e largar item.</string>
-    <string name="mcl_setting_title_backtorightmouse">Usar o botão voltar como o mouse direito</string>
+    <string name="mcl_setting_title_backtorightmouse">Usar o botão voltar como o botão direito</string>
     <string name="mcl_setting_subtitle_backtorightmouse">Alguns dispositivos usam o botão direito do mouse externo como botão voltar. Se você estiver usando um mouse externo, você deve ativar isso.</string>
     <string name="mcl_setting_title_flat_button_style">Estilo de botão plano</string>
-    <string name="mcl_setting_subtitle_flat_button_style">Ative isto para alterar o estilo do botão de controle para plano.</string>
+    <string name="mcl_setting_subtitle_flat_button_style">Ative isto para trocar o estilo do botão para plano.</string>
     <string name="mcl_setting_title_buttonscale">Escala dos botões</string>
     <string name="mcl_setting_subtitle_buttonscale">Aumenta os botões caso estiverem muito pequenos.</string>
     <string name="mcl_setting_title_mousescale">Escala do mouse</string>
     <string name="mcl_setting_subtitle_mousescale">Alterar o tamanho do mouse virtual.</string>
     <string name="mcl_setting_title_javaargs">Argumentos JVM</string>
-    <string name="mcl_setting_subtitle_javaargs">Cuidado, isso pode causar falhas no seu jogo caso modificado sem conhecimento.</string>
+    <string name="mcl_setting_subtitle_javaargs">Cuidado, isto pode causar falhas no seu jogo caso modificado sem conhecimento.</string>
     <string name="mcl_setting_category_general">Configurações gerais</string>
     <string name="mcl_setting_category_scaling">Configurações de escala</string>
     <string name="mcl_setting_category_renderer">Renderizador</string>
     <string name="mcl_setting_renderer_gles2">OpenGL ES 2</string>
     <string name="mcl_setting_renderer_gles3">OpenGL ES 3</string>
-    <string name="mcl_setting_category_veroption">Tipo de versão para mostrar na lista</string>
-    <string name="mcl_setting_veroption_release">Release</string>
+    <string name="mcl_setting_category_veroption">Tipos de versões que serão mostradas na lista de versões</string>
+    <string name="mcl_setting_veroption_release">Versões finais</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
-    <string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
-    <string name="mcl_setting_veroption_oldbeta">Old-beta</string>
+    <string name="mcl_setting_veroption_oldalpha">Alpha antiga</string>
+    <string name="mcl_setting_veroption_oldbeta">Beta antiga</string>
     <string name="mcl_version_clone">Clonar</string>
     <!-- Global strings -->
     <string name="global_edit">Editar</string>
@@ -128,7 +128,7 @@
     <string name="profedit_selected_profile">Perfil selecionado: %s</string>
     <string name="global_new">Novo</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Aplicativo/Jogo fechou com código %d</string>
+    <string name="mcn_exit_title">Aplicativo/jogo fechou com código %d</string>
     <string name="mcn_exit_call">Sair</string>
     <string name="mcn_exit_confirm">Tem certeza que deseja forçar o encerramento?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 não foi instalado!</string>
@@ -147,7 +147,7 @@
     <string name="control_right">▶</string>
     <string name="control_down">▼</string>
     <string name="control_jump">⬛</string>
-    <string name="control_thirdperson">F5</string>
+    <string name="control_thirdperson">visão</string>
     <string name="control_listplayers">Tab</string>
     <string name="control_mouse">Mouse</string>
     <string name="control_mouseoff">Mouse: desligado</string>
@@ -179,7 +179,7 @@
     <string name="customctrl_keycombine_control">Ctrl</string>
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Adicionar botão</string>
-    <string name="customctrl_selectdefault">Selecione o controle padrão</string>
+    <string name="customctrl_selectdefault">Selecionar o json de controle padrão</string>
     <string name="main_options">Opções</string>
     <string name="main_play">Jogar</string>
     <string name="main_welcome">Bem-vindo(a), %s</string>
@@ -189,21 +189,21 @@
     <string name="main_nocrash">Nenhuma falha detectada</string>
     <string name="main_nolog">Sem registros.</string>
     <string name="main_no_news_feed">Não foi possível obter o feed de notícias!</string>
-    <string name="auto_ram_subtitle">Ativar ajuste automático de RAM</string>
+    <string name="auto_ram_subtitle">Ativa o ajuste automático de RAM</string>
     <string name="auto_ram_title">RAM automática</string>
     <string name="autoram_info_msg">Memória definida para %d MB</string>
-    <string name="mcl_setting_check_libraries">Verificar bibliotecas após baixar</string>
-    <string name="mcl_setting_check_libraries_subtitle">Esta opção força o launcher a verificar o hash da biblioteca se ele estiver disponível. Impede downloads com problemas.</string>
-    <string name="dl_library_sha_fail">A biblioteca %s está danificada e será baixada novamente</string>
+    <string name="mcl_setting_check_libraries">Verificar as bibliotecas depois de baixar</string>
+    <string name="mcl_setting_check_libraries_subtitle">Esta opção força o launcher a verificar o hash da biblioteca se ele estiver disponível. Impede baixar arquivos com problemas.</string>
+    <string name="dl_library_sha_fail">Biblioteca %s está danificada e será baixada novamente</string>
     <string name="dl_library_sha_unknown">A biblioteca %s não pôde ser verificada, vamos assumir que está boa</string>
     <string name="dl_library_sha_pass">Biblioteca %s está boa e utilizável</string>
     <string name="mcl_disable_gestures">Desativar gestos</string>
-    <string name="mcl_disable_gestures_subtitle">Desabilita gestos, como \"segure para quebrar bloco\" e \"toque para colocar um bloco\".</string>
+    <string name="mcl_disable_gestures_subtitle">Desativa gestos, como segurar para quebrar blocos e tocar para colocar um bloco.</string>
     <string name="mcl_setting_title_mousespeed">Velocidade do mouse</string>
     <string name="mcl_setting_subtitle_mousespeed">Altera a velocidade do mouse do software</string>
     <string name="customctrl_passthru">Mouse pode atravessar</string>
     <string name="customctrl_rounded">Arredondado</string>
-    <string name="memory_warning_msg">A quantidade atual de RAM livre (%d) é menor que a RAM alocada (%d), o que pode causar falhas. Altere a quantidade se o jogo apresentar alguma falha.</string>
+    <string name="memory_warning_msg">A quantidade atual de RAM livre (%d) é menor que a RAM alocada (%d), no qual pode causar falhas. Altere a quantidade se o jogo apresentar alguma falha.</string>
     <string name="mcl_memory_allocation">Alocação de memória</string>
     <string name="mcl_memory_allocation_subtitle">Controla o quanto de RAM será usado pelo Minecraft</string>
 </resources>
