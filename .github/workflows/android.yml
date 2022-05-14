@@ -71,7 +71,6 @@ jobs:
           repo: PojavLauncherTeam/android-openjdk-build-multiarch
           branch: buildjre8
           name: jre8-pojav
-          run_id: 2140559381
     
     - name: Get JRE17
       uses: dawidd6/action-download-artifact@v2
