@@ -42,6 +42,7 @@
     <string name="mcl_tab_crash">Log ranap</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Tersambung</string>
+    <string name="mcl_account_local">Tempatan</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Bersedia untuk bermain Minecraft %s</string>
     <string name="mcl_launch_cleancache">Membersihkan fail cache</string>
