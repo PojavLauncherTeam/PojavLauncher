@@ -253,8 +253,10 @@
     <string name="unnamed">Chưa đặt tên</string>
     <string name="profiles_latest_snapshot">Bản thử nghiệm mới nhất</string>
     <string name="profiles_latest_release">Phiên bản mới nhất</string>
+    <string name="profiles_editing">Chỉnh sửa hồ sơ</string>
     <string name="profiles_profile_name">Tên</string>
     <string name="profiles_profile_version">Phiên bản</string>
     <string name="global_delete">Xóa</string>
     <string name="pedit_renderer">Trình kết xuất</string>
+    <string name="migrated_profile_str">cấu hình phiên bản %s</string>
 </resources>
