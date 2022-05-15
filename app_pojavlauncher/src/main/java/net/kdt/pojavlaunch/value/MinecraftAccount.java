@@ -54,7 +54,7 @@ public class MinecraftAccount
     }
 
     public static MinecraftAccount load(String name) throws JsonSyntaxException {
-        if(!accountExists(name)) return new MinecraftAccount();
+        if(!accountExists(name)) return null;
         try {
             MinecraftAccount acc = parse(Tools.read(Tools.DIR_ACCOUNT_NEW + "/" + name + ".json"));
             if (acc.accessToken == null) {

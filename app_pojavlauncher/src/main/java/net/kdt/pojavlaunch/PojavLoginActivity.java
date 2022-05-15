@@ -557,7 +557,13 @@ public class PojavLoginActivity extends BaseActivity {
             ImageView imageView = child.findViewById(R.id.account_head);
 
             String accNameStr = s.substring(0, s.length() - 5);
-            imageView.setImageBitmap(MinecraftAccount.load(accNameStr).getSkinFace());
+            MinecraftAccount minecraftAccount = MinecraftAccount.load(accNameStr);
+            if(minecraftAccount != null) {
+                imageView.setImageBitmap(minecraftAccount.getSkinFace());
+            }else{
+                imageView.setImageBitmap(null);
+            }
+
 
             accountName.setText(accNameStr);
 
@@ -583,6 +589,10 @@ public class PojavLoginActivity extends BaseActivity {
                         };
 
                         MinecraftAccount acc = MinecraftAccount.load(selectedAccName);
+                        if(acc == null) {
+                            Log.e("Account","Stop torturing me sempai");
+                            return;
+                        }
                         if (acc.isMicrosoft){
                             new MicrosoftAuthTask(PojavLoginActivity.this, authListener)
                                     .execute("true", acc.msaRefreshToken);
