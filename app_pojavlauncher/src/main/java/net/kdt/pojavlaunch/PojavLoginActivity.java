@@ -389,7 +389,7 @@ public class PojavLoginActivity extends BaseActivity {
                     final Uri uri = data.getData();
                     Thread t = new Thread(() -> {
                         try {
-                            MultiRTUtils.installRuntimeNamed(getContentResolver().openInputStream(uri), getFileName(this, uri),
+                            MultiRTUtils.installRuntimeNamed(getApplicationContext().getApplicationInfo().nativeLibraryDir, getContentResolver().openInputStream(uri), getFileName(this, uri),
                                     (resid, stuff) -> PojavLoginActivity.this.runOnUiThread(
                                             () -> {
                                                 if (startupTextView != null)

@@ -224,7 +224,7 @@ public abstract class BaseLauncherActivity extends BaseActivity {
                 Thread t = new Thread(() -> {
                     try {
                         String name = getFileName(this, uri);
-                        MultiRTUtils.installRuntimeNamed(getContentResolver().openInputStream(uri), name,
+                        MultiRTUtils.installRuntimeNamed(getApplicationContext().getApplicationInfo().nativeLibraryDir, getContentResolver().openInputStream(uri), name,
                                 (resid, stuff) -> BaseLauncherActivity.this.runOnUiThread(
                                         () -> barrier.setMessage(BaseLauncherActivity.this.getString(resid, stuff))));
                         MultiRTUtils.postPrepare(BaseLauncherActivity.this, name);

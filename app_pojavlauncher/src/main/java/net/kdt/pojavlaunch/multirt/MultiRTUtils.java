@@ -75,7 +75,7 @@ public class MultiRTUtils {
         return result;
     }
 
-    public static void installRuntimeNamed(InputStream runtimeInputStream, String name, RuntimeProgressReporter progressReporter) throws IOException {
+    public static void installRuntimeNamed(String nativeLibDir, InputStream runtimeInputStream, String name, RuntimeProgressReporter progressReporter) throws IOException {
         File dest = new File(RUNTIME_FOLDER,"/"+name);
         File tmp = new File(dest,"temporary");
         if(dest.exists()) FileUtils.deleteDirectory(dest);
@@ -87,6 +87,7 @@ public class MultiRTUtils {
         runtimeInputStream.close();
         uncompressTarXZ(tmp,dest,progressReporter);
         tmp.delete();
+        unpack200(nativeLibDir,RUNTIME_FOLDER + "/" + name);
         read(name);
     }
 
