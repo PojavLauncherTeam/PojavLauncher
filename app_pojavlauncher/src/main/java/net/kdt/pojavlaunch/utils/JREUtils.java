@@ -296,7 +296,7 @@ public class JREUtils {
         //Add automatically generated args
         userArgs.add("-Xms" + LauncherPreferences.PREF_RAM_ALLOCATION + "M");
         userArgs.add("-Xmx" + LauncherPreferences.PREF_RAM_ALLOCATION + "M");
-        userArgs.add(" -XX:+IgnoreUnrecognizedVMOptions ");
+        userArgs.add("-XX:+IgnoreUnrecognizedVMOptions");
         if(LOCAL_RENDERER != null) userArgs.add("-Dorg.lwjgl.opengl.libname=" + graphicsLib);
 
         userArgs.addAll(JVMArgs);
