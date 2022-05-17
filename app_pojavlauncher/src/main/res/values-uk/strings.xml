@@ -42,18 +42,21 @@
     <string name="mcl_tab_crash">Журнал збоїв</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Підключено</string>
+    <string name="mcl_account_local">Локальний</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Minecraft %s готовий до запуску</string>
     <string name="mcl_launch_cleancache">Очищення файлів кешу</string>
     <string name="mcl_launch_downloading">Завантаження %s</string>
     <string name="mcl_launch_downloading_progress">"Завантаження %s (%.2f Мбайт / %.2f Мбайт)"</string>
     <string name="mcl_launch_download_assets">Підготовка до завантаження ресурсів</string>
+    <string name="mcl_launch_error_localmode">Minecraft не може бути леґально встановленим із локальним обліковим записом. Будь ласка, перейдіть до онлайн облікового запису, щоб продовжити.</string>
     <string name="mcl_options">Опції</string>
     <string name="mcl_option_modinstall">Запустити інсталятор модів (Forge, LabyMod, Fabric, інші...)</string>
     <string name="mcl_option_modinstallwitharg">Запустити інсталятор модів (зі своїми аргументами)</string>
     <string name="mcl_option_customcontrol">Користувацьке керування</string>
     <string name="mcl_option_settings">Налаштування</string>
     <string name="mcl_option_about">Про лаунчер</string>
+    <string name="mcl_setting_title_use_surface_view">Використовувати альтернативний візуалізатор</string>
     <string name="mcl_setting_title_uninstalljre">Видалити Java Runtime</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Необхідно перезапустити лаунчер] Це допоможе вам перевстановити Java Runtime</string>
     <string name="mcl_setting_title_freeform">Запуск Minecraft у плаваючому вікні</string>
@@ -246,6 +249,16 @@
     <string name="gles_hack_none">Не стискати текстури</string>
     <string name="gles_hack_always">Стиснути всі текстури у 2 рази</string>
     <string name="gles_hack_sometimes">Розділяє великі текстури на 2 або 4</string>
+    <string name="unnamed">Безіменний</string>
+    <string name="profiles_latest_snapshot">Останній снапшот</string>
+    <string name="profiles_latest_release">Останній реліз</string>
+    <string name="profiles_editing">Редагування профілю</string>
     <string name="profiles_profile_name">Ім\'я</string>
+    <string name="profiles_profile_version">Версія</string>
+    <string name="global_delete">Видалити</string>
+    <string name="pedit_java_runtime">Java Runtime</string>
     <string name="pedit_renderer">Візуалізатор</string>
+    <string name="arc_capes_title">Плащі Cosmetica</string>
+    <string name="arc_capes_desc">Включає плащі від Cosmetica (раніше Arc). Для більш детальної інформації, будь ласка, відвідайте https://cosmetica.cc. Потребує OptiFine.</string>
+    <string name="migrated_profile_str">Конфігурація версії %s</string>
 </resources>
