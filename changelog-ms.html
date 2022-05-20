@@ -8,8 +8,8 @@ body {font-family: Arial;}
 /* Style the tab */
 .tab {
   overflow: hidden;
-  border: 1px solid #fffff;
-  background-color: #aaaaaa;
+  border: 1px solid #ffffff;
+  background-color: #ffffff;
 }
 
 /* Style the buttons inside the tab */
@@ -31,7 +31,7 @@ body {font-family: Arial;}
 
 /* Create an active/current tablink class */
 .tab button.active {
-  background-color: #333;
+  background-color: #ffffff;
 }
 
 /* Style the tab content */
@@ -44,31 +44,36 @@ body {font-family: Arial;}
 </style>
 </head>
 <body>
-
-<img src="res/pojav_logo.png"><br>
-	  <b>• Original: Zhuowei Zhang, Boardwalk app.</b><br>
-	  <b>• Developers:</b><br>
+<img src="./res/pojav_logo.png"><br>
+<a><b> </b>
+<div class="tab">
+      <button class="tablinks" onclick="openCity(event, 'DEFE')">About</button>
+  <button class="tablinks" onclick="openCity(event, 'Changelog')">Changelog</button>
+  <button class="tablinks" onclick="openCity(event, 'News')">News</button>
+     <button class="tablinks" onclick="openCity(event, 'serpentmoneygenerator')">Patreon</button>
+    <button class="tablinks" onclick="openCity(event, 'cprt')">Credits</button>
+</div>
+<div id="About" class="tabcontent">
+  <a><b>PojavLauncher is a free, open source, and stable Minecraft launcher for Android built from <a href="https://github.com/zhuowei/Boardwalk"> Boardwalk</a>, a independent MC Launcher project by Zhouwei Zhang</b><br>
+  <b> <br>
+	  <b>• Lead Developers</b><br>
+	  <
     <a href="https://github.com/khanhduytran0">Tran Khanh Duy</a>, <a href="https://github.com/artdeell">artdeell</a></br>
 
-	  <a><b>• Current designer: </b>
-	  <a href="https://github.com/Mathias-Boulay">Mathias-Boulay</a>.<br>
+	  <a><b>• Current designer: </b><br>
+	  <a href="https://github.com/Mathias-Boulay">SerpentSpirale</a>, <a href="https://github.com/Mathias-Boulay">alsakuttle</a><br>
 	  <b>• Best helper for help testing: </b>
-	  <a href="https://github.com/pedrosouzabrasil">Pedro Souza (v2)</a>.<br>
+	  <a href="https://github.com/voiasis">Voiasis</a>.<br>
 	  <b>• <a href="https://github.com/PojavLauncherTeam/PojavLauncher/issues">Bug report</a></b><br>
 	  <b>• <a href="https://github.com/PojavLauncherTeam/PojavLauncher/actions">Download latest development build.</a></b><br>
 	  <b> <br>
 	  
 	  
 	  <a><b>PojavLauncher for jailbroken iOS devices: <a href="https://github.com/PojavLauncherTeam/PojavLauncher_iOS">Click Me</a> </b>
-<a><b> </b>
-<div class="tab">
-  <button class="tablinks" onclick="openCity(event, 'Changelog')">Changelog</button>
-  <button class="tablinks" onclick="openCity(event, 'News')">News</button>
-  <button class="tablinks" onclick="openCity(event, 'cprt')">Copyright</button>
 </div>
-
 <div id="Changelog" class="tabcontent">
-  <body background="res/bg-wool-dark.png" text="ffffff" link="ffffff" alink="ffffff" vlink="ffffff" marginwidth="20" marginheight="20"></body>
+  <body background="./res/background.png" text="ffffff" link="ffffff" alink="ffffff" vlink="ffffff" marginwidth="20" marginheight="20"></body>
+  
   <h2>▶ <a href="https://github.com/PojavLauncherTeam/PojavLauncher/actions?query=branch%3Av3_openjdk">v3 development builds</a></h2>
 	  <b>• New options:</b><br>
 	  - a fully-functional Mod Installer<br>
@@ -86,7 +91,7 @@ body {font-family: Arial;}
           (Note that controls made before this revision will not work.)</br>
           - New renderers: virgl and vgpu</br>
           (Though VirGL supports up to OpenGL 4.5, it can't run shaders properly.)</br>
-          - Removed zink. <strike>FTW</strike></br>
+          - Removed zink</br>
           - Implemented local accounts, after what happened with Doregon/PojavLauncher_iOS, and as such, you can't download Minecraft resources, not even one.</br>
           <strike>(Make sure to backup your PojavLauncher folder so that you can still play Minecraft after updating)</strike></br>
           
@@ -136,7 +141,7 @@ body {font-family: Arial;}
 	  <br>
 
 	  <h2>▶ v2.3 BETA release</h2>
-	  <b>• Changes:</b><br>
+	  <b>• What changed:</b><br>
 	  - Changed some code in update function.<br>
 	  <br>
 	  
@@ -189,47 +194,115 @@ body {font-family: Arial;}
 A small note: When the popup about 1.17 appears, tap Play Anyway. Tapping OK will overwrite the patch.
 Another small note: 1.17.1 or below will simply not work with this patch.<br>
  <br>
-Here's how to get it to work. Muat turun<a href="https://github.com/PojavLauncherTeam/android-openjdk-build-multiarch/releases/tag/jre17-ec28559">fail JRE17 mengikut seni bina CPU anda.</a> untuk 32bit, arm64 untuk 64bit dan x86_64 untuk Chromebook/WSA.<br>
-Tidak kira platform anda, anda perlu memuat turun<a href="https://cdn.discordapp.com/attachments/724163890803638277/892912425366589460/assets-v0.zip"> pek sumber ini.</a>
+Here's how to get it to work. Download this<a href="https://github.com/PojavLauncherTeam/android-openjdk-build-multiarch/releases/tag/jre17-ec28559"> JRE17 file according to your CPU architecture.</a> arm for 32bit, arm64 for 64bit, and x86_64 for Chromebooks/WSA.<br>
+Regardless of your platform, you'll need to download<a href="https://cdn.discordapp.com/attachments/724163890803638277/892912425366589460/assets-v0.zip"> this resource pack.</a>
 
 <br>
 
-<h1></h1><b> <a href ="https://discord.com/channels/724163890803638273/724163890803638277/892912425538576385">Pautan terus ke mesej<br> (oleh @NotAHuyong) </a></b><br></h1>
+<h1></h1><b> <a href ="https://discord.com/channels/724163890803638273/724163890803638277/892912425538576385">Direct link to message<br> (by @NotAHero04/Nguyễn Hùng#1258) ></a></b><br></h1>
 <br>
-
-<h2>▶ Mod luar talian tamat.</h2>
-<b><h2>Perlukah kita bimbang tentangnya sekarang?</h1></b>
-Walaupun mod luar talian belum lagi dialih keluar oleh Mojang, secara teknikal ia masih cetak rompak apabila anda menggunakannya, kerana anda mendapat permainan secara percuma (melainkan jika anda membelinya). Memandangkan GitHub dan Mojang dimiliki oleh syarikat yang sama, sudah tiba masanya kami mengumumkan bahawa kami akan meletakkan kaki kami.
-
-<h4>Pada masa hadapan, mod luar talian akan ditukar kepada mod baharu yang kami panggil mod tempatan. Pengguna akaun mod tempatan mempunyai sekatan yang sama seperti mod luar talian, serta beberapa yang baharu:</h4></h>
-
-<h3>• Akaun mod setempat akan tetap menjadi akaun luar talian, bermakna anda masih terhad oleh cara akaun luar talian berfungsi.</h3>
-<h3>• Akaun mod tempatan tidak dapat memuat turun Minecraft melalui pelancar.</h3>
-<b><a href="https://pojavlauncherteam.github.io/updates/local.html">Baca Lagi ></a></b>
 </div>
+<div id="serpentmoneygenerator" class="tabcontent">
+  Support the PojavLauncher development by Subscribing to our Patreon!<br> Get prioritized updates, prioritized support, perks, and access to Google Play Internal Tests!<br>
+  <br>
+  <a href="https://www.patreon.com/join/pojavlauncher/checkout?rid=7574789">Tier 1 membership level for $2</a><br>
+  <a href="https://www.patreon.com/join/pojavlauncher/checkout?rid=7574790">Tier 2 membership level for $4</a><br>
+  <a href="https://www.patreon.com/join/pojavlauncher/checkout?rid=7574791">Tier 3 membership level for $7</a><br>
+  
+  </div>
 
-<div id="Kredit" class="tabcontent">
-  <h1>Kredit perpustakaan</h1>
-  <h5>—————</h5>
-  <h3>PojavLauncher menggunakan komponen berikut:</h3>
-  <p>Tokyo ialah ibu negara Jepun.</p>
-</div>
-
+<!-- Comments Test -->
 <div id="cprt" class="tabcontent">
-  <b>• PojavLauncher diedarkan sebagai perisian percuma, di bawah lesen <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU GPLv3</a>.</br >
-    <b>-----</br>
-  <b>• Pengubahsuaian kod hanya dibenarkan pada garpu anda sendiri (jika anda tahu apa yang anda lakukan), tetapi jangan tanya kami jika anda ingin membetulkan perkara yang anda pecahkan.</br>
-    <b>-----</br>
-  <b>• Pengedaran PojavLauncher yang diubah suai dibenarkan, tetapi di bawah syarat berikut: 1. anda mesti mengkreditkan karya asal kepada kerja anda sendiri; 2. kod sumber anda mesti juga boleh diakses oleh orang ramai; dan 3. kod/apl anda hendaklah bebas daripada virus/bebas daripada bahaya kepada pengguna.</br>
-  <b>-----</br>
-  <b>• Jika anda ingin menterjemah PojavLauncher ke bahasa anda, log masuk ke Crowdin atau ketik [pautan ini](di bawah kerja) untuk kemudahan.</br>
-    <b>-----</br>
-  <a>• Pelayan/pustaka muat turun Minecraft Rasmi disediakan oleh Microsoft/Mojang dan keseluruhan Minecraft adalah kerja Mojang/Microsoft, jadi sila beli permainan itu, bukan mencetak rompak.</a>
+  PojavLauncher uses the following components in making the launcher. Their license (if available) are also shown.<br>
+  <br>
+    <a href="https://github.com/zhuowei/Boardwalk">Boardwalk:</a> <a href="https://github.com/zhuowei/Boardwalk/blob/master/LICENSE">Apache License 2.0/GNU GPLv2</a><br>
+      Android Support Libraries:</a> <a href="https://android.googlesource.com/platform/prebuilts/maven_repo/android/+/master/NOTICE.txt">Apache License 2.0</a><br>
+        <a href="https://github.com/PojavLauncherTeam/gl4es">GL4ES:</a> <a href="https://github.com/ptitSeb/gl4es/blob/master/LICENSE">MIT License</a><br>
+          <a href="https://github.com/PojavLauncherTeam/openjdk-multiarch-jdk8u">OpenJDK:</a> <a href="https://openjdk.java.net/legal/gplv2+ce.html">GNU GPLv2</a><br>
+            <a href="https://github.com/PojavLauncherTeam/lwjgl3">LWJGL3:</a> <a href="https://github.com/LWJGL/lwjgl3/blob/master/LICENSE.md">BSD-3 License</a><br>
+            <a href="https://github.com/PojavLauncherTeam/lwjglx">LWJGLX:</a> Unknown License<br>
+            <a href="https://gitlab.freedesktop.org/mesa/mesa">Mesa 3D Graphics Library:</a> <a href="https://docs.mesa3d.org/license.html">MIT License</a><br>
+            <a href="https://github.com/pro-grade/pro-grade">pro-grade:</a> <a href="https://github.com/pro-grade/pro-grade/blob/master/LICENSE.txt">Apache License 2.0</a><br>
+           <a href="https://github.com/iqiyi/xHook">xHook:</a> <a href="https://github.com/iqiyi/xHook/blob/master/LICENSE">MIT & BSD-style License</a><br>
+             <a href="https://github.com/anholt/libepoxy">libepoxy:</a> <a href="https://github.com/anholt/libepoxy/blob/master/COPYING">MIT License</a><br>
+              <a href="https://github.com/PojavLauncherTeam/virglrenderer">virglrenderer:</a> <a href="https://gitlab.freedesktop.org/virgl/virglrenderer/-/blob/master/COPYING">MIT License</a><br>
+                <a href="https://mc-heads.net">MCHeads</a><br> 
+                <a href="https://crowdin.com">Crowdin</a><br>
+                <br>
+                  <a>The Official Minecraft download server/library is provided by Microsoft/Mojang, and all Minecraft is work of Mojang/Microsoft, so please buy the game, not pirate it.</a>
 </div>
+<div id="DEFE" class="tabcontent">
+  <a><b>PojavLauncher is a free, open source, and stable Minecraft launcher for Android built from <a href="https://github.com/zhuowei/Boardwalk"> Boardwalk</a>, a MC Launcher project by Zhouwei Zhang</b><br>
+  <b> <br>
+  <table>
+	  <thead>
+		<tr>
+		  <th></th>
+		  <th align="left" colspan="9">Android Development Team</th>
+		</tr>
+		<tr>
+		  <th></th>
+		  <th align="center">Position</th>
+		  <th align="center">Is Active?</th>
+		  <th align="center">Designation</th>
+		</tr>
+	  </thead>
+	  <tbody>
+		<tr>
+		  <td>DuyKhanhTran</td></td>
+		  <td align="center"><b>Developer</b></td>
+		  <td align="center"><b>Yes</b></td>
+		  <td align="center"><b>Head Development</b></td>
+		</tr>
+		<tr>
+		  <td>artDev</td>
+		  <td align="center"><b>Developer</b></td>
+		  <td align="center"><b>Yes</b></td>
+		  <td align="center"><b>Head Development</b></td>
+		</tr>
+	  </tbody>
+	  <tbody>
+		<tr>
+		  <td>SerpentSpirale</td>
+		  <td align="center">Developer, Designer</td>
+		  <td align="center"><b>Yes</b></td>
+		  <td align="center"><b>Core Parts of the launcher</b></td>
+		</tr>
+		<tr>
+		  <td>alsakuttle</td>
+		  <td align="center"><b>Designer</b></td>
+		  <td align="center"><b>Yes</b></td>
+		  <td align="center"><b>Changelog Page</b></td>
+		</tr>
+	  </tbody>
+	  <tbody>
+		<tr>
+		  <td>¹Voiasis, ²Pedro Souza</td>
+		  <td align="center"><b>Tester</b></td>
+		  <td align="center"><b>¹Yes, ²No</b></td>
+		  <td align="center"><b>Launcher Testers</b></td>
+		</tr>
+		</tr>
+	  </tbody>
+	  		<tr>
+		  <td>¹NekoIceCream, ²RealEthanPlayzDev, ³itsnebulalol ⁴LegacyGamerHD, ⁵Syjalo, ⁶Google61, ⁷crystall1nedev</td>
+		  <td align="center"><b>Contributors</b></td>
+		  <td align="center"><b>Yes</b></td>
+		  <td align="center"><b>¹²³⁴⁵⁶Minor Parts of the Android Repository<br>
+		  <b>⁷Maintaining the iOS version</b></td>
+		</tr>
+	  
+	  
+</div>
+<div id="serpentmoneygenerator" class="tabcontent">
+  rrrff
+</div>
+<!-- End of PojavChangelog v22410u1
+Merged Pull Request #3062
+Report an issue immediately if anything breaks.
+Totally redesigned without knowledge by alsakuttle -->
 
-
-
-<script type="text/javascript" src="/theholytab.js"></script>
+<script type="text/javascript" src="./res/tabs.js"></script>
    
 </body>
 </html> 
