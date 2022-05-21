@@ -121,71 +121,69 @@ body {font-family: Arial;}
 	  <br>
 
 	  <h2>▶ v2.4 BETA release</h2>
-	  <b>• Remember: If your device has Android version above or equals to 7.0, use VMOS app. VMOS will install Android 5.1 OS to your device. You can take it to run this app (VMOS is removed by Play Store, you must install it manually)</b>
-	  <br>
+	  <b>• Remember: If your device has Android version above or equals to 7.0, use VMOS app. VMOS will install Android 5.1 OS to your device. 您可以使用它来运行此应用程序（VMO已被Play Store删除，您必须手动安装）</b>	 	 
+	 <br>
+	 <b> •变化：</b><br>
+	 -删除了OpenJDK和busybox<br>
+	 -重新添加了ARM 64位本机库<br>
+	 <br>
+	 <b> •修复：</b><br>
+	 -修复了阻止用户在没有internet连接的情况下启动Minecraft的错误<br>
+	 <br>
 
-	  <b>• Changes:</b><br>
-	  - Removed OpenJDK and busybox.<br>
-	  - Re-added ARM 64bit native libraries.<br>
-	  <br>
+	 <h2>▶ v2.3.1 测试版</h2>
+	 <b>• 变化:</b><br>
+	 - 在OpenJDK安装日志中添加了文本选择。<br>
+	 <b>• 修复:</b><br>
+	 -设备无法安装OpenJDK，但可以隐藏错误。<br>
+	 <br>
 
-	  <b>• Fixes:</b><br>
-	  - Fixed an error that prevent users launch Minecraft without internet connection.<br>
-	  <br>
-
-	  <h2>▶ v2.3.1 BETA release</h2>
-	  <b>• Changes:</b><br>
-	  - Added text selection on OpenJDK install log.<br>
-	  <b>• Fixes:</b><br>
-	  - Devices can't install OpenJDK but able to hide the error.<br>
-	  <br>
-
-	  <h2>▶ v2.3 BETA release</h2>
-	  <b>• What changed:</b><br>
-	  - Changed some code in update function.<br>
-	  <br>
+	 <h2>▶ v2.3测试版</h2>
+	 <b> •发生了什么变化：</b><br>
+	 -在更新函数中更改了一些代码<br>
+	 <br>
 	  
-	  <h2>▶ v2.2 BETA (private)</h2>
-	  <b>• Changes:</b><br>
-	  - Added busybox.<br>
-	  - Added OpenJDK for converter (ARM 64bit only).<br>
-	  - Added more AWT functions.<br>
-	  - Screenshot (and F2 key) now capture using directly API (javax.imageio).<br>
-	  <br>
-		
-	  <h2>▶ v2.1 BETA release</h2>
-	  <b>• Changes:</b><br>
-	  - Added Changelog button!<br>
-	  - Custom versions now visible in the list (not implemented for user)<br>
-	  - In-app Update now usable.<br>
-	  - Replaced glshim with GL4ES for partial OpenGL 2.0 and better performance.<br>
-	  <br>
+	 <h2>▶ v2.2测试版（私人版）</h2>
+	 <b> •变化：</b><br>
+	 -添加了busybox<br>
+	 -为转换器添加了OpenJDK（仅限ARM 64位）<br>
+	 -添加了更多AWT功能<br>
+	 -现在使用直接API（javax.imageio）捕获屏幕截图（和F2键）<br>
+	 <br>
 
-	  <h2>▶ v2.0 BETA</h2>
-	  <b>• Changes:</b><br>
-	  - [Partial] New design (copy of 2017 original Minecraft Launcher)<br>
-	  - Changed how users load/save.<br>
-	  - Added Menu for more options to select.<br>
-	  - Added virtual mouse for styling PC mouse.<br>
+	 <h2>▶ v2.1测试版</h2>
+	 <b> •变化：</b><br>
+	 -添加了Changelog按钮<br>
+	 -自定义版本现在在列表中可见（未为用户实现）<br>
+	 -应用内更新现在可用<br>
+	 -为部分OpenGL 2.0和更好的性能，将glshim替换为GL4ES<br>
+	 <br>
 
-	  <br>
-	  <b>• Fixes:</b><br>
-	  - Max progress -1 when converting.<br>
-	  - Verification failed when run some versions (by patch the client file)<br>
-	  <br>
+	 <h2>▶ v2.0测试版</h2>
+	 <b> •变化：</b><br>
+	 -[Partial]新设计（2017年原始的Minecraft启动器的副本）<br>
+	 -更改了用户加载/保存的方式<br>
+	 -添加了更多选项可供选择的菜单<br>
+	 -添加了用于设置PC鼠标样式的虚拟鼠标<br>
 
-	  <h2>▶ v1.0.4 (lost everything before release)</h2>
-	  - Added Download version option.<br>
-	  - Added virtual mouse (but better than 2.0 rewrite)<br>
+	 <br>
+	 <b> •修复：</b><br>
+	 -最大进度-转换时为1<br>
+	 -运行某些版本时验证失败（通过修补客户端文件）<br>
+	 <br>
 
-	  <h2>▶ v1.0.1-v1.0.3 ALPHA</h2>
-	  <b>• Changes:</b><br>
-	  - Added 1.2.5, 1.7.2, 1.7.10, 1.8, 1.9 pre-converted versions.<br>
-	  - Added Tab, Screenshot, Force close buttons.<br>
-	  <br>
-	  
-	  <h2>▶ v1.0 ALPHA</h2>
-	  <b>• Initial release. Name as Minecraft Launcher</b><br>
+	 <h2>▶ v1.0.4（发布前丢失所有内容）</h2>
+	 -添加了下载版本选项<br>
+	 -添加了虚拟鼠标（但优于2.0重写）<br>
+
+	 <h2>▶ v1.0.1-v1.0.3 ALPHA</h2>
+	 <b> •变化：</b><br>
+	 -添加了1.2.5、1.7.2、1.7.10、1.8、1.9预转换版本<br>
+	 -添加了选项卡、屏幕截图、强制关闭按钮<br>
+	 <br>
+
+	 <h2>▶ v1.0 ALPHA</h2>
+	 <b> •首次发布。 Name as Minecraft Launcher</b><br>
 	  <b>• Only pre-converted 1.9 version is added.</br>
 </div>
 <div id="News" class="tabcontent">
