@@ -250,5 +250,7 @@
     <string name="global_delete">ǝʇǝlǝp</string>
     <string name="pedit_java_runtime">ǝɯᴉʇunɹ ɐʌɐſ</string>
     <string name="pedit_renderer">ɹǝɹǝpuǝᴚ</string>
+    <string name="arc_capes_title">sǝdɐɔ ɐɔıʇǝɯsoɔ</string>
+    <string name="arc_capes_desc">˙ǝuıɟıʇdo sǝɹınbǝɹ ˙ɔɔ˙ɐɔıʇǝɯsoɔ//:sdʇʇɥ ʇısıʌ ǝsɐǝld uoıʇɐɯɹoɟuı ǝɹoɯ ɹoɟ ˙(ɔɹɐ ʎlsnoıʌǝɹd) ɐɔıʇǝɯsoɔ ɯoɹɟ sǝdɐɔ sǝlqɐuǝ</string>
     <string name="migrated_profile_str">uoᴉʇɐɹnƃᴉɟuoɔ uoᴉsɹǝʌ %s</string>
 </resources>
