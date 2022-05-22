@@ -42,18 +42,21 @@
     <string name="mcl_tab_crash">گزارش (لاگ) کرش</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">متصل شد</string>
+    <string name="mcl_account_local">محلی</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">آماده برای اجرای ماینکرفت %s</string>
     <string name="mcl_launch_cleancache">پاکسازی فایل‌های کَش</string>
     <string name="mcl_launch_downloading">در حال دانلود %s</string>
     <string name="mcl_launch_downloading_progress">"در حال دانلود %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">آماده‌سازی برای دانلود منابع</string>
+    <string name="mcl_launch_error_localmode">ماینکرفت وقتی با اکانت محلی وارد شوید قانونا نمیتواند نصب شود. لطفا برای ادامه دادن با یک اکانت آنلاین اکانتتان را جایگزین کنید.</string>
     <string name="mcl_options">گزینه‌ها</string>
     <string name="mcl_option_modinstall">یک نصب کننده ماد را باز کنید (فورج، لیبی‌ماد، فابریک، ...)</string>
     <string name="mcl_option_modinstallwitharg">یک نصب کننده ماد را باز کنید (با متغیر شخصی)</string>
     <string name="mcl_option_customcontrol">کنترل‌های شخصی</string>
     <string name="mcl_option_settings">تنظیمات</string>
     <string name="mcl_option_about">درباره</string>
+    <string name="mcl_setting_title_use_surface_view">از رندر گیر سطوح جایگزین استفاده کنید</string>
     <string name="mcl_setting_title_uninstalljre">حذف نصب جاوا ران تایم</string>
     <string name="mcl_setting_subtitle_uninstalljre">[ری‌استارت لانچر نیاز است] می‌توانید جاوا ران تایم را مجددا نصب کنید</string>
     <string name="mcl_setting_title_freeform">بازکردن ماینکرفت در حالت Freeform</string>
@@ -102,6 +105,7 @@
     <string name="global_error_field_empty">این فیلد نمی‌تواند خالی باشد</string>
     <string name="global_waiting">صبر کنید</string>
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">برنامه یا بازی با کد مرجوعی %d خارج شد. برای جزئیات بیشتر به lastlog.text مراجعت کنید.</string>
     <string name="mcn_exit_call">خروج</string>
     <string name="mcn_exit_confirm">آیا از خروج اجباری اطمینان دارید؟</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 نصب نشده است!</string>
@@ -127,6 +131,11 @@
     <string name="control_scaleup">بزرگنمایی</string>
     <string name="control_scaledown">کوچکنمایی</string>
     <!-- ImportControlActivity Strings -->
+    <string name="import_control_label">کننترل گر ها را وارد کنید</string>
+    <string name="import_control_invalid_file">فایل اشتباه یا آسیب دیده هست</string>
+    <string name="import_control_import_button">کنترل گر ها را وارد نمایید</string>
+    <string name="import_control_verifying_file">فایل تایید شده هست، لطفا صبر نموده و دوباره امتحان کنید…</string>
+    <string name="import_control_invalid_name">یا اسم اشتباه هست و یا فایل هم اکنون وجود دارد</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -154,6 +163,7 @@
     <string name="customctrl_addbutton_drawer">افزودن دکمه کشویی</string>
     <string name="customctrl_addsubbutton">افزودن زیر-دکمه</string>
     <string name="customctrl_selectdefault">انتخاب json کنترل پیش‌فرض</string>
+    <string name="main_install_jar_file">نصب .jar</string>
     <string name="main_options">گزینه‌ها</string>
     <string name="main_play">شروع بازی</string>
     <string name="main_welcome">خوش آمدید، %s</string>
