@@ -210,7 +210,7 @@ public class MultiRTUtils {
         ProcessBuilder processBuilder = new ProcessBuilder().directory(workdir);
         for(File jarFile : files){
             try{
-                Process process = processBuilder.command("./unpack200.so", "-r", jarFile.getAbsolutePath(), jarFile.getAbsolutePath().replace(".pack", "")).start();
+                Process process = processBuilder.command("./libunpack200.so", "-r", jarFile.getAbsolutePath(), jarFile.getAbsolutePath().replace(".pack", "")).start();
                 process.waitFor();
             }catch (InterruptedException | IOException e) {
                 Log.e("MULTIRT", "Failed to unpack the runtime !");
