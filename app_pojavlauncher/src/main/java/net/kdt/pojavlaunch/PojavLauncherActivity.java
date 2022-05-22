@@ -130,7 +130,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
                 setTabActive(position);
             }
         });
-        initTabs(0);
+
 
         //Setup listener to the backPreference system
         backPreferenceListener = (key, value) -> {
@@ -245,6 +245,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
             }
         });
         changeLookAndFeel(PREF_HIDE_SIDEBAR);
+        initTabs(0);
     }
     private void selectTabPage(int pageIndex){
         viewPager.setCurrentItem(pageIndex);
@@ -323,10 +324,10 @@ public class PojavLauncherActivity extends BaseLauncherActivity
 
     protected void initTabs(int activeTab){
         final Handler handler = new Handler(Looper.getMainLooper());
-        handler.post(() -> {
+        handler.postDelayed(() -> {
             //Do something after 100ms
             selectTabPage(activeTab);
-        });
+        }, 100);
     }
 
     private void changeLookAndFeel(boolean useOldLook){
