@@ -1,5 +1,7 @@
 package net.kdt.pojavlaunch.tasks;
 
+import static net.kdt.pojavlaunch.Tools.ENABLE_DEV_FEATURES;
+
 import android.app.*;
 import android.content.*;
 import android.os.*;
@@ -122,7 +124,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                 { //run the checks to detect if we have a *brand new* engine
                     int mcReleaseDate = Integer.parseInt(verInfo.releaseTime.substring(0, 10).replace("-", ""));
                     if(mcReleaseDate > 20210225 && verInfo.javaVersion != null && verInfo.javaVersion.majorVersion > 15)
-                        V117CompatUtil.runCheck(p1[0],mActivity);
+                        V117CompatUtil.runCheck(mActivity);
                 }
                 try {
                     assets = downloadIndex(verInfo.assets, new File(Tools.ASSETS_PATH, "indexes/" + verInfo.assets + ".json"));
@@ -241,7 +243,8 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
             }
 
             mActivity.mIsAssetsProcessing = true;
-            mActivity.mPlayButton.post(new Runnable(){
+            if(ENABLE_DEV_FEATURES){
+                mActivity.mPlayButton.post(new Runnable(){
 
                     @Override
                     public void run()
@@ -250,6 +253,8 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                         mActivity.mPlayButton.setEnabled(true);
                     }
                 });
+            }
+
                 
             if (assets == null) {
                 return null;
