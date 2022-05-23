@@ -174,8 +174,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                         publishProgress("1", "Ignored " + libItem.name);
                         //Thread.sleep(100);
                     } else {
-                        String[] libInfo = libItem.name.split(":");
-                        String libArtifact = Tools.artifactToPath(libInfo[0], libInfo[1], libInfo[2]);
+                        String libArtifact = Tools.artifactToPath(libItem.name);
                         outLib = new File(Tools.DIR_HOME_LIBRARY + "/" + libArtifact);
                         outLib.getParentFile().mkdirs();
 

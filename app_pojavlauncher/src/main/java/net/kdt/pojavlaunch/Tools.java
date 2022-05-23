@@ -331,7 +331,14 @@ public final class Tools {
         return strList.toArray(new String[0]);
     }
 
-    public static String artifactToPath(String group, String artifact, String version) {
+    public static String artifactToPath(String name) {
+        int idx = name.indexOf(":");
+        assert idx != -1;
+        int idx2 = name.indexOf(":", idx+1);
+        assert idx2 != -1;
+        String group = name.substring(0, idx);
+        String artifact = name.substring(idx+1, idx2);
+        String version = name.substring(idx2+1).replace(':','-');
         return group.replaceAll("\\.", "/") + "/" + artifact + "/" + version + "/" + artifact + "-" + version + ".jar";
     }
 
@@ -575,8 +582,7 @@ public final class Tools {
         List<String> libDir = new ArrayList<String>();
         for (DependentLibrary libItem: info.libraries) {
             if(!checkRules(libItem.rules)) continue;
-            String[] libInfos = libItem.name.split(":");
-            libDir.add(Tools.DIR_HOME_LIBRARY + "/" + Tools.artifactToPath(libInfos[0], libInfos[1], libInfos[2]));
+            libDir.add(Tools.DIR_HOME_LIBRARY + "/" + Tools.artifactToPath(libItem.name));
         }
         return libDir.toArray(new String[0]);
     }
