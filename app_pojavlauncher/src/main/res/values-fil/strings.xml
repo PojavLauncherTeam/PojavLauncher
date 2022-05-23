@@ -42,6 +42,7 @@
     <string name="mcl_tab_crash">Crash log</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Nakakonekta</string>
+    <string name="mcl_account_local">Lokal</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Handa nang maglaro ng Minecraft %s</string>
     <string name="mcl_launch_cleancache">Nililinis ang mga file ng cache</string>
@@ -55,6 +56,7 @@
     <string name="mcl_option_customcontrol">Pasadyang mga kontrol</string>
     <string name="mcl_option_settings">Mga Setting</string>
     <string name="mcl_option_about">Tungkol sa</string>
+    <string name="mcl_setting_title_use_surface_view">GABBY</string>
     <string name="mcl_setting_title_uninstalljre">I-uninstall ang Java Runtime</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Kinakailangan ang pag-restart ng launcher] Hinahayaan ka nitong muling i-install ang Java Runtime</string>
     <string name="mcl_setting_title_freeform">Ilunsad ang Minecraft sa mode na Freeform</string>
