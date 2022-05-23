@@ -215,7 +215,7 @@
     <string name="multirt_config_setdefault">Nastavit výchozí</string>
     <string name="multirt_config_setdefault_already">Výchozí</string>
     <string name="multirt_config_removeerror_last">Musíte mít nainstalovanou alespoň jednu Java Runtime</string>
-    <string name="multirt_nocompartiblert">Nelze najít žádnou podporovanou Java Runtime. Tato verze vyžaduje Javu %d nebo novější.</string>
+    <string name="multirt_nocompartiblert">%dNelze najít žádnou podporovanou Java Runtime. Tato verze vyžaduje Javu %d nebo novější.</string>
     <string name="multirt_nojava8rt">Nelze najít Javu 8. Chcete-li používaje tuto možnost, aby fungovala, musíte mít nainstalovanou Java 8.</string>
     <string name="compat_117_message">Minecraft 21w10a+ vyžaduje jádrový profil OpenGL 3.2. Bohužel, GL4ES překladač ho v tuto chvíli plně nepodporuje, ale existují další možnosti jež můžete použít pro spuštění těchto verzí. Stisknutím tlačítka OK potvrďte použít a stisknutím tlačítka Zrušit ukončíte spouštění.</string>
     <string name="compat_11x_playanyway">Nepoužít ale spustit</string>
