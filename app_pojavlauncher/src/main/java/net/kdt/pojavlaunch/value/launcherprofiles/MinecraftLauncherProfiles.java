@@ -4,7 +4,7 @@ import net.kdt.pojavlaunch.*;
 
 public class MinecraftLauncherProfiles
 {
-	public Map<String, MinecraftProfile> profiles;
+	public Map<String, MinecraftProfile> profiles = new HashMap<>();
 	public boolean profilesWereMigrated;
 	public String clientToken;
 	public Map<String, MinecraftAuthenticationDatabase> authenticationDatabase;

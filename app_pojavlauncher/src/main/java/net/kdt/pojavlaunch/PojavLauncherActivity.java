@@ -195,13 +195,14 @@ public class PojavLauncherActivity extends BaseLauncherActivity
             ProfileAdapter profileAdapter = new ProfileAdapter(this, true);
             ProfileEditor profileEditor = new ProfileEditor(this,(name, isNew, deleting)->{
                 LauncherProfiles.update();
+                profileAdapter.notifyDataSetChanged();
                 if(isNew) {
                     mVersionSelector.setSelection(profileAdapter.resolveProfileIndex(name));
                 }
                 if(deleting) {
                     mVersionSelector.setSelection(0);
                 }
-                profileAdapter.notifyDataSetChanged();
+
             });
             mVersionSelector.setOnLongClickListener((v)->profileEditor.show(LauncherPreferences.DEFAULT_PREF.getString(LauncherPreferences.PREF_KEY_CURRENT_PROFILE,"")));
             mVersionSelector.setAdapter(profileAdapter);
