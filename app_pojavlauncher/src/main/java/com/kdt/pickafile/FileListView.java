@@ -113,7 +113,7 @@ public class FileListView extends LinearLayout
                         fileAdapter.add(new File(path, ".."));
                     }
 
-                    if(listFile.length != 0){
+                    if(listFile != null && listFile.length != 0){
                         Arrays.sort(listFile, new SortFileName());
                         if(fileSuffixes.length > 0){ //Meaning we want only specific files
                             for(File file : listFile){
