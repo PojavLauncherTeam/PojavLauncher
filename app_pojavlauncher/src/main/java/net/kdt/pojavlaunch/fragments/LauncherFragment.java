@@ -10,6 +10,8 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -108,7 +110,7 @@ public class LauncherFragment extends Fragment {
 
 		if(!tryUrl(Tools.URL_HOME+localizedUrl)) return;
 
-		requireActivity().runOnUiThread(() -> {
+		new Handler(Looper.getMainLooper()).post(() -> {
 			mInterruptLoad = true;
 			mValidChangelog = localizedUrl;
 			mNewsWebview.loadUrl(Tools.URL_HOME + mValidChangelog);
