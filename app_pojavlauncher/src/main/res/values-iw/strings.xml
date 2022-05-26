@@ -57,7 +57,7 @@
     <string name="mcl_option_settings">הגדרות</string>
     <string name="mcl_option_about">על אודות</string>
     <string name="mcl_setting_title_uninstalljre">הסר התקנת Java Runtime</string>
-    <string name="mcl_setting_subtitle_uninstalljre">[אתחול נדרש] זה ייתן לך להתקין מחדש את Java Runtime</string>
+    <string name="mcl_setting_subtitle_uninstalljre">[אתחול נדרש] זה ייאפשר להתקין מחדש את Java Runtime</string>
     <string name="mcl_setting_title_freeform">פתח Minecraft במצב Freeform</string>
     <string name="mcl_setting_subtitle_freeform">פתח Minecraft בחלון מרחף. Android 7.0 ומעלה נדרש</string>
     <string name="mcl_setting_title_hide_sidebar">הסתר את סרגל הצד</string>
