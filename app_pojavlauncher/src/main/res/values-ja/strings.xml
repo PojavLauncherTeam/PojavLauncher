@@ -83,7 +83,6 @@
     <string name="mcl_setting_category_general">一般的な設定</string>
     <string name="mcl_setting_category_scaling">スケーリングの設定</string>
     <string name="mcl_setting_category_renderer">レンダラー</string>
-    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exports OpenGL 2.1</string>
     <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): exports OpenGL 4.3</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): exports OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exports OpenGL 4.6</string>
@@ -208,7 +207,6 @@
     <string name="multirt_config_removeerror_last">少なくとも1つのJavaランタイムがインストールされている必要があります</string>
     <string name="multirt_nocompartiblert">比較可能なJavaランタイムが見つかりません。このバージョンはJava %d 以降が必要です。</string>
     <string name="multirt_nojava8rt">Java 8が見つかりません。このオプションを使用するには、Java 8をインストールする必要があります。</string>
-    <string name="compat_117_message">Minecraft 21w10a+ では、OpenGL 3.2 コアプロファイルが必要です。 残念ながら、GL4ES ラッパーは現時点では完全にはサポートしていませんが、これらのバージョンを実行するためにインストールできるいくつかの追加リソースがあります。 format@@0 を押してインストールを確認し、format@@1 を押して起動を中止します。</string>
     <string name="compat_11x_playanyway">再試行してください</string>
     <string name="pvc_gameDirectory">ゲームのディレクトリ</string>
     <string name="pvc_jvmArgs">JVM 引数</string>
