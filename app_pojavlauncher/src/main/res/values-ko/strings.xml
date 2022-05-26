@@ -79,7 +79,6 @@
     <string name="mcl_setting_category_general">일반 설정</string>
     <string name="mcl_setting_category_scaling">크기 설정</string>
     <string name="mcl_setting_category_renderer">렌더러</string>
-    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): OpenGL 2.1 내보내기</string>
     <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): OpenGL 4.3 사용</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): OpenGL 3.0 사용</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): OpenGL 4.6 내보내기</string>
@@ -213,7 +212,6 @@
     <string name="multirt_config_removeerror_last">하나 이상의 Java 런타임이 필요합니다</string>
     <string name="multirt_nocompartiblert">호환되는 Java 런타임을 찾지 못했습니다. 이 버전은 Java %d 이상이 필요합니다.</string>
     <string name="multirt_nojava8rt">Java 8을 찾지 못했습니다. 이 옵션을 사용하려면, Java 8을 설치해야 합니다.</string>
-    <string name="compat_117_message">Minecraft 21w10a 이상 버전은 OpenGL 3.2 코어 프로필이 필요합니다. 슬프게도, GL4ES는 현재 OpenGL 3.2 코어 프로필을 완전히 지원하지 않습니다, 하지만 해당 버전을 실행하기 위해 설치할 수 있는 추가 리소스가 있습니다. 확인 버튼을 눌러 설치하거나 취소 버튼을 눌러 취소하세요.</string>
     <string name="compat_11x_playanyway">무시하고 플레이</string>
     <string name="pvc_gameDirectory">게임 디렉토리</string>
     <string name="pvc_jvmArgs">JVM 실행 설정</string>
