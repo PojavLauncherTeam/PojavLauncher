@@ -81,6 +81,7 @@ public class BaseMainActivity extends BaseActivity {
             mControlLayout = findViewById(R.id.main_control_layout);
             
             mProfile = PojavProfile.getCurrentProfileContent(this);
+            LauncherProfiles.update();
             minecraftProfile = LauncherProfiles.mainProfileJson.profiles.get(LauncherPreferences.DEFAULT_PREF.getString(LauncherPreferences.PREF_KEY_CURRENT_PROFILE,""));
             if(minecraftProfile == null) {
                 Toast.makeText(this,"Attempted to launch nonexistent profile",Toast.LENGTH_SHORT).show();
@@ -88,7 +89,6 @@ public class BaseMainActivity extends BaseActivity {
                 return;
             }
             String runtime = LauncherPreferences.PREF_DEFAULT_RUNTIME;
-                LauncherProfiles.update();
 
                 mVersionInfo = Tools.getVersionInfo(null, BaseLauncherActivity.getVersionId(
                         minecraftProfile.lastVersionId));
