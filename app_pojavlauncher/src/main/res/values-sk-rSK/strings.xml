@@ -79,7 +79,6 @@
     <string name="mcl_setting_category_general">Všeobecné nastavenia</string>
     <string name="mcl_setting_category_scaling">Nastavenie mierky</string>
     <string name="mcl_setting_category_renderer">Vykresľovač</string>
-    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exportuje OpenGL 2.1</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): exportuje OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exportuje OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Aké typy verzií budú v zozname verzií</string>
@@ -199,7 +198,6 @@
     <string name="multirt_config_setdefault">Nastaviť predvolené</string>
     <string name="multirt_config_setdefault_already">Predvolené</string>
     <string name="multirt_config_removeerror_last">Musíte mať nainštalovanú aspoň jednu Java Runtime</string>
-    <string name="compat_117_message">Minecraft 21w10a+ vyžaduje základný profil OpenGL 3.2. Bohužiaľ, GL4ES prekladač ho v tejto chvíli plne nepodporuje, ale existujú nejaké ďalšie možnosti, ktoré môžete nainštalovať pre spustenie týchto verzií. Stlačením tlačidla OK potvrďte inštaláciu a stlačením tlačidla Zrušiť ukončíte spúšťanie.</string>
     <string name="compat_11x_playanyway">Napriek tomu hrať</string>
     <string name="pvc_gameDirectory">Zložka hry</string>
     <string name="pvc_jvmArgs">JVM argumenty</string>
