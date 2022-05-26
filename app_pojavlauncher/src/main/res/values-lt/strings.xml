@@ -78,7 +78,6 @@
     <string name="mcl_setting_category_general">Pagrindiniai nustatymai</string>
     <string name="mcl_setting_category_scaling">Didinimo nustatymai</string>
     <string name="mcl_setting_category_renderer">Vaizdo generatorius</string>
-    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): eksportuoja OpenGL 2.1</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): eksportuoja OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Versijų tipai bus versijų sąraše</string>
     <string name="mcl_setting_veroption_release">Leidimai</string>
@@ -192,7 +191,6 @@
     <string name="multirt_config_setdefault">Nustatyti numatytą</string>
     <string name="multirt_config_setdefault_already">Numatytasis</string>
     <string name="multirt_config_removeerror_last">Jūs privalote turėti bent vieną Java Modulį įdiegtą</string>
-    <string name="compat_117_message">Minecraft 21w10+ reikalauja OpenGL 3.2 branduolio profilio. Gaila, GL4ES wrapperis dabar pilnai nepalaiko jo, bet yra dar pridėtinių resursų kuriuos galima įdiegti, kad būtų galima paleisti šias versijas. Paspauskite Gerai, kad patvirtintumėte įdiegimą, paspauskite Atšaukti, kad sustabdytumėte įdiegimą.</string>
     <string name="pvc_gameDirectory">Žaidimo failų vieta</string>
     <string name="pvc_jvmArgs">JVM argumentai</string>
     <string name="pvc_title">Individualios versijos nustatymai</string>
