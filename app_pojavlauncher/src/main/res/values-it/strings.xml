@@ -83,7 +83,6 @@
     <string name="mcl_setting_category_general">Impostazioni generali</string>
     <string name="mcl_setting_category_scaling">Modifica dimensioni</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
-    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): esporta OpenGL 2.1</string>
     <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): esporta OpenGL 4.3</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): esporta OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): esporta OpenGL 4.6</string>
@@ -217,8 +216,6 @@
     <string name="multirt_config_removeerror_last">Devi avere almeno un Runtime Java installato</string>
     <string name="multirt_nocompartiblert">Impossibile trovare una versione compatibile di Java Runtime. Questa versione richiede almeno Java %d o più recente.</string>
     <string name="multirt_nojava8rt">Impossibile trovare Java 8. Per usare questa opzione, è necessario installare Java 8.</string>
-    <string name="compat_117_message">Minecraft 21w10a+ necessità del profilo core OpenGL 3.2. Purtroppo, il wrapper GL4ES non è completamente supportato al momento, ma ci sono altre risorse aggiuntive installabili per usare quelle versioni.
-Premi OK per confermare l\'installazione, oppure Cancel per annullarla.</string>
     <string name="compat_11x_playanyway">Gioca comunque</string>
     <string name="pvc_gameDirectory">Cartella gioco</string>
     <string name="pvc_jvmArgs">Parametri JVM</string>
