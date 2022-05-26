@@ -79,7 +79,6 @@
     <string name="mcl_setting_category_general">Setări generale</string>
     <string name="mcl_setting_category_scaling">Setări de scalare</string>
     <string name="mcl_setting_category_renderer">Randator</string>
-    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exportă OpenGL 2.1</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): exportă OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exportă OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Tipul de versiune va fi în lista de versiuni</string>
@@ -202,7 +201,6 @@
     <string name="multirt_config_setdefault">Setaţi ca prestabilit</string>
     <string name="multirt_config_setdefault_already">Prestabilit</string>
     <string name="multirt_config_removeerror_last">Trebuie să ai cel puțin un Java Runtime instalat</string>
-    <string name="compat_117_message">Minecraft 21w10a+ necesită profilul de bază OpenGL 3.2. Din păcate, wrapper-ul GL4ES nu îl suportă pe deplin în acest moment, dar există câteva resurse suplimentare pe care le poți instala pentru a rula aceste versiuni. Apasă OK pentru a confirma instalarea sau apasă Anulare pentru a întrerupe lansarea.</string>
     <string name="compat_11x_playanyway">Joacă oricum</string>
     <string name="pvc_gameDirectory">Dosarul jocului</string>
     <string name="pvc_jvmArgs">Argumente JVM</string>
