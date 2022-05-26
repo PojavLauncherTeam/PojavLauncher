@@ -78,7 +78,6 @@
     <string name="mcl_setting_category_general">Γενικές ρυθμίσεις</string>
     <string name="mcl_setting_category_scaling">Ρυθμίσεις κλιμάκωσης</string>
     <string name="mcl_setting_category_renderer">Απόδοση</string>
-    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exports OpenGL 2.1</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exports OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Ο τύπος έκδοσης θα είναι στη λίστα εκδόσεων</string>
     <string name="mcl_setting_veroption_release">Κυκλοφορία</string>
@@ -189,7 +188,6 @@
     <string name="multirt_config_setdefault">Ορισμός ως προεπιλογή</string>
     <string name="multirt_config_setdefault_already">Προεπιλογή</string>
     <string name="multirt_config_removeerror_last">Πρέπει να έχετε τουλάχιστον ένα Java Runtime εγκατεστημένο</string>
-    <string name="compat_117_message">Το Minecraft 21w10a+ απαιτεί το προφίλ πυρήνα OpenGL 3.2. Δυστυχώς, το GL4ES wrapper δεν το υποστηρίζει πλήρως αυτή τη στιγμή, αλλά υπάρχουν μερικοί πρόσθετοι πόροι που μπορείτε να εγκαταστήσετε για να εκτελέσετε αυτές τις εκδόσεις. Πατήστε OK για να επιβεβαιώσετε την εγκατάσταση και πατήστε Ακύρωση για να ακυρώσετε την εκκίνηση.</string>
     <string name="pvc_gameDirectory">Κατάλογος παιχνιδιού</string>
     <string name="pvc_jvmArgs">Παράμετροι εκκίνησης JVM</string>
     <string name="pvc_title">Ρυθμίσεις Per-version</string>
