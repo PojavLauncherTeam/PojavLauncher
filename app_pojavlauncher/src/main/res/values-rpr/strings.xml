@@ -79,7 +79,6 @@
     <string name="mcl_setting_category_general">Основныя настройки</string>
     <string name="mcl_setting_category_scaling">Настройки масштабированія</string>
     <string name="mcl_setting_category_renderer">Визуализаторъ</string>
-    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): экспортируетъ OpenGL 2.1</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): экспортируетъ OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): экспортируетъ OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Типы версій, которые будутъ отображаться въ спискѣ версій</string>
@@ -192,7 +191,6 @@
     <string name="multirt_config_setdefault">Установить по умолчанію</string>
     <string name="multirt_config_setdefault_already">По умолчанію</string>
     <string name="multirt_config_removeerror_last">Должно быть установлено хотя бы одинъ Java Runtime</string>
-    <string name="compat_117_message">Для Minecraft 21w10a+ (1.17+) требуется OpenGL 3.2. Къ глубочайшему огорченію, на сегодняшній день GL4ES не полностью поддерживаетъ ея, но есть нѣкоторые дополнительные рессурсы, которые вы можете установить, чтобы запустить этѣ версіи. Нажмите на кнопку «ОКЪ», чтобы одобрить установку или «Отмѣна», чтобы наложить вето на запускъ.</string>
     <string name="compat_11x_playanyway">Все равно запустить</string>
     <string name="pvc_gameDirectory">Папка игры</string>
     <string name="pvc_jvmArgs">Аргументы JVM</string>
