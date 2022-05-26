@@ -249,7 +249,7 @@
     <string name="multirt_nocompartiblert">Can\'t find any compartible Java Runtime. This version requires Java %d or newer.</string>
     <string name="multirt_nojava8rt">Can\'t find Java 8. In order to use this option, you need to install Java 8.</string>
 
-    <string name="compat_117_message">Minecraft 21w10a+ requires the OpenGL 3.2 core profile. Sadly, GL4ES wrapper doesn\'t fully support it at the moment, but there are some additional resources you can install to run these versions. Press OK to confirm installation, and press Cancel to abort launch.</string>
+    <string name="compat_117_message">Minecraft 21w10a+ requires the OpenGL 3.2 core profile. Sadly, your graphics chip does not support OpenGL ES 3.0 or higher, but there are some additional resources you can install to run these versions. Press OK to confirm installation, and press Cancel to abort launch.</string>
     <string name="compat_11x_playanyway">Play anyway</string>
     <string name="pvc_gameDirectory">Game directory</string>
     <string name="pvc_jvmArgs">JVM arguments</string>
