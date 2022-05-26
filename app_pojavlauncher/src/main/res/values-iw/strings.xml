@@ -82,7 +82,6 @@
     <string name="mcl_setting_category_general">הגדרות כלליות</string>
     <string name="mcl_setting_category_scaling">הגדרות קנה מידה</string>
     <string name="mcl_setting_category_renderer">רינדור</string>
-    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): מייצא את OpenGL 2.1</string>
     <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): מייצא את OpenGL 4.3</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): מייצא את OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): מייצא את OpenGL 4.6</string>
@@ -210,7 +209,6 @@
     <string name="multirt_config_removeerror_last">נדרש שיהיה לך לפחות Java Runtime אחת מותקנת</string>
     <string name="multirt_nocompartiblert">לא ניתן למצוא Java Runtime נתמכת. גרסת Java %d ומעלה נדרשת.</string>
     <string name="multirt_nojava8rt">לא מצאתי את Java 8. על מנת להשתמש באפשרות זו, עליך להתקין Java 8.</string>
-    <string name="compat_117_message">מיינקראפט 21w10a+ דורש את פרופיל הליבה שלOpenGL 3.2. למרבה הצער, המעטפת GL4ES אינה תומכת בו במלואה כרגע, אך ישנם כמה משאבים נוספים שתוכל להתקין להפעלת גרסאות אלה. לחץ על אישור כדי לאשר את ההתקנה ולחץ על ביטול כדי לבטל את ההפעלה.</string>
     <string name="compat_11x_playanyway">הפעל בכל זאת</string>
     <string name="pvc_gameDirectory">תיקיית המשחק</string>
     <string name="pvc_jvmArgs">פרמטרים של JVM</string>
