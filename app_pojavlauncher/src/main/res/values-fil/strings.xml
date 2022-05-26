@@ -82,7 +82,6 @@
     <string name="mcl_setting_category_general">Pangkalahatang mga Setting</string>
     <string name="mcl_setting_category_scaling">Mga setting ng pag-scale</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
-    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): i-convert sa OpenGL 2.1</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): i-convert sa OpenGL 4.6 (dapat merong vulkan layer ang GPU mo.)</string>
     <string name="mcl_setting_category_veroption">Ang uri ng bersyon ay nasa listahan ng bersyon</string>
     <string name="mcl_setting_veroption_release">Release</string>
@@ -205,7 +204,6 @@
     <string name="multirt_config_removeerror_last">Dapat may naka-install sa launcher na isang Java Runtime</string>
     <string name="multirt_nocompartiblert">Walang mag katugma na Java Runtime. Etong version ay kailangan ng Java %d or bago.</string>
     <string name="multirt_nojava8rt">Walang mahanap na Java 8. Para magamit ang option na ito, kailangan i-install ang Java 8.</string>
-    <string name="compat_117_message">Ang Minecraft 21w10a+ ay kailangan ng OpenGL 3.2 core profile, Sadly ang GL4ES wrapper ay di fully na support sa ngayon, pero may additional resources na pwede mo i-install para ma run etong mga version, Press OK para ma confirm ang installation, and press Cancel para di i-launch.</string>
     <string name="compat_11x_playanyway">Subukan pa rin</string>
     <string name="storage_warning_title">Bago sa i-storage</string>
     <string name="storage_warning_text"><![CDATA[Dahil kay Google\'s bagong scoped storage enforcements na nadagdag sa Android 10 pataas, kinailangan namin na i-move
