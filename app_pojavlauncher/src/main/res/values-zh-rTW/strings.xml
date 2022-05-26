@@ -79,7 +79,6 @@
     <string name="mcl_setting_category_general">一般設定</string>
     <string name="mcl_setting_category_scaling">解析度縮放</string>
     <string name="mcl_setting_category_renderer">渲染器</string>
-    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): 輸出OpenGL 2.1</string>
     <string name="mcl_setting_renderer_virgl">virgl (OpenGL ES 3): exports OpenGL 4.3</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): exports OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): 輸出OpenGL 4.6</string>
@@ -207,7 +206,6 @@
     <string name="multirt_config_removeerror_last">您必須至少安裝一個Java運行庫</string>
     <string name="multirt_nocompartiblert">無可用Java運行庫。此版本需要Java %d 以上。</string>
     <string name="multirt_nojava8rt">無可用Java 8。請安裝Java 8以啟用此選項。</string>
-    <string name="compat_117_message">Minecraft 21w10a+ 需要 OpenGL 3.2 核心配置檔案。 遺憾的是，GL4ES 包裝器目前並不支援，但是您可以安裝一些額外的資源來運行這些版本。 按 確認鍵 確認安裝，然後按 取消鍵 中止啟動。</string>
     <string name="compat_11x_playanyway">仍然開始遊戲</string>
     <string name="pvc_gameDirectory">遊戲目錄</string>
     <string name="pvc_jvmArgs">JVM 參數</string>
