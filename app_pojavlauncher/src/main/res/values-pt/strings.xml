@@ -82,7 +82,6 @@ Dá-te uma experiência de tela cheia melhorada.</string>
     <string name="mcl_setting_category_general">Definições gerais</string>
     <string name="mcl_setting_category_scaling">Definições de escala</string>
     <string name="mcl_setting_category_renderer">Renderizador</string>
-    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exporta o OpenGL 2.1</string>
     <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): exporta o OpenGL 4.3</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): exporta o OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exporta o OpenGL 4.6</string>
@@ -207,8 +206,6 @@ Dá-te uma experiência de tela cheia melhorada.</string>
     <string name="multirt_config_removeerror_last">Tu deves ter pelo menos uma Runtime do Java instalada</string>
     <string name="multirt_nocompartiblert">Não foi possível encontrar uma Runtime do Java compatível. Esta versão requere Java %d ou superior.</string>
     <string name="multirt_nojava8rt">Não foi possível encontrar o Java 8. Para usar esta opção, tu precisas de instalar o Java 8.</string>
-    <string name="compat_117_message">O Minecraft 21w10a+ requere o OpenGL 3.2.
-Infelizmente, o wrapper do GL4ES não suporta totalmente isso no momento, mas existem alguns recursos adicionais que tu podes instalar para executar essas versões. Pressiona em OK para confirmar a instalação, e pressiona em Cancelar para abortar a execução.</string>
     <string name="compat_11x_playanyway">Jogar mesmo assim</string>
     <string name="pvc_gameDirectory">Diretório do jogo</string>
     <string name="pvc_jvmArgs">Argumentos JVM</string>
