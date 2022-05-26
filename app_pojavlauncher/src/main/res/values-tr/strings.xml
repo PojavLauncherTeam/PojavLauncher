@@ -83,7 +83,6 @@
     <string name="mcl_setting_category_general">Genel ayarlar</string>
     <string name="mcl_setting_category_scaling">Boyutlandırma Seçenekleri</string>
     <string name="mcl_setting_category_renderer">İşleyici</string>
-    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): OpenGL 2.1 dışa aktarır</string>
     <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): OpenGL 4.3 dışa aktarır</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): OpenGL 3.0 dışa aktarır</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): OpenGL 4.6 dışa aktarır</string>
@@ -218,7 +217,6 @@
     <string name="multirt_config_removeerror_last">En az bir Java Runtime kurmanız gerekir</string>
     <string name="multirt_nocompartiblert">Uyumlu Java Runtime bulunamadı. Bu sürüm Java %d ya da daha yenisini gerektiriyor.</string>
     <string name="multirt_nojava8rt">Java 8 bulunamıyor. Bu seçeneği kullanabilmeniz için, Java 8 kurmanız gerekiyor.</string>
-    <string name="compat_117_message">Minecraft 21w10a ve üstü artık OpenGL 3.2 core profilini gerektiriyor. Ne yazık ki, GL4ES wrapper\'ı onu şuanda tamamen desteklemiyor, fakat bu sürümleri çalıştırabilmek için bazı ek kaynaklar indirilebilir. Indirmeyi onaylamak için TAMAM\'a tıklayın, iptal etmek için IPTAL\'e basın.</string>
     <string name="compat_11x_playanyway">Yine de Oyna</string>
     <string name="pvc_gameDirectory">Oyun dizini</string>
     <string name="pvc_jvmArgs">JVM argümanları</string>
