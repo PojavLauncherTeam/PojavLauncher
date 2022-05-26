@@ -79,7 +79,6 @@
     <string name="mcl_setting_category_general">إعدادات عامة</string>
     <string name="mcl_setting_category_scaling">إعدادات الحجم</string>
     <string name="mcl_setting_category_renderer">العارض</string>
-    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exports OpenGL 2.1</string>
     <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): exports OpenGL 4.3</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): exports OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exports OpenGL 4.6</string>
@@ -197,7 +196,6 @@
     <string name="multirt_config_setdefault">تعيين لإستخدام دائم</string>
     <string name="multirt_config_setdefault_already">مستخدم دائما</string>
     <string name="multirt_config_removeerror_last">يجب أن يكون لديك على الأقل مشغل جافا واحد مثبت</string>
-    <string name="compat_117_message">ماينكرافت 21w10a+ يتطلب ملف التعريف الأساسي OpenGL 3.2 من المحزن أن تغليف GL4ES لا يدعمه بشكل كامل في الوقت الحالي، ولكن هناك بعض الموارد الإضافية التي يمكنك تثبيتها لتشغيل هذه الإصدارات اضغط على OK لتأكيد التثبيت، واضغط على Cancel لإجهاض الإطلاق.</string>
     <string name="compat_11x_playanyway">تشغيل على أي حال</string>
     <string name="pvc_gameDirectory">مكان تخزين اللعبة</string>
     <string name="pvc_jvmArgs">مدخلات JVM</string>
