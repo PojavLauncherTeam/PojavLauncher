@@ -83,6 +83,7 @@
     <string name="mcl_setting_category_general">Общие настройки</string>
     <string name="mcl_setting_category_scaling">Настройки масштабирования</string>
     <string name="mcl_setting_category_renderer">Визуализатор</string>
+    <string name="mcl_setting_renderer_gles2_4">священный gl4es: поддерживает 1.0 — 1.19+</string>
     <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): экспортирует OpenGL 4.3</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): экспортирует OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): экспортирует OpenGL 4.6</string>
@@ -217,6 +218,7 @@
     <string name="multirt_config_removeerror_last">Должно быть установлено хотя бы один Java Runtime</string>
     <string name="multirt_nocompartiblert">Не удалось найти подходящий Java Runtime. Эта версия требует Java %d версии или позднее.</string>
     <string name="multirt_nojava8rt">Не удалось найти Java 8. Чтобы использовать эту опцию, необходимо установить Java 8.</string>
+    <string name="compat_117_message">Для Minecraft 21w10a+ требуется OpenGL 3.2. К сожалению, ваш графический чип не поддерживает OpenGL ES 3.0 или выше, но есть некоторые дополнительные ресурсы, которые вы можете установить для запуска этих версий. Нажмите «ОК», чтобы подтвердить установку, или «Отмена», чтобы прервать запуск.</string>
     <string name="compat_11x_playanyway">Запустить в любом случае</string>
     <string name="pvc_gameDirectory">Папка игры</string>
     <string name="pvc_jvmArgs">Аргументы JVM</string>
