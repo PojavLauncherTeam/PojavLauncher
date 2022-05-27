@@ -83,6 +83,7 @@
     <string name="mcl_setting_category_general">Pengaturan umum</string>
     <string name="mcl_setting_category_scaling">Pengaturan penskalaan</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
+    <string name="mcl_setting_renderer_gles2_4">holy gl4es: mendukung 1.0-1.19+</string>
     <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): mengekspor OpenGL 4.3</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): mengeksport OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): mengekspor OpenGL 4.6</string>
@@ -216,6 +217,7 @@
     <string name="multirt_config_removeerror_last">Kamu harus menginstal setidaknya satu Java Runtime</string>
     <string name="multirt_nocompartiblert">Tidak dapat menemukan Java Runtime yang kompatibel. Versi ini membutuhkan Java %d atau yang lebih baru.</string>
     <string name="multirt_nojava8rt">Tidak dapat menemukan Java 8. Untuk menggunakan opsi ini, kamu perlu menginstal Java 8.</string>
+    <string name="compat_117_message">Minecraft 21w10a+ membutuhkan profil inti OpenGL 3.2. Sayangnya chip grafis anda tidak sepenuhnya mendukung OpenGL ES 3.0 atau lebih tinggi, tetapi ada beberapa sumber daya tambahan yang dapat kamu instal untuk menjalankan versi ini. Tekan OK untuk mengkonfirmasi penginstalan, dan tekan Batal untuk membatalkan peluncuran.</string>
     <string name="compat_11x_playanyway">Mainkan saja</string>
     <string name="pvc_gameDirectory">Direktori game</string>
     <string name="pvc_jvmArgs">Argumen JVM</string>
