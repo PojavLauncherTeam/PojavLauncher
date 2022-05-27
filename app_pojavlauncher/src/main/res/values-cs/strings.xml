@@ -83,6 +83,7 @@
     <string name="mcl_setting_category_general">Obecná nastavení</string>
     <string name="mcl_setting_category_scaling">Nastavení měřítka</string>
     <string name="mcl_setting_category_renderer">Vykreslovač</string>
+    <string name="mcl_setting_renderer_gles2_4">gl4es svatý: podporuje 1.0–1.19+</string>
     <string name="mcl_setting_renderer_virgl">virglvykreslovač (OpenGL ES 3): exportuje OpenGL 4.3</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): exportuje OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exportuje OpenGL 4.6</string>
@@ -216,6 +217,7 @@
     <string name="multirt_config_removeerror_last">Musíte mít nainstalovanou alespoň jednu Java Runtime</string>
     <string name="multirt_nocompartiblert">%dNelze najít žádnou podporovanou Java Runtime. Tato verze vyžaduje Javu %d nebo novější.</string>
     <string name="multirt_nojava8rt">Nelze najít Javu 8. Chcete-li používaje tuto možnost, aby fungovala, musíte mít nainstalovanou Java 8.</string>
+    <string name="compat_117_message">Minecraft 21w10a+ vyžaduje jádrový profil OpenGL 3.2. Bohužel, tvůj grafický čip nepodporuje OpenGL ES 3.0 nebo novější, ale existují další možnosti jež můžete použít pro spuštění těchto verzí. Stisknutím tlačítka OK potvrďte použít a stisknutím tlačítka Zrušit ukončíte spouštění.</string>
     <string name="compat_11x_playanyway">Nepoužít ale spustit</string>
     <string name="pvc_gameDirectory">Složka hry</string>
     <string name="pvc_jvmArgs">JVM argumenty</string>
@@ -257,5 +259,7 @@
     <string name="global_delete">Odstranit</string>
     <string name="pedit_java_runtime">Java Runtime</string>
     <string name="pedit_renderer">Vykreslovač</string>
+    <string name="arc_capes_title">Kápě Cosmetica</string>
+    <string name="arc_capes_desc">Vyžadujíc OptiFine, zapne kápě z Cosmeticy (dřiv Arc). Pro více informací navštivte https://cosmetica.cc.</string>
     <string name="migrated_profile_str">Konfigurace verze %s</string>
 </resources>
