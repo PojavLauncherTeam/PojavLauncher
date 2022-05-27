@@ -157,7 +157,7 @@
     <string name="control_viewout">Wyjście danych</string>
     <string name="control_adebug">Wejście debugowania</string>
     <string name="control_customkey">Wyślij własny klawisz</string>
-    <string name="control_scaleup">powiększ</string>
+    <string name="control_scaleup">Powiększ</string>
     <string name="control_scaledown">Zmniejsz</string>
     <!--
     <string name="control_more3"></string>
