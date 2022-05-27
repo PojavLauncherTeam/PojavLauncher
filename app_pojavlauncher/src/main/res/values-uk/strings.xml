@@ -57,6 +57,7 @@
     <string name="mcl_option_settings">Налаштування</string>
     <string name="mcl_option_about">Про лаунчер</string>
     <string name="mcl_setting_title_use_surface_view">Використовувати альтернативний візуалізатор</string>
+    <string name="mcl_setting_subtitle_use_surface_view">Може допомогти з продуктивністю в сценаріях, пов\'язаних з gpu</string>
     <string name="mcl_setting_title_uninstalljre">Видалити Java Runtime</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Необхідно перезапустити лаунчер] Це допоможе вам перевстановити Java Runtime</string>
     <string name="mcl_setting_title_freeform">Запуск Minecraft у плаваючому вікні</string>
@@ -82,6 +83,7 @@
     <string name="mcl_setting_category_general">Загальні налаштування</string>
     <string name="mcl_setting_category_scaling">Налаштування масштабування</string>
     <string name="mcl_setting_category_renderer">Візуалізатор</string>
+    <string name="mcl_setting_renderer_gles2_4">святий gl4es: підтримує 1.0–1.19+</string>
     <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): експортує OpenGL 4.3</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): експортує OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): експортує OpenGL 4.6</string>
@@ -215,6 +217,7 @@
     <string name="multirt_config_removeerror_last">Ви повинні мати принаймні одну встановлену Java Runtime</string>
     <string name="multirt_nocompartiblert">Не вдалося знайти будь-який відповідний Java Runtime. Ця версія потребує Java %d версії або вище.</string>
     <string name="multirt_nojava8rt">Не вдалося знайти Java 8. Для того, щоб скористатися цією опцією, вам потрібно встановити Java 8.</string>
+    <string name="compat_117_message">Minecraft 21w10a+ (1.17+) потребує OpenGL 3.2. На жаль, наразі ваш графічний чип не підтримує OpenGL ES 3.0 чи вище, але є деякі інші ресурси, які ви можете встановити, щоб запустити ці версії. Натисніть «ОК», щоб підтвердити інсталяцію або «Скасувати», щоб скасувати запуск.</string>
     <string name="compat_11x_playanyway">Запустити в будь-якому випадку</string>
     <string name="pvc_gameDirectory">Тека гри</string>
     <string name="pvc_jvmArgs">Аргументи JVM</string>
