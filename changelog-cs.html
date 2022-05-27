@@ -47,25 +47,25 @@ body {font-family: Arial;}
 <img src="./res/pojav_logo.png"><br>
 <a><b> </b>
 <div class="tab">
-      <button class="tablinks" onclick="openCity(event, 'DEFE')">About</button>
-  <button class="tablinks" onclick="openCity(event, 'Changelog')">Changelog</button>
-  <button class="tablinks" onclick="openCity(event, 'News')">News</button>
+      <button class="tablinks" onclick="openCity(event, 'DEFE')">O Pojavu</button>
+  <button class="tablinks" onclick="openCity(event, 'Changelog')">Změny</button>
+  <button class="tablinks" onclick="openCity(event, 'News')">Zprávy</button>
      <button class="tablinks" onclick="openCity(event, 'serpentmoneygenerator')">Patreon</button>
-    <button class="tablinks" onclick="openCity(event, 'cprt')">Credits</button>
+    <button class="tablinks" onclick="openCity(event, 'cprt')">Poděkování</button>
 </div>
 <div id="About" class="tabcontent">
-  <a><b>PojavLauncher is a free, open source, and stable Minecraft launcher for Android built from <a href="https://github.com/zhuowei/Boardwalk"> Boardwalk</a>, a independent MC Launcher project by Zhouwei Zhang</b><br>
+  <a><b>Pojavlauncher byv postaven na nezávislém projektu MC spouštěče<a href="https://github.com/zhuowei/Boardwalk"> Boardwalk</a> od Zhuoweia Zhanga, je svobodný, zdarma a stabilní Minecraft spouštěč pro Android.</b><br>
   <b> <br>
-	  <b>• Lead Developers</b><br>
+	  <b>• Hlavní vývojáři</b><br>
 	  <
     <a href="https://github.com/khanhduytran0">Tran Khanh Duy</a>, <a href="https://github.com/artdeell">artdeell</a></br>
 
-	  <a><b>• Current designer: </b><br>
+	  <a><b>• Nynější dizajnér: </b><br>
 	  <a href="https://github.com/Mathias-Boulay">SerpentSpirale</a>, <a href="https://github.com/Mathias-Boulay">alsakuttle</a><br>
-	  <b>• Best helper for help testing: </b>
+	  <b>• Nejlépe testování pomáhající pomocník: </b>
 	  <a href="https://github.com/voiasis">Voiasis</a>.<br>
-	  <b>• <a href="https://github.com/PojavLauncherTeam/PojavLauncher/issues">Bug report</a></b><br>
-	  <b>• <a href="https://github.com/PojavLauncherTeam/PojavLauncher/actions">Download latest development build.</a></b><br>
+	  <b>• <a href="https://github.com/PojavLauncherTeam/PojavLauncher/issues">Nahlášení bugů</a></b><br>
+	  <b>• <a href="https://github.com/PojavLauncherTeam/PojavLauncher/actions">Stáhnout nejnovější vývojářské sestavení.</a></b><br>
 	  <b> <br>
 	  
 	  
@@ -74,223 +74,226 @@ body {font-family: Arial;}
 <div id="Changelog" class="tabcontent">
   <body background="./res/background.png" text="ffffff" link="ffffff" alink="ffffff" vlink="ffffff" marginwidth="20" marginheight="20"></body>
   
-  <h2>▶ <a href="https://github.com/PojavLauncherTeam/PojavLauncher/actions?query=branch%3Av3_openjdk">v3 development builds</a></h2>
-	  <b>• New options:</b><br>
-	  - a fully-functional Mod Installer<br>
+  <h2>▶ <a href="https://github.com/PojavLauncherTeam/PojavLauncher/actions?query=branch%3Av3_openjdk">v3 vývojové sestavení</a></h2>
+	  <b>• Nové možnosti:</b><br>
+	  - Plně funkční instalátor modů<br>
 	  	  <b>——————</br>
-          <b>• New features:</b><br>
-          - Now faster with Java 8.<br>
-	  - Now can run Minecraft 1.13 and above<br>
-	  - Now can properly launch Forge and Fabric! To install one of these "modloaders", just simply download their .jar files.<br>
-          - Multi-architecture support: ARMv7, aarch64, x86 and x86_64.<br>
-          - <strike>Now properly supports Custom Controls (either made by the Discord community or by you!)</strike><br>
+          <b>• Nové funkce:</b><br>
+          - Nyní rychlejši s Javou 8.<br>
+	  - Nyní může spustit Minecraft 1.13 a novější<br>
+	  - Nyní může správně spustit Forge a Fabric! Pro nainstalování  těchto "modloaderů" (načítačů modů), jen stáhni jejich jar soubory.<br>
+          - Monohoarchitektní podpora: ARMv7, aarch64, x86 a x86_64.<br>
+          - <strike>Nyní plně podporuje Vlastní Rozvržení (Stvořeno buď Discord komunitou či tebou!)</strike><br>
           	  <b>——————</br>
-          <b>• What's New</b></br>
-          - Java 17 for running Minecraft Versions above 21w10a<br>
-          - Controls Revision: added new features, such as drawer buttons, and new control editing features.<br>
-          (Note that controls made before this revision will not work.)</br>
-          - New renderers: virgl and vgpu</br>
-          (Though VirGL supports up to OpenGL 4.5, it can't run shaders properly.)</br>
-          - Removed zink</br>
-          - Implemented local accounts, after what happened with Doregon/PojavLauncher_iOS, and as such, you can't download Minecraft resources, not even one.</br>
-          <strike>(Make sure to backup your PojavLauncher folder so that you can still play Minecraft after updating)</strike></br>
+          <b>• Co nového?</b></br>
+          - Java 17 pro spouštění Minecraft verzí nad 21w10a<br>
+          - Revize vlastníh rozvržení: přidány byly nové funkce, jako třeba šuplíky a nové ovládání editovávající možnosti.<br>
+          (Ale staré rozvržení ovládání stvořené před touto revizí fungovat nebudou.)</br>
+          - Nové vykreslovače: Virgl a Vgpu</br>
+          (VirGl i podporujíc OpenGL 4.5, nemůže správně podporovat shadery.)</br>
+          - Odstraněn Zink</br>
+          -  Potom co se stalo s Doregon/PojavLauncher_iOS, implementovány byvše místní účty, nemohou stáhnout Minecraft obsah, ani jeden.</br>
+          <strike>(Dej si pozor, abys zálohoval tvoji PojavLauncher složku, abys aktualizovav, mohl stále hrát Minecraft)</strike></br>
           
 	  <br>
 
-	  <h2>▶ v2.5.0 preview (deprecated)</h2>
-	  <b>• NOTICE: OptiFine Installer is experimental, for some devices will crash at splash screen (Mojang Screen). Don't report bug about OptiFine crash at splash screen, these will not be solved.</b><br>
-	  <b>• New settings:</b><br>
-	  - You can now customize the MS delay of touch gestures (placing block, destroying block.)<br>
-	  <b>• New features:</b><br>
-	  - Scrolling in Minecraft 1.8 or above by tapping the screen and holding SEC button<br>
+	  <h2>▶ v2.5.0 přednáhled (zastaralý)</h2>
+	  <b>• UPOZORNĚNÍ: Optifine instalatér jsa experimentální, pro některé zařízení crashne na načítací obrazovce (ta s Mojang textem). Nehlaš bugy o OptiFine padání na načítací obrazovce, tyto nebudou vyřešeny.</b><br>
+	  <b>• Nové nastavení:</b><br>
+	  - Nyní můžeš přispůsobit ms zpoždění dotykových gest (stavění, ničení.).<br>
+	  <b>• Nové funkce:</b><br>
+	  - Skrolování v Minecraftu 1.8 nebo novějším, držením SEC tlačítka a kliknutím<br>
 	  <br>
 
-	  <h2>▶ v2.4.2 preview</h2>
-	  <b>• Good news: Any Android 7.0+ devices can now run Minecraft normally.</b><br>
-	  <b>• Changes:</b><br>
-	  - <font color="green">Added OptiFine installer!</font><br>
-	  - External mouse and keyboard support (Feature needs Android 8.0+. Can't detect left or right mouse event).<br>
-	  - Launcher UI should now fit correctly in big screens.<br>
-	  - Freeform mode is now working.<br>
-	  - Virtual mouse now works properly.<br>
-	  - Replaced multdoj7 with PojavDX (dx 1.16) for better converter (thanks to <a href="https://github.com/artdeell">artdeell</a> for suggesting).<br>
-	  <b>• Fixes:</b><br>
-	  - Touch event triggered as click event, this bug exist from Boardwalk.<br>
-	  - (In-Game) Mouse event triggered after looking around.<br>
+	  <h2>▶ v2.4.2 přednáhled</h2>
+	  <b>• Dobré zprávy: Jakékoliv Android 7.0+ zařízení je schopné bežet Minecraft normálně.</b><br>
+	  <b>• Změny:</b><br>
+	  - <font color="green">Přidán OptiFine instalatér!</font><br>
+	  - Podpora externí myši a klávesnice (Funkce potřebujíc Android 8.0+, nemůže rozlišit levé či pravé kliknutí).<br>
+	  - Rozhraní se nyní správně škáluje na velké obrazovky.<br>
+	  - Režim volných oken nyní funguje.<br>
+	  - Virtuální myš nyní funguje správně.<br>
+	  - Nahrazena multdoj7 PojavDX (dx1.16) pro lepší konvertor (díky <a href="https://github.com/artdeell">artdeellovi</a> pro návrh).<br>
+	  <b>• Opravy:</b><br>
+	  - Dotyková událost spuštěná jako událost kliknutí. Tato chyba existuje z Boardwalku.<br>
+	  - (Ve-Hře) událost myši spuštěná po rozhlédnutí.<br>
 
 	  <br>
 
-	  <h2>▶ v2.4 BETA release</h2>
-	  <b>• Remember: If your device has Android version above or equals to 7.0, use VMOS app. VMOS will install Android 5.1 OS to your device. You can take it to run this app (VMOS is removed by Play Store, you must install it manually)</b>
+	  <h2>▶ v2.4 Vydání BETA</h2>
+	  <b>• Pamatujte: Má-li tvoje zařízení Android verzi 7.0 či novější, použij aplikaci VMOS. VMOS nainstaluje do vašeho zařízení Android 5.1. Ten můžeš použít pro spuštění této aplikace (VMOS byla odstraněn Google Playem, protož ji budeš instalovat ručně. </b>
 	  <br>
 
-	  <b>• Changes:</b><br>
-	  - Removed OpenJDK and busybox.<br>
-	  - Re-added ARM 64bit native libraries.<br>
+	  <b>• Změny:</b><br>
+	  - Odstraněny Openjdk a busybox.<br>
+	  - Znovupřidány ARM 64bitové nativní knihovny.<br>
 	  <br>
 
-	  <b>• Fixes:</b><br>
-	  - Fixed an error that prevent users launch Minecraft without internet connection.<br>
+	  <b>• Opravy:</b><br>
+	  - Opraven byl error jenž nedovolil uživatelům spustit Minecraft bez internetu.<br>
 	  <br>
 
-	  <h2>▶ v2.3.1 BETA release</h2>
-	  <b>• Changes:</b><br>
-	  - Added text selection on OpenJDK install log.<br>
-	  <b>• Fixes:</b><br>
-	  - Devices can't install OpenJDK but able to hide the error.<br>
+	  <h2>▶ v2.3.1 BETA Vydání</h2>
+	  <b>• Změny:</b><br>
+	  - Přidána textová selekce na OpenJDK instalovačním záznamu..<br>
+	  <b>• Opravy:</b><br>
+	  - Zařízení nemohše nainstalovat OpenJDK, mohli skrýt error.<br>
 	  <br>
 
-	  <h2>▶ v2.3 BETA release</h2>
-	  <b>• What changed:</b><br>
-	  - Changed some code in update function.<br>
+	  <h2>▶ v2.3 Vydání BETA</h2>
+	  <b>• Co jse změnilo:</b><br>
+	  - Změněn byl některý kód v aktualizační funkci.<br>
 	  <br>
 	  
-	  <h2>▶ v2.2 BETA (private)</h2>
-	  <b>• Changes:</b><br>
-	  - Added busybox.<br>
-	  - Added OpenJDK for converter (ARM 64bit only).<br>
-	  - Added more AWT functions.<br>
-	  - Screenshot (and F2 key) now capture using directly API (javax.imageio).<br>
+	  <h2>▶ v2.2 BETA (privátní)</h2>
+	  <b>• Změna:</b><br>
+	  - Přidán busybox.<br>
+	  - Přidána OpenJDK pro převaděč (ARM 64bit only).<br>
+	  - Přidáno více AWT funkcí.<br>
+	  - Snímky obrazove (a F2 klávesa) nyní zachycují přímo za použití API (javax.imageio).<br>
 	  <br>
 		
-	  <h2>▶ v2.1 BETA release</h2>
-	  <b>• Changes:</b><br>
-	  - Added Changelog button!<br>
-	  - Custom versions now visible in the list (not implemented for user)<br>
-	  - In-app Update now usable.<br>
-	  - Replaced glshim with GL4ES for partial OpenGL 2.0 and better performance.<br>
+	  <h2>▶ v2.1 BETA Vydání</h2>
+	  <b>• Změny:</b><br>
+	  - Přidáno tlačítko změn!<br>
+	  - Vlastní verzo jsou nyní viditelné v seznamu (neimplementováno pro uživatele)<br>
+	  - Uvnitřaplikační aktualizace nyní použitelná.<br>
+	  - Glshim nahrazena GL4ES pro částečnou OpenGL 2.0 a lepší výkon. <br>
 	  <br>
 
 	  <h2>▶ v2.0 BETA</h2>
-	  <b>• Changes:</b><br>
-	  - [Partial] New design (copy of 2017 original Minecraft Launcher)<br>
-	  - Changed how users load/save.<br>
-	  - Added Menu for more options to select.<br>
-	  - Added virtual mouse for styling PC mouse.<br>
+	  <b>• Změny:</b><br>
+	  - [Částečně] Nový dizajn (kopie 2017 originálního Minecraft spouštěče)<br>
+	  - Změněno jak uživatelé se ukládají a načítají.<br>
+	  - Přidáno menu pro více možností k vybrání.<br>
+	  - Přidána virtuální myš jako PC myš.<br>
 
 	  <br>
-	  <b>• Fixes:</b><br>
-	  - Max progress -1 when converting.<br>
-	  - Verification failed when run some versions (by patch the client file)<br>
+	  <b>• Opravy:</b><br>
+	  - Maximální postup -1 při převádění.<br>
+	  - Ověření selhalo, když některé verze byly spuštěny (záplatováním souboru klienta)<br>
 	  <br>
 
-	  <h2>▶ v1.0.4 (lost everything before release)</h2>
-	  - Added Download version option.<br>
-	  - Added virtual mouse (but better than 2.0 rewrite)<br>
+	  <h2>▶ v1.0.4 (Ztraceno vše před vydáním)</h2>
+	  - Přidána možnost Stáhnout verzi.<br>
+	  - Přidána virtuální myš (ale lepši než 2.0 přepsání)<br>
 
-	  <h2>▶ v1.0.1-v1.0.3 ALPHA</h2>
-	  <b>• Changes:</b><br>
-	  - Added 1.2.5, 1.7.2, 1.7.10, 1.8, 1.9 pre-converted versions.<br>
-	  - Added Tab, Screenshot, Force close buttons.<br>
+	  <h2>▶ v1.0.1-v1.0.3 ALFA</h2>
+	  <b>• Změny:</b><br>
+	  - Přidány 1.2.5, 1.7.2, 1.7.10, 1.8, 1.9 předpřevedené verze.<br>
+	  - Přidána tlačítka Tab, Snímek a Donucení zavření.<br>
 	  <br>
 	  
-	  <h2>▶ v1.0 ALPHA</h2>
-	  <b>• Initial release. Name as Minecraft Launcher</b><br>
-	  <b>• Only pre-converted 1.9 version is added.</br>
+	  <h2>▶ v1.0 ALFA</h2>
+	  <b>• Začínající vydání. Název byl Minecraft Launcher</b><br>
+	  <b>• Jediná předpřevedená verze byla 1.9.</br>
 </div>
 <div id="News" class="tabcontent">
-  <h2>▶ 1.18: It's Here<a></h2>
-	  <b>Since 21w37a, Mojang bumped the resource pack version to 8, which rendered the current assets-v0 patch unusable. This is the patch for those versions. Simply replace it to the existing assets-v0, and you’re good to go!<br>
-A small note: When the popup about 1.17 appears, tap Play Anyway. Tapping OK will overwrite the patch.
-Another small note: 1.17.1 or below will simply not work with this patch.<br>
+  <h2>▶ 1.18: Je to tu<a></h2>
+	  <b>od 21w37a, Mojang zvýšil verzi balíčků zdrojů na 8, což způsobilo, že aktuální assets-v0 záplata není použitelná. Toto je oprava pro tyto verze. Jednoduše nahraď existující assets-v0 a můžeš hrát!<br>
+Malá poznámka: Když se vyskakovací okno o 1.17 zobrazí, klepni na I tak hrát. Kliknutím na OK přepíšeš záplatu.
+Další malá poznámka: 1.17.1 či starší prostě nebude s touto záplatou fungovat.<br>
  <br>
-Here's how to get it to work. Download this<a href="https://github.com/PojavLauncherTeam/android-openjdk-build-multiarch/releases/tag/jre17-ec28559"> JRE17 file according to your CPU architecture.</a> arm for 32bit, arm64 for 64bit, and x86_64 for Chromebooks/WSA.<br>
-Regardless of your platform, you'll need to download<a href="https://cdn.discordapp.com/attachments/724163890803638277/892912425366589460/assets-v0.zip"> this resource pack.</a>
+Zde najdeš způsob, jak ji zprovoznit. Stáhni tento<a href="https://github.com/PojavLauncherTeam/android-openjdk-build-multiarch/releases/tag/jre17-ec28559"> JRE17 soubor záležící na architektuře tvého procesoru.</a> arm pro 32bit, arm64 pro 64bit a x86_64 pro Chromebooky či WSA.<br>
+Nezáležíc na tvojí platformě, budeš potřebovat<a href="https://cdn.discordapp.com/attachments/724163890803638277/892912425366589460/assets-v0.zip"> tento resource pack.</a>
 
 <br>
 
-<h1></h1><b> <a href ="https://discord.com/channels/724163890803638273/724163890803638277/892912425538576385">Direct link to message<br> (by @NotAHero04/Nguyễn Hùng#1258) ></a></b><br></h1>
+<h1></h1><b> <a href ="https://discord.com/channels/724163890803638273/724163890803638277/892912425538576385">Přímý odkaz na zprávu<br> (od @NotAHero04/Nguyễn Hùng#1258) ></a></b><br></h1>
 <br>
 </div>
 <div id="serpentmoneygenerator" class="tabcontent">
-  Support the PojavLauncher development by Subscribing to our Patreon!<br> Get prioritized updates, prioritized support, perks, and access to Google Play Internal Tests!<br>
+  Podpoř vývoj PojavLauncheru, odebíráním našeho Patreonu!<br> Získej prioritní aktualizace, prioritní podporu, výhody a přístup k Google Play interním Testů!<br>
   <br>
-  <a href="https://www.patreon.com/join/pojavlauncher/checkout?rid=7574789">Tier 1 membership level for $2</a><br>
-  <a href="https://www.patreon.com/join/pojavlauncher/checkout?rid=7574790">Tier 2 membership level for $4</a><br>
-  <a href="https://www.patreon.com/join/pojavlauncher/checkout?rid=7574791">Tier 3 membership level for $7</a><br>
+  <a href="https://www.patreon.com/join/pojavlauncher/checkout?rid=7574789">Úroveň 1 členství za $2 (~ 46.134Kč )</a><br>
+  <a href="https://www.patreon.com/join/pojavlauncher/checkout?rid=7574790">Úroveň 2 členství za $4 (~ 92.268Kč )</a><br>
+  <a href="https://www.patreon.com/join/pojavlauncher/checkout?rid=7574791">Úroveň 3 členství za $7 (~ 161.469Kč )</a><br>
   
   </div>
 
 <!-- Comments Test -->
 <div id="cprt" class="tabcontent">
-  PojavLauncher uses the following components in making the launcher. Their license (if available) are also shown.<br>
+  PojavLauncher užívá následující komponenty při stváření spouštěče. Jejich licence (jsou-li k dispozici) jsou také zobrazeny.<br>
   <br>
-    <a href="https://github.com/zhuowei/Boardwalk">Boardwalk:</a> <a href="https://github.com/zhuowei/Boardwalk/blob/master/LICENSE">Apache License 2.0/GNU GPLv2</a><br>
-      Android Support Libraries:</a> <a href="https://android.googlesource.com/platform/prebuilts/maven_repo/android/+/master/NOTICE.txt">Apache License 2.0</a><br>
-        <a href="https://github.com/PojavLauncherTeam/gl4es">GL4ES:</a> <a href="https://github.com/ptitSeb/gl4es/blob/master/LICENSE">MIT License</a><br>
+    <a href="https://github.com/zhuowei/Boardwalk">Boardwalk:</a> <a href="https://github.com/zhuowei/Boardwalk/blob/master/LICENSE">Apache Licence 2.0/GNU GPLv2</a><br>
+      Android podporné knihovny:</a> <a href="https://android.googlesource.com/platform/prebuilts/maven_repo/android/+/master/NOTICE.txt">Apache License 2.0</a><br>
+        <a href="https://github.com/PojavLauncherTeam/gl4es">GL4ES:</a> <a href="https://github.com/ptitSeb/gl4es/blob/master/LICENSE">MIT licence</a><br>
           <a href="https://github.com/PojavLauncherTeam/openjdk-multiarch-jdk8u">OpenJDK:</a> <a href="https://openjdk.java.net/legal/gplv2+ce.html">GNU GPLv2</a><br>
-            <a href="https://github.com/PojavLauncherTeam/lwjgl3">LWJGL3:</a> <a href="https://github.com/LWJGL/lwjgl3/blob/master/LICENSE.md">BSD-3 License</a><br>
-            <a href="https://github.com/PojavLauncherTeam/lwjglx">LWJGLX:</a> Unknown License<br>
-            <a href="https://gitlab.freedesktop.org/mesa/mesa">Mesa 3D Graphics Library:</a> <a href="https://docs.mesa3d.org/license.html">MIT License</a><br>
-            <a href="https://github.com/pro-grade/pro-grade">pro-grade:</a> <a href="https://github.com/pro-grade/pro-grade/blob/master/LICENSE.txt">Apache License 2.0</a><br>
-           <a href="https://github.com/iqiyi/xHook">xHook:</a> <a href="https://github.com/iqiyi/xHook/blob/master/LICENSE">MIT & BSD-style License</a><br>
-             <a href="https://github.com/anholt/libepoxy">libepoxy:</a> <a href="https://github.com/anholt/libepoxy/blob/master/COPYING">MIT License</a><br>
-              <a href="https://github.com/PojavLauncherTeam/virglrenderer">virglrenderer:</a> <a href="https://gitlab.freedesktop.org/virgl/virglrenderer/-/blob/master/COPYING">MIT License</a><br>
+            <a href="https://github.com/PojavLauncherTeam/lwjgl3">LWJGL3:</a> <a href="https://github.com/LWJGL/lwjgl3/blob/master/LICENSE.md">BSD-3 licence</a><br>
+            <a href="https://github.com/PojavLauncherTeam/lwjglx">LWJGLX:</a> Neznámá licence<br>
+            <a href="https://gitlab.freedesktop.org/mesa/mesa">Mesa 3D Grafická knihovna:</a> <a href="https://docs.mesa3d.org/license.html">MIT licence</a><br>
+            <a href="https://github.com/pro-grade/pro-grade">Pro-grade:</a> <a href="https://github.com/pro-grade/pro-grade/blob/master/LICENSE.txt">Apache licence 2.0</a><br>
+           <a href="https://github.com/iqiyi/xHook">xHook:</a> <a href="https://github.com/iqiyi/xHook/blob/master/LICENSE">MIT & BSD-styl licence</a><br>
+             <a href="https://github.com/anholt/libepoxy">libepoxe:</a> <a href="https://github.com/anholt/libepoxy/blob/master/COPYING">MIT licence</a><br>
+              <a href="https://github.com/PojavLauncherTeam/virglrenderer">virglrenderer:</a> <a href="https://gitlab.freedesktop.org/virgl/virglrenderer/-/blob/master/COPYING">MIT licence</a><br>
                 <a href="https://mc-heads.net">MCHeads</a><br> 
                 <a href="https://crowdin.com">Crowdin</a><br>
                 <br>
-                  <a>The Official Minecraft download server/library is provided by Microsoft/Mojang, and all Minecraft is work of Mojang/Microsoft, so please buy the game, not pirate it.</a>
+                  <a>Oficiální Minecraft stahovací server serveru/klienta je poskytován Microsoftem/Mojangem, a všechen Minecraft je dílo Mojangu/Microsoftu, proto prosím, kup si hru, nepirať.</a>
 </div>
 <div id="DEFE" class="tabcontent">
-  <a><b>PojavLauncher is a free, open source, and stable Minecraft launcher for Android built from <a href="https://github.com/zhuowei/Boardwalk"> Boardwalk</a>, a MC Launcher project by Zhouwei Zhang</b><br>
+  <a><b>Pojavlauncher byv postaven na nezávislém projektu MC spouštěče<a href="https://github.com/zhuowei/Boardwalk"> Boardwalk</a> od Zhuoweia Zhanga, je svobodný, zdarma a stabilní Minecraft spouštěč pro Android.</b><br>
   <b> <br>
   <table>
 	  <thead>
 		<tr>
 		  <th></th>
-		  <th align="left" colspan="9">Android Development Team</th>
+		  <th align="left" colspan="9">Android vývojový tým</th>
 		</tr>
 		<tr>
 		  <th></th>
-		  <th align="center">Position</th>
-		  <th align="center">Is Active?</th>
-		  <th align="center">Designation</th>
+		  <th align="center">Pozice</th>
+		  <th align="center">Je aktivní?</th>
+		  <th align="center">Umístění</th>
 		</tr>
 	  </thead>
 	  <tbody>
 		<tr>
 		  <td>DuyKhanhTran</td></td>
-		  <td align="center"><b>Developer</b></td>
-		  <td align="center"><b>Yes</b></td>
-		  <td align="center"><b>Head Development</b></td>
+		  <td align="center"><b>Vývojář</b></td>
+		  <td align="center"><b>Ano</b></td>
+		  <td align="center"><b>Hlavní vývoj</b></td>
 		</tr>
 		<tr>
 		  <td>artDev</td>
-		  <td align="center"><b>Developer</b></td>
-		  <td align="center"><b>Yes</b></td>
-		  <td align="center"><b>Head Development</b></td>
+		  <td align="center"><b>Vývojář</b></td>
+		  <td align="center"><b>Ano</b></td>
+		  <td align="center"><b>Hlavní vývoj</b></td>
 		</tr>
 	  </tbody>
 	  <tbody>
 		<tr>
 		  <td>SerpentSpirale</td>
-		  <td align="center">Developer, Designer</td>
-		  <td align="center"><b>Yes</b></td>
-		  <td align="center"><b>Core Parts of the launcher</b></td>
+		  <td align="center">Vývojář, Dizajnér</td>
+		  <td align="center"><b>Ano</b></td>
+		  <td align="center"><b>Hlavní části spouštěče</b></td>
 		</tr>
 		<tr>
 		  <td>alsakuttle</td>
-		  <td align="center"><b>Designer</b></td>
-		  <td align="center"><b>Yes</b></td>
-		  <td align="center"><b>Changelog Page</b></td>
+		  <td align="center"><b>Dizajnér</b></td>
+		  <td align="center"><b>Ano</b></td>
+		  <td align="center"><b>Strana změn</b></td>
 		</tr>
 	  </tbody>
 	  <tbody>
 		<tr>
 		  <td>¹Voiasis, ²Pedro Souza</td>
-		  <td align="center"><b>Tester</b></td>
-		  <td align="center"><b>¹Yes, ²No</b></td>
-		  <td align="center"><b>Launcher Testers</b></td>
+		  <td align="center"><b>Testovači</b></td>
+		  <td align="center"><b>¹Ano, ²Ne</b></td>
+		  <td align="center"><b>Testovači spouštěče</b></td>
 		</tr>
 		</tr>
 	  </tbody>
 	  		<tr>
 		  <td>¹NekoIceCream, ²RealEthanPlayzDev, ³itsnebulalol ⁴LegacyGamerHD, ⁵Syjalo, ⁶Google61, ⁷crystall1nedev</td>
-		  <td align="center"><b>Contributors</b></td>
-		  <td align="center"><b>Yes</b></td>
-		  <td align="center"><b>¹²³⁴⁵⁶Minor Parts of the Android Repository<br>
-		  <b>⁷Maintaining the iOS version</b></td>
+		  <td align="center"><b>Přispěvatelé</b></td>
+		  <td align="center"><b>Ano</b></td>
+		  <td align="center"><b>¹²³⁴⁵⁶Menší části Android repozitáře<br>
+		  <b>⁷Udržování iOS verze</b></td>
 		</tr>
+ 
+Anchor Link
+XPath: /html/body/div[@id=DEFE]/a
 	  
 	  
 </div>
