@@ -11,6 +11,7 @@
     <string name="login_online_password_hint">Slaptažodis</string>
     <string name="login_online_check_keeplogin">Likti prisijungus</string>
     <string name="login_online_login_label">Prisijungti</string>
+    <string name="login_error_invalid_username">Netinkamas slapyvardis. Slapyvardis turi būti nuo 3 iki 16 simbolių, turėti tik simbolius A-Z, a-z, 0-9 ir brūkšnius.</string>
     <string name="login_error_exist_username">Šis slapyvardis jau egzistuoja</string>
     <string name="login_microsoft">Microsoft prisijungimas</string>
     <string name="login_select_account">Pasirinkti paskyrą</string>
