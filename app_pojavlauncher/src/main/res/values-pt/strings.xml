@@ -56,6 +56,7 @@
     <string name="mcl_option_customcontrol">Controlos personalizados</string>
     <string name="mcl_option_settings">Definições</string>
     <string name="mcl_option_about">Acerca</string>
+    <string name="mcl_setting_subtitle_use_surface_view">Pode ajudar no desempenho em cenários de vínculo da GPU</string>
     <string name="mcl_setting_title_uninstalljre">Desinstalar Runtime do Java</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Reinicio do lançador requirido] Isto te permite reinstalar a Runtime do Java</string>
     <string name="mcl_setting_title_freeform">Executar o Minecraft no modo Freeform</string>
@@ -206,6 +207,7 @@ Dá-te uma experiência de tela cheia melhorada.</string>
     <string name="multirt_config_removeerror_last">Tu deves ter pelo menos uma Runtime do Java instalada</string>
     <string name="multirt_nocompartiblert">Não foi possível encontrar uma Runtime do Java compatível. Esta versão requere Java %d ou superior.</string>
     <string name="multirt_nojava8rt">Não foi possível encontrar o Java 8. Para usar esta opção, tu precisas de instalar o Java 8.</string>
+    <string name="compat_117_message">O Minecraft 21w10a+ requer o perfil essencial OpenGL 3.2. Infelizmente, o seu processador de vídeo não suporta o OpenGL ES 3. ou superior, mas há alguns recursos adicionais que você pode instalar para executar essas versões. Pressione OK para confirmar a instalação e pressione Cancelar para abortar a execução.</string>
     <string name="compat_11x_playanyway">Jogar mesmo assim</string>
     <string name="pvc_gameDirectory">Diretório do jogo</string>
     <string name="pvc_jvmArgs">Argumentos JVM</string>
@@ -213,6 +215,7 @@ Dá-te uma experiência de tela cheia melhorada.</string>
     <string name="storage_warning_title">Alterações de armazenamento</string>
     <string name="storage_warning_text"><![CDATA[Devido aos novos reforços ao armazenamento adicionados no Android 10 e superiores, nós fomos obrigados a mover o diretório do jogo para uma pasta privada. <br /> A nova pasta para os ficheiros do Pojav é <b>Android/data/%s/files/</b> (também acessível usando um explorador de ficheiros).<br /> Se tu precisares de copiar os ficheiros do teu jogo, por favor copia tudo da página original em <b>games/PojavLauncher</b> manualmente.]]></string>
     <string name="preference_mouse_start_title">Iniciar com o rato virtual ligado</string>
+    <string name="preference_mouse_start_description">Usar esta opção fará com que você seja julgado pelo Mathias-Boulay</string>
     <string name="preference_video_title">Vídeo e renderizador</string>
     <string name="preference_video_description">Resolução, tipo de escala, e renderizador</string>
     <string name="preference_control_title">Customização dos controlos</string>
@@ -222,6 +225,16 @@ Dá-te uma experiência de tela cheia melhorada.</string>
     <string name="preference_misc_description">Lista de versões, e verificações das bibliotecas</string>
     <string name="preference_experimental_title">Coisas experimentais</string>
     <string name="preference_experimental_description">Use estas coisas com consideração, sem suporte.</string>
+    <string name="preference_sustained_performance_title">Habilitar modo de desempenho constante</string>
+    <string name="preference_sustained_performance_description">Limitar a Redução Térmica limitando o pico do desempenho</string>
+    <string name="profiles_latest_snapshot">Snapshot mais recente</string>
+    <string name="profiles_latest_release">Versão mais recente</string>
+    <string name="profiles_editing">Edição Do Perfil</string>
     <string name="profiles_profile_name">Nome</string>
+    <string name="profiles_profile_version">Versão</string>
+    <string name="global_delete">Eliminar</string>
+    <string name="pedit_java_runtime">Runtime do Java</string>
     <string name="pedit_renderer">Renderizador</string>
+    <string name="arc_capes_title">Capas da \'Comestica\'</string>
+    <string name="arc_capes_desc">Habilitar capas da Cosmetica(antigamente Arc). Para mais informações por favor visite https://cosmetica.cc. Isto Requer OptiFine.</string>
 </resources>
