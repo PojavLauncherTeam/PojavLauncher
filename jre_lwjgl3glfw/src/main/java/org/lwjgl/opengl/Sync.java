@@ -83,7 +83,7 @@ class Sync {
 		long deltaFrame = 1000/fps;
 		if(deltaMs < deltaFrame){  // skip the Thread sleep if the opportunity is available
 			try {
-				Thread.sleep((deltaFrame - deltaMs) + lastDelay);
+				Thread.sleep(Math.min((deltaFrame - deltaMs) + lastDelay, deltaFrame));
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
