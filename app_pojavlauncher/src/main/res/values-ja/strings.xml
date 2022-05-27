@@ -83,6 +83,7 @@
     <string name="mcl_setting_category_general">一般的な設定</string>
     <string name="mcl_setting_category_scaling">スケーリングの設定</string>
     <string name="mcl_setting_category_renderer">レンダラー</string>
+    <string name="mcl_setting_renderer_gles2_4">gl4esは次のバージョンをサポートします：1.0-1.19+</string>
     <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): exports OpenGL 4.3</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): exports OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exports OpenGL 4.6</string>
@@ -207,6 +208,7 @@
     <string name="multirt_config_removeerror_last">少なくとも1つのJavaランタイムがインストールされている必要があります</string>
     <string name="multirt_nocompartiblert">比較可能なJavaランタイムが見つかりません。このバージョンはJava %d 以降が必要です。</string>
     <string name="multirt_nojava8rt">Java 8が見つかりません。このオプションを使用するには、Java 8をインストールする必要があります。</string>
+    <string name="compat_117_message">Minecraft21w10a+ではOpenGL 3.2のコアプロファイルが必要です。残念ながら、グラフィックスチップはOpenGL ES 3をサポートしていません またはそれ以上ですが、これらのバージョンを実行するためにインストールできるいくつかの追加のリソースがあります 「OK」を押してインストールを確認し、「キャンセル」を押して起動を中止します</string>
     <string name="compat_11x_playanyway">再試行してください</string>
     <string name="pvc_gameDirectory">ゲームのディレクトリ</string>
     <string name="pvc_jvmArgs">JVM 引数</string>
@@ -249,5 +251,6 @@
     <string name="pedit_java_runtime">Javaランタイム</string>
     <string name="pedit_renderer">レンダラー</string>
     <string name="arc_capes_title">コスメチカ・ケープズ</string>
+    <string name="arc_capes_desc">Cosmetica（以前のArc）のケープを有効にします。詳細については、https：//cosmetica.ccをご覧ください。 OptiFineが必要です。</string>
     <string name="migrated_profile_str">%s バージョンの設定</string>
 </resources>
