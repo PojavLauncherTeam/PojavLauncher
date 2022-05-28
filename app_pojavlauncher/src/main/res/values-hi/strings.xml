@@ -11,25 +11,43 @@
     <string name="login_online_password_hint">पासवर्ड/कुंजिका</string>
     <string name="login_online_check_keeplogin">मुझे लोग्ड इन रखें</string>
     <string name="login_online_login_label">लॉगिन</string>
-    <string name="login_offline_label">ऑफ़लाइन अकाउंट के रूप में लॉगिन करें</string>
+    <string name="login_error_invalid_username">लॉगिन समस्या अवैध वापरकर्ता नाम</string>
     <string name="login_error_exist_username">यह उपयोगकर्तानाम/username पहले से मौजूद है।</string>
+    <string name="login_microsoft">लॉगिन माइक्रोसॉफ्ट</string>
     <string name="login_select_account">एकाउंट का चयन करें </string>
+    <string name="login_title_no_saved_account">खाता नहीं मिला</string>
     <!-- Hint -->
     <!-- Warnings -->
+    <string name="warning_remove_account">यह खाता हटा दिया जाएगा!</string>
     <!-- AlertDialog title -->
     <!-- Error messages -->
+    <string name="error_fatal">पोजावलांचर अप्रत्याशित क्रैश हो गया है</string>
+    <string name="error_no_version">कोई संस्करण नहीं!</string>
+    <string name="error_show_more">ज्यादा देखे</string>
+    <string name="error_show_less">कम देखे</string>
     <!-- Toast messages -->
+    <string name="toast_permission_denied">भंडारण अनुमति को पढ़ने/लिखने की आवश्यकता है!</string>
+    <string name="toast_optifine_success">सफल स्थापित करें</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_console">विकास कंसोल</string>
+    <string name="mcl_tab_crash">क्रैश लॉग</string>
     <!-- MCLauncherActivity: Account status -->
     <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_version_msg">Minecraft  खेलने के लिए तैयार %s</string>
+    <string name="mcl_launch_cleancache">कैशे फ़ाइलों की सफाई</string>
+    <string name="mcl_launch_downloading">%s डाउनलोड हो रहा है</string>
+    <string name="mcl_setting_title_backtorightmouse">बैक बटन को दाये माउस बटन की तरह इस्तेमाल करे</string>
     <!-- Global strings -->
+    <string name="global_warinng">चेतावनी</string>
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_call">बाहर जाएं</string>
     <!-- MainActivity: Control buttons -->
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_viewout">लॉग आउटपुट</string>
+    <!-- ImportControlActivity Strings -->
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>

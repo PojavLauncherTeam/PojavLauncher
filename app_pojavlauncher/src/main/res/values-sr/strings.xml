@@ -11,9 +11,7 @@
     <string name="login_online_password_hint">Шифра</string>
     <string name="login_online_check_keeplogin">Остави ме пријављеног</string>
     <string name="login_online_login_label">Пријава</string>
-    <string name="login_offline_label">Пријавите се као офлајн налог</string>
     <string name="login_error_exist_username">Ово корицничко име већ постоји</string>
-    <string name="login_error_offline_password">Офлајн налог ме може имати лозинку!</string>
     <string name="login_microsoft">Microsoft Пријава</string>
     <string name="login_select_account">Изаберите налог</string>
     <string name="login_title_no_saved_account">Налог није пронађен !</string>
@@ -43,7 +41,6 @@
     <string name="mcl_tab_crash">Лог Грешака</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Повезано</string>
-    <string name="mcl_account_offline">Офлајн</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Спремно играти Минецрафт %s</string>
     <string name="mcl_launch_cleancache">Чишћење кеш фајлова</string>
@@ -82,9 +79,6 @@
     <string name="mcl_setting_category_general">Општа подешавања</string>
     <string name="mcl_setting_category_scaling">Подешавања величине</string>
     <string name="mcl_setting_category_renderer">Рендерер</string>
-    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): ехпортира OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.4 (OpenGL ES 2): ехпортира OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): експортира OpenGL 2.1 + мало 3.2 (1.17 није подржан)</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): eкспортира OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Верзије које ће бити у листи верзија</string>
     <string name="mcl_setting_veroption_release">Стабилно</string>
@@ -106,11 +100,9 @@
     <string name="global_error_field_empty">Ово поље не може остати празно</string>
     <string name="global_waiting">Чекај</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Апликација/Игра је изашла са кодом %d</string>
     <string name="mcn_exit_call">Изађи</string>
     <string name="mcn_exit_confirm">Да ли желите да форсе-изаћете?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 није инсталиран!</string>
-    <string name="mcn_check_fail_incompatiblearch">Архиктетура %1$s неоже радити са Java Runtime %2$s.</string>
     <string name="mcn_check_fail_vulkan_support">Vulkan Zink рендерер није подржан ма овом уређају!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
@@ -132,6 +124,7 @@
     <string name="control_customkey">Пошаљи прилагоћени типка-код</string>
     <string name="control_scaleup">Зумирање</string>
     <string name="control_scaledown">Смањивање</string>
+    <!-- ImportControlActivity Strings -->
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -178,4 +171,6 @@
     <string name="memory_warning_msg">Слободна меморија (%d) је нижа од подешене меморије (%d), то можда заустави функцију игре. Промените подешену меморију ако се то деси.</string>
     <string name="mcl_memory_allocation">Подешена меморија</string>
     <string name="mcl_memory_allocation_subtitle">Колико меморије може да корости Minecraft</string>
+    <string name="profiles_profile_name">Име</string>
+    <string name="pedit_renderer">Рендерер</string>
 </resources>

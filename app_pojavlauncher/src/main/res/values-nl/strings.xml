@@ -11,7 +11,6 @@
     <string name="login_online_password_hint">Wachtwoord</string>
     <string name="login_online_check_keeplogin">Ingelogd blijven</string>
     <string name="login_online_login_label">Aanmelden</string>
-    <string name="login_offline_label">Inloggen als offline account</string>
     <string name="login_error_exist_username">Deze gebruikersnaam bestaat al</string>
     <string name="login_microsoft">Microsoft-login</string>
     <string name="login_select_account">Selecteer account</string>
@@ -42,7 +41,6 @@
     <string name="mcl_tab_crash">Crash-logbestand</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Verbonden</string>
-    <string name="mcl_account_offline">Offline</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Klaar om Minecraft %s te spelen</string>
     <string name="mcl_launch_cleancache">Cache bestanden opschonen</string>
@@ -100,11 +98,9 @@
     <string name="global_error_field_empty">Dit veld mag niet leeg zijn</string>
     <string name="global_waiting">Wacht</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Applicatie/spel is afgesloten met code %d</string>
     <string name="mcn_exit_call">Afsluiten</string>
     <string name="mcn_exit_confirm">Weet je zeker dat je sluiting wilt forceren?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 is niet geïnstalleerd!</string>
-    <string name="mcn_check_fail_incompatiblearch">Architectuur %1$s is niet compatibel met Java Runtime %2$s,.</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Toetsenbord</string>
@@ -129,6 +125,7 @@
     <string name="control_viewout">Logboek output</string>
     <string name="control_adebug">Input Debug</string>
     <string name="control_customkey">Verstuur aangepaste sleutelcode</string>
+    <!-- ImportControlActivity Strings -->
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -173,4 +170,6 @@
     <string name="mcl_setting_subtitle_mousespeed">Veranderd de snelheid van de virtuele muis</string>
     <string name="customctrl_passthru">Muis pass-thru</string>
     <string name="customctrl_rounded">Afgerond</string>
+    <string name="profiles_profile_name">Naam</string>
+    <string name="pedit_renderer">Renderer</string>
 </resources>

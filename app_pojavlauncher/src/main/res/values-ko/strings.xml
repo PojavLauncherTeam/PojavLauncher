@@ -11,10 +11,8 @@
     <string name="login_online_password_hint">비밀번호</string>
     <string name="login_online_check_keeplogin">로그인 상태 유지</string>
     <string name="login_online_login_label">로그인</string>
-    <string name="login_offline_label">오프라인 계정으로 로그인</string>
     <string name="login_error_invalid_username">잘못된 사용자 이름입니다. 사용자 이름은 3~16글자여야 하며, 대/소문자 알파벳과 숫자, _로 구성되어야 합니다.</string>
     <string name="login_error_exist_username">이미 존재하는 사용자 이름입니다</string>
-    <string name="login_error_offline_password">오프라인 계정은 비밀번호를 요구하지 않습니다!</string>
     <string name="login_microsoft">Microsoft 로그인</string>
     <string name="login_select_account">계정 선택</string>
     <string name="login_title_no_saved_account">계정을 찾을 수 없습니다 !</string>
@@ -44,7 +42,6 @@
     <string name="mcl_tab_crash">충돌 로그</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">연결됨</string>
-    <string name="mcl_account_offline">오프라인</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Minecraft %s 를 시작할 준비가 되었습니다.</string>
     <string name="mcl_launch_cleancache">캐시 비우기</string>
@@ -82,9 +79,7 @@
     <string name="mcl_setting_category_general">일반 설정</string>
     <string name="mcl_setting_category_scaling">크기 설정</string>
     <string name="mcl_setting_category_renderer">렌더러</string>
-    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): OpenGL 2.1 내보내기</string>
-    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): OpenGL 2.1 내보내기</string>
-    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): OpenGL 2.1 내보내기 + 3.2 포함 (1.17 미지원)</string>
+    <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): OpenGL 4.3 사용</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): OpenGL 3.0 사용</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): OpenGL 4.6 내보내기</string>
     <string name="mcl_setting_category_veroption">버전 타입 리스트</string>
@@ -107,11 +102,10 @@
     <string name="global_error_field_empty">이 칸은 비워둘 수 없습니다</string>
     <string name="global_waiting">기다려주세요</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">앱/게임이 코드 %d와 함께 종료되었습니다</string>
+    <string name="mcn_exit_title">애플리케이션/게임이 코드 %d와 함께 종료되었습니다, lastestlog.txt를 확인하여 추가 정보를 확인하세요.</string>
     <string name="mcn_exit_call">나가기</string>
     <string name="mcn_exit_confirm">강제로 종료하시겠습니까?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 이 설치되지 않았습니다!</string>
-    <string name="mcn_check_fail_incompatiblearch">아키텍처 %1$s 은(는)  Java 런타임 %2$s(와)과 호환되지 않습니다.</string>
     <string name="mcn_check_fail_vulkan_support">Vulkan Zink 렌더러는 해당 기기를 지원하지 않습니다!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
@@ -139,6 +133,13 @@
     <string name="control_customkey">사용자 지정 키 보내기</string>
     <string name="control_scaleup">확장</string>
     <string name="control_scaledown">축소</string>
+    <!-- ImportControlActivity Strings -->
+    <string name="import_control_label">컨트롤 가져오기</string>
+    <string name="import_control_invalid_file">잘못되거나 손상된 파일입니다</string>
+    <string name="import_control_import_button">컨트롤 가져오기</string>
+    <string name="import_control_verifying_file">파일을 확인하는 중, 나중에 다시 시도하세요...</string>
+    <string name="import_control_invalid_name">이름이 잘못되었거나 파일이 이미 존재합니다</string>
+    <string name="import_control_done">가져오기 완료</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -168,7 +169,9 @@
     <string name="customctrl_addbutton">버튼 추가</string>
     <string name="customctrl_addbutton_drawer">버튼 드로어 추가</string>
     <string name="customctrl_addsubbutton">부속 버튼 추가</string>
+    <string name="customctrl_add_subbutton_message">부 버튼 n°%d가 추가되었습니다 !</string>
     <string name="customctrl_selectdefault">기본 조작 프리셋 선택하기</string>
+    <string name="main_install_jar_file">.jar 설치</string>
     <string name="main_options">설정</string>
     <string name="main_play">시작하기</string>
     <string name="main_welcome">환영합니다, %s!</string>
@@ -197,6 +200,7 @@
     <string name="mcl_memory_allocation">메모리 할당</string>
     <string name="mcl_memory_allocation_subtitle">Minecraft 메모리 할당 조절</string>
     <string name="multirt_runtime_corrupt">사용 불가능한 Java 런타임</string>
+    <string name="multirt_runtime_incompatiblearch">호환되지 않는 아키텍쳐: %s</string>
     <string name="multirt_config_title">Java 가상 머신</string>
     <string name="multirt_config_add">새로 추가</string>
     <string name="multirt_config_add_subtitle">새로운 Java 가상 머신 가져오기</string>
@@ -206,10 +210,41 @@
     <string name="multirt_config_setdefault">기본으로 설정</string>
     <string name="multirt_config_setdefault_already">기본값</string>
     <string name="multirt_config_removeerror_last">하나 이상의 Java 런타임이 필요합니다</string>
-    <string name="multirt_nocompartiblert">호환되는 Java 런타임을 찾을 수 없습니다</string>
-    <string name="compat_117_message">Minecraft 21w10a 이상 버전은 OpenGL 3.2 코어 프로필이 필요합니다. 슬프게도, GL4ES는 현재 OpenGL 3.2 코어 프로필을 완전히 지원하지 않습니다, 하지만 해당 버전을 실행하기 위해 설치할 수 있는 추가 리소스가 있습니다. 확인 버튼을 눌러 설치하거나 취소 버튼을 눌러 취소하세요.</string>
+    <string name="multirt_nocompartiblert">호환되는 Java 런타임을 찾지 못했습니다. 이 버전은 Java %d 이상이 필요합니다.</string>
+    <string name="multirt_nojava8rt">Java 8을 찾지 못했습니다. 이 옵션을 사용하려면, Java 8을 설치해야 합니다.</string>
     <string name="compat_11x_playanyway">무시하고 플레이</string>
     <string name="pvc_gameDirectory">게임 디렉토리</string>
     <string name="pvc_jvmArgs">JVM 실행 설정</string>
     <string name="pvc_title">버전마다 설정</string>
+    <string name="storage_warning_text"><![CDATA[Android 10 이상에 추가된 Google\의 새로운 스토리지 적용 범위로 인해, 게임 폴더를 내부 저장소 폴더로 이동해야 합니다.<br /> Pojav 파일의 새 폴더는 <b>Android/data/%s/files/</b> 입니다 (파일 탐색기의 콘텐츠 제공자를 사용하여 액세스할 수도 있습니다).<br /> 게임 파일을 복사해야 하는 경우, 원래 폴더인 <b>games/PojavLauncher</b> 에서 모든 파일을 수동으로 복사하십시오.]]></string>
+    <string name="control_offset_title">조작 오프셋</string>
+    <string name="control_top_offset">상단 시작점: </string>
+    <string name="control_right_offset">우측 시작점: </string>
+    <string name="control_bottom_offset">하단 시작점: </string>
+    <string name="control_left_offset">좌측 시작점: </string>
+    <string name="preference_control_offset_title">조작 사이드 오프셋</string>
+    <string name="preference_control_offset_description">화면의 사이드 부분에 사용자 지정 오프셋을 지정합니다</string>
+    <string name="preference_video_title">비디오와 렌더러</string>
+    <string name="preference_video_description">해상도, 스케일링 타입, 렌더러</string>
+    <string name="preference_control_title">사용자 지정 조작</string>
+    <string name="preference_control_description">제스쳐 타입, 트리거, 스케일링</string>
+    <string name="preference_java_title">Java 기능</string>
+    <string name="preference_java_description">Java 버전, JVM 시작 스크립트, 메모리 사용량 제한</string>
+    <string name="preference_misc_title">기타 설정</string>
+    <string name="preference_misc_description">버전 목록, 라이브러리 확인</string>
+    <string name="preference_experimental_title">실험적 기능</string>
+    <string name="preference_experimental_description">여러 실험적 기능을 사용, 지원 안함</string>
+    <string name="preference_back_title">이전 화면으로</string>
+    <string name="gles_hack_title">GL4ES 축소 핵</string>
+    <string name="gles_hack_none">텍스쳐 축소하지 않기</string>
+    <string name="gles_hack_always">모든 텍스쳐를 반으로 줄이기</string>
+    <string name="gles_hack_sometimes">큰 텍스쳐를 반 또는 반의 반으로 줄이기</string>
+    <string name="profiles_latest_snapshot">최신 스냅샷</string>
+    <string name="profiles_latest_release">최신 버전</string>
+    <string name="profiles_editing">프로필 편집</string>
+    <string name="profiles_profile_name">이름</string>
+    <string name="profiles_profile_version">버전</string>
+    <string name="pedit_java_runtime">자바 런타임</string>
+    <string name="pedit_renderer">렌더러</string>
+    <string name="migrated_profile_str">%s 버전 설정</string>
 </resources>

@@ -11,13 +11,13 @@
     <string name="login_online_password_hint">รหัสผ่าน</string>
     <string name="login_online_check_keeplogin">คงฉันไว้ในระบบ</string>
     <string name="login_online_login_label">เข้าสู่ระบบ</string>
-    <string name="login_offline_label">เข้าสู่ระบบในฐานะบัญชีออฟไลน์</string>
     <string name="login_error_exist_username">ชื่อผู้ใช้นี้มีอยู่แล้ว</string>
     <string name="login_microsoft">เข้าสู่ระบบ Microsoft</string>
     <string name="login_select_account">เลือกบัญชี</string>
     <string name="login_title_no_saved_account">ไม่พบบัญชี !</string>
     <!-- Hint -->
     <!-- Warnings -->
+    <string name="warning_remove_account">This account will be removed!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_installmod">เลือกตัวติดตั้งม็อด</string>
     <!-- Error messages -->
@@ -26,6 +26,7 @@
     <string name="error_show_more">แสดงเพิ่มเติม</string>
     <string name="error_show_less">แสดงน้อยลง</string>
     <!-- Toast messages -->
+    <string name="toast_permission_denied">The read/write to storage permission is required!</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
@@ -33,7 +34,6 @@
     <string name="mcl_tab_news">ข่าวสาร</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">เชื่อมต่อแล้ว</string>
-    <string name="mcl_account_offline">ออฟไลน์</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">พร้อมที่จะเล่น Minecraft %s</string>
     <string name="mcl_launch_cleancache">กำลังล้างแฟ้มแคช</string>
@@ -77,6 +77,8 @@
     <string name="control_mouseon">เมาส์: เปิด </string>
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">บังคับปิด</string>
+    <string name="control_viewout">Log output</string>
+    <!-- ImportControlActivity Strings -->
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -103,4 +105,5 @@
     <string name="mcl_setting_title_mousespeed">ความเร็วเมาส์</string>
     <string name="customctrl_rounded">โค้งมน</string>
     <string name="mcl_memory_allocation">การจัดสรรหน่วยความจำ</string>
+    <string name="profiles_profile_name">ชื่อ</string>
 </resources>

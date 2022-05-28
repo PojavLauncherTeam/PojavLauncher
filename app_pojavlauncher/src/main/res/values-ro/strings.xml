@@ -10,15 +10,13 @@
     <string name="login_online_username_hint">Email-ul sau numele de utilizator</string>
     <string name="login_online_password_hint">Parola</string>
     <string name="login_online_check_keeplogin">Ține-mă logat</string>
-    <string name="login_online_login_label">Autentificate/Loghează-te</string>
-    <string name="login_offline_label">Autentificate ca cont offline</string>
-    <string name="login_error_invalid_username">Nume de utilizator invalid. Numele de utilizator trebuie să fie în intervalul 3-16 caractere, trebuie să conțină doar A-Z, a-z, 0-9 și underscore.</string>
-    <string name="login_error_exist_username">Acest nume de utilizator exista deja</string>
-    <string name="login_error_offline_password">Contul offline nu poate include parolă!</string>
-    <string name="login_microsoft">Conectare Microsoft</string>
+    <string name="login_online_login_label">Autentificare</string>
+    <string name="login_error_invalid_username">Nume de utilizator invalid. Numele de utilizator trebuie să aibă între 3-16 caractere, trebuie să conțină doar A-Z, a-z, 0-9 și underscore.</string>
+    <string name="login_error_exist_username">Acest nume de utilizator există deja</string>
+    <string name="login_microsoft">Autentificare Microsoft</string>
     <string name="login_select_account">Selectează contul</string>
     <string name="login_title_no_saved_account">Nu s-a găsit nici un cont!</string>
-    <string name="login_dialog_no_saved_account">Nu ai niciun cont salvat.\nFolosește opțiunea <b>\"tine-ma conectat\"</b> pentru a salva contul din prima conectare.</string>
+    <string name="login_dialog_no_saved_account">Nu ai niciun cont salvat.\nUtilizează opțiunea <b>\"Ține-mă logat\"</b> pentru a salva un cont la prima autentificare.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Glisează de la dreapta la stânga pentru a deschide meniul ◀\n Ține apăsat un buton pentru a personaliza: editează, schimbă mărimea sau șterge."</string>
     <!-- Warnings -->
@@ -28,11 +26,11 @@
     <string name="alerttitle_installmod">Selectează un instalator de mod</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher s-a oprit neașteptat</string>
-    <string name="error_no_version">Nicio versiune!</string>
+    <string name="error_no_version">Fără versiune!</string>
     <string name="error_show_more">Arată mai mult</string>
     <string name="error_show_less">Arată mai puțin</string>
     <!-- Toast messages -->
-    <string name="toast_permission_denied">Permisiunea de citire/scriere stocare este necesară!</string>
+    <string name="toast_permission_denied">Este necesară permisiunea de citire/scriere în memorie!</string>
     <string name="toast_optifine_success">Instalare reușită</string>
     <string name="toast_uninstalljre_done">S-a terminat de dezinstalat Java Runtime</string>
     <!--
@@ -40,17 +38,16 @@
     -->
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_news">Știri</string>
-    <string name="mcl_tab_console">Consolă developer</string>
+    <string name="mcl_tab_console">Consolă de dezvoltare</string>
     <string name="mcl_tab_crash">Jurnal de erori</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Conectat</string>
-    <string name="mcl_account_offline">Deconectat</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Pregătit de a juca Minecraft %s</string>
-    <string name="mcl_launch_cleancache">Se șterge fișierele cache</string>
+    <string name="mcl_launch_cleancache">Se șterg fișierele cache</string>
     <string name="mcl_launch_downloading">Se descarcă %s</string>
     <string name="mcl_launch_downloading_progress">"Se descarcă %s (%.2f MB / %.2f MB)"</string>
-    <string name="mcl_launch_download_assets">Se pregătește pentru a descărca resursele</string>
+    <string name="mcl_launch_download_assets">Se pregătește pentru descărcarea resurselor</string>
     <string name="mcl_options">Opțiuni</string>
     <string name="mcl_option_modinstall">Deschide un instalator de mod (Forge, LabyMod, Fabric, etc...)</string>
     <string name="mcl_option_modinstallwitharg">Deschide un instalator de mod (cu argument personalizat)</string>
@@ -58,34 +55,33 @@
     <string name="mcl_option_settings">Setări</string>
     <string name="mcl_option_about">Despre</string>
     <string name="mcl_setting_title_uninstalljre">Dezinstalează Java Runtime</string>
-    <string name="mcl_setting_subtitle_uninstalljre">[repornire lansator necesar] Acest lucru vă re-instalează Java Runtime</string>
-    <string name="mcl_setting_title_freeform">Deschide Minecraft-ul în modul de fereastră</string>
-    <string name="mcl_setting_subtitle_freeform">Deschide Minecraft-ul în modul de fereastră plutitoare. Necesită Android 7.0+</string>
+    <string name="mcl_setting_subtitle_uninstalljre">[Repornirea lansatorului necesară] Acest lucru îți permite să reinstalezi Java Runtime</string>
+    <string name="mcl_setting_title_freeform">Deschide Minecraft în modul de fereastră</string>
+    <string name="mcl_setting_subtitle_freeform">Deschide Minecraft în modul de fereastră plutitoare. Necesită Android 7.0+</string>
     <string name="mcl_setting_title_hide_sidebar">Ascunde Bara Laterală</string>
-    <string name="mcl_setting_subtitle_hide_sidebar">Oamenii nostalgici care preferă vechiul v1 UI ar putea să îi placă aceasta. Îți dă mai multă impresie fullscreen.</string>
-    <string name="mcl_setting_title_ignore_notch">Ignoră notița</string>
-    <string name="mcl_setting_subtitle_ignore_notch">Ignoră notița și extinde ecranul sub ea.\nÎți oferă o experiență mai imersivă.</string>
-    <string name="mcl_setting_title_resolution_scaler">Scalator de rezolutie</string>
-    <string name="mcl_setting_subtitle_resolution_scaler">Permite descreșterea rezoluției jocului. 100% este o rezoluție completă</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">Oamenilor nostalgici care preferă vechea interfață v1 le-ar putea plăcea acest lucru. Oferă o experiență mai mult pe tot ecranul.</string>
+    <string name="mcl_setting_title_ignore_notch">Ignoră notch-ul</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Ignoră notch-ul și extinde ecranul sub el.\nÎți oferă o experiență mai captivantă.</string>
+    <string name="mcl_setting_title_resolution_scaler">Scaler de rezoluție</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">Permite reducerea rezoluției jocului. 100% este rezoluția maximă</string>
     <string name="mcl_setting_title_longpresstrigger">În cât timp se va declanșa după o apăsare lungă</string>
-    <string name="mcl_setting_subtitle_longpresstrigger">Schimbă timpul de declanșare pentru apăsare lungă pentru a sparge bloc sau a arunca obiect.</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Modifică timpul de declanșare pentru apăsarea lungă a butonului de distrugere a blocului și de aruncare a obiectului.</string>
     <string name="mcl_setting_title_backtorightmouse">Tratează butonul înapoi ca butonul click dreapta</string>
-    <string name="mcl_setting_subtitle_backtorightmouse">Unele dispozitive trateaza butonul click dreapta al mouse-ului extern ca butonul înapoi. Dacă folosiți mouse-ul extern, ar trebui să activați acest lucru.</string>
-    <string name="mcl_setting_title_flat_button_style">Stil buton plat</string>
-    <string name="mcl_setting_subtitle_flat_button_style">Activează acest lucru pentru a schimba stilul butonului de control în plat.</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">Unele dispozitive tratează butonul drept al mouse-ului extern ca fiind butonul înapoi. Dacă folosești un mouse extern, trebuie să activezi această opțiune.</string>
+    <string name="mcl_setting_title_flat_button_style">Stil de buton plat</string>
+    <string name="mcl_setting_subtitle_flat_button_style">Activează această opțiune pentru a schimba stilul butonului de control în plat.</string>
     <string name="mcl_setting_title_buttonscale">Redimensionare butoane de control</string>
-    <string name="mcl_setting_subtitle_buttonscale">Fă mai mare dacă butoanele sunt prea mici.</string>
+    <string name="mcl_setting_subtitle_buttonscale">Mărește-le dacă butoanele sunt prea mici.</string>
     <string name="mcl_setting_title_mousescale">Redimensionarea mouse-ului</string>
     <string name="mcl_setting_subtitle_mousescale">Schimbă dimensiunea mouse-ului virtual.</string>
-    <string name="mcl_setting_title_javaargs">Argumente lansare JVM</string>
-    <string name="mcl_setting_subtitle_javaargs">Aveți grijă, acest lucru poate face ca jocul să se oprească dacă este modificat fără cunoștințe.</string>
+    <string name="mcl_setting_title_javaargs">Argumente de lansare JVM</string>
+    <string name="mcl_setting_subtitle_javaargs">Ai grijă, acest lucru poate face ca jocul să se oprească dacă este modificat fără cunoștințe.</string>
     <string name="mcl_setting_category_general">Setări generale</string>
     <string name="mcl_setting_category_scaling">Setări de scalare</string>
-    <string name="mcl_setting_category_renderer">Motor de redare</string>
-    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exports OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): exports OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exports OpenGL 4.6</string>
-    <string name="mcl_setting_category_veroption">Ce tip de versiune va fi în lista de versiuni</string>
+    <string name="mcl_setting_category_renderer">Randator</string>
+    <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): exportă OpenGL 3.0</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exportă OpenGL 4.6</string>
+    <string name="mcl_setting_category_veroption">Tipul de versiune va fi în lista de versiuni</string>
     <string name="mcl_setting_veroption_release">Lansat oficial</string>
     <string name="mcl_setting_veroption_snapshot">Lansat pentru testare</string>
     <string name="mcl_setting_veroption_oldalpha">Alpha-vechi</string>
@@ -102,19 +98,17 @@
     <string name="global_restart">Repornire</string>
     <string name="global_save">Salvează</string>
     <string name="global_unpacking">Se despachetează %s</string>
-    <string name="global_error_field_empty">Această propoziție nu poate fi goală</string>
+    <string name="global_error_field_empty">Acest câmp nu poate fi gol</string>
     <string name="global_waiting">Așteptați</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Aplicația/Jocul s-a oprit cu codul %d</string>
     <string name="mcn_exit_call">Ieșire</string>
     <string name="mcn_exit_confirm">Ești sigur că vrei să oprești forțat?</string>
-    <string name="mcn_check_fail_lwjgl">LWJGL3 nu se poate instala!</string>
-    <string name="mcn_check_fail_incompatiblearch">Arhitectura %1$s nu este compatibilă cu Java Runtime %2$s.</string>
+    <string name="mcn_check_fail_lwjgl">LWJGL3 nu a fost instalat!</string>
     <string name="mcn_check_fail_vulkan_support">Vulkan Zink renderer nu este suportat pe acest dispozitiv!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Tastatură</string>
-    <string name="control_chat">Mesaje (Chat)</string>
+    <string name="control_chat">Mesaje</string>
     <string name="control_debug">Depanare</string>
     <string name="control_primary">Pri</string>
     <string name="control_secondary">Sec</string>
@@ -131,6 +125,13 @@
     <string name="control_customkey">Trimite personalizat cod cheie</string>
     <string name="control_scaleup">Mărire</string>
     <string name="control_scaledown">Reducere</string>
+    <!-- ImportControlActivity Strings -->
+    <string name="import_control_label">Importă controale</string>
+    <string name="import_control_invalid_file">Fișier invalid sau corupt</string>
+    <string name="import_control_import_button">importă controale</string>
+    <string name="import_control_verifying_file">Fișierul este în curs de verificare, te rugăm să aștepți și să încerci din nou…</string>
+    <string name="import_control_invalid_name">Nume invalid sau fișierul există deja</string>
+    <string name="import_control_done">Importul efectuat</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -160,12 +161,14 @@
     <string name="customctrl_addbutton">Adaugă buton</string>
     <string name="customctrl_addbutton_drawer">Adauga buton sertar</string>
     <string name="customctrl_addsubbutton">Adaugă sub-buton</string>
-    <string name="customctrl_selectdefault">Selectează normalul Control json</string>
+    <string name="customctrl_add_subbutton_message">Subbutonul nr. %d a fost adăugat!</string>
+    <string name="customctrl_selectdefault">Selectați controlul implicit json</string>
+    <string name="main_install_jar_file">Instalează .jar</string>
     <string name="main_options">Opțiuni</string>
     <string name="main_play">Joacă</string>
     <string name="main_welcome">Bun venit, %s</string>
     <string name="main_infodev">Info (DEV)</string>
-    <string name="main_switchuser">Schimba cont/utilizator</string>
+    <string name="main_switchuser">Comută utilizatorul</string>
     <string name="main_version">Versiune:</string>
     <string name="main_nocrash">Nicio eroare detectată</string>
     <string name="main_nolog">Niciun jurnal.</string>
@@ -193,15 +196,18 @@
     <string name="multirt_config_add">Adăugare nouă</string>
     <string name="multirt_config_add_subtitle">Importă noul Java VM</string>
     <string name="multirt_title">Manager Runtime</string>
-    <string name="multirt_subtitle">Gestionează module Java VMs instalate</string>
+    <string name="multirt_subtitle">Gestionează VM-urile Java instalate</string>
     <string name="multirt_progress_caching">Caching...</string>
     <string name="multirt_config_setdefault">Setaţi ca prestabilit</string>
     <string name="multirt_config_setdefault_already">Prestabilit</string>
-    <string name="multirt_config_removeerror_last">Trebuie să aveți cel puțin un Java Runtime instalat</string>
-    <string name="multirt_nocompartiblert">Nu se poate găsi Java Runtime compatibil</string>
-    <string name="compat_117_message">Minecraft 21w10a+ necesită un profil de bază OpenGL 3.2. Din păcate, GL4ES nu îl acceptă pe deplin în acest moment, dar există unele resurse suplimentare pe care le puteți instala pentru a rula aceste versiuni. Apăsaţi OK pentru a confirma instalarea, apăsaţi Anulare pentru a abandona lansarea.</string>
-    <string name="compat_11x_playanyway">Jucați oricum</string>
-    <string name="pvc_gameDirectory">Directorul jocului</string>
+    <string name="multirt_config_removeerror_last">Trebuie să ai cel puțin un Java Runtime instalat</string>
+    <string name="compat_11x_playanyway">Joacă oricum</string>
+    <string name="pvc_gameDirectory">Dosarul jocului</string>
     <string name="pvc_jvmArgs">Argumente JVM</string>
-    <string name="pvc_title">Setări per-versiune</string>
+    <string name="pvc_title">Setări per versiune</string>
+    <string name="storage_warning_title">Modificări de stocare</string>
+    <string name="storage_warning_text"><![CDATA[Din cauza noilor reglementări de stocare cu domeniu de aplicare ale Google adăugate în Android 10 și versiunile ulterioare, trebuie să mutăm directorul de joc într-un dosar privat al aplicației.<br /> Noul dosar pentru fișierele Pojav este <b>Android/data/%s/files/</b> (accesibil și prin intermediul unui furnizor de stocare în exploratorul de fișiere).<br /> Dacă trebuie să copiați fișierele de joc, vă rugăm să copiați manual totul din dosarul original de la <b>games/PojavLauncher</b>.]]></string>
+    <string name="control_offset_title">Decalaj de control</string>
+    <string name="profiles_profile_name">Nume</string>
+    <string name="pedit_renderer">Randator</string>
 </resources>

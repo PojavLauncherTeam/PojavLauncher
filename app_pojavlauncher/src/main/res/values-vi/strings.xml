@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
-    <string name="app_name">PojavLauncher (Minecraft: Java Edition for Android)</string>
-    <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">Khởi chạy Minecraft: Java Edition trên thiết bị của bạn!</string>
+    <string name="app_name">PojavLauncher</string>
+    <string name="app_short_name">PojavLauncher </string>
+    <string name="app_motd">Khởi chạy Minecraft: Java Edition trên thiết bị của bạn! </string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">Email hoặc tên người dùng</string>
-    <string name="login_online_password_hint">Mật khẩu</string>
-    <string name="login_online_check_keeplogin">Giữ trang thái đăng nhập</string>
+    <string name="login_online_username_hint">Email hoặc tên người dùng </string>
+    <string name="login_online_password_hint">Mật khẩu </string>
+    <string name="login_online_check_keeplogin">Giữ trang thái đăng nhập </string>
     <string name="login_online_login_label">Đăng nhập</string>
-    <string name="login_offline_label">Đăng nhập với tài khoản ngoại tuyến</string>
     <string name="login_error_invalid_username">Tên người dùng không hợp lệ. Nó phải có từ 3-16 kí tự, và chỉ bao gồm các kí tự A-Z, a-z, 0-9 và dấu gạch dưới.</string>
     <string name="login_error_exist_username">Tên người dùng này đã tồn tại</string>
-    <string name="login_error_offline_password">Không thể đặt mật khẩu cho tài khoản ngoại tuyến!</string>
     <string name="login_microsoft">Đăng nhập Microsoft</string>
     <string name="login_select_account">Chọn tài khoản</string>
     <string name="login_title_no_saved_account">Không tìm thấy tài khoản !</string>
@@ -44,19 +42,22 @@
     <string name="mcl_tab_crash">Nhật ký sự cố</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Đã kết nối</string>
-    <string name="mcl_account_offline">Ngoại tuyến</string>
+    <string name="mcl_account_local">Nội bộ</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Sẵn sàng để chơi Minecraft %s</string>
     <string name="mcl_launch_cleancache">Đang làm sạch bộ nhớ đệm</string>
     <string name="mcl_launch_downloading">Đang tải xuống %s</string>
     <string name="mcl_launch_downloading_progress">"Đang tải %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Chuẩn bị để tải xuống gói tài nguyên</string>
+    <string name="mcl_launch_error_localmode">Minecraft không thể được cài đặt một cách hợp pháp khi đăng nhập với một tài khoản nội bộ. Chuyển qua một tài khoản đã kết nối để tiếp tục.</string>
     <string name="mcl_options">Tùy chọn</string>
     <string name="mcl_option_modinstall">Chạy một trình cài đặt mod (Forge, LabyMod, Fabric,...)</string>
     <string name="mcl_option_modinstallwitharg">Chạy một trình cài đặt mod (với chỉ số tùy chỉnh)</string>
     <string name="mcl_option_customcontrol">Tùy chỉnh điều khiển</string>
     <string name="mcl_option_settings">Thiết lập</string>
     <string name="mcl_option_about">Giới thiệu</string>
+    <string name="mcl_setting_title_use_surface_view">Dùng cách kết xuất thay thế</string>
+    <string name="mcl_setting_subtitle_use_surface_view">Có thể cải thiện hiệu năng nếu GPU bị nghẽn cổ chai</string>
     <string name="mcl_setting_title_uninstalljre">Gỡ Java Runtime</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Đề nghị khởi động lại trình khởi chạy] Điều này cho phép bạn cài đặt lại Java Runtime</string>
     <string name="mcl_setting_title_freeform">Chạy Minecraft trong chế độ tự do</string>
@@ -82,9 +83,7 @@
     <string name="mcl_setting_category_general">Thiết lập chung</string>
     <string name="mcl_setting_category_scaling">Cài đặt độ rộng</string>
     <string name="mcl_setting_category_renderer">Trình kết xuất</string>
-    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): xuất ra OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): xuất ra OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): xuất ra OpenGL 2.1 + partial 3.2 (1.17 chưa được hỗ trợ)</string>
+    <string name="mcl_setting_renderer_virgl">vgpu (OpenGL ES 3): xuất ra OpenGL 4.3</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): xuất ra OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): xuất ra OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Kiểu phiên bản sẽ được hiện ở trong danh sách phiên bản</string>
@@ -107,11 +106,10 @@
     <string name="global_error_field_empty">Trường này không được để trống</string>
     <string name="global_waiting">Đợi</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Ứng dụng/Trò chơi đã thoát với mã %d</string>
+    <string name="mcn_exit_title">Ứng dụng/Trò chơi đã thoát với mã %d, kiểm tra nhật kí trình khởi chạy (latestlog.txt) để biết thêm chi tiết.</string>
     <string name="mcn_exit_call">Thoát</string>
     <string name="mcn_exit_confirm">Bạn có chắc muốn bắt buộc thoát chương trình?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 chưa được cài đặt!</string>
-    <string name="mcn_check_fail_incompatiblearch">Kiến trúc %1$s không tương thích với Java Runtime %2$s.</string>
     <string name="mcn_check_fail_vulkan_support">Trình kết xuất Vulkan Zink không được hỗ trợ trên thiết bị này!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">Giao diện</string>
@@ -134,11 +132,18 @@
     <string name="control_mouseon">Chuột: bật </string>
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">Đóng chương trình</string>
-    <string name="control_viewout">Nhật ký ra</string>
+    <string name="control_viewout">Nhật ký ra </string>
     <string name="control_adebug">Gỡ lỗi đầu vào</string>
     <string name="control_customkey">Gửi phím tùy chọn</string>
     <string name="control_scaleup">Phóng to</string>
     <string name="control_scaledown">Thu nhỏ</string>
+    <!-- ImportControlActivity Strings -->
+    <string name="import_control_label">Nhập vào bộ điều khiển</string>
+    <string name="import_control_invalid_file">Tệp không hợp lệ hoặc đã bị xung đột</string>
+    <string name="import_control_import_button">nhập vào bộ điều khiển</string>
+    <string name="import_control_verifying_file">Tệp đang được xác minh, xin đợi và thử lại…</string>
+    <string name="import_control_invalid_name">Tên không hợp lệ hoặc tệp đã tồn tại</string>
+    <string name="import_control_done">Quá trình nhập vào hoàn tất</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -168,7 +173,9 @@
     <string name="customctrl_addbutton">Thêm nút</string>
     <string name="customctrl_addbutton_drawer">Thêm bộ phím</string>
     <string name="customctrl_addsubbutton">Thêm phím phụ</string>
+    <string name="customctrl_add_subbutton_message">Phím phụ %d đã được thêm!</string>
     <string name="customctrl_selectdefault">Chọn bộ điều khiển json mặc định</string>
+    <string name="main_install_jar_file">Cài đặt tệp .jar</string>
     <string name="main_options">Tùy chọn</string>
     <string name="main_play">Chơi</string>
     <string name="main_welcome">Chào mừng, %s</string>
@@ -197,6 +204,7 @@
     <string name="mcl_memory_allocation">Phân bổ bộ nhớ</string>
     <string name="mcl_memory_allocation_subtitle">Điều chỉnh số lượng bộ nhớ được cung cấp cho Minecraft</string>
     <string name="multirt_runtime_corrupt">Java đã gặp xung đột</string>
+    <string name="multirt_runtime_incompatiblearch">Kiến trúc không tương thích: %s</string>
     <string name="multirt_config_title">Các phiên bản Java</string>
     <string name="multirt_config_add">Thêm mới</string>
     <string name="multirt_config_add_subtitle">Thêm vào Java VM mới</string>
@@ -206,12 +214,50 @@
     <string name="multirt_config_setdefault">Đặt làm mặc định</string>
     <string name="multirt_config_setdefault_already">Mặc định</string>
     <string name="multirt_config_removeerror_last">Bạn cần có ít nhất một phiên bản Java Runtime đã được cài đặt</string>
-    <string name="multirt_nocompartiblert">Không thể tìm thấy bất kì phiên bản Java Runtime nào tương thích với phiên bản Minecraft này</string>
-    <string name="compat_117_message">Minecraft phiên bản 21w10a trở đi yêu cầu OpenGL lõi phiên bản 3.2 trở lên. Mặc dù GL4ES chưa hỗ trợ nó ở thời điểm này, tuy nhiên bạn có thể cài đặt một số phần tài nguyên bổ sung để khởi chạy những phiên bản này. Chọn OK để bắt đầu cài đặt, hoặc Huỷ để huỷ khởi chạy.</string>
+    <string name="multirt_nocompartiblert">Không thể tìm thấy phiên bản Java tương thích. Phiên bản Minecraft này yêu cầu Java %d trở lên.</string>
+    <string name="multirt_nojava8rt">Không thể tìm thấy Java 8. Để sử dụng tùy chọn này, bạn cần cài đặt Java 8.</string>
     <string name="compat_11x_playanyway">Vẫn chơi</string>
     <string name="pvc_gameDirectory">Đường dẫn thư mục của trò chơi</string>
     <string name="pvc_jvmArgs">Các chỉ số JVM</string>
     <string name="pvc_title">Cài đặt theo từng phiên bản</string>
     <string name="storage_warning_title">Thay đổi về lưu trữ</string>
     <string name="storage_warning_text"><![CDATA[Vì Google đã bắt buộc sử dụng lưu trữ nội bộ, một tính năng được thêm vào Android 10 trở lên, chúng tôi cần phải chuyển thư mục của trò chơi tới một thư mục riêng tư của ứng dụng.<br /> Thư mục mới của PojavLauncher là <b>Android/data/%s/files/</b> (cũng có thể truy cập được bằng cách sử dụng dịch vụ cung cấp lưu trữ trong trình quản lí tệp của bạn).<br /> Nếu bạn muốn sao chép các tệp trò chơi của bạn, hãy sao chép tất cả từ thư mục <b>games/PojavLauncher</b> một cách thủ công.]]></string>
+    <string name="control_offset_title">Khoảng bù trừ của bộ điều khiển</string>
+    <string name="control_top_offset">Khoảng bù trừ trên: </string>
+    <string name="control_right_offset">Khoảng bù trừ phải: </string>
+    <string name="control_bottom_offset">Khoảng bù trừ dưới: </string>
+    <string name="control_left_offset">Khoảng bù trừ trái: </string>
+    <string name="preference_control_offset_title">Khoảng bù trừ theo cạnh của bộ điều khiển</string>
+    <string name="preference_control_offset_description">Đặt khoảng bù trừ tuỳ chỉnh cho mỗi cạnh của màn hình</string>
+    <string name="preference_mouse_start_title">Khởi động với chuột ảo bật</string>
+    <string name="preference_mouse_start_description">Khi dùng tùy chọn này, bạn sẽ bị *chỉ giáo* bởi Mathias Boulay :)</string>
+    <string name="preference_video_title">Hình ảnh và trình kết xuất</string>
+    <string name="preference_video_description">Độ phân giải, dạng thu phóng, và trình kết xuất</string>
+    <string name="preference_control_title">Tuỳ chỉnh bộ điều khiển</string>
+    <string name="preference_control_description">Dạng cử chỉ, phím kích hoạt, và thu phóng</string>
+    <string name="preference_java_title">Điều chỉnh Java</string>
+    <string name="preference_java_description">Phiên bản Java, các tham số JVM, và lượng RAM</string>
+    <string name="preference_misc_title">Các cài đặt khác</string>
+    <string name="preference_misc_description">Danh sách phiên bản, và kiểm tra thư viện</string>
+    <string name="preference_experimental_title">Những cài đặt thử nghiệm</string>
+    <string name="preference_experimental_description">Cân nhắc sử dụng các tuỳ chọn này. Chúng không được hỗ trợ.</string>
+    <string name="preference_sustained_performance_title">Bật chế độ duy trì hiệu suất</string>
+    <string name="preference_sustained_performance_description">Hạn chế giảm hiệu suất vì nhiệt bằng cách giới hạn hiệu suất tối đa</string>
+    <string name="preference_back_title">Quay về màn hình trước đó</string>
+    <string name="gles_hack_title">Giải pháp thu nhỏ texture của gl4es</string>
+    <string name="gles_hack_none">Không thu nhỏ kết cấu</string>
+    <string name="gles_hack_always">Chia tất cả các kết cấu cho 2</string>
+    <string name="gles_hack_sometimes">Chia những kết cấu lớn cho 2 hoặc 4</string>
+    <string name="unnamed">Chưa đặt tên</string>
+    <string name="profiles_latest_snapshot">Bản thử nghiệm mới nhất</string>
+    <string name="profiles_latest_release">Phiên bản mới nhất</string>
+    <string name="profiles_editing">Chỉnh sửa hồ sơ</string>
+    <string name="profiles_profile_name">Tên</string>
+    <string name="profiles_profile_version">Phiên bản</string>
+    <string name="global_delete">Xóa</string>
+    <string name="pedit_java_runtime">Java Runtime</string>
+    <string name="pedit_renderer">Trình kết xuất</string>
+    <string name="arc_capes_title">Áo choàng Cosmetica</string>
+    <string name="arc_capes_desc">Sử dụng áo choàng từ dịch vụ Cosmetica (trước đây là Arc). Để biết thêm thông tin, truy cập https://cosmetica.cc. Yêu cầu có OptiFine.</string>
+    <string name="migrated_profile_str">cấu hình phiên bản %s</string>
 </resources>

@@ -9,22 +9,20 @@
     <!-- Login strings -->
     <string name="login_online_username_hint">E-posta veya kullanıcı adı</string>
     <string name="login_online_password_hint">Şifre</string>
-    <string name="login_online_check_keeplogin">Oturumu Açık Tut</string>
+    <string name="login_online_check_keeplogin">Oturumumu açık tut</string>
     <string name="login_online_login_label">Giriş yap</string>
-    <string name="login_offline_label">Çevrimdışı hesapla girin</string>
-    <string name="login_error_invalid_username">Geçersiz kullanıcı adı. Kullanıcı adı 3-16 karakter aralığında olmalı, sadece A-Z, a-z, 0-9 ve alt tire içermelidir.</string>
+    <string name="login_error_invalid_username">Geçersiz kullanıcı adı. Kullanıcı adı 3-16 karakter aralığında olmalı, sadece A-Z, a-z, 0-9 ve alt çizgi içermelidir.</string>
     <string name="login_error_exist_username">Bu kullanıcı adı zaten var</string>
-    <string name="login_error_offline_password">Çevrimdışı hesaplar şifre içeremez!</string>
     <string name="login_microsoft">Microsoft giriş</string>
     <string name="login_select_account">Hesap seçin</string>
-    <string name="login_title_no_saved_account">Hiç hesap bulunamadı !</string>
+    <string name="login_title_no_saved_account">Hiç hesap bulunamadı!</string>
     <string name="login_dialog_no_saved_account">Hiçbir kayıtlı hesabın yok.\n&lt;b&gt;\"Beni hatırla\"&lt;b&gt;\'yı seçerek hesaplarını kaydedebilirsin.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Menüyü açmak için sağdan sola kaydırın ◀\nBir düğmeyi düzenlemek, yeniden boyutlandırmak veya silmek için basılı tutun."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Bu hesap kaldırılacak!</string>
     <!-- AlertDialog title -->
-    <string name="alerttitle_install_jre">Java Runtime\'ı kur %s (.tar.xz)</string>
+    <string name="alerttitle_install_jre">Java Runtime\'ı Kur %s (.tar.xz)</string>
     <string name="alerttitle_installmod">Bir mod yükleyicisi seç</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher beklenmedik bir sebepten dolayı çöktü</string>
@@ -44,47 +42,49 @@
     <string name="mcl_tab_crash">Çökme günlüğü</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Bağlandı</string>
-    <string name="mcl_account_offline">Çevrimdışı</string>
+    <string name="mcl_account_local">Yerel</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Minecraft %s başlamaya hazır</string>
     <string name="mcl_launch_cleancache">Önbellek dosyaları temizleniyor</string>
     <string name="mcl_launch_downloading">%s indiriliyor</string>
     <string name="mcl_launch_downloading_progress">"%s indiriliyor (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Kaynaklar yüklenmeye hazırlanılıyor</string>
-    <string name="mcl_options">Ayarlar</string>
+    <string name="mcl_launch_error_localmode">Yerel bir hesapla giriş yapıldığında Minecraft yasal olarak yüklenemez. Lütfen yüklemek için çevrimiçi bir hesaba giriş yapın.</string>
+    <string name="mcl_options">Seçenekler</string>
     <string name="mcl_option_modinstall">Bir mod yükleyicisi başlatın (Forge, LabyMod, Fabric, vb...)</string>
     <string name="mcl_option_modinstallwitharg">Bir mod yükleyicisi başlatın (özel argümanlarla)</string>
     <string name="mcl_option_customcontrol">Özel kontroller</string>
     <string name="mcl_option_settings">Ayarlar</string>
-    <string name="mcl_option_about">Launcher hakkında</string>
+    <string name="mcl_option_about">Hakkında</string>
+    <string name="mcl_setting_title_use_surface_view">Alternatif yüzey renderlama kullan</string>
+    <string name="mcl_setting_subtitle_use_surface_view">GPU\'ya bağlı durumlarda performansı arttırabilir</string>
     <string name="mcl_setting_title_uninstalljre">Java Runtime\'ı kaldır</string>
-    <string name="mcl_setting_subtitle_uninstalljre">[yeniden başlatma gerekli] Bu Java Runtime\'ı tekrar yüklemenizi sağlar</string>
+    <string name="mcl_setting_subtitle_uninstalljre">[Yeniden başlatma gerekli] Bu Java Runtime\'ı tekrar yüklemenizi sağlar</string>
     <string name="mcl_setting_title_freeform">Minecraft\'ı pencere modunda başlat</string>
     <string name="mcl_setting_subtitle_freeform">Minecraft\'ı pencere modunda başlat. Android 7.0+ gerektirir</string>
     <string name="mcl_setting_title_hide_sidebar">Kenar çubuğunu gizle</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Eski v1 Menüsünü hatırlayan eski arkadaşlar bunu tercih ediyor. Daha çok tam ekran deneyimi verir.</string>
     <string name="mcl_setting_title_ignore_notch">Çentiği görmezden gel</string>
-    <string name="mcl_setting_subtitle_ignore_notch">Çentiği görmezden gelir ve altındaki ekranı genişletir.\nDaha sürükleyici bir deneyim sunar.</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Çentiği görmezden gelir ve ekranı kameranın yanına genişletir.\nDaha sürükleyici bir deneyim sunar.</string>
     <string name="mcl_setting_title_resolution_scaler">Çözünürlük Ölçekleyicisi</string>
-    <string name="mcl_setting_subtitle_resolution_scaler">Oyun çözünürlüğünü düşürmeni sağlar. %100 full çözünürlüktür</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">Oyun çözünürlüğünü düşürmenizi sağlar. %100 full çözünürlüktür</string>
     <string name="mcl_setting_title_longpresstrigger">Uzun basma ne kadar zaman sonra tetiklenecek</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Blok kırma ve eşya bırakma için ne kadar süre basman gerektiğini değiştir.</string>
     <string name="mcl_setting_title_backtorightmouse">Geri tuşunu fare sağ tıkı gibi algıla</string>
     <string name="mcl_setting_subtitle_backtorightmouse">Bazı cihazlar farenin sağ tıkını geri tuşu olarak algılar. Eğer fiziksel fare kullanıyorsanız, bunu aktifleştirmelisiniz.</string>
     <string name="mcl_setting_title_flat_button_style">Düz düğme tarzı</string>
     <string name="mcl_setting_subtitle_flat_button_style">Düğme tarzını düz yapmak için bunu etkinleştir.</string>
-    <string name="mcl_setting_title_buttonscale">Düğmelerin boyutlayıcısını ayarla</string>
-    <string name="mcl_setting_subtitle_buttonscale">Düğmeler küçükse büyütün.</string>
+    <string name="mcl_setting_title_buttonscale">Düğmelerin ölçeklemesini ayarla</string>
+    <string name="mcl_setting_subtitle_buttonscale">Eğer düğmeler çok küçükse büyütün.</string>
     <string name="mcl_setting_title_mousescale">Fare boyutu</string>
     <string name="mcl_setting_subtitle_mousescale">Sanal farenin boyutunu ayarlayın.</string>
-    <string name="mcl_setting_title_javaargs">JVM Başlatıcı argümânları</string>
+    <string name="mcl_setting_title_javaargs">JVM Başlatıcı argümanları</string>
     <string name="mcl_setting_subtitle_javaargs">Dikkatli olun, eğer bilgisizce değiştirilirse oyun açılmayabilir.</string>
     <string name="mcl_setting_category_general">Genel ayarlar</string>
-    <string name="mcl_setting_category_scaling">Boyutlama Seçenekleri</string>
+    <string name="mcl_setting_category_scaling">Boyutlandırma Seçenekleri</string>
     <string name="mcl_setting_category_renderer">İşleyici</string>
-    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): OpenGL 2.1 dışa aktarır</string>
-    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): OpenGL 2.1 dışa aktarır</string>
-    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): OpenGL 2.1 + tam olmayan 3.2 (1.17 henüz desteklenmiyor)</string>
+    <string name="mcl_setting_renderer_gles2_4">Efsaneli gl4es: 1.0 - 1.19+ Sürümlerini Desteklemektedir</string>
+    <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): OpenGL 4.3 dışa aktarır</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): OpenGL 3.0 dışa aktarır</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): OpenGL 4.6 dışa aktarır</string>
     <string name="mcl_setting_category_veroption">Sürüm tipi sürüm listesinde olacaktır</string>
@@ -107,11 +107,10 @@
     <string name="global_error_field_empty">Bu alan boş bırakılamaz</string>
     <string name="global_waiting">Bekleyin</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Uygulama/Oyun %d koduyla kapandı</string>
+    <string name="mcn_exit_title">Uygulama/Oyundan %d koduyla çıkıldı, daha fazla bilgi için latestlog.txt\'ye bakın.</string>
     <string name="mcn_exit_call">Çıkış</string>
     <string name="mcn_exit_confirm">Zorla kapatmak istediğinize emin misiniz?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 yüklenmemiş!</string>
-    <string name="mcn_check_fail_incompatiblearch">%1$s mimarisi Java Runtime %2$s ile uyumsuz.</string>
     <string name="mcn_check_fail_vulkan_support">Vulkan Zink işleyicisi bu cihazda desteklenmiyor!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
@@ -139,6 +138,13 @@
     <string name="control_customkey">Özel anahtar kodu gönder</string>
     <string name="control_scaleup">Boyutu Arttır</string>
     <string name="control_scaledown">Boyutu Küçült</string>
+    <!-- ImportControlActivity Strings -->
+    <string name="import_control_label">Kontrol içeri aktar</string>
+    <string name="import_control_invalid_file">Geçersiz veya bozuk dosya</string>
+    <string name="import_control_import_button">kontrol içeri aktar</string>
+    <string name="import_control_verifying_file">Dosya doğrulanıyor, lütfen bekleyin ve tekrar deneyin…</string>
+    <string name="import_control_invalid_name">Geçersiz ad ya da dosya zaten var</string>
+    <string name="import_control_done">İçeri aktarma tamamlandı</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -168,8 +174,10 @@
     <string name="customctrl_addbutton">Düğme ekle</string>
     <string name="customctrl_addbutton_drawer">Düğme saklama menüsü ekle</string>
     <string name="customctrl_addsubbutton">Yan-düğme ekle</string>
+    <string name="customctrl_add_subbutton_message">Ek-Düğme n°%d eklendi !</string>
     <string name="customctrl_selectdefault">Varsayılan Control json\'u seç</string>
-    <string name="main_options">Ayarlar</string>
+    <string name="main_install_jar_file">.jar kur</string>
+    <string name="main_options">Seçenekler</string>
     <string name="main_play">Oyna</string>
     <string name="main_welcome">Hoş geldiniz, %s</string>
     <string name="main_infodev">Bilgi (Geliştirici)</string>
@@ -178,7 +186,7 @@
     <string name="main_nocrash">Hiç çökme tespit edilmedi</string>
     <string name="main_nolog">Kayıt yok.</string>
     <string name="main_no_news_feed">Haberler bilgileri getirilemedi !</string>
-    <string name="auto_ram_subtitle">Otomatik RAM ayarlayıcısını aktifleştirir</string>
+    <string name="auto_ram_subtitle">Otomatik RAM ayarlayıcısını etkinleştirir</string>
     <string name="auto_ram_title">Otomatik RAM</string>
     <string name="autoram_info_msg">RAM %d MB olarak ayarlandı</string>
     <string name="mcl_setting_check_libraries">İndirmeden sonra kütüphaneleri kontrol et</string>
@@ -198,6 +206,7 @@
     <string name="mcl_memory_allocation_subtitle">Minecraft\'a ne kadar bellek verileceğini kontrol eder</string>
     <string name="multirt_java_ver">%s (Java %d)</string>
     <string name="multirt_runtime_corrupt">Bozuk Java Runtime</string>
+    <string name="multirt_runtime_incompatiblearch">Uyumsuz mimari: %s</string>
     <string name="multirt_config_title">Java SM\'leri</string>
     <string name="multirt_config_add">Yeni ekle</string>
     <string name="multirt_config_add_subtitle">Yeni Java VM\'i içe aktar</string>
@@ -207,12 +216,51 @@
     <string name="multirt_config_setdefault">Varsayılan olarak ayarla</string>
     <string name="multirt_config_setdefault_already">Varsayılan</string>
     <string name="multirt_config_removeerror_last">En az bir Java Runtime kurmanız gerekir</string>
-    <string name="multirt_nocompartiblert">Uyumlu Java Runtime bulunamadı</string>
-    <string name="compat_117_message">Minecraft 21w10a ve üstü artık OpenGL 3.2 core profilini gerektiriyor. Ne yazık ki, GL4ES wrapper\'ı onu şuanda tamamen desteklemiyor, fakat bu sürümleri çalıştırabilmek için bazı ek kaynaklar indirilebilir. Indirmeyi onaylamak için TAMAM\'a tıklayın, iptal etmek için IPTAL\'e basın.</string>
+    <string name="multirt_nocompartiblert">Uyumlu Java Runtime bulunamadı. Bu sürüm Java %d ya da daha yenisini gerektiriyor.</string>
+    <string name="multirt_nojava8rt">Java 8 bulunamıyor. Bu seçeneği kullanabilmeniz için, Java 8 kurmanız gerekiyor.</string>
+    <string name="compat_117_message">Minecraft 21w10a sürümü Ve üstü sürümler OpenGL 3.2 çekirdeğine gereksinim duyar. Ne yazık ki Sizin Grafik Çipiniz OpenGL ES 3.0 ve Üzerisini desteklememektedir. Fakat Bu sürümü Çalıştırmak için indirebileceğiniz Bazı ektra kaynaklar bulunmaltadır. Lütfen OK tuşuna basıp indirmeyi onaylayın, ve İPTAL tuşuna basarak başlatmayı ipta edebilirsiniz.</string>
     <string name="compat_11x_playanyway">Yine de Oyna</string>
     <string name="pvc_gameDirectory">Oyun dizini</string>
     <string name="pvc_jvmArgs">JVM argümanları</string>
     <string name="pvc_title">Sürüm-başına ayarlar</string>
     <string name="storage_warning_title">Depolama değişiklikleri</string>
     <string name="storage_warning_text"><![CDATA[Google\'ın Android 10 ve sonraki sürümlerde eklenen yeni scoped storage yaptırımları nedeniyle, oyun dizinini app-private klasörüne taşımamız gerekiyor.<br /> Pojav dosyalari için yeni dizin <b>Android/data/%s/files/</b> (Ayrıca dosya yöneticisindeki dosya sağlayıcısından da erişmek mümkün).<br /> Eğer oyun dosyalarınızı kopyalamanız gerekirse, lütfen <b>games/PojavLauncher</b>\'daki orijinal klasördeki her şeyi manuel olarak kopyalayın.]]></string>
+    <string name="control_offset_title">Kontrol uzaklığı</string>
+    <string name="control_top_offset">Üst uzaklık: </string>
+    <string name="control_right_offset">Sağ uzaklık: </string>
+    <string name="control_bottom_offset">Alt uzaklık: </string>
+    <string name="control_left_offset">Sol uzaklık: </string>
+    <string name="preference_control_offset_title">Kontrol köşe uzaklıkları</string>
+    <string name="preference_control_offset_description">Ekranın her köşesine özel uzaklık ayarla</string>
+    <string name="preference_mouse_start_title">Sanal fare açık olarak başla</string>
+    <string name="preference_mouse_start_description">Bu seçeneği kullanmak Mathias-Boulay tarafından yargılanmanıza sebep olacaktır</string>
+    <string name="preference_video_title">Video ve işleyici</string>
+    <string name="preference_video_description">Çözünürlük, ölçekleme türü, ve işleyici</string>
+    <string name="preference_control_title">Kontrol özelleştirmesi</string>
+    <string name="preference_control_description">İşaret türleri, tetikleyiciler ve ölçekleme</string>
+    <string name="preference_java_title">Java Ayarlamaları</string>
+    <string name="preference_java_description">Java sürümleri, JVM Argümanları, ve RAM Miktarı</string>
+    <string name="preference_misc_title">Çeşitli ayarlar</string>
+    <string name="preference_misc_description">Sürüm listesi ve lib kontrolü</string>
+    <string name="preference_experimental_title">Deneysel Ayarlar</string>
+    <string name="preference_experimental_description">Buradaki ayarları düşünerek kullanın, destek yoktur.</string>
+    <string name="preference_sustained_performance_title">Stabil performans modunu aç</string>
+    <string name="preference_sustained_performance_description">Üst performansı kısıtlayarak ısınmayı kısıtla</string>
+    <string name="preference_back_title">Son ekrana geri dön</string>
+    <string name="gles_hack_title">GL4ES Küçültme hilesi</string>
+    <string name="gles_hack_none">Dokuları sakın küçültme</string>
+    <string name="gles_hack_always">Bütün dokuları 2\'ye böler</string>
+    <string name="gles_hack_sometimes">Büyük dokuları 2\'ye ya da 4\'e böler</string>
+    <string name="unnamed">Adsız</string>
+    <string name="profiles_latest_snapshot">En son test sürümü</string>
+    <string name="profiles_latest_release">En son sürüm</string>
+    <string name="profiles_editing">Profili düzenle</string>
+    <string name="profiles_profile_name">İsim</string>
+    <string name="profiles_profile_version">Sürüm</string>
+    <string name="global_delete">Sil</string>
+    <string name="pedit_java_runtime">Java Runtime</string>
+    <string name="pedit_renderer">İşleyici</string>
+    <string name="arc_capes_title">Turkish </string>
+    <string name="arc_capes_desc">Cosmetica\'nın Pelerinlerini aktifleştirir(Arc\'dan önceki). Daha fazla bilgi için lütfen https://cosmetica.cc\'u ziyaret edin. OptiFine gerektirir.</string>
+    <string name="migrated_profile_str">%s sürüm ayarlaması</string>
 </resources>

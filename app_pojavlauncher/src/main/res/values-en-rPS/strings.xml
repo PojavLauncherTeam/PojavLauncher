@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App name part -->
+    <string name="app_name">PojavLauncher (Minecraft: Java Edition fer Android)</string>
+    <string name="app_short_name">PojavLauncher</string>
+    <string name="app_motd">Launch Minecraft: Java Edition in yer device!</string>
+    <!-- Action bar part -->
+    <!-- Languages list part -->
+    <!-- Login strings -->
+    <string name="login_online_username_hint">Eymail orr yusername</string>
+    <string name="login_online_password_hint">Secret Key</string>
+    <string name="login_online_check_keeplogin">Be keepin\' ye on board fer next time</string>
+    <string name="login_online_login_label">Get Aboard</string>
+    <string name="login_error_exist_username">This passport already \'ere</string>
+    <string name="login_microsoft">Hop aboard with Microsoft</string>
+    <string name="login_select_account">Be usin\' buccaneer</string>
+    <string name="login_title_no_saved_account">We can\'t be findin\' ye bucaneer !</string>
+    <!-- Hint -->
+    <!-- Warnings -->
+    <string name="warning_remove_account">This buccaneer will be Marooned!</string>
+    <!-- AlertDialog title -->
+    <string name="alerttitle_install_jre">Settle Java Runtime %s (.tar.xz)</string>
+    <string name="alerttitle_installmod">Be selectin\' a mod settler</string>
+    <!-- Error messages -->
+    <string name="error_fatal">PojavLauncher has unfortunately sunk</string>
+    <string name="error_no_version">No Date o\' creation!</string>
+    <string name="error_show_more">Keep th\' knowledge out on table</string>
+    <string name="error_show_less">Keep th\' knowledge inside th\' table</string>
+    <!-- Toast messages -->
+    <string name="toast_permission_denied">The read/write t\' hold permission be required!</string>
+    <string name="toast_optifine_success">Success in th\' ship</string>
+    <string name="toast_uninstalljre_done">Finished unsettlin\' Java Runtime</string>
+    <!--
+    <string name="toast_3">Exit</string>
+    -->
+    <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">News</string>
+    <string name="mcl_tab_console">Captain\'s Log</string>
+    <string name="mcl_tab_crash">Sunk ship log</string>
+    <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">Settled</string>
+    <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_version_msg">Be Ready to sail dock %s</string>
+    <string name="mcl_launch_downloading">Downloadin %s</string>
+    <string name="mcl_launch_downloading_progress">"Building ship %s (%.2f MB / %.2f MB)"</string>
+    <string name="mcl_launch_download_assets">Gettin\' th\' treasure ready</string>
+    <string name="mcl_option_modinstall">Set sail on a mod settler (Forge, LabyMod, Fabric, etc...)</string>
+    <string name="mcl_option_modinstallwitharg">Set sail on a mod settler (with yer\' codes)</string>
+    <string name="mcl_option_customcontrol">custom trigger</string>
+    <string name="mcl_option_settings">Settings</string>
+    <string name="mcl_option_about">\'Bout me</string>
+    <string name="mcl_setting_title_uninstalljre">Unsettle Java Runtime</string>
+    <string name="mcl_setting_title_ignore_notch">Don\'t see notch</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Don\'t see notch and make big the sail under it.\nGives you more treasure.</string>
+    <string name="mcl_setting_title_resolution_scaler">Map size scaler</string>
+    <string name="mcl_setting_veroption_release">Release</string>
+    <string name="mcl_setting_veroption_snapshot">Snapshot</string>
+    <!-- Global strings -->
+    <string name="global_warinng">Beware</string>
+    <string name="global_name">Title on yer forhead</string>
+    <string name="global_restart">Yar ship needs a lookover</string>
+    <string name="global_waiting">Stay Here</string>
+    <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">Your boat drown with number %d, check debris for more detail (lastestlog.txt).</string>
+    <string name="mcn_exit_call">True Story</string>
+    <!-- MainActivity: Control buttons -->
+    <string name="control_keyboard">Keyboard</string>
+    <string name="control_chat">Chat</string>
+    <!-- MainActivity: Menu advanced controls -->
+    <string name="control_viewout">Yer\' Diary</string>
+    <!-- ImportControlActivity Strings -->
+    <!--
+    <string name="control_more3"></string>
+    <string name="control_more4"></string>
+-->
+    <string name="customctrl_addbutton">Add buttn</string>
+    <string name="customctrl_selectdefault">Choose normal Control json</string>
+    <string name="main_play">Sail</string>
+    <string name="main_infodev">Info (DEV)</string>
+    <string name="main_switchuser">Change bucaneer</string>
+    <string name="main_version">Dock:</string>
+    <string name="main_nocrash">No sunk ship found</string>
+    <string name="main_nolog">No Diary.</string>
+    <string name="profiles_profile_name">Title on yer forhead</string>
+</resources>

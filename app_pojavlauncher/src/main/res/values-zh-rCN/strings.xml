@@ -11,10 +11,8 @@
     <string name="login_online_password_hint">密码</string>
     <string name="login_online_check_keeplogin">保持登录状态</string>
     <string name="login_online_login_label">登录</string>
-    <string name="login_offline_label">以离线账号登录</string>
-    <string name="login_error_invalid_username">无效的用户名。用户名必须在3-16个字符的范围内，只能包含A-Z、a-z、0-9和下划线。</string>
+    <string name="login_error_invalid_username">用户名无效。用户名必须在3-16个字符的范围内，只能包含A-Z、a-z、0-9和下划线。</string>
     <string name="login_error_exist_username">用户名已存在</string>
-    <string name="login_error_offline_password">离线账号不能填写密码！</string>
     <string name="login_microsoft">微软帐号登录</string>
     <string name="login_select_account">选择账号</string>
     <string name="login_title_no_saved_account">帐户未找到！</string>
@@ -44,19 +42,22 @@
     <string name="mcl_tab_crash">崩溃日志</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">已连接</string>
-    <string name="mcl_account_offline">离线</string>
+    <string name="mcl_account_local">本地</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Minecraft %s 就绪</string>
     <string name="mcl_launch_cleancache">正在清理缓存</string>
     <string name="mcl_launch_downloading">正在下载 %s</string>
     <string name="mcl_launch_downloading_progress">"正在下载 %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">正在准备下载资源</string>
+    <string name="mcl_launch_error_localmode">Minecraft 无法在本地账户中合法安装。请切换到在线账户以继续。</string>
     <string name="mcl_options">选项</string>
     <string name="mcl_option_modinstall">启动 Mod 安装器（例如 Forge, LabyMod, Fabric...）</string>
     <string name="mcl_option_modinstallwitharg">以自定义参数启动 Mod 安装器</string>
-    <string name="mcl_option_customcontrol">自定义控制键</string>
+    <string name="mcl_option_customcontrol">自定义控制按键</string>
     <string name="mcl_option_settings">设置</string>
     <string name="mcl_option_about">关于</string>
+    <string name="mcl_setting_title_use_surface_view">使用备用表面渲染（Surface Rendering） </string>
+    <string name="mcl_setting_subtitle_use_surface_view">可能有助于提升受 GPU 机能限制的性能</string>
     <string name="mcl_setting_title_uninstalljre">卸载 Java 运行时环境</string>
     <string name="mcl_setting_subtitle_uninstalljre">[需要重启启动器] 得以重新安装 Java 运行时环境。</string>
     <string name="mcl_setting_title_freeform">以自由窗口模式启动 Minecraft</string>
@@ -82,9 +83,8 @@
     <string name="mcl_setting_category_general">常规设置</string>
     <string name="mcl_setting_category_scaling">缩放设置</string>
     <string name="mcl_setting_category_renderer">渲染器</string>
-    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exports OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): exports OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): exports OpenGL 2.1 + partial 3.2（尚未支持1.17）</string>
+    <string name="mcl_setting_renderer_gles2_4">holy gl4es: supports 1.0–1.19+</string>
+    <string name="mcl_setting_renderer_virgl">vgpu (OpenGL ES 3): exports OpenGL 4.3</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): exports OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exports OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">将在版本列表中显示的版本类型</string>
@@ -107,11 +107,10 @@
     <string name="global_error_field_empty">此处表单不能为空</string>
     <string name="global_waiting">请稍等</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">应用/游戏以 %d 代码退出</string>
+    <string name="mcn_exit_title">应用程序/游戏以代码 %d退出，请查看 latestlog.txt 了解更多详情。</string>
     <string name="mcn_exit_call">退出</string>
     <string name="mcn_exit_confirm">确定强制关闭？</string>
     <string name="mcn_check_fail_lwjgl">未安装 LWJGL3！</string>
-    <string name="mcn_check_fail_incompatiblearch">%1$s 架构不兼容 Java 运行时环境 %2$s 。</string>
     <string name="mcn_check_fail_vulkan_support">Vulkan Zink 渲染在该设备上不可用！</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
@@ -139,6 +138,13 @@
     <string name="control_customkey">发送自定义键码</string>
     <string name="control_scaleup">放大</string>
     <string name="control_scaledown">缩小</string>
+    <!-- ImportControlActivity Strings -->
+    <string name="import_control_label">导入控制</string>
+    <string name="import_control_invalid_file">文件无效或损坏</string>
+    <string name="import_control_import_button">导入控制</string>
+    <string name="import_control_verifying_file">文件正在验证中，请稍候重试…</string>
+    <string name="import_control_invalid_name">无效的名称或文件已存在</string>
+    <string name="import_control_done">导入完成</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -168,7 +174,9 @@
     <string name="customctrl_addbutton">添加按键</string>
     <string name="customctrl_addbutton_drawer">添加组合框</string>
     <string name="customctrl_addsubbutton">添加子按钮</string>
+    <string name="customctrl_add_subbutton_message">子按钮 n°%d 已添加！</string>
     <string name="customctrl_selectdefault">选择默认 .json 控制键位</string>
+    <string name="main_install_jar_file">安装 .jar</string>
     <string name="main_options">选项</string>
     <string name="main_play">启动游戏</string>
     <string name="main_welcome">欢迎， %s</string>
@@ -197,6 +205,7 @@
     <string name="mcl_memory_allocation">内存分配</string>
     <string name="mcl_memory_allocation_subtitle">控制给 Minecraft 分配多少内存</string>
     <string name="multirt_runtime_corrupt">Java 运行时损坏</string>
+    <string name="multirt_runtime_incompatiblearch">不兼容的架构： %s</string>
     <string name="multirt_config_title">Java VMs</string>
     <string name="multirt_config_add">新建</string>
     <string name="multirt_config_add_subtitle">导入新的 Java VM</string>
@@ -206,7 +215,8 @@
     <string name="multirt_config_setdefault">设为默认</string>
     <string name="multirt_config_setdefault_already">默认</string>
     <string name="multirt_config_removeerror_last">您必须至少安装一个 Java 运行时</string>
-    <string name="multirt_nocompartiblert">找不到任何可压缩的 Java 运行时</string>
+    <string name="multirt_nocompartiblert">找不到合适的 Java 运行环境。此版本需要 Java %d 或更高版本。</string>
+    <string name="multirt_nojava8rt">无法找到 Java 8。要使用此选项，您需要安装 Java 8。</string>
     <string name="compat_117_message">Minecraft 21w10a+ 需要 OpenGL 3.2 核心配置文件。 遗憾的是，GL4ES 包装器目前并不完全支持它，但是您可以安装一些额外的资源来运行这些版本。 按 确认 确认安装，然后按 取消键 中止启动。</string>
     <string name="compat_11x_playanyway">仍然开始游戏</string>
     <string name="pvc_gameDirectory">游戏目录</string>
@@ -214,4 +224,42 @@
     <string name="pvc_title">Per-version 设置</string>
     <string name="storage_warning_title">存储变更</string>
     <string name="storage_warning_text"><![CDATA[由于 Google 在 Android 10 及更高版本中添加了新的存储范围强制措施，我们需要将游戏目录移动到应用私有文件夹中。<br />新的 Pojav 文件夹是 <b>Android/data/%s/files/</b> （同样可以通过您的文件管理器访问）。<br />如果您需要复制您的游戏文件，请从 <b>games/PojavLauncher</b> 中手动复制所有内容]]></string>
+    <string name="control_offset_title">控件偏移</string>
+    <string name="control_top_offset">顶端偏移： </string>
+    <string name="control_right_offset">右偏移： </string>
+    <string name="control_bottom_offset">底部偏移： </string>
+    <string name="control_left_offset">左偏移： </string>
+    <string name="preference_control_offset_title">控件侧偏移</string>
+    <string name="preference_control_offset_description">设置屏幕每边的自定义偏移</string>
+    <string name="preference_mouse_start_title">启动游戏时默认打开虚拟鼠标</string>
+    <string name="preference_mouse_start_description">启用该选项将使用 Mathias-Boulay 判断</string>
+    <string name="preference_video_title">视频和渲染器</string>
+    <string name="preference_video_description">分辨率、缩放类型和渲染器</string>
+    <string name="preference_control_title">控制自定义</string>
+    <string name="preference_control_description">手势类型、触发器和缩放</string>
+    <string name="preference_java_title">Java 调整</string>
+    <string name="preference_java_description">Java 版本，JVM 参数和 RAM 配额</string>
+    <string name="preference_misc_title">其他设置</string>
+    <string name="preference_misc_description">版本列表和 libs 检查</string>
+    <string name="preference_experimental_title">实验性的补丁</string>
+    <string name="preference_experimental_description">使用这里的内容是不受支持的。</string>
+    <string name="preference_sustained_performance_title">启用持续性能模式</string>
+    <string name="preference_sustained_performance_description">通过限制峰值性能来限制热节流</string>
+    <string name="preference_back_title">返回上一个页面</string>
+    <string name="gles_hack_title">GL4ES 收缩黑名单</string>
+    <string name="gles_hack_none">不缩小纹理</string>
+    <string name="gles_hack_always">将所有纹理除以 2</string>
+    <string name="gles_hack_sometimes">将大纹理除以 2 或 4</string>
+    <string name="unnamed">未命名</string>
+    <string name="profiles_latest_snapshot">最新快照</string>
+    <string name="profiles_latest_release">最新版本</string>
+    <string name="profiles_editing">编辑档案</string>
+    <string name="profiles_profile_name">名称</string>
+    <string name="profiles_profile_version">版本</string>
+    <string name="global_delete">删除</string>
+    <string name="pedit_java_runtime">Java 运行时</string>
+    <string name="pedit_renderer">渲染器</string>
+    <string name="arc_capes_title">Cosmetica 披风</string>
+    <string name="arc_capes_desc">启用来自 Cosmetica（原 Arc ）的披风。欲了解更多信息，请访问 https://arcapes.com。需要OptiFine。</string>
+    <string name="migrated_profile_str">%s 版本配置</string>
 </resources>

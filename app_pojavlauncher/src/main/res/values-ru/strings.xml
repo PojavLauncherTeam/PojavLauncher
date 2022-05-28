@@ -11,10 +11,8 @@
     <string name="login_online_password_hint">Пароль</string>
     <string name="login_online_check_keeplogin">Запомнить меня</string>
     <string name="login_online_login_label">Войти</string>
-    <string name="login_offline_label">Войти как офлайн учётная запись</string>
     <string name="login_error_invalid_username">Наверное имя пользователя. Оно должно быть длиной от 3 до 16 символов и содержать только латинские буквы, цифры или нижнее подчёркивание.</string>
     <string name="login_error_exist_username">Это имя пользователя уже существует</string>
-    <string name="login_error_offline_password">Офлайн учётная запись не может содержать пароль!</string>
     <string name="login_microsoft">Войти через Microsoft</string>
     <string name="login_select_account">Учётные записи</string>
     <string name="login_title_no_saved_account">Учётные записи не найдены!</string>
@@ -44,19 +42,22 @@
     <string name="mcl_tab_crash">Журнал сбоев</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Подключено</string>
-    <string name="mcl_account_offline">Офлайн</string>
+    <string name="mcl_account_local">Локальный</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Minecraft %s готов к запуску</string>
     <string name="mcl_launch_cleancache">Очистка файлов кэша</string>
     <string name="mcl_launch_downloading">Загрузка %s</string>
     <string name="mcl_launch_downloading_progress">"Загрузка %s (%.2f Мбайт / %.2f Мбайт)"</string>
     <string name="mcl_launch_download_assets">Подготовка к загрузке ресурсов</string>
+    <string name="mcl_launch_error_localmode">Minecraft не может быть легально установлен с локальной учётной записью. Чтобы продолжить, переключитесь на онлайн учётную запись.</string>
     <string name="mcl_options">Опции</string>
     <string name="mcl_option_modinstall">Запустить установщик мода (Forge, LabyMod, Fabric и т. п.)</string>
     <string name="mcl_option_modinstallwitharg">Запустить установщик мода (с пользовательскими аргументами)</string>
     <string name="mcl_option_customcontrol">Пользовательское управление</string>
     <string name="mcl_option_settings">Настройки</string>
     <string name="mcl_option_about">О лаунчере</string>
+    <string name="mcl_setting_title_use_surface_view">Использовать альтернативный визуализатор</string>
+    <string name="mcl_setting_subtitle_use_surface_view">Может повысить производительность в сценариях, связанных с графическим процессором</string>
     <string name="mcl_setting_title_uninstalljre">Удалить Java Runtime</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Требуется перезапуск лаунчера] Это позволит вам переустановить Java Runtime</string>
     <string name="mcl_setting_title_freeform">Запуск Minecraft в плавающем окне</string>
@@ -82,9 +83,8 @@
     <string name="mcl_setting_category_general">Общие настройки</string>
     <string name="mcl_setting_category_scaling">Настройки масштабирования</string>
     <string name="mcl_setting_category_renderer">Визуализатор</string>
-    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): экспортирует OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): экспортирует OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): экспортирует OpenGL 2.1 + частично 3.2 (пока без поддержки 1.17)</string>
+    <string name="mcl_setting_renderer_gles2_4">священный gl4es: поддерживает 1.0 — 1.19+</string>
+    <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): экспортирует OpenGL 4.3</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): экспортирует OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): экспортирует OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Типы версий, которые будут отображаться в списке версий</string>
@@ -107,11 +107,10 @@
     <string name="global_error_field_empty">Это поле не может быть пустым</string>
     <string name="global_waiting">Подождите</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Произошел сбой приложения/игры с кодом %d</string>
+    <string name="mcn_exit_title">Произошёл собой приложения/игры с кодом %d. Проверьте latestlog.txt, чтобы получить больше информации.</string>
     <string name="mcn_exit_call">Выйти</string>
     <string name="mcn_exit_confirm">Вы уверены, что хотите принудительно закрыть его?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 не установлен!</string>
-    <string name="mcn_check_fail_incompatiblearch">Архитектура %1$s несовместима с Java Runtime %2$s.</string>
     <string name="mcn_check_fail_vulkan_support">Визуализатор Vulkan Zink не поддерживается на этом устройстве!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
@@ -139,6 +138,13 @@
     <string name="control_customkey">Отправить пользовательский код клавиши</string>
     <string name="control_scaleup">Увеличить</string>
     <string name="control_scaledown">Уменьшить</string>
+    <!-- ImportControlActivity Strings -->
+    <string name="import_control_label">Импортирование управления</string>
+    <string name="import_control_invalid_file">Недопустимый или повреждённый файл</string>
+    <string name="import_control_import_button">импортировать управление</string>
+    <string name="import_control_verifying_file">Идёт проверка файла. Пожалуйста, подождите и попробуйте снова…</string>
+    <string name="import_control_invalid_name">Недопустимое имя файла или файл с таким именем уже существует</string>
+    <string name="import_control_done">Импортирование завершено</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -168,7 +174,9 @@
     <string name="customctrl_addbutton">Добавить кнопку</string>
     <string name="customctrl_addbutton_drawer">Добавить разворачиваемую кнопку</string>
     <string name="customctrl_addsubbutton">Добавить под-кнопку</string>
+    <string name="customctrl_add_subbutton_message">Подкнопка №%d добавлена!</string>
     <string name="customctrl_selectdefault">Выбрать управление по умолчанию</string>
+    <string name="main_install_jar_file">Установите .jar</string>
     <string name="main_options">Опции</string>
     <string name="main_play">Играть</string>
     <string name="main_welcome">Добро пожаловать, %s</string>
@@ -198,6 +206,7 @@
     <string name="mcl_memory_allocation_subtitle">Управляет тем, сколько памяти выделится для Minecraft</string>
     <string name="multirt_java_ver">%s (Java %d)</string>
     <string name="multirt_runtime_corrupt">Java Runtime повреждён</string>
+    <string name="multirt_runtime_incompatiblearch">Несовместимая архитектура: %s</string>
     <string name="multirt_config_title">Виртуальные машины Java</string>
     <string name="multirt_config_add">Добавить новую</string>
     <string name="multirt_config_add_subtitle">Импортировать новую виртуальную машину</string>
@@ -207,12 +216,51 @@
     <string name="multirt_config_setdefault">Установить по умолчанию</string>
     <string name="multirt_config_setdefault_already">По умолчанию</string>
     <string name="multirt_config_removeerror_last">Должно быть установлено хотя бы один Java Runtime</string>
-    <string name="multirt_nocompartiblert">Не удалось найти совместимую Java Runtime</string>
-    <string name="compat_117_message">Для Minecraft 21w10a+ (1.17+) требуется OpenGL 3.2. К сожалению, на данный момент GL4ES не полностью поддерживает её, но есть некоторые дополнительные ресурсы, которые вы можете установить, чтобы запустить эти версии. Нажмите на кнопку «ОК», чтобы подтвердить установку или «Отмена», чтобы прервать запуск.</string>
+    <string name="multirt_nocompartiblert">Не удалось найти подходящий Java Runtime. Эта версия требует Java %d версии или позднее.</string>
+    <string name="multirt_nojava8rt">Не удалось найти Java 8. Чтобы использовать эту опцию, необходимо установить Java 8.</string>
+    <string name="compat_117_message">Для Minecraft 21w10a+ требуется OpenGL 3.2. К сожалению, ваш графический чип не поддерживает OpenGL ES 3.0 или выше, но есть некоторые дополнительные ресурсы, которые вы можете установить для запуска этих версий. Нажмите «ОК», чтобы подтвердить установку, или «Отмена», чтобы прервать запуск.</string>
     <string name="compat_11x_playanyway">Запустить в любом случае</string>
     <string name="pvc_gameDirectory">Папка игры</string>
     <string name="pvc_jvmArgs">Аргументы JVM</string>
     <string name="pvc_title">Поверсионные настройки</string>
     <string name="storage_warning_title">Изменения в работе хранилища</string>
     <string name="storage_warning_text"><![CDATA[Из-за новых ограничений хранилища добавленных компанией Google в Android 10, приложению нужно переместить папку игры во внутреннюю папку приложения.<br /> Новая папка для файлов Pojav - <b>Android/data/%s/files/</b> (также доступна из провайдера хранилища в вашем проводнике).<br /> Если вам необходимо перенести файлы игры, пожалуйста скопируйте их вручную из папки <b>games/PojavLauncher</b>.]]></string>
+    <string name="control_offset_title">Смещение управления</string>
+    <string name="control_top_offset">Сверху: </string>
+    <string name="control_right_offset">справа: </string>
+    <string name="control_bottom_offset">снизу: </string>
+    <string name="control_left_offset">слева: </string>
+    <string name="preference_control_offset_title">Смещение управления</string>
+    <string name="preference_control_offset_description">Устанавливает пользовательское смещение для каждой стороны экрана</string>
+    <string name="preference_mouse_start_title">Запуск с виртуальной мышью</string>
+    <string name="preference_mouse_start_description">Mathias-Boulay осудит вас, если вы будете использовать эту опцию</string>
+    <string name="preference_video_title">Видео и визуализатор</string>
+    <string name="preference_video_description">Разрешение, тип масштабирования и визуализатор</string>
+    <string name="preference_control_title">Настройка управления</string>
+    <string name="preference_control_description">Типы жестов, флажки и масштабирование</string>
+    <string name="preference_java_title">Корректировка Java</string>
+    <string name="preference_java_description">Версии Java, аргументы JVM и объём ОЗУ</string>
+    <string name="preference_misc_title">Другие настройки</string>
+    <string name="preference_misc_description">Список версий и проверка библиотек</string>
+    <string name="preference_experimental_title">Экспериментальные штуки</string>
+    <string name="preference_experimental_description">Используйте эти функции с осторожностью; поддержка не предоставляется.</string>
+    <string name="preference_sustained_performance_title">Включить режим стабилизации производительности</string>
+    <string name="preference_sustained_performance_description">Уменьшает тротлинга от нагрева путём уменьшения производительности</string>
+    <string name="preference_back_title">Вернуться назад</string>
+    <string name="gles_hack_title">Сжатие GL4ES</string>
+    <string name="gles_hack_none">Не сжимать текстуры</string>
+    <string name="gles_hack_always">Сжимать все текстуры в 2 раза</string>
+    <string name="gles_hack_sometimes">Сжимать большие текстуры в 2 или 4 раза</string>
+    <string name="unnamed">Безымянный</string>
+    <string name="profiles_latest_snapshot">Последний снапшот</string>
+    <string name="profiles_latest_release">Последний релиз</string>
+    <string name="profiles_editing">Редактирование профиля</string>
+    <string name="profiles_profile_name">Имя</string>
+    <string name="profiles_profile_version">Версия</string>
+    <string name="global_delete">Удалить</string>
+    <string name="pedit_java_runtime">Java Runtime</string>
+    <string name="pedit_renderer">Визуализатор</string>
+    <string name="arc_capes_title">Плащи Cosmetica</string>
+    <string name="arc_capes_desc">Включает плащи от Cosmetica (ранее Arc). Для получения дополнительной информации, пожалуйста, посетите https://cosmetica.cc. Требуется OptiFine.</string>
+    <string name="migrated_profile_str">Конфигурация версии %s</string>
 </resources>

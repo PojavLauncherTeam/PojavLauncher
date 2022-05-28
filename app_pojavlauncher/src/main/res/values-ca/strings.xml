@@ -11,14 +11,18 @@
     <string name="login_online_password_hint">Contrasenya</string>
     <string name="login_online_check_keeplogin">Mantenir-me connectat</string>
     <string name="login_online_login_label">Iniciar sessió</string>
-    <string name="login_offline_label">Enta amb una conta offline</string>
+    <string name="login_error_invalid_username">Nom d\'usuari invàlid. El nom d\'usuari deu tindre de 3-16 caràcters, sols pot contenir A-Z, a-z, 0-9 i subratllat.</string>
     <string name="login_error_exist_username">Aquet nom d’usuari ja existeix</string>
+    <string name="login_microsoft">Inici de sessió amb Microsoft</string>
     <string name="login_select_account">Seleccioneu un compte</string>
+    <string name="login_title_no_saved_account">No s\'ha trobat un conter!</string>
+    <string name="login_dialog_no_saved_account">No tens cap conter guardat.\nUtilitza la opcio <b>\"Mantín-me iniciat\"</b> per a guardar un conter en la primera connexió.</string>
     <!-- Hint -->
     <!-- Warnings -->
     <string name="warning_remove_account">Aquesta conta sera eliminada!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Instala Java Runtime %s (.tar.xz)</string>
+    <string name="alerttitle_installmod">Selecciona un mod per afegir</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher s’ha parat inesperadament</string>
     <string name="error_no_version">Cap versio!</string>
@@ -32,26 +36,40 @@
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">Notícies</string>
     <string name="mcl_tab_console">Consola de desenvolupador</string>
     <string name="mcl_tab_crash">Registre de crashes</string>
     <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">Connectat</string>
+    <string name="mcl_account_local">Local</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Apunt de jugar Minecraft %s</string>
     <string name="mcl_launch_cleancache">Cleaning cache files</string>
     <string name="mcl_launch_downloading">Downloading %s</string>
+    <string name="mcl_launch_downloading_progress">"Descarregant %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Preparing to download resources</string>
+    <string name="mcl_launch_error_localmode">Minecraft no es pot instal·lar legalment quan estigui connectat en el mode local. Per favor, inicia a un conter en línia per a continuar.</string>
     <string name="mcl_options">Options</string>
+    <string name="mcl_option_modinstall">Inicia un instal·lador de mods (Forge, LabyMod, Fabric, etc...)</string>
+    <string name="mcl_option_modinstallwitharg">Inicia un instal·lador de mods (amb arguments propis)</string>
     <string name="mcl_option_customcontrol">Custom controls</string>
     <string name="mcl_option_settings">Settings</string>
     <string name="mcl_option_about">About</string>
+    <string name="mcl_setting_title_use_surface_view">Utilitza la renderització de superfície alternativa</string>
+    <string name="mcl_setting_subtitle_use_surface_view">Pots ajudar al rendiment en escenaris lligats al GPU</string>
     <string name="mcl_setting_title_uninstalljre">Desinstala Java Runtime</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Cal reiniciar el llançador] Això us permetrà tornar a instal·lar Java Runtime</string>
     <string name="mcl_setting_title_freeform">Launch Minecraft in Freeform mode</string>
     <string name="mcl_setting_subtitle_freeform">Launch Minecraft in floating window. Requires Android 7.0+</string>
+    <string name="mcl_setting_title_hide_sidebar">Amagar barra lateral</string>
+    <string name="mcl_setting_title_ignore_notch">Ignorar notch</string>
+    <string name="mcl_setting_title_resolution_scaler">Escalador de resolució</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">Permet reduir la resolució del joc. 100% és resolució completa</string>
     <string name="mcl_setting_title_longpresstrigger">How long will trigger after long press</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Change trigger time for long press in destroy block and drop item.</string>
     <string name="mcl_setting_subtitle_javaargs">Vés amb compte, això podria provocar un bloqueig del joc si es modifica sense coneixement.</string>
     <string name="mcl_setting_category_general">General settings</string>
+    <string name="mcl_setting_category_renderer">Renderitzador</string>
     <string name="mcl_setting_category_veroption">Version type will be in version list</string>
     <string name="mcl_setting_veroption_release">Release</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
@@ -70,12 +88,12 @@
     <string name="global_save">Save</string>
     <string name="global_unpacking">S\'està desempaquetant %s</string>
     <string name="global_error_field_empty">This field can\'t be empty</string>
+    <string name="global_waiting">Espera</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Game exited</string>
     <string name="mcn_exit_call">Exit</string>
     <string name="mcn_exit_confirm">Are you sure want to force close?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 no s\'ha instal·lat!</string>
-    <string name="mcn_check_fail_incompatiblearch">L\'arquitectura %1$s no és compatible amb Java Runtime %2$s.</string>
+    <string name="mcn_check_fail_vulkan_support">El renderitzador VULKAN Zink no esta suportat en aquest dispositiu!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Keyboard</string>
@@ -100,11 +118,16 @@
     <string name="control_viewout">Registra la sortida</string>
     <string name="control_adebug">PointerCapture Debug</string>
     <string name="control_customkey">Send custom keycode</string>
+    <string name="control_scaleup">Amplia</string>
+    <string name="control_scaledown">Redueix</string>
+    <!-- ImportControlActivity Strings -->
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
     <string name="customctrl_keyname">Keycode</string>
+    <string name="customctrl_size">Mida</string>
+    <string name="customctrl_size_width">Amplada</string>
     <string name="customctrl_addbutton">Add button</string>
     <string name="customctrl_selectdefault">Select default Control json</string>
     <string name="main_options">Options</string>
@@ -114,4 +137,6 @@
     <string name="main_version">Version:</string>
     <string name="main_nocrash">No crash detected</string>
     <string name="main_nolog">No log.</string>
+    <string name="profiles_profile_name">Name</string>
+    <string name="pedit_renderer">Renderitzador</string>
 </resources>

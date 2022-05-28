@@ -11,9 +11,8 @@
     <string name="login_online_password_hint">كلمة المرور</string>
     <string name="login_online_check_keeplogin">أبق تسجيل دخولي</string>
     <string name="login_online_login_label">تسجيل الدخول</string>
-    <string name="login_offline_label">تسجيل الدخول كحساب غير متصل</string>
+    <string name="login_error_invalid_username">اسم المستخدم غير صالح. اسم المستخدم يجب أن يكون في نطاق 3-16 حرفاً، يجب أن يحتوي فقط على A-Z، a-z، 0-9 وتسطير سفلي.</string>
     <string name="login_error_exist_username">هذا الاسم موجود مسبقا</string>
-    <string name="login_error_offline_password">الحسابات غير المتصلة لا يمكنها تضمن كلمة مرور!</string>
     <string name="login_microsoft">تسجيل دخول بحساب مايكروسوفت</string>
     <string name="login_select_account">اختر الحساب</string>
     <string name="login_title_no_saved_account">لم يتم العثور على الحساب!</string>
@@ -43,7 +42,6 @@
     <string name="mcl_tab_crash">سجل توقف العمل</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">متصل</string>
-    <string name="mcl_account_offline">غير متصل</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">جاهز للعب ماين كرافت %s</string>
     <string name="mcl_launch_cleancache">تنظيف ملفات ذاكرة التخزين المؤقت</string>
@@ -81,9 +79,8 @@
     <string name="mcl_setting_category_general">إعدادات عامة</string>
     <string name="mcl_setting_category_scaling">إعدادات الحجم</string>
     <string name="mcl_setting_category_renderer">العارض</string>
-    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exports OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): exports OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): exports OpenGL 2.1 + partial 3.2 (لم يتم دعم 1.17 بعد)</string>
+    <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): exports OpenGL 4.3</string>
+    <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): exports OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exports OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">نوع الإصدار سيكون في قائمة الإصدارات</string>
     <string name="mcl_setting_veroption_release">إصدار نهائي</string>
@@ -105,11 +102,10 @@
     <string name="global_error_field_empty">لا يمكن لهذه الخانة ان تكون فارغة</string>
     <string name="global_waiting">انتظر</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">تم الخروج من التطبيق/ اللعبة برمز %d</string>
+    <string name="mcn_exit_title">تم الخروج من التطبيق/اللعبة بخلل %d، تحقق من latestlog.txt لمزيد من التفاصيل.</string>
     <string name="mcn_exit_call">خروج</string>
     <string name="mcn_exit_confirm">هل أنت متأكد من أنك تريد الإغلاق؟</string>
     <string name="mcn_check_fail_lwjgl">لم يتم تثبيت LWJGL3!</string>
-    <string name="mcn_check_fail_incompatiblearch">البنية %1$s غير متوافقة مع محرك تشغيل جافا %2$s.</string>
     <string name="mcn_check_fail_vulkan_support">رندر فولكان زينك غير مدعوم على هذا الجهاز!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">واجهة المستخدم الرسومية</string>
@@ -131,6 +127,7 @@
     <string name="control_customkey">إرسال رمز مفتاحي مخصص</string>
     <string name="control_scaleup">رفع المستوى التحكم</string>
     <string name="control_scaledown">خفض مستوى التحكم</string>
+    <!-- ImportControlActivity Strings -->
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -143,7 +140,11 @@
     <string name="customctrl_size_width">العرض</string>
     <string name="customctrl_size_height">الارتفاع</string>
     <string name="customctrl_mapping">تخطيط الأزرار</string>
+    <string name="customctrl_orientation">الإتجاة</string>
     <string name="customctrl_background_color">لون الخلفية</string>
+    <string name="customctrl_corner_radius">تقوس الزاوية</string>
+    <string name="customctrl_stroke_width">عرض الخط</string>
+    <string name="customctrl_stroke_color">لون الخط</string>
     <string name="customctrl_dynamicpos">الموضع الديناميكي</string>
     <string name="customctrl_dynamicpos_x">ديناميكية X</string>
     <string name="customctrl_dynamicpos_y">ديناميكية Y</string>
@@ -154,7 +155,10 @@
     <string name="customctrl_keycombine_control">Ctrl</string>
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">إضافة زر</string>
+    <string name="customctrl_addbutton_drawer">اضافة زر بعدة ازرار</string>
+    <string name="customctrl_addsubbutton">إضافة زر فرعي</string>
     <string name="customctrl_selectdefault">حدد رمز تحكم اعتيادي بصيغة json</string>
+    <string name="main_install_jar_file">تثبيت ملف .jar</string>
     <string name="main_options">الخيارات</string>
     <string name="main_play">إبدأ اللعب</string>
     <string name="main_welcome">مرحباً %s</string>
@@ -192,8 +196,12 @@
     <string name="multirt_config_setdefault">تعيين لإستخدام دائم</string>
     <string name="multirt_config_setdefault_already">مستخدم دائما</string>
     <string name="multirt_config_removeerror_last">يجب أن يكون لديك على الأقل مشغل جافا واحد مثبت</string>
-    <string name="multirt_nocompartiblert">لا يمكن العثور على مشغل جافا قابل للتشغيل</string>
-    <string name="compat_117_message">ماينكرافت 21w10a+ يتطلب ملف التعريف الأساسي OpenGL 3.2 من المحزن أن تغليف GL4ES لا يدعمه بشكل كامل في الوقت الحالي، ولكن هناك بعض الموارد الإضافية التي يمكنك تثبيتها لتشغيل هذه الإصدارات اضغط على OK لتأكيد التثبيت، واضغط على Cancel لإجهاض الإطلاق.</string>
+    <string name="compat_11x_playanyway">تشغيل على أي حال</string>
     <string name="pvc_gameDirectory">مكان تخزين اللعبة</string>
     <string name="pvc_jvmArgs">مدخلات JVM</string>
+    <string name="pvc_title">إعدادات لكل إصدار</string>
+    <string name="storage_warning_title">تغييرات التخزين</string>
+    <string name="storage_warning_text"><![CDATA[بسبب تطبيق Google الجديد لتخزين النطاق المضاف في أندرويد 10 وما فوق، نحن مطالبون بنقل ملفات اللعبة إلى مجلد تطبيق-خاص.<br /> المجلد الجديد لملفات Pojav هو <b>Android/data/%s/files/</b> (يمكن الوصول إليه أيضًا باستخدام موفر تخزين في مستكشف الملفات الخاص بك).<br /> إذا كنت بحاجة إلى نسخ ملفات اللعبة الخاصة بك، يرجى نسخ كل شيء من المجلد الأصلي في <b>الألعاب/ojavLauncher</b> يدويا.]]></string>
+    <string name="profiles_profile_name">الاسم</string>
+    <string name="pedit_renderer">العارض</string>
 </resources>

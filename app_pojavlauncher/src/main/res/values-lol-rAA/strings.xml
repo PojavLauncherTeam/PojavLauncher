@@ -11,10 +11,8 @@
     <string name="login_online_password_hint">passwd</string>
     <string name="login_online_check_keeplogin">kep i kog inside</string>
     <string name="login_online_login_label">logout</string>
-    <string name="login_offline_label">Login as offloin akownt</string>
     <string name="login_error_invalid_username">Invalid catz\' neim. Catz\' neim hav tu be in rein\'g uf 3-16 kerekturs, shud only kontainz A-Z, a-z, 0-9 and undrskore.</string>
     <string name="login_error_exist_username">ohno, this uzrname iz regiztered:(</string>
-    <string name="login_error_offline_password">Offline akownt can\'t include pasword!</string>
     <string name="login_microsoft">Microsoft entrunz</string>
     <string name="login_select_account">what acc?</string>
     <string name="login_title_no_saved_account">No akownt findz !</string>
@@ -44,19 +42,22 @@
     <string name="mcl_tab_crash">Crash trunk</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Connectd</string>
-    <string name="mcl_account_offline">Offlien</string>
+    <string name="mcl_account_local">LOCAL</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Ready 2 pulay minecraft %s</string>
     <string name="mcl_launch_cleancache">Cleanin cache filez</string>
     <string name="mcl_launch_downloading">Downloadin %s</string>
     <string name="mcl_launch_downloading_progress">"Downloadin %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Preparin 2 download resourcez</string>
+    <string name="mcl_launch_error_localmode">MINECRAFT CANT BE LEGALLY INSTALLD WHEN LOGGD IN WIF LOCAL AKOWNT. PLZ SWITCH 2 AN ONLINE AKOWNT 2 CONTINUE.</string>
     <string name="mcl_options">Opshuns</string>
     <string name="mcl_option_modinstall">L’unch mod installr (Forge, LabyMod, Fabric, etc...)</string>
     <string name="mcl_option_modinstallwitharg">L’unch mod installr (wif cuztoum argumentz)</string>
     <string name="mcl_option_customcontrol">Custom controls</string>
     <string name="mcl_option_settings">Settinz</string>
     <string name="mcl_option_about">Bout</string>
+    <string name="mcl_setting_title_use_surface_view">USE ALTERNATE SURFACE RENDERIN</string>
+    <string name="mcl_setting_subtitle_use_surface_view">CUD HALP PERFORMANCE IN GPU BOUND SCENARIOS</string>
     <string name="mcl_setting_title_uninstalljre">Uninstall Coffee Cupz’ Runtime</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Launchah restart requird] dis letz u re-install Coffee Cupz’ Runtime</string>
     <string name="mcl_setting_title_freeform">Launch Minecraft in Freeform moed</string>
@@ -82,9 +83,6 @@
     <string name="mcl_setting_category_general">General settingz</string>
     <string name="mcl_setting_category_scaling">Scalin settingz</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
-    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): givez OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): givez OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): givz OpenGL 2.1 + partial 3.2 (1.17 needz moredakka!)</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): iksportz OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): givez OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Vershun type will be in vershun list</string>
@@ -107,11 +105,10 @@
     <string name="global_error_field_empty">Dis field can\'t bees empty</string>
     <string name="global_waiting">Waitin’, meow~</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Application/Game Escapd witf code %d</string>
+    <string name="mcn_exit_title">Applicashun/game exitd wif code %d, chek lastestlog.txt 4 moar details.</string>
     <string name="mcn_exit_call">Exit</string>
     <string name="mcn_exit_confirm">R u suer u wantz 2 forec cloes?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 wuz not installd!</string>
-    <string name="mcn_check_fail_incompatiblearch">Architecchur %1$s iz incompatibel wif Jaav Runtiem %2$s.</string>
     <string name="mcn_check_fail_vulkan_support">Catz mobile cant’ handel Vulkan Zink renderer!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
@@ -133,6 +130,13 @@
     <string name="control_customkey">Send custom keycoed</string>
     <string name="control_scaleup">Bigging go up</string>
     <string name="control_scaledown">Bigging go down</string>
+    <!-- ImportControlActivity Strings -->
+    <string name="import_control_label">Import controls</string>
+    <string name="import_control_invalid_file">Invalid or coruptd file</string>
+    <string name="import_control_import_button">import controls</string>
+    <string name="import_control_verifying_file">File iz bean verifid plz wait an try again…</string>
+    <string name="import_control_invalid_name">Invalid naym ir file alerdy exists</string>
+    <string name="import_control_done">Importatshun dun</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -159,7 +163,9 @@
     <string name="customctrl_addbutton">Add button</string>
     <string name="customctrl_addbutton_drawer">Add buton drawr’</string>
     <string name="customctrl_addsubbutton">Add b’low-buton</string>
+    <string name="customctrl_add_subbutton_message">Sub-butn %d haz bean addd !</string>
     <string name="customctrl_selectdefault">Select defaul Control json</string>
+    <string name="main_install_jar_file">Install .jar</string>
     <string name="main_options">Opshuns</string>
     <string name="main_play">Pulay</string>
     <string name="main_welcome">Welcom, catz %s</string>
@@ -188,6 +194,7 @@
     <string name="mcl_memory_allocation">RAM allocasion</string>
     <string name="mcl_memory_allocation_subtitle">Controls how mutch RAM iz given 2 Minecraft</string>
     <string name="multirt_runtime_corrupt">Derti Coffee Cup</string>
+    <string name="multirt_runtime_incompatiblearch">Incompatible architecchur: %s</string>
     <string name="multirt_config_title">Coffee Cupz’ Unreal Machinez</string>
     <string name="multirt_config_add">Add new</string>
     <string name="multirt_config_add_subtitle">Add new Coffee Cupz’ Unreal Machine</string>
@@ -197,11 +204,43 @@
     <string name="multirt_config_setdefault">Set favoritz</string>
     <string name="multirt_config_setdefault_already">My favritz</string>
     <string name="multirt_config_removeerror_last">Catz cant’ si any Coffee Cup’s Runtime in kleksion</string>
-    <string name="multirt_nocompartiblert">Catz cant’ si ani drunkabl’ Coffee Cup’s Runtime</string>
-    <string name="compat_117_message">Minecraft 21w10a ur newer needz OpenGL 3.2 Core Profile (ur newer). GL4ES wrapper doeznt’ furly surport it at momentz, but their iz sume additivz resourcez catz can inztall tu run the’z version. Scratch OK tu confurm inztallursion, ur Cancel to abort l’unch.</string>
+    <string name="multirt_nocompartiblert">Ken´t find any compatibl Java Runtime. Dis vershun reqirez Java %d or newr.</string>
+    <string name="multirt_nojava8rt">Ken´t find Java 8. In ordr 2 use dis opshun, u ned 2 install Java 8.</string>
     <string name="compat_11x_playanyway">Cat stil\' won tu play</string>
     <string name="pvc_gameDirectory">Gamez’ direktory</string>
     <string name="pvc_jvmArgs">CCz’UM argumentz</string>
     <string name="pvc_title">Itch-version settinz’</string>
     <string name="storage_warning_title">Starags changez</string>
+    <string name="storage_warning_text"><![CDATA[Due 2 Google/´s new scopd storge enforcements addd in android 10 an highr, we r requird 2 moov teh game directory into an app-private foldr.<br /> Teh new foldr 4 pojav filez iz <b> Android/data/%s/filez/</b> (Also akcesible usin storage providr in ur file explorr).<br /> If u ned 2 copy ur game filez, plz copy evrythin frum teh original foldr at <b>gamez/pojavlaunchr</b> manually.]]></string>
+    <string name="control_offset_title">Control offset</string>
+    <string name="control_top_offset">Top offset: </string>
+    <string name="control_right_offset">right offset: </string>
+    <string name="control_bottom_offset">bottom offset: </string>
+    <string name="control_left_offset">left offset: </string>
+    <string name="preference_control_offset_title">Control side offsetz</string>
+    <string name="preference_control_offset_description">Set a custom offset 2 each side ov teh screen</string>
+    <string name="preference_control_description">Gesturez typez, triggers, an scalin</string>
+    <string name="preference_java_title">Java Tweakz</string>
+    <string name="preference_java_description">Java vershuns, jvm arguments, an ram amount</string>
+    <string name="preference_misc_title">Miscellaneous settings</string>
+    <string name="preference_misc_description">Vershun list, an libz checkz</string>
+    <string name="preference_experimental_title">Experimental Stuff</string>
+    <string name="preference_experimental_description">Use things thar wif considerashun, no support.</string>
+    <string name="preference_sustained_performance_title">Enable sustaind performance mode</string>
+    <string name="preference_sustained_performance_description">Limit thermal thrittlin by limitin peak performance</string>
+    <string name="preference_back_title">Bak 2 teh last screen</string>
+    <string name="gles_hack_title">GL4ES Shrink heck</string>
+    <string name="gles_hack_none">Doan shrink texturez</string>
+    <string name="gles_hack_always">Dividez all texturez by 2</string>
+    <string name="gles_hack_sometimes">Dividez big texturez by /2 or /4</string>
+    <string name="unnamed">No named</string>
+    <string name="profiles_latest_snapshot">last snap shot</string>
+    <string name="profiles_latest_release">latest releez</string>
+    <string name="profiles_editing">Editin cat</string>
+    <string name="profiles_profile_name">Naym</string>
+    <string name="profiles_profile_version">Type of cat</string>
+    <string name="global_delete">Delete</string>
+    <string name="pedit_java_runtime">Java runtime</string>
+    <string name="pedit_renderer">Renderer</string>
+    <string name="migrated_profile_str">%s vershun configuration</string>
 </resources>

@@ -11,9 +11,7 @@
     <string name="login_online_password_hint">Passord</string>
     <string name="login_online_check_keeplogin">Hold meg pålogget</string>
     <string name="login_online_login_label">Logg inn</string>
-    <string name="login_offline_label">Logg inn som frakoblet konto</string>
     <string name="login_error_exist_username">Dette brukernavn er allerede i bruk</string>
-    <string name="login_error_offline_password">Frakoblet konto kan ikke inkludere passord!</string>
     <string name="login_microsoft">Logg inn med Microsoft</string>
     <string name="login_select_account">Velg konto</string>
     <string name="login_title_no_saved_account">Ingen konto funnet!</string>
@@ -43,7 +41,6 @@
     <string name="mcl_tab_crash">Krasj logg</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Tilkoblet</string>
-    <string name="mcl_account_offline">Ikke tilkoblet</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Klar til å spille Minecraft %s</string>
     <string name="mcl_launch_cleancache">Tømmer cache-filer</string>
@@ -81,9 +78,6 @@
     <string name="mcl_setting_category_general">Generelle innstillinger</string>
     <string name="mcl_setting_category_scaling">Innstillinger for skalering</string>
     <string name="mcl_setting_category_renderer">Gjengir</string>
-    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exports OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): exports OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): eksporterer OpenGL 2.1 + delvis 3.2 (1.17 støttes ikke ennå)</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): eksporterer OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Versjonstype vil være i versjonslisten</string>
     <string name="mcl_setting_veroption_release">Release</string>
@@ -105,11 +99,9 @@
     <string name="global_error_field_empty">Feltet kan ikke stå tomt</string>
     <string name="global_waiting">Vent</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Applikasjon/Spill avsluttet med kode %d</string>
     <string name="mcn_exit_call">Avslutt</string>
     <string name="mcn_exit_confirm">Er du sikker på at du vil tvinge avslutte?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 ble ikke installert!</string>
-    <string name="mcn_check_fail_incompatiblearch">Arkitektur %1$s er ikke kompatibel med Java Runtime %2$s.</string>
     <string name="mcn_check_fail_vulkan_support">Vulkan Zink gjengir støttes ikke på denne enheten!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
@@ -131,6 +123,7 @@
     <string name="control_customkey">Send tilpasset kode</string>
     <string name="control_scaleup">Skaler opp</string>
     <string name="control_scaledown">Skalere ned</string>
+    <!-- ImportControlActivity Strings -->
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -184,4 +177,6 @@
     <string name="multirt_progress_caching">Bufrer...</string>
     <string name="multirt_config_setdefault">Sett som standard</string>
     <string name="multirt_config_setdefault_already">Standard</string>
+    <string name="profiles_profile_name">Navn</string>
+    <string name="pedit_renderer">Gjengir</string>
 </resources>

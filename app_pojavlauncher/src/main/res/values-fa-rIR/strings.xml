@@ -11,10 +11,8 @@
     <string name="login_online_password_hint">رمز عبور</string>
     <string name="login_online_check_keeplogin">مرا وارد شده نگه دار</string>
     <string name="login_online_login_label">ورود</string>
-    <string name="login_offline_label">ورود به عنوان اکانت آفلاین</string>
     <string name="login_error_invalid_username">یوزرنیم نامعتبر. یوزرنیم باید بین ۳-۱۶ کاراکتر باشد، و تنها از کاراکترهای A-Z, a-z, 0-9 و _ استفاده شود.</string>
     <string name="login_error_exist_username">این یوزرنیم قبلا استفاده شده</string>
-    <string name="login_error_offline_password">اکانت آفلاین به رمز عبور نیاز ندارد!</string>
     <string name="login_microsoft">ورود با مایکروسافت</string>
     <string name="login_select_account">انتخاب اکانت</string>
     <string name="login_title_no_saved_account">اکانتی پیدا نشد!</string>
@@ -44,19 +42,21 @@
     <string name="mcl_tab_crash">گزارش (لاگ) کرش</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">متصل شد</string>
-    <string name="mcl_account_offline">آفلاین</string>
+    <string name="mcl_account_local">محلی</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">آماده برای اجرای ماینکرفت %s</string>
     <string name="mcl_launch_cleancache">پاکسازی فایل‌های کَش</string>
     <string name="mcl_launch_downloading">در حال دانلود %s</string>
     <string name="mcl_launch_downloading_progress">"در حال دانلود %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">آماده‌سازی برای دانلود منابع</string>
+    <string name="mcl_launch_error_localmode">ماینکرفت وقتی با اکانت محلی وارد شوید قانونا نمیتواند نصب شود. لطفا برای ادامه دادن با یک اکانت آنلاین اکانتتان را جایگزین کنید.</string>
     <string name="mcl_options">گزینه‌ها</string>
     <string name="mcl_option_modinstall">یک نصب کننده ماد را باز کنید (فورج، لیبی‌ماد، فابریک، ...)</string>
     <string name="mcl_option_modinstallwitharg">یک نصب کننده ماد را باز کنید (با متغیر شخصی)</string>
     <string name="mcl_option_customcontrol">کنترل‌های شخصی</string>
     <string name="mcl_option_settings">تنظیمات</string>
     <string name="mcl_option_about">درباره</string>
+    <string name="mcl_setting_title_use_surface_view">از رندر گیر سطوح جایگزین استفاده کنید</string>
     <string name="mcl_setting_title_uninstalljre">حذف نصب جاوا ران تایم</string>
     <string name="mcl_setting_subtitle_uninstalljre">[ری‌استارت لانچر نیاز است] می‌توانید جاوا ران تایم را مجددا نصب کنید</string>
     <string name="mcl_setting_title_freeform">بازکردن ماینکرفت در حالت Freeform</string>
@@ -66,7 +66,7 @@
     <string name="mcl_setting_title_ignore_notch">حفره دوربین را نادیده بگیر</string>
     <string name="mcl_setting_subtitle_ignore_notch">حفره دوربین را نادیده می‌گیرد و صفحه زیر آن را گسترش می‌دهد.\nتجربه کنترل بهتری به شما می‌دهد.</string>
     <string name="mcl_setting_title_resolution_scaler">تغییر مقیاس رزولوشن</string>
-    <string name="mcl_setting_subtitle_resolution_scaler">به شنا اجازه می‌دهد رزولوشن (کیفیت) بازی را کاهش دهید. 100% به معنای کیفیت تمام صفحه است</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">به شما اجازه می‌دهد رزولوشن (کیفیت) بازی را کاهش دهید. 100% به معنای کیفیت تمام صفحه است</string>
     <string name="mcl_setting_title_longpresstrigger">زمان مورد نیاز برای فعال کردن فشردن طولانی</string>
     <string name="mcl_setting_subtitle_longpresstrigger">تغییر زمان برای فعال شدن فشردن طولانی جهت کَندَن بلاک و دراپ کردن آیتم.</string>
     <string name="mcl_setting_title_backtorightmouse">دکمه برگشت به عنوان راست کلیک ماوس</string>
@@ -82,9 +82,6 @@
     <string name="mcl_setting_category_general">تنظیمات عمومی</string>
     <string name="mcl_setting_category_scaling">تنظیمات مقیاسی</string>
     <string name="mcl_setting_category_renderer">رندر کننده</string>
-    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exports OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): exports OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): خروجی گرفتن از OpenGL 2.1 + قسمتی از 3.2 (بدون پشتیبانی از 1.17)</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): خروجی گرفتن از OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exports OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">نوع ورژن برای نمایش در لیست ورژن‌ها</string>
@@ -107,11 +104,10 @@
     <string name="global_error_field_empty">این فیلد نمی‌تواند خالی باشد</string>
     <string name="global_waiting">صبر کنید</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">نرم‌افزار/بازی خارج شد با کدِ %d</string>
+    <string name="mcn_exit_title">برنامه یا بازی با کد مرجوعی %d خارج شد. برای جزئیات بیشتر به lastlog.text مراجعت کنید.</string>
     <string name="mcn_exit_call">خروج</string>
     <string name="mcn_exit_confirm">آیا از خروج اجباری اطمینان دارید؟</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 نصب نشده است!</string>
-    <string name="mcn_check_fail_incompatiblearch">معماریِ %1$s با جاوا ران تایمِ %2$s ناسازگار است.</string>
     <string name="mcn_check_fail_vulkan_support">رندر کننده Vulkan Zink در این دستگاه پشتیبانی نمی‌شود!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
@@ -133,6 +129,12 @@
     <string name="control_customkey">ارسال keycode شخصی</string>
     <string name="control_scaleup">بزرگنمایی</string>
     <string name="control_scaledown">کوچکنمایی</string>
+    <!-- ImportControlActivity Strings -->
+    <string name="import_control_label">کننترل گر ها را وارد کنید</string>
+    <string name="import_control_invalid_file">فایل اشتباه یا آسیب دیده هست</string>
+    <string name="import_control_import_button">کنترل گر ها را وارد نمایید</string>
+    <string name="import_control_verifying_file">فایل تایید شده هست، لطفا صبر نموده و دوباره امتحان کنید…</string>
+    <string name="import_control_invalid_name">یا اسم اشتباه هست و یا فایل هم اکنون وجود دارد</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -160,6 +162,7 @@
     <string name="customctrl_addbutton_drawer">افزودن دکمه کشویی</string>
     <string name="customctrl_addsubbutton">افزودن زیر-دکمه</string>
     <string name="customctrl_selectdefault">انتخاب json کنترل پیش‌فرض</string>
+    <string name="main_install_jar_file">نصب .jar</string>
     <string name="main_options">گزینه‌ها</string>
     <string name="main_play">شروع بازی</string>
     <string name="main_welcome">خوش آمدید، %s</string>
@@ -168,7 +171,7 @@
     <string name="main_version">ورژن:</string>
     <string name="main_nocrash">هیچ کرشی شناسایی نشد</string>
     <string name="main_nolog">بدون لاگ.</string>
-    <string name="main_no_news_feed">ناتوانی در دریافت اخبار!</string>
+    <string name="main_no_news_feed">خطا در دریافت اخبار!</string>
     <string name="auto_ram_subtitle">تنظیم‌کننده اتوماتیک رم را فعال می‌کند</string>
     <string name="auto_ram_title">رم اتوماتیک</string>
     <string name="autoram_info_msg">مموری تنظیم شد روی %d مگابایت</string>
@@ -197,13 +200,12 @@
     <string name="multirt_config_setdefault">تنظیم پیش‌فرض</string>
     <string name="multirt_config_setdefault_already">پیش‌فرض</string>
     <string name="multirt_config_removeerror_last">شما باید حداقل یک جاوا ران تایم را نصب داشته باشید</string>
-    <string name="multirt_nocompartiblert">نمی‌توان هیچ جاوا ران تایم سازگاری را پیدا کرد</string>
-    <string name="compat_117_message">ماینکرفت 21w10a به بالا نیازمند OpenGL 3.2 است. متاسفانه GL4ES اکنون آن را به طور کامل پشتیبانی نمی‌کند، ولی بعضی منابع دیگر وجود دارد که با نصب آن‌ها می‌توانید این ورژن‌ها را بازی کنید.
-برای تایید نصب روی OK و برای خارج شدن روی Cancel بزنید.</string>
     <string name="compat_11x_playanyway">در هر صورت باز کن</string>
     <string name="pvc_gameDirectory">پوشه بازی</string>
     <string name="pvc_jvmArgs">آرگومان‌های JVM</string>
     <string name="pvc_title">تنظیمات مختص هر ورژن</string>
     <string name="storage_warning_title">تغییرات محل ذخیره‌سازی</string>
     <string name="storage_warning_text"><![CDATA[به دلیل تغییرات در محل ذخیره‌سازی توسط گوگل در اندروید 10 و بالاتر، ما مجبور به تغییر پوشه بازی به یک پوشه شخصی هستیم.<br /> پوشه جدید برای فایل‌های پوجاو لانچر این است: <b>Android/data/%s/files/</b> (اجازه دسترسی به مرورگر فایل خود، می‌توانید به این فایل‌ها دسترسی پیدا کنید).<br /> اگر می‌خواهید فایل‌های بازی را کپی کنید، باید فایل‌های پوشه <b>games/PojavLauncher</b> را به صورت دستی کپی کنید.]]></string>
+    <string name="profiles_profile_name">نام</string>
+    <string name="pedit_renderer">رندر کننده</string>
 </resources>

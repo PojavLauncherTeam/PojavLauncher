@@ -11,10 +11,8 @@
     <string name="login_online_password_hint">סיסמה</string>
     <string name="login_online_check_keeplogin">השאר אותי מחובר</string>
     <string name="login_online_login_label">התחבר</string>
-    <string name="login_offline_label">התחבר כחשבון לא מקוון</string>
     <string name="login_error_invalid_username">שם המשתמש לא תקין. שם המשתמש צריך להיות בטווח של 3-16 תווים, לכלול רק A-Z, a-z, 0-9 וקו תחתון.</string>
     <string name="login_error_exist_username">שם המשתמש כבר קיים</string>
-    <string name="login_error_offline_password">חשבונות במצב \"לא מקוון\" לא כוללים סיסמא!</string>
     <string name="login_microsoft">התחברות Microsoft</string>
     <string name="login_select_account">בחר חשבון</string>
     <string name="login_title_no_saved_account">לא נמצאו חשבונות!</string>
@@ -44,21 +42,23 @@
     <string name="mcl_tab_crash">רשומת קריסה</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">מחובר</string>
-    <string name="mcl_account_offline">לא מקוון</string>
+    <string name="mcl_account_local">מקומי</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">מוכן להפעיל Minecraft %s</string>
     <string name="mcl_launch_cleancache">מנקה קבצי מטמון</string>
     <string name="mcl_launch_downloading">מוריד %s</string>
     <string name="mcl_launch_downloading_progress">"מתקין %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">מתכונן להורדת משאבים</string>
+    <string name="mcl_launch_error_localmode">לא ניתן להתקין מיינקראפט כאשר מתחברים לחשבון מקומי. הנכם מתבקשים להתחבר לחשבונכם על מנת להמשיך בהתקנה.</string>
     <string name="mcl_options">אפשרויות</string>
     <string name="mcl_option_modinstall">הפעל אשף התקנה ל-mod (למשל: Forge, LabyMod, Fabric, וכדומה)</string>
     <string name="mcl_option_modinstallwitharg">הפעל אשף התקנה ל-mod (עם פרמטרים מותאמים אישית)</string>
     <string name="mcl_option_customcontrol">פקדים מותאמים אישית</string>
     <string name="mcl_option_settings">הגדרות</string>
-    <string name="mcl_option_about">אודות</string>
+    <string name="mcl_option_about">על אודות</string>
+    <string name="mcl_setting_subtitle_use_surface_view">עשוי להועיל בביצועי ה-GPU בתנאים מסוימים</string>
     <string name="mcl_setting_title_uninstalljre">הסר התקנת Java Runtime</string>
-    <string name="mcl_setting_subtitle_uninstalljre">[אתחול נדרש] זה ייתן לך להתקין מחדש את Java Runtime</string>
+    <string name="mcl_setting_subtitle_uninstalljre">[אתחול נדרש] זה ייאפשר להתקין מחדש את Java Runtime</string>
     <string name="mcl_setting_title_freeform">פתח Minecraft במצב Freeform</string>
     <string name="mcl_setting_subtitle_freeform">פתח Minecraft בחלון מרחף. Android 7.0 ומעלה נדרש</string>
     <string name="mcl_setting_title_hide_sidebar">הסתר את סרגל הצד</string>
@@ -81,15 +81,14 @@
     <string name="mcl_setting_subtitle_javaargs">זהירות! שינוי ערכים אלה ללא ידע מתאים עלול לגרום למשחק לקרוס.</string>
     <string name="mcl_setting_category_general">הגדרות כלליות</string>
     <string name="mcl_setting_category_scaling">הגדרות קנה מידה</string>
-    <string name="mcl_setting_category_renderer">מעבד</string>
-    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): מייצא את OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): מייצא את OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): מייצא את OpenGL 2.1 + חלק מגירסת 3.2 (אין תמיכה ב 1.17 כרגע)</string>
+    <string name="mcl_setting_category_renderer">רינדור</string>
+    <string name="mcl_setting_renderer_gles2_4">gl4es הקדוש: תומך בגירסאות 1.0-1.19+</string>
+    <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): מייצא את OpenGL 4.3</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): מייצא את OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): מייצא את OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">סוג הגרסה שיופיע ברשימת הגרסאות</string>
     <string name="mcl_setting_veroption_release">הפצה</string>
-    <string name="mcl_setting_veroption_snapshot">בטא</string>
+    <string name="mcl_setting_veroption_snapshot">סנאפשוט</string>
     <string name="mcl_setting_veroption_oldalpha">אלפא: גרסה ישנה</string>
     <string name="mcl_setting_veroption_oldbeta">בטא: גרסה ישנה</string>
     <string name="mcl_version_clone">שכפול</string>
@@ -107,11 +106,10 @@
     <string name="global_error_field_empty">שדה זה אינו יכול להיות ריק</string>
     <string name="global_waiting">המתן</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">היישומון/משחק יצא עם הקוד %d</string>
+    <string name="mcn_exit_title">היישומון / המשחק קרס, עם קוד שגיאה %d, בדוק את latestlog.txt למידע נוסף.</string>
     <string name="mcn_exit_call">צא</string>
     <string name="mcn_exit_confirm">האם אתה בטוח שאתה רוצה לכפות כיבוי?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 לא הותקן!</string>
-    <string name="mcn_check_fail_incompatiblearch">ארכיטקטורה %1$s לא נתמכת ב Java Runtime %2$s.</string>
     <string name="mcn_check_fail_vulkan_support">מרנדר Vulkan Zink לא נתמך במכשיר זה!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">ממשק משתמש(GUI)</string>
@@ -133,6 +131,13 @@
     <string name="control_customkey">שלח קוד מקש מותאם אישית</string>
     <string name="control_scaleup">הגדל</string>
     <string name="control_scaledown">הקטן</string>
+    <!-- ImportControlActivity Strings -->
+    <string name="import_control_label">ייבוא פקדים</string>
+    <string name="import_control_invalid_file">קובץ שגוי או פגום</string>
+    <string name="import_control_import_button">ייבוא פקדים</string>
+    <string name="import_control_verifying_file">הקובץ נמצא באימות, אנא המתן ונסה שוב…</string>
+    <string name="import_control_invalid_name">שם שגוי או שהקובץ כבר קיים</string>
+    <string name="import_control_done">ייבוא בוצע</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -163,8 +168,9 @@
     <string name="customctrl_addbutton_drawer">הוסף צייר של כפתור</string>
     <string name="customctrl_addsubbutton">הוסף תת-כפתור</string>
     <string name="customctrl_selectdefault">בחר קובץ שליטה כברירת מחדל</string>
+    <string name="main_install_jar_file">התקנת .jar</string>
     <string name="main_options">אפשרויות</string>
-    <string name="main_play">התחל לשחק!</string>
+    <string name="main_play">הפעל</string>
     <string name="main_welcome">ברוך הבא, %s</string>
     <string name="main_infodev">מידע (מפתח)</string>
     <string name="main_switchuser">החלף משתמש</string>
@@ -192,6 +198,7 @@
     <string name="mcl_memory_allocation_subtitle">שולט בכמות הזיכרון הניתנת ל- Minecraft</string>
     <string name="multirt_java_ver">%s (Java %d)</string>
     <string name="multirt_runtime_corrupt">Java Runtime פגומה</string>
+    <string name="multirt_runtime_incompatiblearch">ארכיטקטורה לא נתמכת: %s</string>
     <string name="multirt_config_title">Java VMs</string>
     <string name="multirt_config_add">הוסף חדש</string>
     <string name="multirt_config_add_subtitle">ייבוא Java VM חדשה</string>
@@ -201,12 +208,41 @@
     <string name="multirt_config_setdefault">הגדר כברירת מחדל</string>
     <string name="multirt_config_setdefault_already">ברירת מחדל</string>
     <string name="multirt_config_removeerror_last">נדרש שיהיה לך לפחות Java Runtime אחת מותקנת</string>
-    <string name="multirt_nocompartiblert">לא נמצאה Java Runtime תואמת</string>
-    <string name="compat_117_message">מיינקראפט 21w10a+ דורש את פרופיל הליבה שלOpenGL 3.2. למרבה הצער, המעטפת GL4ES אינה תומכת בו במלואה כרגע, אך ישנם כמה משאבים נוספים שתוכל להתקין להפעלת גרסאות אלה. לחץ על אישור כדי לאשר את ההתקנה ולחץ על ביטול כדי לבטל את ההפעלה.</string>
+    <string name="multirt_nocompartiblert">לא ניתן למצוא Java Runtime נתמכת. גרסת Java %d ומעלה נדרשת.</string>
+    <string name="multirt_nojava8rt">לא מצאתי את Java 8. על מנת להשתמש באפשרות זו, עליך להתקין Java 8.</string>
     <string name="compat_11x_playanyway">הפעל בכל זאת</string>
     <string name="pvc_gameDirectory">תיקיית המשחק</string>
     <string name="pvc_jvmArgs">פרמטרים של JVM</string>
     <string name="pvc_title">הגדרות לפי גירסה</string>
     <string name="storage_warning_title">שינויי אחסון</string>
     <string name="storage_warning_text"><![CDATA[בשל אכיפות האחסון החדשות של Google שנוספו ב- Android 10 ואילך, עלינו להעביר את ספריית המשחק לתיקייה פרטית לאפליקציות.<br /> התיקיה החדשה לקובצי Pojav היא <b>Android/data/%s/files/</b> (נגיש גם באמצעות ספק אחסון בסייר הקבצים שלך).<br /> אם אתה צריך להעתיק את קבצי המשחק שלך, העתק הכל מהתיקיה המקורית ב <b>games/PojavLauncher</b> באופן ידני.]]></string>
+    <string name="preference_mouse_start_title">התחל עם עכבר וירטואלי מופעל</string>
+    <string name="preference_mouse_start_description">בעת השימוש באפשרות זו, \"תישפטו\" ע\"י Mathias-Boulay</string>
+    <string name="preference_video_title">וידאו ועיבוד</string>
+    <string name="preference_video_description">רזולוציה, סוג קנה מידה, ומעבד (וידאו)</string>
+    <string name="preference_control_title">התאמה אישית של פקדים</string>
+    <string name="preference_control_description">סוגי מחוות, טריגרים, וקנה מידה</string>
+    <string name="preference_java_title">התאמות ל- Java</string>
+    <string name="preference_java_description">גירסאות Java, JVM arguments, וזיכרון עבודה (RAM)</string>
+    <string name="preference_misc_title">הגדרות שונות</string>
+    <string name="preference_misc_description">רשימת גירסאות, ובדיקת ספריות</string>
+    <string name="preference_experimental_title">דברים ניסיוניים</string>
+    <string name="preference_experimental_description">אין תמיכה, יש להשתמש באפשרויות לפי שיקול דעתכם.</string>
+    <string name="preference_sustained_performance_title">הפעל \"מצב מאוזן\"</string>
+    <string name="preference_sustained_performance_description">מגביל התחממות טרמית (של המכשיר) ע\"י הפחתת ביצועים</string>
+    <string name="preference_back_title">חזרה אל המסך האחרון</string>
+    <string name="gles_hack_title">כיווץ GL4ES</string>
+    <string name="gles_hack_none">אל תכווץ טקסטורות</string>
+    <string name="gles_hack_always">חלק את כל הטקסטורות ב2</string>
+    <string name="gles_hack_sometimes">חלק טקסטורות גדולות ב-2 או 4</string>
+    <string name="unnamed">ללא שם</string>
+    <string name="profiles_latest_snapshot">הסנאפשוט העדכני</string>
+    <string name="profiles_latest_release">מהדורה עדכנית</string>
+    <string name="profiles_editing">עריכת פרופיל</string>
+    <string name="profiles_profile_name">שם</string>
+    <string name="profiles_profile_version">גרסא</string>
+    <string name="global_delete">מחיקה</string>
+    <string name="pedit_java_runtime">Java Runtime</string>
+    <string name="pedit_renderer">רינדור</string>
+    <string name="migrated_profile_str">%s גרסת תצורה</string>
 </resources>

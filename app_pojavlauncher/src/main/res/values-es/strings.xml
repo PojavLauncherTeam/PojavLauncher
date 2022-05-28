@@ -7,20 +7,18 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">Email o nombre de usuario</string>
+    <string name="login_online_username_hint">Correo o nombre de usuario</string>
     <string name="login_online_password_hint">Contraseña</string>
     <string name="login_online_check_keeplogin">Mantener la sesión iniciada</string>
     <string name="login_online_login_label">Iniciar sesión</string>
-    <string name="login_offline_label">Iniciar sesión con una cuenta sin conexión</string>
     <string name="login_error_invalid_username">Nombre de usuario inválido. Los nombres de usuario deben tener entre 3-16 caracteres, y solo contienen: A-Z, a-z, 0-9 y guión bajo.</string>
     <string name="login_error_exist_username">Este nombre de usuario ya existe</string>
-    <string name="login_error_offline_password">Las cuentas sin conexión no pueden tener contraseña!</string>
     <string name="login_microsoft">Cuenta de Microsoft</string>
     <string name="login_select_account">Seleccione una cuenta</string>
     <string name="login_title_no_saved_account">No se encontraron cuentas!</string>
     <string name="login_dialog_no_saved_account">No tienes ninguna cuenta guardada.\nUsa la opción <b>\"Mantenme conectado\"</b> para guardar una cuenta al iniciar sesión por primera vez.</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Desliza de derecha a izquierda para abrir el menú ◀\nMantén pulsado un botón para personalizar: editar, redimensionar o eliminar."</string>
+    <string name="hint_control_mapping">"Desliza de derecha a izquierda para abrir el menú ◀\nMantén pulsado un botón para personalizar: editar, cambiar de tamaño o eliminar."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">¡Esta cuenta será borrada!</string>
     <!-- AlertDialog title -->
@@ -34,7 +32,7 @@
     <!-- Toast messages -->
     <string name="toast_permission_denied">¡Se requiere el permiso de lectura/escritura al almacenamiento!</string>
     <string name="toast_optifine_success">Instalación completada</string>
-    <string name="toast_uninstalljre_done">Java Runtime desinstalado</string>
+    <string name="toast_uninstalljre_done">Java Runtime exitosamente desinstalado!</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
@@ -44,19 +42,22 @@
     <string name="mcl_tab_crash">Registro de errores</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Conectado</string>
-    <string name="mcl_account_offline">Desconectado</string>
+    <string name="mcl_account_local">Local</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Listo para jugar Minecraft %s</string>
-    <string name="mcl_launch_cleancache">Limpiando archivos de caché</string>
+    <string name="mcl_launch_cleancache">Limpiando archivos caché</string>
     <string name="mcl_launch_downloading">Descargando %s</string>
     <string name="mcl_launch_downloading_progress">"Descargando %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Preparando para descargar los recursos</string>
+    <string name="mcl_launch_error_localmode">Minecraft no puede instalarse legalmente debido a que ha iniciado sesión con una cuenta local. Por favor, cambie a una cuenta en línea para continuar.</string>
     <string name="mcl_options">Opciones</string>
     <string name="mcl_option_modinstall">Usar un instalador de mods (Forge, LabyMod, Fabric, etc...)</string>
-    <string name="mcl_option_modinstallwitharg">Iniciar un instalador de un mod (con comandos personalizados)</string>
+    <string name="mcl_option_modinstallwitharg">Iniciar un instalador de mods (con argumentos personalizados)</string>
     <string name="mcl_option_customcontrol">Controles personalizados</string>
     <string name="mcl_option_settings">Ajustes</string>
     <string name="mcl_option_about">Acerca de</string>
+    <string name="mcl_setting_title_use_surface_view">Usar representación de superficie alternativa</string>
+    <string name="mcl_setting_subtitle_use_surface_view">Puede ayudar al rendimiento en escenarios enlazados por tarjeta gráfica</string>
     <string name="mcl_setting_title_uninstalljre">Desinstalar Java runtime</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Reiniciar el lanzador] Esto te permitirá reinstalar Java Runtime</string>
     <string name="mcl_setting_title_freeform">Lanzar Minecraft en ventana flotante</string>
@@ -69,28 +70,28 @@
     <string name="mcl_setting_subtitle_resolution_scaler">Te permite reducir la resolución del juego. 100% es resolución completa</string>
     <string name="mcl_setting_title_longpresstrigger">Cuanto tiempo hasta que se active la pulsación larga</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Cambia el tiempo de activación durante una pulsación larga en destruir bloques y soltar objetos.</string>
-    <string name="mcl_setting_title_backtorightmouse">Tratar botón atrás como ratón derecho</string>
-    <string name="mcl_setting_subtitle_backtorightmouse">Algunos dispositivos tratan el ratón derecho externo como botón atrás. Si está usando ratón externo, debería habilitarlo.</string>
+    <string name="mcl_setting_title_backtorightmouse">Tratar el botón de atrás como el ratón derecho</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">Algunos dispositivos tratan al ratón derecho externo como el botón de atrás. Si está usando un ratón externo, debería habilitarlo.</string>
     <string name="mcl_setting_title_flat_button_style">Estilo de botón plano</string>
     <string name="mcl_setting_subtitle_flat_button_style">Habilita esto para cambiar el estilo de los botones de control a plano.</string>
-    <string name="mcl_setting_title_buttonscale">Escala de botones de control</string>
+    <string name="mcl_setting_title_buttonscale">Escala de botones del control</string>
     <string name="mcl_setting_subtitle_buttonscale">Auméntales el tamaño si los botones son muy pequeños.</string>
     <string name="mcl_setting_title_mousescale">Escala del ratón</string>
     <string name="mcl_setting_subtitle_mousescale">Cambiar el tamaño del ratón virtual.</string>
     <string name="mcl_setting_title_javaargs">JRE Argumentos de lanzamiento</string>
     <string name="mcl_setting_subtitle_javaargs">Ten cuidado, esto puede hacer que el juego se cuelgue si se modifica sin saber.</string>
-    <string name="mcl_setting_category_general">Opciones generales</string>
+    <string name="mcl_setting_category_general">Configuración general</string>
     <string name="mcl_setting_category_scaling">Ajustes de escala</string>
     <string name="mcl_setting_category_renderer">Renderizador</string>
-    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exports OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): exporta OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): exports OpenGL 2.1 + partial 3.2 (No, la versión 1.17 sigue sin funcionar todavía)</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exports OpenGL 4.6</string>
+    <string name="mcl_setting_renderer_gles2_4">gl4es milagroso: soporta 1.0-1.19+</string>
+    <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): exporta a OpenGL 4.3</string>
+    <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): exporta a OpenGL 3.0</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exporta a OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">El tipo de versión aparecerá en la lista de versiones</string>
-    <string name="mcl_setting_veroption_release">Lanzadas</string>
-    <string name="mcl_setting_veroption_snapshot">Snapshot</string>
-    <string name="mcl_setting_veroption_oldalpha">Alfa-vieja</string>
-    <string name="mcl_setting_veroption_oldbeta">Beta antigua</string>
+    <string name="mcl_setting_veroption_release">Lanzamientos</string>
+    <string name="mcl_setting_veroption_snapshot">Snapshots</string>
+    <string name="mcl_setting_veroption_oldalpha">Alphas</string>
+    <string name="mcl_setting_veroption_oldbeta">Betas</string>
     <string name="mcl_version_clone">Clonar</string>
     <!-- Global strings -->
     <string name="global_edit">Editar</string>
@@ -98,20 +99,19 @@
     <string name="global_warinng">Advertencia</string>
     <string name="global_load">Cargar</string>
     <string name="global_name">Nombre</string>
-    <string name="global_remove">Remover</string>
+    <string name="global_remove">Eliminar</string>
     <string name="global_clone">Clonar</string>
     <string name="global_restart">Reiniciar</string>
     <string name="global_save">Guardar</string>
     <string name="global_unpacking">Descomprimiendo</string>
-    <string name="global_error_field_empty">Este campo es obligarorio</string>
+    <string name="global_error_field_empty">Este campo es obligatorio</string>
     <string name="global_waiting">Espere</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">La aplicación/juego ha finalizado con el código %d</string>
+    <string name="mcn_exit_title">La aplicación/juego ha finalizado con el código %d, mira el archivo latestlog.txt para más detalles.</string>
     <string name="mcn_exit_call">Salir</string>
     <string name="mcn_exit_confirm">¿Estás seguro de que quieres forzar el cierre?</string>
     <string name="mcn_check_fail_lwjgl">¡LWJGL3 no ha sido instalado!</string>
-    <string name="mcn_check_fail_incompatiblearch">La arquitectura %1$s es incompatible con Java Runtime %2$s.</string>
-    <string name="mcn_check_fail_vulkan_support">El renderizador de Vulkan no es compatible con este dispositivo!</string>
+    <string name="mcn_check_fail_vulkan_support">El renderizador de Vulkan Zink no es compatible en este dispositivo!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">Interfaz</string>
     <string name="control_keyboard">Teclado</string>
@@ -130,14 +130,21 @@
     <string name="control_listplayers">Tab</string>
     <string name="control_mouse">Ratón</string>
     <string name="control_mouseoff">Ratón: Apagado</string>
-    <string name="control_mouseon">Ratón: encendido </string>
+    <string name="control_mouseon">Ratón: Encendido </string>
     <!-- MainActivity: Menu advanced controls -->
-    <string name="control_forceclose">Forzar cierre</string>
+    <string name="control_forceclose">Forzar el cierre</string>
     <string name="control_viewout">Registro de salida</string>
     <string name="control_adebug">Ingresar Debug</string>
     <string name="control_customkey">Enviar tecla personalizada</string>
-    <string name="control_scaleup">Scale up</string>
-    <string name="control_scaledown">Baje la pantatalla proporcionalmente2</string>
+    <string name="control_scaleup">Ampliar</string>
+    <string name="control_scaledown">Reducir</string>
+    <!-- ImportControlActivity Strings -->
+    <string name="import_control_label">Importar controles</string>
+    <string name="import_control_invalid_file">Archivo inválido o dañado</string>
+    <string name="import_control_import_button">importar controles</string>
+    <string name="import_control_verifying_file">El archivo está siendo verificado, por favor espere y vuelva a intentarlo…</string>
+    <string name="import_control_invalid_name">El nombre es inválido o el archivo ya existe</string>
+    <string name="import_control_done">Importación hecha</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -155,7 +162,7 @@
     <string name="customctrl_corner_radius">Radio de las esquinas</string>
     <string name="customctrl_stroke_width">Tamaño del trazo</string>
     <string name="customctrl_stroke_color">Color del trazo</string>
-    <string name="customctrl_dynamicpos">Posición dinámica</string>
+    <string name="customctrl_dynamicpos">Posición dinámica manual</string>
     <string name="customctrl_dynamicpos_x">X Dinámica</string>
     <string name="customctrl_dynamicpos_y">Y Dinámica</string>
     <string name="customctrl_transparency_bg">Transparencia del fondo</string>
@@ -167,21 +174,23 @@
     <string name="customctrl_addbutton">Añadir botón</string>
     <string name="customctrl_addbutton_drawer">Añadir cajón de botones</string>
     <string name="customctrl_addsubbutton">Añadir sub-botón</string>
+    <string name="customctrl_add_subbutton_message">¡El sub-botón n°%d ha sido añadido!</string>
     <string name="customctrl_selectdefault">Seleccionar controles por defecto</string>
+    <string name="main_install_jar_file">Instalar .jar</string>
     <string name="main_options">Opciones</string>
     <string name="main_play">Jugar</string>
     <string name="main_welcome">Bienvenido, %s</string>
     <string name="main_infodev">Información (DEV)</string>
     <string name="main_switchuser">Cambiar de usuario</string>
     <string name="main_version">Versión:</string>
-    <string name="main_nocrash">No se han detectado errores</string>
+    <string name="main_nocrash">No se han detectado fallos</string>
     <string name="main_nolog">Sin registros.</string>
     <string name="main_no_news_feed">¡Error al obtener el feed de noticias!</string>
     <string name="auto_ram_subtitle">Habilita el ajuste automático de RAM</string>
     <string name="auto_ram_title">Auto RAM</string>
     <string name="autoram_info_msg">Memoria establecida a %d MB</string>
     <string name="mcl_setting_check_libraries">Comprobar las librerías después de descargar</string>
-    <string name="mcl_setting_check_libraries_subtitle">Esta opción fuerza al lanzador a comprobar el hash de la biblioteca si está disponible. Evita descargas rotas.</string>
+    <string name="mcl_setting_check_libraries_subtitle">Esta opción fuerza al lanzador a comprobar si el hash de la librería está disponible. Evita descargas rotas.</string>
     <string name="dl_library_sha_fail">La librería %s está dañada y se volverá a descargar</string>
     <string name="dl_library_sha_unknown">La librería %s no puede ser revisada, se asumirá que está en buen estado</string>
     <string name="dl_library_sha_pass">La librería %s está en buen estado y se puede utilizar</string>
@@ -195,20 +204,62 @@
     <string name="memory_warning_msg">La cantidad actual de memoria RAM libre (%d) es menor que la memoria RAM asignada (%d), lo que puede provocar cierres forzados. Cambia la asignación si el juego se cierra.</string>
     <string name="mcl_memory_allocation">Asignación de memoria</string>
     <string name="mcl_memory_allocation_subtitle">Controla cuánta memoria se le da a Minecraft</string>
-    <string name="multirt_runtime_corrupt">Java Runtime Corrompido</string>
+    <string name="multirt_runtime_corrupt">Java Runtime Corrupto</string>
+    <string name="multirt_runtime_incompatiblearch">Arquitectura incompatible: %s</string>
     <string name="multirt_config_title">Java VMs</string>
     <string name="multirt_config_add">Añadir</string>
-    <string name="multirt_config_add_subtitle">Importar un Java VM nuevo</string>
-    <string name="multirt_title">Gestor de Runtimes</string>
+    <string name="multirt_config_add_subtitle">Importar un nuevo Java VM </string>
+    <string name="multirt_title">Administrador de Runtimes</string>
     <string name="multirt_subtitle">Gestionar Java VMs instaladas</string>
     <string name="multirt_progress_caching">Cacheando...</string>
     <string name="multirt_config_setdefault">Establecer como predeterminado</string>
     <string name="multirt_config_setdefault_already">Predeterminado</string>
     <string name="multirt_config_removeerror_last">Debes tener al menos un Java Runtime instalado</string>
-    <string name="multirt_nocompartiblert">No se pudo encontrar ningún Java Runtime compatible</string>
-    <string name="compat_117_message">Las versiones a partir de Minecraft 21w10a en adelante requieren OpenGL 3.2. Lamentablemente, el wrapper de GL4ES no lo soporta totalmente en estos momentos, pero hay varios recursos adicionales que puedes instalar para ejecutar estas versiones.
-Presione \"Ok\" para confirmar la instalación o presione \"Cancelar\" para abortar el lanzamiento.</string>
-    <string name="compat_11x_playanyway">Jugar de todas formas</string>
+    <string name="multirt_nocompartiblert">No se pudo encontrar ningun runtime de Java compatible. Esta versión requiere Java %d o posterior.</string>
+    <string name="multirt_nojava8rt">No se puede encontrar Java 8. Para utilizar esta opción, necesita instalar Java 8.</string>
+    <string name="compat_117_message">Minecraft 21w10a+ requiere el módulo de OpenGL 3.2. Tristemente tu chip gráfico no soporta OpenGL ES 3.0 o superior, pero hay algunos recursos adicionales que tu puedes instalar para iniciar estas versiones. Presione OK para confirmar la instalación, o presione Cancelar para detener el inicio.</string>
+    <string name="compat_11x_playanyway">Jugar de todos modos</string>
+    <string name="pvc_gameDirectory">Directorio del juego</string>
     <string name="pvc_jvmArgs">Argumentos JVM</string>
     <string name="pvc_title">Configuración para esta versión</string>
+    <string name="storage_warning_title">Cambio de almacenamiento</string>
+    <string name="storage_warning_text"><![CDATA[Debido a las nuevas aplicaciones de almacenamiento de Google añadidas en Android 10 o superior, tenemos que mover el directorio del juego a una carpeta privada.<br /> La nueva carpeta para los archivos de PojavLauncher es <b>Android/data/%s/files/</b> (también accesible usando un proveedor de almacenamiento en su explorador de archivos).<br /> Si necesitas copiar tus archivos del juego, por favor copia todo desde la carpeta original en <b>juegos/PojavLauncher</b> manualmente.]]></string>
+    <string name="control_offset_title">Desplazamiento de control</string>
+    <string name="control_top_offset">Desplazamiento superior: </string>
+    <string name="control_right_offset">desplazamiento derecho: </string>
+    <string name="control_bottom_offset">desplazamiento inferior: </string>
+    <string name="control_left_offset">desplazamiento izquierdo: </string>
+    <string name="preference_control_offset_title">Control de desplazamiento lateral</string>
+    <string name="preference_control_offset_description">Establecer un desplazamiento personalizado a cada lado de la pantalla</string>
+    <string name="preference_mouse_start_title">Iniciar con el ratón virtual encendido</string>
+    <string name="preference_mouse_start_description">Usando esta opción podrás ser juzgado por Mathias-Boulay</string>
+    <string name="preference_video_title">Video y renderizador</string>
+    <string name="preference_video_description">Resolución, tipo de escalado y renderizador</string>
+    <string name="preference_control_title">Personalización del control</string>
+    <string name="preference_control_description">Tipos de gestos, disparadores y escalado</string>
+    <string name="preference_java_title">Ajustes de Java</string>
+    <string name="preference_java_description">Versiones de Java, argumentos JVM y cantidad de RAM</string>
+    <string name="preference_misc_title">Ajustes varios</string>
+    <string name="preference_misc_description">Lista de versiones, y comprobación de librerías</string>
+    <string name="preference_experimental_title">Cosas experimentales</string>
+    <string name="preference_experimental_description">Utilice las cosas con consideración, sin apoyo.</string>
+    <string name="preference_sustained_performance_title">Activar el modo de rendimiento sostenido</string>
+    <string name="preference_sustained_performance_description">Limita la velocidad térmica limitando el rendimiento máximo</string>
+    <string name="preference_back_title">Regresar a la pantalla anterior</string>
+    <string name="gles_hack_title">GL4ES Reducir hack</string>
+    <string name="gles_hack_none">No reducir las texturas</string>
+    <string name="gles_hack_always">Divida todas las texturas por 2</string>
+    <string name="gles_hack_sometimes">Divida grandes texturas por /2 o /4</string>
+    <string name="unnamed">Sin nombre</string>
+    <string name="profiles_latest_snapshot">Snapshot más reciente</string>
+    <string name="profiles_latest_release">Versión más reciente</string>
+    <string name="profiles_editing">Editando perfil</string>
+    <string name="profiles_profile_name">Nombre</string>
+    <string name="profiles_profile_version">Versión</string>
+    <string name="global_delete">Eliminar</string>
+    <string name="pedit_java_runtime">Java Runtime</string>
+    <string name="pedit_renderer">Renderizador</string>
+    <string name="arc_capes_title">Capas de Comestica</string>
+    <string name="arc_capes_desc">Activa las capas de Cosmetica (anteriormente Arc). Para más información ve a esta página https://cosmetica.cc. Necesitas Optifine.</string>
+    <string name="migrated_profile_str">%s Configuración de la versión</string>
 </resources>
