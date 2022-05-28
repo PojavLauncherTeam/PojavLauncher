@@ -42,6 +42,7 @@
     <string name="mcl_tab_crash">Journal d\'erreurs</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Connecté</string>
+    <string name="mcl_account_local">Local</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Prêt à jouer à Minecraft %s</string>
     <string name="mcl_launch_cleancache">Nettoyage des fichiers cache</string>
@@ -55,6 +56,8 @@
     <string name="mcl_option_customcontrol">Contrôles personnalisés</string>
     <string name="mcl_option_settings">Paramètres</string>
     <string name="mcl_option_about">À propos</string>
+    <string name="mcl_setting_title_use_surface_view">Utiliser un rendu sur une surface alternative</string>
+    <string name="mcl_setting_subtitle_use_surface_view">Peut aider lorsque le GPU contraint la performance</string>
     <string name="mcl_setting_title_uninstalljre">Désinstaller l\'environnement d\'exécution Java</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Redémarrage du Launcher requis] Cela vous permet de réinstaller l\'environnement d\'exécution Java</string>
     <string name="mcl_setting_title_freeform">Lancer Minecraft en mode libre</string>
@@ -79,6 +82,8 @@
     <string name="mcl_setting_category_general">Paramètres généraux</string>
     <string name="mcl_setting_category_scaling">Paramètres de mise à l\'échelle</string>
     <string name="mcl_setting_category_renderer">Moteur de rendu</string>
+    <string name="mcl_setting_renderer_gles2_4">gl4es edition sainte: supporte 1.0–1.19+</string>
+    <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): supporte OpenGL 4.3</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): exports OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exports OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Type de versions visible dans la liste des versions</string>
@@ -101,6 +106,7 @@
     <string name="global_error_field_empty">Ce champ ne peut pas être vide</string>
     <string name="global_waiting">Patientez</string>
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">L\'Application/Jeu a quitté avec le code %d, vérifiez le fichier latestlog.txt pour plus de détails.</string>
     <string name="mcn_exit_call">Quitter</string>
     <string name="mcn_exit_confirm">Voulez-vous vraiment forcer la fermeture ?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 n\'a pas été installé !</string>
@@ -153,6 +159,8 @@
     <string name="customctrl_orientation">Orientation</string>
     <string name="customctrl_background_color">Couleur d\'arrière-plan</string>
     <string name="customctrl_corner_radius">Rayon des coins</string>
+    <string name="customctrl_stroke_width">Épaisseur du contour</string>
+    <string name="customctrl_stroke_color">Couleur du contour</string>
     <string name="customctrl_dynamicpos">Position dynamique</string>
     <string name="customctrl_dynamicpos_x">X dynamique</string>
     <string name="customctrl_dynamicpos_y">Y dynamique</string>
@@ -163,6 +171,7 @@
     <string name="customctrl_keycombine_control">Ctrl</string>
     <string name="customctrl_keycombine_shift">Maj</string>
     <string name="customctrl_addbutton">Ajouter un bouton</string>
+    <string name="customctrl_addbutton_drawer">Ajouter un tiroir à boutons</string>
     <string name="customctrl_addsubbutton">Ajouter un sous-bouton</string>
     <string name="customctrl_add_subbutton_message">Le sous-bouton n°%d a été ajouté !</string>
     <string name="customctrl_selectdefault">Choisir json contrôle par défaut</string>
@@ -195,6 +204,7 @@
     <string name="mcl_memory_allocation">Allocation de mémoire</string>
     <string name="mcl_memory_allocation_subtitle">Contrôle la quantité de mémoire donnée à Minecraft</string>
     <string name="multirt_runtime_corrupt">Java Runtime corrompu</string>
+    <string name="multirt_runtime_incompatiblearch">Architecture incompatible : %s</string>
     <string name="multirt_config_title">Machine virtuelle Java</string>
     <string name="multirt_config_add">Ajouter un nouveau</string>
     <string name="multirt_config_add_subtitle">Importer une nouvelle machine virtuelle Java</string>
@@ -204,20 +214,51 @@
     <string name="multirt_config_setdefault">Définir par défaut</string>
     <string name="multirt_config_setdefault_already">Par défaut</string>
     <string name="multirt_config_removeerror_last">Vous devez avoir au moins un Java Runtime installé</string>
+    <string name="multirt_nocompartiblert">Impossible de trouver une version de Java compatible. Cette version nécessite au moins Java %d.</string>
+    <string name="multirt_nojava8rt">Java 8 est introuvable. Pour utiliser cette option, vous devez installer Java 8.</string>
+    <string name="compat_117_message">Minecraft 21w10a+ requiert d\'OpenGL 3.2 core. Malheureusement, votre GPU ne supporte pas OpenGL ES 3 ou plus, mais il y a des ressources supplémentaires que vous pouvez installer pour exécuter ces versions. Appuyez sur OK pour confirmer l\'installation et appuyez sur Annuler pour annuler le lancement.</string>
     <string name="compat_11x_playanyway">Jouer quand même</string>
+    <string name="pvc_gameDirectory">Répertoire du jeu</string>
+    <string name="pvc_jvmArgs">Arguments de la JVM</string>
+    <string name="pvc_title">Réglages par version</string>
+    <string name="storage_warning_title">Changements liés au stockage</string>
+    <string name="storage_warning_text"><![CDATA[À cause des restrictions imposées par Google sur l'emplacement de sauvegarde, nous sommes obligés de déplacer le répertoire du jeu dans un répertoire d'application.<br /> The répertoire est maintenant présent dans <b>Android/data/%s/files/</b> (aussi accessible via l'explorateur de fichier)<br />Si vous avez besoin de vos anciens fichiers, deplacez les depuis <b>games/PojavLauncher</b> manuellement.]]></string>
+    <string name="control_offset_title">Marge sur les contrôles</string>
+    <string name="control_top_offset">Marge supérieure: </string>
+    <string name="control_right_offset">Marge de droite: </string>
+    <string name="control_bottom_offset">Marge inférieure: </string>
+    <string name="control_left_offset">Marge de gauche: </string>
+    <string name="preference_control_offset_title">Marges sur les contrôles</string>
+    <string name="preference_control_offset_description">Définir une marge personnalisé pour chaque côté de l\'écran</string>
     <string name="preference_mouse_start_title">Démarrer avec la souris virtuelle activée</string>
     <string name="preference_mouse_start_description">Utiliser cette option vous fera être jugé par Mathias-Boulay</string>
+    <string name="preference_video_title">Vidéo et moteur de rendu</string>
+    <string name="preference_video_description">Résolution, mise à échelle et moteur de rendu</string>
     <string name="preference_control_title">Contrôlez la customisation</string>
+    <string name="preference_control_description">Gestes, déclencheurs et mise à l\'échelle</string>
     <string name="preference_java_title">Réglages Java</string>
     <string name="preference_java_description">Versions de Java, Arguments de la JVM, et montant de RAM</string>
     <string name="preference_misc_title">Paramètres divers</string>
     <string name="preference_misc_description">Liste des versions, et vérifications des librairies</string>
     <string name="preference_experimental_title">Trucs Expérimentaux</string>
+    <string name="preference_experimental_description">Utilisez ces options avec parcimonie, aucun support.</string>
     <string name="preference_sustained_performance_title">Activer le mode de performances soutenues</string>
     <string name="preference_sustained_performance_description">Limiter la limitation thermique en limitant les performances maximales</string>
     <string name="preference_back_title">Retour au dernier écran</string>
+    <string name="gles_hack_title">GL4ES hack réduction des textures</string>
+    <string name="gles_hack_none">Ne pas rétrécir les textures</string>
     <string name="gles_hack_always">Divise toutes les textures par 2</string>
     <string name="gles_hack_sometimes">Divise les grosses textures par 2 ou par 4</string>
+    <string name="unnamed">Unnamed</string>
+    <string name="profiles_latest_snapshot">Dernière snapshot</string>
+    <string name="profiles_latest_release">Dernière version</string>
+    <string name="profiles_editing">Éditer le profil</string>
     <string name="profiles_profile_name">Nom</string>
+    <string name="profiles_profile_version">Version</string>
+    <string name="global_delete">Supprimer</string>
+    <string name="pedit_java_runtime">Exécutable Java</string>
     <string name="pedit_renderer">Moteur de rendu</string>
+    <string name="arc_capes_title">Capes Cosmetica</string>
+    <string name="arc_capes_desc">Active les capes Cosmetica. Pour plus d\'informations visitez https://cosmetica.cc. Nécessite OptiFine.</string>
+    <string name="migrated_profile_str">Configuration de la version %s</string>
 </resources>
