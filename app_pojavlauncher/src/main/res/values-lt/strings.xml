@@ -42,12 +42,14 @@
     <string name="mcl_tab_crash">Išsijungimo įrašai</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Prisijungta</string>
+    <string name="mcl_account_local">Vietinė</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Pasiruošta žaisti Minecraft %s</string>
     <string name="mcl_launch_cleancache">Valomi nereikalingi failai</string>
     <string name="mcl_launch_downloading">Atsisiunčiama %s</string>
     <string name="mcl_launch_downloading_progress">"Atsisiunčiama %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Rengiamasi atsisiųsti resursus</string>
+    <string name="mcl_launch_error_localmode">\"Minecraft\" negali būti legaliai instaliuotas prisijungus su vietine paskyra. Prašau prisijunti prie interneto prieigą turinčios paskyros kad testumėte.</string>
     <string name="mcl_options">Pasirinkimai</string>
     <string name="mcl_option_modinstall">Paleisti modifikacijų įdiegimui (Forge, LabyMod, Fabric, kt.)</string>
     <string name="mcl_option_modinstallwitharg">Paleisti modifikacijų įdiegimui (su pasirinktinais argumentais)</string>
