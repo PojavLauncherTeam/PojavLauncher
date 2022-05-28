@@ -83,6 +83,7 @@
     <string name="mcl_setting_category_general">Allgemeine Einstellungen</string>
     <string name="mcl_setting_category_scaling">Einstellungen für die Größe der Benutzeroberfläche</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
+    <string name="mcl_setting_renderer_gles2_4">holy gl4es: unterstützt 1.0-1.19+</string>
     <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): Gibt OpenGL 4.3 aus</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): Gibt OpenGL 3.0 aus</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): Gibt OpenGL 4.6 aus</string>
@@ -216,6 +217,7 @@
     <string name="multirt_config_removeerror_last">Es muss mindestens eine Java-Runtime installiert sein</string>
     <string name="multirt_nocompartiblert">Es wurde keine kompatible Java Runtime gefunden. Diese Version benötigt Java %d oder neuer.</string>
     <string name="multirt_nojava8rt">Java 8 kann nicht gefunden werden. Um diese Option nutzen zu können, musst du Java 8 installieren.</string>
+    <string name="compat_117_message">Minecraft 21w10a+ benötigt das OpenGL 3.2-Kernprofil. Dein Grafikchip unterstützt leider nicht OpenGL ES 3.0 oder höher, jedoch gibt es einige zusätzliche Ressourcen, die du installieren kannst, um diese Versionen zu spielen. Drücke OK, um die Installation zu bestätigen, und drücke Abbrechen, um den Start abzubrechen.</string>
     <string name="compat_11x_playanyway">Trotzdem starten</string>
     <string name="pvc_gameDirectory">Spielverzeichnis</string>
     <string name="pvc_jvmArgs">JVM-Argumente</string>
