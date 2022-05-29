@@ -118,12 +118,22 @@
     " - This app is not affiliated with Minecraft, Mojang or Microsoft.\n")
     </string>
     -->
+    <string name="vp_latest_snapshot">Последњи снепшот</string>
+    <string name="vp_latest_release">Најновије издавање</string>
+    <string name="mcl_tab_profiles">Профили</string>
+    <string name="mcl_profile_editor_title_profile">Профили</string>
+    <string name="mcl_profile_editor_title_version">Верзије</string>
+    <string name="mcl_profile_editor_edit_text_title">Назив профила</string>
+    <string name="mcl_profile_editor_save">Сачуај</string>
+    <string name="profedit_selected_version">Изабрана верзија: %s</string>
+    <string name="profedit_selected_profile">Изабран профил: %s</string>
+    <string name="global_new">Ново</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Апликација/Игра је изашла са кодом %d</string>
     <string name="mcn_exit_call">Изађи</string>
     <string name="mcn_exit_confirm">Да ли желите да форсе-изаћете?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 није инсталиран!</string>
-    <string name="mcn_check_fail_incompatiblearch">Архиктетура %1$s неоже радити са Java Runtime %2$s.</string>
+    <string name="mcn_check_fail_incompatiblearch">Архиктетура %1$s не може радити са Java Runtime %2$s.</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Тастатура</string>
