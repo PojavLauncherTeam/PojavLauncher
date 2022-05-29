@@ -83,6 +83,7 @@
     <string name="mcl_setting_category_general">Thiết lập chung</string>
     <string name="mcl_setting_category_scaling">Cài đặt độ rộng</string>
     <string name="mcl_setting_category_renderer">Trình kết xuất</string>
+    <string name="mcl_setting_renderer_gles2_4">gl4es mới: hỗ trợ từ 1.0-1.19+</string>
     <string name="mcl_setting_renderer_virgl">vgpu (OpenGL ES 3): xuất ra OpenGL 4.3</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): xuất ra OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): xuất ra OpenGL 4.6</string>
@@ -216,6 +217,7 @@
     <string name="multirt_config_removeerror_last">Bạn cần có ít nhất một phiên bản Java Runtime đã được cài đặt</string>
     <string name="multirt_nocompartiblert">Không thể tìm thấy phiên bản Java tương thích. Phiên bản Minecraft này yêu cầu Java %d trở lên.</string>
     <string name="multirt_nojava8rt">Không thể tìm thấy Java 8. Để sử dụng tùy chọn này, bạn cần cài đặt Java 8.</string>
+    <string name="compat_117_message">Minecraft phiên bản 21w10a trở đi yêu cầu OpenGL lõi phiên bản 3.2 trở lên. Mặc dù bộ xử lí đồ hoạ của bạn không hỗ trợ OpenGL ES 3.0 hoặc hơn, bạn có thể cài đặt một số phần tài nguyên bổ sung để khởi chạy những phiên bản này. Chọn OK để bắt đầu cài đặt, hoặc Huỷ để huỷ khởi chạy.</string>
     <string name="compat_11x_playanyway">Vẫn chơi</string>
     <string name="pvc_gameDirectory">Đường dẫn thư mục của trò chơi</string>
     <string name="pvc_jvmArgs">Các chỉ số JVM</string>
