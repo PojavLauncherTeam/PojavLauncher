@@ -208,7 +208,7 @@ public class PojavLoginActivity extends BaseActivity {
         
         int selectedLang = 0;
         for (int i = 0; i < langAdapter.getCount(); i++) {
-            if (Locale.getDefault().getDisplayLanguage().equals(langAdapter.getItem(i).mLocale.getDisplayLanguage())) {
+            if (Locale.getDefault().toString().equalsIgnoreCase(langAdapter.getItem(i).mLocale.toString())) {
                 selectedLang = i;
                 break;
             }
@@ -234,7 +234,7 @@ public class PojavLoginActivity extends BaseActivity {
                     locale = langAdapter.getItem(position).mLocale;
                 }
                 
-                LauncherPreferences.PREF_LANGUAGE = locale.getLanguage();
+                LauncherPreferences.PREF_LANGUAGE = locale.toString();
                 LauncherPreferences.DEFAULT_PREF.edit().putString("language", LauncherPreferences.PREF_LANGUAGE).apply();
                 
                 // Restart to apply language change
