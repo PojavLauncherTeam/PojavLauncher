@@ -105,7 +105,7 @@
     <string name="global_save">Lưu</string>
     <string name="global_unpacking">Đang giải nén %s</string>
     <string name="global_error_field_empty">Trường này không được để trống</string>
-    <string name="global_waiting">Đợi</string>
+    <string name="global_waiting">Vui lòng đợi</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Ứng dụng/Trò chơi đã thoát với mã %d, kiểm tra nhật kí trình khởi chạy (latestlog.txt) để biết thêm chi tiết.</string>
     <string name="mcn_exit_call">Thoát</string>
@@ -142,27 +142,27 @@
     <string name="import_control_label">Nhập vào bộ điều khiển</string>
     <string name="import_control_invalid_file">Tệp không hợp lệ hoặc đã bị xung đột</string>
     <string name="import_control_import_button">nhập vào bộ điều khiển</string>
-    <string name="import_control_verifying_file">Tệp đang được xác minh, xin đợi và thử lại…</string>
+    <string name="import_control_verifying_file">Tệp đang được xác minh, vui lòng đợi và thử lại…</string>
     <string name="import_control_invalid_name">Tên không hợp lệ hoặc tệp đã tồn tại</string>
     <string name="import_control_done">Quá trình nhập vào hoàn tất</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
-    <string name="customctrl_edit">Chỉnh sửa %s</string>
+    <string name="customctrl_edit">Đang chỉnh sửa %s</string>
     <string name="customctrl_remove">Xóa %s?</string>
     <string name="customctrl_keyname">Mã phím</string>
-    <string name="customctrl_toggle">Chuyển đổi</string>
+    <string name="customctrl_toggle">Bật/tắt</string>
     <string name="customctrl_size">Kích thước</string>
     <string name="customctrl_size_width">Chiều rộng</string>
     <string name="customctrl_size_height">Độ cao</string>
     <string name="customctrl_mapping">Sơ đồ phím</string>
     <string name="customctrl_orientation">Hướng</string>
     <string name="customctrl_background_color">Màu nền</string>
-    <string name="customctrl_corner_radius">Bán kính góc cong</string>
+    <string name="customctrl_corner_radius">Bán kính góc tròn</string>
     <string name="customctrl_stroke_width">Độ rộng viền phím</string>
     <string name="customctrl_stroke_color">Màu viền phím</string>
-    <string name="customctrl_dynamicpos">Điểm động</string>
+    <string name="customctrl_dynamicpos">Điểm động tùy chỉnh</string>
     <string name="customctrl_dynamicpos_x">Vị trí động theo chiều X</string>
     <string name="customctrl_dynamicpos_y">Vị trí động theo chiều Y</string>
     <string name="customctrl_transparency_bg">Độ trong suốt của hình nền</string>
