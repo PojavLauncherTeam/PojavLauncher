@@ -607,7 +607,7 @@ public class MinecraftGLSurface extends View {
         }else{
             TextureView view = (TextureView)mSurface;
             if(view.getSurfaceTexture() != null){
-                view.setDefaultBufferSize(windowWidth, windowHeight);
+                view.getSurfaceTexture().setDefaultBufferSize(windowWidth, windowHeight);
             }
         }
 
