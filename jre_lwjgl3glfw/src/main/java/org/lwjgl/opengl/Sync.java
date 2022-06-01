@@ -72,6 +72,11 @@ class Sync {
 		if (fps <= 0)
 			return;
 
+		preciseSync(fps);
+	}
+
+	/** Fast, more cpu friendly way of syncing, although can be off the mark at times */
+	private static void fastSync(int fps){
 		if (!initialised){
 			initialised = true;
 			lastFrameTime = getTime();
@@ -96,6 +101,39 @@ class Sync {
 		lastFrameTime = getTime();
 	}
 
+	/** Precise, more cpu intensive way of syncing */
+	private static void preciseSync(int fps){
+		if (!initialised)
+			initialise();
+
+		try {
+			// sleep until the average sleep time is greater than the time
+			// remaining till nextFrame
+			for (long t0 = getTime(), t1; (nextFrame - t0) > sleepDurations.avg(); t0 = t1) {
+				Thread.sleep(1);
+				sleepDurations.add((t1 = getTime()) - t0); // update average
+				// sleep time
+			}
+
+			// slowly dampen sleep average if too high to avoid yielding too
+			// much
+			sleepDurations.dampenForLowResTicker();
+
+			// yield until the average yield time is greater than the time
+			// remaining till nextFrame
+			for (long t0 = getTime(), t1; (nextFrame - t0) > yieldDurations.avg(); t0 = t1) {
+				Thread.yield();
+				yieldDurations.add((t1 = getTime()) - t0); // update average
+				// yield time
+			}
+		} catch (InterruptedException e) {
+
+		}
+
+		// schedule next frame, drop frame(s) if already too late for next frame
+		nextFrame = Math.max(nextFrame + NANOS_IN_SECOND / fps, getTime());
+	}
+
 	/**
 	 * This method will initialise the sync method by setting initial values for
 	 * sleepDurations/yieldDurations and nextFrame.
@@ -109,27 +147,6 @@ class Sync {
 		yieldDurations.init((int) (-(getTime() - getTime()) * 1.333));
 
 		nextFrame = getTime();
-
-		String osName = System.getProperty("os.name");
-
-		if (osName.startsWith("Win")) {
-			// On windows the sleep functions can be highly inaccurate by
-			// over 10ms making in unusable. However it can be forced to
-			// be a bit more accurate by running a separate sleeping daemon
-			// thread.
-			Thread timerAccuracyThread = new Thread(new Runnable() {
-				public void run() {
-					try {
-						Thread.sleep(Long.MAX_VALUE);
-					} catch (Exception e) {
-					}
-				}
-			});
-
-			timerAccuracyThread.setName("LWJGL Timer");
-			timerAccuracyThread.setDaemon(true);
-			timerAccuracyThread.start();
-		}
 	}
 
 	/**
