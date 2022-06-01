@@ -600,9 +600,15 @@ public class MinecraftGLSurface extends View {
         windowWidth = Tools.getDisplayFriendlyRes(Tools.currentDisplayMetrics.widthPixels, mScaleFactor);
         windowHeight = Tools.getDisplayFriendlyRes(Tools.currentDisplayMetrics.heightPixels, mScaleFactor);
         if(LauncherPreferences.PREF_USE_ALTERNATE_SURFACE){
-            ((SurfaceView)mSurface).getHolder().setFixedSize(windowWidth, windowHeight);
+            SurfaceView view = (SurfaceView) mSurface;
+            if(view.getHolder() != null){
+                view.getHolder().setFixedSize(windowWidth, windowHeight);
+            }
         }else{
-            ((TextureView)mSurface).getSurfaceTexture().setDefaultBufferSize(windowWidth, windowHeight);
+            TextureView view = (TextureView)mSurface;
+            if(view.getSurfaceTexture() != null){
+                view.setDefaultBufferSize(windowWidth, windowHeight);
+            }
         }
 
         CallbackBridge.sendUpdateWindowSize(windowWidth, windowHeight);
