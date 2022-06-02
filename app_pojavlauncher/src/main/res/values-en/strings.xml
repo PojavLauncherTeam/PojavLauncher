@@ -128,7 +128,7 @@
     <string name="profedit_selected_profile">Selected profile: %s</string>
     <string name="global_new">New</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Game exited</string>
+    <string name="mcn_exit_title">Game exited with code %d</string>
     <string name="mcn_exit_call">Exit</string>
     <string name="mcn_exit_confirm">Are you sure you want to force close?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 was not installed!</string>
