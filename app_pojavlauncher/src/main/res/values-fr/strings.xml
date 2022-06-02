@@ -71,6 +71,7 @@
     <string name="mcl_setting_title_longpresstrigger">Le temps nécessaire pour déclencher une action après un appui long</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Changez le temps de déclenchement pendant un appui long durant la destruction de bloc et lâcher l\'objet.</string>
     <string name="mcl_setting_title_backtorightmouse">Traiter le bouton Retour comme la souris droite</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">Certains appareils traitent le clic droit externe comme un bouton retour. Si vous utilisez une souris externe, vous devriez l\'activer.</string>
     <string name="mcl_setting_title_flat_button_style">Style de bouton plat</string>
     <string name="mcl_setting_subtitle_flat_button_style">Activez cette option pour changer le style des boutons virtuels pour être plat.</string>
     <string name="mcl_setting_title_buttonscale">Mise à l\'échelle des boutons de contrôle</string>
