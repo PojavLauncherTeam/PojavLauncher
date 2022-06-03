@@ -337,6 +337,8 @@ public class PojavLoginActivity extends BaseActivity {
         try {
             new CustomControls(this).save(Tools.CTRLDEF_FILE);
 
+            Tools.copyAssetFile(this, "components/security/log4j-rce-patch-1.7.xml", Tools.DIR_DATA, true);
+            Tools.copyAssetFile(this, "components/security/log4j-rce-patch-1.12.xml", Tools.DIR_DATA, true);
             Tools.copyAssetFile(this, "components/security/pro-grade.jar", Tools.DIR_DATA, true);
             Tools.copyAssetFile(this, "components/security/java_sandbox.policy", Tools.DIR_DATA, true);
             Tools.copyAssetFile(this, "options.txt", Tools.DIR_GAME_NEW, false);

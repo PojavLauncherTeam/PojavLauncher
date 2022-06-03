@@ -136,8 +136,12 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
 
                 // Patch the Log4J RCE (CVE-2021-44228)
                 if (verInfo.logging != null) {
-                    outLib = new File(Tools.DIR_GAME_NEW, verInfo.logging.client.file.id);
-                    if (outLib.exists()) {
+                    outLib = new File(Tools.DIR_DATA, verInfo.logging.client.file.id.replace("client", "log4j-rce-patch"));
+                    boolean useLocal = outLib.exists();
+                    if (!useLocal) {
+                        outLib = new File(Tools.DIR_GAME_NEW, verInfo.logging.client.file.id);
+                    }
+                    if (outLib.exists() && !useLocal) {
                         if(LauncherPreferences.PREF_CHECK_LIBRARY_SHA) {
                             if(!Tools.compareSHA1(outLib,verInfo.logging.client.file.sha1)) {
                                 outLib.delete();
