@@ -56,6 +56,8 @@
     <string name="mcl_option_customcontrol">Kontrolės</string>
     <string name="mcl_option_settings">Nustatymai</string>
     <string name="mcl_option_about">Apie</string>
+    <string name="mcl_setting_title_use_surface_view">Naudoti alternatyvų atvaizdų vaizdavimą</string>
+    <string name="mcl_setting_subtitle_use_surface_view">Gali pagerinti našumą GPU surištuose scenarijuose</string>
     <string name="mcl_setting_title_uninstalljre">Ištrinti Java Runtime</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Reikia paleisti iš naujo] Tai leis perinstaliuoti Java Runtime</string>
     <string name="mcl_setting_title_freeform">Paleisti laisvoje formoje</string>
@@ -81,6 +83,9 @@
     <string name="mcl_setting_category_general">Pagrindiniai nustatymai</string>
     <string name="mcl_setting_category_scaling">Didinimo nustatymai</string>
     <string name="mcl_setting_category_renderer">Vaizdo generatorius</string>
+    <string name="mcl_setting_renderer_gles2_4">holy gl4es: tinka 1.0-1.19+</string>
+    <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): eksportuoja OpenGL 4.3</string>
+    <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): eksportuoja OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): eksportuoja OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Versijų tipai bus versijų sąraše</string>
     <string name="mcl_setting_veroption_release">Leidimai</string>
@@ -102,6 +107,7 @@
     <string name="global_error_field_empty">Šis laukas negali būti tuščias</string>
     <string name="global_waiting">Palaukite</string>
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">Applikacija išsijungė su kodu %d, patikrinkite latestlog.txt kad gautumėte detalių.</string>
     <string name="mcn_exit_call">Išeiti</string>
     <string name="mcn_exit_confirm">Ar jūs tikrai norite priverstinai išjungti?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 nebuvo instaliuota!</string>
@@ -127,6 +133,12 @@
     <string name="control_scaleup">Padidinti</string>
     <string name="control_scaledown">Sumažinti</string>
     <!-- ImportControlActivity Strings -->
+    <string name="import_control_label">Importuoti kontroles</string>
+    <string name="import_control_invalid_file">Netinkamas arba sugedęs failas</string>
+    <string name="import_control_import_button">importuoti kontroles</string>
+    <string name="import_control_verifying_file">Failas tikrinamas, prašome palaukti ir bandyti dar kartą…</string>
+    <string name="import_control_invalid_name">Netinkamas pavadinimas arba failas jau egzistuoja</string>
+    <string name="import_control_done">Importavimas baigtas</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -156,7 +168,9 @@
     <string name="customctrl_addbutton">Pridėti mygtuką</string>
     <string name="customctrl_addbutton_drawer">Pridėti mygtukų spintą</string>
     <string name="customctrl_addsubbutton">Pridetį mygtukų spintos mygtuką</string>
+    <string name="customctrl_add_subbutton_message">Mygtukas n°%d buvo pridėtas !</string>
     <string name="customctrl_selectdefault">Pasirinkti pagrindinį kontrolių JSON</string>
+    <string name="main_install_jar_file">Instaliuoti .jar</string>
     <string name="main_options">Pasirinkimai</string>
     <string name="main_play">Žaisti</string>
     <string name="main_welcome">Sveiki, %s</string>
@@ -185,6 +199,7 @@
     <string name="mcl_memory_allocation">Atminties skirtstymas</string>
     <string name="mcl_memory_allocation_subtitle">Kontroliuoja kiek RAM atminties duodama Minecraft</string>
     <string name="multirt_runtime_corrupt">Sugadintas Java Modulis</string>
+    <string name="multirt_runtime_incompatiblearch">Netinkama architektūra: %s</string>
     <string name="multirt_config_title">Java Moduliai</string>
     <string name="multirt_config_add">Pridėti naują</string>
     <string name="multirt_config_add_subtitle">Importuoti naują Java Modulį</string>
@@ -194,9 +209,51 @@
     <string name="multirt_config_setdefault">Nustatyti numatytą</string>
     <string name="multirt_config_setdefault_already">Numatytasis</string>
     <string name="multirt_config_removeerror_last">Jūs privalote turėti bent vieną Java Modulį įdiegtą</string>
+    <string name="multirt_nocompartiblert">Nerasta tinkamos Java Runtine. Šiai versijai reikalinga Java %d arba naujesnė.</string>
+    <string name="multirt_nojava8rt">Nerasta Java 8. Kad naudotumėte šią funkciją, naudokite Java 8.</string>
+    <string name="compat_117_message">Minecraft 21w10+ reikalauja OpenGL 3.2 branduolio profilio. Gaila, GL4ES wrapperis dabar pilnai nepalaiko jo, bet yra dar pridėtinių resursų kuriuos galima įdiegti, kad būtų galima paleisti šias versijas. Paspauskite Gerai, kad patvirtintumėte įdiegimą, paspauskite Atšaukti, kad sustabdytumėte įdiegimą.</string>
+    <string name="compat_11x_playanyway">Žaisti vistiek</string>
     <string name="pvc_gameDirectory">Žaidimo failų vieta</string>
     <string name="pvc_jvmArgs">JVM argumentai</string>
     <string name="pvc_title">Individualios versijos nustatymai</string>
+    <string name="storage_warning_title">Saugyklos pakeitimai</string>
+    <string name="storage_warning_text"><![CDATA[Dėl Google\ naujų saugyklos reikalavimų pridėtų į Android 10, mes priversti perkelti žaidimo direktoriją į privatų folderį.<br /> Naujasis folderis yra <b>Android/data/%s/files/</b> (pasiekiamas naudojant failų naršyklę) <br /> Jei norėsite perkelti savo žaidimo failus, prašau kopijuoti viską į originalų folderį, kuris yra <b>games/PojavLauncher</b> rankiniu būdu.]]></string>
+    <string name="control_offset_title">Kontrolių offset\'as</string>
+    <string name="control_top_offset">Viršaus offset\'as: </string>
+    <string name="control_right_offset">Dešinės offset\'as: </string>
+    <string name="control_bottom_offset">Apačios offset\'as: </string>
+    <string name="control_left_offset">Kairės offset\'as: </string>
+    <string name="preference_control_offset_title">Controlių šoninis offset\'as</string>
+    <string name="preference_control_offset_description">Nustatytį offset\'ą kiekvienai ekrano pusei pasirinktinai</string>
+    <string name="preference_mouse_start_title">Pradėti su virtualia įjungta</string>
+    <string name="preference_mouse_start_description">Naudojant šią funkciją būsite nuteistas Mathias-Boulay\'o</string>
+    <string name="preference_video_title">Vaizdas</string>
+    <string name="preference_video_description">Rezoliucija, skalių tipas ir vaizdavimas</string>
+    <string name="preference_control_title">Kontrolių redagavimas</string>
+    <string name="preference_control_description">Gestų tipai, trigger\'ai ir skaliavimas</string>
+    <string name="preference_java_title">Java redagavimas</string>
+    <string name="preference_java_description">Java versijos, JVM argumentai ir operatyviosios atminties kiekis</string>
+    <string name="preference_misc_title">Kiti nustatymai</string>
+    <string name="preference_misc_description">Versijų sąrašas ir bibliotekų tikrinimas</string>
+    <string name="preference_experimental_title">Eksperimentiniai dalykai</string>
+    <string name="preference_experimental_description">Naudokite šiuos dalykus atsargiai, jokio palaikymo.</string>
+    <string name="preference_sustained_performance_title">Įjungti nuolatinio našumo režimą</string>
+    <string name="preference_sustained_performance_description">Apriboti terminį limitą limituojant didžiausią našumą</string>
+    <string name="preference_back_title">Atgal į paskutinį ekraną</string>
+    <string name="gles_hack_title">GL4ES mažinimo modifikacija</string>
+    <string name="gles_hack_none">Nemažinti tekstūrų</string>
+    <string name="gles_hack_always">Dalinti visas tekstūras per pusę.</string>
+    <string name="gles_hack_sometimes">Naudoti antradalį arba ketvirtadalį tekstūrų</string>
+    <string name="unnamed">Be pavadinimo</string>
+    <string name="profiles_latest_snapshot">Naujausias Snapshotas</string>
+    <string name="profiles_latest_release">Naujausias Leidinys</string>
+    <string name="profiles_editing">Redaguojamas profilis</string>
     <string name="profiles_profile_name">Pavadinimas</string>
+    <string name="profiles_profile_version">Versija</string>
+    <string name="global_delete">Ištrinti</string>
+    <string name="pedit_java_runtime">Java Runtime</string>
     <string name="pedit_renderer">Vaizdo generatorius</string>
+    <string name="arc_capes_title">\"Cosmetica\" apvalkalai</string>
+    <string name="arc_capes_desc">Įjungia apvalkalus iš \"Cosmetica\" (anksčiau \"Arc\"). Daugiau informacijos rasite https://cosmetica.cc. Reikalingas OptiFine.</string>
+    <string name="migrated_profile_str">%s versijos konfiguracija</string>
 </resources>
