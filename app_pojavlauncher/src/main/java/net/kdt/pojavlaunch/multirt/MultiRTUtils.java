@@ -202,8 +202,7 @@ public class MultiRTUtils {
      * @param runtimePath The path to the runtime to walk into
      */
     private static void unpack200(String nativeLibraryDir, String runtimePath) {
-        // TODO FIX THE ARM UNPACKER
-        /*
+
         File basePath = new File(runtimePath);
         Collection<File> files = listFiles(basePath, new String[]{"pack"}, true);
 
@@ -218,8 +217,6 @@ public class MultiRTUtils {
                 Log.e("MULTIRT", "Failed to unpack the runtime !");
             }
         }
-        
-         */
     }
 
     private static void copyDummyNativeLib(Context ctx, String name, File dest, String libFolder) throws IOException {

@@ -197,10 +197,12 @@ public class PojavLauncherActivity extends BaseLauncherActivity
                 LauncherProfiles.update();
                 profileAdapter.notifyDataSetChanged();
                 if(isNew) {
-                    mVersionSelector.setSelection(profileAdapter.resolveProfileIndex(name));
+                    int newPosition = profileAdapter.resolveProfileIndex(name);
+                    setProfileSelection(newPosition);
+                    return;
                 }
                 if(deleting) {
-                    mVersionSelector.setSelection(0);
+                    setProfileSelection(0);
                 }
 
             });
@@ -209,25 +211,17 @@ public class PojavLauncherActivity extends BaseLauncherActivity
             mVersionSelector.setSelection(profileAdapter.resolveProfileIndex(LauncherPreferences.DEFAULT_PREF.getString(LauncherPreferences.PREF_KEY_CURRENT_PROFILE,"")));
             mVersionSelector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
                 @Override
-                public void onItemSelected(AdapterView<?> p1, View p2, int p3, long p4)
-                {
+                public void onItemSelected(AdapterView<?> p1, View p2, int p3, long p4) {
                     String profileName = p1.getItemAtPosition(p3).toString();
                     if(profileName.equals(ProfileAdapter.CREATE_PROFILE_MAGIC)) {
                         profileEditor.show(profileName);
                         mVersionSelector.setSelection(0);
                         return;
                     }
-                    LauncherPreferences.DEFAULT_PREF.edit()
-                            .putString(
-                                    LauncherPreferences.PREF_KEY_CURRENT_PROFILE,
-                                    p1.getItemAtPosition(p3).toString())
-                            .commit();
+                    setProfileSelection(p3);
                 }
                 @Override
-                public void onNothingSelected(AdapterView<?> p1)
-                {
-                    // TODO: Implement this method
-                }
+                public void onNothingSelected(AdapterView<?> p1){/* TODO: Implement this method*/}
             });
         //
         statusIsLaunching(false);
@@ -248,6 +242,16 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         changeLookAndFeel(PREF_HIDE_SIDEBAR);
         initTabs(0);
     }
+
+    /** Set the selection AND saves it as a shared preference */
+    private void setProfileSelection(int position){
+        mVersionSelector.setSelection(position);
+        LauncherPreferences.DEFAULT_PREF.edit()
+            .putString(LauncherPreferences.PREF_KEY_CURRENT_PROFILE,
+                mVersionSelector.getAdapter().getItem(position).toString())
+            .apply();
+    }
+
     private void selectTabPage(int pageIndex){
         viewPager.setCurrentItem(pageIndex);
         setTabActive(pageIndex);

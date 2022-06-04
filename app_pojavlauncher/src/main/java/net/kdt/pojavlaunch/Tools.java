@@ -163,7 +163,11 @@ public final class Tools {
 */
 
         if (versionInfo.logging != null) {
-            javaArgList.add("-Dlog4j.configurationFile=" + Tools.DIR_GAME_NEW + "/" + versionInfo.logging.client.file.id);
+            String configFile = Tools.DIR_DATA + "/" + versionInfo.logging.client.file.id.replace("client", "log4j-rce-patch");
+            if (!new File(configFile).exists()) {
+                configFile = Tools.DIR_GAME_NEW + "/" + versionInfo.logging.client.file.id;
+            }
+            javaArgList.add("-Dlog4j.configurationFile=" + configFile);
         }
         javaArgList.addAll(Arrays.asList(getMinecraftJVMArgs(versionName, gamedirPath)));
         javaArgList.add("-cp");
