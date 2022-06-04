@@ -141,6 +141,31 @@ public class FolderProvider extends DocumentsProvider {
     }
 
     @Override
+    public String renameDocument(String documentId, String displayName) throws FileNotFoundException {
+        File sourceFile = getFileForDocId(documentId);
+        File targetFile = new File(getDocIdForFile(sourceFile.getParentFile()) + "/" + displayName);
+        if(!sourceFile.renameTo(targetFile)){
+            throw new FileNotFoundException("Couldn't rename the document with id" + documentId);
+        }
+        return getDocIdForFile(targetFile);
+    }
+
+    @Override
+    public String moveDocument(String sourceDocumentId, String sourceParentDocumentId, String targetParentDocumentId) throws FileNotFoundException {
+        File sourceFile = getFileForDocId(sourceParentDocumentId + sourceDocumentId);
+        File targetFile = new File(targetParentDocumentId + sourceDocumentId);
+        if(!sourceFile.renameTo(targetFile)){
+            throw new FileNotFoundException("Failed to move the document with id " + sourceFile.getPath());
+        }
+        return getDocIdForFile(targetFile);
+    }
+
+    @Override
+    public void removeDocument(String documentId, String parentDocumentId) throws FileNotFoundException {
+        deleteDocument(parentDocumentId + "/" + documentId);
+    }
+
+    @Override
     public void deleteDocument(String documentId) throws FileNotFoundException {
         File file = getFileForDocId(documentId);
         if(file.isDirectory()){
