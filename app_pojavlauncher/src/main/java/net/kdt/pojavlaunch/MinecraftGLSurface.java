@@ -398,7 +398,7 @@ public class MinecraftGLSurface extends View {
         }
         if(mouseCursorIndex == -1) return false; // we cant consoom that, theres no mice!
         if(CallbackBridge.isGrabbing()) {
-            if(BaseMainActivity.isAndroid8OrHigher()){
+            if(BaseMainActivity.isAndroid8OrHigher() && !hasPointerCapture()){
                 requestFocus();
                 requestPointerCapture();
             }
