@@ -417,8 +417,10 @@ public final class Tools {
         }else{
             if (SDK_INT >= Build.VERSION_CODES.R) {
                 activity.getDisplay().getRealMetrics(displayMetrics);
-            } else {
+            } else if(SDK_INT >= P) {
                  activity.getWindowManager().getDefaultDisplay().getRealMetrics(displayMetrics);
+            }else{ // Some old devices can have a notch despite it not being officially supported
+                activity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
             }
             if(!PREF_IGNORE_NOTCH){
                 //Remove notch width when it isn't ignored.
