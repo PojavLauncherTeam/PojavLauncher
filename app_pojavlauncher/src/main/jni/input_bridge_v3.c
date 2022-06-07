@@ -420,13 +420,13 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSetWindowAttrib(
         return; // nothing to do yet
     }
 
-    jclass glfwClazz = (*env)->FindClass(env, "org/lwjgl/glfw/GLFW");
+    jclass glfwClazz = (*runtimeJNIEnvPtr_JRE)->FindClass(runtimeJNIEnvPtr_JRE, "org/lwjgl/glfw/GLFW");
     assert(glfwClazz != NULL);
-    jmethodID glfwMethod = (*env)->GetStaticMethodID(env, glfwClazz, "glfwSetWindowAttrib", "(JII)V");
+    jmethodID glfwMethod = (*runtimeJNIEnvPtr_JRE)->GetStaticMethodID(runtimeJNIEnvPtr_JRE, glfwClazz, "glfwSetWindowAttrib", "(JII)V");
     assert(glfwMethod != NULL);
 
-    (*env)->CallStaticVoidMethod(
-        env,
+    (*runtimeJNIEnvPtr_JRE)->CallStaticVoidMethod(
+        runtimeJNIEnvPtr_JRE,
         glfwClazz, glfwMethod,
         (jlong) showingWindow, attrib, value
     );
