@@ -10,9 +10,12 @@
  * - Implements glfwSetCursorPos() to handle grab camera pos correctly.
  */
  
-#include <stdlib.h>
-#include <jni.h>
 #include <assert.h>
+#include <dlfcn.h>
+#include <jni.h>
+#include <libgen.h>
+#include <stdlib.h>
+#include <string.h>
 
 #include "log.h"
 #include "utils.h"
@@ -26,6 +29,8 @@
 #define EVENT_TYPE_MOUSE_BUTTON 1006
 #define EVENT_TYPE_SCROLL 1007
 #define EVENT_TYPE_WINDOW_SIZE 1008
+
+jint (*orig_ProcessImpl_forkAndExec)(JNIEnv *env, jobject process, jint mode, jbyteArray helperpath, jbyteArray prog, jbyteArray argBlock, jint argc, jbyteArray envBlock, jint envc, jbyteArray dir, jintArray std_fds, jboolean redirectErrorStream);
 
 typedef void GLFW_invoke_Char_func(void* window, unsigned int codepoint);
 typedef void GLFW_invoke_CharMods_func(void* window, unsigned int codepoint, int mods);
@@ -55,6 +60,7 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved) {
     } else if (dalvikJavaVMPtr != vm) {
         runtimeJavaVMPtr = vm;
         (*vm)->GetEnv(vm, (void**) &runtimeJNIEnvPtr_JRE, JNI_VERSION_1_4);
+        hookExec();
     }
     
     isGrabbing = JNI_FALSE;
@@ -72,7 +78,7 @@ void JNI_OnUnload(JavaVM* vm, void* reserved) {
     DetachCurrentThread(vm);
 */
 
-    dalvikJNIEnvPtr_JRE = NULL;
+    //dalvikJNIEnvPtr_JRE = NULL;
     runtimeJNIEnvPtr_ANDROID = NULL;
 }
 
@@ -148,6 +154,41 @@ void closeGLFWWindow() {
     exit(-1);
 }
 
+/**
+ * Hooked version of java.lang.UNIXProcess.forkAndExec()
+ * which is used to handle the "open" command.
+ */
+jint
+hooked_ProcessImpl_forkAndExec(JNIEnv *env, jobject process, jint mode, jbyteArray helperpath, jbyteArray prog, jbyteArray argBlock, jint argc, jbyteArray envBlock, jint envc, jbyteArray dir, jintArray std_fds, jboolean redirectErrorStream) {
+    char *pProg = (char *)((*env)->GetByteArrayElements(env, prog, NULL));
+
+    // Here we only handle the "xdg-open" command
+    if (strcmp(basename(pProg), "xdg-open")) {
+        (*env)->ReleaseByteArrayElements(env, prog, (jbyte *)pProg, 0);
+        return orig_ProcessImpl_forkAndExec(env, process, mode, helperpath, prog, argBlock, argc, envBlock, envc, dir, std_fds, redirectErrorStream);
+    }
+    (*env)->ReleaseByteArrayElements(env, prog, (jbyte *)pProg, 0);
+
+    Java_org_lwjgl_glfw_CallbackBridge_nativeClipboard(env, NULL, /* CLIPBOARD_OPEN */ 2002, argBlock);
+    return 0;
+}
+
+void hookExec() {
+    jclass cls;
+    orig_ProcessImpl_forkAndExec = dlsym(RTLD_DEFAULT, "Java_java_lang_UNIXProcess_forkAndExec");
+    if (!orig_ProcessImpl_forkAndExec) {
+        orig_ProcessImpl_forkAndExec = dlsym(RTLD_DEFAULT, "Java_java_lang_ProcessImpl_forkAndExec");
+        cls = (*runtimeJNIEnvPtr_JRE)->FindClass(runtimeJNIEnvPtr_JRE, "java/lang/ProcessImpl");
+    } else {
+        cls = (*runtimeJNIEnvPtr_JRE)->FindClass(runtimeJNIEnvPtr_JRE, "java/lang/UNIXProcess");
+    }
+    JNINativeMethod methods[] = {
+        {"forkAndExec", "(I[B[B[BI[BI[B[IZ)I", (void *)&hooked_ProcessImpl_forkAndExec}
+    };
+    (*runtimeJNIEnvPtr_JRE)->RegisterNatives(runtimeJNIEnvPtr_JRE, cls, methods, 1);
+    printf("Registered forkAndExec\n");
+}
+
 JNIEXPORT void JNICALL
 Java_org_lwjgl_glfw_CallbackBridge_nativeSetUseInputStackQueue(JNIEnv *env, jclass clazz,
                                                                jboolean use_input_stack_queue) {
@@ -164,10 +205,10 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeAttachThread
     //isUseStackQueueCall = (int) isUseStackQueueBool;
     if (isAndroid) {
         result = attachThread(true, &runtimeJNIEnvPtr_ANDROID);
-    } else {
+    } /* else {
         result = attachThread(false, &dalvikJNIEnvPtr_JRE);
         // getJavaInputBridge(&inputBridgeClass_JRE, &inputBridgeMethod_JRE);
-    }
+    } */
     
     if (isUseStackQueueCall && isAndroid && result) {
         isPrepareGrabPos = true;
@@ -175,7 +216,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeAttachThread
     return result;
 }
 
-JNIEXPORT jstring JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeClipboard(JNIEnv* env, jclass clazz, jint action, jstring copySrc) {
+JNIEXPORT jstring JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeClipboard(JNIEnv* env, jclass clazz, jint action, jbyteArray copySrc) {
 #ifdef DEBUG
     LOGD("Debug: Clipboard access is going on\n", isUseStackQueueCall);
 #endif
@@ -185,13 +226,24 @@ JNIEXPORT jstring JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeClipboard(JNI
     assert(dalvikEnv != NULL);
     assert(bridgeClazz != NULL);
     LOGD("Clipboard: Obtaining method\n");
-    jmethodID bridgeMethod = (* dalvikEnv)->GetStaticMethodID(dalvikEnv, bridgeClazz, "accessAndroidClipboard", "(ILjava/lang/String;)Ljava/lang/String;");
+    jmethodID bridgeMethod = (*dalvikEnv)->GetStaticMethodID(dalvikEnv, bridgeClazz, "accessAndroidClipboard", "(ILjava/lang/String;)Ljava/lang/String;");
     assert(bridgeMethod != NULL);
     
     LOGD("Clipboard: Converting string\n");
-    jstring copyDst = convertStringJVM(env, dalvikEnv, copySrc);
+    char *copySrcC = NULL;
+    jstring copyDst = NULL;
+    if (copySrc) {
+        copySrcC = (char *)((*env)->GetByteArrayElements(env, copySrc, NULL));
+        copyDst = (*dalvikEnv)->NewStringUTF(dalvikEnv, copySrcC);
+    }
+
     LOGD("Clipboard: Calling 2nd\n");
     jstring pasteDst = convertStringJVM(dalvikEnv, env, (jstring) (*dalvikEnv)->CallStaticObjectMethod(dalvikEnv, bridgeClazz, bridgeMethod, action, copyDst));
+
+    if (copySrc) {
+        (*dalvikEnv)->DeleteLocalRef(dalvikEnv, copyDst);    
+        (*env)->ReleaseByteArrayElements(env, copySrc, (jbyte *)copySrcC, 0);
+    }
     (*dalvikJavaVMPtr)->DetachCurrentThread(dalvikJavaVMPtr);
     return pasteDst;
 }
@@ -368,13 +420,13 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSetWindowAttrib(
         return; // nothing to do yet
     }
 
-    jclass glfwClazz = (*runtimeJNIEnvPtr_JRE)->FindClass(runtimeJNIEnvPtr_JRE, "org/lwjgl/glfw/GLFW");
+    jclass glfwClazz = (*env)->FindClass(env, "org/lwjgl/glfw/GLFW");
     assert(glfwClazz != NULL);
-    jmethodID glfwMethod = (*runtimeJNIEnvPtr_JRE)->GetStaticMethodID(runtimeJNIEnvPtr_JRE, glfwClazz, "glfwSetWindowAttrib", "(JII)V");
+    jmethodID glfwMethod = (*env)->GetStaticMethodID(env, glfwClazz, "glfwSetWindowAttrib", "(JII)V");
     assert(glfwMethod != NULL);
 
-    (*runtimeJNIEnvPtr_JRE)->CallStaticVoidMethod(
-        runtimeJNIEnvPtr_JRE,
+    (*env)->CallStaticVoidMethod(
+        env,
         glfwClazz, glfwMethod,
         (jlong) showingWindow, attrib, value
     );

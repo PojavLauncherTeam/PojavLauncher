@@ -37,6 +37,7 @@ import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
 import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 
 import org.lwjgl.glfw.*;
+import android.net.*;
 
 public class BaseMainActivity extends BaseActivity {
     public static volatile ClipboardManager GLOBAL_CLIPBOARD;
@@ -417,5 +418,18 @@ public class BaseMainActivity extends BaseActivity {
             System.gc();
         });
         b.show();
+    }
+
+    public static void openLink(String link) {
+        Context ctx = touchpad.getContext(); // no more better way to obtain a context statically
+        ((Activity)ctx).runOnUiThread(() -> {
+            try {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setDataAndType(Uri.parse(link.replace("file://", "content://")), "*/*");
+                ctx.startActivity(intent);
+            } catch (Throwable th) {
+                Tools.showError(ctx, th);
+            }
+        });
     }
 }

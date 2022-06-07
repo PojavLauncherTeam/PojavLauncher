@@ -810,7 +810,7 @@ public class GLFW
     static boolean isGLFWReady;
     public static boolean glfwInit() {
         if (!isGLFWReady) {
-            CallbackBridge.nativeAttachThreadToOther(false, false);
+            //CallbackBridge.nativeAttachThreadToOther(false, false);
             mGLFWInitialTime = (double) System.nanoTime();
             long __functionAddress = Functions.Init;
             isGLFWReady = invokeI(__functionAddress) != 0;
@@ -1233,11 +1233,13 @@ public class GLFW
     }
 
     public static void glfwSetClipboardString(@NativeType("GLFWwindow *") long window, @NativeType("char const *") ByteBuffer string) {
-        glfwSetClipboardString(window, memUTF8Safe(string));
+        byte[] arr = new byte[string.remaining()];
+        string.get(arr);
+        CallbackBridge.nativeClipboard(CallbackBridge.CLIPBOARD_COPY, arr);
     }
 
     public static void glfwSetClipboardString(@NativeType("GLFWwindow *") long window, @NativeType("char const *") CharSequence string) {
-        CallbackBridge.nativeClipboard(CallbackBridge.CLIPBOARD_COPY, string.toString());
+        glfwSetClipboardString(window, memUTF8Safe(string));
     }
 
     public static String glfwGetClipboardString(@NativeType("GLFWwindow *") long window) {

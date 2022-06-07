@@ -71,7 +71,7 @@ public class CallbackBridge {
     }
     public static native void nativeSendData(boolean isAndroid, int type, String data);
     public static native boolean nativeSetInputReady(boolean ready);
-    public static native String nativeClipboard(int action, String copy);
+    public static native String nativeClipboard(int action, byte[] copy);
     public static native void nativeAttachThreadToOther(boolean isAndroid, boolean isUseStackQueueBool);
     private static native void nativeSetGrabbing(boolean grab, int xset, int yset);
     public static native void setClass();
