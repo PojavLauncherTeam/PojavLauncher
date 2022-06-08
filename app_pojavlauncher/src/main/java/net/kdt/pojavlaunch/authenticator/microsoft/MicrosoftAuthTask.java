@@ -46,7 +46,7 @@ public class MicrosoftAuthTask extends AsyncTask<String, Void, Object> {
         build.setMessage(ctx.get().getString(R.string.global_waiting));
         build.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         build.setCancelable(false);
-        build.setMax(6);
+        build.setMax(5);
         build.show();
     }
 
@@ -80,6 +80,7 @@ public class MicrosoftAuthTask extends AsyncTask<String, Void, Object> {
                 acc.profileId = msa.mcUuid;
                 acc.isMicrosoft = true;
                 acc.msaRefreshToken = msa.msRefreshToken;
+                acc.expiresAt = msa.expiresAt;
                 acc.updateSkinFace();
             }
             acc.save();

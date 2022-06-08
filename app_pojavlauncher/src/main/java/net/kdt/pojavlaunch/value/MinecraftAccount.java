@@ -21,6 +21,7 @@ public class MinecraftAccount
     public boolean isMicrosoft = false;
     public String msaRefreshToken = "0";
     public String skinFaceBase64;
+    public long expiresAt;
     
     void updateSkinFace(String uuid) {
         try {

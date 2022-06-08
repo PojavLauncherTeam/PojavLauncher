@@ -595,7 +595,7 @@ public class PojavLoginActivity extends BaseActivity {
                             Log.e("Account","Stop torturing me sempai");
                             return;
                         }
-                        if (acc.isMicrosoft){
+                        if (acc.isMicrosoft && System.currentTimeMillis() > acc.expiresAt){
                             new MicrosoftAuthTask(PojavLoginActivity.this, authListener)
                                     .execute("true", acc.msaRefreshToken);
                         } else {
