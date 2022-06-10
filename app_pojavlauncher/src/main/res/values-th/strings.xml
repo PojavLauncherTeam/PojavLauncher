@@ -33,6 +33,8 @@
     -->
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_news">ข่าวสาร</string>
+    <string name="mcl_tab_console">คอนโซลผู้พัฒนา</string>
+    <string name="mcl_tab_crash">บันทึกข้อขัดข้อง</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">เชื่อมต่อแล้ว</string>
     <!-- MCLauncherActivity: Strings -->
