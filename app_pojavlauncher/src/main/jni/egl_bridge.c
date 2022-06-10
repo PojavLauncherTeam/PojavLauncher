@@ -21,6 +21,12 @@
 #include <android/rect.h>
 #include <string.h>
 #include "utils.h"
+
+#define GLFW_CLIENT_API 0x22001
+/* Consider GLFW_NO_API as Vulkan API */
+#define GLFW_NO_API 0
+#define GLFW_OPENGL_API 0x30001
+
 // region OSMESA internals
 
 struct pipe_screen;
@@ -628,6 +634,7 @@ EGLSurface (*eglGetCurrentSurface_p) (EGLint readdraw);
 int (*vtest_main_p) (int argc, char** argv);
 void (*vtest_swap_buffers_p) (void);
 
+#define RENDERER_VULKAN 0
 #define RENDERER_GL4ES 1
 #define RENDERER_VK_ZINK 2
 #define RENDERER_VIRGL 3
@@ -801,6 +808,10 @@ int pojavInit() {
     savedHeight = ANativeWindow_getHeight(potatoBridge.androidWindow);
     ANativeWindow_setBuffersGeometry(potatoBridge.androidWindow,savedWidth,savedHeight,AHARDWAREBUFFER_FORMAT_R8G8B8X8_UNORM);
 
+    return JNI_TRUE;
+}
+
+jboolean pojavInit_OpenGL() {
     // NOTE: Override for now.
     const char *renderer = getenv("POJAV_RENDERER");
     if (strncmp("opengles3_virgl", renderer, 15) == 0) {
@@ -929,6 +940,24 @@ int pojavInit() {
     
     return 0;
 }
+
+void pojavSetWindowHint(int hint, int value) {
+    if (hint != GLFW_CLIENT_API) return;
+    switch (value) {
+        case GLFW_NO_API:
+            config_renderer = RENDERER_VULKAN;
+            /* Nothing to do: initialization is handled in Java-side */
+            // pojavInit_Vulkan();
+            break;
+        case GLFW_OPENGL_API:
+            pojavInit_OpenGL();
+            break;
+        default:
+            printf("GLFW: Unimplemented API 0x%x\n", value);
+            abort();
+    }
+}
+
 ANativeWindow_Buffer buf;
 int32_t stride;
 bool stopSwapBuffers;
@@ -945,7 +974,7 @@ void pojavSwapBuffers() {
                 }
             }
         } break;
-        
+
         case RENDERER_VIRGL: {
             glFinish_p();
             vtest_swap_buffers_p();
@@ -954,7 +983,7 @@ void pojavSwapBuffers() {
         case RENDERER_VK_ZINK: {
             OSMesaContext ctx = OSMesaGetCurrentContext_p();
             if(ctx == NULL) {
-                printf("Zink: attempted to swap buffers without context!");
+                printf("Zink: attempted to swap buffers without context!\n");
                 break;
             }
             OSMesaMakeCurrent_p(ctx,buf.bits,GL_UNSIGNED_BYTE,savedWidth,savedHeight);
@@ -1077,6 +1106,10 @@ Java_org_lwjgl_glfw_GLFW_nativeEglDetachOnCurrentThread(JNIEnv *env, jclass claz
 */
 
 void* pojavCreateContext(void* contextSrc) {
+    if (config_renderer == RENDERER_VULKAN) {
+        return (void *)potatoBridge.androidWindow;
+    }
+
     if (config_renderer == RENDERER_GL4ES) {
             const EGLint ctx_attribs[] = {
                 EGL_CONTEXT_CLIENT_VERSION, atoi(getenv("LIBGL_ES")),

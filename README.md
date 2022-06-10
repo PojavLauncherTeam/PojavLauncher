@@ -105,4 +105,5 @@ Any code change should be submitted as a pull request. The description should ex
 - [xHook](https://github.com/iqiyi/xHook) (Used for exit code trapping): [MIT and BSD-style licenses](https://github.com/iqiyi/xHook/blob/master/LICENSE).
 - [libepoxy](https://github.com/anholt/libepoxy): [MIT License](https://github.com/anholt/libepoxy/blob/master/COPYING).
 - [virglrenderer](https://github.com/PojavLauncherTeam/virglrenderer): [MIT License](https://gitlab.freedesktop.org/virgl/virglrenderer/-/blob/master/COPYING).
+- [shaderc](https://github.com/google/shaderc) (used by mods that use Vulkan for rendering): [Apache 2.0 License](https://github.com/google/shaderc/blob/main/LICENSE).
 - Thanks to [MCHeads](https://mc-heads.net) for providing Minecraft avatars.
