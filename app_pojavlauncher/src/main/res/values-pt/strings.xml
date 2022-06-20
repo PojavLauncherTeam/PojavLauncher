@@ -49,13 +49,14 @@
     <string name="mcl_launch_downloading">A transferir %s</string>
     <string name="mcl_launch_downloading_progress">"A transferir %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">A preparar para transferir os recursos</string>
-    <string name="mcl_launch_error_localmode">Minecraft não pode ser instalado legalmente quando conectado numa conta local. Por favor, mude para uma conta online para continuar.</string>
+    <string name="mcl_launch_error_localmode">Minecraft não pode ser instalado legalmente quando conectado numa conta local. Por favor, mude para uma conta original para continuar.</string>
     <string name="mcl_options">Opções</string>
     <string name="mcl_option_modinstall">Executa um instalador de mods (Forge, LabyMod, Fabric, etc...)</string>
     <string name="mcl_option_modinstallwitharg">Executa um instalador de mods (com argumentos personalizados)</string>
     <string name="mcl_option_customcontrol">Controlos personalizados</string>
     <string name="mcl_option_settings">Definições</string>
     <string name="mcl_option_about">Acerca</string>
+    <string name="mcl_setting_title_use_surface_view">Usar renderização de superfície alternada</string>
     <string name="mcl_setting_subtitle_use_surface_view">Pode ajudar no desempenho em cenários de vínculo da GPU</string>
     <string name="mcl_setting_title_uninstalljre">Desinstalar Runtime do Java</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Reinicio do lançador requirido] Isto te permite reinstalar a Runtime do Java</string>
@@ -83,6 +84,7 @@ Dá-te uma experiência de tela cheia melhorada.</string>
     <string name="mcl_setting_category_general">Definições gerais</string>
     <string name="mcl_setting_category_scaling">Definições de escala</string>
     <string name="mcl_setting_category_renderer">Renderizador</string>
+    <string name="mcl_setting_renderer_gles2_4">Holy gl4es: suporta 1.0-1.19+</string>
     <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): exporta o OpenGL 4.3</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): exporta o OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exporta o OpenGL 4.6</string>
@@ -214,11 +216,19 @@ Dá-te uma experiência de tela cheia melhorada.</string>
     <string name="pvc_title">Definições da versão</string>
     <string name="storage_warning_title">Alterações de armazenamento</string>
     <string name="storage_warning_text"><![CDATA[Devido aos novos reforços ao armazenamento adicionados no Android 10 e superiores, nós fomos obrigados a mover o diretório do jogo para uma pasta privada. <br /> A nova pasta para os ficheiros do Pojav é <b>Android/data/%s/files/</b> (também acessível usando um explorador de ficheiros).<br /> Se tu precisares de copiar os ficheiros do teu jogo, por favor copia tudo da página original em <b>games/PojavLauncher</b> manualmente.]]></string>
+    <string name="control_offset_title">Deslocamento dos controles</string>
+    <string name="control_top_offset">Deslocar superior: </string>
+    <string name="control_right_offset">Deslocar para direita: </string>
+    <string name="control_bottom_offset">deslocamento inferior: </string>
+    <string name="control_left_offset">Descolar para esquerda: </string>
+    <string name="preference_control_offset_title">Deslocamento lateral dos controles</string>
+    <string name="preference_control_offset_description">Definir um deslocamento personalizado para cada lado da tela</string>
     <string name="preference_mouse_start_title">Iniciar com o rato virtual ligado</string>
     <string name="preference_mouse_start_description">Usar esta opção fará com que você seja julgado pelo Mathias-Boulay</string>
     <string name="preference_video_title">Vídeo e renderizador</string>
     <string name="preference_video_description">Resolução, tipo de escala, e renderizador</string>
     <string name="preference_control_title">Customização dos controlos</string>
+    <string name="preference_control_description">Tipos de Gestos, triggers e escala</string>
     <string name="preference_java_title">Ajustes do Java</string>
     <string name="preference_java_description">Versões do Java, Argumentos JVM, e quantidade de RAM</string>
     <string name="preference_misc_title">Definições diversas</string>
@@ -227,6 +237,12 @@ Dá-te uma experiência de tela cheia melhorada.</string>
     <string name="preference_experimental_description">Use estas coisas com consideração, sem suporte.</string>
     <string name="preference_sustained_performance_title">Habilitar modo de desempenho constante</string>
     <string name="preference_sustained_performance_description">Limitar a Redução Térmica limitando o pico do desempenho</string>
+    <string name="preference_back_title">Voltar à tela anterior</string>
+    <string name="gles_hack_title">Hack de Redução do GL4ES</string>
+    <string name="gles_hack_none">Não diminuir texturas</string>
+    <string name="gles_hack_always">Divide todas as texturas por 2</string>
+    <string name="gles_hack_sometimes">Divide texturas grandes por 2 ou por 4</string>
+    <string name="unnamed">Sem Nome</string>
     <string name="profiles_latest_snapshot">Snapshot mais recente</string>
     <string name="profiles_latest_release">Versão mais recente</string>
     <string name="profiles_editing">Edição Do Perfil</string>
@@ -237,4 +253,5 @@ Dá-te uma experiência de tela cheia melhorada.</string>
     <string name="pedit_renderer">Renderizador</string>
     <string name="arc_capes_title">Capas da \'Comestica\'</string>
     <string name="arc_capes_desc">Habilitar capas da Cosmetica(antigamente Arc). Para mais informações por favor visite https://cosmetica.cc. Isto Requer OptiFine.</string>
+    <string name="migrated_profile_str">%s definições da versão</string>
 </resources>
