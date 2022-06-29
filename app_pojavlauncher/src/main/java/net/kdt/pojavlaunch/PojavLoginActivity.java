@@ -426,8 +426,8 @@ public class PojavLoginActivity extends BaseActivity {
 
                     // Replaced by gl4es_extra
                     if(config.renderer != null) {
-                        if (config.renderer.contains("zink")) config.renderer = "opengles3_virgl";
-                        if (!config.renderer.contains("virgl")) config.renderer = null;
+                        //if (config.renderer.contains("zink")) config.renderer = "opengles3_virgl";
+                        if (!config.renderer.contains("virgl") || !config.renderer.contains("zink")) config.renderer = null;
                     }
 
                     if(config.renderer == null && config.gamePath == null &&
