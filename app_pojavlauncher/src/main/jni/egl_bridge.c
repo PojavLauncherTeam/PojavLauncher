@@ -400,9 +400,9 @@ void pojavSwapBuffers() {
         } break;
 
         case RENDERER_VK_ZINK: {
-            OSMesaFlushFrontbuffer_p();
             //OSMesaMakeCurrent_p(ctx,buf.bits,GL_UNSIGNED_BYTE,savedWidth,savedHeight);
             glFinish_p();
+            //OSMesaFlushFrontbuffer_p();
             //ANativeWindow_lock(potatoBridge.androidWindow,&buf,NULL);
             //glReadPixels_p(0, 0, savedWidth, savedHeight, GL_RGBA, GL_INT, buf.bits);
             //ANativeWindow_unlockAndPost(potatoBridge.androidWindow);
@@ -479,7 +479,7 @@ void pojavMakeCurrent(void* window) {
 
     if (config_renderer == RENDERER_VK_ZINK || config_renderer == RENDERER_VIRGL) {
             printf("OSMDroid: making current\n");
-            OSMesaMakeCurrent_p((OSMesaContext)window,NULL/*potatoBridge.androidWindow*/,GL_UNSIGNED_BYTE,savedWidth,savedHeight);
+            OSMesaMakeCurrent_p((OSMesaContext)window,potatoBridge.androidWindow,GL_UNSIGNED_BYTE,savedWidth,savedHeight);
             if (config_renderer == RENDERER_VK_ZINK) {
                 //ANativeWindow_lock(potatoBridge.androidWindow,&buf,NULL);
                 OSMesaPixelStore_p(OSMESA_ROW_LENGTH,buf.stride);
