@@ -1,7 +1,7 @@
 <H1 align="center">PojavLauncher</H1>
 
-<img src="https://github.com/CriticalRange/PojavLauncher/blob/v3_openjdk/app_pojavlauncher/src/main/assets/pojavlauncher.png" align="left" width="130" height="130" alt="PojavLauncher logo">
- 
+<img src="https://github.com/CriticalRange/PojavLauncher/blob/v3_openjdk/app_pojavlauncher/src/main/assets/pojavlauncher.png" align="left" width="130" height="140" alt="PojavLauncher logo">
+
 [![Android CI](https://github.com/PojavLauncherTeam/PojavLauncher/workflows/Android%20CI/badge.svg)](https://github.com/PojavLauncherTeam/PojavLauncher/actions)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/PojavLauncherTeam/PojavLauncher)
 [![Crowdin](https://badges.crowdin.net/pojavlauncher/localized.svg)](https://crowdin.com/project/pojavlauncher)
@@ -10,9 +10,9 @@
 ---------
 * From [Boardwalk](https://github.com/zhuowei/Boardwalk)'s ashes here comes PojavLauncher!
 
-* PojavLauncher is a launcher that allows you to play Minecraft:Java Editions on your Android device!
+* PojavLauncher is a launcher that allows you to play Minecraft:Java Edition on your Android device!
 
-* It can run **almost** every version of the Minecraft, allowing you to install (.jar only) installers to install modloaders like [forge](https://files.minecraftforge.net/), [fabric](http://fabricmc.net/), [optifine](https://optifine.net), hack clients and much more!
+* It can run **almost** every version of the Minecraft, allowing you to use .jar only installers to install modloaders like [forge](https://files.minecraftforge.net/), [fabric](http://fabricmc.net/), [optifine](https://optifine.net), hack clients and much more!
 
 * For more details [check out our wiki](https://github.com/CriticalRange/PojavLauncher/wiki)
 ## Some notes to start with
@@ -30,7 +30,7 @@
 
 ## Introduction 
 * PojavLauncher is a Minecraft: Java Edition launcher for Android and iOS based on [Boardwalk](https://github.com/zhuowei/Boardwalk). 
-* This launcher can launch almost all available Minecraft versions (from rd-132211 to 1.18 snapshots (kinda)), including Combat Test versions. 
+* This launcher can launch almost all available Minecraft versions (from rd-132211 to 1.19 snapshots (kinda)), including Combat Test versions. 
 * Modding via Forge (up to 1.16.5) and Fabric are also supported. 
 * This repository contains source code for Android. 
 * For iOS/iPadOS, check out [PojavLauncher_iOS](https://github.com/PojavLauncherTeam/PojavLauncher_iOS).
@@ -57,7 +57,7 @@ If you want to build after launcher code changes, follow the steps below.
                 Platform-independent: .jar files, libraries, configs, etc...</br>
                 Platform-dependent: .so files, etc...</br>
         - Create:</br>
-                file named `universal.tar.xz` with all platform-independent files</br>
+                A file named `universal.tar.xz` with all platform-independent files</br>
                 4 files named `bin-<arch>.tar.xz` with all platform-dependent files per-architecture</br>
         - Put these in `assets/components/jre/` folder</br>
         - (If needed) update the Version file with the current date</br>
@@ -98,14 +98,14 @@ scripts\languagelist_updater.bat
 - [x] Support for Minecraft 1.17 (22w13a to be exact) and above. Used [Holy GL4ES](https://github.com/PojavLauncherTeam/gl4es-114-extra)
 - [x] Game surface zooming.
 - [x] New input pipe rewritten to native code to boost performance.
-- [x] Rewritten entire controls system (thanks to @Mathias-Boulay
-- [ ] More...
+- [x] Rewritten entire controls system (thanks to @Mathias-Boulay)
+- [ ] More to come!
 
 ## Known Issues
 - Minecraft `21w10a` or newer are currently not yet supported due to the new GLSL usage. Fortunately, a workaround is provided and built into the launcher.
 - ~In 1.16 and up, spawn eggs banners are white (you can fix this by switching renderer
 to `gl4es 1.1.5`, only works on 1.16 and up, do not use under this version, as the texture
-will bug out when hit a mob)~ It should work when you use gl4es 1.1.4.
+will bug out when hit a mob)~ It should work when you use HolyGL4ES.
 - Controller mods aren't working.
 - Random crashes could happen very often on Android 5.x during game load or join world.
 - With big modpacks textures could be messed up
@@ -115,7 +115,9 @@ will bug out when hit a mob)~ It should work when you use gl4es 1.1.4.
 - PojavLauncher is licensed under [GNU GPLv3](https://github.com/khanhduytran0/PojavLauncher/blob/master/LICENSE).
 
 ## Contributing
-Contributions are welcome! We welcome any type of contribution, not only code. For example, you can help the wiki shape up.
+Contributions are welcome! We welcome any type of contribution, not only code. For example, you can help the wiki shape up. You can help the [translation](https://crowdin.com/project/pojavlauncher) too!
+
+
 Any code change should be submitted as a pull request. The description should explain what the code does and give steps to execute it.
 
 ## Credits & Third party components and their licenses (if available)
