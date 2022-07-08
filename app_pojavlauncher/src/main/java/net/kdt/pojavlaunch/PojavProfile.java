@@ -8,10 +8,13 @@ import android.util.Log;
 import com.google.gson.JsonSyntaxException;
 import java.io.File;
 import java.io.IOException;
+import java.util.UUID;
 
 import net.kdt.pojavlaunch.authenticator.mojang.RefreshListener;
 import net.kdt.pojavlaunch.authenticator.mojang.RefreshTokenTask;
 import net.kdt.pojavlaunch.value.MinecraftAccount;
+import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
+import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 
 public class PojavProfile {
 	private static final String PROFILE_PREF = "pojav_profile";
@@ -100,7 +103,15 @@ public class PojavProfile {
 
     public static void launch(Activity ctx, Object o) {
         PojavProfile.setCurrentProfile(ctx, o);
-
+        LauncherProfiles.update();
+        if(!LauncherProfiles.mainProfileJson.profilesWereMigrated && LauncherProfiles.mainProfileJson.profiles != null) {
+            MinecraftProfile defaultProfile = LauncherProfiles.mainProfileJson.profiles.get("(Default)");
+            if(defaultProfile != null) {
+                defaultProfile.lastVersionId = PojavProfile.getCurrentProfileContent(ctx).selectedVersion;
+            }
+            LauncherProfiles.mainProfileJson.profilesWereMigrated = true;
+            LauncherProfiles.update();
+        }
         Intent intent = new Intent(ctx, PojavLauncherActivity.class); //MCLauncherActivity.class);
         ctx.startActivity(intent);
     }

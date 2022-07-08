@@ -21,6 +21,7 @@ public class MinecraftAccount
     public boolean isMicrosoft = false;
     public String msaRefreshToken = "0";
     public String skinFaceBase64;
+    public long expiresAt;
     
     void updateSkinFace(String uuid) {
         try {
@@ -54,7 +55,7 @@ public class MinecraftAccount
     }
 
     public static MinecraftAccount load(String name) throws JsonSyntaxException {
-        if(!accountExists(name)) return new MinecraftAccount();
+        if(!accountExists(name)) return null;
         try {
             MinecraftAccount acc = parse(Tools.read(Tools.DIR_ACCOUNT_NEW + "/" + name + ".json"));
             if (acc.accessToken == null) {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
-    <string name="app_name">PojavLauncher（適用於 Android 的《Minecraft：Java版》）,</string>
+    <string name="app_name">PojavLauncher（適用於 Android 的《Minecraft：Java版》）</string>
     <string name="app_short_name">PojavLauncher</string>
     <string name="app_motd">在您的設備上啟動《Minecraft：Java版》！</string>
     <!-- Action bar part -->
@@ -11,10 +11,8 @@
     <string name="login_online_password_hint">密碼</string>
     <string name="login_online_check_keeplogin">保持登入狀態</string>
     <string name="login_online_login_label">登入</string>
-    <string name="login_offline_label">以離線帳號登入</string>
     <string name="login_error_invalid_username">無效的用戶名。用戶名必須在3-16個字節的範圍內，只能包含A-Z、a-z、0-9和下劃線。</string>
     <string name="login_error_exist_username">用戶名已存在</string>
-    <string name="login_error_offline_password">離線帳戶不能填寫密碼！</string>
     <string name="login_microsoft">微軟帳號登入</string>
     <string name="login_select_account">選擇帳號</string>
     <string name="login_title_no_saved_account">找不到帳戶!</string>
@@ -24,7 +22,7 @@
     <!-- Warnings -->
     <string name="warning_remove_account">將移除此帳號！</string>
     <!-- AlertDialog title -->
-    <string name="alerttitle_install_jre">安裝 Java 執行環境 %s (.tar.xz)</string>
+    <string name="alerttitle_install_jre">安裝 Java 運行環境 %s (.tar.xz)</string>
     <string name="alerttitle_installmod">選擇 Mod 安裝器</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher 意外崩潰</string>
@@ -34,7 +32,7 @@
     <!-- Toast messages -->
     <string name="toast_permission_denied">需要儲存寫入權限！</string>
     <string name="toast_optifine_success">安裝成功</string>
-    <string name="toast_uninstalljre_done">Java 執行環境解除安裝成功</string>
+    <string name="toast_uninstalljre_done">Java 運行庫解除安裝成功</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
@@ -44,27 +42,30 @@
     <string name="mcl_tab_crash">崩潰日誌</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">已連接</string>
-    <string name="mcl_account_offline">離線</string>
+    <string name="mcl_account_local">本地</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Minecraft %s 就緒</string>
     <string name="mcl_launch_cleancache">正在清理快取</string>
     <string name="mcl_launch_downloading">正在下載 %s</string>
-    <string name="mcl_launch_downloading_progress">"正在下載 %s (%.2f MB / %.2f MB)"</string>
+    <string name="mcl_launch_downloading_progress">"下載中 %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">正在準備下載資源</string>
+    <string name="mcl_launch_error_localmode">使用本地帳號時，是無法合法的安裝 [Minecraft: Java Edition] 的。請登入Microsoft帳號以繼續。</string>
     <string name="mcl_options">選項</string>
     <string name="mcl_option_modinstall">啟動 Mod 安裝器（例如 Forge, LabyMod, Fabric...）</string>
     <string name="mcl_option_modinstallwitharg">以自訂引數啟動 Mod 安裝器</string>
     <string name="mcl_option_customcontrol">自訂控制鍵</string>
     <string name="mcl_option_settings">設定</string>
     <string name="mcl_option_about">關於</string>
-    <string name="mcl_setting_title_uninstalljre">解除安裝 Java 執行環境</string>
-    <string name="mcl_setting_subtitle_uninstalljre">[需要重新啟動啟動器] 才能重新安裝 Java 執行環境</string>
+    <string name="mcl_setting_title_use_surface_view">使用SurfaceView渲染</string>
+    <string name="mcl_setting_subtitle_use_surface_view">在吃重GPU的情況可能會有幫助</string>
+    <string name="mcl_setting_title_uninstalljre">解除安裝 Java 運行環境</string>
+    <string name="mcl_setting_subtitle_uninstalljre">重新安裝Java運行環境 [需要重新啟動啟動器]</string>
     <string name="mcl_setting_title_freeform">以自由窗口模式啟動 Minecraft</string>
     <string name="mcl_setting_subtitle_freeform">在浮動視窗中啟動 Minecraft。需要 Android 7.0+。</string>
     <string name="mcl_setting_title_hide_sidebar">隱藏側邊欄</string>
-    <string name="mcl_setting_subtitle_hide_sidebar">可能有用戶懷念舊 v1 界面，擁有更接近全螢幕的體驗。</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">提供更接近全螢幕的體驗。可能會有玩家懷念v1舊版啟動器介面。</string>
     <string name="mcl_setting_title_ignore_notch">忽略瀏海螢幕</string>
-    <string name="mcl_setting_subtitle_ignore_notch">忽略瀏海螢幕並將畫面擴展至其下方。\n給您更完整的沉浸感。</string>
+    <string name="mcl_setting_subtitle_ignore_notch">忽略瀏海螢幕並延伸畫面。\n給您更完整的沉浸感。</string>
     <string name="mcl_setting_title_resolution_scaler">解析度縮放</string>
     <string name="mcl_setting_subtitle_resolution_scaler">允許降低遊戲畫面解析度。原生解析度為 100%</string>
     <string name="mcl_setting_title_longpresstrigger">長按觸發時長</string>
@@ -82,9 +83,8 @@
     <string name="mcl_setting_category_general">一般設定</string>
     <string name="mcl_setting_category_scaling">縮放設定</string>
     <string name="mcl_setting_category_renderer">渲染器</string>
-    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): 輸出OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): 輸出OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): exports OpenGL 2.1 + partial 3.2（1.17 暫不支持）</string>
+    <string name="mcl_setting_renderer_gles2_4">holy gl4es: 支援 1.0-1.19+</string>
+    <string name="mcl_setting_renderer_virgl">virgl (OpenGL ES 3): exports OpenGL 4.3</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): exports OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): 輸出OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">將在版本列表中顯示的版本型別</string>
@@ -107,11 +107,10 @@
     <string name="global_error_field_empty">此欄位為必填</string>
     <string name="global_waiting">等待中</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">程式/遊戲以 %d 程式碼退出</string>
+    <string name="mcn_exit_title">程式/遊戲以代碼 %d 退出，詳情請查看latestlog.txt。</string>
     <string name="mcn_exit_call">退出</string>
     <string name="mcn_exit_confirm">確定強制關閉？</string>
     <string name="mcn_check_fail_lwjgl">未安裝LWJGL3！</string>
-    <string name="mcn_check_fail_incompatiblearch">%1$s 架構與 Java 執行環境 %2$s 不相容。</string>
     <string name="mcn_check_fail_vulkan_support">該設備不支援 Vulkan Zink 渲染器！</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
@@ -133,6 +132,13 @@
     <string name="control_customkey">傳送自訂鍵碼</string>
     <string name="control_scaleup">放大</string>
     <string name="control_scaledown">縮小</string>
+    <!-- ImportControlActivity Strings -->
+    <string name="import_control_label">導入控制鍵</string>
+    <string name="import_control_invalid_file">無效或損毀的的檔案</string>
+    <string name="import_control_import_button">導入控制鍵</string>
+    <string name="import_control_verifying_file">正在效驗檔案，請稍候再試...</string>
+    <string name="import_control_invalid_name">無效的檔案名或檔案已經存在</string>
+    <string name="import_control_done">導入完成</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -162,7 +168,9 @@
     <string name="customctrl_addbutton">添加按鈕</string>
     <string name="customctrl_addbutton_drawer">添加組合框</string>
     <string name="customctrl_addsubbutton">添加子按鈕</string>
+    <string name="customctrl_add_subbutton_message">子按鈕 n°%d 已添加 !</string>
     <string name="customctrl_selectdefault">選擇預設.json 控制鍵位</string>
+    <string name="main_install_jar_file">安裝 .jar</string>
     <string name="main_options">選項</string>
     <string name="main_play">啟動遊戲</string>
     <string name="main_welcome">歡迎， %s</string>
@@ -173,12 +181,12 @@
     <string name="main_nolog">無日誌。</string>
     <string name="main_no_news_feed">新聞獲取失敗！</string>
     <string name="auto_ram_subtitle">啟用 RAM 自動調節</string>
-    <string name="auto_ram_title">自動 RAM</string>
+    <string name="auto_ram_title">自動調節RAM</string>
     <string name="autoram_info_msg">記憶體已設爲 %d MB</string>
     <string name="mcl_setting_check_libraries">在下載後檢查執行庫</string>
     <string name="mcl_setting_check_libraries_subtitle">此選項會強制啟動器在下載後檢查執行庫的雜湊值，避免下載錯誤。</string>
-    <string name="dl_library_sha_fail">執行庫 %s 已損壞，將重新下載</string>
-    <string name="dl_library_sha_unknown">無法檢查執行庫 %s 的狀態</string>
+    <string name="dl_library_sha_fail">執行庫 %s 損毀，將重新下載</string>
+    <string name="dl_library_sha_unknown">無法檢查執行庫 %s 的狀態，默認為狀況良好。</string>
     <string name="dl_library_sha_pass">執行庫 %s 正常</string>
     <string name="mcl_disable_gestures">停用手勢</string>
     <string name="mcl_disable_gestures_subtitle">停用手勢，例如長按破壞方塊和點擊放置方塊。</string>
@@ -187,10 +195,11 @@
     <string name="customctrl_passthru">滑鼠透傳</string>
     <string name="customctrl_swipeable">可滑動</string>
     <string name="customctrl_rounded">圓角</string>
-    <string name="memory_warning_msg">目前可用RAM (%d) 低於分配的RAM (%d)，遊戲可能會崩潰。 如果遊戲崩潰請更改分配的記憶體大小。</string>
+    <string name="memory_warning_msg">目前可用RAM (%d) 低於分配的RAM (%d)，遊戲可能會崩潰。 如果遊戲崩潰請增加記憶體的分配量。</string>
     <string name="mcl_memory_allocation">分配記憶體</string>
     <string name="mcl_memory_allocation_subtitle">分配多少記憶體給Minecraft</string>
-    <string name="multirt_runtime_corrupt">Java運行庫毀損</string>
+    <string name="multirt_runtime_corrupt">Java運行環境毀損</string>
+    <string name="multirt_runtime_incompatiblearch">%s 與您的硬體架構不相容</string>
     <string name="multirt_config_title">Java VM</string>
     <string name="multirt_config_add">新建</string>
     <string name="multirt_config_add_subtitle">導入新的 Java VM</string>
@@ -200,12 +209,51 @@
     <string name="multirt_config_setdefault">設為預設</string>
     <string name="multirt_config_setdefault_already">預設</string>
     <string name="multirt_config_removeerror_last">您必須至少安裝一個Java運行庫</string>
-    <string name="multirt_nocompartiblert">找不到任何可壓縮的 Java 運行環境</string>
-    <string name="compat_117_message">Minecraft 21w10a+ 需要 OpenGL 3.2 核心配置檔案。 遺憾的是，GL4ES 包裝器目前並不支援，但是您可以安裝一些額外的資源來運行這些版本。 按 確認鍵 確認安裝，然後按 取消鍵 中止啟動。</string>
+    <string name="multirt_nocompartiblert">無可用Java運行庫。此版本需要Java %d 以上。</string>
+    <string name="multirt_nojava8rt">找不到已安裝的Java 8。請安裝Java 8以使用此功能。</string>
+    <string name="compat_117_message">Minecraft 21w10a+ 需要 OpenGL 3.2 。 遺憾的是，GL4ES 渲染器目前並不支援，但是您可以安裝一些額外的補釘來運行這些版本。 按 確認鍵 確認安裝，按 取消鍵 中止啟動。</string>
     <string name="compat_11x_playanyway">仍然開始遊戲</string>
-    <string name="pvc_gameDirectory">遊戲目錄</string>
+    <string name="pvc_gameDirectory">遊戲資料夾</string>
     <string name="pvc_jvmArgs">JVM 參數</string>
     <string name="pvc_title">Per-version 設定</string>
     <string name="storage_warning_title">儲存位置已變更</string>
-    <string name="storage_warning_text"><![CDATA[由於Google在Android 10所加入的儲存規範，我們把遊戲的目錄移動到app的私有資料夾下了。.<br />Pojav的新資料夾位於<b>Android/data/%s/files/</b> (可用檔案瀏覽器存取) <br /> 如果有需要移動先前的遊戲檔案，請手動從<b>/games/PojavLauncher</b>將資料複製到新的位置。]]></string>
+    <string name="storage_warning_text"><![CDATA[由於Google在Android 10所加入的儲存規範，我們把遊戲的目錄移動到app的私有資料夾下了。<br />Pojav的新資料夾位於<b>Android/data/%s/files/</b> (可用檔案瀏覽器存取) <br /> 如果有需要移動先前的遊戲檔案，請手動從<b>/games/PojavLauncher</b>將資料複製到新的位置。]]></string>
+    <string name="control_offset_title">控制鍵偏移</string>
+    <string name="control_top_offset">頂端偏移: </string>
+    <string name="control_right_offset">右偏移: </string>
+    <string name="control_bottom_offset">底部偏移: </string>
+    <string name="control_left_offset">左偏移: </string>
+    <string name="preference_control_offset_title">控制鍵偏移</string>
+    <string name="preference_control_offset_description">自訂控制鍵與螢幕兩邊的偏移。</string>
+    <string name="preference_mouse_start_title">啟動時開啟虛擬滑鼠</string>
+    <string name="preference_mouse_start_description">(開啟此選項會受到開發者Mathias-Boulay的審判)</string>
+    <string name="preference_video_title">顯示設定</string>
+    <string name="preference_video_description">解析度縮放和渲染器</string>
+    <string name="preference_control_title">自定義控制</string>
+    <string name="preference_control_description">手勢類型、觸發器和縮放</string>
+    <string name="preference_java_title">Java 選項</string>
+    <string name="preference_java_description">Java 版本，JVM 參數和 RAM 分配</string>
+    <string name="preference_misc_title">其他設定</string>
+    <string name="preference_misc_description">檢查版本和執行庫</string>
+    <string name="preference_experimental_title">實驗性選項</string>
+    <string name="preference_experimental_description">使用這些選項請三思，後果自負。</string>
+    <string name="preference_sustained_performance_title">啟用性能限制模式</string>
+    <string name="preference_sustained_performance_description">通過限制峰值效能來減少熱當的情況</string>
+    <string name="preference_back_title">返回上一個頁面</string>
+    <string name="gles_hack_title">gl4es貼圖縮放</string>
+    <string name="gles_hack_none">不縮放貼圖</string>
+    <string name="gles_hack_always">將所有貼圖大小除以 2</string>
+    <string name="gles_hack_sometimes">將較大的貼圖大小除以 2 或 4</string>
+    <string name="unnamed">未命名</string>
+    <string name="profiles_latest_snapshot">最新快照</string>
+    <string name="profiles_latest_release">最新版本</string>
+    <string name="profiles_editing">編輯安裝檔</string>
+    <string name="profiles_profile_name">名稱</string>
+    <string name="profiles_profile_version">版本</string>
+    <string name="global_delete">刪除</string>
+    <string name="pedit_java_runtime">Java運行環境</string>
+    <string name="pedit_renderer">渲染器</string>
+    <string name="arc_capes_title">Cosmetica披風</string>
+    <string name="arc_capes_desc">透過Cosmetica(前身為Arc)啟用披風。需要Optifine。更多資訊請至https://cosmetica.cc。</string>
+    <string name="migrated_profile_str">%s 版本設定</string>
 </resources>

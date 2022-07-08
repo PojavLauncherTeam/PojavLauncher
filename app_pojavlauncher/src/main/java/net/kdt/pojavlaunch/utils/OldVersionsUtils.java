@@ -26,7 +26,7 @@ public class OldVersionsUtils {
         }
 
         try {
-            String openGlVersion = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(creationDate.substring(0, creationDate.indexOf("T"))).before(new Date(2011-1900, 6, 7)) ? "1" : "2";
+            String openGlVersion = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(creationDate.substring(0, creationDate.indexOf("T"))).before(new Date(2011-1900, 6, 8)) ? "1" : "2";
             ExtraCore.setValue(ExtraConstants.OPEN_GL_VERSION, openGlVersion);
         }catch (ParseException exception){
             Log.e("OPENGL SELECTION", exception.toString());

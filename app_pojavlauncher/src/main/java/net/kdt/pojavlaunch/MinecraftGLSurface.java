@@ -398,7 +398,7 @@ public class MinecraftGLSurface extends View {
         }
         if(mouseCursorIndex == -1) return false; // we cant consoom that, theres no mice!
         if(CallbackBridge.isGrabbing()) {
-            if(BaseMainActivity.isAndroid8OrHigher()){
+            if(BaseMainActivity.isAndroid8OrHigher() && !hasPointerCapture()){
                 requestFocus();
                 requestPointerCapture();
             }
@@ -486,7 +486,6 @@ public class MinecraftGLSurface extends View {
         //Toast.makeText(this, event.getDevice().toString(), Toast.LENGTH_SHORT).show();
 
         //Filtering useless events by order of probability
-        if((event.getFlags() & KeyEvent.FLAG_FALLBACK) == KeyEvent.FLAG_FALLBACK) return true;
         int eventKeycode = event.getKeyCode();
         if(eventKeycode == KeyEvent.KEYCODE_UNKNOWN) return true;
         if(eventKeycode == KeyEvent.KEYCODE_VOLUME_DOWN) return false;
@@ -536,6 +535,9 @@ public class MinecraftGLSurface extends View {
             EfficientAndroidLWJGLKeycode.execKey(event, index);
             return true;
         }
+
+        // Some events will be generated an infinite number of times when no consumed
+        if((event.getFlags() & KeyEvent.FLAG_FALLBACK) == KeyEvent.FLAG_FALLBACK) return true;
 
         return false;
     }
@@ -600,9 +602,15 @@ public class MinecraftGLSurface extends View {
         windowWidth = Tools.getDisplayFriendlyRes(Tools.currentDisplayMetrics.widthPixels, mScaleFactor);
         windowHeight = Tools.getDisplayFriendlyRes(Tools.currentDisplayMetrics.heightPixels, mScaleFactor);
         if(LauncherPreferences.PREF_USE_ALTERNATE_SURFACE){
-            ((SurfaceView)mSurface).getHolder().setFixedSize(windowWidth, windowHeight);
+            SurfaceView view = (SurfaceView) mSurface;
+            if(view.getHolder() != null){
+                view.getHolder().setFixedSize(windowWidth, windowHeight);
+            }
         }else{
-            ((TextureView)mSurface).getSurfaceTexture().setDefaultBufferSize(windowWidth, windowHeight);
+            TextureView view = (TextureView)mSurface;
+            if(view.getSurfaceTexture() != null){
+                view.getSurfaceTexture().setDefaultBufferSize(windowWidth, windowHeight);
+            }
         }
 
         CallbackBridge.sendUpdateWindowSize(windowWidth, windowHeight);

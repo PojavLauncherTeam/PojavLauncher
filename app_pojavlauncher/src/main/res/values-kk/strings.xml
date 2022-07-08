@@ -11,7 +11,6 @@
     <string name="login_online_password_hint">Құпиясөз</string>
     <string name="login_online_check_keeplogin">Мені кірген күйде қалдыру</string>
     <string name="login_online_login_label">Кіру</string>
-    <string name="login_offline_label">Offline-тіркелгімен кіру</string>
     <string name="login_error_exist_username">Бұл ат бос емес</string>
     <string name="login_microsoft">Microsoft-пен кіру</string>
     <string name="login_select_account">Тіркелгі таңдау</string>
@@ -42,7 +41,6 @@
     <string name="mcl_tab_crash">Іркіліс жорналы</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Желіде</string>
-    <string name="mcl_account_offline">Офлайн</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Minecraft %s қосылуға дайын</string>
     <string name="mcl_launch_cleancache">Кәш файлдары жойылуда</string>
@@ -98,11 +96,9 @@
     <string name="global_error_field_empty">Бұл өріс бос бола алмайды</string>
     <string name="global_waiting">Күте тұрыңыз</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Қолданба/ойын %d кодымен жабылды</string>
     <string name="mcn_exit_call">Шығу</string>
     <string name="mcn_exit_confirm">Мәжбүрлеп жапқыңыз келе ме?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 орнатылмаған!</string>
-    <string name="mcn_check_fail_incompatiblearch">%1$s сәулеті Java Runtime-мен %2$s үйлесе алмайды.</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Пернетақта</string>
@@ -129,6 +125,7 @@
     <string name="control_customkey">Өзгертілген жайманы жіберу</string>
     <string name="control_scaleup">Үлкейту</string>
     <string name="control_scaledown">Кішірейту</string>
+    <!-- ImportControlActivity Strings -->
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -165,4 +162,6 @@
     <string name="mcl_setting_check_libraries">Жүктегеннен кейін кітапханаларды тексереді</string>
     <string name="dl_library_sha_pass">%s кітапханасы жақсы және қолдануға жарамды</string>
     <string name="mcl_setting_title_mousespeed">Тінтуір жылдамдығы</string>
+    <string name="profiles_profile_name">Атауы</string>
+    <string name="pedit_renderer">Рендерер</string>
 </resources>

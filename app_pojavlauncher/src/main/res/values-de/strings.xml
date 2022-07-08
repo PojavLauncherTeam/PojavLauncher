@@ -7,14 +7,12 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">Email oder Benutzername</string>
+    <string name="login_online_username_hint">E-Mail oder Benutzername</string>
     <string name="login_online_password_hint">Passwort</string>
     <string name="login_online_check_keeplogin">Angemeldet bleiben</string>
     <string name="login_online_login_label">Anmelden</string>
-    <string name="login_offline_label">Als Offline-Konto anmelden</string>
     <string name="login_error_invalid_username">Ungültiger Benutzername. Der Benutzername muss zwischen 3-16 Zeichen lang sein und sollte nur A-Z, a-z, 0-9 und Unterstriche enthalten.</string>
     <string name="login_error_exist_username">Dieser Benutzername ist bereits vergeben</string>
-    <string name="login_error_offline_password">Offline Konten können kein Kennwort haben!</string>
     <string name="login_microsoft">Microsoft-Login</string>
     <string name="login_select_account">Konto auswählen</string>
     <string name="login_title_no_saved_account">Es konnte kein Konto gefunden werden!</string>
@@ -32,7 +30,7 @@
     <string name="error_show_more">Mehr anzeigen</string>
     <string name="error_show_less">Weniger anzeigen</string>
     <!-- Toast messages -->
-    <string name="toast_permission_denied">Die Schreib-/Lese-Berechtigung für den Speicher ist erforderlich!</string>
+    <string name="toast_permission_denied">Die Lese-/Schreib-Berechtigung für den Speicher ist erforderlich!</string>
     <string name="toast_optifine_success">Installation erfolgreich</string>
     <string name="toast_uninstalljre_done">Deinstallation der Java Runtime fertiggestellt</string>
     <!--
@@ -44,19 +42,22 @@
     <string name="mcl_tab_crash">Absturzbericht</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Verbunden</string>
-    <string name="mcl_account_offline">Offline</string>
+    <string name="mcl_account_local">Lokal</string>
     <!-- MCLauncherActivity: Strings -->
-    <string name="mcl_version_msg">Bereit um Minecraft Version %s zu spielen</string>
-    <string name="mcl_launch_cleancache">Säuberung von Cachedateien</string>
+    <string name="mcl_version_msg">Bereit um Minecraft %s zu spielen</string>
+    <string name="mcl_launch_cleancache">Cache-Dateien bereinigen</string>
     <string name="mcl_launch_downloading">Lade %s herunter</string>
-    <string name="mcl_launch_downloading_progress">"%s wird heruntergeladen (%.2f MB / %.2f MB)"</string>
-    <string name="mcl_launch_download_assets">Bereite das Herunterladen der Resourcen vor</string>
+    <string name="mcl_launch_downloading_progress">"Lade %s herunter (%.2f MB / %.2f MB)"</string>
+    <string name="mcl_launch_download_assets">Bereite das Herunterladen der Ressourcen vor</string>
+    <string name="mcl_launch_error_localmode">Minecraft kann nicht legal installiert werden, wenn du mit einem lokalen Konto angemeldet sind. Bitte wechsel zu einem Online-Konto, um fortzufahren.</string>
     <string name="mcl_options">Optionen</string>
     <string name="mcl_option_modinstall">Starte einen Mod-Installer (Forge, LabyMod, Fabric, u.s.w.)</string>
     <string name="mcl_option_modinstallwitharg">Starte einen Mod-Installer (Mit eigenen Argumenten)</string>
     <string name="mcl_option_customcontrol">Benutzerdefinierte Steuerung</string>
     <string name="mcl_option_settings">Einstellungen</string>
     <string name="mcl_option_about">Über</string>
+    <string name="mcl_setting_title_use_surface_view">Verwende alternatives Oberflächen-Rendering</string>
+    <string name="mcl_setting_subtitle_use_surface_view">Kann die Leistung in GPU-gebundenen Szenarien verbessern</string>
     <string name="mcl_setting_title_uninstalljre">Java Runtime deinstallieren</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Launcher Neustart erforderlich] Mit dieser Option können Sie Java Runtime erneut installieren</string>
     <string name="mcl_setting_title_freeform">Minecraft im Freiform-Modus starten</string>
@@ -67,27 +68,26 @@
     <string name="mcl_setting_subtitle_ignore_notch">Ignoriert die Einbuchtung im Bildschirm und erweitert das Bild unter ihr.\nDie Spielerfahrung wird dadurch immersiver.</string>
     <string name="mcl_setting_title_resolution_scaler">Auflösungsskalator</string>
     <string name="mcl_setting_subtitle_resolution_scaler">Ermöglicht es dir die Spielauflösung zu verringern. 100% ist die normale Auflösung</string>
-    <string name="mcl_setting_title_longpresstrigger">Wie lange wird nach langem Drücken ausgelöst</string>
+    <string name="mcl_setting_title_longpresstrigger">Auslösezeit für langes Drücken</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Ändere die Auslösezeit für langes Drücken beim Zerstören des Blocks und Ablegen des Gegenstandes.</string>
     <string name="mcl_setting_title_backtorightmouse">Die Zurück-Taste als Rechte Maustaste werten</string>
     <string name="mcl_setting_subtitle_backtorightmouse">Manche Geräte werten den Rechtsklick einer externen Maus als Zurück-Taste. Solltest du eine externe Maus verwenden, solltest du diese Einstellung aktivieren.</string>
-    <string name="mcl_setting_title_flat_button_style">Flacher Schaltflächen-Style</string>
+    <string name="mcl_setting_title_flat_button_style">Flacher Schalflächen-Stil</string>
     <string name="mcl_setting_subtitle_flat_button_style">Wenn diese Einstellung aktiviert ist, ändert sich der Style der Steuerungsschaltflächen zu einem flachen Style.</string>
-    <string name="mcl_setting_title_buttonscale">Größe der Steuerungsschaltflächen</string>
-    <string name="mcl_setting_subtitle_buttonscale">Vergrößere die Schaltflächen, wenn sie zu klein sind.</string>
+    <string name="mcl_setting_title_buttonscale">Größe der Steuerelemente</string>
+    <string name="mcl_setting_subtitle_buttonscale">Vergrößere zu kleine Steuerelemente.</string>
     <string name="mcl_setting_title_mousescale">Größe der Maus</string>
     <string name="mcl_setting_subtitle_mousescale">Ändere die Größe der virtuellen Maus.</string>
     <string name="mcl_setting_title_javaargs">JVM-Start-Argumente</string>
-    <string name="mcl_setting_subtitle_javaargs">Passen Sie auf. Sollten Sie die Argumente wahrlos verändern, könnte dies zu Abstürzen führen.</string>
+    <string name="mcl_setting_subtitle_javaargs">Passe auf. Sollten die Argumente ohne Fachwissen einfach verändert werden, kann dies zu Abstürzen führen.</string>
     <string name="mcl_setting_category_general">Allgemeine Einstellungen</string>
     <string name="mcl_setting_category_scaling">Einstellungen für die Größe der Benutzeroberfläche</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
-    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): Gibt OpenGL 2.1 aus</string>
-    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): Gibt OpenGL 2.1 aus</string>
-    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): Gibt OpenGL 2.1 + partial 3.2 aus (Noch keine Unterstützung für 1.17)</string>
+    <string name="mcl_setting_renderer_gles2_4">holy gl4es: unterstützt 1.0-1.19+</string>
+    <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): Gibt OpenGL 4.3 aus</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): Gibt OpenGL 3.0 aus</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): Gibt OpenGL 4.6 aus</string>
-    <string name="mcl_setting_category_veroption">Versionstypen welche in der Versionsliste sind:</string>
+    <string name="mcl_setting_category_veroption">Versionsarten, welche in der Versionsliste sind:</string>
     <string name="mcl_setting_veroption_release">Vollversionen</string>
     <string name="mcl_setting_veroption_snapshot">Entwicklungsversionen</string>
     <string name="mcl_setting_veroption_oldalpha">Old-Alpha</string>
@@ -107,14 +107,13 @@
     <string name="global_error_field_empty">Dieses Feld darf nicht leer sein</string>
     <string name="global_waiting">Bitte warte einen kleinen Moment</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Anwendung/Spiel mit Code %d beendet</string>
+    <string name="mcn_exit_title">Anwendung/Spiel mit dem Code %d beendet, für weitere Details, latestlog.txt lesen.</string>
     <string name="mcn_exit_call">Beenden</string>
-    <string name="mcn_exit_confirm">Sind Sie sicher, dass Sie die Beendung erzwingen möchten?</string>
+    <string name="mcn_exit_confirm">Sind Sie sicher, dass Sie das Beenden erzwingen möchten?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 wurde nicht installiert!</string>
-    <string name="mcn_check_fail_incompatiblearch">Architektur %1$s ist inkompatibel mit Java Runtime %2$s.</string>
     <string name="mcn_check_fail_vulkan_support">Vulkan Zink-Renderer wird auf diesem Gerät nicht unterstützt!</string>
     <!-- MainActivity: Control buttons -->
-    <string name="control_toggle">Benutzeroberfläche</string>
+    <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Tastatur</string>
     <string name="control_chat">Chat</string>
     <string name="control_debug">Debug</string>
@@ -139,13 +138,20 @@
     <string name="control_customkey">Sende Keycode</string>
     <string name="control_scaleup">Vergrößern</string>
     <string name="control_scaledown">Verkleinern</string>
+    <!-- ImportControlActivity Strings -->
+    <string name="import_control_label">Steuerung importieren</string>
+    <string name="import_control_invalid_file">Ungültige oder beschädigte Datei</string>
+    <string name="import_control_import_button">Steuerung importieren</string>
+    <string name="import_control_verifying_file">Datei wird verifiziert, bitte warten und erneut versuchen…</string>
+    <string name="import_control_invalid_name">Ungültiger Dateiname oder Datei bereits vorhanden</string>
+    <string name="import_control_done">Import abgeschlossen</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
     <string name="customctrl_edit">Editiere %s</string>
     <string name="customctrl_remove">Soll %s entfernt werden?</string>
-    <string name="customctrl_keyname">Keycode</string>
+    <string name="customctrl_keyname">Tastencode</string>
     <string name="customctrl_toggle">Umschaltbar</string>
     <string name="customctrl_size">Größe</string>
     <string name="customctrl_size_width">Breite</string>
@@ -168,7 +174,9 @@
     <string name="customctrl_addbutton">Taste hinzufügen</string>
     <string name="customctrl_addbutton_drawer">Schaltflächengruppe hinzufügen</string>
     <string name="customctrl_addsubbutton">Sub-Schaltfläche hinzufügen</string>
-    <string name="customctrl_selectdefault">Wähle die standard Conroll json</string>
+    <string name="customctrl_add_subbutton_message">Unter-Schaltfläche Nr. %d wurde hinzugefügt!</string>
+    <string name="customctrl_selectdefault">Wähle die Standardsteuerung</string>
+    <string name="main_install_jar_file">.jar installieren</string>
     <string name="main_options">Optionen</string>
     <string name="main_play">Spielen</string>
     <string name="main_welcome">Willkommen, %s</string>
@@ -197,6 +205,7 @@
     <string name="mcl_memory_allocation">Zugewiesener RAM</string>
     <string name="mcl_memory_allocation_subtitle">Legt fest, wie viel RAM Minecraft gegeben wird</string>
     <string name="multirt_runtime_corrupt">Beschädigte Java-Runtime</string>
+    <string name="multirt_runtime_incompatiblearch">Inkompatible Architektur: %s</string>
     <string name="multirt_config_title">Java-VMs</string>
     <string name="multirt_config_add">Hinzufügen</string>
     <string name="multirt_config_add_subtitle">Neue Java-VM importieren</string>
@@ -206,12 +215,51 @@
     <string name="multirt_config_setdefault">Als Standard festlegen</string>
     <string name="multirt_config_setdefault_already">Standard</string>
     <string name="multirt_config_removeerror_last">Es muss mindestens eine Java-Runtime installiert sein</string>
-    <string name="multirt_nocompartiblert">Keine kompartible Java-Runtime gefunden</string>
-    <string name="compat_117_message">Minecraft 21w10a+ benötigt das OpenGL 3.2-Kernprofil, welches derzeitig leider nicht vollständig vom GL4ES-Wrapper unterstützt wird. Jedoch gibt es einige zusätzliche Ressourcen, die installiert werden können, um diese Versionen trotzdem auszuführen. Drücke auf OK, um die Installation zu bestätigen oder auf Abbrechen, um den Start-Vorgang zu beenden.</string>
-    <string name="compat_11x_playanyway">Trotzdem spielen</string>
+    <string name="multirt_nocompartiblert">Es wurde keine kompatible Java Runtime gefunden. Diese Version benötigt Java %d oder neuer.</string>
+    <string name="multirt_nojava8rt">Java 8 kann nicht gefunden werden. Um diese Option nutzen zu können, musst du Java 8 installieren.</string>
+    <string name="compat_117_message">Minecraft 21w10a+ benötigt das OpenGL 3.2-Kernprofil. Dein Grafikchip unterstützt leider nicht OpenGL ES 3.0 oder höher, jedoch gibt es einige zusätzliche Ressourcen, die du installieren kannst, um diese Versionen zu spielen. Drücke OK, um die Installation zu bestätigen, und drücke Abbrechen, um den Start abzubrechen.</string>
+    <string name="compat_11x_playanyway">Trotzdem starten</string>
     <string name="pvc_gameDirectory">Spielverzeichnis</string>
     <string name="pvc_jvmArgs">JVM-Argumente</string>
     <string name="pvc_title">Einstellungen pro Version</string>
     <string name="storage_warning_title">Änderungen des Speichers</string>
     <string name="storage_warning_text"><![CDATA[Aufgrund der, von Android 10 und höhrer genutzten, neu hinzugefügten Speichererzwingungen von Google, müssen wir das Spielverzeichnis in einen privaten Ordner der App verschieben.<br /> Der neue Ordner für Pojav-Dateien ist <b>Android/data/%s/files/</b> (auch über einen Speicheranbieter in deinem Datei-Explorer erreichbar).<br /> Wenn du deine Spieldateien kopieren musst, kopiere bitte alles aus dem ursprünglichen Ordner unter <b>games/PojavLauncher</b> manuell.]]></string>
+    <string name="control_offset_title">Steuerungs-Verschiebung</string>
+    <string name="control_top_offset">Oberere Verschiebung: </string>
+    <string name="control_right_offset">Rechte Verschiebung: </string>
+    <string name="control_bottom_offset">Untere Verschiebung: </string>
+    <string name="control_left_offset">Linke Verschiebung: </string>
+    <string name="preference_control_offset_title">Seitliche Verschiebungen steuern</string>
+    <string name="preference_control_offset_description">Setzte für jede Seite des Bildschirms eine benutzerdefinierte Verschiebung</string>
+    <string name="preference_mouse_start_title">Mit virtueller Maus starten</string>
+    <string name="preference_mouse_start_description">Mit dieser Option wirst du von Mathias-Boulay beurteilt</string>
+    <string name="preference_video_title">Grafik und Renderer</string>
+    <string name="preference_video_description">Auflösung, Skalierungstyp und Renderer</string>
+    <string name="preference_control_title">Steuerung anpassen</string>
+    <string name="preference_control_description">Gestentypen, Auslöser und Skalierung</string>
+    <string name="preference_java_title">Java-Optimierungen</string>
+    <string name="preference_java_description">Java-Versionen, JVM-Argumente und RAM-Menge</string>
+    <string name="preference_misc_title">Sonstige Einstellungen</string>
+    <string name="preference_misc_description">Versionsliste und Bibliotheksüberprüfungen</string>
+    <string name="preference_experimental_title">Experimentell</string>
+    <string name="preference_experimental_description">Benutze diese Einstellungen mit Bedacht, wir leisten keinen Support für diese Features.</string>
+    <string name="preference_sustained_performance_title">Dauerhaften Leistungsmodus aktivieren</string>
+    <string name="preference_sustained_performance_description">Begrenzung der thermischen Drosselung durch Begrenzung der Spitzenleistung</string>
+    <string name="preference_back_title">Zum übergeordneten Menü gehen</string>
+    <string name="gles_hack_title">GL4ES-Schrumpfhack</string>
+    <string name="gles_hack_none">Texturen nicht verkleinern</string>
+    <string name="gles_hack_always">Teilt alle Texturen durch 2</string>
+    <string name="gles_hack_sometimes">Teilt große Texturen durch /2 oder /4</string>
+    <string name="unnamed">Unbenannt</string>
+    <string name="profiles_latest_snapshot">Neuste Entwicklungsversion</string>
+    <string name="profiles_latest_release">Neuste Vollversion</string>
+    <string name="profiles_editing">Profil bearbeiten</string>
+    <string name="profiles_profile_name">Name</string>
+    <string name="profiles_profile_version">Version</string>
+    <string name="global_delete">Löschen</string>
+    <string name="pedit_java_runtime">Java Runtime</string>
+    <string name="pedit_renderer">Renderer</string>
+    <string name="arc_capes_title">Cosmetica-Umhänge</string>
+    <string name="arc_capes_desc">Aktiviert Umhänge von Cosmetica (früher Arc). Für weitere Informationen https://cosmetica.cc besuchen. OptiFine wird benötigt.</string>
+    <string name="migrated_profile_str">%s Versionskonfiguration</string>
 </resources>

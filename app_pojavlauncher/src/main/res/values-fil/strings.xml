@@ -11,9 +11,8 @@
     <string name="login_online_password_hint">Password</string>
     <string name="login_online_check_keeplogin">Panatilihin akong naka-log in</string>
     <string name="login_online_login_label">Mag log in</string>
-    <string name="login_offline_label">Mag-login bilang offline na account</string>
+    <string name="login_error_invalid_username">Invalid username, Ang Username ay dapat may 3-16 characters, dapat lamang A-Z, a-z, 0-9 at underscore.</string>
     <string name="login_error_exist_username">Mayroon nang username na ito</string>
-    <string name="login_error_offline_password">Hinde pwedeng magkaroon ng password ang isang Offline Account!</string>
     <string name="login_microsoft">Log in sa Microsoft</string>
     <string name="login_select_account">Piliin ang account</string>
     <string name="login_title_no_saved_account">Walang nahanap na account!</string>
@@ -43,19 +42,21 @@
     <string name="mcl_tab_crash">Crash log</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Nakakonekta</string>
-    <string name="mcl_account_offline">Offline</string>
+    <string name="mcl_account_local">Lokal</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Handa nang maglaro ng Minecraft %s</string>
     <string name="mcl_launch_cleancache">Nililinis ang mga file ng cache</string>
     <string name="mcl_launch_downloading">Nagda-download %s</string>
     <string name="mcl_launch_downloading_progress">"Pagda-download ng %s (%.2f MB /%.2f MB)"</string>
     <string name="mcl_launch_download_assets">Paghahanda upang mag-download ng mga mapagkukunan</string>
+    <string name="mcl_launch_error_localmode">Ang Minecraft ay di pwede mainstall ng legal pag nakalogin gamit ang local account. Mangyaring gamitin ang online acc para magpatuloy.</string>
     <string name="mcl_options">Mga pagpipilian</string>
     <string name="mcl_option_modinstall">I lunsad ang isang installer ng mod (Forge, LabyMod, Fabric, etc...)</string>
     <string name="mcl_option_modinstallwitharg">Ilunsad ang isang installer ng mod (na may pasadyang mga argumento)</string>
     <string name="mcl_option_customcontrol">Pasadyang mga kontrol</string>
     <string name="mcl_option_settings">Mga Setting</string>
     <string name="mcl_option_about">Tungkol sa</string>
+    <string name="mcl_setting_title_use_surface_view">GABBY</string>
     <string name="mcl_setting_title_uninstalljre">I-uninstall ang Java Runtime</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Kinakailangan ang pag-restart ng launcher] Hinahayaan ka nitong muling i-install ang Java Runtime</string>
     <string name="mcl_setting_title_freeform">Ilunsad ang Minecraft sa mode na Freeform</string>
@@ -81,9 +82,6 @@
     <string name="mcl_setting_category_general">Pangkalahatang mga Setting</string>
     <string name="mcl_setting_category_scaling">Mga setting ng pag-scale</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
-    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): i-convert sa OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): i-convert sa OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): i-convert sa OpenGL 2.1 + partial na 3.2 (hindi pa gagana sa 1.17 kung walang modifications)</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): i-convert sa OpenGL 4.6 (dapat merong vulkan layer ang GPU mo.)</string>
     <string name="mcl_setting_category_veroption">Ang uri ng bersyon ay nasa listahan ng bersyon</string>
     <string name="mcl_setting_veroption_release">Release</string>
@@ -105,11 +103,10 @@
     <string name="global_error_field_empty">Ang patlang na ito ay hindi maaaring walang laman</string>
     <string name="global_waiting">Teka lang</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Application/Laro na lumabas sa code %d</string>
+    <string name="mcn_exit_title">Ang Application/Game exited with code %d, i-check ang latestlog.txt para sa detalye.</string>
     <string name="mcn_exit_call">Umalis</string>
     <string name="mcn_exit_confirm">Sigurado ka bang nais na pilitin malapit?</string>
     <string name="mcn_check_fail_lwjgl">Ang LWJGL3 ay hindi na-install!</string>
-    <string name="mcn_check_fail_incompatiblearch">Ang arkitektura %1$s ay hindi tugma sa Java Runtime%2$s.</string>
     <string name="mcn_check_fail_vulkan_support">Hindi supported ang Vulkan - Zink dito!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
@@ -131,6 +128,11 @@
     <string name="control_customkey">Magpadala ng pasadyang keycode</string>
     <string name="control_scaleup">Scale up</string>
     <string name="control_scaledown">Scale down</string>
+    <!-- ImportControlActivity Strings -->
+    <string name="import_control_label">Mag Import ng controls</string>
+    <string name="import_control_invalid_file">Hindi wasto or sirang file</string>
+    <string name="import_control_import_button">Mag import ng controls</string>
+    <string name="import_control_verifying_file">Ang file ay pinapatunayan pa. maghintay at umilit…</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -159,7 +161,9 @@
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Magdagdag ng pindotan</string>
     <string name="customctrl_addbutton_drawer">Magdagdag ng drawer ng pindutan</string>
+    <string name="customctrl_add_subbutton_message">Sub-button n°%d ay na idagdag !</string>
     <string name="customctrl_selectdefault">Piliin ang default Control json</string>
+    <string name="main_install_jar_file">Install .jar</string>
     <string name="main_options">Mga pagpipilian</string>
     <string name="main_play">Maglaro</string>
     <string name="main_welcome">Welcome, %s</string>
@@ -182,11 +186,13 @@
     <string name="mcl_setting_title_mousespeed">Bilis ng Mouse</string>
     <string name="mcl_setting_subtitle_mousespeed">Binabago ang bilis ng mouse ng software</string>
     <string name="customctrl_passthru">Mouse pass-thru</string>
+    <string name="customctrl_swipeable">Pwede ma swipe</string>
     <string name="customctrl_rounded">Rounded</string>
     <string name="memory_warning_msg">Ang kasalukuyang dami ng libreng RAM (%d) ay mas mababa kaysa sa inilalaan na RAM (%d), na maaaring humantong sa mga pag-crash. Baguhin ang paglalaan kung ang laro ay nag-crash.</string>
     <string name="mcl_memory_allocation">Paglalaan ng memorya</string>
     <string name="mcl_memory_allocation_subtitle">Kinokontrol kung magkano ang memorya na ibinibigay sa Minecraft</string>
     <string name="multirt_runtime_corrupt">Ang runtime na ito ay sira</string>
+    <string name="multirt_runtime_incompatiblearch">Di compatible ang arkitektura: %s</string>
     <string name="multirt_config_title">Java VMs</string>
     <string name="multirt_config_add">Magdagdag</string>
     <string name="multirt_config_add_subtitle">Mag-import ng bagong Java VM</string>
@@ -196,7 +202,15 @@
     <string name="multirt_config_setdefault">I-set bilang default</string>
     <string name="multirt_config_setdefault_already">Default</string>
     <string name="multirt_config_removeerror_last">Dapat may naka-install sa launcher na isang Java Runtime</string>
-    <string name="multirt_nocompartiblert">Hindi makahanap ng isang compatible na Java Runtime</string>
+    <string name="multirt_nocompartiblert">Walang mag katugma na Java Runtime. Etong version ay kailangan ng Java %d or bago.</string>
+    <string name="multirt_nojava8rt">Walang mahanap na Java 8. Para magamit ang option na ito, kailangan i-install ang Java 8.</string>
     <string name="compat_11x_playanyway">Subukan pa rin</string>
     <string name="storage_warning_title">Bago sa i-storage</string>
+    <string name="storage_warning_text"><![CDATA[Dahil kay Google\'s bagong scoped storage enforcements na nadagdag sa Android 10 pataas, kinailangan namin na i-move
+ang game directory into an app-private folder.<br /> Ang bagong folder para sa Pojav files ay <b>Android/data/%s/files/</b>(pwede rin i-access gamit ang storage provider sa inyong file explorer).<br /> Kapag kailangan mo i-copy ang inyong game files, please i-copy lahat from the original folder at <b>games/PojavLauncher</b> manually.]]></string>
+    <string name="control_offset_title">Offset ng Control</string>
+    <string name="preference_mouse_start_title">Mag start ng may virtual mouse on</string>
+    <string name="preference_mouse_start_description">Kapag i-gamit ang option na ito ikaw ay ma judge ni Mathias-Boulay</string>
+    <string name="profiles_profile_name">Pangalan</string>
+    <string name="pedit_renderer">Renderer</string>
 </resources>

@@ -11,7 +11,6 @@
     <string name="login_online_password_hint">Серһүҙ</string>
     <string name="login_online_check_keeplogin">Хәтерҙә ҡалдырырға</string>
     <string name="login_online_login_label">Керергә</string>
-    <string name="login_offline_label">Офлайн хисап яҙмаһы менән кереү</string>
     <string name="login_error_exist_username">Был ҡулланыусы исеме инде бар</string>
     <string name="login_microsoft">Microsoft менән керергә</string>
     <string name="login_select_account">Хисап яҙмалар</string>
@@ -31,7 +30,6 @@
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_news">Яңылыҡтар</string>
     <!-- MCLauncherActivity: Account status -->
-    <string name="mcl_account_offline">Офлайн</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_launch_downloading">Йөкләү %s</string>
     <string name="mcl_options">Опциялар</string>
@@ -71,6 +69,7 @@
     <string name="control_mouseon">Сысҡан: Ҡаб </string>
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_viewout">Журнал</string>
+    <!-- ImportControlActivity Strings -->
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -84,4 +83,6 @@
     <string name="main_infodev">Инфо (Эшк.)</string>
     <string name="main_switchuser">Ҡулланыусыны алмаштырырға</string>
     <string name="main_version">Версия:</string>
+    <string name="profiles_profile_name">Исем</string>
+    <string name="pedit_renderer">Рендерер</string>
 </resources>

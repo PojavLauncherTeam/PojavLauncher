@@ -37,6 +37,7 @@ import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
 import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 
 import org.lwjgl.glfw.*;
+import android.net.*;
 
 public class BaseMainActivity extends BaseActivity {
     public static volatile ClipboardManager GLOBAL_CLIPBOARD;
@@ -81,6 +82,7 @@ public class BaseMainActivity extends BaseActivity {
             mControlLayout = findViewById(R.id.main_control_layout);
             
             mProfile = PojavProfile.getCurrentProfileContent(this);
+            LauncherProfiles.update();
             minecraftProfile = LauncherProfiles.mainProfileJson.profiles.get(LauncherPreferences.DEFAULT_PREF.getString(LauncherPreferences.PREF_KEY_CURRENT_PROFILE,""));
             if(minecraftProfile == null) {
                 Toast.makeText(this,"Attempted to launch nonexistent profile",Toast.LENGTH_SHORT).show();
@@ -88,7 +90,6 @@ public class BaseMainActivity extends BaseActivity {
                 return;
             }
             String runtime = LauncherPreferences.PREF_DEFAULT_RUNTIME;
-                LauncherProfiles.update();
 
                 mVersionInfo = Tools.getVersionInfo(null, BaseLauncherActivity.getVersionId(
                         minecraftProfile.lastVersionId));
@@ -232,7 +233,7 @@ public class BaseMainActivity extends BaseActivity {
         if(Tools.LOCAL_RENDERER == null) {
             Tools.LOCAL_RENDERER = LauncherPreferences.PREF_RENDERER;
         }
-        Logger.getInstance().appendToLog("--------- beggining with launcher debug");
+        Logger.getInstance().appendToLog("--------- beginning with launcher debug");
         Logger.getInstance().appendToLog("Info: Launcher version: " + BuildConfig.VERSION_NAME);
         if (Tools.LOCAL_RENDERER.equals("vulkan_zink")) {
             checkVulkanZinkIsSupported();
@@ -417,5 +418,18 @@ public class BaseMainActivity extends BaseActivity {
             System.gc();
         });
         b.show();
+    }
+
+    public static void openLink(String link) {
+        Context ctx = touchpad.getContext(); // no more better way to obtain a context statically
+        ((Activity)ctx).runOnUiThread(() -> {
+            try {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setDataAndType(Uri.parse(link.replace("file://", "content://")), "*/*");
+                ctx.startActivity(intent);
+            } catch (Throwable th) {
+                Tools.showError(ctx, th);
+            }
+        });
     }
 }

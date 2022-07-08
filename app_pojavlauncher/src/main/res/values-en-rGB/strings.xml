@@ -11,9 +11,7 @@
     <string name="login_online_password_hint">Password</string>
     <string name="login_online_check_keeplogin">Keep me logged in</string>
     <string name="login_online_login_label">Login</string>
-    <string name="login_offline_label">Login as offline account</string>
     <string name="login_error_exist_username">This username already exist</string>
-    <string name="login_error_offline_password">Offline account can\'t include password!</string>
     <string name="login_microsoft">Microsoft login</string>
     <string name="login_select_account">Select account</string>
     <string name="login_title_no_saved_account">No account found !</string>
@@ -43,7 +41,6 @@
     <string name="mcl_tab_crash">Crash log</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Connected</string>
-    <string name="mcl_account_offline">Offline</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Ready to play Minecraft %s</string>
     <string name="mcl_launch_cleancache">Cleaning cache files</string>
@@ -81,8 +78,6 @@
     <string name="mcl_setting_category_general">General settings</string>
     <string name="mcl_setting_category_scaling">Scaling settings</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
-    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exports OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): exports OpenGL 2.1</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exports OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Version type will be in version list</string>
     <string name="mcl_setting_veroption_release">Release</string>
@@ -104,11 +99,9 @@
     <string name="global_error_field_empty">This field can\'t be empty</string>
     <string name="global_waiting">Wait</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Application/Game exited with code %d</string>
     <string name="mcn_exit_call">Exit</string>
     <string name="mcn_exit_confirm">Are you sure want to force close?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 was not installed!</string>
-    <string name="mcn_check_fail_incompatiblearch">Architecture %1$s is incompatible with Java Runtime %2$s.</string>
     <string name="mcn_check_fail_vulkan_support">Vulkan Zink renderer is not supported on this device!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
@@ -136,6 +129,7 @@
     <string name="control_customkey">Send custom keycode</string>
     <string name="control_scaleup">Scale up</string>
     <string name="control_scaledown">Scale down</string>
+    <!-- ImportControlActivity Strings -->
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -147,7 +141,7 @@
     <string name="customctrl_size">Size</string>
     <string name="customctrl_size_width">Width</string>
     <string name="customctrl_size_height">Height</string>
-    <string name="customctrl_dynamicpos">Dynamic position</string>
+    <string name="customctrl_dynamicpos">Manual Dynamic position</string>
     <string name="customctrl_dynamicpos_x">Dynamic X-axis</string>
     <string name="customctrl_dynamicpos_y">Dynamic Y-axis</string>
     <string name="customctrl_transparency_bg">Background transparency</string>
@@ -192,4 +186,6 @@
     <string name="multirt_progress_caching">Caching...</string>
     <string name="multirt_config_setdefault">Set default</string>
     <string name="multirt_config_setdefault_already">Default</string>
+    <string name="profiles_profile_name">Name</string>
+    <string name="pedit_renderer">Renderer</string>
 </resources>

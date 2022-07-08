@@ -58,16 +58,22 @@ import net.kdt.pojavlaunch.value.PerVersionConfig;
 import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
 import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 
+import org.apache.commons.compress.utils.IOUtils;
 import org.apache.commons.io.FileUtils;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Locale;
+import java.util.jar.Attributes;
+import java.util.jar.JarEntry;
+import java.util.jar.JarInputStream;
+import java.util.jar.JarOutputStream;
 
 public class PojavLoginActivity extends BaseActivity {
     private final Object mLockStoragePerm = new Object();
@@ -202,7 +208,7 @@ public class PojavLoginActivity extends BaseActivity {
         
         int selectedLang = 0;
         for (int i = 0; i < langAdapter.getCount(); i++) {
-            if (Locale.getDefault().getDisplayLanguage().equals(langAdapter.getItem(i).mLocale.getDisplayLanguage())) {
+            if (Locale.getDefault().toString().equalsIgnoreCase(langAdapter.getItem(i).mLocale.toString())) {
                 selectedLang = i;
                 break;
             }
@@ -228,7 +234,7 @@ public class PojavLoginActivity extends BaseActivity {
                     locale = langAdapter.getItem(position).mLocale;
                 }
                 
-                LauncherPreferences.PREF_LANGUAGE = locale.getLanguage();
+                LauncherPreferences.PREF_LANGUAGE = locale.toString();
                 LauncherPreferences.DEFAULT_PREF.edit().putString("language", LauncherPreferences.PREF_LANGUAGE).apply();
                 
                 // Restart to apply language change
@@ -261,8 +267,7 @@ public class PojavLoginActivity extends BaseActivity {
         PojavProfile.setCurrentProfile(this, null);
     }
 
-   
-    private void unpackComponent(AssetManager am, String component) throws IOException {
+    private boolean unpackComponent(AssetManager am, String component) throws IOException {
         File versionFile = new File(Tools.DIR_GAME_HOME + "/" + component + "/version");
         InputStream is = am.open("components/" + component + "/version");
         if(!versionFile.exists()) {
@@ -292,8 +297,10 @@ public class PojavLoginActivity extends BaseActivity {
                 }
             } else {
                 Log.i("UnpackPrep", component + ": Pack is up-to-date with the launcher, continuing...");
+                return false;
             }
         }
+        return true;
     }
     public static void disableSplash(String dir) {
         mkdirs(dir + "/config");
@@ -330,6 +337,8 @@ public class PojavLoginActivity extends BaseActivity {
         try {
             new CustomControls(this).save(Tools.CTRLDEF_FILE);
 
+            Tools.copyAssetFile(this, "components/security/log4j-rce-patch-1.7.xml", Tools.DIR_DATA, true);
+            Tools.copyAssetFile(this, "components/security/log4j-rce-patch-1.12.xml", Tools.DIR_DATA, true);
             Tools.copyAssetFile(this, "components/security/pro-grade.jar", Tools.DIR_DATA, true);
             Tools.copyAssetFile(this, "components/security/java_sandbox.policy", Tools.DIR_DATA, true);
             Tools.copyAssetFile(this, "options.txt", Tools.DIR_GAME_NEW, false);
@@ -340,7 +349,11 @@ public class PojavLoginActivity extends BaseActivity {
             AssetManager am = this.getAssets();
             
             unpackComponent(am, "caciocavallo");
+
+            // Since the Java module system doesn't allow multiple JARs to declare the same module,
+            // we repack them to a single file here
             unpackComponent(am, "lwjgl3");
+
             if(!installRuntimeAutomatically(am,MultiRTUtils.getRuntimes().size() > 0)) {
                MultiRTConfigDialog.openRuntimeSelector(this, MultiRTConfigDialog.MULTIRT_PICK_RUNTIME_STARTUP);
                 synchronized (mLockSelectJRE) {
@@ -378,7 +391,7 @@ public class PojavLoginActivity extends BaseActivity {
                     final Uri uri = data.getData();
                     Thread t = new Thread(() -> {
                         try {
-                            MultiRTUtils.installRuntimeNamed(getContentResolver().openInputStream(uri), getFileName(this, uri),
+                            MultiRTUtils.installRuntimeNamed(getApplicationContext().getApplicationInfo().nativeLibraryDir, getContentResolver().openInputStream(uri), getFileName(this, uri),
                                     (resid, stuff) -> PojavLoginActivity.this.runOnUiThread(
                                             () -> {
                                                 if (startupTextView != null)
@@ -449,8 +462,8 @@ public class PojavLoginActivity extends BaseActivity {
         } catch (IOException e) {
             Log.e("JREAuto", "JRE was not included on this APK.", e);
         }
-        if(current_rt_version == null && otherRuntimesAvailable) return true; //Assume user maintains his own runtime
-        if(rt_version == null) return false;
+        if(current_rt_version == null && MultiRTUtils.getExactJreName(8) != null) return true; //Assume user maintains his own runtime
+        if(rt_version == null) return otherRuntimesAvailable; // On noruntime builds, skip if there is at least 1 runtime installed (no matter if it is 8 or not)
         if(!rt_version.equals(current_rt_version)) { //If we already have an integrated one installed, check if it's up-to-date
             try {
                 MultiRTUtils.installRuntimeNamedBinpack(getApplicationInfo().nativeLibraryDir, am.open("components/jre/universal.tar.xz"), am.open("components/jre/bin-" + archAsString(Tools.DEVICE_ARCHITECTURE) + ".tar.xz"), "Internal", rt_version,
@@ -546,7 +559,13 @@ public class PojavLoginActivity extends BaseActivity {
             ImageView imageView = child.findViewById(R.id.account_head);
 
             String accNameStr = s.substring(0, s.length() - 5);
-            imageView.setImageBitmap(MinecraftAccount.load(accNameStr).getSkinFace());
+            MinecraftAccount minecraftAccount = MinecraftAccount.load(accNameStr);
+            if(minecraftAccount != null) {
+                imageView.setImageBitmap(minecraftAccount.getSkinFace());
+            }else{
+                imageView.setImageBitmap(null);
+            }
+
 
             accountName.setText(accNameStr);
 
@@ -572,7 +591,11 @@ public class PojavLoginActivity extends BaseActivity {
                         };
 
                         MinecraftAccount acc = MinecraftAccount.load(selectedAccName);
-                        if (acc.isMicrosoft){
+                        if(acc == null) {
+                            Log.e("Account","Stop torturing me sempai");
+                            return;
+                        }
+                        if (acc.isMicrosoft && System.currentTimeMillis() > acc.expiresAt){
                             new MicrosoftAuthTask(PojavLoginActivity.this, authListener)
                                     .execute("true", acc.msaRefreshToken);
                         } else {

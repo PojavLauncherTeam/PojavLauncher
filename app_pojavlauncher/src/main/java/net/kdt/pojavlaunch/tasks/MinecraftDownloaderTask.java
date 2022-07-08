@@ -1,5 +1,7 @@
 package net.kdt.pojavlaunch.tasks;
 
+import static net.kdt.pojavlaunch.Tools.ENABLE_DEV_FEATURES;
+
 import android.app.*;
 import android.content.*;
 import android.os.*;
@@ -102,26 +104,27 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                     if(runtime.javaVersion < verInfo.javaVersion.majorVersion) {
                          String appropriateRuntime = MultiRTUtils.getNearestJreName(verInfo.javaVersion.majorVersion);
                          if(appropriateRuntime != null) {
+                             if(JRE17Util.isInternalNewJRE(appropriateRuntime)) {
+                                 JRE17Util.checkInternalNewJre(mActivity, ((resId, stuff) -> publishProgress("0",mActivity.getString(resId,stuff))));
+                             }
                              minecraftProfile.javaDir = Tools.LAUNCHERPROFILES_RTPREFIX+appropriateRuntime;
                              LauncherProfiles.update();
                          }else{
-                             mActivity.runOnUiThread(()->{
-                                 AlertDialog.Builder bldr = new AlertDialog.Builder(mActivity);
-                                 bldr.setTitle(R.string.global_error);
-                                 bldr.setMessage(mActivity.getString(R.string.multirt_nocompartiblert, verInfo.javaVersion.majorVersion));
-                                 bldr.setPositiveButton(android.R.string.ok,(dialog, which)->{
-                                     dialog.dismiss();
-                                 });
-                                 bldr.show();
-                             });
-                             throw new SilentException();
+                             if(verInfo.javaVersion.majorVersion <= 17) { // there's a chance we have an internal one for this case
+                                 if(!JRE17Util.checkInternalNewJre(mActivity, ((resId, stuff) -> publishProgress("0",mActivity.getString(resId,stuff)))))
+                                     showRuntimeFail();
+                                 else {
+                                     minecraftProfile.javaDir = Tools.LAUNCHERPROFILES_RTPREFIX+JRE17Util.NEW_JRE_NAME;
+                                     LauncherProfiles.update();
+                                 }
+                             }else showRuntimeFail();
                          }
                      } //if else, we are satisfied
                 }
                 { //run the checks to detect if we have a *brand new* engine
                     int mcReleaseDate = Integer.parseInt(verInfo.releaseTime.substring(0, 10).replace("-", ""));
                     if(mcReleaseDate > 20210225 && verInfo.javaVersion != null && verInfo.javaVersion.majorVersion > 15)
-                        V117CompatUtil.runCheck(p1[0],mActivity);
+                        V117CompatUtil.runCheck(mActivity);
                 }
                 try {
                     assets = downloadIndex(verInfo.assets, new File(Tools.ASSETS_PATH, "indexes/" + verInfo.assets + ".json"));
@@ -133,8 +136,12 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
 
                 // Patch the Log4J RCE (CVE-2021-44228)
                 if (verInfo.logging != null) {
-                    outLib = new File(Tools.DIR_GAME_NEW, verInfo.logging.client.file.id);
-                    if (outLib.exists()) {
+                    outLib = new File(Tools.DIR_DATA, verInfo.logging.client.file.id.replace("client", "log4j-rce-patch"));
+                    boolean useLocal = outLib.exists();
+                    if (!useLocal) {
+                        outLib = new File(Tools.DIR_GAME_NEW, verInfo.logging.client.file.id);
+                    }
+                    if (outLib.exists() && !useLocal) {
                         if(LauncherPreferences.PREF_CHECK_LIBRARY_SHA) {
                             if(!Tools.compareSHA1(outLib,verInfo.logging.client.file.sha1)) {
                                 outLib.delete();
@@ -173,8 +180,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                         publishProgress("1", "Ignored " + libItem.name);
                         //Thread.sleep(100);
                     } else {
-                        String[] libInfo = libItem.name.split(":");
-                        String libArtifact = Tools.artifactToPath(libInfo[0], libInfo[1], libInfo[2]);
+                        String libArtifact = Tools.artifactToPath(libItem.name);
                         outLib = new File(Tools.DIR_HOME_LIBRARY + "/" + libArtifact);
                         outLib.getParentFile().mkdirs();
 
@@ -241,7 +247,8 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
             }
 
             mActivity.mIsAssetsProcessing = true;
-            mActivity.mPlayButton.post(new Runnable(){
+            if(ENABLE_DEV_FEATURES){
+                mActivity.mPlayButton.post(new Runnable(){
 
                     @Override
                     public void run()
@@ -250,6 +257,8 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                         mActivity.mPlayButton.setEnabled(true);
                     }
                 });
+            }
+
                 
             if (assets == null) {
                 return null;
@@ -273,6 +282,18 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
             return throwable;
         }
     }
+     private void showRuntimeFail() throws SilentException{
+         mActivity.runOnUiThread(()->{
+             AlertDialog.Builder bldr = new AlertDialog.Builder(mActivity);
+             bldr.setTitle(R.string.global_error);
+             bldr.setMessage(mActivity.getString(R.string.multirt_nocompartiblert, verInfo.javaVersion.majorVersion));
+             bldr.setPositiveButton(android.R.string.ok,(dialog, which)->{
+                 dialog.dismiss();
+             });
+             bldr.show();
+         });
+         throw new SilentException();
+     }
     private int addProgress = 0;
     public static class SilentException extends Exception{}
     public void zeroProgress() {

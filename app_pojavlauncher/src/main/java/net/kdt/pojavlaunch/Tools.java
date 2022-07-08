@@ -130,7 +130,7 @@ public final class Tools {
                     LauncherPreferences.PREF_CUSTOM_JAVA_ARGS = minecraftProfile.javaArgs;
             }
         PojavLoginActivity.disableSplash(gamedirPath);
-        String[] launchArgs = getMinecraftArgs(profile, versionInfo, gamedirPath);
+        String[] launchArgs = getMinecraftClientArgs(profile, versionInfo, gamedirPath);
 
         // Select the appropriate openGL version
         OldVersionsUtils.selectOpenGlVersion(versionInfo);
@@ -163,8 +163,13 @@ public final class Tools {
 */
 
         if (versionInfo.logging != null) {
-            javaArgList.add("-Dlog4j.configurationFile=" + Tools.DIR_GAME_NEW + "/" + versionInfo.logging.client.file.id);
+            String configFile = Tools.DIR_DATA + "/" + versionInfo.logging.client.file.id.replace("client", "log4j-rce-patch");
+            if (!new File(configFile).exists()) {
+                configFile = Tools.DIR_GAME_NEW + "/" + versionInfo.logging.client.file.id;
+            }
+            javaArgList.add("-Dlog4j.configurationFile=" + configFile);
         }
+        javaArgList.addAll(Arrays.asList(getMinecraftJVMArgs(versionName, gamedirPath)));
         javaArgList.add("-cp");
         javaArgList.add(getLWJGL3ClassPath() + ":" + launchClassPath);
 
@@ -198,7 +203,47 @@ public final class Tools {
         javaArgList.add(cacioClasspath.toString());
     }
 
-    public static String[] getMinecraftArgs(MinecraftAccount profile, JMinecraftVersionList.Version versionInfo, String strGameDir) {
+    public static String[] getMinecraftJVMArgs(String versionName, String strGameDir) {
+        JMinecraftVersionList.Version versionInfo = Tools.getVersionInfo(null, versionName, true);
+        // Parse Forge 1.17+ additional JVM Arguments
+        if (versionInfo.inheritsFrom == null || versionInfo.arguments == null || versionInfo.arguments.jvm == null) {
+            return new String[0];
+        }
+
+        Map<String, String> varArgMap = new ArrayMap<>();
+        varArgMap.put("classpath_separator", ":");
+        varArgMap.put("library_directory", strGameDir + "/libraries");
+        varArgMap.put("version_name", versionInfo.id);
+
+        List<String> minecraftArgs = new ArrayList<String>();
+        if (versionInfo.arguments != null) {
+            for (Object arg : versionInfo.arguments.jvm) {
+                if (arg instanceof String) {
+                    minecraftArgs.add((String) arg);
+                } else {
+                    /*
+                     JMinecraftVersionList.Arguments.ArgValue argv = (JMinecraftVersionList.Arguments.ArgValue) arg;
+                     if (argv.values != null) {
+                     minecraftArgs.add(argv.values[0]);
+                     } else {
+
+                     for (JMinecraftVersionList.Arguments.ArgValue.ArgRules rule : arg.rules) {
+                     // rule.action = allow
+                     // TODO implement this
+                     }
+
+                     }
+                     */
+                }
+            }
+        }
+
+        String[] argsFromJson = JSONUtils.insertJSONValueList(minecraftArgs.toArray(new String[0]), varArgMap);
+        // Tools.dialogOnUiThread(this, "Result args", Arrays.asList(argsFromJson).toString());
+        return argsFromJson;
+    }
+
+    public static String[] getMinecraftClientArgs(MinecraftAccount profile, JMinecraftVersionList.Version versionInfo, String strGameDir) {
         String username = profile.username;
         String versionName = versionInfo.id;
         if (versionInfo.inheritsFrom != null) {
@@ -290,7 +335,14 @@ public final class Tools {
         return strList.toArray(new String[0]);
     }
 
-    public static String artifactToPath(String group, String artifact, String version) {
+    public static String artifactToPath(String name) {
+        int idx = name.indexOf(":");
+        assert idx != -1;
+        int idx2 = name.indexOf(":", idx+1);
+        assert idx2 != -1;
+        String group = name.substring(0, idx);
+        String artifact = name.substring(idx+1, idx2);
+        String version = name.substring(idx2+1).replace(':','-');
         return group.replaceAll("\\.", "/") + "/" + artifact + "/" + version + "/" + artifact + "-" + version + ".jar";
     }
 
@@ -365,8 +417,10 @@ public final class Tools {
         }else{
             if (SDK_INT >= Build.VERSION_CODES.R) {
                 activity.getDisplay().getRealMetrics(displayMetrics);
-            } else {
+            } else if(SDK_INT >= P) {
                  activity.getWindowManager().getDefaultDisplay().getRealMetrics(displayMetrics);
+            }else{ // Some old devices can have a notch despite it not being officially supported
+                activity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
             }
             if(!PREF_IGNORE_NOTCH){
                 //Remove notch width when it isn't ignored.
@@ -521,18 +575,29 @@ public final class Tools {
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         act.startActivity(browserIntent);
     }
-
+    private static boolean checkRules(JMinecraftVersionList.Arguments.ArgValue.ArgRules[] rules) {
+        if(rules == null) return true; // always allow
+        for (JMinecraftVersionList.Arguments.ArgValue.ArgRules rule : rules) {
+            if (rule.action.equals("allow") && rule.os != null && rule.os.name.equals("osx")) {
+                return false; //disallow
+            }
+        }
+        return true; // allow if none match
+    }
     public static String[] generateLibClasspath(JMinecraftVersionList.Version info) {
         List<String> libDir = new ArrayList<String>();
-
         for (DependentLibrary libItem: info.libraries) {
-            String[] libInfos = libItem.name.split(":");
-            libDir.add(Tools.DIR_HOME_LIBRARY + "/" + Tools.artifactToPath(libInfos[0], libInfos[1], libInfos[2]));
+            if(!checkRules(libItem.rules)) continue;
+            libDir.add(Tools.DIR_HOME_LIBRARY + "/" + Tools.artifactToPath(libItem.name));
         }
         return libDir.toArray(new String[0]);
     }
 
     public static JMinecraftVersionList.Version getVersionInfo(BaseLauncherActivity bla, String versionName) {
+        return getVersionInfo(bla, versionName, false);
+    }
+
+    public static JMinecraftVersionList.Version getVersionInfo(BaseLauncherActivity bla, String versionName, boolean skipInheriting) {
         try {
             JMinecraftVersionList.Version customVer = Tools.GLOBAL_GSON.fromJson(read(DIR_HOME_VERSION + "/" + versionName + "/" + versionName + ".json"), JMinecraftVersionList.Version.class);
             for (DependentLibrary lib : customVer.libraries) {
@@ -540,7 +605,7 @@ public final class Tools {
                     customVer.optifineLib = lib;
                 }
             }
-            if (customVer.inheritsFrom == null || customVer.inheritsFrom.equals(customVer.id)) {
+            if (skipInheriting || customVer.inheritsFrom == null || customVer.inheritsFrom.equals(customVer.id)) {
                 return customVer;
             } else {
                 JMinecraftVersionList.Version inheritsVer = null;

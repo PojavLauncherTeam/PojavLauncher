@@ -1,5 +1,6 @@
 package net.kdt.pojavlaunch;
 
+import static net.kdt.pojavlaunch.Tools.ENABLE_DEV_FEATURES;
 import static net.kdt.pojavlaunch.Tools.getFileName;
 
 import android.app.*;
@@ -99,34 +100,34 @@ public abstract class BaseLauncherActivity extends BaseActivity {
     }
 
     public void launchGame(View v) {
-        if (!canBack && mIsAssetsProcessing) {
+        if (!canBack && mIsAssetsProcessing && ENABLE_DEV_FEATURES) {
             mIsAssetsProcessing = false;
             statusIsLaunching(false);
         } else if (canBack) {
             v.setEnabled(false);
             mTask = new MinecraftDownloaderTask(this);
-                LauncherProfiles.update();
-                String selectedProfile = LauncherPreferences.DEFAULT_PREF.getString(LauncherPreferences.PREF_KEY_CURRENT_PROFILE,"");
-                if (LauncherProfiles.mainProfileJson != null && LauncherProfiles.mainProfileJson.profiles != null && LauncherProfiles.mainProfileJson.profiles.containsKey(selectedProfile)) {
-                    MinecraftProfile prof = LauncherProfiles.mainProfileJson.profiles.get(selectedProfile);
-                    if (prof != null && prof.lastVersionId != null) {
-                        if (mProfile.accessToken.equals("0")) {
-                            String versionId = getVersionId(prof.lastVersionId);
-                            File verJsonFile = new File(Tools.DIR_HOME_VERSION,
-                                versionId + "/" + versionId + ".json");
-                            if (verJsonFile.exists()) {
-                                mTask.onPostExecute(null);
-                                return;
-                            }
-                            Tools.dialogOnUiThread(this,
-                                    getString(R.string.global_error),
-                                    getString(R.string.mcl_launch_error_localmode)
-                            );
-                        }else {
-                            mTask.execute(getVersionId(prof.lastVersionId));
+            LauncherProfiles.update();
+            String selectedProfile = LauncherPreferences.DEFAULT_PREF.getString(LauncherPreferences.PREF_KEY_CURRENT_PROFILE,"");
+            if (LauncherProfiles.mainProfileJson != null && LauncherProfiles.mainProfileJson.profiles != null && LauncherProfiles.mainProfileJson.profiles.containsKey(selectedProfile)) {
+                MinecraftProfile prof = LauncherProfiles.mainProfileJson.profiles.get(selectedProfile);
+                if (prof != null && prof.lastVersionId != null) {
+                    if (mProfile.accessToken.equals("0")) {
+                        String versionId = getVersionId(prof.lastVersionId);
+                        File verJsonFile = new File(Tools.DIR_HOME_VERSION,
+                            versionId + "/" + versionId + ".json");
+                        if (verJsonFile.exists()) {
+                            mTask.onPostExecute(null);
+                            return;
                         }
+                        Tools.dialogOnUiThread(this,
+                                getString(R.string.global_error),
+                                getString(R.string.mcl_launch_error_localmode)
+                        );
+                    }else {
+                        mTask.execute(getVersionId(prof.lastVersionId));
                     }
                 }
+            }
         }
     }
 
@@ -224,7 +225,7 @@ public abstract class BaseLauncherActivity extends BaseActivity {
                 Thread t = new Thread(() -> {
                     try {
                         String name = getFileName(this, uri);
-                        MultiRTUtils.installRuntimeNamed(getContentResolver().openInputStream(uri), name,
+                        MultiRTUtils.installRuntimeNamed(getApplicationContext().getApplicationInfo().nativeLibraryDir, getContentResolver().openInputStream(uri), name,
                                 (resid, stuff) -> BaseLauncherActivity.this.runOnUiThread(
                                         () -> barrier.setMessage(BaseLauncherActivity.this.getString(resid, stuff))));
                         MultiRTUtils.postPrepare(BaseLauncherActivity.this, name);

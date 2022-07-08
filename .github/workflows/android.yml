@@ -71,7 +71,17 @@ jobs:
           repo: PojavLauncherTeam/android-openjdk-build-multiarch
           branch: buildjre8
           name: jre8-pojav
-          run_id: 2140559381
+    
+    - name: Get JRE17
+      uses: dawidd6/action-download-artifact@v2
+      with:
+          github_token: ${{secrets.GITHUB_TOKEN}}
+          workflow: build.yml
+          path: app_pojavlauncher/src/main/assets/components/jre-new
+          workflow_conclusion: success
+          repo: PojavLauncherTeam/android-openjdk-build-multiarch
+          branch: buildjre17
+          name: jre17-pojav
     
     - name: Build JRE JAR files
       run: |
@@ -100,6 +110,7 @@ jobs:
     - name: Build APK without runtime
       run: | 
         rm -r app_pojavlauncher/src/main/assets/components/jre
+        rm -r app_pojavlauncher/src/main/assets/components/jre-new
         ./gradlew assembleDebug
         mv app_pojavlauncher/build/outputs/apk/debug/app_pojavlauncher-debug.apk out/app-debug-noruntime.apk
         

@@ -11,10 +11,8 @@
     <string name="login_online_password_hint">Password</string>
     <string name="login_online_check_keeplogin">Keep me logged in</string>
     <string name="login_online_login_label">Login</string>
-    <string name="login_offline_label">Login as a offline account</string>
     <string name="login_error_invalid_username">Invalid username. Username must be in range of 3-16 characters, should only contains A-Z, a-z, 0-9 and underscore.</string>
     <string name="login_error_exist_username">This username already exist</string>
-    <string name="login_error_offline_password">Offline account can\'t include password!</string>
     <string name="login_microsoft">Microsoft login</string>
     <string name="login_select_account">Select account</string>
     <string name="login_title_no_saved_account">No accounts found!</string>
@@ -44,7 +42,7 @@
     <string name="mcl_tab_crash">Crash log</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Connected</string>
-    <string name="mcl_account_offline">Offline</string>
+    <string name="mcl_account_local">Local</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Ready to play Minecraft %s</string>
     <string name="mcl_launch_cleancache">Cleaning cache files</string>
@@ -82,9 +80,7 @@
     <string name="mcl_setting_category_general">General settings</string>
     <string name="mcl_setting_category_scaling">Scaling settings</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
-    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exports OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): exports OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): exports OpenGL 2.1 + partial 3.2 (no 1.17 supported yet)</string>
+    <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): exports OpenGL 4.3</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): exports OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exports OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Version type will be in the version list</string>
@@ -107,11 +103,10 @@
     <string name="global_error_field_empty">This field can\'t be empty</string>
     <string name="global_waiting">Wait</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Game exited</string>
+    <string name="mcn_exit_title">Application/Game exited with code %d, check latestlog.txt for more details.</string>
     <string name="mcn_exit_call">Exit</string>
     <string name="mcn_exit_confirm">Are you sure you want to force close?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 was not installed!</string>
-    <string name="mcn_check_fail_incompatiblearch">Architecture %1$s is incompatible with Java Runtime %2$s.</string>
     <string name="mcn_check_fail_vulkan_support">Vulkan Zink renderer is not supported on this device!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
@@ -139,6 +134,13 @@
     <string name="control_customkey">Send custom keycode</string>
     <string name="control_scaleup">Scale up</string>
     <string name="control_scaledown">Scale down</string>
+    <!-- ImportControlActivity Strings -->
+    <string name="import_control_label">Import controls</string>
+    <string name="import_control_invalid_file">Invalid or corrupted file</string>
+    <string name="import_control_import_button">import controls</string>
+    <string name="import_control_verifying_file">File is being verified, please wait and try again…</string>
+    <string name="import_control_invalid_name">Invalid name or file already exists</string>
+    <string name="import_control_done">Importation done</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -168,7 +170,9 @@
     <string name="customctrl_addbutton">Add button</string>
     <string name="customctrl_addbutton_drawer">Add button drawer</string>
     <string name="customctrl_addsubbutton">Add sub-button</string>
+    <string name="customctrl_add_subbutton_message">Sub-button n°%d has been added !</string>
     <string name="customctrl_selectdefault">Select default Control json</string>
+    <string name="main_install_jar_file">Install .jar</string>
     <string name="main_options">Options</string>
     <string name="main_play">Play</string>
     <string name="main_welcome">Welcome, %s</string>
@@ -197,6 +201,7 @@
     <string name="mcl_memory_allocation">Memory allocation</string>
     <string name="mcl_memory_allocation_subtitle">Controls how much memory is given to Minecraft</string>
     <string name="multirt_runtime_corrupt">Corrupted Java Runtime</string>
+    <string name="multirt_runtime_incompatiblearch">Incompatible architecture: %s</string>
     <string name="multirt_config_title">Java VMs</string>
     <string name="multirt_config_add">Add New</string>
     <string name="multirt_config_add_subtitle">Import new Java VM</string>
@@ -206,10 +211,14 @@
     <string name="multirt_config_setdefault">Set default</string>
     <string name="multirt_config_setdefault_already">Default</string>
     <string name="multirt_config_removeerror_last">You must have at least one Java Runtime installed</string>
-    <string name="multirt_nocompartiblert">Can\'t find any compatible Java Runtime</string>
-    <string name="compat_117_message">Minecraft 21w10a+ requires the OpenGL 3.2 core profile. Sadly, GL4ES wrapper doesn\'t fully support it at the moment, but there are some additional resources you can install to run these versions. Press OK to confirm installation, and press Cancel to abort launch.</string>
+    <string name="multirt_nocompartiblert">Can\'t find any compatible Java Runtime. This version requires Java %d or newer.</string>
+    <string name="multirt_nojava8rt">Can\'t find Java 8. In order to use this option, you need to install Java 8.</string>
     <string name="compat_11x_playanyway">Play anyway</string>
     <string name="pvc_gameDirectory">Game directory</string>
     <string name="pvc_jvmArgs">JVM arguments</string>
     <string name="pvc_title">Per-version settings</string>
+    <string name="storage_warning_title">Storage changes</string>
+    <string name="storage_warning_text"><![CDATA[Due to Google\'s new scoped storage enforcements added in Android 10 and higher, we are required to move the game directory into an app-private folder.<br /> The new folder for Pojav files is <b>Android/data/%s/files/</b> (also accessible using a storage provider in your file explorer).<br /> If you need to copy your game files, please copy everything from the original folder at <b>games/PojavLauncher</b> manually.]]></string>
+    <string name="profiles_profile_name">Name</string>
+    <string name="pedit_renderer">Renderer</string>
 </resources>

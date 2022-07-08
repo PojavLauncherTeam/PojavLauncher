@@ -11,6 +11,7 @@ public class CallbackBridge {
     
     public static final int CLIPBOARD_COPY = 2000;
     public static final int CLIPBOARD_PASTE = 2001;
+    public static final int CLIPBOARD_OPEN = 2002;
     
     public static volatile int windowWidth, windowHeight;
     public static volatile int physicalWidth, physicalHeight;
@@ -128,14 +129,17 @@ public class CallbackBridge {
             case CLIPBOARD_COPY:
                 BaseMainActivity.GLOBAL_CLIPBOARD.setPrimaryClip(ClipData.newPlainText("Copy", copy));
                 return null;
-                
+
             case CLIPBOARD_PASTE:
                 if (BaseMainActivity.GLOBAL_CLIPBOARD.hasPrimaryClip() && BaseMainActivity.GLOBAL_CLIPBOARD.getPrimaryClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
                     return BaseMainActivity.GLOBAL_CLIPBOARD.getPrimaryClip().getItemAt(0).getText().toString();
                 } else {
                     return "";
                 }
-                
+
+            case CLIPBOARD_OPEN:
+                BaseMainActivity.openLink(copy);
+                return null;
             default: return null;
         }
     }

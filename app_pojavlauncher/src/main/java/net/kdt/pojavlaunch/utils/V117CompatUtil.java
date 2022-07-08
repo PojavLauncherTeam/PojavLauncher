@@ -104,7 +104,7 @@ public class V117CompatUtil {
         return ret.toString();
     }
 
-    public static void runCheck(String version, Activity activity) throws Exception{
+    public static void runCheck(Activity activity) throws Exception{
 
 
         MCOptionUtils.load();

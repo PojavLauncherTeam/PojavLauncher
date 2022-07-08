@@ -11,10 +11,8 @@
     <string name="login_online_password_hint">Heslo</string>
     <string name="login_online_check_keeplogin">Nechaj ma prihláseného</string>
     <string name="login_online_login_label">Prihlásiť</string>
-    <string name="login_offline_label">Prihlásiť sa za offline účet</string>
     <string name="login_error_invalid_username">Neplatné užívateľské meno. Užívateľské meno musí byť v rozsahu 3-16 znakov, obsahovať iba A-Z, a-z, (bez diakritiky) 0-9 a znak podčiarknutia.</string>
     <string name="login_error_exist_username">Toto užívateľské meno už existuje</string>
-    <string name="login_error_offline_password">Offline účet nemôže obsahovať heslo!</string>
     <string name="login_microsoft">Microsoft prihlásenie</string>
     <string name="login_select_account">Vybrať účet</string>
     <string name="login_title_no_saved_account">Žiadny účet sa nenašiel !</string>
@@ -44,7 +42,6 @@
     <string name="mcl_tab_crash">Záznam pádu</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Pripojené</string>
-    <string name="mcl_account_offline">Offline</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Pripravené na spustenie Minecraftu %s</string>
     <string name="mcl_launch_cleancache">Čistenie súborov medzipamäte</string>
@@ -82,9 +79,6 @@
     <string name="mcl_setting_category_general">Všeobecné nastavenia</string>
     <string name="mcl_setting_category_scaling">Nastavenie mierky</string>
     <string name="mcl_setting_category_renderer">Vykresľovač</string>
-    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exportuje OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): exportuje OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): exportuje OpenGL 2.1 + čiastočne 3.2 (1.17 zatiaľ nie je podporovaná)</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): exportuje OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exportuje OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Aké typy verzií budú v zozname verzií</string>
@@ -107,11 +101,9 @@
     <string name="global_error_field_empty">Toto pole nesmie byť prázdne</string>
     <string name="global_waiting">Čakajte</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Aplikácia/Hra skončila s kódom %d</string>
     <string name="mcn_exit_call">Skončiť</string>
     <string name="mcn_exit_confirm">Ste si istí, že chcete vynútiť ukončenie?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 nebol nainštalovaný!</string>
-    <string name="mcn_check_fail_incompatiblearch">Architektúra %1$s je nekompatibilna s Java Runtime %2$s.</string>
     <string name="mcn_check_fail_vulkan_support">Vulkan Zink vykresľovač nie je v tomto zariadení podporovaný!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
@@ -133,6 +125,13 @@
     <string name="control_customkey">Poslať vlastný kláves</string>
     <string name="control_scaleup">Zväčšiť</string>
     <string name="control_scaledown">Zmenšiť</string>
+    <!-- ImportControlActivity Strings -->
+    <string name="import_control_label">Importovať ovládacie prvky</string>
+    <string name="import_control_invalid_file">Neplatný alebo poškodený súbor</string>
+    <string name="import_control_import_button">importovať ovládacie prvky</string>
+    <string name="import_control_verifying_file">Súbor sa overuje, počkajte a skúste to znova…</string>
+    <string name="import_control_invalid_name">Neplatný názov alebo súbor už existuje</string>
+    <string name="import_control_done">Import dokončený</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -159,7 +158,9 @@
     <string name="customctrl_addbutton">Pridať tlačidlo</string>
     <string name="customctrl_addbutton_drawer">Pridať šuplík tlačidiel</string>
     <string name="customctrl_addsubbutton">Pridať podtlačidlo</string>
+    <string name="customctrl_add_subbutton_message">Podtlačidlo č.%d bolo pridané !</string>
     <string name="customctrl_selectdefault">Vybrať json východzieho ovládanie</string>
+    <string name="main_install_jar_file">Inštalovať .jar</string>
     <string name="main_options">Možnosti</string>
     <string name="main_play">Hrať</string>
     <string name="main_welcome">Vitaj, %s</string>
@@ -197,12 +198,35 @@
     <string name="multirt_config_setdefault">Nastaviť predvolené</string>
     <string name="multirt_config_setdefault_already">Predvolené</string>
     <string name="multirt_config_removeerror_last">Musíte mať nainštalovanú aspoň jednu Java Runtime</string>
-    <string name="multirt_nocompartiblert">Nemožno nájsť žiadnu kompatibilnu Java Runtime</string>
-    <string name="compat_117_message">Minecraft 21w10a+ vyžaduje základný profil OpenGL 3.2. Bohužiaľ, GL4ES prekladač ho v tejto chvíli plne nepodporuje, ale existujú nejaké ďalšie možnosti, ktoré môžete nainštalovať pre spustenie týchto verzií. Stlačením tlačidla OK potvrďte inštaláciu a stlačením tlačidla Zrušiť ukončíte spúšťanie.</string>
     <string name="compat_11x_playanyway">Napriek tomu hrať</string>
     <string name="pvc_gameDirectory">Zložka hry</string>
     <string name="pvc_jvmArgs">JVM argumenty</string>
     <string name="pvc_title">Nastavenia po verzii</string>
     <string name="storage_warning_title">Zmeny úložiska</string>
     <string name="storage_warning_text"><![CDATA[Kvôli novo Vynucovanie rozsahovo úložisku od Googlu pridanému v Androide 10 a vyšším sme prinútení presunúť zložku hry do privátnej priečinka programu. <br/> Nový priečinok pre súbory pojal je <b>Android/data/%s/files/</b> (tiež prístupná pomocou poskytovateľa úložiska v Prieskumníkovi súborov).<br/> Ak potrebujete skopírovať svoje herné súbory, prosím skopírujte všetko z pôvodnej zložky na <b>games/PojavLauncher</b> ručne.]]></string>
+    <string name="control_offset_title">Odsadenie ovládania</string>
+    <string name="control_top_offset">Horné odsadenie: </string>
+    <string name="control_right_offset">pravé odsadenie: </string>
+    <string name="control_bottom_offset">spodné odsadenie: </string>
+    <string name="control_left_offset">ľavé odsadenie: </string>
+    <string name="preference_control_offset_title">Strana odsadenie ovládania</string>
+    <string name="preference_control_offset_description">Nastaviť vlastné odsadenie pre každú stranu obrazovky</string>
+    <string name="preference_video_title">Video a vykresľovač</string>
+    <string name="preference_video_description">Rozlíšenie, typ škálovania, a vykresľovač</string>
+    <string name="preference_control_title">Prispôsobenie ovládania</string>
+    <string name="preference_control_description">Typy gest, spúšťače a škálovanie</string>
+    <string name="preference_java_title">Vyladenie Javy</string>
+    <string name="preference_java_description">Verzia Javy, Argumenty JVM, a množstvo RAM</string>
+    <string name="preference_misc_title">Rôzne nastavenia</string>
+    <string name="preference_misc_description">Zoznam verzií, a kontrola knižníc</string>
+    <string name="preference_experimental_title">Experimentálne Veci</string>
+    <string name="preference_experimental_description">Používajte tieto veci s uvážením, nepodporujeme.</string>
+    <string name="preference_sustained_performance_title">Zapnúť režim trvalého výkonu</string>
+    <string name="preference_sustained_performance_description">Limitovať termálne spomaľovanie limitovaním výkonu</string>
+    <string name="preference_back_title">Späť na poslednú stránku</string>
+    <string name="gles_hack_none">Nezmenšiť textúry</string>
+    <string name="gles_hack_always">Vydeliť všetky textúry dvoma</string>
+    <string name="gles_hack_sometimes">Vydeliť veľké textúry dvoma alebo štyrmi</string>
+    <string name="profiles_profile_name">Názov</string>
+    <string name="pedit_renderer">Vykresľovač</string>
 </resources>

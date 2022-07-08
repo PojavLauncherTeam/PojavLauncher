@@ -39,6 +39,9 @@ public class RefreshTokenTask extends AsyncTask<String, Void, Throwable> {
     public Throwable doInBackground(String... args) {
         try {
             this.profilePath = MinecraftAccount.load(args[0]);
+            if(profilePath == null) {
+                return new NullPointerException();
+            }
             int responseCode = 400;
             try {
                 responseCode = this.authenticator.validate(profilePath.accessToken).statusCode;

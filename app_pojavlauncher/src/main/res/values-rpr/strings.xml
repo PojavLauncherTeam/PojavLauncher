@@ -11,10 +11,8 @@
     <string name="login_online_password_hint">Ключъ-фраза</string>
     <string name="login_online_check_keeplogin">Запомнить меня</string>
     <string name="login_online_login_label">Войти</string>
-    <string name="login_offline_label">Войти по внѣсѣтевымъ документамъ</string>
     <string name="login_error_invalid_username">Невѣрное имя пользователя. Имя пользователя должно состоять изъ 3-16 символовъ, должно содержать только A-Z, a-z, 0-9 и подчеркиваніе.</string>
     <string name="login_error_exist_username">Сіе имя пользователя уже существуетъ</string>
-    <string name="login_error_offline_password">Внѣсѣтевые документы не могутъ содержать ключъ-фразу!</string>
     <string name="login_microsoft">Войти черезъ Microsoft</string>
     <string name="login_select_account">Выбрать документъ</string>
     <string name="login_title_no_saved_account">Документы не найдены!</string>
@@ -44,7 +42,6 @@
     <string name="mcl_tab_crash">Регистръ сбоевъ</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Подключено</string>
-    <string name="mcl_account_offline">Оффлайнъ</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Minecraft %s готовъ къ запуску</string>
     <string name="mcl_launch_cleancache">Очистка файловъ кэша</string>
@@ -82,9 +79,7 @@
     <string name="mcl_setting_category_general">Основныя настройки</string>
     <string name="mcl_setting_category_scaling">Настройки масштабированія</string>
     <string name="mcl_setting_category_renderer">Визуализаторъ</string>
-    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): экспортируетъ OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): экспортируетъ OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles3_5">gl4es 1.1.5 (OpenGL ES 3): экспортируетъ OpenGL 2.1 + частично 3.2 (пока безъ поддержки 1.17)</string>
+    <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): экспортируетъ OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): экспортируетъ OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Типы версій, которые будутъ отображаться въ спискѣ версій</string>
     <string name="mcl_setting_veroption_release">Выпущенныя версіи</string>
@@ -106,12 +101,10 @@
     <string name="global_error_field_empty">Сіе поле не можетъ быть пустымъ</string>
     <string name="global_waiting">Подождите</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Произошёлъ сбой приложенія/игры съ кодомъ %d</string>
     <string name="mcn_exit_call">Выйти</string>
     <string name="mcn_exit_confirm">Вы увѣрены, что хотите принудительно закрыть оный?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 не установленъ!</string>
-    <string name="mcn_check_fail_incompatiblearch">Архитектура %1$s несовмѣстима съ Java Runtime %2$s.</string>
-    <string name="mcn_check_fail_vulkan_support">Визуализаторъ Vulkan Zink не ​котируется​ на семъ аппаратѣ!</string>
+    <string name="mcn_check_fail_vulkan_support">Визуализаторъ Vulkan Zink не ​котируется на семъ аппаратѣ!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">Интерфейсъ</string>
     <string name="control_keyboard">Клавіатура</string>
@@ -132,6 +125,7 @@
     <string name="control_customkey">Отправить пользовательскій кодъ кнопки</string>
     <string name="control_scaleup">Увеличить</string>
     <string name="control_scaledown">Уменьшить</string>
+    <!-- ImportControlActivity Strings -->
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -147,7 +141,7 @@
     <string name="customctrl_orientation">Положеніе</string>
     <string name="customctrl_background_color">Цвѣтъ фона</string>
     <string name="customctrl_corner_radius">Радіусъ угла</string>
-    <string name="customctrl_stroke_width">​Толщина​ обведенія</string>
+    <string name="customctrl_stroke_width">​Толщина обведенія</string>
     <string name="customctrl_stroke_color">Цвѣтъ обведенія</string>
     <string name="customctrl_dynamicpos">Динамическая позиція</string>
     <string name="customctrl_dynamicpos_x">Динамика по оси X</string>
@@ -197,10 +191,12 @@
     <string name="multirt_config_setdefault">Установить по умолчанію</string>
     <string name="multirt_config_setdefault_already">По умолчанію</string>
     <string name="multirt_config_removeerror_last">Должно быть установлено хотя бы одинъ Java Runtime</string>
-    <string name="multirt_nocompartiblert">Не удалось найти совмѣстимую Java Runtime</string>
-    <string name="compat_117_message">Для Minecraft 21w10a+ (1.17+) требуется OpenGL 3.2. Къ глубочайшему огорченію, на сегодняшній день GL4ES не полностью поддерживаетъ ея, но есть нѣкоторые дополнительные рессурсы, которые вы можете установить, чтобы запустить этѣ версіи. Нажмите на кнопку «ОКЪ», чтобы одобрить установку или «Отмѣна», чтобы наложить вето на запускъ.</string>
     <string name="compat_11x_playanyway">Все равно запустить</string>
     <string name="pvc_gameDirectory">Папка игры</string>
     <string name="pvc_jvmArgs">Аргументы JVM</string>
-    <string name="pvc_title">​Поверсіонныя опціи</string>
+    <string name="pvc_title">Поверсіонныя опціи</string>
+    <string name="storage_warning_title">Измѣненія въ работѣ хранилища</string>
+    <string name="storage_warning_text"><![CDATA[Изъ-за новыхъ ограниченій хранилища добавленныхъ компаніей Google въ Android 10, приложенію нужно перемѣстить папку игры во внутреннюю папку приложенія.<br /> Новая папка для файловъ Pojav - <b>Android/data/%s/files/</b> (также доступна изъ провайдера хранилища въ вашемъ проводникѣ).<br /> Если вамъ необходимо перенести файлы игры, пожалуйста скопируйте ихъ вручную изъ папки <b>games/PojavLauncher</b>.]]></string>
+    <string name="profiles_profile_name">Имя</string>
+    <string name="pedit_renderer">Визуализаторъ</string>
 </resources>

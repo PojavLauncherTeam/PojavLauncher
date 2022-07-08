@@ -75,7 +75,7 @@ public class MultiRTUtils {
         return result;
     }
 
-    public static void installRuntimeNamed(InputStream runtimeInputStream, String name, RuntimeProgressReporter progressReporter) throws IOException {
+    public static void installRuntimeNamed(String nativeLibDir, InputStream runtimeInputStream, String name, RuntimeProgressReporter progressReporter) throws IOException {
         File dest = new File(RUNTIME_FOLDER,"/"+name);
         File tmp = new File(dest,"temporary");
         if(dest.exists()) FileUtils.deleteDirectory(dest);
@@ -87,6 +87,7 @@ public class MultiRTUtils {
         runtimeInputStream.close();
         uncompressTarXZ(tmp,dest,progressReporter);
         tmp.delete();
+        unpack200(nativeLibDir,RUNTIME_FOLDER + "/" + name);
         read(name);
     }
 
@@ -201,6 +202,7 @@ public class MultiRTUtils {
      * @param runtimePath The path to the runtime to walk into
      */
     private static void unpack200(String nativeLibraryDir, String runtimePath) {
+
         File basePath = new File(runtimePath);
         Collection<File> files = listFiles(basePath, new String[]{"pack"}, true);
 
@@ -209,7 +211,7 @@ public class MultiRTUtils {
         ProcessBuilder processBuilder = new ProcessBuilder().directory(workdir);
         for(File jarFile : files){
             try{
-                Process process = processBuilder.command("./unpack200.so", "-r", jarFile.getAbsolutePath(), jarFile.getAbsolutePath().replace(".pack", "")).start();
+                Process process = processBuilder.command("./libunpack200.so", "-r", jarFile.getAbsolutePath(), jarFile.getAbsolutePath().replace(".pack", "")).start();
                 process.waitFor();
             }catch (InterruptedException | IOException e) {
                 Log.e("MULTIRT", "Failed to unpack the runtime !");

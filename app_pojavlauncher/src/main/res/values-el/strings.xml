@@ -11,9 +11,7 @@
     <string name="login_online_password_hint">Κωδικός Πρόσβασης</string>
     <string name="login_online_check_keeplogin">Να παραμείνω συνδεδεμένος</string>
     <string name="login_online_login_label">Είσοδος</string>
-    <string name="login_offline_label">Είσοδος ως λογαριασμός εκτός σύνδεσης</string>
     <string name="login_error_exist_username">Αυτό το όνομα χρήστη υπάρχει ήδη</string>
-    <string name="login_error_offline_password">Ο λογαριασμός εκτός σύνδεσης δεν μπορεί να περιλαμβάνει κωδικό πρόσβασης!</string>
     <string name="login_microsoft">Microsoft Είσοδος</string>
     <string name="login_select_account">Επιλέξτε λογαριασμό</string>
     <string name="login_title_no_saved_account">Δεν βρέθηκε κανένας λογαριασμός !</string>
@@ -43,7 +41,6 @@
     <string name="mcl_tab_crash">Αρχείο καταγραφής κατάρρευσης</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Συνδεδεμένος</string>
-    <string name="mcl_account_offline">Εκτός σύνδεσης</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Ετοιμο για να παίξεις Minecraft %s</string>
     <string name="mcl_launch_cleancache">Εκκαθάριση χώρου προσωρινής αποθήκευσης αρχείων</string>
@@ -81,8 +78,6 @@
     <string name="mcl_setting_category_general">Γενικές ρυθμίσεις</string>
     <string name="mcl_setting_category_scaling">Ρυθμίσεις κλιμάκωσης</string>
     <string name="mcl_setting_category_renderer">Απόδοση</string>
-    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): exports OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): exports OpenGL 2.1</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exports OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Ο τύπος έκδοσης θα είναι στη λίστα εκδόσεων</string>
     <string name="mcl_setting_veroption_release">Κυκλοφορία</string>
@@ -104,11 +99,9 @@
     <string name="global_error_field_empty">Αυτό το πεδίο δεν μπορεί να είναι κενό</string>
     <string name="global_waiting">Περιμένετε</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Η εφαρμογή/παιχνίδι τερματίστηκε με κωδικό %d</string>
     <string name="mcn_exit_call">Έξοδος</string>
     <string name="mcn_exit_confirm">Είστε βέβαιοι ότι θέλετε να αναγκάσετε το κλείσιμο;</string>
     <string name="mcn_check_fail_lwjgl">Το LWJGL3 δεν έχει εγκατασταθεί!</string>
-    <string name="mcn_check_fail_incompatiblearch">Η αρχιτεκτονική %1$s δεν είναι συμβατή με το Java Runtime %2$s.</string>
     <string name="mcn_check_fail_vulkan_support">Το Vulkan Zink renderer δεν υποστηρίζεται σε αυτήν τη συσκευή!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
@@ -130,6 +123,7 @@
     <string name="control_customkey">Αποστολή προσαρμοσμένου κωδικού κλειδιού</string>
     <string name="control_scaleup">Κλιμάκωση πάνω</string>
     <string name="control_scaledown">Κλιμάκωση προς τα κάτω</string>
+    <!-- ImportControlActivity Strings -->
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -194,9 +188,9 @@
     <string name="multirt_config_setdefault">Ορισμός ως προεπιλογή</string>
     <string name="multirt_config_setdefault_already">Προεπιλογή</string>
     <string name="multirt_config_removeerror_last">Πρέπει να έχετε τουλάχιστον ένα Java Runtime εγκατεστημένο</string>
-    <string name="multirt_nocompartiblert">Δεν είναι δυνατή η εύρεση οποιουδήποτε περιβάλλοντος Java Runtime</string>
-    <string name="compat_117_message">Το Minecraft 21w10a+ απαιτεί το προφίλ πυρήνα OpenGL 3.2. Δυστυχώς, το GL4ES wrapper δεν το υποστηρίζει πλήρως αυτή τη στιγμή, αλλά υπάρχουν μερικοί πρόσθετοι πόροι που μπορείτε να εγκαταστήσετε για να εκτελέσετε αυτές τις εκδόσεις. Πατήστε OK για να επιβεβαιώσετε την εγκατάσταση και πατήστε Ακύρωση για να ακυρώσετε την εκκίνηση.</string>
     <string name="pvc_gameDirectory">Κατάλογος παιχνιδιού</string>
     <string name="pvc_jvmArgs">Παράμετροι εκκίνησης JVM</string>
     <string name="pvc_title">Ρυθμίσεις Per-version</string>
+    <string name="profiles_profile_name">Όνομα</string>
+    <string name="pedit_renderer">Απόδοση</string>
 </resources>

@@ -11,9 +11,8 @@
     <string name="login_online_password_hint">Slaptažodis</string>
     <string name="login_online_check_keeplogin">Likti prisijungus</string>
     <string name="login_online_login_label">Prisijungti</string>
-    <string name="login_offline_label">Prisijungti naudojant be interneto paskyrą</string>
+    <string name="login_error_invalid_username">Netinkamas slapyvardis. Slapyvardis turi būti nuo 3 iki 16 simbolių, turėti tik simbolius A-Z, a-z, 0-9 ir brūkšnius.</string>
     <string name="login_error_exist_username">Šis slapyvardis jau egzistuoja</string>
-    <string name="login_error_offline_password">Netikros pasakytos negali turėti slaptažodžio</string>
     <string name="login_microsoft">Microsoft prisijungimas</string>
     <string name="login_select_account">Pasirinkti paskyrą</string>
     <string name="login_title_no_saved_account">Paskyra nerasta!</string>
@@ -43,13 +42,14 @@
     <string name="mcl_tab_crash">Išsijungimo įrašai</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Prisijungta</string>
-    <string name="mcl_account_offline">Neprisijungta</string>
+    <string name="mcl_account_local">Vietinė</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Pasiruošta žaisti Minecraft %s</string>
     <string name="mcl_launch_cleancache">Valomi nereikalingi failai</string>
     <string name="mcl_launch_downloading">Atsisiunčiama %s</string>
     <string name="mcl_launch_downloading_progress">"Atsisiunčiama %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Rengiamasi atsisiųsti resursus</string>
+    <string name="mcl_launch_error_localmode">\"Minecraft\" negali būti legaliai instaliuotas prisijungus su vietine paskyra. Prašau prisijunti prie interneto prieigą turinčios paskyros kad testumėte.</string>
     <string name="mcl_options">Pasirinkimai</string>
     <string name="mcl_option_modinstall">Paleisti modifikacijų įdiegimui (Forge, LabyMod, Fabric, kt.)</string>
     <string name="mcl_option_modinstallwitharg">Paleisti modifikacijų įdiegimui (su pasirinktinais argumentais)</string>
@@ -81,8 +81,6 @@
     <string name="mcl_setting_category_general">Pagrindiniai nustatymai</string>
     <string name="mcl_setting_category_scaling">Didinimo nustatymai</string>
     <string name="mcl_setting_category_renderer">Vaizdo generatorius</string>
-    <string name="mcl_setting_renderer_gles2_4">gl4es 1.1.4 (OpenGL ES 2): eksportuoja OpenGL 2.1</string>
-    <string name="mcl_setting_renderer_gles2_5">gl4es 1.1.5 (OpenGL ES 2): eksportuoja OpenGL 2.1</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): eksportuoja OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Versijų tipai bus versijų sąraše</string>
     <string name="mcl_setting_veroption_release">Leidimai</string>
@@ -104,11 +102,9 @@
     <string name="global_error_field_empty">Šis laukas negali būti tuščias</string>
     <string name="global_waiting">Palaukite</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Aplikacija/Žaidimas išsijungė su kodu %d</string>
     <string name="mcn_exit_call">Išeiti</string>
     <string name="mcn_exit_confirm">Ar jūs tikrai norite priverstinai išjungti?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 nebuvo instaliuota!</string>
-    <string name="mcn_check_fail_incompatiblearch">Architektūra %1$s nėra palaikomas su Java Runtime %2$s.</string>
     <string name="mcn_check_fail_vulkan_support">Vulkan Zink atvaizduotojas nėra palaikomas ant šio įrenginio!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
@@ -130,6 +126,7 @@
     <string name="control_customkey">Siųsti mygtuko kodą</string>
     <string name="control_scaleup">Padidinti</string>
     <string name="control_scaledown">Sumažinti</string>
+    <!-- ImportControlActivity Strings -->
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -197,9 +194,9 @@
     <string name="multirt_config_setdefault">Nustatyti numatytą</string>
     <string name="multirt_config_setdefault_already">Numatytasis</string>
     <string name="multirt_config_removeerror_last">Jūs privalote turėti bent vieną Java Modulį įdiegtą</string>
-    <string name="multirt_nocompartiblert">Negalima rasti tinkamo Java Runtime</string>
-    <string name="compat_117_message">Minecraft 21w10+ reikalauja OpenGL 3.2 branduolio profilio. Gaila, GL4ES wrapperis dabar pilnai nepalaiko jo, bet yra dar pridėtinių resursų kuriuos galima įdiegti, kad būtų galima paleisti šias versijas. Paspauskite Gerai, kad patvirtintumėte įdiegimą, paspauskite Atšaukti, kad sustabdytumėte įdiegimą.</string>
     <string name="pvc_gameDirectory">Žaidimo failų vieta</string>
     <string name="pvc_jvmArgs">JVM argumentai</string>
     <string name="pvc_title">Individualios versijos nustatymai</string>
+    <string name="profiles_profile_name">Pavadinimas</string>
+    <string name="pedit_renderer">Vaizdo generatorius</string>
 </resources>

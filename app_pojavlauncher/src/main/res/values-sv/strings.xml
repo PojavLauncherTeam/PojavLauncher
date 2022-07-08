@@ -11,11 +11,9 @@
     <string name="login_online_password_hint">Lösenord</string>
     <string name="login_online_check_keeplogin">Fortsätt vara inloggad</string>
     <string name="login_online_login_label">Logga in</string>
-    <string name="login_offline_label">Logga in som offlinekonto</string>
     <string name="login_error_invalid_username">Ogiltigt användarnamn. Användarnamnet måste vara i intervallet 3-16 tecken, bör endast innehålla A-Z, a-z, 0-9 och understreck.</string>
     <string name="login_error_exist_username">Detta användarnamn finns redan</string>
-    <string name="login_error_offline_password">Offline-kontot kan inte innehålla lösenord!</string>
-    <string name="login_microsoft">Microsoft Word</string>
+    <string name="login_microsoft">Logga in med Microsoft-konto</string>
     <string name="login_select_account">Välj konto</string>
     <string name="login_title_no_saved_account">Inget konto hittades!</string>
     <string name="login_dialog_no_saved_account">Du har inget sparat konto.\nAnvänd alternativet <b>\"Håll mig inloggad\"</b> för att spara ett konto vid första inloggningen.</string>
@@ -25,7 +23,7 @@
     <string name="warning_remove_account">Detta konto kommer att tas bort!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Installera Java Runtime %s (.tar.xz)</string>
-    <string name="alerttitle_installmod">Välj för att installera</string>
+    <string name="alerttitle_installmod">Välj ett mod installationsprogram</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher har oväntat kraschat</string>
     <string name="error_no_version">Ingen version!</string>
@@ -34,7 +32,7 @@
     <!-- Toast messages -->
     <string name="toast_permission_denied">Läs/skriv till lagringsbehörighet krävs!</string>
     <string name="toast_optifine_success">Installationen lyckades</string>
-    <string name="toast_uninstalljre_done">Avinstallera Java Runtime</string>
+    <string name="toast_uninstalljre_done">Avinstallation av Java Runtime färdig</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
@@ -43,20 +41,28 @@
     <string name="mcl_tab_console">Utveckling konsol</string>
     <string name="mcl_tab_crash">Kraschlogg</string>
     <!-- MCLauncherActivity: Account status -->
-    <string name="mcl_account_connected">Umeunganishwa</string>
-    <string name="mcl_account_offline">Frånkopplad</string>
+    <string name="mcl_account_connected">Ansluten</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Redo att spela Minecraft %s</string>
+    <string name="mcl_launch_cleancache">Rensar cachefiler</string>
+    <string name="mcl_launch_downloading">Laddar ned %s</string>
     <string name="mcl_launch_downloading_progress">"Laddar ner %s (%.2f MB / %.2f MB)"</string>
-    <string name="mcl_option_modinstall">Starta ett mod installer (Forge, LabyMod, Fabric, etc...)</string>
-    <string name="mcl_option_modinstallwitharg">Starta ett mod installer (med anpassade argument)</string>
+    <string name="mcl_launch_download_assets">Förbereder nedladdning av resurser</string>
+    <string name="mcl_options">Alternativ</string>
+    <string name="mcl_option_modinstall">Starta ett mod installationsprogram (Forge, LabyMod, Fabric, etc...)</string>
+    <string name="mcl_option_modinstallwitharg">Starta ett mod installationsprogram (med anpassade argument)</string>
+    <string name="mcl_option_customcontrol">Anpassade kontroller</string>
+    <string name="mcl_option_settings">Inställningar</string>
+    <string name="mcl_option_about">Om</string>
     <string name="mcl_setting_title_uninstalljre">Avinstallera Java Runtime</string>
-    <string name="mcl_setting_subtitle_uninstalljre">Detta låter dig ominstallera Java Runtime</string>
+    <string name="mcl_setting_subtitle_uninstalljre">[Launcher omstart krävs] Detta låter dig ominstallera Java Runtime</string>
+    <string name="mcl_setting_title_freeform">Starta Minecraft i Freeform läge</string>
+    <string name="mcl_setting_subtitle_freeform">Starta Minecraft i flytande fönster. Kräver Android 7.0+</string>
     <string name="mcl_setting_title_hide_sidebar">Dölj sidofält</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Nostalgiska folk föredrar gamla v1 UI kanske gillar detta. Ger dig en mer fullskärm upplevelse.</string>
-    <string name="mcl_setting_title_ignore_notch">Ignorera notch</string>
+    <string name="mcl_setting_title_ignore_notch">Ignorera visningsflärp</string>
     <string name="mcl_setting_subtitle_ignore_notch">Ignorera notch och förlänger skärmen under den.\nGer dig en mer uppslukande upplevelse.</string>
-    <string name="mcl_setting_title_resolution_scaler">Upplösning Skalare</string>
+    <string name="mcl_setting_title_resolution_scaler">Upplösningsskalare</string>
     <string name="mcl_setting_subtitle_resolution_scaler">Gör att du kan minska spelupplösningen. 100% är full upplösning</string>
     <string name="mcl_setting_title_backtorightmouse">Behandla bakåtknappen som höger mus</string>
     <string name="mcl_setting_subtitle_backtorightmouse">Vissa enheter behandlar extern höger mus som bakåtknapp. Om du använder extern mus bör du aktivera detta.</string>
@@ -79,6 +85,7 @@
     <string name="control_forceclose">Tvingad avslutning</string>
     <string name="control_viewout">Logga utdata</string>
     <string name="control_customkey">Skicka anpassad nyckelkod</string>
+    <!-- ImportControlActivity Strings -->
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -86,6 +93,7 @@
     <string name="customctrl_keyname">Tangentkod</string>
     <string name="customctrl_addbutton">Lägg till knapp</string>
     <string name="customctrl_selectdefault">Välj standard Control json</string>
+    <string name="main_options">Alternativ</string>
     <string name="main_play">Spela</string>
     <string name="main_infodev">Information (DEV)</string>
     <string name="main_switchuser">Växla användare</string>
@@ -113,8 +121,6 @@
     <string name="multirt_config_setdefault">Ange standard</string>
     <string name="multirt_config_setdefault_already">Standard</string>
     <string name="multirt_config_removeerror_last">Du måste ha minst en Java Runtime installerad</string>
-    <string name="multirt_nocompartiblert">Kan inte hitta någon compartible Java Runtime</string>
-    <string name="compat_117_message">Minecraft 21w10a+ kräver kärnprofilen OpenGL 3.2. Tyvärr har GL4ES-wrapper inte fullt stöd för det just nu, men det finns ytterligare resurser som du kan installera för att köra dessa versioner. Tryck på OK för att bekräfta installationen och tryck på Avbryt för att avbryta lanseringen.</string>
     <string name="compat_11x_playanyway">Spela ändå</string>
     <string name="pvc_gameDirectory">Spelkatalog</string>
     <string name="pvc_jvmArgs">JVM argument</string>

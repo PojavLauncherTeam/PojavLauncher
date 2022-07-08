@@ -28,6 +28,9 @@ public class InvalidateTokenTask extends AsyncTask<String, Void, Throwable> {
 
             
             this.profilePath = MinecraftAccount.load(args[0]);
+            if(profilePath == null) {
+                return null;
+            }
             if (profilePath.accessToken.equals("0")) {
                 return null;
             }

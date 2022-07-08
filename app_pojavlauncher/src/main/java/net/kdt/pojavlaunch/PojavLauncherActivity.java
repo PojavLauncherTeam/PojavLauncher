@@ -130,7 +130,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
                 setTabActive(position);
             }
         });
-        initTabs(0);
+
 
         //Setup listener to the backPreference system
         backPreferenceListener = (key, value) -> {
@@ -195,38 +195,33 @@ public class PojavLauncherActivity extends BaseLauncherActivity
             ProfileAdapter profileAdapter = new ProfileAdapter(this, true);
             ProfileEditor profileEditor = new ProfileEditor(this,(name, isNew, deleting)->{
                 LauncherProfiles.update();
+                profileAdapter.notifyDataSetChanged();
                 if(isNew) {
-                    mVersionSelector.setSelection(profileAdapter.resolveProfileIndex(name));
+                    int newPosition = profileAdapter.resolveProfileIndex(name);
+                    setProfileSelection(newPosition);
+                    return;
                 }
                 if(deleting) {
-                    mVersionSelector.setSelection(0);
+                    setProfileSelection(0);
                 }
-                profileAdapter.notifyDataSetChanged();
+
             });
             mVersionSelector.setOnLongClickListener((v)->profileEditor.show(LauncherPreferences.DEFAULT_PREF.getString(LauncherPreferences.PREF_KEY_CURRENT_PROFILE,"")));
             mVersionSelector.setAdapter(profileAdapter);
             mVersionSelector.setSelection(profileAdapter.resolveProfileIndex(LauncherPreferences.DEFAULT_PREF.getString(LauncherPreferences.PREF_KEY_CURRENT_PROFILE,"")));
             mVersionSelector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
                 @Override
-                public void onItemSelected(AdapterView<?> p1, View p2, int p3, long p4)
-                {
+                public void onItemSelected(AdapterView<?> p1, View p2, int p3, long p4) {
                     String profileName = p1.getItemAtPosition(p3).toString();
                     if(profileName.equals(ProfileAdapter.CREATE_PROFILE_MAGIC)) {
                         profileEditor.show(profileName);
                         mVersionSelector.setSelection(0);
                         return;
                     }
-                    LauncherPreferences.DEFAULT_PREF.edit()
-                            .putString(
-                                    LauncherPreferences.PREF_KEY_CURRENT_PROFILE,
-                                    p1.getItemAtPosition(p3).toString())
-                            .commit();
+                    setProfileSelection(p3);
                 }
                 @Override
-                public void onNothingSelected(AdapterView<?> p1)
-                {
-                    // TODO: Implement this method
-                }
+                public void onNothingSelected(AdapterView<?> p1){/* TODO: Implement this method*/}
             });
         //
         statusIsLaunching(false);
@@ -245,7 +240,18 @@ public class PojavLauncherActivity extends BaseLauncherActivity
             }
         });
         changeLookAndFeel(PREF_HIDE_SIDEBAR);
+        initTabs(0);
     }
+
+    /** Set the selection AND saves it as a shared preference */
+    private void setProfileSelection(int position){
+        mVersionSelector.setSelection(position);
+        LauncherPreferences.DEFAULT_PREF.edit()
+            .putString(LauncherPreferences.PREF_KEY_CURRENT_PROFILE,
+                mVersionSelector.getAdapter().getItem(position).toString())
+            .apply();
+    }
+
     private void selectTabPage(int pageIndex){
         viewPager.setCurrentItem(pageIndex);
         setTabActive(pageIndex);
@@ -323,10 +329,10 @@ public class PojavLauncherActivity extends BaseLauncherActivity
 
     protected void initTabs(int activeTab){
         final Handler handler = new Handler(Looper.getMainLooper());
-        handler.post(() -> {
+        handler.postDelayed(() -> {
             //Do something after 100ms
             selectTabPage(activeTab);
-        });
+        }, 100);
     }
 
     private void changeLookAndFeel(boolean useOldLook){
