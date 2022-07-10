@@ -48,6 +48,7 @@
     <string name="mcl_launch_downloading">التحميل جارٍ %s</string>
     <string name="mcl_launch_downloading_progress">"جارٍ تنزيل %s (%.2f ميغابايت / %.2f ميغابايت)"</string>
     <string name="mcl_launch_download_assets">جار الاستعداد لتنزيل الموارد</string>
+    <string name="mcl_launch_error_localmode">لا يمكن تثبيت Minecraft بشكل قانوني عند تسجيل الدخول مع حساب محلي. الرجاء التحويل إلى حساب فعلي والمتابعة.</string>
     <string name="mcl_options">الخيارات</string>
     <string name="mcl_option_modinstall">تشغيل مثبت مود (Forge, LabyMod, Fabric, الخ...)</string>
     <string name="mcl_option_modinstallwitharg">تشغيل مثبت مود (مع حجج مخصصة)</string>
