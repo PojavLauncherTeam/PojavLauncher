@@ -272,7 +272,7 @@ int pojavInit() {
         if (potatoBridge.eglDisplay == NULL || potatoBridge.eglDisplay == EGL_NO_DISPLAY) {
             potatoBridge.eglDisplay = eglGetDisplay_p(EGL_DEFAULT_DISPLAY);
             if (potatoBridge.eglDisplay == EGL_NO_DISPLAY) {
-                printf("EGLBridge: Error eglGetDefaultDisplay() failed: %p\n", eglGetError_p());
+                printf("EGLBridge: Error eglGetDefaultDisplay() failed: 0x%x\n", eglGetError_p());
                 return 0;
             }
         }
@@ -281,7 +281,7 @@ int pojavInit() {
         // printf("EGLBridge: ANativeWindow pointer = %p\n", potatoBridge.androidWindow);
         //(*env)->ThrowNew(env,(*env)->FindClass(env,"java/lang/Exception"),"Trace exception");
         if (!eglInitialize_p(potatoBridge.eglDisplay, NULL, NULL)) {
-            printf("EGLBridge: Error eglInitialize() failed: %s\n", eglGetError_p());
+            printf("EGLBridge: Error eglInitialize() failed: 0x%x\n", eglGetError_p());
             return 0;
         }
 
@@ -300,7 +300,7 @@ int pojavInit() {
         EGLint vid;
 
         if (!eglChooseConfig_p(potatoBridge.eglDisplay, attribs, &config, 1, &num_configs)) {
-            printf("EGLBridge: Error couldn't get an EGL visual config: %s\n", eglGetError_p());
+            printf("EGLBridge: Error couldn't get an EGL visual config: 0x%x\n", eglGetError_p());
             return 0;
         }
 
@@ -308,7 +308,7 @@ int pojavInit() {
         assert(num_configs > 0);
 
         if (!eglGetConfigAttrib_p(potatoBridge.eglDisplay, config, EGL_NATIVE_VISUAL_ID, &vid)) {
-            printf("EGLBridge: Error eglGetConfigAttrib() failed: %s\n", eglGetError_p());
+            printf("EGLBridge: Error eglGetConfigAttrib() failed: 0x%x\n", eglGetError_p());
             return 0;
         }
 
@@ -319,7 +319,7 @@ int pojavInit() {
         potatoBridge.eglSurface = eglCreateWindowSurface_p(potatoBridge.eglDisplay, config, potatoBridge.androidWindow, NULL);
 
         if (!potatoBridge.eglSurface) {
-            printf("EGLBridge: Error eglCreateWindowSurface failed: %p\n", eglGetError_p());
+            printf("EGLBridge: Error eglCreateWindowSurface failed: 0x%x\n", eglGetError_p());
             //(*env)->ThrowNew(env,(*env)->FindClass(env,"java/lang/Exception"),"Trace exception");
             return 0;
         }
@@ -403,9 +403,9 @@ void pojavSwapBuffers() {
             //OSMesaMakeCurrent_p(ctx,buf.bits,GL_UNSIGNED_BYTE,savedWidth,savedHeight);
             glFinish_p();
             //OSMesaFlushFrontbuffer_p();
-            //ANativeWindow_lock(potatoBridge.androidWindow,&buf,NULL);
-            //glReadPixels_p(0, 0, savedWidth, savedHeight, GL_RGBA, GL_INT, buf.bits);
-            //ANativeWindow_unlockAndPost(potatoBridge.androidWindow);
+            ANativeWindow_lock(potatoBridge.androidWindow,&buf,NULL);
+            glReadPixels_p(0, 0, savedWidth, savedHeight, GL_RGBA_INTEGER, GL_UNSIGNED_INT, buf.bits);
+            ANativeWindow_unlockAndPost(potatoBridge.androidWindow);
         } break;
     }
 }
@@ -419,7 +419,7 @@ void* egl_make_current(void* window) {
     );
 
     if (success == EGL_FALSE) {
-        printf("EGLBridge: Error: eglMakeCurrent() failed: %p\n", eglGetError_p());
+        printf("EGLBridge: Error: eglMakeCurrent() failed: 0x%x\n", eglGetError_p());
     } else {
         printf("EGLBridge: eglMakeCurrent() succeed!\n");
     }
@@ -466,7 +466,7 @@ void pojavMakeCurrent(void* window) {
                 glClearColor(0.4f, 0.4f, 0.4f, 1.0f);
                 glClear(GL_COLOR_BUFFER_BIT);
                 eglSwapBuffers(potatoBridge.eglDisplay, potatoBridge.eglSurface);
-                printf("First frame error: %p\n", eglGetError());
+                printf("First frame error: 0x%x\n", eglGetError());
 #endif
 
                 // idk this should convert or just `return success;`...
@@ -479,7 +479,7 @@ void pojavMakeCurrent(void* window) {
 
     if (config_renderer == RENDERER_VK_ZINK || config_renderer == RENDERER_VIRGL) {
             printf("OSMDroid: making current\n");
-            OSMesaMakeCurrent_p((OSMesaContext)window,potatoBridge.androidWindow,GL_UNSIGNED_BYTE,savedWidth,savedHeight);
+            OSMesaMakeCurrent_p((OSMesaContext)window,potatoBridge.androidWindow,GL_UNSIGNED_SHORT,savedWidth,savedHeight);
             if (config_renderer == RENDERER_VK_ZINK) {
                 //ANativeWindow_lock(potatoBridge.androidWindow,&buf,NULL);
                 OSMesaPixelStore_p(OSMESA_ROW_LENGTH,buf.stride);
@@ -490,7 +490,8 @@ void pojavMakeCurrent(void* window) {
 
             printf("OSMDroid: vendor: %s\n",glGetString_p(GL_VENDOR));
             printf("OSMDroid: renderer: %s\n",glGetString_p(GL_RENDERER));
-            glReadBuffer_p(GL_FRONT);
+            //glReadBuffer_p(GL_FRONT);
+            glReadBuffer_p(GL_BACK);
             glClear_p(GL_COLOR_BUFFER_BIT);
             glClearColor_p(0.4f, 0.4f, 0.4f, 1.0f);
             glFinish_p();
@@ -498,7 +499,7 @@ void pojavMakeCurrent(void* window) {
             // Trigger a texture creation, which then set VIRGL_TEXTURE_ID
             int pixelsArr[4];
             glReadPixels_p(0, 0, 1, 1, GL_RGBA, GL_INT, &pixelsArr);
-            //printf("R=%d G=%d B=%d A=%d\n", pixelsArr[0], pixelsArr[1], pixelsArr[2], pixelsArr[3]);
+            printf("R=%d G=%d B=%d A=%d\n", pixelsArr[0], pixelsArr[1], pixelsArr[2], pixelsArr[3]);
 
             pojavSwapBuffers();
 
