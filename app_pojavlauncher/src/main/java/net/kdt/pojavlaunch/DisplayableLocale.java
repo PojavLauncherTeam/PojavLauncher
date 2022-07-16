@@ -8,7 +8,7 @@ public class DisplayableLocale {
     private static Locale processStringLocale(String locale) {
         if (locale.contains("-")) {
             String[] split = locale.split("-");
-            return new Locale(split[0], split[1]);
+            return new Locale(split[0], split[1].toUpperCase());
         } else {
             return new Locale(locale);
         }
