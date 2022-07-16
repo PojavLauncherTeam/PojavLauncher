@@ -106,10 +106,6 @@ Then, run these commands ~~or build using Android Studio~~.
 - [ ] More to come!
 
 ## Known Issues
-- Minecraft `21w10a` or newer are currently not yet supported due to the new GLSL usage. Fortunately, a workaround is provided and built into the launcher.
-- ~In 1.16 and up, spawn eggs banners are white (you can fix this by switching renderer
-to `gl4es 1.1.5`, only works on 1.16 and up, do not use under this version, as the texture
-will bug out when hit a mob)~ It should work when you use HolyGL4ES.
 - Controller mods aren't working.
 - Random crashes could happen very often on Android 5.x during game load or join world.
 - With big modpacks textures could be messed up
