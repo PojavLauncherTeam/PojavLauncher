@@ -465,10 +465,13 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                 JAssetInfo asset = assetsObjects.get(assetKey);
                 assetsSizeBytes+=asset.size;
                 String assetPath = asset.hash.substring(0, 2) + "/" + asset.hash;
-                File outFile = assets.mapToResources ?new File(objectsDir,"/"+assetKey):new File(objectsDir, assetPath);
+                File outFile = assets.mapToResources ?new File(outputDir,"/"+assetKey):new File(objectsDir, assetPath);
                 boolean skip = outFile.exists();// skip if the file exists
-                if(LauncherPreferences.PREF_CHECK_LIBRARY_SHA)  //if sha checking is enabled
-                    if(skip) skip = Tools.compareSHA1(outFile, asset.hash); //check hash
+                if(LauncherPreferences.PREF_CHECK_LIBRARY_SHA && skip){
+                    //if sha checking is enabled
+                    skip = Tools.compareSHA1(outFile, asset.hash); //check hash
+                }
+
                 if(skip) {
                     downloadedSize.addAndGet(asset.size);
                 }else{
