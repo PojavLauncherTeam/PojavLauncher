@@ -40,6 +40,20 @@ public class Touchpad extends FrameLayout {
     private float mPrevX, mPrevY;
     /* Last first pointer positions non-scaled, used to scroll distance */
     private float mScrollLastInitialX, mScrollLastInitialY;
+    /* Handler and message to check if we are grabbing */
+    private final Runnable mGrabRunnable = new Runnable() {
+        @Override
+        public void run() {
+            if (!CallbackBridge.isGrabbing() && mDisplayState && getVisibility() != VISIBLE) {
+                enable();
+            }else{
+                if ((CallbackBridge.isGrabbing() && getVisibility() != View.GONE) || !mDisplayState && getVisibility() == VISIBLE) {
+                    disable();
+                }
+            }
+            postDelayed(this, 250);
+        }
+    };
 
     public Touchpad(@NonNull Context context) {
         this(context, null);
@@ -170,20 +184,7 @@ public class Touchpad extends FrameLayout {
         // When the game is grabbing, we should not display the mouse
         disable();
         mDisplayState = false;
-        Thread virtualMouseGrabThread = new Thread(() -> {
-            while (true) {
-                if (!CallbackBridge.isGrabbing() && mDisplayState && getVisibility() != VISIBLE) {
-                    post(this::enable);
-                }else{
-                    if ((CallbackBridge.isGrabbing() && getVisibility() != View.GONE) || !mDisplayState && getVisibility() == VISIBLE) {
-                        post(this::disable);
-                    }
-                }
-
-            }
-        }, "VirtualMouseGrabThread");
-        virtualMouseGrabThread.setPriority(Thread.MIN_PRIORITY);
-        virtualMouseGrabThread.start();
+        postDelayed(mGrabRunnable, 250);
     }
 
 }
