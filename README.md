@@ -12,7 +12,7 @@
 
 * PojavLauncher is a launcher that allows you to play Minecraft:Java Edition on your Android device!
 
-* It can run **almost** every version of the Minecraft, allowing you to use .jar only installers to install modloaders like [forge](https://files.minecraftforge.net/), [fabric](http://fabricmc.net/), [optifine](https://optifine.net), hack clients and much more!
+* It can run almost every version of the Minecraft, allowing you to use .jar only installers to install modloaders like [forge](https://files.minecraftforge.net/), [fabric](http://fabricmc.net/), [optifine](https://optifine.net); hack clients like LabyMod and much more!
 
 * For more details [check out our wiki](https://github.com/PojavLauncherTeam/PojavLauncher/wiki)
 ## Some notes to start with
@@ -30,8 +30,8 @@
 
 ## Introduction 
 * PojavLauncher is a Minecraft: Java Edition launcher for Android and iOS based on [Boardwalk](https://github.com/zhuowei/Boardwalk). 
-* This launcher can launch almost all available Minecraft versions (from rd-132211 to 1.19 snapshots (kinda)), including Combat Test versions. 
-* Modding via Forge (up to 1.16.5) and Fabric are also supported. 
+* This launcher can launch almost all available Minecraft versions ranging from rd-132211 to 1.19 snapshots (including Combat Test versions). 
+* Modding via Forge and Fabric are also supported. 
 * This repository contains source code for Android. 
 * For iOS/iPadOS, check out [PojavLauncher_iOS](https://github.com/PojavLauncherTeam/PojavLauncher_iOS).
 
@@ -39,7 +39,7 @@
 
 Getting PojavLauncher is divided into 3 parts.
 
-1. You can get prebuilt app from ~[stable release](https://github.com/PojavLauncherTeam/PojavLauncher/releases)~ (not preferred because outdated) or [automatic builds](https://github.com/PojavLauncherTeam/PojavLauncher/actions).
+1. You can get prebuilt app from [stable releases](https://github.com/PojavLauncherTeam/PojavLauncher/releases) or [automatic builds](https://github.com/PojavLauncherTeam/PojavLauncher/actions).
 
 2. You can get it from Google Play by clicking:
 [![Google Play](https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png)](https://play.google.com/store/apps/details?id=net.kdt.pojavlaunch)
@@ -67,20 +67,24 @@ If you want to build after launcher code changes, follow the steps below.
 
 ### The Launcher
 - Because languages are auto added by Crowdin, you need to run language list generator before building. In the project directory, run:
+
+* On Linux, Mac OS:
 ```
-# On Linux, Mac OS:
 chmod +x scripts/languagelist_updater.sh
 bash scripts/languagelist_updater.sh
-
-# On Windows:
+```
+* On Windows:
+```
 scripts\languagelist_updater.bat
 ```
-- Then, run these commands ~~or build using Android Studio~~.
+Then, run these commands ~~or build using Android Studio~~.
+
+* Build GLFW stub:
 ```
-# Build GLFW stub
 ./gradlew :jre_lwjgl3glfw:build
-        
-# Build the launcher
+```       
+* Build the launcher
+```
 ./gradlew :app_pojavlauncher:assembleDebug
 ```
 (Replace `gradlew` to `gradlew.bat` if you are building on Windows).
@@ -88,11 +92,11 @@ scripts\languagelist_updater.bat
 ## Current status
 - [x] ~~OpenJDK 9 Mobile port: ARM32, ARM64, x86, x86_64.~~ Replaced by JRE8.
 - [x] OpenJDK 8 Mobile port: ARM32, ARM64, x86, x86_64
-- [x] OpenJDK 17 Mobile port: ~ARM32~(taken from Termux libraries), ARM64, x86, x86_64
+- [x] OpenJDK 17 Mobile port: ARM32, ARM64, x86, x86_64
 - [x] Mod installer headless
 - [x] Mod installer with GUI. Used `Caciocavallo` project for AWT without X11.
 - [x] OpenGL in OpenJDK environment
-- [x] OpenAL (work on most devices)
+- [x] OpenAL (works on most devices)
 - [x] Support for Minecraft 1.12.2 and below. Used [lwjglx](https://github.com/PojavLauncherTeam/lwjglx), a LWJGL2 compatibility layer for LWJGL3.
 - [x] Support for Minecraft 1.13 and above. Used [GLFW stub](https://github.com/PojavLauncherTeam/lwjgl3-glfw-java).
 - [x] Support for Minecraft 1.17 (22w13a to be exact) and above. Used [Holy GL4ES](https://github.com/PojavLauncherTeam/gl4es-114-extra)
@@ -118,7 +122,7 @@ will bug out when hit a mob)~ It should work when you use HolyGL4ES.
 Contributions are welcome! We welcome any type of contribution, not only code. For example, you can help the wiki shape up. You can help the [translation](https://crowdin.com/project/pojavlauncher) too!
 
 
-Any code change should be submitted as a pull request. The description should explain what the code does and give steps to execute it.
+Any code change to this repository (or iOS) should be submitted as a pull request. The description should explain what the code does and give steps to execute it.
 
 ## Credits & Third party components and their licenses (if available)
 - [Boardwalk](https://github.com/zhuowei/Boardwalk) (JVM Launcher): Unknown License/[Apache License 2.0](https://github.com/zhuowei/Boardwalk/blob/master/LICENSE) or GNU GPLv2.
