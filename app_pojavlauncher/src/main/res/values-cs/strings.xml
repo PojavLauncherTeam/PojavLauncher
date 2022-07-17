@@ -129,8 +129,8 @@
     <string name="control_thirdperson">Třetí</string>
     <string name="control_listplayers">Tab</string>
     <string name="control_mouse">Myš</string>
-    <string name="control_mouseoff">Myš: ano</string>
-    <string name="control_mouseon">Myš: ne </string>
+    <string name="control_mouseoff">Myš: ne</string>
+    <string name="control_mouseon">Myš: ano </string>
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">Vynutit zavření</string>
     <string name="control_viewout">Záznam výstupu</string>
@@ -260,6 +260,6 @@
     <string name="pedit_java_runtime">Java Runtime</string>
     <string name="pedit_renderer">Vykreslovač</string>
     <string name="arc_capes_title">Kápě Cosmetica</string>
-    <string name="arc_capes_desc">Vyžadujíc OptiFine, zapne kápě z Cosmeticy (dřiv Arc). Pro více informací navštivte https://cosmetica.cc.</string>
+    <string name="arc_capes_desc">Zapne kápě z Cosmeticy (dřiv Arc), vyžaduje Optifine. Pro více informací navštivte https://cosmetica.cc.</string>
     <string name="migrated_profile_str">Konfigurace verze %s</string>
 </resources>
