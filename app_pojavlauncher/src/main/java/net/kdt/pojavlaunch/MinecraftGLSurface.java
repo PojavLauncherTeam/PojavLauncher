@@ -203,7 +203,7 @@ public class MinecraftGLSurface extends View {
     public boolean onTouchEvent(MotionEvent e) {
         // Looking for a mouse to handle, won't have an effect if no mouse exists.
         for (int i = 0; i < e.getPointerCount(); i++) {
-            if (e.getToolType(i) != MotionEvent.TOOL_TYPE_MOUSE) continue;
+            if(e.getToolType(i) != MotionEvent.TOOL_TYPE_MOUSE && e.getToolType(i) != MotionEvent.TOOL_TYPE_STYLUS ) continue;
 
             // Mouse found
             if(CallbackBridge.isGrabbing()) return false;
@@ -391,7 +391,7 @@ public class MinecraftGLSurface extends View {
         }
 
         for(int i = 0; i < event.getPointerCount(); i++) {
-            if(event.getToolType(i) != MotionEvent.TOOL_TYPE_MOUSE) continue;
+            if(event.getToolType(i) != MotionEvent.TOOL_TYPE_MOUSE && event.getToolType(i) != MotionEvent.TOOL_TYPE_STYLUS ) continue;
             // Mouse found
             mouseCursorIndex = i;
             break;
@@ -493,8 +493,6 @@ public class MinecraftGLSurface extends View {
         if(event.getRepeatCount() != 0) return true;
         if(event.getAction() == KeyEvent.ACTION_MULTIPLE) return true;
 
-        //Toast.makeText(this, "FIRST VERIF PASSED", Toast.LENGTH_SHORT).show();
-
         //Sometimes, key events comes from SOME keys of the software keyboard
         //Even weirder, is is unknown why a key or another is selected to trigger a keyEvent
         if((event.getFlags() & KeyEvent.FLAG_SOFT_KEYBOARD) == KeyEvent.FLAG_SOFT_KEYBOARD){
@@ -502,25 +500,19 @@ public class MinecraftGLSurface extends View {
             touchCharInput.dispatchKeyEvent(event);
             return true;
         }
-        //Toast.makeText(this, "SECOND VERIF PASSED", Toast.LENGTH_SHORT).show();
-
 
         //Sometimes, key events may come from the mouse
         if(event.getDevice() != null
                 && ( (event.getSource() & InputDevice.SOURCE_MOUSE_RELATIVE) == InputDevice.SOURCE_MOUSE_RELATIVE
                 ||   (event.getSource() & InputDevice.SOURCE_MOUSE) == InputDevice.SOURCE_MOUSE)  ){
-            //Toast.makeText(this, "THE EVENT COMES FROM A MOUSE", Toast.LENGTH_SHORT).show();
-
 
             if(eventKeycode == KeyEvent.KEYCODE_BACK){
                 sendMouseButton(LwjglGlfwKeycode.GLFW_MOUSE_BUTTON_RIGHT, event.getAction() == KeyEvent.ACTION_DOWN);
                 return true;
             }
         }
-        //System.out.println(event);
 
         if(Gamepad.isGamepadEvent(event)){
-
             if(mGamepad == null){
                 mGamepad = new Gamepad(this, event.getDevice());
             }
