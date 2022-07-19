@@ -12,8 +12,8 @@ import net.kdt.pojavlaunch.utils.*;
 import org.lwjgl.glfw.*;
 
 public class AWTCanvasView extends TextureView implements TextureView.SurfaceTextureListener, Runnable {
-    public static final int AWT_CANVAS_WIDTH = 600;
-    public static final int AWT_CANVAS_HEIGHT = 420;
+    public static final int AWT_CANVAS_WIDTH = 720;
+    public static final int AWT_CANVAS_HEIGHT = 600;
     private final int MAX_SIZE = 100;
     private final double NANOS = 1000000000.0;
 
