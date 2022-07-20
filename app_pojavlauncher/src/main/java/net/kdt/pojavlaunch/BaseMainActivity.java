@@ -376,7 +376,7 @@ public class BaseMainActivity extends BaseActivity {
             sendKeyPress(LwjglGlfwKeycode.GLFW_KEY_ESCAPE);
             return true;
         }
-        return super.dispatchKeyEvent(event);
+        return minecraftGLView.processKeyEvent(event);
     }
 
     public static void switchKeyboardState() {

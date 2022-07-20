@@ -480,8 +480,7 @@ public class MinecraftGLSurface extends View {
     }
 
     /** The event for keyboard/ gamepad button inputs */
-    @Override
-    public boolean onKeyPreIme(int keyCode, KeyEvent event) {
+    public boolean processKeyEvent(KeyEvent event) {
         //Toast.makeText(this, event.toString(),Toast.LENGTH_SHORT).show();
         //Toast.makeText(this, event.getDevice().toString(), Toast.LENGTH_SHORT).show();
 
