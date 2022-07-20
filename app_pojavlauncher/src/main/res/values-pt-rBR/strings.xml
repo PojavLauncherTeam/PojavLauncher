@@ -11,7 +11,7 @@
     <string name="login_online_password_hint">Senha</string>
     <string name="login_online_check_keeplogin">Manter conectado</string>
     <string name="login_online_login_label">Iniciar sessão</string>
-    <string name="login_error_invalid_username">Nome de usuário inválido. O nome de usuário deve conter 3-16 caracteres, contendo apenas A-Z, a-z, 0-9 e o sublinhado.</string>
+    <string name="login_error_invalid_username">Nome de usuário inválido. O nome de usuário deve conter 3-16 caracteres, contendo apenas A-Z, a-z, 0-9 e subtraço.</string>
     <string name="login_error_exist_username">Este nome de usuário já existe</string>
     <string name="login_microsoft">Entrar com uma conta Microsoft</string>
     <string name="login_select_account">Selecionar conta</string>
