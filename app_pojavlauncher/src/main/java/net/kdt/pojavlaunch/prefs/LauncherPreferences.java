@@ -23,7 +23,7 @@ public class LauncherPreferences {
 	public static String PREF_DEFAULTCTRL_PATH = Tools.CTRLDEF_FILE;
 	public static String PREF_CUSTOM_JAVA_ARGS;
     public static String PREF_LANGUAGE = "default";
-    public static String PREF_VERSION_REPOS = "https://launchermeta.mojang.com/mc/game/version_manifest_v2.json";
+    public static String PREF_VERSION_REPOS = "https://piston-meta.mojang.com/mc/game/version_manifest_v2.json";
     public static boolean PREF_CHECK_LIBRARY_SHA = true;
     public static boolean PREF_DISABLE_GESTURES = false;
     public static float PREF_MOUSESPEED = 1f;
