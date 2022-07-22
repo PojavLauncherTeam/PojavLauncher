@@ -107,7 +107,7 @@
     <string name="global_error_field_empty">Toto pole nemůže být prázdné</string>
     <string name="global_waiting">Čekej</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Aplikace/Hra skončila s kódem %d, zkontroluj latestlog.txt pro více informací.</string>
+    <string name="mcn_exit_title">Aplikace/Hra spadla s kódem %d, zkontroluj latestlog.txt pro více informací.</string>
     <string name="mcn_exit_call">Odejít</string>
     <string name="mcn_exit_confirm">Opravdu chcete vynutit ukončení?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 nebyla nainstalována!</string>
@@ -221,16 +221,16 @@
     <string name="compat_11x_playanyway">Nepoužít ale spustit</string>
     <string name="pvc_gameDirectory">Složka hry</string>
     <string name="pvc_jvmArgs">JVM argumenty</string>
-    <string name="pvc_title">Nastavení po verzi</string>
+    <string name="pvc_title">Nastavení ku verzím</string>
     <string name="storage_warning_title">Změny úložiště</string>
-    <string name="storage_warning_text"><![CDATA[Kvůli novému vynucování rozsahového úložiště od Googlu přidanému v Androidu 10 a vyšším, jsme přinuceni přesunout složku hry do privátní složky aplikace.<br /> Nová složka pro soubory Pojavu je <b>Android/data/%s/files/</b> (také přístupná pomocí poskytovatele úložiště v Průzkumníku souborů).<br /> Pokud potřebujete zkopírovat své herní soubory, prosím zkopírujte vše z původní složky na <b>games/PojavLauncher</b> ručně.]]></string>
+    <string name="storage_warning_text"><![CDATA[Kvůli Googlem nově vynucovaném rozsahovém úložišti, přidaném v Androidu 10 a vyšším, musíme přesouvat složku hry do aplikačně privátní složky. <br />Ta nová složka pro soubory Pojavu je <b>Android/data/%s/files/</b> (též přístupná z poskytovatele úložiště ve tvém průzkumníku souborů).<br />Potřebuješ-li zkopírovat soubory hry. prosím zkopíruj ručně vše z původní složky v <b>games/PojavLauncher</b>.]]></string>
     <string name="control_offset_title">Odsazení ovládání</string>
     <string name="control_top_offset">Horní odsazení: </string>
     <string name="control_right_offset">pravé odsazení: </string>
     <string name="control_bottom_offset">spodní odsazení: </string>
     <string name="control_left_offset">levé odsazení: </string>
     <string name="preference_control_offset_title">Strana odsazení ovládání</string>
-    <string name="preference_control_offset_description">Nastavit vlastní odsazení pro každou stranu obrazovky</string>
+    <string name="preference_control_offset_description">Nastavit vlastní odsazení na každou stranu obrazovky</string>
     <string name="preference_mouse_start_title">Spouštět s zapnutou virtuální myší</string>
     <string name="preference_mouse_start_description">Užívaje této možnosti, budeš souzen Mathiasem-Boulayem</string>
     <string name="preference_video_title">Video a vykreslovač</string>
@@ -238,14 +238,14 @@
     <string name="preference_control_title">Přizpůsobení ovládání</string>
     <string name="preference_control_description">Typy gest, spouštěče a škálování</string>
     <string name="preference_java_title">Vyladění Javy</string>
-    <string name="preference_java_description">Verze Javy, Argumenty JVM, a množství RAM</string>
-    <string name="preference_misc_title">Různé nastavení</string>
-    <string name="preference_misc_description">Seznam verzí, a kontrola knihoven</string>
+    <string name="preference_java_description">Verze Javy, Argumenty JVM a množství RAM</string>
+    <string name="preference_misc_title">Jiná nastavení</string>
+    <string name="preference_misc_description">Seznam verzí, a kontroly knihoven</string>
     <string name="preference_experimental_title">Experimentální Věci</string>
     <string name="preference_experimental_description">Používej tyto věci s uvážením, nepodporujeme.</string>
     <string name="preference_sustained_performance_title">Zapnout režim zmenšeného výkonu</string>
     <string name="preference_sustained_performance_description">Limitujíc termální zpomalování, limituje maximální výkon</string>
-    <string name="preference_back_title">Vrátit se na předchozí obrazovku</string>
+    <string name="preference_back_title">Zpět na předchozí obrazovku</string>
     <string name="gles_hack_title">GL4ES Zmenšovátko</string>
     <string name="gles_hack_none">Nezmenšit textury</string>
     <string name="gles_hack_always">Vydělit všechny textury dvěma</string>
@@ -260,6 +260,6 @@
     <string name="pedit_java_runtime">Java Runtime</string>
     <string name="pedit_renderer">Vykreslovač</string>
     <string name="arc_capes_title">Kápě Cosmetica</string>
-    <string name="arc_capes_desc">Zapne kápě z Cosmeticy (dřiv Arc), vyžaduje Optifine. Pro více informací navštivte https://cosmetica.cc.</string>
+    <string name="arc_capes_desc">Zapne kápě z Cosmeticy (dřiv Arc), vyžadujíc OptiFine. Pro více informací navštivte https://cosmetica.cc.</string>
     <string name="migrated_profile_str">Konfigurace verze %s</string>
 </resources>
