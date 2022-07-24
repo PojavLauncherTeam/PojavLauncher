@@ -20,6 +20,7 @@ public class PojavMigrator {
                     newAccStruct.accessToken = oldAccStruct.getAccessToken();
                     newAccStruct.clientToken = oldAccStruct.getClientID();
                     newAccStruct.isMicrosoft = false;
+                    newAccStruct.isElyBy = false;
                     newAccStruct.profileId = oldAccStruct.getProfileID();
                     newAccStruct.selectedVersion = oldAccStruct.getVersion();
                     newAccStruct.username = oldAccStruct.getUsername();
