@@ -86,6 +86,9 @@
         <activity
             android:screenOrientation="sensorLandscape"
             android:name=".authenticator.microsoft.ui.MicrosoftLoginGUIActivity"/>
+	<activity
+            android:screenOrientation="sensorLandscape"
+            android:name=".authenticator.elyby.ui.ElyByLoginGUIActivity"/>
         <activity
             android:launchMode="standard"
             android:multiprocess="true"
