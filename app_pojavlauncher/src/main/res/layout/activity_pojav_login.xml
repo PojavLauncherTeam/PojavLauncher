@@ -89,7 +89,7 @@
         android:layout_gravity="start"
         android:text="@string/login_online_check_keeplogin"
         app:layout_constraintStart_toStartOf="@+id/login_edit_password"
-        app:layout_constraintTop_toBottomOf="@+id/login_switch_local" />
+        app:layout_constraintTop_toBottomOf="@+id/login_switch_offline" />
 
     <com.kdt.mcgui.MineButton
         android:id="@+id/mineButton"
@@ -136,6 +136,20 @@
         app:layout_constraintTop_toTopOf="@+id/mineButton" />
 
     <com.kdt.mcgui.MineButton
+        android:id="@+id/mineButton4"
+        android:layout_width="0dp"
+        android:layout_height="42dp"
+        android:background="@drawable/mine_button_background"
+        android:onClick="loginElyBy"
+        android:text="@string/login_ely_by"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/mineButton5"
+        app:layout_constraintEnd_toEndOf="@+id/mineButton2"
+        app:layout_constraintStart_toStartOf="@+id/mineButton2"
+        app:layout_constraintTop_toTopOf="@+id/mineButton5" />
+    
+    <com.kdt.mcgui.MineButton
+        android:id="@+id/mineButton5"
         android:layout_width="0dp"
         android:layout_height="42dp"
         android:background="@drawable/mine_button_background"
@@ -143,7 +157,7 @@
         android:text="@string/login_microsoft"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="@+id/login_menu"
-        app:layout_constraintEnd_toEndOf="@+id/mineButton2"
+        app:layout_constraintEnd_toEndOf="@+id/mineButton"
         app:layout_constraintStart_toStartOf="@+id/mineButton"
         app:layout_constraintTop_toBottomOf="@+id/mineButton" />
 
@@ -167,10 +181,10 @@
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <CheckBox
-        android:id="@+id/login_switch_local"
+        android:id="@+id/login_switch_offline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/mcl_account_local"
+        android:text="@string/mcl_account_offline"
         app:layout_constraintStart_toStartOf="@+id/login_edit_password"
         app:layout_constraintTop_toBottomOf="@+id/login_edit_password" />
 
