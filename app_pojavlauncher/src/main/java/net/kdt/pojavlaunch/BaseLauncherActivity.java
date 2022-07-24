@@ -111,21 +111,7 @@ public abstract class BaseLauncherActivity extends BaseActivity {
             if (LauncherProfiles.mainProfileJson != null && LauncherProfiles.mainProfileJson.profiles != null && LauncherProfiles.mainProfileJson.profiles.containsKey(selectedProfile)) {
                 MinecraftProfile prof = LauncherProfiles.mainProfileJson.profiles.get(selectedProfile);
                 if (prof != null && prof.lastVersionId != null) {
-                    if (mProfile.accessToken.equals("0")) {
-                        String versionId = getVersionId(prof.lastVersionId);
-                        File verJsonFile = new File(Tools.DIR_HOME_VERSION,
-                            versionId + "/" + versionId + ".json");
-                        if (verJsonFile.exists()) {
-                            mTask.onPostExecute(null);
-                            return;
-                        }
-                        Tools.dialogOnUiThread(this,
-                                getString(R.string.global_error),
-                                getString(R.string.mcl_launch_error_localmode)
-                        );
-                    }else {
-                        mTask.execute(getVersionId(prof.lastVersionId));
-                    }
+                    mTask.execute(getVersionId(prof.lastVersionId));
                 }
             }
         }
