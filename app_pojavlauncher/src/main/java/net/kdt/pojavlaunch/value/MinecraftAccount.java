@@ -19,17 +19,20 @@ public class MinecraftAccount
     public String username = "Steve";
     public String selectedVersion = "1.7.10";
     public boolean isMicrosoft = false;
+    public boolean isElyBy = false;
     public String msaRefreshToken = "0";
     public String skinFaceBase64;
     public long expiresAt;
     
     void updateSkinFace(String uuid) {
         try {
-            File skinFile = File.createTempFile("skin", ".png", new File(Tools.DIR_DATA, "cache"));
-            Tools.downloadFile("https://mc-heads.net/head/" + uuid + "/100", skinFile.getAbsolutePath());
-            skinFaceBase64 = Base64.encodeToString(IOUtils.toByteArray(new FileInputStream(skinFile)), Base64.DEFAULT);
-            
-            Log.i("SkinLoader", "Update skin face success");
+            if (!isElyBy) {
+                File skinFile = File.createTempFile("skin", ".png", new File(Tools.DIR_DATA, "cache"));
+                Tools.downloadFile("https://mc-heads.net/head/" + uuid + "/100", skinFile.getAbsolutePath());
+                skinFaceBase64 = Base64.encodeToString(IOUtils.toByteArray(new FileInputStream(skinFile)), Base64.DEFAULT);
+                
+                Log.i("SkinLoader", "Update skin face success");
+            }
         } catch (IOException e) {
             // Skin refresh limit, no internet connection, etc...
             // Simply ignore updating skin face
