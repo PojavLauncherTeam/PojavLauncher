@@ -54,14 +54,14 @@ public class ControlData {
     public String dynamicX, dynamicY;
     public boolean isDynamicBtn, isToggle, passThruEnabled;
     
-    public static ControlData[] getSpecialButtons(){
+    public static ControlData[] getSpecialButtons(android.content.Context ctx){
         if (SPECIAL_BUTTONS == null) {
             SPECIAL_BUTTONS = new ControlData[]{
-                new ControlData("Keyboard", new int[]{SPECIALBTN_KEYBOARD}, "${margin} * 3 + ${width} * 2", "${margin}", false),
-                new ControlData("GUI", new int[]{SPECIALBTN_TOGGLECTRL}, "${margin}", "${bottom} - ${margin}"),
-                new ControlData("PRI", new int[]{SPECIALBTN_MOUSEPRI}, "${margin}", "${screen_height} - ${margin} * 3 - ${height} * 3"),
-                new ControlData("SEC", new int[]{SPECIALBTN_MOUSESEC}, "${margin} * 3 + ${width} * 2", "${screen_height} - ${margin} * 3 - ${height} * 3"),
-                new ControlData("Mouse", new int[]{SPECIALBTN_VIRTUALMOUSE}, "${right}", "${margin}", false),
+                new ControlData(ctx.getResources().getString(R.string.control_keyboard), new int[]{SPECIALBTN_KEYBOARD}, "${margin} * 3 + ${width} * 2", "${margin}", false),
+                new ControlData(ctx.getResources().getString(R.string.control_toggle), new int[]{SPECIALBTN_TOGGLECTRL}, "${margin}", "${bottom} - ${margin}"),
+                new ControlData(ctx.getResources().getString(R.string.control_primary), new int[]{SPECIALBTN_MOUSEPRI}, "${margin}", "${screen_height} - ${margin} * 3 - ${height} * 3"),
+                new ControlData(ctx.getResources().getString(R.string.control_secondary), new int[]{SPECIALBTN_MOUSESEC}, "${margin} * 3 + ${width} * 2", "${screen_height} - ${margin} * 3 - ${height} * 3"),
+                new ControlData(ctx.getResources().getString(R.string.control_mouse), new int[]{SPECIALBTN_VIRTUALMOUSE}, "${right}", "${margin}", false),
 
                 new ControlData("MID", new int[]{SPECIALBTN_MOUSEMID}, "${margin}", "${margin}"),
                 new ControlData("SCROLLUP", new int[]{SPECIALBTN_SCROLLUP}, "${margin}", "${margin}"),
