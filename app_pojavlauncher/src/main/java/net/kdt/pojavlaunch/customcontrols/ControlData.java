@@ -72,10 +72,10 @@ public class ControlData {
         return SPECIAL_BUTTONS;
     }
 
-    public static String[] buildSpecialButtonArray() {
+    public static String[] buildSpecialButtonArray(android.content.Context ctx) {
         if (SPECIAL_BUTTON_NAME_ARRAY == null) {
             List<String> nameList = new ArrayList<String>();
-            for (ControlData btn : getSpecialButtons()) {
+            for (ControlData btn : getSpecialButtons(ctx)) {
                 nameList.add(btn.name);
             }
             SPECIAL_BUTTON_NAME_ARRAY = nameList.toArray(new String[0]);
