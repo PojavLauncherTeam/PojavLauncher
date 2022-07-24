@@ -28,11 +28,11 @@ public class CustomControls {
 	// Generate default control
 	public CustomControls(Context ctx) {
 		this();
-		this.mControlDataList.add(new ControlData(ControlData.getSpecialButtons()[0])); // Keyboard
-		this.mControlDataList.add(new ControlData(ControlData.getSpecialButtons()[1])); // GUI
-		this.mControlDataList.add(new ControlData(ControlData.getSpecialButtons()[2])); // Primary Mouse mControlDataList
-		this.mControlDataList.add(new ControlData(ControlData.getSpecialButtons()[3])); // Secondary Mouse mControlDataList
-		this.mControlDataList.add(new ControlData(ControlData.getSpecialButtons()[4])); // Virtual mouse toggle
+		this.mControlDataList.add(new ControlData(ControlData.getSpecialButtons(ctx)[0])); // Keyboard
+		this.mControlDataList.add(new ControlData(ControlData.getSpecialButtons(ctx)[1])); // GUI
+		this.mControlDataList.add(new ControlData(ControlData.getSpecialButtons(ctx)[2])); // Primary Mouse mControlDataList
+		this.mControlDataList.add(new ControlData(ControlData.getSpecialButtons(ctx)[3])); // Secondary Mouse mControlDataList
+		this.mControlDataList.add(new ControlData(ControlData.getSpecialButtons(ctx)[4])); // Virtual mouse toggle
 
 		this.mControlDataList.add(new ControlData(ctx, R.string.control_debug, new int[]{LwjglGlfwKeycode.GLFW_KEY_F3}, "${margin}", "${margin}", false));
 		this.mControlDataList.add(new ControlData(ctx, R.string.control_chat, new int[]{LwjglGlfwKeycode.GLFW_KEY_T}, "${margin} * 2 + ${width}", "${margin}", false));
