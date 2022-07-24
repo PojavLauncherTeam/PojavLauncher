@@ -14,10 +14,10 @@
     <string name="login_offline_label">Přihlásit se za offline účet</string>
     <string name="login_error_short_username">Uživatelské jméno musí mít nejméně 3 znaky</string>
     <string name="login_error_exist_username">Toto uživatelské jméno již existuje</string>
-    <string name="login_microsoft">Microsoft přihlášení</string>
+    <string name="login_microsoft">Přihlásit Microsoftem</string>
     <string name="login_select_account">Vybrat účet</string>
     <string name="login_title_no_saved_account">Nenalezen žádný účet !</string>
-    <string name="login_dialog_no_saved_account">Nemáte žádný uložený účet.\nPoužijte možnost <b>\"Zůstat přihlášen/a\"</b> pro uložení účtu při prvním přihlášení.</string>
+    <string name="login_dialog_no_saved_account">Nemáš žádný uložený účet. \nPoužij možnost <b>\"Zůstat přihlášen/a\"</b>, aby se účet uložil při prvním přihlášení.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Přejetím zprava doleva otevřeš nabídku ◀\nPodrž tlačítko pro úpravu: upravení, změnění velikosti nebo smazání."</string>
     <!-- Warnings -->
@@ -67,7 +67,7 @@
     <string name="mcl_setting_title_resolution_scaler">Škála rozlišení</string>
     <string name="mcl_setting_subtitle_resolution_scaler">Umožňuje snížit rozlišení hry. 100% je plné rozlišení</string>
     <string name="mcl_setting_title_longpresstrigger">Jak dlouho bude trvat dlouhé stisknutí</string>
-    <string name="mcl_setting_subtitle_longpresstrigger">Změňte čas pro rozbití bloku a vyhození itemu.</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Změň čas pro rozbití bloku a vyhození itemu.</string>
     <string name="mcl_setting_title_backtorightmouse">Považovat tlačítko zpět za tlačítko pravé myši</string>
     <string name="mcl_setting_subtitle_backtorightmouse">Některá zařízení přistupují k externímu pravému tlačítku jako k tlačítku zpět. Pokud používáte externí myš, měli byste toto povolit.</string>
     <string name="mcl_setting_title_flat_button_style">Styl plochých tlačítek</string>
@@ -88,7 +88,7 @@
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Stará alfa</string>
     <string name="mcl_setting_veroption_oldbeta">Stará beta</string>
-    <string name="mcl_version_clone">Klon</string>
+    <string name="mcl_version_clone">Klonovat</string>
     <!-- Global strings -->
     <string name="global_edit">Editovat</string>
     <string name="global_error">Chyba</string>
@@ -150,8 +150,8 @@
     <string name="control_thirdperson">Třetí</string>
     <string name="control_listplayers">Tab</string>
     <string name="control_mouse">Myš</string>
-    <string name="control_mouseoff">Myš: ano</string>
-    <string name="control_mouseon">Myš: ne </string>
+    <string name="control_mouseoff">Myš: ne</string>
+    <string name="control_mouseon">Myš: ano </string>
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">Vynutit zavření</string>
     <string name="control_viewout">Záznam výstupu</string>
