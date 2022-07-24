@@ -160,7 +160,7 @@ public class EditControlButtonPopup {
 
         //Initialize adapter for keycodes
         mAdapter = new ArrayAdapter<>(ctx, android.R.layout.simple_spinner_item);
-        String[] oldSpecialArr = ControlData.buildSpecialButtonArray();
+        String[] oldSpecialArr = ControlData.buildSpecialButtonArray(ctx);
         mSpecialArray = new String[oldSpecialArr.length];
         for (int i = 0; i < mSpecialArray.length; i++) {
             mSpecialArray[i] = "SPECIAL_" + oldSpecialArr[mSpecialArray.length - i - 1];
