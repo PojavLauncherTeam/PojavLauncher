@@ -411,6 +411,7 @@ public class PojavLoginActivity extends BaseActivity {
             }else if(requestCode == ElyByLoginGUIActivity.AUTHENTICATE_ELYBY_REQUEST) {
                 //Log.i("ElyByLoginWrap","Got ely.by login result:" + data);
                 performElyByLogin(data);
+            }
         }
     }
 
