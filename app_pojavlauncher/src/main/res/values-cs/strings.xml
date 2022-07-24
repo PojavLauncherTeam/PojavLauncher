@@ -69,7 +69,7 @@
     <string name="mcl_setting_title_resolution_scaler">Škála rozlišení</string>
     <string name="mcl_setting_subtitle_resolution_scaler">Umožňuje snížit rozlišení hry. 100% je plné rozlišení</string>
     <string name="mcl_setting_title_longpresstrigger">Jak dlouho bude trvat dlouhé stisknutí</string>
-    <string name="mcl_setting_subtitle_longpresstrigger">Změňte čas pro rozbití bloku a vyhození itemu.</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Změň čas pro rozbití bloku a vyhození itemu.</string>
     <string name="mcl_setting_title_backtorightmouse">Považovat tlačítko zpět za tlačítko pravé myši</string>
     <string name="mcl_setting_subtitle_backtorightmouse">Některá zařízení přistupují k externímu pravému tlačítku jako k tlačítku zpět. Pokud používáte externí myš, měli byste toto povolit.</string>
     <string name="mcl_setting_title_flat_button_style">Styl plochých tlačítek</string>
@@ -92,7 +92,7 @@
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Stará alfa</string>
     <string name="mcl_setting_veroption_oldbeta">Stará beta</string>
-    <string name="mcl_version_clone">Klon</string>
+    <string name="mcl_version_clone">Klonovat</string>
     <!-- Global strings -->
     <string name="global_edit">Editovat</string>
     <string name="global_error">Chyba</string>
@@ -100,7 +100,7 @@
     <string name="global_load">Načíst</string>
     <string name="global_name">Název</string>
     <string name="global_remove">Odstranit</string>
-    <string name="global_clone">Klon</string>
+    <string name="global_clone">Klonovat</string>
     <string name="global_restart">Restart</string>
     <string name="global_save">Uložit</string>
     <string name="global_unpacking">Rozbalování %s</string>
@@ -223,7 +223,7 @@
     <string name="pvc_jvmArgs">JVM argumenty</string>
     <string name="pvc_title">Nastavení ku verzím</string>
     <string name="storage_warning_title">Změny úložiště</string>
-    <string name="storage_warning_text"><![CDATA[Kvůli Googlem nově vynucovaném rozsahovém úložišti, přidaném v Androidu 10 a vyšším, musíme přesouvat složku hry do aplikačně privátní složky. <br />Ta nová složka pro soubory Pojavu je <b>Android/data/%s/files/</b> (též přístupná z poskytovatele úložiště ve tvém průzkumníku souborů).<br />Potřebuješ-li zkopírovat soubory hry. prosím zkopíruj ručně vše z původní složky v <b>games/PojavLauncher</b>.]]></string>
+    <string name="storage_warning_text"><![CDATA[Kvůli Googlem nově vynucovaném rozsahovém úložišti, přidaném v Androidu 10 a vyšším, musíme mít přesunutou složku hry do aplikačně privátní složky. <br />Ta nová složka pro soubory Pojavu je <b>Android/data/%s/files/</b> (též přístupná z poskytovatele úložiště ve tvém průzkumníku souborů).<br />Potřebuješ-li zkopírovat soubory hry. prosím zkopíruj ručně vše z původní složky v <b>games/PojavLauncher</b>.]]></string>
     <string name="control_offset_title">Odsazení ovládání</string>
     <string name="control_top_offset">Horní odsazení: </string>
     <string name="control_right_offset">pravé odsazení: </string>
