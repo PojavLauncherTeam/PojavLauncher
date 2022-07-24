@@ -35,7 +35,7 @@ public class InvalidateTokenTask extends AsyncTask<String, Void, Throwable> {
                 return null;
             }
             this.authenticator.invalidate(profilePath.accessToken,
-                UUID.fromString(profilePath.isMicrosoft ? profilePath.profileId : profilePath.clientToken /* should be? */));
+                UUID.fromString(profilePath.isMicrosoft || profilePath.isElyBy ? profilePath.profileId : profilePath.clientToken /* should be? */));
             return null;
         } catch (Throwable e) {
             return e;
