@@ -49,7 +49,7 @@
     <string name="mcl_launch_downloading">Stahování %s</string>
     <string name="mcl_launch_downloading_progress">"Stahování %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Příprava ke stažení prostředků</string>
-    <string name="mcl_launch_error_localmode">Minecraft nemůže být legálně nainstalován, používáš-li lokální účtet. Prosím přepni na online účet pro pokračování.</string>
+    <string name="mcl_launch_error_localmode">Minecraft nemůže být legálně nainstalován, používáš-li lokální účet. Prosím přepni na online účet pro pokračování.</string>
     <string name="mcl_options">Možnosti</string>
     <string name="mcl_option_modinstall">Spusť instalátor módů (Forge, LabyMod, Fabric, atd...)</string>
     <string name="mcl_option_modinstallwitharg">Spustit instalátor módů (s vlastními argumenty)</string>
