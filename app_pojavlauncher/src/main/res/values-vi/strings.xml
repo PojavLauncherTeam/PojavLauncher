@@ -99,7 +99,7 @@
     <string name="global_save">Lưu</string>
     <string name="global_unpacking">Đang giải nén %s</string>
     <string name="global_error_field_empty">Trường này không được để trống</string>
-    <string name="global_waiting">Đợi</string>
+    <string name="global_waiting">Vui lòng đợi</string>
     <!--
     <string name="mcl_about">
     %1$s BETA (Minecraft Java launcher for Android), version " + PathTools.usingVerName + "\n" +
@@ -163,10 +163,10 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
-    <string name="customctrl_edit">Chỉnh sửa %s</string>
+    <string name="customctrl_edit">Đang chỉnh sửa %s</string>
     <string name="customctrl_remove">Xóa %s?</string>
     <string name="customctrl_keyname">Mã phím</string>
-    <string name="customctrl_toggle">Chuyển đổi</string>
+    <string name="customctrl_toggle">Bật/tắt</string>
     <string name="customctrl_size">Kích thước</string>
     <string name="customctrl_size_width">Chiều rộng</string>
     <string name="customctrl_size_height">Độ cao</string>
