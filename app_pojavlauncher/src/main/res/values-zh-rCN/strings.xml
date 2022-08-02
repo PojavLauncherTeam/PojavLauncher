@@ -7,7 +7,7 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">电子邮件或用户名</string>
+    <string name="login_online_username_hint">电子邮箱或用户名</string>
     <string name="login_online_password_hint">密码</string>
     <string name="login_online_check_keeplogin">保持登录状态</string>
     <string name="login_online_login_label">登录</string>
@@ -175,7 +175,7 @@
     <string name="customctrl_addbutton_drawer">添加组合框</string>
     <string name="customctrl_addsubbutton">添加子按钮</string>
     <string name="customctrl_add_subbutton_message">子按钮 n°%d 已添加！</string>
-    <string name="customctrl_selectdefault">选择默认 .json 控制键位</string>
+    <string name="customctrl_selectdefault">选择默认 json 控制键位</string>
     <string name="main_install_jar_file">安装 .jar</string>
     <string name="main_options">选项</string>
     <string name="main_play">启动游戏</string>
