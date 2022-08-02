@@ -11,8 +11,8 @@
     <string name="login_online_password_hint">Contrasenya</string>
     <string name="login_online_check_keeplogin">Mantenir-me connectat</string>
     <string name="login_online_login_label">Iniciar sessió</string>
-    <string name="login_offline_label">Enta amb una conta offline</string>
-    <string name="login_error_short_username">Nom d’usuari ha de ser com a minim 3 caracters o mes</string>
+    <string name="login_offline_label">Enta amb un conter local</string>
+    <string name="login_error_short_username">El nom d’usuari ha de ser com a mínim 3 caràcters o més</string>
     <string name="login_error_exist_username">Aquet nom d’usuari ja existeix</string>
     <string name="login_microsoft">Inici de sessió amb Microsoft</string>
     <string name="login_select_account">Seleccioneu un compte</string>
