@@ -16,7 +16,7 @@
     <string name="login_error_exist_username">Este nombre de usuario ya existe</string>
     <string name="login_microsoft">Cuenta de Microsoft</string>
     <string name="login_select_account">Seleccione una cuenta</string>
-    <string name="login_title_no_saved_account">No se encontraron cuentas!</string>
+    <string name="login_title_no_saved_account">¡Cuenta no encontrada!</string>
     <string name="login_dialog_no_saved_account">No tienes ninguna cuenta guardada.\nUsa la opción <b>\"Mantenme conectado\"</b> para guardar una cuenta al iniciar sesión por primera vez.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Desliza de derecha a izquierda para abrir el menú ◀\nMantén pulsado un botón para personalizar: editar, cambiar de tamaño o eliminar."</string>
