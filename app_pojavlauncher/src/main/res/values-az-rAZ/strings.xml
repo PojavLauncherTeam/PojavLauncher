@@ -4,6 +4,8 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_microsoft">Microsoft girişi</string>
+    <string name="login_title_no_saved_account">Hesab tapılmadı !</string>
     <!-- Hint -->
     <!-- Warnings -->
     <!-- AlertDialog title -->
@@ -13,9 +15,12 @@
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">Xəbərlər</string>
     <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">Əlagədar</string>
     <!-- MCLauncherActivity: Strings -->
     <!-- Global strings -->
+    <string name="global_waiting">Gözləyin</string>
     <!-- MainActivity: strings -->
     <!-- MainActivity: Control buttons -->
     <!-- MainActivity: Menu advanced controls -->
