@@ -689,12 +689,6 @@ public class GLFW
         if (cbfun == null) mGLFWFramebufferSizeCallback = null;
         else mGLFWFramebufferSizeCallback = GLFWFramebufferSizeCallback.createSafe(nglfwSetFramebufferSizeCallback(window, memAddressSafe(cbfun)));
 
-        mGLFWFramebufferSizeCallback = GLFWFramebufferSizeCallback.createSafe(nglfwSetFramebufferSizeCallback(window, memAddressSafe(cbfun)));
-
-        try {
-            mGLFWFramebufferSizeCallback.invoke(window, mGLFWWindowWidth, mGLFWWindowHeight);
-        } catch (Throwable th) {}
-
         return lastCallback;
     }
 
@@ -797,12 +791,6 @@ public class GLFW
         GLFWWindowSizeCallback lastCallback = mGLFWWindowSizeCallback;
         if (cbfun == null) mGLFWWindowSizeCallback = null;
         else mGLFWWindowSizeCallback = GLFWWindowSizeCallback.createSafe(nglfwSetWindowSizeCallback(window, memAddressSafe(cbfun)));
-
-        mGLFWWindowSizeCallback = GLFWWindowSizeCallback.createSafe(nglfwSetWindowSizeCallback(window, memAddressSafe(cbfun)));
-
-        try {
-            mGLFWWindowSizeCallback.invoke(window, mGLFWWindowWidth, mGLFWWindowHeight);
-        } catch (Throwable th) {}
 
         return lastCallback;
     }
@@ -926,7 +914,9 @@ public class GLFW
         try {
             // long __result = nglfwGetVideoModes(monitor, memAddress(count));
             long __result = memAddress(stack.callocLong(1));
-            return GLFWVidMode.createSafe(__result, 1);
+            GLFWVidMode.Buffer buffer = GLFWVidMode.createSafe(__result, 1);
+            buffer.put(glfwGetVideoMode(monitor));
+            return buffer;
         } finally {
             stack.setPointer(stackPointer);
         }
