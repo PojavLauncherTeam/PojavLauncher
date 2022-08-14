@@ -910,13 +910,10 @@ public class GLFW
     @NativeType("GLFWvidmode const *")
     public static GLFWVidMode.Buffer glfwGetVideoModes(@NativeType("GLFWmonitor *") long monitor) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        IntBuffer count = stack.callocInt(1);
         try {
             // long __result = nglfwGetVideoModes(monitor, memAddress(count));
-            long __result = memAddress(stack.callocLong(1));
-            GLFWVidMode.Buffer buffer = GLFWVidMode.createSafe(__result, 1);
-            buffer.put(glfwGetVideoMode(monitor));
-            return buffer;
+            long __result = glfwGetVideoMode(monitor).address();
+            return GLFWVidMode.createSafe(__result, 1);
         } finally {
             stack.setPointer(stackPointer);
         }
