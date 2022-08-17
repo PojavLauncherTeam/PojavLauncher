@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 
 import net.kdt.pojavlaunch.utils.FileUtils;
 
+import org.apache.commons.io.IOUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -122,11 +123,8 @@ public class ImportControlActivity extends Activity {
         InputStream is;
         try {
             is = getContentResolver().openInputStream(mUriData);
-
             OutputStream os = new FileOutputStream(Tools.CTRLMAP_PATH + "/" + fileName + ".json");
-            byte[] buffer = new byte[1024];
-            while(is.read(buffer) != -1)
-                os.write(buffer);
+            IOUtils.copy(is, os);
 
             os.close();
             is.close();
