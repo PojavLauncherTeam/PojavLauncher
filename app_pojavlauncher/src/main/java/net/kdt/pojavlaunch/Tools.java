@@ -141,13 +141,7 @@ public final class Tools {
 
         List<String> javaArgList = new ArrayList<String>();
 
-        // Only Java 8 supports headful AWT for now
-        if (JREUtils.jreReleaseList.get("JAVA_VERSION").equals("1.8.0")) {
-            getCacioJavaArgs(javaArgList, false);
-        } else if (LauncherPreferences.PREF_ARC_CAPES) {
-            // Opens the java.net package to Arc DNS injector on Java 9+
-            javaArgList.add("--add-opens=java.base/java.net=ALL-UNNAMED");
-        }
+        getCacioJavaArgs(javaArgList, JREUtils.jreReleaseList.get("JAVA_VERSION").equals("1.8.0"));
 
 /*
         int mcReleaseDate = Integer.parseInt(versionInfo.releaseTime.substring(0, 10).replace("-", ""));
@@ -179,20 +173,46 @@ public final class Tools {
         JREUtils.launchJavaVM(activity, javaArgList);
     }
     
-    public static void getCacioJavaArgs(List<String> javaArgList, boolean isHeadless) {
-        javaArgList.add("-Djava.awt.headless="+isHeadless);
+    public static void getCacioJavaArgs(List<String> javaArgList, boolean isJava8) {
         // Caciocavallo config AWT-enabled version
+        javaArgList.add("-Djava.awt.headless=false");
         javaArgList.add("-Dcacio.managed.screensize=" + AWTCanvasView.AWT_CANVAS_WIDTH + "x" + AWTCanvasView.AWT_CANVAS_HEIGHT);
         // javaArgList.add("-Dcacio.font.fontmanager=net.java.openjdk.cacio.ctc.CTCFontManager");
-        javaArgList.add("-Dcacio.font.fontmanager=sun.awt.X11FontManager");
         javaArgList.add("-Dcacio.font.fontscaler=sun.font.FreetypeFontScaler");
         javaArgList.add("-Dswing.defaultlaf=javax.swing.plaf.metal.MetalLookAndFeel");
-        javaArgList.add("-Dawt.toolkit=net.java.openjdk.cacio.ctc.CTCToolkit");
-        javaArgList.add("-Djava.awt.graphicsenv=net.java.openjdk.cacio.ctc.CTCGraphicsEnvironment");
+        if (isJava8) {
+            javaArgList.add("-Dcacio.font.fontmanager=sun.awt.X11FontManager");
+            javaArgList.add("-Dawt.toolkit=net.java.openjdk.cacio.ctc.CTCToolkit");
+            javaArgList.add("-Djava.awt.graphicsenv=net.java.openjdk.cacio.ctc.CTCGraphicsEnvironment");
+        } else {
+            javaArgList.add("-Dcacio.font.fontmanager=com.github.caciocavallosilano.cacio.ctc.CTCFontManager");
+            javaArgList.add("-Dawt.toolkit=com.github.caciocavallosilano.cacio.ctc.CTCToolkit");
+            javaArgList.add("-Djava.awt.graphicsenv=com.github.caciocavallosilano.cacio.ctc.CTCGraphicsEnvironment");
+            javaArgList.add("-Djava.system.class.loader=com.github.caciocavallosilano.cacio.ctc.CTCPreloadClassLoader");
+
+            javaArgList.add("--add-exports=java.desktop/java.awt=ALL-UNNAMED");
+            javaArgList.add("--add-exports=java.desktop/java.awt.peer=ALL-UNNAMED");
+            javaArgList.add("--add-exports=java.desktop/sun.awt.image=ALL-UNNAMED");
+            javaArgList.add("--add-exports=java.desktop/sun.java2d=ALL-UNNAMED");
+            javaArgList.add("--add-exports=java.desktop/java.awt.dnd.peer=ALL-UNNAMED");
+            javaArgList.add("--add-exports=java.desktop/sun.awt=ALL-UNNAMED");
+            javaArgList.add("--add-exports=java.desktop/sun.awt.event=ALL-UNNAMED");
+            javaArgList.add("--add-exports=java.desktop/sun.awt.datatransfer=ALL-UNNAMED");
+            javaArgList.add("--add-exports=java.desktop/sun.font=ALL-UNNAMED");
+            javaArgList.add("--add-exports=java.base/sun.security.action=ALL-UNNAMED");
+            javaArgList.add("--add-opens=java.base/java.util=ALL-UNNAMED");
+            javaArgList.add("--add-opens=java.desktop/java.awt=ALL-UNNAMED");
+            javaArgList.add("--add-opens=java.desktop/sun.font=ALL-UNNAMED");
+            javaArgList.add("--add-opens=java.desktop/sun.java2d=ALL-UNNAMED");
+            javaArgList.add("--add-opens=java.base/java.lang.reflect=ALL-UNNAMED");
+
+            // Opens the java.net package to Arc DNS injector on Java 9+
+            javaArgList.add("--add-opens=java.base/java.net=ALL-UNNAMED");
+        }
 
         StringBuilder cacioClasspath = new StringBuilder();
-        cacioClasspath.append("-Xbootclasspath/p");
-        File cacioDir = new File(DIR_GAME_HOME + "/caciocavallo");
+        cacioClasspath.append("-Xbootclasspath/" + (isJava8 ? "p" : "a"));
+        File cacioDir = new File(DIR_GAME_HOME + "/caciocavallo" + (isJava8 ? "" : "17"));
         if (cacioDir.exists() && cacioDir.isDirectory()) {
             for (File file : cacioDir.listFiles()) {
                 if (file.getName().endsWith(".jar")) {

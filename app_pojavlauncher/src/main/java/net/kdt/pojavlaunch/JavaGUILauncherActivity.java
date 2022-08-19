@@ -117,13 +117,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
         });
 
         try {
-            JREUtils.jreReleaseList = JREUtils.readJREReleaseProperties(LauncherPreferences.PREF_DEFAULT_RUNTIME);
-            if (JREUtils.jreReleaseList.get("JAVA_VERSION").equals("1.8.0")) {
-                MultiRTUtils.setRuntimeNamed(this,LauncherPreferences.PREF_DEFAULT_RUNTIME);
-            } else {
-                MultiRTUtils.setRuntimeNamed(this,MultiRTUtils.getExactJreName(8));
-                JREUtils.jreReleaseList = JREUtils.readJREReleaseProperties();
-            }
+            MultiRTUtils.setRuntimeNamed(this,LauncherPreferences.PREF_DEFAULT_RUNTIME);
 
             placeMouseAt(CallbackBridge.physicalWidth / 2, CallbackBridge.physicalHeight / 2);
             
@@ -247,7 +241,8 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
             List<String> javaArgList = new ArrayList<String>();
 
             // Enable Caciocavallo
-            Tools.getCacioJavaArgs(javaArgList,false);
+            JREUtils.jreReleaseList = JREUtils.readJREReleaseProperties(LauncherPreferences.PREF_DEFAULT_RUNTIME);
+            Tools.getCacioJavaArgs(javaArgList,JREUtils.jreReleaseList.get("JAVA_VERSION").equals("1.8.0"));
             
             if (javaArgs != null) {
                 javaArgList.addAll(Arrays.asList(javaArgs.split(" ")));

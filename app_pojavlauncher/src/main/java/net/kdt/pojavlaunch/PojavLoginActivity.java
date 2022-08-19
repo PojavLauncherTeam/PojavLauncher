@@ -344,6 +344,7 @@ public class PojavLoginActivity extends BaseActivity {
             AssetManager am = this.getAssets();
             
             unpackComponent(am, "caciocavallo");
+            unpackComponent(am, "caciocavallo17");
 
             // Since the Java module system doesn't allow multiple JARs to declare the same module,
             // we repack them to a single file here
