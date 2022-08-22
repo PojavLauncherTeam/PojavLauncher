@@ -233,7 +233,7 @@ public class BaseMainActivity extends BaseActivity {
         if(Tools.LOCAL_RENDERER == null) {
             Tools.LOCAL_RENDERER = LauncherPreferences.PREF_RENDERER;
         }
-        Logger.getInstance().appendToLog("--------- beggining with launcher debug");
+        Logger.getInstance().appendToLog("--------- beginning with launcher debug");
         Logger.getInstance().appendToLog("Info: Launcher version: " + BuildConfig.VERSION_NAME);
         if (Tools.LOCAL_RENDERER.equals("vulkan_zink")) {
             checkVulkanZinkIsSupported();
@@ -376,7 +376,7 @@ public class BaseMainActivity extends BaseActivity {
             sendKeyPress(LwjglGlfwKeycode.GLFW_KEY_ESCAPE);
             return true;
         }
-        return super.dispatchKeyEvent(event);
+        return minecraftGLView.processKeyEvent(event);
     }
 
     public static void switchKeyboardState() {

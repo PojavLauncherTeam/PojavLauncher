@@ -19,8 +19,7 @@ public static int getControllerCount() {
     ctrlr.poll();
     }
     public static boolean next() {
-    ctrlr.poll();
-    return true;
+        return false;
     }
     public static boolean isCreated() {
     return true;
