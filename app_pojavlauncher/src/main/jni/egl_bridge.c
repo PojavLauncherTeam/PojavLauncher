@@ -401,11 +401,11 @@ void pojavSwapBuffers() {
 
         case RENDERER_VK_ZINK: {
             //OSMesaMakeCurrent_p(ctx,buf.bits,GL_UNSIGNED_BYTE,savedWidth,savedHeight);
-            glFinish_p();
-            //OSMesaFlushFrontbuffer_p();
-            ANativeWindow_lock(potatoBridge.androidWindow,&buf,NULL);
-            glReadPixels_p(0, 0, savedWidth, savedHeight, GL_RGBA_INTEGER, GL_UNSIGNED_INT, buf.bits);
-            ANativeWindow_unlockAndPost(potatoBridge.androidWindow);
+            //glFinish_p();
+            OSMesaFlushFrontbuffer_p();
+            //ANativeWindow_lock(potatoBridge.androidWindow,&buf,NULL);
+            //glReadPixels_p(0, 0, savedWidth, savedHeight, GL_RGBA_INTEGER, GL_UNSIGNED_INT, buf.bits);
+            //ANativeWindow_unlockAndPost(potatoBridge.androidWindow);
         } break;
     }
 }
@@ -479,7 +479,8 @@ void pojavMakeCurrent(void* window) {
 
     if (config_renderer == RENDERER_VK_ZINK || config_renderer == RENDERER_VIRGL) {
             printf("OSMDroid: making current\n");
-            OSMesaMakeCurrent_p((OSMesaContext)window,potatoBridge.androidWindow,GL_UNSIGNED_SHORT,savedWidth,savedHeight);
+            OSMesaMakeCurrent_p((OSMesaContext)window,potatoBridge.androidWindow,GL_UNSIGNED_BYTE,savedWidth,savedHeight);
+/*
             if (config_renderer == RENDERER_VK_ZINK) {
                 //ANativeWindow_lock(potatoBridge.androidWindow,&buf,NULL);
                 OSMesaPixelStore_p(OSMESA_ROW_LENGTH,buf.stride);
@@ -487,21 +488,25 @@ void pojavMakeCurrent(void* window) {
                 //ANativeWindow_unlockAndPost(potatoBridge.androidWindow);
                 OSMesaPixelStore_p(OSMESA_Y_UP,0);
             }
-
+*/
             printf("OSMDroid: vendor: %s\n",glGetString_p(GL_VENDOR));
             printf("OSMDroid: renderer: %s\n",glGetString_p(GL_RENDERER));
-            //glReadBuffer_p(GL_FRONT);
+
             glReadBuffer_p(GL_BACK);
+            glReadBuffer_p(GL_FRONT);
+/*
             glClear_p(GL_COLOR_BUFFER_BIT);
             glClearColor_p(0.4f, 0.4f, 0.4f, 1.0f);
             glFinish_p();
+*/
+            if (config_renderer == RENDERER_VIRGL) {
+                // Trigger a texture creation, which then set VIRGL_TEXTURE_ID
+                int pixelsArr[4];
+                glReadPixels_p(0, 0, 1, 1, GL_RGBA, GL_INT, &pixelsArr);
+                printf("R=%d G=%d B=%d A=%d\n", pixelsArr[0], pixelsArr[1], pixelsArr[2], pixelsArr[3]);
 
-            // Trigger a texture creation, which then set VIRGL_TEXTURE_ID
-            int pixelsArr[4];
-            glReadPixels_p(0, 0, 1, 1, GL_RGBA, GL_INT, &pixelsArr);
-            printf("R=%d G=%d B=%d A=%d\n", pixelsArr[0], pixelsArr[1], pixelsArr[2], pixelsArr[3]);
-
-            pojavSwapBuffers();
+                pojavSwapBuffers();
+            }
 
             return;
     }

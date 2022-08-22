@@ -139,6 +139,7 @@ JNIEXPORT jint JNICALL Java_com_oracle_dalvik_VMLauncher_launchJVM(JNIEnv *env, 
 #endif
 
    jint res = 0;
+  if (!getenv("POJAV_NO_SIGNAL_TRAP")) {
    // int i;
    //Prepare the signal trapper
    struct sigaction catcher;
@@ -158,6 +159,7 @@ JNIEXPORT jint JNICALL Java_com_oracle_dalvik_VMLauncher_launchJVM(JNIEnv *env, 
     CATCHSIG(SIGPIPE);
     CATCHSIG(SIGXFSZ);
    //Signal trapper ready
+  }
 
     // Save dalvik JNIEnv pointer for JVM launch thread
     dalvikJNIEnvPtr_ANDROID = env;
