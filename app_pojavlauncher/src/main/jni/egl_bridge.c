@@ -79,7 +79,6 @@ void (*vtest_swap_buffers_p) (void);
 #define RENDERER_VIRGL 3
 
 int config_renderer;
-void* gbuffer;
 
 void* egl_make_current(void* window);
 
@@ -362,20 +361,8 @@ int pojavInit() {
             printf("OSMDroid: %s\n",dlerror());
             return 0;
         }
-        
-        printf("OSMDroid: width=%i;height=%i, reserving %i bytes for frame buffer\n", savedWidth, savedHeight,
-             savedWidth * 4 * savedHeight);
-        gbuffer = malloc(savedWidth * 4 * savedHeight+1);
-        if (gbuffer) {
-            printf("OSMDroid: created frame buffer\n");
-            return 1;
-        } else {
-            printf("OSMDroid: can't generate frame buffer\n");
-            return 0;
-        }
     }
-    
-    return 0;
+    return 1;
 }
 ANativeWindow_Buffer buf;
 int32_t stride;
@@ -561,11 +548,11 @@ JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL_nativeRegalMakeCurrent(JNIEnv *e
     abort();
 }
 JNIEXPORT jlong JNICALL
-Java_org_lwjgl_opengl_GL_getGraphicsBufferAddr(JNIEnv *env, jobject thiz) {
-    return &gbuffer;
+Java_org_lwjgl_opengl_GL_getNativeWindowAddr(JNIEnv *env, jclass clazz) {
+    return potatoBridge.androidWindow;
 }
 JNIEXPORT jintArray JNICALL
-Java_org_lwjgl_opengl_GL_getNativeWidthHeight(JNIEnv *env, jobject thiz) {
+Java_org_lwjgl_opengl_GL_getNativeWidthHeight(JNIEnv *env, jclass clazz) {
     jintArray ret = (*env)->NewIntArray(env,2);
     jint arr[] = {savedWidth, savedHeight};
     (*env)->SetIntArrayRegion(env,ret,0,2,arr);
