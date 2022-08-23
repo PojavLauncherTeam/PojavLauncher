@@ -690,12 +690,6 @@ public class GLFW
         if (cbfun == null) mGLFWFramebufferSizeCallback = null;
         else mGLFWFramebufferSizeCallback = GLFWFramebufferSizeCallback.createSafe(nglfwSetFramebufferSizeCallback(window, memAddressSafe(cbfun)));
 
-        mGLFWFramebufferSizeCallback = GLFWFramebufferSizeCallback.createSafe(nglfwSetFramebufferSizeCallback(window, memAddressSafe(cbfun)));
-
-        try {
-            mGLFWFramebufferSizeCallback.invoke(window, mGLFWWindowWidth, mGLFWWindowHeight);
-        } catch (Throwable th) {}
-
         return lastCallback;
     }
 
@@ -798,12 +792,6 @@ public class GLFW
         GLFWWindowSizeCallback lastCallback = mGLFWWindowSizeCallback;
         if (cbfun == null) mGLFWWindowSizeCallback = null;
         else mGLFWWindowSizeCallback = GLFWWindowSizeCallback.createSafe(nglfwSetWindowSizeCallback(window, memAddressSafe(cbfun)));
-
-        mGLFWWindowSizeCallback = GLFWWindowSizeCallback.createSafe(nglfwSetWindowSizeCallback(window, memAddressSafe(cbfun)));
-
-        try {
-            mGLFWWindowSizeCallback.invoke(window, mGLFWWindowWidth, mGLFWWindowHeight);
-        } catch (Throwable th) {}
 
         return lastCallback;
     }
@@ -923,10 +911,9 @@ public class GLFW
     @NativeType("GLFWvidmode const *")
     public static GLFWVidMode.Buffer glfwGetVideoModes(@NativeType("GLFWmonitor *") long monitor) {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
-        IntBuffer count = stack.callocInt(1);
         try {
             // long __result = nglfwGetVideoModes(monitor, memAddress(count));
-            long __result = memAddress(stack.callocLong(1));
+            long __result = glfwGetVideoMode(monitor).address();
             return GLFWVidMode.createSafe(__result, 1);
         } finally {
             stack.setPointer(stackPointer);

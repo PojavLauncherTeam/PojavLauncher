@@ -11,14 +11,11 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        LocaleUtils.setLocale(this);
         Tools.setFullscreen(this);
         Tools.updateWindowSize(this);
     }
-    
-    @Override
-    protected void attachBaseContext(Context base) {
-        super.attachBaseContext(LocaleUtils.setLocale(base));
-    }
+
 
     @Override
     public void startActivity(Intent i) {

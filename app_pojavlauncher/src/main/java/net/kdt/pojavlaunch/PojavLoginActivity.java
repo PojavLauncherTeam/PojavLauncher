@@ -180,14 +180,7 @@ public class PojavLoginActivity extends BaseActivity {
         setContentView(R.layout.activity_pojav_login);
 
         Spinner spinnerChgLang = findViewById(R.id.login_spinner_language);
-
-        String defaultLang = LocaleUtils.DEFAULT_LOCALE.getDisplayName();
-        SpannableString defaultLangChar = new SpannableString(defaultLang);
-        defaultLangChar.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, defaultLang.length(), 0);
-        
         final ArrayAdapter<DisplayableLocale> langAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item);
-        langAdapter.add(new DisplayableLocale(LocaleUtils.DEFAULT_LOCALE, defaultLangChar));
-        langAdapter.add(new DisplayableLocale(Locale.ENGLISH));
         
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open("language_list.txt")));
@@ -205,17 +198,15 @@ public class PojavLoginActivity extends BaseActivity {
         }
         
         langAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
-        
-        int selectedLang = 0;
-        for (int i = 0; i < langAdapter.getCount(); i++) {
-            if (Locale.getDefault().toString().equalsIgnoreCase(langAdapter.getItem(i).mLocale.toString())) {
-                selectedLang = i;
-                break;
-            }
-        }
-        
+
+        int selectedLang = getSelectorPosition(langAdapter, LocaleUtils.getLocale());
+        if (selectedLang == -1) selectedLang = getSelectorPosition(langAdapter, null);
+
         spinnerChgLang.setAdapter(langAdapter);
-        spinnerChgLang.setSelection(selectedLang);
+        if (selectedLang != -1){
+            spinnerChgLang.setSelection(selectedLang);
+        }
+
         spinnerChgLang.setOnItemSelectedListener(new Spinner.OnItemSelectedListener(){
             private boolean isInitCalled;
             @Override
@@ -225,15 +216,7 @@ public class PojavLoginActivity extends BaseActivity {
                     return;
                 }
                 
-                Locale locale;
-                if (position == 0) {
-                    locale = LocaleUtils.DEFAULT_LOCALE;
-                } else if (position == 1) {
-                    locale = Locale.ENGLISH;
-                } else {
-                    locale = langAdapter.getItem(position).mLocale;
-                }
-                
+                Locale locale = langAdapter.getItem(position).mLocale;
                 LauncherPreferences.PREF_LANGUAGE = locale.toString();
                 LauncherPreferences.DEFAULT_PREF.edit().putString("language", LauncherPreferences.PREF_LANGUAGE).apply();
                 
@@ -256,6 +239,18 @@ public class PojavLoginActivity extends BaseActivity {
         });
         isSkipInit = true;
     }
+
+    /** @return The index in the array adapter for a given language, or english. -1 if not found */
+    public int getSelectorPosition(@NonNull ArrayAdapter<DisplayableLocale> langAdapter, @Nullable Locale locale){
+        String localeString = locale == null ? Locale.ENGLISH.toString() : locale.toString();
+        for (int i = 0; i < langAdapter.getCount(); i++) {
+            if (localeString.equalsIgnoreCase(langAdapter.getItem(i).mLocale.toString())) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     
     @Override
     public void onResume() {
@@ -349,6 +344,7 @@ public class PojavLoginActivity extends BaseActivity {
             AssetManager am = this.getAssets();
             
             unpackComponent(am, "caciocavallo");
+            unpackComponent(am, "caciocavallo17");
 
             // Since the Java module system doesn't allow multiple JARs to declare the same module,
             // we repack them to a single file here

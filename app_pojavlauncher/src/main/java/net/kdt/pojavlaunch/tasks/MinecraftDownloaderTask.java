@@ -92,7 +92,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                 verInfo = Tools.getVersionInfo(mActivity,p1[0]);
 
                 //Now we have the reliable information to check if our runtime settings are good enough
-                if(verInfo.javaVersion != null) { //1.17+
+                if(verInfo.javaVersion != null && !verInfo.javaVersion.component.equalsIgnoreCase("jre-legacy")) { //1.17+
                     LauncherProfiles.update();
                     MinecraftProfile minecraftProfile = LauncherProfiles.mainProfileJson.profiles.get(LauncherPreferences.DEFAULT_PREF.getString(LauncherPreferences.PREF_KEY_CURRENT_PROFILE,""));
                     if(minecraftProfile == null) throw new SilentException();
@@ -121,11 +121,7 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                          }
                      } //if else, we are satisfied
                 }
-                { //run the checks to detect if we have a *brand new* engine
-                    int mcReleaseDate = Integer.parseInt(verInfo.releaseTime.substring(0, 10).replace("-", ""));
-                    if(mcReleaseDate > 20210225 && verInfo.javaVersion != null && verInfo.javaVersion.majorVersion > 15)
-                        V117CompatUtil.runCheck(mActivity);
-                }
+
                 try {
                     assets = downloadIndex(verInfo.assets, new File(Tools.ASSETS_PATH, "indexes/" + verInfo.assets + ".json"));
                 } catch (IOException e) {
@@ -465,10 +461,13 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
                 JAssetInfo asset = assetsObjects.get(assetKey);
                 assetsSizeBytes+=asset.size;
                 String assetPath = asset.hash.substring(0, 2) + "/" + asset.hash;
-                File outFile = assets.mapToResources ?new File(objectsDir,"/"+assetKey):new File(objectsDir, assetPath);
+                File outFile = assets.mapToResources ?new File(outputDir,"/"+assetKey):new File(objectsDir, assetPath);
                 boolean skip = outFile.exists();// skip if the file exists
-                if(LauncherPreferences.PREF_CHECK_LIBRARY_SHA)  //if sha checking is enabled
-                    if(skip) skip = Tools.compareSHA1(outFile, asset.hash); //check hash
+                if(LauncherPreferences.PREF_CHECK_LIBRARY_SHA && skip){
+                    //if sha checking is enabled
+                    skip = Tools.compareSHA1(outFile, asset.hash); //check hash
+                }
+
                 if(skip) {
                     downloadedSize.addAndGet(asset.size);
                 }else{

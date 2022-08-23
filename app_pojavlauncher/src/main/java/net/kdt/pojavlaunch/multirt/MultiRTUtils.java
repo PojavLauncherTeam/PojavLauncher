@@ -77,16 +77,11 @@ public class MultiRTUtils {
 
     public static void installRuntimeNamed(String nativeLibDir, InputStream runtimeInputStream, String name, RuntimeProgressReporter progressReporter) throws IOException {
         File dest = new File(RUNTIME_FOLDER,"/"+name);
-        File tmp = new File(dest,"temporary");
         if(dest.exists()) FileUtils.deleteDirectory(dest);
         dest.mkdirs();
-        FileOutputStream fos = new FileOutputStream(tmp);
-        progressReporter.reportStringProgress(R.string.multirt_progress_caching);
-        IOUtils.copy(runtimeInputStream,fos);
-        fos.close();
+
+        uncompressTarXZ(runtimeInputStream,dest,progressReporter);
         runtimeInputStream.close();
-        uncompressTarXZ(tmp,dest,progressReporter);
-        tmp.delete();
         unpack200(nativeLibDir,RUNTIME_FOLDER + "/" + name);
         read(name);
     }
@@ -230,25 +225,16 @@ public class MultiRTUtils {
     }
 
     private static void installRuntimeNamedNoRemove(InputStream runtimeInputStream, File dest, RuntimeProgressReporter progressReporter) throws IOException {
-        File tmp = new File(dest,"temporary");
-        FileOutputStream fos = new FileOutputStream(tmp);
-        progressReporter.reportStringProgress(R.string.multirt_progress_caching);
-        IOUtils.copy(runtimeInputStream,fos);
-        fos.close();
+
+        uncompressTarXZ(runtimeInputStream,dest,progressReporter);
         runtimeInputStream.close();
-        uncompressTarXZ(tmp,dest,progressReporter);
-        tmp.delete();
     }
 
-    private static void uncompressTarXZ(final File tarFile, final File dest, final RuntimeProgressReporter thingy) throws IOException {
+    private static void uncompressTarXZ(final InputStream tarFileInputStream, final File dest, final RuntimeProgressReporter thingy) throws IOException {
         dest.mkdirs();
 
         TarArchiveInputStream tarIn = new TarArchiveInputStream(
-                new XZCompressorInputStream(
-                        new BufferedInputStream(
-                                new FileInputStream(tarFile)
-                        )
-                )
+                new XZCompressorInputStream(tarFileInputStream)
         );
         TarArchiveEntry tarEntry = tarIn.getNextTarEntry();
         // tarIn is a TarArchiveInputStream

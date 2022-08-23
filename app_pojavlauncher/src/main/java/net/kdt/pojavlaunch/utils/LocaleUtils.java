@@ -1,37 +1,60 @@
 package net.kdt.pojavlaunch.utils;
 
+import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_LANGUAGE;
+
 import android.content.*;
 import android.content.res.*;
+import android.os.Build;
+
 import androidx.preference.*;
 import java.util.*;
 import net.kdt.pojavlaunch.prefs.*;
 
 public class LocaleUtils {
-    public static final Locale DEFAULT_LOCALE;
-    
-    static {
-        DEFAULT_LOCALE = Locale.getDefault();
+
+    private static Locale CURRENT_LOCALE;
+
+    public static Locale getLocale(){
+        return Locale.getDefault();
     }
     
     public static Context setLocale(Context context) {
         if (LauncherPreferences.DEFAULT_PREF == null) {
             LauncherPreferences.DEFAULT_PREF = PreferenceManager.getDefaultSharedPreferences(context);
-			LauncherPreferences.loadPreferences(context);
+            LauncherPreferences.loadPreferences(context);
         }
-        
-        Locale locale;
+
+
         if (LauncherPreferences.PREF_LANGUAGE.equals("default")) {
-            locale = DEFAULT_LOCALE;
+            CURRENT_LOCALE = getLocale();
         } else {
-            locale = new Locale(LauncherPreferences.PREF_LANGUAGE);
+            if(CURRENT_LOCALE == null || !PREF_LANGUAGE.equalsIgnoreCase(CURRENT_LOCALE.toString())){
+                String[] localeString;
+                if(PREF_LANGUAGE.contains("_")){
+                    localeString = PREF_LANGUAGE.split("_");
+                }else{
+                    localeString = new String[]{PREF_LANGUAGE, ""};
+                }
+                CURRENT_LOCALE = new Locale(localeString[0], localeString[1]);
+            }
+
         }
+
+
         
-        Locale.setDefault(locale);
+        Locale.setDefault(CURRENT_LOCALE);
 
         Resources res = context.getResources();
-        Configuration config = new Configuration(res.getConfiguration());
-        config.setLocale(locale);
-        context = context.createConfigurationContext(config);
+        Configuration config = res.getConfiguration();
+
+        if (Build.VERSION.SDK_INT >= 24) {
+            config.setLocale(CURRENT_LOCALE);
+            context.getResources().updateConfiguration(config, context.getResources().getDisplayMetrics());
+        } else {
+            config.locale = CURRENT_LOCALE;
+            context.getApplicationContext().createConfigurationContext(config);
+        }
+
         return context;
     }
 }

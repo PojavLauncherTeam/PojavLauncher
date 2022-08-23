@@ -953,7 +953,7 @@ public class Display {
             } else {
                 glfwSetWindowIcon(Window.handle, new GLFWImage.Buffer(icons[0]));
             }
-        } catch (NullPointerException e) {
+        } catch (Exception e) {
             LWJGLUtil.log("Couldn't set icon");
             e.printStackTrace();
         }
@@ -986,8 +986,10 @@ public class Display {
     }
 
     public static void setDisplayModeAndFullscreen(DisplayMode dm) throws LWJGLException {
-        Display.mode = dm;
-        GLFW.glfwSetWindowSize(Window.handle, dm.getWidth(), dm.getHeight());
+        if(Window.handle != 0) {
+            Display.mode = dm;
+            GLFW.glfwSetWindowSize(Window.handle, dm.getWidth(), dm.getHeight());
+        }
     }
 
     public static void setFullscreen(boolean fullscreen) throws LWJGLException {
