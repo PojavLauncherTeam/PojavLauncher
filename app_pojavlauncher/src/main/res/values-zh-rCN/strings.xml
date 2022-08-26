@@ -42,7 +42,7 @@
     <string name="mcl_tab_crash">崩溃日志</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">已连接</string>
-    <string name="mcl_account_local">离线模式</string>
+    <string name="mcl_account_local">本地模式</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Minecraft %s 就绪</string>
     <string name="mcl_launch_cleancache">正在清理缓存</string>
@@ -204,7 +204,7 @@
     <string name="memory_warning_msg">当前可用内存 (%d) 低于所分配的内存 (%d)，这可能会导致游戏崩溃。 如果游戏崩溃请更改配置。</string>
     <string name="mcl_memory_allocation">内存分配</string>
     <string name="mcl_memory_allocation_subtitle">控制给 Minecraft 分配多少内存</string>
-    <string name="multirt_runtime_corrupt">Java 运行管理器损坏</string>
+    <string name="multirt_runtime_corrupt">Java 运行时损坏</string>
     <string name="multirt_runtime_incompatiblearch">不兼容的架构： %s</string>
     <string name="multirt_config_title">Java VMs</string>
     <string name="multirt_config_add">新建</string>
