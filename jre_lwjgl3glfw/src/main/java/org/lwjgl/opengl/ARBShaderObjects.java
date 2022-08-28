@@ -9,8 +9,7 @@ import javax.annotation.*;
 
 import java.nio.*;
 
-import org.lwjgl.*;
-
+import org.lwjgl.PointerBuffer;
 import org.lwjgl.system.*;
 
 import static org.lwjgl.system.Checks.*;
