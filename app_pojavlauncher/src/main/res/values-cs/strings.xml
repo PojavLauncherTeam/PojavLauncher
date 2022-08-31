@@ -15,7 +15,7 @@
     <string name="login_error_exist_username">Toto uživatelské jméno již existuje</string>
     <string name="login_microsoft">Přihlásit Microsoftem</string>
     <string name="login_select_account">Vybrat účet</string>
-    <string name="login_title_no_saved_account">Nenalezen žádný účet !</string>
+    <string name="login_title_no_saved_account">Nenalezen žádný účet!</string>
     <string name="login_dialog_no_saved_account">Nemáš žádný uložený účet. \nPoužij možnost <b>\"Zůstat přihlášen/a\"</b>, aby se účet uložil při prvním přihlášení.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Přejetím zprava doleva otevřeš nabídku ◀\nPodrž tlačítko pro úpravu: upravení, změnění velikosti nebo smazání."</string>
@@ -71,7 +71,7 @@
     <string name="mcl_setting_title_longpresstrigger">Jak dlouho bude trvat dlouhé stisknutí</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Změň čas pro rozbití bloku a vyhození itemu.</string>
     <string name="mcl_setting_title_backtorightmouse">Považovat tlačítko zpět za tlačítko pravé myši</string>
-    <string name="mcl_setting_subtitle_backtorightmouse">Některá zařízení přistupují k externímu pravému tlačítku jako k tlačítku zpět. Pokud používáte externí myš, měli byste toto povolit.</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">Některá zařízení berou externí pravé tlačítku jako tlačítko zpět. Používáte-li externí myš, měli byste toto zapnout.</string>
     <string name="mcl_setting_title_flat_button_style">Styl plochých tlačítek</string>
     <string name="mcl_setting_subtitle_flat_button_style">Povol pro změnu stylu ovládacího tlačítka na ploché.</string>
     <string name="mcl_setting_title_buttonscale">Škálování kontrolních tlačítek</string>
@@ -175,7 +175,7 @@
     <string name="customctrl_addbutton_drawer">Přidat šuplík tlačítek</string>
     <string name="customctrl_addsubbutton">Přidat podtlačítko</string>
     <string name="customctrl_add_subbutton_message">Podtlačítko č.%d bylo přidáno!</string>
-    <string name="customctrl_selectdefault">Vybrat json výchozího ovládání</string>
+    <string name="customctrl_selectdefault">Vybrat .json výchozího ovládání</string>
     <string name="main_install_jar_file">Instalovat .jar</string>
     <string name="main_options">Možnosti</string>
     <string name="main_play">Hrát</string>
