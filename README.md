@@ -1,8 +1,6 @@
 <p align="center">
 
-  <img src="https://img.shields.io/badge/Codename-Tusk-blue>?style=flat">
-
-  <img src="https://img.shields.io/badge/Revision No.-224101-red?style=flat">
+  <img src="https://img.shields.io/badge/Revision No.-220629-red?style=flat">
 
 </p>
 
