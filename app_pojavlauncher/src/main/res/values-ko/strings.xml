@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
-    <string name="app_name">PojavLauncher (Android를 위한 Minecraft: Java Edition 구동기)</string>
+    <string name="app_name">PojavLauncher (Android용 Minecraft 자바 에디션 버전 실행기)</string>
     <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">당신의 기기에서 Minecraft: Java Edition 를 실행하세요!</string>
+    <string name="app_motd">내 디바이스에서 Minecraft 자바 에디션을 실행해 보세요!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">이메일 또는 사용자 이름</string>
+    <string name="login_online_username_hint">이메일 또는 사용자명</string>
     <string name="login_online_password_hint">비밀번호</string>
     <string name="login_online_check_keeplogin">로그인 상태 유지</string>
     <string name="login_online_login_label">로그인</string>
     <string name="login_offline_label">오프라인 계정으로 로그인</string>
-    <string name="login_error_short_username">사용자 이름은 최소 3자 이상이어야 합니다</string>
-    <string name="login_error_exist_username">이미 존재하는 사용자 이름입니다</string>
+    <string name="login_error_short_username">사용자명은 3자 이상이어야 해요</string>
+    <string name="login_error_exist_username">이미 존재하는 사용자명이에요</string>
     <string name="login_microsoft">Microsoft 로그인</string>
     <string name="login_select_account">계정 선택</string>
-    <string name="login_title_no_saved_account">계정을 찾을 수 없습니다 !</string>
+    <string name="login_title_no_saved_account">계정을 찾지 못했어요!</string>
     <string name="login_dialog_no_saved_account">저장된 계정이 없습니다.\n <b>\"로그인 상태 유지\"</b> 옵션은 처음으로 로그인 할 시 계정을 저장합니다.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"오른쪽에서 왼쪽으로 끌어당겨 메뉴를 여세요. ◀\n 버튼을 눌러 수정, 크기 조절, 삭제를 할 수 있습니다."</string>
