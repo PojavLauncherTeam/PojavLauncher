@@ -253,7 +253,7 @@
     <string name="unnamed">未命名</string>
     <string name="profiles_latest_snapshot">最新快照</string>
     <string name="profiles_latest_release">最新版本</string>
-    <string name="profiles_editing">编辑档案</string>
+    <string name="profiles_editing">编辑配置</string>
     <string name="profiles_profile_name">名称</string>
     <string name="profiles_profile_version">版本</string>
     <string name="global_delete">删除</string>
