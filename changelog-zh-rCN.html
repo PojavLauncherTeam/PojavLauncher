@@ -42,9 +42,6 @@ body {font-family: Arial;}
   border-top: none;
 }
 
-/* Javascript functions that the file uses goes here. */
-<script type="text/javascript" src="./res/tabs.js"></script>
-
 </style>
 <!-- Javascript functions that this page uses goes here. -->
 <script type="text/javascript" src="./assets/javascript/tabs.js"></script>
@@ -53,11 +50,11 @@ body {font-family: Arial;}
   
 
 <!-- the PojavLauncher with crafting block header image -->
-<img src="./assets/images/page/oldmainheader.png"><br>
+<img src="./assets/images/header.png"><br>
 
 
 <!-- Background Image: changes every pr-->
-<body background="./assets/images/page/bg/materialbg.png" text="ffffff" link="ffffff" alink="ffffff" vlink="ffffff" marginwidth="20" marginheight="20"></body>
+<body background="./assets/images/bg/materialbg.png" text="ffffff" link="ffffff" alink="ffffff" vlink="ffffff" marginwidth="20" marginheight="20"></body>
 
 
 <!-- Page tabs (DO NOT TOUCH UNLESS PERMITTED TO DO SO) -->
@@ -74,10 +71,10 @@ body {font-family: Arial;}
 <div id="LauncherChangelog" class="tabcontent">
 <center><h1>稳定版本</h1></center>
 <center><h4>已接受启动器支持：</center>
-<center><img src="./assets/images/page/pix/discord.png" width="32" height="32"><img src="./assets/images/page/pix/spacer.png" width="32" height="32"><img src="./assets/images/page/pix/ghub.png" width="32" height="32"></h4></center>
+<center><img src="./assets/images/pix/discord.png" width="32" height="32"><img src="./assets/images/pix/spacer.png" width="32" height="32"><img src="./assets/images/px/ghub.png" width="32" height="32"></h4></center>
 <br>
 <center>仅限 Dahlia。</center>
-  <h2><img src="./assets/images/page/pix/isSupported.png" width="16" height="16"> Dahlia</h2>
+  <h2><img src="./assets/images/pix/isSupported.png" width="16" height="16"> Dahlia</h2>
 	  <b>• 应用程序现在需要高级账户，否则无法从启动器本身安装游戏资源。</b><br>
 	  • 大部分语言已添加<br>
           <b>•VGPU和GL4ES 1.1.5的所有变体都已从启动器中删除。</b><br>
@@ -97,17 +94,17 @@ body {font-family: Arial;}
 <br>
 错误修复：<br>
 • 修复了启动屏幕录像时发生的崩溃事件<br>
-• 修复了启动1.6.4以下版本时发生的NullPointerDisception 崩溃问题<br>
-• 在1.13以上的版本中，滚动时游戏正在崩溃，已修复<br>
+• 修复了启动1.6.4以下版本时发生的 NullPointerDisception 崩溃问题<br>
+• 在1.13以上的版本中，滚动时游戏几近崩溃，已修复<br>
 • 1.13/1.14 不再在第一次触摸时崩溃<br>
 • 修复旧版本在启动时不是全屏的<br>
 • 修复实体上具有“halved light”的旧版本<br>
 • 修复了快捷栏不注册0-9输入的问题<br>
 • 当在 android 10+ 中加载自定义控件时没有更多的空数组错误<br>
-• 现在游戏将在分割屏幕/自由形式 模式中调整大小，虽然没有得到官方支持<br>
+• 现在游戏将在分割屏幕/自由窗口 模式中调整大小，虽然没有得到官方支持<br>
 <br>
 
-<h2><img src="./assets/images/page/pix/isNotSupported.png" width="16" height="16"> Crocus (v3_openjdk)</h2>
+<h2><img src="./assets/images/pix/isNotSupported.png" width="16" height="16"> Crocus (v3_openjdk)</h2>
 	  <b>• 新选项：</b><br>
 	  - 功能齐全的 mod 安装程序<br>
 	  	  <b>— — — — — — —</br>
@@ -152,7 +149,7 @@ body {font-family: Arial;}
 	  - <font color="green">添加 OptiFine 安装器！</font><br>
 	  - 外部鼠标和键盘支持 (功能需要 Android 8.0+)。 无法检测鼠标左侧或右侧事件。<br>
 	  - 启动器界面现在应该正确地放入大屏幕。<br>
-	  - 自由格式模式现在得以运行。<br>
+	  - 自由窗口模式现在得以运行。<br>
 	  - 虚拟鼠标现在正常工作。<br>
 	  - 用 PojavDX（dx 1.16）替换了 multdoj7，以获得更好的转换器 (感谢 <a href="https://github.com/artdeell">artdeell</a> 的建议)。<br>
 	  <b>• 修复：</b><br>
@@ -237,7 +234,7 @@ body {font-family: Arial;}
 <!-- This is the "About" section.-->
 <div id="About" class="tabcontent">
   <br>
-  <center><img src="./assets/images/page/aboutsect.png" width="318" height="51"></center>
+  <center><img src="./assets/images/aboutsect.png" width="318" height="51"></center>
   <br>
   <center><h3>PojavLauncher - 更新日志</h3></center>
   <center>维护者： khanhduytran0(v2)， c4scdev(v3)</center>
@@ -245,7 +242,7 @@ body {font-family: Arial;}
   <br>
   <br>
   <br>
-  <center><img src="./assets/images/page/pix/app.png" width="250" height="275"></center>
+  <center><img src="./assets/images/pix/app.png" width="250" height="275"></center>
   <center><h1>关于 PojavLauncher</h1></center>
   <center>PojavLauncher是一个免费的开源和安卓系统稳定的 Minecraft 启动器，由 <a href="https://github.com/zhuowei/Boardwalk"> Boardwalk</a>构建，一个由 Zhouwei Zhang 设计的 MC 启动器项目</center>
   <br>
@@ -261,8 +258,8 @@ body {font-family: Arial;}
   <br>
   <br>
   <center>特别提及</center>
-  <center>• crystall1nedev</center>
-  <center>• QuestCraft</center>
+  <center>• crystall1nedev, 制作了 <a href="https://github.com/PojavLauncherTeam/PojavLauncher_iOS"> iOS 版本</a></center>
+  <center>• QuestCraft, 将 PojavLauncher 移植到 <a href="https://github.com/QuestCraftPlusPlus/QuestCraft"> QuestVR 平台</a>。</center>
   <br>
   <br>
   <center>通过订阅我们的 Patreon 来支持 PojavLauncher 开发！ 获取优先级更新、优先级支持、权限和访问 Google Play 内部测试！</center>
