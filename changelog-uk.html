@@ -42,9 +42,6 @@ body {font-family: Arial;}
   border-top: none;
 }
 
-/* Javascript functions that the file uses goes here. */
-<script type="text/javascript" src="./res/tabs.js"></script>
-
 </style>
 <!-- Javascript functions that this page uses goes here. -->
 <script type="text/javascript" src="./assets/javascript/tabs.js"></script>
@@ -53,18 +50,18 @@ body {font-family: Arial;}
   
 
 <!-- the PojavLauncher with crafting block header image -->
-<img src="./assets/images/page/oldmainheader.png"><br>
+<img src="./assets/images/header.png"><br>
 
 
 <!-- Background Image: changes every pr-->
-<body background="./assets/images/page/bg/materialbg.png" text="ffffff" link="ffffff" alink="ffffff" vlink="ffffff" marginwidth="20" marginheight="20"></body>
+<body background="./assets/images/bg/materialbg.png" text="ffffff" link="ffffff" alink="ffffff" vlink="ffffff" marginwidth="20" marginheight="20"></body>
 
 
 <!-- Page tabs (DO NOT TOUCH UNLESS PERMITTED TO DO SO) -->
 <div class="tab">
-  <button class="tablinks" onclick="openCity(event, 'LauncherChangelog')">📰 Changelog</button>
+  <button class="tablinks" onclick="openCity(event, 'LauncherChangelog')">📰 Журнал змін</button>
   <button class="tablinks" onclick="openCity(event, 
-    'About')">ℹ️ About</button>
+    'About')">ℹ️ Про</button>
 </div>
 
 
@@ -72,14 +69,14 @@ body {font-family: Arial;}
 
 <!-- LauncherChangelog: Contains PojavLauncher App Changelog -->
 <div id="LauncherChangelog" class="tabcontent">
-<center><h1>Stable Releases</h1></center>
-<center><h4>Launcher Support accepted in:</center>
-<center><img src="./assets/images/page/pix/discord.png" width="32" height="32"><img src="./assets/images/page/pix/spacer.png" width="32" height="32"><img src="./assets/images/page/pix/ghub.png" width="32" height="32"></h4></center>
+<center><h1>Стабільні релізи</h1></center>
+<center><h4>Підтримка Лаунчеру приймається в:</center>
+<center><img src="./assets/images/pix/discord.png" width="32" height="32"><img src="./assets/images/pix/spacer.png" width="32" height="32"><img src="./assets/images/px/ghub.png" width="32" height="32"></h4></center>
 <br>
-<center>Dahlia only.</center>
-  <h2><img src="./assets/images/page/pix/isSupported.png" width="16" height="16"> Dahlia</h2>
-	  <b>• App now requires a premium account, otherwise installation of the game assets are denied from the launcher itself.</b><br>
-	  • Most languages have been added<br>
+<center>Тільки Dahlia.</center>
+  <h2><img src="./assets/images/pix/isSupported.png" width="16" height="16"> Dahlia</h2>
+	  <b>• Додатку тепер потрібен преміум-акаунт, інакше встановлювати ігрові активи буде заборонено в самому лаунчері.</b><br>
+	  • Додано більшість мов<br>
           <b>• VGPU and all variants of GL4ES 1.1.5 have been removed from the launcher.</b><br>
           • GL4ES 1.1.4 was replaced with a custom fork, adding many features and bug fixes<br>
 	  • Controls have been reworked and improved and extended, gamepad latency is frame perfect.<br>
@@ -106,7 +103,7 @@ Bug Fixes:<br>
 • Now the game will resize in splitscreen/freeform mode, although not officially supported<br>
 <br>
 
-<h2><img src="./assets/images/page/pix/isNotSupported.png" width="16" height="16"> Crocus (v3_openjdk)</h2>
+<h2><img src="./assets/images/pix/isNotSupported.png" width="16" height="16"> Crocus (v3_openjdk)</h2>
 	  <b>• New options:</b><br>
 	  - a fully-functional Mod Installer<br>
 	  	  <b>——————</br>
@@ -233,7 +230,7 @@ Bug Fixes:<br>
 <!-- This is the "About" section.-->
 <div id="About" class="tabcontent">
   <br>
-  <center><img src="./assets/images/page/aboutsect.png" width="318" height="51"></center>
+  <center><img src="./assets/images/aboutsect.png" width="318" height="51"></center>
   <br>
   <center><h3>PojavLauncher - Changelog Page</h3></center>
   <center>Maintainers: khanhduytran0(v2), c4scdev(v3)</center>
@@ -241,7 +238,7 @@ Bug Fixes:<br>
   <br>
   <br>
   <br>
-  <center><img src="./assets/images/page/pix/app.png" width="250" height="275"></center>
+  <center><img src="./assets/images/pix/app.png" width="250" height="275"></center>
   <center><h1>About PojavLauncher</h1></center>
   <center>PojavLauncher is a free, open source, and stable Minecraft launcher for Android built from <a href="https://github.com/zhuowei/Boardwalk"> Boardwalk</a>, a MC Launcher project by Zhouwei Zhang</center>
   <br>
@@ -257,8 +254,8 @@ Bug Fixes:<br>
   <br>
   <br>
   <center>Honorable Mentions</center>
-  <center>• crystall1nedev</center>
-  <center>• QuestCraft</center>
+  <center>• crystall1nedev, for the <a href="https://github.com/PojavLauncherTeam/PojavLauncher_iOS"> iOS Version</a></center>
+  <center>• QuestCraft, for porting PojavLauncher into <a href="https://github.com/QuestCraftPlusPlus/QuestCraft"> QuestVR platforms</a>.</center>
   <br>
   <br>
   <center>Support the PojavLauncher development by Subscribing to our Patreon! Get prioritized updates, prioritized support, perks, and access to Google Play Internal Tests!</center>
