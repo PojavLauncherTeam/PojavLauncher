@@ -4,7 +4,8 @@
  */
 package org.lwjgl.openal;
 
-import org.lwjgl.*;
+import org.lwjgl.BufferUtils;
+import org.lwjgl.LWJGLException;
 import org.lwjgl.system.*;
 
 import javax.annotation.*;

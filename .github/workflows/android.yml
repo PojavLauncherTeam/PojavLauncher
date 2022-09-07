@@ -122,13 +122,14 @@ jobs:
           
     - name: Upload onto the Google Play testing track
       if: github.repository_owner == 'PojavLauncherTeam' && github.ref_name == 'v3_openjdk'
-      uses: r0adkll/upload-google-play@v1.0.15
+      uses: r0adkll/upload-google-play@v1.0.17
       with:
         serviceAccountJsonPlainText: ${{ secrets.GPLAY_SERVICE_JSON }}
         packageName: net.kdt.pojavlaunch
         releaseFiles: out/app-gplay.aab
         track: internal
         inAppUpdatePriority: 5
+        changesNotSentForReview: true
         
     - name: Upload APK (without runtime)
       uses: actions/upload-artifact@v2

@@ -46,58 +46,10 @@ public final class MemoryUtil {
 
 	private static final Charset ascii;
 	private static final Charset utf8;
-	private static final Charset utf16;
 
 	static {
 		ascii = Charset.forName("ISO-8859-1");
 		utf8 = Charset.forName("UTF-8");
-		utf16 = Charset.forName("UTF-16LE");
-	}
-
-	private static final Accessor memUtil;
-
-	static {
-		Accessor util;
-		try {
-			// Depends on java.nio.Buffer#address and sun.misc.Unsafe
-			util = loadAccessor("org.lwjgl.MemoryUtilSun$AccessorUnsafe");
-		} catch (Exception e0) {
-			try {
-				// Depends on java.nio.Buffer#address and sun.reflect.FieldAccessor
-				util = loadAccessor("org.lwjgl.MemoryUtilSun$AccessorReflectFast");
-			} catch (Exception e1) {
-				try {
-					// Depends on java.nio.Buffer#address
-					util = new AccessorReflect();
-				} catch (Exception e2) {
-					LWJGLUtil.log("Unsupported JVM detected, this will likely result in low performance. Please inform LWJGL developers.");
-					util = new AccessorJNI();
-				}
-			}
-		}
-
-		LWJGLUtil.log("MemoryUtil Accessor: " + util.getClass().getSimpleName());
-		memUtil = util;
-
-		/*
-		BENCHMARK RESULTS - Oracle Server VM:
-
-		Unsafe: 4ns
-		ReflectFast: 8ns
-		Reflect: 10ns
-		JNI: 82ns
-
-		BENCHMARK RESULTS - Oracle Client VM:
-
-		Unsafe: 5ns
-		ReflectFast: 81ns
-		Reflect: 85ns
-		JNI: 87ns
-
-		On non-Oracle VMs, Unsafe should be the fastest implementation as well. In the absence
-		of Unsafe, performance will depend on how reflection and JNI are implemented. For now
-		we'll go with what we see on the Oracle VM (that is, we'll prefer reflection over JNI).
-		 */
 	}
 
 	private MemoryUtil() {
@@ -110,13 +62,13 @@ public final class MemoryUtil {
 	 *
 	 * @return the memory address
 	 */
-	public static long getAddress0(Buffer buffer) { return memUtil.getAddress(buffer); }
+	public static long getAddress0(Buffer buffer) { return org.lwjgl.system.MemoryUtil.memAddress0(buffer); }
 
-	public static long getAddress0Safe(Buffer buffer) { return buffer == null ? 0L : memUtil.getAddress(buffer); }
+	public static long getAddress0Safe(Buffer buffer) { return buffer == null ? 0L : getAddress0(buffer); }
 
-	public static long getAddress0(PointerBuffer buffer) { return memUtil.getAddress(buffer.getBuffer()); }
+	public static long getAddress0(PointerBuffer buffer) { return getAddress0(buffer.getBuffer()); }
 
-	public static long getAddress0Safe(PointerBuffer buffer) { return buffer == null ? 0L : memUtil.getAddress(buffer.getBuffer()); }
+	public static long getAddress0Safe(PointerBuffer buffer) { return buffer == null ? 0L : getAddress0(buffer.getBuffer()); }
 
 	// --- [ API utilities ] ---
 
@@ -225,7 +177,7 @@ public final class MemoryUtil {
 	 * @return the encoded text
 	 */
 	public static ByteBuffer encodeUTF16(final CharSequence text) {
-		return encode(text, utf16);
+		return org.lwjgl.system.MemoryUtil.memUTF16(text);
 	}
 
 	/**
@@ -295,7 +247,7 @@ public final class MemoryUtil {
 	}
 
 	public static String decodeUTF16(final ByteBuffer buffer) {
-		return decode(buffer, utf16);
+		return org.lwjgl.system.MemoryUtil.memUTF16(buffer);
 	}
 
 	private static String decode(final ByteBuffer buffer, final Charset charset) {
