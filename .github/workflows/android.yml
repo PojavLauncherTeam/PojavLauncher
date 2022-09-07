@@ -54,7 +54,7 @@ jobs:
         cp -R libs/* ../app_pojavlauncher/src/main/jniLibs/
     
     - name: Push gl4es
-      if: github.event != 'pull_request' && steps.gl4es-cache.outputs.cache-hit != 'true'
+      if: github.event != 'pull_request' && steps.gl4es-cache.outputs.cache-hit != 'true' && github.repository_owner == 'PojavLauncherTeam' && github.ref_name == 'v3_openjdk'
       continue-on-error: true
       run: |
         git add .
