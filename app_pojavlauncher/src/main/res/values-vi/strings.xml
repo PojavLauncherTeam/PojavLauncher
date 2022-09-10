@@ -152,7 +152,7 @@
     <string name="customctrl_edit">Đang chỉnh sửa %s</string>
     <string name="customctrl_remove">Xóa %s?</string>
     <string name="customctrl_keyname">Mã phím</string>
-    <string name="customctrl_toggle">Bật/tắt</string>
+    <string name="customctrl_toggle">Chuyển đổi</string>
     <string name="customctrl_size">Kích thước</string>
     <string name="customctrl_size_width">Chiều rộng</string>
     <string name="customctrl_size_height">Độ cao</string>
