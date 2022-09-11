@@ -49,7 +49,7 @@
     <string name="mcl_launch_downloading">Pobieranie %s</string>
     <string name="mcl_launch_downloading_progress">"Pobieranie %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Przygotowywanie do pobrania zasobów</string>
-    <string name="mcl_launch_error_localmode">Minecraft nie może być zainstalowany legalnie, gdy używasz lokalnego konta. Zaloguj się na konto online, aby kontynuować.</string>
+    <string name="mcl_launch_error_localmode">Nie można legalnie zainstalować Minecraft, gdy używane jest konto lokalne. Przełącz na konto online, aby kontynuować.</string>
     <string name="mcl_options">Opcje</string>
     <string name="mcl_option_modinstall">Zainstaluj modyfikację (Forge, LabyMod, Fabric itp.)</string>
     <string name="mcl_option_modinstallwitharg">Zainstaluj modyfikację (z niestandardowymi argumentami)</string>
@@ -216,8 +216,8 @@
     <string name="multirt_config_setdefault">Ustaw jako domyślny</string>
     <string name="multirt_config_setdefault_already">Domyślny</string>
     <string name="multirt_config_removeerror_last">Należy mieć zainstalowane co najmniej jedno środowisko wykonawcze Java</string>
-    <string name="multirt_nocompartiblert">Nie można znaleźć żadnej kompatybilnej wersji Javy. Ta wersja wymaga Javy %d lub nowszej.</string>
-    <string name="multirt_nojava8rt">Nie można znaleźć Javy 8. Aby użyć tej opcji, musisz zainstalować Javę 8.</string>
+    <string name="multirt_nocompartiblert">Nie można znaleźć żadnej zgodnej wersji środowiska Java. Ta wersja wymaga Java %d lub nowszych.</string>
+    <string name="multirt_nojava8rt">Nie można znaleźć Java 8. Aby korzystać z tej opcji, należy zainstalować Java 8.</string>
     <string name="compat_117_message">Minecraft 21w10a+ wymaga OpenGL 3.2. Niestety twoja karta graficzna nie obsługuje OpenGL ES 3.0 lub wyższych, ale możesz zainstalować dodatkowe zasoby, dzięki którym możesz uruchomić te wersje. Naciśnij OK, aby potwierdzić instalacje lub Anuluj, aby ją przerwać.</string>
     <string name="compat_11x_playanyway">Uruchom mimo to</string>
     <string name="pvc_gameDirectory">Katalog gry</string>
