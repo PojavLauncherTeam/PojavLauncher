@@ -10,35 +10,6 @@ import android.view.Choreographer;
 public class CallbackBridge {
     public static Choreographer sChoreographer = Choreographer.getInstance();
     private static boolean isGrabbing = false;
-    private static long lastGrabTime = System.currentTimeMillis();
-    public static final int ANDROID_TYPE_GRAB_STATE = 0;
-    
-    public static final int CLIPBOARD_COPY = 2000;
-    public static final int CLIPBOARD_PASTE = 2001;
-    public static final int CLIPBOARD_OPEN = 2002;
-    
-    public static volatile int windowWidth, windowHeight;
-    public static volatile int physicalWidth, physicalHeight;
-    public static float mouseX, mouseY;
-    public static StringBuilder DEBUG_STRING = new StringBuilder();
-    private static boolean threadAttached;
-    public volatile static boolean holdingAlt, holdingCapslock, holdingCtrl,
-            holdingNumlock, holdingShift;
-
-    public static void putMouseEventWithCoords(int button, float x, float y) {
-        putMouseEventWithCoords(button, true, x, y);
-        sChoreographer.postFrameCallbackDelayed(l -> putMouseEventWithCoords(button, false, x, y), 33);
-    }
-    
-    public static void putMouseEventWithCoords(int button, boolean isDown, float x, float y /* , int dz, long nanos */) {
-        sendCursorPos(x, y);
-        sendMouseKeycode(button, CallbackBridge.getCurrentMods(), isDown);
-    }
-
-
-    public static void sendCursorPos(float x, float y) {
-        if (!threadAttached) {
-            nativeSetUseInputStackQueue(BaseMainActivity.isInputStackCall);
             threadAttached = CallbackBridge.nativeAttachThreadToOther(true, BaseMainActivity.isInputStackCall);
         }
 
