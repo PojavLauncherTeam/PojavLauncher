@@ -51,6 +51,10 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
 
         findViewById(R.id.installmod_mouse_pri).setOnTouchListener(this);
         findViewById(R.id.installmod_mouse_sec).setOnTouchListener(this);
+        findViewById(R.id.installmod_window_moveup).setOnTouchListener(this);
+        findViewById(R.id.installmod_window_movedown).setOnTouchListener(this);
+        findViewById(R.id.installmod_window_moveleft).setOnTouchListener(this);
+        findViewById(R.id.installmod_window_moveright).setOnTouchListener(this);
 
         mMousePointerImageView.post(() -> {
             ViewGroup.LayoutParams params = mMousePointerImageView.getLayoutParams();
@@ -185,6 +189,20 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
                 
             case R.id.installmod_mouse_sec:
                 AWTInputBridge.sendMousePress(AWTInputEvent.BUTTON3_DOWN_MASK, isDown);
+                break;
+        }
+        if(isDown) switch(v.getId()) {
+            case R.id.installmod_window_moveup:
+                AWTInputBridge.nativeMoveWindow(0, -10);
+                break;
+            case R.id.installmod_window_movedown:
+                AWTInputBridge.nativeMoveWindow(0, 10);
+                break;
+            case R.id.installmod_window_moveleft:
+                AWTInputBridge.nativeMoveWindow(-10, 0);
+                break;
+            case R.id.installmod_window_moveright:
+                AWTInputBridge.nativeMoveWindow(10, 0);
                 break;
         }
         return true;
