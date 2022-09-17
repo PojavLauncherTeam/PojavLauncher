@@ -33,6 +33,7 @@ LOCAL_MODULE := pojavexec
 # -DGLES_TEST
 LOCAL_SRC_FILES := \
     egl_bridge.c \
+    gl_bridge.c \
     input_bridge_v3.c \
     jre_launcher.c \
     utils.c

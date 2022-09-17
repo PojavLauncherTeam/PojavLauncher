@@ -143,7 +143,10 @@ public class MinecraftGLSurface extends View {
                 private boolean isCalled = false;
                 @Override
                 public void surfaceCreated(@NonNull SurfaceHolder holder) {
-                    if(isCalled) return;
+                    if(isCalled) {
+                        JREUtils.setupBridgeWindow(surfaceView.getHolder().getSurface());
+                        return;
+                    }
                     isCalled = true;
 
                     realStart(surfaceView.getHolder().getSurface());
@@ -168,7 +171,10 @@ public class MinecraftGLSurface extends View {
                 private boolean isCalled = false;
                 @Override
                 public void onSurfaceTextureAvailable(@NonNull SurfaceTexture surface, int width, int height) {
-                    if(isCalled) return;
+                    if(isCalled) {
+                        JREUtils.setupBridgeWindow(new Surface(surface));
+                        return;
+                    }
                     isCalled = true;
 
                     realStart(new Surface(textureView.getSurfaceTexture()));
