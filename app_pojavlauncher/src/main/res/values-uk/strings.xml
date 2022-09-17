@@ -244,7 +244,7 @@
     <string name="preference_experimental_title">Експериментальні штуки</string>
     <string name="preference_experimental_description">Використовуйте речі з увагою, підтримка недоступна.</string>
     <string name="preference_sustained_performance_title">Увімкнути режим постійної продуктивности</string>
-    <string name="preference_sustained_performance_description">Обмежте терморегуляцію, обмеживши пікову продуктивність</string>
+    <string name="preference_sustained_performance_description">Обмежте тротлінг ЦПУ, обмеживши пікову продуктивність</string>
     <string name="preference_back_title">Повернутися назад</string>
     <string name="gles_hack_title">Скорочення GL4ES</string>
     <string name="gles_hack_none">Не стискати текстури</string>
