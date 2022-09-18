@@ -11,6 +11,7 @@ public class LwjglCharSender implements CharacterSenderStrategy {
     @Override
     public void sendBackspace() {
         CallbackBridge.sendKeycode(LwjglGlfwKeycode.GLFW_KEY_BACKSPACE, '\u0008', 0, 0, true);
+        CallbackBridge.sendKeycode(LwjglGlfwKeycode.GLFW_KEY_BACKSPACE, '\u0008', 0, 0, false);
     }
 
     @Override
