@@ -144,23 +144,31 @@ void gl_make_current(render_bundle_t* bundle) {
         }
         return;
     }
+    bool hasSetMainWindow = false;
+    if(mainWindowBundle == NULL) {
+        mainWindowBundle = bundle;
+        __android_log_print(ANDROID_LOG_INFO, g_LogTag, "Main window bundle is now %p", mainWindowBundle);
+        mainWindowBundle->newNativeSurface = newWindow;
+        hasSetMainWindow = true;
+    }
     __android_log_print(ANDROID_LOG_INFO, g_LogTag, "Making current, surface=%p, nativeSurface=%p, newNativeSurface=%p", bundle->surface, bundle->nativeSurface, bundle->newNativeSurface);
     if(bundle->surface == NULL) { //it likely will be on the first run
         gl_swap_surface(bundle);
     }
     if(eglMakeCurrent_p(g_EglDisplay, bundle->surface, bundle->surface, bundle->context)) {
         currentBundle = bundle;
-    }else __android_log_print(ANDROID_LOG_ERROR, g_LogTag, "eglMakeCurrent returned with error: %04x", eglGetError_p());
+    }else {
+        if(hasSetMainWindow) {
+            mainWindowBundle->newNativeSurface = NULL;
+            gl_swap_surface(mainWindowBundle);
+            mainWindowBundle = NULL;
+        }
+        __android_log_print(ANDROID_LOG_ERROR, g_LogTag, "eglMakeCurrent returned with error: %04x", eglGetError_p());
+    }
 
 }
 
 void gl_swap_buffers() {
-    if(mainWindowBundle == NULL) {
-        mainWindowBundle = currentBundle;
-        __android_log_print(ANDROID_LOG_INFO, g_LogTag, "Main window bundle is now %p", mainWindowBundle);
-        mainWindowBundle->state = STATE_RENDERER_NEW_WINDOW;
-        mainWindowBundle->newNativeSurface = newWindow;
-    }
     if(currentBundle->state == STATE_RENDERER_NEW_WINDOW) {
         eglMakeCurrent_p(g_EglDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT); //detach everything to destroy the old EGLSurface
         gl_swap_surface(currentBundle);
