@@ -21,7 +21,7 @@
 #include <android/rect.h>
 #include <string.h>
 #include "utils.h"
-#include "gl_bridge.h"
+#include "ctxbridges/gl_bridge.h"
 // region OSMESA internals
 
 struct pipe_screen;
@@ -594,38 +594,8 @@ struct PotatoBridge {
 EGLConfig config;
 struct PotatoBridge potatoBridge;
 
-/* OSMesa functions */
-GLboolean (*OSMesaMakeCurrent_p) (OSMesaContext ctx, void *buffer, GLenum type,
-                                  GLsizei width, GLsizei height);
-OSMesaContext (*OSMesaGetCurrentContext_p) (void);
-OSMesaContext  (*OSMesaCreateContext_p) (GLenum format, OSMesaContext sharelist);
-void (*OSMesaDestroyContext_p) (OSMesaContext ctx);
-void (*OSMesaPixelStore_p) ( GLint pname, GLint value );
-GLubyte* (*glGetString_p) (GLenum name);
-void (*glFinish_p) (void);
-void (*glClearColor_p) (GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha);
-void (*glClear_p) (GLbitfield mask);
-void (*glReadPixels_p) (GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, void * data);
-
-/*EGL functions */
-EGLBoolean (*eglMakeCurrent_p) (EGLDisplay dpy, EGLSurface draw, EGLSurface read, EGLContext ctx);
-EGLBoolean (*eglDestroyContext_p) (EGLDisplay dpy, EGLContext ctx);
-EGLBoolean (*eglDestroySurface_p) (EGLDisplay dpy, EGLSurface surface);
-EGLBoolean (*eglTerminate_p) (EGLDisplay dpy);
-EGLBoolean (*eglReleaseThread_p) (void);
-EGLContext (*eglGetCurrentContext_p) (void);
-EGLDisplay (*eglGetDisplay_p) (NativeDisplayType display);
-EGLBoolean (*eglInitialize_p) (EGLDisplay dpy, EGLint *major, EGLint *minor);
-EGLBoolean (*eglChooseConfig_p) (EGLDisplay dpy, const EGLint *attrib_list, EGLConfig *configs, EGLint config_size, EGLint *num_config);
-EGLBoolean (*eglGetConfigAttrib_p) (EGLDisplay dpy, EGLConfig config, EGLint attribute, EGLint *value);
-EGLBoolean (*eglBindAPI_p) (EGLenum api);
-EGLSurface (*eglCreatePbufferSurface_p) (EGLDisplay dpy, EGLConfig config, const EGLint *attrib_list);
-EGLSurface (*eglCreateWindowSurface_p) (EGLDisplay dpy, EGLConfig config, NativeWindowType window, const EGLint *attrib_list);
-EGLBoolean (*eglSwapBuffers_p) (EGLDisplay dpy, EGLSurface draw);
-EGLint (*eglGetError_p) (void);
-EGLContext (*eglCreateContext_p) (EGLDisplay dpy, EGLConfig config, EGLContext share_list, const EGLint *attrib_list);
-EGLBoolean (*eglSwapInterval_p) (EGLDisplay dpy, EGLint interval);
-EGLSurface (*eglGetCurrentSurface_p) (EGLint readdraw);
+#include "ctxbridges/egl_loader.h"
+#include "ctxbridges/osmesa_loader.h"
 int (*vtest_main_p) (int argc, char** argv);
 void (*vtest_swap_buffers_p) (void);
 
@@ -696,7 +666,7 @@ void* pojavGetCurrentContext() {
     }
 }
 
-void dlsym_EGL(void* dl_handle) {
+/*void dlsym_EGL(void* dl_handle) {
     eglBindAPI_p = dlsym(dl_handle,"eglBindAPI");
     eglChooseConfig_p = dlsym(dl_handle, "eglChooseConfig");
     eglCreateContext_p = dlsym(dl_handle, "eglCreateContext");
@@ -728,61 +698,24 @@ void dlsym_OSMesa(void* dl_handle) {
     glClear_p = dlsym(dl_handle,"glClear");
     glFinish_p = dlsym(dl_handle,"glFinish");
     glReadPixels_p = dlsym(dl_handle,"glReadPixels");
-}
+}*/
 
 bool loadSymbols() {
-    char* fileName = calloc(1, 1024);
-    char* fileNameExt = calloc(1, 1024);
     switch (config_renderer) {
+        case RENDERER_VIRGL:
+            dlsym_EGL();
         case RENDERER_VK_ZINK:
-            sprintf(fileName, "%s/libOSMesa_8.so", getenv("POJAV_NATIVEDIR"));
-            sprintf(fileNameExt, "%s/libOSMesa.so.8", getenv("POJAV_NATIVEDIR"));
+            dlsym_OSMesa();
             break;
         case RENDERER_GL4ES:
-            sprintf(fileName, "libEGL.so");
-            char* eglLib = getenv("POJAVEXEC_EGL");
-            if (eglLib) {
-                sprintf(fileNameExt, "%s", eglLib);
-            }
+            //inside glbridge
             break;
     }
-    void* dl_handle = dlopen(fileNameExt,RTLD_NOW|RTLD_GLOBAL|RTLD_NODELETE);
-    if (!dl_handle) {
-        dl_handle = dlopen(fileNameExt,RTLD_NOW|RTLD_GLOBAL);
-    }
-    if (!dl_handle) {
-        dl_handle = dlopen(fileName,RTLD_NOW|RTLD_GLOBAL|RTLD_NODELETE);
-        if (!dl_handle) {
-            dl_handle = dlopen(fileName,RTLD_NOW|RTLD_GLOBAL);
-        }
-        printf("DlLoader: using default %s\n", fileName);
-    } else {
-        printf("DlLoader: using external %s\n", fileNameExt);
-    }
-
-    if(dl_handle == NULL) {
-        printf("DlLoader: unable to load: %s\n",dlerror());
-        return 0;
-    }
-    switch(config_renderer) {
-        case RENDERER_VK_ZINK:
-            dlsym_OSMesa(dl_handle);
-            break;
-        case RENDERER_GL4ES:
-            dlsym_EGL(dl_handle);
-            break;
-    }
-
-    free(fileName);
-    free(fileNameExt);
 }
 
 bool loadSymbolsVirGL() {
-    config_renderer = RENDERER_GL4ES;
-    loadSymbols();
-    config_renderer = RENDERER_VK_ZINK;
-    loadSymbols();
     config_renderer = RENDERER_VIRGL;
+    loadSymbols();
 
     char* fileName = calloc(1, 1024);
 
@@ -999,7 +932,7 @@ void pojavMakeCurrent(void* window) {
     //    return JNI_TRUE;
     //}
     if(config_renderer == RENDERER_GL4ES) {
-        gl_make_current((render_bundle_t*)window);
+        gl_make_current((render_window_t*)window);
     }
     if (config_renderer == RENDERER_VK_ZINK || config_renderer == RENDERER_VIRGL) {
             printf("OSMDroid: making current\n");

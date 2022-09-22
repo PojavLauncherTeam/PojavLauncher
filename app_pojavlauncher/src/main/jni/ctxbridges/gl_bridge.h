@@ -13,11 +13,11 @@ typedef struct {
     EGLSurface surface;
     struct ANativeWindow *nativeSurface;
     struct ANativeWindow *newNativeSurface;
-} render_bundle_t;
+} render_window_t;
 
 bool gl_init();
-render_bundle_t* gl_init_context(render_bundle_t* share);
-void gl_make_current(render_bundle_t* bundle);
+render_window_t* gl_init_context(render_window_t* share);
+void gl_make_current(render_window_t* bundle);
 void gl_swap_buffers();
 void gl_setup_window(struct ANativeWindow* window);
 void gl_swap_interval(int swapInterval);

@@ -7,6 +7,7 @@
 #include <dlfcn.h>
 #include <stdbool.h>
 #include "gl_bridge.h"
+#include "egl_loader.h"
 
 //
 // Created by maks on 17.09.2022.
@@ -16,57 +17,15 @@
 #define STATE_RENDERER_NEW_WINDOW 1
 static char* g_LogTag = "GLBridge";
 
-EGLBoolean (*eglMakeCurrent_p) (EGLDisplay dpy, EGLSurface draw, EGLSurface read, EGLContext ctx);
-EGLBoolean (*eglDestroyContext_p) (EGLDisplay dpy, EGLContext ctx);
-EGLBoolean (*eglDestroySurface_p) (EGLDisplay dpy, EGLSurface surface);
-EGLBoolean (*eglTerminate_p) (EGLDisplay dpy);
-EGLBoolean (*eglReleaseThread_p) (void);
-EGLContext (*eglGetCurrentContext_p) (void);
-EGLDisplay (*eglGetDisplay_p) (NativeDisplayType display);
-EGLBoolean (*eglInitialize_p) (EGLDisplay dpy, EGLint *major, EGLint *minor);
-EGLBoolean (*eglChooseConfig_p) (EGLDisplay dpy, const EGLint *attrib_list, EGLConfig *configs, EGLint config_size, EGLint *num_config);
-EGLBoolean (*eglGetConfigAttrib_p) (EGLDisplay dpy, EGLConfig config, EGLint attribute, EGLint *value);
-EGLBoolean (*eglBindAPI_p) (EGLenum api);
-EGLSurface (*eglCreatePbufferSurface_p) (EGLDisplay dpy, EGLConfig config, const EGLint *attrib_list);
-EGLSurface (*eglCreateWindowSurface_p) (EGLDisplay dpy, EGLConfig config, NativeWindowType window, const EGLint *attrib_list);
-EGLBoolean (*eglSwapBuffers_p) (EGLDisplay dpy, EGLSurface draw);
-EGLint (*eglGetError_p) (void);
-EGLContext (*eglCreateContext_p) (EGLDisplay dpy, EGLConfig config, EGLContext share_list, const EGLint *attrib_list);
-EGLBoolean (*eglSwapInterval_p) (EGLDisplay dpy, EGLint interval);
-EGLSurface (*eglGetCurrentSurface_p) (EGLint readdraw);
+
 
 struct ANativeWindow* newWindow;
-static __thread render_bundle_t* currentBundle;
-static render_bundle_t* mainWindowBundle;
+static __thread render_window_t* currentBundle;
+static render_window_t* mainWindowBundle;
 EGLDisplay g_EglDisplay;
 
-void gl_dlsym_EGL() {
-    void* dl_handle = NULL;
-    if(getenv("POJAVEXEC_EGL")) dl_handle = dlopen(getenv("POJAVEXEC_EGL"), RTLD_LAZY);
-    if(dl_handle == NULL) dl_handle = dlopen("libEGL.so", RTLD_LAZY);
-    if(dl_handle == NULL) abort();
-    eglBindAPI_p = dlsym(dl_handle,"eglBindAPI");
-    eglChooseConfig_p = dlsym(dl_handle, "eglChooseConfig");
-    eglCreateContext_p = dlsym(dl_handle, "eglCreateContext");
-    eglCreatePbufferSurface_p = dlsym(dl_handle, "eglCreatePbufferSurface");
-    eglCreateWindowSurface_p = dlsym(dl_handle, "eglCreateWindowSurface");
-    eglDestroyContext_p = dlsym(dl_handle, "eglDestroyContext");
-    eglDestroySurface_p = dlsym(dl_handle, "eglDestroySurface");
-    eglGetConfigAttrib_p = dlsym(dl_handle, "eglGetConfigAttrib");
-    eglGetCurrentContext_p = dlsym(dl_handle, "eglGetCurrentContext");
-    eglGetDisplay_p = dlsym(dl_handle, "eglGetDisplay");
-    eglGetError_p = dlsym(dl_handle, "eglGetError");
-    eglInitialize_p = dlsym(dl_handle, "eglInitialize");
-    eglMakeCurrent_p = dlsym(dl_handle, "eglMakeCurrent");
-    eglSwapBuffers_p = dlsym(dl_handle, "eglSwapBuffers");
-    eglReleaseThread_p = dlsym(dl_handle, "eglReleaseThread");
-    eglSwapInterval_p = dlsym(dl_handle, "eglSwapInterval");
-    eglTerminate_p = dlsym(dl_handle, "eglTerminate");
-    eglGetCurrentSurface_p = dlsym(dl_handle,"eglGetCurrentSurface");
-}
-
 bool gl_init() {
-    gl_dlsym_EGL();
+    dlsym_EGL();
     g_EglDisplay = eglGetDisplay_p(EGL_DEFAULT_DISPLAY);
     if (g_EglDisplay == EGL_NO_DISPLAY) {
         __android_log_print(ANDROID_LOG_ERROR, g_LogTag, "%s",
@@ -82,8 +41,8 @@ bool gl_init() {
     return true;
 }
 
-render_bundle_t* gl_init_context(render_bundle_t *share) {
-    render_bundle_t* bundle = malloc(sizeof(render_bundle_t));
+render_window_t* gl_init_context(render_window_t *share) {
+    render_window_t* bundle = malloc(sizeof(render_window_t));
     const EGLint egl_attributes[] = { EGL_BLUE_SIZE, 8, EGL_GREEN_SIZE, 8, EGL_RED_SIZE, 8, EGL_ALPHA_SIZE, 8, EGL_DEPTH_SIZE, 24, EGL_SURFACE_TYPE, EGL_WINDOW_BIT|EGL_PBUFFER_BIT, EGL_NONE };
     EGLint num_configs = 0;
     if (eglChooseConfig_p(g_EglDisplay, egl_attributes, NULL, 0, &num_configs) != EGL_TRUE) {
@@ -106,7 +65,7 @@ render_bundle_t* gl_init_context(render_bundle_t *share) {
     int libgl_es = strtol(getenv("LIBGL_ES"), NULL, 0);
     if(libgl_es < 0 || libgl_es > INT16_MAX) libgl_es = 2;
     const EGLint egl_context_attributes[] = { EGL_CONTEXT_CLIENT_VERSION, 3, EGL_NONE };
-    bundle->context = eglCreateContext_p(g_EglDisplay, bundle->context, share == NULL ? EGL_NO_CONTEXT : share->context, egl_context_attributes);
+    bundle->context = eglCreateContext_p(g_EglDisplay, bundle->config, share == NULL ? EGL_NO_CONTEXT : share->context, egl_context_attributes);
 
     if (bundle->context == EGL_NO_CONTEXT) {
         __android_log_print(ANDROID_LOG_ERROR, g_LogTag, "eglCreateContext_p() finished with error: %04x",
@@ -117,7 +76,7 @@ render_bundle_t* gl_init_context(render_bundle_t *share) {
     return bundle;
 }
 
-void gl_swap_surface(render_bundle_t* bundle) {
+void gl_swap_surface(render_window_t* bundle) {
     if(bundle->nativeSurface != NULL) {
         ANativeWindow_release(bundle->nativeSurface);
     }
@@ -137,7 +96,7 @@ void gl_swap_surface(render_bundle_t* bundle) {
     //eglMakeCurrent_p(g_EglDisplay, bundle->surface, bundle->surface, bundle->context);
 }
 
-void gl_make_current(render_bundle_t* bundle) {
+void gl_make_current(render_window_t* bundle) {
     if(bundle == NULL) {
         if(eglMakeCurrent_p(g_EglDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT)) {
             currentBundle = NULL;
