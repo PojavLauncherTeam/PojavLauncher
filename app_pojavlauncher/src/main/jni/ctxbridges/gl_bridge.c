@@ -16,14 +16,11 @@
 
 #define STATE_RENDERER_ALIVE 0
 #define STATE_RENDERER_NEW_WINDOW 1
-static char* g_LogTag = "GLBridge";
-
-
-
+static const char* g_LogTag = "GLBridge";
 struct ANativeWindow* newWindow;
 static __thread render_window_t* currentBundle;
 static render_window_t* mainWindowBundle;
-EGLDisplay g_EglDisplay;
+static EGLDisplay g_EglDisplay;
 
 bool gl_init() {
     dlsym_EGL();
@@ -66,7 +63,7 @@ render_window_t* gl_init_context(render_window_t *share) {
 
     int libgl_es = strtol(getenv("LIBGL_ES"), NULL, 0);
     if(libgl_es < 0 || libgl_es > INT16_MAX) libgl_es = 2;
-    const EGLint egl_context_attributes[] = { EGL_CONTEXT_CLIENT_VERSION, 3, EGL_NONE };
+    const EGLint egl_context_attributes[] = { EGL_CONTEXT_CLIENT_VERSION, libgl_es, EGL_NONE };
     bundle->context = eglCreateContext_p(g_EglDisplay, bundle->config, share == NULL ? EGL_NO_CONTEXT : share->context, egl_context_attributes);
 
     if (bundle->context == EGL_NO_CONTEXT) {
@@ -86,6 +83,7 @@ void gl_swap_surface(render_window_t* bundle) {
     if(bundle->newNativeSurface != NULL) {
         __android_log_print(ANDROID_LOG_ERROR, g_LogTag, "Switching to new native surface");
         bundle->nativeSurface = bundle->newNativeSurface;
+        bundle->newNativeSurface = NULL;
         ANativeWindow_acquire(bundle->nativeSurface);
         ANativeWindow_setBuffersGeometry(bundle->nativeSurface, 0, 0, bundle->format);
         bundle->surface = eglCreateWindowSurface_p(g_EglDisplay, bundle->config, bundle->nativeSurface, NULL);
