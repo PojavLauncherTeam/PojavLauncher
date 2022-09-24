@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <dlfcn.h>
 #include <stdbool.h>
+#include <environ/environ.h>
 #include "gl_bridge.h"
 #include "egl_loader.h"
 
@@ -17,9 +18,7 @@
 #define STATE_RENDERER_ALIVE 0
 #define STATE_RENDERER_NEW_WINDOW 1
 static const char* g_LogTag = "GLBridge";
-struct ANativeWindow* newWindow;
 static __thread render_window_t* currentBundle;
-static render_window_t* mainWindowBundle;
 static EGLDisplay g_EglDisplay;
 
 bool gl_init() {
@@ -104,10 +103,10 @@ void gl_make_current(render_window_t* bundle) {
         return;
     }
     bool hasSetMainWindow = false;
-    if(mainWindowBundle == NULL) {
-        mainWindowBundle = bundle;
-        __android_log_print(ANDROID_LOG_INFO, g_LogTag, "Main window bundle is now %p", mainWindowBundle);
-        mainWindowBundle->newNativeSurface = newWindow;
+    if(pojav_environ->mainWindowBundle == NULL) {
+        pojav_environ->mainWindowBundle = bundle;
+        __android_log_print(ANDROID_LOG_INFO, g_LogTag, "Main window bundle is now %p", pojav_environ->mainWindowBundle);
+        pojav_environ->mainWindowBundle->newNativeSurface = pojav_environ->pojavWindow;
         hasSetMainWindow = true;
     }
     __android_log_print(ANDROID_LOG_INFO, g_LogTag, "Making current, surface=%p, nativeSurface=%p, newNativeSurface=%p", bundle->surface, bundle->nativeSurface, bundle->newNativeSurface);
@@ -118,9 +117,9 @@ void gl_make_current(render_window_t* bundle) {
         currentBundle = bundle;
     }else {
         if(hasSetMainWindow) {
-            mainWindowBundle->newNativeSurface = NULL;
-            gl_swap_surface(mainWindowBundle);
-            mainWindowBundle = NULL;
+            pojav_environ->mainWindowBundle->newNativeSurface = NULL;
+            gl_swap_surface(pojav_environ->mainWindowBundle);
+            pojav_environ->mainWindowBundle = NULL;
         }
         __android_log_print(ANDROID_LOG_ERROR, g_LogTag, "eglMakeCurrent returned with error: %04x", eglGetError_p());
     }
@@ -145,12 +144,11 @@ void gl_swap_buffers() {
 
 }
 
-void gl_setup_window(struct ANativeWindow* window) {
-    if(mainWindowBundle != NULL) {
-        mainWindowBundle->state = STATE_RENDERER_NEW_WINDOW;
-        mainWindowBundle->newNativeSurface = window;
-    }else{
-        newWindow = window;
+void gl_setup_window() {
+    if(pojav_environ->mainWindowBundle != NULL) {
+        __android_log_print(ANDROID_LOG_INFO, g_LogTag, "Main window bundle is not NULL, changing state");
+        pojav_environ->mainWindowBundle->state = STATE_RENDERER_NEW_WINDOW;
+        pojav_environ->mainWindowBundle->newNativeSurface = pojav_environ->pojavWindow;
     }
 }
 

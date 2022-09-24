@@ -20,6 +20,7 @@
 #include <android/native_window_jni.h>
 #include <android/rect.h>
 #include <string.h>
+#include <environ/environ.h>
 #include "utils.h"
 #include "ctxbridges/gl_bridge.h"
 // region OSMESA internals
@@ -580,7 +581,6 @@ typedef struct osmesa_context
 };
 // endregion OSMESA internals
 struct PotatoBridge {
-     /*ANativeWindow */ void* androidWindow;
         
     /* EGLContext */ void* eglContextOld;
     /* EGLContext */ void* eglContext;
@@ -603,7 +603,6 @@ void (*vtest_swap_buffers_p) (void);
 #define RENDERER_VK_ZINK 2
 #define RENDERER_VIRGL 3
 
-int config_renderer;
 void* gbuffer;
 
 void* egl_make_current(void* window);
@@ -617,7 +616,7 @@ void pojav_openGLOnUnload() {
 void pojavTerminate() {
     printf("EGLBridge: Terminating\n");
     
-    switch (config_renderer) {
+    switch (pojav_environ->config_renderer) {
         case RENDERER_GL4ES: {
             eglMakeCurrent_p(potatoBridge.eglDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
             eglDestroySurface_p(potatoBridge.eglDisplay, potatoBridge.eglSurface);
@@ -638,24 +637,20 @@ void pojavTerminate() {
 }
 
 JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_utils_JREUtils_setupBridgeWindow(JNIEnv* env, jclass clazz, jobject surface) {
-    potatoBridge.androidWindow = ANativeWindow_fromSurface(env, surface);
-    if(config_renderer == RENDERER_GL4ES) {
-        gl_setup_window(potatoBridge.androidWindow);
+    pojav_environ->pojavWindow = ANativeWindow_fromSurface(env, surface);
+    if(pojav_environ->config_renderer == RENDERER_GL4ES) {
+        gl_setup_window();
     }
-    char *ptrStr;
-    asprintf(&ptrStr, "%ld", (long) potatoBridge.androidWindow);
-    setenv("POJAV_WINDOW_PTR", ptrStr, 1);
-    free(ptrStr);
 }
 
 
 JNIEXPORT void JNICALL
 Java_net_kdt_pojavlaunch_utils_JREUtils_releaseBridgeWindow(JNIEnv *env, jclass clazz) {
-    ANativeWindow_release(potatoBridge.androidWindow);
+    ANativeWindow_release(pojav_environ->pojavWindow);
 }
 
 void* pojavGetCurrentContext() {
-    switch (config_renderer) {
+    switch (pojav_environ->config_renderer) {
         case RENDERER_GL4ES:
             return (void *)eglGetCurrentContext_p();
         case RENDERER_VIRGL:
@@ -701,7 +696,7 @@ void dlsym_OSMesa(void* dl_handle) {
 }*/
 
 bool loadSymbols() {
-    switch (config_renderer) {
+    switch (pojav_environ->config_renderer) {
         case RENDERER_VIRGL:
             dlsym_EGL();
         case RENDERER_VK_ZINK:
@@ -714,7 +709,7 @@ bool loadSymbols() {
 }
 
 bool loadSymbolsVirGL() {
-    config_renderer = RENDERER_VIRGL;
+    pojav_environ->config_renderer = RENDERER_VIRGL;
     loadSymbols();
 
     char* fileName = calloc(1, 1024);
@@ -732,16 +727,15 @@ bool loadSymbolsVirGL() {
 }
 
 int pojavInit() {
-    potatoBridge.androidWindow = (void *)atol(getenv("POJAV_WINDOW_PTR"));
-    ANativeWindow_acquire(potatoBridge.androidWindow);
-    savedWidth = ANativeWindow_getWidth(potatoBridge.androidWindow);
-    savedHeight = ANativeWindow_getHeight(potatoBridge.androidWindow);
-    ANativeWindow_setBuffersGeometry(potatoBridge.androidWindow,savedWidth,savedHeight,AHARDWAREBUFFER_FORMAT_R8G8B8X8_UNORM);
+    ANativeWindow_acquire(pojav_environ->pojavWindow);
+    savedWidth = ANativeWindow_getWidth(pojav_environ->pojavWindow);
+    savedHeight = ANativeWindow_getHeight(pojav_environ->pojavWindow);
+    ANativeWindow_setBuffersGeometry(pojav_environ->pojavWindow,savedWidth,savedHeight,AHARDWAREBUFFER_FORMAT_R8G8B8X8_UNORM);
 
     // NOTE: Override for now.
     const char *renderer = getenv("POJAV_RENDERER");
     if (strncmp("opengles3_virgl", renderer, 15) == 0) {
-        config_renderer = RENDERER_VIRGL;
+        pojav_environ->config_renderer = RENDERER_VIRGL;
         setenv("GALLIUM_DRIVER","virpipe",1);
         setenv("OSMESA_NO_FLUSH_FRONTBUFFER","1",false);
         if(strcmp(getenv("OSMESA_NO_FLUSH_FRONTBUFFER"),"1") == 0) {
@@ -749,21 +743,21 @@ int pojavInit() {
         }
         loadSymbolsVirGL();
     } else if (strncmp("opengles", renderer, 8) == 0) {
-        config_renderer = RENDERER_GL4ES;
+        pojav_environ->config_renderer = RENDERER_GL4ES;
         //loadSymbols();
     } else if (strcmp(renderer, "vulkan_zink") == 0) {
-        config_renderer = RENDERER_VK_ZINK;
+        pojav_environ->config_renderer = RENDERER_VK_ZINK;
         setenv("GALLIUM_DRIVER","zink",1);
         loadSymbols();
     }
-    if(config_renderer == RENDERER_GL4ES) {
+    if(pojav_environ->config_renderer == RENDERER_GL4ES) {
         if(gl_init()) {
-            gl_setup_window(potatoBridge.androidWindow);
+            gl_setup_window(pojav_environ->pojavWindow);
             return 1;
         }
         return 0;
     }
-    if (config_renderer == RENDERER_VIRGL) {
+    if (pojav_environ->config_renderer == RENDERER_VIRGL) {
         if (potatoBridge.eglDisplay == NULL || potatoBridge.eglDisplay == EGL_NO_DISPLAY) {
             potatoBridge.eglDisplay = eglGetDisplay_p(EGL_DEFAULT_DISPLAY);
             if (potatoBridge.eglDisplay == EGL_NO_DISPLAY) {
@@ -773,7 +767,7 @@ int pojavInit() {
         }
 
         printf("EGLBridge: Initializing\n");
-        // printf("EGLBridge: ANativeWindow pointer = %p\n", potatoBridge.androidWindow);
+        // printf("EGLBridge: ANativeWindow pointer = %p\n", pojav_environ->pojavWindow);
         //(*env)->ThrowNew(env,(*env)->FindClass(env,"java/lang/Exception"),"Trace exception");
         if (!eglInitialize_p(potatoBridge.eglDisplay, NULL, NULL)) {
             printf("EGLBridge: Error eglInitialize() failed: %s\n", eglGetError_p());
@@ -807,11 +801,11 @@ int pojavInit() {
             return 0;
         }
 
-        ANativeWindow_setBuffersGeometry(potatoBridge.androidWindow, 0, 0, vid);
+        ANativeWindow_setBuffersGeometry(pojav_environ->pojavWindow, 0, 0, vid);
 
         eglBindAPI_p(EGL_OPENGL_ES_API);
 
-        potatoBridge.eglSurface = eglCreateWindowSurface_p(potatoBridge.eglDisplay, config, potatoBridge.androidWindow, NULL);
+        potatoBridge.eglSurface = eglCreateWindowSurface_p(potatoBridge.eglDisplay, config, pojav_environ->pojavWindow, NULL);
 
         if (!potatoBridge.eglSurface) {
             printf("EGLBridge: Error eglCreateWindowSurface failed: %p\n", eglGetError_p());
@@ -833,12 +827,12 @@ int pojavInit() {
                potatoBridge.eglDisplay,
                potatoBridge.eglSurface
         );
-        if (config_renderer != RENDERER_VIRGL) {
+        if (pojav_environ->config_renderer != RENDERER_VIRGL) {
             return 1;
         }
     }
 
-    if (config_renderer == RENDERER_VIRGL) {
+    if (pojav_environ->config_renderer == RENDERER_VIRGL) {
         // Init EGL context and vtest server
         const EGLint ctx_attribs[] = {
             EGL_CONTEXT_CLIENT_VERSION, 3,
@@ -852,7 +846,7 @@ int pojavInit() {
         usleep(100*1000); // need enough time for the server to init
     }
 
-    if (config_renderer == RENDERER_VK_ZINK || config_renderer == RENDERER_VIRGL) {
+    if (pojav_environ->config_renderer == RENDERER_VK_ZINK || pojav_environ->config_renderer == RENDERER_VIRGL) {
         if(OSMesaCreateContext_p == NULL) {
             printf("OSMDroid: %s\n",dlerror());
             return 0;
@@ -879,7 +873,7 @@ void pojavSwapBuffers() {
     if (stopSwapBuffers) {
         return;
     }
-    switch (config_renderer) {
+    switch (pojav_environ->config_renderer) {
         case RENDERER_GL4ES: {
             gl_swap_buffers();
         } break;
@@ -897,9 +891,9 @@ void pojavSwapBuffers() {
             }
             OSMesaMakeCurrent_p(ctx,buf.bits,GL_UNSIGNED_BYTE,savedWidth,savedHeight);
             glFinish_p();
-            ANativeWindow_unlockAndPost(potatoBridge.androidWindow);
+            ANativeWindow_unlockAndPost(pojav_environ->pojavWindow);
             //OSMesaMakeCurrent_p(ctx,gbuffer,GL_UNSIGNED_BYTE,savedWidth,savedHeight);
-            ANativeWindow_lock(potatoBridge.androidWindow,&buf,NULL);
+            ANativeWindow_lock(pojav_environ->pojavWindow,&buf,NULL);
         } break;
     }
 }
@@ -918,7 +912,7 @@ void* egl_make_current(void* window) {
         printf("EGLBridge: eglMakeCurrent() succeed!\n");
     }
 
-    if (config_renderer == RENDERER_VIRGL) {
+    if (pojav_environ->config_renderer == RENDERER_VIRGL) {
         printf("VirGL: vtest_main = %p\n", vtest_main_p);
         printf("VirGL: Calling VTest server's main function\n");
         vtest_main_p(3, (const char*[]){"vtest", "--no-loop-or-fork", "--use-gles", NULL, NULL});
@@ -931,17 +925,17 @@ void pojavMakeCurrent(void* window) {
     //    printf("OSMDroid: skipped context reset\n");
     //    return JNI_TRUE;
     //}
-    if(config_renderer == RENDERER_GL4ES) {
+    if(pojav_environ->config_renderer == RENDERER_GL4ES) {
         gl_make_current((render_window_t*)window);
     }
-    if (config_renderer == RENDERER_VK_ZINK || config_renderer == RENDERER_VIRGL) {
+    if (pojav_environ->config_renderer == RENDERER_VK_ZINK || pojav_environ->config_renderer == RENDERER_VIRGL) {
             printf("OSMDroid: making current\n");
             OSMesaMakeCurrent_p((OSMesaContext)window,gbuffer,GL_UNSIGNED_BYTE,savedWidth,savedHeight);
-            if (config_renderer == RENDERER_VK_ZINK) {
-                ANativeWindow_lock(potatoBridge.androidWindow,&buf,NULL);
+            if (pojav_environ->config_renderer == RENDERER_VK_ZINK) {
+                ANativeWindow_lock(pojav_environ->pojavWindow,&buf,NULL);
                 OSMesaPixelStore_p(OSMESA_ROW_LENGTH,buf.stride);
                 stride = buf.stride;
-                //ANativeWindow_unlockAndPost(potatoBridge.androidWindow);
+                //ANativeWindow_unlockAndPost(pojav_environ->pojavWindow);
                 OSMesaPixelStore_p(OSMESA_Y_UP,0);
             }
 
@@ -964,7 +958,7 @@ JNIEXPORT void JNICALL
 Java_org_lwjgl_glfw_GLFW_nativeEglDetachOnCurrentThread(JNIEnv *env, jclass clazz) {
     //Obstruct the context on the current thread
     
-    switch (config_renderer) {
+    switch (pojav_environ->config_renderer) {
         case RENDERER_GL4ES: {
             eglMakeCurrent_p(potatoBridge.eglDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
         } break;
@@ -978,7 +972,7 @@ Java_org_lwjgl_glfw_GLFW_nativeEglDetachOnCurrentThread(JNIEnv *env, jclass claz
 */
 
 void* pojavCreateContext(void* contextSrc) {
-    if (config_renderer == RENDERER_GL4ES) {
+    if (pojav_environ->config_renderer == RENDERER_GL4ES) {
             /*const EGLint ctx_attribs[] = {
                 EGL_CONTEXT_CLIENT_VERSION, atoi(getenv("LIBGL_ES")),
                 EGL_NONE
@@ -991,7 +985,7 @@ void* pojavCreateContext(void* contextSrc) {
             return gl_init_context(contextSrc);
     }
 
-    if (config_renderer == RENDERER_VK_ZINK || config_renderer == RENDERER_VIRGL) {
+    if (pojav_environ->config_renderer == RENDERER_VK_ZINK || pojav_environ->config_renderer == RENDERER_VIRGL) {
             printf("OSMDroid: generating context\n");
             void* ctx = OSMesaCreateContext_p(OSMESA_RGBA,contextSrc);
             printf("OSMDroid: context=%p\n",ctx);
@@ -1020,7 +1014,7 @@ Java_org_lwjgl_opengl_GL_getNativeWidthHeight(JNIEnv *env, jobject thiz) {
     return ret;
 }
 void pojavSwapInterval(int interval) {
-    switch (config_renderer) {
+    switch (pojav_environ->config_renderer) {
         case RENDERER_GL4ES: {
             gl_swap_interval(interval);
         } break;
