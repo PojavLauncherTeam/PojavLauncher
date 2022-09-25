@@ -34,7 +34,6 @@ bool gl_init() {
                             eglGetError_p());
         return false;
     }
-    eglSwapInterval_p(g_EglDisplay, 1);
     return true;
 }
 
