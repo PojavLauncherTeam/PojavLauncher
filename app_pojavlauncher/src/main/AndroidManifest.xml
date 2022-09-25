@@ -13,6 +13,7 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
+        android:process=":launcher"
         android:allowBackup="true"
         android:name=".PojavApplication"
         android:theme="@style/AppTheme"
@@ -88,8 +89,8 @@
             android:name=".authenticator.microsoft.ui.MicrosoftLoginGUIActivity"/>
         <activity
             android:launchMode="standard"
-            android:multiprocess="true"
             android:screenOrientation="sensorLandscape"
+            android:process=":game"
             android:name=".MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|keyboard|navigation"/>
 
