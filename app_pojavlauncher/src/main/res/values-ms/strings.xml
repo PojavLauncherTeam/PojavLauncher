@@ -80,6 +80,7 @@
     <string name="mcl_setting_category_general">Tetapan umum</string>
     <string name="mcl_setting_category_scaling">Tetapan Skala</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
+    <string name="mcl_setting_renderer_gles2_4">holy gl4es: menyokong 1.0–1.19+</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): eksport OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): eksport OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Jenis versi akan ada di dalam senarai versi</string>
@@ -130,6 +131,7 @@
     <string name="import_control_label">Import Kawalan</string>
     <string name="import_control_invalid_file">Fail tidak sah atau rosak</string>
     <string name="import_control_import_button">import kawalan</string>
+    <string name="import_control_done">Pengimportan selesai</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -180,12 +182,22 @@
     <string name="mcl_memory_allocation_subtitle">Mengawal berapa banyak memori yang diberikan kepada Minecraft</string>
     <string name="multirt_runtime_corrupt">Java Runtime Rosak</string>
     <string name="multirt_runtime_incompatiblearch">Seni bina tidak serasi: %s</string>
+    <string name="multirt_config_setdefault">Tetapkan lalai</string>
+    <string name="multirt_config_setdefault_already">Lalai</string>
+    <string name="multirt_config_removeerror_last">Anda mesti mempunyai sekurang-kurangnya satu Java Runtime dipasang</string>
+    <string name="multirt_nocompartiblert">Tidak menemui sebarang Java Runtime yang serasi. Versi ini memerlukan Java %d atau lebih baru.</string>
+    <string name="multirt_nojava8rt">Tidak menemui Java 8. Untuk menggunakan pilihan ini, anda perlu memasang Java 8.</string>
+    <string name="compat_117_message">Minecraft 21w10a+ memerlukan profil teras OpenGL 3.2. Malangnya, cip grafik anda tidak menyokong OpenGL ES 3.0 atau lebih tinggi, tetapi terdapat beberapa sumber tambahan yang boleh anda pasang untuk menjalankan versi ini. Tekan OK untuk mengesahkan pemasangan, dan tekan Batal untuk membatalkan pelancaran.</string>
     <string name="compat_11x_playanyway">Mainkan saja</string>
     <string name="pvc_gameDirectory">Direktori permainan</string>
     <string name="pvc_jvmArgs">Argumen JVM</string>
     <string name="pvc_title">Tetapan per-versi</string>
     <string name="storage_warning_title">Tetapan Storan</string>
     <string name="storage_warning_text"><![CDATA[Oleh kerana penguatkuasaan penyimpanan skop baru Google yang ditambahkan dalam Android 10 dan yang lebih tinggi, kami diminta untuk memindahkan direktori permainan ke folder peribadi aplikasi. <br/>Folder baru untuk fail Pojav adalah <b>Android/data/%s/files/</b> (juga dapat diakses menggunakan penyedia penyimpanan di penjelajah fail anda).<br/>Sekiranya anda perlu menyalin fail permainan anda, sila salin semuanya dari folder asal di <b>games/PojavLauncher</b> secara manual.]]></string>
+    <string name="control_top_offset">Ofset atas: </string>
+    <string name="control_right_offset">ofset kanan: </string>
+    <string name="control_bottom_offset">ofset bawah: </string>
+    <string name="control_left_offset">ofset kiri: </string>
     <string name="preference_misc_title">Tetapan lain-lain</string>
     <string name="gles_hack_none">Jangan mengecilkan tekstur</string>
     <string name="gles_hack_always">Membahagi semua textur dengan 2</string>
