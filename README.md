@@ -11,7 +11,7 @@ Translations can be done at **[Crowdin]()**
 # Screenshots
 # Acknowledgements
 The following page uses 
-- the [GloschUI]() cascading style sheet by CasVeux,
-- the [San Francisco]() font made by Apple,
-- the [Gotham]() font made by Tobias Frere-Jones Gotham
-- and the [Quicksand]() font made by Andrew Paglinawan.
+- the [GloschUI](https://github.com/VeuxDesigns/GloschUI) web interface by CasVeux,
+- the [San Francisco](https://developer.apple.com/fonts/) font made by Apple,
+- the [Gotham](https://www.typography.com/fonts/gotham/overview) font made by Tobias Frere-Jones Gotham
+- and the [Quicksand](https://fonts.google.com/specimen/Quicksand/about) font made by Andrew Paglinawan.
