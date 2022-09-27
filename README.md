@@ -5,7 +5,7 @@
 </p>
 
 # PojavLauncher: gh-pages
-This is the branch for the launcher's news page, and translated `changelog.html` files used in the launcher.
+This is the branch for the launcher's news page, ~~and translated `changelog.html` files used in the launcher~~ Moved to `l10n-gh-pages`.
 # Translations
 Translations can be done at **[Crowdin]()**
 # Screenshots
