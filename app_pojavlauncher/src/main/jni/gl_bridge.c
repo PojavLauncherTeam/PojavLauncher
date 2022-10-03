@@ -84,7 +84,7 @@ bool gl_init() {
 
 render_bundle_t* gl_init_context(render_bundle_t *share) {
     render_bundle_t* bundle = malloc(sizeof(render_bundle_t));
-    const EGLint egl_attributes[] = { EGL_BLUE_SIZE, 8, EGL_GREEN_SIZE, 8, EGL_RED_SIZE, 8, EGL_ALPHA_SIZE, 8, EGL_DEPTH_SIZE, 24, EGL_SURFACE_TYPE, EGL_WINDOW_BIT, EGL_NONE };
+    const EGLint egl_attributes[] = { EGL_BLUE_SIZE, 8, EGL_GREEN_SIZE, 8, EGL_RED_SIZE, 8, EGL_ALPHA_SIZE, 8, EGL_DEPTH_SIZE, 24, EGL_SURFACE_TYPE, EGL_WINDOW_BIT|EGL_PBUFFER_BIT, EGL_NONE };
     EGLint num_configs = 0;
     if (eglChooseConfig_p(g_EglDisplay, egl_attributes, NULL, 0, &num_configs) != EGL_TRUE) {
         __android_log_print(ANDROID_LOG_ERROR, g_LogTag, "eglChooseConfig_p() failed: %04x",
@@ -105,7 +105,7 @@ render_bundle_t* gl_init_context(render_bundle_t *share) {
 
     int libgl_es = strtol(getenv("LIBGL_ES"), NULL, 0);
     if(libgl_es < 0 || libgl_es > INT16_MAX) libgl_es = 2;
-    const EGLint egl_context_attributes[] = { EGL_CONTEXT_CLIENT_VERSION, libgl_es, EGL_NONE };
+    const EGLint egl_context_attributes[] = { EGL_CONTEXT_CLIENT_VERSION, 3, EGL_NONE };
     bundle->context = eglCreateContext_p(g_EglDisplay, bundle->context, share == NULL ? EGL_NO_CONTEXT : share->context, egl_context_attributes);
 
     if (bundle->context == EGL_NO_CONTEXT) {
@@ -117,10 +117,11 @@ render_bundle_t* gl_init_context(render_bundle_t *share) {
     return bundle;
 }
 
-void gl_set_android_surface(render_bundle_t* bundle) {
+void gl_swap_surface(render_bundle_t* bundle) {
     if(bundle->nativeSurface != NULL) {
         ANativeWindow_release(bundle->nativeSurface);
     }
+    if(bundle->surface != NULL) eglDestroySurface_p(g_EglDisplay, bundle->surface);
     if(bundle->newNativeSurface != NULL) {
         __android_log_print(ANDROID_LOG_ERROR, g_LogTag, "Switching to new native surface");
         bundle->nativeSurface = bundle->newNativeSurface;
@@ -128,21 +129,24 @@ void gl_set_android_surface(render_bundle_t* bundle) {
         ANativeWindow_setBuffersGeometry(bundle->nativeSurface, 0, 0, bundle->format);
         bundle->surface = eglCreateWindowSurface_p(g_EglDisplay, bundle->config, bundle->nativeSurface, NULL);
     }else{
-        __android_log_print(ANDROID_LOG_ERROR, g_LogTag, "No new native surface, disabling surfaces");
+        __android_log_print(ANDROID_LOG_ERROR, g_LogTag, "No new native surface, switching to 1x1 pbuffer");
         bundle->nativeSurface = NULL;
-        bundle->surface = NULL;
+        const EGLint pbuffer_attrs[] = {EGL_WIDTH, 1 , EGL_HEIGHT, 1, EGL_NONE};
+        bundle->surface = eglCreatePbufferSurface_p(g_EglDisplay, bundle->config, pbuffer_attrs);
     }
     //eglMakeCurrent_p(g_EglDisplay, bundle->surface, bundle->surface, bundle->context);
 }
 
 void gl_make_current(render_bundle_t* bundle) {
     if(bundle == NULL) {
-        __android_log_print(ANDROID_LOG_FATAL, g_LogTag, "Cannot make a NULL bundle current!");
-        abort();
+        if(eglMakeCurrent_p(g_EglDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT)) {
+            currentBundle = NULL;
+        }
+        return;
     }
     __android_log_print(ANDROID_LOG_INFO, g_LogTag, "Making current, surface=%p, nativeSurface=%p, newNativeSurface=%p", bundle->surface, bundle->nativeSurface, bundle->newNativeSurface);
     if(bundle->surface == NULL) { //it likely will be on the first run
-        if(bundle->nativeSurface || bundle->newNativeSurface) gl_set_android_surface(bundle);
+        gl_swap_surface(bundle);
     }
     if(eglMakeCurrent_p(g_EglDisplay, bundle->surface, bundle->surface, bundle->context)) {
         currentBundle = bundle;
@@ -159,18 +163,17 @@ void gl_swap_buffers() {
     }
     if(currentBundle->state == STATE_RENDERER_NEW_WINDOW) {
         eglMakeCurrent_p(g_EglDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT); //detach everything to destroy the old EGLSurface
-        if(currentBundle->surface != NULL) eglDestroySurface_p(g_EglDisplay, currentBundle->surface);
-        gl_set_android_surface(currentBundle);
+        gl_swap_surface(currentBundle);
         eglMakeCurrent_p(g_EglDisplay, currentBundle->surface, currentBundle->surface, currentBundle->context);
         currentBundle->state = STATE_RENDERER_ALIVE;
     }
     if(currentBundle->surface != NULL)
         if(!eglSwapBuffers_p(g_EglDisplay, currentBundle->surface) && eglGetError_p() == EGL_BAD_SURFACE) {
             eglMakeCurrent_p(g_EglDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
-            eglDestroySurface_p(g_EglDisplay, currentBundle->surface);
-            currentBundle->surface = NULL;
+            currentBundle->newNativeSurface = NULL;
+            gl_swap_surface(currentBundle);
+            eglMakeCurrent_p(g_EglDisplay, currentBundle->surface, currentBundle->surface, currentBundle->context);
             __android_log_print(ANDROID_LOG_INFO, g_LogTag, "The window has died, awaiting window change");
-            eglMakeCurrent_p(g_EglDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, currentBundle->context);
     }
 
 }
