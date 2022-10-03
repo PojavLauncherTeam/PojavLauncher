@@ -2,6 +2,7 @@
 #include <android/log.h>
 #include <android/native_window.h>
 #include <android/native_window_jni.h>
+#include <string.h>
 #include <malloc.h>
 #include <stdlib.h>
 #include <dlfcn.h>
@@ -43,6 +44,7 @@ bool gl_init() {
 
 render_window_t* gl_init_context(render_window_t *share) {
     render_window_t* bundle = malloc(sizeof(render_window_t));
+    memset(bundle, 0, sizeof(render_window_t));
     const EGLint egl_attributes[] = { EGL_BLUE_SIZE, 8, EGL_GREEN_SIZE, 8, EGL_RED_SIZE, 8, EGL_ALPHA_SIZE, 8, EGL_DEPTH_SIZE, 24, EGL_SURFACE_TYPE, EGL_WINDOW_BIT|EGL_PBUFFER_BIT, EGL_NONE };
     EGLint num_configs = 0;
     if (eglChooseConfig_p(g_EglDisplay, egl_attributes, NULL, 0, &num_configs) != EGL_TRUE) {
