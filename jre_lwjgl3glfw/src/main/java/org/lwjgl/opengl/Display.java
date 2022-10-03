@@ -414,7 +414,7 @@ public class Display {
         Display.drawable = drawable;
         context = org.lwjgl.opengl.GLContext.createFromCurrent();
 
-        glfwSwapInterval(0);
+        //glfwSwapInterval(0);
         glfwShowWindow(Window.handle);
 
         Mouse.create();
@@ -762,6 +762,7 @@ public class Display {
 
     public static void setVSyncEnabled(boolean sync) {
         vsyncEnabled = sync;
+        glfwSwapInterval(vsyncEnabled ? 1 : 0);
     }
 
     public static long getWindow() {
@@ -1046,9 +1047,9 @@ public class Display {
      *            - the desired frame rate, in frames per second
      */
     public static void sync(int fps) {
-        if (vsyncEnabled)
+        /*if (vsyncEnabled)
             Sync.sync(60);
-        else Sync.sync(fps);
+        else*/ Sync.sync(fps);
     }
 
     public static Drawable getDrawable() {
