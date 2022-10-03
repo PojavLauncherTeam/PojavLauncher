@@ -394,8 +394,6 @@ public class MinecraftDownloaderTask extends AsyncTask<String, String, Throwable
             try {
                 Intent mainIntent = new Intent(mActivity, MainActivity.class /* MainActivity.class */);
                 // mainIntent.addFlags(Intent.FLAG_ACTIVITY_LAUNCH_ADJACENT);
-                mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
-                mainIntent.addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
                 mActivity.startActivity(mainIntent);
                 mActivity.finish();
                 Log.i("ActCheck","mainActivity finishing="+mActivity.isFinishing()+", destroyed="+mActivity.isDestroyed());
