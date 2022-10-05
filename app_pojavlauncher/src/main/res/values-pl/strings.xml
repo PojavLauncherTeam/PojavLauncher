@@ -53,7 +53,7 @@
     <string name="mcl_options">Opcje</string>
     <string name="mcl_option_modinstall">Zainstaluj modyfikację (Forge, LabyMod, Fabric itp.)</string>
     <string name="mcl_option_modinstallwitharg">Zainstaluj modyfikację (z niestandardowymi argumentami)</string>
-    <string name="mcl_option_customcontrol">Dostosuj sterowanie</string>
+    <string name="mcl_option_customcontrol">Sterowanie niestandardowe</string>
     <string name="mcl_option_settings">Ustawienia</string>
     <string name="mcl_option_about">Informacje</string>
     <string name="mcl_setting_title_uninstalljre">Odinstaluj środowisko wykonawcze Java</string>
