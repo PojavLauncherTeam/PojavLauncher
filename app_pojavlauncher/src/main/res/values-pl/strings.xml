@@ -38,7 +38,7 @@
     -->
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_news">Aktualności</string>
-    <string name="mcl_tab_console">Konsola programistyczna</string>
+    <string name="mcl_tab_console">Konsola</string>
     <string name="mcl_tab_crash">Rejestr awarii</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Połączono</string>
@@ -53,11 +53,11 @@
     <string name="mcl_options">Opcje</string>
     <string name="mcl_option_modinstall">Zainstaluj modyfikację (Forge, LabyMod, Fabric itp.)</string>
     <string name="mcl_option_modinstallwitharg">Zainstaluj modyfikację (z niestandardowymi argumentami)</string>
-    <string name="mcl_option_customcontrol">Dostosuj sterowanie</string>
+    <string name="mcl_option_customcontrol">Sterowanie</string>
     <string name="mcl_option_settings">Ustawienia</string>
     <string name="mcl_option_about">Informacje</string>
     <string name="mcl_setting_title_use_surface_view">Użyj alternatywnego renderowania powierzchni</string>
-    <string name="mcl_setting_subtitle_use_surface_view">Może pomóc z wydajnością w przypadkach problemów z gpu</string>
+    <string name="mcl_setting_subtitle_use_surface_view">Ta opcja może okazać się pomocna w przypadku problemów z wydajnością</string>
     <string name="mcl_setting_title_uninstalljre">Odinstaluj środowisko wykonawcze Java</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Wymagane ponowne uruchomienie launchera] Umożliwi to ponowną instalację środowiska wykonawczego Java</string>
     <string name="mcl_setting_title_freeform">Funkcja \"Obraz w obrazie\"</string>
@@ -224,7 +224,7 @@
     <string name="pvc_jvmArgs">Argumenty JVM</string>
     <string name="pvc_title">Ustawienia dla wersji</string>
     <string name="storage_warning_title">Zmiany w przechowywaniu</string>
-    <string name="storage_warning_text"><![CDATA[Ze względu na nowe wymagania Google skupione na pamięci, dodane w systemie Android 10 i wyższych, musimy przenieść katalog gry do prywatnego folderu aplikacji.<br /> Nowy folder Pojav to <b>Android/data/%s/files/</b> (dostępny również poprzez posiadany eksplorator plików).<br /> Jeśli potrzebujesz kopii swoich plików gry, skopiuj wszystko ręcznie z oryginalnego folderu <b>games/PojavLauncher</b>.]]></string>
+    <string name="storage_warning_text"><![CDATA[Ze względu na nowe wymagania Google dotyczące pamięci dodane w systemie Android 10 i nowszych, konieczne jest przeniesienie katalogu gry do prywatnego folderu aplikacji.<br /> Nowy folder Pojav to <b>Android/data/%s/files/</b> (do którego możesz uzyskać dostęp poprzez przeglądarkę plików).<br /> Jeśli potrzebujesz kopii swoich plików gry, skopiuj wszystko ręcznie z oryginalnego folderu <b>games/PojavLauncher</b>.]]></string>
     <string name="control_offset_title">Przesunięcie sterowania</string>
     <string name="control_top_offset">Górne przesunięcie: </string>
     <string name="control_right_offset">prawe przesunięcie: </string>
@@ -234,24 +234,24 @@
     <string name="preference_control_offset_description">Ustaw niestandardowe przesunięcie na każdą stronę ekranu</string>
     <string name="preference_mouse_start_title">Uruchom z włączoną myszą wirtualną</string>
     <string name="preference_mouse_start_description">Używanie tej opcji naraża Cię na komentarze ze strony Mathiasa-Boulay\'a</string>
-    <string name="preference_video_title">Wideo i renderowanie</string>
+    <string name="preference_video_title">Grafika i silnik renderujący</string>
     <string name="preference_video_description">Rozdzielczość, typ skalowania i renderowanie</string>
-    <string name="preference_control_title">Kontroluj dostosowywanie</string>
+    <string name="preference_control_title">Sterowanie</string>
     <string name="preference_control_description">Typy gestów, wyzwalacze i skalowanie</string>
-    <string name="preference_java_title">Ulepszenia Javy</string>
+    <string name="preference_java_title">Konfiguracja Java</string>
     <string name="preference_java_description">Wersje Java, Argumenty JVM i ilość RAM</string>
     <string name="preference_misc_title">Pozostałe ustawienia</string>
-    <string name="preference_misc_description">Sprawdzanie listy wersji i lib</string>
-    <string name="preference_experimental_title">Eksperymentalna faza</string>
-    <string name="preference_experimental_description">Używaj tam rzeczy z rozwagą, bez wsparcia.</string>
+    <string name="preference_misc_description">Lista wersji oraz sprawdzanie bibliotek</string>
+    <string name="preference_experimental_title">Eksperymentalne</string>
+    <string name="preference_experimental_description">Nie pomożemy Ci, jeśli coś zepsujesz używając tych opcji.</string>
     <string name="preference_sustained_performance_title">Włącz tryb zrównoważonej wydajności</string>
-    <string name="preference_sustained_performance_description">Ogranicz przegrzewanie zmniejszając górny próg wydajności</string>
+    <string name="preference_sustained_performance_description">Zmniejsz nagrzewanie urządzenia ograniczając górny próg wydajności</string>
     <string name="preference_back_title">Powrót do ostatniego ekranu</string>
     <string name="gles_hack_title">Poprawka zmniejszająca GL4ES</string>
     <string name="gles_hack_none">Nie zmniejszaj tekstur</string>
     <string name="gles_hack_always">Dzieli wszystkie tekstury przez 2</string>
     <string name="gles_hack_sometimes">Dzieli wszystkie tekstury przez /2 lub /4</string>
-    <string name="unnamed">Nienazwany</string>
+    <string name="unnamed">Bez nazwy</string>
     <string name="profiles_latest_snapshot">Najnowsza wersja deweloperska</string>
     <string name="profiles_latest_release">Najnowsze wydanie</string>
     <string name="profiles_editing">Edytowanie profilu</string>
