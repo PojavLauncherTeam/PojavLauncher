@@ -83,6 +83,7 @@
     <string name="mcl_setting_category_general">sᵷuᴉʇʇǝs ꞁɐɹǝuǝ⅁</string>
     <string name="mcl_setting_category_scaling">sᵷuᴉʇʇǝs ᵷuᴉꞁɐɔS</string>
     <string name="mcl_setting_category_renderer">ɹǝɹǝpuǝᴚ</string>
+    <string name="mcl_setting_renderer_gles2_4">+6Ɩ˙Ɩ–0˙Ɩ sʇɹoddns :sǝㄣlƃ ʎloɥ</string>
     <string name="mcl_setting_renderer_virgl">Ɛ˙߈ Ꞁ⅁uǝdO sʇɹodxǝ :(Ɛ SƎ Ꞁ⅁uǝdO) ɹǝɹǝpuǝɹꞁᵷɹᴉʌ</string>
     <string name="mcl_setting_renderer_vgpu">0˙Ɛ Ꞁ⅁uǝdO sʇɹodxǝ :(Ɛ SƎ Ꞁ⅁uǝdO) ndᵷʌ</string>
     <string name="mcl_setting_renderer_vulkan_zink">9˙߈ Ꞁ⅁uǝdO sʇɹodxǝ :(uɐʞꞁnɅ) ʞuᴉz</string>
@@ -207,6 +208,7 @@
     <string name="multirt_config_removeerror_last">pǝꞁꞁɐʇsuᴉ ǝɯᴉʇunᴚ ɐʌɐՐ ǝuo ʇsɐǝꞁ ʇɐ ǝʌɐɥ ʇsnɯ no⅄</string>
     <string name="multirt_nocompartiblert">˙ɹǝʍǝu ɹo %d ɐʌɐſ sǝɹᴉnbǝɹ uoᴉsɹǝʌ sᴉɥ┴ ˙ǝɯᴉʇunɹ ɐʌɐſ ǝlqᴉʇɹɐdɯoɔ ʎuɐ puᴉɟ ʇ,uɐƆ</string>
     <string name="multirt_nojava8rt">˙8 ɐʌɐſ llɐʇsuᴉ oʇ pǝǝu noʎ \'uoᴉʇdo sᴉɥʇ ǝsn oʇ ɹǝpɹo uI ˙8 ɐʌɐſ puᴉɟ ʇ,uɐƆ</string>
+    <string name="compat_117_message">˙ɥɔunɐl ʇɹoqɐ oʇ lǝɔuɐƆ ssǝɹd puɐ \'uoᴉʇɐllɐʇsuᴉ ɯɹᴉɟuoɔ oʇ ʞO ssǝɹԀ ˙suoᴉsɹǝʌ ǝsǝɥʇ unɹ oʇ llɐʇsuᴉ uɐɔ noʎ sǝɔɹnosǝɹ lɐuoᴉʇᴉppɐ ǝɯos ǝɹɐ ǝɹǝɥʇ ʇnq \'ɹǝɥƃᴉɥ ɹo 0˙Ɛ SƎ ˥פuǝdO ʇɹoddns ʇou sǝop dᴉɥɔ sɔᴉɥdɐɹƃ ɹnoʎ \'ʎlpɐS ˙ǝlᴉɟoɹd ǝɹoɔ ᄅ˙Ɛ ˥פuǝdO ǝɥʇ sǝɹᴉnbǝɹ +ɐ0ƖʍƖᄅ ʇɟɐɹɔǝuᴉW</string>
     <string name="compat_11x_playanyway">ʎɐʍʎuɐ ʎɐlԀ</string>
     <string name="pvc_gameDirectory">ʎɹoʇɔǝɹᴉp ǝɯɐ⅁</string>
     <string name="pvc_jvmArgs">sʇuǝɯnᵷɹɐ WɅՐ</string>
