@@ -11,8 +11,8 @@
     <string name="login_online_password_hint">Password</string>
     <string name="login_online_check_keeplogin">Keep me logged in</string>
     <string name="login_online_login_label">Login</string>
-    <string name="login_error_invalid_username">Invalid username. Username must be in range of 3-16 characters, should only contains A-Z, a-z, 0-9 and underscore.</string>
-    <string name="login_error_exist_username">This username already exist</string>
+    <string name="login_error_invalid_username">Invalid username. Your username must be 3-16 characters long and should only contain the following characters: A-Z, a-z, 0-9 and underscore.</string>
+    <string name="login_error_exist_username">This username already exists</string>
     <string name="login_microsoft">Microsoft login</string>
     <string name="login_select_account">Select account</string>
     <string name="login_title_no_saved_account">No accounts found!</string>
@@ -32,7 +32,7 @@
     <!-- Toast messages -->
     <string name="toast_permission_denied">The read/write to storage permission is required!</string>
     <string name="toast_optifine_success">Install successful</string>
-    <string name="toast_uninstalljre_done">Uninstalled Java Runtime succesfully</string>
+    <string name="toast_uninstalljre_done">Uninstalled Java Runtime successfully</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
@@ -64,13 +64,13 @@
     <string name="mcl_setting_title_hide_sidebar">Hide Sidebar</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Nostalgic folks preferring the old v1 UI might like this. Gives you a more fullscreen experience.</string>
     <string name="mcl_setting_title_ignore_notch">Ignore notch</string>
-    <string name="mcl_setting_subtitle_ignore_notch">Ignore the notch and extends the screen under it.\nGives you a more immersive experience.</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Ignores the notch and extends the screen under it.\nGives you a more immersive experience.</string>
     <string name="mcl_setting_title_resolution_scaler">Resolution Scaler</string>
     <string name="mcl_setting_subtitle_resolution_scaler">Allows you to decrease the game resolution. 100% is full resolution</string>
     <string name="mcl_setting_title_longpresstrigger">Trigger press duration</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Trigger press duration for destroying blocks and dropping items.</string>
     <string name="mcl_setting_title_backtorightmouse">Treat back button as right mouse</string>
-    <string name="mcl_setting_subtitle_backtorightmouse">Some devices treats external right mouse as back button. If you are using external mouse, you should enable this.</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">Some devices treat the external right mouse as a back button. If you are using an external mouse, you should enable this.</string>
     <string name="mcl_setting_title_flat_button_style">Flat button style</string>
     <string name="mcl_setting_subtitle_flat_button_style">Enable this to change control button style to flat.</string>
     <string name="mcl_setting_title_buttonscale">Control buttons scaling</string>
@@ -85,7 +85,7 @@
     <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): exports OpenGL 4.3</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): exports OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exports OpenGL 4.6</string>
-    <string name="mcl_setting_category_veroption">Version type will be in the version list</string>
+    <string name="mcl_setting_category_veroption">Filter versions</string>
     <string name="mcl_setting_veroption_release">Release</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
@@ -183,7 +183,7 @@
     <string name="main_version">Version:</string>
     <string name="main_nocrash">No crash detected</string>
     <string name="main_nolog">No log.</string>
-    <string name="main_no_news_feed">Failed to fetch the news feed !</string>
+    <string name="main_no_news_feed">Failed to fetch the news feed!</string>
     <string name="auto_ram_subtitle">Enables automatic RAM adjuster</string>
     <string name="auto_ram_title">Auto RAM</string>
     <string name="autoram_info_msg">Memory set to %d MB</string>
@@ -221,6 +221,7 @@
     <string name="pvc_title">Per-version settings</string>
     <string name="storage_warning_title">Storage changes</string>
     <string name="storage_warning_text"><![CDATA[Due to Google\'s new scoped storage enforcements added in Android 10 and higher, we are required to move the game directory into an app-private folder.<br /> The new folder for Pojav files is <b>Android/data/%s/files/</b> (also accessible using a storage provider in your file explorer).<br /> If you need to copy your game files, please copy everything from the original folder at <b>games/PojavLauncher</b> manually.]]></string>
+    <string name="preference_experimental_description">Enable this at your own risk! We won\'t be able to help you if you experience issues.</string>
     <string name="profiles_profile_name">Name</string>
     <string name="pedit_renderer">Renderer</string>
 </resources>
