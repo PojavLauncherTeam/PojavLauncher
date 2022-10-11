@@ -7,7 +7,7 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">Eymail orr yusername</string>
+    <string name="login_online_username_hint">Email or passport</string>
     <string name="login_online_password_hint">Secret Key</string>
     <string name="login_online_check_keeplogin">Be keepin\' ye on board fer next time</string>
     <string name="login_online_login_label">Get Aboard</string>
@@ -51,10 +51,12 @@
     <string name="mcl_option_about">\'Bout me</string>
     <string name="mcl_setting_title_uninstalljre">Unsettle Java Runtime</string>
     <string name="mcl_setting_title_ignore_notch">Don\'t see notch</string>
-    <string name="mcl_setting_subtitle_ignore_notch">Don\'t see notch and make big the sail under it.\nGives you more treasure.</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Don\'t see notch and extend th\' screen under it.\nGives you more treasure.</string>
     <string name="mcl_setting_title_resolution_scaler">Map size scaler</string>
     <string name="mcl_setting_veroption_release">Release</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
+    <string name="mcl_setting_veroption_oldalpha">Ol\'-alpha</string>
+    <string name="mcl_setting_veroption_oldbeta">Ol\'-beta</string>
     <!-- Global strings -->
     <string name="global_warinng">Beware</string>
     <string name="global_name">Title on yer forhead</string>
@@ -68,7 +70,7 @@
     <string name="control_keyboard">Keyboard</string>
     <string name="control_chat">Chat</string>
     <!-- MainActivity: Menu advanced controls -->
-    <string name="control_viewout">Yer\' Diary</string>
+    <string name="control_viewout">Crow\'s Nest</string>
     <!-- ImportControlActivity Strings -->
     <!--
     <string name="control_more3"></string>
@@ -85,6 +87,7 @@
     <string name="main_version">Dock:</string>
     <string name="main_nocrash">No sunk ship found</string>
     <string name="main_nolog">No Diary.</string>
+    <string name="auto_ram_title">RAM by magic</string>
     <string name="compat_11x_playanyway">Sail nevertheless</string>
     <string name="profiles_latest_snapshot">Latest prototype</string>
     <string name="profiles_latest_release">Latest ship</string>
