@@ -26,7 +26,7 @@
 - [Current status](#current-status) 
 - [License](#license) 
 - [Contributing](#contributing) 
-- [Credits; third party components and their licenses](#credits-third-party-components-and-their-licenses-if-available)
+- [Credits / third party components and their licenses](#credits--third-party-components-and-their-licenses-if-available)
 
 ## Introduction 
 * PojavLauncher is a Minecraft: Java Edition launcher for Android and iOS based on [Boardwalk](https://github.com/zhuowei/Boardwalk). 
@@ -120,7 +120,7 @@ Contributions are welcome! We welcome any type of contribution, not only code. F
 
 Any code change to this repository (or iOS) should be submitted as a pull request. The description should explain what the code does and give steps to execute it.
 
-## Credits; third party components and their licenses (if available)
+## Credits / third party components and their licenses (if available)
 - [Boardwalk](https://github.com/zhuowei/Boardwalk) (JVM Launcher): Unknown License/[Apache License 2.0](https://github.com/zhuowei/Boardwalk/blob/master/LICENSE) or GNU GPLv2.
 - Android Support Libraries: [Apache License 2.0](https://android.googlesource.com/platform/prebuilts/maven_repo/android/+/master/NOTICE.txt).
 - [GL4ES](https://github.com/PojavLauncherTeam/gl4es): [MIT License](https://github.com/ptitSeb/gl4es/blob/master/LICENSE).<br>
