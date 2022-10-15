@@ -581,7 +581,7 @@ typedef struct osmesa_context
 };
 // endregion OSMESA internals
 struct PotatoBridge {
-        
+
     /* EGLContext */ void* eglContextOld;
     /* EGLContext */ void* eglContext;
     /* EGLDisplay */ void* eglDisplay;
@@ -806,6 +806,19 @@ int pojavInit() {
         eglBindAPI_p(EGL_OPENGL_ES_API);
 
         potatoBridge.eglSurface = eglCreateWindowSurface_p(potatoBridge.eglDisplay, config, pojav_environ->pojavWindow, NULL);
+        ANativeWindow_setBuffersGeometry(potatoBridge.androidWindow, 0, 0, vid);
+        {
+            EGLBoolean bindResult;
+            if (strncmp(renderer, "opengles3_desktopgl", 19) == 0) {
+                printf("EGLBridge: Binding to desktop OpenGL\n");
+                bindResult = eglBindAPI_p(EGL_OPENGL_API);
+            } else {
+                printf("EGLBridge: Binding to OpenGL ES\n");
+                bindResult = eglBindAPI_p(EGL_OPENGL_ES_API);
+            }
+            if(!bindResult) printf("EGLBridge: bind failed: %p\n", eglGetError_p());
+        }
+        potatoBridge.eglSurface = eglCreateWindowSurface_p(potatoBridge.eglDisplay, config, potatoBridge.androidWindow, NULL);
 
         if (!potatoBridge.eglSurface) {
             printf("EGLBridge: Error eglCreateWindowSurface failed: %p\n", eglGetError_p());
