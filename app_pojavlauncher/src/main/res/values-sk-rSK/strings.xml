@@ -42,18 +42,22 @@
     <string name="mcl_tab_crash">Záznam pádu</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Pripojené</string>
+    <string name="mcl_account_local">Miestny</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Pripravené na spustenie Minecraftu %s</string>
     <string name="mcl_launch_cleancache">Čistenie súborov medzipamäte</string>
     <string name="mcl_launch_downloading">Sťahuje sa %s</string>
     <string name="mcl_launch_downloading_progress">"Sťahujem %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Príprava na sťiahnutie prostriedkov</string>
+    <string name="mcl_launch_error_localmode">Minecraft nemôže byť legálne nainštalovaný keď je prihlásený miestny účet. Pre pokračovanie prejdite na online účet.</string>
     <string name="mcl_options">Možnosti</string>
     <string name="mcl_option_modinstall">Spusťte inštalátor módov (Forge, LabyMod, Fabric, atď...)</string>
     <string name="mcl_option_modinstallwitharg">Spustiť inštalátor módov (s vlastnými argumentmi)</string>
     <string name="mcl_option_customcontrol">Vlastné ovládacie prvky</string>
     <string name="mcl_option_settings">Nastavenie</string>
     <string name="mcl_option_about">O aplikácii</string>
+    <string name="mcl_setting_title_use_surface_view">Použiť alternatívne vykresľovanie povrchu</string>
+    <string name="mcl_setting_subtitle_use_surface_view">Môže pomôcť s výkonom v situáciách viazaných na Grafickom Procesore (GPU)</string>
     <string name="mcl_setting_title_uninstalljre">Odinštalovať Java Runtime</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Restart launcher vyžadovaný] Toto vám umožní preinštalovať Java Runtime</string>
     <string name="mcl_setting_title_freeform">Spustiť Minecraft v režime Voľného okna</string>
@@ -79,6 +83,8 @@
     <string name="mcl_setting_category_general">Všeobecné nastavenia</string>
     <string name="mcl_setting_category_scaling">Nastavenie mierky</string>
     <string name="mcl_setting_category_renderer">Vykresľovač</string>
+    <string name="mcl_setting_renderer_gles2_4">svätý gl4es: podporuje 1.0 - 1.19+</string>
+    <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): exportuje OpenGL 4.3</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): exportuje OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exportuje OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Aké typy verzií budú v zozname verzií</string>
@@ -101,6 +107,7 @@
     <string name="global_error_field_empty">Toto pole nesmie byť prázdne</string>
     <string name="global_waiting">Čakajte</string>
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">Aplikácia/Hra sa ukončila s kódom %d, skontroluj latestlog.txt pre viac podrobností.</string>
     <string name="mcn_exit_call">Skončiť</string>
     <string name="mcn_exit_confirm">Ste si istí, že chcete vynútiť ukončenie?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 nebol nainštalovaný!</string>
@@ -189,6 +196,7 @@
     <string name="mcl_memory_allocation">Pridelenie pamäte</string>
     <string name="mcl_memory_allocation_subtitle">Určite, koľko pamäti bude mať Minecraft</string>
     <string name="multirt_runtime_corrupt">Poškodená Java Runtime</string>
+    <string name="multirt_runtime_incompatiblearch">Nekompatibilná architektúra: %s</string>
     <string name="multirt_config_title">Java VMy</string>
     <string name="multirt_config_add">Pridať nový</string>
     <string name="multirt_config_add_subtitle">Naimportovať novú Java VM</string>
@@ -198,6 +206,9 @@
     <string name="multirt_config_setdefault">Nastaviť predvolené</string>
     <string name="multirt_config_setdefault_already">Predvolené</string>
     <string name="multirt_config_removeerror_last">Musíte mať nainštalovanú aspoň jednu Java Runtime</string>
+    <string name="multirt_nocompartiblert">Nebolo možné nájsť kompatibilnú verziu Java Runtime. Táto verzia vyžaduje Javu %d alebo novšiu.</string>
+    <string name="multirt_nojava8rt">Nebolo možné nájsť Javu 8. Ak chceš používať túto možnosť, musíš nainštalovať Javu 8.</string>
+    <string name="compat_117_message">Minecraft 21w10a+ vyžaduje jadrový profil OpenGL 3.2. Bohužiaľ, tvoj grafický čip nepodporuje OpenGL ES 3.0 alebo novší, ale existujú ďalšie možnosti ktoré môžeš použiť pre spustenie týchto verzií. Stlačením tlačidla OK potvrdíš spúšťanie a stlačením tlačidla Zrušiť ukončíš spúšťanie.</string>
     <string name="compat_11x_playanyway">Napriek tomu hrať</string>
     <string name="pvc_gameDirectory">Zložka hry</string>
     <string name="pvc_jvmArgs">JVM argumenty</string>
@@ -211,6 +222,7 @@
     <string name="control_left_offset">ľavé odsadenie: </string>
     <string name="preference_control_offset_title">Strana odsadenie ovládania</string>
     <string name="preference_control_offset_description">Nastaviť vlastné odsadenie pre každú stranu obrazovky</string>
+    <string name="preference_mouse_start_title">Spustiť so zapnutou virtuálnou myškou</string>
     <string name="preference_video_title">Video a vykresľovač</string>
     <string name="preference_video_description">Rozlíšenie, typ škálovania, a vykresľovač</string>
     <string name="preference_control_title">Prispôsobenie ovládania</string>
