@@ -41,22 +41,41 @@ render_window_t* gl_init_context(render_window_t *share) {
     render_window_t* bundle = malloc(sizeof(render_window_t));
     memset(bundle, 0, sizeof(render_window_t));
     const EGLint egl_attributes[] = { EGL_BLUE_SIZE, 8, EGL_GREEN_SIZE, 8, EGL_RED_SIZE, 8, EGL_ALPHA_SIZE, 8, EGL_DEPTH_SIZE, 24, EGL_SURFACE_TYPE, EGL_WINDOW_BIT|EGL_PBUFFER_BIT, EGL_RENDERABLE_TYPE, EGL_OPENGL_BIT, EGL_NONE };
+    const EGLint egl_attributes2[] = { EGL_BLUE_SIZE, 8, EGL_GREEN_SIZE, 8, EGL_RED_SIZE, 8, EGL_ALPHA_SIZE, 8, EGL_DEPTH_SIZE, 24, EGL_SURFACE_TYPE, EGL_WINDOW_BIT|EGL_PBUFFER_BIT, EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT, EGL_NONE };
     EGLint num_configs = 0;
-    if (eglChooseConfig_p(g_EglDisplay, egl_attributes, NULL, 0, &num_configs) != EGL_TRUE) {
-        __android_log_print(ANDROID_LOG_ERROR, g_LogTag, "eglChooseConfig_p() failed: %04x",
-                            eglGetError_p());
-        free(bundle);
-        return NULL;
-    }
-    if (num_configs == 0) {
-        __android_log_print(ANDROID_LOG_ERROR, g_LogTag, "%s",
-                            "eglChooseConfig_p() found no matching config");
-        free(bundle);
-        return NULL;
-    }
+    if(strncmp(getenv("POJAV_RENDERER"), "opengles3_desktopgl", 19) == 0) {
+        if (eglChooseConfig_p(g_EglDisplay, egl_attributes2, NULL, 0, &num_configs) != EGL_TRUE) {
+            __android_log_print(ANDROID_LOG_ERROR, g_LogTag, "eglChooseConfig_p() failed: %04x",
+                                eglGetError_p());
+            free(bundle);
+            return NULL;
+        }
+        if (num_configs == 0) {
+            __android_log_print(ANDROID_LOG_ERROR, g_LogTag, "%s",
+                                "eglChooseConfig_p() found no matching config");
+            free(bundle);
+            return NULL;
+        }
 
-    // Get the first matching config
-    eglChooseConfig_p(g_EglDisplay, egl_attributes, &bundle->config, 1, &num_configs);
+        // Get the first matching config
+        eglChooseConfig_p(g_EglDisplay, egl_attributes2, &bundle->config, 1, &num_configs);
+    } else {
+        if (eglChooseConfig_p(g_EglDisplay, egl_attributes, NULL, 0, &num_configs) != EGL_TRUE) {
+            __android_log_print(ANDROID_LOG_ERROR, g_LogTag, "eglChooseConfig_p() failed: %04x",
+                                eglGetError_p());
+            free(bundle);
+            return NULL;
+        }
+        if (num_configs == 0) {
+            __android_log_print(ANDROID_LOG_ERROR, g_LogTag, "%s",
+                                "eglChooseConfig_p() found no matching config");
+            free(bundle);
+            return NULL;
+        }
+
+        // Get the first matching config
+        eglChooseConfig_p(g_EglDisplay, egl_attributes, &bundle->config, 1, &num_configs);
+    }
     eglGetConfigAttrib_p(g_EglDisplay, bundle->config, EGL_NATIVE_VISUAL_ID, &bundle->format);
 
     {
