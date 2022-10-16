@@ -4,7 +4,7 @@
         <item name="2">@string/mcl_setting_renderer_gles2_4</item>
         <!-- <item name="4">@string/mcl_setting_renderer_vulkan_zink</item> -->
         <item name="5">@string/mcl_setting_renderer_virgl</item>
-        <item name="6">TINYWRAPPER ANGLE VULKAN</item>
+        <item name="6">@string/mcl_setting_renderer_angle</item>
     </string-array>
 
     <string-array name="menu_customcontrol">
