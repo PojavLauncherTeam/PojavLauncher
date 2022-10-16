@@ -222,7 +222,9 @@ public class JREUtils {
         envMap.put("REGAL_GL_VERSION", "4.5");
         if(LOCAL_RENDERER != null) {
             envMap.put("POJAV_RENDERER", LOCAL_RENDERER);
+            envMap.put("LIBGL_ES", Character.toString(LOCAL_RENDERER.charAt(8)));
         }
+        if(LOCAL_RENDERER.equals("opengles3_desktopgl_angle_vulkan")) envMap.put("POJAVEXEC_EGL","libEGL_angle.so"); // use ANGLE egl
         envMap.put("AWTSTUB_WIDTH", Integer.toString(CallbackBridge.windowWidth > 0 ? CallbackBridge.windowWidth : CallbackBridge.physicalWidth));
         envMap.put("AWTSTUB_HEIGHT", Integer.toString(CallbackBridge.windowHeight > 0 ? CallbackBridge.windowHeight : CallbackBridge.physicalHeight));
         

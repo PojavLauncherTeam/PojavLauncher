@@ -95,7 +95,7 @@ void glShaderSource(GLuint shader, GLsizei count, const GLchar * const *string, 
         for (int i=0; i<count; i++)
             strcat(source, string[i]);
     }
-    
+
     char *source2 = strchr(source, '#');
     if (!source2) {
         source2 = source;

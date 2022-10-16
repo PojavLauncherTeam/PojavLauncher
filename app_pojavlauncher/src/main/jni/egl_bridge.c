@@ -774,14 +774,14 @@ int pojavInit() {
             return 0;
         }
 
-        static const EGLint attribs[] = {
+        static const EGLint attribs[13] = {
                 EGL_RED_SIZE, 8,
                 EGL_GREEN_SIZE, 8,
                 EGL_BLUE_SIZE, 8,
                 EGL_ALPHA_SIZE, 8,
                 // Minecraft required on initial 24
                 EGL_DEPTH_SIZE, 24,
-                EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
+                EGL_RENDERABLE_TYPE, EGL_OPENGL_BIT,
                 EGL_NONE
         };
 
@@ -803,22 +803,8 @@ int pojavInit() {
 
         ANativeWindow_setBuffersGeometry(pojav_environ->pojavWindow, 0, 0, vid);
 
-        eglBindAPI_p(EGL_OPENGL_ES_API);
-
         potatoBridge.eglSurface = eglCreateWindowSurface_p(potatoBridge.eglDisplay, config, pojav_environ->pojavWindow, NULL);
-        ANativeWindow_setBuffersGeometry(potatoBridge.androidWindow, 0, 0, vid);
-        {
-            EGLBoolean bindResult;
-            if (strncmp(renderer, "opengles3_desktopgl", 19) == 0) {
-                printf("EGLBridge: Binding to desktop OpenGL\n");
-                bindResult = eglBindAPI_p(EGL_OPENGL_API);
-            } else {
-                printf("EGLBridge: Binding to OpenGL ES\n");
-                bindResult = eglBindAPI_p(EGL_OPENGL_ES_API);
-            }
-            if(!bindResult) printf("EGLBridge: bind failed: %p\n", eglGetError_p());
-        }
-        potatoBridge.eglSurface = eglCreateWindowSurface_p(potatoBridge.eglDisplay, config, potatoBridge.androidWindow, NULL);
+        eglBindAPI_p(EGL_OPENGL_ES_API);
 
         if (!potatoBridge.eglSurface) {
             printf("EGLBridge: Error eglCreateWindowSurface failed: %p\n", eglGetError_p());
