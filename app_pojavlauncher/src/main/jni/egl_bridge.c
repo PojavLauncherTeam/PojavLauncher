@@ -30,20 +30,20 @@ struct pipe_screen;
 //only get what we need to access/modify
 struct st_manager
 {
-   struct pipe_screen *screen;
+    struct pipe_screen *screen;
 };
 struct st_context_iface
 {
-   void *st_context_private;
+    void *st_context_private;
 };
 struct zink_device_info
 {
-   bool have_EXT_conditional_rendering;
-   bool have_EXT_transform_feedback;
+    bool have_EXT_conditional_rendering;
+    bool have_EXT_transform_feedback;
 };
 struct zink_screen
 {
-   struct zink_device_info info;
+    struct zink_device_info info;
 };
 
 enum st_attachment_type {
@@ -615,7 +615,7 @@ void pojav_openGLOnUnload() {
 
 void pojavTerminate() {
     printf("EGLBridge: Terminating\n");
-    
+
     switch (pojav_environ->config_renderer) {
         case RENDERER_GL4ES: {
             eglMakeCurrent_p(potatoBridge.eglDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
@@ -623,13 +623,13 @@ void pojavTerminate() {
             eglDestroyContext_p(potatoBridge.eglDisplay, potatoBridge.eglContext);
             eglTerminate_p(potatoBridge.eglDisplay);
             eglReleaseThread_p();
-    
+
             potatoBridge.eglContext = EGL_NO_CONTEXT;
             potatoBridge.eglDisplay = EGL_NO_DISPLAY;
             potatoBridge.eglSurface = EGL_NO_SURFACE;
         } break;
-        
-        //case RENDERER_VIRGL:
+
+            //case RENDERER_VIRGL:
         case RENDERER_VK_ZINK: {
             // Nothing to do here
         } break;
@@ -637,16 +637,16 @@ void pojavTerminate() {
 }
 
 JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_utils_JREUtils_setupBridgeWindow(JNIEnv* env, jclass clazz, jobject surface) {
-    pojav_environ->pojavWindow = ANativeWindow_fromSurface(env, surface);
-    if(pojav_environ->config_renderer == RENDERER_GL4ES) {
-        gl_setup_window();
-    }
+pojav_environ->pojavWindow = ANativeWindow_fromSurface(env, surface);
+if(pojav_environ->config_renderer == RENDERER_GL4ES) {
+gl_setup_window();
+}
 }
 
 
 JNIEXPORT void JNICALL
 Java_net_kdt_pojavlaunch_utils_JREUtils_releaseBridgeWindow(JNIEnv *env, jclass clazz) {
-    ANativeWindow_release(pojav_environ->pojavWindow);
+ANativeWindow_release(pojav_environ->pojavWindow);
 }
 
 void* pojavGetCurrentContext() {
@@ -774,14 +774,14 @@ int pojavInit() {
             return 0;
         }
 
-        static const EGLint attribs[13] = {
+        static const EGLint attribs[] = {
                 EGL_RED_SIZE, 8,
                 EGL_GREEN_SIZE, 8,
                 EGL_BLUE_SIZE, 8,
                 EGL_ALPHA_SIZE, 8,
                 // Minecraft required on initial 24
                 EGL_DEPTH_SIZE, 24,
-                EGL_RENDERABLE_TYPE, EGL_OPENGL_BIT,
+                EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
                 EGL_NONE
         };
 
@@ -803,8 +803,9 @@ int pojavInit() {
 
         ANativeWindow_setBuffersGeometry(pojav_environ->pojavWindow, 0, 0, vid);
 
-        potatoBridge.eglSurface = eglCreateWindowSurface_p(potatoBridge.eglDisplay, config, pojav_environ->pojavWindow, NULL);
         eglBindAPI_p(EGL_OPENGL_ES_API);
+
+        potatoBridge.eglSurface = eglCreateWindowSurface_p(potatoBridge.eglDisplay, config, pojav_environ->pojavWindow, NULL);
 
         if (!potatoBridge.eglSurface) {
             printf("EGLBridge: Error eglCreateWindowSurface failed: %p\n", eglGetError_p());
@@ -834,8 +835,8 @@ int pojavInit() {
     if (pojav_environ->config_renderer == RENDERER_VIRGL) {
         // Init EGL context and vtest server
         const EGLint ctx_attribs[] = {
-            EGL_CONTEXT_CLIENT_VERSION, 3,
-            EGL_NONE
+                EGL_CONTEXT_CLIENT_VERSION, 3,
+                EGL_NONE
         };
         EGLContext* ctx = eglCreateContext_p(potatoBridge.eglDisplay, config, NULL, ctx_attribs);
         printf("VirGL: created EGL context %p\n", ctx);
@@ -850,9 +851,9 @@ int pojavInit() {
             printf("OSMDroid: %s\n",dlerror());
             return 0;
         }
-        
+
         printf("OSMDroid: width=%i;height=%i, reserving %i bytes for frame buffer\n", savedWidth, savedHeight,
-             savedWidth * 4 * savedHeight);
+               savedWidth * 4 * savedHeight);
         gbuffer = malloc(savedWidth * 4 * savedHeight+1);
         if (gbuffer) {
             printf("OSMDroid: created frame buffer\n");
@@ -862,7 +863,7 @@ int pojavInit() {
             return 0;
         }
     }
-    
+
     return 0;
 }
 ANativeWindow_Buffer buf;
@@ -876,7 +877,7 @@ void pojavSwapBuffers() {
         case RENDERER_GL4ES: {
             gl_swap_buffers();
         } break;
-        
+
         case RENDERER_VIRGL: {
             glFinish_p();
             vtest_swap_buffers_p();
@@ -899,10 +900,10 @@ void pojavSwapBuffers() {
 
 void* egl_make_current(void* window) {
     EGLBoolean success = eglMakeCurrent_p(
-        potatoBridge.eglDisplay,
-        window==0 ? (EGLSurface *) 0 : potatoBridge.eglSurface,
-        window==0 ? (EGLSurface *) 0 : potatoBridge.eglSurface,
-        /* window==0 ? EGL_NO_CONTEXT : */ (EGLContext *) window
+            potatoBridge.eglDisplay,
+            window==0 ? (EGLSurface *) 0 : potatoBridge.eglSurface,
+            window==0 ? (EGLSurface *) 0 : potatoBridge.eglSurface,
+            /* window==0 ? EGL_NO_CONTEXT : */ (EGLContext *) window
     );
 
     if (success == EGL_FALSE) {
@@ -928,27 +929,27 @@ void pojavMakeCurrent(void* window) {
         gl_make_current((render_window_t*)window);
     }
     if (pojav_environ->config_renderer == RENDERER_VK_ZINK || pojav_environ->config_renderer == RENDERER_VIRGL) {
-            printf("OSMDroid: making current\n");
-            OSMesaMakeCurrent_p((OSMesaContext)window,gbuffer,GL_UNSIGNED_BYTE,savedWidth,savedHeight);
-            if (pojav_environ->config_renderer == RENDERER_VK_ZINK) {
-                ANativeWindow_lock(pojav_environ->pojavWindow,&buf,NULL);
-                OSMesaPixelStore_p(OSMESA_ROW_LENGTH,buf.stride);
-                stride = buf.stride;
-                //ANativeWindow_unlockAndPost(pojav_environ->pojavWindow);
-                OSMesaPixelStore_p(OSMESA_Y_UP,0);
-            }
+        printf("OSMDroid: making current\n");
+        OSMesaMakeCurrent_p((OSMesaContext)window,gbuffer,GL_UNSIGNED_BYTE,savedWidth,savedHeight);
+        if (pojav_environ->config_renderer == RENDERER_VK_ZINK) {
+            ANativeWindow_lock(pojav_environ->pojavWindow,&buf,NULL);
+            OSMesaPixelStore_p(OSMESA_ROW_LENGTH,buf.stride);
+            stride = buf.stride;
+            //ANativeWindow_unlockAndPost(pojav_environ->pojavWindow);
+            OSMesaPixelStore_p(OSMESA_Y_UP,0);
+        }
 
-            printf("OSMDroid: vendor: %s\n",glGetString_p(GL_VENDOR));
-            printf("OSMDroid: renderer: %s\n",glGetString_p(GL_RENDERER));
-            glClear_p(GL_COLOR_BUFFER_BIT);
-            glClearColor_p(0.4f, 0.4f, 0.4f, 1.0f);
+        printf("OSMDroid: vendor: %s\n",glGetString_p(GL_VENDOR));
+        printf("OSMDroid: renderer: %s\n",glGetString_p(GL_RENDERER));
+        glClear_p(GL_COLOR_BUFFER_BIT);
+        glClearColor_p(0.4f, 0.4f, 0.4f, 1.0f);
 
-            // Trigger a texture creation, which then set VIRGL_TEXTURE_ID
-            int pixelsArr[4];
-            glReadPixels_p(0, 0, 1, 1, GL_RGB, GL_INT, &pixelsArr);
+        // Trigger a texture creation, which then set VIRGL_TEXTURE_ID
+        int pixelsArr[4];
+        glReadPixels_p(0, 0, 1, 1, GL_RGB, GL_INT, &pixelsArr);
 
-            pojavSwapBuffers();
-            return;
+        pojavSwapBuffers();
+        return;
     }
 }
 
@@ -956,7 +957,7 @@ void pojavMakeCurrent(void* window) {
 JNIEXPORT void JNICALL
 Java_org_lwjgl_glfw_GLFW_nativeEglDetachOnCurrentThread(JNIEnv *env, jclass clazz) {
     //Obstruct the context on the current thread
-    
+
     switch (pojav_environ->config_renderer) {
         case RENDERER_GL4ES: {
             eglMakeCurrent_p(potatoBridge.eglDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
@@ -972,34 +973,34 @@ Java_org_lwjgl_glfw_GLFW_nativeEglDetachOnCurrentThread(JNIEnv *env, jclass claz
 
 void* pojavCreateContext(void* contextSrc) {
     if (pojav_environ->config_renderer == RENDERER_GL4ES) {
-            /*const EGLint ctx_attribs[] = {
-                EGL_CONTEXT_CLIENT_VERSION, atoi(getenv("LIBGL_ES")),
-                EGL_NONE
-            };
-            EGLContext* ctx = eglCreateContext_p(potatoBridge.eglDisplay, config, (void*)contextSrc, ctx_attribs);
-            potatoBridge.eglContext = ctx;
-            printf("EGLBridge: Created CTX pointer = %p\n",ctx);
-            //(*env)->ThrowNew(env,(*env)->FindClass(env,"java/lang/Exception"),"Trace exception");
-            return (long)ctx;*/
-            return gl_init_context(contextSrc);
+        /*const EGLint ctx_attribs[] = {
+            EGL_CONTEXT_CLIENT_VERSION, atoi(getenv("LIBGL_ES")),
+            EGL_NONE
+        };
+        EGLContext* ctx = eglCreateContext_p(potatoBridge.eglDisplay, config, (void*)contextSrc, ctx_attribs);
+        potatoBridge.eglContext = ctx;
+        printf("EGLBridge: Created CTX pointer = %p\n",ctx);
+        //(*env)->ThrowNew(env,(*env)->FindClass(env,"java/lang/Exception"),"Trace exception");
+        return (long)ctx;*/
+        return gl_init_context(contextSrc);
     }
 
     if (pojav_environ->config_renderer == RENDERER_VK_ZINK || pojav_environ->config_renderer == RENDERER_VIRGL) {
-            printf("OSMDroid: generating context\n");
-            void* ctx = OSMesaCreateContext_p(OSMESA_RGBA,contextSrc);
-            printf("OSMDroid: context=%p\n",ctx);
-            return ctx;
+        printf("OSMDroid: generating context\n");
+        void* ctx = OSMesaCreateContext_p(OSMESA_RGBA,contextSrc);
+        printf("OSMDroid: context=%p\n",ctx);
+        return ctx;
     }
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_opengl_GL_nativeRegalMakeCurrent(JNIEnv *env, jclass clazz) {
-    /*printf("Regal: making current");
-    
-    RegalMakeCurrent_func *RegalMakeCurrent = (RegalMakeCurrent_func *) dlsym(RTLD_DEFAULT, "RegalMakeCurrent");
-    RegalMakeCurrent(potatoBridge.eglContext);*/
-    
-    printf("regal removed\n");
-    abort();
+/*printf("Regal: making current");
+
+RegalMakeCurrent_func *RegalMakeCurrent = (RegalMakeCurrent_func *) dlsym(RTLD_DEFAULT, "RegalMakeCurrent");
+RegalMakeCurrent(potatoBridge.eglContext);*/
+
+printf("regal removed\n");
+abort();
 }
 JNIEXPORT jlong JNICALL
 Java_org_lwjgl_opengl_GL_getGraphicsBufferAddr(JNIEnv *env, jobject thiz) {
