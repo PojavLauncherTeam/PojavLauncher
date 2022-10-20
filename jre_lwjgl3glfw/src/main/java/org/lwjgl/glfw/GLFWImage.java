@@ -255,7 +255,7 @@ public class GLFWImage extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static GLFWImage mallocStack(MemoryStack stack) {
-        return wrap(GLFWImage.class, stack.nmalloc(ALIGNOF, SIZEOF));
+        return malloc(stack);
     }
 
     /**
@@ -264,7 +264,7 @@ public class GLFWImage extends Struct implements NativeResource {
      * @param stack the stack from which to allocate
      */
     public static GLFWImage callocStack(MemoryStack stack) {
-        return wrap(GLFWImage.class, stack.ncalloc(ALIGNOF, 1, SIZEOF));
+        return calloc(stack);
     }
 
     /**
@@ -292,7 +292,7 @@ public class GLFWImage extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static GLFWImage.Buffer mallocStack(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.nmalloc(ALIGNOF, capacity * SIZEOF), capacity);
+        return malloc(capacity, stack);
     }
 
     /**
@@ -302,7 +302,7 @@ public class GLFWImage extends Struct implements NativeResource {
      * @param capacity the buffer capacity
      */
     public static GLFWImage.Buffer callocStack(int capacity, MemoryStack stack) {
-        return wrap(Buffer.class, stack.ncalloc(ALIGNOF, capacity, SIZEOF), capacity);
+        return calloc(capacity, stack);
     }
 
     // -----------------------------------
