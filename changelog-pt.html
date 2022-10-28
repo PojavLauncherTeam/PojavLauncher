@@ -3,116 +3,147 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-body {margin:0;}
+body {font-family: Arial;}
 
-.navbar {
+/* Style the tab */
+.tab {
   overflow: hidden;
-  background-color: #333;
-  position: fixed;
-  top: 0;
-  width: 100%;
+  border: 1px solid #ffffff;
+  background-color: #ffffff;
 }
 
-.navbar a {
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
   float: left;
-  display: block;
-  color: #f2f2f2;
-  text-align: center;
+  border: none;
+  outline: none;
+  cursor: pointer;
   padding: 14px 16px;
-  text-decoration: none;
+  transition: 0.3s;
   font-size: 17px;
 }
 
-.navbar a:hover {
-  background: #ddd;
-  color: black;
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ffffff;
 }
 
-.main {
-  padding: 16px;
-  margin-top: 30px;
-  height: 1500px; /* Used in this example to enable scrolling */
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ffffff;
 }
 
-body {
-		  margin: 0;
-		  padding: 0;
-		  background-color: #fdfdff;
-		  
-		  box-shadow: 2px 3px 7px 2px rgba(0,0,0,0.02);
-		  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-		}
-	  
-		.changelog {
-		  padding: 10px;
-		  background-color: #f0f0f2;
-		  background-image: url('https://www.minecraft.net/content/dam/minecraft/backgrounds/bg-wool-dark.png');
-		  color: white;
-		}
-		
-		a:link, a:visited {
-		  color: #2198bf;
-		}
-		
-		@media (max-width: 700px) {
-		  div {
-		    margin: 0 auto;
-			width: auto;
-		  }
-	    }
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ffffff;
+  border-top: none;
+}
+
 </style>
+<!-- Javascript functions that this page uses goes here. -->
+<script type="text/javascript" src="./assets/javascript/tabs.js"></script>
 </head>
 <body>
+  
 
-<div class="navbar">
-  <a href="https://pojavlauncherteam.github.io/updates/local.html">Atualização Recente</a>
- <a href="https://pojavlauncherteam.github.io/">Website</a>
- <a href="https://www.minecraft.net/en-us/store/minecraft-java-edition/buy">Gerador de Contas</a>
- <a href="https://www.patreon.com/pojavlauncher"><b>Doação</b></a>
+<!-- the PojavLauncher with crafting block header image -->
+<img src="./assets/images/header.png"><br>
+
+
+<!-- Background Image: changes every pr-->
+<body background="./assets/images/bg/materialbg.png" text="ffffff" link="ffffff" alink="ffffff" vlink="ffffff" marginwidth="20" marginheight="20"></body>
+
+
+<!-- Page tabs (DO NOT TOUCH UNLESS PERMITTED TO DO SO) -->
+<div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'LauncherChangelog')">📰 Changelog</button>
+  <button class="tablinks" onclick="openCity(event, 
+    'About')">ℹ️ About</button>
 </div>
 
-<div class="changelog">
-  <h6>Oh não! Esta não é a forma que isto deve ser exibido! Reporte qualquer coisa sobre isto <a href="#">aqui.</a></h6>
-  <h2>PojavLauncher</h2>
-	<h2>Se tu queres ajudar o PojavLauncher e conseguir algumas boas vantagens no processo, considera <b><a href="https://www.patreon.com/pojavlauncher">subscrever o nosso Patreon</a></b></h2>
-	  <b> • Original: Zhuowei Zhang, aplicação Boardwalk. </b><br>
-	  <b> • Programadores:</b><br>
-    <a href="https://github.com/khanhduytran0">Tran Khanh Duy</a>, <a href="https://github.com/artdeell">artdeell</a>, <a href="https://github.com/LegacyGamerHD">LegacyGamerHD</a>.<br>
 
-	  <b>• Designer atual: </b>
-	  <a href="https://github.com/Mathias-Boulay">Mathias-Boulay</a>.<br>
+<!-- DIV: Contents of each tab starts HERE-->
 
-	  <b>• Melhor ajudante que ajudou nos testes: </b>
-	  <a href="https://github.com/pedrosouzabrasil">Pedro Souza</a>.<br>
-	  <b> • NOVO: <a href="https://pojavlauncherteam.github.io/updates/117.html"> Suporte preliminar para o Minecraft 1.17</a></b><br>
-	  <b> • <a href="https://github.com/PojavLauncherTeam/PojavLauncher/issues">Reporta bugs</a></b><br>
-	  <b>• <a href="https://github.com/PojavLauncherTeam/PojavLauncher/actions"> Instale a última versão de desenvolvimento.</a></b><br>
-	  <b>• <a href="https://discord.gg/6RpEJda">Entra no servidor do Discord do PojavLauncher.</a></b><br>
-	  <b>• <a href="https://github.com/PojavLauncherTeam/PojavLauncher_iOS">PojavLauncher para iOS/iPadOS com Jailbreak</a>.<br>
-<h2> ▶ <a href="https://github.com/PojavLauncherTeam/PojavLauncher/actions?query=branch%3Av3_openjdk">Versões de desenvolvimento do v3</a></h2>
- <b>• Novas opções:</b><br>
-- um Instalador de Mods totalmente funcional<br>
-          <b>• Novos recursos:</b><br>
-          - Agora mais rápido com o Java 8.<br>
-          - Agora consegue executar Minecraft 1.13 e superiores. Hoorah!<br>
-	  - Agora pode executar corretamente Forge e Fabric! Para instalar um desses rapazes, basta fazer download deles em ficheiros .jar.<br>
-          - Suporte a múltiplas arquiteturas: ARMv7, aarch64, x86 e x86_64.<br>
-          - Agora suporta corretamente controlos personalizados (feitos pela comunidade do Discord ou por ti!<br>
-	  <br>
-
-	  <h2>▶pré-visualização da v2.5.0 (descontinuada)</h2>
-	  <b>• AVISO: O Instalador do Optifine é experimental, para alguns dispositivos falhará na tela inicial (tela da Mojang). Não reportes bugs sobre a falha do Optifine na tela inicial, estes não vão ser resolvidos.</b><br>
-<b>• Novas definições:</b><br>
-- Agora tu podes customizar o delay em MS dos gestos (colocar blocos, destruir blocos.) <br>
-<b> Novos recursos:</b><br>
-- Rolar no Minecraft 1.8 ou superiores por tocar no ecrã e segurar no botão SEG<br>
+<!-- LauncherChangelog: Contains PojavLauncher App Changelog -->
+<div id="LauncherChangelog" class="tabcontent">
+<center><h1>Stable Releases</h1></center>
+<center><h4>Launcher Support accepted in:</center>
+<center><img src="./assets/images/pix/discord.png" width="32" height="32"><img src="./assets/images/pix/spacer.png" width="32" height="32"><img src="./assets/images/pix/ghub.png" width="32" height="32"></h4></center>
+<br>
+<center>Dahlia only.</center>
+  <h2><img src="./assets/images/pix/isSupported.png" width="16" height="16"> Dahlia</h2>
+	  <b>• App now requires a premium account, otherwise installation of the game assets are denied from the launcher itself.</b><br>
+	  • Most languages have been added<br>
+          <b>• VGPU and all variants of GL4ES 1.1.5 have been removed from the launcher.</b><br>
+          • GL4ES 1.1.4 was replaced with a custom fork, adding many features and bug fixes<br>
+	  • Controls have been reworked and improved and extended, gamepad latency is frame perfect.<br>
+	  • Color selector for controls has been changed<br>
+          <b>• Profiles are added! Now you can keep multiple setups of the game with different selected renderers, JVMs, and game directories.</b></br>
+          • Java 17 is now integrated into the launcher for running 1.17+<br>
+          <br>
+          • New settings were added:<br>
+           "Use alternate surface rendering", which uses a different kind of rendering surface to render the game faster on some devices.<br>
+"Start with virtual mouse on", which makes the game start with mouse already enabled<br>
+"Enable sustained performance mode", which limits CPU/GPU usage to prevent overheating and thermal throttling<br>
+<br>
+• Added Arc Capes support (now changed to cosmetica.gg)<br>
+<br>
+Bug Fixes:<br>
+• Fixed a crash occurring while starting a screen recorder<br>
+• Fixed a NullPointerException crash when launching versions below 1.6.4<br>
+• In versions above 1.13, game was crashing while scrolling, that was fixed.<br>
+• 1.13/1.14 no longer crashes upon the first touch<br>
+• Fix older versions not being fullscreen at launch<br>
+• Fix older versions having a "halved light" on entities<br>
+• Fixed hotbar not registering 0-9 inputs.<br>
+• No more errors about a null array when loading a custom control on android 10+<br>
+• Now the game will resize in splitscreen/freeform mode, although not officially supported<br>
 <br>
 
-<h2> ▶Pré-visualização v2.4.2</h2>
-<b>• Boas notícias: Qualquer dispositivo com Android 7.0+ agora podem executar Minecraft normalmente.</b><br>
-<b>• Alterações:</b><br>
-- <font color="green"> Adicionado instalador do OptiFine!</font><br>
-- Suporte para rato externo e teclado (Este recurso precisa de Android 8.0+. Can't detect left or right mouse event).<br>
+<h2><img src="./assets/images/pix/isNotSupported.png" width="16" height="16"> Crocus (v3_openjdk)</h2>
+	  <b>• New options:</b><br>
+	  - a fully-functional Mod Installer<br>
+	  	  <b>——————</br>
+          <b>• New features:</b><br>
+          - Now faster with Java 8.<br>
+	  - Now can run Minecraft 1.13 and above<br>
+	  - Now can properly launch Forge and Fabric! To install one of these "modloaders", just simply download their .jar files.<br>
+          - Multi-architecture support: ARMv7, aarch64, x86 and x86_64.<br>
+          - <strike>Now properly supports Custom Controls (either made by the Discord community or by you!)</strike><br>
+          	  <b>——————</br>
+          <b>• What's New</b></br>
+          - Java 17 for running Minecraft Versions above 21w10a<br>
+          - Controls Revision: added new features, such as drawer buttons, and new control editing features.<br>
+          (Note that controls made before this revision will not work.)</br>
+          - New renderers: virgl and vgpu</br>
+          (Though VirGL supports up to OpenGL 4.5, it can't run shaders properly.)</br>
+          - Removed zink</br>
+          - Implemented local accounts, after what happened with Doregon/PojavLauncher_iOS, and as such, you can't download Minecraft resources, not even one.</br>
+          <strike>(Make sure to backup your PojavLauncher folder so that you can still play Minecraft after updating)</strike></br>
+          
+	  <br>
+
+<br>
+<!-- v2.x-->
+<center><h1>Beta Releases</h1></center>
+<center><h4>Don't use unless you're that one history guy.</h4></center>
+<br>
+<h2>▶ v2.5 - Last BETA Release</h2>
+	  <b>• NOTICE: OptiFine Installer is experimental, for some devices will crash at splash screen (Mojang Screen). Don't report bug about OptiFine crash at splash screen, these will not be solved.</b><br>
+	  <b>• New settings:</b><br>
+	  - You can now customize the MS delay of touch gestures (placing block, destroying block.)<br>
+	  <b>• New features:</b><br>
+	  - Scrolling in Minecraft 1.8 or above by tapping the screen and holding SEC button<br>
+	  <br>
+
+<h2>▶ v2.4.2 Release</h2>
+	  <b>• Good news: Any Android 7.0+ devices can now run Minecraft normally.</b><br>
+	  <b>• Changes:</b><br>
+	  - <font color="green">Added OptiFine installer!</font><br>
+	  - External mouse and keyboard support (Feature needs Android 8.0+. Can't detect left or right mouse event).<br>
 	  - Launcher UI should now fit correctly in big screens.<br>
 	  - Freeform mode is now working.<br>
 	  - Virtual mouse now works properly.<br>
@@ -120,11 +151,13 @@ body {
 	  <b>• Fixes:</b><br>
 	  - Touch event triggered as click event, this bug exist from Boardwalk.<br>
 	  - (In-Game) Mouse event triggered after looking around.<br>
+  
+  <br>
 
 	  <br>
 
-	  <h2>▶ v2.4 BETA release</h2>
-	  <b>• Remember: If your device has Android version above or equals to 7.0, use VMOS app. VMOS vai instalar o SO Android 5.1 no teu dispositivo. You can take it to run this app (VMOS is removed by Play Store, you must install it manually)</b>
+<h2>▶ v2.4 Release</h2>
+	  <b>• Remember: If your device has Android version above or equals to 7.0, use VMOS app. VMOS will install Android 5.1 OS to your device. You can take it to run this app (VMOS is removed by Play Store, you must install it manually)</b>
 	  <br>
 
 	  <b>• Changes:</b><br>
@@ -136,27 +169,23 @@ body {
 	  - Fixed an error that prevent users launch Minecraft without internet connection.<br>
 	  <br>
 
-	  <h2>▶ v2.3.1 BETA release</h2>
+<h2>▶ v2.3.1 Release</h2>
 	  <b>• Changes:</b><br>
 	  - Added text selection on OpenJDK install log.<br>
 	  <b>• Fixes:</b><br>
 	  - Devices can't install OpenJDK but able to hide the error.<br>
 	  <br>
 
-	  <h2>▶ v2.3 BETA release</h2>
-	  <b>• Changes:</b><br>
-	  - Changed some code in update function.<br>
-	  <br>
-	  
-	  <h2>▶ v2.2 BETA (private)</h2>
-	  <b>• Changes:</b><br>
+<h2>▶ v2.2/v2.3 Release</h2>
+	  <b>• What changed:</b><br>
+	  - Changed some code in update function
 	  - Added busybox.<br>
 	  - Added OpenJDK for converter (ARM 64bit only).<br>
 	  - Added more AWT functions.<br>
 	  - Screenshot (and F2 key) now capture using directly API (javax.imageio).<br>
 	  <br>
 		
-	  <h2>▶ v2.1 BETA release</h2>
+<h2>▶v2.1 Release</h2>
 	  <b>• Changes:</b><br>
 	  - Added Changelog button!<br>
 	  - Custom versions now visible in the list (not implemented for user)<br>
@@ -164,7 +193,7 @@ body {
 	  - Replaced glshim with GL4ES for partial OpenGL 2.0 and better performance.<br>
 	  <br>
 
-	  <h2>▶ v2.0 BETA</h2>
+	  <h2>▶ v2 Release</h2>
 	  <b>• Changes:</b><br>
 	  - [Partial] New design (copy of 2017 original Minecraft Launcher)<br>
 	  - Changed how users load/save.<br>
@@ -177,6 +206,8 @@ body {
 	  - Verification failed when run some versions (by patch the client file)<br>
 	  <br>
 
+<center><h1>Alpha Releases</h1></center>
+<center><h4>Good ol' times.</h4></center>
 	  <h2>▶ v1.0.4 (lost everything before release)</h2>
 	  - Added Download version option.<br>
 	  - Added virtual mouse (but better than 2.0 rewrite)<br>
@@ -189,8 +220,64 @@ body {
 	  
 	  <h2>▶ v1.0 ALPHA</h2>
 	  <b>• Initial release. Name as Minecraft Launcher</b><br>
-	  <b>• Only pre-converted 1.9 version is added.</b>
+	  <b>• Only pre-converted 1.9 version is added.</br>
 </div>
 
+
+<!-- TODO: "Community" section-->
+ 
+
+<!-- This is the "About" section.-->
+<div id="About" class="tabcontent">
+  <br>
+  <center><img src="./assets/images/aboutsect.png" width="318" height="51"></center>
+  <br>
+  <center><h3>PojavLauncher - Changelog Page</h3></center>
+  <center>Maintainers: khanhduytran0(v2), NeveuXon(v3)</center>
+  <center>Translations can be done at Crowdin</center>
+  <br>
+  <br>
+  <br>
+  <center><img src="./assets/images/pix/app.png" width="250" height="275"></center>
+  <center><h1>About PojavLauncher</h1></center>
+  <center>PojavLauncher is a free, open source, and stable Minecraft launcher for Android built from <a href="https://github.com/zhuowei/Boardwalk"> Boardwalk</a>, a MC Launcher project by Zhouwei Zhang</center>
+  <br>
+  <center><h2>PojavLauncher (Android) Development Team</h2></center>
+  <center><h3>Head Developers:</h3></center>
+  <center>DuyKhanhTran, artdeell, SerpenSpirale</center>
+  <br>
+  <center><h3>Designers:</h3></center>
+  <center>NeveuXon</center>
+  <br>
+  <center><h3>Testers:</h3></center>
+  <center>Pedro Souza, realVezio(Voiasis), Aero</center>
+  <br>
+  <br>
+  <center>Honorable Mentions</center>
+  <center>• crystall1nedev, for the <a href="https://github.com/PojavLauncherTeam/PojavLauncher_iOS"> iOS Version</a></center>
+  <center>• QuestCraft, for porting PojavLauncher into <a href="https://github.com/QuestCraftPlusPlus/QuestCraft"> QuestVR platforms</a>.</center>
+  <br>
+  <br>
+<br>
+  <center>PojavLauncher uses the following components in making the launcher. Their license (if available) are also shown.</center>
+  <br>
+    <a href="https://github.com/zhuowei/Boardwalk">Boardwalk:</a> <a href="https://github.com/zhuowei/Boardwalk/blob/master/LICENSE">Apache License 2.0/GNU GPLv2</a><br>
+      Android Support Libraries:</a> <a href="https://android.googlesource.com/platform/prebuilts/maven_repo/android/+/master/NOTICE.txt">Apache License 2.0</a><br>
+        <a href="https://github.com/PojavLauncherTeam/gl4es">GL4ES:</a> <a href="https://github.com/ptitSeb/gl4es/blob/master/LICENSE">MIT License</a><br>
+          <a href="https://github.com/PojavLauncherTeam/openjdk-multiarch-jdk8u">OpenJDK:</a> <a href="https://openjdk.java.net/legal/gplv2+ce.html">GNU GPLv2</a><br>
+            <a href="https://github.com/PojavLauncherTeam/lwjgl3">LWJGL3:</a> <a href="https://github.com/LWJGL/lwjgl3/blob/master/LICENSE.md">BSD-3 License</a><br>
+            <a href="https://github.com/PojavLauncherTeam/lwjglx">LWJGLX:</a> Unknown License<br>
+            <a href="https://gitlab.freedesktop.org/mesa/mesa">Mesa 3D Graphics Library:</a> <a href="https://docs.mesa3d.org/license.html">MIT License</a><br>
+            <a href="https://github.com/pro-grade/pro-grade">pro-grade:</a> <a href="https://github.com/pro-grade/pro-grade/blob/master/LICENSE.txt">Apache License 2.0</a><br>
+           <a href="https://github.com/iqiyi/xHook">xHook:</a> <a href="https://github.com/iqiyi/xHook/blob/master/LICENSE">MIT & BSD-style License</a><br>
+             <a href="https://github.com/anholt/libepoxy">libepoxy:</a> <a href="https://github.com/anholt/libepoxy/blob/master/COPYING">MIT License</a><br>
+              <a href="https://github.com/PojavLauncherTeam/virglrenderer">virglrenderer:</a> <a href="https://gitlab.freedesktop.org/virgl/virglrenderer/-/blob/master/COPYING">MIT License</a><br>
+                <a href="https://mc-heads.net">MCHeads</a><br> 
+                <a href="https://crowdin.com">Crowdin</a><br>
+                <br>
+                  <center>The Official Minecraft download server/library is provided by Microsoft/Mojang, and all Minecraft is work of Mojang/Microsoft, so please buy the game, not pirate it.</center>
+    </div>
+
+
 </body>
-</html>
+</html> 
