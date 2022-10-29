@@ -47,7 +47,12 @@ public class LauncherFragment extends Fragment {
 
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+		// Show some text
+		//TODO (for rsc): properly fix the changelog
 		mNewsWebview = (WebView) getView().findViewById(R.id.lmaintabnewsNewsView);
+		mNewsWebview.loadData("News temporarily unavailable", "text/plain", "UTF-8");
+
+		/*mNewsWebview = (WebView) getView().findViewById(R.id.lmaintabnewsNewsView);
 		mNewsWebview.setWebViewClient(new WebViewClient(){
 
 			// API < 23
@@ -100,7 +105,7 @@ public class LauncherFragment extends Fragment {
 		mNewsWebview.getSettings().setJavaScriptEnabled(true);
 		mValidUrlSelectorThread = new Thread(this::selectValidUrl);
 		mValidUrlSelectorThread.start();
-		if(!mInterruptLoad) mNewsWebview.loadUrl(Tools.URL_HOME + mValidChangelog);
+		if(!mInterruptLoad) mNewsWebview.loadUrl(Tools.URL_HOME + mValidChangelog);*/
 	}
 
 	private void selectValidUrl() {
