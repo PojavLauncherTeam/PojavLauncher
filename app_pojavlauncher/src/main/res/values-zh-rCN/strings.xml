@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
-    <string name="app_name">PojavLauncher（适用于 Android 的 Java 版本的 Minecraft）</string>
+    <string name="app_name">PojavLauncher（适用于 Android 的《Minecraft：Java版》）</string>
     <string name="app_short_name">PojavLauncher</string>
     <string name="app_motd">在您的设备上启动《Minecraft：Java版》！</string>
     <!-- Action bar part -->
@@ -23,7 +23,7 @@
     <string name="warning_remove_account">此账户将被移除！</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">安装 Java 运行时 %s （.tar.xz）</string>
-    <string name="alerttitle_installmod">选择 Mod 安装器</string>
+    <string name="alerttitle_installmod">选择模组安装器</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher 意外崩溃</string>
     <string name="error_no_version">无版本！</string>
@@ -51,8 +51,8 @@
     <string name="mcl_launch_download_assets">正在准备下载资源</string>
     <string name="mcl_launch_error_localmode">Minecraft 无法在本地账户中进行安装，请切换到正版账户以继续。</string>
     <string name="mcl_options">选项</string>
-    <string name="mcl_option_modinstall">启动 Mod 安装器（例如 Forge、LabyMod、Fabric...）</string>
-    <string name="mcl_option_modinstallwitharg">以自定义参数启动 Mod 安装器</string>
+    <string name="mcl_option_modinstall">启动模组安装器（例如 Forge、LabyMod、Fabric...）</string>
+    <string name="mcl_option_modinstallwitharg">以自定义参数启动模组安装器</string>
     <string name="mcl_option_customcontrol">自定义控制按键</string>
     <string name="mcl_option_settings">设置</string>
     <string name="mcl_option_about">关于</string>
