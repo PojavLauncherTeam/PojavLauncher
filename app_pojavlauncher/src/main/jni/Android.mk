@@ -8,6 +8,17 @@ HERE_PATH := $(LOCAL_PATH)
 
 LOCAL_PATH := $(HERE_PATH)
 
+include $(CLEAR_VARS)
+LOCAL_MODULE := angle_gles2
+LOCAL_SRC_FILES := tinywrapper/angle-gles/$(TARGET_ARCH_ABI)/libGLESv2_angle.so
+include $(PREBUILT_SHARED_LIBRARY)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := tinywrapper
+LOCAL_SHARED_LIBRARIES := angle_gles2
+LOCAL_SRC_FILES := tinywrapper/main.c tinywrapper/string_utils.c
+LOCAL_C_INCLUDES := $(LOCAL_PATH)/tinywrapper
+include $(BUILD_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE     := xhook

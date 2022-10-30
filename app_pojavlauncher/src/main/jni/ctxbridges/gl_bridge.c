@@ -40,8 +40,9 @@ bool gl_init() {
 render_window_t* gl_init_context(render_window_t *share) {
     render_window_t* bundle = malloc(sizeof(render_window_t));
     memset(bundle, 0, sizeof(render_window_t));
-    const EGLint egl_attributes[] = { EGL_BLUE_SIZE, 8, EGL_GREEN_SIZE, 8, EGL_RED_SIZE, 8, EGL_ALPHA_SIZE, 8, EGL_DEPTH_SIZE, 24, EGL_SURFACE_TYPE, EGL_WINDOW_BIT|EGL_PBUFFER_BIT, EGL_NONE };
+    EGLint egl_attributes[] = { EGL_BLUE_SIZE, 8, EGL_GREEN_SIZE, 8, EGL_RED_SIZE, 8, EGL_ALPHA_SIZE, 8, EGL_DEPTH_SIZE, 24, EGL_SURFACE_TYPE, EGL_WINDOW_BIT|EGL_PBUFFER_BIT, EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT, EGL_NONE };
     EGLint num_configs = 0;
+
     if (eglChooseConfig_p(g_EglDisplay, egl_attributes, NULL, 0, &num_configs) != EGL_TRUE) {
         __android_log_print(ANDROID_LOG_ERROR, g_LogTag, "eglChooseConfig_p() failed: %04x",
                             eglGetError_p());
@@ -58,6 +59,18 @@ render_window_t* gl_init_context(render_window_t *share) {
     // Get the first matching config
     eglChooseConfig_p(g_EglDisplay, egl_attributes, &bundle->config, 1, &num_configs);
     eglGetConfigAttrib_p(g_EglDisplay, bundle->config, EGL_NATIVE_VISUAL_ID, &bundle->format);
+
+    {
+        EGLBoolean bindResult;
+        if (strncmp(getenv("POJAV_RENDERER"), "opengles3_desktopgl", 19) == 0) {
+            printf("EGLBridge: Binding to desktop OpenGL\n");
+            bindResult = eglBindAPI_p(EGL_OPENGL_API);
+        } else {
+            printf("EGLBridge: Binding to OpenGL ES\n");
+            bindResult = eglBindAPI_p(EGL_OPENGL_ES_API);
+        }
+        if (!bindResult) printf("EGLBridge: bind failed: %p\n", eglGetError_p());
+    }
 
     int libgl_es = strtol(getenv("LIBGL_ES"), NULL, 0);
     if(libgl_es < 0 || libgl_es > INT16_MAX) libgl_es = 2;

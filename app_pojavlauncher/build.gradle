@@ -115,6 +115,7 @@ android {
             enableSplit = false
         }
     }
+
     buildToolsVersion '30.0.2'
 }
 
