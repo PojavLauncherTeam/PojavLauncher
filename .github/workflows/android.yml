@@ -121,6 +121,7 @@ jobs:
           path: out/app-debug.apk
           
     - name: Upload onto the Google Play testing track
+      continue-on-error: true
       if: github.repository_owner == 'PojavLauncherTeam' && github.ref_name == 'v3_openjdk'
       uses: r0adkll/upload-google-play@v1.0.17
       with:
