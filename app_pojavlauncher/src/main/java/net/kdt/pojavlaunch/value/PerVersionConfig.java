@@ -1,5 +1,7 @@
 package net.kdt.pojavlaunch.value;
 
+import androidx.annotation.Keep;
+
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
@@ -10,6 +12,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
+@Keep
 public class PerVersionConfig {
     static File pvcFile;
     public static HashMap<String,VersionConfig> configMap;
@@ -37,6 +40,8 @@ public class PerVersionConfig {
     public static boolean exists() {
         return new File(Tools.DIR_GAME_HOME,"per-version-config.json").exists();
     }
+
+    @Keep
     public static class VersionConfig {
         public String jvmArgs;
         public String gamePath;

@@ -3,8 +3,7 @@ import com.google.gson.*;
 import net.kdt.pojavlaunch.*;
 import java.io.*;
 
-public class LauncherProfiles
-{
+public class LauncherProfiles {
     public static MinecraftLauncherProfiles mainProfileJson;
     public static File launcherProfilesFile = new File(Tools.DIR_GAME_NEW + "/launcher_profiles.json");
     public static MinecraftLauncherProfiles update() {

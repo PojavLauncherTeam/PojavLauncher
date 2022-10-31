@@ -9,10 +9,13 @@ import java.io.*;
 import com.google.gson.*;
 import android.graphics.Bitmap;
 import android.util.Base64;
+
+import androidx.annotation.Keep;
+
 import org.apache.commons.io.IOUtils;
 
-public class MinecraftAccount
-{
+@Keep
+public class MinecraftAccount {
     public String accessToken = "0"; // access token
     public String clientToken = "0"; // clientID: refresh and invalidate
     public String profileId = "00000000-0000-0000-0000-000000000000"; // profile UUID, for obtaining skin

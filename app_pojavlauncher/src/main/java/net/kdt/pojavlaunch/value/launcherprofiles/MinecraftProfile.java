@@ -1,7 +1,9 @@
 package net.kdt.pojavlaunch.value.launcherprofiles;
 
-public class MinecraftProfile
-{
+import androidx.annotation.Keep;
+
+@Keep
+public class MinecraftProfile {
 	public String name;
 	public String type;
 	public String created;
