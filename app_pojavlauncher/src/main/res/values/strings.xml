@@ -103,7 +103,7 @@
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (all versions, fastest)</string>
     <string name="mcl_setting_renderer_virgl">virglrenderer - (release 1.7+, slowest)</string>
     <string name="mcl_setting_renderer_vgpu">vgpu - (up to 1.16.5, faster)</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink (old_beta b1.8+, slowest)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink - (old_beta b1.8+, slowest)</string>
     <string name="mcl_setting_renderer_angle">ANGLE - (release 1.17+, slower)</string>
     <string name="mcl_setting_category_veroption">Version type will be in version list</string>
     <string name="mcl_setting_veroption_release">Release</string>
