@@ -104,7 +104,7 @@
     <string name="mcl_setting_renderer_virgl">virglrenderer - (release 1.7+, slow)</string>
     <string name="mcl_setting_renderer_vgpu">vgpu - (up to 1.16.5, fast)</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink - (old_beta b1.8+, slow)</string>
-    <string name="mcl_setting_renderer_angle">ANGLE - (release 1.17+, medium)</string>
+    <string name="mcl_setting_renderer_angle">ANGLE - (release 1.17+, mid)</string>
     <string name="mcl_setting_category_veroption">Version type will be in version list</string>
     <string name="mcl_setting_veroption_release">Release</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
