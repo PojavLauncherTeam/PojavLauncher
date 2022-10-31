@@ -87,6 +87,7 @@
     <string name="mcl_setting_renderer_virgl">virgl (OpenGL ES 3): exports OpenGL 4.3</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): exports OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): 輸出OpenGL 4.6</string>
+    <string name="mcl_setting_renderer_angle">tinywrapper ANGLE Vulkan</string>
     <string name="mcl_setting_category_veroption">將在版本列表中顯示的版本型別</string>
     <string name="mcl_setting_veroption_release">正式版</string>
     <string name="mcl_setting_veroption_snapshot">快照</string>
