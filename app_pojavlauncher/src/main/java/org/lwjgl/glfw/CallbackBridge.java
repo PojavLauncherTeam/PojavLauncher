@@ -1,8 +1,5 @@
 package org.lwjgl.glfw;
 
-import android.os.Handler;
-import android.os.Looper;
-
 import net.kdt.pojavlaunch.*;
 import android.content.*;
 import android.view.Choreographer;
@@ -38,8 +35,8 @@ public class CallbackBridge {
 
     public static void sendCursorPos(float x, float y) {
         if (!threadAttached) {
-            nativeSetUseInputStackQueue(BaseMainActivity.isInputStackCall);
-            threadAttached = CallbackBridge.nativeAttachThreadToOther(true, BaseMainActivity.isInputStackCall);
+            nativeSetUseInputStackQueue(MainActivity.isInputStackCall);
+            threadAttached = CallbackBridge.nativeAttachThreadToOther(true, MainActivity.isInputStackCall);
         }
 
         DEBUG_STRING.append("CursorPos=").append(x).append(", ").append(y).append("\n");
@@ -133,18 +130,18 @@ public class CallbackBridge {
     public static String accessAndroidClipboard(int type, String copy) {
         switch (type) {
             case CLIPBOARD_COPY:
-                BaseMainActivity.GLOBAL_CLIPBOARD.setPrimaryClip(ClipData.newPlainText("Copy", copy));
+                MainActivity.GLOBAL_CLIPBOARD.setPrimaryClip(ClipData.newPlainText("Copy", copy));
                 return null;
 
             case CLIPBOARD_PASTE:
-                if (BaseMainActivity.GLOBAL_CLIPBOARD.hasPrimaryClip() && BaseMainActivity.GLOBAL_CLIPBOARD.getPrimaryClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
-                    return BaseMainActivity.GLOBAL_CLIPBOARD.getPrimaryClip().getItemAt(0).getText().toString();
+                if (MainActivity.GLOBAL_CLIPBOARD.hasPrimaryClip() && MainActivity.GLOBAL_CLIPBOARD.getPrimaryClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
+                    return MainActivity.GLOBAL_CLIPBOARD.getPrimaryClip().getItemAt(0).getText().toString();
                 } else {
                     return "";
                 }
 
             case CLIPBOARD_OPEN:
-                BaseMainActivity.openLink(copy);
+                MainActivity.openLink(copy);
                 return null;
             default: return null;
         }

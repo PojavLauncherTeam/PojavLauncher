@@ -1,6 +1,6 @@
 package net.kdt.pojavlaunch;
 
-import static net.kdt.pojavlaunch.BaseMainActivity.touchCharInput;
+import static net.kdt.pojavlaunch.MainActivity.touchCharInput;
 import static net.kdt.pojavlaunch.utils.MCOptionUtils.getMcScale;
 import static org.lwjgl.glfw.CallbackBridge.sendKeyPress;
 import static org.lwjgl.glfw.CallbackBridge.sendMouseButton;
@@ -25,7 +25,6 @@ import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -404,7 +403,7 @@ public class MinecraftGLSurface extends View {
         }
         if(mouseCursorIndex == -1) return false; // we cant consoom that, theres no mice!
         if(CallbackBridge.isGrabbing()) {
-            if(BaseMainActivity.isAndroid8OrHigher() && !hasPointerCapture()){
+            if(MainActivity.isAndroid8OrHigher() && !hasPointerCapture()){
                 requestFocus();
                 requestPointerCapture();
             }

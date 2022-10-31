@@ -519,7 +519,7 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
     private void sendSpecialKey(int keycode, boolean isDown){
         switch (keycode) {
             case ControlData.SPECIALBTN_KEYBOARD:
-               if(isDown)BaseMainActivity.switchKeyboardState();
+               if(isDown) MainActivity.switchKeyboardState();
                 break;
 
             case ControlData.SPECIALBTN_TOGGLECTRL:
@@ -527,7 +527,7 @@ public class ControlButton extends androidx.appcompat.widget.AppCompatButton imp
                 break;
 
             case ControlData.SPECIALBTN_VIRTUALMOUSE:
-                if(isDown)BaseMainActivity.toggleMouse(getContext());
+                if(isDown) MainActivity.toggleMouse(getContext());
                 break;
 
             case ControlData.SPECIALBTN_MOUSEPRI:

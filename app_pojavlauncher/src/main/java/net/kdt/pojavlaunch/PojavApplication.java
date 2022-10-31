@@ -44,7 +44,7 @@ public class PojavApplication extends Application {
 			FatalErrorActivity.showError(PojavApplication.this, crashFile.getAbsolutePath(), storagePermAllowed, th);
 			// android.os.Process.killProcess(android.os.Process.myPid());
 
-			BaseMainActivity.fullyExit();
+			MainActivity.fullyExit();
 		});
 		
 		try {

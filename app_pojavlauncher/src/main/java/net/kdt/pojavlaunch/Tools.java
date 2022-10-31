@@ -6,19 +6,16 @@ import android.database.Cursor;
 import android.net.*;
 import android.os.*;
 import android.provider.OpenableColumns;
-import android.system.*;
 import android.util.*;
 import com.google.gson.*;
-import com.oracle.dalvik.*;
+
 import java.io.*;
 import java.lang.reflect.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.*;
-import java.util.zip.*;
+
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.utils.*;
 import net.kdt.pojavlaunch.value.*;
@@ -26,15 +23,11 @@ import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
 import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 
 import org.apache.commons.codec.binary.Hex;
-import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.io.FileUtils;
 import org.lwjgl.glfw.*;
 import android.view.*;
-import android.widget.Toast;
 
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.P;
-import static android.os.Build.VERSION_CODES.Q;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_IGNORE_NOTCH;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_NOTCH_SIZE;
 
@@ -120,9 +113,9 @@ public final class Tools {
 
         JMinecraftVersionList.Version versionInfo = Tools.getVersionInfo(null,versionName);
         String gamedirPath = Tools.DIR_GAME_NEW;
-            if(activity instanceof BaseMainActivity) {
+            if(activity instanceof MainActivity) {
                 LauncherProfiles.update();
-                MinecraftProfile minecraftProfile = ((BaseMainActivity)activity).minecraftProfile;
+                MinecraftProfile minecraftProfile = ((MainActivity)activity).minecraftProfile;
                 if(minecraftProfile == null) throw new Exception("Launching empty Profile");
                 if(minecraftProfile.gameDir != null && minecraftProfile.gameDir.startsWith(Tools.LAUNCHERPROFILES_RTPREFIX))
                     gamedirPath = minecraftProfile.gameDir.replace(Tools.LAUNCHERPROFILES_RTPREFIX,Tools.DIR_GAME_HOME+"/");
@@ -522,8 +515,8 @@ public final class Tools {
                 .setMessage(errMsg)
                 .setPositiveButton(android.R.string.ok, (DialogInterface.OnClickListener) (p1, p2) -> {
                     if(exitIfOk) {
-                        if (ctx instanceof BaseMainActivity) {
-                            BaseMainActivity.fullyExit();
+                        if (ctx instanceof MainActivity) {
+                            MainActivity.fullyExit();
                         } else if (ctx instanceof Activity) {
                             ((Activity) ctx).finish();
                         }
@@ -534,8 +527,8 @@ public final class Tools {
                     ClipboardManager mgr = (ClipboardManager) ctx.getSystemService(Context.CLIPBOARD_SERVICE);
                     mgr.setPrimaryClip(ClipData.newPlainText("error", Log.getStackTraceString(e)));
                     if(exitIfOk) {
-                        if (ctx instanceof BaseMainActivity) {
-                            BaseMainActivity.fullyExit();
+                        if (ctx instanceof MainActivity) {
+                            MainActivity.fullyExit();
                         } else {
                             ((Activity) ctx).finish();
                         }

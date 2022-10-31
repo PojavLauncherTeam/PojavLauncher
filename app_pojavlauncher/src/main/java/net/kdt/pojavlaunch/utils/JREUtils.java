@@ -318,7 +318,7 @@ public class JREUtils {
                 AlertDialog.Builder dialog = new AlertDialog.Builder(activity);
                 dialog.setMessage(activity.getString(R.string.mcn_exit_title, exitCode));
 
-                dialog.setPositiveButton(android.R.string.ok, (p1, p2) -> BaseMainActivity.fullyExit());
+                dialog.setPositiveButton(android.R.string.ok, (p1, p2) -> MainActivity.fullyExit());
                 dialog.show();
             });
         }

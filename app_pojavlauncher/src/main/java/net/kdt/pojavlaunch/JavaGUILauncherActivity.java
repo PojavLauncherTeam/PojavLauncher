@@ -1,5 +1,7 @@
 package net.kdt.pojavlaunch;
 
+import static net.kdt.pojavlaunch.MainActivity.fullyExit;
+
 import android.annotation.SuppressLint;
 import android.os.*;
 import android.util.*;
@@ -143,7 +145,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
                     if (exit != 0) return;
                     runOnUiThread(() -> {
                         Toast.makeText(JavaGUILauncherActivity.this, R.string.toast_optifine_success, Toast.LENGTH_SHORT).show();
-                        MainActivity.fullyExit();
+                        fullyExit();
                     });
 
                 } catch (Throwable e) {
@@ -230,7 +232,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
     }
 
     public void forceClose(View v) {
-        BaseMainActivity.dialogForceClose(this);
+        MainActivity.dialogForceClose(this);
     }
 
     public void openLogOutput(View v) {
