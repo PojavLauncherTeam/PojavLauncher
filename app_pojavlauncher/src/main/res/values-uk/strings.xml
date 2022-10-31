@@ -87,6 +87,7 @@
     <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): експортує OpenGL 4.3</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): експортує OpenGL 3.0</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): експортує OpenGL 4.6</string>
+    <string name="mcl_setting_renderer_angle">tinywrapper ANGLE Vulkan</string>
     <string name="mcl_setting_category_veroption">Типи версій, які будуть відображатися в списку версій</string>
     <string name="mcl_setting_veroption_release">Релізи</string>
     <string name="mcl_setting_veroption_snapshot">Снапшоти</string>
@@ -244,7 +245,7 @@
     <string name="preference_experimental_title">Експериментальні штуки</string>
     <string name="preference_experimental_description">Використовуйте речі з увагою, підтримка недоступна.</string>
     <string name="preference_sustained_performance_title">Увімкнути режим постійної продуктивности</string>
-    <string name="preference_sustained_performance_description">Обмежте тротлінг ЦПУ, обмеживши пікову продуктивність</string>
+    <string name="preference_sustained_performance_description">Обмежте терморегуляцію, обмеживши пікову продуктивність</string>
     <string name="preference_back_title">Повернутися назад</string>
     <string name="gles_hack_title">Скорочення GL4ES</string>
     <string name="gles_hack_none">Не стискати текстури</string>
