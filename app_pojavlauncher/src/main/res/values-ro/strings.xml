@@ -83,10 +83,6 @@
     <string name="mcl_setting_category_general">Setări generale</string>
     <string name="mcl_setting_category_scaling">Setări de scalare</string>
     <string name="mcl_setting_category_renderer">Randator</string>
-    <string name="mcl_setting_renderer_gles2_4">holy gl4es: acceptă 1.0–1.19+</string>
-    <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): exports OpenGL 4.3</string>
-    <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): exportă OpenGL 3.0</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exportă OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Tipul de versiune va fi în lista de versiuni</string>
     <string name="mcl_setting_veroption_release">Lansat oficial</string>
     <string name="mcl_setting_veroption_snapshot">Lansat pentru testare</string>
