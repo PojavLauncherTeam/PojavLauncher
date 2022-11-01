@@ -83,11 +83,11 @@
     <string name="mcl_setting_category_general">Загальні налаштування</string>
     <string name="mcl_setting_category_scaling">Налаштування масштабування</string>
     <string name="mcl_setting_category_renderer">Візуалізатор</string>
-    <string name="mcl_setting_renderer_gles2_4">святий gl4es: підтримує 1.0–1.19+</string>
-    <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): експортує OpenGL 4.3</string>
-    <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): експортує OpenGL 3.0</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): експортує OpenGL 4.6</string>
-    <string name="mcl_setting_renderer_angle">tinywrapper ANGLE Vulkan</string>
+    <string name="mcl_setting_renderer_gles2_4">Божий GL4ES - (всі версії, швидкі)</string>
+    <string name="mcl_setting_renderer_virgl">virglrenderer - (реліз 1.7+, повільний)</string>
+    <string name="mcl_setting_renderer_vgpu">vgpu - (до 1.16.5, швидкий)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink - (old_beta b1.8+, повільний)</string>
+    <string name="mcl_setting_renderer_angle">ANGLE - (реліз 1.17+, таке)</string>
     <string name="mcl_setting_category_veroption">Типи версій, які будуть відображатися в списку версій</string>
     <string name="mcl_setting_veroption_release">Релізи</string>
     <string name="mcl_setting_veroption_snapshot">Снапшоти</string>
