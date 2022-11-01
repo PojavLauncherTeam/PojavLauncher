@@ -83,10 +83,6 @@
     <string name="mcl_setting_category_general">إعدادات عامة</string>
     <string name="mcl_setting_category_scaling">إعدادات الحجم</string>
     <string name="mcl_setting_category_renderer">العارض</string>
-    <string name="mcl_setting_renderer_gles2_4">holy gl4es: يدعم 1.0-1.19+</string>
-    <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): exports OpenGL 4.3</string>
-    <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): exports OpenGL 3.0</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exports OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">نوع الإصدار سيكون في قائمة الإصدارات</string>
     <string name="mcl_setting_veroption_release">إصدار نهائي</string>
     <string name="mcl_setting_veroption_snapshot">اللمحات (سنابشوت)</string>
