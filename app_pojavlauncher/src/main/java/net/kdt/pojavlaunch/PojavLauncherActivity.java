@@ -281,7 +281,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
     }
     private void pickAccount() {
         try {
-            mProfile = PojavProfile.getCurrentProfileContent(this);
+            mProfile = PojavProfile.getCurrentProfileContent(this, null);
             accountFaceImageView.setImageBitmap(mProfile.getSkinFace());
 
             //TODO FULL BACKGROUND LOGIN

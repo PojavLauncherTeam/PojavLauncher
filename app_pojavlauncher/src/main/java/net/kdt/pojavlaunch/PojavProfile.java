@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.google.gson.JsonSyntaxException;
 import java.io.File;
 import java.io.IOException;
@@ -24,15 +27,10 @@ public class PojavProfile {
 	public static SharedPreferences getPrefs(Context ctx) {
 		return ctx.getSharedPreferences(PROFILE_PREF, Context.MODE_PRIVATE);
 	}
-	
-	public static MinecraftAccount getCurrentProfileContent(Context ctx) throws JsonSyntaxException {
-		MinecraftAccount build = MinecraftAccount.load(getCurrentProfileName(ctx));
-        if (build == null) {
-            System.out.println("isTempProfile null? " + (getTempProfileContent() == null));
-            return getTempProfileContent();
-        }
-        return build;
-	}
+
+    public static MinecraftAccount getCurrentProfileContent(@NonNull Context ctx, @Nullable String profileName) throws JsonSyntaxException {
+        return MinecraftAccount.load(profileName == null ? getCurrentProfileName(ctx) : profileName);
+    }
 
     public static MinecraftAccount getTempProfileContent() {
 	    try {
@@ -107,7 +105,7 @@ public class PojavProfile {
         if(!LauncherProfiles.mainProfileJson.profilesWereMigrated && LauncherProfiles.mainProfileJson.profiles != null) {
             MinecraftProfile defaultProfile = LauncherProfiles.mainProfileJson.profiles.get("(Default)");
             if(defaultProfile != null) {
-                defaultProfile.lastVersionId = PojavProfile.getCurrentProfileContent(ctx).selectedVersion;
+                defaultProfile.lastVersionId = PojavProfile.getCurrentProfileContent(ctx, null).selectedVersion;
             }
             LauncherProfiles.mainProfileJson.profilesWereMigrated = true;
             LauncherProfiles.update();

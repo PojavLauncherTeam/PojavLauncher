@@ -57,7 +57,7 @@ public class MainActivity extends BaseActivity {
     private LoggerView loggerView;
 
     MinecraftAccount mProfile;
-    MinecraftProfile minecraftProfile;
+    public static MinecraftProfile minecraftProfile;
     
     private DrawerLayout drawerLayout;
     private ListView navDrawer;
@@ -74,6 +74,12 @@ public class MainActivity extends BaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+        mProfile = PojavProfile.getCurrentProfileContent(this, null);
+        if(LauncherProfiles.mainProfileJson == null) LauncherProfiles.update();
+        minecraftProfile = LauncherProfiles.mainProfileJson.profiles.get(LauncherPreferences.DEFAULT_PREF.getString(LauncherPreferences.PREF_KEY_CURRENT_PROFILE,""));
+        MCOptionUtils.load(Tools.getGameDirPath(minecraftProfile));
 
         initLayout(R.layout.activity_basemain);
 
@@ -134,7 +140,7 @@ public class MainActivity extends BaseActivity {
             loggerView = findViewById(R.id.mainLoggerView);
             mControlLayout = findViewById(R.id.main_control_layout);
             
-            mProfile = PojavProfile.getCurrentProfileContent(this);
+
             LauncherProfiles.update();
             minecraftProfile = LauncherProfiles.mainProfileJson.profiles.get(LauncherPreferences.DEFAULT_PREF.getString(LauncherPreferences.PREF_KEY_CURRENT_PROFILE,""));
             if(minecraftProfile == null) {
@@ -144,8 +150,7 @@ public class MainActivity extends BaseActivity {
             }
             String runtime = LauncherPreferences.PREF_DEFAULT_RUNTIME;
 
-                mVersionInfo = Tools.getVersionInfo(null, BaseLauncherActivity.getVersionId(
-                        minecraftProfile.lastVersionId));
+                mVersionInfo = Tools.getVersionInfo(BaseLauncherActivity.getVersionId(minecraftProfile.lastVersionId));
                 if(minecraftProfile.javaDir != null && minecraftProfile.javaDir.startsWith(Tools.LAUNCHERPROFILES_RTPREFIX)) {
                     String runtimeName = minecraftProfile.javaDir.substring(Tools.LAUNCHERPROFILES_RTPREFIX.length());
                     if(MultiRTUtils.forceReread(runtimeName).versionString != null) {
@@ -304,9 +309,8 @@ public class MainActivity extends BaseActivity {
 
 
         JREUtils.redirectAndPrintJRELog();
-            LauncherProfiles.update();
-            Tools.launchMinecraft(this, mProfile, BaseLauncherActivity.getVersionId(
-                    minecraftProfile.lastVersionId));
+        LauncherProfiles.update();
+        Tools.launchMinecraft(this, mProfile, minecraftProfile);
     }
     
     private void checkJavaArgsIsLaunchable(String jreVersion) throws Throwable {
