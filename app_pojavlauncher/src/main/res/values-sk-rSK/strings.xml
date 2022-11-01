@@ -83,10 +83,6 @@
     <string name="mcl_setting_category_general">Všeobecné nastavenia</string>
     <string name="mcl_setting_category_scaling">Nastavenie mierky</string>
     <string name="mcl_setting_category_renderer">Vykresľovač</string>
-    <string name="mcl_setting_renderer_gles2_4">svätý gl4es: podporuje 1.0 - 1.19+</string>
-    <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): exportuje OpenGL 4.3</string>
-    <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): exportuje OpenGL 3.0</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exportuje OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Aké typy verzií budú v zozname verzií</string>
     <string name="mcl_setting_veroption_release">Vydanie</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
