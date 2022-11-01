@@ -81,9 +81,6 @@
     <string name="mcl_setting_category_general">일반 설정</string>
     <string name="mcl_setting_category_scaling">크기 설정</string>
     <string name="mcl_setting_category_renderer">렌더러</string>
-    <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): OpenGL 4.3 사용</string>
-    <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): OpenGL 3.0 사용</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): OpenGL 4.6 내보내기</string>
     <string name="mcl_setting_category_veroption">버전 타입 리스트</string>
     <string name="mcl_setting_veroption_release">릴리즈</string>
     <string name="mcl_setting_veroption_snapshot">스냅숏</string>
