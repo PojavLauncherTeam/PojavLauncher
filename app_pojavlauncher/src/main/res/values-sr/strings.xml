@@ -84,10 +84,6 @@
     <string name="mcl_setting_category_general">Општа подешавања</string>
     <string name="mcl_setting_category_scaling">Подешавања величине</string>
     <string name="mcl_setting_category_renderer">Рендерер</string>
-    <string name="mcl_setting_renderer_gles2_4">Свети гл4ес: подржава 1.0- 1.19+</string>
-    <string name="mcl_setting_renderer_virgl">вирглрендерер (ОпенГЛ ЕС 3): експортира ОпенГЛ 4.3</string>
-    <string name="mcl_setting_renderer_vgpu">вгпу (ОпенГЛ ЕС 3) експортира ОпенГЛ 3.0</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): eкспортира OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Верзије које ће бити у листи верзија</string>
     <string name="mcl_setting_veroption_release">Стабилно</string>
     <string name="mcl_setting_veroption_snapshot">Снепшот</string>
