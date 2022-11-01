@@ -83,10 +83,6 @@
     <string name="mcl_setting_category_general">Mga pangkalahatang setting</string>
     <string name="mcl_setting_category_scaling">Mga setting ng pag-scale</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
-    <string name="mcl_setting_renderer_gles2_4">Sinusuportahan ng \"holy gl4es\" ang 1.0-1.19 at pataas</string>
-    <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): Nabago sa OpenGL 4.3</string>
-    <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): Nabago sa OpenGL 3.0</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): ini-export ang OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Ang uri ng bersyon ay nasa listahan ng bersyon</string>
     <string name="mcl_setting_veroption_release">Release</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
