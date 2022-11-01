@@ -79,8 +79,6 @@
     <string name="mcl_setting_category_general">Основныя настройки</string>
     <string name="mcl_setting_category_scaling">Настройки масштабированія</string>
     <string name="mcl_setting_category_renderer">Визуализаторъ</string>
-    <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): экспортируетъ OpenGL 3.0</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): экспортируетъ OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Типы версій, которые будутъ отображаться въ спискѣ версій</string>
     <string name="mcl_setting_veroption_release">Выпущенныя версіи</string>
     <string name="mcl_setting_veroption_snapshot">Пробныя версіи</string>
