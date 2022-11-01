@@ -83,10 +83,6 @@
     <string name="mcl_setting_category_general">Pengaturan umum</string>
     <string name="mcl_setting_category_scaling">Pengaturan penskalaan</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
-    <string name="mcl_setting_renderer_gles2_4">holy gl4es: mendukung 1.0-1.19+</string>
-    <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): mengekspor OpenGL 4.3</string>
-    <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): mengeksport OpenGL 3.0</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): mengekspor OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Jenis versi akan ada dalam daftar versi</string>
     <string name="mcl_setting_veroption_release">Rilis</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
