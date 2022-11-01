@@ -83,10 +83,6 @@
     <string name="mcl_setting_category_general">Impostazioni generali</string>
     <string name="mcl_setting_category_scaling">Modifica dimensioni</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
-    <string name="mcl_setting_renderer_gles2_4">santo gl4es: supporta 1.0-19+</string>
-    <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): esporta OpenGL 4.3</string>
-    <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): esporta OpenGL 3.0</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): esporta OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Tipo di versioni che saranno nell\'elenco delle versioni</string>
     <string name="mcl_setting_veroption_release">Finale</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
