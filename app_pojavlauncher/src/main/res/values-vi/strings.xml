@@ -83,10 +83,6 @@
     <string name="mcl_setting_category_general">Thiết lập chung</string>
     <string name="mcl_setting_category_scaling">Cài đặt độ rộng</string>
     <string name="mcl_setting_category_renderer">Trình kết xuất</string>
-    <string name="mcl_setting_renderer_gles2_4">gl4es mới: hỗ trợ từ 1.0-1.19+</string>
-    <string name="mcl_setting_renderer_virgl">vgpu (OpenGL ES 3): xuất ra OpenGL 4.3</string>
-    <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): xuất ra OpenGL 3.0</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): xuất ra OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Kiểu phiên bản sẽ được hiện ở trong danh sách phiên bản</string>
     <string name="mcl_setting_veroption_release">Bản phát hành</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
