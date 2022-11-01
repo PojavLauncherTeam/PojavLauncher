@@ -83,10 +83,6 @@
     <string name="mcl_setting_category_general">sᵷuᴉʇʇǝs ꞁɐɹǝuǝ⅁</string>
     <string name="mcl_setting_category_scaling">sᵷuᴉʇʇǝs ᵷuᴉꞁɐɔS</string>
     <string name="mcl_setting_category_renderer">ɹǝɹǝpuǝᴚ</string>
-    <string name="mcl_setting_renderer_gles2_4">+6Ɩ˙Ɩ–0˙Ɩ sʇɹoddns :sǝㄣlƃ ʎloɥ</string>
-    <string name="mcl_setting_renderer_virgl">Ɛ˙߈ Ꞁ⅁uǝdO sʇɹodxǝ :(Ɛ SƎ Ꞁ⅁uǝdO) ɹǝɹǝpuǝɹꞁᵷɹᴉʌ</string>
-    <string name="mcl_setting_renderer_vgpu">0˙Ɛ Ꞁ⅁uǝdO sʇɹodxǝ :(Ɛ SƎ Ꞁ⅁uǝdO) ndᵷʌ</string>
-    <string name="mcl_setting_renderer_vulkan_zink">9˙߈ Ꞁ⅁uǝdO sʇɹodxǝ :(uɐʞꞁnɅ) ʞuᴉz</string>
     <string name="mcl_setting_category_veroption">ʇsᴉꞁ uoᴉsɹǝʌ uᴉ ǝq ꞁꞁᴉʍ ǝdʎʇ uoᴉsɹǝɅ</string>
     <string name="mcl_setting_veroption_release">ǝsɐǝꞁǝᴚ</string>
     <string name="mcl_setting_veroption_snapshot">ʇoɥsdɐuS</string>
