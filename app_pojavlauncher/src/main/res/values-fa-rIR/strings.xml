@@ -82,8 +82,6 @@
     <string name="mcl_setting_category_general">تنظیمات عمومی</string>
     <string name="mcl_setting_category_scaling">تنظیمات مقیاسی</string>
     <string name="mcl_setting_category_renderer">رندر کننده</string>
-    <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): خروجی گرفتن از OpenGL 3.0</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exports OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">نوع ورژن برای نمایش در لیست ورژن‌ها</string>
     <string name="mcl_setting_veroption_release">ریلیز</string>
     <string name="mcl_setting_veroption_snapshot">اسنپ‌شات</string>
