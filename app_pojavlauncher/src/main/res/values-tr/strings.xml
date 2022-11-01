@@ -83,10 +83,6 @@
     <string name="mcl_setting_category_general">Genel ayarlar</string>
     <string name="mcl_setting_category_scaling">Boyutlandırma Seçenekleri</string>
     <string name="mcl_setting_category_renderer">İşleyici</string>
-    <string name="mcl_setting_renderer_gles2_4">kutsal gl4es: 1.0 - 1.19+ sürümlerini destekler</string>
-    <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): OpenGL 4.3 dışa aktarır</string>
-    <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): OpenGL 3.0 dışa aktarır</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): OpenGL 4.6 dışa aktarır</string>
     <string name="mcl_setting_category_veroption">Sürüm tipi sürüm listesinde olacaktır</string>
     <string name="mcl_setting_veroption_release">Sürümler</string>
     <string name="mcl_setting_veroption_snapshot">Test sürümleri</string>
