@@ -87,7 +87,7 @@
     <string name="mcl_setting_renderer_virgl">virglrenderer - (реліз 1.7+, повільний)</string>
     <string name="mcl_setting_renderer_vgpu">vgpu - (до 1.16.5, швидкий)</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink - (old_beta b1.8+, повільний)</string>
-    <string name="mcl_setting_renderer_angle">ANGLE - (реліз 1.17+, таке)</string>
+    <string name="mcl_setting_renderer_angle">ANGLE - (реліз 1.17+, середній)</string>
     <string name="mcl_setting_category_veroption">Типи версій, які будуть відображатися в списку версій</string>
     <string name="mcl_setting_veroption_release">Релізи</string>
     <string name="mcl_setting_veroption_snapshot">Снапшоти</string>
