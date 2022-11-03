@@ -132,6 +132,8 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:2.1.2"
 
     implementation 'com.github.duanhong169:checkerboarddrawable:1.0.2'
+    implementation 'com.intuit.sdp:sdp-android:1.1.0'
+    implementation 'com.intuit.ssp:ssp-android:1.1.0'
 
     
     // implementation 'com.intuit.sdp:sdp-android:1.0.5'
