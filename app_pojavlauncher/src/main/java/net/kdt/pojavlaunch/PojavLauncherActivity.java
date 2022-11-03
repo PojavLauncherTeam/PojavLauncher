@@ -145,10 +145,7 @@ public class PojavLauncherActivity extends BaseLauncherActivity
 
         // Try to load the temporary account
         final List<String> accountList = new ArrayList<>();
-        final MinecraftAccount tempProfile = PojavProfile.getTempProfileContent();
-        if (tempProfile != null) {
-            accountList.add(tempProfile.username);
-        }
+
         for (String s : new File(Tools.DIR_ACCOUNT_NEW).list()) {
             accountList.add(s.substring(0, s.length() - 5));
         }
@@ -159,26 +156,19 @@ public class PojavLauncherActivity extends BaseLauncherActivity
         adapterAcc.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
         accountSelector.setAdapter(adapterAcc);
 
-        if (tempProfile != null) {
-            accountSelector.setSelection(0);
-        } else {
-            for (int i = 0; i < accountList.size(); i++) {
-                String account = accountList.get(i);
-                if (account.equals(mProfile.username)) {
-                    accountSelector.setSelection(i);
-                }
+        for (int i = 0; i < accountList.size(); i++) {
+            String account = accountList.get(i);
+            if (account.equals(mProfile.username)) {
+                accountSelector.setSelection(i);
             }
         }
+
 
         accountSelector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
             @Override
             public void onItemSelected(AdapterView<?> p1, View p2, int position, long p4) {
-                if (tempProfile != null && position == 0) {
-                    PojavProfile.setCurrentProfile(PojavLauncherActivity.this, tempProfile);
-                } else {
-                    PojavProfile.setCurrentProfile(PojavLauncherActivity.this,
-                        accountList.get(position + (tempProfile != null ? 1 : 0)));
-                }
+                PojavProfile.setCurrentProfile(PojavLauncherActivity.this, accountList.get(position));
+
                 pickAccount();
             }
 

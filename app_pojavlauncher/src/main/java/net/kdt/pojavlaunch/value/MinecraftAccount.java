@@ -100,15 +100,4 @@ public class MinecraftAccount {
     private static boolean accountExists(String username){
         return new File(Tools.DIR_ACCOUNT_NEW + "/" + username + ".json").exists();
     }
-
-    public static void clearTempAccount() {
-        File tempAccFile = new File(Tools.DIR_DATA, "cache/tempacc.json");
-        tempAccFile.delete();
-    }
-    
-    public static void saveTempAccount(MinecraftAccount acc) throws IOException {
-        File tempAccFile = new File(Tools.DIR_DATA, "cache/tempacc.json");
-        tempAccFile.delete();
-        acc.save(tempAccFile.getAbsolutePath());
-    }
 }

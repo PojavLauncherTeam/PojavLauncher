@@ -696,7 +696,7 @@ public class PojavLoginActivity extends BaseActivity {
                     profileName = mProfile.save();
                 }
                 
-                PojavProfile.launch(PojavLoginActivity.this, profileName == null ? mProfile : profileName);
+                PojavProfile.launch(PojavLoginActivity.this, profileName);
             } catch (IOException e) {
                 Tools.showError(this, e);
             }
