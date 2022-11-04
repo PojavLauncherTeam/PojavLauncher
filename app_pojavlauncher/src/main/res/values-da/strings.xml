@@ -4,22 +4,35 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_error_invalid_username">Ugyldigt brugernavn. Brugernavn skal være mellem 3-16 tegn langt, bør kun indeholde A-Z, a-z, 0-9 og understregning.</string>
+    <string name="login_microsoft">Microsoft login</string>
+    <string name="login_title_no_saved_account">Ingen konto fundet!</string>
+    <string name="login_dialog_no_saved_account">Du har ikke nogen gemt konto.\nBrug indstillingen <b>\"Hold mig logget ind\"</b> for at gemme en konto ved første login.</string>
     <!-- Hint -->
     <!-- Warnings -->
     <!-- AlertDialog title -->
     <!-- Error messages -->
     <!-- Toast messages -->
+    <string name="toast_uninstalljre_done">Udført afinstallationen af Java RunTime</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">Nyt</string>
     <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">Tilsuttet</string>
+    <string name="mcl_account_local">Lokal</string>
     <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_launch_downloading_progress">"Henter %s (%.2f MB / %.2f MB)"</string>
+    <string name="mcl_launch_error_localmode">Minecraft kan ikke lovligt installeres, når du er logget ind med en lokal konto. Skift til en online konto for at fortsætte.</string>
+    <string name="mcl_option_modinstall">Start et mod-installationsprogram (Forge, LabyMod, Fabric, osv...)</string>
+    <string name="mcl_option_modinstallwitharg">Start et mod-installationsprogram (med brugerdefinerede argumenter)</string>
     <!-- Global strings -->
     <!-- MainActivity: strings -->
     <!-- MainActivity: Control buttons -->
     <!-- MainActivity: Menu advanced controls -->
     <!-- ImportControlActivity Strings -->
+    <string name="import_control_invalid_file">Filen er ugyldig eller beskadiget</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
