@@ -83,6 +83,11 @@
     <string name="mcl_setting_category_general">sᵷuᴉʇʇǝs ꞁɐɹǝuǝ⅁</string>
     <string name="mcl_setting_category_scaling">sᵷuᴉʇʇǝs ᵷuᴉꞁɐɔS</string>
     <string name="mcl_setting_category_renderer">ɹǝɹǝpuǝᴚ</string>
+    <string name="mcl_setting_renderer_gles2_4">(ʇsɐɟ \'suoᴉsɹǝʌ llɐ) - SƎㄣ˥פ ʎloH</string>
+    <string name="mcl_setting_renderer_virgl">(ʍols \'+ㄥ˙Ɩ ǝsɐǝlǝɹ) - ɹǝɹǝpuǝɹlƃɹᴉʌ</string>
+    <string name="mcl_setting_renderer_vgpu">(ʇsɐɟ \'ϛ˙9Ɩ˙Ɩ oʇ dn) - ndƃʌ</string>
+    <string name="mcl_setting_renderer_vulkan_zink">(ʍols \'+8˙Ɩq ɐʇǝq‾plo) - ʞuᴉz</string>
+    <string name="mcl_setting_renderer_angle">(pᴉɯ \'+ㄥƖ˙Ɩ ǝsɐǝlǝɹ) - Ǝ˥פN∀</string>
     <string name="mcl_setting_category_veroption">ʇsᴉꞁ uoᴉsɹǝʌ uᴉ ǝq ꞁꞁᴉʍ ǝdʎʇ uoᴉsɹǝɅ</string>
     <string name="mcl_setting_veroption_release">ǝsɐǝꞁǝᴚ</string>
     <string name="mcl_setting_veroption_snapshot">ʇoɥsdɐuS</string>
