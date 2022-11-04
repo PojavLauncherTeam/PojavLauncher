@@ -4,17 +4,26 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_microsoft">Microsoft login</string>
+    <string name="login_title_no_saved_account">Ingen konto fundet!</string>
+    <string name="login_dialog_no_saved_account">Du har ikke nogen gemt konto.\nBrug indstillingen <b>\"Hold mig logget ind\"</b> for at gemme en konto ved første login.</string>
     <!-- Hint -->
     <!-- Warnings -->
     <!-- AlertDialog title -->
     <!-- Error messages -->
     <!-- Toast messages -->
+    <string name="toast_uninstalljre_done">Udført afinstallationen af Java RunTime</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_news">Nyt</string>
     <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">Tilsuttet</string>
     <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_launch_downloading_progress">"Henter %s (%.2f MB / %.2f MB)"</string>
+    <string name="mcl_option_modinstall">Start et mod-installationsprogram (Forge, LabyMod, Fabric, osv...)</string>
+    <string name="mcl_option_modinstallwitharg">Start et mod-installationsprogram (med brugerdefinerede argumenter)</string>
     <!-- Global strings -->
     <!--
     <string name="mcl_about">
