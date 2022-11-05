@@ -7,6 +7,7 @@ import static org.lwjgl.glfw.CallbackBridge.sendMouseButton;
 import static org.lwjgl.glfw.CallbackBridge.windowHeight;
 import static org.lwjgl.glfw.CallbackBridge.windowWidth;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.SurfaceTexture;
@@ -382,6 +383,7 @@ public class MinecraftGLSurface extends View {
      * The event for mouse/joystick movements
      * We don't do the gamepad right now.
      */
+    @SuppressLint("NewApi")
     @Override
     public boolean dispatchGenericMotionEvent(MotionEvent event) {
         int mouseCursorIndex = -1;
