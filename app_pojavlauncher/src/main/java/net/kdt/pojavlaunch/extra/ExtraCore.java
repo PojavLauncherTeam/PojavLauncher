@@ -71,6 +71,12 @@ public final class ExtraCore {
         getInstance().mValueMap.remove(key);
     }
 
+    public static Object consumeValue(String key){
+        Object value = getInstance().mValueMap.get(key);
+        getInstance().mValueMap.remove(key);
+        return value;
+    }
+
     /** Remove all values */
     public static void removeAllValues(){
         getInstance().mValueMap.clear();
