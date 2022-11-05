@@ -8,24 +8,31 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
+
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import net.kdt.pojavlaunch.R;
 
 public class ColorSelector implements HueSelectionListener, RectangleSelectionListener, AlphaSelectionListener, TextWatcher{
     private static final int ALPHA_MASK = ~(0xFF << 24);
+    private final View mRootView;
     private final HueView mHueView;
     private final SVRectangleView mLuminosityIntensityView;
     private final AlphaView mAlphaView;
     private final ColorSideBySideView mColorView;
     private final EditText mTextView;
-    private final AlertDialog mDialog;
+
     private ColorSelectionListener mColorSelectionListener;
-    private float[] mHueTemplate = new float[] {0,1,1};
-    private float[] mHsvSelected = new float[] {360,1,1};
+    private final float[] mHueTemplate = new float[] {0,1,1};
+    private final float[] mHsvSelected = new float[] {360,1,1};
     private int mAlphaSelected = 0xff;
-    private ColorStateList mTextColors;
+    private final ColorStateList mTextColors;
     private boolean mWatch = true;
+
+    private boolean mAlphaEnabled = true;
 
 
     /**
@@ -33,38 +40,36 @@ public class ColorSelector implements HueSelectionListener, RectangleSelectionLi
      * @param context Context used for this ColorSelector dialog
      * @param colorSelectionListener Color selection listener to which the events will be sent to. Can be null.
      */
-    public ColorSelector(Context context, ColorSelectionListener colorSelectionListener) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        View view = LayoutInflater.from(context).inflate(R.layout.dialog_color_selector,null);
-        mHueView = view.findViewById(R.id.color_selector_hue_view);
-        mLuminosityIntensityView = view.findViewById(R.id.color_selector_rectangle_view);
-        mAlphaView = view.findViewById(R.id.color_selector_alpha_view);
-        mColorView = view.findViewById(R.id.color_selector_color_view);
-        mTextView = view.findViewById(R.id.color_selector_hex_edit);
+    public ColorSelector(Context context, ViewGroup parent, @Nullable ColorSelectionListener colorSelectionListener) {
+
+        mRootView = LayoutInflater.from(context).inflate(R.layout.dialog_color_selector,parent, false);
+        mHueView = mRootView.findViewById(R.id.color_selector_hue_view);
+        mLuminosityIntensityView = mRootView.findViewById(R.id.color_selector_rectangle_view);
+        mAlphaView = mRootView.findViewById(R.id.color_selector_alpha_view);
+        mColorView = mRootView.findViewById(R.id.color_selector_color_view);
+        mTextView = mRootView.findViewById(R.id.color_selector_hex_edit);
         runColor(Color.RED);
         mHueView.setHueSelectionListener(this);
         mLuminosityIntensityView.setRectSelectionListener(this);
         mAlphaView.setAlphaSelectionListener(this);
         mTextView.addTextChangedListener(this);
         mTextColors = mTextView.getTextColors();
-        builder.setView(view);
-        builder.setPositiveButton(android.R.string.ok,(dialog,which)->{
-            if (mColorSelectionListener != null) {
-                mColorSelectionListener.onColorSelected(Color.HSVToColor(mAlphaSelected, mHsvSelected));
-            }
-        });
-        builder.setNegativeButton(android.R.string.cancel, ((dialog, which) -> {}));
+
         mColorSelectionListener = colorSelectionListener;
-        mDialog = builder.create();
+
+        parent.addView(mRootView);
+    }
+
+    /** @return The root view, mainly for position manipulation purposes */
+    public View getRootView(){
+        return mRootView;
     }
 
     /**
      * Shows the color selector with the default (red) color selected.
      */
     public void show() {
-        runColor(Color.RED);
-        dispatchColorChange();
-        mDialog.show();
+        show(Color.RED);
     }
 
     /**
@@ -74,7 +79,6 @@ public class ColorSelector implements HueSelectionListener, RectangleSelectionLi
     public void show(int previousColor) {
         runColor(previousColor); // initialize
         dispatchColorChange(); // set the hex text
-        mDialog.show();
     }
 
     @Override
@@ -113,9 +117,10 @@ public class ColorSelector implements HueSelectionListener, RectangleSelectionLi
         mColorView.setColor(color);
         mWatch = false;
         mTextView.setText(String.format("%08X",color));
+        notifyColorSelector(color);
     }
 
-    //IUO: sets all Views to render the desired color. Used for initilaization and HEX color input
+    //IUO: sets all Views to render the desired color. Used for initialization and HEX color input
     protected void runColor(int color) {
         Color.RGBToHSV(Color.red(color), Color.green(color), Color.blue(color), mHsvSelected);
         mHueTemplate[0] = mHsvSelected[0];
@@ -123,7 +128,7 @@ public class ColorSelector implements HueSelectionListener, RectangleSelectionLi
         mLuminosityIntensityView.setColor(Color.HSVToColor(mHueTemplate), false);
         mLuminosityIntensityView.setLuminosityIntensity(mHsvSelected[2], mHsvSelected[1]);
         mAlphaSelected = Color.alpha(color);
-        mAlphaView.setAlpha(mAlphaSelected);
+        mAlphaView.setAlpha(mAlphaEnabled ? mAlphaSelected : 255);
         mColorView.setColor(color);
     }
 
@@ -146,5 +151,19 @@ public class ColorSelector implements HueSelectionListener, RectangleSelectionLi
         }else{
             mWatch = true;
         }
+    }
+
+    public void setColorSelectionListener(ColorSelectionListener listener){
+        mColorSelectionListener = listener;
+    }
+
+    public void setAlphaEnabled(boolean alphaEnabled){
+        mAlphaEnabled = alphaEnabled;
+        mAlphaView.setVisibility(alphaEnabled ? View.VISIBLE : View.GONE);
+    }
+
+    private void notifyColorSelector(int color){
+        if(mColorSelectionListener != null)
+            mColorSelectionListener.onColorSelected(color);
     }
 }

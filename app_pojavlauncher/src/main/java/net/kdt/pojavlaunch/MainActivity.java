@@ -61,6 +61,7 @@ public class MainActivity extends BaseActivity {
     
     private DrawerLayout drawerLayout;
     private ListView navDrawer;
+    private View mDrawerPullButton;
 
     private ArrayAdapter<String> gameActionArrayAdapter;
     private AdapterView.OnItemClickListener gameActionClickListener;
@@ -82,6 +83,9 @@ public class MainActivity extends BaseActivity {
         MCOptionUtils.load(Tools.getGameDirPath(minecraftProfile));
 
         initLayout(R.layout.activity_basemain);
+
+        mDrawerPullButton.setOnClickListener(v -> drawerLayout.openDrawer(navDrawer));
+        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
 
         // Set the sustained performance mode for available APIs
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
@@ -110,7 +114,7 @@ public class MainActivity extends BaseActivity {
         optionListener = MCOptionUtils::getMcScale;
         MCOptionUtils.addMCOptionListener(optionListener);
 
-        mControlLayout = findViewById(R.id.main_control_layout);
+
         mControlLayout.setModifiable(false);
         try {
             mControlLayout.loadLayout(LauncherPreferences.PREF_DEFAULTCTRL_PATH);
@@ -131,14 +135,14 @@ public class MainActivity extends BaseActivity {
 
     protected void initLayout(int resId) {
         setContentView(resId);
+        bindViews();
+
         try {
             Logger.getInstance().reset();
             // FIXME: is it safe fot multi thread?
             GLOBAL_CLIPBOARD = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-            touchCharInput = findViewById(R.id.mainTouchCharInput);
+
             touchCharInput.setCharacterSender(new LwjglCharSender());
-            loggerView = findViewById(R.id.mainLoggerView);
-            mControlLayout = findViewById(R.id.main_control_layout);
             
 
             LauncherProfiles.update();
@@ -175,10 +179,6 @@ public class MainActivity extends BaseActivity {
 
 
             // Menu
-            drawerLayout = findViewById(R.id.main_drawer_options);
-
-            navDrawer = findViewById(R.id.main_navigation_view);
-
             gameActionArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.menu_ingame));
             gameActionClickListener = (parent, view, position, id) -> {
                 switch(position) {
@@ -205,10 +205,10 @@ public class MainActivity extends BaseActivity {
             navDrawer.setAdapter(gameActionArrayAdapter);
             navDrawer.setOnItemClickListener(gameActionClickListener);
 
-            touchpad = findViewById(R.id.main_touchpad);
 
 
-            this.minecraftGLView = findViewById(R.id.main_game_render_view);
+
+
             this.drawerLayout.closeDrawers();
 
             minecraftGLView.setSurfaceReadyListener(() -> {
@@ -375,18 +375,15 @@ public class MainActivity extends BaseActivity {
     }
 
     public void leaveCustomControls() {
-        if(this instanceof MainActivity) {
-            try {
-                mControlLayout.hideAllHandleViews();
-                mControlLayout.loadLayout((CustomControls)null);
-                mControlLayout.setModifiable(false);
-                System.gc();
-                mControlLayout.loadLayout(LauncherPreferences.DEFAULT_PREF.getString("defaultCtrl",Tools.CTRLDEF_FILE));
-            } catch (IOException e) {
-                Tools.showError(this,e);
-            }
-            //((MainActivity) this).mControlLayout.loadLayout((CustomControls)null);
+        try {
+            mControlLayout.loadLayout((CustomControls)null);
+            mControlLayout.setModifiable(false);
+            System.gc();
+            mControlLayout.loadLayout(LauncherPreferences.DEFAULT_PREF.getString("defaultCtrl",Tools.CTRLDEF_FILE));
+        } catch (IOException e) {
+            Tools.showError(this,e);
         }
+        //((MainActivity) this).mControlLayout.loadLayout((CustomControls)null);
         navDrawer.setAdapter(gameActionArrayAdapter);
         navDrawer.setOnItemClickListener(gameActionClickListener);
         isInEditor = false;
@@ -508,5 +505,17 @@ public class MainActivity extends BaseActivity {
                 Tools.showError(ctx, th);
             }
         });
+    }
+
+    private void bindViews(){
+        mControlLayout = findViewById(R.id.main_control_layout);
+        minecraftGLView = findViewById(R.id.main_game_render_view);
+        touchpad = findViewById(R.id.main_touchpad);
+        drawerLayout = findViewById(R.id.main_drawer_options);
+        navDrawer = findViewById(R.id.main_navigation_view);
+        loggerView = findViewById(R.id.mainLoggerView);
+        mControlLayout = findViewById(R.id.main_control_layout);
+        touchCharInput = findViewById(R.id.mainTouchCharInput);
+        mDrawerPullButton = findViewById(R.id.drawer_button);
     }
 }

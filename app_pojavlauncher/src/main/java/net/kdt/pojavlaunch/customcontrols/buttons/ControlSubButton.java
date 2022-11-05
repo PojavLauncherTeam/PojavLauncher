@@ -1,7 +1,6 @@
 package net.kdt.pojavlaunch.customcontrols.buttons;
 
-import android.os.Handler;
-import android.os.Looper;
+import android.annotation.SuppressLint;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -12,6 +11,7 @@ import net.kdt.pojavlaunch.customcontrols.ControlData;
 import net.kdt.pojavlaunch.customcontrols.ControlDrawerData;
 import net.kdt.pojavlaunch.customcontrols.ControlLayout;
 
+@SuppressLint("ViewConstructor")
 public class ControlSubButton extends ControlButton {
 
     public ControlDrawer parentDrawer;
@@ -19,9 +19,6 @@ public class ControlSubButton extends ControlButton {
     public ControlSubButton(ControlLayout layout, ControlData properties, ControlDrawer parentDrawer) {
         super(layout, properties);
         this.parentDrawer = parentDrawer;
-
-
-
         filterProperties();
     }
 
@@ -49,16 +46,40 @@ public class ControlSubButton extends ControlButton {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if(!mModifiable || parentDrawer.drawerData.orientation == ControlDrawerData.Orientation.FREE){
+        if(!getControlLayoutParent().getModifiable() || parentDrawer.drawerData.orientation == ControlDrawerData.Orientation.FREE){
             return super.onTouchEvent(event);
         }
 
-        if(mGestureDetector == null) mGestureDetector = new GestureDetector(getContext(), new SingleTapConfirm());
-
-        if (mGestureDetector.onTouchEvent(event)) {
-            mCanTriggerLongClick = true;
+        if (event.getActionMasked() == MotionEvent.ACTION_UP) {
+            //mCanTriggerLongClick = true;
             onLongClick(this);
         }
         return true;
+    }
+
+    @Override
+    public void cloneButton() {
+        ControlData cloneData = new ControlData(getProperties());
+        cloneData.dynamicX = "0.5 * ${screen_width}";
+        cloneData.dynamicY = "0.5 * ${screen_height}";
+        ((ControlLayout) getParent()).addSubButton(parentDrawer, cloneData);
+    }
+
+    @Override
+    public void removeButton() {
+        parentDrawer.drawerData.buttonProperties.remove(getProperties());
+        parentDrawer.drawerData.buttonProperties.remove(getProperties());
+        parentDrawer.buttons.remove(this);
+
+        parentDrawer.syncButtons();
+
+        super.removeButton();
+    }
+
+    @Override
+    public void snapAndAlign(float x, float y) {
+        if(parentDrawer.drawerData.orientation == ControlDrawerData.Orientation.FREE)
+            super.snapAndAlign(x, y);
+        // Else the button is forced into place
     }
 }

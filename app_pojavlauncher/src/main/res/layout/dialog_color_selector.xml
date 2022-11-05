@@ -1,69 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-    <net.kdt.pojavlaunch.colorselector.HueView
-        android:id="@+id/color_selector_hue_view"
-        android:layout_width="0dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:focusable="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/color_selector_rectangle_view" />
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/_230sdp"
+    android:layout_height="match_parent"
+    android:background="@color/background_app"
+    android:paddingHorizontal="@dimen/_5sdp"
+    android:paddingVertical="@dimen/_5sdp"
+    android:id="@+id/color_picker_layout"
+    android:layout_marginVertical="@dimen/_14sdp">
 
     <net.kdt.pojavlaunch.colorselector.SVRectangleView
         android:id="@+id/color_selector_rectangle_view"
         android:layout_width="0dp"
         android:layout_height="150dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
         android:focusable="true"
-        app:layout_constraintEnd_toStartOf="@+id/color_selector_hex_edit"
+        android:layout_marginEnd="8dp"
+
+        app:layout_constraintEnd_toStartOf="@+id/color_selector_alpha_view"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <net.kdt.pojavlaunch.colorselector.AlphaView
-        android:id="@+id/color_selector_alpha_view"
-        android:layout_width="0dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/color_selector_hue_view"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/color_selector_hue_view" />
-
-    <EditText
-        android:id="@+id/color_selector_hex_edit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:hint="@string/color_default_hex"
-        android:importantForAutofill="no"
-        android:inputType="text"
-        android:minHeight="48dp"
-        android:typeface="monospace"
-        app:layout_constraintBottom_toTopOf="@+id/color_selector_hue_view"
-        app:layout_constraintEnd_toEndOf="parent" />
 
     <net.kdt.pojavlaunch.colorselector.ColorSideBySideView
         android:id="@+id/color_selector_color_view"
         android:layout_width="0dp"
+        android:layout_height="94dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/color_selector_rectangle_view"
+        app:layout_constraintStart_toStartOf="@+id/color_selector_rectangle_view"
+        app:layout_constraintTop_toBottomOf="@+id/color_selector_rectangle_view" />
+
+    <EditText
+        android:id="@+id/color_selector_hex_edit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/color_default_hex"
+        android:gravity="center"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:typeface="monospace"
+        app:layout_constraintEnd_toEndOf="@+id/color_selector_color_view"
+        app:layout_constraintStart_toStartOf="@+id/color_selector_color_view"
+        app:layout_constraintTop_toBottomOf="@+id/color_selector_color_view" />
+
+
+
+    <net.kdt.pojavlaunch.colorselector.AlphaView
+        android:id="@+id/color_selector_alpha_view"
+        android:layout_width="25dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/color_selector_hue_view"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <net.kdt.pojavlaunch.colorselector.HueView
+        android:id="@+id/color_selector_hue_view"
+        android:layout_width="25dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/color_selector_hex_edit"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/color_selector_rectangle_view"
+
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
