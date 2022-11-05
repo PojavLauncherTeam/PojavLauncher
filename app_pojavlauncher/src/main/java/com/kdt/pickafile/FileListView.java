@@ -26,6 +26,8 @@ public class FileListView extends LinearLayout
 
     //For filtering by file types:
     private final String[] fileSuffixes;
+    private boolean showFiles = true;
+    private boolean showFolders = true;
 
     public FileListView(AlertDialog build) {
         this(build.getContext(), null, new String[0]);
@@ -40,6 +42,14 @@ public class FileListView extends LinearLayout
     public FileListView(AlertDialog build, String[] fileSuffixes){
         this(build.getContext(), null, fileSuffixes);
         this.build = build;
+    }
+
+    public FileListView(Context context){
+        this(context, null);
+    }
+
+    public FileListView(Context context, AttributeSet attrs){
+        this(context, attrs, new String[0]);
     }
 
     public FileListView(Context context, AttributeSet attrs, String[] fileSuffixes) {
@@ -62,32 +72,25 @@ public class FileListView extends LinearLayout
 
         mainLv = new ListView(context);
 
-        mainLv.setOnItemClickListener(new OnItemClickListener(){
-                @Override
-                public void onItemClick(AdapterView<?> p1, View p2, int p3, long p4)
-                {
-                    // TODO: Implement this method
-                    File mainFile = new File(p1.getItemAtPosition(p3).toString());
-                    if (p3 == 0 && !lockPath.equals(fullPath)) {
-                        parentDir();
-                    } else {
-                        listFileAt(mainFile.getAbsolutePath());
-                    }
-                }
-            });
-        mainLv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
-                @Override
-                public boolean onItemLongClick(AdapterView<?> p1, View p2, int p3, long p4)
-                {
-                    // TODO: Implement this method
-                    File mainFile = new File(p1.getItemAtPosition(p3).toString());
-                    if (mainFile.isFile()) {
-                        listener.onFileLongClick(mainFile, mainFile.getAbsolutePath());
-                        return true;
-                    }
-                    return false;
-                }
-            });
+        mainLv.setOnItemClickListener((p1, p2, p3, p4) -> {
+            // TODO: Implement this method
+            File mainFile = new File(p1.getItemAtPosition(p3).toString());
+            if (p3 == 0 && !lockPath.equals(fullPath)) {
+                parentDir();
+            } else {
+                listFileAt(mainFile.getAbsolutePath());
+            }
+        });
+
+        mainLv.setOnItemLongClickListener((p1, p2, p3, p4) -> {
+            // TODO: Implement this method
+            File mainFile = new File(p1.getItemAtPosition(p3).toString());
+            if (mainFile.isFile()) {
+                listener.onFileLongClick(mainFile, mainFile.getAbsolutePath());
+                return true;
+            }
+            return false;
+        });
         addView(mainLv, layParam);
 
         try {
@@ -99,8 +102,7 @@ public class FileListView extends LinearLayout
         this.listener = listener;
     }
 
-    public void listFileAt(final String path)
-    {
+    public void listFileAt(final String path) {
         try{
             final File mainPath = new File(path);
             if(mainPath.exists()){
@@ -115,27 +117,27 @@ public class FileListView extends LinearLayout
 
                     if(listFile != null && listFile.length != 0){
                         Arrays.sort(listFile, new SortFileName());
-                        if(fileSuffixes.length > 0){ //Meaning we want only specific files
-                            for(File file : listFile){
-                                if(file.isDirectory()){
-                                    if((!file.getName().startsWith(".")) || file.getName().equals(".minecraft"))
-                                    fileAdapter.add(file);
-                                    continue;
-                                }
 
-                                for(String suffix : fileSuffixes){
-                                    if(file.getName().endsWith("." + suffix)){
-                                        fileAdapter.add(file);
-                                        break;
-                                    }
-                                }
+                        for(File file : listFile){
+                            if(file.isDirectory()){
+                                if(showFolders && ((!file.getName().startsWith(".")) || file.getName().equals(".minecraft")))
+                                    fileAdapter.add(file);
+                                continue;
                             }
-                        }else{ //We get every file
-                            for(File file : listFile){
-                                fileAdapter.add(file);
+
+                            if(showFiles){
+                                if(fileSuffixes.length > 0){
+                                    for(String suffix : fileSuffixes){
+                                        if(file.getName().endsWith("." + suffix)){
+                                            fileAdapter.add(file);
+                                            break;
+                                        }
+                                    }
+                                }else {
+                                    fileAdapter.add(file);
+                                }
                             }
                         }
-
                     }
                     mainLv.setAdapter(fileAdapter);
                     if (build != null) build.setTitle(new File(path).getName());
@@ -158,16 +160,24 @@ public class FileListView extends LinearLayout
     public void refreshPath() {
         listFileAt(getFullPath());
     }
-    
+
     public void parentDir() {
         File pathFile = new File(fullPath);
         if(!pathFile.getAbsolutePath().equals("/")){
             listFileAt(pathFile.getParent());
         }
     }
-    
+
     public void lockPathAt(String path) {
         lockPath = path;
         listFileAt(path);
+    }
+
+    public void setShowFiles(boolean showFiles){
+        this.showFiles = showFiles;
+    }
+
+    public void setShowFolders(boolean showFolders){
+        this.showFolders = showFolders;
     }
 }
