@@ -177,6 +177,7 @@
     <string name="customctrl_addsubbutton">Sub-Schaltfläche hinzufügen</string>
     <string name="customctrl_add_subbutton_message">Unter-Schaltfläche Nr. %d wurde hinzugefügt!</string>
     <string name="customctrl_selectdefault">Wähle die Standardsteuerung</string>
+    <string name="customctrl_export">Steuerung exportieren</string>
     <string name="main_install_jar_file">.jar installieren</string>
     <string name="main_options">Optionen</string>
     <string name="main_play">Spielen</string>
