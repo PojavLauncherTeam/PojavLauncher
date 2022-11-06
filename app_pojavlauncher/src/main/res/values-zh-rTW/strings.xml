@@ -166,6 +166,7 @@
     <string name="customctrl_addsubbutton">添加子按鈕</string>
     <string name="customctrl_add_subbutton_message">子按鈕 n°%d 已添加 !</string>
     <string name="customctrl_selectdefault">選擇預設.json 控制鍵位</string>
+    <string name="customctrl_export">導出控制鍵</string>
     <string name="main_install_jar_file">安裝 .jar</string>
     <string name="main_options">選項</string>
     <string name="main_play">啟動遊戲</string>
