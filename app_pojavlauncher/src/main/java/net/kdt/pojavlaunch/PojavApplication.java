@@ -11,11 +11,14 @@ import android.util.*;
 import java.io.*;
 import java.text.*;
 import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import net.kdt.pojavlaunch.utils.*;
 
 public class PojavApplication extends Application {
 	public static String CRASH_REPORT_TAG = "PojavCrashReport";
+	public static ExecutorService sExecutorService = Executors.newFixedThreadPool(4);
 	
 	@Override
 	public void onCreate() {

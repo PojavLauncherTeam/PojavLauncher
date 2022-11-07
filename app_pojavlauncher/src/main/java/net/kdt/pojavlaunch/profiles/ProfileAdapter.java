@@ -1,13 +1,11 @@
 package net.kdt.pojavlaunch.profiles;
 
 import android.content.Context;
-import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
@@ -18,6 +16,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import fr.spse.extended_view.ExtendedTextView;
+
 /*
  * Adapter for listing launcher profiles in a Spinner
  */
@@ -27,6 +28,7 @@ public class ProfileAdapter extends BaseAdapter {
     private final MinecraftProfile dummy = new MinecraftProfile();
     private MinecraftProfile mCreateProfile;
     private List<String> mProfileList;
+
     public ProfileAdapter(Context context, boolean enableCreateButton) {
         ProfileIconCache.initDefault(context);
         LauncherProfiles.update();
@@ -34,7 +36,7 @@ public class ProfileAdapter extends BaseAdapter {
         if(enableCreateButton) {
             mCreateProfile = new MinecraftProfile();
             mCreateProfile.name = "Create new profile";
-            mCreateProfile.lastVersionId = "";
+            mCreateProfile.lastVersionId = null;
         }
         mProfileList = new ArrayList<>(Arrays.asList(mProfiles.keySet().toArray(new String[0])));
         if(enableCreateButton) {
@@ -94,33 +96,38 @@ public class ProfileAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = convertView;
-        if (v == null) v = LayoutInflater.from(parent.getContext()).inflate(R.layout.version_profile_layout,parent,false);
+        if (v == null) v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_version_profile_layout,parent,false);
         setViewProfile(v,mProfileList.get(position));
         return v;
     }
+
     public void setViewProfile(View v, String nm) {
+        ExtendedTextView extendedTextView = (ExtendedTextView) v;
+
         MinecraftProfile minecraftProfile = mProfiles.get(nm);
         if(minecraftProfile == null) minecraftProfile = dummy;
-        Bitmap cachedIcon = ProfileIconCache.getCachedIcon(nm);
-        ImageView iconView = v.findViewById(R.id.vprof_icon_view);
-        if(cachedIcon == null) {
-            cachedIcon = ProfileIconCache.tryResolveIcon(nm,minecraftProfile.icon);
-        }
-        iconView.setImageBitmap(cachedIcon);
-        if(minecraftProfile.name != null && !minecraftProfile.name.isEmpty())
-            ((TextView)v.findViewById(R.id.vprof_profile_name_view)).setText(minecraftProfile.name);
-        else
-            ((TextView)v.findViewById(R.id.vprof_profile_name_view)).setText(R.string.unnamed);
+        Drawable cachedIcon = ProfileIconCache.getCachedIcon(nm);
 
-        TextView tv = v.findViewById(R.id.vprof_version_id_view);
-        if(minecraftProfile.lastVersionId != null) switch (minecraftProfile.lastVersionId) {
-            case "latest-release":
-                tv.setText(R.string.profiles_latest_release);
-            case "latest-snapshot":
-                tv.setText(R.string.profiles_latest_snapshot);
-            default:
-                tv.setText(minecraftProfile.lastVersionId);
-        } else tv.setText(android.R.string.unknownName);
+        if(cachedIcon == null) {
+            cachedIcon = ProfileIconCache.tryResolveIcon(v.getResources(), nm, minecraftProfile.icon);
+        }
+        extendedTextView.setCompoundDrawablesRelative(cachedIcon, null, extendedTextView.getCompoundsDrawables()[2], null);
+
+        if(minecraftProfile.name != null && !minecraftProfile.name.isEmpty())
+            extendedTextView.setText(minecraftProfile.name);
+        else
+            extendedTextView.setText(R.string.unnamed);
+
+        if(minecraftProfile.lastVersionId != null){
+            if(minecraftProfile.lastVersionId.equalsIgnoreCase("latest-release")){
+                extendedTextView.setText( String.format("%s - %s", extendedTextView.getText(), v.getContext().getText(R.string.profiles_latest_release)));
+            } else if(minecraftProfile.lastVersionId.equalsIgnoreCase("latest-snapshot")){
+                extendedTextView.setText( String.format("%s - %s", extendedTextView.getText(), v.getContext().getText(R.string.profiles_latest_snapshot)));
+            } else {
+                extendedTextView.setText( String.format("%s - %s", extendedTextView.getText(), minecraftProfile.lastVersionId));
+            }
+
+        } else extendedTextView.setText(extendedTextView.getText());
 
     }
 }

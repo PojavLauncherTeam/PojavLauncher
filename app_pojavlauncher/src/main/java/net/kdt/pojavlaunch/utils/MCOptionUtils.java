@@ -28,15 +28,15 @@ public class MCOptionUtils {
     private static FileObserver sFileObserver;
     private static String sOptionFolderPath = null;
     public interface MCOptionListener {
-         /** Called when an option is changed. Don't know which one though */
+        /** Called when an option is changed. Don't know which one though */
         void onOptionChanged();
     }
 
 
     public static void load(){
         load(sOptionFolderPath == null
-            ? Tools.DIR_GAME_NEW
-            : sOptionFolderPath);
+                ? Tools.DIR_GAME_NEW
+                : sOptionFolderPath);
     }
 
     public static void load(@NonNull String folderPath) {
@@ -56,7 +56,7 @@ public class MCOptionUtils {
         sParameterMap.clear();
 
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(sOptionFolderPath + "/options.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader(optionFile));
             String line;
             while ((line = reader.readLine()) != null) {
                 int firstColonIndex = line.indexOf(':');
@@ -71,7 +71,7 @@ public class MCOptionUtils {
             Log.w(Tools.APP_NAME, "Could not load options.txt", e);
         }
     }
-    
+
     public static void set(String key, String value) {
         sParameterMap.put(key,value);
     }
@@ -98,7 +98,7 @@ public class MCOptionUtils {
 
         return Arrays.asList(value.split(","));
     }
-    
+
     public static void save() {
         StringBuilder result = new StringBuilder();
         for(String key : sParameterMap.keySet())
@@ -106,9 +106,11 @@ public class MCOptionUtils {
                     .append(':')
                     .append(sParameterMap.get(key))
                     .append('\n');
-        
+
         try {
+            sFileObserver.stopWatching();
             Tools.write(sOptionFolderPath + "/options.txt", result.toString());
+            sFileObserver.startWatching();
         } catch (IOException e) {
             Log.w(Tools.APP_NAME, "Could not save options.txt", e);
         }
@@ -116,7 +118,6 @@ public class MCOptionUtils {
 
     /** @return The stored Minecraft GUI scale, also auto-computed if on auto-mode or improper setting */
     public static int getMcScale() {
-        MCOptionUtils.load();
         String str = MCOptionUtils.get("guiScale");
         int guiScale = (str == null ? 0 :Integer.parseInt(str));
 

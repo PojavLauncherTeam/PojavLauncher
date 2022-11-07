@@ -12,8 +12,6 @@ import com.google.gson.JsonSyntaxException;
 import java.io.File;
 import java.io.IOException;
 
-import net.kdt.pojavlaunch.authenticator.mojang.RefreshListener;
-import net.kdt.pojavlaunch.authenticator.mojang.RefreshTokenTask;
 import net.kdt.pojavlaunch.value.MinecraftAccount;
 import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
 import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
@@ -89,23 +87,5 @@ public class PojavProfile {
 	public static boolean isFileType(Context ctx) {
 		return new File(Tools.DIR_ACCOUNT_NEW + "/" + PojavProfile.getCurrentProfileName(ctx) + ".json").exists();
 	}
-	
 
-    public static void launch(Activity ctx, String accountName) {
-        PojavProfile.setCurrentProfile(ctx, accountName);
-        LauncherProfiles.update();
-        if(!LauncherProfiles.mainProfileJson.profilesWereMigrated && LauncherProfiles.mainProfileJson.profiles != null) {
-            MinecraftProfile defaultProfile = LauncherProfiles.mainProfileJson.profiles.get("(Default)");
-            if(defaultProfile != null) {
-                defaultProfile.lastVersionId = PojavProfile.getCurrentProfileContent(ctx, null).selectedVersion;
-            }
-            LauncherProfiles.mainProfileJson.profilesWereMigrated = true;
-            LauncherProfiles.update();
-        }
-        Intent intent = new Intent(ctx, PojavLauncherActivity.class); //MCLauncherActivity.class);
-        ctx.startActivity(intent);
-    }
-    public static void updateTokens(final Activity ctx, final String name, RefreshListener listen) throws Exception {
-        new RefreshTokenTask(ctx, listen).execute(name);
-    }
 }

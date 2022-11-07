@@ -604,6 +604,10 @@ public class MinecraftGLSurface extends View {
     public void refreshSize(){
         windowWidth = Tools.getDisplayFriendlyRes(Tools.currentDisplayMetrics.widthPixels, mScaleFactor);
         windowHeight = Tools.getDisplayFriendlyRes(Tools.currentDisplayMetrics.heightPixels, mScaleFactor);
+        if(mSurface == null){
+            Log.w("MGLSurface", "Attempt to refresh size on null surface");
+            return;
+        }
         if(LauncherPreferences.PREF_USE_ALTERNATE_SURFACE){
             SurfaceView view = (SurfaceView) mSurface;
             if(view.getHolder() != null){

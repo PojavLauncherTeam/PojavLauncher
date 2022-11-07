@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.SwitchPreference;
 
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.prefs.CustomSeekBarPreference;
@@ -29,5 +30,9 @@ public class LauncherPreferenceVideoFragment extends LauncherPreferenceFragment 
         if (seek5.getValue() < 25) {
             seek5.setValue(100);
         }
+
+        // Sustained performance is only available since Nougat
+        SwitchPreference sustainedPerfSwitch = findPreference("sustainedPerformance");
+        sustainedPerfSwitch.setVisible(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N);
     }
 }

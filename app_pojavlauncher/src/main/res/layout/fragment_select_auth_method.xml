@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:background="@color/background_app"
+    android:paddingHorizontal="@dimen/_16sdp"
+    >
+
+    <com.kdt.mcgui.MineButton
+        android:id="@+id/button_microsoft_authentication"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_12ssp"
+        android:text="Microsoft Account"
+        />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_5sdp"/>
+
+    <com.kdt.mcgui.MineButton
+        android:id="@+id/button_local_authentication"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_12ssp"
+        android:text="Local account"
+        />
+
+</LinearLayout>

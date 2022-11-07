@@ -12,7 +12,6 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 
     <application
-        android:process=":launcher"
         android:allowBackup="true"
         android:name=".PojavApplication"
         android:theme="@style/AppTheme"
@@ -30,9 +29,9 @@
         <activity
             android:exported="true"
             android:launchMode="singleTop"
-            android:screenOrientation="sensorLandscape"
+            android:screenOrientation="portrait"
             android:label="@string/app_short_name"
-            android:name=".PojavLoginActivity"
+            android:name=".LauncherActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -69,10 +68,6 @@
             android:screenOrientation="sensorLandscape"
             android:name=".ExitActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
-        <activity
-            android:screenOrientation="sensorLandscape"
-            android:name=".PojavLauncherActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
         
         <activity
             android:screenOrientation="sensorLandscape"
@@ -83,13 +78,10 @@
             android:screenOrientation="sensorLandscape"
             android:name=".CustomControlsActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
-        <activity
-            android:screenOrientation="sensorLandscape"
-            android:name=".authenticator.microsoft.ui.MicrosoftLoginGUIActivity"/>
+
         <activity
             android:launchMode="standard"
             android:screenOrientation="sensorLandscape"
-            android:process=":game"
             android:name=".MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|keyboard|navigation"/>
 
