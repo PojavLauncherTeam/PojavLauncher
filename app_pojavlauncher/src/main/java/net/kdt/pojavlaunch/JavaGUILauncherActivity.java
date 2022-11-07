@@ -123,7 +123,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
         });
 
         try {
-            MultiRTUtils.setRuntimeNamed(this,LauncherPreferences.PREF_DEFAULT_RUNTIME);
+            MultiRTUtils.setRuntimeNamed(LauncherPreferences.PREF_DEFAULT_RUNTIME);
 
             placeMouseAt(CallbackBridge.physicalWidth / 2, CallbackBridge.physicalHeight / 2);
             

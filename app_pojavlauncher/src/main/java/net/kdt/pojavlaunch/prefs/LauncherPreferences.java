@@ -1,6 +1,13 @@
 package net.kdt.pojavlaunch.prefs;
 
+import static android.os.Build.VERSION_CODES.P;
+
+import android.app.Activity;
 import android.content.*;
+import android.graphics.Rect;
+import android.os.Build;
+import android.util.Log;
+
 import net.kdt.pojavlaunch.*;
 import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.utils.JREUtils;
@@ -22,7 +29,7 @@ public class LauncherPreferences {
 	public static int PREF_LONGPRESS_TRIGGER = 300;
 	public static String PREF_DEFAULTCTRL_PATH = Tools.CTRLDEF_FILE;
 	public static String PREF_CUSTOM_JAVA_ARGS;
-    public static String PREF_LANGUAGE = "default";
+    public static boolean PREF_FORCE_ENGLISH = false;
     public static String PREF_VERSION_REPOS = "https://piston-meta.mojang.com/mc/game/version_manifest_v2.json";
     public static boolean PREF_CHECK_LIBRARY_SHA = true;
     public static boolean PREF_DISABLE_GESTURES = false;
@@ -57,7 +64,7 @@ public class LauncherPreferences {
 		PREF_VERTYPE_OLDBETA = DEFAULT_PREF.getBoolean("vertype_oldbeta", false);
 		PREF_LONGPRESS_TRIGGER = DEFAULT_PREF.getInt("timeLongPressTrigger", 300);
 		PREF_DEFAULTCTRL_PATH = DEFAULT_PREF.getString("defaultCtrl", Tools.CTRLDEF_FILE);
-        PREF_LANGUAGE = DEFAULT_PREF.getString("language", "default");
+        PREF_FORCE_ENGLISH = DEFAULT_PREF.getBoolean("force_english", false);
         PREF_CHECK_LIBRARY_SHA = DEFAULT_PREF.getBoolean("checkLibraries",true);
         PREF_DISABLE_GESTURES = DEFAULT_PREF.getBoolean("disableGestures",false);
         PREF_RAM_ALLOCATION = DEFAULT_PREF.getInt("allocation", findBestRAMAllocation(ctx));
@@ -138,5 +145,20 @@ public class LauncherPreferences {
         if (deviceRam < 4096) return 1148;
         if (deviceRam < 6144) return 1536;
         return 2048; //Default RAM allocation for 64 bits
+    }
+
+    /** Compute the notch size to avoid being out of bounds */
+    public static void computeNotchSize(Activity activity) {
+        if (Build.VERSION.SDK_INT < P) return;
+
+        try {
+            Rect notchRect = activity.getWindow().getDecorView().getRootWindowInsets().getDisplayCutout().getBoundingRects().get(0);
+            // Math min is to handle all rotations
+            LauncherPreferences.PREF_NOTCH_SIZE = Math.min(notchRect.width(), notchRect.height());
+        }catch (Exception e){
+            Log.i("NOTCH DETECTION", "No notch detected, or the device if in split screen mode");
+            LauncherPreferences.PREF_NOTCH_SIZE = -1;
+        }
+        Tools.updateWindowSize(activity);
     }
 }

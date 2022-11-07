@@ -1,6 +1,9 @@
 package net.kdt.pojavlaunch.utils;
 
 import android.util.*;
+
+import androidx.annotation.Nullable;
+
 import java.io.*;
 import java.net.*;
 import java.nio.charset.*;
@@ -18,29 +21,29 @@ public class DownloadUtils {
     public static void download(URL url, OutputStream os) throws IOException {
         InputStream is = null;
         try {
-			// System.out.println("Connecting: " + url.toString());
+            // System.out.println("Connecting: " + url.toString());
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestProperty("User-Agent", USER_AGENT);
-			conn.setConnectTimeout(10000);
+            conn.setConnectTimeout(10000);
             conn.setDoInput(true);
             conn.connect();
-			if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
+            if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
                 throw new IOException("Server returned HTTP " + conn.getResponseCode()
-					+ ": " + conn.getResponseMessage());
+                        + ": " + conn.getResponseMessage());
             }
             is = conn.getInputStream();
-			IOUtils.copy(is, os);
+            IOUtils.copy(is, os);
         } catch (IOException e) {
             throw new IOException("Unable to download from " + url.toString(), e);
         } finally {
-			if (is != null) {
+            if (is != null) {
                 try {
                     is.close();
                 } catch (Exception e) {
-					e.printStackTrace();
+                    e.printStackTrace();
                 }
             }
-		}
+        }
     }
 
     public static String downloadString(String url) throws IOException {
@@ -75,7 +78,7 @@ public class DownloadUtils {
                 throw th2;
             }
         } catch (IOException th3) {
-         
+
             if (bos != null) {
                 bos.close();
             }
@@ -85,5 +88,60 @@ public class DownloadUtils {
             throw th3;
         }
     }
+
+    public static void downloadFileMonitored(String urlInput, String nameOutput, @Nullable byte[] buffer,
+                                             Tools.DownloaderFeedback monitor) throws IOException {
+        downloadFileMonitored(urlInput, new File(nameOutput), buffer, monitor);
+    }
+    public static void downloadFileMonitored(String urlInput,File outputFile, @Nullable byte[] buffer,
+                                             Tools.DownloaderFeedback monitor) throws IOException {
+        if (!outputFile.exists()) {
+            outputFile.getParentFile().mkdirs();
+        }
+
+        HttpURLConnection conn = (HttpURLConnection) new URL(urlInput).openConnection();
+        InputStream readStr = conn.getInputStream();
+        FileOutputStream fos = new FileOutputStream(outputFile);
+        int cur;
+        int oval = 0;
+        int len = conn.getContentLength();
+
+        if(buffer == null) buffer = new byte[65535];
+
+        while ((cur = readStr.read(buffer)) != -1) {
+            oval += cur;
+            fos.write(buffer, 0, cur);
+            monitor.updateProgress(oval, len);
+        }
+        fos.close();
+        conn.disconnect();
+    }
+
+    public static void downloadFileMonitoredWithHeaders(String urlInput,File outputFile, @Nullable byte[] buffer,
+                                                        Tools.DownloaderFeedback monitor, String userAgent, String cookies) throws IOException {
+        if (!outputFile.exists()) {
+            outputFile.getParentFile().mkdirs();
+        }
+
+        HttpURLConnection conn = (HttpURLConnection) new URL(urlInput).openConnection();
+        conn.setRequestProperty("User-Agent", userAgent);
+        conn.setRequestProperty("Cookies", cookies);
+        InputStream readStr = conn.getInputStream();
+        FileOutputStream fos = new FileOutputStream(outputFile);
+        int cur;
+        int oval = 0;
+        int len = conn.getContentLength();
+
+        if(buffer == null) buffer = new byte[65535];
+
+        while ((cur = readStr.read(buffer)) != -1) {
+            oval += cur;
+            fos.write(buffer, 0, cur);
+            monitor.updateProgress(oval, len);
+        }
+        fos.close();
+        conn.disconnect();
+    }
+
 }
 

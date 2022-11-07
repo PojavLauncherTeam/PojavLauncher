@@ -11,13 +11,12 @@ import com.google.gson.*;
 
 import java.io.*;
 import java.lang.reflect.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.nio.charset.*;
 import java.util.*;
 
 import net.kdt.pojavlaunch.extra.ExtraConstants;
 import net.kdt.pojavlaunch.extra.ExtraCore;
+import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.utils.*;
 import net.kdt.pojavlaunch.value.*;
@@ -25,25 +24,35 @@ import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
 import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 
 import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.io.IOUtils;
 import org.lwjgl.glfw.*;
 import android.view.*;
+import android.webkit.MimeTypeMap;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.P;
+import static net.kdt.pojavlaunch.PojavApplication.sExecutorService;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_IGNORE_NOTCH;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_NOTCH_SIZE;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 public final class Tools {
     public static final boolean ENABLE_DEV_FEATURES = BuildConfig.DEBUG;
 
     public static String APP_NAME = "null";
-    
+
     public static final Gson GLOBAL_GSON = new GsonBuilder().setPrettyPrinting().create();
-    
+
     public static final String URL_HOME = "https://pojavlauncherteam.github.io/PojavLauncher";
 
+    public static String NATIVE_LIB_DIR;
     public static String DIR_DATA; //Initialized later to get context
     public static String MULTIRT_HOME;
     public static String LOCAL_RENDERER = null;
@@ -56,7 +65,7 @@ public final class Tools {
     public static String DIR_GAME_HOME = Environment.getExternalStorageDirectory().getAbsolutePath() + "/games/PojavLauncher";
     public static String DIR_GAME_NEW;
     public static String DIR_GAME_OLD = Environment.getExternalStorageDirectory().getAbsolutePath() + "/games/.minecraft";
-    
+
     // New since 3.0.0
     public static String DIR_HOME_JRE;
     public static String DIRNAME_HOME_JRE = "lib";
@@ -71,8 +80,9 @@ public final class Tools {
     public static String OBSOLETE_RESOURCES_PATH;
     public static String CTRLMAP_PATH;
     public static String CTRLDEF_FILE;
-    
+
     public static final String LIBNAME_OPTIFINE = "optifine:OptiFine";
+    public static final int RUN_MOD_INSTALLER = 2050;
 
     /**
      * Since some constant requires the use of the Context object
@@ -95,6 +105,7 @@ public final class Tools {
         OBSOLETE_RESOURCES_PATH= DIR_GAME_NEW + "/resources";
         CTRLMAP_PATH = DIR_GAME_HOME + "/controlmap";
         CTRLDEF_FILE = DIR_GAME_HOME + "/controlmap/default.json";
+        NATIVE_LIB_DIR = ctx.getApplicationInfo().nativeLibraryDir;
     }
 
 
@@ -115,8 +126,7 @@ public final class Tools {
             }
         }
 
-
-        JMinecraftVersionList.Version versionInfo = Tools.getVersionInfo(MainActivity.minecraftProfile.lastVersionId);
+        JMinecraftVersionList.Version versionInfo = Tools.getVersionInfo(minecraftProfile.lastVersionId);
 
         LauncherProfiles.update();
         String gamedirPath = Tools.getGameDirPath(minecraftProfile);
@@ -131,7 +141,6 @@ public final class Tools {
         // Select the appropriate openGL version
         OldVersionsUtils.selectOpenGlVersion(versionInfo);
 
-        // ctx.appendlnToLog("Minecraft Args: " + Arrays.toString(launchArgs));
 
         String launchClassPath = generateLaunchClassPath(versionInfo, minecraftProfile.lastVersionId);
 
@@ -153,7 +162,7 @@ public final class Tools {
 */
 
         if (versionInfo.logging != null) {
-            String configFile = Tools.DIR_DATA + "/" + versionInfo.logging.client.file.id.replace("client", "log4j-rce-patch");
+            String configFile = Tools.DIR_DATA + "/security/" + versionInfo.logging.client.file.id.replace("client", "log4j-rce-patch");
             if (!new File(configFile).exists()) {
                 configFile = Tools.DIR_GAME_NEW + "/" + versionInfo.logging.client.file.id;
             }
@@ -200,7 +209,7 @@ public final class Tools {
             Log.w(Tools.APP_NAME, "Could not disable Forge 1.12.2 and below splash screen!", e);
         }
     }
-    
+
     public static void getCacioJavaArgs(List<String> javaArgList, boolean isJava8) {
         // Caciocavallo config AWT-enabled version
         javaArgList.add("-Djava.awt.headless=false");
@@ -295,7 +304,7 @@ public final class Tools {
         if (versionInfo.inheritsFrom != null) {
             versionName = versionInfo.inheritsFrom;
         }
-        
+
         String userType = "mojang";
 
         File gameDir = new File(strGameDir);
@@ -327,12 +336,12 @@ public final class Tools {
                     if (argv.values != null) {
                         minecraftArgs.add(argv.values[0]);
                     } else {
-                        
+
                          for (JMinecraftVersionList.Arguments.ArgValue.ArgRules rule : arg.rules) {
                          // rule.action = allow
                          // TODO implement this
                          }
-                         
+
                     }
                     */
                 }
@@ -349,13 +358,13 @@ public final class Tools {
         minecraftArgs.add("--fullscreenHeight");
         minecraftArgs.add(Integer.toString(CallbackBridge.windowHeight));
         */
-        
+
         String[] argsFromJson = JSONUtils.insertJSONValueList(
-            splitAndFilterEmpty(
-                versionInfo.minecraftArguments == null ?
-                fromStringArray(minecraftArgs.toArray(new String[0])):
-                versionInfo.minecraftArguments
-            ), varArgMap
+                splitAndFilterEmpty(
+                        versionInfo.minecraftArguments == null ?
+                                fromStringArray(minecraftArgs.toArray(new String[0])):
+                                versionInfo.minecraftArguments
+                ), varArgMap
         );
         // Tools.dialogOnUiThread(this, "Result args", Arrays.asList(argsFromJson).toString());
         return argsFromJson;
@@ -465,7 +474,7 @@ public final class Tools {
             if (SDK_INT >= Build.VERSION_CODES.R) {
                 activity.getDisplay().getRealMetrics(displayMetrics);
             } else if(SDK_INT >= P) {
-                 activity.getWindowManager().getDefaultDisplay().getRealMetrics(displayMetrics);
+                activity.getWindowManager().getDefaultDisplay().getRealMetrics(displayMetrics);
             }else{ // Some old devices can have a notch despite it not being officially supported
                 activity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
             }
@@ -479,17 +488,22 @@ public final class Tools {
         return displayMetrics;
     }
 
-    public static void setFullscreen(Activity activity) {
+    public static void setFullscreen(Activity activity, boolean fullscreen) {
         final View decorView = activity.getWindow().getDecorView();
         decorView.setOnSystemUiVisibilityChangeListener (visibility -> {
-            if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
-                decorView.setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+            if(fullscreen){
+                if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
+                    decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            | View.SYSTEM_UI_FLAG_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+                }
+            }else{
+                decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
             }
+
         });
     }
 
@@ -516,15 +530,14 @@ public final class Tools {
         copyAssetFile(ctx, fileName, output, new File(fileName).getName(), overwrite);
     }
 
-    public static void copyAssetFile(Context ctx, String fileName, String output, String outputName, boolean overwrite) throws IOException
-    {
-        File file = new File(output);
-        if(!file.exists()) {
-            file.mkdirs();
+    public static void copyAssetFile(Context ctx, String fileName, String output, String outputName, boolean overwrite) throws IOException {
+        File parentFolder = new File(output);
+        if(!parentFolder.exists()) {
+            parentFolder.mkdirs();
         }
-        File file2 = new File(output, outputName);
-        if(!file2.exists() || overwrite){
-            write(file2.getAbsolutePath(), loadFromAssetToByte(ctx, fileName));
+        File destinationFile = new File(output, outputName);
+        if(!destinationFile.exists() || overwrite){
+            IOUtils.copy(ctx.getAssets().open(fileName), new FileOutputStream(destinationFile));
         }
     }
 
@@ -542,34 +555,34 @@ public final class Tools {
 
     private static void showError(final Context ctx, final int titleId, final Throwable e, final boolean exitIfOk, final boolean showMore) {
         e.printStackTrace();
-        
+
         Runnable runnable = () -> {
             final String errMsg = showMore ? Log.getStackTraceString(e): e.getMessage();
             AlertDialog.Builder builder = new AlertDialog.Builder((Context) ctx)
-                .setTitle(titleId)
-                .setMessage(errMsg)
-                .setPositiveButton(android.R.string.ok, (DialogInterface.OnClickListener) (p1, p2) -> {
-                    if(exitIfOk) {
-                        if (ctx instanceof MainActivity) {
-                            MainActivity.fullyExit();
-                        } else if (ctx instanceof Activity) {
-                            ((Activity) ctx).finish();
+                    .setTitle(titleId)
+                    .setMessage(errMsg)
+                    .setPositiveButton(android.R.string.ok, (DialogInterface.OnClickListener) (p1, p2) -> {
+                        if(exitIfOk) {
+                            if (ctx instanceof MainActivity) {
+                                MainActivity.fullyExit();
+                            } else if (ctx instanceof Activity) {
+                                ((Activity) ctx).finish();
+                            }
                         }
-                    }
-                })
-                .setNegativeButton(showMore ? R.string.error_show_less : R.string.error_show_more, (DialogInterface.OnClickListener) (p1, p2) -> showError(ctx, titleId, e, exitIfOk, !showMore))
-                .setNeutralButton(android.R.string.copy, (DialogInterface.OnClickListener) (p1, p2) -> {
-                    ClipboardManager mgr = (ClipboardManager) ctx.getSystemService(Context.CLIPBOARD_SERVICE);
-                    mgr.setPrimaryClip(ClipData.newPlainText("error", Log.getStackTraceString(e)));
-                    if(exitIfOk) {
-                        if (ctx instanceof MainActivity) {
-                            MainActivity.fullyExit();
-                        } else {
-                            ((Activity) ctx).finish();
+                    })
+                    .setNegativeButton(showMore ? R.string.error_show_less : R.string.error_show_more, (DialogInterface.OnClickListener) (p1, p2) -> showError(ctx, titleId, e, exitIfOk, !showMore))
+                    .setNeutralButton(android.R.string.copy, (DialogInterface.OnClickListener) (p1, p2) -> {
+                        ClipboardManager mgr = (ClipboardManager) ctx.getSystemService(Context.CLIPBOARD_SERVICE);
+                        mgr.setPrimaryClip(ClipData.newPlainText("error", Log.getStackTraceString(e)));
+                        if(exitIfOk) {
+                            if (ctx instanceof MainActivity) {
+                                MainActivity.fullyExit();
+                            } else {
+                                ((Activity) ctx).finish();
+                            }
                         }
-                    }
-                })
-                .setCancelable(!exitIfOk);
+                    })
+                    .setCancelable(!exitIfOk);
             try {
                 builder.show();
             } catch (Throwable th) {
@@ -586,10 +599,10 @@ public final class Tools {
 
     public static void dialogOnUiThread(final Activity activity, final CharSequence title, final CharSequence message) {
         activity.runOnUiThread(() -> new AlertDialog.Builder(activity)
-            .setTitle(title)
-            .setMessage(message)
-            .setPositiveButton(android.R.string.ok, null)
-            .show());
+                .setTitle(title)
+                .setMessage(message)
+                .setPositiveButton(android.R.string.ok, null)
+                .show());
     }
 
     public static void moveInside(String from, String to) {
@@ -622,6 +635,7 @@ public final class Tools {
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         act.startActivity(browserIntent);
     }
+
     private static boolean checkRules(JMinecraftVersionList.Arguments.ArgValue.ArgRules[] rules) {
         if(rules == null) return true; // always allow
         for (JMinecraftVersionList.Arguments.ArgValue.ArgRules rule : rules) {
@@ -757,11 +771,11 @@ public final class Tools {
             }
         }
     }
-    
+
     public static String convertStream(InputStream inputStream) throws IOException {
         return convertStream(inputStream, Charset.forName("UTF-8"));
     }
-    
+
     public static String convertStream(InputStream inputStream, Charset charset) throws IOException {
         StringBuilder out = new StringBuilder();
         int len;
@@ -786,9 +800,9 @@ public final class Tools {
         long lastMod = Long.MIN_VALUE;
         File choice = null;
         for (File file : files) {
-             if (file.lastModified() > lastMod) {
-                 choice = file;
-                 lastMod = file.lastModified();
+            if (file.lastModified() > lastMod) {
+                choice = file;
+                lastMod = file.lastModified();
             }
         }
         return choice;
@@ -845,35 +859,16 @@ public final class Tools {
         File file = new File(nameOutput);
         DownloadUtils.downloadFile(urlInput, file);
     }
-    public abstract static class DownloaderFeedback {
-        public abstract void updateProgress(int curr, int max);
+    public interface DownloaderFeedback {
+        void updateProgress(int curr, int max);
     }
 
-    public static void downloadFileMonitored(String urlInput,String nameOutput, DownloaderFeedback monitor) throws IOException {
-        File nameOutputFile = new File(nameOutput);
-        if (!nameOutputFile.exists()) {
-            nameOutputFile.getParentFile().mkdirs();
-        }
-        HttpURLConnection conn = (HttpURLConnection) new URL(urlInput).openConnection();
-        InputStream readStr = conn.getInputStream();
-        FileOutputStream fos = new FileOutputStream(nameOutputFile);
-        int cur = 0;
-        int oval = 0;
-        int len = conn.getContentLength();
-        byte[] buf = new byte[65535];
-        while ((cur = readStr.read(buf)) != -1) {
-            oval += cur;
-            fos.write(buf, 0, cur);
-            monitor.updateProgress(oval, len);
-        }
-        fos.close();
-        conn.disconnect();
-    }
+
     public static boolean compareSHA1(File f, String sourceSHA) {
         try {
             String sha1_dst;
             try (InputStream is = new FileInputStream(f)) {
-                 sha1_dst = new String(Hex.encodeHex(org.apache.commons.codec.digest.DigestUtils.sha1(is)));
+                sha1_dst = new String(Hex.encodeHex(org.apache.commons.codec.digest.DigestUtils.sha1(is)));
             }
             if(sha1_dst != null && sourceSHA != null) {
                 return sha1_dst.equalsIgnoreCase(sourceSHA);
@@ -921,13 +916,10 @@ public final class Tools {
     public static String getFileName(Context ctx, Uri uri) {
         String result = null;
         if (uri.getScheme().equals("content")) {
-            Cursor cursor = ctx.getContentResolver().query(uri, null, null, null, null);
-            try {
+            try (Cursor cursor = ctx.getContentResolver().query(uri, null, null, null, null)) {
                 if (cursor != null && cursor.moveToFirst()) {
                     result = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
                 }
-            } finally {
-                cursor.close();
             }
         }
         if (result == null) {
@@ -938,5 +930,110 @@ public final class Tools {
             }
         }
         return result;
+    }
+
+    /** Swap the main fragment with another */
+    public static void swapFragment(FragmentActivity fragmentActivity , Class<? extends Fragment> fragmentClass,
+                                    @Nullable String fragmentTag, boolean addCurrentToBackstack, @Nullable Bundle bundle) {
+        // When people tab out, it might happen
+        //TODO handle custom animations
+        FragmentTransaction transaction = fragmentActivity.getSupportFragmentManager().beginTransaction()
+                .setReorderingAllowed(true)
+                .replace(R.id.container_fragment, fragmentClass, bundle, fragmentTag);
+        if(addCurrentToBackstack) transaction.addToBackStack(null);
+
+        transaction.commit();
+    }
+
+    /** Remove the current fragment */
+    public static void removeCurrentFragment(FragmentActivity fragmentActivity){
+        fragmentActivity.getSupportFragmentManager().popBackStackImmediate();
+    }
+
+    public static void installMod(Activity activity, boolean customJavaArgs) {
+        if (MultiRTUtils.getExactJreName(8) == null) {
+            Toast.makeText(activity, R.string.multirt_nojava8rt, Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        if(!customJavaArgs){ // Launch the intent to get the jar file
+            Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+            intent.addCategory(Intent.CATEGORY_OPENABLE);
+            String mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension("jar");
+            if(mimeType == null) mimeType = "*/*";
+            intent.setType(mimeType);
+            activity.startActivityForResult(intent, RUN_MOD_INSTALLER);
+            return;
+        }
+
+        // install mods with custom arguments
+        final EditText editText = new EditText(activity);
+        editText.setSingleLine();
+        editText.setHint("-jar/-cp /path/to/file.jar ...");
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity)
+                .setTitle(R.string.alerttitle_installmod)
+                .setNegativeButton(android.R.string.cancel, null)
+                .setView(editText)
+                .setPositiveButton(android.R.string.ok, (di, i) -> {
+                    Intent intent = new Intent(activity, JavaGUILauncherActivity.class);
+                    intent.putExtra("skipDetectMod", true);
+                    intent.putExtra("javaArgs", editText.getText().toString());
+                    activity.startActivity(intent);
+                });
+        builder.show();
+    }
+
+    /** Display and return a progress dialog, instructing to wait */
+    private static ProgressDialog getWaitingDialog(Context ctx){
+        final ProgressDialog barrier = new ProgressDialog(ctx);
+        barrier.setMessage(ctx.getString(R.string.global_waiting));
+        barrier.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        barrier.setCancelable(false);
+        barrier.show();
+
+        return barrier;
+    }
+
+    /** Copy the mod file, and launch the mod installer activity */
+    public static void launchModInstaller(Activity activity, @NonNull Intent data){
+        final ProgressDialog alertDialog = getWaitingDialog(activity);
+
+        final Uri uri = data.getData();
+        alertDialog.setMessage(activity.getString(R.string.multirt_progress_caching));
+        sExecutorService.execute(() -> {
+            try {
+                final String name = getFileName(activity, uri);
+                final File modInstallerFile = new File(activity.getCacheDir(), name);
+                FileOutputStream fos = new FileOutputStream(modInstallerFile);
+                IOUtils.copy(activity.getContentResolver().openInputStream(uri), fos);
+                fos.close();
+                activity.runOnUiThread(() -> {
+                    alertDialog.dismiss();
+                    Intent intent = new Intent(activity, JavaGUILauncherActivity.class);
+                    intent.putExtra("modFile", modInstallerFile);
+                    activity.startActivity(intent);
+                });
+            }catch(IOException e) {
+                Tools.showError(activity, e);
+            }
+        });
+    }
+
+
+    public static void installRuntimeFromUri(Activity activity, Uri uri){
+        sExecutorService.execute(() -> {
+            try {
+                String name = getFileName(activity, uri);
+                MultiRTUtils.installRuntimeNamed(
+                        NATIVE_LIB_DIR,
+                        activity.getContentResolver().openInputStream(uri),
+                        name);
+
+                MultiRTUtils.postPrepare(name);
+            } catch (IOException e) {
+                Tools.showError(activity, e);
+            }
+        });
     }
 }
