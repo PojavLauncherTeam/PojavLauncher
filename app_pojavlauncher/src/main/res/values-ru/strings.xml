@@ -177,6 +177,7 @@
     <string name="customctrl_addsubbutton">Добавить под-кнопку</string>
     <string name="customctrl_add_subbutton_message">Подкнопка №%d добавлена!</string>
     <string name="customctrl_selectdefault">Выбрать управление по умолчанию</string>
+    <string name="customctrl_export">Экспорт раскладки</string>
     <string name="main_install_jar_file">Установите .jar</string>
     <string name="main_options">Опции</string>
     <string name="main_play">Играть</string>
