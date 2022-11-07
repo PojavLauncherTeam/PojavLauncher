@@ -12,8 +12,13 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         LocaleUtils.setLocale(this);
-        Tools.setFullscreen(this);
+        Tools.setFullscreen(this, setFullscreen());
         Tools.updateWindowSize(this);
+    }
+
+    /** @return Whether the activity should be set as a fullscreen one */
+    public boolean setFullscreen(){
+        return true;
     }
 
 
