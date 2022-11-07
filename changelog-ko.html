@@ -59,9 +59,9 @@ body {font-family: Arial;}
 
 <!-- Page tabs (DO NOT TOUCH UNLESS PERMITTED TO DO SO) -->
 <div class="tab">
-  <button class="tablinks" onclick="openCity(event, 'LauncherChangelog')">📰 Changelog</button>
-  <button class="tablinks" onclick="openCity(event, 
-    'About')">ℹ️ About</button>
+  <button class="tablinks" onclick="openCity(event, 'LauncherChangelog')">📰 바뀐점</button>
+<button class="tablinks" onclick="openCity(event, 
+    'About')">ℹ️ 정보</button>
 </div>
 
 
@@ -69,95 +69,95 @@ body {font-family: Arial;}
 
 <!-- LauncherChangelog: Contains PojavLauncher App Changelog -->
 <div id="LauncherChangelog" class="tabcontent">
-<center><h1>Stable Releases</h1></center>
-<center><h4>Launcher Support accepted in:</center>
+<center><h1>안정적인 버전</h1></center>
+<center><h4>런처 지원이 허용되었습니다</center>
 <center><img src="./assets/images/pix/discord.png" width="32" height="32"><img src="./assets/images/pix/spacer.png" width="32" height="32"><img src="./assets/images/pix/ghub.png" width="32" height="32"></h4></center>
 <br>
-<center>Dahlia only.</center>
-  <h2><img src="./assets/images/pix/isSupported.png" width="16" height="16"> Dahlia</h2>
-	  <b>• App now requires a premium account, otherwise installation of the game assets are denied from the launcher itself.</b><br>
-	  • Most languages have been added<br>
-          <b>• VGPU and all variants of GL4ES 1.1.5 have been removed from the launcher.</b><br>
-          • GL4ES 1.1.4 was replaced with a custom fork, adding many features and bug fixes<br>
-	  • Controls have been reworked and improved and extended, gamepad latency is frame perfect.<br>
-	  • Color selector for controls has been changed<br>
-          <b>• Profiles are added! Now you can keep multiple setups of the game with different selected renderers, JVMs, and game directories.</b></br>
-          • Java 17 is now integrated into the launcher for running 1.17+<br>
+<center>오직 달리아만</center>
+  <h2><img src="./assets/images/pix/isSupported.png" width="16" height="16"> 달리아</h2>
+	  <b>• 이제부터 프리미엄 계정이 필요합니다.
+프리미엄 계정이 아니라면, 런처가 게임 구성요소를 설치하지 않을것입니다.</b><br>
+	  • 대부분의 언어가 추가되었습니다<br>
+          <b>• VGPU와 GL4ES 1.1.5의 모든 관련 버전들이 런처에서 삭제되었습니다.</b><br>
+          • GL4ES 1.1.4가 버그 수정과, 많은 기능을 추가하며, 커스텀 포크로 대체되었습니다<br>
+	  • 컨트롤이 증가하고, 개선되었습니다. 컨트롤러 지원이 이제 완벽합니다<br>
+	  • 컨트롤에서 색깔 선택기가 수정되었습니다<br>
+          <b>• 프로필이 추가되었습니다! 이제부터 여러 다른 랜더러, JVM, 게임 디렉터리 구성이 유지됩니다.</b></br>
+          • Java 17은 이제 1.17버전 이상 실행을 위해 런처에 내장되었습니다.<br>
           <br>
-          • New settings were added:<br>
-           "Use alternate surface rendering", which uses a different kind of rendering surface to render the game faster on some devices.<br>
-"Start with virtual mouse on", which makes the game start with mouse already enabled<br>
-"Enable sustained performance mode", which limits CPU/GPU usage to prevent overheating and thermal throttling<br>
+          • 새로운 설정이 생겼습니다:<br>
+           "대체 표면 렌더링 사용"은 특정 기기에서 게임을 더 빠르게 구동하기 위해, 다른 종류의 표면 렌더링을 사용합니다.<br>
+"가상 마우스 켜짐 상태로 시작하기"는 가상 마우스가 이미 켜진 상태로 게임을 시작합니다<br>
+"성능 유지모드 켜기"는 과열과 쓰로틀링 제어를 위해CPU/GPU의 성능을 제한합니다<br>
 <br>
-• Added Arc Capes support (now changed to cosmetica.gg)<br>
+• 아크 망토 지원을 추가했습니다 (이제 cosmetica.gg로 변경되었습니다)<br>
 <br>
-Bug Fixes:<br>
-• Fixed a crash occurring while starting a screen recorder<br>
-• Fixed a NullPointerException crash when launching versions below 1.6.4<br>
-• In versions above 1.13, game was crashing while scrolling, that was fixed.<br>
-• 1.13/1.14 no longer crashes upon the first touch<br>
-• Fix older versions not being fullscreen at launch<br>
-• Fix older versions having a "halved light" on entities<br>
-• Fixed hotbar not registering 0-9 inputs.<br>
-• No more errors about a null array when loading a custom control on android 10+<br>
-• Now the game will resize in splitscreen/freeform mode, although not officially supported<br>
+버그 패치노트:<br>
+• 화면 녹화기를 실행할때 발생하는 크래쉬를 해결하였습니다<br>
+• 1.6.4 이하 버전을 실행할때 생기는 NullPointerException 크래쉬를 해결하였습니다<br>
+• 1.13 이상 버전에서 스크롤할때 생기는 크래쉬를 해결하였습니다<br>
+• 1.13/1.14 버전에서 처음으로 터치할때 생기는 크래쉬를해결하였습니다<br>
+• 오래된 버전에서 전체화면으로 시작되지 않는 문제를 해결하였습니다<br>
+• 오래된 버전에서 "엔티티 빛이 절반이 되는 현상"을 해결하였습니다<br>
+• 핫바에서 0-9 입력에 응답하지 않던 현상을 해결하였습니다<br>
+• 안드로이드 10 이상에서 커스텀 컨트롤을 로딩할때 생기던 "배열 없음" 현상을 해결하였습니다<br>
+• 비록 공식적으로 지원되지는 않지만, 이제부터 분할화면, 팝업화면 모드에서 게임이 자동으로 재조정됩니다<br>
 <br>
 
 <h2><img src="./assets/images/pix/isNotSupported.png" width="16" height="16"> Crocus (v3_openjdk)</h2>
-	  <b>• New options:</b><br>
-	  - a fully-functional Mod Installer<br>
+	  <b>• 새로운 옵션:</b><br>
+	  - 모든 기능이 작동하는 모드 설치기<br>
 	  	  <b>——————</br>
-          <b>• New features:</b><br>
-          - Now faster with Java 8.<br>
-	  - Now can run Minecraft 1.13 and above<br>
-	  - Now can properly launch Forge and Fabric! To install one of these "modloaders", just simply download their .jar files.<br>
-          - Multi-architecture support: ARMv7, aarch64, x86 and x86_64.<br>
-          - <strike>Now properly supports Custom Controls (either made by the Discord community or by you!)</strike><br>
+          <b>• 새로운 기능들:</b><br>
+          - 이제 Java 8이 더 빨라졌습니다.<br>
+	  - 이제 마인크래프트 1.13과 그 이후 버전를 실행할수 있습니다<br>
+	  - 이제 포지와 패브릭을 원활히 실행할수 있습니다! "모드 로더"들 중 하나를 설치하려면, 단순히 모드의 .jar 파일을 다운로드하세요.<br>
+          - 여러 아키텍처를 지원합니다: ARMv7, aarch64, x86 and x86_64.<br>
+          - <strike>이제 원활하게 커스텀 컨트롤을 지원합니다 (디스코드 커뮤니티에서 만들어진것 또는 당신이 만든것도 지원합니다!)</strike><br>
           	  <b>——————</br>
-          <b>• What's New</b></br>
-          - Java 17 for running Minecraft Versions above 21w10a<br>
-          - Controls Revision: added new features, such as drawer buttons, and new control editing features.<br>
-          (Note that controls made before this revision will not work.)</br>
-          - New renderers: virgl and vgpu</br>
-          (Though VirGL supports up to OpenGL 4.5, it can't run shaders properly.)</br>
-          - Removed zink</br>
-          - Implemented local accounts, after what happened with Doregon/PojavLauncher_iOS, and as such, you can't download Minecraft resources, not even one.</br>
-          <strike>(Make sure to backup your PojavLauncher folder so that you can still play Minecraft after updating)</strike></br>
+          <b>• 패치노트</b></br>
+          - 마인크래프트 21w10a 이상 버전에서는 Java 17이 사용됩니다<br>
+          - 컨트롤 개선: 드로워 버튼과 새로운 컨트롤 편집 기능같은 새 기능들이 추가되었습니다<br>
+          (이번 업데이트 전에 만들어진 컨트롤 설정들은 사용할수 없음을 알립니다)</br>
+          - 새로운 렌더러: virgl 과 vgpu</br>
+          (VirGL이 OpenGL 4.5 이상을 지원하지만, 쉐이더를 원활히 실행할수 없습니다)</br>
+          - zink를 삭제했습니다</br>
+          - 로컬 계정을 조치하였습니다 Doregon/IOS용 PojavLauncher에 생긴 일처럼, 당신은 마인크래프트 구성요소를 단 한개도 설치할수 없습니다</br>
+          <strike>(업데이트 후에도 마인크래프트를 플레이할수 있게, PojavLauncher 폴더를 백업해두세요)</strike></br>
           
 	  <br>
 
 <br>
 <!-- v2.x-->
-<center><h1>Beta Releases</h1></center>
-<center><h4>Don't use unless you're that one history guy.</h4></center>
+<center><h1>베타 버전</h1></center>
+<center><h4>당신이 바보가 아니라면 사용하지 마세요</h4></center>
 <br>
-<h2>▶ v2.5 - Last BETA Release</h2>
-	  <b>• NOTICE: OptiFine Installer is experimental, for some devices will crash at splash screen (Mojang Screen). Don't report bug about OptiFine crash at splash screen, these will not be solved.</b><br>
-	  <b>• New settings:</b><br>
-	  - You can now customize the MS delay of touch gestures (placing block, destroying block.)<br>
-	  <b>• New features:</b><br>
-	  - Scrolling in Minecraft 1.8 or above by tapping the screen and holding SEC button<br>
+<h2>▶ v2.5 - 최신 베타버전</h2>
+	  <b>• 주의: 옵티파인 설치기는 아직 테스트용 입니다. 어떤 기기는 스플래시 화면에서 멈출수 있습니다(모장 로딩화면). 옵티파인 충돌 관련 버그를 신고하지 말아주세요. 해결되지 않을 것입니다.</b><br>
+	  <b>• 새로운 설정:</b><br>
+	  - 이제 터치 제스처 (블록 설치, 블록 파괴) 의 딜레이를 밀리초 단위로 설정할 수 있습니다.<br>
+	  <b>• 새로운 기능:</b><br>
+	  - Minecraft 1.8 이상 버전에서 탭하고 SEC 버튼을 꾹 눌러 화면을 스크롤할 수 있습니다<br>
 	  <br>
 
-<h2>▶ v2.4.2 Release</h2>
-	  <b>• Good news: Any Android 7.0+ devices can now run Minecraft normally.</b><br>
-	  <b>• Changes:</b><br>
-	  - <font color="green">Added OptiFine installer!</font><br>
-	  - External mouse and keyboard support (Feature needs Android 8.0+. Can't detect left or right mouse event).<br>
-	  - Launcher UI should now fit correctly in big screens.<br>
-	  - Freeform mode is now working.<br>
-	  - Virtual mouse now works properly.<br>
-	  - Replaced multdoj7 with PojavDX (dx 1.16) for better converter (thanks to <a href="https://github.com/artdeell">artdeell</a> for suggesting).<br>
-	  <b>• Fixes:</b><br>
-	  - Touch event triggered as click event, this bug exist from Boardwalk.<br>
-	  - (In-Game) Mouse event triggered after looking around.<br>
-  
-  <br>
-
+	  <h2>▶ v2.4.2 미리보기</h2>
+	  <b>• 좋은 소식: Android 7.0 이상의 기기들을 사용하여 Minecraft를 정상적으로 실행할 수 있게 되었습니다.</b><br>
+	  <b>• 바뀐 점:</b><br>
+	  - <font color="green">옵티파인 설치기를 추가했습니다!</font><br>
+	  - 외부 마우스와 키보드를 지원합니다. (해당 기능은 Android 8.0에서 지원됩니다) 마우스 왼쪽과 오른쪽 이벤트를 감지할 수 없습니다).<br>
+	  - 이제 런처의 UI가 큰 화면에 딱 들어맞습니다.<br>
+	  - 이제 FreeForm 모드가 정상적으로 작동합니다.<br>
+	  - 가상 마우스가 이제 제대로 작동합니다.<br>
+	  - 더 나은 컨버터를 위해 multdoj7을 PojavDX (dx 1.16) 로 교체했습니다. (제안해주신 <a href="https://github.com/artdeell">artdeell</a>님에게 감사드립니다.).<br>
+	  <b>• 고쳐진 것들:</b><br>
+	  - 클릭 이벤트로 트리거된 터치 이벤트. 이 버그는 보드워크에 존재했었습니다.<br>
+	  - (인게임) 마우스 이벤트가 주변을 둘러본 뒤에 트리거되었었습니다.<br>
+ 
+<br>
 	  <br>
 
-<h2>▶ v2.4 Release</h2>
-	  <b>• Remember: If your device has Android version above or equals to 7.0, use VMOS app. VMOS will install Android 5.1 OS to your device. You can take it to run this app (VMOS is removed by Play Store, you must install it manually)</b>
+<h2>▶ v2.4 베타 릴리즈</h2>
+	  <b>• 기억하세요: 만약 Android 버전이 7.0보다 높거나 같다면, VMOS 애플리케이션을 사용하세요. VMOS는 Android 5.1을 기기에 설치할겁니다. You can take it to run this app (VMOS is removed by Play Store, you must install it manually)</b>
 	  <br>
 
 	  <b>• Changes:</b><br>
