@@ -39,6 +39,10 @@ public class MinecraftAccount {
             Log.w("SkinLoader", "Could not update skin face", e);
         }
     }
+
+    public boolean isLocal(){
+        return accessToken.equals("0");
+    }
     
     public void updateSkinFace() {
         updateSkinFace(profileId);
