@@ -11,7 +11,7 @@
     <string name="login_online_password_hint">Пароль</string>
     <string name="login_online_check_keeplogin">Запомнить меня</string>
     <string name="login_online_login_label">Войти</string>
-    <string name="login_error_invalid_username">Наверное имя пользователя. Оно должно быть длиной от 3 до 16 символов и содержать только латинские буквы, цифры или нижнее подчёркивание.</string>
+    <string name="login_error_invalid_username">Неверное имя пользователя. Оно должно быть длиной от 3 до 16 символов и содержать только латинские буквы, цифры или нижнее подчёркивание.</string>
     <string name="login_error_exist_username">Это имя пользователя уже существует</string>
     <string name="login_microsoft">Войти через Microsoft</string>
     <string name="login_select_account">Учётные записи</string>
