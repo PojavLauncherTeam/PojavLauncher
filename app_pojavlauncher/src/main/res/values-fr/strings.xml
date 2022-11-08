@@ -172,6 +172,7 @@
     <string name="customctrl_addsubbutton">Ajouter un sous-bouton</string>
     <string name="customctrl_add_subbutton_message">Le sous-bouton n°%d a été ajouté !</string>
     <string name="customctrl_selectdefault">Choisir json contrôle par défaut</string>
+    <string name="customctrl_export">Exporter les contrôles</string>
     <string name="main_install_jar_file">Installer le .jar</string>
     <string name="main_options">Options</string>
     <string name="main_play">Jouer</string>
