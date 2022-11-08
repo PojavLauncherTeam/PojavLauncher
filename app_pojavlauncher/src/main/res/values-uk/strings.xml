@@ -177,6 +177,7 @@
     <string name="customctrl_addsubbutton">Додати під-кнопку</string>
     <string name="customctrl_add_subbutton_message">Підлегла кнопка n°%d була додана!</string>
     <string name="customctrl_selectdefault">Вибрати керування за замовчуванням</string>
+    <string name="customctrl_export">Експорт керування</string>
     <string name="main_install_jar_file">Встановити .jar</string>
     <string name="main_options">Опції</string>
     <string name="main_play">Грати</string>
