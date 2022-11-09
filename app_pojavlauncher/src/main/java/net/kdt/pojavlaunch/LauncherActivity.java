@@ -134,11 +134,10 @@ public class LauncherActivity extends BaseActivity {
             try {
                 Intent mainIntent = new Intent(getBaseContext(), MainActivity.class);
                 mainIntent.putExtra(INTENT_MINECRAFT_VERSION, mcVersion.id);
-                mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
-                mainIntent.addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+                mainIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(mainIntent);
                 finish();
-                Log.i("ActCheck","mainActivity finishing=" + isFinishing() + ", destroyed=" + isDestroyed());
+                android.os.Process.killProcess(android.os.Process.myPid()); //You should kill yourself, NOW!
             } catch (Throwable e) {
                 Tools.showError(getBaseContext(), e);
             }

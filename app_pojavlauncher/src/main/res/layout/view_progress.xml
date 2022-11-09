@@ -30,10 +30,20 @@
         tools:text="5 tasks in progress"
 
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/progress_flip_arrow"
         app:layout_constraintStart_toEndOf="@+id/progress_generic_progressbar"
         app:layout_constraintTop_toTopOf="@+id/progress_generic_progressbar"
         tools:ignore="RtlSymmetry" />
+
+    <ImageView
+        android:id="@+id/progress_flip_arrow"
+        android:layout_width="@dimen/_24sdp"
+        android:layout_height="@dimen/_24sdp"
+        android:layout_marginEnd="@dimen/_8sdp"
+        app:layout_constraintBottom_toBottomOf="@id/progress_generic_progressbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/progress_generic_progressbar"
+        app:srcCompat="@drawable/spinner_arrow" />
 
     <LinearLayout
         android:id="@+id/progress_linear_layout"
@@ -50,8 +60,6 @@
         tools:layout_height="@dimen/_100sdp"
         tools:visibility="visible"
         >
-
-
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

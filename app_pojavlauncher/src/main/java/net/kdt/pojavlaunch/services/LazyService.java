@@ -1,12 +1,15 @@
 package net.kdt.pojavlaunch.services;
 
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.IBinder;
+import android.os.Process;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
@@ -27,15 +30,9 @@ public class LazyService extends Service {
 
     private static WeakReference<Service> sLazyService = new WeakReference<>(null);
 
-    /** Simple wrappers to start the service */
+    /** Simple wrapper to start the service */
     public static void startService(Context context){
-        startService(context, R.string.lazy_service_default_title, R.string.lazy_service_default_description);
-    }
-
-    public static void startService(Context context, int titleID, int descriptionID){
         Intent intent = new Intent(context, LazyService.class);
-        intent.putExtra(NOTIF_TITLE, titleID);
-        intent.putExtra(NOTIF_DESC, descriptionID);
         ContextCompat.startForegroundService(context, intent);
     }
 
@@ -55,14 +52,19 @@ public class LazyService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        if(intent.getBooleanExtra("kill", false)) {
+            Process.killProcess(Process.myPid());
+            return super.onStartCommand(intent, flags, startId);
+        }
         buildNotificationChannel();
-        //TODO custom strings ?
+        Intent killIntent = new Intent(getApplicationContext(), LazyService.class);
+        killIntent.putExtra("kill", true);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "channel_id")
-                .setContentTitle(getString(intent.getIntExtra(NOTIF_TITLE, R.string.lazy_service_default_title)))
-                .setContentText(getString(intent.getIntExtra(NOTIF_DESC ,R.string.lazy_service_default_description)))
+                .setContentTitle(getString(R.string.lazy_service_default_title))
+                .setContentText(getString(R.string.lazy_service_default_description))
+                .addAction(android.R.drawable.ic_menu_close_clear_cancel,  getString(R.string.notification_terminate), PendingIntent.getService(this, 0, killIntent, Build.VERSION.SDK_INT >=23 ? PendingIntent.FLAG_IMMUTABLE : 0))
                 .setSmallIcon(R.mipmap.ic_launcher_round);
-
-        startForeground(1, builder.build());
+        startForeground(1,builder.build());
         return super.onStartCommand(intent, flags, startId);
     }
 

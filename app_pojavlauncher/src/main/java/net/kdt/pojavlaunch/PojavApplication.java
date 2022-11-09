@@ -12,13 +12,15 @@ import java.io.*;
 import java.text.*;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 import net.kdt.pojavlaunch.utils.*;
 
 public class PojavApplication extends Application {
 	public static String CRASH_REPORT_TAG = "PojavCrashReport";
-	public static ExecutorService sExecutorService = Executors.newFixedThreadPool(4);
+	public static ExecutorService sExecutorService = new ThreadPoolExecutor(0, 4, 500, TimeUnit.MILLISECONDS,  new LinkedBlockingQueue<>());
 	
 	@Override
 	public void onCreate() {

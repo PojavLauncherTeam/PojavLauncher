@@ -21,7 +21,7 @@ public class AddSubButton extends Button implements ActionButtonInterface {
     public AddSubButton(Context context, @Nullable AttributeSet attrs) {super(context, attrs); init();}
 
     public void init() {
-        setText("Add Button");
+        setText(R.string.customctrl_addsubbutton);
         setOnClickListener(this);
     }
 
