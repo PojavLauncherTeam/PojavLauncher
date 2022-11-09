@@ -83,6 +83,11 @@
     <string name="mcl_setting_category_general">Paramètres généraux</string>
     <string name="mcl_setting_category_scaling">Paramètres de mise à l\'échelle</string>
     <string name="mcl_setting_category_renderer">Moteur de rendu</string>
+    <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (toutes les versions, rapide)</string>
+    <string name="mcl_setting_renderer_virgl">virglrenderer - (version 1.7+, lent)</string>
+    <string name="mcl_setting_renderer_vgpu">vgpu - (jusqu\'à 1.16.5, rapide)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink - (ancienne_beta b1.8+, lent)</string>
+    <string name="mcl_setting_renderer_angle">ANGLE - (version 1.17+, moyen)</string>
     <string name="mcl_setting_category_veroption">Type de versions visible dans la liste des versions</string>
     <string name="mcl_setting_veroption_release">Version officielle</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
