@@ -83,6 +83,11 @@
     <string name="mcl_setting_category_general">Configuración general</string>
     <string name="mcl_setting_category_scaling">Ajustes de escala</string>
     <string name="mcl_setting_category_renderer">Renderizador</string>
+    <string name="mcl_setting_renderer_gles2_4">Hola, GASES - (ay versión, fase)</string>
+    <string name="mcl_setting_renderer_virgl">virglrenderer - (release 1.7+, slow)</string>
+    <string name="mcl_setting_renderer_vgpu">vgpu - (up to 1.16.5, fast)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">Zinc - (antiguo b1.8+, lento)</string>
+    <string name="mcl_setting_renderer_angle">Java edieditio</string>
     <string name="mcl_setting_category_veroption">El tipo de versión aparecerá en la lista de versiones</string>
     <string name="mcl_setting_veroption_release">Lanzamientos</string>
     <string name="mcl_setting_veroption_snapshot">Snapshots</string>
@@ -172,6 +177,7 @@
     <string name="customctrl_addsubbutton">Añadir sub-botón</string>
     <string name="customctrl_add_subbutton_message">¡El sub-botón n°%d ha sido añadido!</string>
     <string name="customctrl_selectdefault">Seleccionar controles por defecto</string>
+    <string name="customctrl_export">Exporte control</string>
     <string name="main_install_jar_file">Instalar .jar</string>
     <string name="main_options">Opciones</string>
     <string name="main_play">Jugar</string>
