@@ -101,25 +101,7 @@ public class MainActivity extends BaseActivity {
         // Recompute the gui scale when options are changed
         MCOptionUtils.MCOptionListener optionListener = MCOptionUtils::getMcScale;
         MCOptionUtils.addMCOptionListener(optionListener);
-
-        try {
-            // Load keys
-            mControlLayout.loadLayout(
-                    minecraftProfile.controlFile == null
-                            ? LauncherPreferences.PREF_DEFAULTCTRL_PATH
-                            : Tools.CTRLMAP_PATH + minecraftProfile.controlFile);
-        } catch(IOException e) {
-            try {
-                Log.w("MainActivity", "Unable to load the control file, loading the default now");
-                mControlLayout.loadLayout(Tools.CTRLDEF_FILE);
-            } catch (IOException ioException) {
-                Tools.showError(this, ioException);
-            }
-        } catch (Throwable th) {
-            Tools.showError(this, th);
-        }
         mControlLayout.setModifiable(false);
-        mControlLayout.toggleControlVisible();
     }
 
     protected void initLayout(int resId) {
@@ -200,6 +182,32 @@ public class MainActivity extends BaseActivity {
         } catch (Throwable e) {
             Tools.showError(this, e, true);
         }
+    }
+
+    private void loadControls() {
+        try {
+            // Load keys
+            mControlLayout.loadLayout(
+                    minecraftProfile.controlFile == null
+                            ? LauncherPreferences.PREF_DEFAULTCTRL_PATH
+                            : Tools.CTRLMAP_PATH + minecraftProfile.controlFile);
+        } catch(IOException e) {
+            try {
+                Log.w("MainActivity", "Unable to load the control file, loading the default now");
+                mControlLayout.loadLayout(Tools.CTRLDEF_FILE);
+            } catch (IOException ioException) {
+                Tools.showError(this, ioException);
+            }
+        } catch (Throwable th) {
+            Tools.showError(this, th);
+        }
+        mControlLayout.toggleControlVisible();
+    }
+
+    @Override
+    public void onAttachedToWindow() {
+        LauncherPreferences.computeNotchSize(this);
+        loadControls();
     }
 
     /** Boilerplate binding */

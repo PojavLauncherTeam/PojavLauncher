@@ -18,6 +18,7 @@
         android:label="@string/app_name"
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:process=":launcher"
         android:resizeableActivity="true"
         android:hasFragileUserData="true"
         android:allowNativeHeapPointerTagging="false">
@@ -80,6 +81,7 @@
             android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
 
         <activity
+            android:process=":game"
             android:launchMode="standard"
             android:screenOrientation="sensorLandscape"
             android:name=".MainActivity"

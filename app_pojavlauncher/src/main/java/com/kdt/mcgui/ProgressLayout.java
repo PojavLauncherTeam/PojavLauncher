@@ -2,10 +2,9 @@ package com.kdt.mcgui;
 
 
 import android.content.Context;
-import android.os.Handler;
-import android.os.Looper;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -26,7 +25,7 @@ import java.util.Arrays;
  *
  * This class relies on ExtraCore for its behavior.
  */
-public class ProgressLayout extends ConstraintLayout implements View.OnClickListener {
+public class ProgressLayout extends ConstraintLayout implements View.OnClickListener{
     public static final String UNPACK_RUNTIME = "unpack_runtime";
     public static final String DOWNLOAD_MINECRAFT = "download_minecraft";
     public static final String INSTALL_MODPACK = "install_modpack";
@@ -52,6 +51,7 @@ public class ProgressLayout extends ConstraintLayout implements View.OnClickList
     private final ArrayMap<String, TextProgressBar> mMap = new ArrayMap<>();
     private LinearLayout mLinearLayout;
     private TextView mTaskNumberDisplayer;
+    private ImageView mFlipArrow;
     private final Runnable mCheckProgressRunnable = new Runnable() {
         @Override
         public void run() {
@@ -100,7 +100,7 @@ public class ProgressLayout extends ConstraintLayout implements View.OnClickList
 
             setVisibility(hasProcesses() ? VISIBLE : GONE);
 
-            mTaskNumberDisplayer.setText(mActiveProcesses + " tasks in progress");
+            mTaskNumberDisplayer.setText(getContext().getString(R.string.progresslayout_tasks_in_progress, mActiveProcesses));
             postDelayed(this, 1000);
         }
     };
@@ -123,6 +123,7 @@ public class ProgressLayout extends ConstraintLayout implements View.OnClickList
         inflate(getContext(), R.layout.view_progress, this);
         mLinearLayout = findViewById(R.id.progress_linear_layout);
         mTaskNumberDisplayer = findViewById(R.id.progress_textview);
+        mFlipArrow = findViewById(R.id.progress_flip_arrow);
         postDelayed(mCheckProgressRunnable, 1000);
 
         setBackgroundColor(getResources().getColor(R.color.background_bottom_bar));
@@ -159,6 +160,6 @@ public class ProgressLayout extends ConstraintLayout implements View.OnClickList
     @Override
     public void onClick(View v) {
         mLinearLayout.setVisibility(mLinearLayout.getVisibility() == GONE ? VISIBLE : GONE);
+        mFlipArrow.setRotation(mLinearLayout.getVisibility() == GONE? 0 : 180);
     }
-
 }
