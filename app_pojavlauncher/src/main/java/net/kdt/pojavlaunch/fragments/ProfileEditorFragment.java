@@ -102,6 +102,7 @@ public class ProfileEditorFragment extends Fragment {
             Bundle bundle = new Bundle(2);
             bundle.putBoolean(FileSelectorFragment.BUNDLE_SELECT_FOLDER, true);
             bundle.putString(FileSelectorFragment.BUNDLE_ROOT_PATH, Tools.DIR_GAME_HOME);
+            bundle.putBoolean(FileSelectorFragment.BUNDLE_SHOW_FILE, false);
             mValueToConsume = FileSelectorFragment.BUNDLE_SELECT_FOLDER;
 
             Tools.swapFragment(requireActivity(),

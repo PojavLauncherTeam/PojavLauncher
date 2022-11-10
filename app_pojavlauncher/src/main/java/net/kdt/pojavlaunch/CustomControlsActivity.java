@@ -120,7 +120,7 @@ public class CustomControlsActivity extends BaseActivity {
 
 		final AlertDialog dialog = builder.create();
 		FileListView flv = new FileListView(dialog, "json");
-		flv.lockPathAt(Tools.CTRLMAP_PATH);
+		flv.lockPathAt(new File(Tools.CTRLMAP_PATH));
 		flv.setFileSelectedListener(new FileSelectedListener(){
 
 			@Override
@@ -200,8 +200,8 @@ public class CustomControlsActivity extends BaseActivity {
 
 		final AlertDialog dialog = builder.create();
 		FileListView flv = new FileListView(dialog, "json");
-		if(Build.VERSION.SDK_INT < 29)flv.listFileAt(Tools.CTRLMAP_PATH);
-		else flv.lockPathAt(Tools.CTRLMAP_PATH);
+		if(Build.VERSION.SDK_INT < 29)flv.listFileAt(new File(Tools.CTRLMAP_PATH));
+		else flv.lockPathAt(new File(Tools.CTRLMAP_PATH));
 		flv.setFileSelectedListener(new FileSelectedListener(){
 
 			@Override

@@ -83,7 +83,7 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
     };
 
     private final DoneListener mDoneListener = account -> {
-        Toast.makeText(getContext(), "Login done", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), R.string.main_login_done, Toast.LENGTH_SHORT).show();
         mSelectecAccount = account;
         invalidate();
         mAccountList.add(account.username);
@@ -220,7 +220,7 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
         if(fromFiles){
             mAccountList.clear();
 
-            mAccountList.add("Add account");
+            mAccountList.add(getContext().getString(R.string.main_add_account));
             File accountFolder = new File(Tools.DIR_ACCOUNT_NEW);
             if(accountFolder.exists()){
                 for (String fileName : accountFolder.list()) {
