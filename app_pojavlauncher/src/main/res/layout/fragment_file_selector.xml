@@ -11,8 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
 
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toTopOf="@id/file_selector_create_folder"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/file_selector_current_path" />
 
     <com.kdt.mcgui.MineButton
         android:id="@+id/file_selector_select_folder"
@@ -41,6 +42,17 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintWidth_percent="0.45" />
+
+    <TextView
+        android:id="@+id/file_selector_current_path"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="."
+        android:textColor="@color/primary_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

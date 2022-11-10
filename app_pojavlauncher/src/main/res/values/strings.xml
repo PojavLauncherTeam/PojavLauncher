@@ -312,4 +312,8 @@
     <string name="progresslayout_tasks_in_progress">%d tasks in progress</string>
     <string name="notification_terminate">Terminate</string>
     <string name="notification_game_runs">The game is running!</string>
+    <string name="folder_dialog_create">Create</string>
+    <string name="folder_dialog_insert_name">Insert folder name</string>
+    <string name="main_login_done">Login done</string>
+    <string name="main_add_account">Add account</string>
 </resources>

@@ -1,13 +1,13 @@
 package net.kdt.pojavlaunch.fragments;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,6 +31,7 @@ public class FileSelectorFragment extends Fragment {
 
     private Button mSelectFolderButton, mCreateFolderButton;
     private FileListView mFileListView;
+    private TextView mFilePathView;
 
     private boolean mSelectFolder = true;
     private boolean mShowFiles = true;
@@ -48,23 +49,26 @@ public class FileSelectorFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         bindViews(view);
         parseBundle();
+        if(!mSelectFolder) mSelectFolderButton.setVisibility(View.GONE);
+        else mSelectFolderButton.setVisibility(View.VISIBLE);
 
         mFileListView.setShowFiles(mShowFiles);
         mFileListView.setShowFolders(mShowFolders);
-        mFileListView.lockPathAt(mRootPath);
+        mFileListView.lockPathAt(new File(mRootPath));
+        mFileListView.setDialogTitleListener((title)->mFilePathView.setText(removeLockPath(title)));
         mFileListView.refreshPath();
 
         mCreateFolderButton.setOnClickListener(v -> {
             final EditText editText = new EditText(getContext());
             new AlertDialog.Builder(getContext())
-                    .setTitle("Insert folder name")
+                    .setTitle(R.string.folder_dialog_insert_name)
                     .setView(editText)
                     .setNegativeButton(android.R.string.cancel, null)
-                    .setPositiveButton("Create", (dialog, which) -> {
+                    .setPositiveButton(R.string.folder_dialog_create, (dialog, which) -> {
                         File folder = new File(mFileListView.getFullPath(), editText.getText().toString());
                         boolean success = folder.mkdir();
                         if(success){
-                            mFileListView.listFileAt(mFileListView.getFullPath() + "/" + editText.getText().toString());
+                            mFileListView.listFileAt(new File(mFileListView.getFullPath(),editText.getText().toString()));
                         }else{
                             mFileListView.refreshPath();
                         }
@@ -72,7 +76,7 @@ public class FileSelectorFragment extends Fragment {
         });
 
         mSelectFolderButton.setOnClickListener(v -> {
-            ExtraCore.setValue(ExtraConstants.FILE_SELECTOR, removeLockPath(mFileListView.getFullPath()));
+            ExtraCore.setValue(ExtraConstants.FILE_SELECTOR, removeLockPath(mFileListView.getFullPath().getAbsolutePath()));
             Tools.removeCurrentFragment(requireActivity());
         });
 
@@ -86,7 +90,7 @@ public class FileSelectorFragment extends Fragment {
     }
 
     private String removeLockPath(String path){
-        return path.replace(mRootPath, "");
+        return path.replace(mRootPath, ".");
     }
 
     private void parseBundle(){
@@ -102,5 +106,6 @@ public class FileSelectorFragment extends Fragment {
         mSelectFolderButton = view.findViewById(R.id.file_selector_select_folder);
         mCreateFolderButton = view.findViewById(R.id.file_selector_create_folder);
         mFileListView = view.findViewById(R.id.file_selector);
+        mFilePathView = view.findViewById(R.id.file_selector_current_path);
     }
 }
