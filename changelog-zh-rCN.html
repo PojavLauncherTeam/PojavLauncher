@@ -3,194 +3,283 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-body {margin:0;}
+body {font-family: Arial;}
 
-.navbar {
+/* Style the tab */
+.tab {
   overflow: hidden;
-  background-color: #333;
-  position: fixed;
-  top: 0;
-  width: 100%;
+  border: 1px solid #ffffff;
+  background-color: #ffffff;
 }
 
-.navbar a {
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
   float: left;
-  display: block;
-  color: #f2f2f2;
-  text-align: center;
+  border: none;
+  outline: none;
+  cursor: pointer;
   padding: 14px 16px;
-  text-decoration: none;
+  transition: 0.3s;
   font-size: 17px;
 }
 
-.navbar a:hover {
-  background: #ddd;
-  color: black;
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ffffff;
 }
 
-.main {
-  padding: 16px;
-  margin-top: 30px;
-  height: 1500px; /* Used in this example to enable scrolling */
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ffffff;
 }
 
-body {
-		  margin: 0;
-		  padding: 0;
-		  background-color: #fdfdff;
-		  
-		  box-shadow: 2px 3px 7px 2px rgba(0,0,0,0.02);
-		  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-		}
-	  
-		.changelog {
-		  padding: 10px;
-		  background-color: #f0f0f2;
-		  background-image: url('https://www.minecraft.net/content/dam/minecraft/backgrounds/bg-wool-dark.png');
-		  color: white;
-		}
-		
-		a:link, a:visited {
-		  color: #2198bf;
-		}
-		
-		@media (max-width: 700px) {
-		  div {
-		    margin: 0 auto;
-			width: auto;
-		  }
-	    }
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ffffff;
+  border-top: none;
+}
+
 </style>
+<!-- Javascript functions that this page uses goes here. -->
+<script type="text/javascript" src="./assets/javascript/tabs.js"></script>
 </head>
 <body>
+  
 
-<div class="navbar">
-  <a href="https://pojavlauncherteam.github.io/updates/local.html">最近更新</a>
-  <a href="https://pojavlauncherteam.github.io/">网站</a>
-  <a href="https://www.minecraft.net/en-us/store/minecraft-java-edition/buy">账户生成器</a>
-  <a href="https://www.patreon.com/pojavlauncher"><b>捐赠</b></a>
+<!-- the PojavLauncher with crafting block header image -->
+<img src="./assets/images/header.png"><br>
+
+
+<!-- Background Image: changes every pr-->
+<body background="./assets/images/bg/materialbg.png" text="ffffff" link="ffffff" alink="ffffff" vlink="ffffff" marginwidth="20" marginheight="20"></body>
+
+
+<!-- Page tabs (DO NOT TOUCH UNLESS PERMITTED TO DO SO) -->
+<div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'LauncherChangelog')">📰 更新日志</button>
+  <button class="tablinks" onclick="openCity(event, 
+    'About')">ℹ️ 关于</button>
 </div>
 
-<div class="changelog">
-  <h6>糟糕！ 这不是显示这个的正确方法 在<a href="#">这里</a>反馈所有有关这个的内容</h6>
-  <h2>PojavLauncher</h2>
-	<h2>如果您想支持 PojavLauncher 并在该过程中获得一些好的增益，请考虑<b><a href="https://www.patreon.com/pojavlauncher">订阅我们的Patreon</a></b></h2>
-	  <b>• 原作者：Zhang Zhuowei，Boardwalk 启动器.</b><br>
-	  <b>• 开发人员：</b><br>
-    <a href="https://github.com/khanhduytran0">Tran Khanh Duy</a>, <a href="https://github.com/artdeell">artdeell</a>, <a href="https://github.com/LegacyGamerHD">LegacyGamerHD</a>.<br>
 
-	  <b>• 当前设计师： </b>
-	  <a href="https://github.com/Mathias-Boulay">Mathias-Boulay</a>.<br>
+<!-- DIV: Contents of each tab starts HERE-->
 
-	  <b>• 协助测试的最佳助手： </b>
-	  <a href="https://github.com/pedrosouzabrasil">Pedro Souza</a>.<br>
-	  <b>• 更新： <a href="https://pojavlauncherteam.github.io/updates/117.html">现在可以初步支持 Minecraft 1.17 了</a></b><br>
-	  <b>• <a href="https://github.com/PojavLauncherTeam/PojavLauncher/issues">错误报告</a></b><br>
-	  <b>• <a href="https://github.com/PojavLauncherTeam/PojavLauncher/actions">下载最新的开发版本。</a></b><br>
-	  <b>• <a href="https://discord.gg/6RpEJda">加入 PojavLauncher Discord 服务器。</a></b><br>
-	  <b>• <a href="https://github.com/PojavLauncherTeam/PojavLauncher_iOS">PojavLauncher for jailbroken iOS/iPadOS</a>.<br>
-	<h2>▶ <a href="https://github.com/PojavLauncherTeam/PojavLauncher/actions?query=branch%3Av3_openjdk">v3 开发版</a></h2>
-	  <b>• 新功能：</b><br>
-	  - 一个完整的 Mod 安装器<br>
-          <b>• 新特性：</b><br>
-          - 现在在 Java 8 环境下可以更快的运行了<br>
-	  - 现在可以运行 Minecraft 1.13 及更高版本了 好耶！<br>
-	  - 现在可以正确地启动 Forge 和 Fabric了！ 想要安装这些玩意，只需要下载他们的 .jar 文件。<br>
-          - 多构架支持：ARMv7, aarch64, x86 和 x86_64.<br>
-          - 现在可以正确支持自定义控制了（由 Discord 社区或您创造）<br>
+<!-- LauncherChangelog: Contains PojavLauncher App Changelog -->
+<div id="LauncherChangelog" class="tabcontent">
+<center><h1>稳定版</h1></center>
+<center><h4>已接受启动器支持：</center>
+<center><img src="./assets/images/pix/discord.png" width="32" height="32"><img src="./assets/images/pix/spacer.png" width="32" height="32"><img src="./assets/images/pix/ghub.png" width="32" height="32"></h4></center>
+<br>
+<center>仅限 Dahlia 版本。</center>
+  <h2><img src="./assets/images/pix/isSupported.png" width="16" height="16"> Dahlia</h2>
+	  <b>• Pojav 启动器现在需要正版账户才能从启动器安装游戏资源。</b><br>
+	  • 大部分语言已添加<br>
+          <b>• VGPU 和 GL4ES 1.1.5 的所有变体都已从启动器中删除。</b><br>
+          • GL4ES 1.1.4 被自定义分支取代，添加了许多功能和错误修复<br>
+          • 控件已重新设计、改进和扩展，游戏手柄延迟框架完善。<br>
+          • 控件的颜色选择器已更改<br>
+          <b>• 配置文件已添加！ 现在，您可以使用不同的渲染器、JVM 和游戏目录保存游戏的多个设置。
+</b></br>
+          • Java 17 已集成到启动器中，用于运行 1.17+ 版本<br>
+          <br>
+          • 添加了新设置：<br>
+           "使用备用表面渲染"，它使用不同类型的渲染表面来使游戏在某些设备上变得更快。<br>
+"启动游戏时默认打开虚拟鼠标"，这使得游戏开始时自动启用虚拟鼠标<br>
+"启用持续性能模式"，它限制CPU/GPU的使用量，以防止过热和降频。<br>
+<br>
+• 已添加 Arc Capes 支持 （现在更改为 cosmetica.gg）<br>
+<br>
+错误修复：<br>
+• 修复了启动屏幕录像时发生的崩溃事件<br>
+• 修复了启动 1.6.4 以下版本时发生的 NullPointerDisception 崩溃问题<br>
+• 在 1.13 以上的版本中，滚动时游戏崩溃，已修复<br>
+• 1.13/1.14 不再在第一次触摸时崩溃<br>
+• 修复旧版本在启动时不是全屏的<br>
+• 修复实体上有 “halved light” 的旧版本<br>
+• 修复了快捷栏不注意0-9输入的问题<br>
+• 当在 android 10+ 中加载自定义控件时不再有空数组错误<br>
+• 现在游戏将在分割屏幕/自由窗口模式中调整大小，虽然没有得到官方支持<br>
+<br>
+
+<h2><img src="./assets/images/pix/isNotSupported.png" width="16" height="16"> Crocus (v3_openjdk)</h2>
+	  <b>• 新选项：</b><br>
+	  - 功能齐全的模组安装程序<br>
+	  	  <b>— — — — — — —</br>
+          <b>• 新功能：</b><br>
+          - 现在运行 Java 8 更快了。<br>
+	  - 现在可以运行 1.13 及以上版本的 Minecraft<br>
+	  - 现在可以正确启动 Forge 和 Fabric！ 要安装这些 " 模组加载器" 其中的一个，只需简单地下载它们的 .jar 文件即可。<br>
+          - 支持多体系结构：ARMv7、aarch64、x86 和 x86_64。<br>
+          - <strike>现在可以正确地支持自定义控件了（由Discord社区成员或是您制作！）</strike><br>
+          	  <b>——————</br>
+          <b>• 新内容</b></br>
+          - 现在使用 Java 17 来用于运行 21w10a 及以上的 Minecraft 版本<br>
+          - 控件修订：增加了新的功能，如组合框，以及新的控件编辑功能。<br>
+          （注意，在此修订前制作的控件将无法使用。）</br>
+          - 新的渲染器：virgl 和 vgpu</br>
+          （尽管 VirGL 支持到 OpenGL 4.5，但它不能正常运行着色器。）</br>
+          - 删除了 zink</br>
+          - 实行本地账户，由于 Doregon/PojavLauncher_iOS 发生了什么不好的事情。因此，你不能下载 Minecraft 的资源，一个都不行。</br>
+          <strike>（请务必备份您的 PojavLauncher 文件夹，以便您在更新后仍然可以游玩 Minecraft）
+</strike></br>
+          
 	  <br>
 
-	  <h2>▶ v2.5.0 预览版（已过时）</h2>
-	  <b>• 注意: OptiFine 安装器仍是预览，在一些设备上可能会在启动时崩溃（Mojang Screen）。 不要反馈任何关于 OptiFine 启动崩溃的问题，这些问题不会被修复。</b><br>
+<br>
+<!-- v2.x-->
+<center><h1>测试版发布</h1></center>
+<center><h4>除非您有历史记录，否则不要使用。</h4></center>
+<br>
+<h2>▶ v2.5 - 最后一次测试版发布</h2>
+	 <b>•注意：OptiFine 安装程序是实验性的，因为一些设备会在启动屏幕（Mojang 屏幕）时崩溃。 不要报告在启动屏幕上的 OptiFine 崩溃的问题，这些问题将无法解决。</b><br>
 	  <b>• 新设置：</b><br>
-	  - 您现在可以自定义手势延迟长度（放置方块，破坏方块。）<br>
-	  <b>• 新特性：</b><br>
-	  - 点击屏幕并按住 SEC 键可以在 Minecraft 1.8 及以上中滑动<br>
+	  - 您现在可以自定义触摸手势的 MS 延迟（放置方块与摧毁方块。）<br>
+	  <b>• 新功能：</b><br>
+	  - 通过点击屏幕并按住副按钮在 Minecraft 1.8 或更高版本中划动<br>
 	  <br>
 
-	  <h2>▶ v2.4.2 预览版</h2>
-	  <b>• 好消息：现在所有 Android 7.0+ 设备都可以正常运行 Minecraft 了</b><br>
-	  <b>• 更改：</b><br>
-	  - <font color="green">新增了 OptiFne 安装器！</font><br>
-	  - 外置键鼠已支持（该功能需要 Android 8.0+ 。 目前无法检测左击和右击).<br>
-	  - 大屏设备上的启动 UI 现在可以正常显示了。<br>
-	  - 自由窗口模式现在可以正常工作了。<br>
-	  - 虚拟鼠标现在可以正常工作了。<br>
-	  - 将 multdoj7 替换为 PojavDX (dx 1.16) 以获得更好的转换（感谢 <a href="https://github.com/artdeell">artdeell</a> 提供建议）。<br>
+<h2>:▶ v2.4.2 版本</h2>
+	  <b>• 好消息：任何 Android 7.0+ 设备现在都可以正常运行 Minecraft。</b><br>
+	  <b>• 变更：</b><br>
+	  - <font color="green">添加 OptiFine 安装器！</font><br>
+	  - 外部鼠标和键盘支持 (功能需要 Android 8.0+。 无法检测鼠标左侧或右侧事件）。<br>
+	  - 启动器界面现在应该正确地放入大屏幕。<br>
+	  - 自由窗口模式现在得以运行。<br>
+	  - 虚拟鼠标现在正常工作。<br>
+	  - 用 PojavDX (dx 1.16) 替换了 multdoj7，以获得更好的转换器（感谢 <a href="https://github.com/artdeell">artdeell</a> 的建议）。<br>
 	  <b>• 修复：</b><br>
-	  - 触摸事件会被当作点击事件，这个问题存在于 Boardwalk 。<br>
-	  - （游戏中）鼠标事件将会在移动视角时触发<br>
+	  - 触摸事件触发为点击事件，这个错误存在于 Boardwalk。<br>
+	  - （游戏内）鼠标事件在四处看后触发。<br>
+  
+  <br>
 
 	  <br>
 
-	  <h2>▶ v2.4 BETA release</h2>
-	  <b>• 提醒：如果您的设备运行 Android 7.0 及以上，请使用 VMOS 应用。 VMOS 将安装 Android 5.1 OS 到您的设备。 您可以通过这个来运行该应用（VMOS 已经在 Play 商店下架，您需要手动安装它）</b>
+<h2>▶ v2.4 版本</h2>
+	  <b>• 记住：如果您的设备的 Android 版本高于或等于7.0，请使用虚拟大师应用。 虚拟大师将在您的设备上安装 Android 5.1 操作系统。 您可以使用它来运行这个应用（虚拟大师被 Play 商店移除，您必须手动安装它）</b>
 	  <br>
 
-	  <b>• 更改：</b><br>
-	  - 移除了 OpenJDK 和 busybox 。<br>
-	  - 重新加入了 ARM 64位 原生运行库。<br>
+	  <b>• 变更：</b><br>
+	  - 删除 OpenJDK 和 busybox。<br>
+	  - 重新添加ARM 64bit本地库。<br>
 	  <br>
 
 	  <b>• 修复：</b><br>
-	  - 修复了一个会导致用户在运行 Minecraft 时无法连接到网络的错误。<br>
+	  - 修复了一个错误，防止用户在没有互联网连接的情况下启动 Minecraft。<br>
 	  <br>
 
-	  <h2>▶ v2.3.1 BETA release</h2>
-	  <b>• 更改：</b><br>
-	  - 添加了一个文本选择在 OpenJDK 安装日志。<br>
+<h2>▶ v2.3.1 版本</h2>
+	  <b>• 变更：</b><br>
+	  - 在 OpenJDK 安装日志上添加文本选择。<br>
 	  <b>• 修复：</b><br>
-	  - 设备无法安装 OpenJDK 但可以隐藏该错误。<br>
+	  - 设备无法安装 OpenJDK 但能够隐藏错误。<br>
 	  <br>
 
-	  <h2>▶ v2.3 BETA release</h2>
-	  <b>• 更改：</b><br>
-	  - 修改了一些关于更新的代码<br>
-	  <br>
-	  
-	  <h2>▶ v2.2 BETA (private)</h2>
-	  <b>• 更改：</b><br>
-	  - 添加 busybox.<br>
-	  - 添加 OpenJDK 转换器 （仅支持ARM 64位）。<br>
+<h2>▶ v2.2/v2.3 版本</h2>
+	  <b>• 变更内容:</b><br>
+	  - 在更新功能中更改了一些代码
+	  - 添加 busybox<br>
+	  - 已添加 OpenJDK 用于转换器（仅 ARM 64位）。<br>
 	  - 添加更多 AWT 功能。<br>
-	  - 截屏（和 F2 键）现在直接调用API (javax.imageio).<br>
+	  - 屏幕截图（和 F2 键）现在直接使用 API (javax.imageio)捕获。<br>
 	  <br>
 		
-	  <h2>▶ v2.1 BETA release</h2>
-	  <b>• 更改：</b><br>
-	  - 新增更新日志按键！<br>
-	  - 现在自定义版本可以正常显示了（not implemented for user）<br>
-	  - 现在可以使用应用内更新了。<br>
-	  - 将 glshim 替换为 GL4ES 以提供 OpenGL 2.0 及更好的体验。<br>
+<h2>▶v2.1 版本</h2>
+	  <b>• 变更：</b><br>
+	  - 添加更新日志按钮！<br>
+	  - 现在在列表中可见的自定义版本（用户无法实现）<br>
+	  - 现在可以使用应用内更新。<br>
+	  - 使用 GL4ES 替换 glshim，用于部分 OpenGL 2.0 并提高性能。<br>
 	  <br>
 
-	  <h2>▶ v2.0 BETA</h2>
-	  <b>• 更改：</b><br>
-	  - [Partial] 新设计（复制 2017 官方 Minecraft 启动器）<br>
-	  - 更改加载/保存方法。<br>
-	  - 添加更多功能菜单。<br>
-	  - 添加虚拟鼠标以支持 PC 鼠标。<br>
+	  <h2>▶ v2 版本</h2>
+	  <b><b> • 变更:</b><br>
+	  - [Partial] 新设计（2017年原版 Minecraft 启动器的副本）<br>
+	  - 改变用户加载/保存的方式。<br>
+	  - 添加菜单以选择更多选项。<br>
+	  - 添加了用于设计 PC 鼠标的虚拟鼠标。<br>
 
 	  <br>
 	  <b>• 修复：</b><br>
-	  - 当转换时最大进程 -1 。<br>
-	  - 在运行一些版本时验证失败（通过修补客户端文件）<br>
-	  <br>
+	  - 在转换时最大进度-1<br>
+	  - 某些版本运行时验证失败（通过补丁客户端文件）<br>
+	  <br><br>
 
-	  <h2>▶ v1.0.4 （在发布前丢失了所有东西）</h2>
-	  - 添加下载版本功能<br>
-	  - 添加虚拟鼠标（比 2.0 重写版更好）<br>
+<center><h1>Alpha 版本</h1></center>
+<center><h4>良好的时间。</h4></center>
+	  <h2>▶ v1.0.4（发布前丢失所有内容）</h2>
+	  - 添加下载版本选项。<br>
+	  - 添加虚拟鼠标（但比 2.0 重写更好）<br>
 
 	  <h2>▶ v1.0.1-v1.0.3 ALPHA</h2>
-	  <b>• 更改：</b><br>
-	  - 添加 1.2.5, 1.7.2, 1.7.10, 1.8, 1.9 pre-converted 版本。<br>
-	  - 添加 Tab, Screenshot, Force close 按键。<br>
-	  <br>
+	  <b>• 修改：</b><br>
+	  - 添加了1.2.5、1.7.2、1.7.10、1.8、1.9预发布版本。<br>
+	  - 添加标签、屏幕截图、强制关闭按钮。<br>
+	  <1>
 	  
-	  <h2>▶ v1.0 ALPHA</h2>
-	  <b>• 初始发布版。 应用名为 Minecraft Launcher</b><br>
-	  <b>• 只添加了 pre-converted 1.9 版本。</b>
+	  <h2> ▶ v1.0 ALPHA</h2>
+	  <2>• 初步发布。 应用名为 Minecraft Launcher</b><br>
+	  <b>• 只添加了预发布 1.9 版本。</br>
 </div>
 
+
+<!-- TODO: "Community" section-->
+ 
+
+<!-- This is the "About" section.-->
+<div id="About" class="tabcontent">
+  <br>
+  <center><img src="./assets/images/aboutsect.png" width="318" height="51"></center>
+  <br>
+  <center><h3>PojavLauncher - 更新日志页面</h3></center>
+  <center>维护者：khanhduytran0(v2)，c4scdev(v3)</center>
+  <center>翻译可以在 Crowdin 完成</center>
+  <br>
+  <br>
+  <br>
+  <center><img src="./assets/images/pix/app.png" width="250" height="275"></center>
+  <center><h1>关于 PojavLauncher</h1></center>
+  <center>PojavLauncher 是一个免费、开源、稳定的 Android 系统 Minecraft 启动器，由 <a href="https://github.com/zhuowei/Boardwalk"> Boardwalk</a>—— Zhouwei Zhang 设计的一个 MC 启动器项目构建</center>
+  <br>
+  <center><h2>PojavLauncher (Android) 开发团队</h2></center>
+  <center><h3>头部开发人员：</h3></center>
+  <center>DuyKhanhTran, artdeell, SerpenSpirale</center>
+  <br>
+  <center><h3>设计师</h3></center>
+  <center>NeveuXon</center>
+  <br>
+  <center><h3>测试人员</h3></center>
+  <center>Pedro Souza、realVezio(Voiasis)、Aero</center>
+  <br>
+  <br>
+  <center>特别提及</center>
+  <center>• crystall1nedev，制作了 <a href="https://github.com/PojavLauncherTeam/PojavLauncher_iOS"> iOS 版本</a></center>
+  <center>• QuestCraft，将 PojavLauncher 移植到 <a href="https://github.com/QuestCraftPlusPlus/QuestCraft"> QuestVR 平台</a>。</center>
+  <br>
+  <br>
+<br>
+  <center>PojavLauncher 使用以下组件来制作启动器。 同时也将其授权显示（如有的话）。</center>
+  <br>
+    <a href="https://github.com/zhuowei/Boardwalk">Boardwalk：</a> <a href="https://github.com/zhuowei/Boardwalk/blob/master/LICENSE">Apache 授权 2.0/GNU GPLv2</a><br>
+      Android 支持库：</a> <a href="https://android.googlesource.com/platform/prebuilts/maven_repo/android/+/master/NOTICE.txt">Apache 授权 2.0</a><br>
+        <a href="https://github.com/PojavLauncherTeam/gl4es">GL4ES：</a> <a href="https://github.com/ptitSeb/gl4es/blob/master/LICENSE">MIT 授权</a><br>
+          <a href="https://github.com/PojavLauncherTeam/openjdk-multiarch-jdk8u">OpenJDK：</a> <a href="https://openjdk.java.net/legal/gplv2+ce.html">GNU GPLv2</a><br>
+            <a href="https://github.com/PojavLauncherTeam/lwjgl3">LWJGL3：</a> <a href="https://github.com/LWJGL/lwjgl3/blob/master/LICENSE.md">BSD-3 授权</a><br>
+            <a href="https://github.com/PojavLauncherTeam/lwjglx">LWJGLX：</a> 未知授权<br>
+            <a href="https://gitlab.freedesktop.org/mesa/mesa">Mesa 3D 图形库：</a> <a href="https://docs.mesa3d.org/license.html">MIT 授权</a><br>
+            <a href="https://github.com/pro-grade/pro-grade">pro-grade：</a> <a href="https://github.com/pro-grade/pro-grade/blob/master/LICENSE.txt">Apache 授权 2.0</a><br>
+           <a href="https://github.com/iqiyi/xHook">xHook：</a> <a href="https://github.com/iqiyi/xHook/blob/master/LICENSE">MIT & BSD-style 授权</a><br>
+             <a href="https://github.com/anholt/libepoxy">libepoxy：</a> <a href="https://github.com/anholt/libepoxy/blob/master/COPYING">MIT 授权</a><br>
+              <a href="https://github.com/PojavLauncherTeam/virglrenderer">virglrenderer：</a> <a href="https://gitlab.freedesktop.org/virgl/virglrenderer/-/blob/master/COPYING">MIT 授权</a><br>
+                <a href="https://mc-heads.net">MCHeads</a><br> 
+                <a href="https://crowdin.com">Crowdin</a><br>
+                <br>
+                  <center>官方 Minecraft 下载服务器/库由 Microsoft/Mojang 提供，所有 Minecraft 均由 Mojang/Microsoft 开发，因此请购买游戏而非使用盗版游戏。</center>
+    </div>
+
+
 </body>
-</html>
+</html> 

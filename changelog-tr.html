@@ -3,195 +3,281 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-body {margin:0;}
+body {font-family: Arial;}
 
-.navbar {
+/* Style the tab */
+.tab {
   overflow: hidden;
-  background-color: #333;
-  position: fixed;
-  top: 0;
-  width: 100%;
+  border: 1px solid #ffffff;
+  background-color: #ffffff;
 }
 
-.navbar a {
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
   float: left;
-  display: block;
-  color: #f2f2f2;
-  text-align: center;
+  border: none;
+  outline: none;
+  cursor: pointer;
   padding: 14px 16px;
-  text-decoration: none;
+  transition: 0.3s;
   font-size: 17px;
 }
 
-.navbar a:hover {
-  background: #ddd;
-  color: black;
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ffffff;
 }
 
-.main {
-  padding: 16px;
-  margin-top: 30px;
-  height: 1500px; /* Used in this example to enable scrolling */
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ffffff;
 }
 
-body {
-		  margin: 0;
-		  padding: 0;
-		  background-color: #fdfdff;
-		  
-		  box-shadow: 2px 3px 7px 2px rgba(0,0,0,0.02);
-		  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-		}
-	  
-		.changelog {
-		  padding: 10px;
-		  background-color: #f0f0f2;
-		  background-image: url('https://www.minecraft.net/content/dam/minecraft/backgrounds/bg-wool-dark.png');
-		  color: white;
-		}
-		
-		a:link, a:visited {
-		  color: #2198bf;
-		}
-		
-		@media (max-width: 700px) {
-		  div {
-		    margin: 0 auto;
-			width: auto;
-		  }
-	    }
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ffffff;
+  border-top: none;
+}
+
 </style>
+<!-- Javascript functions that this page uses goes here. -->
+<script type="text/javascript" src="./assets/javascript/tabs.js"></script>
 </head>
 <body>
+  
 
-<div class="navbar">
-  <a href="https://pojavlauncherteam.github.io/updates/local.html">Son Güncellemeler</a>
-  <a href="https://pojavlauncherteam.github.io/">İnternet Sayfası</a>
-  <a href="https://www.minecraft.net/en-us/store/minecraft-java-edition/buy">Hesap Üreticisi</a>
-  <a href="https://www.patreon.com/pojavlauncher"><b>Bağış</b></a>
+<!-- the PojavLauncher with crafting block header image -->
+<img src="./assets/images/header.png"><br>
+
+
+<!-- Background Image: changes every pr-->
+<body background="./assets/images/bg/materialbg.png" text="ffffff" link="ffffff" alink="ffffff" vlink="ffffff" marginwidth="20" marginheight="20"></body>
+
+
+<!-- Page tabs (DO NOT TOUCH UNLESS PERMITTED TO DO SO) -->
+<div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'LauncherChangelog')">📰 Değişiklikler</button>
+  <button class="tablinks" onclick="openCity(event, 
+    'About')">ℹ️ Hakkında</button>
 </div>
 
-<div class="changelog">
-  <h6>Hay aksi! Bu olması gerektiği gibi görüntülenmiyor! Bunun hakkında herhangi birşeyi <a href="#">buraya</a> bildirebilirsiniz.</h6>
-  <h2>PojavLauncher</h2>
-	<h2>Eğer PojavLauncher takımını desteklemek istiyorsanız ve bu süreçte güzel avantajlar elde etmek istiyorsanız, <b><a href="https://www.patreon.com/pojavlauncher">Patreon'umuza abone olmayı</a></b> düşünün</h2>
-	  <b>• Asılı: Zhuowei Zhang, Boardwalk uygulaması.</b><br>
-	  <b>• Geliştiriciler:</b><br>
-    <a href="https://github.com/khanhduytran0">Tran Khanh Duy</a>, <a href="https://github.com/artdeell">artdeell</a>, <a href="https://github.com/LegacyGamerHD">LegacyGamerHD</a>.<br>
 
-	  <b>• Şuanki tasarımcı: </b>
-	  <a href="https://github.com/Mathias-Boulay">Mathias-Boulay</a>.<br>
+<!-- DIV: Contents of each tab starts HERE-->
 
-	  <b>• Testler için en iyi yardımcı: </b>
-	  <a href="https://github.com/pedrosouzabrasil">Pedro Souza</a>.<br>
-	  <b>• YENİ: <a href="https://pojavlauncherteam.github.io/updates/117.html"> Minecraft 1.17 için ön hazırlık desteği</a></b><br>
-	  <b>• <a href="https://github.com/PojavLauncherTeam/PojavLauncher/issues">Hata rapor et</a></b><br>
-	  <b>• <a href="https://github.com/PojavLauncherTeam/PojavLauncher/actions">En yeni geliştirici yapımını indir.</a></b><br>
-	  <b>• <a href="https://discord.gg/6RpEJda">PojavLauncher Discord sunucusuna katıl.</a></b><br>
-	  <b>• <a href="https://github.com/PojavLauncherTeam/PojavLauncher_iOS">Jailbreak'lenmiş iOS/iPadOS'ler için PojavLauncher</a>.<br>
-	<h2>▶ <a href="https://github.com/PojavLauncherTeam/PojavLauncher/actions?query=branch%3Av3_openjdk">v3 geliştirici yapımları</a></h2>
-	  <b>• Yeni seçenekler:</b><br>
-	  - Tamamen-işlevli bir mod yükleyicisi <br>
+<!-- LauncherChangelog: Contains PojavLauncher App Changelog -->
+<div id="LauncherChangelog" class="tabcontent">
+<center><h1>Kararlı Sürümler</h1></center>
+<center><h4>Başlatıcı desteğinin kabul edildiği sürüm:</center>
+<center><img src="./assets/images/pix/discord.png" width="32" height="32"><img src="./assets/images/pix/spacer.png" width="32" height="32"><img src="./assets/images/pix/ghub.png" width="32" height="32"></h4></center>
+<br>
+<center>Sadece Dahlia için.</center>
+  <h2><img src="./assets/images/pix/isSupported.png" width="16" height="16"> Dahlia</h2>
+	  <b>• Uygulama artık premium hesap gerektiriyor, aksi takdirde oyun dosyalarının indirilmesi başlatıcının kendisi tarafından reddedilecek.</b><br>
+	  • Çoğu dil eklendi<br>
+          <b>• VGPU ve GL4ES 1.1.5'in bütün biçimleri başlatıcıdan kaldırıldı.</b><br>
+          • GL4ES 1.1.4 birçok özellik ekleyen ve hataları düzelten özel bir forkuyla değiştirildi.<br>
+	  • Kontroller yeniden yapıldı, iyileştirildi ve uzatıldı, oyun kolu gecikmesi artık tam ayarında.<br>
+	  • Kontroller için olan renk seçicisi değiştirildi<br>
+          <b>• Profiller eklendi! Artık oyun kurulumlarını, farklı seçilmiş oluşturucuları, JVM'leri ve oyun dizinlerini farklı çatılar altında toplayabilirsin.</b></br>
+          • Java 17 artık 1.17+ çalıştırmak için başlatıcıya eklendi<br>
+          <br>
+          • Yeni seçenekler eklendi:<br>
+           "Alternatif yüzey işleyicisi kullan ", başka türde bir yüzey işleyicisi kullanarak bazı cihazların oyunu daha hızlı işlemesini sağlar.<br>
+"Sanal fare açık olarak başla", oyunun sanal fare açık olarak başlamasını sağlar<br>
+"Kısıtlı performans modunu etkinleştir", CPU/GPU kullanımını kısıtlayacak aşırı ısınmayı ve termal yıkanmayı engeller<br>
+<br>
+• Arc Pelerinleri desteği eklendi (artık cosmetica.gg ile değiştirildi)<br>
+<br>
+Hata düzeltmeleri:<br>
+• Bir ekran kaydedici başlatırken oluşan çökme düzeltildi.<br>
+• 1.6.4 sürümü altı sürüm başlatırken oluşan NullPointerException çökmesi düzeltildi.<br>
+• 1.13 üstü sürümlerde oyun tekerleği kaydırırken çıkıyordu, bu düzeltildi.<br>
+• 1.13/1.14 artık ilk dokunuşta çökmüyor.<br>
+• Eski sürümlerin başlangıçta tam ekran olmaması düzeltildi.<br>
+• eski sürümlerin entity'lerinde "yarı yarıya aydınlatma" buğu düzeltildi.<br>
+• Hotbar'ın 0-9 girişlerini almaması düzeltildi.<br>
+• Android 10+'da artık özel kontrol yüklerken "null array" hatası göremeyeceksiniz.<br>
+• Resmi olarak desteklenmese de artık oyun splitscreen/freeform modda açılabilecek<br>
+<br>
+
+<h2><img src="./assets/images/pix/isNotSupported.png" width="16" height="16"> Crocus (v3_openjdk)</h2>
+	  <b>• Yeni ayarlar:</b><br>
+	  - Tamamen çalışan Mod İndiricisi<br>
+	  	  <b>——————</br>
           <b>• Yeni özellikler:</b><br>
           - Artık Java 8 ile daha hızlı.<br>
-	  - Artık Minecraft 1.13 ve üstü çalıştırılabilir. Hurrah!<br>
-	  - Artık düzgün bir şekilde Forge ve Fabric çalıştırabilir! Bu kötü çocuklardan birini indirmek için, Sadece web sayfalarından .jar dosyalarını indirin.<br>
-          - Çoklu mimari desteği: ARMv7, aarch64, x86 ve x86_64.<br>
-          - Artık düzgün bir şekilde Özel Kontrolleri destekliyor (Discord toplumundan ya da senden!<br>
+	  - Artık 1.13 ve üstünü çalıştırabilir<br>
+	  - Artık Forge ve Fabric'i düzgün bir şekilde çalıştırabilir! Bu "modloader"'lardan birini kurmak için", sadece basitçe .jar dosyalarını indirin.<br>
+          - Çoklu-mimari desteği: ARMv7, aarch64, x86 ve x86_64.<br>
+          - <strike>Artık düzgün bir şekilde özel kontrolleri destekliyor (ya Discord topluluğu ya da senin tarafından yapılanlar!)</strike><br>
+          	  <b>——————</br>
+          <b>• Neler yeni</b></br>
+          - 21w10a üstü Minecraft sürümlerini çalıştırmak için Java 17<br>
+          - Kontroller Revizyonu: Yeni özellikler eklendi, çekmece düğmeleri ve yeni kontrol ayarlama özellikleri gibi.<br>
+          (Bu revizyondan önce yapılan kontroller bu sürümde çalışmaz, haberinize.)</br>
+          - Yeni işleyiciler: virgl ve vgpu</br>
+          (VirGL openGL4.5 desteklese de, shader'ları düzgün bir şekilde çalıştıramıyor.)</br>
+          - zink kaldırıldı.</br>
+          - Doregon/PojavLauncher_iOS ile olanlardan sonra yerel hesaplar eklendi, ve bu sebeple artık Minecraft dosyalarını premium hesapsız indiremezsiniz, hiç birini bile.</br>
+          <strike>(Güncellemedir sonra Minecraft oynayabilmek için dosyalarınızın yedeğini aldığınızda emin olun)</strike></br>
+          
 	  <br>
 
-	  <h2>▶ v2.5.0 öngösterim (kullanımdan kaldırıldı)</h2>
-	  <b>• UYARI: OptiFine yükleyicisi deneyseldir,bazı cihazlarda splash ekranında çökebilir (Mojang ekranı). OptiFine splash ekranında çöküyor diye rapor göndermeyin, onlar çözülmeyecektir.</b><br>
+<br>
+<!-- v2.x-->
+<center><h1>Beta Sürümleri</h1></center>
+<center><h4>Eğer o tarihçesi yüksek olanlardan değilsen kullanma.</h4></center>
+<br>
+<h2>▶ v2.5 - Son BETA sürümü</h2>
+	  <b>• UYARI: OptiFine Yükleyicisi deneysel, bazı cihazlarda yükleme ekranında çöküyor (Mojang Ekranı). OptiFine'ın yükleme ekranında çökmesiyle ilgili hatayı raporlama yön, bunlar çözülmeyecek.</b><br>
 	  <b>• Yeni seçenekler:</b><br>
-	  - Dokunma haraketlerinin MS gecikmesini ayarlayabilirsiniz (blok koyma, blok kırma.)<br>
+	  - artık dokunmadaki MS gecikmesini ayarlayabilirsiniz (blok koyma, blok kırma.)<br>
 	  <b>• Yeni özellikler:</b><br>
-	  - Ekrana tıklayarak ve SEC tuşuna basılı tutarak Minecraft 1.8 ve üstünde kaydırma<br>
+	  - Minecraft 1.8 ve üstünde ekrana basılı tutarak ve SEC tuşuna basarak kaydırma<br>
 	  <br>
 
-	  <h2>▶ v2.4.2 öngösterimi</h2>
-	  <b>• İyi haberler: Artık herhangi bir android 7.0 ve üstü cihazlar Minecraft'ı normal bir şekilde çalıştırabilir.</b><br>
+<h2>▶ v2.4.2 Sürümü</h2>
+	  <b>• Müjdemizi isteriz: Herhangi 7.0'ın üstünde Android Minecraft'ı normal bir şekilde çalıştırabiliyor.</b><br>
 	  <b>• Değişiklikler:</b><br>
 	  - <font color="green">OptiFine yükleyicisi eklendi!</font><br>
-	  - Fiziksel Klavye ve fare desteği (Özellik android 8.0+ gerektirir. Sağ ya da sol fare olayı tespit edilemiyor).<br>
-	  - Başlatıcı kullanıcı arayüzü artık büyük ekranlara düzgün bir şekilde oturmalı.<br>
-	  - Freeform Modu artık çalışıyor.<br>
+	  - Donanımsal fare ve klavye desteği (Özellik Android 8.0+ gerektirir. Sağ ya da sol fare olayını tespit edemiyor).<br>
+	  - Başlatıcı Kullanıcı arayüzü artık büyük ekranlara düzgün bir şekilde sığmalı.<br>
+	  - Pencere modu artık çalışıyor.<br>
 	  - Sanal fare artık düzgün çalışıyor.<br>
-	  - Daha iyi dönüştürücü için multdoj7 yerine PojavDX (dx 1.16) getirildi (<a href="https://github.com/artdeell">artdeell</a>'e önerdiği için teşekkürler).<br>
+	  - Daha iyi dönüşüm için multdoj7 PojavDX (dx 1.16) ile değiştirildi (Önerdiği için <a href="https://github.com/artdeell">artdeell</a>'e teşekkürler).<br>
 	  <b>• Düzeltmeler:</b><br>
-	  - Dokunma eylemi tıklama eylemiyle aynı görülüyordu, bu bug Boardwalk'tan beri var.<br>
+	  - Dokunma olayı tıklama olayı gibi algılanıyordu, bu hata Boardwalk'tan beri var.<br>
 	  - (Oyun-içi) Etrafa baktıktan sonra fare eylemi gerçekleşiyordu.<br>
+  
+  <br>
 
 	  <br>
 
 	  <h2>▶ v2.4 BETA sürümü</h2>
-	  <b>• Unutmayın: Eğer cihazınız android 7.0 veya üstünde ise VMOS uygulamasını kullanın. VMOS cihazınıza Android 5.1 işletim sistemi kuracak. Bu uygulamayı çalıştırabilmek için onu kullanabilirsiniz (VMOS Play mağazasından kaldırıldı, o yüzden manual olarak indirmeniz gerekecek)</b>
+	  <b>• Hatırlayın: Eğer android sürümünüz android 7.0 veya üzeri ise, VMOS uygulamasını kullanın. VMOS cihazınıza Android 5.1 İşletim sistemi kuracak. Bu uygulamayı çalıştırmak için bunu edinebilirsiniz (VMOS Play Store tarafından kaldırıldı, Manüel olarak indirmeniz gerekecek)</b>
 	  <br>
 
 	  <b>• Değişiklikler:</b><br>
 	  - OpenJDK ve BusyBox kaldırıldı.<br>
-	  - ARM 64bit yerel kütüphaneleri yeniden eklendi.<br>
+	  - ARM 64 bit yerel Kütüphaneleri tekrar eklendi.<br>
 	  <br>
 
 	  <b>• Düzeltmeler:</b><br>
-	  - Kullanıcıların Minecraft'ı internetsiz açmasını engelleyen bir sorun giderildi.<br>
+	  - Kullanıcıların Minecraft'ı internetsiz başlamalarını engelleyen bir hata düzeltildi.<br>
 	  <br>
 
-	  <h2>▶ v2.3.1 BETA sürümü</h2>
-	  <b>• Değişiklikler:</b><br>
-	  - OpenJDK yükleme günlüğüne metin seçimi eklendi.<br>
+<h2>▶ v2.3.1 Release</h2>
+	  <b>• Changes:</b><br>
+	  - OpenJDK indirme günlüğüne metin seçimi eklendi.<br>
 	  <b>• Düzeltmeler:</b><br>
-	  - Cihazlar OpenJDk'i indiremiyorlar fakat hatayı saklayabiliyorlar.<br>
+	  - cihazlar OpenJDk indiremiyorlar fakat hatayı saklayabiliyorlar.<br>
 	  <br>
 
-	  <h2>▶ v2.3 BETA sürümü</h2>
-	  <b>• Değişiklikler:</b><br>
-	  - Güncelleme işlevinde bazı kodlar değiştirildi<br>
-	  <br>
-	  
-	  <h2>▶ v2.2 BETA (özel)</h2>
-	  <b>• Değişkenler:</b><br>
-	  - BusyBox eklendi.<br>
-	  - Dönüştürücü için OpenJDK eklendi (sadece ARM 64bit için)<br>
-	  - Daha çok AWT işlevleri eklendi.<br>
-	  - Ekran görüntüsü (ve F2 tuşu) şimdi doğrudan API kullanarak yakalıyor (javax.imageio).<br>
+<h2>▶ v2.2/v2.3 Sürümü</h2>
+	  <b>• Neler değişti:</b><br>
+	  - Güncelleme fonksiyonunda ki bazı kodlar değiştirildi
+	  - Busybox eklendi.<br>
+	  - Dönüştürücü için OpenJDK eklendi (sadece ARM 64bit için).<br>
+	  - Daha çok AWT fonksiyonu eklendi.<br>
+	  - Screenshot (ve F2 tuşu) artık direkt API kullanarak yakalanıyor (javax.imageio).<br>
 	  <br>
 		
-	  <h2>▶ v2.1 BETA sürümü</h2>
+<h2>▶v2.1 Sürümü</h2>
 	  <b>• Değişiklikler:</b><br>
-	  - Değişiklik günlüğü düğmesi eklendi!<br>
-	  - Özel sürümler artık listede görünür (kullanıcı için uygulanmadı)<br>
-	  - Uygulama-içi güncelleme artık mümkün.<br>
-	  - Kısmi OpenGL 2.0 ve daha iyi performans için glshim'i GL4ES ile değiştirdik.<br>
+	  - Değişiklik Günlüğü düğmesi eklendi!<br>
+	  - Artık özel sürümler listede gözüküyor (kullanıcı için ayarlanmadı)<br>
+	  - Uygulama-içi güncelleme artık kullanılabilir.<br>
+	  - Kısmi OpenGL 2.0 ve daha iyi performans için glshim GL4ES ile değiştirildi.<br>
 	  <br>
 
-	  <h2>▶ v2.0 BETA</h2>
+	  <h2>▶ v2 Sürümü</h2>
 	  <b>• Değişiklikler:</b><br>
-	  - [Kısmi] Yeni tasarım (2017 orijinal Minecraft başlatıcısı kopyası)<br>
-	  - kullanıcıların nasıl yüklediği/kaydettiği değiştirildi.<br>
-	  - Daha çok seçeneklerin seçilebilmesi için menü eklendi.<br>
-	  - Bilgisayar faresine benzer olarak sanal fare eklendi.<br>
+	  - [Kısmi] Yeni tasarım (2017 orijinal Minecraft Başlatıcısı'nın kopyası)<br>
+	  - Kullanıcıların nasıl yüklediği/kaydettiği değiştirildi.<br>
+	  - Daha çok seçenek seçebilmek için menü eklendi.<br>
+	  - PC faresine benzemesi için sanal fare eklendi.<br>
 
 	  <br>
 	  <b>• Düzeltmeler:</b><br>
-	  - Çevirirken maksimum ilerleme -1.<br>
-	  - Bazı sürümler çalıştırıldığında doğrulama hatası (client dosyasını yamalarken)<br>
+	  - Dönüştürürken en yüksek ilerleme -1 oluyordu.<br>
+	  - bazı sürümlerde doğrulama başarısız oldu veriyordu (client dosyasını yamalarken)<br>
 	  <br>
 
-	  <h2>▶ v1.0.4 (sürümden önce bütün dosyaları kaybettik)</h2>
-	  - Sürüm indir seçeneği eklendi.<br>
-	  - Sanal fare eklendi (2.0 yeniden yazmasından daha iyi)<br>
+<center><h1>Alpha Sürümleri</h1></center>
+<center><h4>Mazi güzeldir.</h4></center>
+	  <h2>▶ v1.0.4 (sürümden önce herşeyi kaybettik)</h2>
+	  - Sürüm indirme seçeneği eklendi.<br>
+	  - Sanal fare eklendi (ama 2.0 yeniden yazmasından daha iyi)<br>
 
 	  <h2>▶ v1.0.1-v1.0.3 ALPHA</h2>
 	  <b>• Değişiklikler:</b><br>
-	  - Önceden çevrilmiş sürümler1.2.5, 1.7.2, 1.7.10, 1.8, 1.9 eklendi.<br>
-	  - Tab, Ekran görüntüsü, zorla kapat düğmeleri eklendi.<br>
+	  - 1.2.5, 1.7.2, 1.7.10, 1.8, 1.9 önceden dönüştürülmüş sürümler olarak eklendi.<br>
+	  - Tab, Screenshot ve Zorla kapat düğmeleri eklendi.<br>
 	  <br>
 	  
 	  <h2>▶ v1.0 ALPHA</h2>
-	  <b>• İlk sürüm.
-	 Minecraft Başlatıcısı olarak adlandırıldı</b><br>
-	  <b>• Sadece önceden çevrilmiş 1.9 sürümü eklendi.</b>
+	  <b>• İlk sürüm. Minecraft Başlatıcısı olarak adlandırıldı</b><br>
+	  <b>• Sadece önceden çevrilmiş 1.9 sürümü eklendi.</br>
 </div>
 
+
+<!-- TODO: "Community" section-->
+ 
+
+<!-- This is the "About" section.-->
+<div id="About" class="tabcontent">
+  <br>
+  <center><img src="./assets/images/aboutsect.png" width="318" height="51"></center>
+  <br>
+  <center><h3>PojavLauncher - Değişiklik günlüğü Sayfası</h3></center>
+  <center>Bakımını yapanlar: khanhduytran0(v2), NeveuXon(v3)</center>
+  <center>Çeviriler Crowdin üzerinden yapılabilir</center>
+  <br>
+  <br>
+  <br>
+  <center><img src="./assets/images/pix/app.png" width="250" height="275"></center>
+  <center><h1>PojavLauncher hakkında</h1></center>
+  <center>PojavLauncher, bir MC Başlatıcısı projesi olan Zhuowei Zhang'ın <a href="https://github.com/zhuowei/Boardwalk">Boardwalk</a>'undan yapılan ücretsiz, açık kaynaklı ve kararlı bir Minecraft başlatıcısıdır</center>
+  <br>
+  <center><h2>PojavLauncher (Android) Geliştirici Takımı</h2></center>
+  <center><h3>Baş Geliştiriciler:</h3></center>
+  <center>DuyKhanhTran, artdeell, SerpenSpirale</center>
+  <br>
+  <center><h3>Tasarımcılar:</h3></center>
+  <center>NeveuXon</center>
+  <br>
+  <center><h3>Test edenler:</h3></center>
+  <center>Pedro Souza, realVezio(Voiasis), Aero</center>
+  <br>
+  <br>
+  <center>Takdir edilecekler</center>
+  <center>• crystall1nedev, <a href="https://github.com/PojavLauncherTeam/PojavLauncher_iOS"> iOS Sürümü</a> için</center>
+  <center>• QuestCraft, PojavLauncher'ı <a href="https://github.com/QuestCraftPlusPlus/QuestCraft"> QuestVR platformları</a>'na portladıkları için.</center>
+  <br>
+  <br>
+<br>
+  <center>PojavLauncher başlatıcıyı oluştururken aşağıdaki bileşenleri kullanır. Ayrıca lisansları (eğer varsa) gösterilir.</center>
+  <br>
+    <a href="https://github.com/zhuowei/Boardwalk">Boardwalk:</a> <a href="https://github.com/zhuowei/Boardwalk/blob/master/LICENSE">Apache Lisansı 2.0/GNU GPLv2</a><br>
+      Android Destek Kütüphaneleri:</a> <a href="https://android.googlesource.com/platform/prebuilts/maven_repo/android/+/master/NOTICE.txt">Apache Lisansı 2.0</a><br>
+        <a href="https://github.com/PojavLauncherTeam/gl4es">GL4ES:</a> <a href="https://github.com/ptitSeb/gl4es/blob/master/LICENSE">MIT Lisansı</a><br>
+          <a href="https://github.com/PojavLauncherTeam/openjdk-multiarch-jdk8u">OpenJDK:</a> <a href="https://openjdk.java.net/legal/gplv2+ce.html">GNU GPLv2</a><br>
+            <a href="https://github.com/PojavLauncherTeam/lwjgl3">LWJGL3:</a> <a href="https://github.com/LWJGL/lwjgl3/blob/master/LICENSE.md">BSD-3 Lisansı</a><br>
+            <a href="https://github.com/PojavLauncherTeam/lwjglx">LWJGLX:</a> Bilinmeyen Lisans<br>
+            <a href="https://gitlab.freedesktop.org/mesa/mesa">Mesa 3D Grafik Kütüphanesi:</a> <a href="https://docs.mesa3d.org/license.html">MIT Lisansı</a><br>
+            <a href="https://github.com/pro-grade/pro-grade">pro-grade:</a> <a href="https://github.com/pro-grade/pro-grade/blob/master/LICENSE.txt">Apache Lisansı 2.0</a><br>
+           <a href="https://github.com/iqiyi/xHook">xHook:</a> <a href="https://github.com/iqiyi/xHook/blob/master/LICENSE">MIT & BSD-style Lisansı</a><br>
+             <a href="https://github.com/anholt/libepoxy">libepoxy:</a> <a href="https://github.com/anholt/libepoxy/blob/master/COPYING">MIT Lisansı</a><br>
+              <a href="https://github.com/PojavLauncherTeam/virglrenderer">virglrenderer:</a> <a href="https://gitlab.freedesktop.org/virgl/virglrenderer/-/blob/master/COPYING">MIT Lisansı</a><br>
+                <a href="https://mc-heads.net">MCHeads</a><br> 
+                <a href="https://crowdin.com">Crowdin</a><br>
+                <br>
+                  <center>The Official Minecraft download server/library is provided by Microsoft/Mojang, and all Minecraft is work of Mojang/Microsoft, so please buy the game, not pirate it.</center>
+    </div>
+
+
 </body>
-</html>
+</html> 

@@ -3,107 +3,139 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-body {margin:0;}
+body {font-family: Arial;}
 
-.navbar {
+/* Style the tab */
+.tab {
   overflow: hidden;
-  background-color: #333;
-  position: fixed;
-  top: 0;
-  width: 100%;
+  border: 1px solid #ffffff;
+  background-color: #ffffff;
 }
 
-.navbar a {
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
   float: left;
-  display: block;
-  color: #f2f2f2;
-  text-align: center;
+  border: none;
+  outline: none;
+  cursor: pointer;
   padding: 14px 16px;
-  text-decoration: none;
+  transition: 0.3s;
   font-size: 17px;
 }
 
-.navbar a:hover {
-  background: #ddd;
-  color: black;
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ffffff;
 }
 
-.main {
-  padding: 16px;
-  margin-top: 30px;
-  height: 1500px; /* Used in this example to enable scrolling */
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ffffff;
 }
 
-body {
-		  margin: 0;
-		  padding: 0;
-		  background-color: #fdfdff;
-		  
-		  box-shadow: 2px 3px 7px 2px rgba(0,0,0,0.02);
-		  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-		}
-	  
-		.changelog {
-		  padding: 10px;
-		  background-color: #f0f0f2;
-		  background-image: url('https://www.minecraft.net/content/dam/minecraft/backgrounds/bg-wool-dark.png');
-		  color: white;
-		}
-		
-		a:link, a:visited {
-		  color: #2198bf;
-		}
-		
-		@media (max-width: 700px) {
-		  div {
-		    margin: 0 auto;
-			width: auto;
-		  }
-	    }
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ffffff;
+  border-top: none;
+}
+
 </style>
+<!-- Javascript functions that this page uses goes here. -->
+<script type="text/javascript" src="./assets/javascript/tabs.js"></script>
 </head>
 <body>
+  
 
-<div class="navbar">
-  <a href="https://pojavlauncherteam.github.io/updates/local.html">최근 업데이트</a>
-  <a href="https://pojavlauncherteam.github.io/">웹사이트</a>
-  <a href="https://www.minecraft.net/en-us/store/minecraft-java-edition/buy">계정 생성기</a>
-  <a href="https://www.patreon.com/pojavlauncher"><b>후원</b></a>
+<!-- the PojavLauncher with crafting block header image -->
+<img src="./assets/images/header.png"><br>
+
+
+<!-- Background Image: changes every pr-->
+<body background="./assets/images/bg/materialbg.png" text="ffffff" link="ffffff" alink="ffffff" vlink="ffffff" marginwidth="20" marginheight="20"></body>
+
+
+<!-- Page tabs (DO NOT TOUCH UNLESS PERMITTED TO DO SO) -->
+<div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'LauncherChangelog')">📰 바뀐점</button>
+<button class="tablinks" onclick="openCity(event, 
+    'About')">ℹ️ 정보</button>
 </div>
 
-<div class="changelog">
-  <h6>안 돼! 이것이 표시되어야 할 방식이 아닙니다! <a href="#">이 곳</a>에서 무엇이든지 신고하세요.</h6>
-  <h2>PojavLauncher</h2>
-	<h2>혹시나 PojavLauncher를 지원하고 싶고 이 프로세스에서 좋은 퍼크들을 얻고 싶으시다면, <b><a href="https://www.patreon.com/pojavlauncher">Patreon으로 구독</a></b>하는 것을 고려해보세요</h2>
-	  <b>• 원본: Zhuowei Zhang, 보드워크 애플리케이션.</b><br>
-	  <b>• 개발자:</b><br>
-    <a href="https://github.com/khanhduytran0">Tran Khanh Duy</a>, <a href="https://github.com/artdeell">artdeell</a>, <a href="https://github.com/LegacyGamerHD">LegacyGamerHD</a>.<br>
 
-	  <b>• 현 디자이너: </b>
-	  <a href="https://github.com/Mathias-Boulay">Mathias-Boulay</a>.<br>
+<!-- DIV: Contents of each tab starts HERE-->
 
-	  <b>• 최고의 테스트 도우미: </b>
-	  <a href="https://github.com/pedrosouzabrasil">Pedro Souza</a>.<br>
-	  <b>• 신규: <a href="https://pojavlauncherteam.github.io/updates/117.html"> Minecraft 1.17버전을 위한 임시 지원</a></b><br>
-	  <b>• <a href="https://github.com/PojavLauncherTeam/PojavLauncher/issues">버그 신고</a></b><br>
-	  <b>• <a href="https://github.com/PojavLauncherTeam/PojavLauncher/actions">최신 개발 빌드를 다운로드 하세요.</a></b><br>
-	  <b>• <a href="https://discord.gg/6RpEJda">PojavLauncher 디스코드 서버에 들어오세요.</a></b><br>
-	  <b>• <a href="https://github.com/PojavLauncherTeam/PojavLauncher_iOS">탈옥한 iOS/iPadOS를 위한 PojavLauncher</a>.<br>
-	<h2>▶ <a href="https://github.com/PojavLauncherTeam/PojavLauncher/actions?query=branch%3Av3_openjdk">v3 개발 빌드</a></h2>
-	  <b>• 새 옵션:</b><br>
-	  - 완전한 모드 설치기<br>
-          <b>• 새로운 기능:</b><br>
-          - 이제 Java 8에서 성능이 좋아집니다.<br>
-	  - 이제 Minecraft 1.13 이상을 실행할 수 있습니다. 야호!<br>
-	  - 이제 Forge와 Fabric을 제대로 실행할 수 있습니다! 아무 나쁜 녀석들 중 하나를 설치하려면, 간단하게 .jar 파일을 다운로드 하세요.<br>
-          - 다중 아키텍처 지원: ARMv7, aarch64, x86과 x86_64.<br>
-          - 이제 사용자 지정 컨트롤을 완전히 지원합니다 (디스코드 커뮤니티에 의해 만들어지거나 당신이 만들거나!)<br>
+<!-- LauncherChangelog: Contains PojavLauncher App Changelog -->
+<div id="LauncherChangelog" class="tabcontent">
+<center><h1>안정적인 버전</h1></center>
+<center><h4>런처 지원이 허용되었습니다</center>
+<center><img src="./assets/images/pix/discord.png" width="32" height="32"><img src="./assets/images/pix/spacer.png" width="32" height="32"><img src="./assets/images/pix/ghub.png" width="32" height="32"></h4></center>
+<br>
+<center>오직 달리아만</center>
+  <h2><img src="./assets/images/pix/isSupported.png" width="16" height="16"> 달리아</h2>
+	  <b>• 이제부터 프리미엄 계정이 필요합니다.
+프리미엄 계정이 아니라면, 런처가 게임 구성요소를 설치하지 않을것입니다.</b><br>
+	  • 대부분의 언어가 추가되었습니다<br>
+          <b>• VGPU와 GL4ES 1.1.5의 모든 관련 버전들이 런처에서 삭제되었습니다.</b><br>
+          • GL4ES 1.1.4가 버그 수정과, 많은 기능을 추가하며, 커스텀 포크로 대체되었습니다<br>
+	  • 컨트롤이 증가하고, 개선되었습니다. 컨트롤러 지원이 이제 완벽합니다<br>
+	  • 컨트롤에서 색깔 선택기가 수정되었습니다<br>
+          <b>• 프로필이 추가되었습니다! 이제부터 여러 다른 랜더러, JVM, 게임 디렉터리 구성이 유지됩니다.</b></br>
+          • Java 17은 이제 1.17버전 이상 실행을 위해 런처에 내장되었습니다.<br>
+          <br>
+          • 새로운 설정이 생겼습니다:<br>
+           "대체 표면 렌더링 사용"은 특정 기기에서 게임을 더 빠르게 구동하기 위해, 다른 종류의 표면 렌더링을 사용합니다.<br>
+"가상 마우스 켜짐 상태로 시작하기"는 가상 마우스가 이미 켜진 상태로 게임을 시작합니다<br>
+"성능 유지모드 켜기"는 과열과 쓰로틀링 제어를 위해CPU/GPU의 성능을 제한합니다<br>
+<br>
+• 아크 망토 지원을 추가했습니다 (이제 cosmetica.gg로 변경되었습니다)<br>
+<br>
+버그 패치노트:<br>
+• 화면 녹화기를 실행할때 발생하는 크래쉬를 해결하였습니다<br>
+• 1.6.4 이하 버전을 실행할때 생기는 NullPointerException 크래쉬를 해결하였습니다<br>
+• 1.13 이상 버전에서 스크롤할때 생기는 크래쉬를 해결하였습니다<br>
+• 1.13/1.14 버전에서 처음으로 터치할때 생기는 크래쉬를해결하였습니다<br>
+• 오래된 버전에서 전체화면으로 시작되지 않는 문제를 해결하였습니다<br>
+• 오래된 버전에서 "엔티티 빛이 절반이 되는 현상"을 해결하였습니다<br>
+• 핫바에서 0-9 입력에 응답하지 않던 현상을 해결하였습니다<br>
+• 안드로이드 10 이상에서 커스텀 컨트롤을 로딩할때 생기던 "배열 없음" 현상을 해결하였습니다<br>
+• 비록 공식적으로 지원되지는 않지만, 이제부터 분할화면, 팝업화면 모드에서 게임이 자동으로 재조정됩니다<br>
+<br>
+
+<h2><img src="./assets/images/pix/isNotSupported.png" width="16" height="16"> Crocus (v3_openjdk)</h2>
+	  <b>• 새로운 옵션:</b><br>
+	  - 모든 기능이 작동하는 모드 설치기<br>
+	  	  <b>——————</br>
+          <b>• 새로운 기능들:</b><br>
+          - 이제 Java 8이 더 빨라졌습니다.<br>
+	  - 이제 마인크래프트 1.13과 그 이후 버전를 실행할수 있습니다<br>
+	  - 이제 포지와 패브릭을 원활히 실행할수 있습니다! "모드 로더"들 중 하나를 설치하려면, 단순히 모드의 .jar 파일을 다운로드하세요.<br>
+          - 여러 아키텍처를 지원합니다: ARMv7, aarch64, x86 and x86_64.<br>
+          - <strike>이제 원활하게 커스텀 컨트롤을 지원합니다 (디스코드 커뮤니티에서 만들어진것 또는 당신이 만든것도 지원합니다!)</strike><br>
+          	  <b>——————</br>
+          <b>• 패치노트</b></br>
+          - 마인크래프트 21w10a 이상 버전에서는 Java 17이 사용됩니다<br>
+          - 컨트롤 개선: 드로워 버튼과 새로운 컨트롤 편집 기능같은 새 기능들이 추가되었습니다<br>
+          (이번 업데이트 전에 만들어진 컨트롤 설정들은 사용할수 없음을 알립니다)</br>
+          - 새로운 렌더러: virgl 과 vgpu</br>
+          (VirGL이 OpenGL 4.5 이상을 지원하지만, 쉐이더를 원활히 실행할수 없습니다)</br>
+          - zink를 삭제했습니다</br>
+          - 로컬 계정을 조치하였습니다 Doregon/IOS용 PojavLauncher에 생긴 일처럼, 당신은 마인크래프트 구성요소를 단 한개도 설치할수 없습니다</br>
+          <strike>(업데이트 후에도 마인크래프트를 플레이할수 있게, PojavLauncher 폴더를 백업해두세요)</strike></br>
+          
 	  <br>
 
-	  <h2>▶ v2.5.0 미리보기 (더 이상 사용하지 않음)</h2>
-	  <b>• 안내: OptiFine 설치기는 실험 중이며, 일부 기기에서는 스플래시 창 (Mojang 로고 창)에서 충돌할 수 있습니다. Optifine 충돌 관련 버그를 신고하지 말아주세요. 해결되지 않을 것입니다.</b><br>
+<br>
+<!-- v2.x-->
+<center><h1>베타 버전</h1></center>
+<center><h4>당신이 바보가 아니라면 사용하지 마세요</h4></center>
+<br>
+<h2>▶ v2.5 - 최신 베타버전</h2>
+	  <b>• 주의: 옵티파인 설치기는 아직 테스트용 입니다. 어떤 기기는 스플래시 화면에서 멈출수 있습니다(모장 로딩화면). 옵티파인 충돌 관련 버그를 신고하지 말아주세요. 해결되지 않을 것입니다.</b><br>
 	  <b>• 새로운 설정:</b><br>
-	  - 이제 터치 제스처 (블록 설치, 블록 파괴) 의 딜레이를 밀리초 단위로 커스터마이징할 수 있습니다.<br>
+	  - 이제 터치 제스처 (블록 설치, 블록 파괴) 의 딜레이를 밀리초 단위로 설정할 수 있습니다.<br>
 	  <b>• 새로운 기능:</b><br>
 	  - Minecraft 1.8 이상 버전에서 탭하고 SEC 버튼을 꾹 눌러 화면을 스크롤할 수 있습니다<br>
 	  <br>
@@ -111,8 +143,8 @@ body {
 	  <h2>▶ v2.4.2 미리보기</h2>
 	  <b>• 좋은 소식: Android 7.0 이상의 기기들을 사용하여 Minecraft를 정상적으로 실행할 수 있게 되었습니다.</b><br>
 	  <b>• 바뀐 점:</b><br>
-	  - <font color="green">Optifine 인스톨러를 추가했습니다!</font><br>
-	  - 외부 마우스와 키보드를 지원합니다. (해당 기능은 Android 8.0 이상이 요구됩니다. 마우스 왼쪽과 오른쪽 이벤트를 감지할 수 없습니다).<br>
+	  - <font color="green">옵티파인 설치기를 추가했습니다!</font><br>
+	  - 외부 마우스와 키보드를 지원합니다. (해당 기능은 Android 8.0에서 지원됩니다) 마우스 왼쪽과 오른쪽 이벤트를 감지할 수 없습니다).<br>
 	  - 이제 런처의 UI가 큰 화면에 딱 들어맞습니다.<br>
 	  - 이제 FreeForm 모드가 정상적으로 작동합니다.<br>
 	  - 가상 마우스가 이제 제대로 작동합니다.<br>
@@ -120,77 +152,132 @@ body {
 	  <b>• 고쳐진 것들:</b><br>
 	  - 클릭 이벤트로 트리거된 터치 이벤트. 이 버그는 보드워크에 존재했었습니다.<br>
 	  - (인게임) 마우스 이벤트가 주변을 둘러본 뒤에 트리거되었었습니다.<br>
-
+ 
+<br>
 	  <br>
 
-	  <h2>▶ v2.4 베타 릴리즈</h2>
-	  <b>• 기억하세요: 만약 Android 버전이 7.0보다 높거나 같다면, VMOS 애플리케이션을 사용하세요. VMOS는 Android 5.1을 기기에 설치할 것입니다. 해당 애플리케이션을 사용해 이 애플리케이션을 실행할 수 있습니다. (VMOS는 플레이 스토어에 의해 삭제되었기 때문에, 직접 설치해야 합니다)</b>
+<h2>▶ v2.4 베타 릴리즈</h2>
+	  <b>• 기억하세요: 만약 Android 버전이 7.0보다 높거나 같다면, VMOS 애플리케이션을 사용하세요. VMOS는 Android 5.1을 기기에 설치할겁니다. You can take it to run this app (VMOS is removed by Play Store, you must install it manually)</b>
 	  <br>
 
-	  <b>• 바뀐 점:</b><br>
-	  - OpenJDK와 busybox를 삭제했습니다.<br>
-	  - ARM 64bit 네이티브 라이브러리를 다시 추가했습니다.<br>
+	  <b>• Changes:</b><br>
+	  - Removed OpenJDK and busybox.<br>
+	  - Re-added ARM 64bit native libraries.<br>
 	  <br>
 
-	  <b>• 고쳐진 것들:</b><br>
-	  - 인터넷 연결 없이 Minecraft를 실행할 수 없게 하는 오류를 수정했습니다.<br>
+	  <b>• Fixes:</b><br>
+	  - Fixed an error that prevent users launch Minecraft without internet connection.<br>
 	  <br>
 
-	  <h2>▶ v2.3.1 베타 릴리즈</h2>
-	  <b>• 바뀐 점:</b><br>
-	  - OpenJDK 설치 로그에서 텍스트를 선택할 수 있게 수정했습니다.<br>
-	  <b>• 고쳐진 것들:</b><br>
-	  - 기기에서 OpenJDK를 설치할 수 없지만 오류를 숨길 수 있던 버그를 수정했습니다.<br>
+<h2>▶ v2.3.1 Release</h2>
+	  <b>• Changes:</b><br>
+	  - Added text selection on OpenJDK install log.<br>
+	  <b>• Fixes:</b><br>
+	  - Devices can't install OpenJDK but able to hide the error.<br>
 	  <br>
 
-	  <h2>▶ v2.3 베타 릴리즈</h2>
-	  <b>• 바뀐 점:</b><br>
-	  - 업데이트 함수의 일부 코드를 수정했습니다.<br>
-	  <br>
-	  
-	  <h2>▶ v2.2 베타 (비공개)</h2>
-	  <b>• 바뀐 점:</b><br>
-	  - busybox를 추가했습니다.<br>
-	  - 컨버터 OpenJDK를 추가했습니다 (ARM 64bit 전용).<br>
-	  - AWT 함수를 더 추가했습니다.<br>
-	  - 스크린샷 (그리고 F2 키)을 Directly API를 사용해 촬영하도록 수정했습니다 (javax.imageio).<br>
+<h2>▶ v2.2/v2.3 Release</h2>
+	  <b>• What changed:</b><br>
+	  - Changed some code in update function
+	  - Added busybox.<br>
+	  - Added OpenJDK for converter (ARM 64bit only).<br>
+	  - Added more AWT functions.<br>
+	  - Screenshot (and F2 key) now capture using directly API (javax.imageio).<br>
 	  <br>
 		
-	  <h2>▶ v2.1 베타 릴리즈</h2>
-	  <b>• 바뀐 점:</b><br>
-	  - 수정사항 버튼을 추가했습니다!<br>
-	  - 커스텀 버전을 리스트에서 볼 수 있도록 했습니다. (사용자를 위한 것이 아닙니다)<br>
-	  - 인앱 업데이트를 사용할 수 있게 되었습니다.<br>
-	  - OpenGL 2.0 일부 지원과 더 나은 성능을 위해 glshim을 GL4ES로 교체하였습니다.<br>
-	  <br>
-
-	  <h2>▶ v2.0 베타</h2>
-	  <b>• 바뀐 점:</b><br>
-	  - [Partial] 새로운 디자인 (2017 원본 Minecraft 런처의 사본)<br>
-	  - 유저를 저장하고 불러오는 방식을 수정했습니다.<br>
-	  - 더 많은 옵션을 선택할 수 있는 메뉴를 추가했습니다.<br>
-	  - PC 마우스 스타일을 위한 가상 마우스가 추가되었습니다.<br>
-
-	  <br>
-	  <b>• 고쳐진 것들:</b><br>
-	  - 변환할 때 최대 진행률이 -1인 버그를 수정했습니다.<br>
-	  - 일부 버전을 실행할 때 인증 실패 (클라이언트 파일을 패치하면)가 나오던 버그를 수정했습니다.<br>
-	  <br>
-
-	  <h2>▶ v1.0.4 (릴리즈가 출시되기 전 모든 것을 잃게 됩니다)</h2>
-	  - 버전 다운로드 옵션을 추가했습니다.<br>
-	  - 가상 마우스 (2.0 리라이트 버전보다 좋습니다)를 추가했습니다.<br>
-
-	  <h2>▶ v1.0.1-v1.0.3 알파</h2>
+<h2>▶v2.1 Release</h2>
 	  <b>• Changes:</b><br>
-	  - 사전에 변환한 버전 1.2.5, 1.7.2, 1.7.10, 1.8, 1.9를 추가했습니다.<br>
-	  - Tab, 스크린샷, 강제 종료 버튼을 추가했습니다.<br>
+	  - Added Changelog button!<br>
+	  - Custom versions now visible in the list (not implemented for user)<br>
+	  - In-app Update now usable.<br>
+	  - Replaced glshim with GL4ES for partial OpenGL 2.0 and better performance.<br>
+	  <br>
+
+	  <h2>▶ v2 Release</h2>
+	  <b>• Changes:</b><br>
+	  - [Partial] New design (copy of 2017 original Minecraft Launcher)<br>
+	  - Changed how users load/save.<br>
+	  - Added Menu for more options to select.<br>
+	  - Added virtual mouse for styling PC mouse.<br>
+
+	  <br>
+	  <b>• Fixes:</b><br>
+	  - Max progress -1 when converting.<br>
+	  - Verification failed when run some versions (by patch the client file)<br>
+	  <br>
+
+<center><h1>Alpha Releases</h1></center>
+<center><h4>Good ol' times.</h4></center>
+	  <h2>▶ v1.0.4 (lost everything before release)</h2>
+	  - Added Download version option.<br>
+	  - Added virtual mouse (but better than 2.0 rewrite)<br>
+
+	  <h2>▶ v1.0.1-v1.0.3 ALPHA</h2>
+	  <b>• Changes:</b><br>
+	  - Added 1.2.5, 1.7.2, 1.7.10, 1.8, 1.9 pre-converted versions.<br>
+	  - Added Tab, Screenshot, Force close buttons.<br>
 	  <br>
 	  
-	  <h2>▶ v1.0 알파</h2>
-	  <b>• 최초 릴리즈. Minecraft 런처로 이름 지정</b><br>
-	  <b>• 사전에 변환한 1.9 버전만이 추가되었습니다.</b>
+	  <h2>▶ v1.0 ALPHA</h2>
+	  <b>• Initial release. Name as Minecraft Launcher</b><br>
+	  <b>• Only pre-converted 1.9 version is added.</br>
 </div>
 
+
+<!-- TODO: "Community" section-->
+ 
+
+<!-- This is the "About" section.-->
+<div id="About" class="tabcontent">
+  <br>
+  <center><img src="./assets/images/aboutsect.png" width="318" height="51"></center>
+  <br>
+  <center><h3>PojavLauncher - Changelog Page</h3></center>
+  <center>Maintainers: khanhduytran0(v2), NeveuXon(v3)</center>
+  <center>Translations can be done at Crowdin</center>
+  <br>
+  <br>
+  <br>
+  <center><img src="./assets/images/pix/app.png" width="250" height="275"></center>
+  <center><h1>About PojavLauncher</h1></center>
+  <center>PojavLauncher is a free, open source, and stable Minecraft launcher for Android built from <a href="https://github.com/zhuowei/Boardwalk"> Boardwalk</a>, a MC Launcher project by Zhouwei Zhang</center>
+  <br>
+  <center><h2>PojavLauncher (Android) Development Team</h2></center>
+  <center><h3>Head Developers:</h3></center>
+  <center>DuyKhanhTran, artdeell, SerpenSpirale</center>
+  <br>
+  <center><h3>Designers:</h3></center>
+  <center>NeveuXon</center>
+  <br>
+  <center><h3>Testers:</h3></center>
+  <center>Pedro Souza, realVezio(Voiasis), Aero</center>
+  <br>
+  <br>
+  <center>Honorable Mentions</center>
+  <center>• crystall1nedev, for the <a href="https://github.com/PojavLauncherTeam/PojavLauncher_iOS"> iOS Version</a></center>
+  <center>• QuestCraft, for porting PojavLauncher into <a href="https://github.com/QuestCraftPlusPlus/QuestCraft"> QuestVR platforms</a>.</center>
+  <br>
+  <br>
+<br>
+  <center>PojavLauncher uses the following components in making the launcher. Their license (if available) are also shown.</center>
+  <br>
+    <a href="https://github.com/zhuowei/Boardwalk">Boardwalk:</a> <a href="https://github.com/zhuowei/Boardwalk/blob/master/LICENSE">Apache License 2.0/GNU GPLv2</a><br>
+      Android Support Libraries:</a> <a href="https://android.googlesource.com/platform/prebuilts/maven_repo/android/+/master/NOTICE.txt">Apache License 2.0</a><br>
+        <a href="https://github.com/PojavLauncherTeam/gl4es">GL4ES:</a> <a href="https://github.com/ptitSeb/gl4es/blob/master/LICENSE">MIT License</a><br>
+          <a href="https://github.com/PojavLauncherTeam/openjdk-multiarch-jdk8u">OpenJDK:</a> <a href="https://openjdk.java.net/legal/gplv2+ce.html">GNU GPLv2</a><br>
+            <a href="https://github.com/PojavLauncherTeam/lwjgl3">LWJGL3:</a> <a href="https://github.com/LWJGL/lwjgl3/blob/master/LICENSE.md">BSD-3 License</a><br>
+            <a href="https://github.com/PojavLauncherTeam/lwjglx">LWJGLX:</a> Unknown License<br>
+            <a href="https://gitlab.freedesktop.org/mesa/mesa">Mesa 3D Graphics Library:</a> <a href="https://docs.mesa3d.org/license.html">MIT License</a><br>
+            <a href="https://github.com/pro-grade/pro-grade">pro-grade:</a> <a href="https://github.com/pro-grade/pro-grade/blob/master/LICENSE.txt">Apache License 2.0</a><br>
+           <a href="https://github.com/iqiyi/xHook">xHook:</a> <a href="https://github.com/iqiyi/xHook/blob/master/LICENSE">MIT & BSD-style License</a><br>
+             <a href="https://github.com/anholt/libepoxy">libepoxy:</a> <a href="https://github.com/anholt/libepoxy/blob/master/COPYING">MIT License</a><br>
+              <a href="https://github.com/PojavLauncherTeam/virglrenderer">virglrenderer:</a> <a href="https://gitlab.freedesktop.org/virgl/virglrenderer/-/blob/master/COPYING">MIT License</a><br>
+                <a href="https://mc-heads.net">MCHeads</a><br> 
+                <a href="https://crowdin.com">Crowdin</a><br>
+                <br>
+                  <center>The Official Minecraft download server/library is provided by Microsoft/Mojang, and all Minecraft is work of Mojang/Microsoft, so please buy the game, not pirate it.</center>
+    </div>
+
+
 </body>
-</html>
+</html> 
