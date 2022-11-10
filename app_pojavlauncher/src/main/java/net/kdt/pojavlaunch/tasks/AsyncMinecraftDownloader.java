@@ -1,12 +1,9 @@
 package net.kdt.pojavlaunch.tasks;
 
 import static net.kdt.pojavlaunch.PojavApplication.sExecutorService;
-import static net.kdt.pojavlaunch.Tools.ENABLE_DEV_FEATURES;
 import static net.kdt.pojavlaunch.utils.DownloadUtils.downloadFileMonitored;
 
 import android.app.Activity;
-import android.content.Context;
-import android.util.ArrayMap;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -21,16 +18,12 @@ import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.extra.ExtraConstants;
 import net.kdt.pojavlaunch.extra.ExtraCore;
-import net.kdt.pojavlaunch.multirt.MultiRTUtils;
-import net.kdt.pojavlaunch.multirt.Runtime;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
-import net.kdt.pojavlaunch.services.LazyService;
+import net.kdt.pojavlaunch.services.ProgressService;
 import net.kdt.pojavlaunch.utils.DownloadUtils;
 import net.kdt.pojavlaunch.value.DependentLibrary;
 import net.kdt.pojavlaunch.value.MinecraftClientInfo;
 import net.kdt.pojavlaunch.value.MinecraftLibraryArtifact;
-import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
-import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 
 import org.apache.commons.io.IOUtils;
 
@@ -54,13 +47,13 @@ public class AsyncMinecraftDownloader {
 
     public AsyncMinecraftDownloader(@NonNull Activity activity, JMinecraftVersionList.Version version,
                                     @NonNull DoneListener listener){
-        LazyService.startService(activity);
+        ProgressService.startService(activity);
         sExecutorService.execute(() -> {
 
             if(downloadGame(activity, version, version.id))
                 listener.onDownloadDone();
 
-            LazyService.killService();
+            ProgressService.killService();
         });
     }
 

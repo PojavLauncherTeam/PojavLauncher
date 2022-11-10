@@ -32,6 +32,7 @@ import net.kdt.pojavlaunch.customcontrols.keyboard.TouchCharInput;
 import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 
 import net.kdt.pojavlaunch.prefs.*;
+import net.kdt.pojavlaunch.services.GameService;
 import net.kdt.pojavlaunch.utils.*;
 import net.kdt.pojavlaunch.value.*;
 import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
@@ -77,7 +78,7 @@ public class MainActivity extends BaseActivity {
         if(LauncherProfiles.mainProfileJson == null) LauncherProfiles.update();
         minecraftProfile = LauncherProfiles.mainProfileJson.profiles.get(LauncherPreferences.DEFAULT_PREF.getString(LauncherPreferences.PREF_KEY_CURRENT_PROFILE,""));
         MCOptionUtils.load(Tools.getGameDirPath(minecraftProfile));
-
+        GameService.startService(this);
         initLayout(R.layout.activity_basemain);
         getWindow().setBackgroundDrawable(null);
 

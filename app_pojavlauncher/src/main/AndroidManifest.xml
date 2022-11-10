@@ -114,8 +114,8 @@
 
         </provider>
 
-        <service android:name=".services.LazyService">
-        </service>
+        <service android:name=".services.ProgressService"/>
+        <service android:name=".services.GameService" android:process=":game"/>
 
     </application>
 

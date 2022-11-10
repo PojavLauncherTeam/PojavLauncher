@@ -39,6 +39,7 @@ import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_NOTCH_SIZE;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
@@ -186,6 +187,15 @@ public final class Tools {
                 return Tools.DIR_GAME_HOME + minecraftProfile.gameDir;
         }
         return Tools.DIR_GAME_NEW;
+    }
+
+    public static void buildNotificationChannel(Context context){
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return;
+        NotificationChannel channel = new NotificationChannel(
+                context.getString(R.string.notif_channel_id),
+                context.getString(R.string.notif_channel_name), NotificationManager.IMPORTANCE_HIGH);
+        NotificationManagerCompat manager = NotificationManagerCompat.from(context);
+        manager.createNotificationChannel(channel);
     }
 
     private static boolean mkdirs(String path) {
