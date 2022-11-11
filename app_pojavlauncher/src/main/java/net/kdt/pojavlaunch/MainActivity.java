@@ -191,10 +191,10 @@ public class MainActivity extends BaseActivity {
             mControlLayout.loadLayout(
                     minecraftProfile.controlFile == null
                             ? LauncherPreferences.PREF_DEFAULTCTRL_PATH
-                            : Tools.CTRLMAP_PATH + minecraftProfile.controlFile);
+                            : Tools.CTRLMAP_PATH + "/" + minecraftProfile.controlFile);
         } catch(IOException e) {
             try {
-                Log.w("MainActivity", "Unable to load the control file, loading the default now");
+                Log.w("MainActivity", "Unable to load the control file, loading the default now", e);
                 mControlLayout.loadLayout(Tools.CTRLDEF_FILE);
             } catch (IOException ioException) {
                 Tools.showError(this, ioException);
@@ -391,7 +391,7 @@ public class MainActivity extends BaseActivity {
             MainActivity.mControlLayout.loadLayout(
                     minecraftProfile.controlFile == null
                             ? LauncherPreferences.PREF_DEFAULTCTRL_PATH
-                            : Tools.CTRLMAP_PATH + minecraftProfile.controlFile);
+                            : Tools.CTRLMAP_PATH + "/" + minecraftProfile.controlFile);
         } catch (IOException e) {
             Tools.showError(this,e);
         }
