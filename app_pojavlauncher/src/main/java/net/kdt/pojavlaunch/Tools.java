@@ -500,7 +500,7 @@ public final class Tools {
 
     public static void setFullscreen(Activity activity, boolean fullscreen) {
         final View decorView = activity.getWindow().getDecorView();
-        decorView.setOnSystemUiVisibilityChangeListener (visibility -> {
+        View.OnSystemUiVisibilityChangeListener visibilityChangeListener = visibility -> {
             if(fullscreen){
                 if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
                     decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -514,7 +514,9 @@ public final class Tools {
                 decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
             }
 
-        });
+        };
+        decorView.setOnSystemUiVisibilityChangeListener(visibilityChangeListener);
+        visibilityChangeListener.onSystemUiVisibilityChange(decorView.getSystemUiVisibility()); //call it once since the UI state may not change after the call, so the activity wont become fullscreen
     }
 
     public static DisplayMetrics currentDisplayMetrics;
