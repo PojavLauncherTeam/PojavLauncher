@@ -131,12 +131,12 @@ public class LauncherActivity extends BaseActivity {
             Toast.makeText(this, R.string.no_saved_accounts, Toast.LENGTH_LONG).show();
             return false;
         }
-
-        JMinecraftVersionList.Version mcVersion = AsyncMinecraftDownloader.findVersion(prof.lastVersionId);
-        new AsyncMinecraftDownloader(this, mcVersion, () -> runOnUiThread(() -> {
+        String normalizedVersionId = AsyncMinecraftDownloader.normalizeVersionId(prof.lastVersionId);
+        JMinecraftVersionList.Version mcVersion = Tools.getVersionInfo(normalizedVersionId);
+        new AsyncMinecraftDownloader(this, mcVersion, normalizedVersionId, () -> runOnUiThread(() -> {
             try {
                 Intent mainIntent = new Intent(getBaseContext(), MainActivity.class);
-                mainIntent.putExtra(INTENT_MINECRAFT_VERSION, mcVersion.id);
+                mainIntent.putExtra(INTENT_MINECRAFT_VERSION, normalizedVersionId);
                 mainIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(mainIntent);
                 finish();

@@ -45,10 +45,10 @@ public class AsyncMinecraftDownloader {
     /* Allows each downloading thread to have its own RECYCLED buffer */
     private final ConcurrentHashMap<Thread, byte[]> mThreadBuffers = new ConcurrentHashMap<>(5);
 
-    public AsyncMinecraftDownloader(@NonNull Activity activity, JMinecraftVersionList.Version version,
-                                    @NonNull DoneListener listener){
+    public AsyncMinecraftDownloader(@NonNull Activity activity, JMinecraftVersionList.Version version, String realVersion,
+                                    @NonNull DoneListener listener){ // this was there for a reason
         sExecutorService.execute(() -> {
-            if(downloadGame(activity, version, version.id))
+            if(downloadGame(activity, version, realVersion))
                 listener.onDownloadDone();
         });
     }
@@ -90,7 +90,7 @@ public class AsyncMinecraftDownloader {
             try {
                 assets = downloadIndex(verInfo, new File(Tools.ASSETS_PATH, "indexes/" + verInfo.assets + ".json"));
             } catch (IOException e) {
-                Log.e("AsyncMcDownloader", e.toString());
+                Log.e("AsyncMcDownloader", e.toString(), e);
             }
 
             File outLib;
@@ -179,7 +179,7 @@ public class AsyncMinecraftDownloader {
                 }
             }
         } catch (Throwable e) {
-            Log.e("AsyncMcDownloader", e.toString());
+            Log.e("AsyncMcDownloader", e.toString(),e );
         }
 
         ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT, 0, R.string.mcl_launch_cleancache);
@@ -195,7 +195,7 @@ public class AsyncMinecraftDownloader {
         try {
             downloadAssets(assets, verInfo.assets, assets.mapToResources ? new File(Tools.OBSOLETE_RESOURCES_PATH) : new File(Tools.ASSETS_PATH));
         } catch (Exception e) {
-            Log.e("AsyncMcDownloader", e.toString());
+            Log.e("AsyncMcDownloader", e.toString(), e);
         }
 
         return true;
@@ -331,7 +331,7 @@ public class AsyncMinecraftDownloader {
                         ,outLib.getName());
             }
         } catch (Throwable th) {
-            Log.e("AsyncMcDownloader", th.toString());
+            Log.e("AsyncMcDownloader", th.toString(), th);
             if (!skipIfFailed) {
                 throw th;
             } else {
@@ -351,19 +351,11 @@ public class AsyncMinecraftDownloader {
         return Tools.GLOBAL_GSON.fromJson(Tools.read(output.getAbsolutePath()), JAssets.class);
     }
 
-    public static JMinecraftVersionList.Version findVersion(String versionString) {
+    public static String normalizeVersionId(String versionString) {
         JMinecraftVersionList versionList = (JMinecraftVersionList) ExtraCore.getValue(ExtraConstants.RELEASE_TABLE);
-
         if("latest-release".equals(versionString)) versionString = versionList.latest.get("release");
         if("latest-snapshot".equals(versionString)) versionString = versionList.latest.get("snapshot");
-
-        for (JMinecraftVersionList.Version version: versionList.versions) {
-            if (version.id.equals(versionString)) {
-                return version;
-            }
-        }
-
-        return null;
+        return versionString;
     }
 
     /**@return A byte buffer bound to a thread, useful to recycle it across downloads */
