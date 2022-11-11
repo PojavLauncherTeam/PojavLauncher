@@ -11,7 +11,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public class ProgressKeeper {
     private static final ConcurrentHashMap<String, ConcurrentLinkedQueue<WeakReference<ProgressListener>>> sProgressListeners = new ConcurrentHashMap<>();
     private static final ConcurrentHashMap<String, ProgressState> sProgressStates = new ConcurrentHashMap<>();
-    private static final ArrayList<WeakReference<TaskCountListener>> sTaskCountListeners = new ArrayList<>();
+    private static final ArrayList<TaskCountListener> sTaskCountListeners = new ArrayList<>();
 
     public static void submitProgress(String progressRecord, int progress, int resid, Object... va) {
         ProgressState progressState = sProgressStates.get(progressRecord);
@@ -48,16 +48,9 @@ public class ProgressKeeper {
     }
 
     private static void updateTaskCount() {
-        Log.i("ProgressKeeper","updateTaskCount()");
         int count = sProgressStates.size();
-        Iterator<WeakReference<TaskCountListener>> taskCountListeners = sTaskCountListeners.iterator();
-        while(taskCountListeners.hasNext()) {
-            TaskCountListener countListener = taskCountListeners.next().get();
-            if(countListener == null) {
-                Log.i("ProgressKeeper","Swooped a listener");
-                taskCountListeners.remove();
-            }
-            else countListener.onUpdateTaskCount(count);
+        for(TaskCountListener listener : sTaskCountListeners) {
+            listener.onUpdateTaskCount(count);
         }
     }
 
@@ -81,16 +74,15 @@ public class ProgressKeeper {
         listenerWeakReferenceList.add(new WeakReference<>(listener));
     }
     public static void addTaskCountListener(TaskCountListener listener) {
-        Iterator<WeakReference<TaskCountListener>> taskCountListeners = sTaskCountListeners.iterator();
-        while(taskCountListeners.hasNext()) {
-            TaskCountListener countListener = taskCountListeners.next().get();
-            if(countListener == null){
-                Log.i("ProgressKeeper","Swooped a listener");
-                taskCountListeners.remove();
-            }
-        }
         listener.onUpdateTaskCount(sProgressStates.size());
-        sTaskCountListeners.add(new WeakReference<>(listener));
+        if(!sTaskCountListeners.contains(listener)) sTaskCountListeners.add(listener);
+    }
+    public static void addTaskCountListener(TaskCountListener listener, boolean runUpdate) {
+        if(runUpdate) listener.onUpdateTaskCount(sProgressStates.size());
+        if(!sTaskCountListeners.contains(listener)) sTaskCountListeners.add(listener);
+    }
+    public static void removeTaskCountListener(TaskCountListener listener) {
+        sTaskCountListeners.remove(listener);
     }
     public static int getTaskCount() {
         return sProgressStates.size();

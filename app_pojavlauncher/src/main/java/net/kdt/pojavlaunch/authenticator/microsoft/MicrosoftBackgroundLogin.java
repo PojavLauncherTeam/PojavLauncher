@@ -7,6 +7,8 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import com.kdt.mcgui.ProgressLayout;
+
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.value.MinecraftAccount;
 import net.kdt.pojavlaunch.authenticator.listener.*;
@@ -97,6 +99,7 @@ public class MicrosoftBackgroundLogin {
                 if(errorListener != null)
                     mHandler.post(() -> errorListener.onLoginError(e));
             }
+            ProgressLayout.clearProgress(ProgressLayout.AUTHENTICATE_MICROSOFT);
         });
     }
 
@@ -280,6 +283,7 @@ public class MicrosoftBackgroundLogin {
         if(listener != null){
             mHandler.post(() -> listener.onLoginProgress(step));
         }
+        ProgressLayout.setProgress(ProgressLayout.AUTHENTICATE_MICROSOFT, step*20);
     }
 
 

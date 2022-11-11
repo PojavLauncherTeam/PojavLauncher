@@ -17,6 +17,8 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
+import com.kdt.mcgui.ProgressLayout;
+
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.multirt.MultiRTUtils;
@@ -72,6 +74,7 @@ public class AsyncAssetManager {
     /** Unpack single files, with no regard to version tracking */
     public static void unpackSingleFiles(Context ctx){
         sExecutorService.execute(() -> {
+
             try {
                 Tools.copyAssetFile(ctx, "options.txt", Tools.DIR_GAME_NEW, false);
                 Tools.copyAssetFile(ctx, "default.json", Tools.CTRLMAP_PATH, false);

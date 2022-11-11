@@ -159,14 +159,11 @@ public class LauncherActivity extends BaseActivity {
 
         mSettingsButton.setOnClickListener(mSettingButtonListener);
         mDeleteAccountButton.setOnClickListener(mAccountDeleteButtonListener);
+        ProgressKeeper.addTaskCountListener(mProgressLayout);
         ExtraCore.addExtraListener(ExtraConstants.BACK_PREFERENCE, mBackPreferenceListener);
         ExtraCore.addExtraListener(ExtraConstants.SELECT_AUTH_METHOD, mSelectAuthMethod);
 
         ExtraCore.addExtraListener(ExtraConstants.LAUNCH_GAME, mLaunchGameListener);
-
-        AsyncAssetManager.unpackRuntime(this.getAssets(), false);
-        AsyncAssetManager.unpackComponents(this);
-        AsyncAssetManager.unpackSingleFiles(this);
 
         new AsyncVersionList().getVersionList(versions -> {
             ExtraCore.setValue(ExtraConstants.RELEASE_TABLE, versions);
@@ -175,6 +172,8 @@ public class LauncherActivity extends BaseActivity {
         mProgressLayout.observe(ProgressLayout.DOWNLOAD_MINECRAFT);
         mProgressLayout.observe(ProgressLayout.UNPACK_RUNTIME);
         mProgressLayout.observe(ProgressLayout.INSTALL_MODPACK);
+        mProgressLayout.observe(ProgressLayout.AUTHENTICATE_MICROSOFT);
+        mProgressLayout.observe(ProgressLayout.DOWNLOAD_VERSION_LIST);
     }
 
     @Override
@@ -191,6 +190,8 @@ public class LauncherActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        ProgressKeeper.removeTaskCountListener(mProgressLayout);
+        ProgressKeeper.removeTaskCountListener(mProgressServiceKeeper);
         ExtraCore.removeExtraListenerFromValue(ExtraConstants.BACK_PREFERENCE, mBackPreferenceListener);
         ExtraCore.removeExtraListenerFromValue(ExtraConstants.SELECT_AUTH_METHOD, mSelectAuthMethod);
         ExtraCore.removeExtraListenerFromValue(ExtraConstants.LAUNCH_GAME, mLaunchGameListener);

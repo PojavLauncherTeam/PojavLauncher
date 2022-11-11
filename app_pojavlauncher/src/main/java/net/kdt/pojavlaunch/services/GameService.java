@@ -27,7 +27,7 @@ public class GameService extends Service {
     public static void stopService() {
         Service gameService = sGameService.get();
         if(gameService != null)
-        gameService.stopSelf();
+            gameService.stopSelf();
     }
 
     @Override
@@ -40,7 +40,7 @@ public class GameService extends Service {
         if(intent != null && intent.getBooleanExtra("kill", false)) {
             stopSelf();
             Process.killProcess(Process.myPid());
-            return super.onStartCommand(intent, flags, startId);
+            return START_NOT_STICKY;
         }
         Intent killIntent = new Intent(getApplicationContext(), GameService.class);
         killIntent.putExtra("kill", true);

@@ -19,6 +19,7 @@ import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.extra.ExtraCore;
 import net.kdt.pojavlaunch.progresskeeper.ProgressKeeper;
 import net.kdt.pojavlaunch.progresskeeper.ProgressListener;
+import net.kdt.pojavlaunch.progresskeeper.TaskCountListener;
 import net.kdt.pojavlaunch.services.ProgressService;
 
 import java.util.ArrayList;
@@ -29,9 +30,11 @@ import java.util.ArrayList;
  *
  * This class relies on ExtraCore for its behavior.
  */
-public class ProgressLayout extends ConstraintLayout implements View.OnClickListener{
+public class ProgressLayout extends ConstraintLayout implements View.OnClickListener, TaskCountListener{
     public static final String UNPACK_RUNTIME = "unpack_runtime";
     public static final String DOWNLOAD_MINECRAFT = "download_minecraft";
+    public static final String DOWNLOAD_VERSION_LIST = "download_verlist";
+    public static final String AUTHENTICATE_MICROSOFT = "authenticate_microsoft";
     public static final String INSTALL_MODPACK = "install_modpack";
 
     public ProgressLayout(@NonNull Context context) {
@@ -73,22 +76,13 @@ public class ProgressLayout extends ConstraintLayout implements View.OnClickList
         mTaskNumberDisplayer = findViewById(R.id.progress_textview);
         mFlipArrow = findViewById(R.id.progress_flip_arrow);
         setBackgroundColor(getResources().getColor(R.color.background_bottom_bar));
-        ProgressKeeper.addTaskCountListener((tc)->{
-            post(()->{
-                Log.i("ProgressLayout", "tc="+tc);
-                if(tc > 0) {
-                    mTaskNumberDisplayer.setText(getContext().getString(R.string.progresslayout_tasks_in_progress, tc));
-                    setVisibility(VISIBLE);
-                }else
-                    setVisibility(GONE);
-            });
-        });
         setOnClickListener(this);
     }
 
+
     /** Update the progress bar content */
     public static void setProgress(String progressKey, int progress){
-         ExtraCore.setValue(progressKey, progress + "¤" + "-1");
+        ProgressKeeper.submitProgress(progressKey, progress, -1, (Object)null);
     }
 
     /** Update the text and progress content */
@@ -110,6 +104,17 @@ public class ProgressLayout extends ConstraintLayout implements View.OnClickList
     public void onClick(View v) {
         mLinearLayout.setVisibility(mLinearLayout.getVisibility() == GONE ? VISIBLE : GONE);
         mFlipArrow.setRotation(mLinearLayout.getVisibility() == GONE? 0 : 180);
+    }
+
+    @Override
+    public void onUpdateTaskCount(int tc) {
+        post(()->{
+            if(tc > 0) {
+                mTaskNumberDisplayer.setText(getContext().getString(R.string.progresslayout_tasks_in_progress, tc));
+                setVisibility(VISIBLE);
+            }else
+                setVisibility(GONE);
+        });
     }
 
     class LayoutProgressListener implements ProgressListener {
@@ -136,6 +141,7 @@ public class ProgressLayout extends ConstraintLayout implements View.OnClickList
             post(()-> {
                 textView.setProgress(progress);
                 if(resid != -1) textView.setText(getContext().getString(resid, va));
+                else if(va.length > 0 && va[0] != null)textView.setText((String)va[0]);
                 else textView.setText("");
             });
         }
