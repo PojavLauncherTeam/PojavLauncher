@@ -5,18 +5,16 @@ import static net.kdt.pojavlaunch.utils.DownloadUtils.downloadString;
 
 import android.util.Log;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.gson.stream.JsonReader;
+import com.kdt.mcgui.ProgressLayout;
 
 import net.kdt.pojavlaunch.JMinecraftVersionList;
+import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
-import net.kdt.pojavlaunch.extra.ExtraConstants;
-import net.kdt.pojavlaunch.extra.ExtraCore;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
-import net.kdt.pojavlaunch.utils.DownloadUtils;
-import net.kdt.pojavlaunch.utils.FilteredSubList;
+import net.kdt.pojavlaunch.progresskeeper.ProgressKeeper;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -31,6 +29,7 @@ import java.util.Collections;
 public class AsyncVersionList {
 
     public void getVersionList(@Nullable VersionDoneListener listener){
+        ProgressKeeper.submitProgress(ProgressLayout.DOWNLOAD_VERSION_LIST, 0, R.string.downloading_versions);
         sExecutorService.execute(() -> {
             File versionFile = new File(Tools.DIR_DATA + "/version_list.json");
             JMinecraftVersionList versionList = null;
@@ -54,6 +53,7 @@ public class AsyncVersionList {
 
             if(listener != null)
                 listener.onVersionDone(versionList);
+            ProgressLayout.clearProgress(ProgressLayout.DOWNLOAD_VERSION_LIST);
         });
     }
 

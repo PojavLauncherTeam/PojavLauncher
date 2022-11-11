@@ -318,4 +318,5 @@
     <string name="main_add_account">Add account</string>
     <string name="tasks_ongoing">Tasks are in progress, please wait</string>
     <string name="no_saved_accounts">No saved accounts</string>
+    <string name="downloading_versions">Downloading version list…</string>
 </resources>
