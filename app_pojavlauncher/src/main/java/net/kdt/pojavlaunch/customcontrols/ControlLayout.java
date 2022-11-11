@@ -242,7 +242,7 @@ public class ControlLayout extends FrameLayout {
     @Override
     public void onViewRemoved(View child) {
         super.onViewRemoved(child);
-        if(child instanceof ControlInterface){
+        if(child instanceof ControlInterface && mControlPopup != null){
             mControlPopup.disappearColor();
             mControlPopup.disappear();
         }
