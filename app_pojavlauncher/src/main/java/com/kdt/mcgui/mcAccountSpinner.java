@@ -34,6 +34,7 @@ import net.kdt.pojavlaunch.authenticator.microsoft.MicrosoftBackgroundLogin;
 import net.kdt.pojavlaunch.extra.ExtraConstants;
 import net.kdt.pojavlaunch.extra.ExtraCore;
 import net.kdt.pojavlaunch.extra.ExtraListener;
+import net.kdt.pojavlaunch.services.ProgressService;
 import net.kdt.pojavlaunch.value.MinecraftAccount;
 
 import java.io.File;
@@ -165,8 +166,10 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
     public void removeCurrentAccount(){
         int position = getSelectedItemPosition();
         if(position == 0) return;
-
+        File accountFile = new File(Tools.DIR_ACCOUNT_NEW, mAccountList.get(position)+".json");
+        if(accountFile.exists()) accountFile.delete();
         mAccountList.remove(position);
+
         reloadAccounts(false, 0);
     }
 
