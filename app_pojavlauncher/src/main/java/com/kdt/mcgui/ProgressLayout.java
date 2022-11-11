@@ -3,6 +3,7 @@ package com.kdt.mcgui;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -16,8 +17,11 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.extra.ExtraCore;
+import net.kdt.pojavlaunch.progresskeeper.ProgressKeeper;
+import net.kdt.pojavlaunch.progresskeeper.ProgressListener;
+import net.kdt.pojavlaunch.services.ProgressService;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 
 
 /** Class staring at specific values and automatically show something if the progress is present
@@ -47,88 +51,38 @@ public class ProgressLayout extends ConstraintLayout implements View.OnClickList
         init();
     }
 
-    private int mActiveProcesses = 0;
-    private final ArrayMap<String, TextProgressBar> mMap = new ArrayMap<>();
+    private final ArrayList<LayoutProgressListener> mMap = new ArrayList<>();
     private LinearLayout mLinearLayout;
     private TextView mTaskNumberDisplayer;
     private ImageView mFlipArrow;
-    private final Runnable mCheckProgressRunnable = new Runnable() {
-        @Override
-        public void run() {
-            for(String progressKey : mMap.keySet()){
-                if(progressKey == null) continue; //TODO check wtf does this
-
-                Object object = ExtraCore.consumeValue(progressKey);
-
-                if(object != null){
-                    String[] progressStuff = ((String) object).split("¤");
-                    int progress = Integer.parseInt(progressStuff[0]);
-                    int resourceString = Integer.parseInt(progressStuff[1]);
-
-                    // Prepare the progressbar
-                    if(mMap.get(progressKey) == null){
-                        TextProgressBar textView = new TextProgressBar(getContext());
-                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, getResources().getDimensionPixelOffset(R.dimen._20sdp));
-                        params.bottomMargin = getResources().getDimensionPixelOffset(R.dimen._6sdp);
-
-                        mLinearLayout.addView(textView, params);
-                        mMap.put(progressKey, textView);
-                        mActiveProcesses++;
-                    }
-
-                    mMap.get(progressKey).setProgress(progress);
-                    if(resourceString != -1){
-                        // As an optimization, copy array content back 2 indexes instead of creating another object
-                        System.arraycopy(progressStuff, 2, progressStuff, 0, progressStuff.length - 2);
-                        mMap.get(progressKey).setText(getResources().getString(resourceString, progressStuff));
-                    }else{
-                        if(progressStuff.length >= 3)
-                            mMap.get(progressStuff[2]);
-                    }
-
-
-                    // Remove when we don't have progress
-                    if(progress < 0){
-                        if(progress <= -10) // Only remove the observer when it is explicitly told to do so ?
-                            mMap.remove(progressKey);
-
-                        mLinearLayout.removeView(mMap.get(progressKey));
-                        mActiveProcesses--;
-                    }
-                }
-            }
-
-            setVisibility(hasProcesses() ? VISIBLE : GONE);
-
-            mTaskNumberDisplayer.setText(getContext().getString(R.string.progresslayout_tasks_in_progress, mActiveProcesses));
-            postDelayed(this, 1000);
-        }
-    };
 
 
 
     public void observe(String progressKey){
-        mMap.put(progressKey, null);
+        mMap.add(new LayoutProgressListener(progressKey));
     }
 
     public boolean hasProcesses(){
-        return mActiveProcesses > 0;
+        return ProgressKeeper.getTaskCount() > 0;
     }
 
-    public boolean hasProcess(String process){
-        return mMap.get(process) != null;
-    }
 
     private void init(){
         inflate(getContext(), R.layout.view_progress, this);
         mLinearLayout = findViewById(R.id.progress_linear_layout);
         mTaskNumberDisplayer = findViewById(R.id.progress_textview);
         mFlipArrow = findViewById(R.id.progress_flip_arrow);
-        postDelayed(mCheckProgressRunnable, 1000);
-
         setBackgroundColor(getResources().getColor(R.color.background_bottom_bar));
-        setVisibility(GONE);
-
+        ProgressKeeper.addTaskCountListener((tc)->{
+            post(()->{
+                Log.i("ProgressLayout", "tc="+tc);
+                if(tc > 0) {
+                    mTaskNumberDisplayer.setText(getContext().getString(R.string.progresslayout_tasks_in_progress, tc));
+                    setVisibility(VISIBLE);
+                }else
+                    setVisibility(GONE);
+            });
+        });
         setOnClickListener(this);
     }
 
@@ -138,13 +92,8 @@ public class ProgressLayout extends ConstraintLayout implements View.OnClickList
     }
 
     /** Update the text and progress content */
-    public static void setProgress(String progressKey, int progress, @StringRes int resource, String... message){
-        StringBuilder builder = new StringBuilder();
-        for(String bit : message){
-            builder.append(bit).append("¤");
-        }
-
-        ExtraCore.setValue(progressKey, progress + "¤" + resource + "¤" + builder);
+    public static void setProgress(String progressKey, int progress, @StringRes int resource, Object... message){
+        ProgressKeeper.submitProgress(progressKey, progress, resource, message);
     }
 
     /** Update the text and progress content */
@@ -161,5 +110,41 @@ public class ProgressLayout extends ConstraintLayout implements View.OnClickList
     public void onClick(View v) {
         mLinearLayout.setVisibility(mLinearLayout.getVisibility() == GONE ? VISIBLE : GONE);
         mFlipArrow.setRotation(mLinearLayout.getVisibility() == GONE? 0 : 180);
+    }
+
+    class LayoutProgressListener implements ProgressListener {
+        final String progressKey;
+        final TextProgressBar textView;
+        final LinearLayout.LayoutParams params;
+        public LayoutProgressListener(String progressKey) {
+            this.progressKey = progressKey;
+            textView = new TextProgressBar(getContext());
+            params = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, getResources().getDimensionPixelOffset(R.dimen._20sdp));
+            params.bottomMargin = getResources().getDimensionPixelOffset(R.dimen._6sdp);
+            ProgressKeeper.addListener(progressKey, this);
+        }
+        @Override
+        public void onProgressStarted() {
+            post(()-> {
+                Log.i("ProgressLayout", "onProgressStarted");
+                mLinearLayout.addView(textView, params);
+            });
+        }
+
+        @Override
+        public void onProgressUpdated(int progress, int resid, Object... va) {
+            post(()-> {
+                textView.setProgress(progress);
+                if(resid != -1) textView.setText(getContext().getString(resid, va));
+                else textView.setText("");
+            });
+        }
+
+        @Override
+        public void onProgressEnded() {
+            post(()-> {
+                mLinearLayout.removeView(textView);
+            });
+        }
     }
 }

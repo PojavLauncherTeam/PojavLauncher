@@ -41,6 +41,8 @@ import net.kdt.pojavlaunch.fragments.SelectAuthFragment;
 import net.kdt.pojavlaunch.multirt.MultiRTConfigDialog;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.prefs.screens.LauncherPreferenceFragment;
+import net.kdt.pojavlaunch.progresskeeper.ProgressKeeper;
+import net.kdt.pojavlaunch.services.ProgressServiceKeeper;
 import net.kdt.pojavlaunch.tasks.AsyncAssetManager;
 import net.kdt.pojavlaunch.tasks.AsyncMinecraftDownloader;
 import net.kdt.pojavlaunch.tasks.AsyncVersionList;
@@ -60,6 +62,7 @@ public class LauncherActivity extends BaseActivity {
     private FragmentContainerView mFragmentView;
     private ImageButton mSettingsButton, mDeleteAccountButton;
     private ProgressLayout mProgressLayout;
+    private ProgressServiceKeeper mProgressServiceKeeper;
 
     /* Allows to switch from one button "type" to another */
     private final FragmentManager.FragmentLifecycleCallbacks mFragmentCallbackListener = new FragmentManager.FragmentLifecycleCallbacks() {
@@ -151,7 +154,7 @@ public class LauncherActivity extends BaseActivity {
         setContentView(R.layout.activity_pojav_launcher);
         getWindow().setBackgroundDrawable(null);
         bindViews();
-
+        ProgressKeeper.addTaskCountListener((mProgressServiceKeeper = new ProgressServiceKeeper(this)));
         askForStoragePermission(); // Will wait here
 
         mSettingsButton.setOnClickListener(mSettingButtonListener);

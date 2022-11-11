@@ -47,13 +47,9 @@ public class AsyncMinecraftDownloader {
 
     public AsyncMinecraftDownloader(@NonNull Activity activity, JMinecraftVersionList.Version version,
                                     @NonNull DoneListener listener){
-        ProgressService.startService(activity);
         sExecutorService.execute(() -> {
-
             if(downloadGame(activity, version, version.id))
                 listener.onDownloadDone();
-
-            ProgressService.killService();
         });
     }
 
