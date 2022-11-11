@@ -108,24 +108,24 @@ public class LauncherActivity extends BaseActivity {
 
     private final ExtraListener<Boolean> mLaunchGameListener = (key, value) -> {
         if(mProgressLayout.hasProcesses()){
-            Toast.makeText(this, "Tasks are in progress, please wait", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.tasks_ongoing, Toast.LENGTH_LONG).show();
             return false;
         }
 
         String selectedProfile = LauncherPreferences.DEFAULT_PREF.getString(LauncherPreferences.PREF_KEY_CURRENT_PROFILE,"");
         if (LauncherProfiles.mainProfileJson == null  || LauncherProfiles.mainProfileJson.profiles == null
                 || !LauncherProfiles.mainProfileJson.profiles.containsKey(selectedProfile)){
-            Toast.makeText(this, "No selected version", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.error_no_version, Toast.LENGTH_LONG).show();
             return false;
         }
         MinecraftProfile prof = LauncherProfiles.mainProfileJson.profiles.get(selectedProfile);
         if (prof == null || prof.lastVersionId == null){
-            Toast.makeText(this, "No selected version", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.error_no_version, Toast.LENGTH_LONG).show();
             return false;
         }
 
         if(mAccountSpinner.getSelectedAccount() == null){
-            Toast.makeText(this, "No selected minecraft account", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.no_saved_accounts, Toast.LENGTH_LONG).show();
             return false;
         }
 
