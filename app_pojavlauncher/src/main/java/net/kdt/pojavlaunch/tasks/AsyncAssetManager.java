@@ -54,6 +54,7 @@ public class AsyncAssetManager {
         // Install the runtime in an async manner, hope for the best
         String finalRt_version = rt_version;
         sExecutorService.execute(() -> {
+
             try {
                 MultiRTUtils.installRuntimeNamedBinpack(
                         am.open("components/jre/universal.tar.xz"),

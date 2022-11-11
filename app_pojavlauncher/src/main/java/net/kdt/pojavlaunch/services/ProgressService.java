@@ -5,54 +5,49 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Handler;
 import android.os.IBinder;
 import android.os.Process;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
+import net.kdt.pojavlaunch.progresskeeper.ProgressKeeper;
+import net.kdt.pojavlaunch.progresskeeper.ProgressListener;
+import net.kdt.pojavlaunch.progresskeeper.TaskCountListener;
 
 import java.lang.ref.WeakReference;
+import java.util.Iterator;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Lazy service which allows the process not to get killed.
  * Can be created from context, can be killed statically
  */
-public class ProgressService extends Service {
+public class ProgressService extends Service implements TaskCountListener {
 
-    private static WeakReference<Service> sProgressService = new WeakReference<>(null);
-    private static final AtomicInteger sReferenceCount = new AtomicInteger(0);
+    private Handler mainThreadHandler = new Handler();
+    private NotificationManagerCompat notificationManagerCompat;
 
     /** Simple wrapper to start the service */
     public static void startService(Context context){
         Intent intent = new Intent(context, ProgressService.class);
-        if(sReferenceCount.get() < 0) sReferenceCount.set(0);
-        sReferenceCount.getAndIncrement();
         ContextCompat.startForegroundService(context, intent);
     }
 
-    /** Kill the service if it is still running */
-    public static void killService(){
-        Service service = sProgressService.get();
-        int refcnt = sReferenceCount.decrementAndGet();
-        if(service != null && refcnt <= 0) {
-            service.stopSelf();
-        }
-    }
-
     private NotificationCompat.Builder mNotificationBuilder;
-    public ProgressService(){
-        super();
-        sProgressService = new WeakReference<>(this);
-    }
 
     @Override
     public void onCreate() {
         Tools.buildNotificationChannel(getApplicationContext());
+        notificationManagerCompat = NotificationManagerCompat.from(getApplicationContext());
         Intent killIntent = new Intent(getApplicationContext(), ProgressService.class);
         killIntent.putExtra("kill", true);
         PendingIntent pendingKillIntent = PendingIntent.getService(this, 0, killIntent, Build.VERSION.SDK_INT >=23 ? PendingIntent.FLAG_IMMUTABLE : 0);
@@ -60,16 +55,20 @@ public class ProgressService extends Service {
                 .setContentTitle(getString(R.string.lazy_service_default_title))
                 .addAction(android.R.drawable.ic_menu_close_clear_cancel,  getString(R.string.notification_terminate), pendingKillIntent)
                 .setSmallIcon(R.mipmap.ic_launcher_round);
+        ProgressKeeper.addTaskCountListener(this);
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        if(intent != null && intent.getBooleanExtra("kill", false)) {
-            stopSelf(); // otherwise Android tries to restart the service since it "crashed"
-            Process.killProcess(Process.myPid());
-            return super.onStartCommand(intent, flags, startId);
+        if(intent != null) {
+            if(intent.getBooleanExtra("kill", false)) {
+                stopSelf(); // otherwise Android tries to restart the service since it "crashed"
+                Process.killProcess(Process.myPid());
+                return super.onStartCommand(intent, flags, startId);
+            }
         }
-        mNotificationBuilder.setContentText(getString(R.string.progresslayout_tasks_in_progress, sReferenceCount.get()));
+        Log.d("ProgressService", "Started!");
+        mNotificationBuilder.setContentText(getString(R.string.progresslayout_tasks_in_progress, ProgressKeeper.getTaskCount()));
         startForeground(1,mNotificationBuilder.build());
         return super.onStartCommand(intent, flags, startId);
     }
@@ -78,5 +77,17 @@ public class ProgressService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         return null;
+    }
+
+    @Override
+    public void onUpdateTaskCount(int taskCount) {
+        mainThreadHandler.post(()->{
+            if(taskCount < 0) {
+                mNotificationBuilder.setContentText(getString(R.string.progresslayout_tasks_in_progress, taskCount));
+                notificationManagerCompat.notify(1, mNotificationBuilder.build());
+            }else{
+                stopSelf();
+            }
+        });
     }
 }
