@@ -26,7 +26,6 @@ import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.extra.ExtraConstants;
 import net.kdt.pojavlaunch.extra.ExtraCore;
-import net.kdt.pojavlaunch.fragments.FileSelectorFragment;
 import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.multirt.RTSpinnerAdapter;
 import net.kdt.pojavlaunch.multirt.Runtime;
@@ -122,12 +121,11 @@ public class ProfileEditorFragment extends Fragment {
             AlertDialog.Builder builder = new AlertDialog.Builder(mDefaultVersion.getContext());
             ExpandableListView expandableListView = (ExpandableListView) LayoutInflater.from(mDefaultVersion.getContext())
                     .inflate(R.layout.dialog_expendable_list_view , null);
-
-            JMinecraftVersionList.Version[] versionList;
-            if(getValue(ExtraConstants.RELEASE_TABLE) == null)
-                versionList = new JMinecraftVersionList.Version[0];
-            else versionList = ((JMinecraftVersionList) getValue(ExtraConstants.RELEASE_TABLE)).versions;
-            ExpandableListAdapter adapter = new VersionListAdapter(versionList, mDefaultVersion.getContext());
+            JMinecraftVersionList jMinecraftVersionList = (JMinecraftVersionList) getValue(ExtraConstants.RELEASE_TABLE);
+            JMinecraftVersionList.Version[] versionArray;
+            if(jMinecraftVersionList == null || jMinecraftVersionList.versions == null) versionArray = new JMinecraftVersionList.Version[0];
+            else versionArray = jMinecraftVersionList.versions;
+            ExpandableListAdapter adapter = new VersionListAdapter(versionArray, mDefaultVersion.getContext());
 
             expandableListView.setAdapter(adapter);
             builder.setView(expandableListView);

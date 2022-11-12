@@ -1,7 +1,5 @@
 package net.kdt.pojavlaunch.progresskeeper;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -29,7 +27,6 @@ public class ProgressKeeper {
             progressState.varArg = va;
         }
 
-        Log.d("ProgressLayout", "shouldCallStarted="+shouldCallStarted+" shouldCallEnded="+shouldCallEnded);
         ConcurrentLinkedQueue<ProgressListener> progressListeners = sProgressListeners.get(progressRecord);
         if(progressListeners != null)
             for(ProgressListener listener : progressListeners) {

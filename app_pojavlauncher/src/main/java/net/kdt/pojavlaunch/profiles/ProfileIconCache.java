@@ -24,8 +24,7 @@ public class ProfileIconCache {
 
     public static void initDefault(Context context) {
         if(sDefaultIcon != null) return;
-
-        sDefaultIcon = ResourcesCompat.getDrawable(context.getResources(), R.drawable.ic_gamepad_pointer, null);
+        sDefaultIcon = ResourcesCompat.getDrawable(context.getResources(), R.mipmap.ic_launcher_foreground, null);
         sDefaultIcon.setBounds(0, 0, 10, 10);
     }
 
