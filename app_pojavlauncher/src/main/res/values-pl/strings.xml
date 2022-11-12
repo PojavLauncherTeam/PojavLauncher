@@ -83,6 +83,11 @@
     <string name="mcl_setting_category_general">Ustawienia ogólne</string>
     <string name="mcl_setting_category_scaling">Ustawienia skalowania</string>
     <string name="mcl_setting_category_renderer">Silnik renderujący</string>
+    <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (wszystkie wersje, szybki)</string>
+    <string name="mcl_setting_renderer_virgl">virglrenderer - (wersja 1.7+, wolny)</string>
+    <string name="mcl_setting_renderer_vgpu">vgpu - (do wersji 1.16.5, szybki)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink - (old_beta b1.8+, wolny)</string>
+    <string name="mcl_setting_renderer_angle">ANGLE - (wersja 1.17+, zrównoważony)</string>
     <string name="mcl_setting_category_veroption">Opcje widoczne na liście wersji</string>
     <string name="mcl_setting_veroption_release">Oficjalne wydanie</string>
     <string name="mcl_setting_veroption_snapshot">Wersja deweloperska</string>
@@ -172,6 +177,7 @@
     <string name="customctrl_addsubbutton">Dodaj przycisk podrzędny</string>
     <string name="customctrl_add_subbutton_message">Dodano przycisk podrzędny n°%d !</string>
     <string name="customctrl_selectdefault">Wybierz domyślny plik json dla sterowania</string>
+    <string name="customctrl_export">Eksportuj ustawienia sterowania</string>
     <string name="main_install_jar_file">Zainstaluj .jar</string>
     <string name="main_options">Opcje</string>
     <string name="main_play">Graj</string>
