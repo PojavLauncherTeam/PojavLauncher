@@ -2,14 +2,12 @@ package net.kdt.pojavlaunch.progresskeeper;
 
 import android.util.Log;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class ProgressKeeper {
-    private static final ConcurrentHashMap<String, ConcurrentLinkedQueue<WeakReference<ProgressListener>>> sProgressListeners = new ConcurrentHashMap<>();
+    private static final ConcurrentHashMap<String, ConcurrentLinkedQueue<ProgressListener>> sProgressListeners = new ConcurrentHashMap<>();
     private static final ConcurrentHashMap<String, ProgressState> sProgressStates = new ConcurrentHashMap<>();
     private static final ArrayList<TaskCountListener> sTaskCountListeners = new ArrayList<>();
 
@@ -32,19 +30,13 @@ public class ProgressKeeper {
         }
 
         Log.d("ProgressLayout", "shouldCallStarted="+shouldCallStarted+" shouldCallEnded="+shouldCallEnded);
-        ConcurrentLinkedQueue<WeakReference<ProgressListener>> listenerWeakReferenceList = sProgressListeners.get(progressRecord);
-        if(listenerWeakReferenceList != null) {
-            Iterator<WeakReference<ProgressListener>> iterator = listenerWeakReferenceList.iterator();
-            while(iterator.hasNext()) {
-                ProgressListener listener = iterator.next().get();
-                Log.i("ProgressLayout", listener+"");
-                if(listener != null) {
+        ConcurrentLinkedQueue<ProgressListener> progressListeners = sProgressListeners.get(progressRecord);
+        if(progressListeners != null)
+            for(ProgressListener listener : progressListeners) {
                     if(shouldCallStarted) listener.onProgressStarted();
                     else if(shouldCallEnded) listener.onProgressEnded();
                     else listener.onProgressUpdated(progress, resid, va);
-                } else iterator.remove();
             }
-        }
     }
 
     private static void updateTaskCount() {
@@ -59,20 +51,19 @@ public class ProgressKeeper {
         if(state != null && (state.resid != -1 || state.progress != -1)) {
             listener.onProgressStarted();
             listener.onProgressUpdated(state.progress, state.resid, state.varArg);
-            Log.d("ProgressLayout", "Resubmitting UI state");
         }else{
             listener.onProgressEnded();
         }
-        ConcurrentLinkedQueue<WeakReference<ProgressListener>> listenerWeakReferenceList = sProgressListeners.get(progressRecord);
+       ConcurrentLinkedQueue<ProgressListener> listenerWeakReferenceList = sProgressListeners.get(progressRecord);
         if(listenerWeakReferenceList == null) sProgressListeners.put(progressRecord, (listenerWeakReferenceList = new ConcurrentLinkedQueue<>()));
-        else {
-            Iterator<WeakReference<ProgressListener>> iterator = listenerWeakReferenceList.iterator();
-            while(iterator.hasNext()) {
-                if(iterator.next().get() == null) iterator.remove();
-            }
-        }
-        listenerWeakReferenceList.add(new WeakReference<>(listener));
+        listenerWeakReferenceList.add(listener);
     }
+
+    public static void removeListener(String progressRecord, ProgressListener listener) {
+        ConcurrentLinkedQueue<ProgressListener> listenerWeakReferenceList = sProgressListeners.get(progressRecord);
+        if(listenerWeakReferenceList != null) listenerWeakReferenceList.remove(listener);
+    }
+
     public static void addTaskCountListener(TaskCountListener listener) {
         listener.onUpdateTaskCount(sProgressStates.size());
         if(!sTaskCountListeners.contains(listener)) sTaskCountListeners.add(listener);
