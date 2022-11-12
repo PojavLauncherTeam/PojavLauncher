@@ -62,7 +62,7 @@ public class AsyncMinecraftDownloader {
         try {
             File verJsonDir = new File(Tools.DIR_HOME_VERSION + downVName + ".json");
 
-            if (verInfo.url != null) {
+            if (verInfo != null && verInfo.url != null) {
                 if(!LauncherPreferences.PREF_CHECK_LIBRARY_SHA)  Log.w("Chk","Checker is off");
 
                 boolean isManifestGood = verJsonDir.exists()
@@ -80,7 +80,7 @@ public class AsyncMinecraftDownloader {
                 }
             }
 
-            verInfo = Tools.getVersionInfo(verInfo.id);
+            verInfo = Tools.getVersionInfo(versionName);
 
             // THIS one function need the activity in the case of an error
             if(!JRE17Util.installNewJreIfNeeded(activity, verInfo)){
@@ -357,6 +357,15 @@ public class AsyncMinecraftDownloader {
         if("latest-snapshot".equals(versionString)) versionString = versionList.latest.get("snapshot");
         return versionString;
     }
+
+    public static JMinecraftVersionList.Version getListedVersion(String normalizedVersionString) {
+        JMinecraftVersionList versionList = (JMinecraftVersionList) ExtraCore.getValue(ExtraConstants.RELEASE_TABLE);
+        for(JMinecraftVersionList.Version version : versionList.versions) {
+            if(version.id.equals(normalizedVersionString)) return version;
+        }
+        return null;
+    }
+
 
     /**@return A byte buffer bound to a thread, useful to recycle it across downloads */
     private byte[] getByteBuffer(){

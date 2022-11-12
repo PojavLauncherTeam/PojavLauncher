@@ -132,7 +132,7 @@ public class LauncherActivity extends BaseActivity {
             return false;
         }
         String normalizedVersionId = AsyncMinecraftDownloader.normalizeVersionId(prof.lastVersionId);
-        JMinecraftVersionList.Version mcVersion = Tools.getVersionInfo(normalizedVersionId);
+        JMinecraftVersionList.Version mcVersion = AsyncMinecraftDownloader.getListedVersion(normalizedVersionId);
         new AsyncMinecraftDownloader(this, mcVersion, normalizedVersionId, () -> runOnUiThread(() -> {
             try {
                 Intent mainIntent = new Intent(getBaseContext(), MainActivity.class);
