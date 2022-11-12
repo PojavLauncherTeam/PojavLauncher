@@ -53,6 +53,7 @@ public class ActionRow extends LinearLayout {
 
     /** Add action buttons and configure them */
     private void init(){
+        setTranslationZ(11);
         setVisibility(GONE);
         setOrientation(HORIZONTAL);
         setLayoutParams(new LayoutParams(
