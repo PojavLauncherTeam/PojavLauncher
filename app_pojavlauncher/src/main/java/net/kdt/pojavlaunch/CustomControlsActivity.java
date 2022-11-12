@@ -235,7 +235,7 @@ public class CustomControlsActivity extends BaseActivity {
 	private static void loadControl(String path,ControlLayout layout) {
 		try {
 			layout.loadLayout(path);
-			sSelectedName = new File(path).getName();
+			sSelectedName = path.replace(Tools.CTRLMAP_PATH, ".");
 			// Remove `.json`
 			sSelectedName = sSelectedName.substring(0, sSelectedName.length() - 5);
 		} catch (Exception e) {

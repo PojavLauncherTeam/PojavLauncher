@@ -29,7 +29,6 @@ import java.util.Collections;
 public class AsyncVersionList {
 
     public void getVersionList(@Nullable VersionDoneListener listener){
-        ProgressKeeper.submitProgress(ProgressLayout.DOWNLOAD_VERSION_LIST, 0, R.string.downloading_versions);
         sExecutorService.execute(() -> {
             File versionFile = new File(Tools.DIR_DATA + "/version_list.json");
             JMinecraftVersionList versionList = null;
@@ -53,7 +52,6 @@ public class AsyncVersionList {
 
             if(listener != null)
                 listener.onVersionDone(versionList);
-            ProgressLayout.clearProgress(ProgressLayout.DOWNLOAD_VERSION_LIST);
         });
     }
 

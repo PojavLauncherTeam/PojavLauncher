@@ -99,7 +99,7 @@ public class AsyncAssetManager {
                 unpackComponent(ctx, "lwjgl3", false);
                 unpackComponent(ctx, "security", true);
             } catch (IOException e) {
-                Log.e("AsyncAssetManager", "Failed o unpack components !");
+                Log.e("AsyncAssetManager", "Failed o unpack components !",e );
             }
         });
     }

@@ -275,9 +275,9 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
             
             // Run java on sandbox, non-overrideable.
             Collections.reverse(javaArgList);
-            javaArgList.add("-Xbootclasspath/a:" + Tools.DIR_DATA + "/pro-grade.jar");
+            javaArgList.add("-Xbootclasspath/a:" + Tools.DIR_DATA + "/security/pro-grade.jar");
             javaArgList.add("-Djava.security.manager=net.sourceforge.prograde.sm.ProGradeJSM");
-            javaArgList.add("-Djava.security.policy=" + Tools.DIR_DATA + "/java_sandbox.policy");
+            javaArgList.add("-Djava.security.policy=" + Tools.DIR_DATA + "/security/java_sandbox.policy");
             Collections.reverse(javaArgList);
 
             return JREUtils.launchJavaVM(this, javaArgList);

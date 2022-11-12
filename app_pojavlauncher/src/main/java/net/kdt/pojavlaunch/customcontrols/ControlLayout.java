@@ -353,11 +353,13 @@ public class ControlLayout extends FrameLayout {
 
 		// When the input window cannot be hidden, it returns false
 		imm.hideSoftInputFromWindow(getWindowToken(), 0);
-		mControlPopup.disappearColor();
-		mControlPopup.disappear();
+		if(mControlPopup != null) {
+			mControlPopup.disappearColor();
+			mControlPopup.disappear();
+		}
 
-		actionRow.setFollowedButton(null);
-		mHandleView.hide();
+		if(actionRow != null) actionRow.setFollowedButton(null);
+		if(mHandleView != null) mHandleView.hide();
 	}
 
 	public void save(String path){
