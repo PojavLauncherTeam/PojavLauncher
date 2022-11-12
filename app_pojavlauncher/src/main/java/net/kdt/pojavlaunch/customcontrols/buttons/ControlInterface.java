@@ -268,6 +268,17 @@ public interface ControlInterface extends View.OnLongClickListener {
         setDynamicY(dynamicY);
     }
 
+    /** Wrapper for multiple injections at once */
+    default void injectBehaviors(){
+        injectProperties();
+        injectTouchEventBehavior();
+        injectLayoutParamBehavior();
+    }
+
+    default void injectProperties(){
+        getControlView().setTranslationZ(10);
+    }
+
     /** Inject a touch listener on the view to make editing controls straight forward */
     default void injectTouchEventBehavior(){
         getControlView().setOnTouchListener(new View.OnTouchListener() {
