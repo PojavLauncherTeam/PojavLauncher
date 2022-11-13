@@ -191,7 +191,7 @@ public class AsyncMinecraftDownloader {
 
 
         try {
-            //downloadAssets(assets, verInfo.assets, assets.mapToResources ? new File(Tools.OBSOLETE_RESOURCES_PATH) : new File(Tools.ASSETS_PATH));
+            downloadAssets(assets, verInfo.assets, assets.mapToResources ? new File(Tools.OBSOLETE_RESOURCES_PATH) : new File(Tools.ASSETS_PATH));
         } catch (Exception e) {
             Log.e("AsyncMcDownloader", e.toString(), e);
         }
