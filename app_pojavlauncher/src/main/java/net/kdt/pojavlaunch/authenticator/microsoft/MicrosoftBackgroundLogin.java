@@ -78,6 +78,7 @@ public class MicrosoftBackgroundLogin {
                 MinecraftAccount acc = MinecraftAccount.load(mcName);
                 if(acc == null) acc = new MinecraftAccount();
                 if (doesOwnGame) {
+                    acc.xuid = xsts[0];
                     acc.clientToken = "0"; /* FIXME */
                     acc.accessToken = mcToken;
                     acc.username = mcName;
