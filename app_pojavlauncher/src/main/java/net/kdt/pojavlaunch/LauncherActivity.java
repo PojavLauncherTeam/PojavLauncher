@@ -129,6 +129,7 @@ public class LauncherActivity extends BaseActivity {
 
         if(mAccountSpinner.getSelectedAccount() == null){
             Toast.makeText(this, R.string.no_saved_accounts, Toast.LENGTH_LONG).show();
+            ExtraCore.setValue(ExtraConstants.SELECT_AUTH_METHOD, true);
             return false;
         }
         String normalizedVersionId = AsyncMinecraftDownloader.normalizeVersionId(prof.lastVersionId);
