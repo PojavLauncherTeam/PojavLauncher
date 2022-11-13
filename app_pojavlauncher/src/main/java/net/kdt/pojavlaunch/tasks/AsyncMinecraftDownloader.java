@@ -153,29 +153,27 @@ public class AsyncMinecraftDownloader {
                     }
                 }
             }
-
-
             File minecraftMainFile = new File(minecraftMainJar);
-            if ((!minecraftMainFile.exists() || minecraftMainFile.length() == 0L) &&
-                    verInfo.downloads != null) {
-                try {
-                    downloadFileMonitored(
-                            verInfo.downloads.values().toArray(new MinecraftClientInfo[0])[0].url,
-                            minecraftMainFile, getByteBuffer(),
-                            (curr, max) -> ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT,
-                                    (int) Math.max((float)curr/max*100,0), R.string.mcl_launch_downloading, versionName + ".jar" )
-                    );
-                } catch (Throwable th) {
-                    if (verInfo.inheritsFrom != null) {
-                        minecraftMainFile.delete();
-                        FileInputStream is = new FileInputStream(new File(Tools.DIR_HOME_VERSION, verInfo.inheritsFrom + "/" + verInfo.inheritsFrom + ".jar"));
-                        FileOutputStream os = new FileOutputStream(minecraftMainFile);
-                        IOUtils.copy(is, os);
-                        is.close();
-                        os.close();
-                    } else {
-                        throw th;
-                    }
+            JMinecraftVersionList.Version originalVersion = Tools.getVersionInfo(versionName, true);
+            Log.i("Downloader", "originalVersion.inheritsFrom="+originalVersion.inheritsFrom);
+            Log.i("Downloader", "originalVersion.downloads="+originalVersion.downloads);
+            MinecraftClientInfo originalClientInfo;
+            if(originalVersion.inheritsFrom == null) {
+                if (originalVersion.downloads != null && (originalClientInfo = originalVersion.downloads.get("client")) != null) {
+                    verifyAndDownloadMainJar(originalClientInfo.url, originalClientInfo.sha1, minecraftMainFile);
+                }
+            }else if(!minecraftMainFile.exists() || minecraftMainFile.length() == 0) {
+                File minecraftSourceFile = new File(Tools.DIR_HOME_VERSION + "/" + verInfo.id + "/" + verInfo.id + ".jar");
+                MinecraftClientInfo inheritedClientInfo;
+                if(verInfo.downloads != null && (inheritedClientInfo = verInfo.downloads.get("client")) != null) {
+                    verifyAndDownloadMainJar(inheritedClientInfo.url, inheritedClientInfo.sha1, minecraftSourceFile);
+                }
+                if(minecraftSourceFile.exists()) {
+                    FileInputStream is = new FileInputStream(minecraftSourceFile);
+                    FileOutputStream os = new FileOutputStream(minecraftMainFile);
+                    IOUtils.copy(is, os);
+                    is.close();
+                    os.close();
                 }
             }
         } catch (Throwable e) {
@@ -193,7 +191,7 @@ public class AsyncMinecraftDownloader {
 
 
         try {
-            downloadAssets(assets, verInfo.assets, assets.mapToResources ? new File(Tools.OBSOLETE_RESOURCES_PATH) : new File(Tools.ASSETS_PATH));
+            //downloadAssets(assets, verInfo.assets, assets.mapToResources ? new File(Tools.OBSOLETE_RESOURCES_PATH) : new File(Tools.ASSETS_PATH));
         } catch (Exception e) {
             Log.e("AsyncMcDownloader", e.toString(), e);
         }
@@ -201,6 +199,13 @@ public class AsyncMinecraftDownloader {
         return true;
     }
 
+    public void verifyAndDownloadMainJar(String url, String sha1, File destination) throws Exception{
+        while(!destination.exists() || (destination.exists() && !Tools.compareSHA1(destination, sha1))) downloadFileMonitored(
+                url,
+                destination, getByteBuffer(),
+                (curr, max) -> ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT,
+                        (int) Math.max((float)curr/max*100,0), R.string.mcl_launch_downloading, destination.getName()));
+    }
 
     public void downloadAssets(final JAssets assets, String assetsVersion, final File outputDir) throws IOException {
         LinkedBlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<>();
