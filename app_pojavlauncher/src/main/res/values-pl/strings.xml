@@ -248,6 +248,8 @@
     <string name="preference_experimental_description">Nie pomożemy Ci, jeśli coś zepsujesz używając tych opcji.</string>
     <string name="preference_sustained_performance_title">Włącz tryb zrównoważonej wydajności</string>
     <string name="preference_sustained_performance_description">Zmniejsz nagrzewanie urządzenia ograniczając górny próg wydajności</string>
+    <string name="preference_force_english_title">Wymuś język angielski</string>
+    <string name="preference_force_english_description">Umożliwia wyświetlanie zdań w oryginalnym języku produkcyjnym. Wymagane ponowne uruchomienie</string>
     <string name="preference_back_title">Powrót do ostatniego ekranu</string>
     <string name="gles_hack_title">Poprawka zmniejszająca GL4ES</string>
     <string name="gles_hack_none">Nie zmniejszaj tekstur</string>
@@ -265,4 +267,5 @@
     <string name="arc_capes_title">Peleryny Cosmetica</string>
     <string name="arc_capes_desc">Aktywuje peleryny z Cosmetica (wcześniej Arc). Aby dowiedzieć się więcej, odwiedź https://cosmetica.cc. Wymaga OptiFine.</string>
     <string name="migrated_profile_str">%s konfiguracja wersji</string>
+    <string name="mcl_setting_veroption_installed">Zainstalowane</string>
 </resources>
