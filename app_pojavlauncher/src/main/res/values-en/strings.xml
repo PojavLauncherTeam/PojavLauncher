@@ -263,4 +263,5 @@
     <string name="arc_capes_title">Cosmetica Capes</string>
     <string name="arc_capes_desc">Enables capes from Cosmetica (previously Arc). For more information please visit https://cosmetica.cc. Requires OptiFine.</string>
     <string name="migrated_profile_str">%s version configuration</string>
+    <string name="mcl_setting_veroption_installed">Installed</string>
 </resources>
