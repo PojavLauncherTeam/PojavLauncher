@@ -264,4 +264,5 @@
     <string name="arc_capes_title">Capas de Comestica</string>
     <string name="arc_capes_desc">Activa las capas de Cosmetica (anteriormente Arc). Para más información ve a esta página https://cosmetica.cc. Necesitas Optifine.</string>
     <string name="migrated_profile_str">%s Configuración de la versión</string>
+    <string name="mcl_setting_veroption_installed">Instalada</string>
 </resources>
