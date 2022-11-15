@@ -247,6 +247,8 @@
     <string name="preference_experimental_description">使用这里的内容是不受支持的。</string>
     <string name="preference_sustained_performance_title">启用持续性能模式</string>
     <string name="preference_sustained_performance_description">通过限制峰值性能来限制过热降频</string>
+    <string name="preference_force_english_title">强制使用英文</string>
+    <string name="preference_force_english_description">允许您按开发者的原意看到原始字符串。需要重启</string>
     <string name="preference_back_title">返回最后一个屏幕</string>
     <string name="gles_hack_title">GL4ES 缩放设置</string>
     <string name="gles_hack_none">不缩小纹理</string>
@@ -264,4 +266,20 @@
     <string name="arc_capes_title">Cosmetica 披风</string>
     <string name="arc_capes_desc">启用来自 Cosmetica（原 Arc ）的披风。欲了解更多信息，请访问 https://arcapes.com。需要 OptiFine。</string>
     <string name="migrated_profile_str">%s 版本配置</string>
+    <string name="notif_channel_name">常规</string>
+    <string name="lazy_service_default_title">Pojav 前台服务</string>
+    <string name="lazy_service_default_description">该服务用于执行长期运行操作</string>
+    <string name="mcl_setting_veroption_installed">已安装</string>
+    <string name="use_global_default">（使用全局默认值）</string>
+    <string name="default_control">默认控件布局</string>
+    <string name="progresslayout_tasks_in_progress">%d 项任务正在进行中</string>
+    <string name="notification_terminate">终止</string>
+    <string name="notification_game_runs">游戏正在进行！</string>
+    <string name="folder_dialog_create">创建</string>
+    <string name="folder_dialog_insert_name">插入文件夹名称</string>
+    <string name="main_login_done">登录完成</string>
+    <string name="main_add_account">添加账户</string>
+    <string name="tasks_ongoing">任务正在执行中，请稍候</string>
+    <string name="no_saved_accounts">没有保存的账户</string>
+    <string name="downloading_versions">正在下载版本列表……</string>
 </resources>
