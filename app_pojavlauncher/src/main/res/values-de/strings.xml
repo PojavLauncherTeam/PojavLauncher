@@ -247,6 +247,8 @@
     <string name="preference_experimental_description">Benutze diese Einstellungen mit Bedacht, wir leisten keinen Support für diese Features.</string>
     <string name="preference_sustained_performance_title">Dauerhaften Leistungsmodus aktivieren</string>
     <string name="preference_sustained_performance_description">Begrenzung der thermischen Drosselung durch Begrenzung der Spitzenleistung</string>
+    <string name="preference_force_english_title">Englische Sprache erzwingen</string>
+    <string name="preference_force_english_description">Ermöglicht es dir, die ursprünglichen Texte zu sehen, wie sie von Entwicklern vorgesehen sind. Benötigt einen Neustart</string>
     <string name="preference_back_title">Zum übergeordneten Menü gehen</string>
     <string name="gles_hack_title">GL4ES-Schrumpfhack</string>
     <string name="gles_hack_none">Texturen nicht verkleinern</string>
@@ -264,4 +266,20 @@
     <string name="arc_capes_title">Cosmetica-Umhänge</string>
     <string name="arc_capes_desc">Aktiviert Umhänge von Cosmetica (früher Arc). Für weitere Informationen https://cosmetica.cc besuchen. OptiFine wird benötigt.</string>
     <string name="migrated_profile_str">%s Versionskonfiguration</string>
+    <string name="notif_channel_name">Allgemein</string>
+    <string name="lazy_service_default_title">Pojav-Vordergrunddienst</string>
+    <string name="lazy_service_default_description">Der Dienst wird verwendet, um lange laufende Operationen auszuführen</string>
+    <string name="mcl_setting_veroption_installed">Installiert</string>
+    <string name="use_global_default">(Standardvorgaben verwenden)</string>
+    <string name="default_control">Standardsteuerung</string>
+    <string name="progresslayout_tasks_in_progress">%d Aufgaben in Bearbeitung</string>
+    <string name="notification_terminate">Beenden</string>
+    <string name="notification_game_runs">Das Spiel läuft!</string>
+    <string name="folder_dialog_create">Erstellen</string>
+    <string name="folder_dialog_insert_name">Ordnernamen eingeben</string>
+    <string name="main_login_done">Anmeldung abgeschlossen</string>
+    <string name="main_add_account">Konto hinzufügen</string>
+    <string name="tasks_ongoing">Mehrere Aufgaben im Gange, bitte warten</string>
+    <string name="no_saved_accounts">Keine eingespeicherten Konten</string>
+    <string name="downloading_versions">Lade Versionsliste herunter…</string>
 </resources>
