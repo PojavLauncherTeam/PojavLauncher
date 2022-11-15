@@ -258,4 +258,5 @@
     <string name="arc_capes_title">Mantelli Cosmetica</string>
     <string name="arc_capes_desc">Abilità i mantelli di Cosmetica (precedentemente Arc). Per ulteriori informazioni visita https://cosmetica.cc. Necessita la OptiFine.</string>
     <string name="migrated_profile_str">%s configurazione versione</string>
+    <string name="mcl_setting_veroption_installed">Installato</string>
 </resources>
