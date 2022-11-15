@@ -264,4 +264,5 @@
     <string name="arc_capes_title">Kápě Cosmetica</string>
     <string name="arc_capes_desc">Zapne kápě z Cosmeticy (dřiv Arc), vyžadujíc OptiFine. Pro více informací navštivte https://cosmetica.cc.</string>
     <string name="migrated_profile_str">Konfigurace verze %s</string>
+    <string name="mcl_setting_veroption_installed">Nainstalováno</string>
 </resources>
