@@ -252,4 +252,5 @@
     <string name="arc_capes_title">Capes galing sa Cosmetica</string>
     <string name="arc_capes_desc">Pinapagana ang mga kapa mula sa Cosmetica (ang dating Arc). Para sa karagdagang impormasyon mangyaring bisitahin ang https://cosmetica.cc  Kinagangailangan ng OptiFine.</string>
     <string name="migrated_profile_str">%s pagsasaayos ng bersyon</string>
+    <string name="mcl_setting_veroption_installed">Naka-Install</string>
 </resources>
