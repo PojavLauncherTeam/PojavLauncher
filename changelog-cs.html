@@ -130,95 +130,93 @@ Opravy Chyb:<br>
 <center><h4>Nepoužívej je, nejsi-li ten jeden historik.</h4></center>
 <br>
 <h2>▶ v2.5 - Poslední BETA</h2>
-	  <b>• POZNÁMKA: Instalatér Optifinu je experimentální, pro některá zařízení spadne na úvodní obrazovce (ta s Mojang načítáním). Don't report bug about OptiFine crash at splash screen, these will not be solved.</b><br>
-	  <b>• New settings:</b><br>
-	  - You can now customize the MS delay of touch gestures (placing block, destroying block.)<br>
-	  <b>• New features:</b><br>
-	  - Scrolling in Minecraft 1.8 or above by tapping the screen and holding SEC button<br>
+	  <b>• POZNÁMKA: Instalatér Optifinu je experimentální, pro některá zařízení spadne na úvodní obrazovce (ta s Mojang načítáním). Neohlašuj bugy o OptiFine padání na načítací obrazovce, ty nebudou vyřešeny.</b><br>
+	  <b>• Nové nastavení:</b><br>
+	  - Nyní můžeš přispůsobit ms. zpoždění dotykových gest (stavění, ničení.).<br>
+	  <b>• Nové funkce:</b><br>
+	  - Skrolování v Minecraftu 1.8 nebo novějším, držením SEC tlačítka a kliknutím<br>
 	  <br>
 
-<h2>▶ v2.4.2 Release</h2>
-	  <b>• Good news: Any Android 7.0+ devices can now run Minecraft normally.</b><br>
-	  <b>• Changes:</b><br>
-	  - <font color="green">Added OptiFine installer!</font><br>
-	  - External mouse and keyboard support (Feature needs Android 8.0+. Can't detect left or right mouse event).<br>
-	  - Launcher UI should now fit correctly in big screens.<br>
-	  - Freeform mode is now working.<br>
-	  - Virtual mouse now works properly.<br>
-	  - Replaced multdoj7 with PojavDX (dx 1.16) for better converter (thanks to <a href="https://github.com/artdeell">artdeell</a> for suggesting).<br>
-	  <b>• Fixes:</b><br>
-	  - Touch event triggered as click event, this bug exist from Boardwalk.<br>
-	  - (In-Game) Mouse event triggered after looking around.<br>
-  
-  <br>
+	  <h2>▶ v2.4.2 vydání</h2>
+	  <b>• Dobré zprávy: Jakékoliv Android 7.0+ zařízení je schopné běžet Minecraft normálně.</b><br>
+	  <b>• Změny:</b><br>
+	  - <font color="green">Přidán OptiFine instalatér!</font><br>
+	  - Podpora externí myši a klávesnice (Funkce vyžadujíc Android 8.0+, nemůže rozlišit levé či pravé kliknutí).<br>
+	  - Rozhraní se nyní správně škáluje na velké obrazovky.<br>
+	  - Režim volných oken nyní funguje.<br>
+	  - Virtuální myš nyní funguje správně.<br>
+	  - Nahrazena multdoj7 PojavDXem (dx1.16) pro lepší konvertor (díky <a href="https://github.com/artdeell">artdeellovi</a> pro návrh).<br>
+	  <b>• Opravy:</b><br>
+	  - Dotyková událost spuštěná jako událost kliknutí. Tato chyba existuje z Boardwalku.<br>
+	  - (Ve-Hře) událost myši spuštěná po rozhlédnutí.<br>
 
+	  <br><br>
+
+	  <h2>▶ v2.4 Vydání BETA</h2>
+	  <b>• Pamatujte: Má-li tvoje zařízení Android verzi 7.0 či novější, použij aplikaci VMOS. VMOS nainstaluje do vašeho zařízení Android 5.1. Můžete jej použít ke spuštění této aplikace (VMOS byl odstraněn Play Storem, takže jej musíte nainstlovat ručně)</b>
 	  <br>
 
-<h2>▶ v2.4 Release</h2>
-	  <b>• Remember: If your device has Android version above or equals to 7.0, use VMOS app. VMOS will install Android 5.1 OS to your device. You can take it to run this app (VMOS is removed by Play Store, you must install it manually)</b>
+	  <b>• Změny:</b><br>
+	  - Odstraněna Openjdk a Busybox.<br>
+	  - Znovu přidány nativní 64bitové ARM knihovny.<br>
 	  <br>
 
-	  <b>• Changes:</b><br>
-	  - Removed OpenJDK and busybox.<br>
-	  - Re-added ARM 64bit native libraries.<br>
+	  <b>• Opravy:</b><br>
+	  - Opravena byla chyba jež nedovolovala uživatelům spustit Minecraft bez internetového připojení.<br>
 	  <br>
 
-	  <b>• Fixes:</b><br>
-	  - Fixed an error that prevent users launch Minecraft without internet connection.<br>
+<h2>▶ Vydání v2.3.1</h2>
+	  <b>• Změny:</b><br>
+	  - Přidána možnost výběru textu na instalačním OpenJDK záznamu.<br>
+	  <b>• Opravy:</b><br>
+	  - Zařízení nemohouce nainstalovat OpenJDK, mohla skrýt chybu.<br>
 	  <br>
 
-<h2>▶ v2.3.1 Release</h2>
-	  <b>• Changes:</b><br>
-	  - Added text selection on OpenJDK install log.<br>
-	  <b>• Fixes:</b><br>
-	  - Devices can't install OpenJDK but able to hide the error.<br>
-	  <br>
-
-<h2>▶ v2.2/v2.3 Release</h2>
-	  <b>• What changed:</b><br>
-	  - Changed some code in update function
-	  - Added busybox.<br>
-	  - Added OpenJDK for converter (ARM 64bit only).<br>
-	  - Added more AWT functions.<br>
-	  - Screenshot (and F2 key) now capture using directly API (javax.imageio).<br>
+<h2>▶Vydání v2.2/v2.3</h2>
+	  <b>• Změny:</b><br>
+	  - Změněn jakýsi kód ve funkci aktualizace
+	  - Přidán Busybox.<br>
+	  - Přidána OpenJDK pro převaděč (pouze 64bitové ARM).<br>
+	  - Přidáno více AWT funkcí.<br>
+	  - Snímek obrazovky (a klávesa F2) nyní snímá přímo pomocí API (javax.imageio).<br>
 	  <br>
 		
-<h2>▶v2.1 Release</h2>
-	  <b>• Changes:</b><br>
-	  - Added Changelog button!<br>
-	  - Custom versions now visible in the list (not implemented for user)<br>
-	  - In-app Update now usable.<br>
-	  - Replaced glshim with GL4ES for partial OpenGL 2.0 and better performance.<br>
+<h2>▶Vydání v2.1</h2>
+	  <b>• Změny:</b><br>
+	  - Přídáno tlačítko novinek!<br>
+	  - Vlastní verze nyní viditelné v seznamu (neimplementováno pro uživatele)<br>
+	  - Aktualizace v aplikaci nyní dostupné.<br>
+	  - Glshim byla nahrazena GL4ES pro částečnou OpenGL 2.0 a lepší výkon.<br>
 	  <br>
 
-	  <h2>▶ v2 Release</h2>
-	  <b>• Changes:</b><br>
-	  - [Partial] New design (copy of 2017 original Minecraft Launcher)<br>
-	  - Changed how users load/save.<br>
-	  - Added Menu for more options to select.<br>
-	  - Added virtual mouse for styling PC mouse.<br>
+	  <h2>▶Vydání v2</h2>
+	  <b>• Změny:</b><br>
+	  - [Částečně] Nový design (kopie originálního Minecraft Launcheru z roku 2017)<br>
+	  - Změněno jak se uživatelé načítají a ukládají.<br>
+	  - Přidáno menu pro více možností k výběru<br>
+	  - Přidána virtuální myš k napodobení PC myši.<br>
 
 	  <br>
-	  <b>• Fixes:</b><br>
-	  - Max progress -1 when converting.<br>
-	  - Verification failed when run some versions (by patch the client file)<br>
+	  <b>• Opravy:</b><br>
+	  - Maximální postup -1 při převádění.<br>
+	  - Kontrola selhala při některých verzích (záplotváním klientského souboru)<br>
 	  <br>
 
-<center><h1>Alpha Releases</h1></center>
-<center><h4>Good ol' times.</h4></center>
-	  <h2>▶ v1.0.4 (lost everything before release)</h2>
-	  - Added Download version option.<br>
-	  - Added virtual mouse (but better than 2.0 rewrite)<br>
+<center><h1>Alfa vydání</h1></center>
+<center><h4>Staré dobré časy.</h4></center>
+	  <h2>▶ v1.0.4 (ztraceno vše před vydáním)</h2>
+	  - Přidáno tlačítko stažení verzí.<br>
+	  - Přidána virtuální myš (ale lepší než 2.0 přepsání)<br>
 
-	  <h2>▶ v1.0.1-v1.0.3 ALPHA</h2>
-	  <b>• Changes:</b><br>
-	  - Added 1.2.5, 1.7.2, 1.7.10, 1.8, 1.9 pre-converted versions.<br>
-	  - Added Tab, Screenshot, Force close buttons.<br>
+	  <h2>▶ v1.0.1-v1.0.3 ALFA</h2>
+	  <b>• Změny:</b><br>
+	  - Přidány 1.2.5, 1.7.2, 1.7.10, 1.8, 1.9 předpřevedené verze.<br>
+	  - Přidána tlačítka Tabu, Snímku obrazovky a Vynucení ukočení.<br>
 	  <br>
 	  
-	  <h2>▶ v1.0 ALPHA</h2>
-	  <b>• Initial release. Name as Minecraft Launcher</b><br>
-	  <b>• Only pre-converted 1.9 version is added.</br>
+	  <h2>▶ v1.0 ALFA</h2>
+	  <b>• Prvé vydání. Název byl Minecraft Launcher</b><br>
+	  <b>• Přidána pouze předpřevedená verze 1.9.</br>
 </div>
 
 
@@ -230,19 +228,19 @@ Opravy Chyb:<br>
   <br>
   <center><img src="./assets/images/aboutsect.png" width="318" height="51"></center>
   <br>
-  <center><h3>PojavLauncher - Changelog Page</h3></center>
-  <center>Maintainers: khanhduytran0(v2), NeveuXon(v3)</center>
-  <center>Translations can be done at Crowdin</center>
+  <center><h3>PojavLauncher - Stránka Změn</h3></center>
+  <center>Správci: khanhduytran0(v2), NeveuXon(v3)</center>
+  <center>Překlady lze provést na Crowdině</center>
   <br>
   <br>
   <br>
   <center><img src="./assets/images/pix/app.png" width="250" height="275"></center>
   <center><h1>O PojavLauncheru</h1></center>
-  <center>PojavLauncher is a free, open source, and stable Minecraft launcher for Android built from <a href="https://github.com/zhuowei/Boardwalk"> Boardwalk</a>, a MC Launcher project by Zhouwei Zhang</center>
+  <center>PojavLauncher je svobodný, open source a stabilní Minecraft spouštěč pro android, stvořen z <a href="https://github.com/zhuowei/Boardwalk"> Boardwalku</a>, projekt MC spouštěče Zhouweie Zhanga</center>
   <br>
   <center><h2>Vývojový tým PojavLauncheru (Android)</h2></center>
   <center><h3>Hlavní vývojáři:</h3></center>
-  <center>DuyKhanhTran, artdeell, SerpenSpirale</center>
+  <center>DuyKhanhTran, artdeell, SerpentSpirale</center>
   <br>
   <center><h3>Designéři:</h3></center>
   <center>NeveuXon</center>
@@ -257,23 +255,23 @@ Opravy Chyb:<br>
   <br>
   <br>
 <br>
-  <center>PojavLauncher uses the following components in making the launcher. Their license (if available) are also shown.</center>
+  <center>PojavLauncher používá následující komponenty ve tvorbě spouštěče. Jejich licence (jsou-li k dispozici) jsou také zobrazeny.</center>
   <br>
-    <a href="https://github.com/zhuowei/Boardwalk">Boardwalk:</a> <a href="https://github.com/zhuowei/Boardwalk/blob/master/LICENSE">Apache License 2.0/GNU GPLv2</a><br>
-      Android Support Libraries:</a> <a href="https://android.googlesource.com/platform/prebuilts/maven_repo/android/+/master/NOTICE.txt">Apache License 2.0</a><br>
-        <a href="https://github.com/PojavLauncherTeam/gl4es">GL4ES:</a> <a href="https://github.com/ptitSeb/gl4es/blob/master/LICENSE">MIT License</a><br>
+    <a href="https://github.com/zhuowei/Boardwalk">Boardwalk:</a> <a href="https://github.com/zhuowei/Boardwalk/blob/master/LICENSE">Licence Apache 2.0/GNU GPLv2</a><br>
+      Podpůrné knihovny Androidu:</a> <a href="https://android.googlesource.com/platform/prebuilts/maven_repo/android/+/master/NOTICE.txt">Licence Apache 2.0</a><br>
+        <a href="https://github.com/PojavLauncherTeam/gl4es">GL4ES:</a> <a href="https://github.com/ptitSeb/gl4es/blob/master/LICENSE">MIT licence</a><br>
           <a href="https://github.com/PojavLauncherTeam/openjdk-multiarch-jdk8u">OpenJDK:</a> <a href="https://openjdk.java.net/legal/gplv2+ce.html">GNU GPLv2</a><br>
-            <a href="https://github.com/PojavLauncherTeam/lwjgl3">LWJGL3:</a> <a href="https://github.com/LWJGL/lwjgl3/blob/master/LICENSE.md">BSD-3 License</a><br>
-            <a href="https://github.com/PojavLauncherTeam/lwjglx">LWJGLX:</a> Unknown License<br>
-            <a href="https://gitlab.freedesktop.org/mesa/mesa">Mesa 3D Graphics Library:</a> <a href="https://docs.mesa3d.org/license.html">MIT License</a><br>
-            <a href="https://github.com/pro-grade/pro-grade">pro-grade:</a> <a href="https://github.com/pro-grade/pro-grade/blob/master/LICENSE.txt">Apache License 2.0</a><br>
-           <a href="https://github.com/iqiyi/xHook">xHook:</a> <a href="https://github.com/iqiyi/xHook/blob/master/LICENSE">MIT & BSD-style License</a><br>
-             <a href="https://github.com/anholt/libepoxy">libepoxy:</a> <a href="https://github.com/anholt/libepoxy/blob/master/COPYING">MIT License</a><br>
-              <a href="https://github.com/PojavLauncherTeam/virglrenderer">virglrenderer:</a> <a href="https://gitlab.freedesktop.org/virgl/virglrenderer/-/blob/master/COPYING">MIT License</a><br>
+            <a href="https://github.com/PojavLauncherTeam/lwjgl3">LWJGL3:</a> <a href="https://github.com/LWJGL/lwjgl3/blob/master/LICENSE.md">BSD-3 licence</a><br>
+            <a href="https://github.com/PojavLauncherTeam/lwjglx">LWJGLX:</a> Neznámá licence<br>
+            <a href="https://gitlab.freedesktop.org/mesa/mesa">Mesa 3D Grafická knihovna:</a> <a href="https://docs.mesa3d.org/license.html">MIT licence</a><br>
+            <a href="https://github.com/pro-grade/pro-grade">Pro-grade:</a> <a href="https://github.com/pro-grade/pro-grade/blob/master/LICENSE.txt">Apache licence 2.0</a><br>
+           <a href="https://github.com/iqiyi/xHook">xHook:</a> <a href="https://github.com/iqiyi/xHook/blob/master/LICENSE">MIT & BSD-styl licence</a><br>
+             <a href="https://github.com/anholt/libepoxy">libepoxy:</a> <a href="https://github.com/anholt/libepoxy/blob/master/COPYING">MIT licence</a><br>
+              <a href="https://github.com/PojavLauncherTeam/virglrenderer">virglrenderer:</a> <a href="https://gitlab.freedesktop.org/virgl/virglrenderer/-/blob/master/COPYING">MIT licence</a><br>
                 <a href="https://mc-heads.net">MCHeads</a><br> 
                 <a href="https://crowdin.com">Crowdin</a><br>
                 <br>
-                  <center>The Official Minecraft download server/library is provided by Microsoft/Mojang, and all Minecraft is work of Mojang/Microsoft, so please buy the game, not pirate it.</center>
+                  <center>Oficiální Minecraft stahovací server i knihovny jsou poskytovány Microsoftem/Mojangem, a všechen Minecraft je dílo Mojangu/Microsoftu, proto prosím, hru si kup, nepirať.</center>
     </div>
 
 
