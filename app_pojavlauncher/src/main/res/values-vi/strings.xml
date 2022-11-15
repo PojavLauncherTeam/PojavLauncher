@@ -258,4 +258,5 @@
     <string name="arc_capes_title">Áo choàng Cosmetica</string>
     <string name="arc_capes_desc">Sử dụng áo choàng từ dịch vụ Cosmetica (trước đây là Arc). Để biết thêm thông tin, truy cập https://cosmetica.cc. Yêu cầu có OptiFine.</string>
     <string name="migrated_profile_str">cấu hình phiên bản %s</string>
+    <string name="mcl_setting_veroption_installed">Đã cài đặt</string>
 </resources>
