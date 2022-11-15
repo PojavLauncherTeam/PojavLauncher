@@ -253,4 +253,5 @@
     <string name="arc_capes_title">Cosmetica披風</string>
     <string name="arc_capes_desc">透過Cosmetica(前身為Arc)啟用披風。需要Optifine。更多資訊請至https://cosmetica.cc。</string>
     <string name="migrated_profile_str">%s 版本設定</string>
+    <string name="mcl_setting_veroption_installed">已安裝</string>
 </resources>
