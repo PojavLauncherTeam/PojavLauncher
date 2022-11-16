@@ -3,6 +3,7 @@ package net.kdt.pojavlaunch;
 import static net.kdt.pojavlaunch.Architecture.ARCH_X86;
 import static net.kdt.pojavlaunch.Tools.currentDisplayMetrics;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_SUSTAINED_PERFORMANCE;
+import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_USE_ALTERNATE_SURFACE;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_VIRTUAL_MOUSE_START;
 
 import static org.lwjgl.glfw.CallbackBridge.sendKeyPress;
@@ -80,7 +81,10 @@ public class MainActivity extends BaseActivity {
         MCOptionUtils.load(Tools.getGameDirPath(minecraftProfile));
         GameService.startService(this);
         initLayout(R.layout.activity_basemain);
-        getWindow().setBackgroundDrawable(null);
+
+        // Enabling this on TextureView results in a broken white result
+        if(PREF_USE_ALTERNATE_SURFACE)
+            getWindow().setBackgroundDrawable(null);
 
         // Set the sustained performance mode for available APIs
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
