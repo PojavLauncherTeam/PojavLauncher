@@ -20,7 +20,7 @@ import java.io.*;
 
 import net.kdt.pojavlaunch.prefs.*;
 import net.kdt.pojavlaunch.customcontrols.*;
-
+import net.kdt.pojavlaunch.utils.FileUtils;
 
 public class CustomControlsActivity extends BaseActivity {
 	private DrawerLayout mDrawerLayout;
@@ -98,8 +98,8 @@ public class CustomControlsActivity extends BaseActivity {
 		*/
 		mControlLayout.setActivity(this);
 		mControlLayout.setModifiable(true);
-
-		loadControl(LauncherPreferences.PREF_DEFAULTCTRL_PATH, mControlLayout);
+        if (FileUtils.exists(LauncherPreferences.PREF_DEFAULTCTRL_PATH))
+		    loadControl(LauncherPreferences.PREF_DEFAULTCTRL_PATH, mControlLayout);
 	}
 
 	@Override
