@@ -107,10 +107,14 @@ public class CustomControlsActivity extends BaseActivity {
 		if (!isModified) {
 			setResult(Activity.RESULT_OK, new Intent());
 			super.onBackPressed();
+			finish();
 			return;
 		}
-
-		save(true, mControlLayout);
+		save(true, mControlLayout, (ctx) -> {
+			CustomControlsActivity activity = (CustomControlsActivity) ctx;
+			activity.mModified = false;
+			activity.onBackPressed();
+		});
 	}
 
 	public static void dialogSelectDefaultCtrl(final ControlLayout layout) {
@@ -133,8 +137,15 @@ public class CustomControlsActivity extends BaseActivity {
 		dialog.show();
 	}
 
+	public static void save(final ControlLayout layout) {
+        save(false, layout, null);
+	}
 
 	public static void save(final boolean exit, final ControlLayout layout) {
+		save(exit, layout, null);
+	}
+
+	public static void save(final boolean exit, final ControlLayout layout, final OnExitButtonClickListener listener) {
 		final Context ctx = layout.getContext();
 		final EditText edit = new EditText(ctx);
 		edit.setSingleLine();
@@ -150,14 +161,16 @@ public class CustomControlsActivity extends BaseActivity {
 				@Override
 				public void onClick(DialogInterface p1, int p2) {
 					layout.setModifiable(false);
-					if(ctx instanceof MainActivity) {
+					/*if(ctx instanceof MainActivity) {
 						((MainActivity) ctx).leaveCustomControls();
 					}else{
 						((CustomControlsActivity) ctx).isModified = false;
 						((Activity)ctx).onBackPressed();
-					}
+					}*/
 					//			    setResult(Activity.RESULT_OK, new Intent());
 					//				CustomControlsActivity.super.onBackPressed();
+					if (listener != null)
+					    listener.click(ctx);
 				}
 			});
 		}
@@ -241,5 +254,9 @@ public class CustomControlsActivity extends BaseActivity {
 		} catch (Exception e) {
 			Tools.showError(layout.getContext(), e);
 		}
+	}
+
+	public static interface OnExitButtonClickListener {
+		void click(Context ctx);
 	}
 }

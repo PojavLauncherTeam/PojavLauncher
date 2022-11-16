@@ -94,7 +94,7 @@ public class MainActivity extends BaseActivity {
                 case 1: mControlLayout.addDrawer(new ControlDrawerData()); break;
                 //case 2: mControlLayout.addJoystickButton(new ControlData()); break;
                 case 2 : CustomControlsActivity.load(mControlLayout); break;
-                case 3: CustomControlsActivity.save(true,mControlLayout); break;
+                case 3: CustomControlsActivity.save(true, mControlLayout, (ctx) -> {((MainActivity)ctx).leaveCustomControls();}); break;
                 case 4: CustomControlsActivity.dialogSelectDefaultCtrl(mControlLayout); break;
             }
         };
