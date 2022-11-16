@@ -37,7 +37,7 @@ def getVersionName =  {
 }
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 33
     dexOptions {
         javaMaxHeapSize "4g"
     }
@@ -64,7 +64,7 @@ android {
     defaultConfig {
         applicationId "net.kdt.pojavlaunch"
         minSdkVersion 21
-        targetSdkVersion 31
+        targetSdkVersion 33
         versionCode getDateSeconds()
         versionName getVersionName()
         multiDexEnabled true //important
