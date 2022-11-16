@@ -184,7 +184,7 @@ public final class Tools {
             if(minecraftProfile.gameDir.startsWith(Tools.LAUNCHERPROFILES_RTPREFIX))
                 return minecraftProfile.gameDir.replace(Tools.LAUNCHERPROFILES_RTPREFIX,Tools.DIR_GAME_HOME+"/");
             else
-                return Tools.DIR_GAME_HOME + minecraftProfile.gameDir;
+                return Tools.DIR_GAME_HOME + '/' + minecraftProfile.gameDir;
         }
         return Tools.DIR_GAME_NEW;
     }
@@ -524,9 +524,6 @@ public final class Tools {
 
     public static void updateWindowSize(Activity activity) {
         currentDisplayMetrics = getDisplayMetrics(activity);
-
-        CallbackBridge.physicalWidth = currentDisplayMetrics.widthPixels;
-        CallbackBridge.physicalHeight = currentDisplayMetrics.heightPixels;
     }
 
     public static float dpToPx(float dp) {

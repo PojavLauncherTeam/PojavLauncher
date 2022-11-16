@@ -90,7 +90,7 @@ public class FileSelectorFragment extends Fragment {
     }
 
     private String removeLockPath(String path){
-        return path.replace(mRootPath, "/.");
+        return path.replace(mRootPath, ".");
     }
 
     private void parseBundle(){
