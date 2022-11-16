@@ -112,7 +112,7 @@ public class CustomControlsActivity extends BaseActivity {
 		}
 		save(true, mControlLayout, (ctx) -> {
 			CustomControlsActivity activity = (CustomControlsActivity) ctx;
-			activity.mModified = false;
+			activity.isModified = false;
 			activity.onBackPressed();
 		});
 	}
