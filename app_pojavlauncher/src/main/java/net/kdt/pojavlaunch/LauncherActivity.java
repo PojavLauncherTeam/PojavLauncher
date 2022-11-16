@@ -105,8 +105,8 @@ public class LauncherActivity extends BaseActivity {
     /* Listener for account deletion */
     private final View.OnClickListener mAccountDeleteButtonListener = v -> new AlertDialog.Builder(this)
             .setMessage(R.string.warning_remove_account)
-            .setNeutralButton(android.R.string.cancel, null)
-            .setPositiveButton(R.string.global_delete, (dialog, which) -> mAccountSpinner.removeCurrentAccount())
+            .setPositiveButton(android.R.string.cancel, null)
+            .setNeutralButton(R.string.global_delete, (dialog, which) -> mAccountSpinner.removeCurrentAccount())
             .show();
 
     private final ExtraListener<Boolean> mLaunchGameListener = (key, value) -> {
