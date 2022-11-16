@@ -107,7 +107,6 @@ public class CustomControlsActivity extends BaseActivity {
 		if (!isModified) {
 			setResult(Activity.RESULT_OK, new Intent());
 			super.onBackPressed();
-			finish();
 			return;
 		}
 		save(true, mControlLayout, (ctx) -> {
