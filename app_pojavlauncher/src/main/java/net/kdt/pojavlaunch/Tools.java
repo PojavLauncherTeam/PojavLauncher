@@ -524,6 +524,9 @@ public final class Tools {
 
     public static void updateWindowSize(Activity activity) {
         currentDisplayMetrics = getDisplayMetrics(activity);
+
+        CallbackBridge.physicalWidth = currentDisplayMetrics.widthPixels;
+        CallbackBridge.physicalHeight = currentDisplayMetrics.heightPixels;
     }
 
     public static float dpToPx(float dp) {
