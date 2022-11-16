@@ -285,6 +285,7 @@ public interface ControlInterface extends View.OnLongClickListener {
             private boolean mIsPointerOutOfBounds = false;
             private boolean mCanTriggerLongClick = true;
             private float downX, downY;
+            private float downRawX, downRawY;
 
             @Override
             public boolean onTouch(View view, MotionEvent event) {
@@ -305,12 +306,15 @@ public interface ControlInterface extends View.OnLongClickListener {
                 switch (event.getActionMasked()) {
                     case MotionEvent.ACTION_DOWN:
                         mCanTriggerLongClick = true;
-                        downX = event.getRawX() - view.getX();
-                        downY = event.getRawY() - view.getY();
+                        downRawX = event.getRawX();
+                        downRawY = event.getRawY();
+                        downX = downRawX - view.getX();
+                        downY = downRawY - view.getY();
                         break;
 
                     case MotionEvent.ACTION_MOVE:
-                        mCanTriggerLongClick = false;
+                        if(Math.abs(event.getRawX() - downRawX) > 8 || Math.abs(event.getRawY() - downRawY) > 8)
+                            mCanTriggerLongClick = false;
                         getControlLayoutParent().adaptPanelPosition();
 
                         if (!getProperties().isDynamicBtn) {
