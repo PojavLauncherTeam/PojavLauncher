@@ -145,7 +145,7 @@ public class CustomControlsActivity extends BaseActivity {
 		save(exit, layout, null);
 	}
 
-	public static void save(final boolean exit, final ControlLayout layout, final OnExitButtonClickListener listener) {
+	public static void save(final boolean exit, final ControlLayout layout, final OnButtonClickListener listener) {
 		final Context ctx = layout.getContext();
 		final EditText edit = new EditText(ctx);
 		edit.setSingleLine();
@@ -191,11 +191,8 @@ public class CustomControlsActivity extends BaseActivity {
 					dialog.dismiss();
 					if (!exit) return;
 
-					if(ctx instanceof MainActivity) {
-						((MainActivity) ctx).leaveCustomControls();
-					}else{
-						((Activity)ctx).onBackPressed();
-					}
+					if (listener != null)
+					    listener.click(ctx);
 				} catch (Throwable th) {
 					Tools.showError(ctx, th, exit);
 				}
@@ -256,7 +253,7 @@ public class CustomControlsActivity extends BaseActivity {
 		}
 	}
 
-	public static interface OnExitButtonClickListener {
+	public static interface OnButtonClickListener {
 		void click(Context ctx);
 	}
 }
