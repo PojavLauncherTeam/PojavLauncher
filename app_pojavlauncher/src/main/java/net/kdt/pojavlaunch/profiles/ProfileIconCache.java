@@ -1,5 +1,7 @@
 package net.kdt.pojavlaunch.profiles;
 
+import static net.kdt.pojavlaunch.profiles.ProfileAdapter.CREATE_PROFILE_MAGIC;
+
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -21,6 +23,7 @@ public class ProfileIconCache {
     private static final String BASE64_PNG_HEADER = "data:image/png;base64,";
     private static final Map<String, Drawable> sIconCache = new HashMap<>();
     private static Drawable sDefaultIcon;
+
 
     public static void initDefault(Context context) {
         if(sDefaultIcon != null) return;
@@ -49,9 +52,19 @@ public class ProfileIconCache {
             icon = ProfileIconCache.submitIcon(resources, profileName, b64Icon.substring(BASE64_PNG_HEADER.length()));
         }else{
             Log.i("IconParser","Unsupported icon: "+b64Icon);
-            icon = ProfileIconCache.pushDefaultIcon(profileName);
+            if(profileName.equals(CREATE_PROFILE_MAGIC)){
+                icon = ProfileIconCache.pushAddProfileIcon(ResourcesCompat.getDrawable(resources, R.drawable.ic_add, null));
+            }else{
+                icon = ProfileIconCache.pushDefaultIcon(profileName);
+            }
+
         }
         return icon;
+    }
+
+    public static Drawable pushAddProfileIcon(Drawable drawable){
+        sIconCache.put(CREATE_PROFILE_MAGIC, drawable);
+        return drawable;
     }
 
     public static Drawable pushDefaultIcon(String key) {

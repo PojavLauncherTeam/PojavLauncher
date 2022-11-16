@@ -74,11 +74,7 @@ public class ProfileAdapter extends BaseAdapter {
     public void fireProfileEdit() {
         notifyDataSetChanged();
     }
-    /*
-     * Gets the item ID (crc64 hash of the profile name) for a given index
-     * @param position index to get the hash for
-     * @returns ID (crc64 of a profile name string) or -1 if the index is out of bounds
-     */
+
     @Override
     public long getItemId(int position) {
         return position;
