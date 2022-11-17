@@ -38,6 +38,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
+import net.kdt.pojavlaunch.download.MirrorsChanger;
 
 public class AsyncMinecraftDownloader {
     public static final String MINECRAFT_RES = "https://resources.download.minecraft.net/";
@@ -45,8 +46,16 @@ public class AsyncMinecraftDownloader {
     /* Allows each downloading thread to have its own RECYCLED buffer */
     private final ConcurrentHashMap<Thread, byte[]> mThreadBuffers = new ConcurrentHashMap<>(5);
 
+	public AsyncMinecraftDownloader(@NonNull Activity activity, JMinecraftVersionList.Version version, String realVersion,
+                                    
+									@NonNull DoneListener listener) {
+		this(activity, version, realVersion, listener, true);
+	}
+	
     public AsyncMinecraftDownloader(@NonNull Activity activity, JMinecraftVersionList.Version version, String realVersion,
-                                    @NonNull DoneListener listener){ // this was there for a reason
+                                    @NonNull DoneListener listener, boolean changeMirror) { // this was there for a reason
+		if (changeMirror)
+			MirrorsChanger.GLOBAL_URL_CHANGER.inject(version);
         sExecutorService.execute(() -> {
             if(downloadGame(activity, version, realVersion))
                 listener.onDownloadDone();
