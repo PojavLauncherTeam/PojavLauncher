@@ -81,6 +81,8 @@ public class MainActivity extends BaseActivity {
         MCOptionUtils.load(Tools.getGameDirPath(minecraftProfile));
         GameService.startService(this);
         initLayout(R.layout.activity_basemain);
+        CallbackBridge.addGrabListener(touchpad);
+        CallbackBridge.addGrabListener(minecraftGLView);
 
         // Enabling this on TextureView results in a broken white result
         if(PREF_USE_ALTERNATE_SURFACE)
@@ -258,6 +260,13 @@ public class MainActivity extends BaseActivity {
     protected void onStop() {
         CallbackBridge.nativeSetWindowAttrib(LwjglGlfwKeycode.GLFW_VISIBLE, 0);
         super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        CallbackBridge.removeGrabListener(touchpad);
+        CallbackBridge.removeGrabListener(minecraftGLView);
     }
 
     @Override
