@@ -1,19 +1,19 @@
 package net.kdt.pojavlaunch.download;
 
-import net.kdt.pojavlaunch.download.providers.*;
+import android.util.Log;
+import java.util.Map;
 import net.kdt.pojavlaunch.JMinecraftVersionList;
+import net.kdt.pojavlaunch.download.providers.*;
+import net.kdt.pojavlaunch.value.DependentLibrary;
+import net.kdt.pojavlaunch.value.MinecraftClientInfo;
 
 import static net.kdt.pojavlaunch.download.providers.MirrorsProviders.DEFAULT_PROVIDER;
-import java.util.Map;
-import net.kdt.pojavlaunch.value.MinecraftClientInfo;
-import net.kdt.pojavlaunch.value.DependentLibrary;
-import android.util.Log;
 
 public class MirrorsChanger {
 	
     public static final MirrorsChanger GLOBAL_URL_CHANGER = new MirrorsChanger();
 	
-	private MirrorsProvider provider;
+	private IMirrorsProvider provider;
 	
 	private MirrorsChanger() {
 		this.provider = MirrorsProviders.DEFAULT_PROVIDER;
@@ -62,12 +62,12 @@ public class MirrorsChanger {
 	
 	//getters and setters
 	
-	public void setProvider(MirrorsProvider provider) {
+	public void setProvider(IMirrorsProvider provider) {
 		this.provider = provider;
 		Log.i("Mirror", "change mirror provider to " + provider.getDisplayName());
 	}
 
-	public MirrorsProvider getProvider() {
+	public IMirrorsProvider getProvider() {
 		return provider;
 	}
 }

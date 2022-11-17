@@ -1,14 +1,44 @@
 package net.kdt.pojavlaunch.download.providers;
 
-import net.kdt.pojavlaunch.JMinecraftVersionList;
+public class MirrorsProvider implements IMirrorsProvider {
 
-//Provide the URL of the source
-public interface MirrorsProvider {
+	private final String assetsUrl;
+	private final String assetIndexUrl;
+	private final String librariesUrl;
+	private final String versionManifestUrl;
+	private final String displayName;
+
+	protected MirrorsProvider(String assetsUrl, String assetIndexUrl, String librariesUrl, String versionManifestUrl, String displayName) {
+		this.assetsUrl = assetsUrl;
+		this.assetIndexUrl = assetIndexUrl;
+		this.librariesUrl = librariesUrl;
+		this.versionManifestUrl = versionManifestUrl;
+		this.displayName = displayName;
+	}
 	
-    String getAssetsURL();
-	String getAssetsIndexURL();
-    String getLibrariesURL();
-	
-	String getVersionManifestURL();
-	String getDisplayName();
+	@Override
+	public String getAssetsURL() {
+		return assetsUrl;
+	}
+
+	@Override
+	public String getAssetsIndexURL() {
+		return assetIndexUrl;
+	}
+
+	@Override
+	public String getLibrariesURL() {
+		return librariesUrl;
+	}
+
+	@Override
+	public String getVersionManifestURL() {
+		return versionManifestUrl;
+	}
+
+	@Override
+	public String getDisplayName() {
+		return displayName;
+	}
+    
 }
