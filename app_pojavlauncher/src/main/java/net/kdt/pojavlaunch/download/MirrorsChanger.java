@@ -18,7 +18,7 @@ public class MirrorsChanger {
 	private IMirrorsProvider provider;
 	
 	private MirrorsChanger() {
-		this.provider = MirrorsProviders.DEFAULT_PROVIDER;
+		this.provider = MirrorsProviders.BMCL_PROVIDER;
 		Log.i("Mirror", "change mirror provider to " + provider.getDisplayName());
 	}
 
@@ -55,6 +55,10 @@ public class MirrorsChanger {
 	
 	public String getMinecraftVersionManifestUrl() {
 		return provider.getVersionManifestURL();
+    }
+	
+	public String getMinecraftLibrariesUrl() {
+		return provider.getLibrariesURL();
 	}
 	
 	private void injectLibs(JMinecraftVersionList.Version ver) {

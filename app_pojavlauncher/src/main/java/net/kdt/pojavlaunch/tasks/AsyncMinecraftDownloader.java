@@ -34,11 +34,13 @@ import org.apache.commons.io.IOUtils;
 
 import static net.kdt.pojavlaunch.PojavApplication.sExecutorService;
 import static net.kdt.pojavlaunch.utils.DownloadUtils.downloadFileMonitored;
+import android.widget.Toast;
 
 public class AsyncMinecraftDownloader {
+	
     private String mcResUrl;
 	private String mcLibrariesUrl;
-
+	
     /* Allows each downloading thread to have its own RECYCLED buffer */
     private final ConcurrentHashMap<Thread, byte[]> mThreadBuffers = new ConcurrentHashMap<>(5);
 
@@ -87,6 +89,7 @@ public class AsyncMinecraftDownloader {
                 if(!isManifestGood) {
                     ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT, 0, R.string.mcl_launch_downloading, versionName + ".json");
                     verJsonDir.delete();
+					
                     downloadFileMonitored(verInfo.url, verJsonDir, getByteBuffer(),
                             (curr, max) -> ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT,
                                     (int) Math.max((float)curr/max*100,0), R.string.mcl_launch_downloading, versionName + ".json")
@@ -168,6 +171,7 @@ public class AsyncMinecraftDownloader {
                 }
             }
             File minecraftMainFile = new File(minecraftMainJar);
+			//wait for
             JMinecraftVersionList.Version originalVersion = Tools.getVersionInfo(versionName, true);
             Log.i("Downloader", "originalVersion.inheritsFrom="+originalVersion.inheritsFrom);
             Log.i("Downloader", "originalVersion.downloads="+originalVersion.downloads);
@@ -289,7 +293,7 @@ public class AsyncMinecraftDownloader {
     public void downloadAsset(JAssetInfo asset, File objectsDir, AtomicInteger downloadCounter) throws IOException {
         String assetPath = asset.hash.substring(0, 2) + "/" + asset.hash;
         File outFile = new File(objectsDir, assetPath);
-        downloadFileMonitored(mcResUrl + assetPath, outFile, getByteBuffer(),
+        downloadFileMonitored(mcResUrl + "/" + assetPath, outFile, getByteBuffer(),
                 new Tools.DownloaderFeedback() {
                     int prevCurr;
                     @Override
@@ -303,7 +307,8 @@ public class AsyncMinecraftDownloader {
     public void downloadAssetMapped(JAssetInfo asset, String assetName, File resDir, AtomicInteger downloadCounter) throws IOException {
         String assetPath = asset.hash.substring(0, 2) + "/" + asset.hash;
         File outFile = new File(resDir,"/"+assetName);
-        downloadFileMonitored(mcResUrl + assetPath, outFile, getByteBuffer(),
+		
+        downloadFileMonitored(mcResUrl + "/" + assetPath, outFile, getByteBuffer(),
                 new Tools.DownloaderFeedback() {
                     int prevCurr;
                     @Override
