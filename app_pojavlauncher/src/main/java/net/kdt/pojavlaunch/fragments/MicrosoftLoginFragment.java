@@ -29,7 +29,7 @@ public class MicrosoftLoginFragment extends Fragment {
         mWebview = (WebView) inflater.inflate(R.layout.fragment_microsoft_login, container, false);
         CookieManager.getInstance().removeAllCookie();  // The non deprecated method is not async
         WebSettings settings = mWebview.getSettings();
-        settings.setBlockNetworkImage(true);  // Faster loading
+
         settings.setJavaScriptEnabled(true);
         mWebview.clearHistory();
         mWebview.clearCache(true);
