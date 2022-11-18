@@ -37,6 +37,7 @@ import static net.kdt.pojavlaunch.utils.DownloadUtils.downloadFileMonitored;
 
 public class AsyncMinecraftDownloader {
     private String mcResUrl;
+	private String mcLibrariesUrl;
 
     /* Allows each downloading thread to have its own RECYCLED buffer */
     private final ConcurrentHashMap<Thread, byte[]> mThreadBuffers = new ConcurrentHashMap<>(5);
@@ -57,6 +58,9 @@ public class AsyncMinecraftDownloader {
 		mcResUrl = changeMirror ? MirrorsChanger.getInstance().getMinecraftResourceUrl(): 
 		   MirrorsProviders.DEFAULT_PROVIDER.getAssetsURL();
 		
+		mcLibrariesUrl = changeMirror ? MirrorsChanger.getInstance().getMinecraftLibrariesUrl(): 
+			MirrorsProviders.DEFAULT_PROVIDER.getLibrariesURL();
+		   
         sExecutorService.execute(() -> {
             if(downloadGame(activity, version, realVersion))
                 listener.onDownloadDone();
@@ -317,7 +321,7 @@ public class AsyncMinecraftDownloader {
         if (libItem.downloads == null || libItem.downloads.artifact == null) {
             MinecraftLibraryArtifact artifact = new MinecraftLibraryArtifact();
             artifact.url = (libItem.url == null
-                    ? "https://libraries.minecraft.net/"
+                    ? mcLibrariesUrl
                     : libItem.url.replace("http://","https://")) + libArtifact;
             libItem.downloads = new DependentLibrary.LibraryDownloads(artifact);
 
