@@ -46,7 +46,11 @@ static float grabCursorX, grabCursorY, lastCursorX, lastCursorY;
 
 jclass inputBridgeClass_ANDROID, inputBridgeClass_JRE;
 jmethodID inputBridgeMethod_ANDROID, inputBridgeMethod_JRE;
+jmethodID method_accessAndroidClipboard;
+jmethodID method_onGrabStateChanged;
+jmethodID method_glftSetWindowAttrib;
 jclass bridgeClazz;
+jclass vmGlfwClass;
 jboolean isGrabbing;
 
 jint JNI_OnLoad(JavaVM* vm, void* reserved) {
@@ -55,11 +59,14 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved) {
         dalvikJavaVMPtr = vm;
         (*vm)->GetEnv(vm, (void**) &dalvikJNIEnvPtr_ANDROID, JNI_VERSION_1_4);
         bridgeClazz = (*dalvikJNIEnvPtr_ANDROID)->NewGlobalRef(dalvikJNIEnvPtr_ANDROID,(*dalvikJNIEnvPtr_ANDROID) ->FindClass(dalvikJNIEnvPtr_ANDROID,"org/lwjgl/glfw/CallbackBridge"));
-        assert(bridgeClazz != NULL);
+        method_accessAndroidClipboard = (*dalvikJNIEnvPtr_ANDROID)->GetStaticMethodID(dalvikJNIEnvPtr_ANDROID, bridgeClazz, "accessAndroidClipboard", "(ILjava/lang/String;)Ljava/lang/String;");
+        method_onGrabStateChanged = (*dalvikJNIEnvPtr_ANDROID)->GetStaticMethodID(dalvikJNIEnvPtr_ANDROID, bridgeClazz, "onGrabStateChanged", "(Z)V");
         isUseStackQueueCall = JNI_FALSE;
     } else if (dalvikJavaVMPtr != vm) {
         runtimeJavaVMPtr = vm;
         (*vm)->GetEnv(vm, (void**) &runtimeJNIEnvPtr_JRE, JNI_VERSION_1_4);
+        vmGlfwClass = (*runtimeJNIEnvPtr_JRE)->NewGlobalRef(runtimeJNIEnvPtr_JRE, (*runtimeJNIEnvPtr_JRE)->FindClass(runtimeJNIEnvPtr_JRE, "org/lwjgl/glfw/GLFW"));
+        method_glftSetWindowAttrib = (*runtimeJNIEnvPtr_JRE)->GetStaticMethodID(runtimeJNIEnvPtr_JRE, vmGlfwClass, "glfwSetWindowAttrib", "(JII)V");
         hookExec();
     }
     
@@ -225,9 +232,6 @@ JNIEXPORT jstring JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeClipboard(JNI
     (*dalvikJavaVMPtr)->AttachCurrentThread(dalvikJavaVMPtr, &dalvikEnv, NULL);
     assert(dalvikEnv != NULL);
     assert(bridgeClazz != NULL);
-    LOGD("Clipboard: Obtaining method\n");
-    jmethodID bridgeMethod = (*dalvikEnv)->GetStaticMethodID(dalvikEnv, bridgeClazz, "accessAndroidClipboard", "(ILjava/lang/String;)Ljava/lang/String;");
-    assert(bridgeMethod != NULL);
     
     LOGD("Clipboard: Converting string\n");
     char *copySrcC = NULL;
@@ -238,7 +242,7 @@ JNIEXPORT jstring JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeClipboard(JNI
     }
 
     LOGD("Clipboard: Calling 2nd\n");
-    jstring pasteDst = convertStringJVM(dalvikEnv, env, (jstring) (*dalvikEnv)->CallStaticObjectMethod(dalvikEnv, bridgeClazz, bridgeMethod, action, copyDst));
+    jstring pasteDst = convertStringJVM(dalvikEnv, env, (jstring) (*dalvikEnv)->CallStaticObjectMethod(dalvikEnv, bridgeClazz, method_accessAndroidClipboard, action, copyDst));
 
     if (copySrc) {
         (*dalvikEnv)->DeleteLocalRef(dalvikEnv, copyDst);    
@@ -257,6 +261,10 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSetInputRead
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSetGrabbing(JNIEnv* env, jclass clazz, jboolean grabbing, jint xset, jint yset) {
+    JNIEnv *dalvikEnv;
+    (*dalvikJavaVMPtr)->AttachCurrentThread(dalvikJavaVMPtr, &dalvikEnv, NULL);
+    (*dalvikEnv)->CallStaticVoidMethod(dalvikEnv, bridgeClazz, method_onGrabStateChanged, grabbing);
+    (*dalvikJavaVMPtr)->DetachCurrentThread(dalvikJavaVMPtr);
     isGrabbing = grabbing;
     if (isGrabbing == JNI_TRUE) {
         grabCursorX = xset; // savedWidth / 2;
@@ -422,14 +430,9 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSetWindowAttrib(
         return;
     }
 
-    jclass glfwClazz = (*runtimeJNIEnvPtr_JRE)->FindClass(runtimeJNIEnvPtr_JRE, "org/lwjgl/glfw/GLFW");
-    assert(glfwClazz != NULL);
-    jmethodID glfwMethod = (*runtimeJNIEnvPtr_JRE)->GetStaticMethodID(runtimeJNIEnvPtr_JRE, glfwClazz, "glfwSetWindowAttrib", "(JII)V");
-    assert(glfwMethod != NULL);
-
     (*runtimeJNIEnvPtr_JRE)->CallStaticVoidMethod(
         runtimeJNIEnvPtr_JRE,
-        glfwClazz, glfwMethod,
+        vmGlfwClass, method_glftSetWindowAttrib,
         (jlong) showingWindow, attrib, value
     );
 }

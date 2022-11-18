@@ -43,7 +43,8 @@ import org.lwjgl.glfw.CallbackBridge;
 /**
  * Class dealing with showing minecraft surface and taking inputs to dispatch them to minecraft
  */
-public class MinecraftGLSurface extends View {
+public class MinecraftGLSurface extends View implements GrabListener{
+    Handler uiThreadHandler = new Handler();
     /* Gamepad object for gamepad inputs, instantiated on need */
     private Gamepad mGamepad = null;
     /* Pointer Debug textview, used to show info about the pointer state */
@@ -410,12 +411,6 @@ public class MinecraftGLSurface extends View {
             break;
         }
         if(mouseCursorIndex == -1) return false; // we cant consoom that, theres no mice!
-        if(CallbackBridge.isGrabbing()) {
-            if(MainActivity.isAndroid8OrHigher() && !hasPointerCapture()){
-                requestFocus();
-                requestPointerCapture();
-            }
-        }
         switch(event.getActionMasked()) {
             case MotionEvent.ACTION_HOVER_MOVE:
                 CallbackBridge.mouseX = (event.getX(mouseCursorIndex) * mScaleFactor);
@@ -444,10 +439,6 @@ public class MinecraftGLSurface extends View {
     public boolean dispatchCapturedPointerEvent(MotionEvent e) {
         CallbackBridge.mouseX += (e.getX()* mScaleFactor);
         CallbackBridge.mouseY += (e.getY()* mScaleFactor);
-        if(!CallbackBridge.isGrabbing()){
-            releasePointerCapture();
-            clearFocus();
-        }
 
         if (mPointerDebugTextView.getVisibility() == View.VISIBLE && !debugErrored) {
             StringBuilder builder = new StringBuilder();
@@ -651,6 +642,25 @@ public class MinecraftGLSurface extends View {
                 Tools.showError(getContext(), e, true);
             }
         }, "JVM Main thread").start();
+    }
+
+    @Override
+    public void onGrabState(boolean isGrabbing) {
+        uiThreadHandler.post(()->updateGrabState(isGrabbing));
+    }
+
+    private void updateGrabState(boolean isGrabbing) {
+        if(MainActivity.isAndroid8OrHigher()) {
+            if (isGrabbing && !hasPointerCapture()) {
+                requestFocus();
+                requestPointerCapture();
+            }
+
+            if (!isGrabbing && hasPointerCapture()) {
+                releasePointerCapture();
+                clearFocus();
+            }
+        }
     }
 
     /** A small interface called when the listener is ready for the first time */

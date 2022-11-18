@@ -1,5 +1,6 @@
 package net.kdt.pojavlaunch.prefs;
 
+import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.P;
 
 import android.app.Activity;
@@ -7,6 +8,10 @@ import android.content.*;
 import android.graphics.Rect;
 import android.os.Build;
 import android.util.Log;
+import android.view.WindowInsets;
+import android.view.WindowMetrics;
+
+import androidx.core.view.WindowInsetsCompat;
 
 import net.kdt.pojavlaunch.*;
 import net.kdt.pojavlaunch.multirt.MultiRTUtils;
@@ -152,6 +157,11 @@ public class LauncherPreferences {
         if (Build.VERSION.SDK_INT < P) return;
 
         try {
+            if(SDK_INT >= Build.VERSION_CODES.S){
+                Rect notchRect = activity.getWindowManager().getCurrentWindowMetrics().getWindowInsets().getDisplayCutout().getBoundingRects().get(0);
+                LauncherPreferences.PREF_NOTCH_SIZE = Math.min(notchRect.width(), notchRect.height());
+                return;
+            }
             Rect notchRect = activity.getWindow().getDecorView().getRootWindowInsets().getDisplayCutout().getBoundingRects().get(0);
             // Math min is to handle all rotations
             LauncherPreferences.PREF_NOTCH_SIZE = Math.min(notchRect.width(), notchRect.height());

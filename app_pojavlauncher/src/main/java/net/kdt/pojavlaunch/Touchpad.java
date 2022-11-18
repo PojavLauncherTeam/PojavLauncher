@@ -6,6 +6,7 @@ import static net.kdt.pojavlaunch.prefs.LauncherPreferences.DEFAULT_PREF;
 
 import android.content.Context;
 import android.os.Build;
+import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -25,13 +26,14 @@ import org.lwjgl.glfw.CallbackBridge;
 /**
  * Class dealing with the virtual mouse
  */
-public class Touchpad extends FrameLayout {
+public class Touchpad extends FrameLayout implements GrabListener{
     /* Whether the Touchpad should be displayed */
     private boolean mDisplayState;
     /* Mouse pointer icon used by the touchpad */
     private final ImageView mMousePointerImageView = new ImageView(getContext());
     /* Detect a classic android Tap */
     private final GestureDetector mSingleTapDetector = new GestureDetector(getContext(), new SingleTapConfirm());
+    private final Handler uiThreadHandler = new Handler();
     /* Resolution scaler option, allow downsizing a window */
     private final float mScaleFactor = DEFAULT_PREF.getInt("resolutionRatio",100)/100f;
     /* Current pointer ID to move the mouse */
@@ -41,19 +43,6 @@ public class Touchpad extends FrameLayout {
     /* Last first pointer positions non-scaled, used to scroll distance */
     private float mScrollLastInitialX, mScrollLastInitialY;
     /* Handler and message to check if we are grabbing */
-    private final Runnable mGrabRunnable = new Runnable() {
-        @Override
-        public void run() {
-            if (!CallbackBridge.isGrabbing() && mDisplayState && getVisibility() != VISIBLE) {
-                enable();
-            }else{
-                if ((CallbackBridge.isGrabbing() && getVisibility() != View.GONE) || !mDisplayState && getVisibility() == VISIBLE) {
-                    disable();
-                }
-            }
-            postDelayed(this, 250);
-        }
-    };
 
     public Touchpad(@NonNull Context context) {
         this(context, null);
@@ -156,6 +145,10 @@ public class Touchpad extends FrameLayout {
     /** @return The new state, enabled or disabled */
     public boolean switchState(){
         mDisplayState = !mDisplayState;
+        if(!CallbackBridge.isGrabbing()) {
+            if(mDisplayState) enable();
+            else disable();
+        }
         return mDisplayState;
     }
 
@@ -184,7 +177,18 @@ public class Touchpad extends FrameLayout {
         // When the game is grabbing, we should not display the mouse
         disable();
         mDisplayState = false;
-        postDelayed(mGrabRunnable, 250);
     }
 
+    @Override
+    public void onGrabState(boolean isGrabbing) {
+        uiThreadHandler.post(()->updateGrabState(isGrabbing));
+    }
+    private void updateGrabState(boolean isGrabbing) {
+        if(!isGrabbing) {
+            if(mDisplayState && getVisibility() != VISIBLE) enable();
+            if(!mDisplayState && getVisibility() == VISIBLE) disable();
+        }else{
+            if(getVisibility() != View.GONE) disable();
+        }
+    }
 }
