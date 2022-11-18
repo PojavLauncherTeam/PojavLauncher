@@ -14,6 +14,8 @@ import android.app.*;
 import android.content.*;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.*;
 import android.util.*;
 import android.view.*;
@@ -85,8 +87,8 @@ public class MainActivity extends BaseActivity {
         CallbackBridge.addGrabListener(minecraftGLView);
 
         // Enabling this on TextureView results in a broken white result
-        if(PREF_USE_ALTERNATE_SURFACE)
-            getWindow().setBackgroundDrawable(null);
+        if(PREF_USE_ALTERNATE_SURFACE) getWindow().setBackgroundDrawable(null);
+        else getWindow().setBackgroundDrawable(new ColorDrawable(Color.BLACK));
 
         // Set the sustained performance mode for available APIs
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
@@ -451,12 +453,15 @@ public class MainActivity extends BaseActivity {
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
         if(isInEditor) return super.dispatchKeyEvent(event);
-        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK && !touchCharInput.isEnabled()) {
-            if(event.getAction() != KeyEvent.ACTION_UP) return true; // We eat it anyway
-            sendKeyPress(LwjglGlfwKeycode.GLFW_KEY_ESCAPE);
-            return true;
+        boolean handleEvent;
+        if(!(handleEvent = minecraftGLView.processKeyEvent(event))) {
+            if (event.getKeyCode() == KeyEvent.KEYCODE_BACK && !touchCharInput.isEnabled()) {
+                if(event.getAction() != KeyEvent.ACTION_UP) return true; // We eat it anyway
+                sendKeyPress(LwjglGlfwKeycode.GLFW_KEY_ESCAPE);
+                return true;
+            }
         }
-        return minecraftGLView.processKeyEvent(event);
+        return handleEvent;
     }
 
     public static void switchKeyboardState() {
