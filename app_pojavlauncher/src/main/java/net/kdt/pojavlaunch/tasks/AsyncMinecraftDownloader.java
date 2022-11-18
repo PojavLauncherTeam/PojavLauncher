@@ -57,11 +57,11 @@ public class AsyncMinecraftDownloader {
 			MirrorsChanger.getInstance().inject(version);
 			
 		//use default when changeMirror is false
-		mcResUrl = changeMirror ? MirrorsChanger.getInstance().getMinecraftResourceUrl(): 
-		   MirrorsProviders.DEFAULT_PROVIDER.getAssetsURL();
+		mcResUrl = addMissingInUrl(changeMirror ? MirrorsChanger.getInstance().getMinecraftResourceUrl(): 
+		   MirrorsProviders.DEFAULT_PROVIDER.getAssetsURL());
 		
-		mcLibrariesUrl = changeMirror ? MirrorsChanger.getInstance().getMinecraftLibrariesUrl(): 
-			MirrorsProviders.DEFAULT_PROVIDER.getLibrariesURL();
+		mcLibrariesUrl = addMissingInUrl(changeMirror ? MirrorsChanger.getInstance().getMinecraftLibrariesUrl(): 
+			MirrorsProviders.DEFAULT_PROVIDER.getLibrariesURL());
 		   
         sExecutorService.execute(() -> {
             if(downloadGame(activity, version, realVersion))
@@ -293,7 +293,7 @@ public class AsyncMinecraftDownloader {
     public void downloadAsset(JAssetInfo asset, File objectsDir, AtomicInteger downloadCounter) throws IOException {
         String assetPath = asset.hash.substring(0, 2) + "/" + asset.hash;
         File outFile = new File(objectsDir, assetPath);
-        downloadFileMonitored(mcResUrl + "/" + assetPath, outFile, getByteBuffer(),
+        downloadFileMonitored(mcResUrl + assetPath, outFile, getByteBuffer(),
                 new Tools.DownloaderFeedback() {
                     int prevCurr;
                     @Override
@@ -308,7 +308,7 @@ public class AsyncMinecraftDownloader {
         String assetPath = asset.hash.substring(0, 2) + "/" + asset.hash;
         File outFile = new File(resDir,"/"+assetName);
 		
-        downloadFileMonitored(mcResUrl + "/" + assetPath, outFile, getByteBuffer(),
+        downloadFileMonitored(mcResUrl + assetPath, outFile, getByteBuffer(),
                 new Tools.DownloaderFeedback() {
                     int prevCurr;
                     @Override
@@ -403,6 +403,10 @@ public class AsyncMinecraftDownloader {
 
         return buffer;
     }
+	
+	private String addMissingInUrl(String needle) {
+		return needle.endsWith("/") ? needle : needle + "/";
+	}
 
     public interface DoneListener{
         void onDownloadDone();

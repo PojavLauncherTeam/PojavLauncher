@@ -18,7 +18,7 @@ public class MirrorsChanger {
 	private IMirrorsProvider provider;
 	
 	private MirrorsChanger() {
-		this.provider = MirrorsProviders.BMCL_PROVIDER;
+		this.provider = MirrorsProviders.DEFAULT_PROVIDER;
 		Log.i("Mirror", "change mirror provider to " + provider.getDisplayName());
 	}
 
