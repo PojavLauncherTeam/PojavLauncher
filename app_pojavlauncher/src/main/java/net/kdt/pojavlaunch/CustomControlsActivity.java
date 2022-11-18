@@ -9,6 +9,7 @@ import android.os.*;
 
 import androidx.appcompat.app.*;
 
+import android.provider.DocumentsContract;
 import android.view.View;
 import android.widget.*;
 
@@ -54,19 +55,21 @@ public class CustomControlsActivity extends BaseActivity {
 				case 3: save(false, mControlLayout); break;
 				case 4: dialogSelectDefaultCtrl(mControlLayout); break;
 				case 5: // Saving the currently shown control
-					mControlLayout.save(Tools.DIR_DATA + "/files/" + sSelectedName + ".json");
+					try {
+						Uri contentUri = DocumentsContract.buildDocumentUri(getString(R.string.storageProviderAuthorities), doSaveCtrl(sSelectedName, mControlLayout));
 
-					Uri contentUri = getUriForFile(getBaseContext(), getString(R.string.shareProviderAuthority), new File(Tools.DIR_DATA, "/files/" + sSelectedName + ".json"));
+						Intent shareIntent = new Intent();
+						shareIntent.setAction(Intent.ACTION_SEND);
+						shareIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
+						shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+						shareIntent.setType("application/json");
+						startActivity(shareIntent);
 
-					Intent shareIntent = new Intent();
-					shareIntent.setAction(Intent.ACTION_SEND);
-					shareIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
-					shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-					shareIntent.setType("application/json");
-					startActivity(shareIntent);
-
-					Intent sendIntent = Intent.createChooser(shareIntent, sSelectedName);
-					startActivity(sendIntent);
+						Intent sendIntent = Intent.createChooser(shareIntent, sSelectedName);
+						startActivity(sendIntent);
+					}catch (Exception e) {
+						Tools.showError(this, e);
+					}
 					break;
 			}
 			mDrawerLayout.closeDrawers();

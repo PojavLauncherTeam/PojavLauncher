@@ -94,7 +94,6 @@ android {
             // multiDexEnabled = true
            // debuggable = true
             resValue 'string', 'storageProviderAuthorities', 'net.kdt.pojavlaunch.scoped.gamefolder'
-            resValue 'string', 'shareProviderAuthority', 'net.kdt.pojavlaunch.scoped.controlfolder'
         }
         gplay {
             initWith release
