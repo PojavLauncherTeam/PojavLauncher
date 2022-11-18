@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collections;
+import net.kdt.pojavlaunch.download.MirrorsChanger;
 
 /** Class getting the version list, and that's all really */
 public class AsyncVersionList {
@@ -34,7 +35,7 @@ public class AsyncVersionList {
             JMinecraftVersionList versionList = null;
             try{
                 if(!versionFile.exists() || (System.currentTimeMillis() > versionFile.lastModified() + 86400000 )){
-                    versionList = downloadVersionList(LauncherPreferences.PREF_VERSION_REPOS);
+                    versionList = downloadVersionList(MirrorsChanger.getInstance().getMinecraftVersionManifestUrl());
                 }
             }catch (Exception e){
                 Log.e("AsyncVersionList", "Refreshing version list failed :" + e);

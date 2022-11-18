@@ -2,8 +2,10 @@ package net.kdt.pojavlaunch.download;
 
 import android.util.Log;
 import java.util.Map;
+import net.kdt.pojavlaunch.JAssets;
 import net.kdt.pojavlaunch.JMinecraftVersionList;
-import net.kdt.pojavlaunch.download.providers.*;
+import net.kdt.pojavlaunch.download.providers.IMirrorsProvider;
+import net.kdt.pojavlaunch.download.providers.MirrorsProviders;
 import net.kdt.pojavlaunch.value.DependentLibrary;
 import net.kdt.pojavlaunch.value.MinecraftClientInfo;
 
@@ -11,7 +13,7 @@ import static net.kdt.pojavlaunch.download.providers.MirrorsProviders.DEFAULT_PR
 
 public class MirrorsChanger {
 	
-    public static final MirrorsChanger GLOBAL_URL_CHANGER = new MirrorsChanger();
+    private static MirrorsChanger instance = new MirrorsChanger();
 	
 	private IMirrorsProvider provider;
 	
@@ -19,10 +21,22 @@ public class MirrorsChanger {
 		this.provider = MirrorsProviders.DEFAULT_PROVIDER;
 		Log.i("Mirror", "change mirror provider to " + provider.getDisplayName());
 	}
+
+	//To facilitate management, a single is used
+	//On the other hand, users have only one source setting globally
+	public static MirrorsChanger getInstance() {
+		if (instance == null) {
+			synchronized(MirrorsChanger.class) {
+				if (instance == null)
+			       instance = new MirrorsChanger();
+			}
+		}
+		return instance;
+	}
 	
 	public void inject(JMinecraftVersionList.Version version) {
 		
-        if (DEFAULT_PROVIDER.equals(provider) && version == null) return;
+        if (DEFAULT_PROVIDER.equals(provider) || version == null) return;
 		Log.i("Mirror", "Changing mirror to " + provider.getDisplayName());
 		if (version.assetIndex != null) 
 			version.assetIndex.url = injectUrl(version.assetIndex.url);
@@ -33,6 +47,14 @@ public class MirrorsChanger {
 		if (version.logging != null) 
 			version.logging.client.file.url = injectUrl(version.logging.client.file.url);
 		version.url = injectUrl(version.url);
+	}
+	
+	public String getMinecraftResourceUrl() {
+		return provider.getAssetsURL();
+	}
+	
+	public String getMinecraftVersionManifestUrl() {
+		return provider.getVersionManifestURL();
 	}
 	
 	private void injectLibs(JMinecraftVersionList.Version ver) {
@@ -52,22 +74,22 @@ public class MirrorsChanger {
 	//It only replaces one time
 	//TODO: make it faster
 	private String injectUrl(String url) {
-		return url != null ? url
+		return url != null ? url//Prevent NullPointerException
 		  .replace(DEFAULT_PROVIDER.getAssetsIndexURL(), provider.getAssetsIndexURL())
-		  .replace(DEFAULT_PROVIDER.getAssetsURL(), provider.getAssetsURL())
 		  .replace(DEFAULT_PROVIDER.getLibrariesURL(), provider.getLibrariesURL())
 		  .replace(DEFAULT_PROVIDER.getVersionManifestURL(), provider.getVersionManifestURL())
 		  : null;
 	}
 	
 	//getters and setters
-	
 	public void setProvider(IMirrorsProvider provider) {
 		this.provider = provider;
 		Log.i("Mirror", "change mirror provider to " + provider.getDisplayName());
+		Log.v("Mirror", "Notify listener");
 	}
 
 	public IMirrorsProvider getProvider() {
 		return provider;
 	}
+
 }

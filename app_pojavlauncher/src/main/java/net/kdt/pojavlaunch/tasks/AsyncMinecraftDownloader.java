@@ -1,32 +1,9 @@
 package net.kdt.pojavlaunch.tasks;
 
-import static net.kdt.pojavlaunch.PojavApplication.sExecutorService;
-import static net.kdt.pojavlaunch.utils.DownloadUtils.downloadFileMonitored;
-
 import android.app.Activity;
 import android.util.Log;
-
 import androidx.annotation.NonNull;
-
 import com.kdt.mcgui.ProgressLayout;
-
-import net.kdt.pojavlaunch.JAssetInfo;
-import net.kdt.pojavlaunch.JAssets;
-import net.kdt.pojavlaunch.JMinecraftVersionList;
-import net.kdt.pojavlaunch.JRE17Util;
-import net.kdt.pojavlaunch.R;
-import net.kdt.pojavlaunch.Tools;
-import net.kdt.pojavlaunch.extra.ExtraConstants;
-import net.kdt.pojavlaunch.extra.ExtraCore;
-import net.kdt.pojavlaunch.prefs.LauncherPreferences;
-import net.kdt.pojavlaunch.services.ProgressService;
-import net.kdt.pojavlaunch.utils.DownloadUtils;
-import net.kdt.pojavlaunch.value.DependentLibrary;
-import net.kdt.pojavlaunch.value.MinecraftClientInfo;
-import net.kdt.pojavlaunch.value.MinecraftLibraryArtifact;
-
-import org.apache.commons.io.IOUtils;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -38,10 +15,28 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
+import net.kdt.pojavlaunch.JAssetInfo;
+import net.kdt.pojavlaunch.JAssets;
+import net.kdt.pojavlaunch.JMinecraftVersionList;
+import net.kdt.pojavlaunch.JRE17Util;
+import net.kdt.pojavlaunch.Tools;
+import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.download.MirrorsChanger;
+import net.kdt.pojavlaunch.download.providers.MirrorsProviders;
+import net.kdt.pojavlaunch.extra.ExtraConstants;
+import net.kdt.pojavlaunch.extra.ExtraCore;
+import net.kdt.pojavlaunch.prefs.LauncherPreferences;
+import net.kdt.pojavlaunch.utils.DownloadUtils;
+import net.kdt.pojavlaunch.value.DependentLibrary;
+import net.kdt.pojavlaunch.value.MinecraftClientInfo;
+import net.kdt.pojavlaunch.value.MinecraftLibraryArtifact;
+import org.apache.commons.io.IOUtils;
+
+import static net.kdt.pojavlaunch.PojavApplication.sExecutorService;
+import static net.kdt.pojavlaunch.utils.DownloadUtils.downloadFileMonitored;
 
 public class AsyncMinecraftDownloader {
-    public static final String MINECRAFT_RES = "https://resources.download.minecraft.net/";
+    private String mcResUrl;
 
     /* Allows each downloading thread to have its own RECYCLED buffer */
     private final ConcurrentHashMap<Thread, byte[]> mThreadBuffers = new ConcurrentHashMap<>(5);
@@ -54,8 +49,14 @@ public class AsyncMinecraftDownloader {
 	
     public AsyncMinecraftDownloader(@NonNull Activity activity, JMinecraftVersionList.Version version, String realVersion,
                                     @NonNull DoneListener listener, boolean changeMirror) { // this was there for a reason
-		if (changeMirror)
-			MirrorsChanger.GLOBAL_URL_CHANGER.inject(version);
+		//here change main jar and so on 
+		if (changeMirror) 
+			MirrorsChanger.getInstance().inject(version);
+			
+		//use default when changeMirror is false
+		mcResUrl = changeMirror ? MirrorsChanger.getInstance().getMinecraftResourceUrl(): 
+		   MirrorsProviders.DEFAULT_PROVIDER.getAssetsURL();
+		
         sExecutorService.execute(() -> {
             if(downloadGame(activity, version, realVersion))
                 listener.onDownloadDone();
@@ -284,7 +285,7 @@ public class AsyncMinecraftDownloader {
     public void downloadAsset(JAssetInfo asset, File objectsDir, AtomicInteger downloadCounter) throws IOException {
         String assetPath = asset.hash.substring(0, 2) + "/" + asset.hash;
         File outFile = new File(objectsDir, assetPath);
-        downloadFileMonitored(MINECRAFT_RES + assetPath, outFile, getByteBuffer(),
+        downloadFileMonitored(mcResUrl + assetPath, outFile, getByteBuffer(),
                 new Tools.DownloaderFeedback() {
                     int prevCurr;
                     @Override
@@ -298,7 +299,7 @@ public class AsyncMinecraftDownloader {
     public void downloadAssetMapped(JAssetInfo asset, String assetName, File resDir, AtomicInteger downloadCounter) throws IOException {
         String assetPath = asset.hash.substring(0, 2) + "/" + asset.hash;
         File outFile = new File(resDir,"/"+assetName);
-        downloadFileMonitored(MINECRAFT_RES + assetPath, outFile, getByteBuffer(),
+        downloadFileMonitored(mcResUrl + assetPath, outFile, getByteBuffer(),
                 new Tools.DownloaderFeedback() {
                     int prevCurr;
                     @Override
@@ -393,10 +394,6 @@ public class AsyncMinecraftDownloader {
 
         return buffer;
     }
-
-
-
-
 
     public interface DoneListener{
         void onDownloadDone();
