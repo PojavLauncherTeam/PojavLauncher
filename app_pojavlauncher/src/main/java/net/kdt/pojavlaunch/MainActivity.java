@@ -451,12 +451,15 @@ public class MainActivity extends BaseActivity {
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
         if(isInEditor) return super.dispatchKeyEvent(event);
-        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK && !touchCharInput.isEnabled()) {
-            if(event.getAction() != KeyEvent.ACTION_UP) return true; // We eat it anyway
-            sendKeyPress(LwjglGlfwKeycode.GLFW_KEY_ESCAPE);
-            return true;
+        boolean handleEvent;
+        if(!(handleEvent = minecraftGLView.processKeyEvent(event))) {
+            if (event.getKeyCode() == KeyEvent.KEYCODE_BACK && !touchCharInput.isEnabled()) {
+                if(event.getAction() != KeyEvent.ACTION_UP) return true; // We eat it anyway
+                sendKeyPress(LwjglGlfwKeycode.GLFW_KEY_ESCAPE);
+                return true;
+            }
         }
-        return minecraftGLView.processKeyEvent(event);
+        return handleEvent;
     }
 
     public static void switchKeyboardState() {
