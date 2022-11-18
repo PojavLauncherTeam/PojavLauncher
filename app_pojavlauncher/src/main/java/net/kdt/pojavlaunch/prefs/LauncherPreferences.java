@@ -160,6 +160,7 @@ public class LauncherPreferences {
             if(SDK_INT >= Build.VERSION_CODES.S){
                 Rect notchRect = activity.getWindowManager().getCurrentWindowMetrics().getWindowInsets().getDisplayCutout().getBoundingRects().get(0);
                 LauncherPreferences.PREF_NOTCH_SIZE = Math.min(notchRect.width(), notchRect.height());
+                Tools.updateWindowSize(activity);
                 return;
             }
             Rect notchRect = activity.getWindow().getDecorView().getRootWindowInsets().getDisplayCutout().getBoundingRects().get(0);
