@@ -41,13 +41,13 @@
     <string name="mcl_tab_console">Vývojárska konzola</string>
     <string name="mcl_tab_crash">Záznam pádu</string>
     <!-- MCLauncherActivity: Account status -->
-    <string name="mcl_account_connected">Pripojené</string>
-    <string name="mcl_account_local">Miestny</string>
+    <string name="mcl_account_connected">Prihlásený</string>
+    <string name="mcl_account_local">Lokálny</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Pripravené na spustenie Minecraftu %s</string>
     <string name="mcl_launch_cleancache">Čistenie súborov medzipamäte</string>
     <string name="mcl_launch_downloading">Sťahuje sa %s</string>
-    <string name="mcl_launch_downloading_progress">"Sťahujem %s (%.2f MB / %.2f MB)"</string>
+    <string name="mcl_launch_downloading_progress">"Sťahuje sa %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Príprava na sťiahnutie prostriedkov</string>
     <string name="mcl_launch_error_localmode">Minecraft nemôže byť legálne nainštalovaný keď je prihlásený miestny účet. Pre pokračovanie prejdite na online účet.</string>
     <string name="mcl_options">Možnosti</string>
@@ -83,6 +83,11 @@
     <string name="mcl_setting_category_general">Všeobecné nastavenia</string>
     <string name="mcl_setting_category_scaling">Nastavenie mierky</string>
     <string name="mcl_setting_category_renderer">Vykresľovač</string>
+    <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (všetky verzie, rýchly)</string>
+    <string name="mcl_setting_renderer_virgl">virglrenderer - (release 1.7+, pomalý)</string>
+    <string name="mcl_setting_renderer_vgpu">vgpu - (do 1.16.5, rýchly)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink - (old_beta b1.8+, pomalý)</string>
+    <string name="mcl_setting_renderer_angle">ANGLE - (release 1.17+, priemerný)</string>
     <string name="mcl_setting_category_veroption">Aké typy verzií budú v zozname verzií</string>
     <string name="mcl_setting_veroption_release">Vydanie</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
@@ -163,6 +168,7 @@
     <string name="customctrl_addsubbutton">Pridať podtlačidlo</string>
     <string name="customctrl_add_subbutton_message">Podtlačidlo č.%d bolo pridané !</string>
     <string name="customctrl_selectdefault">Vybrať json východzieho ovládanie</string>
+    <string name="customctrl_export">Exportovať ovládacie prvky</string>
     <string name="main_install_jar_file">Inštalovať .jar</string>
     <string name="main_options">Možnosti</string>
     <string name="main_play">Hrať</string>
@@ -219,6 +225,7 @@
     <string name="preference_control_offset_title">Strana odsadenie ovládania</string>
     <string name="preference_control_offset_description">Nastaviť vlastné odsadenie pre každú stranu obrazovky</string>
     <string name="preference_mouse_start_title">Spustiť so zapnutou virtuálnou myškou</string>
+    <string name="preference_mouse_start_description">Používaním tohto nastavenia budete súdení Mathiasom Boulayom</string>
     <string name="preference_video_title">Video a vykresľovač</string>
     <string name="preference_video_description">Rozlíšenie, typ škálovania, a vykresľovač</string>
     <string name="preference_control_title">Prispôsobenie ovládania</string>
@@ -231,7 +238,9 @@
     <string name="preference_experimental_description">Používajte tieto veci s uvážením, nepodporujeme.</string>
     <string name="preference_sustained_performance_title">Zapnúť režim trvalého výkonu</string>
     <string name="preference_sustained_performance_description">Limitovať termálne spomaľovanie limitovaním výkonu</string>
+    <string name="preference_force_english_description">Dovoľuje vám vidieť pôvodné názvy nastavení, atď., ako boli pôvodne navrhnuté vývojármi. Na nastavenie je nutný reštart aplikácie</string>
     <string name="preference_back_title">Späť na poslednú stránku</string>
+    <string name="gles_hack_title">Hack na zmenšenie všetkých textúr pre renderer GL4ES</string>
     <string name="gles_hack_none">Nezmenšiť textúry</string>
     <string name="gles_hack_always">Vydeliť všetky textúry dvoma</string>
     <string name="gles_hack_sometimes">Vydeliť veľké textúry dvoma alebo štyrmi</string>
