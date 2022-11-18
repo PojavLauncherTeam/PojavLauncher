@@ -56,7 +56,7 @@ public class CustomControlsActivity extends BaseActivity {
 				case 5: // Saving the currently shown control
 					mControlLayout.save(Tools.DIR_DATA + "/files/" + sSelectedName + ".json");
 
-					Uri contentUri = getUriForFile(getBaseContext(), "share_file", new File(Tools.DIR_DATA, "/files/" + sSelectedName + ".json"));
+					Uri contentUri = getUriForFile(getBaseContext(), getString(R.string.shareProviderAuthority), new File(Tools.DIR_DATA, "/files/" + sSelectedName + ".json"));
 
 					Intent shareIntent = new Intent();
 					shareIntent.setAction(Intent.ACTION_SEND);

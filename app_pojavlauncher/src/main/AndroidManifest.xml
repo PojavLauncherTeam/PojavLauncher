@@ -98,7 +98,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="@string/storageProviderAuthorities"
+            android:authorities="@string/shareProviderAuthority"
             android:exported="false"
             android:grantUriPermissions="true"
             android:permission="android.permission.MANAGE_DOCUMENTS">
