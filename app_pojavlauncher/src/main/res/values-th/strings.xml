@@ -17,10 +17,13 @@
     <string name="login_microsoft">เข้าสู่ระบบ Microsoft</string>
     <string name="login_select_account">เลือกบัญชี</string>
     <string name="login_title_no_saved_account">ไม่พบบัญชี !</string>
+    <string name="login_dialog_no_saved_account">คุณไม่มีบัญชีที่บันทึกไว้\nใช้ตัวเลือก <b>\"ให้ฉันอยู่ในระบบต่อไป\"</b> เพื่อบันทึกบัญชีเมื่อเข้าสู่ระบบครั้งแรก</string>
     <!-- Hint -->
+    <string name="hint_control_mapping">"เลื่อนจากขวาไปซ้ายเพื่อเปิดเมนู ◀\nกดปุ่มค้างไว้เพื่อปรับแต่ง: แก้ไข ปรับขนาด หรือลบ"</string>
     <!-- Warnings -->
     <string name="warning_remove_account">This account will be removed!</string>
     <!-- AlertDialog title -->
+    <string name="alerttitle_install_jre">ติดตั้ง Java Runtime %s (.tar.xz)</string>
     <string name="alerttitle_installmod">เลือกตัวติดตั้งม็อด</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher ได้ขัดข้องโดยไม่คาดคิด</string>
@@ -30,6 +33,7 @@
     <!-- Toast messages -->
     <string name="toast_permission_denied">The read/write to storage permission is required!</string>
     <string name="toast_optifine_success">ติดตั้งสำเร็จแล้ว</string>
+    <string name="toast_uninstalljre_done">ถอนการติดตั่ง Java Runtime สำเร็จ</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
@@ -47,16 +51,31 @@
     <string name="mcl_launch_downloading_progress">"กำลังดาวน์โหลด %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">กำลังเตรียมดาวน์โหลดทรัพยากร</string>
     <string name="mcl_options">ตัวเลือก</string>
+    <string name="mcl_option_modinstall">เปิดตัวติดตั้ง mod (Forge, LabyMod, Fabric, etc..)</string>
+    <string name="mcl_option_modinstallwitharg">เปิดตัวติดตั้ง mod (ด้วยอาร์กิวเมนต์ที่กำหนดเอง)</string>
     <string name="mcl_option_customcontrol">การควบคุมกำหนดเอง</string>
     <string name="mcl_option_settings">การตั้งค่า</string>
     <string name="mcl_option_about">เกี่ยวกับ</string>
+    <string name="mcl_setting_title_uninstalljre">ถอนการติดตั้ง Java Runtime</string>
+    <string name="mcl_setting_subtitle_uninstalljre">[ต้องรีสตาร์ท Launcher] ซึ่งจะช่วยให้คุณติดตั้ง Java Runtime ใหม่ได้</string>
     <string name="mcl_setting_subtitle_freeform">เปิด Minecraft ในหน้าต่างลอย. ต้องใช้ Android 7.0+</string>
     <string name="mcl_setting_title_hide_sidebar">ซ่อนแถบด้านข้าง</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">ผู้ที่คิดถึงอดีตที่ชอบ v1 UI แบบเก่าอาจชอบสิ่งนี้ ให้ประสบการณ์เต็มหน้าจอมากขึ้น</string>
+    <string name="mcl_setting_title_ignore_notch">เต็มจอ</string>
+    <string name="mcl_setting_subtitle_ignore_notch">ไม่ต้องสนใจรอยบากและขยายหน้าจอข้างใต้\nให้ประสบการณ์ที่สมจริงยิ่งขึ้น</string>
     <string name="mcl_setting_title_resolution_scaler">มาตราส่วนความละเอียด</string>
     <string name="mcl_setting_subtitle_resolution_scaler">อนุญาตให้คุณลดความละเอียดเกมลง. 100% คือความละเอียดเต็มที่</string>
+    <string name="mcl_setting_title_flat_button_style">สไตล์ปุ่มแบน</string>
+    <string name="mcl_setting_subtitle_flat_button_style">เปิดใช้งานตัวเลือกนี้เพื่อเปลี่ยนรูปแบบปุ่มควบคุมเป็นแบบแบน</string>
+    <string name="mcl_setting_title_buttonscale">ปรับขนาดปุ่มควบคุม</string>
+    <string name="mcl_setting_subtitle_buttonscale">เพิ่มขนาดหากปุ่มมีขนาดเล็กเกินไป</string>
     <string name="mcl_setting_title_mousescale">การปรับมาตราเมาส์</string>
     <string name="mcl_setting_subtitle_mousescale">เปลี่ยนขนาดของเมาส์เสมือน.</string>
+    <string name="mcl_setting_title_javaargs">JVM Launch arguments</string>
+    <string name="mcl_setting_subtitle_javaargs">ระวัง อาจทำให้เกมพังได้หากแก้ไขโดยขาดความรู้</string>
     <string name="mcl_setting_category_general">การตั้งค่าทั่วไป</string>
+    <string name="mcl_setting_category_scaling">การตั้งค่าการปรับขนาด</string>
+    <string name="mcl_setting_category_renderer">การแสดงผล</string>
     <string name="mcl_setting_category_veroption">ประเภทเวอร์ชันจะอยู่ในรายการเวอร์ชัน</string>
     <string name="mcl_setting_veroption_snapshot">ภาพรวม</string>
     <string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
@@ -70,6 +89,7 @@
     <string name="global_remove">ถอดออก</string>
     <string name="global_restart">เริ่มใหม่</string>
     <string name="global_save">บันทึก</string>
+    <string name="global_unpacking">กำลังแยก… %s</string>
     <string name="global_error_field_empty">สนามนี้ไม่สามารถว่าง</string>
     <string name="global_waiting">รอ</string>
     <!--
@@ -105,11 +125,16 @@
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">บังคับปิด</string>
     <string name="control_viewout">ประวัติที่บันทึกไว้</string>
+    <string name="control_adebug">การดีบักอินพุต</string>
+    <string name="control_scaleup">Scale Up</string>
+    <string name="control_scaledown">Scale down</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
     <string name="customctrl_edit">การแก้ไข %s</string>
+    <string name="customctrl_remove">ลบ %s?</string>
+    <string name="customctrl_toggle">Toggleable</string>
     <string name="customctrl_size">ขนาด</string>
     <string name="customctrl_size_width">ความกว้าง</string>
     <string name="customctrl_size_height">ความสูง</string>
