@@ -267,5 +267,20 @@
     <string name="arc_capes_title">Peleryny Cosmetica</string>
     <string name="arc_capes_desc">Aktywuje peleryny z Cosmetica (wcześniej Arc). Aby dowiedzieć się więcej, odwiedź https://cosmetica.cc. Wymaga OptiFine.</string>
     <string name="migrated_profile_str">%s konfiguracja wersji</string>
+    <string name="notif_channel_name">Ogólne</string>
+    <string name="lazy_service_default_title">Usługa Pojav Foreground</string>
+    <string name="lazy_service_default_description">Ta usługa jest używana do wykonywania długich operacji</string>
     <string name="mcl_setting_veroption_installed">Zainstalowane</string>
+    <string name="use_global_default">(Użyj ustawień domyślnych)</string>
+    <string name="default_control">Domyślne sterowanie</string>
+    <string name="progresslayout_tasks_in_progress">%d zadań w toku</string>
+    <string name="notification_terminate">Przerwij</string>
+    <string name="notification_game_runs">Gra jest uruchomiona!</string>
+    <string name="folder_dialog_create">Utwórz</string>
+    <string name="folder_dialog_insert_name">Wpisz nazwę folderu</string>
+    <string name="main_login_done">Logowanie zakończone</string>
+    <string name="main_add_account">Dodaj konto</string>
+    <string name="tasks_ongoing">Zadania są w toku, proszę czekać</string>
+    <string name="no_saved_accounts">Brak zapisanych kont</string>
+    <string name="downloading_versions">Pobieranie listy wersji…</string>
 </resources>
