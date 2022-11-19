@@ -11,14 +11,18 @@
     <string name="login_online_password_hint">รหัสผ่าน</string>
     <string name="login_online_check_keeplogin">คงฉันไว้ในระบบ</string>
     <string name="login_online_login_label">เข้าสู่ระบบ</string>
+    <string name="login_error_invalid_username">ชื่อผู้ใช้ที่ไม่ถูกต้อง ชื่อผู้ใช้ต้องอยู่ในช่วง 3-16 ตัวอักษร ควรประกอบด้วย A-Z, a-z, 0-9 และขีดล่างเท่านั้น</string>
     <string name="login_error_exist_username">ชื่อผู้ใช้นี้มีอยู่แล้ว</string>
     <string name="login_microsoft">เข้าสู่ระบบ Microsoft</string>
     <string name="login_select_account">เลือกบัญชี</string>
     <string name="login_title_no_saved_account">ไม่พบบัญชี !</string>
+    <string name="login_dialog_no_saved_account">คุณไม่มีบัญชีที่บันทึกไว้\nใช้ตัวเลือก <b>\"ให้ฉันอยู่ในระบบต่อไป\"</b> เพื่อบันทึกบัญชีเมื่อเข้าสู่ระบบครั้งแรก</string>
     <!-- Hint -->
+    <string name="hint_control_mapping">"เลื่อนจากขวาไปซ้ายเพื่อเปิดเมนู ◀\nกดปุ่มค้างไว้เพื่อปรับแต่ง: แก้ไข ปรับขนาด หรือลบ"</string>
     <!-- Warnings -->
     <string name="warning_remove_account">This account will be removed!</string>
     <!-- AlertDialog title -->
+    <string name="alerttitle_install_jre">ติดตั้ง Java Runtime %s (.tar.xz)</string>
     <string name="alerttitle_installmod">เลือกตัวติดตั้งม็อด</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher ได้ขัดข้องโดยไม่คาดคิด</string>
@@ -28,6 +32,7 @@
     <!-- Toast messages -->
     <string name="toast_permission_denied">The read/write to storage permission is required!</string>
     <string name="toast_optifine_success">ติดตั้งสำเร็จแล้ว</string>
+    <string name="toast_uninstalljre_done">ถอนการติดตั่ง Java Runtime สำเร็จ</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
@@ -37,23 +42,47 @@
     <string name="mcl_tab_crash">บันทึกข้อขัดข้อง</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">เชื่อมต่อแล้ว</string>
+    <string name="mcl_account_local">Local</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">พร้อมที่จะเล่น Minecraft %s</string>
     <string name="mcl_launch_cleancache">กำลังล้างแฟ้มแคช</string>
     <string name="mcl_launch_downloading">กำลังดาวน์โหลด %s</string>
     <string name="mcl_launch_downloading_progress">"กำลังดาวน์โหลด %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">กำลังเตรียมดาวน์โหลดทรัพยากร</string>
+    <string name="mcl_launch_error_localmode">ไม่สามารถติดตั้ง Minecraft อย่างถูกกฎหมายเมื่อเข้าสู่ระบบด้วยบัญชี Local โปรดเปลี่ยนเป็นบัญชีออนไลน์เพื่อดำเนินการต่อ</string>
     <string name="mcl_options">ตัวเลือก</string>
+    <string name="mcl_option_modinstall">เปิดตัวติดตั้ง mod (Forge, LabyMod, Fabric, etc..)</string>
+    <string name="mcl_option_modinstallwitharg">เปิดตัวติดตั้ง mod (ด้วยอาร์กิวเมนต์ที่กำหนดเอง)</string>
     <string name="mcl_option_customcontrol">การควบคุมกำหนดเอง</string>
     <string name="mcl_option_settings">การตั้งค่า</string>
     <string name="mcl_option_about">เกี่ยวกับ</string>
+    <string name="mcl_setting_title_use_surface_view">ใช้การเรนเดอร์พื้นผิวแบบอื่น</string>
+    <string name="mcl_setting_subtitle_use_surface_view">อาจช่วยประสิทธิภาพในสถานการณ์ที่ผูกกับ GPU</string>
+    <string name="mcl_setting_title_uninstalljre">ถอนการติดตั้ง Java Runtime</string>
+    <string name="mcl_setting_subtitle_uninstalljre">[ต้องรีสตาร์ท Launcher] ซึ่งจะช่วยให้คุณติดตั้ง Java Runtime ใหม่ได้</string>
     <string name="mcl_setting_subtitle_freeform">เปิด Minecraft ในหน้าต่างลอย. ต้องใช้ Android 7.0+</string>
     <string name="mcl_setting_title_hide_sidebar">ซ่อนแถบด้านข้าง</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">ผู้ที่คิดถึงอดีตที่ชอบ v1 UI แบบเก่าอาจชอบสิ่งนี้ ให้ประสบการณ์เต็มหน้าจอมากขึ้น</string>
+    <string name="mcl_setting_title_ignore_notch">เต็มจอ</string>
+    <string name="mcl_setting_subtitle_ignore_notch">ไม่ต้องสนใจรอยบากและขยายหน้าจอข้างใต้\nให้ประสบการณ์ที่สมจริงยิ่งขึ้น</string>
     <string name="mcl_setting_title_resolution_scaler">มาตราส่วนความละเอียด</string>
     <string name="mcl_setting_subtitle_resolution_scaler">อนุญาตให้คุณลดความละเอียดเกมลง. 100% คือความละเอียดเต็มที่</string>
+    <string name="mcl_setting_title_flat_button_style">สไตล์ปุ่มแบน</string>
+    <string name="mcl_setting_subtitle_flat_button_style">เปิดใช้งานตัวเลือกนี้เพื่อเปลี่ยนรูปแบบปุ่มควบคุมเป็นแบบแบน</string>
+    <string name="mcl_setting_title_buttonscale">ปรับขนาดปุ่มควบคุม</string>
+    <string name="mcl_setting_subtitle_buttonscale">เพิ่มขนาดหากปุ่มมีขนาดเล็กเกินไป</string>
     <string name="mcl_setting_title_mousescale">การปรับมาตราเมาส์</string>
     <string name="mcl_setting_subtitle_mousescale">เปลี่ยนขนาดของเมาส์เสมือน.</string>
+    <string name="mcl_setting_title_javaargs">JVM Launch arguments</string>
+    <string name="mcl_setting_subtitle_javaargs">ระวัง อาจทำให้เกมพังได้หากแก้ไขโดยขาดความรู้</string>
     <string name="mcl_setting_category_general">การตั้งค่าทั่วไป</string>
+    <string name="mcl_setting_category_scaling">การตั้งค่าการปรับขนาด</string>
+    <string name="mcl_setting_category_renderer">การแสดงผล</string>
+    <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (all versions, fast)</string>
+    <string name="mcl_setting_renderer_virgl">virglrenderer - (release 1.7+, ช้า)</string>
+    <string name="mcl_setting_renderer_vgpu">vgpu - (up to 1.16.5, เร็ว)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink - (old_beta b1.8+, ช้า)</string>
+    <string name="mcl_setting_renderer_angle">ANGLE - (release 1.17+, กลาง)</string>
     <string name="mcl_setting_category_veroption">ประเภทเวอร์ชันจะอยู่ในรายการเวอร์ชัน</string>
     <string name="mcl_setting_veroption_snapshot">ภาพรวม</string>
     <string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
@@ -69,12 +98,15 @@
     <string name="global_clone">คัดลอก</string>
     <string name="global_restart">เริ่มใหม่</string>
     <string name="global_save">บันทึก</string>
+    <string name="global_unpacking">กำลังแยก… %s</string>
     <string name="global_error_field_empty">สนามนี้ไม่สามารถว่าง</string>
     <string name="global_waiting">รอ</string>
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">ออกจากแอปพลิเคชัน/เกมเด้งด้วยรหัส %d โปรดตรวจสอบที่ latestlog.txt สำหรับรายละเอียดเพิ่มเติม</string>
     <string name="mcn_exit_call">ออก</string>
     <string name="mcn_exit_confirm">คุณแน่ใจหรือไม่ว่าต้องการบังคับปิด?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 ไม่ได้ถูกติดตั้ง!</string>
+    <string name="mcn_check_fail_vulkan_support">อุปกรณ์นี้ไม่รองรับตัวเรนเดอร์ Vulkan Zink</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">แป้นพิมพ์</string>
@@ -87,15 +119,27 @@
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">บังคับปิด</string>
     <string name="control_viewout">ประวัติที่บันทึกไว้</string>
+    <string name="control_adebug">การดีบักอินพุต</string>
+    <string name="control_scaleup">Scale Up</string>
+    <string name="control_scaledown">Scale down</string>
     <!-- ImportControlActivity Strings -->
+    <string name="import_control_label">นำเข้า ควบคุม</string>
+    <string name="import_control_invalid_file">ไฟล์ไม่ถูกต้องหรือเสียหาย</string>
+    <string name="import_control_import_button">นำเข้าควบคุม</string>
+    <string name="import_control_verifying_file">กำลังตรวจสอบไฟล์ โปรดรอและลองอีกครั้ง</string>
+    <string name="import_control_invalid_name">ชื่อหรือไฟล์ไม่ถูกต้องมีอยู่แล้ว</string>
+    <string name="import_control_done">นำเข้าสำเร็จ</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
     <string name="customctrl_edit">การแก้ไข %s</string>
+    <string name="customctrl_remove">ลบ %s?</string>
+    <string name="customctrl_toggle">Toggleable</string>
     <string name="customctrl_size">ขนาด</string>
     <string name="customctrl_size_width">ความกว้าง</string>
     <string name="customctrl_size_height">ความสูง</string>
+    <string name="customctrl_mapping">Mapping</string>
     <string name="customctrl_dynamicpos">ตำแหน่งพลวัต</string>
     <string name="customctrl_dynamicpos_x">พลวัต X</string>
     <string name="customctrl_dynamicpos_y">พลวัต Y</string>
@@ -118,4 +162,5 @@
     <string name="customctrl_rounded">โค้งมน</string>
     <string name="mcl_memory_allocation">การจัดสรรหน่วยความจำ</string>
     <string name="profiles_profile_name">ชื่อ</string>
+    <string name="pedit_renderer">การแสดงผล</string>
 </resources>
