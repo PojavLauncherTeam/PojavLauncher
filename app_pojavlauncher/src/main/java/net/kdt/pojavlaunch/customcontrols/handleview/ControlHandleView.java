@@ -52,7 +52,7 @@ public class ControlHandleView extends View {
         ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(size, size);
         setLayoutParams(params);
         setBackground(mDrawable);
-        setElevation(3);
+        setTranslationZ(10.5F);
     }
 
     public void setControlButton(ControlInterface controlInterface){
