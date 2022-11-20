@@ -388,7 +388,6 @@ public class MinecraftGLSurface extends View implements GrabListener{
 
     /**
      * The event for mouse/joystick movements
-     * We don't do the gamepad right now.
      */
     @SuppressLint("NewApi")
     @Override
@@ -634,10 +633,12 @@ public class MinecraftGLSurface extends View implements GrabListener{
 
         new Thread(() -> {
             try {
-                Thread.sleep(200);
-                if(mSurfaceReadyListener != null){
-                    mSurfaceReadyListener.isReady();
+                // Wait until the listener is attached
+                while (mSurfaceReadyListener == null){
+                    Thread.sleep(100);
                 }
+
+                mSurfaceReadyListener.isReady();
             } catch (Throwable e) {
                 Tools.showError(getContext(), e, true);
             }
@@ -670,5 +671,6 @@ public class MinecraftGLSurface extends View implements GrabListener{
 
     public void setSurfaceReadyListener(SurfaceReadyListener listener){
         mSurfaceReadyListener = listener;
+
     }
 }
