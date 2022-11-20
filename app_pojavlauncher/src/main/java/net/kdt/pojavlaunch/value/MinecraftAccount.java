@@ -96,7 +96,7 @@ public class MinecraftAccount {
 
     public Bitmap getSkinFace(){
         if(skinFaceBase64 == null){
-            return Bitmap.createBitmap(1,1, Bitmap.Config.ARGB_8888);
+            return null;
         }
         byte[] faceIconBytes = Base64.decode(skinFaceBase64, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(faceIconBytes, 0, faceIconBytes.length);

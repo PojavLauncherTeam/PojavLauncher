@@ -284,11 +284,16 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
             ExtendedTextView view = ((ExtendedTextView) getSelectedView());
             if(view != null){
                 Bitmap bitmap = mSelectecAccount.getSkinFace();
-                mHeadDrawable = new BitmapDrawable(bitmap);
-                mHeadDrawable.setBounds(0, 0, bitmap.getWidth(), bitmap.getHeight());
+                if(bitmap != null) {
+                    mHeadDrawable = new BitmapDrawable(bitmap);
+                    mHeadDrawable.setBounds(0, 0, bitmap.getWidth(), bitmap.getHeight());
 
-                view.setCompoundDrawables(mHeadDrawable, null, null, null);
-                view.postProcessDrawables();
+                    view.setCompoundDrawables(mHeadDrawable, null, null, null);
+                    view.postProcessDrawables();
+                }else{
+                    view.setCompoundDrawables(null, null, null, null);
+                    view.postProcessDrawables();
+                }
             }
         }
 
