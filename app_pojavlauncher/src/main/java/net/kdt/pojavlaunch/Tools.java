@@ -110,7 +110,8 @@ public final class Tools {
     }
 
 
-    public static void launchMinecraft(final Activity activity, MinecraftAccount minecraftAccount, MinecraftProfile minecraftProfile) throws Throwable {
+    public static void launchMinecraft(final Activity activity, MinecraftAccount minecraftAccount,
+                                       MinecraftProfile minecraftProfile, JMinecraftVersionList.Version versionInfo) throws Throwable {
         ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
         ((ActivityManager)activity.getSystemService(Context.ACTIVITY_SERVICE)).getMemoryInfo(mi);
         if(LauncherPreferences.PREF_RAM_ALLOCATION > (mi.availMem/1048576L)) {
@@ -127,8 +128,6 @@ public final class Tools {
             }
         }
 
-        JMinecraftVersionList.Version versionInfo = Tools.getVersionInfo(minecraftProfile.lastVersionId);
-
         LauncherProfiles.update();
         String gamedirPath = Tools.getGameDirPath(minecraftProfile);
 
@@ -143,7 +142,7 @@ public final class Tools {
         OldVersionsUtils.selectOpenGlVersion(versionInfo);
 
 
-        String launchClassPath = generateLaunchClassPath(versionInfo, minecraftProfile.lastVersionId);
+        String launchClassPath = generateLaunchClassPath(versionInfo, versionInfo.id);
 
         List<String> javaArgList = new ArrayList<String>();
 
@@ -169,7 +168,7 @@ public final class Tools {
             }
             javaArgList.add("-Dlog4j.configurationFile=" + configFile);
         }
-        javaArgList.addAll(Arrays.asList(getMinecraftJVMArgs(minecraftProfile.lastVersionId, gamedirPath)));
+        javaArgList.addAll(Arrays.asList(getMinecraftJVMArgs(versionInfo.id, gamedirPath)));
         javaArgList.add("-cp");
         javaArgList.add(getLWJGL3ClassPath() + ":" + launchClassPath);
 

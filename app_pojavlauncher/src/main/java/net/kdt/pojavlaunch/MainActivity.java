@@ -334,7 +334,7 @@ public class MainActivity extends BaseActivity {
         JREUtils.redirectAndPrintJRELog();
 
         LauncherProfiles.update();
-        Tools.launchMinecraft(this, mProfile, minecraftProfile);
+        Tools.launchMinecraft(this, mProfile, minecraftProfile, mVersionInfo);
     }
 
     private void checkJavaArgsIsLaunchable(String jreVersion) throws Throwable {
