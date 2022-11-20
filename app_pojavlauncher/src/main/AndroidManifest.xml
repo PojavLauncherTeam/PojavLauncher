@@ -21,6 +21,8 @@
         android:process=":launcher"
         android:resizeableActivity="true"
         android:hasFragileUserData="true"
+        android:isGame="true"
+        android:appCategory="game"
         android:allowNativeHeapPointerTagging="false">
 
         <meta-data 
