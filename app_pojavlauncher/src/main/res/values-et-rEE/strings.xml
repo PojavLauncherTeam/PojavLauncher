@@ -134,6 +134,7 @@
     <string name="main_nocrash">Krahhi ei tuvastatud</string>
     <string name="main_nolog">Logi puudub.</string>
     <string name="auto_ram_title">Automaatne RAM</string>
+    <string name="autoram_info_msg">Muutmäluks seatud %d MB</string>
     <string name="mcl_setting_check_libraries">Kontrolli teeke pärast allalaadimist</string>
     <string name="mcl_setting_check_libraries_subtitle">See valik sunnib käivitajat teekide räsisid kontrollima, kui need on saadaval. Väldib katkiseid allalaadimisi.</string>
     <string name="mcl_disable_gestures">Keela viiped</string>
@@ -141,6 +142,7 @@
     <string name="mcl_setting_title_mousespeed">Kursori kiirus</string>
     <string name="customctrl_passthru">Kursori läbivus</string>
     <string name="customctrl_rounded">Ümardatud</string>
+    <string name="memory_warning_msg">Hetkel saadaolev muutmälu (%d) on madalam kui eraldatud muutmälu (%d), mis võib krahhe põhjustada. Kui mäng jookseb kokku, muuda mälueraldust.</string>
     <string name="mcl_memory_allocation">Mälueraldus</string>
     <string name="mcl_memory_allocation_subtitle">Juhib, kui palju mälu Minecraftile antakse</string>
 </resources>
