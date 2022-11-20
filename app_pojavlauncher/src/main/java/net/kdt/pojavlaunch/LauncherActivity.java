@@ -81,10 +81,10 @@ public class LauncherActivity extends BaseActivity {
 
     /* Listener for the auth method selection screen */
     private final ExtraListener<Boolean> mSelectAuthMethod = (key, value) -> {
-        if(isFragmentVisible(SelectAuthFragment.TAG)
-                || isFragmentVisible(LocalLoginFragment.TAG)
-                || isFragmentVisible(MicrosoftLoginFragment.TAG)
-        ) return false;
+        Fragment fragment = getSupportFragmentManager().findFragmentById(mFragmentView.getId());
+        // Allow starting the add account only from the main menu, should it be moved to fragment itself ?
+        if(!(fragment instanceof MainMenuFragment)) return false;
+
         Tools.swapFragment(this, SelectAuthFragment.class, SelectAuthFragment.TAG, true, null);
         return false;
     };
