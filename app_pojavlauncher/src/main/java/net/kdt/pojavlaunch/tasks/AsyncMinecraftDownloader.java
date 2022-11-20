@@ -1,8 +1,5 @@
 package net.kdt.pojavlaunch.tasks;
 
-import static net.kdt.pojavlaunch.PojavApplication.sExecutorService;
-import static net.kdt.pojavlaunch.utils.DownloadUtils.downloadFileMonitored;
-
 import android.app.Activity;
 import android.util.Log;
 
@@ -24,6 +21,7 @@ import net.kdt.pojavlaunch.utils.DownloadUtils;
 import net.kdt.pojavlaunch.value.DependentLibrary;
 import net.kdt.pojavlaunch.value.MinecraftClientInfo;
 import net.kdt.pojavlaunch.value.MinecraftLibraryArtifact;
+import net.kdt.pojavlaunch.utils.DownloadUtils;
 
 import org.apache.commons.io.IOUtils;
 
@@ -41,6 +39,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class AsyncMinecraftDownloader {
     public static final String MINECRAFT_RES = "https://resources.download.minecraft.net/";
+
+    public static long retryAfterMs = 1000;
+    public static int retryTimes = 5;
 
     /* Allows each downloading thread to have its own RECYCLED buffer */
     private final ConcurrentHashMap<Thread, byte[]> mThreadBuffers = new ConcurrentHashMap<>(5);
@@ -73,7 +74,7 @@ public class AsyncMinecraftDownloader {
                 if(!isManifestGood) {
                     ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT, 0, R.string.mcl_launch_downloading, versionName + ".json");
                     verJsonDir.delete();
-                    downloadFileMonitored(verInfo.url, verJsonDir, getByteBuffer(),
+                    downloadFileMonitoredWithRetry(verInfo.url, verJsonDir, getByteBuffer(),
                             (curr, max) -> ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT,
                                     (int) Math.max((float)curr/max*100,0), R.string.mcl_launch_downloading, versionName + ".json")
                     );
@@ -118,7 +119,7 @@ public class AsyncMinecraftDownloader {
                 if (!outLib.exists()) {
                     ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT, 0, R.string.mcl_launch_downloading, verInfo.logging.client.file.id);
                     JMinecraftVersionList.Version finalVerInfo = verInfo;
-                    downloadFileMonitored(
+                    downloadFileMonitoredWithRetry(
                             verInfo.logging.client.file.url, outLib, getByteBuffer(),
                             (curr, max) -> ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT,
                                     (int) Math.max((float)curr/max*100,0), R.string.mcl_launch_downloading, finalVerInfo.logging.client.file.id)
@@ -200,7 +201,7 @@ public class AsyncMinecraftDownloader {
     }
 
     public void verifyAndDownloadMainJar(String url, String sha1, File destination) throws Exception{
-        while(!destination.exists() || (destination.exists() && !Tools.compareSHA1(destination, sha1))) downloadFileMonitored(
+        while(!destination.exists() || (destination.exists() && !Tools.compareSHA1(destination, sha1))) downloadFileMonitoredWithRetry(
                 url,
                 destination, getByteBuffer(),
                 (curr, max) -> ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT,
@@ -275,7 +276,7 @@ public class AsyncMinecraftDownloader {
     public void downloadAsset(JAssetInfo asset, File objectsDir, AtomicInteger downloadCounter) throws IOException {
         String assetPath = asset.hash.substring(0, 2) + "/" + asset.hash;
         File outFile = new File(objectsDir, assetPath);
-        downloadFileMonitored(MINECRAFT_RES + assetPath, outFile, getByteBuffer(),
+        downloadFileMonitoredWithRetry(MINECRAFT_RES + assetPath, outFile, getByteBuffer(),
                 new Tools.DownloaderFeedback() {
                     int prevCurr;
                     @Override
@@ -289,7 +290,7 @@ public class AsyncMinecraftDownloader {
     public void downloadAssetMapped(JAssetInfo asset, String assetName, File resDir, AtomicInteger downloadCounter) throws IOException {
         String assetPath = asset.hash.substring(0, 2) + "/" + asset.hash;
         File outFile = new File(resDir,"/"+assetName);
-        downloadFileMonitored(MINECRAFT_RES + assetPath, outFile, getByteBuffer(),
+        downloadFileMonitoredWithRetry(MINECRAFT_RES + assetPath, outFile, getByteBuffer(),
                 new Tools.DownloaderFeedback() {
                     int prevCurr;
                     @Override
@@ -320,9 +321,9 @@ public class AsyncMinecraftDownloader {
             byte timesChecked=0;
             while(!isFileGood) {
                 timesChecked++;
-                if(timesChecked > 5) throw new RuntimeException("Library download failed after 5 retries");
+                if(timesChecked > retryTimes) throw new RuntimeException("Library download failed after 5 retries");
 
-                downloadFileMonitored(libPathURL, outLib, getByteBuffer(),
+                downloadFileMonitoredWithRetry(libPathURL, outLib, getByteBuffer(),
                         (curr, max) -> ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT,
                                 (int) Math.max((float)curr/max*100,0), R.string.mcl_launch_downloading, outLib.getName())
                 );
@@ -348,7 +349,7 @@ public class AsyncMinecraftDownloader {
     public JAssets downloadIndex(JMinecraftVersionList.Version version, File output) throws IOException {
         if (!output.exists()) {
             output.getParentFile().mkdirs();
-            DownloadUtils.downloadFile(version.assetIndex != null
+            downloadFileWithRetry(version.assetIndex != null
                     ? version.assetIndex.url
                     : "https://s3.amazonaws.com/Minecraft.Download/indexes/" + version.assets + ".json", output);
         }
@@ -385,9 +386,45 @@ public class AsyncMinecraftDownloader {
         return buffer;
     }
 
-
-
-
+    private void downloadFileWithRetry(String url, File out) {
+		int retryTimes = this.retryTimes;
+		while(retryTimes > 0) {
+			try {
+				DownloadUtils.downloadFile(url, out);
+				return;
+			} catch (IOException e) {
+				--retryTimes;
+				Log.i("Downloader", "download " + url + "failed. Retrying.");
+				try {
+					Thread.sleep(retryAfterMs);
+				} catch (InterruptedException e0) {}
+			}
+		}
+		throw new RuntimeException("Download " + url + "failed because retry times > " + this.retryTimes);
+	}
+	
+	private void downloadFileMonitoredWithRetry(String urlInput, String nameOutput, @Nullable byte[] buffer,
+                                             Tools.DownloaderFeedback monitor) {
+                 downloadFileMonitoredWithRetry(urlInput, new File(nameOutput), buffer, monitor);
+        }
+	
+	private void downloadFileMonitoredWithRetry(String urlInput,File outputFile, @Nullable byte[] buffer,
+												Tools.DownloaderFeedback monitor) {
+		int retryTimes = this.retryTimes;
+		while(retryTimes > 0) {
+			try {
+				DownloadUtils.downloadFileMonitored(urlInput, outputFile, buffer, monitor);
+				return;
+			} catch (IOException e) {
+				--retryTimes;
+				Log.i("Downloader", "download " + urlInput + "failed. Retrying.");
+				try {
+					Thread.sleep(retryAfterMs);
+				} catch (InterruptedException e0) {}
+			}
+		}
+		throw new RuntimeException("Download " + urlInput + "failed because retry times > " + this.retryTimes);
+	}	
 
     public interface DoneListener{
         void onDownloadDone();
