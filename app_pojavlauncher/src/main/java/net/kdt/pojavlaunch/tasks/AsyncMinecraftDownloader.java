@@ -1,5 +1,7 @@
 package net.kdt.pojavlaunch.tasks;
 
+import static net.kdt.pojavlaunch.PojavApplication.sExecutorService;
+
 import android.app.Activity;
 import android.util.Log;
 
@@ -403,12 +405,12 @@ public class AsyncMinecraftDownloader {
 		throw new RuntimeException("Download " + url + "failed because retry times > " + this.retryTimes);
 	}
 	
-	private void downloadFileMonitoredWithRetry(String urlInput, String nameOutput, @Nullable byte[] buffer,
+	private void downloadFileMonitoredWithRetry(String urlInput, String nameOutput, byte[] buffer,
                                              Tools.DownloaderFeedback monitor) {
                  downloadFileMonitoredWithRetry(urlInput, new File(nameOutput), buffer, monitor);
         }
 	
-	private void downloadFileMonitoredWithRetry(String urlInput,File outputFile, @Nullable byte[] buffer,
+	private void downloadFileMonitoredWithRetry(String urlInput,File outputFile, byte[] buffer,
 												Tools.DownloaderFeedback monitor) {
 		int retryTimes = this.retryTimes;
 		while(retryTimes > 0) {
