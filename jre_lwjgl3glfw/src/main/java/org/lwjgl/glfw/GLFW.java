@@ -21,6 +21,8 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import java.util.*;
 
+import sun.misc.Unsafe;
+
 public class GLFW
 {
     static FloatBuffer joystickData = (FloatBuffer)FloatBuffer.allocate(8).flip();
@@ -496,7 +498,7 @@ public class GLFW
     private static ArrayMap<Long, GLFWWindowProperties> mGLFWWindowMap;
 
     public static boolean mGLFWIsGrabbing, mGLFWIsInputReady, mGLFWIsUseStackQueue = false;
-    public static final byte[] keyDownBuffer = new byte[317];
+    public static final ByteBuffer keyDownBuffer = ByteBuffer.allocateDirect(317);
     private static final String PROP_WINDOW_WIDTH = "glfwstub.windowWidth";
     private static final String PROP_WINDOW_HEIGHT= "glfwstub.windowHeight";
     public static long mainContext = 0;
@@ -612,7 +614,9 @@ public class GLFW
         MakeContextCurrent = apiGetFunctionAddress(GLFW, "pojavMakeCurrent"),
         Terminate = apiGetFunctionAddress(GLFW, "pojavTerminate"),
         SwapBuffers = apiGetFunctionAddress(GLFW, "pojavSwapBuffers"),
-        SwapInterval = apiGetFunctionAddress(GLFW, "pojavSwapInterval");
+        SwapInterval = apiGetFunctionAddress(GLFW, "pojavSwapInterval"),
+        PumpEvents = apiGetFunctionAddress(GLFW, "pojavPumpEvents"),
+        RewindEvents = apiGetFunctionAddress(GLFW, "pojavRewindEvents");
     }
 
     public static SharedLibrary getLibrary() {
@@ -1057,69 +1061,8 @@ public class GLFW
             CallbackBridge.PENDING_EVENT_READY = true;
         }
 
-        // Indirect event
-        while (CallbackBridge.PENDING_EVENT_LIST.size() > 0) {
-            Integer[] dataArr = CallbackBridge.PENDING_EVENT_LIST.remove(0);
-            for (Long ptr : mGLFWWindowMap.keySet()) {
-                try {
-                    switch (dataArr[0]) {
-                        case CallbackBridge.EVENT_TYPE_CHAR:
-                            if (mGLFWCharCallback != null) {
-                                mGLFWCharCallback.invoke(ptr, dataArr[1]);
-                            }
-                            break;
-                        case CallbackBridge.EVENT_TYPE_CHAR_MODS:
-                            if (mGLFWCharModsCallback != null) {
-                                mGLFWCharModsCallback.invoke(ptr, dataArr[1], dataArr[2]);
-                            }
-                            break;
-                        case CallbackBridge.EVENT_TYPE_CURSOR_ENTER:
-                            if (mGLFWCursorEnterCallback != null) {
-                                mGLFWCursorEnterCallback.invoke(ptr, dataArr[1] == 1);
-                            }
-                            break;
-                        case CallbackBridge.EVENT_TYPE_KEY:
-                            if (mGLFWKeyCallback != null) {
-                                keyDownBuffer[Math.max(0, dataArr[1]-31)]=(byte)(int)dataArr[3];
-                                mGLFWKeyCallback.invoke(ptr, dataArr[1], dataArr[2], dataArr[3], dataArr[4]);
-                            }
-                            break;
-                        case CallbackBridge.EVENT_TYPE_MOUSE_BUTTON:
-                            if (mGLFWMouseButtonCallback != null) {
-                                mGLFWMouseButtonCallback.invoke(ptr, dataArr[1], dataArr[2], dataArr[3]);
-                            }
-                            break;
-                        case CallbackBridge.EVENT_TYPE_SCROLL:
-                            if (mGLFWScrollCallback != null) {
-                                mGLFWScrollCallback.invoke(ptr, dataArr[1], dataArr[2]);
-                            }
-                            break;
-                        case CallbackBridge.EVENT_TYPE_FRAMEBUFFER_SIZE:
-                        case CallbackBridge.EVENT_TYPE_WINDOW_SIZE:
-                            try {
-                                internalChangeMonitorSize(dataArr[1], dataArr[2]);
-                                glfwSetWindowSize(ptr, mGLFWWindowWidth, mGLFWWindowHeight);
-                                if (dataArr[0] == CallbackBridge.EVENT_TYPE_FRAMEBUFFER_SIZE && mGLFWFramebufferSizeCallback != null) {
-                                    mGLFWFramebufferSizeCallback.invoke(ptr, mGLFWWindowWidth, mGLFWWindowHeight);
-                                } else if (dataArr[0] == CallbackBridge.EVENT_TYPE_WINDOW_SIZE && mGLFWWindowSizeCallback != null) {
-                                    mGLFWWindowSizeCallback.invoke(ptr, mGLFWWindowWidth, mGLFWWindowHeight);
-                                }
-                            } catch (Throwable th) {
-                                // Some Minecraft versions cause a NPE when setting size, so we will have to ignore them to make game alive
-                                th.printStackTrace();
-                            }
-                            break;
-                        default:
-                            System.err.println("GLFWEvent: unknown callback type " + dataArr[0]);
-                            break;
-                    }
-                }catch (Throwable throwable){
-                    throwable.printStackTrace();
-                }
-
-            }
-        }
-
+        for (Long ptr : mGLFWWindowMap.keySet()) callJV(ptr, Functions.PumpEvents);
+        callV(Functions.RewindEvents);
         if ((mGLFWCursorX != mGLFWCursorLastX || mGLFWCursorY != mGLFWCursorLastY) && mGLFWCursorPosCallback != null) {
             mGLFWCursorLastX = mGLFWCursorX;
             mGLFWCursorLastY = mGLFWCursorY;
@@ -1135,6 +1078,15 @@ public class GLFW
                 mGLFWCursorPosCallback.invoke(ptr, mGLFWCursorX, mGLFWCursorY);
             }
             // System.out.println("CursorPos updated to x=" + mGLFWCursorX + ",y=" + mGLFWCursorY);
+        }
+    }
+
+    public static void internalWindowSizeChanged(long window, int w, int h) {
+        try {
+            internalChangeMonitorSize(w, h);
+            glfwSetWindowSize(window, mGLFWWindowWidth, mGLFWWindowHeight);
+        }catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -1181,7 +1133,7 @@ public class GLFW
     }
 
     public static int glfwGetKey(@NativeType("GLFWwindow *") long window, int key) {
-        return keyDownBuffer[Math.max(0, key-31)];
+        return keyDownBuffer.get(Math.max(0, key-31));
     }
 
     public static int glfwGetMouseButton(@NativeType("GLFWwindow *") long window, int button) {
