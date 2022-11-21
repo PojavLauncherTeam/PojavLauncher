@@ -50,6 +50,10 @@ public class LauncherPreferences {
     public static boolean PREF_ARC_CAPES = false;
     public static boolean PREF_USE_ALTERNATE_SURFACE = true;
     public static int PREF_SCALE_FACTOR = 100;
+	
+	//download
+	public static int PREF_DOWNLOAD_RETRY_TIMES = 5;
+	public static int PREF_DOWNLOAD_RETRY_AFTER_MS = 1000;
 
 
     public static void loadPreferences(Context ctx) {
@@ -84,6 +88,8 @@ public class LauncherPreferences {
         PREF_USE_ALTERNATE_SURFACE = DEFAULT_PREF.getBoolean("alternate_surface", false);
         PREF_SCALE_FACTOR = DEFAULT_PREF.getInt("resolutionRatio", 100);
 
+		PREF_DOWNLOAD_RETRY_TIMES = DEFAULT_PREF.getInt("redownloadTimes", 5);
+		PREF_DOWNLOAD_RETRY_AFTER_MS = DEFAULT_PREF.getInt("redownloadAfterMs", 1000);
 /*
         if (PREF_CUSTOM_JAVA_ARGS.isEmpty()) {
             String DEFAULT_JAVA_ARGS = "";

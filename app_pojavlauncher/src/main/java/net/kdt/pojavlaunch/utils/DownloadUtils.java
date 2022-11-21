@@ -1,14 +1,22 @@
 package net.kdt.pojavlaunch.utils;
 
-import android.util.*;
-
+import android.util.Log;
 import androidx.annotation.Nullable;
-
-import java.io.*;
-import java.net.*;
-import java.nio.charset.*;
-import net.kdt.pojavlaunch.*;
-import org.apache.commons.io.*;
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.Charset;
+import java.util.Arrays;
+import net.kdt.pojavlaunch.Logger;
+import net.kdt.pojavlaunch.Tools;
+import org.apache.commons.io.IOUtils;
+import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 
 public class DownloadUtils {
     public static final String USER_AGENT = Tools.APP_NAME;
@@ -88,11 +96,34 @@ public class DownloadUtils {
             throw th3;
         }
     }
+	
+	public static void downloadFileWithRetry(String url, File out, int retryTimes, int retryAfter) {
+		while(retryTimes > 0) {
+			try {
+				DownloadUtils.downloadFile(url, out);
+				return;
+			} catch (IOException e) {
+				--retryTimes;
+				Log.i("Downloader", "download " + url + "failed. Retrying.");
+				if (out.exists())
+				    out.delete();
+				try {
+					Thread.sleep(retryAfter);
+				} catch (InterruptedException e0) {}
+			}
+		}
+		throw new RuntimeException("Download " + url + "failed because retry times > " + retryTimes);
+	}
+	
+	public static void downloadFileWithRetry(String url, File out) {
+		downloadFileWithRetry(url, out, LauncherPreferences.PREF_DOWNLOAD_RETRY_TIMES, LauncherPreferences.PREF_DOWNLOAD_RETRY_AFTER_MS);
+	}
 
     public static void downloadFileMonitored(String urlInput, String nameOutput, @Nullable byte[] buffer,
                                              Tools.DownloaderFeedback monitor) throws IOException {
         downloadFileMonitored(urlInput, new File(nameOutput), buffer, monitor);
     }
+	
     public static void downloadFileMonitored(String urlInput,File outputFile, @Nullable byte[] buffer,
                                              Tools.DownloaderFeedback monitor) throws IOException {
         if (!outputFile.exists()) {
@@ -116,6 +147,37 @@ public class DownloadUtils {
         fos.close();
         conn.disconnect();
     }
+
+	public static void downloadFileMonitoredWithRetry(String urlInput, String nameOutput, @Nullable byte[] buffer,
+												Tools.DownloaderFeedback monitor) {
+        downloadFileMonitoredWithRetry(urlInput, new File(nameOutput), buffer, monitor, 
+			LauncherPreferences.PREF_DOWNLOAD_RETRY_TIMES, LauncherPreferences.PREF_DOWNLOAD_RETRY_AFTER_MS);
+    }
+	
+	public static void downloadFileMonitoredWithRetry(String urlInput, File outputFile, @Nullable byte[] buffer,
+		Tools.DownloaderFeedback monitor) {
+			downloadFileMonitoredWithRetry(urlInput, outputFile, buffer, monitor, 
+			    LauncherPreferences.PREF_DOWNLOAD_RETRY_TIMES, LauncherPreferences.PREF_DOWNLOAD_RETRY_AFTER_MS);
+	}
+
+	public static void downloadFileMonitoredWithRetry(String urlInput,File outputFile, @Nullable byte[] buffer,
+												Tools.DownloaderFeedback monitor, int retryTimes, int retryAfterMs) {
+		while(retryTimes > 0) {
+			try {
+				DownloadUtils.downloadFileMonitored(urlInput, outputFile, buffer, monitor);
+				return;
+			} catch (IOException e) {
+				--retryTimes;
+				Log.i("Downloader", "download " + urlInput + "failed. Retrying.");
+				if (buffer != null)
+				    Arrays.fill(buffer, (byte) 0);
+				try {
+					Thread.sleep(retryAfterMs);
+				} catch (InterruptedException e0) {}
+			}
+		}
+		throw new RuntimeException("Download " + urlInput + "failed because retry times > " + retryTimes);
+	}	
 
     public static void downloadFileMonitoredWithHeaders(String urlInput,File outputFile, @Nullable byte[] buffer,
                                                         Tools.DownloaderFeedback monitor, String userAgent, String cookies) throws IOException {

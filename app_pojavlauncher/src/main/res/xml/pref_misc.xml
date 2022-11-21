@@ -11,6 +11,25 @@
             android:key="checkLibraries"
             android:summary="@string/mcl_setting_check_libraries_subtitle"
             android:title="@string/mcl_setting_check_libraries" />
+		
+		<net.kdt.pojavlaunch.prefs.CustomSeekBarPreference
+			android:key="redownloadTimes"
+            android:dialogTitle="@string/mcl_setting_title_redownload_times"
+			android:summary="@string/mcl_setting_subtitle_redownload_times"
+            android:title="@string/mcl_setting_title_redownload_times"
+            app2:selectable="false"
+			app2:showSeekBarValue="true"
+            app2:seekBarIncrement="1"/>
+		
+		<net.kdt.pojavlaunch.prefs.CustomSeekBarPreference
+			android:key="redownloadAfterMs"
+            android:dialogTitle="@string/mcl_setting_title_redownload_after"
+			android:summary="@string/mcl_setting_subtitle_redownload_after"
+            android:title="@string/mcl_setting_title_redownload_after"
+			app2:showSeekBarValue="true"
+            app2:selectable="false"
+            app2:seekBarIncrement="100"/>
+		
         <SwitchPreference
             android:defaultValue="false"
             android:key="arc_capes"

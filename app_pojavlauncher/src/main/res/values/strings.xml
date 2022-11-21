@@ -111,7 +111,11 @@
     <string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Old-beta</string>
     <string name="mcl_version_clone">Clone</string>
-
+	<string name="mcl_setting_title_redownload_times">Redownload limit</string>
+	<string name="mcl_setting_subtitle_redownload_times">Try downloading again after the download fails</string>
+	<string name="mcl_setting_title_redownload_after">Redownload after</string>
+    <string name="mcl_setting_subtitle_redownload_after">In millionseconds</string>
+	
     <!-- Global strings -->
     <string name="global_edit">Edit</string>
     <string name="global_error">Error</string>

@@ -1,7 +1,7 @@
 package net.kdt.pojavlaunch.tasks;
 
 import static net.kdt.pojavlaunch.PojavApplication.sExecutorService;
-import static net.kdt.pojavlaunch.utils.DownloadUtils.downloadFileMonitored;
+import static net.kdt.pojavlaunch.utils.DownloadUtils.downloadFileMonitoredWithRetry;
 
 import android.app.Activity;
 import android.util.Log;
@@ -73,7 +73,7 @@ public class AsyncMinecraftDownloader {
                 if(!isManifestGood) {
                     ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT, 0, R.string.mcl_launch_downloading, versionName + ".json");
                     verJsonDir.delete();
-                    downloadFileMonitored(verInfo.url, verJsonDir, getByteBuffer(),
+                    downloadFileMonitoredWithRetry(verInfo.url, verJsonDir, getByteBuffer(),
                             (curr, max) -> ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT,
                                     (int) Math.max((float)curr/max*100,0), R.string.mcl_launch_downloading, versionName + ".json")
                     );
@@ -118,7 +118,7 @@ public class AsyncMinecraftDownloader {
                 if (!outLib.exists()) {
                     ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT, 0, R.string.mcl_launch_downloading, verInfo.logging.client.file.id);
                     JMinecraftVersionList.Version finalVerInfo = verInfo;
-                    downloadFileMonitored(
+                    downloadFileMonitoredWithRetry(
                             verInfo.logging.client.file.url, outLib, getByteBuffer(),
                             (curr, max) -> ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT,
                                     (int) Math.max((float)curr/max*100,0), R.string.mcl_launch_downloading, finalVerInfo.logging.client.file.id)
@@ -200,7 +200,7 @@ public class AsyncMinecraftDownloader {
     }
 
     public void verifyAndDownloadMainJar(String url, String sha1, File destination) throws Exception{
-        while(!destination.exists() || (destination.exists() && !Tools.compareSHA1(destination, sha1))) downloadFileMonitored(
+        while(!destination.exists() || (destination.exists() && !Tools.compareSHA1(destination, sha1))) downloadFileMonitoredWithRetry(
                 url,
                 destination, getByteBuffer(),
                 (curr, max) -> ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT,
@@ -275,7 +275,7 @@ public class AsyncMinecraftDownloader {
     public void downloadAsset(JAssetInfo asset, File objectsDir, AtomicInteger downloadCounter) throws IOException {
         String assetPath = asset.hash.substring(0, 2) + "/" + asset.hash;
         File outFile = new File(objectsDir, assetPath);
-        downloadFileMonitored(MINECRAFT_RES + assetPath, outFile, getByteBuffer(),
+        downloadFileMonitoredWithRetry(MINECRAFT_RES + assetPath, outFile, getByteBuffer(),
                 new Tools.DownloaderFeedback() {
                     int prevCurr;
                     @Override
@@ -289,7 +289,7 @@ public class AsyncMinecraftDownloader {
     public void downloadAssetMapped(JAssetInfo asset, String assetName, File resDir, AtomicInteger downloadCounter) throws IOException {
         String assetPath = asset.hash.substring(0, 2) + "/" + asset.hash;
         File outFile = new File(resDir,"/"+assetName);
-        downloadFileMonitored(MINECRAFT_RES + assetPath, outFile, getByteBuffer(),
+        downloadFileMonitoredWithRetry(MINECRAFT_RES + assetPath, outFile, getByteBuffer(),
                 new Tools.DownloaderFeedback() {
                     int prevCurr;
                     @Override
@@ -322,7 +322,7 @@ public class AsyncMinecraftDownloader {
                 timesChecked++;
                 if(timesChecked > 5) throw new RuntimeException("Library download failed after 5 retries");
 
-                downloadFileMonitored(libPathURL, outLib, getByteBuffer(),
+                downloadFileMonitoredWithRetry(libPathURL, outLib, getByteBuffer(),
                         (curr, max) -> ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT,
                                 (int) Math.max((float)curr/max*100,0), R.string.mcl_launch_downloading, outLib.getName())
                 );
