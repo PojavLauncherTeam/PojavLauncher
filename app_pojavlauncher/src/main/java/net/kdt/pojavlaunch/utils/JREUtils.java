@@ -333,7 +333,7 @@ public class JREUtils {
      * @return A list filled with args.
      */
     public static List<String> getJavaArgs(Context ctx) {
-        List<String> userArguments = parseJavaArguments(LauncherPreferences.PREF_CUSTOM_JAVA_ARGS);
+        List<String> userArguments = new ArrayList<String>(Arrays.asList(LauncherPreferences.PREF_CUSTOM_JAVA_ARGS.split(" ")));
         String resolvFile;
         resolvFile = new File(Tools.DIR_DATA,"resolv.conf").getAbsolutePath();
 
