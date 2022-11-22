@@ -9,7 +9,7 @@
 
         <androidx.preference.SwitchPreferenceCompat
             android:defaultValue="false"
-            android:icon="@drawable/ic_setting_disable_gestures"
+            android:icon="@drawable/ic_setting_gesture_disable"
             android:key="disableGestures"
             android:summary="@string/mcl_disable_gestures_subtitle"
             android:title="@string/mcl_disable_gestures" />
@@ -21,7 +21,8 @@
             app2:showSeekBarValue="true"
             app2:selectable="false"
             app2:seekBarIncrement="10"
-            app2:icon="@drawable/ic_setting_tap_length" />
+            android:icon="@drawable/ic_setting_gesture_time"
+            />
 
     </PreferenceCategory>
 
@@ -35,9 +36,8 @@
             app2:showSeekBarValue="true"
             app2:selectable="false"
             app2:seekBarIncrement="5"
-            app2:icon="@drawable/ic_setting_btn_scale"/>
-
-        <net.kdt.pojavlaunch.prefs.ControlOffsetPreference/>
+            android:icon="@drawable/ic_setting_control_scale"
+            />
 
     </PreferenceCategory>
 
@@ -48,15 +48,18 @@
             android:key="mousescale"
             android:summary="@string/mcl_setting_subtitle_mousescale"
             android:title="@string/mcl_setting_title_mousescale"
-            app2:icon="@drawable/ic_setting_mouse_pointer"
+
             app2:selectable="false"
             app2:seekBarIncrement="5"
-            app2:showSeekBarValue="true" />
+            app2:showSeekBarValue="true"
+            android:icon="@drawable/ic_setting_pointer_scale"
+            />
+
         <net.kdt.pojavlaunch.prefs.CustomSeekBarPreference
             android:key="mousespeed"
             android:summary="@string/mcl_setting_subtitle_mousespeed"
             android:title="@string/mcl_setting_title_mousespeed"
-            app2:icon="@drawable/ic_setting_mouse_pointer_spd"
+            android:icon="@drawable/ic_setting_mouse_speed"
             app2:selectable="false"
             app2:seekBarIncrement="5"
             app2:showSeekBarValue="true" />

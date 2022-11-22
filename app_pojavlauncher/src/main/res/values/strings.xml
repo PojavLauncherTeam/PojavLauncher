@@ -205,6 +205,7 @@
     <string name="customctrl_add_subbutton_message">Sub-button n°%d has been added !</string>
 
     <string name="customctrl_selectdefault">Select default Control json</string>
+    <string name="customctrl_export">Export control</string>
 
 
     <string name="main_install_jar_file">Install .jar</string>
@@ -280,6 +281,8 @@
     <string name="preference_experimental_description">Use things there with consideration, no support.</string>
     <string name="preference_sustained_performance_title">Enable sustained performance mode</string>
     <string name="preference_sustained_performance_description">Limit thermal throttling by limiting peak performance</string>
+    <string name="preference_force_english_title">Force language to english</string>
+    <string name="preference_force_english_description">Allows you to see original strings, as intended by developers. Requires a restart</string>
 
     <string name="preference_back_title">Back to the last screen</string>
     <string name="gles_hack_title">GL4ES Shrink hack</string>
@@ -299,4 +302,21 @@
     <string name="arc_capes_desc">Enables capes from Cosmetica (previously Arc). For more information please visit https://cosmetica.cc. Requires OptiFine.</string>
     <string name="migrated_profile_str">%s version configuration</string>
     <string name="color_default_hex" translatable="false">FFFF0000</string>
+    <string name="notif_channel_name">General</string>
+    <string name="notif_channel_id" translatable="false">channel_id</string>
+    <string name="lazy_service_default_title">Pojav Foreground Service</string>
+    <string name="lazy_service_default_description">The service is used to perform long running operations</string>
+    <string name="mcl_setting_veroption_installed">Installed</string>
+    <string name="use_global_default">(Use global default)</string>
+    <string name="default_control">Default control</string>
+    <string name="progresslayout_tasks_in_progress">%d tasks in progress</string>
+    <string name="notification_terminate">Terminate</string>
+    <string name="notification_game_runs">The game is running!</string>
+    <string name="folder_dialog_create">Create</string>
+    <string name="folder_dialog_insert_name">Insert folder name</string>
+    <string name="main_login_done">Login done</string>
+    <string name="main_add_account">Add account</string>
+    <string name="tasks_ongoing">Tasks are in progress, please wait</string>
+    <string name="no_saved_accounts">No saved accounts</string>
+    <string name="downloading_versions">Downloading version list…</string>
 </resources>

@@ -7,15 +7,28 @@
 	android:layout_alignParentRight="true"
 	android:id="@+id/customctrl_drawerlayout">
 
-	<RelativeLayout
+
+	<androidx.constraintlayout.widget.ConstraintLayout
 		android:layout_height="wrap_content"
 		android:layout_width="wrap_content">
 
+
+		<net.kdt.pojavlaunch.customcontrols.handleview.DrawerPullButton
+			android:id="@+id/drawer_button"
+			android:layout_width="32dp"
+			android:layout_height="16dp"
+			android:elevation="10dp"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent" />
+
 		<TextView
-			android:text="@string/hint_control_mapping"
-			android:layout_height="wrap_content"
 			android:layout_width="wrap_content"
-			android:layout_alignParentRight="true"/>
+			android:layout_height="wrap_content"
+			android:layout_alignParentRight="true"
+			android:text="@string/hint_control_mapping"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintTop_toTopOf="parent" />
 
 		<net.kdt.pojavlaunch.customcontrols.ControlLayout
 			android:id="@+id/customctrl_controllayout"
@@ -24,7 +37,7 @@
 
 		</net.kdt.pojavlaunch.customcontrols.ControlLayout>
 
-	</RelativeLayout>
+	</androidx.constraintlayout.widget.ConstraintLayout>
 
 	<ListView
 		android:id="@+id/customctrl_navigation_view"

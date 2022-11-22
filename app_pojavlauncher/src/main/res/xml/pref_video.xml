@@ -11,6 +11,7 @@
             android:defaultValue="opengles2"
             android:entries="@array/renderer"
             android:entryValues="@array/renderer_values"
+            android:icon="@drawable/ic_setting_engine"
             app2:useSimpleSummaryProvider="true"/>
 
         <androidx.preference.SwitchPreferenceCompat
@@ -18,7 +19,8 @@
             android:key="ignoreNotch"
             android:summary="@string/mcl_setting_subtitle_ignore_notch"
             android:title="@string/mcl_setting_title_ignore_notch"
-            app2:icon="@drawable/ic_setting_ignore_notch" />
+            android:icon="@drawable/ic_setting_hide_notch"
+            />
 
         <net.kdt.pojavlaunch.prefs.CustomSeekBarPreference
             android:key="resolutionRatio"
@@ -27,13 +29,21 @@
             app2:showSeekBarValue="true"
             app2:selectable="false"
             app2:seekBarIncrement="5"
-            app2:icon="@drawable/ic_setting_resolution_scaler"/>
+            android:icon="@drawable/ic_setting_screen_resolution"
+            />
+
+        <SwitchPreference
+            android:title="@string/preference_sustained_performance_title"
+            android:summary="@string/preference_sustained_performance_description"
+            android:key="sustainedPerformance"
+            android:defaultValue="false"
+            />
 
         <androidx.preference.SwitchPreferenceCompat
             android:defaultValue="false"
             android:key="alternate_surface"
             android:summary="@string/mcl_setting_subtitle_use_surface_view"
             android:title="@string/mcl_setting_title_use_surface_view"
-             />
+            />
     </PreferenceCategory>
 </PreferenceScreen>

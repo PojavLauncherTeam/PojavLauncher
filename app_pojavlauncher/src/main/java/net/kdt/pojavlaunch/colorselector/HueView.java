@@ -21,11 +21,11 @@ public class HueView extends View {
     private Bitmap mGamma;
     private HueSelectionListener mHueSelectionListener;
     private float mSelectionHue;
-    private float mWidthHueRatio;
-    private float mHueWidthRatio;
+    private float mHeightHueRatio;
+    private float mHueHeightRatio;
     private float mWidth;
     private float mHeight;
-    private float mHeightThird;
+    private float mWidthThird;
     public HueView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         blackPaint.setColor(Color.BLACK);
@@ -43,7 +43,7 @@ public class HueView extends View {
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        mSelectionHue = event.getX() * mWidthHueRatio;
+        mSelectionHue = event.getY() * mHeightHueRatio;
         invalidate();
         if(mHueSelectionListener != null) mHueSelectionListener.onHueSelected(mSelectionHue);
         return true;
@@ -52,32 +52,32 @@ public class HueView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         canvas.drawBitmap(mGamma, 0, 0 ,null);
-        float linePos = mSelectionHue * mHueWidthRatio;
-        canvas.drawLine(linePos, 0 ,linePos, mHeightThird, blackPaint);
-        canvas.drawLine(linePos, mHeightThird * 2 ,linePos, mHeight, blackPaint);
+        float linePos = mSelectionHue * mHueHeightRatio;
+        canvas.drawLine(0, linePos , mWidthThird, linePos, blackPaint);
+        canvas.drawLine( mWidthThird * 2 ,linePos, mWidth, linePos, blackPaint);
     }
 
     @Override
     protected void onSizeChanged(int w, int h, int old_w, int old_h) {
         mWidth = w;
         mHeight = h;
-        mHeightThird = mHeight / 3;
+        mWidthThird = mWidth / 3;
         regenerateGammaBitmap();
     }
 
     protected void regenerateGammaBitmap() {
         if(mGamma != null)
-           mGamma.recycle();
+            mGamma.recycle();
         mGamma = Bitmap.createBitmap(getWidth(), getHeight(), Bitmap.Config.ARGB_8888);
         Paint paint = new Paint();
         Canvas canvas = new Canvas(mGamma);
-        mWidthHueRatio = 360/ mWidth;
-        mHueWidthRatio = mWidth / 360;
+        mHeightHueRatio = 360/ mHeight;
+        mHueHeightRatio = mHeight / 360;
         float[] hsvFiller = new float[] {0, 1, 1};
-        for(float i = 0; i < mWidth; i++) {
-            hsvFiller[0] = i * mWidthHueRatio;
+        for(float i = 0; i < mHeight; i++) {
+            hsvFiller[0] = i * mHeightHueRatio;
             paint.setColor(Color.HSVToColor(hsvFiller));
-            canvas.drawLine(i,0,i, mHeight,paint);
+            canvas.drawLine(0,i,mWidth, i,paint);
         }
     }
 }

@@ -66,9 +66,21 @@ public final class ExtraCore {
         return getInstance().mValueMap.get(key);
     }
 
+    /** @return The value behind the key, or the default value */
+    public static Object getValue(String key, Object defaultValue){
+        Object value = getInstance().mValueMap.get(key);
+        return value != null ? value : defaultValue;
+    }
+
     /** Remove the key and its value from the valueMap */
     public static void removeValue(String key){
         getInstance().mValueMap.remove(key);
+    }
+
+    public static Object consumeValue(String key){
+        Object value = getInstance().mValueMap.get(key);
+        getInstance().mValueMap.remove(key);
+        return value;
     }
 
     /** Remove all values */

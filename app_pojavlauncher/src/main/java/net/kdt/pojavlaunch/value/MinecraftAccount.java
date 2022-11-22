@@ -23,6 +23,7 @@ public class MinecraftAccount {
     public String selectedVersion = "1.7.10";
     public boolean isMicrosoft = false;
     public String msaRefreshToken = "0";
+    public String xuid;
     public String skinFaceBase64;
     public long expiresAt;
     
@@ -38,6 +39,10 @@ public class MinecraftAccount {
             // Simply ignore updating skin face
             Log.w("SkinLoader", "Could not update skin face", e);
         }
+    }
+
+    public boolean isLocal(){
+        return accessToken.equals("0");
     }
     
     public void updateSkinFace() {
@@ -91,7 +96,7 @@ public class MinecraftAccount {
 
     public Bitmap getSkinFace(){
         if(skinFaceBase64 == null){
-            return Bitmap.createBitmap(1,1, Bitmap.Config.ARGB_8888);
+            return null;
         }
         byte[] faceIconBytes = Base64.decode(skinFaceBase64, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(faceIconBytes, 0, faceIconBytes.length);

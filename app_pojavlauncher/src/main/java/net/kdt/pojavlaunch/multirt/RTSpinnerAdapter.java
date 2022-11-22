@@ -27,14 +27,10 @@ public class RTSpinnerAdapter implements SpinnerAdapter {
     }
 
     @Override
-    public void registerDataSetObserver(DataSetObserver observer) {
-        //STUB
-    }
+    public void registerDataSetObserver(DataSetObserver observer) {}
 
     @Override
-    public void unregisterDataSetObserver(DataSetObserver observer) {
-        //STUB
-    }
+    public void unregisterDataSetObserver(DataSetObserver observer) {}
 
     @Override
     public int getCount() {
@@ -61,22 +57,17 @@ public class RTSpinnerAdapter implements SpinnerAdapter {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View view = convertView != null?
                 convertView:
-                LayoutInflater.from(mContext).inflate(R.layout.item_multirt_runtime,parent,false);
+                LayoutInflater.from(mContext).inflate(android.R.layout.simple_list_item_1, parent,false);
 
         Runtime runtime = mRuntimes.get(position);
-
-        final TextView javaVersionView = view.findViewById(R.id.multirt_view_java_version);
-        final TextView fullJavaVersionView = view.findViewById(R.id.multirt_view_java_version_full);
-        view.findViewById(R.id.multirt_view_removebtn).setVisibility(View.GONE);
-        view.findViewById(R.id.multirt_view_setdefaultbtn).setVisibility(View.GONE);
-
-        if(runtime.versionString != null) {
-            javaVersionView.setText(mContext.getString(R.string.multirt_java_ver, runtime.name, runtime.javaVersion));
-            fullJavaVersionView.setText(runtime.versionString);
+        if(position == mRuntimes.size() - 1 ){
+            ((TextView) view).setText(runtime.name);
         }else{
-            javaVersionView.setText(runtime.name);
-            fullJavaVersionView.setText(R.string.multirt_runtime_corrupt);
+            ((TextView) view).setText(String.format("%s - %s",
+                    runtime.name.replace(".tar.xz", ""),
+                    runtime.versionString == null ? view.getResources().getString(R.string.multirt_runtime_corrupt) : runtime.versionString));
         }
+
         return view;
     }
 

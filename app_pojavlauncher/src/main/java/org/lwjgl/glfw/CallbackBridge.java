@@ -2,12 +2,17 @@ package org.lwjgl.glfw;
 
 import net.kdt.pojavlaunch.*;
 import android.content.*;
+import android.telecom.Call;
 import android.view.Choreographer;
+
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 
 public class CallbackBridge {
     public static Choreographer sChoreographer = Choreographer.getInstance();
     private static boolean isGrabbing = false;
-    private static long lastGrabTime = System.currentTimeMillis();
+    private static final ArrayList<GrabListener> grabListeners = new ArrayList<>();
+
     public static final int ANDROID_TYPE_GRAB_STATE = 0;
     
     public static final int CLIPBOARD_COPY = 2000;
@@ -118,11 +123,6 @@ public class CallbackBridge {
 
     public static boolean isGrabbing() {
         // Avoid going through the JNI each time.
-        long currentTime = System.currentTimeMillis();
-        if (currentTime - lastGrabTime > 250){
-            isGrabbing = nativeIsGrabbing();
-            lastGrabTime = currentTime;
-        }
         return isGrabbing;
     }
 
@@ -203,6 +203,24 @@ public class CallbackBridge {
             case LwjglGlfwKeycode.GLFW_KEY_NUM_LOCK:
                 CallbackBridge.holdingNumlock = isDown;
                 return;
+        }
+    }
+
+    private static void onGrabStateChanged(boolean grabbing) {
+        isGrabbing = grabbing;
+        synchronized (grabListeners) {
+            for (GrabListener g : grabListeners) g.onGrabState(grabbing);
+        }
+    }
+    public static void addGrabListener(GrabListener listener) {
+        synchronized (grabListeners) {
+            listener.onGrabState(isGrabbing);
+            grabListeners.add(listener);
+        }
+    }
+    public static void removeGrabListener(GrabListener listener) {
+        synchronized (grabListeners) {
+            grabListeners.remove(listener);
         }
     }
 

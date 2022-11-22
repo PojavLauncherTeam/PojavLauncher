@@ -3,50 +3,57 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="@dimen/_60sdp">
 
     <TextView
         android:id="@+id/multirt_view_java_version"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Java 8"
+        android:layout_marginEnd="@dimen/_8sdp"
+
+        android:textSize="@dimen/_12ssp"
+        android:layout_marginStart="@dimen/_5sdp"
+
+
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/multirt_view_setdefaultbtn"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+
+        tools:text="Java 8" />
 
     <TextView
         android:id="@+id/multirt_view_java_version_full"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
-        android:text="1.8.0_292"
-        android:textSize="10sp"
+        android:textSize="@dimen/_10ssp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/multirt_view_java_version"
-        app:layout_constraintTop_toBottomOf="@+id/multirt_view_java_version" />
+
+        tools:text="1.8.0_292" />
 
     <ImageButton
         android:id="@+id/multirt_view_removebtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/multirt_view_java_version_full"
+        android:layout_width="@dimen/_60sdp"
+        android:paddingVertical="@dimen/_10sdp"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_menu_delete_forever"
+        android:scaleType="fitCenter"
+        android:background="?attr/selectableItemBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/multirt_view_java_version"
-        app:srcCompat="@drawable/ic_remove" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/multirt_view_setdefaultbtn"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_height="0dp"
         android:text="@string/multirt_config_setdefault"
+        android:background="?attr/selectableItemBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/multirt_view_removebtn"
-        app:layout_constraintTop_toTopOf="@+id/multirt_view_removebtn" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

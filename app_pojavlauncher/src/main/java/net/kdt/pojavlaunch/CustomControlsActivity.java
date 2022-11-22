@@ -1,11 +1,16 @@
 package net.kdt.pojavlaunch;
 
+import static androidx.core.content.FileProvider.getUriForFile;
+
 import android.app.Activity;
 import android.content.*;
+import android.net.Uri;
 import android.os.*;
 
 import androidx.appcompat.app.*;
 
+import android.provider.DocumentsContract;
+import android.view.View;
 import android.widget.*;
 
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -20,7 +25,7 @@ import net.kdt.pojavlaunch.customcontrols.*;
 
 public class CustomControlsActivity extends BaseActivity {
 	private DrawerLayout mDrawerLayout;
-    private ListView mDrawerNavigationView;
+	private ListView mDrawerNavigationView;
 	private ControlLayout mControlLayout;
 
 	public boolean isModified = false;
@@ -28,36 +33,43 @@ public class CustomControlsActivity extends BaseActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        
-        if (getIntent().getExtras() != null && getIntent().getExtras().getBoolean("fromMainActivity", false)) {
-            // TODO translucent!
-            // setTheme(androidx.appcompat.R.style.Theme_AppCompat_Translucent);
-        }
-        
+		super.onCreate(savedInstanceState);
+
 		setContentView(R.layout.activity_custom_controls);
 
-		mControlLayout = (ControlLayout) findViewById(R.id.customctrl_controllayout);
-		mDrawerLayout = (DrawerLayout) findViewById(R.id.customctrl_drawerlayout);
-		mDrawerNavigationView = (ListView) findViewById(R.id.customctrl_navigation_view);
+		mControlLayout = findViewById(R.id.customctrl_controllayout);
+		mDrawerLayout = findViewById(R.id.customctrl_drawerlayout);
+		mDrawerNavigationView = findViewById(R.id.customctrl_navigation_view);
+		View mPullDrawerButton = findViewById(R.id.drawer_button);
 
-		mDrawerNavigationView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.menu_customcontrol)));
+		mPullDrawerButton.setOnClickListener(v -> mDrawerLayout.openDrawer(mDrawerNavigationView));
+		mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+
+		mDrawerNavigationView.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.menu_customcontrol_customactivity)));
 		mDrawerNavigationView.setOnItemClickListener((parent, view, position, id) -> {
 			switch(position) {
-				case 0:
-					mControlLayout.addControlButton(new ControlData("New"));
-					break;
-				case 1:
-					mControlLayout.addDrawer(new ControlDrawerData());
-					break;
-				case 2:
-					load(mControlLayout);
-					break;
-				case 3:
-					save(false, mControlLayout);
-					break;
-				case 4:
-					dialogSelectDefaultCtrl(mControlLayout);
+				case 0: mControlLayout.addControlButton(new ControlData("New")); break;
+				case 1: mControlLayout.addDrawer(new ControlDrawerData()); break;
+				//case 2: mControlLayout.addJoystickButton(new ControlData()); break;
+				case 2: load(mControlLayout); break;
+				case 3: save(false, mControlLayout); break;
+				case 4: dialogSelectDefaultCtrl(mControlLayout); break;
+				case 5: // Saving the currently shown control
+					try {
+						Uri contentUri = DocumentsContract.buildDocumentUri(getString(R.string.storageProviderAuthorities), doSaveCtrl(sSelectedName, mControlLayout));
+
+						Intent shareIntent = new Intent();
+						shareIntent.setAction(Intent.ACTION_SEND);
+						shareIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
+						shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+						shareIntent.setType("application/json");
+						startActivity(shareIntent);
+
+						Intent sendIntent = Intent.createChooser(shareIntent, sSelectedName);
+						startActivity(sendIntent);
+					}catch (Exception e) {
+						Tools.showError(this, e);
+					}
 					break;
 			}
 			mDrawerLayout.closeDrawers();
@@ -96,14 +108,14 @@ public class CustomControlsActivity extends BaseActivity {
 	@Override
 	public void onBackPressed() {
 		if (!isModified) {
-		    setResult(Activity.RESULT_OK, new Intent());
+			setResult(Activity.RESULT_OK, new Intent());
 			super.onBackPressed();
 			return;
 		}
 
 		save(true, mControlLayout);
 	}
-    
+
 	public static void dialogSelectDefaultCtrl(final ControlLayout layout) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(layout.getContext());
 		builder.setTitle(R.string.customctrl_selectdefault);
@@ -111,15 +123,15 @@ public class CustomControlsActivity extends BaseActivity {
 
 		final AlertDialog dialog = builder.create();
 		FileListView flv = new FileListView(dialog, "json");
-		flv.lockPathAt(Tools.CTRLMAP_PATH);
+		flv.lockPathAt(new File(Tools.CTRLMAP_PATH));
 		flv.setFileSelectedListener(new FileSelectedListener(){
 
-				@Override
-				public void onFileSelected(File file, String path) {
-					setDefaultControlJson(path,layout);
-					dialog.dismiss();
-				}
-			});
+			@Override
+			public void onFileSelected(File file, String path) {
+				setDefaultControlJson(path,layout);
+				dialog.dismiss();
+			}
+		});
 		dialog.setView(flv);
 		dialog.show();
 	}
@@ -138,19 +150,19 @@ public class CustomControlsActivity extends BaseActivity {
 		builder.setNegativeButton(android.R.string.cancel, null);
 		if (exit) {
 			builder.setNeutralButton(R.string.mcn_exit_call, new AlertDialog.OnClickListener(){
-					@Override
-					public void onClick(DialogInterface p1, int p2) {
-						layout.setModifiable(false);
-						if(ctx instanceof MainActivity) {
-							((MainActivity) ctx).leaveCustomControls();
-						}else{
-							((CustomControlsActivity) ctx).isModified = false;
-							((Activity)ctx).onBackPressed();
-						}
-		//			    setResult(Activity.RESULT_OK, new Intent());
-		//				CustomControlsActivity.super.onBackPressed();
+				@Override
+				public void onClick(DialogInterface p1, int p2) {
+					layout.setModifiable(false);
+					if(ctx instanceof MainActivity) {
+						((MainActivity) ctx).leaveCustomControls();
+					}else{
+						((CustomControlsActivity) ctx).isModified = false;
+						((Activity)ctx).onBackPressed();
 					}
-				});
+					//			    setResult(Activity.RESULT_OK, new Intent());
+					//				CustomControlsActivity.super.onBackPressed();
+				}
+			});
 		}
 		final AlertDialog dialog = builder.create();
 		dialog.setOnShowListener(dialogInterface -> {
@@ -191,16 +203,16 @@ public class CustomControlsActivity extends BaseActivity {
 
 		final AlertDialog dialog = builder.create();
 		FileListView flv = new FileListView(dialog, "json");
-		if(Build.VERSION.SDK_INT < 29)flv.listFileAt(Tools.CTRLMAP_PATH);
-		else flv.lockPathAt(Tools.CTRLMAP_PATH);
+		if(Build.VERSION.SDK_INT < 29)flv.listFileAt(new File(Tools.CTRLMAP_PATH));
+		else flv.lockPathAt(new File(Tools.CTRLMAP_PATH));
 		flv.setFileSelectedListener(new FileSelectedListener(){
 
-				@Override
-				public void onFileSelected(File file, String path) {
-					loadControl(path,layout);
-					dialog.dismiss();
-				}
-			});
+			@Override
+			public void onFileSelected(File file, String path) {
+				loadControl(path,layout);
+				dialog.dismiss();
+			}
+		});
 		dialog.setView(flv);
 		dialog.show();
 	}
@@ -226,7 +238,7 @@ public class CustomControlsActivity extends BaseActivity {
 	private static void loadControl(String path,ControlLayout layout) {
 		try {
 			layout.loadLayout(path);
-			sSelectedName = new File(path).getName();
+			sSelectedName = path.replace(Tools.CTRLMAP_PATH, ".");
 			// Remove `.json`
 			sSelectedName = sSelectedName.substring(0, sSelectedName.length() - 5);
 		} catch (Exception e) {

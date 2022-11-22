@@ -5,29 +5,23 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.webkit.MimeTypeMap;
 
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.kdt.pojavlaunch.BaseLauncherActivity;
+
 import net.kdt.pojavlaunch.R;
 
 public class MultiRTConfigDialog {
     public static final int MULTIRT_PICK_RUNTIME = 2048;
     public static final int MULTIRT_PICK_RUNTIME_STARTUP = 2049;
-    public AlertDialog mDialog;
-    public RecyclerView mDialogView;
+    private AlertDialog mDialog;
+    private RecyclerView mDialogView;
 
-    public void prepare(BaseLauncherActivity activity) {
-        mDialogView = new RecyclerView(activity);
-        mDialogView.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
-        mDialogView.setAdapter(new RTRecyclerViewAdapter(this));
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setTitle(R.string.multirt_config_title);
-        builder.setView(mDialogView);
-        builder.setPositiveButton(R.string.multirt_config_add, (dialog, which) -> openRuntimeSelector(activity,MULTIRT_PICK_RUNTIME));
-        builder.setNegativeButton(R.string.mcn_exit_call, (dialog, which) -> dialog.cancel());
-        mDialog = builder.create();
+    /** Show the dialog, refreshes the adapter data before showing it */
+    public void show(){
+        refresh();
+        mDialog.show();
     }
 
     public void refresh() {
@@ -35,12 +29,26 @@ public class MultiRTConfigDialog {
         if(adapter != null) mDialogView.getAdapter().notifyDataSetChanged();
     }
 
+    /** Build the dialog behavior and style */
+    public void prepare(Activity activity) {
+        mDialogView = new RecyclerView(activity);
+        mDialogView.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
+        mDialogView.setAdapter(new RTRecyclerViewAdapter(this));
+
+        mDialog = new AlertDialog.Builder(activity)
+                .setTitle(R.string.multirt_config_title)
+                .setView(mDialogView)
+                .setPositiveButton(R.string.multirt_config_add, (dialog, which) -> openRuntimeSelector(activity,MULTIRT_PICK_RUNTIME))
+                .setNegativeButton(R.string.mcn_exit_call, (dialog, which) -> dialog.cancel())
+                .create();
+    }
+
     public static void openRuntimeSelector(Activity activity, int code) {
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         String mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension("xz");
-        if(mimeType == null) mimeType = "*/*";
+        if (mimeType == null) mimeType = "*/*";
         intent.setType(mimeType);
-        activity.startActivityForResult(intent,code);
+        activity.startActivityForResult(intent, code);
     }
 }

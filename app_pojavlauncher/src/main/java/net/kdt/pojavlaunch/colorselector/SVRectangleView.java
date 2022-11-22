@@ -91,7 +91,7 @@ public class SVRectangleView extends View {
         mWidthInverted = 1/mViewSize.right;
         mHeightInverted = 1/mViewSize.bottom;
         if(w > 0 && h > 0)
-        regenerateRectangle();
+            regenerateRectangle();
     }
 
     protected void regenerateRectangle() {
