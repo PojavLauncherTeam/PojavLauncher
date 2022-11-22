@@ -71,7 +71,7 @@ public class MainActivity extends BaseActivity {
     public ArrayAdapter<String> ingameControlsEditorArrayAdapter;
     public AdapterView.OnItemClickListener ingameControlsEditorListener;
 
-    protected volatile JMinecraftVersionList.Version mVersionInfo;
+    protected volatile String mVersionId;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -147,8 +147,8 @@ public class MainActivity extends BaseActivity {
             String version = getIntent().getStringExtra(INTENT_MINECRAFT_VERSION);
             version = version == null ? minecraftProfile.lastVersionId : version;
 
-            mVersionInfo = Tools.getVersionInfo(version);
-            isInputStackCall = mVersionInfo.arguments != null;
+            mVersionId = version;
+            isInputStackCall = Tools.getVersionInfo(mVersionId).arguments != null;
 
             Tools.getDisplayMetrics(this);
             windowWidth = Tools.getDisplayFriendlyRes(currentDisplayMetrics.widthPixels, scaleFactor);
@@ -326,15 +326,13 @@ public class MainActivity extends BaseActivity {
         checkJavaArgsIsLaunchable(JREUtils.jreReleaseList.get("JAVA_VERSION"));
         // appendlnToLog("Info: Custom Java arguments: \"" + LauncherPreferences.PREF_CUSTOM_JAVA_ARGS + "\"");
 
-        Logger.getInstance().appendToLog("Info: Selected Minecraft version: " + mVersionInfo.id +
-                ((mVersionInfo.inheritsFrom == null || mVersionInfo.inheritsFrom.equals(mVersionInfo.id)) ?
-                        "" : " (" + mVersionInfo.inheritsFrom + ")"));
+        Logger.getInstance().appendToLog("Info: Selected Minecraft version: " + mVersionId);
 
 
         JREUtils.redirectAndPrintJRELog();
 
         LauncherProfiles.update();
-        Tools.launchMinecraft(this, mProfile, minecraftProfile, mVersionInfo);
+        Tools.launchMinecraft(this, mProfile, minecraftProfile, mVersionId);
     }
 
     private void checkJavaArgsIsLaunchable(String jreVersion) throws Throwable {
