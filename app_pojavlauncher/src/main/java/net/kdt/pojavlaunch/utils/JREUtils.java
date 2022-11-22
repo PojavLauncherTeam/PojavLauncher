@@ -359,7 +359,8 @@ public class JREUtils {
                 "-Dlog4j2.formatMsgNoLookups=true", //Log4j RCE mitigation
 
                 "-Dnet.minecraft.clientmodname=" + Tools.APP_NAME,
-                "-Dfml.earlyprogresswindow=false" //Forge 1.14+ workaround
+                "-Dfml.earlyprogresswindow=false", //Forge 1.14+ workaround
+                "-XX:+IgnoreUnrecognizedVMOptions" // Prevents JVM from exiting because of a non-existent JVM arg
         ));
         if(LauncherPreferences.PREF_ARC_CAPES) {
             overridableArguments.add("-javaagent:"+new File(Tools.DIR_DATA,"arc_dns_injector.jar").getAbsolutePath()+"=23.95.137.176");
@@ -383,50 +384,6 @@ public class JREUtils {
         //Add all the arguments
         userArguments.addAll(additionalArguments);
         return userArguments;
-    }
-
-    /**
-     * Parse and separate java arguments in a user friendly fashion
-     * It supports multi line and absence of spaces between arguments
-     * The function also supports auto-removal of improper arguments, although it may miss some.
-     *
-     * @param args The un-parsed argument list.
-     * @return Parsed args as an ArrayList
-     */
-    public static ArrayList<String> parseJavaArguments(String args){
-        ArrayList<String> parsedArguments = new ArrayList<>(0);
-        args = args.trim().replace(" ", "");
-        //For each prefixes, we separate args.
-        for(String prefix : new String[]{"-XX:-","-XX:+", "-XX:","--","-"}){
-            while (true){
-                int start = args.indexOf(prefix);
-                if(start == -1) break;
-                //Get the end of the current argument
-                int end = args.indexOf("-", start + prefix.length());
-                if(end == -1) end = args.length();
-
-                //Extract it
-                String parsedSubString = args.substring(start, end);
-                args = args.replace(parsedSubString, "");
-
-                //Check if two args aren't bundled together by mistake
-                if(parsedSubString.indexOf('=') == parsedSubString.lastIndexOf('=')) {
-                    int arraySize = parsedArguments.size();
-                    if(arraySize > 0){
-                        String lastString = parsedArguments.get(arraySize - 1);
-                        // Looking for list elements
-                        if(lastString.charAt(lastString.length() - 1) == ',' ||
-                                parsedSubString.contains(",")){
-                            parsedArguments.set(arraySize - 1, lastString + parsedSubString);
-                            continue;
-                        }
-                    }
-                    parsedArguments.add(parsedSubString);
-                }
-                else Log.w("JAVA ARGS PARSER", "Removed improper arguments: " + parsedSubString);
-            }
-        }
-        return parsedArguments;
     }
 
     /**
