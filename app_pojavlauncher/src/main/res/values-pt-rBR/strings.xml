@@ -87,6 +87,7 @@
     <string name="mcl_setting_renderer_virgl">virglrenderer - (versão 1.7+, lento)</string>
     <string name="mcl_setting_renderer_vgpu">vgpu - (até 1.16.5, rápido)</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink - (antigo beta b1.8+, lento)</string>
+    <string name="mcl_setting_renderer_angle">ANGLE - (versão 1.17+, meio)</string>
     <string name="mcl_setting_category_veroption">Tipos de versões que serão mostradas na lista de versões</string>
     <string name="mcl_setting_veroption_release">Versões finais</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
@@ -176,6 +177,7 @@
     <string name="customctrl_addsubbutton">Adicionar sub-botão</string>
     <string name="customctrl_add_subbutton_message">Sub-botão n°%d foi adicionado!</string>
     <string name="customctrl_selectdefault">Selecionar o json de controle padrão</string>
+    <string name="customctrl_export">Exportar controle</string>
     <string name="main_install_jar_file">Instalar .jar</string>
     <string name="main_options">Opções</string>
     <string name="main_play">Jogar</string>
@@ -246,6 +248,8 @@
     <string name="preference_experimental_description">Use estas opções com cuidado, não daremos suporte.</string>
     <string name="preference_sustained_performance_title">Ativar o modo de desempenho sustentado</string>
     <string name="preference_sustained_performance_description">Limitar redução térmica limitando o pico de desempenho</string>
+    <string name="preference_force_english_title">Forçar linguagem ao inglês</string>
+    <string name="preference_force_english_description">Permite que você veja frases originais, como esperado por desenvolvedores. Requer uma reinicialização</string>
     <string name="preference_back_title">Voltar para última tela</string>
     <string name="gles_hack_title">Compressão GL4ES</string>
     <string name="gles_hack_none">Não encolher texturas</string>
@@ -263,4 +267,5 @@
     <string name="arc_capes_title">Capas da Cosmetica</string>
     <string name="arc_capes_desc">Ativa capas da Cosmetica (anteriormente Arc). Para mais informações visite https://cosmetica.cc. Requer OptiFine.</string>
     <string name="migrated_profile_str">Configuração da versão %s</string>
+    <string name="notif_channel_name">Geral</string>
 </resources>
