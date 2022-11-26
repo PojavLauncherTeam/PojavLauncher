@@ -238,6 +238,8 @@
     <string name="preference_experimental_description">˙ʇɹoddns ou \'uoᴉʇɐɹǝpᴉsuoɔ ɥʇᴉʍ ǝɹǝɥʇ sᵷuᴉɥʇ ǝs∩</string>
     <string name="preference_sustained_performance_title">ǝpoɯ ǝɔuɐɯɹoɟɹǝd pǝuᴉɐʇsns ǝꞁqɐuƎ</string>
     <string name="preference_sustained_performance_description">ǝɔuɐɯɹoɟɹǝd ʞɐǝd ᵷuᴉʇᴉɯᴉꞁ ʎq ᵷuᴉꞁʇʇoɹɥʇ ꞁɐɯɹǝɥʇ ʇᴉɯᴉꞀ</string>
+    <string name="preference_force_english_title">ɥsᴉlƃuǝ oʇ ǝƃɐnƃuɐl ǝɔɹoℲ</string>
+    <string name="preference_force_english_description">ʇɹɐʇsǝɹ ɐ sǝɹᴉnbǝɹ ˙sɹǝdolǝʌǝp ʎq pǝpuǝʇuᴉ sɐ \'sƃuᴉɹʇs lɐuᴉƃᴉɹo ǝǝs oʇ noʎ sʍoll∀</string>
     <string name="preference_back_title">uǝǝɹɔs ʇsɐꞁ ǝɥʇ oʇ ʞɔɐᗺ</string>
     <string name="gles_hack_title">ʞɔɐɥ ʞuᴉɹɥS SƎㄣ˥פ</string>
     <string name="gles_hack_none">sǝɹnʇxǝʇ ʞuᴉɹɥs ʇ,uop</string>
@@ -255,5 +257,20 @@
     <string name="arc_capes_title">sǝdɐɔ ɐɔıʇǝɯsoɔ</string>
     <string name="arc_capes_desc">˙ǝuıɟıʇdo sǝɹınbǝɹ ˙ɔɔ˙ɐɔıʇǝɯsoɔ//:sdʇʇɥ ʇısıʌ ǝsɐǝld uoıʇɐɯɹoɟuı ǝɹoɯ ɹoɟ ˙(ɔɹɐ ʎlsnoıʌǝɹd) ɐɔıʇǝɯsoɔ ɯoɹɟ sǝdɐɔ sǝlqɐuǝ</string>
     <string name="migrated_profile_str">uoᴉʇɐɹnƃᴉɟuoɔ uoᴉsɹǝʌ %s</string>
+    <string name="notif_channel_name">lɐɹǝuǝפ</string>
+    <string name="lazy_service_default_title">ǝɔᴉʌɹǝS punoɹƃǝɹoℲ ʌɐɾoԀ</string>
+    <string name="lazy_service_default_description">suoᴉʇɐɹǝdo ƃuᴉuunɹ ƃuol ɯɹoɟɹǝd oʇ pǝsn sᴉ ǝɔᴉʌɹǝs ǝɥ┴</string>
     <string name="mcl_setting_veroption_installed">pǝllɐʇsuI</string>
+    <string name="use_global_default">(ʇlnɐɟǝp lɐqolƃ ǝs∩)</string>
+    <string name="default_control">loɹʇuoɔ ʇlnɐɟǝp</string>
+    <string name="progresslayout_tasks_in_progress">ssǝɹƃoɹd uᴉ sʞsɐʇ %d</string>
+    <string name="notification_terminate">ǝʇɐuᴉɯɹǝ┴</string>
+    <string name="notification_game_runs">¡ƃuᴉuunɹ sᴉ ǝɯɐƃ ǝɥ┴</string>
+    <string name="folder_dialog_create">ǝʇɐǝɹƆ</string>
+    <string name="folder_dialog_insert_name">ǝɯɐu ɹǝploɟ ʇɹǝsuI</string>
+    <string name="main_login_done">ǝuop uᴉƃo˥</string>
+    <string name="main_add_account">ʇunoɔɔɐ pp∀</string>
+    <string name="tasks_ongoing">Tasks are in progress, please wait</string>
+    <string name="no_saved_accounts">sʇunoɔɔɐ pǝʌɐs oN</string>
+    <string name="downloading_versions">˙˙˙ʇsᴉl uoᴉsɹǝʌ ƃuᴉpɐoluʍop</string>
 </resources>
