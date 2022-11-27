@@ -280,7 +280,7 @@
     <string name="folder_dialog_insert_name">Новая папка</string>
     <string name="main_login_done">Вход выполнен</string>
     <string name="main_add_account">Добавить учётную запись</string>
-    <string name="tasks_ongoing">Производится подготовка, подождите…</string>
+    <string name="tasks_ongoing">Уже в процессе, подождите…</string>
     <string name="no_saved_accounts">Нет сохранённых учётных записей</string>
     <string name="downloading_versions">Загрузка списка версий…</string>
 </resources>
