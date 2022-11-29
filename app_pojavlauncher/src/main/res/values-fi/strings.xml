@@ -3,10 +3,15 @@
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition Androidille)</string>
     <string name="app_short_name">PojavLauncher</string>
+    <string name="app_motd">Käynnistä Minecraft: Java-versio laitteellasi!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_online_username_hint">Sähköposti tai Käyttäjätunnus</string>
+    <string name="login_online_password_hint">Salasana</string>
+    <string name="login_online_check_keeplogin">Pidä minut sisäänkirjautuneena</string>
     <string name="login_online_login_label">Kirjaudu sisään</string>
+    <string name="login_error_exist_username">Tämä käyttäjätunnus on varattu</string>
     <string name="login_select_account">Valitse tili</string>
     <!-- Hint -->
     <!-- Warnings -->
@@ -34,6 +39,7 @@
     <!-- MainActivity: Control buttons -->
     <string name="control_mouse">Hiiri</string>
     <!-- MainActivity: Menu advanced controls -->
+    <string name="control_viewout">tallenna tulos</string>
     <!-- ImportControlActivity Strings -->
     <!--
     <string name="control_more3"></string>
