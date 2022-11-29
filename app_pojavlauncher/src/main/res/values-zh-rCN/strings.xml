@@ -192,7 +192,7 @@
     <string name="auto_ram_title">自动设置内存大小</string>
     <string name="autoram_info_msg">内存已设为 %d MB</string>
     <string name="mcl_setting_check_libraries">在下载后检查依赖库</string>
-    <string name="mcl_setting_check_libraries_subtitle">此选项强制启动器在hash可用时检查依赖库，防止下载错误。</string>
+    <string name="mcl_setting_check_libraries_subtitle">此选项强制启动器在哈希值可用时检查运行库，防止下载错误。</string>
     <string name="dl_library_sha_fail">依赖 %s 已损坏，此依赖将被重新下载</string>
     <string name="dl_library_sha_unknown">无法检查运行库 %s ，希望它正常</string>
     <string name="dl_library_sha_pass">依赖库 %s 正常</string>
