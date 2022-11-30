@@ -269,7 +269,7 @@
     <string name="migrated_profile_str">Конфигурация версии %s</string>
     <string name="notif_channel_name">Общее</string>
     <string name="lazy_service_default_title">Служба переднего плана Pojav</string>
-    <string name="lazy_service_default_description">Служба используется для выполнения длительных операций</string>
+    <string name="lazy_service_default_description">Используется для выполнения длительных операций</string>
     <string name="mcl_setting_veroption_installed">Установлено</string>
     <string name="use_global_default">(Как везде)</string>
     <string name="default_control">Раскладка управления</string>
