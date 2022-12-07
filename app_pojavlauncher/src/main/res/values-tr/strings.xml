@@ -83,6 +83,11 @@
     <string name="mcl_setting_category_general">Genel ayarlar</string>
     <string name="mcl_setting_category_scaling">Boyutlandırma Seçenekleri</string>
     <string name="mcl_setting_category_renderer">İşleyici</string>
+    <string name="mcl_setting_renderer_gles2_4">Kutsal GL4ES - (bütün sürümler için, hızlı)</string>
+    <string name="mcl_setting_renderer_virgl">virglrenderer - (sürüm 1.7+, yavaş)</string>
+    <string name="mcl_setting_renderer_vgpu">vgpu - (1.16.5\'e kadar, hızlı)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink - (eski_beta b1.8+, yavaş)</string>
+    <string name="mcl_setting_renderer_angle">ANGLE - (sürüm 1.17+, ortalama)</string>
     <string name="mcl_setting_category_veroption">Sürüm tipi sürüm listesinde olacaktır</string>
     <string name="mcl_setting_veroption_release">Sürümler</string>
     <string name="mcl_setting_veroption_snapshot">Test sürümleri</string>
@@ -172,6 +177,7 @@
     <string name="customctrl_addsubbutton">Yan-düğme ekle</string>
     <string name="customctrl_add_subbutton_message">Yan-düğme n°%d eklendi !</string>
     <string name="customctrl_selectdefault">Varsayılan Control json\'u seç</string>
+    <string name="customctrl_export">kontrolleri içeri aktar</string>
     <string name="main_install_jar_file">.jar kur</string>
     <string name="main_options">Seçenekler</string>
     <string name="main_play">Oyna</string>
@@ -242,6 +248,8 @@
     <string name="preference_experimental_description">Buradaki ayarları düşünerek kullanın, destek yoktur.</string>
     <string name="preference_sustained_performance_title">Kısıtlı performans modunu aç</string>
     <string name="preference_sustained_performance_description">Üst performansı kısıtlayarak ısınmayı limitle</string>
+    <string name="preference_force_english_title">Dili ingilizce\'ye zorla</string>
+    <string name="preference_force_english_description">Geliştiriciler tarafından amaçlanan orijinal yazıları görmenizi sağlar. Yeniden başlatma gerektirir</string>
     <string name="preference_back_title">Son ekrana geri dön</string>
     <string name="gles_hack_title">GL4ES Küçültme hilesi</string>
     <string name="gles_hack_none">Dokuları sakın küçültme</string>
@@ -259,5 +267,20 @@
     <string name="arc_capes_title">Cosmetica Pelerinleri</string>
     <string name="arc_capes_desc">Cosmetica\'nın Pelerinlerini etkinleştirir (Önceden Arc). Daha fazla bilgi için lütfen https://cosmetica.cc\'u ziyaret edin. OptiFine gerektirir.</string>
     <string name="migrated_profile_str">%s sürüm ayarlaması</string>
+    <string name="notif_channel_name">Genel</string>
+    <string name="lazy_service_default_title">Pojav Önplan Hizmeti</string>
+    <string name="lazy_service_default_description">Bu hizmet uzun süren işlemleri uygulamak için kullanılıyor</string>
     <string name="mcl_setting_veroption_installed">Kuruldu</string>
+    <string name="use_global_default">(Genel varsayılanı kullan)</string>
+    <string name="default_control">Varsayılan kontroller</string>
+    <string name="progresslayout_tasks_in_progress">%d tane görev devam etmekte</string>
+    <string name="notification_terminate">Sonlandır</string>
+    <string name="notification_game_runs">Oyun şuanda çalışıyor!</string>
+    <string name="folder_dialog_create">Oluştur</string>
+    <string name="folder_dialog_insert_name">Dosya ismini girin</string>
+    <string name="main_login_done">Giriş tamamlandı</string>
+    <string name="main_add_account">Hesap Ekle</string>
+    <string name="tasks_ongoing">Görevler devam etmekte, lütfen bekleyin</string>
+    <string name="no_saved_accounts">Kayıtlı hesap yok</string>
+    <string name="downloading_versions">Sürüm listesi indiriliyor…</string>
 </resources>
