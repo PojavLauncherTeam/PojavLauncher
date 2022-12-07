@@ -254,4 +254,5 @@
     <string name="arc_capes_title">Cosmetica Capes</string>
     <string name="arc_capes_desc">يفعل أوشحه من Cosmetica, (المعروفة مسبقًا ب Arc). لمزيد من المعلومات، يرجى زيارة https://cosmetica.cc, يتطلب Optifine لكي يعمل.</string>
     <string name="migrated_profile_str">إعدادات الإصدار %s</string>
+    <string name="mcl_setting_veroption_installed">مثبت</string>
 </resources>
