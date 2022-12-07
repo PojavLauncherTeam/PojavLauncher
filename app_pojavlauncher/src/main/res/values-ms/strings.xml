@@ -81,6 +81,9 @@
     <string name="mcl_setting_category_general">Tetapan umum</string>
     <string name="mcl_setting_category_scaling">Tetapan Skala</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
+    <string name="mcl_setting_renderer_vgpu">vgpu - (hingga 1.16.5, pantas)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink - (old_beta b1.+, perlahan)</string>
+    <string name="mcl_setting_renderer_angle">ANGLE - (terbitan 1.17+, sederhana)</string>
     <string name="mcl_setting_category_veroption">Jenis versi akan ada di dalam senarai versi</string>
     <string name="mcl_setting_veroption_release">Rilis</string>
     <string name="mcl_setting_veroption_snapshot">Petikan</string>
@@ -101,6 +104,7 @@
     <string name="global_error_field_empty">Medan ini tidak boleh dibiarkan kosong</string>
     <string name="global_waiting">Tunggu</string>
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">Aplikasi/Permainan keluar dengan kod %d, semak latestlog.txt untuk butiran lebih lanjut.</string>
     <string name="mcn_exit_call">Keluar</string>
     <string name="mcn_exit_confirm">Adakah anda mahu paksa tutup aplikasi?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 tidak terpasang!</string>
@@ -129,6 +133,8 @@
     <string name="import_control_label">Import Kawalan</string>
     <string name="import_control_invalid_file">Fail tidak sah atau rosak</string>
     <string name="import_control_import_button">import kawalan</string>
+    <string name="import_control_verifying_file">Fail sedang disahkan, sila tunggu dan cuba lagi…</string>
+    <string name="import_control_invalid_name">Nama tidak sah atau fail sudah wujud</string>
     <string name="import_control_done">Pengimportan selesai</string>
     <!--
     <string name="control_more3"></string>
@@ -198,6 +204,10 @@
     <string name="control_bottom_offset">ofset bawah: </string>
     <string name="control_left_offset">ofset kiri: </string>
     <string name="preference_misc_title">Tetapan lain-lain</string>
+    <string name="preference_experimental_title">Benda Uji Kaji</string>
+    <string name="preference_force_english_title">Paksa bahasa menjadi bahasa inggeris</string>
+    <string name="preference_force_english_description">Membenarkan anda melihat teks asal, seperti yang ditentukan oleh pembangun. Memerlukan pemulaan semula</string>
+    <string name="preference_back_title">Kembali ke skrin terakhir</string>
     <string name="gles_hack_none">Jangan mengecilkan tekstur</string>
     <string name="gles_hack_always">Membahagi semua textur dengan 2</string>
     <string name="gles_hack_sometimes">Membahagikan tekstur yang besar dengan /2 atau /4</string>
@@ -214,4 +224,6 @@
     <string name="arc_capes_desc">Mendayakan jubah daripada Cosmetica (sebelum ini Arc). Untuk maklumat lanjut sila layari https://cosmetica.cc. Memerlukan OptiFine.</string>
     <string name="migrated_profile_str">Konfigurasi versi %s</string>
     <string name="notif_channel_name">Umum</string>
+    <string name="progresslayout_tasks_in_progress">%d tugas sedang dijalankan</string>
+    <string name="notification_terminate">Tamatkan</string>
 </resources>
