@@ -268,4 +268,19 @@
     <string name="arc_capes_desc">Ativa capas da Cosmetica (anteriormente Arc). Para mais informações visite https://cosmetica.cc. Requer OptiFine.</string>
     <string name="migrated_profile_str">Configuração da versão %s</string>
     <string name="notif_channel_name">Geral</string>
+    <string name="lazy_service_default_title">Serviço de primeiro plano</string>
+    <string name="lazy_service_default_description">O serviço é usado para executar operações de longo prazo</string>
+    <string name="mcl_setting_veroption_installed">Instalado</string>
+    <string name="use_global_default">Use o padrão global</string>
+    <string name="default_control">Controle padrão</string>
+    <string name="progresslayout_tasks_in_progress">Tarefa em andamento</string>
+    <string name="notification_terminate">terminar</string>
+    <string name="notification_game_runs">O jogo está sendo executado!</string>
+    <string name="folder_dialog_create">Criar</string>
+    <string name="folder_dialog_insert_name">Insira o novo nome da pasta</string>
+    <string name="main_login_done">‘Login’ efetuado</string>
+    <string name="main_add_account">Adicionar conta</string>
+    <string name="tasks_ongoing">Tarefas em andamento, por favor aguarde</string>
+    <string name="no_saved_accounts">Não há contas salvas</string>
+    <string name="downloading_versions">Baixando a versão ${version}…</string>
 </resources>
