@@ -66,7 +66,8 @@
             android:layout_width="@dimen/_72sdp"
             android:layout_height="0dp"
 
-            android:text="Select"
+            android:text="@string/global_select"
+
             app:layout_constraintBottom_toBottomOf="@+id/vprof_editor_version_spinner"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/vprof_editor_version_spinner" />
@@ -101,7 +102,8 @@
             android:layout_width="@dimen/_72sdp"
             android:layout_height="0dp"
 
-            android:text="SELECT"
+            android:text="@string/global_select"
+
 
             app:layout_constraintBottom_toBottomOf="@id/vprof_editor_ctrl_spinner"
             app:layout_constraintEnd_toEndOf="parent"
@@ -161,7 +163,7 @@
             android:id="@+id/vprof_editor_path_button"
             android:layout_width="@dimen/_72sdp"
             android:layout_height="0dp"
-            android:text="SELECT"
+            android:text="@string/global_select"
 
             app:layout_constraintBottom_toBottomOf="@id/vprof_editor_path"
             app:layout_constraintEnd_toEndOf="parent"
