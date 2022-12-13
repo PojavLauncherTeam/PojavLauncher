@@ -75,6 +75,7 @@ public class JMinecraftVersionList {
                 public String features;
                 public ArgOS os;
 
+                @Keep
                 public static class ArgOS {
                     public String name;
                     public String version;

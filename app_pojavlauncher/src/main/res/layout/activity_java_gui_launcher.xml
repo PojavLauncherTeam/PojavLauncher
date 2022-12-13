@@ -116,6 +116,48 @@
 			app:layout_constraintLeft_toRightOf="@id/installmod_mouse_pri"
 			app:layout_constraintStart_toStartOf="parent" />
 
+		<Button
+			android:id="@+id/installmod_window_moveleft"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentBottom="true"
+			android:background="@drawable/control_button"
+			android:text="◀"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent" />
+
+		<Button
+			android:id="@+id/installmod_window_moveright"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentBottom="true"
+			android:layout_toRightOf="@id/installmod_mouse_pri"
+			android:background="@drawable/control_button"
+			android:text="▶"
+			app:layout_constraintBottom_toTopOf="@+id/installmod_window_moveleft"
+			app:layout_constraintEnd_toEndOf="@+id/installmod_window_moveleft" />
+
+		<Button
+			android:id="@+id/installmod_window_moveup"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentBottom="true"
+			android:layout_toRightOf="@id/installmod_mouse_pri"
+			android:background="@drawable/control_button"
+			android:text="▲"
+			app:layout_constraintBottom_toTopOf="@+id/installmod_window_moveleft"
+			app:layout_constraintEnd_toStartOf="@+id/installmod_window_moveright" />
+
+		<Button
+			android:id="@+id/installmod_window_movedown"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentBottom="true"
+			android:background="@drawable/control_button"
+			android:text="▼"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toStartOf="@+id/installmod_window_moveleft" />
+
 	</androidx.constraintlayout.widget.ConstraintLayout>
 
 	<com.kdt.LoggerView

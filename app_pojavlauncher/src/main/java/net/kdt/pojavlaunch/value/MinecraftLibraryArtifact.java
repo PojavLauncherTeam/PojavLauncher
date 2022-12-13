@@ -1,6 +1,8 @@
 package net.kdt.pojavlaunch.value;
 
-public class MinecraftLibraryArtifact extends MinecraftClientInfo
-{
+import androidx.annotation.Keep;
+
+@Keep
+public class MinecraftLibraryArtifact extends MinecraftClientInfo {
 	public String path;
 }

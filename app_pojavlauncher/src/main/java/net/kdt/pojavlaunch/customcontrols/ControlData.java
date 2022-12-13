@@ -272,7 +272,7 @@ public class ControlData {
         keyValueMap.put("screen_width", "DUMMY_DATA" );
         keyValueMap.put("screen_height", "DUMMY_DATA");
         keyValueMap.put("margin", Integer.toString((int) Tools.dpToPx(2)));
-        keyValueMap.put("preferred_scale", Float.toString(LauncherPreferences.PREF_BUTTONSIZE));
+        keyValueMap.put("preferred_scale", "DUMMY_DATA");
 
         conversionMap = new WeakReference<>(keyValueMap);
     }
@@ -295,6 +295,7 @@ public class ControlData {
         valueMap.put("height", Float.toString(getHeight()));
         valueMap.put("screen_width",Integer.toString(CallbackBridge.physicalWidth));
         valueMap.put("screen_height",Integer.toString(CallbackBridge.physicalHeight));
+        valueMap.put("preferred_scale", Float.toString(LauncherPreferences.PREF_BUTTONSIZE));
 
         return valueMap;
     }

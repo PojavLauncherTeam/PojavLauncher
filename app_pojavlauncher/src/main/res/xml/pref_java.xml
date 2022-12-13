@@ -11,7 +11,7 @@
 
         <androidx.preference.EditTextPreference
             android:dialogTitle="@string/mcl_setting_title_javaargs"
-            android:icon="@drawable/ic_setting_jre_args"
+
             android:key="javaArgs"
             android:singleLine="true"
             android:summary="@string/mcl_setting_subtitle_javaargs"
@@ -19,7 +19,7 @@
 
         <net.kdt.pojavlaunch.prefs.CustomSeekBarPreference
             android:key="allocation"
-            android:icon="@drawable/ic_setting_ram"
+
             android:summary="@string/mcl_memory_allocation_subtitle"
             android:title="@string/mcl_memory_allocation"
             app2:showSeekBarValue="true"

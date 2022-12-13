@@ -265,8 +265,10 @@ public class Gamepad {
     }
 
     public static boolean isGamepadEvent(KeyEvent event){
-        return ((event.getDevice().getSources() & InputDevice.SOURCE_GAMEPAD) == InputDevice.SOURCE_GAMEPAD
-                && GamepadDpad.isDpadEvent(event) );
+        boolean isGamepad = ((event.getSource() & InputDevice.SOURCE_GAMEPAD) == InputDevice.SOURCE_GAMEPAD)
+                || ((event.getDevice() != null) && ((event.getDevice().getSources() & InputDevice.SOURCE_GAMEPAD) == InputDevice.SOURCE_GAMEPAD));
+
+        return isGamepad && GamepadDpad.isDpadEvent(event);
     }
 
     /**

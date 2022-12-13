@@ -11,9 +11,5 @@ public class LauncherPreferenceMiscellaneousFragment extends LauncherPreferenceF
     @Override
     public void onCreatePreferences(Bundle b, String str) {
         addPreferencesFromResource(R.xml.pref_misc);
-
-        // Sustained performance is only available since Nougat
-        SwitchPreference sustainedPerfSwitch = findPreference("sustainedPerformance");
-        sustainedPerfSwitch.setVisible(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N);
     }
 }

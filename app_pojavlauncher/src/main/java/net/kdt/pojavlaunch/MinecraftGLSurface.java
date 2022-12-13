@@ -1,12 +1,13 @@
 package net.kdt.pojavlaunch;
 
-import static net.kdt.pojavlaunch.BaseMainActivity.touchCharInput;
+import static net.kdt.pojavlaunch.MainActivity.touchCharInput;
 import static net.kdt.pojavlaunch.utils.MCOptionUtils.getMcScale;
 import static org.lwjgl.glfw.CallbackBridge.sendKeyPress;
 import static org.lwjgl.glfw.CallbackBridge.sendMouseButton;
 import static org.lwjgl.glfw.CallbackBridge.windowHeight;
 import static org.lwjgl.glfw.CallbackBridge.windowWidth;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.SurfaceTexture;
@@ -25,10 +26,11 @@ import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+
+import net.kdt.pojavlaunch.customcontrols.ControlLayout;
 import net.kdt.pojavlaunch.utils.MathUtils;
 
 import net.kdt.pojavlaunch.customcontrols.gamepad.Gamepad;
@@ -41,7 +43,8 @@ import org.lwjgl.glfw.CallbackBridge;
 /**
  * Class dealing with showing minecraft surface and taking inputs to dispatch them to minecraft
  */
-public class MinecraftGLSurface extends View {
+public class MinecraftGLSurface extends View implements GrabListener{
+    Handler uiThreadHandler = new Handler();
     /* Gamepad object for gamepad inputs, instantiated on need */
     private Gamepad mGamepad = null;
     /* Pointer Debug textview, used to show info about the pointer state */
@@ -54,7 +57,7 @@ public class MinecraftGLSurface extends View {
     private final TapDetector mSingleTapDetector = new TapDetector(1, TapDetector.DETECTION_METHOD_BOTH);
     private final TapDetector mDoubleTapDetector = new TapDetector(2, TapDetector.DETECTION_METHOD_DOWN);
     /* MC GUI scale, listened by MCOptionUtils */
-    private int mGuiScale = getMcScale();
+    private int mGuiScale;
     private final MCOptionUtils.MCOptionListener mGuiScaleListener = () -> mGuiScale = getMcScale();
     /* Surface ready listener, used by the activity to launch minecraft */
     SurfaceReadyListener mSurfaceReadyListener = null;
@@ -143,7 +146,10 @@ public class MinecraftGLSurface extends View {
                 private boolean isCalled = false;
                 @Override
                 public void surfaceCreated(@NonNull SurfaceHolder holder) {
-                    if(isCalled) return;
+                    if(isCalled) {
+                        JREUtils.setupBridgeWindow(surfaceView.getHolder().getSurface());
+                        return;
+                    }
                     isCalled = true;
 
                     realStart(surfaceView.getHolder().getSurface());
@@ -168,10 +174,14 @@ public class MinecraftGLSurface extends View {
                 private boolean isCalled = false;
                 @Override
                 public void onSurfaceTextureAvailable(@NonNull SurfaceTexture surface, int width, int height) {
-                    if(isCalled) return;
+                    Surface tSurface = new Surface(surface);
+                    if(isCalled) {
+                        JREUtils.setupBridgeWindow(tSurface);
+                        return;
+                    }
                     isCalled = true;
 
-                    realStart(new Surface(textureView.getSurfaceTexture()));
+                    realStart(tSurface);
                 }
 
                 @Override
@@ -201,6 +211,9 @@ public class MinecraftGLSurface extends View {
      */
     @Override
     public boolean onTouchEvent(MotionEvent e) {
+        // Kinda need to send this back to the layout
+        if(((ControlLayout)getParent()).getModifiable()) return false;
+
         // Looking for a mouse to handle, won't have an effect if no mouse exists.
         for (int i = 0; i < e.getPointerCount(); i++) {
             if(e.getToolType(i) != MotionEvent.TOOL_TYPE_MOUSE && e.getToolType(i) != MotionEvent.TOOL_TYPE_STYLUS ) continue;
@@ -375,8 +388,8 @@ public class MinecraftGLSurface extends View {
 
     /**
      * The event for mouse/joystick movements
-     * We don't do the gamepad right now.
      */
+    @SuppressLint("NewApi")
     @Override
     public boolean dispatchGenericMotionEvent(MotionEvent event) {
         int mouseCursorIndex = -1;
@@ -397,12 +410,6 @@ public class MinecraftGLSurface extends View {
             break;
         }
         if(mouseCursorIndex == -1) return false; // we cant consoom that, theres no mice!
-        if(CallbackBridge.isGrabbing()) {
-            if(BaseMainActivity.isAndroid8OrHigher() && !hasPointerCapture()){
-                requestFocus();
-                requestPointerCapture();
-            }
-        }
         switch(event.getActionMasked()) {
             case MotionEvent.ACTION_HOVER_MOVE:
                 CallbackBridge.mouseX = (event.getX(mouseCursorIndex) * mScaleFactor);
@@ -431,10 +438,6 @@ public class MinecraftGLSurface extends View {
     public boolean dispatchCapturedPointerEvent(MotionEvent e) {
         CallbackBridge.mouseX += (e.getX()* mScaleFactor);
         CallbackBridge.mouseY += (e.getY()* mScaleFactor);
-        if(!CallbackBridge.isGrabbing()){
-            releasePointerCapture();
-            clearFocus();
-        }
 
         if (mPointerDebugTextView.getVisibility() == View.VISIBLE && !debugErrored) {
             StringBuilder builder = new StringBuilder();
@@ -592,6 +595,10 @@ public class MinecraftGLSurface extends View {
     public void refreshSize(){
         windowWidth = Tools.getDisplayFriendlyRes(Tools.currentDisplayMetrics.widthPixels, mScaleFactor);
         windowHeight = Tools.getDisplayFriendlyRes(Tools.currentDisplayMetrics.heightPixels, mScaleFactor);
+        if(mSurface == null){
+            Log.w("MGLSurface", "Attempt to refresh size on null surface");
+            return;
+        }
         if(LauncherPreferences.PREF_USE_ALTERNATE_SURFACE){
             SurfaceView view = (SurfaceView) mSurface;
             if(view.getHolder() != null){
@@ -616,7 +623,6 @@ public class MinecraftGLSurface extends View {
         refreshSize();
 
         //Load Minecraft options:
-        MCOptionUtils.load();
         MCOptionUtils.set("fullscreen", "off");
         MCOptionUtils.set("overrideWidth", String.valueOf(windowWidth));
         MCOptionUtils.set("overrideHeight", String.valueOf(windowHeight));
@@ -627,14 +633,35 @@ public class MinecraftGLSurface extends View {
 
         new Thread(() -> {
             try {
-                Thread.sleep(200);
-                if(mSurfaceReadyListener != null){
-                    mSurfaceReadyListener.isReady();
+                // Wait until the listener is attached
+                while (mSurfaceReadyListener == null){
+                    Thread.sleep(100);
                 }
+
+                mSurfaceReadyListener.isReady();
             } catch (Throwable e) {
                 Tools.showError(getContext(), e, true);
             }
         }, "JVM Main thread").start();
+    }
+
+    @Override
+    public void onGrabState(boolean isGrabbing) {
+        uiThreadHandler.post(()->updateGrabState(isGrabbing));
+    }
+
+    private void updateGrabState(boolean isGrabbing) {
+        if(MainActivity.isAndroid8OrHigher()) {
+            if (isGrabbing && !hasPointerCapture()) {
+                requestFocus();
+                requestPointerCapture();
+            }
+
+            if (!isGrabbing && hasPointerCapture()) {
+                releasePointerCapture();
+                clearFocus();
+            }
+        }
     }
 
     /** A small interface called when the listener is ready for the first time */
@@ -644,5 +671,6 @@ public class MinecraftGLSurface extends View {
 
     public void setSurfaceReadyListener(SurfaceReadyListener listener){
         mSurfaceReadyListener = listener;
+
     }
 }

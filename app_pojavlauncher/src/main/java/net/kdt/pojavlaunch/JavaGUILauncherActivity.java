@@ -1,5 +1,7 @@
 package net.kdt.pojavlaunch;
 
+import static net.kdt.pojavlaunch.MainActivity.fullyExit;
+
 import android.annotation.SuppressLint;
 import android.os.*;
 import android.util.*;
@@ -51,6 +53,10 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
 
         findViewById(R.id.installmod_mouse_pri).setOnTouchListener(this);
         findViewById(R.id.installmod_mouse_sec).setOnTouchListener(this);
+        findViewById(R.id.installmod_window_moveup).setOnTouchListener(this);
+        findViewById(R.id.installmod_window_movedown).setOnTouchListener(this);
+        findViewById(R.id.installmod_window_moveleft).setOnTouchListener(this);
+        findViewById(R.id.installmod_window_moveright).setOnTouchListener(this);
 
         mMousePointerImageView.post(() -> {
             ViewGroup.LayoutParams params = mMousePointerImageView.getLayoutParams();
@@ -117,7 +123,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
         });
 
         try {
-            MultiRTUtils.setRuntimeNamed(this,LauncherPreferences.PREF_DEFAULT_RUNTIME);
+            MultiRTUtils.setRuntimeNamed(LauncherPreferences.PREF_DEFAULT_RUNTIME);
 
             placeMouseAt(CallbackBridge.physicalWidth / 2, CallbackBridge.physicalHeight / 2);
             
@@ -139,7 +145,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
                     if (exit != 0) return;
                     runOnUiThread(() -> {
                         Toast.makeText(JavaGUILauncherActivity.this, R.string.toast_optifine_success, Toast.LENGTH_SHORT).show();
-                        MainActivity.fullyExit();
+                        fullyExit();
                     });
 
                 } catch (Throwable e) {
@@ -187,6 +193,20 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
                 AWTInputBridge.sendMousePress(AWTInputEvent.BUTTON3_DOWN_MASK, isDown);
                 break;
         }
+        if(isDown) switch(v.getId()) {
+            case R.id.installmod_window_moveup:
+                AWTInputBridge.nativeMoveWindow(0, -10);
+                break;
+            case R.id.installmod_window_movedown:
+                AWTInputBridge.nativeMoveWindow(0, 10);
+                break;
+            case R.id.installmod_window_moveleft:
+                AWTInputBridge.nativeMoveWindow(-10, 0);
+                break;
+            case R.id.installmod_window_moveright:
+                AWTInputBridge.nativeMoveWindow(10, 0);
+                break;
+        }
         return true;
     }
 
@@ -212,7 +232,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
     }
 
     public void forceClose(View v) {
-        BaseMainActivity.dialogForceClose(this);
+        MainActivity.dialogForceClose(this);
     }
 
     public void openLogOutput(View v) {
@@ -255,9 +275,9 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
             
             // Run java on sandbox, non-overrideable.
             Collections.reverse(javaArgList);
-            javaArgList.add("-Xbootclasspath/a:" + Tools.DIR_DATA + "/pro-grade.jar");
+            javaArgList.add("-Xbootclasspath/a:" + Tools.DIR_DATA + "/security/pro-grade.jar");
             javaArgList.add("-Djava.security.manager=net.sourceforge.prograde.sm.ProGradeJSM");
-            javaArgList.add("-Djava.security.policy=" + Tools.DIR_DATA + "/java_sandbox.policy");
+            javaArgList.add("-Djava.security.policy=" + Tools.DIR_DATA + "/security/java_sandbox.policy");
             Collections.reverse(javaArgList);
 
             return JREUtils.launchJavaVM(this, javaArgList);

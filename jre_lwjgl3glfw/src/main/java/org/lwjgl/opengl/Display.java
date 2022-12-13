@@ -82,15 +82,6 @@ public class Display {
 
         mode = desktopDisplayMode = new DisplayMode(monitorWidth, monitorHeight, monitorBitPerPixel, monitorRefreshRate);
         LWJGLUtil.log("Initial mode: " + desktopDisplayMode);
-	if("true".equals(System.getProperty("org.lwjgl.opengl.disableStaticInit"))) {
-		LWJGLUtil.log("Static Display.create() disabled");
-	}else{
-        	// additional code workaround not called yet!
-        	LWJGLUtil.log("Calling Display.create()");
-        	try {
-        	    create();
-        	} catch (LWJGLException e) {throw new RuntimeException(e);}
-	}
     }
     
     public static void setSwapInterval(int value) {
@@ -423,7 +414,7 @@ public class Display {
         Display.drawable = drawable;
         context = org.lwjgl.opengl.GLContext.createFromCurrent();
 
-        glfwSwapInterval(0);
+        //glfwSwapInterval(0);
         glfwShowWindow(Window.handle);
 
         Mouse.create();
@@ -771,6 +762,7 @@ public class Display {
 
     public static void setVSyncEnabled(boolean sync) {
         vsyncEnabled = sync;
+        glfwSwapInterval(vsyncEnabled ? 1 : 0);
     }
 
     public static long getWindow() {
@@ -861,7 +853,7 @@ public class Display {
 
     public static void setDisplayMode(DisplayMode dm) throws LWJGLException {
         mode = dm;
-        GLFW.glfwSetWindowSize(Window.handle, dm.getWidth(), dm.getHeight());
+        if(isCreated) GLFW.glfwSetWindowSize(Window.handle, dm.getWidth(), dm.getHeight());
     }
 
     public static DisplayMode getDisplayMode() {
@@ -1055,9 +1047,9 @@ public class Display {
      *            - the desired frame rate, in frames per second
      */
     public static void sync(int fps) {
-        if (vsyncEnabled)
+        /*if (vsyncEnabled)
             Sync.sync(60);
-        else Sync.sync(fps);
+        else*/ Sync.sync(fps);
     }
 
     public static Drawable getDrawable() {

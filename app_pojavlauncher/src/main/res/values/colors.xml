@@ -2,4 +2,12 @@
 <resources>
     <color name="control_button_color">#4CC4C4C4</color>
     <color name="control_button_pressed_color">#4D000000</color>
+
+    <color name="minebutton_color">#57CC33</color>
+    <color name="background_app">#181818</color>
+    <color name="background_status_bar">#242424</color>
+    <color name="background_bottom_bar">#232323</color>
+
+    <color name="primary_text">#FFFFFF</color>
+    <color name="secondary_text">#B2B2B2</color>
 </resources>

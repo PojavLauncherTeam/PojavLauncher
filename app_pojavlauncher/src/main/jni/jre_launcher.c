@@ -148,7 +148,7 @@ JNIEXPORT jint JNICALL Java_com_oracle_dalvik_VMLauncher_launchJVM(JNIEnv *env, 
    // SA_RESETHAND;
 #define CATCHSIG(X) sigaction(X, &catcher, &old_sa[X])
     CATCHSIG(SIGILL);
-    CATCHSIG(SIGABRT);
+    //CATCHSIG(SIGABRT);
     CATCHSIG(SIGBUS);
     CATCHSIG(SIGFPE);
 #ifdef TRY_SIG2JVM

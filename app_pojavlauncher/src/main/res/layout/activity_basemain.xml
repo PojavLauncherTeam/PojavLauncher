@@ -23,14 +23,15 @@
 			<net.kdt.pojavlaunch.MinecraftGLSurface
 				android:id="@+id/main_game_render_view"
 				android:layout_width="fill_parent"
-				android:layout_height="fill_parent"/>
+				android:layout_height="fill_parent"
+				/>
 
 			<net.kdt.pojavlaunch.Touchpad
 				android:layout_height="match_parent"
 				android:layout_width="match_parent"
 				android:orientation="vertical"
 				android:id="@+id/main_touchpad"
-				android:elevation="1dp"
+				android:translationZ="1dp"
 				android:visibility="gone"/>
 
 
@@ -43,6 +44,13 @@
 				android:imeOptions="flagNoFullscreen|flagNoExtractUi|flagNoPersonalizedLearning|actionDone"
 				android:inputType="textFilter|textImeMultiLine|textAutoComplete|textAutoCorrect"
 				tools:ignore="TouchTargetSizeCheck" />
+
+			<net.kdt.pojavlaunch.customcontrols.handleview.DrawerPullButton
+				android:id="@+id/drawer_button"
+				android:layout_width="24dp"
+				android:layout_height="12dp"
+				android:elevation="10dp"
+				android:layout_gravity="center_horizontal"/>
 
 		</net.kdt.pojavlaunch.customcontrols.ControlLayout>
 

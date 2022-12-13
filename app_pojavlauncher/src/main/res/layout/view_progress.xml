@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Change the layout to merge tag once done -->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+
+    >
+
+
+    <ProgressBar
+        android:id="@+id/progress_generic_progressbar"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_30sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/progress_textview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:textSize="@dimen/_12ssp"
+        android:textColor="@android:color/white"
+        android:paddingEnd="@dimen/_40sdp"
+
+        tools:text="5 tasks in progress"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/progress_flip_arrow"
+        app:layout_constraintStart_toEndOf="@+id/progress_generic_progressbar"
+        app:layout_constraintTop_toTopOf="@+id/progress_generic_progressbar"
+        tools:ignore="RtlSymmetry" />
+
+    <ImageView
+        android:id="@+id/progress_flip_arrow"
+        android:layout_width="@dimen/_24sdp"
+        android:layout_height="@dimen/_24sdp"
+        android:layout_marginEnd="@dimen/_8sdp"
+        app:layout_constraintBottom_toBottomOf="@id/progress_generic_progressbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/progress_generic_progressbar"
+        app:srcCompat="@drawable/spinner_arrow" />
+
+    <LinearLayout
+        android:id="@+id/progress_linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:paddingHorizontal="@dimen/_12sdp"
+        android:paddingTop="@dimen/_12sdp"
+        android:weightSum="3"
+
+
+        app:layout_constraintBottom_toTopOf="@+id/progress_generic_progressbar"
+        tools:layout_height="@dimen/_100sdp"
+        tools:visibility="visible"
+        >
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

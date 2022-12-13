@@ -5,13 +5,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.google.gson.JsonSyntaxException;
 import java.io.File;
 import java.io.IOException;
-import java.util.UUID;
 
-import net.kdt.pojavlaunch.authenticator.mojang.RefreshListener;
-import net.kdt.pojavlaunch.authenticator.mojang.RefreshTokenTask;
 import net.kdt.pojavlaunch.value.MinecraftAccount;
 import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
 import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
@@ -24,15 +24,10 @@ public class PojavProfile {
 	public static SharedPreferences getPrefs(Context ctx) {
 		return ctx.getSharedPreferences(PROFILE_PREF, Context.MODE_PRIVATE);
 	}
-	
-	public static MinecraftAccount getCurrentProfileContent(Context ctx) throws JsonSyntaxException {
-		MinecraftAccount build = MinecraftAccount.load(getCurrentProfileName(ctx));
-        if (build == null) {
-            System.out.println("isTempProfile null? " + (getTempProfileContent() == null));
-            return getTempProfileContent();
-        }
-        return build;
-	}
+
+    public static MinecraftAccount getCurrentProfileContent(@NonNull Context ctx, @Nullable String profileName) throws JsonSyntaxException {
+        return MinecraftAccount.load(profileName == null ? getCurrentProfileName(ctx) : profileName);
+    }
 
     public static MinecraftAccount getTempProfileContent() {
 	    try {
@@ -72,24 +67,17 @@ public class PojavProfile {
         return name;
     }
 	
-	public static boolean setCurrentProfile(Context ctx, Object obj) {
+	public static boolean setCurrentProfile(@NonNull Context ctx, @Nullable  Object obj) {
 		SharedPreferences.Editor pref = getPrefs(ctx).edit();
 		
-		try {
-			if (obj instanceof MinecraftAccount) {
-                try {
-                    MinecraftAccount.saveTempAccount((MinecraftAccount) obj);
-                } catch (IOException e) {
-                    Tools.showError(ctx, e);
-                }
-			} else if (obj instanceof String) {
+		try { if (obj instanceof String) {
                 String acc = (String) obj;
 				pref.putString(PROFILE_PREF_FILE, acc);
-                MinecraftAccount.clearTempAccount();
+                //MinecraftAccount.clearTempAccount();
 			} else if (obj == null) {
 				pref.putString(PROFILE_PREF_FILE, "");
 			} else {
-				throw new IllegalArgumentException("Profile must be MinecraftAccount.class, String.class or null");
+				throw new IllegalArgumentException("Profile must be String.class or null");
 			}
 		} finally {
 			return pref.commit();
@@ -99,23 +87,5 @@ public class PojavProfile {
 	public static boolean isFileType(Context ctx) {
 		return new File(Tools.DIR_ACCOUNT_NEW + "/" + PojavProfile.getCurrentProfileName(ctx) + ".json").exists();
 	}
-	
 
-    public static void launch(Activity ctx, Object o) {
-        PojavProfile.setCurrentProfile(ctx, o);
-        LauncherProfiles.update();
-        if(!LauncherProfiles.mainProfileJson.profilesWereMigrated && LauncherProfiles.mainProfileJson.profiles != null) {
-            MinecraftProfile defaultProfile = LauncherProfiles.mainProfileJson.profiles.get("(Default)");
-            if(defaultProfile != null) {
-                defaultProfile.lastVersionId = PojavProfile.getCurrentProfileContent(ctx).selectedVersion;
-            }
-            LauncherProfiles.mainProfileJson.profilesWereMigrated = true;
-            LauncherProfiles.update();
-        }
-        Intent intent = new Intent(ctx, PojavLauncherActivity.class); //MCLauncherActivity.class);
-        ctx.startActivity(intent);
-    }
-    public static void updateTokens(final Activity ctx, final String name, RefreshListener listen) throws Exception {
-        new RefreshTokenTask(ctx, listen).execute(name);
-    }
 }

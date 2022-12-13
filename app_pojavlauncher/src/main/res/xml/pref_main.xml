@@ -1,39 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app2="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    app:key=""
+    >
 
-    <Preference
-        android:key="video_screen_setting"
-        android:title="@string/preference_video_title"
-        android:summary="@string/preference_video_description"
-        android:fragment="net.kdt.pojavlaunch.prefs.screens.LauncherPreferenceVideoFragment"
+    <net.kdt.pojavlaunch.prefs.BackButtonPreference/>
+
+    <PreferenceCategory
+        android:title="Categories"
+        >
+
+        <Preference
+            android:key="video_screen_setting"
+            android:title="@string/preference_video_title"
+            android:summary="@string/preference_video_description"
+            android:fragment="net.kdt.pojavlaunch.prefs.screens.LauncherPreferenceVideoFragment"
+            android:icon="@drawable/ic_setting_video"
+            />
+
+        <Preference
+            android:key="control_screen_setting"
+            android:title="@string/preference_control_title"
+            android:summary="@string/preference_control_description"
+            android:fragment="net.kdt.pojavlaunch.prefs.screens.LauncherPreferenceControlFragment"
+            android:icon="@drawable/ic_menu_custom_controls"
+            />
+
+        <Preference
+            android:key="java_screen_setting"
+            android:title="@string/preference_java_title"
+            android:summary="@string/preference_java_description"
+            android:fragment="net.kdt.pojavlaunch.prefs.screens.LauncherPreferenceJavaFragment"
+            android:icon="@drawable/ic_setting_java_runtime"
+            />
+
+        <Preference
+            android:key="misc_screen_setting"
+            android:title="@string/preference_misc_title"
+            android:summary="@string/preference_misc_description"
+            android:fragment="net.kdt.pojavlaunch.prefs.screens.LauncherPreferenceMiscellaneousFragment"
+            android:icon="@drawable/ic_setting_misc"
+            />
+
+        <!-- Not needed for now
+        <Preference
+            android:key="experimental_screen_setting"
+            android:title="@string/preference_experimental_title"
+            android:summary="@string/preference_experimental_description"
+            android:fragment="net.kdt.pojavlaunch.prefs.screens.settings.LauncherPreferenceExperimentalFragment"
+            /> -->
+    </PreferenceCategory>
+
+    <SwitchPreference
+        android:title="@string/preference_force_english_title"
+        android:key="force_english"
+        android:summary="@string/preference_force_english_description"
         />
 
-    <Preference
-        android:key="control_screen_setting"
-        android:title="@string/preference_control_title"
-        android:summary="@string/preference_control_description"
-        android:fragment="net.kdt.pojavlaunch.prefs.screens.LauncherPreferenceControlFragment"
-        />
 
-    <Preference
-        android:key="java_screen_setting"
-        android:title="@string/preference_java_title"
-        android:summary="@string/preference_java_description"
-        android:fragment="net.kdt.pojavlaunch.prefs.screens.LauncherPreferenceJavaFragment"
-        />
 
-    <Preference
-        android:key="misc_screen_setting"
-        android:title="@string/preference_misc_title"
-        android:summary="@string/preference_misc_description"
-        android:fragment="net.kdt.pojavlaunch.prefs.screens.LauncherPreferenceMiscellaneousFragment"
-        />
 
-    <Preference
-        android:key="experimental_screen_setting"
-        android:title="@string/preference_experimental_title"
-        android:summary="@string/preference_experimental_description"
-        android:fragment="net.kdt.pojavlaunch.prefs.screens.LauncherPreferenceExperimentalFragment"
-        />
 
 </PreferenceScreen>
