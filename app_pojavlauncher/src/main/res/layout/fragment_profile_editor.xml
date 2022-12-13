@@ -29,6 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_24sdp"
             android:background="@drawable/background_line"
+            android:textSize="@dimen/_13ssp"
 
             android:ems="10"
             android:hint="@string/unnamed"
@@ -54,7 +55,7 @@
             android:background="@drawable/background_line"
             android:hint="Select a version"
             android:paddingHorizontal="@dimen/_12sdp"
-            android:textSize="@dimen/_14sdp"
+            android:textSize="@dimen/_13ssp"
 
             app:layout_constraintEnd_toStartOf="@+id/vprof_editor_version_button"
             app:layout_constraintStart_toStartOf="parent"
@@ -89,7 +90,7 @@
             android:background="@drawable/background_line"
             android:hint="@string/use_global_default"
             android:paddingHorizontal="@dimen/_12sdp"
-            android:textSize="@dimen/_14sdp"
+            android:textSize="@dimen/_13ssp"
 
             app:layout_constraintEnd_toStartOf="@id/vprof_editor_ctrl_button"
             app:layout_constraintStart_toStartOf="parent"
@@ -125,6 +126,7 @@
             android:hint="@string/use_global_default"
             android:inputType="text"
             android:paddingHorizontal="@dimen/_12sdp"
+            android:textSize="@dimen/_13ssp"
 
             app:layout_constraintTop_toBottomOf="@+id/vprof_editor_ctrl_spinner" />
 
@@ -149,7 +151,7 @@
 
             android:hint=".minecraft"
             android:paddingHorizontal="@dimen/_12sdp"
-            android:textSize="@dimen/_14ssp"
+            android:textSize="@dimen/_13ssp"
 
             app:layout_constraintEnd_toStartOf="@id/vprof_editor_path_button"
             app:layout_constraintStart_toStartOf="parent"
@@ -180,6 +182,7 @@
             android:layout_marginTop="32dp"
             android:background="@drawable/background_line"
             android:paddingVertical="0px"
+            android:textSize="@dimen/_13ssp"
 
             app:layout_constraintTop_toBottomOf="@+id/vprof_editor_path"
 

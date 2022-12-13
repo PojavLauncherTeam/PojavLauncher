@@ -12,7 +12,7 @@
 		android:text="@string/app_short_name"
 		android:textAppearance="?android:attr/textAppearanceLarge"
 		android:fontFamily="@font/noto_sans_bold"
-		android:textSize="40sp"/>
+		android:textSize="@dimen/_40ssp"/>
 
 	<TextView
 		android:layout_height="wrap_content"
