@@ -239,7 +239,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginVertical="26dp"
-            android:text="Save profile"
+            android:text="@string/global_save"
             app:layout_constraintEnd_toStartOf="@+id/vprof_editor_delete_button"
 
             app:layout_constraintHorizontal_bias="0.5"
@@ -252,7 +252,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
 
-            android:text="Delete profile"
+            android:text="@string/global_delete"
             app:layout_constraintEnd_toEndOf="parent"
 
             app:layout_constraintHorizontal_bias="0.5"
