@@ -57,7 +57,7 @@
     <string name="mcl_option_settings">设置</string>
     <string name="mcl_option_about">关于</string>
     <string name="mcl_setting_title_uninstalljre">卸载 Java 环境</string>
-    <string name="mcl_setting_subtitle_uninstalljre">[需要重启启动器] 得以重新安装 Java。</string>
+    <string name="mcl_setting_subtitle_uninstalljre">[需要重启启动器] 得以重新安装 Java 运行时。</string>
     <string name="mcl_setting_title_freeform">以自由窗口模式启动 Minecraft</string>
     <string name="mcl_setting_subtitle_freeform">在浮动窗口中启动 Minecraft。需要 Android 7.0+</string>
     <string name="mcl_setting_title_hide_sidebar">隐藏侧边栏</string>
@@ -134,7 +134,7 @@
     <string name="mcn_check_fail_lwjgl">未安装 LWJGL3！</string>
     <string name="mcn_check_fail_incompatiblearch">%1$s 架构不兼容 Java 运行时 %2$s 。</string>
     <!-- MainActivity: Control buttons -->
-    <string name="control_toggle">GUI</string>
+    <string name="control_toggle">界面</string>
     <string name="control_keyboard">键盘</string>
     <string name="control_chat">聊天</string>
     <string name="control_debug">调试</string>
@@ -193,7 +193,7 @@
     <string name="auto_ram_title">自动设置内存大小</string>
     <string name="autoram_info_msg">内存已设为 %d MB</string>
     <string name="mcl_setting_check_libraries">在下载后检查依赖库</string>
-    <string name="mcl_setting_check_libraries_subtitle">此选项强制启动器在hash可用时检查依赖库，防止下载错误。</string>
+    <string name="mcl_setting_check_libraries_subtitle">此选项强制启动器在哈希值可用时检查运行库，防止下载错误。</string>
     <string name="dl_library_sha_fail">依赖 %s 已损坏，此依赖将被重新下载</string>
     <string name="dl_library_sha_unknown">无法检查运行库 %s ，希望它正常</string>
     <string name="dl_library_sha_pass">依赖库 %s 正常</string>
