@@ -83,6 +83,11 @@
     <string name="mcl_setting_category_general">Pengaturan umum</string>
     <string name="mcl_setting_category_scaling">Pengaturan penskalaan</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
+    <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (semua versi, cepat)</string>
+    <string name="mcl_setting_renderer_virgl">virglrenderer - (rilis 1.7+, lambat)</string>
+    <string name="mcl_setting_renderer_vgpu">vgpu - (bisa sampai 1.16.5, cepat)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink - (old_beta b1.8+, lambat)</string>
+    <string name="mcl_setting_renderer_angle">ANGLE - (rilis 1.17+, pertengahan)</string>
     <string name="mcl_setting_category_veroption">Jenis versi akan ada dalam daftar versi</string>
     <string name="mcl_setting_veroption_release">Rilis</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
@@ -172,6 +177,7 @@
     <string name="customctrl_addsubbutton">Tambahkan tombol</string>
     <string name="customctrl_add_subbutton_message">Sub-tombol n°%d telah ditambahkan!</string>
     <string name="customctrl_selectdefault">Pilih \". json\" kontrol default</string>
+    <string name="customctrl_export">Ekspor kontrol</string>
     <string name="main_install_jar_file">Install .jar</string>
     <string name="main_options">Opsi</string>
     <string name="main_play">Main</string>
@@ -241,6 +247,8 @@
     <string name="preference_experimental_description">Gunakan hal-hal di sana dengan pertimbangan, tanpa dukungan.</string>
     <string name="preference_sustained_performance_title">Aktifkan mode kinerja berkelanjutan</string>
     <string name="preference_sustained_performance_description">Limit thermal throttling dengan menglimit perfoma maksimal</string>
+    <string name="preference_force_english_title">Paksa bahasa menggunakan Bahasa Inggris</string>
+    <string name="preference_force_english_description">Memperbolehkan anda untuk melihat string asli, seperti diinginkan oleh para pengembang. Membutuhkan sebuah restart</string>
     <string name="preference_back_title">Kembali ke layar terakhir</string>
     <string name="gles_hack_title">GL4ES Shrink hack</string>
     <string name="gles_hack_none">Jangan mengecilkan tekstur</string>
@@ -258,5 +266,20 @@
     <string name="arc_capes_title">Capes Cosmetica</string>
     <string name="arc_capes_desc">Mengaktifkan capes dari Cosmetica (sebelumnya Arc). Untuk informasi lebih lanjut silahkan kunjungi https://cosmetica.cc. Membutuhkan OptiFine.</string>
     <string name="migrated_profile_str">Versi konfigurasi %s</string>
+    <string name="notif_channel_name">Umum</string>
+    <string name="lazy_service_default_title">Pojav Foreground Service</string>
+    <string name="lazy_service_default_description">Service ini digunakan untuk menjalankang operasi berjalan lama</string>
     <string name="mcl_setting_veroption_installed">Terpasang</string>
+    <string name="use_global_default">(Gunakan global bawaan)</string>
+    <string name="default_control">Kontrol bawaan</string>
+    <string name="progresslayout_tasks_in_progress">%d tugas sedang berjalan</string>
+    <string name="notification_terminate">Hentikan</string>
+    <string name="notification_game_runs">Permainannya sedang berjalan!</string>
+    <string name="folder_dialog_create">Buat</string>
+    <string name="folder_dialog_insert_name">Masukkan nama folder</string>
+    <string name="main_login_done">Masuk selesai</string>
+    <string name="main_add_account">Tambah akun</string>
+    <string name="tasks_ongoing">Ada tugas yang sedang berjalan, mohon menunggu</string>
+    <string name="no_saved_accounts">Tidak ada akun yang tersimpan</string>
+    <string name="downloading_versions">Mengunduh daftar versi…</string>
 </resources>
