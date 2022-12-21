@@ -208,7 +208,7 @@
     <string name="customctrl_selectdefault">Select default Control json</string>
     <string name="customctrl_export">Export control</string>
 
-
+    <string name="main_share_logs">Share log file</string>
     <string name="main_install_jar_file">Install .jar</string>
     <string name="main_options">Options</string>
     <string name="main_play">Play</string>
