@@ -4,6 +4,15 @@
 
     <net.kdt.pojavlaunch.prefs.BackButtonPreference/>
 
+
+    <Preference
+        android:title="@string/preference_edit_controls_title"
+        android:summary="@string/preference_edit_controls_summary"
+        app2:icon="@drawable/ic_menu_custom_controls"
+        >
+        <intent android:action=".CustomControlsActivity"/>
+    </Preference>
+
     <PreferenceCategory
         android:title="Gestures ">
 

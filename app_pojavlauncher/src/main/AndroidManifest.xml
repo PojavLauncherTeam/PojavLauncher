@@ -78,7 +78,13 @@
         <activity
             android:screenOrientation="sensorLandscape"
             android:name=".CustomControlsActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"/>
+            android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"
+            android:exported="true">
+            <intent-filter>
+                <action android:name=".CustomControlsActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
         <activity
             android:process=":game"

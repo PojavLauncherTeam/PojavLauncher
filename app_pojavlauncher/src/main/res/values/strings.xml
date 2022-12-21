@@ -284,6 +284,8 @@
     <string name="preference_sustained_performance_description">Limit thermal throttling by limiting peak performance</string>
     <string name="preference_force_english_title">Force language to english</string>
     <string name="preference_force_english_description">Allows you to see original strings, as intended by developers. Requires a restart</string>
+    <string name="preference_edit_controls_title">Edit custom controls</string>
+    <string name="preference_edit_controls_summary">Tweak the control scheme to fit your needs</string>
 
     <string name="preference_back_title">Back to the last screen</string>
     <string name="gles_hack_title">GL4ES Shrink hack</string>
