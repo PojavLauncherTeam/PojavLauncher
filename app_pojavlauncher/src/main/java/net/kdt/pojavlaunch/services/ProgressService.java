@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
+import android.os.Looper;
 import android.os.Process;
 import android.util.Log;
 
@@ -28,7 +29,7 @@ import net.kdt.pojavlaunch.progresskeeper.TaskCountListener;
  */
 public class ProgressService extends Service implements TaskCountListener {
 
-    private final Handler mainThreadHandler = new Handler();
+    private final Handler mainThreadHandler = new Handler(Looper.getMainLooper());
     private NotificationManagerCompat notificationManagerCompat;
 
     /** Simple wrapper to start the service */

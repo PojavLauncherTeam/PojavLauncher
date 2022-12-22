@@ -44,7 +44,6 @@ import org.lwjgl.glfw.CallbackBridge;
  * Class dealing with showing minecraft surface and taking inputs to dispatch them to minecraft
  */
 public class MinecraftGLSurface extends View implements GrabListener{
-    Handler uiThreadHandler = new Handler();
     /* Gamepad object for gamepad inputs, instantiated on need */
     private Gamepad mGamepad = null;
     /* Pointer Debug textview, used to show info about the pointer state */
@@ -647,7 +646,7 @@ public class MinecraftGLSurface extends View implements GrabListener{
 
     @Override
     public void onGrabState(boolean isGrabbing) {
-        uiThreadHandler.post(()->updateGrabState(isGrabbing));
+        post(()->updateGrabState(isGrabbing));
     }
 
     private void updateGrabState(boolean isGrabbing) {
