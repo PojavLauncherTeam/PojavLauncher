@@ -107,6 +107,7 @@
     <string name="global_unpacking">正在解压 %s</string>
     <string name="global_error_field_empty">此处表单不能为空</string>
     <string name="global_waiting">请稍等</string>
+    <string name="global_select">选择</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">应用程序/游戏以代码 %d退出，请查看 latestlog.txt 了解更多详情。</string>
     <string name="mcn_exit_call">退出</string>
@@ -178,6 +179,7 @@
     <string name="customctrl_add_subbutton_message">子按钮 n°%d 已添加！</string>
     <string name="customctrl_selectdefault">选择默认 json 控制键位</string>
     <string name="customctrl_export">导出键盘</string>
+    <string name="main_share_logs">共享日志文件</string>
     <string name="main_install_jar_file">安装 .jar</string>
     <string name="main_options">选项</string>
     <string name="main_play">启动游戏</string>
@@ -249,6 +251,8 @@
     <string name="preference_sustained_performance_description">通过限制峰值性能来限制过热降频</string>
     <string name="preference_force_english_title">强制使用英文</string>
     <string name="preference_force_english_description">允许您按开发者的原意看到原始字符串。此操作需要重启</string>
+    <string name="preference_edit_controls_title">编辑自定义控制按键</string>
+    <string name="preference_edit_controls_summary">调整控制方案以适应您的需求</string>
     <string name="preference_back_title">返回上一个页面</string>
     <string name="gles_hack_title">GL4ES 缩放设置</string>
     <string name="gles_hack_none">不缩小纹理</string>
