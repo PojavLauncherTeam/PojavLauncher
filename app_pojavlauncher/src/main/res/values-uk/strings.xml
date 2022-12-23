@@ -107,6 +107,7 @@
     <string name="global_unpacking">Розпакування %s</string>
     <string name="global_error_field_empty">Це поле не може бути порожнім</string>
     <string name="global_waiting">Зачекайте</string>
+    <string name="global_select">Обрати</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Програма/Гра завершилась з кодом %d, глянь в latestlog.txt для більш детальної інформації.</string>
     <string name="mcn_exit_call">Вийти</string>
@@ -178,6 +179,7 @@
     <string name="customctrl_add_subbutton_message">Підлегла кнопка n°%d була додана!</string>
     <string name="customctrl_selectdefault">Вибрати керування за замовчуванням</string>
     <string name="customctrl_export">Експорт керування</string>
+    <string name="main_share_logs">Поділитися журналом</string>
     <string name="main_install_jar_file">Встановити .jar</string>
     <string name="main_options">Опції</string>
     <string name="main_play">Грати</string>
@@ -249,6 +251,8 @@
     <string name="preference_sustained_performance_description">Обмежте терморегуляцію, обмеживши пікову продуктивність</string>
     <string name="preference_force_english_title">Примусово перевести мову на англійську</string>
     <string name="preference_force_english_description">Дозволяє бачити оригінальні рядки, як це було задумано розробниками. Вимагає перезавантаження</string>
+    <string name="preference_edit_controls_title">Редагувати елементи керування</string>
+    <string name="preference_edit_controls_summary">Налаштуйте схему керування на ваше вподобання</string>
     <string name="preference_back_title">Повернутися назад</string>
     <string name="gles_hack_title">Скорочення GL4ES</string>
     <string name="gles_hack_none">Не стискати текстури</string>
