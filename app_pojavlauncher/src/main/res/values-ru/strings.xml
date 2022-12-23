@@ -107,6 +107,7 @@
     <string name="global_unpacking">Распаковка %s</string>
     <string name="global_error_field_empty">Это поле не может быть пустым</string>
     <string name="global_waiting">Подождите</string>
+    <string name="global_select">Выбрать</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Произошёл собой приложения/игры с кодом %d. Проверьте latestlog.txt, чтобы получить больше информации.</string>
     <string name="mcn_exit_call">Выйти</string>
@@ -178,6 +179,7 @@
     <string name="customctrl_add_subbutton_message">Подкнопка №%d добавлена!</string>
     <string name="customctrl_selectdefault">Выбрать управление по умолчанию</string>
     <string name="customctrl_export">Экспорт раскладки</string>
+    <string name="main_share_logs">Отправить журнал</string>
     <string name="main_install_jar_file">Установите .jar</string>
     <string name="main_options">Опции</string>
     <string name="main_play">Играть</string>
@@ -250,6 +252,8 @@
     <string name="preference_sustained_performance_description">Уменьшает тротлинга от нагрева путём уменьшения производительности</string>
     <string name="preference_force_english_title">Принудительно включить английский</string>
     <string name="preference_force_english_description">Позволяет увидеть оригинальные строки такими, какими их задумали разработчики. Требует перезапуска.</string>
+    <string name="preference_edit_controls_title">Изменить раскладку</string>
+    <string name="preference_edit_controls_summary">Настройте кнопки управления по вашему желанию</string>
     <string name="preference_back_title">Вернуться назад</string>
     <string name="gles_hack_title">Сжатие GL4ES</string>
     <string name="gles_hack_none">Не сжимать текстуры</string>
