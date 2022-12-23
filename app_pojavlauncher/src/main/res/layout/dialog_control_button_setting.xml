@@ -91,6 +91,39 @@
             app:layout_constraintStart_toEndOf="@id/editSize_editTextX"
             app:layout_constraintTop_toTopOf="@+id/editSize_editTextX" />
 
+        <!-- TEXT SIZE SECTION -->
+        <TextView
+            android:id="@+id/editTextSize_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:paddingEnd="5dp"
+            android:text="@string/customctrl_text_size"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editSize_editTextX" />
+
+        <SeekBar
+            android:id="@+id/editTextSize_seekbar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.538"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextSize_textView" />
+
+        <TextView
+            android:id="@+id/editTextSize_textView_dip"
+            android:layout_width="50dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="14dp"
+
+            app:layout_constraintBottom_toBottomOf="@id/editTextSize_textView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/editTextSize_textView" />
+
         <!-- MAPPING SECTION -->
         <TextView
             android:id="@+id/editMapping_textView"
@@ -101,7 +134,7 @@
             android:text="@string/customctrl_mapping"
 
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editSize_editTextX" />
+            app:layout_constraintTop_toBottomOf="@+id/editTextSize_seekbar" />
 
         <Spinner
             android:id="@+id/editMapping_spinner_1"

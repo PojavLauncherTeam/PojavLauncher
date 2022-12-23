@@ -11,6 +11,7 @@ import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -82,8 +83,8 @@ public class EditControlPopup {
     protected Switch mToggleSwitch, mPassthroughSwitch, mSwipeableSwitch;
     protected Spinner mOrientationSpinner;
     protected Spinner[] mKeycodeSpinners = new Spinner[4];
-    protected SeekBar mStrokeWidthSeekbar, mCornerRadiusSeekbar, mAlphaSeekbar;
-    protected TextView mStrokePercentTextView, mCornerRadiusPercentTextView, mAlphaPercentTextView;
+    protected SeekBar mStrokeWidthSeekbar, mCornerRadiusSeekbar, mAlphaSeekbar, mTextSizeSeekbar;
+    protected TextView mTextSizeTextView, mStrokePercentTextView, mCornerRadiusPercentTextView, mAlphaPercentTextView;
     protected TextView mSelectBackgroundColor, mSelectStrokeColor;
     protected ArrayAdapter<String> mAdapter;
     protected String[] mSpecialArray;
@@ -113,6 +114,7 @@ public class EditControlPopup {
         mScrollView.setX(-context.getResources().getDimensionPixelOffset(R.dimen._230sdp));
 
         bindLayout();
+        mTextSizeSeekbar.setMax(24 - 8); // max - min
         loadAdapter();
 
         setupRealTimeListeners();
@@ -245,6 +247,9 @@ public class EditControlPopup {
         return mScrollView.getX() > currentDisplayMetrics.widthPixels/2f;
     }
 
+    public static void setDPText(TextView textView, int dp_progress){
+        textView.setText(dp_progress + "dp");
+    }
 
     public static void setPercentageText(TextView textView, int progress){
         textView.setText(progress + " %");
@@ -262,10 +267,12 @@ public class EditControlPopup {
         mWidthEditText.setText(String.valueOf(data.getWidth()));
         mHeightEditText.setText(String.valueOf(data.getHeight()));
 
+        mTextSizeSeekbar.setProgress(data.textSize - 8);
         mAlphaSeekbar.setProgress((int) (data.opacity*100));
         mStrokeWidthSeekbar.setProgress(data.strokeWidth);
         mCornerRadiusSeekbar.setProgress((int) data.cornerRadius);
 
+        setDPText(mTextSizeTextView, data.textSize);
         setPercentageText(mAlphaPercentTextView, (int) (data.opacity*100));
         setPercentageText(mStrokePercentTextView, data.strokeWidth);
         setPercentageText(mCornerRadiusPercentTextView, (int) data.cornerRadius);
@@ -332,6 +339,8 @@ public class EditControlPopup {
         mNameEditText = mScrollView.findViewById(R.id.editName_editText);
         mWidthEditText = mScrollView.findViewById(R.id.editSize_editTextX);
         mHeightEditText = mScrollView.findViewById(R.id.editSize_editTextY);
+        mTextSizeSeekbar = mScrollView.findViewById(R.id.editTextSize_seekbar);
+        mTextSizeTextView = mScrollView.findViewById(R.id.editTextSize_textView_dip);
         mToggleSwitch = mScrollView.findViewById(R.id.checkboxToggle);
         mPassthroughSwitch = mScrollView.findViewById(R.id.checkboxPassThrough);
         mSwipeableSwitch = mScrollView.findViewById(R.id.checkboxSwipeable);
@@ -425,6 +434,21 @@ public class EditControlPopup {
         mPassthroughSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if(internalChanges) return;
             mCurrentlyEditedButton.getProperties().passThruEnabled = isChecked;
+        });
+
+        mTextSizeSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if(internalChanges) return;
+                mCurrentlyEditedButton.getProperties().textSize = 8 + mTextSizeSeekbar.getProgress();
+                mCurrentlyEditedButton.setProperties(mCurrentlyEditedButton.getProperties(), false);
+                setDPText(mTextSizeTextView, 8 + progress);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {}
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {}
         });
 
         mAlphaSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {

@@ -182,6 +182,7 @@
     <string name="customctrl_size_width">Width</string>
     <string name="customctrl_size_height">Height</string>
 
+    <string name="customctrl_text_size">Text size</string>
     <string name="customctrl_mapping">Mapping</string>
     <string name="customctrl_orientation">Orientation</string>
     <string name="customctrl_background_color">Background color</string>

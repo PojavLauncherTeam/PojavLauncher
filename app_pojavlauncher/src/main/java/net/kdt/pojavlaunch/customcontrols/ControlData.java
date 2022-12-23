@@ -221,6 +221,10 @@ public class ControlData {
         return Tools.dpToPx(height);
     }
 
+    public int getTextSize(){
+        return this.textSize;
+    }
+
 
     public void setWidth(float widthInPx){
         width = Tools.pxToDp(widthInPx);
@@ -228,6 +232,10 @@ public class ControlData {
 
     public void setHeight(float heightInPx){
         height = Tools.pxToDp(heightInPx);
+    }
+
+    public void setTextSize(int sizeInDP){
+        this.textSize = sizeInDP;
     }
 
     /**
