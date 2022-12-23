@@ -85,6 +85,7 @@ public class ControlData {
     }
 
     public String name;
+    public int textSize;        //In Dp
     private float width;         //Dp instead of Px now
     private float height;        //Dp instead of Px now
     public int[] keycodes;      //Should store up to 4 keys
@@ -137,11 +138,12 @@ public class ControlData {
     }
 
     public ControlData(String name, int[] keycodes, String dynamicX, String dynamicY, float width, float height, boolean isToggle){
-        this(name, keycodes, dynamicX, dynamicY, width, height, isToggle, 1,0x4D000000, 0xFFFFFFFF,0,0);
+        this(name, 14, keycodes, dynamicX, dynamicY, width, height, isToggle, 1,0x4D000000, 0xFFFFFFFF,0,0);
     }
 
-    public ControlData(String name, int[] keycodes, String dynamicX, String dynamicY, float width, float height, boolean isToggle, float opacity, int bgColor, int strokeColor, int strokeWidth, float cornerRadius) {
+    public ControlData(String name, int textSize, int[] keycodes, String dynamicX, String dynamicY, float width, float height, boolean isToggle, float opacity, int bgColor, int strokeColor, int strokeWidth, float cornerRadius) {
         this.name = name;
+        this.textSize = textSize;
         this.keycodes = inflateKeycodeArray(keycodes);
         this.dynamicX = dynamicX;
         this.dynamicY = dynamicY;
@@ -160,6 +162,7 @@ public class ControlData {
     public ControlData(ControlData controlData){
         this(
                 controlData.name,
+                controlData.textSize,
                 controlData.keycodes,
                 controlData.dynamicX,
                 controlData.dynamicY,
