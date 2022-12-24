@@ -528,6 +528,8 @@ public final class Tools {
         CallbackBridge.physicalHeight = currentDisplayMetrics.heightPixels;
     }
 
+    // DP <=> PX
+
     public static float dpToPx(float dp) {
         //Better hope for the currentDisplayMetrics to be good
         return dp * currentDisplayMetrics.density;
@@ -536,6 +538,30 @@ public final class Tools {
     public static float pxToDp(float px){
         //Better hope for the currentDisplayMetrics to be good
         return px / currentDisplayMetrics.density;
+    }
+
+    // SP <=> PX
+
+    public static float spToPx(float sp){
+   	//Better hope for the currentDisplayMetrics to be good
+	return sp * currentDisplayMetrics.scaledDensity;
+    }
+
+    public static float pxToSp(float px){
+	//Better hope for the currentDisplayMetrics to be good
+	return px / currentDisplayMetrics.scaledDensity;
+    }
+
+    // DP <=> SP
+
+    public static float dpToSp(float dp){
+	//Better hope for the currentDisplayMetrics to be good
+	return dpToPx(dp) / currentDisplayMetrics.density;
+    }
+
+    public static float spToDp(float sp){
+	//Better hope for the currentDisplayMetrics to be good
+	return spToPx(sp) / currentDisplayMetrics.density;
     }
 
     public static void copyAssetFile(Context ctx, String fileName, String output, boolean overwrite) throws IOException {
