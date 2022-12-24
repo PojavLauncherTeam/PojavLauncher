@@ -32,7 +32,7 @@ public class ControlButton extends TextView implements ControlInterface {
         setAllCaps(true);
         setTextColor(Color.WHITE);
         setPadding(4, 4, 4, 4);
-        setTextSize(Tools.dpToPx(properties.textSize)); // Nullify the default size setting
+        setTextSize(TypedValue.COMPLEX_UNIT_PX, Tools.dpToPx(properties.textSize)); // Nullify the default size setting
 
         //setOnLongClickListener(this);
 
@@ -65,7 +65,7 @@ public class ControlButton extends TextView implements ControlInterface {
         }
 
         setText(properties.name);
-        setTextSize(Tools.dpToPx(properties.textSize));
+        setTextSize(TypedValue.COMPLEX_UNIT_PX, Tools.dpToPx(properties.textSize));
     }
 
     public void setVisible(boolean isVisible){
