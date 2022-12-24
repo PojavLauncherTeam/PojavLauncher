@@ -222,7 +222,7 @@ public class ControlData {
     }
 
     public int getTextSize(){
-        return this.textSize;
+        return textSize;
     }
 
 
@@ -234,8 +234,8 @@ public class ControlData {
         height = Tools.pxToDp(heightInPx);
     }
 
-    public void setTextSize(int sizeInDP){
-        this.textSize = sizeInDP;
+    public void setTextSize(int sizeInDp){
+        textSize = sizeInDp;
     }
 
     /**
