@@ -107,6 +107,7 @@
     <string name="global_unpacking">Entpacke %s</string>
     <string name="global_error_field_empty">Dieses Feld darf nicht leer sein</string>
     <string name="global_waiting">Bitte warte einen kleinen Moment</string>
+    <string name="global_select">Auswählen</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Anwendung/Spiel mit dem Code %d beendet, für weitere Details, latestlog.txt lesen.</string>
     <string name="mcn_exit_call">Beenden</string>
@@ -178,6 +179,7 @@
     <string name="customctrl_add_subbutton_message">Unter-Schaltfläche Nr. %d wurde hinzugefügt!</string>
     <string name="customctrl_selectdefault">Wähle die Standardsteuerung</string>
     <string name="customctrl_export">Steuerung exportieren</string>
+    <string name="main_share_logs">Protokoll-/Logdatei teilen</string>
     <string name="main_install_jar_file">.jar installieren</string>
     <string name="main_options">Optionen</string>
     <string name="main_play">Spielen</string>
@@ -249,6 +251,8 @@
     <string name="preference_sustained_performance_description">Begrenzung der thermischen Drosselung durch Begrenzung der Spitzenleistung</string>
     <string name="preference_force_english_title">Englische Sprache erzwingen</string>
     <string name="preference_force_english_description">Ermöglicht es dir, die ursprünglichen Texte zu sehen, wie sie von Entwicklern vorgesehen sind. Benötigt einen Neustart</string>
+    <string name="preference_edit_controls_title">Benutzerdefinierte Steuerung bearbeiten</string>
+    <string name="preference_edit_controls_summary">Passe die Steuerung deinen Ansprüchen an</string>
     <string name="preference_back_title">Zum übergeordneten Menü gehen</string>
     <string name="gles_hack_title">GL4ES-Schrumpfhack</string>
     <string name="gles_hack_none">Texturen nicht verkleinern</string>
