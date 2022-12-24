@@ -267,12 +267,12 @@ public class EditControlPopup {
         mWidthEditText.setText(String.valueOf(data.getWidth()));
         mHeightEditText.setText(String.valueOf(data.getHeight()));
 
-        mTextSizeSeekbar.setProgress(data.textSize - 8);
+        mTextSizeSeekbar.setProgress((int) (data.textSize - 8));
         mAlphaSeekbar.setProgress((int) (data.opacity*100));
         mStrokeWidthSeekbar.setProgress(data.strokeWidth);
         mCornerRadiusSeekbar.setProgress((int) data.cornerRadius);
 
-        setDPText(mTextSizeTextView, data.textSize);
+        setDPText(mTextSizeTextView, (int) data.textSize);
         setPercentageText(mAlphaPercentTextView, (int) (data.opacity*100));
         setPercentageText(mStrokePercentTextView, data.strokeWidth);
         setPercentageText(mCornerRadiusPercentTextView, (int) data.cornerRadius);
