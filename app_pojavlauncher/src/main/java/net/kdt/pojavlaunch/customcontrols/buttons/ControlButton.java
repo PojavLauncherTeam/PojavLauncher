@@ -32,7 +32,8 @@ public class ControlButton extends TextView implements ControlInterface {
         setAllCaps(true);
         setTextColor(Color.WHITE);
         setPadding(4, 4, 4, 4);
-        setTextSize(TypedValue.COMPLEX_UNIT_PX, Tools.dpToPx(properties.textSize)); // Nullify the default size setting
+        /*setTextSize(TypedValue.COMPLEX_UNIT_PX, Tools.dpToPx(properties.textSize)); // Nullify the default size setting
+            not required to call here, setProperties() that is next after this does it anyway */
 
         //setOnLongClickListener(this);
 
