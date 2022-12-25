@@ -409,6 +409,10 @@ public class MinecraftGLSurface extends View implements GrabListener{
             break;
         }
         if(mouseCursorIndex == -1) return false; // we cant consoom that, theres no mice!
+
+        // Make sure we grabbed the mouse if necessary
+        updateGrabState(CallbackBridge.isGrabbing());
+
         switch(event.getActionMasked()) {
             case MotionEvent.ACTION_HOVER_MOVE:
                 CallbackBridge.mouseX = (event.getX(mouseCursorIndex) * mScaleFactor);
@@ -650,16 +654,20 @@ public class MinecraftGLSurface extends View implements GrabListener{
     }
 
     private void updateGrabState(boolean isGrabbing) {
-        if(MainActivity.isAndroid8OrHigher()) {
-            if (isGrabbing && !hasPointerCapture()) {
+        if(!MainActivity.isAndroid8OrHigher()) return;
+
+        boolean hasPointerCapture = hasPointerCapture();
+        if(isGrabbing){
+            if(!hasPointerCapture) {
                 requestFocus();
                 requestPointerCapture();
             }
+            return;
+        }
 
-            if (!isGrabbing && hasPointerCapture()) {
-                releasePointerCapture();
-                clearFocus();
-            }
+        if(hasPointerCapture) {
+            releasePointerCapture();
+            clearFocus();
         }
     }
 
