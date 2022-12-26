@@ -282,7 +282,7 @@
     <string name="folder_dialog_create">新建</string>
     <string name="folder_dialog_insert_name">插入文件夹名称</string>
     <string name="main_login_done">登录完成</string>
-    <string name="main_add_account">添加账号</string>
+    <string name="main_add_account">添加账户</string>
     <string name="tasks_ongoing">任务正在执行中，请稍候</string>
     <string name="no_saved_accounts">没有已保存的账户</string>
     <string name="downloading_versions">正在下载版本列表……</string>
