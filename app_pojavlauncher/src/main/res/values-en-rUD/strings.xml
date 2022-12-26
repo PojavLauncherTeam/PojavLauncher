@@ -107,6 +107,7 @@
     <string name="global_unpacking">%s ᵷuᴉʞɔɐdu∩</string>
     <string name="global_error_field_empty">ʎʇdɯǝ ǝq ʇ,uɐɔ pꞁǝᴉɟ sᴉɥ⟘</string>
     <string name="global_waiting">ʇᴉɐM</string>
+    <string name="global_select">ʇɔǝlǝS</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">sꞁᴉɐʇǝp ǝɹoɯ ɹoɟ ʇxʇ˙ᵷoꞁʇsǝʇɐꞁ ʞɔǝɥɔ \'%d ǝpoɔ ɥʇᴉʍ pǝʇᴉxǝ ǝɯɐ⅁/uoᴉʇɐɔᴉꞁddⱯ</string>
     <string name="mcn_exit_call">ʇᴉxƎ</string>
@@ -169,6 +170,7 @@
     <string name="customctrl_add_subbutton_message">¡ pǝppɐ uǝǝq sɐɥ %d°u uoʇʇnq-qnS</string>
     <string name="customctrl_selectdefault">uosɾ ꞁoɹʇuoƆ ʇꞁnɐɟǝp ʇɔǝꞁǝS</string>
     <string name="customctrl_export">loɹʇuoɔ ʇɹodxƎ</string>
+    <string name="main_share_logs">ǝlᴉɟ ƃol ǝɹɐɥS</string>
     <string name="main_install_jar_file">ɹɐɾ˙ ꞁꞁɐʇsuI</string>
     <string name="main_options">suoᴉʇdO</string>
     <string name="main_play">ʎɐꞁԀ</string>
@@ -240,6 +242,8 @@
     <string name="preference_sustained_performance_description">ǝɔuɐɯɹoɟɹǝd ʞɐǝd ᵷuᴉʇᴉɯᴉꞁ ʎq ᵷuᴉꞁʇʇoɹɥʇ ꞁɐɯɹǝɥʇ ʇᴉɯᴉꞀ</string>
     <string name="preference_force_english_title">ɥsᴉlƃuǝ oʇ ǝƃɐnƃuɐl ǝɔɹoℲ</string>
     <string name="preference_force_english_description">ʇɹɐʇsǝɹ ɐ sǝɹᴉnbǝɹ ˙sɹǝdolǝʌǝp ʎq pǝpuǝʇuᴉ sɐ \'sƃuᴉɹʇs lɐuᴉƃᴉɹo ǝǝs oʇ noʎ sʍoll∀</string>
+    <string name="preference_edit_controls_title">sloɹʇuoɔ ɯoʇsnɔ ʇᴉpƎ</string>
+    <string name="preference_edit_controls_summary">spǝǝu ɹnoʎ ʇᴉɟ oʇ ǝɯǝɥɔs loɹʇuoɔ ǝɥʇ ʞɐǝʍ┴</string>
     <string name="preference_back_title">uǝǝɹɔs ʇsɐꞁ ǝɥʇ oʇ ʞɔɐᗺ</string>
     <string name="gles_hack_title">ʞɔɐɥ ʞuᴉɹɥS SƎㄣ˥פ</string>
     <string name="gles_hack_none">sǝɹnʇxǝʇ ʞuᴉɹɥs ʇ,uop</string>
