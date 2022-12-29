@@ -386,6 +386,45 @@ public class JREUtils {
     }
 
     /**
+     * more better arguments parser that allows escapes and doesnt change up args
+     * @param _args all args as a string
+     * @return a list of split args
+     */
+    public static ArrayList<String> parseJavaArguments(String _args) {
+        char bracketOpen = '\0';
+        char[] str = _args.toCharArray();
+        StringBuilder sb = new StringBuilder();
+        ArrayList<String> ret = new ArrayList<String>();
+        for(int i = 0; i < str.length; i++) {
+            if(str[i] == '\\') {
+                sb.append(str[i+1]);
+                i++;
+                continue;
+            }
+            if(str[i] == ' ' && bracketOpen == '\0') {
+                if(sb.length() > 0) {
+                    ret.add(sb.toString());
+                    sb = new StringBuilder();
+                }
+                continue;
+            }
+            if(str[i] == '"' || str[i] == '\'') {
+                if(bracketOpen == str[i]) {
+                    bracketOpen = '\0';
+                    continue;
+                }else if(bracketOpen == '\0') {
+                    bracketOpen = str[i];
+                    continue;
+                }
+
+            }
+            sb.append(str[i]);
+        }
+        ret.add(sb.toString());
+        return ret;
+    }
+
+    /*
      * Parse and separate java arguments in a user friendly fashion
      * It supports multi line and absence of spaces between arguments
      * The function also supports auto-removal of improper arguments, although it may miss some.
@@ -393,7 +432,7 @@ public class JREUtils {
      * @param args The un-parsed argument list.
      * @return Parsed args as an ArrayList
      */
-    public static ArrayList<String> parseJavaArguments(String args){
+    /*public static ArrayList<String> parseJavaArguments(String args){
         ArrayList<String> parsedArguments = new ArrayList<>(0);
         args = args.trim().replace(" ", "");
         //For each prefixes, we separate args.
@@ -427,7 +466,7 @@ public class JREUtils {
             }
         }
         return parsedArguments;
-    }
+    }*/
 
     /**
      * Open the render library in accordance to the settings.
