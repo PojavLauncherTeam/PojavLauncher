@@ -9,6 +9,8 @@ import static net.kdt.pojavlaunch.Tools.currentDisplayMetrics;
 import android.app.*;
 import android.content.*;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Looper;
 import android.system.*;
 import android.util.*;
 import android.widget.Toast;
@@ -186,7 +188,7 @@ public class JREUtils {
         LD_LIBRARY_PATH = ldLibraryPath.toString();
     }
 
-    public static void setJavaEnvironment(Activity activity) throws Throwable {
+    public static void setJavaEnvironment(Context activity) throws Throwable {
         Map<String, String> envMap = new ArrayMap<>();
         envMap.put("POJAV_NATIVEDIR", NATIVE_LIB_DIR);
         envMap.put("JAVA_HOME", Tools.DIR_HOME_JRE);
@@ -274,7 +276,8 @@ public class JREUtils {
         // return ldLibraryPath;
     }
 
-    public static int launchJavaVM(final Activity activity,final List<String> JVMArgs) throws Throwable {
+    public static int launchJavaVM(final Context activity,final List<String> JVMArgs) throws Throwable {
+        final Handler handler = new Handler(Looper.getMainLooper());
         JREUtils.relocateLibPath();
         // For debugging only!
 /*
@@ -304,18 +307,18 @@ public class JREUtils {
         if(LOCAL_RENDERER != null) userArgs.add("-Dorg.lwjgl.opengl.libname=" + graphicsLib);
 
         userArgs.addAll(JVMArgs);
-        activity.runOnUiThread(() -> Toast.makeText(activity, activity.getString(R.string.autoram_info_msg,LauncherPreferences.PREF_RAM_ALLOCATION), Toast.LENGTH_SHORT).show());
+        handler.post(() -> Toast.makeText(activity, activity.getString(R.string.autoram_info_msg,LauncherPreferences.PREF_RAM_ALLOCATION), Toast.LENGTH_SHORT).show());
         System.out.println(JVMArgs);
 
         initJavaRuntime();
-        setupExitTrap(activity.getApplication());
+        setupExitTrap(activity);
         chdir(Tools.DIR_GAME_NEW);
         userArgs.add(0,"java"); //argv[0] is the program name according to C standard.
 
         final int exitCode = VMLauncher.launchJVM(userArgs.toArray(new String[0]));
         Logger.getInstance().appendToLog("Java Exit code: " + exitCode);
         if (exitCode != 0) {
-            activity.runOnUiThread(() -> {
+            handler.post(() -> {
                 AlertDialog.Builder dialog = new AlertDialog.Builder(activity);
                 dialog.setMessage(activity.getString(R.string.mcn_exit_title, exitCode));
 

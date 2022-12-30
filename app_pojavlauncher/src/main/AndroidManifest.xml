@@ -106,6 +106,7 @@
 
         <service android:name=".services.ProgressService"/>
         <service android:name=".services.GameService" android:process=":game"/>
+        <service android:name=".services.remotevm.RemoteVMService" android:process=":remotevm"/>
 
     </application>
 
