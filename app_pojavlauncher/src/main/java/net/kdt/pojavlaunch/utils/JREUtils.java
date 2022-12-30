@@ -385,12 +385,12 @@ public class JREUtils {
         return userArguments;
     }
 
-    /**
+    /*
      * more better arguments parser that allows escapes and doesnt change up args
      * @param _args all args as a string
      * @return a list of split args
      */
-    public static ArrayList<String> parseJavaArguments(String _args) {
+    /*public static ArrayList<String> parseJavaArguments(String _args) {
         char bracketOpen = '\0';
         char[] str = _args.toCharArray();
         StringBuilder sb = new StringBuilder();
@@ -422,9 +422,9 @@ public class JREUtils {
         }
         ret.add(sb.toString());
         return ret;
-    }
+    }*/
 
-    /*
+    /**
      * Parse and separate java arguments in a user friendly fashion
      * It supports multi line and absence of spaces between arguments
      * The function also supports auto-removal of improper arguments, although it may miss some.
@@ -432,7 +432,7 @@ public class JREUtils {
      * @param args The un-parsed argument list.
      * @return Parsed args as an ArrayList
      */
-    /*public static ArrayList<String> parseJavaArguments(String args){
+    public static ArrayList<String> parseJavaArguments(String args){
         ArrayList<String> parsedArguments = new ArrayList<>(0);
         args = args.trim().replace(" ", "");
         //For each prefixes, we separate args.
@@ -466,7 +466,7 @@ public class JREUtils {
             }
         }
         return parsedArguments;
-    }*/
+    }
 
     /**
      * Open the render library in accordance to the settings.
