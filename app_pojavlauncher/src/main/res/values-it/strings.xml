@@ -83,6 +83,11 @@
     <string name="mcl_setting_category_general">Impostazioni generali</string>
     <string name="mcl_setting_category_scaling">Modifica dimensioni</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
+    <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (Tutte le versioni, veloce)</string>
+    <string name="mcl_setting_renderer_virgl">virglrenderer - (versione 1.7+, lento)</string>
+    <string name="mcl_setting_renderer_vgpu">vgpu - (fino alla 1.16.5, veloce)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink - (vecchia_beta b1.8+, lento)</string>
+    <string name="mcl_setting_renderer_angle">ANGLE - (versione 1.17+, mediamente veloce)</string>
     <string name="mcl_setting_category_veroption">Tipo di versioni che saranno nell\'elenco delle versioni</string>
     <string name="mcl_setting_veroption_release">Finale</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
@@ -102,6 +107,7 @@
     <string name="global_unpacking">Estrazione %s</string>
     <string name="global_error_field_empty">Questo campo non può essere vuoto</string>
     <string name="global_waiting">Attendere</string>
+    <string name="global_select">Seleziona</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">L\'applicazione/gioco si è chiuso con il codice %d, controlla il lastlog.txt per più dettagli.</string>
     <string name="mcn_exit_call">Esci</string>
@@ -172,6 +178,8 @@
     <string name="customctrl_addsubbutton">Aggiungi sub-pulsante</string>
     <string name="customctrl_add_subbutton_message">Il sub-pulsante n°%d è stato aggiunto!</string>
     <string name="customctrl_selectdefault">Seleziona Controllo di default json</string>
+    <string name="customctrl_export">Esporta controlli</string>
+    <string name="main_share_logs">Condividi i log</string>
     <string name="main_install_jar_file">Installa .jar</string>
     <string name="main_options">Impostazioni</string>
     <string name="main_play">Gioca</string>
@@ -241,6 +249,10 @@
     <string name="preference_experimental_description">Utilizza le impostazioni a tuo rischio, non si garantisce il supporto.</string>
     <string name="preference_sustained_performance_title">Attiva modalità performance sostenute</string>
     <string name="preference_sustained_performance_description">Limita il thermal throttling limitando le performance massime</string>
+    <string name="preference_force_english_title">Forza l\'inglese come lingua</string>
+    <string name="preference_force_english_description">Ti consente di vedere le stringhe originali, come previsto dagli sviluppatori. Richiede un riavvio dell\'app</string>
+    <string name="preference_edit_controls_title">Modifica i controlli personalizzati</string>
+    <string name="preference_edit_controls_summary">Regola lo schema di controllo per soddisfare le tue esigenze</string>
     <string name="preference_back_title">Ritorna indietro</string>
     <string name="gles_hack_title">GL4ES Shrink hack</string>
     <string name="gles_hack_none">Non rimpicciolire le textures</string>
@@ -258,5 +270,20 @@
     <string name="arc_capes_title">Mantelli Cosmetica</string>
     <string name="arc_capes_desc">Abilità i mantelli di Cosmetica (precedentemente Arc). Per ulteriori informazioni visita https://cosmetica.cc. Necessita la OptiFine.</string>
     <string name="migrated_profile_str">%s configurazione versione</string>
+    <string name="notif_channel_name">Generale</string>
+    <string name="lazy_service_default_title">Servizio di Foreground Pojav</string>
+    <string name="lazy_service_default_description">Il servizio viene utilizzato per eseguire delle operazioni di lunga durata</string>
     <string name="mcl_setting_veroption_installed">Installato</string>
+    <string name="use_global_default">(Utilizza il predefinito globale)</string>
+    <string name="default_control">Controlli predefiniti</string>
+    <string name="progresslayout_tasks_in_progress">%d Operazione in corso</string>
+    <string name="notification_terminate">Termina</string>
+    <string name="notification_game_runs">Il gioco è in esecuzione!</string>
+    <string name="folder_dialog_create">Crea</string>
+    <string name="folder_dialog_insert_name">Inserisci il nome della cartella</string>
+    <string name="main_login_done">Login effettuato</string>
+    <string name="main_add_account">Aggiungi un account</string>
+    <string name="tasks_ongoing">Delle operazioni sono in corso, perfavore attendi</string>
+    <string name="no_saved_accounts">Nessun account salvato</string>
+    <string name="downloading_versions">Download della lista delle versioni…</string>
 </resources>
