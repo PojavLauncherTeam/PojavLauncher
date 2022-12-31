@@ -107,6 +107,7 @@
     <string name="global_unpacking">Rozbalování %s</string>
     <string name="global_error_field_empty">Toto pole nemůže být prázdné</string>
     <string name="global_waiting">Čekej</string>
+    <string name="global_select">Vybrat</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Aplikace/Hra spadla s kódem %d, zkontroluj latestlog.txt pro více informací.</string>
     <string name="mcn_exit_call">Odejít</string>
@@ -178,6 +179,7 @@
     <string name="customctrl_add_subbutton_message">Podtlačítko č.%d bylo přidáno!</string>
     <string name="customctrl_selectdefault">Vybrat .json výchozího ovládání</string>
     <string name="customctrl_export">Exportovat ovládání</string>
+    <string name="main_share_logs">Sdílet záznamový soubor</string>
     <string name="main_install_jar_file">Instalovat .jar</string>
     <string name="main_options">Možnosti</string>
     <string name="main_play">Hrát</string>
@@ -249,6 +251,8 @@
     <string name="preference_sustained_performance_description">Limitujíc termální zpomalování, limituje maximální výkon</string>
     <string name="preference_force_english_title">Vynutit angličtinu</string>
     <string name="preference_force_english_description">Umožňuje mít originální text, jak byl vymyšlen vývojáři. Vyžaduje restart</string>
+    <string name="preference_edit_controls_title">Upravit vlastní ovládací prvky</string>
+    <string name="preference_edit_controls_summary">Vylaďte ovládací schéma dle vaších potřeb</string>
     <string name="preference_back_title">Zpět na předchozí obrazovku</string>
     <string name="gles_hack_title">GL4ES Zmenšovátko</string>
     <string name="gles_hack_none">Nezmenšit textury</string>
