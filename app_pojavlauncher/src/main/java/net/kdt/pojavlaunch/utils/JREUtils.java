@@ -436,13 +436,22 @@ public class JREUtils {
         ArrayList<String> parsedArguments = new ArrayList<>(0);
         args = args.trim().replace(" ", "");
         //For each prefixes, we separate args.
-        for(String prefix : new String[]{"-XX:-","-XX:+", "-XX:","--", "-D", "-"}){
+        String[] separators = new String[]{"-XX:-","-XX:+", "-XX:","--", "-D", "-X"};
+        for(String prefix : separators){
             while (true){
                 int start = args.indexOf(prefix);
                 if(start == -1) break;
-                //Get the end of the current argument
-                int end = args.indexOf("-", start + prefix.length());
-                if(end == -1) end = args.length();
+                //Get the end of the current argument by checking the nearest separator
+                int end = -1;
+                for(String separator: separators){
+                    int tempEnd = args.indexOf(separator, start + prefix.length());
+                    if(tempEnd == -1) continue;
+                    if(end == -1){
+                        end = tempEnd;
+                        continue;
+                    }
+                    end = Math.min(end, tempEnd);
+                }
 
                 //Extract it
                 String parsedSubString = args.substring(start, end);
