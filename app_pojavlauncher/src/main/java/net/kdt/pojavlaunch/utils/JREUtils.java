@@ -452,6 +452,8 @@ public class JREUtils {
                     }
                     end = Math.min(end, tempEnd);
                 }
+                //Fallback
+                if(end == -1) end = args.length();
 
                 //Extract it
                 String parsedSubString = args.substring(start, end);
