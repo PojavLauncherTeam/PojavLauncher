@@ -83,6 +83,11 @@
     <string name="mcl_setting_category_general">一般的な設定</string>
     <string name="mcl_setting_category_scaling">スケーリングの設定</string>
     <string name="mcl_setting_category_renderer">レンダラー</string>
+    <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (全バージョン対応、動作が軽い)</string>
+    <string name="mcl_setting_renderer_virgl">virglenderer - (リリース 1.7+、遅い)</string>
+    <string name="mcl_setting_renderer_vgpu">vgpu - （最大1.16.5、高速）</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink - (old_b1.8+, 遅い)</string>
+    <string name="mcl_setting_renderer_angle">ANGLE - (リリース 1.17以上, 中)</string>
     <string name="mcl_setting_category_veroption">バージョンリストに表示する種類</string>
     <string name="mcl_setting_veroption_release">正式</string>
     <string name="mcl_setting_veroption_snapshot">スナップショット</string>
@@ -102,6 +107,7 @@
     <string name="global_unpacking">%s を解凍中</string>
     <string name="global_error_field_empty">このフィールドは入力必須です</string>
     <string name="global_waiting">お待ちください</string>
+    <string name="global_select">選択...</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">アプリケーション/ゲームはコード %dで終了しました。詳細についてはlatestlog.txtをご確認ください</string>
     <string name="mcn_exit_call">閉じる</string>
@@ -163,6 +169,8 @@
     <string name="customctrl_addsubbutton">サブボタンを追加</string>
     <string name="customctrl_add_subbutton_message">サブボタンn°%d が追加されました！</string>
     <string name="customctrl_selectdefault">デフォルトの Control json を選択</string>
+    <string name="customctrl_export">コントロールをエクスポート</string>
+    <string name="main_share_logs">ログファイルを共有する</string>
     <string name="main_install_jar_file">.jarをインストール</string>
     <string name="main_options">設定</string>
     <string name="main_play">プレイ</string>
@@ -232,6 +240,10 @@
     <string name="preference_experimental_description">そこにあるものを考慮し、サポートなしで使用してください。</string>
     <string name="preference_sustained_performance_title">持続的なパフォーマンスモードを有効にする</string>
     <string name="preference_sustained_performance_description">ピーク性能を制限することでサーマルスロットリングを制限</string>
+    <string name="preference_force_english_title">強制的に言語を英語にする</string>
+    <string name="preference_force_english_description">開発者向けのオリジナルの文字列を表示できます。再起動が必要です</string>
+    <string name="preference_edit_controls_title">カスタムコントロールの編集</string>
+    <string name="preference_edit_controls_summary">コントロールスキームを調整する</string>
     <string name="preference_back_title">最後の画面に戻る</string>
     <string name="gles_hack_title">GL4ES シュリンク・ハック</string>
     <string name="gles_hack_none">テクスチャを縮小しない</string>
@@ -249,4 +261,20 @@
     <string name="arc_capes_title">コスメチカ・ケープズ</string>
     <string name="arc_capes_desc">Cosmetica（以前のArc）のケープを有効にします。詳細については、https：//cosmetica.ccをご覧ください。 OptiFineが必要です。</string>
     <string name="migrated_profile_str">%s バージョンの設定</string>
+    <string name="notif_channel_name">一般</string>
+    <string name="lazy_service_default_title">Pojav フォアグラウンドサービス</string>
+    <string name="lazy_service_default_description">このサービスは、長時間の実行操作を実行するために使用されます</string>
+    <string name="mcl_setting_veroption_installed">インストール済み</string>
+    <string name="use_global_default">(グローバル既定値を使用する)</string>
+    <string name="default_control">デフォルトコントロール</string>
+    <string name="progresslayout_tasks_in_progress">%d タスクが進行中</string>
+    <string name="notification_terminate">終了</string>
+    <string name="notification_game_runs">ゲームを起動しました！</string>
+    <string name="folder_dialog_create">新規作成</string>
+    <string name="folder_dialog_insert_name">フォルダー名を挿入</string>
+    <string name="main_login_done">ログイン完了</string>
+    <string name="main_add_account">アカウントを追加</string>
+    <string name="tasks_ongoing">タスクが進行中です。しばらくお待ちください。</string>
+    <string name="no_saved_accounts">保存されたアカウントはありません</string>
+    <string name="downloading_versions">バージョンリストをダウンロード中…</string>
 </resources>
