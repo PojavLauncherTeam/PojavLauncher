@@ -278,6 +278,7 @@ public final class Tools {
         varArgMap.put("classpath_separator", ":");
         varArgMap.put("library_directory", strGameDir + "/libraries");
         varArgMap.put("version_name", versionInfo.id);
+        varArgMap.put("natives_directory", Tools.NATIVE_LIB_DIR);
 
         List<String> minecraftArgs = new ArrayList<String>();
         if (versionInfo.arguments != null) {
