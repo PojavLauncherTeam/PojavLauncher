@@ -19,6 +19,7 @@ import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.extra.ExtraConstants;
 import net.kdt.pojavlaunch.extra.ExtraCore;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
+import net.kdt.pojavlaunch.progresskeeper.ProgressKeeper;
 import net.kdt.pojavlaunch.services.ProgressService;
 import net.kdt.pojavlaunch.utils.DownloadUtils;
 import net.kdt.pojavlaunch.value.DependentLibrary;
@@ -84,6 +85,7 @@ public class AsyncMinecraftDownloader {
 
             // THIS one function need the activity in the case of an error
             if(!JRE17Util.installNewJreIfNeeded(activity, verInfo)){
+                ProgressKeeper.submitProgress(ProgressLayout.DOWNLOAD_MINECRAFT, -1, -1);
                 return false;
             }
 
@@ -195,7 +197,7 @@ public class AsyncMinecraftDownloader {
         } catch (Exception e) {
             Log.e("AsyncMcDownloader", e.toString(), e);
         }
-
+        ProgressKeeper.submitProgress(ProgressLayout.DOWNLOAD_MINECRAFT, -1, -1);
         return true;
     }
 
