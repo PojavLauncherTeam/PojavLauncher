@@ -1,13 +1,17 @@
 package net.kdt.pojavlaunch.progresskeeper;
 
+import android.util.Log;
+
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class ProgressKeeper {
     private static final ConcurrentHashMap<String, ConcurrentLinkedQueue<ProgressListener>> sProgressListeners = new ConcurrentHashMap<>();
     private static final ConcurrentHashMap<String, ProgressState> sProgressStates = new ConcurrentHashMap<>();
-    private static final ArrayList<TaskCountListener> sTaskCountListeners = new ArrayList<>();
+    private static final List<TaskCountListener> sTaskCountListeners = Collections.synchronizedList(new ArrayList<>());
 
     public static void submitProgress(String progressRecord, int progress, int resid, Object... va) {
         ProgressState progressState = sProgressStates.get(progressRecord);
@@ -72,6 +76,31 @@ public class ProgressKeeper {
     public static void removeTaskCountListener(TaskCountListener listener) {
         sTaskCountListeners.remove(listener);
     }
+
+    /**
+     * Waits until all tasks are done and runs the runnable, or if there were no pending process remaining
+     * The runnable runs from the thread that updated the task count last, and it might be the UI thread,
+     * so dont put long running processes in it
+     * @param runnable the runnable to run when no tasks are remaining
+     */
+    public static void waitUntilDone(final Runnable runnable) {
+        // If we do it the other way the listener would be removed before it was added, which will cause a listener object leak
+        if(getTaskCount() == 0) {
+            runnable.run();
+            return;
+        }
+        TaskCountListener listener = new TaskCountListener() {
+            @Override
+            public void onUpdateTaskCount(int taskCount) {
+                if(taskCount == 0) {
+                    runnable.run();
+                }
+                removeTaskCountListener(this);
+            }
+        };
+        addTaskCountListener(listener);
+    }
+
     public static int getTaskCount() {
         return sProgressStates.size();
     }
