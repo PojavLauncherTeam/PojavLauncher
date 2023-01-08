@@ -108,8 +108,10 @@ Then, run these commands ~~or build using Android Studio~~.
 ## Known Issues
 - Controller mods aren't working.
 - Random crashes could happen very often on Android 5.x during game load or join world.
-- With big modpacks textures could be messed up
-- Probably more, that's why we have a bug tracker ;) 
+- With big modpacks textures could be messed.
+- Messing with renderer could cause rendering issues or glitches on some devices.
+- Game stuck on preparing on world creation on some devices.
+- Probably more, that's why we have a bug tracker :) 
 
 ## License
 - PojavLauncher is licensed under [GNU GPLv3](https://github.com/khanhduytran0/PojavLauncher/blob/master/LICENSE).
