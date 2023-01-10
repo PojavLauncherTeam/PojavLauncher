@@ -91,7 +91,7 @@
             android:launchMode="standard"
             android:screenOrientation="sensorLandscape"
             android:name=".MainActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|keyboard|navigation"/>
+            android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|keyboard|navigation|uiMode"/>
 
         <provider
             android:name=".scoped.FolderProvider"
