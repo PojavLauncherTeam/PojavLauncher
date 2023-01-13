@@ -25,6 +25,7 @@
     <!-- MCLauncherActivity: Account status -->
     <!-- MCLauncherActivity: Strings -->
     <!-- Global strings -->
+    <string name="global_warinng">Jidan minecraft </string>
     <!-- MainActivity: strings -->
     <!-- MainActivity: Control buttons -->
     <!-- MainActivity: Menu advanced controls -->
