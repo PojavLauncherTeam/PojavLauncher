@@ -107,6 +107,7 @@
     <string name="global_unpacking">압축 해제 중 %s</string>
     <string name="global_error_field_empty">이 칸은 비워둘 수 없습니다</string>
     <string name="global_waiting">기다려주세요</string>
+    <string name="global_select">선택</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">애플리케이션/게임이 코드 %d와 함께 종료되었습니다, lastestlog.txt를 확인하여 추가 정보를 확인하세요.</string>
     <string name="mcn_exit_call">나가기</string>
@@ -175,9 +176,10 @@
     <string name="customctrl_addbutton">버튼 추가</string>
     <string name="customctrl_addbutton_drawer">버튼 드로어 추가</string>
     <string name="customctrl_addsubbutton">부속 버튼 추가</string>
-    <string name="customctrl_add_subbutton_message">부 버튼 n°%d가 추가되었습니다 !</string>
+    <string name="customctrl_add_subbutton_message">부속 버튼 n°%d가 추가됐습니다!</string>
     <string name="customctrl_selectdefault">기본 조작 프리셋 선택하기</string>
     <string name="customctrl_export">컨트롤 설정 가져오기</string>
+    <string name="main_share_logs">기록 파일 공유</string>
     <string name="main_install_jar_file">.jar 설치</string>
     <string name="main_options">설정</string>
     <string name="main_play">시작하기</string>
@@ -247,6 +249,9 @@
     <string name="preference_experimental_description">여러 실험적 기능을 사용, 지원 안함</string>
     <string name="preference_sustained_performance_title">성능 유지 모드를 활성화합니다</string>
     <string name="preference_sustained_performance_description">최고 성능을 제한함으로써, 쓰로틀링을 제어합니다</string>
+    <string name="preference_force_english_title">강제로 영어 사용</string>
+    <string name="preference_force_english_description">개발자가 의도한 기본 문자열을 볼 수 있도록 해 줍니다. 재시작 필요</string>
+    <string name="preference_edit_controls_title">사용자 지정 조작 편집</string>
     <string name="preference_back_title">이전 화면으로</string>
     <string name="gles_hack_title">GL4ES 축소 핵</string>
     <string name="gles_hack_none">텍스쳐 축소하지 않기</string>
@@ -267,4 +272,18 @@
 https://cosmetica.cc 를 방문해주세요.
 옵티파인 모드가 필요합니다.</string>
     <string name="migrated_profile_str">%s 버전 설정</string>
+    <string name="notif_channel_name">일반</string>
+    <string name="lazy_service_default_title">Pojav 포그라운드 서비스</string>
+    <string name="use_global_default">(글로벌 기본값 사용)</string>
+    <string name="default_control">기본 조작</string>
+    <string name="progresslayout_tasks_in_progress">작업 %d개 진행 중</string>
+    <string name="notification_terminate">종료</string>
+    <string name="notification_game_runs">게임이 실행 중이에요!</string>
+    <string name="folder_dialog_create">생성</string>
+    <string name="folder_dialog_insert_name">폴더 이름 입력</string>
+    <string name="main_login_done">로그인 완료</string>
+    <string name="main_add_account">계정 추가</string>
+    <string name="tasks_ongoing">작업이 진행 중이에요. 기다려 주세요</string>
+    <string name="no_saved_accounts">저장된 계정 없음</string>
+    <string name="downloading_versions">버전 목록 다운로드 중...</string>
 </resources>
