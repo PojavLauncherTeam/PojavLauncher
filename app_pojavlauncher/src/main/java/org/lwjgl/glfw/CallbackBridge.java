@@ -206,11 +206,19 @@ public class CallbackBridge {
         }
     }
 
-    private static void onGrabStateChanged(boolean grabbing) {
+    private static void onGrabStateChanged(final boolean grabbing) {
         isGrabbing = grabbing;
-        synchronized (grabListeners) {
-            for (GrabListener g : grabListeners) g.onGrabState(grabbing);
-        }
+        sChoreographer.postFrameCallbackDelayed((time) -> {
+            // If the grab re-changed, skip notify process
+            if(isGrabbing != grabbing) return;
+
+            System.out.println("Grab changed : " + grabbing);
+            synchronized (grabListeners) {
+                for (GrabListener g : grabListeners) g.onGrabState(grabbing);
+            }
+
+        }, 16);
+
     }
     public static void addGrabListener(GrabListener listener) {
         synchronized (grabListeners) {
