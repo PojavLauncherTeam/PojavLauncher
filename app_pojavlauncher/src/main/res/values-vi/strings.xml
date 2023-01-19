@@ -84,6 +84,10 @@
     <string name="mcl_setting_category_scaling">Cài đặt độ rộng</string>
     <string name="mcl_setting_category_renderer">Trình kết xuất</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (tất cả phiên bản, nhanh)</string>
+    <string name="mcl_setting_renderer_virgl">virglrenderer - (phiên bản 1.7+, chậm)</string>
+    <string name="mcl_setting_renderer_vgpu">vgpu - (đến 1.16.5, nhanh)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink - (beta_cũ b1.8+, chậm)</string>
+    <string name="mcl_setting_renderer_angle">ANGLE - (phiên bản 1.17+, trung bình)</string>
     <string name="mcl_setting_category_veroption">Kiểu phiên bản sẽ được hiện ở trong danh sách phiên bản</string>
     <string name="mcl_setting_veroption_release">Bản phát hành</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
@@ -103,6 +107,7 @@
     <string name="global_unpacking">Đang giải nén %s</string>
     <string name="global_error_field_empty">Trường này không được để trống</string>
     <string name="global_waiting">Vui lòng đợi</string>
+    <string name="global_select">Chọn</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Ứng dụng/Trò chơi đã thoát với mã %d, kiểm tra nhật kí trình khởi chạy (latestlog.txt) để biết thêm chi tiết.</string>
     <string name="mcn_exit_call">Thoát</string>
@@ -173,6 +178,7 @@
     <string name="customctrl_addsubbutton">Thêm phím phụ</string>
     <string name="customctrl_add_subbutton_message">Phím phụ %d đã được thêm!</string>
     <string name="customctrl_selectdefault">Chọn bộ điều khiển json mặc định</string>
+    <string name="main_share_logs">Chia sẻ tệp nhật ký</string>
     <string name="main_install_jar_file">Cài đặt tệp .jar</string>
     <string name="main_options">Tùy chọn</string>
     <string name="main_play">Chơi</string>
@@ -242,6 +248,10 @@
     <string name="preference_experimental_description">Cân nhắc sử dụng các tuỳ chọn này. Chúng không được hỗ trợ.</string>
     <string name="preference_sustained_performance_title">Bật chế độ duy trì hiệu suất</string>
     <string name="preference_sustained_performance_description">Hạn chế giảm hiệu suất vì nhiệt bằng cách giới hạn hiệu suất tối đa</string>
+    <string name="preference_force_english_title">Buộc ngôn ngữ Tiếng Anh</string>
+    <string name="preference_force_english_description">Cho phép hiển thị các dòng chữ ban đầu, như theo ý của nhà phát triển. Yêu cầu khởi động lại</string>
+    <string name="preference_edit_controls_title">Tùy chỉnh điều khiển</string>
+    <string name="preference_edit_controls_summary">Sửa cách điểu khiển theo ý muốn của bạn</string>
     <string name="preference_back_title">Quay về màn hình trước đó</string>
     <string name="gles_hack_title">Giải pháp thu nhỏ texture của gl4es</string>
     <string name="gles_hack_none">Không thu nhỏ kết cấu</string>
@@ -259,5 +269,18 @@
     <string name="arc_capes_title">Áo choàng Cosmetica</string>
     <string name="arc_capes_desc">Sử dụng áo choàng từ dịch vụ Cosmetica (trước đây là Arc). Để biết thêm thông tin, truy cập https://cosmetica.cc. Yêu cầu có OptiFine.</string>
     <string name="migrated_profile_str">cấu hình phiên bản %s</string>
+    <string name="notif_channel_name">Chung</string>
     <string name="mcl_setting_veroption_installed">Đã cài đặt</string>
+    <string name="use_global_default">(Sử dụng mặc định chung)</string>
+    <string name="default_control">Điểu khiển mặc định</string>
+    <string name="progresslayout_tasks_in_progress">%d tác vụ đang diễn ra</string>
+    <string name="notification_terminate">Chấm dứt</string>
+    <string name="notification_game_runs">Trò chơi đang chạy!</string>
+    <string name="folder_dialog_create">Tạo</string>
+    <string name="folder_dialog_insert_name">Nhập tên thư mục</string>
+    <string name="main_login_done">Hoàn tất đăng nhập</string>
+    <string name="main_add_account">Thêm tài khoản</string>
+    <string name="tasks_ongoing">Các tác vụ đang chạy, vui lòng chờ</string>
+    <string name="no_saved_accounts">Không có tài khoản nào được lưu</string>
+    <string name="downloading_versions">Đang tải xuống danh sách phiên bản…</string>
 </resources>
