@@ -241,7 +241,6 @@
     <string name="preference_control_title">Sterowanie</string>
     <string name="preference_control_description">Typy gestów, wyzwalacze i skalowanie</string>
     <string name="preference_java_title">Konfiguracja Java</string>
-    <string name="preference_java_description">Wersje Java, Argumenty JVM i ilość RAM</string>
     <string name="preference_misc_title">Pozostałe ustawienia</string>
     <string name="preference_misc_description">Lista wersji oraz sprawdzanie bibliotek</string>
     <string name="preference_experimental_title">Eksperymentalne</string>
