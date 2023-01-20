@@ -111,7 +111,7 @@
     <string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Old-beta</string>
     <string name="mcl_setting_java_sandbox">Sandbox .jar installer</string>
-    <string name="mcl_setting_java_sandbox_subtitle">Control the availability sandbox security manager when launching .jar installer.</string>
+    <string name="mcl_setting_java_sandbox_subtitle">Control the availability of sandbox security manager when launching .jar installer.</string>
     <string name="mcl_version_clone">Clone</string>
 
     <!-- Global strings -->
@@ -277,7 +277,7 @@
     <string name="preference_control_title">Control customization</string>
     <string name="preference_control_description">Gestures types, triggers, and scaling</string>
     <string name="preference_java_title">Java Tweaks</string>
-    <string name="preference_java_description">Java versions, JVM Arguments, and RAM amount</string>
+    <string name="preference_java_description">Java versions, JVM Arguments, RAM amount and sandbox</string>
     <string name="preference_misc_title">Miscellaneous settings</string>
     <string name="preference_misc_description">Version list, and libs checks</string>
     <string name="preference_experimental_title">Experimental Stuff</string>
