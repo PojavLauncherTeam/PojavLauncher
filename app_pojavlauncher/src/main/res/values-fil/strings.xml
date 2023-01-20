@@ -228,7 +228,6 @@
     <string name="preference_control_title">Kontrolin ang customization</string>
     <string name="preference_control_description">Gestures types, triggers, at scaling</string>
     <string name="preference_java_title">Mga tweaks sa Java</string>
-    <string name="preference_java_description">Mga bersyon ng Java, JVM Argument, at kailangan ng RAM</string>
     <string name="preference_misc_title">Karagdagang setting</string>
     <string name="preference_misc_description">Listahan ng bersyon, at mga checke ng mga libs</string>
     <string name="preference_experimental_title">Pang-eksperimentong ng bagay</string>
