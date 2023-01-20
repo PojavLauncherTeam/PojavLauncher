@@ -93,6 +93,7 @@
     <string name="mcl_setting_veroption_snapshot">Entwicklungsversionen</string>
     <string name="mcl_setting_veroption_oldalpha">Old-Alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Old-Beta</string>
+    <string name="mcl_setting_java_sandbox">Sandbox-.jar-Installer</string>
     <string name="mcl_version_clone">Duplizieren</string>
     <!-- Global strings -->
     <string name="global_edit">Bearbeiten</string>
@@ -242,7 +243,7 @@
     <string name="preference_control_title">Steuerung anpassen</string>
     <string name="preference_control_description">Gestentypen, Auslöser und Skalierung</string>
     <string name="preference_java_title">Java-Optimierungen</string>
-    <string name="preference_java_description">Java-Versionen, JVM-Argumente und RAM-Menge</string>
+    <string name="preference_java_description">Java-Versionen, JVM-Argumente, RAM und Sandbox</string>
     <string name="preference_misc_title">Sonstige Einstellungen</string>
     <string name="preference_misc_description">Versionsliste und Bibliotheksüberprüfungen</string>
     <string name="preference_experimental_title">Experimentell</string>
