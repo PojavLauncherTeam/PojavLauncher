@@ -226,7 +226,6 @@ Dá-te uma experiência de tela cheia melhorada.</string>
     <string name="preference_control_title">Customização dos controlos</string>
     <string name="preference_control_description">Tipos de Gestos, triggers e escala</string>
     <string name="preference_java_title">Ajustes do Java</string>
-    <string name="preference_java_description">Versões do Java, Argumentos JVM, e quantidade de RAM</string>
     <string name="preference_misc_title">Definições diversas</string>
     <string name="preference_misc_description">Lista de versões, e verificações das bibliotecas</string>
     <string name="preference_experimental_title">Coisas experimentais</string>
