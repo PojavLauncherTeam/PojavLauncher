@@ -242,7 +242,6 @@
     <string name="preference_control_title">사용자 지정 조작</string>
     <string name="preference_control_description">제스쳐 타입, 트리거, 스케일링</string>
     <string name="preference_java_title">Java 기능</string>
-    <string name="preference_java_description">Java 버전, JVM 시작 스크립트, 메모리 사용량 제한</string>
     <string name="preference_misc_title">기타 설정</string>
     <string name="preference_misc_description">버전 목록, 라이브러리 확인</string>
     <string name="preference_experimental_title">실험적 기능</string>
