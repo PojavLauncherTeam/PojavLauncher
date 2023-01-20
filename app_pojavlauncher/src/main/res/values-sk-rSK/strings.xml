@@ -231,7 +231,6 @@
     <string name="preference_control_title">Ovládanie</string>
     <string name="preference_control_description">Gestá, škálovanie a iné možnosti</string>
     <string name="preference_java_title">Nastavenia Javy</string>
-    <string name="preference_java_description">Verzia Javy, Argumenty JVM, a množstvo RAM</string>
     <string name="preference_misc_title">Iné nastavenia</string>
     <string name="preference_misc_description">Zoznam verzií a kontrola knižníc</string>
     <string name="preference_experimental_title">Experimentálne nastavenia</string>
