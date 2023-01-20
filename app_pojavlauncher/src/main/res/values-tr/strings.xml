@@ -241,7 +241,6 @@
     <string name="preference_control_title">Kontrol özelleştirmesi</string>
     <string name="preference_control_description">İşaret türleri, tetikleyiciler ve ölçekleme</string>
     <string name="preference_java_title">Java Ayarlamaları</string>
-    <string name="preference_java_description">Java sürümleri, JVM Değişkenleri ve Bellek miktarı</string>
     <string name="preference_misc_title">Çeşitli ayarlar</string>
     <string name="preference_misc_description">Sürüm listesi ve lib kontrolü</string>
     <string name="preference_experimental_title">Deneysel Ayarlar</string>
