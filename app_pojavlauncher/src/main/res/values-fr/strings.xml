@@ -240,7 +240,6 @@
     <string name="preference_control_title">Contrôlez la customisation</string>
     <string name="preference_control_description">Gestes, déclencheurs et mise à l\'échelle</string>
     <string name="preference_java_title">Réglages Java</string>
-    <string name="preference_java_description">Versions de Java, Arguments de la JVM, et montant de RAM</string>
     <string name="preference_misc_title">Paramètres divers</string>
     <string name="preference_misc_description">Liste des versions, et vérifications des librairies</string>
     <string name="preference_experimental_title">Trucs Expérimentaux</string>
