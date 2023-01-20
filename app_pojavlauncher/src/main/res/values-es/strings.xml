@@ -240,7 +240,6 @@
     <string name="preference_control_title">Personalización del control</string>
     <string name="preference_control_description">Tipos de gestos, disparadores y escalado</string>
     <string name="preference_java_title">Ajustes de Java</string>
-    <string name="preference_java_description">Versiones de Java, argumentos JVM y cantidad de RAM</string>
     <string name="preference_misc_title">Ajustes varios</string>
     <string name="preference_misc_description">Lista de versiones, y comprobación de librerías</string>
     <string name="preference_experimental_title">Cosas experimentales</string>
