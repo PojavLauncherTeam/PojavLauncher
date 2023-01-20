@@ -239,7 +239,6 @@
     <string name="preference_control_title">Control customization</string>
     <string name="preference_control_description">Gestures types, triggers, and scaling</string>
     <string name="preference_java_title">Java Tweaks</string>
-    <string name="preference_java_description">Java versions, JVM Arguments, and RAM amount</string>
     <string name="preference_misc_title">Miscellaneous settings</string>
     <string name="preference_misc_description">Version list, and libs checks</string>
     <string name="preference_experimental_title">Experimental Stuff</string>
