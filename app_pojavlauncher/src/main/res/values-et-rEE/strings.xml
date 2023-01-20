@@ -144,6 +144,7 @@
     <string name="preference_control_title">Juhtnuppude kohandamine</string>
     <string name="preference_control_description">Viibete liigid, päästikud ja suurused</string>
     <string name="preference_java_title">Java trikid</string>
+    <string name="preference_java_description">Java versioonid, JVM argumendid, RAMi kogus ja liivakast</string>
     <string name="preference_misc_title">Mitmesugused seaded</string>
     <string name="preference_misc_description">Versiooniloend ja teekide kontrollid</string>
     <string name="preference_sustained_performance_title">Jätkusuutliku jõudluse režiimi sisselülitamine</string>
