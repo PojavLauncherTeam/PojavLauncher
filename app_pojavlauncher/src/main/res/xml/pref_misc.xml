@@ -7,6 +7,11 @@
     <PreferenceCategory android:title="Miscellaneous settings">
         <SwitchPreference
             android:defaultValue="true"
+            android:key="java_sandbox"
+            android:summary="@string/mcl_setting_java_sandbox_subtitle"
+            android:title="@string/mcl_setting_java_sandbox" />
+        <SwitchPreference
+            android:defaultValue="true"
             android:icon="@drawable/ic_setting_hash_verification"
             android:key="checkLibraries"
             android:summary="@string/mcl_setting_check_libraries_subtitle"

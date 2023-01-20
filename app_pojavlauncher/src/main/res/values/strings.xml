@@ -110,6 +110,8 @@
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Old-beta</string>
+    <string name="mcl_setting_java_sandbox">Sandbox .jar installer</string>
+    <string name="mcl_setting_java_sandbox_subtitle">Control the availability sandbox security manager when launching .jar installer.</string>
     <string name="mcl_version_clone">Clone</string>
 
     <!-- Global strings -->
