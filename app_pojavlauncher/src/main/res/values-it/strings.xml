@@ -242,7 +242,6 @@
     <string name="preference_control_title">Controlla personalizzazioni</string>
     <string name="preference_control_description">Gestures, trigger, e scala</string>
     <string name="preference_java_title">Tweaks Java</string>
-    <string name="preference_java_description">Versioni Java, argomenti JVM, e quantità RAM</string>
     <string name="preference_misc_title">Impostazioni miste</string>
     <string name="preference_misc_description">Lista versioni, e controlli librerie</string>
     <string name="preference_experimental_title">Sperimentale</string>
