@@ -93,6 +93,8 @@
     <string name="mcl_setting_veroption_snapshot">Снапшоти</string>
     <string name="mcl_setting_veroption_oldalpha">Старі альфа</string>
     <string name="mcl_setting_veroption_oldbeta">Старі бета</string>
+    <string name="mcl_setting_java_sandbox">Встановлювач пісочниці .jar</string>
+    <string name="mcl_setting_java_sandbox_subtitle">Контролювати доступність менеджера безпеки пісочниці при запуску встановлювача .jar.</string>
     <string name="mcl_version_clone">Клонувати</string>
     <!-- Global strings -->
     <string name="global_edit">Редагувати</string>
@@ -242,7 +244,7 @@
     <string name="preference_control_title">Налаштування керування</string>
     <string name="preference_control_description">Типи жестів, триґери і масштабування</string>
     <string name="preference_java_title">Оптимізація Java</string>
-    <string name="preference_java_description">Версія Java, аргументи JVM, і об\'єм RAM</string>
+    <string name="preference_java_description">Версії Java, JVM Аргументи, обсяг оперативної пам\'яті та пісочниця</string>
     <string name="preference_misc_title">Інші параметри</string>
     <string name="preference_misc_description">Список версій, та перевірка lib-файлів</string>
     <string name="preference_experimental_title">Експериментальні штуки</string>
