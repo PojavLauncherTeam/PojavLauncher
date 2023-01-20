@@ -219,7 +219,6 @@
     <string name="preference_control_offset_description">Set a custom offset 2 each side ov teh screen</string>
     <string name="preference_control_description">Gesturez typez, triggers, an scalin</string>
     <string name="preference_java_title">Java Tweakz</string>
-    <string name="preference_java_description">Java vershuns, jvm arguments, an ram amount</string>
     <string name="preference_misc_title">Miscellaneous settings</string>
     <string name="preference_misc_description">Vershun list, an libz checkz</string>
     <string name="preference_experimental_title">Experimental Stuff</string>
