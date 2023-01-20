@@ -178,6 +178,7 @@
     <string name="customctrl_addsubbutton">Thêm phím phụ</string>
     <string name="customctrl_add_subbutton_message">Phím phụ %d đã được thêm!</string>
     <string name="customctrl_selectdefault">Chọn bộ điều khiển json mặc định</string>
+    <string name="customctrl_export">Xuất điều khiển</string>
     <string name="main_share_logs">Chia sẻ tệp nhật ký</string>
     <string name="main_install_jar_file">Cài đặt tệp .jar</string>
     <string name="main_options">Tùy chọn</string>
@@ -241,7 +242,6 @@
     <string name="preference_control_title">Tuỳ chỉnh bộ điều khiển</string>
     <string name="preference_control_description">Dạng cử chỉ, phím kích hoạt, và thu phóng</string>
     <string name="preference_java_title">Điều chỉnh Java</string>
-    <string name="preference_java_description">Phiên bản Java, các tham số JVM, và lượng RAM</string>
     <string name="preference_misc_title">Các cài đặt khác</string>
     <string name="preference_misc_description">Danh sách phiên bản, và kiểm tra thư viện</string>
     <string name="preference_experimental_title">Những cài đặt thử nghiệm</string>
@@ -270,6 +270,8 @@
     <string name="arc_capes_desc">Sử dụng áo choàng từ dịch vụ Cosmetica (trước đây là Arc). Để biết thêm thông tin, truy cập https://cosmetica.cc. Yêu cầu có OptiFine.</string>
     <string name="migrated_profile_str">cấu hình phiên bản %s</string>
     <string name="notif_channel_name">Chung</string>
+    <string name="lazy_service_default_title">Dịch vụ tiền cảnh Pojav</string>
+    <string name="lazy_service_default_description">Dịch vụ này dùng để thực hiện tác vụ lâu dài</string>
     <string name="mcl_setting_veroption_installed">Đã cài đặt</string>
     <string name="use_global_default">(Sử dụng mặc định chung)</string>
     <string name="default_control">Điểu khiển mặc định</string>
