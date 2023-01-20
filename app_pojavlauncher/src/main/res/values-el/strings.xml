@@ -117,6 +117,7 @@
     " - This app is not affiliated with Minecraft, Mojang or Microsoft.\n")
     </string>
     -->
+    <string name="vp_latest_snapshot">Τελευταίο στιγμιότυπο</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Η εφαρμογή/παιχνίδι τερματίστηκε με κωδικό %d</string>
     <string name="mcn_exit_call">Έξοδος</string>
