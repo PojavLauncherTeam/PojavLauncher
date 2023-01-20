@@ -230,7 +230,6 @@
     <string name="preference_control_title">تخصيص التحكم</string>
     <string name="preference_control_description">أنواع الإيماءات ومفعلاتها و الأحجام</string>
     <string name="preference_java_title">تعديلات جافا</string>
-    <string name="preference_java_description">إصدارات جافا، JVM Arguments، ومبلغ ذاكرة الوصول العشوائي</string>
     <string name="preference_misc_title">أعدادات متنوعة</string>
     <string name="preference_misc_description">قائمة الإصدار، والتحقق من المكاتب</string>
     <string name="preference_experimental_title">أشياء تجريبيه</string>
