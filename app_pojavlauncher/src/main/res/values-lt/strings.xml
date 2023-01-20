@@ -228,7 +228,6 @@
     <string name="preference_control_title">Kontrolių redagavimas</string>
     <string name="preference_control_description">Gestų tipai, trigger\'ai ir skaliavimas</string>
     <string name="preference_java_title">Java redagavimas</string>
-    <string name="preference_java_description">Java versijos, JVM argumentai ir operatyviosios atminties kiekis</string>
     <string name="preference_misc_title">Kiti nustatymai</string>
     <string name="preference_misc_description">Versijų sąrašas ir bibliotekų tikrinimas</string>
     <string name="preference_experimental_title">Eksperimentiniai dalykai</string>
