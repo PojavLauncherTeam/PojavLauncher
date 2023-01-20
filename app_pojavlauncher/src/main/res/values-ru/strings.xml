@@ -243,7 +243,6 @@
     <string name="preference_control_title">Настройка управления</string>
     <string name="preference_control_description">Типы жестов, флажки и масштабирование</string>
     <string name="preference_java_title">Корректировка Java</string>
-    <string name="preference_java_description">Версии Java, аргументы JVM и объём ОЗУ</string>
     <string name="preference_misc_title">Другие настройки</string>
     <string name="preference_misc_description">Список версий и проверка библиотек</string>
     <string name="preference_experimental_title">Экспериментальные штуки</string>
