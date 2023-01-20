@@ -240,7 +240,6 @@
     <string name="preference_control_title">Kustomisasi kontrol</string>
     <string name="preference_control_description">Jenis gerakan, pemicu, dan penskalaan</string>
     <string name="preference_java_title">Tweak Java</string>
-    <string name="preference_java_description">Versi Java, Argumen JVM, dan jumlah RAM</string>
     <string name="preference_misc_title">Pengaturan lain-lain</string>
     <string name="preference_misc_description">Daftar versi, dan pemeriksaan lib</string>
     <string name="preference_experimental_title">Barang Eksperimental</string>
