@@ -93,6 +93,8 @@
     <string name="mcl_setting_veroption_snapshot">快照</string>
     <string name="mcl_setting_veroption_oldalpha">远古 alpha 版</string>
     <string name="mcl_setting_veroption_oldbeta">远古 beta 版</string>
+    <string name="mcl_setting_java_sandbox">沙盒 .jar 文件安装器</string>
+    <string name="mcl_setting_java_sandbox_subtitle">当启动 .jar 安装器时，控制沙盒安全管理器的可用性。</string>
     <string name="mcl_version_clone">复制</string>
     <!-- Global strings -->
     <string name="global_edit">修改</string>
@@ -242,7 +244,7 @@
     <string name="preference_control_title">自定义控制</string>
     <string name="preference_control_description">手势类型、触发器和缩放</string>
     <string name="preference_java_title">Java 调整</string>
-    <string name="preference_java_description">Java 版本，JVM 参数和内存配额</string>
+    <string name="preference_java_description">Java 版本、JVM 参数、RAM 量和沙盒</string>
     <string name="preference_misc_title">其他设置</string>
     <string name="preference_misc_description">版本列表和依赖库检查</string>
     <string name="preference_experimental_title">实验性的补丁</string>
