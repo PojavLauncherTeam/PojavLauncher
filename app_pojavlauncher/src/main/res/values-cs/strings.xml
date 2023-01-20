@@ -93,6 +93,8 @@
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Stará alfa</string>
     <string name="mcl_setting_veroption_oldbeta">Stará beta</string>
+    <string name="mcl_setting_java_sandbox">Instalátorové pískoviště .jar</string>
+    <string name="mcl_setting_java_sandbox_subtitle">Ovládá dostupnost správce pískoviště při spouštění .jar instalátoru.</string>
     <string name="mcl_version_clone">Klonovat</string>
     <!-- Global strings -->
     <string name="global_edit">Editovat</string>
@@ -242,7 +244,7 @@
     <string name="preference_control_title">Přizpůsobení ovládání</string>
     <string name="preference_control_description">Typy gest, spouštěče a škálování</string>
     <string name="preference_java_title">Vyladění Javy</string>
-    <string name="preference_java_description">Verze Javy, Argumenty JVM a množství RAM</string>
+    <string name="preference_java_description">Verze Javy, Argumenty JVM, Množství RAM a pískoviště</string>
     <string name="preference_misc_title">Jiná nastavení</string>
     <string name="preference_misc_description">Seznam verzí, a kontroly knihoven</string>
     <string name="preference_experimental_title">Experimentální Věci</string>
