@@ -174,7 +174,6 @@
     <string name="pvc_title">Версиягә-версия көйләүләр</string>
     <string name="preference_control_title">Идарә элементлары</string>
     <string name="preference_java_title">Java төзәтмәләре</string>
-    <string name="preference_java_description">Java версияләр, JVM аргументлар һәм Оператив хәтер күләмен</string>
     <string name="preference_misc_title">Башка көйләүләр</string>
     <string name="preference_misc_description">Версияләр исемлеге һәм китапханә тикшерү</string>
     <string name="preference_experimental_title">Эксперименталь нәрсәләр</string>
