@@ -219,7 +219,6 @@
     <string name="preference_control_title">התאמה אישית של פקדים</string>
     <string name="preference_control_description">סוגי מחוות, טריגרים, וקנה מידה</string>
     <string name="preference_java_title">התאמות ל- Java</string>
-    <string name="preference_java_description">גירסאות Java, JVM arguments, וזיכרון עבודה (RAM)</string>
     <string name="preference_misc_title">הגדרות שונות</string>
     <string name="preference_misc_description">רשימת גירסאות, ובדיקת ספריות</string>
     <string name="preference_experimental_title">דברים ניסיוניים</string>
