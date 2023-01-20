@@ -233,7 +233,6 @@
     <string name="preference_control_title">制御のカスタマイズ</string>
     <string name="preference_control_description">ジェスチャーの種類、トリガー、およびスケーリング</string>
     <string name="preference_java_title">Java の調整</string>
-    <string name="preference_java_description">Java バージョン、JVM 引数、および RAM 量</string>
     <string name="preference_misc_title">その他の設定</string>
     <string name="preference_misc_description">バージョンリストとlibsチェック</string>
     <string name="preference_experimental_title">実験的なもの</string>
