@@ -228,7 +228,6 @@
     <string name="preference_control_title">Personalizarea controalelor</string>
     <string name="preference_control_description">Tipuri de gesturi, declanșatoare și scalare</string>
     <string name="preference_java_title">Ajustări Java</string>
-    <string name="preference_java_description">Versiunile Java, argumentele JVM și cantitatea de RAM</string>
     <string name="preference_misc_title">Setări diverse</string>
     <string name="preference_misc_description">Lista de versiuni și verificări ale bibliotecilor</string>
     <string name="preference_experimental_title">Lucruri experimentale</string>
