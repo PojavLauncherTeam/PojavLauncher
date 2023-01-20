@@ -229,7 +229,6 @@
     <string name="preference_control_title">自定義控制</string>
     <string name="preference_control_description">手勢類型、觸發器和縮放</string>
     <string name="preference_java_title">Java 選項</string>
-    <string name="preference_java_description">Java 版本，JVM 參數和 RAM 分配</string>
     <string name="preference_misc_title">其他設定</string>
     <string name="preference_misc_description">檢查版本和執行庫</string>
     <string name="preference_experimental_title">實驗性選項</string>
