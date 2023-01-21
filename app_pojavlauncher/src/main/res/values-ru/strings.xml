@@ -83,7 +83,7 @@
     <string name="mcl_setting_category_general">Общие настройки</string>
     <string name="mcl_setting_category_scaling">Настройки масштабирования</string>
     <string name="mcl_setting_category_renderer">Визуализатор</string>
-    <string name="mcl_setting_renderer_gles2_4">Holy GL4ES (все версии, быстрый)</string>
+    <string name="mcl_setting_renderer_gles2_4">Holy GL4ES (универсальный и быстрый)</string>
     <string name="mcl_setting_renderer_virgl">virglrenderer (1.7 и выше, медленный)</string>
     <string name="mcl_setting_renderer_vgpu">vgpu (1.16.5 и ниже, быстрый)</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink (бета b1.8 и выше, медленный)</string>
@@ -93,6 +93,8 @@
     <string name="mcl_setting_veroption_snapshot">Снапшоты</string>
     <string name="mcl_setting_veroption_oldalpha">Старые альфа</string>
     <string name="mcl_setting_veroption_oldbeta">Старые бета</string>
+    <string name="mcl_setting_java_sandbox">Безопасная установка .jar</string>
+    <string name="mcl_setting_java_sandbox_subtitle">Управление доступностью менеджера безопасной среды Java при установке из .jar-файла.</string>
     <string name="mcl_version_clone">Клонировать</string>
     <!-- Global strings -->
     <string name="global_edit">Редактировать</string>
@@ -243,6 +245,7 @@
     <string name="preference_control_title">Настройка управления</string>
     <string name="preference_control_description">Типы жестов, флажки и масштабирование</string>
     <string name="preference_java_title">Корректировка Java</string>
+    <string name="preference_java_description">Версии Java, аргументы JVM, выделение памяти и безопасность среды</string>
     <string name="preference_misc_title">Другие настройки</string>
     <string name="preference_misc_description">Список версий и проверка библиотек</string>
     <string name="preference_experimental_title">Экспериментальные штуки</string>
