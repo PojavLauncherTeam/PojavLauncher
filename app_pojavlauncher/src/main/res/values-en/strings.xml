@@ -93,6 +93,8 @@
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Old-beta</string>
+    <string name="mcl_setting_java_sandbox">Chksd6sxg</string>
+    <string name="mcl_setting_java_sandbox_subtitle">Control the availability of sandbox security manager when launching .jar installer.</string>
     <string name="mcl_version_clone">Clone</string>
     <!-- Global strings -->
     <string name="global_edit">Edit</string>
@@ -107,6 +109,7 @@
     <string name="global_unpacking">Unpacking %s</string>
     <string name="global_error_field_empty">This field can\'t be empty</string>
     <string name="global_waiting">Wait</string>
+    <string name="global_select">Select</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Application/Game exited with code %d, check latestlog.txt for more details.</string>
     <string name="mcn_exit_call">Exit</string>
@@ -177,6 +180,8 @@
     <string name="customctrl_addsubbutton">Add sub-button</string>
     <string name="customctrl_add_subbutton_message">Sub-button n°%d has been added !</string>
     <string name="customctrl_selectdefault">Select default Control json</string>
+    <string name="customctrl_export">Export Controls</string>
+    <string name="main_share_logs">Share log file</string>
     <string name="main_install_jar_file">Install .jar</string>
     <string name="main_options">Options</string>
     <string name="main_play">Play</string>
@@ -239,12 +244,17 @@
     <string name="preference_control_title">Control customization</string>
     <string name="preference_control_description">Gestures types, triggers, and scaling</string>
     <string name="preference_java_title">Java Tweaks</string>
+    <string name="preference_java_description">Java versions, JVM Arguments, RAM amount and sandbox</string>
     <string name="preference_misc_title">Miscellaneous settings</string>
     <string name="preference_misc_description">Version list, and libs checks</string>
     <string name="preference_experimental_title">Experimental Stuff</string>
     <string name="preference_experimental_description">Enable this at your own risk! We won\'t be able to help you if you experience issues.</string>
     <string name="preference_sustained_performance_title">Enable sustained performance mode</string>
     <string name="preference_sustained_performance_description">Limit thermal throttling by limiting peak performance</string>
+    <string name="preference_force_english_title">Fhddgfr5g5d6rg6eg6gruyrdsfs4uu64vsucra64c8a674ca74cwc74a5v8s875ge85sv885gd875e8geg4y4y 5th 53534</string>
+    <string name="preference_force_english_description">Allows you to see original strings, as intended by developers. Requires a restart</string>
+    <string name="preference_edit_controls_title">Edit custom controls</string>
+    <string name="preference_edit_controls_summary">UcehjwyhehjhiHJUcehjwyhehjhiHJWIi9wU8fooAI9WHIIWu8wh89qg88iwuiIiQGYQV7ZF6SCI9</string>
     <string name="preference_back_title">Back to the last screen</string>
     <string name="gles_hack_title">GL4ES Shrink hack</string>
     <string name="gles_hack_none">Don\'t shrink textures</string>
