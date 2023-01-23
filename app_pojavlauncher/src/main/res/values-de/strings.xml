@@ -94,6 +94,7 @@
     <string name="mcl_setting_veroption_oldalpha">Old-Alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Old-Beta</string>
     <string name="mcl_setting_java_sandbox">Sandbox-.jar-Installer</string>
+    <string name="mcl_setting_java_sandbox_subtitle">Steuern Sie die Verfügbarkeit des Sandbox-Sicherheitsmanagers beim Starten des .jar-Installers.</string>
     <string name="mcl_version_clone">Duplizieren</string>
     <!-- Global strings -->
     <string name="global_edit">Bearbeiten</string>
