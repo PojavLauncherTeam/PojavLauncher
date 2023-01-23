@@ -4,22 +4,12 @@ package net.kdt.pojavlaunch.tasks;
 import static net.kdt.pojavlaunch.Architecture.archAsString;
 import static net.kdt.pojavlaunch.PojavApplication.sExecutorService;
 
-import android.app.Notification;
-import android.app.Service;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.AssetManager;
-import android.os.Handler;
-import android.os.HandlerThread;
-import android.os.IBinder;
 import android.util.Log;
-
-import androidx.annotation.Nullable;
-import androidx.core.app.NotificationCompat;
 
 import com.kdt.mcgui.ProgressLayout;
 
-import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 
@@ -49,7 +39,8 @@ public class AsyncAssetManager {
         } catch (IOException e) {
             Log.e("JREAuto", "JRE was not included on this APK.", e);
         }
-        if(current_rt_version == null && MultiRTUtils.getExactJreName(8) != null) return true; //Assume user maintains his own runtime
+        String exactJREName = MultiRTUtils.getExactJreName(8);
+        if(current_rt_version == null && exactJREName != null && !exactJREName.equals("Internal")/*this clause is for when the internal runtime is goofed*/) return true; //Assume user maintains his own runtime
         if(rt_version == null) return otherRuntimesAvailable; // On noruntime builds, skip if there is at least 1 runtime installed (no matter if it is 8 or not)
         if(rt_version.equals(current_rt_version)) return true; //If we already have an integrated one installed, check if it's up-to-date
 
@@ -73,8 +64,8 @@ public class AsyncAssetManager {
 
     /** Unpack single files, with no regard to version tracking */
     public static void unpackSingleFiles(Context ctx){
+        ProgressLayout.setProgress(ProgressLayout.EXTRACT_SINGLE_FILES, 0);
         sExecutorService.execute(() -> {
-
             try {
                 Tools.copyAssetFile(ctx, "options.txt", Tools.DIR_GAME_NEW, false);
                 Tools.copyAssetFile(ctx, "default.json", Tools.CTRLMAP_PATH, false);
@@ -85,11 +76,12 @@ public class AsyncAssetManager {
             } catch (IOException e) {
                 Log.e("AsyncAssetManager", "Failed to unpack critical components !");
             }
-
+            ProgressLayout.clearProgress(ProgressLayout.EXTRACT_SINGLE_FILES);
         });
     }
 
     public static void unpackComponents(Context ctx){
+        ProgressLayout.setProgress(ProgressLayout.EXTRACT_COMPONENTS, 0);
         sExecutorService.execute(() -> {
             try {
                 unpackComponent(ctx, "caciocavallo", false);
@@ -101,6 +93,7 @@ public class AsyncAssetManager {
             } catch (IOException e) {
                 Log.e("AsyncAssetManager", "Failed o unpack components !",e );
             }
+            ProgressLayout.clearProgress(ProgressLayout.EXTRACT_COMPONENTS);
         });
     }
 

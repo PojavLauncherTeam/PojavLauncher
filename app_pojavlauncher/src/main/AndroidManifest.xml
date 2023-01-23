@@ -28,19 +28,24 @@
         <meta-data 
             android:name="android.max_aspect"
             android:value="ratio_float"/>
-		
-        <activity
+
+        <activity android:name=".TestStorageActivity"
             android:exported="true"
             android:launchMode="singleTop"
-            android:label="@string/app_short_name"
-            android:name=".LauncherActivity">
+            android:label="@string/app_short_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".ImportControlActivity"
+        <activity
+            android:label="@string/app_short_name"
+            android:name=".LauncherActivity">
+        </activity>
+
+        <activity
+            android:name=".ImportControlActivity"
             android:exported="true"
             android:windowSoftInputMode="stateVisible"
             android:launchMode="singleInstance"
