@@ -44,7 +44,7 @@ import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 import org.lwjgl.glfw.*;
 import android.net.*;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements ControlButtonMenuListener{
     public static volatile ClipboardManager GLOBAL_CLIPBOARD;
     public static final String INTENT_MINECRAFT_VERSION = "intent_version";
 
@@ -116,6 +116,7 @@ public class MainActivity extends BaseActivity {
     protected void initLayout(int resId) {
         setContentView(resId);
         bindValues();
+        mControlLayout.setMenuListener(this);
 
         mDrawerPullButton.setOnClickListener(v -> drawerLayout.openDrawer(navDrawer));
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
@@ -210,6 +211,7 @@ public class MainActivity extends BaseActivity {
         } catch (Throwable th) {
             Tools.showError(this, th);
         }
+        mDrawerPullButton.setVisibility(mControlLayout.hasMenuButton() ? View.GONE : View.VISIBLE);
         mControlLayout.toggleControlVisible();
     }
 
@@ -405,6 +407,7 @@ public class MainActivity extends BaseActivity {
                     minecraftProfile.controlFile == null
                             ? LauncherPreferences.PREF_DEFAULTCTRL_PATH
                             : Tools.CTRLMAP_PATH + "/" + minecraftProfile.controlFile);
+            mDrawerPullButton.setVisibility(mControlLayout.hasMenuButton() ? View.GONE : View.VISIBLE);
         } catch (IOException e) {
             Tools.showError(this,e);
         }
@@ -514,5 +517,10 @@ public class MainActivity extends BaseActivity {
                 Tools.showError(ctx, th);
             }
         });
+    }
+
+    @Override
+    public void onClickedMenu() {
+        drawerLayout.openDrawer(navDrawer);
     }
 }

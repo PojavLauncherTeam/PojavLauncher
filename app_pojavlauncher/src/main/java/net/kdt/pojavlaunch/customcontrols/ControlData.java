@@ -29,6 +29,7 @@ public class ControlData {
     public static final int SPECIALBTN_MOUSEMID = -6;
     public static final int SPECIALBTN_SCROLLUP = -7;
     public static final int SPECIALBTN_SCROLLDOWN = -8;
+    public static final int SPECIALBTN_MENU = -9;
     
     private static ControlData[] SPECIAL_BUTTONS;
     private static String[] SPECIAL_BUTTON_NAME_ARRAY;
@@ -65,7 +66,8 @@ public class ControlData {
 
                 new ControlData("MID", new int[]{SPECIALBTN_MOUSEMID}, "${margin}", "${margin}"),
                 new ControlData("SCROLLUP", new int[]{SPECIALBTN_SCROLLUP}, "${margin}", "${margin}"),
-                new ControlData("SCROLLDOWN", new int[]{SPECIALBTN_SCROLLDOWN}, "${margin}", "${margin}")
+                new ControlData("SCROLLDOWN", new int[]{SPECIALBTN_SCROLLDOWN}, "${margin}", "${margin}"),
+                new ControlData("MENU", new int[]{SPECIALBTN_MENU}, "${margin}", "${margin}")
             };
         }
 
