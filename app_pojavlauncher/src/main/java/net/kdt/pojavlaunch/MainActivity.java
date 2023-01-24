@@ -395,6 +395,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         mControlLayout.setModifiable(true);
         navDrawer.setAdapter(ingameControlsEditorArrayAdapter);
         navDrawer.setOnItemClickListener(ingameControlsEditorListener);
+        mDrawerPullButton.setVisibility(View.VISIBLE);
         isInEditor = true;
     }
 
