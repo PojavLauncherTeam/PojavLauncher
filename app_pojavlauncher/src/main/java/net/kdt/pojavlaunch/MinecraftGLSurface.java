@@ -167,6 +167,7 @@ public class MinecraftGLSurface extends View implements GrabListener{
         }else{
             TextureView textureView = new TextureView(getContext());
             textureView.setOpaque(true);
+            textureView.setAlpha(1.0f);
             mSurface = textureView;
 
             textureView.setSurfaceTextureListener(new TextureView.SurfaceTextureListener() {
