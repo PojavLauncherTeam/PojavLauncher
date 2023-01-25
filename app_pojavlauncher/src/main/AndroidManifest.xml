@@ -4,6 +4,7 @@
     package="net.kdt.pojavlaunch">
 
     <uses-feature android:glEsVersion="0x00020000"/>
+    <uses-feature android:name="android.hardware.type.pc" android:required="false" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="28"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="28"/>
     <uses-permission android:name="android.permission.INTERNET"/>
