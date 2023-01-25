@@ -567,21 +567,24 @@ public final class Tools {
     }
 
     public static void showError(final Context ctx, final Throwable e, final boolean exitIfOk) {
-        showError(ctx, R.string.global_error, 0 ,e, exitIfOk, false);
+        showError(ctx, R.string.global_error, null ,e, exitIfOk, false);
     }
     public static void showError(final Context ctx, final int rolledMessage, final Throwable e) {
+        showError(ctx, R.string.global_error, ctx.getString(rolledMessage), e, false, false);
+    }
+    public static void showError(final Context ctx, final String rolledMessage, final Throwable e) {
         showError(ctx, R.string.global_error, rolledMessage, e, false, false);
     }
 
     public static void showError(final Context ctx, final int titleId, final Throwable e, final boolean exitIfOk) {
-        showError(ctx, titleId, 0, e, exitIfOk, false);
+        showError(ctx, titleId, null, e, exitIfOk, false);
     }
 
-    private static void showError(final Context ctx, final int titleId, final int rolledMessage, final Throwable e, final boolean exitIfOk, final boolean showMore) {
+    private static void showError(final Context ctx, final int titleId, final String rolledMessage, final Throwable e, final boolean exitIfOk, final boolean showMore) {
         e.printStackTrace();
 
         Runnable runnable = () -> {
-            final String errMsg = showMore ? printToString(e) : rolledMessage != 0 ? ctx.getString(rolledMessage) : e.getMessage();
+            final String errMsg = showMore ? printToString(e) : rolledMessage != null ? rolledMessage : e.getMessage();
             AlertDialog.Builder builder = new AlertDialog.Builder((Context) ctx)
                     .setTitle(titleId)
                     .setMessage(errMsg)

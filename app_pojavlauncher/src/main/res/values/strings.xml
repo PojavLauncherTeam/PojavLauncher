@@ -325,4 +325,10 @@
     <string name="no_saved_accounts">No saved accounts</string>
     <string name="downloading_versions">Downloading version list…</string>
     <string name="mc_download_failed">Failed to download Minecraft! This could be due to bad network connection, incorrectly placed files, etc..</string>
+    <string name="xerr_unknown">Unknown Xbox Live API error %d</string>
+    <string name="xerr_no_account">You don\'t seem to have an Xbox Live account. Please log in once on https://minecraft.net/ and try again.</string>
+    <string name="xerr_adult_verification">An adult needs to verify your account.</string>
+    <string name="xerr_child">Your account is a child account, and needs to be added into a Family in order to log in.</string>
+    <string name="minecraft_not_owned">It seems like this account does not have a Minecraft profile. If you have Xbox Game Pass, please log in on https://minecraft.net/ and set it up.</string>
+    <string name="xerr_not_available">Xbox Live is not available in your country</string>
 </resources>
