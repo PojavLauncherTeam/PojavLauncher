@@ -554,23 +554,34 @@ public final class Tools {
         }
     }
 
+    public static String printToString(Throwable throwable) {
+        StringWriter stringWriter = new StringWriter();
+        PrintWriter printWriter = new PrintWriter(stringWriter);
+        throwable.printStackTrace(printWriter);
+        printWriter.close();
+        return stringWriter.toString();
+    }
+
     public static void showError(Context ctx, Throwable e) {
         showError(ctx, e, false);
     }
 
     public static void showError(final Context ctx, final Throwable e, final boolean exitIfOk) {
-        showError(ctx, R.string.global_error, e, exitIfOk, false);
+        showError(ctx, R.string.global_error, 0 ,e, exitIfOk, false);
+    }
+    public static void showError(final Context ctx, final int rolledMessage, final Throwable e) {
+        showError(ctx, R.string.global_error, rolledMessage, e, false, false);
     }
 
     public static void showError(final Context ctx, final int titleId, final Throwable e, final boolean exitIfOk) {
-        showError(ctx, titleId, e, exitIfOk, false);
+        showError(ctx, titleId, 0, e, exitIfOk, false);
     }
 
-    private static void showError(final Context ctx, final int titleId, final Throwable e, final boolean exitIfOk, final boolean showMore) {
+    private static void showError(final Context ctx, final int titleId, final int rolledMessage, final Throwable e, final boolean exitIfOk, final boolean showMore) {
         e.printStackTrace();
 
         Runnable runnable = () -> {
-            final String errMsg = showMore ? Log.getStackTraceString(e): e.getMessage();
+            final String errMsg = showMore ? printToString(e) : rolledMessage != 0 ? ctx.getString(rolledMessage) : e.getMessage();
             AlertDialog.Builder builder = new AlertDialog.Builder((Context) ctx)
                     .setTitle(titleId)
                     .setMessage(errMsg)
@@ -583,7 +594,7 @@ public final class Tools {
                             }
                         }
                     })
-                    .setNegativeButton(showMore ? R.string.error_show_less : R.string.error_show_more, (DialogInterface.OnClickListener) (p1, p2) -> showError(ctx, titleId, e, exitIfOk, !showMore))
+                    .setNegativeButton(showMore ? R.string.error_show_less : R.string.error_show_more, (DialogInterface.OnClickListener) (p1, p2) -> showError(ctx, titleId, rolledMessage, e, exitIfOk, !showMore))
                     .setNeutralButton(android.R.string.copy, (DialogInterface.OnClickListener) (p1, p2) -> {
                         ClipboardManager mgr = (ClipboardManager) ctx.getSystemService(Context.CLIPBOARD_SERVICE);
                         mgr.setPrimaryClip(ClipData.newPlainText("error", Log.getStackTraceString(e)));

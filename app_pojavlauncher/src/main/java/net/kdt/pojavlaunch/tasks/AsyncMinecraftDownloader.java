@@ -49,12 +49,16 @@ public class AsyncMinecraftDownloader {
     public AsyncMinecraftDownloader(@NonNull Activity activity, JMinecraftVersionList.Version version, String realVersion,
                                     @NonNull DoneListener listener){ // this was there for a reason
         sExecutorService.execute(() -> {
-            if(downloadGame(activity, version, realVersion))
+            try {
+                downloadGame(activity, version, realVersion);
                 listener.onDownloadDone();
+            }catch (ControlledDownloaderException e) {
+                listener.onDownloadFailed(e.getCause());
+            }
         });
     }
 
-    private boolean downloadGame(@NonNull Activity activity, JMinecraftVersionList.Version verInfo, String versionName){
+    private void downloadGame(@NonNull Activity activity, JMinecraftVersionList.Version verInfo, String versionName) throws ControlledDownloaderException /* we do this to avoid blanket-catching Exception as a form of anti-lazy-developer protection */{
         final String downVName = "/" + versionName + "/" + versionName;
 
         //Downloading libraries
@@ -86,13 +90,14 @@ public class AsyncMinecraftDownloader {
             // THIS one function need the activity in the case of an error
             if(!JRE17Util.installNewJreIfNeeded(activity, verInfo)){
                 ProgressKeeper.submitProgress(ProgressLayout.DOWNLOAD_MINECRAFT, -1, -1);
-                return false;
+                throw new ControlledDownloaderException();
             }
 
             try {
                 assets = downloadIndex(verInfo, new File(Tools.ASSETS_PATH, "indexes/" + verInfo.assets + ".json"));
             } catch (IOException e) {
                 Log.e("AsyncMcDownloader", e.toString(), e);
+                throw new ControlledDownloaderException(e);
             }
 
             File outLib;
@@ -180,6 +185,8 @@ public class AsyncMinecraftDownloader {
             }
         } catch (Throwable e) {
             Log.e("AsyncMcDownloader", e.toString(),e );
+            ProgressKeeper.submitProgress(ProgressLayout.DOWNLOAD_MINECRAFT, -1, -1);
+            throw new ControlledDownloaderException(e);
         }
 
         ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT, 0, R.string.mcl_launch_cleancache);
@@ -196,9 +203,10 @@ public class AsyncMinecraftDownloader {
             downloadAssets(assets, verInfo.assets, assets.mapToResources ? new File(Tools.OBSOLETE_RESOURCES_PATH) : new File(Tools.ASSETS_PATH));
         } catch (Exception e) {
             Log.e("AsyncMcDownloader", e.toString(), e);
+            ProgressKeeper.submitProgress(ProgressLayout.DOWNLOAD_MINECRAFT, -1, -1);
+            throw new ControlledDownloaderException(e);
         }
         ProgressKeeper.submitProgress(ProgressLayout.DOWNLOAD_MINECRAFT, -1, -1);
-        return true;
     }
 
     public void verifyAndDownloadMainJar(String url, String sha1, File destination) throws Exception{
@@ -393,6 +401,14 @@ public class AsyncMinecraftDownloader {
 
     public interface DoneListener{
         void onDownloadDone();
+        void onDownloadFailed(Throwable throwable);
+    }
+
+    public static class ControlledDownloaderException extends Exception {
+        public ControlledDownloaderException() {}
+        public ControlledDownloaderException(Throwable e) {
+            super(e);
+        }
     }
 
 }
