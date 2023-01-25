@@ -422,7 +422,7 @@ public class MinecraftGLSurface extends View implements GrabListener{
                 CallbackBridge.DEBUG_STRING.setLength(0);
                 return true;
             case MotionEvent.ACTION_SCROLL:
-                CallbackBridge.sendScroll((double) event.getAxisValue(MotionEvent.AXIS_VSCROLL), (double) event.getAxisValue(MotionEvent.AXIS_HSCROLL));
+                CallbackBridge.sendScroll((double) event.getAxisValue(MotionEvent.AXIS_HSCROLL), (double) event.getAxisValue(MotionEvent.AXIS_VSCROLL));
                 return true;
             case MotionEvent.ACTION_BUTTON_PRESS:
                 return sendMouseButtonUnconverted(event.getActionButton(),true);
