@@ -6,31 +6,47 @@ import static net.kdt.pojavlaunch.prefs.LauncherPreferences.DEFAULT_PREF;
 import android.content.*;
 import android.content.res.*;
 import android.os.Build;
+import android.os.LocaleList;
 
+import androidx.core.os.ConfigurationCompat;
 import androidx.preference.*;
 import java.util.*;
 import net.kdt.pojavlaunch.prefs.*;
 
-public class LocaleUtils {
+public class LocaleUtils extends ContextWrapper {
+
+    public LocaleUtils(Context base) {
+        super(base);
+    }
 
     public static Locale getLocale(){
         return Locale.getDefault();
     }
 
-    public static Context setLocale(Context context) {
+    public static ContextWrapper setLocale(Context context) {
         if (DEFAULT_PREF == null) {
             DEFAULT_PREF = PreferenceManager.getDefaultSharedPreferences(context);
             LauncherPreferences.loadPreferences(context);
         }
 
         if(DEFAULT_PREF.getBoolean("force_english", false)){
-            Locale locale = Locale.ENGLISH;
-            Locale.setDefault(locale);
-            Configuration config = context.getResources().getConfiguration();
-            config.locale = locale;
-            context.getResources().updateConfiguration(config, context.getResources().getDisplayMetrics());
+            Resources resources = context.getResources();
+            Configuration configuration = resources.getConfiguration();
+
+            configuration.setLocale(Locale.ENGLISH);
+            Locale.setDefault(Locale.ENGLISH);
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+                LocaleList localeList = new LocaleList(Locale.ENGLISH);
+                LocaleList.setDefault(localeList);
+                configuration.setLocales(localeList);
+            }
+
+            resources.updateConfiguration(configuration, resources.getDisplayMetrics());
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1){
+                context = context.createConfigurationContext(configuration);
+            }
         }
 
-        return context;
+        return new LocaleUtils(context);
     }
 }
