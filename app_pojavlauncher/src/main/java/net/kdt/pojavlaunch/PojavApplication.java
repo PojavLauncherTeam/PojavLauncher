@@ -1,5 +1,7 @@
 package net.kdt.pojavlaunch;
 
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+
 import android.app.*;
 import android.content.*;
 import android.content.pm.*;
@@ -76,6 +78,7 @@ public class PojavApplication extends Application {
 		} catch (Throwable throwable) {
 			Intent ferrorIntent = new Intent(this, FatalErrorActivity.class);
 			ferrorIntent.putExtra("throwable", throwable);
+			ferrorIntent.setFlags(FLAG_ACTIVITY_NEW_TASK);
 			startActivity(ferrorIntent);
 		}
 	}
