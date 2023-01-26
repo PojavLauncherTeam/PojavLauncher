@@ -289,4 +289,11 @@
     <string name="tasks_ongoing">Уже в процессе, подождите…</string>
     <string name="no_saved_accounts">Нет сохранённых учётных записей</string>
     <string name="downloading_versions">Загрузка списка версий…</string>
+    <string name="mc_download_failed">Не удалось загрузить Minecraft! Это может возникать из-за медленного интернет-соединения или ошибок в размещении файлов.</string>
+    <string name="xerr_unknown">Неизвестная ошибка Xbox Live API %d</string>
+    <string name="xerr_no_account">Похоже, у вас нет учётной записи Xbox Live. Единожды войдите на https://minecraft.net и попробуйте ещё раз.</string>
+    <string name="xerr_adult_verification">Вашу учётную запись должен подтвердить взрослый представитель.</string>
+    <string name="xerr_child">Для входа в игру учётная запись ребёнка должна быть добавлена в семью.</string>
+    <string name="minecraft_not_owned">Похоже, к вашей учётной записи не привязан профиль Minecraft с лицензией. Если у вас есть подписка Xbox Game Pass, войдите на https://minecraft.net и настройте её.</string>
+    <string name="xerr_not_available">Xbox Live недоступен в вашей стране :(</string>
 </resources>
