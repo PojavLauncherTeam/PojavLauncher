@@ -288,4 +288,11 @@
     <string name="tasks_ongoing">Завдання виконуються, зачекайте</string>
     <string name="no_saved_accounts">Немає збережених обл. записів</string>
     <string name="downloading_versions">Завантаження списку версій…</string>
+    <string name="mc_download_failed">Не вдалося завантажити Minecraft! Це може бути через погане з\'єднання з мережею, неправильно розміщені файли, тощо..</string>
+    <string name="xerr_unknown">Невідома помилка Xbox Live API %d</string>
+    <string name="xerr_no_account">Схоже, у вас немає облікового запису Xbox Live. Будь ласка, увійдіть ще раз на https://minecraft.net та спробуйте знов.</string>
+    <string name="xerr_adult_verification">Повнолітні повинні підтвердити свій обліковий запис.</string>
+    <string name="xerr_child">Ваш акаунт - дитячий, та потребує добавлення у Сімейну Групу, щоб увійти.</string>
+    <string name="minecraft_not_owned">Схоже, цей обліковий запис не має профілю Minecraft. Якщо у вас є Ігрові Пропуски Xbox Live, просимо, увійдіть на https://minecraft.net/ та організуйте його.</string>
+    <string name="xerr_not_available">Xbox Live недоступний у вашій країні</string>
 </resources>
