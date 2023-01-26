@@ -107,6 +107,7 @@
     <string name="global_unpacking">Décompression de %s</string>
     <string name="global_error_field_empty">Ce champ ne peut pas être vide</string>
     <string name="global_waiting">Patientez</string>
+    <string name="global_select">Sélectionner</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">L\'Application/Jeu a quitté avec le code %d, vérifiez le fichier latestlog.txt pour plus de détails.</string>
     <string name="mcn_exit_call">Quitter</string>
@@ -178,6 +179,7 @@
     <string name="customctrl_add_subbutton_message">Le sous-bouton n°%d a été ajouté !</string>
     <string name="customctrl_selectdefault">Choisir json contrôle par défaut</string>
     <string name="customctrl_export">Exporter les contrôles</string>
+    <string name="main_share_logs">Partager le fichier journal</string>
     <string name="main_install_jar_file">Installer le .jar</string>
     <string name="main_options">Options</string>
     <string name="main_play">Jouer</string>
@@ -246,6 +248,7 @@
     <string name="preference_experimental_description">Utilisez ces options avec parcimonie, aucun support.</string>
     <string name="preference_sustained_performance_title">Activer le mode de performances soutenues</string>
     <string name="preference_sustained_performance_description">Limiter la limitation thermique en limitant les performances maximales</string>
+    <string name="preference_edit_controls_title">Modifier les contrôles personnalisés</string>
     <string name="preference_back_title">Retour au dernier écran</string>
     <string name="gles_hack_title">GL4ES hack réduction des textures</string>
     <string name="gles_hack_none">Ne pas rétrécir les textures</string>
@@ -263,5 +266,21 @@
     <string name="arc_capes_title">Capes Cosmetica</string>
     <string name="arc_capes_desc">Active les capes Cosmetica. Pour plus d\'informations visitez https://cosmetica.cc. Nécessite OptiFine.</string>
     <string name="migrated_profile_str">Configuration de la version %s</string>
+    <string name="notif_channel_name">Général</string>
     <string name="mcl_setting_veroption_installed">Installés</string>
+    <string name="default_control">Contrôle par défaut</string>
+    <string name="notification_game_runs">Le jeu est en cours d\'exécution !</string>
+    <string name="folder_dialog_create">Créer</string>
+    <string name="folder_dialog_insert_name">Insérer le nom du dossier</string>
+    <string name="main_login_done">Connexion effectuée</string>
+    <string name="main_add_account">Ajouter un compte</string>
+    <string name="no_saved_accounts">Aucun compte enregistré</string>
+    <string name="downloading_versions">Téléchargement de la liste des versions…</string>
+    <string name="mc_download_failed">Échec du téléchargement de Minecraft ! Cela peut être dû à une mauvaise connexion réseau, des fichiers mal placés, etc..</string>
+    <string name="xerr_unknown">Erreur de l\'API Xbox Live inconnue %d</string>
+    <string name="xerr_no_account">Vous ne semblez pas avoir de compte Xbox Live. Veuillez vous connecter une fois sur https://minecraft.net/ et réessayer.</string>
+    <string name="xerr_adult_verification">Un adulte doit vérifier votre compte.</string>
+    <string name="xerr_child">Vous avez un compte enfant, pour vous connecter vous devez être relié à une famille.</string>
+    <string name="minecraft_not_owned">Il semble que ce compte n\'ait pas de profil Minecraft. Si vous avez le Xbox Game Pas, connectez-vous sur https://minecraft.net/ et configurez-le.</string>
+    <string name="xerr_not_available">Xbox Live n\'est pas disponible dans votre pays</string>
 </resources>
