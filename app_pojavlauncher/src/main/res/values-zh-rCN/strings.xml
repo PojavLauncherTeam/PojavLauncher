@@ -288,4 +288,11 @@
     <string name="tasks_ongoing">任务正在执行中，请稍候</string>
     <string name="no_saved_accounts">没有已保存的账户</string>
     <string name="downloading_versions">正在下载版本列表……</string>
+    <string name="mc_download_failed">下载 Minecraft 失败！这可能是由于网络连接不良、文件放置错误等。</string>
+    <string name="xerr_unknown">未知的 Xbox Live API 错误 %d</string>
+    <string name="xerr_no_account">您似乎没有 Xbox Live 账户。请在 https://minecraft.net/上登录一次，然后重试。</string>
+    <string name="xerr_adult_verification">需要成人验证您的账户。</string>
+    <string name="xerr_child">您的账户是儿童账户，需要添加到家庭中方能登录。</string>
+    <string name="minecraft_not_owned">这个账户似乎没有 Minecraft 个人资料。如果您有 Xbox Game Pass，请登录 https://minecraft.net/ 并进行设置。</string>
+    <string name="xerr_not_available">Xbox Live 在您所在的国家/地区不可用。</string>
 </resources>
