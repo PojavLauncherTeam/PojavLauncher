@@ -288,4 +288,11 @@
     <string name="tasks_ongoing">Mehrere Aufgaben im Gange, bitte warten</string>
     <string name="no_saved_accounts">Keine eingespeicherten Konten</string>
     <string name="downloading_versions">Lade Versionsliste herunter…</string>
+    <string name="mc_download_failed">Fehler beim Herunterladen von Minecraft! Dies kann aufgrund einer schlechte Netzwerkverbindung, falsch platzierter Dateien, etc. passiert sein.</string>
+    <string name="xerr_unknown">Unbekannter Xbox-Live-API-Fehler %d</string>
+    <string name="xerr_no_account">Du scheinst kein Xbox-Live-Konto zu haben. Bitte melde dich einmal auf https://minecraft.net/ an und versuche es erneut.</string>
+    <string name="xerr_adult_verification">Ein Erwachsener muss dein Konto verifizieren.</string>
+    <string name="xerr_child">Dein Konto ist ein Kinderkonto und muss in einer Familie hinzugefügt werden, um sich anzumelden.</string>
+    <string name="minecraft_not_owned">Es scheint, als hätte dieses Konto kein Minecraft-Profil. Wenn du den Xbox-Game-Pass hast, logge dich bitte auf https://minecraft.net/ ein und stelle ihn ein.</string>
+    <string name="xerr_not_available">Xbox-Live ist in deinem Land nicht verfügbar</string>
 </resources>
