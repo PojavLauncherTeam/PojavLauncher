@@ -17,6 +17,7 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.*;
+import android.provider.DocumentsContract;
 import android.util.*;
 import android.view.*;
 import android.widget.*;
@@ -513,6 +514,18 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
             try {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setDataAndType(Uri.parse(link.replace("file://", "content://")), "*/*");
+                ctx.startActivity(intent);
+            } catch (Throwable th) {
+                Tools.showError(ctx, th);
+            }
+        });
+    }
+    public static void openPath(String path) {
+        Context ctx = touchpad.getContext(); // no more better way to obtain a context statically
+        ((Activity)ctx).runOnUiThread(() -> {
+            try {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setDataAndType(DocumentsContract.buildDocumentUri(ctx.getString(R.string.storageProviderAuthorities), path), "*/*");
                 ctx.startActivity(intent);
             } catch (Throwable th) {
                 Tools.showError(ctx, th);
