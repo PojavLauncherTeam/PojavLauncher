@@ -1,15 +1,20 @@
 package net.kdt.pojavlaunch.scoped;
 
+import android.annotation.TargetApi;
 import android.content.res.AssetFileDescriptor;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.graphics.Point;
 import android.os.CancellationSignal;
 import android.os.ParcelFileDescriptor;
+import android.provider.DocumentsContract;
 import android.provider.DocumentsContract.Document;
 import android.provider.DocumentsContract.Root;
 import android.provider.DocumentsProvider;
+import android.util.Log;
 import android.webkit.MimeTypeMap;
+
+import androidx.annotation.Nullable;
 
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
@@ -19,8 +24,10 @@ import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * A document provider for the Storage Access Framework which exposes the files in the
@@ -183,6 +190,7 @@ public class FolderProvider extends DocumentsProvider {
 
     @Override
     public String getDocumentType(String documentId) throws FileNotFoundException {
+        Log.i("FolderPRovider", "getDocumentType("+documentId+")");
         File file = getFileForDocId(documentId);
         return getMimeType(file);
     }
@@ -300,4 +308,11 @@ public class FolderProvider extends DocumentsProvider {
         row.add(Document.COLUMN_ICON, R.mipmap.ic_launcher);
     }
 
+    @Override
+    @TargetApi(26)
+    public DocumentsContract.Path findDocumentPath(@Nullable String parentDocumentId, String childDocumentId) throws FileNotFoundException {
+        File source = BASE_DIR;
+        if(parentDocumentId != null) source = getFileForDocId(parentDocumentId);
+        return new DocumentsContract.Path(getDocIdForFile(source), Collections.singletonList(childDocumentId));
+    }
 }
