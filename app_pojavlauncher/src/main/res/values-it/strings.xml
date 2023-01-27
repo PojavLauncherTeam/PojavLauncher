@@ -93,6 +93,8 @@
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Vecchie-alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Vecchie-beta</string>
+    <string name="mcl_setting_java_sandbox">Installatore per Sandbox .jar</string>
+    <string name="mcl_setting_java_sandbox_subtitle">Controlla la disponibilità del gestore di sicurezza per sandbox quando avvii l\'installatore .jar \".</string>
     <string name="mcl_version_clone">Clona</string>
     <!-- Global strings -->
     <string name="global_edit">Modifica</string>
@@ -242,6 +244,7 @@
     <string name="preference_control_title">Controlla personalizzazioni</string>
     <string name="preference_control_description">Gestures, trigger, e scala</string>
     <string name="preference_java_title">Tweaks Java</string>
+    <string name="preference_java_description">Versioni di Java, Argomenti JVM, Quantità di RAM e sandbox</string>
     <string name="preference_misc_title">Impostazioni miste</string>
     <string name="preference_misc_description">Lista versioni, e controlli librerie</string>
     <string name="preference_experimental_title">Sperimentale</string>
@@ -285,4 +288,9 @@
     <string name="tasks_ongoing">Delle operazioni sono in corso, perfavore attendi</string>
     <string name="no_saved_accounts">Nessun account salvato</string>
     <string name="downloading_versions">Download della lista delle versioni…</string>
+    <string name="mc_download_failed">Impossibile scaricare Minecraft! Questo può essere dovuto a una scarsa connessione a internet, file posizionati in modo errato, ecc..</string>
+    <string name="xerr_unknown">Errore di Xbox Live API %d sconosciuto</string>
+    <string name="xerr_no_account">Sembra che tu non abbia un account Xbox Live.
+La preghiamo di accedere una volta su https://minecraft.net/ e riprova</string>
+    <string name="xerr_adult_verification">Un adulto deve verificare il tuo account</string>
 </resources>
