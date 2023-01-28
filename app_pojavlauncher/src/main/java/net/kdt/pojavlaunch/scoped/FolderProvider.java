@@ -313,6 +313,15 @@ public class FolderProvider extends DocumentsProvider {
     public DocumentsContract.Path findDocumentPath(@Nullable String parentDocumentId, String childDocumentId) throws FileNotFoundException {
         File source = BASE_DIR;
         if(parentDocumentId != null) source = getFileForDocId(parentDocumentId);
-        return new DocumentsContract.Path(getDocIdForFile(source), Collections.singletonList(childDocumentId));
+        File destination = getFileForDocId(childDocumentId);
+        List<String> pathIds = new ArrayList<>();
+        while(!source.equals(destination) && destination != null) {
+            pathIds.add(getDocIdForFile(destination));
+            destination = destination.getParentFile();
+        }
+        pathIds.add(getDocIdForFile(source));
+        Collections.reverse(pathIds);
+        Log.i("FolderProvider", pathIds.toString());
+        return new DocumentsContract.Path(getDocIdForFile(source), pathIds);
     }
 }
