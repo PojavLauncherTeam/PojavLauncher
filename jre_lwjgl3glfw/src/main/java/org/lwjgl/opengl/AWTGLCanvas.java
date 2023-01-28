@@ -79,7 +79,8 @@ public class AWTGLCanvas extends Canvas implements Drawable, ComponentListener, 
 	}
 
 	public AWTGLCanvas() throws LWJGLException {
-		Display.create();
+		System.out.println("AWTGLCanvas constructor called on thread:"+Thread.currentThread().getName());
+		//Display.create();
 	}
 
 	public AWTGLCanvas(PixelFormat pixel_format) throws LWJGLException {
