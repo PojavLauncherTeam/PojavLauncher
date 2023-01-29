@@ -437,7 +437,7 @@ public class JREUtils {
         ArrayList<String> parsedArguments = new ArrayList<>(0);
         args = args.trim().replace(" ", "");
         //For each prefixes, we separate args.
-        String[] separators = new String[]{"-XX:-","-XX:+", "-XX:","--", "-D", "-X"};
+        String[] separators = new String[]{"-XX:-","-XX:+", "-XX:","--", "-D", "-X", "-javaagent:", "-verbose"};
         for(String prefix : separators){
             while (true){
                 int start = args.indexOf(prefix);
