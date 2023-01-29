@@ -20,6 +20,7 @@ jar {
             it.isDirectory() ? it : zipTree(it)
         }
     }
+    exclude 'net/java/openjdk/cacio/ctc/**'
 }
 
 java {
