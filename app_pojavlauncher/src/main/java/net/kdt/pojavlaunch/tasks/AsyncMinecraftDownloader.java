@@ -65,22 +65,22 @@ public class AsyncMinecraftDownloader {
         JAssets assets = null;
         try {
             File verJsonDir = new File(Tools.DIR_HOME_VERSION + downVName + ".json");
-
             if (verInfo != null && verInfo.url != null) {
-                if(!LauncherPreferences.PREF_CHECK_LIBRARY_SHA)  Log.w("Chk","Checker is off");
-
-                boolean isManifestGood = verJsonDir.exists()
-                        && (!LauncherPreferences.PREF_CHECK_LIBRARY_SHA
-                        || verInfo.sha1 == null
-                        || Tools.compareSHA1(verJsonDir, verInfo.sha1));
-
-                if(!isManifestGood) {
-                    ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT, 0, R.string.mcl_launch_downloading, versionName + ".json");
-                    verJsonDir.delete();
-                    downloadFileMonitored(verInfo.url, verJsonDir, getByteBuffer(),
-                            (curr, max) -> ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT,
-                                    (int) Math.max((float)curr/max*100,0), R.string.mcl_launch_downloading, versionName + ".json")
-                    );
+                downloadVersionJson(versionName, verJsonDir, verInfo);
+            }
+            JMinecraftVersionList.Version originalVersion = Tools.getVersionInfo(versionName, true);
+            if(originalVersion.inheritsFrom != null && !originalVersion.inheritsFrom.isEmpty()) {
+                Log.i("Downloader", "probe: inheritsFrom="+originalVersion.inheritsFrom);
+                String version = originalVersion.inheritsFrom;
+                String downName = Tools.DIR_HOME_VERSION+"/"+version+"/"+version+".json";
+                JMinecraftVersionList.Version listedVersion = getListedVersion(originalVersion.inheritsFrom);
+                if(listedVersion != null) {
+                    Log.i("Downloader", "probe: verifying "+version);
+                    downloadVersionJson(version, new File(downName), listedVersion);
+                }else{
+                    Log.i("Downloader", "failed to test source version before downloading.");
+                    Log.i("Downloader", "Inheriting from versions not in the Mojang list?");
+                    Log.i("Downloader", "If so, feel free to open a PR at our GitHub repository to add this feature!");
                 }
             }
 
@@ -161,7 +161,6 @@ public class AsyncMinecraftDownloader {
                 }
             }
             File minecraftMainFile = new File(minecraftMainJar);
-            JMinecraftVersionList.Version originalVersion = Tools.getVersionInfo(versionName, true);
             Log.i("Downloader", "originalVersion.inheritsFrom="+originalVersion.inheritsFrom);
             Log.i("Downloader", "originalVersion.downloads="+originalVersion.downloads);
             MinecraftClientInfo originalClientInfo;
@@ -365,6 +364,24 @@ public class AsyncMinecraftDownloader {
         }
 
         return Tools.GLOBAL_GSON.fromJson(Tools.read(output.getAbsolutePath()), JAssets.class);
+    }
+
+    public void downloadVersionJson(String versionName, File verJsonDir, JMinecraftVersionList.Version verInfo) throws IOException {
+        if(!LauncherPreferences.PREF_CHECK_LIBRARY_SHA)  Log.w("Chk","Checker is off");
+
+        boolean isManifestGood = verJsonDir.exists()
+                && (!LauncherPreferences.PREF_CHECK_LIBRARY_SHA
+                || verInfo.sha1 == null
+                || Tools.compareSHA1(verJsonDir, verInfo.sha1));
+
+        if(!isManifestGood) {
+            ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT, 0, R.string.mcl_launch_downloading, versionName + ".json");
+            verJsonDir.delete();
+            downloadFileMonitored(verInfo.url, verJsonDir, getByteBuffer(),
+                    (curr, max) -> ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT,
+                            (int) Math.max((float)curr/max*100,0), R.string.mcl_launch_downloading, versionName + ".json")
+            );
+        }
     }
 
     public static String normalizeVersionId(String versionString) {
