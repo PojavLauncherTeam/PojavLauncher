@@ -7,9 +7,9 @@ import net.kdt.pojavlaunch.extra.ExtraConstants;
 import net.kdt.pojavlaunch.extra.ExtraCore;
 import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 
-import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 /** Class here to help with various stuff to help run lower versions smoothly */
@@ -26,10 +26,18 @@ public class OldVersionsUtils {
         }
 
         try {
-            String openGlVersion = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(creationDate.substring(0, creationDate.indexOf("T"))).before(new Date(2011-1900, 6, 8)) ? "1" : "2";
+            int tIndexOf = creationDate.indexOf('T');
+            if(tIndexOf != -1) creationDate = creationDate.substring(0, tIndexOf);
+            Date creationDateObj = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(creationDate);
+            if(creationDateObj == null) {
+                Log.e("GL_SELECT", "Failed to parse version date");
+                ExtraCore.setValue(ExtraConstants.OPEN_GL_VERSION, "2");
+                return;
+            }
+            String openGlVersion =  creationDateObj.before(new Date(2011-1900, 6, 8)) ? "1" : "2";
             ExtraCore.setValue(ExtraConstants.OPEN_GL_VERSION, openGlVersion);
         }catch (ParseException exception){
-            Log.e("OPENGL SELECTION", exception.toString());
+            Log.e("GL_SELECT", exception.toString());
             ExtraCore.setValue(ExtraConstants.OPEN_GL_VERSION, "2");
         }
     }
