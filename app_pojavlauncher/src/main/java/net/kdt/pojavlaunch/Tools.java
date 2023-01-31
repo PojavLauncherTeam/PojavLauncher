@@ -2,6 +2,7 @@ package net.kdt.pojavlaunch;
 
 import android.app.*;
 import android.content.*;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.net.*;
 import android.os.*;
@@ -484,18 +485,18 @@ public final class Tools {
         }else{
             if (SDK_INT >= Build.VERSION_CODES.R) {
                 activity.getDisplay().getRealMetrics(displayMetrics);
-            } else if(SDK_INT >= P) {
+            } else { // Removed the clause for devices with unofficial notch support, since it also ruins all devices with virtual nav bars before P
                 activity.getWindowManager().getDefaultDisplay().getRealMetrics(displayMetrics);
-            }else{ // Some old devices can have a notch despite it not being officially supported
-                activity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
             }
             if(!PREF_IGNORE_NOTCH){
                 //Remove notch width when it isn't ignored.
-                displayMetrics.widthPixels -= PREF_NOTCH_SIZE;
+                if(activity.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
+                    displayMetrics.heightPixels -= PREF_NOTCH_SIZE;
+                else
+                    displayMetrics.widthPixels -= PREF_NOTCH_SIZE;
             }
         }
         currentDisplayMetrics = displayMetrics;
-
         return displayMetrics;
     }
 
