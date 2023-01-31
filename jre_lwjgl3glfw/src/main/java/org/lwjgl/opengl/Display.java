@@ -417,7 +417,7 @@ public class Display {
 
         //glfwSwapInterval(0);
         glfwShowWindow(Window.handle);
-
+        if(parent != null) parent.setSize(displayWidth, displayHeight);
         Mouse.create();
         Keyboard.create();
 
@@ -954,7 +954,7 @@ public class Display {
     }
 
     public static void setResizable(boolean resizable) {
-        displayResizable = resizable;
+        //displayResizable = resizable;
         if (displayResizable ^ resizable) {
             if (Window.handle != 0) {
                 IntBuffer width = BufferUtils.createIntBuffer(1);

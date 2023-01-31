@@ -252,14 +252,11 @@ JNIEXPORT jstring JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeClipboard(JNI
     return pasteDst;
 }
 
-void Java_org_lwjgl_glfw_CallbackBridge_nativeSendScreenSize(JNIEnv* env, jclass clazz, jint width, jint height);
-
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSetInputReady(JNIEnv* env, jclass clazz, jboolean inputReady) {
 #ifdef DEBUG
     LOGD("Debug: Changing input state, isReady=%d, isUseStackQueueCall=%d\n", inputReady, isUseStackQueueCall);
 #endif
     isInputReady = inputReady;
-    if(isInputReady) Java_org_lwjgl_glfw_CallbackBridge_nativeSendScreenSize(NULL, NULL, savedWidth, savedHeight);
     return isUseStackQueueCall;
 }
 
