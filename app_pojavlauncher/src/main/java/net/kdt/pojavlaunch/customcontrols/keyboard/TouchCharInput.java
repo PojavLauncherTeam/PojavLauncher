@@ -127,7 +127,6 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
         setFocusable(true);
         setVisibility(VISIBLE);
         requestFocus();
-
     }
 
     /** Lose ability to exist, take focus and have some text being input */
@@ -135,6 +134,7 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
         clear();
         clearFocus();
         setEnabled(false);
+        setFocusable(false);
     }
 
     /** Send the enter key. */
