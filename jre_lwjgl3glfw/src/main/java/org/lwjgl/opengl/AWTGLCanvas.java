@@ -178,27 +178,27 @@ public class AWTGLCanvas extends Canvas implements Drawable, ComponentListener, 
 	}
 
 	public void setLocation(int x, int y) {
-		
+		super.setLocation(x, y);
 	}
 
 	public void setLocation(Point p) {
-		
+		super.setLocation(p);
 	}
 
 	public void setSize(Dimension d) {
-		
+		super.setSize(d);
 	}
 
 	public void setSize(int width, int height) {
-		
+		super.setSize(width, height);
 	}
 
 	public void setBounds(int x, int y, int width, int height) {
-		
+		super.setBounds(x, y, width, height);
 	}
 
 	public void hierarchyChanged(HierarchyEvent e) {
-		
+
 	}
 
 }
