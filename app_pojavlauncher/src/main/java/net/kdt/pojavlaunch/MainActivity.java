@@ -120,7 +120,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         bindValues();
         mControlLayout.setMenuListener(this);
 
-        mDrawerPullButton.setOnClickListener(v -> drawerLayout.openDrawer(navDrawer));
+        mDrawerPullButton.setOnClickListener(v -> onClickedMenu());
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
 
         try {
@@ -562,5 +562,6 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
     @Override
     public void onClickedMenu() {
         drawerLayout.openDrawer(navDrawer);
+        navDrawer.requestLayout();
     }
 }
