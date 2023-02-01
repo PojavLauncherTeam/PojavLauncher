@@ -66,7 +66,7 @@ If you want to build after launcher code changes, follow the steps below.
 - **Coming soon**
 
 ### The Launcher
-- Because languages are auto added by Crowdin, you need to run language list generator before building. In the project directory, run:
+- Because languages are auto-added by Crowdin, you need to run the language list generator before building. In the project directory, run:
 
 * On Linux, Mac OS:
 ```
