@@ -77,7 +77,23 @@
             android:title="@string/preference_mouse_start_title"
             android:summary="@string/preference_mouse_start_description"
             />
-
+        <SwitchPreference
+            android:key="enableGyro"
+            android:title="@string/preference_enable_gyro_title"
+            android:summary="@string/preference_enable_gyro_description"/>
+        <net.kdt.pojavlaunch.prefs.CustomSeekBarPreference
+            android:key="gyroSensitivity"
+            android:title="@string/preference_gyro_sensitivity_title"
+            android:summary="@string/preference_gyro_sensitivity_description"
+            app2:selectable="false"
+            app2:seekBarIncrement="5"
+            app2:showSeekBarValue="true"/>
+        <net.kdt.pojavlaunch.prefs.CustomSeekBarPreference
+            android:key="gyroSampleRate"
+            android:title="@string/preference_gyro_sample_rate_title"
+            android:summary="@string/preference_gyro_sample_rate_description"
+            app2:selectable="false"
+            app2:showSeekBarValue="true"/>
     </PreferenceCategory>
 
 

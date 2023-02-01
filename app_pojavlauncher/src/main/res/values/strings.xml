@@ -331,4 +331,11 @@
     <string name="xerr_child">Your account is a child account, and needs to be added into a Family in order to log in.</string>
     <string name="minecraft_not_owned">It seems like this account does not have a Minecraft profile. If you have Xbox Game Pass, please log in on https://minecraft.net/ and set it up.</string>
     <string name="xerr_not_available">Xbox Live is not available in your country</string>
+    <string name="preference_enable_gyro_title">Enable gyroscope controls</string>
+    <string name="preference_enable_gyro_description">Enabling this will allow you to turn in game by turning your phone</string>
+    <string name="preference_gyro_sensitivity_title">Gyroscope controls sensitivity</string>
+    <string name="preference_gyro_sensitivity_description">Adjust the sensitivity of gyroscope controls</string>
+    <string name="toast_turn_on_gyro">Enable gyro controls first to use this!</string>
+    <string name="preference_gyro_sample_rate_title">Gyroscope sampling rate</string>
+    <string name="preference_gyro_sample_rate_description">If you have performance issues with the gyroscope controls, increase this</string>
 </resources>
