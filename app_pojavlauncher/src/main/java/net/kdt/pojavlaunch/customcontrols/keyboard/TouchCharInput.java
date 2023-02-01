@@ -135,7 +135,7 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
         setVisibility(GONE);
         clearFocus();
         setEnabled(false);
-        setFocusable(false);
+        //setFocusable(false);
     }
 
     /** Send the enter key. */
