@@ -190,7 +190,7 @@ public class JREUtils {
         Map<String, String> envMap = new ArrayMap<>();
         envMap.put("POJAV_NATIVEDIR", NATIVE_LIB_DIR);
         envMap.put("JAVA_HOME", Tools.DIR_HOME_JRE);
-        envMap.put("HOME", Tools.DIR_GAME_NEW);
+        envMap.put("HOME", Tools.DIR_GAME_HOME);
         envMap.put("TMPDIR", activity.getCacheDir().getAbsolutePath());
         envMap.put("LIBGL_MIPMAP", "3");
 
@@ -274,7 +274,7 @@ public class JREUtils {
         // return ldLibraryPath;
     }
 
-    public static int launchJavaVM(final Activity activity,final List<String> JVMArgs) throws Throwable {
+    public static int launchJavaVM(final Activity activity, String gameDirectory, final List<String> JVMArgs) throws Throwable {
         JREUtils.relocateLibPath();
         // For debugging only!
 /*
@@ -309,7 +309,7 @@ public class JREUtils {
 
         initJavaRuntime();
         setupExitTrap(activity.getApplication());
-        chdir(Tools.DIR_GAME_NEW);
+        chdir(gameDirectory == null ? Tools.DIR_GAME_NEW : gameDirectory);
         userArgs.add(0,"java"); //argv[0] is the program name according to C standard.
 
         final int exitCode = VMLauncher.launchJVM(userArgs.toArray(new String[0]));
@@ -340,7 +340,7 @@ public class JREUtils {
         ArrayList<String> overridableArguments = new ArrayList<>(Arrays.asList(
                 "-Djava.home=" + Tools.DIR_HOME_JRE,
                 "-Djava.io.tmpdir=" + ctx.getCacheDir().getAbsolutePath(),
-                "-Duser.home=" + new File(Tools.DIR_GAME_NEW).getParent(),
+                "-Duser.home=" + Tools.DIR_GAME_HOME,
                 "-Duser.language=" + System.getProperty("user.language"),
                 "-Dos.name=Linux",
                 "-Dos.version=Android-" + Build.VERSION.RELEASE,

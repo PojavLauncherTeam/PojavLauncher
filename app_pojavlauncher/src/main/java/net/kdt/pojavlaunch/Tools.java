@@ -176,7 +176,7 @@ public final class Tools {
         javaArgList.add(versionInfo.mainClass);
         javaArgList.addAll(Arrays.asList(launchArgs));
         // ctx.appendlnToLog("full args: "+javaArgList.toString());
-        JREUtils.launchJavaVM(activity, javaArgList);
+        JREUtils.launchJavaVM(activity, gamedirPath, javaArgList);
     }
 
     public static String getGameDirPath(@NonNull MinecraftProfile minecraftProfile){

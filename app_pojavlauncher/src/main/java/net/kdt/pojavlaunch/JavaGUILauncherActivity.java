@@ -282,7 +282,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
 
             Logger.getInstance().appendToLog("Info: Java arguments: " + Arrays.toString(javaArgList.toArray(new String[0])));
 
-            return JREUtils.launchJavaVM(this, javaArgList);
+            return JREUtils.launchJavaVM(this, null,javaArgList);
         } catch (Throwable th) {
             Tools.showError(this, th, true);
             return -1;
