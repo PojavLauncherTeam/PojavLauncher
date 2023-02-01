@@ -288,4 +288,18 @@
     <string name="tasks_ongoing">Probíhají činosti, prosím počkejte</string>
     <string name="no_saved_accounts">Žádné přihlášené účty</string>
     <string name="downloading_versions">Stahování seznamu verzí…</string>
+    <string name="mc_download_failed">Selhalo stahování Minecraftu! Mohlo se tak stát kvůli špatnému internetovému připojení, nesprávně umístěnými soubory apod.</string>
+    <string name="xerr_unknown">Neznámá Chyba API Xbox Live %d</string>
+    <string name="xerr_no_account">Zdá se že nemáte účet Xbox Live. Jednou se přihlašte na https://minecraft.net/ a zkuste to znovu.</string>
+    <string name="xerr_adult_verification">Váš účet musí být ověřen dospělým.</string>
+    <string name="xerr_child">Váš účet je dětský, tudíž je potřeba jej přidat do Rodiny pro přihlášení.</string>
+    <string name="minecraft_not_owned">Tento účet nejspíše nemá profil Minecraftu. Máte-li Xbox Game Pass, přihlašte se na https://minecraft.net/ a nastavte jej.</string>
+    <string name="xerr_not_available">Xbox Live není ve vaší zemi dostupné</string>
+    <string name="preference_enable_gyro_title">Zapnout gyroskopové ovládání</string>
+    <string name="preference_enable_gyro_description">Zapnutí vám umožní otáčet se ve hře otočením telefonu</string>
+    <string name="preference_gyro_sensitivity_title">Citlivost gyroskopového ovládání</string>
+    <string name="preference_gyro_sensitivity_description">Upravit citlivost gyroskopového ovládání</string>
+    <string name="toast_turn_on_gyro">Pro použití tohoto zapněte gyroskopové ovládání!</string>
+    <string name="preference_gyro_sample_rate_title">Vzorkovací kmitočet gyroskopu</string>
+    <string name="preference_gyro_sample_rate_description">Máte-li problémy výkonu, užívajíce gyroskopové ovládání, zvyšte toto</string>
 </resources>
