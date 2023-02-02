@@ -18,7 +18,6 @@
     <string name="login_title_no_saved_account">Es konnte kein Konto gefunden werden!</string>
     <string name="login_dialog_no_saved_account">Sie haben keine Konten eingespeichert.\nWähle die Option <b>\"Angemeldet bleiben\"</b> während des Anmeldens aus, um das Konto einzuspeichern.</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Wische von rechts nach links um das Menü zu öffnen ◀\nDrücke auf eine Schaltfläche um Sie anzupassen: Editieren, Vergrößern und Verkleinern oder Löschen."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Dieses Konto wird entfernt!</string>
     <!-- AlertDialog title -->
@@ -295,4 +294,11 @@
     <string name="xerr_child">Dein Konto ist ein Kinderkonto und muss in einer Familie hinzugefügt werden, um sich anzumelden.</string>
     <string name="minecraft_not_owned">Es scheint, als hätte dieses Konto kein Minecraft-Profil. Wenn du den Xbox-Game-Pass hast, logge dich bitte auf https://minecraft.net/ ein und stelle ihn ein.</string>
     <string name="xerr_not_available">Xbox-Live ist in deinem Land nicht verfügbar</string>
+    <string name="preference_enable_gyro_title">Aktiviere Gyroskop-Steuerung</string>
+    <string name="preference_enable_gyro_description">Wenn du dies aktivierst, kannst du dich im Spiel umsehen, indem du dein Telefon dreht</string>
+    <string name="preference_gyro_sensitivity_title">Gyroskop-Steuerungs-Empfindlichkeit</string>
+    <string name="preference_gyro_sensitivity_description">Passe die Empfindlichkeit der Gyroskop-Steuerung an</string>
+    <string name="toast_turn_on_gyro">Aktiviere zuerst die Gyro-Steuerung, um dies zu verwenden!</string>
+    <string name="preference_gyro_sample_rate_title">Gyroskop-Abtastrate</string>
+    <string name="preference_gyro_sample_rate_description">Wenn du Performanceprobleme mit der Gyroskop-Steuerung hast, erhöhe diese Einstellung</string>
 </resources>
