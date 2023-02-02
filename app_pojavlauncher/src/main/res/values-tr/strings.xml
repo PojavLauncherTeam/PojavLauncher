@@ -18,7 +18,6 @@
     <string name="login_title_no_saved_account">Hiç hesap bulunamadı!</string>
     <string name="login_dialog_no_saved_account">Hiçbir kayıtlı hesabın yok.\n&lt;b&gt;\"Beni hatırla\"&lt;b&gt;\'yı seçerek hesaplarını kaydedebilirsin.</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Menüyü açmak için sağdan sola kaydırın ◀\nBir düğmeyi düzenlemek, yeniden boyutlandırmak veya silmek için basılı tutun."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Bu hesap kaldırılacak!</string>
     <!-- AlertDialog title -->
