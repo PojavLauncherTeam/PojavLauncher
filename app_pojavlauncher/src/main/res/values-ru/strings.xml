@@ -18,7 +18,7 @@
     <string name="login_title_no_saved_account">Учётные записи не найдены!</string>
     <string name="login_dialog_no_saved_account">Вы не сохраняли ни одну учётную запись.\nИспользуйте опцию <b>«Запомнить меня»</b>, чтобы сохранить учётную запись при первом входе.</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Проведите справа налево, чтобы открыть меню ◀\nУдерживайте кнопку для настройки: редактирования, изменения размера или удаления."</string>
+    <string name="hint_control_mapping">"Нажмите значок ⚙, чтобы открыть панель действий.\nВыберите кнопку, чтобы создать её копию или удалить;\nизменить свойства, размер или привязанную клавишу."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Эта учётная запись будет удалена!</string>
     <!-- AlertDialog title -->
@@ -296,4 +296,11 @@
     <string name="xerr_child">Для входа в игру учётная запись ребёнка должна быть добавлена в семью.</string>
     <string name="minecraft_not_owned">Похоже, к вашей учётной записи не привязан профиль Minecraft с лицензией. Если у вас есть подписка Xbox Game Pass, войдите на https://minecraft.net и настройте её.</string>
     <string name="xerr_not_available">Xbox Live недоступен в вашей стране :(</string>
+    <string name="preference_enable_gyro_title">Управление наклоном</string>
+    <string name="preference_enable_gyro_description">Это позволит вам управлять положением камеры в игре путём вращения устройства.</string>
+    <string name="preference_gyro_sensitivity_title">Чувствительность гироскопа</string>
+    <string name="preference_gyro_sensitivity_description">Изменить чувствительность датчика вращения.</string>
+    <string name="toast_turn_on_gyro">Сначала включите \"Управление наклоном\".</string>
+    <string name="preference_gyro_sample_rate_title">Интервал опроса гироскопа</string>
+    <string name="preference_gyro_sample_rate_description">Увеличьте, если управление наклоном снижает производительность.</string>
 </resources>
