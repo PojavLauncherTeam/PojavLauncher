@@ -18,7 +18,6 @@
     <string name="login_title_no_saved_account">Žiadny účet sa nenašiel !</string>
     <string name="login_dialog_no_saved_account">Nemáte žiaden uložený účet. \nPoužite možnosť <b>\"Ponechať ma prihlásených\"</b> pre uloženie účtu pri prvom prihlásení.</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Prejdením sprava doľava otvorte ponuku ◀\nPodrž tlačidlo pre úpravu: upravenie, zmenenie veľkosti alebo zmazanie."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Tento účet bude odstránený!</string>
     <!-- AlertDialog title -->
