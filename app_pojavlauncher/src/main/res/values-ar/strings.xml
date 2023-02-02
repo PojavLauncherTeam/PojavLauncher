@@ -18,7 +18,6 @@
     <string name="login_title_no_saved_account">لم يتم العثور على الحساب!</string>
     <string name="login_dialog_no_saved_account">ليس لديك أي حساب محفوظ.\nاستخدم الخيار <b>\"تذكر تسجيل دخولي\"</b> لحفظ حساب عند تسجيل الدخول الأول.</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"اسحب من اليمين إلى اليسار لفتح القائمة ◀\nاضغط على زر التخصيص: تحريره أو تغيير حجمه أو حذفه."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">سيتم إزالة هذا الحساب!</string>
     <!-- AlertDialog title -->
