@@ -18,7 +18,6 @@
     <string name="login_title_no_saved_account">Aucun compte trouvé !</string>
     <string name="login_dialog_no_saved_account">Vous n\'avez pas de compte enregistré.\nUtilisez l\'option <b>\"Rester connecté\"</b> pour enregistrer un compte lors de la première connexion.</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Balayez l'écran vers la gauche pour ouvrir le menu ◀\nCliquez sur un bouton pour le modifier, le redimensionner ou le supprimer."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Ce compte sera retiré !</string>
     <!-- AlertDialog title -->
