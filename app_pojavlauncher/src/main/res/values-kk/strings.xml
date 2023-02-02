@@ -17,7 +17,6 @@
     <string name="login_title_no_saved_account">Тіркелгі табылмады!</string>
     <string name="login_dialog_no_saved_account">Сақталған тіркелгіңіз жоқ.\n<b>\"Мені кірген күйде қалдыру\"</b> функциясын қолданып, кірген күйде қала беріңіз.</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Мәзірді ашу үшін экранды оңнан солға сипаңыз ◀\nБаптау (өңдеу, көлем өзгертунемесежою) үшін батырманы басып ұстаңыз."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Бұл тіркелгі жойылады!</string>
     <!-- AlertDialog title -->
