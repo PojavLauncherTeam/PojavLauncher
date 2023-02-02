@@ -18,7 +18,6 @@
     <string name="login_title_no_saved_account">Tidak ada akun yang ditemukan!</string>
     <string name="login_dialog_no_saved_account">Anda tidak punya akun yang sudah disimpan.\nGunakan opsi <b>\"Tetap masuk\"</b> untuk menyimpan sebuah akun waktu login pertama kali.</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Geser dari kanan ke kiri untuk membuka menu ◀\nPencet lama sebuah tombol untuk memodifikasi: edit, modifikasi ukuran, atau hapus."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Akun ini akan dihapus!</string>
     <!-- AlertDialog title -->
@@ -178,6 +177,7 @@
     <string name="customctrl_add_subbutton_message">Sub-tombol n°%d telah ditambahkan!</string>
     <string name="customctrl_selectdefault">Pilih \". json\" kontrol default</string>
     <string name="customctrl_export">Ekspor kontrol</string>
+    <string name="main_share_logs">Bagikan file log</string>
     <string name="main_install_jar_file">Install .jar</string>
     <string name="main_options">Opsi</string>
     <string name="main_play">Main</string>
@@ -240,6 +240,7 @@
     <string name="preference_control_title">Kustomisasi kontrol</string>
     <string name="preference_control_description">Jenis gerakan, pemicu, dan penskalaan</string>
     <string name="preference_java_title">Tweak Java</string>
+    <string name="preference_java_description">Versi java, JVM Arguments, Jumlah RAM dan sandbox</string>
     <string name="preference_misc_title">Pengaturan lain-lain</string>
     <string name="preference_misc_description">Daftar versi, dan pemeriksaan lib</string>
     <string name="preference_experimental_title">Barang Eksperimental</string>
@@ -281,4 +282,9 @@
     <string name="tasks_ongoing">Ada tugas yang sedang berjalan, mohon menunggu</string>
     <string name="no_saved_accounts">Tidak ada akun yang tersimpan</string>
     <string name="downloading_versions">Mengunduh daftar versi…</string>
+    <string name="mc_download_failed">Gagal mengunduh Minecraft! Ini mungkin karena jaringan yang buruk, file yang salah ditempatkan, dll..</string>
+    <string name="xerr_no_account">Kamu sepertinya tidak memiliki akun Xbox Live. Tolong login ke https://minecraft.net/ dan ulang kembali.</string>
+    <string name="minecraft_not_owned">Sepertinya akun ini tidak mempunyai profil Minecraft. Jika kamu memiliki Xbox Game Pass, tolong login ke https://minecraft.net/ dan mengaturnya.</string>
+    <string name="xerr_not_available">Xbox Live tidak tersedia dinegaramu</string>
+    <string name="preference_enable_gyro_title">Hidupkan kontrol gyroscope</string>
 </resources>
