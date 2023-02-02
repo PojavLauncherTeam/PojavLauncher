@@ -18,7 +18,6 @@
     <string name="login_title_no_saved_account">Tiada akaun dijumpai!</string>
     <string name="login_dialog_no_saved_account">Kamu tidak mempunyai sebarang akaun yang disimpan.\nGunakan pilihan <b>\"Kekalkan saya terlog masuk\"</b> untuk menyimpan sebuah akaun pada log masuk pertama.</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Leret dari kanan untuk membuka menu ◀\nTekan dan tahan sebuah butang untuk menyesuaikan: edit, mengubah saiz atau padam."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Akaun ini akan dihapus!</string>
     <!-- AlertDialog title -->
