@@ -18,7 +18,6 @@
     <string name="login_title_no_saved_account">Nenhuma conta encontrada!</string>
     <string name="login_dialog_no_saved_account">Você não tem nenhuma conta salva.\nUse a opção <b>\"Manter conectado\"</b> para salvar uma conta após o primeiro início de sessão.</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Deslize da direita para a esquerda para abrir o menu ◀ \nSegure um botão para personalizar: editar, redimensionar ou excluir."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Esta conta será removida!</string>
     <!-- AlertDialog title -->
