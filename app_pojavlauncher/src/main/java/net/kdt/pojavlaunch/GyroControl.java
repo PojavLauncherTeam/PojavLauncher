@@ -15,6 +15,8 @@ public class GyroControl implements SensorEventListener, GrabListener {
     private final SensorManager mSensorManager;
     private final Sensor mSensor;
     private boolean mShouldHandleEvents;
+    private boolean mFirstPass;
+    private long mPreviousTimestamp;
 
     public GyroControl(Context context) {
         mSensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
@@ -23,6 +25,7 @@ public class GyroControl implements SensorEventListener, GrabListener {
 
     public void enable() {
         if(mSensor == null) return;
+        mFirstPass = true;
         mSensorManager.registerListener(this, mSensor, 1000 * LauncherPreferences.PREF_GYRO_SAMPLE_RATE);
         mShouldHandleEvents = CallbackBridge.isGrabbing();
         CallbackBridge.addGrabListener(this);
@@ -37,9 +40,14 @@ public class GyroControl implements SensorEventListener, GrabListener {
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
         if(mShouldHandleEvents && sensorEvent.sensor == mSensor) {
-            CallbackBridge.mouseX += sensorEvent.values[0] * LauncherPreferences.PREF_GYRO_SENSITIVITY * 10;
-            CallbackBridge.mouseY += sensorEvent.values[1] * LauncherPreferences.PREF_GYRO_SENSITIVITY * 10;
+            float factor = LauncherPreferences.PREF_GYRO_SENSITIVITY;
+            if(!mFirstPass) {
+                factor *= (sensorEvent.timestamp - mPreviousTimestamp) * 0.000001;
+            }else mFirstPass = false;
+            CallbackBridge.mouseX += sensorEvent.values[0] * factor;
+            CallbackBridge.mouseY += sensorEvent.values[1] * factor;
             CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
+            mPreviousTimestamp = sensorEvent.timestamp;
         }
     }
 
@@ -50,6 +58,7 @@ public class GyroControl implements SensorEventListener, GrabListener {
 
     @Override
     public void onGrabState(boolean isGrabbing) {
+        mFirstPass = true;
         mShouldHandleEvents = isGrabbing;
     }
 }
