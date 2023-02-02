@@ -18,7 +18,6 @@
     <string name="login_title_no_saved_account">¡ punoɟ ʇunoɔɔɐ oN</string>
     <string name="login_dialog_no_saved_account">˙uᴉᵷoꞁ ʇsɹᴉɟ uodn ʇunoɔɔɐ uɐ ǝʌɐs oʇ &lt;/b&gt;,, uᴉ pǝᵷᵷoꞁ ǝɯ dǝǝꞰ,,&lt;b&gt; uoᴉʇdo ǝɥʇ ǝs∩\n˙ʇunoɔɔɐ pǝʌɐs ʎuɐ ǝʌɐɥ ʇ, uop no⅄.</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"˙ǝʇǝꞁǝp ɹo ǝzᴉsǝɹ 'ʇᴉpǝ :ǝzᴉɯoʇsnɔ oʇ uoʇʇnq ɐ pꞁoH\n◀ nuǝɯ uǝdo oʇ ʇɟǝꞁ oʇ ʇɥᵷᴉɹ ɯoɹɟ ǝdᴉʍS"</string>
     <!-- Warnings -->
     <string name="warning_remove_account">¡pǝʌoɯǝɹ ǝq ꞁꞁᴉʍ ʇunoɔɔɐ sᴉɥ⟘</string>
     <!-- AlertDialog title -->
