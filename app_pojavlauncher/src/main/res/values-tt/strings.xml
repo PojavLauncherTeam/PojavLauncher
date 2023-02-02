@@ -17,7 +17,6 @@
     <string name="login_title_no_saved_account">Аккаунт табылмады!</string>
     <string name="login_dialog_no_saved_account">Сакланган аккаунтлар юк.\nАккаунтны беренче керү вакытында саклап өчен <b>«Хәтердә калдырырга»</b> опциясен кулланыгыз.</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Менюны ачу өчен экран аннан сулга сызыгыз ◀\nКөйләү (үзгәрту, зурлыгын үзгәртү яки бетерү) өчен төймәне тотыгыз."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Бу аккаунт бетереләчәк!</string>
     <!-- AlertDialog title -->
