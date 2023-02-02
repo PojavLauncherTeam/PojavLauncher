@@ -18,7 +18,6 @@
     <string name="login_title_no_saved_account">اکانتی پیدا نشد!</string>
     <string name="login_dialog_no_saved_account">هیچ اکانت ذخیره شده‌ای ندارید.\nاز گزینه <b>\"مرا وارد شده نگه دار\"</b> استفاده کنید تا اکانت را به محض ورود ذخیره کنید.</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"از راست به چپ بکشید تا منو را باز کنید ◀️\nدکمه‌ای را نگه دارید تا شخصی‌سازی کنید: ویرایش، تغییر سایز یا حذف."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">این اکانت حذف خواهد شد!</string>
     <!-- AlertDialog title -->
