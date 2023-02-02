@@ -18,7 +18,6 @@
     <string name="login_title_no_saved_account">Walang account na natagpuan!</string>
     <string name="login_dialog_no_saved_account">Wala kang anumang naka-save na account.\nGamitin ang opsyon na <b>\"Panatilihin akong naka-log in\"</b> upang mag-save ng account sa unang pag-log in.</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Mag-swipe mula sa kanan pakaliwa upang buksan ang menu ◀\nI-hold ang isang button upang i-customize: i-edit, baguhin ang laki o tanggalin."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Aalisin ang account na ito!</string>
     <!-- AlertDialog title -->
