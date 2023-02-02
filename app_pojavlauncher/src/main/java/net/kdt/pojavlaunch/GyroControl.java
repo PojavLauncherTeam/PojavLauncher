@@ -16,11 +16,9 @@ public class GyroControl implements SensorEventListener, GrabListener {
     private final Sensor mSensor;
     private boolean mShouldHandleEvents;
 
-    private float mLastX, mLastY;
-
     public GyroControl(Context context) {
         mSensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
-        mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GAME_ROTATION_VECTOR);
+        mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
     }
 
     public void enable() {
@@ -39,11 +37,9 @@ public class GyroControl implements SensorEventListener, GrabListener {
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
         if(mShouldHandleEvents && sensorEvent.sensor == mSensor) {
-            CallbackBridge.mouseX += (sensorEvent.values[0]-mLastX) * LauncherPreferences.PREF_GYRO_SENSITIVITY * 1000;
-            CallbackBridge.mouseY += (sensorEvent.values[1]-mLastY) * LauncherPreferences.PREF_GYRO_SENSITIVITY * 1000;
+            CallbackBridge.mouseX += sensorEvent.values[0] * LauncherPreferences.PREF_GYRO_SENSITIVITY * 10;
+            CallbackBridge.mouseY += sensorEvent.values[1] * LauncherPreferences.PREF_GYRO_SENSITIVITY * 10;
             CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
-            mLastX = sensorEvent.values[0];
-            mLastY = sensorEvent.values[1];
         }
     }
 

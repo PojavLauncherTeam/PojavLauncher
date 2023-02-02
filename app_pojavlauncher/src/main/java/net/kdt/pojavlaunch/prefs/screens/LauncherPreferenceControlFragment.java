@@ -49,7 +49,7 @@ public class LauncherPreferenceControlFragment extends LauncherPreferenceFragmen
 
         Context context = getContext();
         if(context != null) {
-            mGyroAvailable = ((SensorManager)context.getSystemService(Context.SENSOR_SERVICE)).getDefaultSensor(Sensor.TYPE_GAME_ROTATION_VECTOR) != null;
+            mGyroAvailable = ((SensorManager)context.getSystemService(Context.SENSOR_SERVICE)).getDefaultSensor(Sensor.TYPE_GYROSCOPE) != null;
         }
         SwitchPreference gyroSwitch = findPreference("enableGyro");
         gyroSwitch.setVisible(mGyroAvailable);
