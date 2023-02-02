@@ -18,7 +18,6 @@
     <string name="login_title_no_saved_account">Paskyra nerasta!</string>
     <string name="login_dialog_no_saved_account">Jūs neturite išsaugotų paskyrų.\nPasinaudokite funkcija <b>\"Likti prisijungus\"</b> jei norite išsaugoti savo paskyrą.</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Vilkti iš dešinės į kairę kad atidarytumėte meniu. ◀\nLaikykite mygtuką kad pritaikytume: redaguoti, padidinti ar ištrinti."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Ši paskyra bus pašalinta!</string>
     <!-- AlertDialog title -->
