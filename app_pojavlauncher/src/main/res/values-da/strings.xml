@@ -9,7 +9,6 @@
     <string name="login_title_no_saved_account">Ingen konto fundet!</string>
     <string name="login_dialog_no_saved_account">Du har ikke nogen gemt konto.\nBrug indstillingen <b>\"Hold mig logget ind\"</b> for at gemme en konto ved første login.</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Stryg fra højre til venstre for at åbne menuen: reverse_button:\nHold en knap nede for at tilpasse den: Redigere, ændre størrelse eller slette."</string>
     <!-- Warnings -->
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Installer Java Runtime %s (.tar.xz)</string>
