@@ -18,7 +18,6 @@
     <string name="login_title_no_saved_account">Nu s-a găsit nici un cont!</string>
     <string name="login_dialog_no_saved_account">Nu ai niciun cont salvat.\nUtilizează opțiunea <b>\"Ține-mă logat\"</b> pentru a salva un cont la prima autentificare.</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Glisează de la dreapta la stânga pentru a deschide meniul ◀\n Ține apăsat un buton pentru a personaliza: editează, schimbă mărimea sau șterge."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Acest cont va fi eliminat!</string>
     <!-- AlertDialog title -->
