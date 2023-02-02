@@ -18,7 +18,6 @@
     <string name="login_title_no_saved_account">ไม่พบบัญชี !</string>
     <string name="login_dialog_no_saved_account">คุณไม่มีบัญชีที่บันทึกไว้\nใช้ตัวเลือก <b>\"ให้ฉันอยู่ในระบบต่อไป\"</b> เพื่อบันทึกบัญชีเมื่อเข้าสู่ระบบครั้งแรก</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"เลื่อนจากขวาไปซ้ายเพื่อเปิดเมนู ◀\nกดปุ่มค้างไว้เพื่อปรับแต่ง: แก้ไข ปรับขนาด หรือลบ"</string>
     <!-- Warnings -->
     <string name="warning_remove_account">This account will be removed!</string>
     <!-- AlertDialog title -->
