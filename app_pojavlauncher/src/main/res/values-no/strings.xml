@@ -17,7 +17,6 @@
     <string name="login_title_no_saved_account">Ingen konto funnet!</string>
     <string name="login_dialog_no_saved_account">Du har ingen lagrede konto.\nBruk alternativet <b>\"Hold meg logget inn\" </b> for å lagre en konto ved første innlogging.</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Dra fra høyre til venstre for å åpne menyen ◀\nHold en knapp for å tilpasse: endre størrelse eller slette."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Denne kontoen blir fjernet!</string>
     <!-- AlertDialog title -->
