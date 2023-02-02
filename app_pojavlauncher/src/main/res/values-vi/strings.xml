@@ -18,7 +18,7 @@
     <string name="login_title_no_saved_account">Không tìm thấy tài khoản !</string>
     <string name="login_dialog_no_saved_account">Bạn không có tài khoản nào được lưu.\nDùng cài đặt <b>\"Giữ trạng thái đăng nhập\"</b> để giữ tài khoản lúc đầu đăng nhập.</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Vuốt từ phải sang trái để mở menu ◀\nGiữ một nút để tùy chỉnh: chỉnh sửa, thay đổi kích thước hoặc xoá."</string>
+    <string name="hint_control_mapping">"Chạm phím bánh răng ở cạnh trên màn hình để mở menu ⚙\nChạm vào các phím để tùy chỉnh chúng: thay đổi tên, kích thước, liên kết phím, hoặc xoá phím."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Tài khoản này sẽ bị loại bỏ!</string>
     <!-- AlertDialog title -->
@@ -93,6 +93,8 @@
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Bản Alpha cũ</string>
     <string name="mcl_setting_veroption_oldbeta">Bản Beta cũ</string>
+    <string name="mcl_setting_java_sandbox">Chế độ hộp cát của trình cài đặt .jar</string>
+    <string name="mcl_setting_java_sandbox_subtitle">Bật hoặc tắt trình quản lí an ninh (trong Java) khi khởi động trình cài đặt .jar.</string>
     <string name="mcl_version_clone">Nhân bản</string>
     <!-- Global strings -->
     <string name="global_edit">Chỉnh sửa</string>
@@ -242,6 +244,7 @@
     <string name="preference_control_title">Tuỳ chỉnh bộ điều khiển</string>
     <string name="preference_control_description">Dạng cử chỉ, phím kích hoạt, và thu phóng</string>
     <string name="preference_java_title">Điều chỉnh Java</string>
+    <string name="preference_java_description">Câc phiên bản Java, chỉ số JVM, lượng RAM phân bổ và hộp cát</string>
     <string name="preference_misc_title">Các cài đặt khác</string>
     <string name="preference_misc_description">Danh sách phiên bản, và kiểm tra thư viện</string>
     <string name="preference_experimental_title">Những cài đặt thử nghiệm</string>
@@ -285,4 +288,18 @@
     <string name="tasks_ongoing">Các tác vụ đang chạy, vui lòng chờ</string>
     <string name="no_saved_accounts">Không có tài khoản nào được lưu</string>
     <string name="downloading_versions">Đang tải xuống danh sách phiên bản…</string>
+    <string name="mc_download_failed">Không thể tải Minecraft! Điều này có thể do kết nối mạng kém, tệp được đặt sai vị trí, ...</string>
+    <string name="xerr_unknown">Lỗi API Xbox Live chưa rõ, mã %d</string>
+    <string name="xerr_no_account">Có vẻ như bạn chưa có một tài khoản Xbox Live. Đăng nhập vào https://minecraft.net/ một lần và thử lại.</string>
+    <string name="xerr_adult_verification">Tài khoản của bạn cần được xác thực bởi người lớn.</string>
+    <string name="xerr_child">Tài khoản của bạn là tài khoản trẻ em, và phải được thêm vào một Gia đình để có thể đăng nhập.</string>
+    <string name="minecraft_not_owned">Có vẻ như tài khoản của bạn chưa có hồ sơ Minecraft. Nếu bạn có Xbox Game Pass, đăng nhập vào https://minecraft.net/ và thiết lập hồ sơ.</string>
+    <string name="xerr_not_available">Xbox Live không có sẵn ở quốc gia của bạn</string>
+    <string name="preference_enable_gyro_title">Bật con quay hồi chuyển</string>
+    <string name="preference_enable_gyro_description">Bật để quay góc nhìn trong trò chơi bằng cách nghiêng thiết bị</string>
+    <string name="preference_gyro_sensitivity_title">Độ nhạy con quay hồi chuyển</string>
+    <string name="preference_gyro_sensitivity_description">Điều chỉnh độ nhạy của điều khiển bằng con quay hồi chuyển</string>
+    <string name="toast_turn_on_gyro">Bạn cần bật con quay hồi chuyển để sử dụng!</string>
+    <string name="preference_gyro_sample_rate_title">Tốc độ lấy mẫu con quay hồi chuyển</string>
+    <string name="preference_gyro_sample_rate_description">Nếu bạn gặp vấn đề hiệu suất với điều khiển bằng con quay hồi chuyển, thử tăng cái này</string>
 </resources>
