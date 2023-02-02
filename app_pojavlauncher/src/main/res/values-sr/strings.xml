@@ -18,7 +18,6 @@
     <string name="login_title_no_saved_account">Налог није пронађен !</string>
     <string name="login_dialog_no_saved_account">Ви немате сачувани налог.\nКористите опцију <b>\"Сачувај налог\"</b>да сачувате налог прије него што се пријавите.</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Повуците са десна на лево да отворите мени ◀\nДржите дугме да га прилагодиш: едит, промени величину или избриши."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Овај налог ће бити уклоњен!</string>
     <!-- AlertDialog title -->
