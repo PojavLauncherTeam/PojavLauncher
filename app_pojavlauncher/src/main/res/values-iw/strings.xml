@@ -18,7 +18,6 @@
     <string name="login_title_no_saved_account">לא נמצאו חשבונות!</string>
     <string name="login_dialog_no_saved_account">אין לך אף חשבון שמור.\nהשתמש באפשרות <b>\"השאר אותי מחובר\"</b> כדי לשמור חשבון בכניסה הראשונה.</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"החלק מימין לשמאל כדי לפתוח את התפריט ◀\nלחץ לחיצה ארוכה על כפתור כדי לעצב: לערוך, לשנות גודל, או למחוק."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">החשבון יוסר!</string>
     <!-- AlertDialog title -->
