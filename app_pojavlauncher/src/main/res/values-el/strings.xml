@@ -18,7 +18,6 @@
     <string name="login_title_no_saved_account">Δεν βρέθηκε κανένας λογαριασμός !</string>
     <string name="login_dialog_no_saved_account">Δεν έχετε αποθηκευμένο λογαριασμό.\nΧρησιμοποιήστε την επιλογή <b>\"Κρατήστε με συνδεδεμένο\"</b> για να αποθηκεύσετε έναν λογαριασμό κατά την πρώτη σύνδεση.</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Σύρετε από δεξιά προς τα αριστερά για να ανοίξετε το μενού ◀\nΚρατήστε ένα κουμπί για προσαρμογή: επεξεργασία, αλλαγή μεγέθους ή διαγραφή."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Αυτός ο λογαριασμός θα αφαιρεθεί!</string>
     <!-- AlertDialog title -->
