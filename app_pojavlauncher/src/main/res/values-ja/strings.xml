@@ -18,7 +18,6 @@
     <string name="login_title_no_saved_account">アカウントが見つかりません！</string>
     <string name="login_dialog_no_saved_account">保存されたアカウントがありません。\n <b>\"ログイン状態を保持\"</b> オプションを使用して、最初にログインするとアカウントを保存します。</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"右から左にスワイプしてメニューを開きます ◀\nボタンを押してカスタマイズ：編集、サイズ変更、削除。"</string>
     <!-- Warnings -->
     <string name="warning_remove_account">このアカウントが削除されます！</string>
     <!-- AlertDialog title -->
