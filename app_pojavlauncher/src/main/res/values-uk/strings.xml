@@ -18,7 +18,7 @@
     <string name="login_title_no_saved_account">Не знайдено облікових записів!</string>
     <string name="login_dialog_no_saved_account">У вас немає жодного збереженого облікового запису.\nСкористайтеся опцією <b>\"Запам\'ятати мене\"</b>, щоб зберегти обліковий запис при першому вході в систему.</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Проведіть пальцем справа наліво, щоб відкрити меню ◀\nУтримуйте кнопку для налаштування: редагування, зміни розміру або видалення."</string>
+    <string name="hint_control_mapping">"Натисніть верхню центральну шестерню, щоб відкрити контекстне меню ⚙\nНатисніть на кнопку, щоб: редагувати, змінювати розмір, щось стерти, чи налаштувати клавіатуру."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Цей обліковий запис буде видалено!</string>
     <!-- AlertDialog title -->
@@ -295,4 +295,11 @@
     <string name="xerr_child">Ваш акаунт - дитячий, та потребує добавлення у Сімейну Групу, щоб увійти.</string>
     <string name="minecraft_not_owned">Схоже, цей обліковий запис не має профілю Minecraft. Якщо у вас є Ігрові Пропуски Xbox Live, просимо, увійдіть на https://minecraft.net/ та організуйте його.</string>
     <string name="xerr_not_available">Xbox Live недоступний у вашій країні</string>
+    <string name="preference_enable_gyro_title">Увімкнути керування гіроскопом</string>
+    <string name="preference_enable_gyro_description">Увімкнення цього дозволить вам змінювати гру, увімкнувши свій телефон</string>
+    <string name="preference_gyro_sensitivity_title">Налаштування чутливості гіроскопа</string>
+    <string name="preference_gyro_sensitivity_description">Налаштуйте чутливість елементів керування гіроскопом</string>
+    <string name="toast_turn_on_gyro">Увімкніть контроль гіроскопа, перш ніж використовувати це!</string>
+    <string name="preference_gyro_sample_rate_title">Частота дискретності Гіроскопа</string>
+    <string name="preference_gyro_sample_rate_description">Якщо у вас виникають проблеми з продуктивністю разом з керуванням гіроскопом, то збільшить це</string>
 </resources>
