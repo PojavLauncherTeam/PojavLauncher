@@ -18,7 +18,6 @@
     <string name="login_title_no_saved_account">该账户不存在！</string>
     <string name="login_dialog_no_saved_account">尚未保存任何账户。\n使用<b>“保持登录状态”</b>选项以在首次登录后保存账户。</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"左滑打开菜单 ◀\n长按按键以自定义：编辑，缩放或删除。"</string>
     <!-- Warnings -->
     <string name="warning_remove_account">此账户将被移除！</string>
     <!-- AlertDialog title -->
@@ -244,7 +243,7 @@
     <string name="preference_control_title">自定义控制</string>
     <string name="preference_control_description">手势类型、触发器和缩放</string>
     <string name="preference_java_title">Java 调整</string>
-    <string name="preference_java_description">Java 版本、JVM 参数、RAM 量和沙盒</string>
+    <string name="preference_java_description">Java 版本、JVM 参数、内存量及沙盒</string>
     <string name="preference_misc_title">其他设置</string>
     <string name="preference_misc_description">版本列表和依赖库检查</string>
     <string name="preference_experimental_title">实验性的补丁</string>
@@ -295,4 +294,11 @@
     <string name="xerr_child">您的账户是儿童账户，需要添加到家庭中方能登录。</string>
     <string name="minecraft_not_owned">这个账户似乎没有 Minecraft 个人资料。如果您有 Xbox Game Pass，请登录 https://minecraft.net/ 并进行设置。</string>
     <string name="xerr_not_available">Xbox Live 在您所在的国家/地区不可用。</string>
+    <string name="preference_enable_gyro_title">启用陀螺仪控制</string>
+    <string name="preference_enable_gyro_description">启用此功能将允许您通过转动手机来在游戏中转动视角</string>
+    <string name="preference_gyro_sensitivity_title">陀螺仪控制灵敏度</string>
+    <string name="preference_gyro_sensitivity_description">调整陀螺仪控制的灵敏度</string>
+    <string name="toast_turn_on_gyro">需要先启用陀螺仪控件以使用！</string>
+    <string name="preference_gyro_sample_rate_title">陀螺仪采样率</string>
+    <string name="preference_gyro_sample_rate_description">如果您在陀螺仪控制上遇到性能问题，请增加此值</string>
 </resources>
