@@ -7,6 +7,7 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 
 import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
 
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.prefs.CustomSeekBarPreference;
@@ -77,6 +78,8 @@ public class LauncherPreferenceControlFragment extends LauncherPreferenceFragmen
         gyroSensitivitySeek.setVisible(mGyroAvailable && LauncherPreferences.PREF_ENALBE_GYRO);
         CustomSeekBarPreference gyroSampleRateSeek = findPreference("gyroSampleRate");
         gyroSampleRateSeek.setVisible(mGyroAvailable && LauncherPreferences.PREF_ENALBE_GYRO);
+        SwitchPreferenceCompat gyroInvertSwitch = findPreference("gyroInvert");
+        gyroInvertSwitch.setVisible(mGyroAvailable && LauncherPreferences.PREF_ENALBE_GYRO);
     }
 
 }

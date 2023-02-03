@@ -44,7 +44,8 @@ public class GyroControl implements SensorEventListener, GrabListener {
             if(!mFirstPass) {
                 factor *= (sensorEvent.timestamp - mPreviousTimestamp) * 0.000001;
             }else mFirstPass = false;
-            CallbackBridge.mouseX += sensorEvent.values[0] * factor;
+            if(LauncherPreferences.PREF_GYRO_INVERT) CallbackBridge.mouseX += sensorEvent.values[0] * factor;
+            else CallbackBridge.mouseX -= sensorEvent.values[0] * factor;
             CallbackBridge.mouseY += sensorEvent.values[1] * factor;
             CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
             mPreviousTimestamp = sensorEvent.timestamp;

@@ -54,6 +54,7 @@ public class LauncherPreferences {
     public static boolean PREF_ENALBE_GYRO = false;
     public static float PREF_GYRO_SENSITIVITY = 100;
     public static int PREF_GYRO_SAMPLE_RATE = 16;
+    public static boolean PREF_GYRO_INVERT = false;
 
 
     public static void loadPreferences(Context ctx) {
@@ -91,6 +92,7 @@ public class LauncherPreferences {
         PREF_ENALBE_GYRO = DEFAULT_PREF.getBoolean("enableGyro", false);
         PREF_GYRO_SENSITIVITY = ((float)DEFAULT_PREF.getInt("gyroSensitivity", 100))/100f;
         PREF_GYRO_SAMPLE_RATE = DEFAULT_PREF.getInt("gyroSampleRate", 16);
+        PREF_GYRO_INVERT = DEFAULT_PREF.getBoolean("gyroInvert", false);
 
 /*
         if (PREF_CUSTOM_JAVA_ARGS.isEmpty()) {

@@ -338,4 +338,6 @@
     <string name="toast_turn_on_gyro">Enable gyro controls first to use this!</string>
     <string name="preference_gyro_sample_rate_title">Gyroscope sampling rate</string>
     <string name="preference_gyro_sample_rate_description">If you have performance issues with the gyroscope controls, increase this</string>
+    <string name="preference_gyro_invert_title">Invert left and right</string>
+    <string name="preference_gyro_invert_summary">Inverts the X-axis of the gyroscope</string>
 </resources>
