@@ -15,9 +15,10 @@
     <string name="login_error_exist_username">Nome utente già esistente</string>
     <string name="login_microsoft">Accedi Da Microsoft</string>
     <string name="login_select_account">Seleziona account</string>
-    <string name="login_title_no_saved_account">Non ci sono account !</string>
-    <string name="login_dialog_no_saved_account">Non hai account salvati.\nUsa l\'opzione <b>\"ricordami\"</b> per salvare un account al login.</string>
+    <string name="login_title_no_saved_account">Account non trovati!</string>
+    <string name="login_dialog_no_saved_account">Non hai account salvati.\nUsa l\'opzione <b>\"ricordami\"</b> per salvare un account al primo login.</string>
     <!-- Hint -->
+    <string name="hint_control_mapping">"Tocca l'icona del cog del centro superiore per aprire il menu contestuale ⚙\nTocca un pulsante per personalizzare: modificare, ridimensionare, eliminare o personalizzare la sua combinazione di tasti."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">L\'account sarà cancellato!</string>
     <!-- AlertDialog title -->
@@ -48,14 +49,14 @@
     <string name="mcl_launch_downloading">Scaricando %s</string>
     <string name="mcl_launch_downloading_progress">"Scaricando %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Preparazione per il download delle risorse</string>
-    <string name="mcl_launch_error_localmode">Minecraft non può essere legalmente installato quando loggati con un account locale. Per favore passa ad un account online premium per continuare.</string>
+    <string name="mcl_launch_error_localmode">Minecraft non può essere legalmente installato quando accedi con un account locale. Per favore passa a un account online per continuare.</string>
     <string name="mcl_options">Impostazioni</string>
     <string name="mcl_option_modinstall">Avvia un mod installer (Forge, LabyMod, Fabric, ecc...)</string>
     <string name="mcl_option_modinstallwitharg">Avvia un mod installer (personalizzato)</string>
     <string name="mcl_option_customcontrol">Controlli personalizzati</string>
     <string name="mcl_option_settings">Impostazioni</string>
     <string name="mcl_option_about">Informazioni</string>
-    <string name="mcl_setting_title_use_surface_view">Usa rendering superficie alternato</string>
+    <string name="mcl_setting_title_use_surface_view">Usa renderizzazione superficie alternato</string>
     <string name="mcl_setting_subtitle_use_surface_view">Può migliorare le prestazioni in caso di uso della gpu</string>
     <string name="mcl_setting_title_uninstalljre">Disinstalla Java Runtime</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Riavvio del launcher necessario] Questo ti lascerà reinstallare il Runtime Java</string>
@@ -63,10 +64,10 @@
     <string name="mcl_setting_subtitle_freeform">Avvia Minecraft in finestra fluttuante. Necessario Android 7.0+</string>
     <string name="mcl_setting_title_hide_sidebar">Nascondi barra laterale</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Potrebbe piacere a coloro che preferivano la vecchia l\'interfaccia v1. Offre un\'esperienza migliore a schermo intero.</string>
-    <string name="mcl_setting_title_ignore_notch">Ignora il notch</string>
-    <string name="mcl_setting_subtitle_ignore_notch">Allarga lo schermo fino al di sotto della notch.\nDandoti un\'esperienza più immersiva.</string>
+    <string name="mcl_setting_title_ignore_notch">Ignora il bordo</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Allarga lo schermo fino al di sotto del bordo.\nDandoti un\'esperienza più immersiva.</string>
     <string name="mcl_setting_title_resolution_scaler">Proporzioni risoluzione</string>
-    <string name="mcl_setting_subtitle_resolution_scaler">Ti permetti di diminuire la risoluzione del gioco. 100% è la risoluzione completa</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">Ti permette di diminuire la risoluzione del gioco. 100% è la risoluzione massima</string>
     <string name="mcl_setting_title_longpresstrigger">Per quanto tempo rimarrà attivo dopo una pressione prolungata</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Cambia il tempo di attivazione per una pressione prolungata nel rompimento di un blocco e il drop di un item.</string>
     <string name="mcl_setting_title_backtorightmouse">Usa il pulsante indietro come destro mouse</string>
@@ -160,14 +161,14 @@
     <string name="customctrl_size_width">Larghezza</string>
     <string name="customctrl_size_height">Altezza</string>
     <string name="customctrl_mapping">Mapping</string>
-    <string name="customctrl_orientation">Orientazione</string>
-    <string name="customctrl_background_color">Colore sfondo</string>
-    <string name="customctrl_corner_radius">Raggio angolo</string>
+    <string name="customctrl_orientation">Orientamento</string>
+    <string name="customctrl_background_color">Colore di sfondo</string>
+    <string name="customctrl_corner_radius">Raggio dell\'angolo</string>
     <string name="customctrl_stroke_width">Spessore tratto</string>
     <string name="customctrl_stroke_color">Colore tratto</string>
     <string name="customctrl_dynamicpos">Posizione dinamica</string>
-    <string name="customctrl_dynamicpos_x">X dinamica</string>
-    <string name="customctrl_dynamicpos_y">Y dinamica</string>
+    <string name="customctrl_dynamicpos_x">Altezza dinamica</string>
+    <string name="customctrl_dynamicpos_y">Larghezza dinamica</string>
     <string name="customctrl_transparency_bg">Trasparenza sfondo</string>
     <string name="customctrl_button_opacity">Opacità pulsante</string>
     <string name="customctrl_keycombine">Combinazioni tasti</string>
@@ -175,12 +176,12 @@
     <string name="customctrl_keycombine_control">Ctrl</string>
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Aggiungi pulsante</string>
-    <string name="customctrl_addbutton_drawer">Aggiungi pulsante drawer</string>
-    <string name="customctrl_addsubbutton">Aggiungi sub-pulsante</string>
-    <string name="customctrl_add_subbutton_message">Il sub-pulsante n°%d è stato aggiunto!</string>
+    <string name="customctrl_addbutton_drawer">Aggiungi pulsante multiplo</string>
+    <string name="customctrl_addsubbutton">Aggiungi sotto-pulsante</string>
+    <string name="customctrl_add_subbutton_message">Il sotto-pulsante n°%d è stato aggiunto!</string>
     <string name="customctrl_selectdefault">Seleziona Controllo di default json</string>
     <string name="customctrl_export">Esporta controlli</string>
-    <string name="main_share_logs">Condividi i log</string>
+    <string name="main_share_logs">Condividi i file di log</string>
     <string name="main_install_jar_file">Installa .jar</string>
     <string name="main_options">Impostazioni</string>
     <string name="main_play">Gioca</string>
@@ -193,9 +194,9 @@
     <string name="main_no_news_feed">Collegamento alle news fallito !</string>
     <string name="auto_ram_subtitle">Attiva regolatore RAM automatico</string>
     <string name="auto_ram_title">Auto RAM</string>
-    <string name="autoram_info_msg">Memory impostata a %d MB</string>
+    <string name="autoram_info_msg">Memoria (RAM) impostata a %d MB</string>
     <string name="mcl_setting_check_libraries">Controlla le librerie dopo il download</string>
-    <string name="mcl_setting_check_libraries_subtitle">Questa opzione forza il launcher a controllare l\'hash delle librerie se disponibile. Prevenendo download corrotti.</string>
+    <string name="mcl_setting_check_libraries_subtitle">Questa opzione forza il launcher a controllare l\'integrità della libreria se è possibile. Previene i download corrotti.</string>
     <string name="dl_library_sha_fail">La libreria %s è danneggiata e sarà riscaricata</string>
     <string name="dl_library_sha_unknown">La libreria %s non può essere controllata, sarà ignorata e applicata comunque</string>
     <string name="dl_library_sha_pass">La libreria %s va bene ed è usabile</string>
@@ -292,4 +293,14 @@
     <string name="xerr_no_account">Sembra che tu non abbia un account Xbox Live.
 La preghiamo di accedere una volta su https://minecraft.net/ e riprova</string>
     <string name="xerr_adult_verification">Un adulto deve verificare il tuo account</string>
+    <string name="xerr_child">Il tuo account è un account bambino e deve essere aggiunto in una famiglia per poter accedere.</string>
+    <string name="minecraft_not_owned">Sembra che questo account non abbia un profilo Minecraft. Se hai Xbox Game Pass, accedi su https://minecraft.net/ e impostalo.</string>
+    <string name="xerr_not_available">Xbox Live non è disponibile nel tuo paese</string>
+    <string name="preference_enable_gyro_title">Abilita controlli giroscopici</string>
+    <string name="preference_enable_gyro_description">Abilitando questo potrai girare il gioco ruotando il telefono</string>
+    <string name="preference_gyro_sensitivity_title">Sensibilità controlli giroscopici</string>
+    <string name="preference_gyro_sensitivity_description">Regola la sensibilità dei controlli giroscopici</string>
+    <string name="toast_turn_on_gyro">Abilita i controlli giroscopici prima di usarli!</string>
+    <string name="preference_gyro_sample_rate_title">Frequenza di campionamento giroscopico</string>
+    <string name="preference_gyro_sample_rate_description">Se avete problemi di prestazioni con i controlli del giroscopio, aumentare questo</string>
 </resources>
