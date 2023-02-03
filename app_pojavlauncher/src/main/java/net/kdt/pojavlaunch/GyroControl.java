@@ -5,7 +5,8 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.util.Log;
+import android.view.Surface;
+import android.view.WindowManager;
 
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 
@@ -14,6 +15,7 @@ import org.lwjgl.glfw.CallbackBridge;
 public class GyroControl implements SensorEventListener, GrabListener {
     private final SensorManager mSensorManager;
     private final Sensor mSensor;
+    private final Context ctx;
     private boolean mShouldHandleEvents;
     private boolean mFirstPass;
     private long mPreviousTimestamp;
@@ -21,6 +23,7 @@ public class GyroControl implements SensorEventListener, GrabListener {
     public GyroControl(Context context) {
         mSensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
         mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+        ctx = context;
     }
 
     public void enable() {
@@ -44,8 +47,15 @@ public class GyroControl implements SensorEventListener, GrabListener {
             if(!mFirstPass) {
                 factor *= (sensorEvent.timestamp - mPreviousTimestamp) * 0.000001;
             }else mFirstPass = false;
-            CallbackBridge.mouseX += sensorEvent.values[0] * factor;
-            CallbackBridge.mouseY += sensorEvent.values[1] * factor;
+            WindowManager windowManager = (WindowManager) ctx.getSystemService(Context.WINDOW_SERVICE);
+            if(windowManager.getDefaultDisplay().getRotation() == Surface.ROTATION_90) {
+                CallbackBridge.mouseX -= sensorEvent.values[0] * factor;
+                CallbackBridge.mouseY += sensorEvent.values[1] * factor;
+            }
+            else {
+                CallbackBridge.mouseX += sensorEvent.values[0] * factor;
+                CallbackBridge.mouseY -= sensorEvent.values[1] * factor;
+            }
             CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
             mPreviousTimestamp = sensorEvent.timestamp;
         }
