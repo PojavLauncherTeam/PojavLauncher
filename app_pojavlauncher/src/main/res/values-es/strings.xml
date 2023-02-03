@@ -264,5 +264,7 @@
     <string name="arc_capes_desc">Activa las capas de Cosmetica (anteriormente Arc). Para más información ve a esta página https://cosmetica.cc. Necesitas Optifine.</string>
     <string name="migrated_profile_str">%s Configuración de la versión</string>
     <string name="mcl_setting_veroption_installed">Instalada</string>
+    <string name="tasks_ongoing">Tareas en curso, por favor espere</string>
+    <string name="no_saved_accounts">No hay cuentas guardadas</string>
     <string name="xerr_not_available">Xbox Live no está disponible en su país</string>
 </resources>
