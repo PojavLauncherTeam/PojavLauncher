@@ -3,6 +3,8 @@ package net.kdt.pojavlaunch.prefs;
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.P;
 
+import static net.kdt.pojavlaunch.Architecture.is32BitsDevice;
+
 import android.app.Activity;
 import android.content.*;
 import android.graphics.Rect;
@@ -154,6 +156,9 @@ public class LauncherPreferences {
         if (deviceRam < 1024) return 300;
         if (deviceRam < 1536) return 450;
         if (deviceRam < 2048) return 600;
+        // Limit the max for 32 bits devices more harshly
+        if (is32BitsDevice()) return 700;
+
         if (deviceRam < 3064) return 936;
         if (deviceRam < 4096) return 1148;
         if (deviceRam < 6144) return 1536;
