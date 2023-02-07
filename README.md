@@ -8,7 +8,7 @@
 [![Discord](https://img.shields.io/discord/724163890803638273.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/6RpEJda) 
 [![Twitter Follow](https://img.shields.io/twitter/follow/plaunchteam?color=blue&style=flat-square)](https://twitter.com/PLaunchTeam)
 ---------
-* From [Boardwalk](https://github.com/zhuowei/Boardwalk)'s ashes here comes PojavLauncher!
+* From [Boardwalk](https://github.com/zhuowei/Boardwalk)'s ashes, here comes PojavLauncher!
 
 * PojavLauncher is a launcher that allows you to play Minecraft: Java Edition on your Android device!
 
