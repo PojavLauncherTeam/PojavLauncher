@@ -18,6 +18,7 @@
     <string name="login_title_no_saved_account">اکانتی پیدا نشد!</string>
     <string name="login_dialog_no_saved_account">هیچ اکانت ذخیره شده‌ای ندارید.\nاز گزینه <b>\"مرا وارد شده نگه دار\"</b> استفاده کنید تا اکانت را به محض ورود ذخیره کنید.</string>
     <!-- Hint -->
+    <string name="hint_control_mapping">"روی نماد چرخ دنده بالا ضربه بزنید تا منو باز شود ⚙\nبرای سفارشی کردن روی دکمه ضربه بزنید: ویرایش، تغییر اندازه، حذف یا سفارشی کردن keybind آن."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">این اکانت حذف خواهد شد!</string>
     <!-- AlertDialog title -->
@@ -56,6 +57,7 @@
     <string name="mcl_option_settings">تنظیمات</string>
     <string name="mcl_option_about">درباره</string>
     <string name="mcl_setting_title_use_surface_view">از رندر گیر سطوح جایگزین استفاده کنید</string>
+    <string name="mcl_setting_subtitle_use_surface_view">ممکن است به عملکرد در سناریوهای محدود به پردازنده گرافیکی کمک کند</string>
     <string name="mcl_setting_title_uninstalljre">حذف نصب جاوا ران تایم</string>
     <string name="mcl_setting_subtitle_uninstalljre">[ری‌استارت لانچر نیاز است] می‌توانید جاوا ران تایم را مجددا نصب کنید</string>
     <string name="mcl_setting_title_freeform">بازکردن ماینکرفت در حالت Freeform</string>
