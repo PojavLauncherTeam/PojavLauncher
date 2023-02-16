@@ -182,6 +182,7 @@
     <string name="preference_misc_title">Башка көйләүләр</string>
     <string name="preference_misc_description">Версияләр исемлеге һәм китапханә тикшерү</string>
     <string name="preference_experimental_title">Эксперименталь нәрсәләр</string>
+    <string name="preference_category_virtual_mouse">Виртуаль тычкан</string>
     <string name="preference_back_title">Артка</string>
     <string name="unnamed">Исемсез</string>
     <string name="profiles_latest_snapshot">Соңгы ярдәмче версия</string>
