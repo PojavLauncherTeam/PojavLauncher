@@ -57,6 +57,10 @@ public class LauncherPreferences {
     public static float PREF_GYRO_SENSITIVITY = 100;
     public static int PREF_GYRO_SAMPLE_RATE = 16;
 
+    public static boolean PREF_GYRO_INVERT_X = false;
+
+    public static boolean PREF_GYRO_INVERT_Y = false;
+
 
     public static void loadPreferences(Context ctx) {
         //Required for the data folder.
@@ -93,6 +97,8 @@ public class LauncherPreferences {
         PREF_ENALBE_GYRO = DEFAULT_PREF.getBoolean("enableGyro", false);
         PREF_GYRO_SENSITIVITY = ((float)DEFAULT_PREF.getInt("gyroSensitivity", 100))/100f;
         PREF_GYRO_SAMPLE_RATE = DEFAULT_PREF.getInt("gyroSampleRate", 16);
+        PREF_GYRO_INVERT_X = DEFAULT_PREF.getBoolean("gyroInvertX", false);
+        PREF_GYRO_INVERT_Y = DEFAULT_PREF.getBoolean("gyroInvertY", false);
 
 /*
         if (PREF_CUSTOM_JAVA_ARGS.isEmpty()) {

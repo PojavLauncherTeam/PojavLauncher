@@ -98,6 +98,8 @@ public class GyroControl implements SensorEventListener, GrabListener{
                 xFactor = -1;
                 yFactor = 1;
             }
+            if(LauncherPreferences.PREF_GYRO_INVERT_X) xFactor *= -1;
+            if(LauncherPreferences.PREF_GYRO_INVERT_Y) yFactor *= -1;
         }
     }
 }

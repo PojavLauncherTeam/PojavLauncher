@@ -6,6 +6,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 
+import androidx.preference.PreferenceCategory;
 import androidx.preference.SwitchPreference;
 
 import net.kdt.pojavlaunch.R;
@@ -51,8 +52,9 @@ public class LauncherPreferenceControlFragment extends LauncherPreferenceFragmen
         if(context != null) {
             mGyroAvailable = ((SensorManager)context.getSystemService(Context.SENSOR_SERVICE)).getDefaultSensor(Sensor.TYPE_GYROSCOPE) != null;
         }
-        SwitchPreference gyroSwitch = findPreference("enableGyro");
-        gyroSwitch.setVisible(mGyroAvailable);
+        PreferenceCategory gyroCategory =  (PreferenceCategory) findPreference("gyroCategory");
+        gyroCategory.setVisible(mGyroAvailable);
+
         CustomSeekBarPreference gyroSensitivitySeek = findPreference("gyroSensitivity");
         gyroSensitivitySeek.setRange(25, 300);
         gyroSensitivitySeek.setValue((int) (gyroSpeed*100f));
@@ -71,12 +73,11 @@ public class LauncherPreferenceControlFragment extends LauncherPreferenceFragmen
     }
 
     private void computeVisibility(){
-        CustomSeekBarPreference seek2 = findPreference("timeLongPressTrigger");
-        seek2.setVisible(!LauncherPreferences.PREF_DISABLE_GESTURES);
-        CustomSeekBarPreference gyroSensitivitySeek = findPreference("gyroSensitivity");
-        gyroSensitivitySeek.setVisible(mGyroAvailable && LauncherPreferences.PREF_ENALBE_GYRO);
-        CustomSeekBarPreference gyroSampleRateSeek = findPreference("gyroSampleRate");
-        gyroSampleRateSeek.setVisible(mGyroAvailable && LauncherPreferences.PREF_ENALBE_GYRO);
+        findPreference("timeLongPressTrigger").setVisible(!LauncherPreferences.PREF_DISABLE_GESTURES);
+        findPreference("gyroSensitivity").setVisible(LauncherPreferences.PREF_ENALBE_GYRO);
+        findPreference("gyroSampleRate").setVisible(LauncherPreferences.PREF_ENALBE_GYRO);
+        findPreference("gyroInvertX").setVisible(LauncherPreferences.PREF_ENALBE_GYRO);
+        findPreference("gyroInvertY").setVisible(LauncherPreferences.PREF_ENALBE_GYRO);
     }
 
 }
