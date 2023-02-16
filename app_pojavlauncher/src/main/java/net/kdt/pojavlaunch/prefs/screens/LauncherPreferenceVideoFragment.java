@@ -2,14 +2,17 @@ package net.kdt.pojavlaunch.prefs.screens;
 
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_NOTCH_SIZE;
 
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
 
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.prefs.CustomSeekBarPreference;
+import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 
 /**
  * Fragment for any settings video related
@@ -34,5 +37,17 @@ public class LauncherPreferenceVideoFragment extends LauncherPreferenceFragment 
         // Sustained performance is only available since Nougat
         SwitchPreference sustainedPerfSwitch = findPreference("sustainedPerformance");
         sustainedPerfSwitch.setVisible(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N);
+        computeVisibility();
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences p, String s) {
+        super.onSharedPreferenceChanged(p, s);
+        computeVisibility();
+    }
+
+    private void computeVisibility(){
+        SwitchPreferenceCompat preference = findPreference("force_vsync");
+        preference.setVisible(LauncherPreferences.PREF_USE_ALTERNATE_SURFACE);
     }
 }

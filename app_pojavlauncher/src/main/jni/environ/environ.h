@@ -11,6 +11,7 @@ struct pojav_environ_s {
     struct ANativeWindow* pojavWindow;
     render_window_t* mainWindowBundle;
     int config_renderer;
+    bool force_vsync;
 };
 extern struct pojav_environ_s *pojav_environ;
 

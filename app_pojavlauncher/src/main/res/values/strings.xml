@@ -284,6 +284,8 @@
     <string name="preference_experimental_description">Use things there with consideration, no support.</string>
     <string name="preference_sustained_performance_title">Enable sustained performance mode</string>
     <string name="preference_sustained_performance_description">Limit thermal throttling by limiting peak performance</string>
+    <string name="preference_force_vsync_title">Force enable vsync</string>
+    <string name="preference_force_vsync_description">Limit thermal throttling by limiting peak performance</string>
     <string name="preference_force_english_title">Force language to english</string>
     <string name="preference_force_english_description">Allows you to see original strings, as intended by developers. Requires a restart</string>
     <string name="preference_edit_controls_title">Edit custom controls</string>

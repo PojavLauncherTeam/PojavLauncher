@@ -203,6 +203,8 @@ public class JREUtils {
         // The OPEN GL version is changed according
         envMap.put("LIBGL_ES", (String) ExtraCore.getValue(ExtraConstants.OPEN_GL_VERSION));
 
+        envMap.put("FORCE_VSYNC", String.valueOf(LauncherPreferences.PREF_FORCE_VSYNC));
+
         envMap.put("MESA_GLSL_CACHE_DIR", activity.getCacheDir().getAbsolutePath());
         if (LOCAL_RENDERER != null) {
             envMap.put("MESA_GL_VERSION_OVERRIDE", LOCAL_RENDERER.equals("opengles3_virgl")?"4.3":"4.6");

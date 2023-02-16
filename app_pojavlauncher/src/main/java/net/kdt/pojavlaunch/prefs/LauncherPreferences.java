@@ -60,6 +60,7 @@ public class LauncherPreferences {
     public static boolean PREF_GYRO_INVERT_X = false;
 
     public static boolean PREF_GYRO_INVERT_Y = false;
+    public static boolean PREF_FORCE_VSYNC = false;
 
 
     public static void loadPreferences(Context ctx) {
@@ -99,6 +100,7 @@ public class LauncherPreferences {
         PREF_GYRO_SAMPLE_RATE = DEFAULT_PREF.getInt("gyroSampleRate", 16);
         PREF_GYRO_INVERT_X = DEFAULT_PREF.getBoolean("gyroInvertX", false);
         PREF_GYRO_INVERT_Y = DEFAULT_PREF.getBoolean("gyroInvertY", false);
+        PREF_FORCE_VSYNC = DEFAULT_PREF.getBoolean("force_vsync", false);
 
 /*
         if (PREF_CUSTOM_JAVA_ARGS.isEmpty()) {
