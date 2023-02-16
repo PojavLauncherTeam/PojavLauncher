@@ -254,6 +254,7 @@
     <string name="preference_force_english_description">Ermöglicht es dir, die ursprünglichen Texte zu sehen, wie sie von Entwicklern vorgesehen sind. Benötigt einen Neustart</string>
     <string name="preference_edit_controls_title">Benutzerdefinierte Steuerung bearbeiten</string>
     <string name="preference_edit_controls_summary">Passe die Steuerung deinen Ansprüchen an</string>
+    <string name="preference_category_virtual_mouse">Virtuelle Maus</string>
     <string name="preference_back_title">Zum übergeordneten Menü gehen</string>
     <string name="gles_hack_title">GL4ES-Schrumpfhack</string>
     <string name="gles_hack_none">Texturen nicht verkleinern</string>
