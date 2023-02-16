@@ -246,6 +246,7 @@
     <string name="preference_sustained_performance_title">Activar el modo de rendimiento sostenido</string>
     <string name="preference_sustained_performance_description">Limita la velocidad térmica limitando el rendimiento máximo</string>
     <string name="preference_force_english_title">Forzar idioma a ingles</string>
+    <string name="preference_category_virtual_mouse">Ratón virtual</string>
     <string name="preference_back_title">Regresar a la pantalla anterior</string>
     <string name="gles_hack_title">GL4ES Reducir hack</string>
     <string name="gles_hack_none">No reducir las texturas</string>
