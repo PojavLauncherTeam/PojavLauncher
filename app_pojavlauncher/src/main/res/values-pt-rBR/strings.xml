@@ -248,6 +248,7 @@
     <string name="preference_sustained_performance_description">Limitar redução térmica limitando o pico de desempenho</string>
     <string name="preference_force_english_title">Forçar linguagem ao inglês</string>
     <string name="preference_force_english_description">Permite que você veja frases originais, como esperado por desenvolvedores. Requer uma reinicialização</string>
+    <string name="preference_category_virtual_mouse">Mouse virtual</string>
     <string name="preference_back_title">Voltar para última tela</string>
     <string name="gles_hack_title">Compressão GL4ES</string>
     <string name="gles_hack_none">Não encolher texturas</string>
