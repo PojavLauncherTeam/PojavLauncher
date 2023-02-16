@@ -255,6 +255,7 @@
     <string name="preference_force_english_description">Cho phép hiển thị các dòng chữ ban đầu, như theo ý của nhà phát triển. Yêu cầu khởi động lại</string>
     <string name="preference_edit_controls_title">Tùy chỉnh điều khiển</string>
     <string name="preference_edit_controls_summary">Sửa cách điểu khiển theo ý muốn của bạn</string>
+    <string name="preference_category_virtual_mouse">Chuột ảo</string>
     <string name="preference_back_title">Quay về màn hình trước đó</string>
     <string name="gles_hack_title">Giải pháp thu nhỏ texture của gl4es</string>
     <string name="gles_hack_none">Không thu nhỏ kết cấu</string>
