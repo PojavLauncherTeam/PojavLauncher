@@ -249,6 +249,7 @@
     <string name="preference_sustained_performance_description">Limit thermal throttling dengan menglimit perfoma maksimal</string>
     <string name="preference_force_english_title">Paksa bahasa menggunakan Bahasa Inggris</string>
     <string name="preference_force_english_description">Memperbolehkan anda untuk melihat string asli, seperti diinginkan oleh para pengembang. Membutuhkan sebuah restart</string>
+    <string name="preference_category_virtual_mouse">Mouse virtual</string>
     <string name="preference_back_title">Kembali ke layar terakhir</string>
     <string name="gles_hack_title">GL4ES Shrink hack</string>
     <string name="gles_hack_none">Jangan mengecilkan tekstur</string>
