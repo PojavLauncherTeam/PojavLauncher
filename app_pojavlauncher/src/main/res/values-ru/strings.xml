@@ -256,6 +256,7 @@
     <string name="preference_force_english_description">Позволяет увидеть оригинальные строки такими, какими их задумали разработчики. Требует перезапуска.</string>
     <string name="preference_edit_controls_title">Изменить раскладку</string>
     <string name="preference_edit_controls_summary">Настройте кнопки управления по вашему желанию</string>
+    <string name="preference_category_virtual_mouse">Виртуальная мышь</string>
     <string name="preference_back_title">Вернуться назад</string>
     <string name="gles_hack_title">Сжатие GL4ES</string>
     <string name="gles_hack_none">Не сжимать текстуры</string>
