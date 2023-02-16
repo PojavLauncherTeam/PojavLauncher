@@ -151,6 +151,7 @@
     <string name="preference_sustained_performance_description">Vähenda termilist aeglustamist, piirates tippjõudlust</string>
     <string name="preference_force_english_title">Sunni inglise keele kasutus</string>
     <string name="preference_force_english_description">Võimaldab sul näha originaalseid väljendeid, nagu arendajad need loonud on. Nõuab taaskäivitust</string>
+    <string name="preference_category_virtual_mouse">Virtuaalne hiir</string>
     <string name="preference_back_title">Tagasi viimasele kuvale</string>
     <string name="unnamed">Nimetu</string>
     <string name="profiles_latest_snapshot">Viimatine katsetus</string>
