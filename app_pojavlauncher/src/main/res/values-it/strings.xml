@@ -255,6 +255,7 @@
     <string name="preference_force_english_description">Ti consente di vedere le stringhe originali, come previsto dagli sviluppatori. Richiede un riavvio dell\'app</string>
     <string name="preference_edit_controls_title">Modifica i controlli personalizzati</string>
     <string name="preference_edit_controls_summary">Regola lo schema di controllo per soddisfare le tue esigenze</string>
+    <string name="preference_category_virtual_mouse">Mouse virtuale</string>
     <string name="preference_back_title">Ritorna indietro</string>
     <string name="gles_hack_title">GL4ES Shrink hack</string>
     <string name="gles_hack_none">Non rimpicciolire le textures</string>
