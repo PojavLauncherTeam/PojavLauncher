@@ -248,6 +248,7 @@
     <string name="preference_sustained_performance_title">Activer le mode de performances soutenues</string>
     <string name="preference_sustained_performance_description">Limiter la limitation thermique en limitant les performances maximales</string>
     <string name="preference_edit_controls_title">Modifier les contrôles personnalisés</string>
+    <string name="preference_category_virtual_mouse">Souris virtuelle</string>
     <string name="preference_back_title">Retour au dernier écran</string>
     <string name="gles_hack_title">GL4ES hack réduction des textures</string>
     <string name="gles_hack_none">Ne pas rétrécir les textures</string>
