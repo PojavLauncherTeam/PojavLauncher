@@ -233,6 +233,7 @@
     <string name="preference_experimental_description">Gamitin ang mga bagay doon nang may considerasyon, walang suporta.</string>
     <string name="preference_sustained_performance_title">I-enable ang sustained performance mode</string>
     <string name="preference_sustained_performance_description">Limitahan ang pang iinit ng device sa pamamagitan ng paglilimita sa peak performance</string>
+    <string name="preference_category_virtual_mouse">Virtual mouse</string>
     <string name="preference_back_title">Bumalik sa huling screen</string>
     <string name="gles_hack_title">GL4ES Shrink hack</string>
     <string name="gles_hack_none">Wag paliitin ang Textures</string>
