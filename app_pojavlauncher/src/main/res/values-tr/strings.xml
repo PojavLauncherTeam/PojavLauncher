@@ -256,6 +256,7 @@
     <string name="preference_force_english_description">Geliştiriciler tarafından amaçlanan orijinal yazıları görmenizi sağlar. Yeniden başlatma gerektirir</string>
     <string name="preference_edit_controls_title">Özel kontrolleri düzenle</string>
     <string name="preference_edit_controls_summary">İhtiyaçlarını gidermesi için kontrol şemasını ayarla</string>
+    <string name="preference_category_virtual_mouse">Sanal Fare</string>
     <string name="preference_back_title">Son ekrana geri dön</string>
     <string name="gles_hack_title">GL4ES Küçültme hilesi</string>
     <string name="gles_hack_none">Dokuları sakın küçültme</string>
