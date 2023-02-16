@@ -242,6 +242,7 @@
     <string name="preference_force_english_description">開発者向けのオリジナルの文字列を表示できます。再起動が必要です</string>
     <string name="preference_edit_controls_title">カスタムコントロールの編集</string>
     <string name="preference_edit_controls_summary">コントロールスキームを調整する</string>
+    <string name="preference_category_virtual_mouse">仮想マウス</string>
     <string name="preference_back_title">最後の画面に戻る</string>
     <string name="gles_hack_title">GL4ES シュリンク・ハック</string>
     <string name="gles_hack_none">テクスチャを縮小しない</string>
