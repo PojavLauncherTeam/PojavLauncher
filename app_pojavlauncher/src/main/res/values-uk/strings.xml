@@ -255,6 +255,7 @@
     <string name="preference_force_english_description">Дозволяє бачити оригінальні рядки, як це було задумано розробниками. Вимагає перезавантаження</string>
     <string name="preference_edit_controls_title">Редагувати елементи керування</string>
     <string name="preference_edit_controls_summary">Налаштуйте схему керування на ваше вподобання</string>
+    <string name="preference_category_virtual_mouse">Віртуальна миша</string>
     <string name="preference_back_title">Повернутися назад</string>
     <string name="gles_hack_title">Скорочення GL4ES</string>
     <string name="gles_hack_none">Не стискати текстури</string>
