@@ -83,19 +83,19 @@ public class GyroControl implements SensorEventListener, GrabListener{
         public void onOrientationChanged(int i) {
             if((315 < i && i <= 360) || (i < 45) ) {
                 mSwapXY = true;
-                xFactor = -1;
+                xFactor = 1;
                 yFactor = -1;
             }else if(45 < i && i < 135) {
                 mSwapXY = false;
-                xFactor = -1;
+                xFactor = 1;
                 yFactor = -1;
             }else if(135 < i && i < 225) {
                 mSwapXY = true;
-                xFactor = 1;
+                xFactor = -1;
                 yFactor = 1;
             }else if(225 <  i && i < 315) {
                 mSwapXY = false;
-                xFactor = 1;
+                xFactor = -1;
                 yFactor = 1;
             }
         }
