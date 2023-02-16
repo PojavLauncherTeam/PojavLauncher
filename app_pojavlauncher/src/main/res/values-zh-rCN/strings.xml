@@ -255,6 +255,7 @@
     <string name="preference_force_english_description">允许您按开发者的原意看到原始字符串。此操作需要重启</string>
     <string name="preference_edit_controls_title">编辑自定义控制按键</string>
     <string name="preference_edit_controls_summary">调整控制方案以适应您的需求</string>
+    <string name="preference_category_virtual_mouse">虚拟鼠标</string>
     <string name="preference_back_title">返回到上一个屏幕</string>
     <string name="gles_hack_title">GL4ES 缩放设置</string>
     <string name="gles_hack_none">不缩小纹理</string>
