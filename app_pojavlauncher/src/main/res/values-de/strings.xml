@@ -18,6 +18,7 @@
     <string name="login_title_no_saved_account">Es konnte kein Konto gefunden werden!</string>
     <string name="login_dialog_no_saved_account">Sie haben keine Konten eingespeichert.\nWähle die Option <b>\"Angemeldet bleiben\"</b> während des Anmeldens aus, um das Konto einzuspeichern.</string>
     <!-- Hint -->
+    <string name="hint_control_mapping">"Tippe auf das Zahnradsymbol mittig oben, um das Kontextmenü zu öffnen ⚙\nTippe auf eine Schaltfläche, um sie anzupassen: Bearbeiten, Vergrößern, Löschen oder ihre Tastenzuordnung anpassen."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Dieses Konto wird entfernt!</string>
     <!-- AlertDialog title -->
@@ -254,7 +255,12 @@
     <string name="preference_force_english_description">Ermöglicht es dir, die ursprünglichen Texte zu sehen, wie sie von Entwicklern vorgesehen sind. Benötigt einen Neustart</string>
     <string name="preference_edit_controls_title">Benutzerdefinierte Steuerung bearbeiten</string>
     <string name="preference_edit_controls_summary">Passe die Steuerung deinen Ansprüchen an</string>
+    <string name="preference_category_gyro_controls">Gyroskop-Steuerung</string>
     <string name="preference_category_virtual_mouse">Virtuelle Maus</string>
+    <string name="preference_gyro_invert_x_axis">X-Achse invertieren</string>
+    <string name="preference_gyro_invert_y_axis">Y-Achse invertieren</string>
+    <string name="preference_gyro_invert_x_axis_description">Invertiert die horizontale Achse</string>
+    <string name="preference_gyro_invert_y_axis_description">Invertiert die vertikale Achse</string>
     <string name="preference_back_title">Zum übergeordneten Menü gehen</string>
     <string name="gles_hack_title">GL4ES-Schrumpfhack</string>
     <string name="gles_hack_none">Texturen nicht verkleinern</string>
