@@ -255,7 +255,12 @@
     <string name="preference_force_english_description">Umožňuje mít originální text, jak byl vymyšlen vývojáři. Vyžaduje restart</string>
     <string name="preference_edit_controls_title">Upravit vlastní ovládací prvky</string>
     <string name="preference_edit_controls_summary">Vylaďte ovládací schéma dle vaších potřeb</string>
+    <string name="preference_category_gyro_controls">Ovládání gyroskopem</string>
     <string name="preference_category_virtual_mouse">Virtuální myš</string>
+    <string name="preference_gyro_invert_x_axis">Invertovat osu X</string>
+    <string name="preference_gyro_invert_y_axis">Invertovat osu Y</string>
+    <string name="preference_gyro_invert_x_axis_description">Invertovat vodorovnou osu</string>
+    <string name="preference_gyro_invert_y_axis_description">Invertovat svislou osu</string>
     <string name="preference_back_title">Zpět na předchozí obrazovku</string>
     <string name="gles_hack_title">GL4ES Zmenšovátko</string>
     <string name="gles_hack_none">Nezmenšit textury</string>
