@@ -167,6 +167,7 @@ public class MinecraftGLSurface extends View implements GrabListener{
         }else{
             TextureView textureView = new TextureView(getContext());
             textureView.setOpaque(true);
+            textureView.setAlpha(1.0f);
             mSurface = textureView;
 
             textureView.setSurfaceTextureListener(new TextureView.SurfaceTextureListener() {
@@ -409,6 +410,10 @@ public class MinecraftGLSurface extends View implements GrabListener{
             break;
         }
         if(mouseCursorIndex == -1) return false; // we cant consoom that, theres no mice!
+
+        // Make sure we grabbed the mouse if necessary
+        updateGrabState(CallbackBridge.isGrabbing());
+
         switch(event.getActionMasked()) {
             case MotionEvent.ACTION_HOVER_MOVE:
                 CallbackBridge.mouseX = (event.getX(mouseCursorIndex) * mScaleFactor);
@@ -418,7 +423,7 @@ public class MinecraftGLSurface extends View implements GrabListener{
                 CallbackBridge.DEBUG_STRING.setLength(0);
                 return true;
             case MotionEvent.ACTION_SCROLL:
-                CallbackBridge.sendScroll((double) event.getAxisValue(MotionEvent.AXIS_VSCROLL), (double) event.getAxisValue(MotionEvent.AXIS_HSCROLL));
+                CallbackBridge.sendScroll((double) event.getAxisValue(MotionEvent.AXIS_HSCROLL), (double) event.getAxisValue(MotionEvent.AXIS_VSCROLL));
                 return true;
             case MotionEvent.ACTION_BUTTON_PRESS:
                 return sendMouseButtonUnconverted(event.getActionButton(),true);
@@ -650,16 +655,20 @@ public class MinecraftGLSurface extends View implements GrabListener{
     }
 
     private void updateGrabState(boolean isGrabbing) {
-        if(MainActivity.isAndroid8OrHigher()) {
-            if (isGrabbing && !hasPointerCapture()) {
+        if(!MainActivity.isAndroid8OrHigher()) return;
+
+        boolean hasPointerCapture = hasPointerCapture();
+        if(isGrabbing){
+            if(!hasPointerCapture) {
                 requestFocus();
                 requestPointerCapture();
             }
+            return;
+        }
 
-            if (!isGrabbing && hasPointerCapture()) {
-                releasePointerCapture();
-                clearFocus();
-            }
+        if(hasPointerCapture) {
+            releasePointerCapture();
+            clearFocus();
         }
     }
 

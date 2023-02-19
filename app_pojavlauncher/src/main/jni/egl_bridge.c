@@ -732,6 +732,11 @@ int pojavInit() {
     savedHeight = ANativeWindow_getHeight(pojav_environ->pojavWindow);
     ANativeWindow_setBuffersGeometry(pojav_environ->pojavWindow,savedWidth,savedHeight,AHARDWAREBUFFER_FORMAT_R8G8B8X8_UNORM);
 
+    // Only affects GL4ES as of now
+    const char *forceVsync = getenv("FORCE_VSYNC");
+    if (strcmp(forceVsync, "true") == 0)
+        pojav_environ->force_vsync = true;
+
     // NOTE: Override for now.
     const char *renderer = getenv("POJAV_RENDERER");
     if (strncmp("opengles3_virgl", renderer, 15) == 0) {

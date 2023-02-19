@@ -2,6 +2,7 @@ package net.kdt.pojavlaunch;
 
 import android.app.*;
 import android.content.*;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.net.*;
 import android.os.*;
@@ -175,7 +176,7 @@ public final class Tools {
         javaArgList.add(versionInfo.mainClass);
         javaArgList.addAll(Arrays.asList(launchArgs));
         // ctx.appendlnToLog("full args: "+javaArgList.toString());
-        JREUtils.launchJavaVM(activity, javaArgList);
+        JREUtils.launchJavaVM(activity, gamedirPath, javaArgList);
     }
 
     public static String getGameDirPath(@NonNull MinecraftProfile minecraftProfile){
@@ -278,6 +279,7 @@ public final class Tools {
         varArgMap.put("classpath_separator", ":");
         varArgMap.put("library_directory", strGameDir + "/libraries");
         varArgMap.put("version_name", versionInfo.id);
+        varArgMap.put("natives_directory", Tools.NATIVE_LIB_DIR);
 
         List<String> minecraftArgs = new ArrayList<String>();
         if (versionInfo.arguments != null) {
@@ -483,18 +485,18 @@ public final class Tools {
         }else{
             if (SDK_INT >= Build.VERSION_CODES.R) {
                 activity.getDisplay().getRealMetrics(displayMetrics);
-            } else if(SDK_INT >= P) {
+            } else { // Removed the clause for devices with unofficial notch support, since it also ruins all devices with virtual nav bars before P
                 activity.getWindowManager().getDefaultDisplay().getRealMetrics(displayMetrics);
-            }else{ // Some old devices can have a notch despite it not being officially supported
-                activity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
             }
             if(!PREF_IGNORE_NOTCH){
                 //Remove notch width when it isn't ignored.
-                displayMetrics.widthPixels -= PREF_NOTCH_SIZE;
+                if(activity.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
+                    displayMetrics.heightPixels -= PREF_NOTCH_SIZE;
+                else
+                    displayMetrics.widthPixels -= PREF_NOTCH_SIZE;
             }
         }
         currentDisplayMetrics = displayMetrics;
-
         return displayMetrics;
     }
 
@@ -579,23 +581,37 @@ public final class Tools {
         }
     }
 
+    public static String printToString(Throwable throwable) {
+        StringWriter stringWriter = new StringWriter();
+        PrintWriter printWriter = new PrintWriter(stringWriter);
+        throwable.printStackTrace(printWriter);
+        printWriter.close();
+        return stringWriter.toString();
+    }
+
     public static void showError(Context ctx, Throwable e) {
         showError(ctx, e, false);
     }
 
     public static void showError(final Context ctx, final Throwable e, final boolean exitIfOk) {
-        showError(ctx, R.string.global_error, e, exitIfOk, false);
+        showError(ctx, R.string.global_error, null ,e, exitIfOk, false);
+    }
+    public static void showError(final Context ctx, final int rolledMessage, final Throwable e) {
+        showError(ctx, R.string.global_error, ctx.getString(rolledMessage), e, false, false);
+    }
+    public static void showError(final Context ctx, final String rolledMessage, final Throwable e) {
+        showError(ctx, R.string.global_error, rolledMessage, e, false, false);
     }
 
     public static void showError(final Context ctx, final int titleId, final Throwable e, final boolean exitIfOk) {
-        showError(ctx, titleId, e, exitIfOk, false);
+        showError(ctx, titleId, null, e, exitIfOk, false);
     }
 
-    private static void showError(final Context ctx, final int titleId, final Throwable e, final boolean exitIfOk, final boolean showMore) {
+    private static void showError(final Context ctx, final int titleId, final String rolledMessage, final Throwable e, final boolean exitIfOk, final boolean showMore) {
         e.printStackTrace();
 
         Runnable runnable = () -> {
-            final String errMsg = showMore ? Log.getStackTraceString(e): e.getMessage();
+            final String errMsg = showMore ? printToString(e) : rolledMessage != null ? rolledMessage : e.getMessage();
             AlertDialog.Builder builder = new AlertDialog.Builder((Context) ctx)
                     .setTitle(titleId)
                     .setMessage(errMsg)
@@ -608,7 +624,7 @@ public final class Tools {
                             }
                         }
                     })
-                    .setNegativeButton(showMore ? R.string.error_show_less : R.string.error_show_more, (DialogInterface.OnClickListener) (p1, p2) -> showError(ctx, titleId, e, exitIfOk, !showMore))
+                    .setNegativeButton(showMore ? R.string.error_show_less : R.string.error_show_more, (DialogInterface.OnClickListener) (p1, p2) -> showError(ctx, titleId, rolledMessage, e, exitIfOk, !showMore))
                     .setNeutralButton(android.R.string.copy, (DialogInterface.OnClickListener) (p1, p2) -> {
                         ClipboardManager mgr = (ClipboardManager) ctx.getSystemService(Context.CLIPBOARD_SERVICE);
                         mgr.setPrimaryClip(ClipData.newPlainText("error", Log.getStackTraceString(e)));
@@ -699,11 +715,6 @@ public final class Tools {
     public static JMinecraftVersionList.Version getVersionInfo(String versionName, boolean skipInheriting) {
         try {
             JMinecraftVersionList.Version customVer = Tools.GLOBAL_GSON.fromJson(read(DIR_HOME_VERSION + "/" + versionName + "/" + versionName + ".json"), JMinecraftVersionList.Version.class);
-            for (DependentLibrary lib : customVer.libraries) {
-                if (lib.name.startsWith(LIBNAME_OPTIFINE)) {
-                    customVer.optifineLib = lib;
-                }
-            }
             if (skipInheriting || customVer.inheritsFrom == null || customVer.inheritsFrom.equals(customVer.id)) {
                 return customVer;
             } else {
@@ -723,7 +734,7 @@ public final class Tools {
                 insertSafety(inheritsVer, customVer,
                         "assetIndex", "assets", "id",
                         "mainClass", "minecraftArguments",
-                        "optifineLib", "releaseTime", "time", "type"
+                        "releaseTime", "time", "type"
                 );
 
                 List<DependentLibrary> libList = new ArrayList<DependentLibrary>(Arrays.asList(inheritsVer.libraries));
@@ -744,7 +755,7 @@ public final class Tools {
                             }
                         }
 
-                        libList.add(lib);
+                        libList.add(0, lib);
                     }
                 } finally {
                     inheritsVer.libraries = libList.toArray(new DependentLibrary[0]);

@@ -26,6 +26,12 @@
             app2:seekBarIncrement="10"
             app2:selectable="false"/>
 
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="java_sandbox"
+            android:summary="@string/mcl_setting_java_sandbox_subtitle"
+            android:title="@string/mcl_setting_java_sandbox" />
+
     </PreferenceCategory>
 
 

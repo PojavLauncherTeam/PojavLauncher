@@ -7,6 +7,7 @@ import android.view.*;
 import android.widget.*;
 
 
+import net.kdt.pojavlaunch.customcontrols.ControlButtonMenuListener;
 import net.kdt.pojavlaunch.customcontrols.ControlData;
 import net.kdt.pojavlaunch.customcontrols.ControlLayout;
 import net.kdt.pojavlaunch.customcontrols.handleview.*;
@@ -22,12 +23,14 @@ import static org.lwjgl.glfw.CallbackBridge.sendMouseButton;
 public class ControlButton extends TextView implements ControlInterface {
     private final Paint mRectPaint = new Paint();
     protected ControlData mProperties;
+    private final ControlLayout mControlLayout;
 
     protected boolean mIsToggled = false;
     protected boolean mIsPointerOutOfBounds = false;
 
     public ControlButton(ControlLayout layout, ControlData properties) {
         super(layout.getContext());
+        mControlLayout = layout;
         setGravity(Gravity.CENTER);
         setAllCaps(true);
         setTextColor(Color.WHITE);
@@ -185,6 +188,7 @@ public class ControlButton extends TextView implements ControlInterface {
                 sendKeyPress(keycode, CallbackBridge.getCurrentMods(), isDown);
                 CallbackBridge.setModifiers(keycode, isDown);
             }else{
+                Log.i("punjabilauncher", "sendSpecialKey("+keycode+","+isDown+")");
                 sendSpecialKey(keycode, isDown);
             }
         }
@@ -222,6 +226,9 @@ public class ControlButton extends TextView implements ControlInterface {
 
             case ControlData.SPECIALBTN_SCROLLUP:
                 if (!isDown) CallbackBridge.sendScroll(0, -1d);
+                break;
+            case ControlData.SPECIALBTN_MENU:
+                mControlLayout.notifyAppMenu();
                 break;
         }
     }

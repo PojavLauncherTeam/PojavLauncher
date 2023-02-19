@@ -191,8 +191,11 @@ public class ImportControlActivity extends Activity {
 
     public String getNameFromURI(Uri uri) {
         Cursor c = getContentResolver().query(uri, null, null, null, null);
+        if(c == null) return uri.getLastPathSegment(); // idk myself but it happens on asus file manager
         c.moveToFirst();
-        String fileName = c.getString(c.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+        int columnIndex = c.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+        if(columnIndex == -1) return uri.getLastPathSegment();
+        String fileName = c.getString(columnIndex);
         c.close();
         return trimFileName(fileName);
     }

@@ -2,7 +2,6 @@ package com.kdt.mcgui;
 
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -30,11 +29,11 @@ import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.authenticator.listener.DoneListener;
 import net.kdt.pojavlaunch.authenticator.listener.ErrorListener;
 import net.kdt.pojavlaunch.authenticator.listener.ProgressListener;
+import net.kdt.pojavlaunch.authenticator.microsoft.PresentedException;
 import net.kdt.pojavlaunch.authenticator.microsoft.MicrosoftBackgroundLogin;
 import net.kdt.pojavlaunch.extra.ExtraConstants;
 import net.kdt.pojavlaunch.extra.ExtraCore;
 import net.kdt.pojavlaunch.extra.ExtraListener;
-import net.kdt.pojavlaunch.services.ProgressService;
 import net.kdt.pojavlaunch.value.MinecraftAccount;
 
 import java.io.File;
@@ -93,7 +92,12 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
 
     private final ErrorListener mErrorListener = errorMessage -> {
         mLoginBarPaint.setColor(Color.RED);
-        Tools.showError(getContext(), errorMessage);
+        if(errorMessage instanceof PresentedException) {
+            PresentedException exception = (PresentedException) errorMessage;
+            Tools.showError(getContext(), exception.toString(getContext()), exception.getCause());
+        }else {
+            Tools.showError(getContext(), errorMessage);
+        }
         invalidate();
     };
 

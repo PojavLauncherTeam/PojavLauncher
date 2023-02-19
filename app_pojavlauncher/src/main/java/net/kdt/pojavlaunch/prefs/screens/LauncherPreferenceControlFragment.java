@@ -1,21 +1,29 @@
 package net.kdt.pojavlaunch.prefs.screens;
 
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.os.Bundle;
+
+import androidx.preference.PreferenceCategory;
+import androidx.preference.SwitchPreference;
 
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.prefs.CustomSeekBarPreference;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 
 public class LauncherPreferenceControlFragment extends LauncherPreferenceFragment {
-
+    private boolean mGyroAvailable = false;
     @Override
     public void onCreatePreferences(Bundle b, String str) {
         // Get values
         int longPressTrigger = LauncherPreferences.PREF_LONGPRESS_TRIGGER;
         int prefButtonSize = (int) LauncherPreferences.PREF_BUTTONSIZE;
         int mouseScale = (int) LauncherPreferences.PREF_MOUSESCALE;
+        int gyroSampleRate = LauncherPreferences.PREF_GYRO_SAMPLE_RATE;
         float mouseSpeed = LauncherPreferences.PREF_MOUSESPEED;
+        float gyroSpeed = LauncherPreferences.PREF_GYRO_SENSITIVITY;
 
         //Triggers a write for some reason which resets the value
         addPreferencesFromResource(R.xml.pref_control);
@@ -40,7 +48,21 @@ public class LauncherPreferenceControlFragment extends LauncherPreferenceFragmen
         seek6.setValue((int)(mouseSpeed *100f));
         seek6.setSuffix(" %");
 
+        Context context = getContext();
+        if(context != null) {
+            mGyroAvailable = ((SensorManager)context.getSystemService(Context.SENSOR_SERVICE)).getDefaultSensor(Sensor.TYPE_GYROSCOPE) != null;
+        }
+        PreferenceCategory gyroCategory =  (PreferenceCategory) findPreference("gyroCategory");
+        gyroCategory.setVisible(mGyroAvailable);
 
+        CustomSeekBarPreference gyroSensitivitySeek = findPreference("gyroSensitivity");
+        gyroSensitivitySeek.setRange(25, 300);
+        gyroSensitivitySeek.setValue((int) (gyroSpeed*100f));
+        gyroSensitivitySeek.setSuffix(" %");
+        CustomSeekBarPreference gyroSampleRateSeek = findPreference("gyroSampleRate");
+        gyroSampleRateSeek.setRange(5, 50);
+        gyroSampleRateSeek.setValue(gyroSampleRate);
+        gyroSampleRateSeek.setSuffix(" ms");
         computeVisibility();
     }
 
@@ -51,8 +73,11 @@ public class LauncherPreferenceControlFragment extends LauncherPreferenceFragmen
     }
 
     private void computeVisibility(){
-        CustomSeekBarPreference seek2 = findPreference("timeLongPressTrigger");
-        seek2.setVisible(!LauncherPreferences.PREF_DISABLE_GESTURES);
+        findPreference("timeLongPressTrigger").setVisible(!LauncherPreferences.PREF_DISABLE_GESTURES);
+        findPreference("gyroSensitivity").setVisible(LauncherPreferences.PREF_ENALBE_GYRO);
+        findPreference("gyroSampleRate").setVisible(LauncherPreferences.PREF_ENALBE_GYRO);
+        findPreference("gyroInvertX").setVisible(LauncherPreferences.PREF_ENALBE_GYRO);
+        findPreference("gyroInvertY").setVisible(LauncherPreferences.PREF_ENALBE_GYRO);
     }
 
 }

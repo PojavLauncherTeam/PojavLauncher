@@ -32,6 +32,7 @@ public class ControlLayout extends FrameLayout {
 
 	private EditControlPopup mControlPopup = null;
 	private ControlHandleView mHandleView;
+	private ControlButtonMenuListener mMenuListener;
 	public ActionRow actionRow = null;
 
 	public ControlLayout(Context ctx) {
@@ -366,5 +367,23 @@ public class ControlLayout extends FrameLayout {
 		try {
 			mLayout.save(path);
 		} catch (IOException e) {Log.e("ControlLayout", "Failed to save the layout at:" + path);}
+	}
+
+
+	public boolean hasMenuButton() {
+		for(ControlInterface controlInterface : getButtonChildren()){
+			for (int keycode : controlInterface.getProperties().keycodes) {
+				if (keycode == ControlData.SPECIALBTN_MENU) return true;
+			}
+		}
+		return false;
+	}
+
+	public void setMenuListener(ControlButtonMenuListener menuListener) {
+		this.mMenuListener = menuListener;
+	}
+
+	public void notifyAppMenu() {
+		if(mMenuListener != null) mMenuListener.onClickedMenu();
 	}
 }

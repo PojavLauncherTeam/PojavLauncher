@@ -25,7 +25,7 @@
     <string name="login_dialog_no_saved_account">You don\'t have any saved account.\nUse the option <b>\"Keep me logged in\"</b> to save an account upon first login.</string>
 
     <!-- Hint -->
-    <string name="hint_control_mapping">"Swipe from right to left to open menu ◀\nHold a button to customize: edit, resize or delete."</string>
+    <string name="hint_control_mapping">"Tap the top center cog icon to open the context menu ⚙\nTap a button to customize: edit, resize, delete, or customize it's keybind."</string>
 
     <!-- Warnings -->
     <string name="warning_remove_account">This account will be removed!</string>
@@ -110,6 +110,8 @@
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Old-beta</string>
+    <string name="mcl_setting_java_sandbox">Sandbox .jar installer</string>
+    <string name="mcl_setting_java_sandbox_subtitle">Control the availability of sandbox security manager when launching .jar installer.</string>
     <string name="mcl_version_clone">Clone</string>
 
     <!-- Global strings -->
@@ -276,17 +278,27 @@
     <string name="preference_control_title">Control customization</string>
     <string name="preference_control_description">Gestures types, triggers, and scaling</string>
     <string name="preference_java_title">Java Tweaks</string>
-    <string name="preference_java_description">Java versions, JVM Arguments, and RAM amount</string>
+    <string name="preference_java_description">Java versions, JVM Arguments, RAM amount and sandbox</string>
     <string name="preference_misc_title">Miscellaneous settings</string>
     <string name="preference_misc_description">Version list, and libs checks</string>
     <string name="preference_experimental_title">Experimental Stuff</string>
     <string name="preference_experimental_description">Use things there with consideration, no support.</string>
     <string name="preference_sustained_performance_title">Enable sustained performance mode</string>
     <string name="preference_sustained_performance_description">Limit thermal throttling by limiting peak performance</string>
+    <string name="preference_force_vsync_title">Force enable vsync</string>
+    <string name="preference_force_vsync_description">Limit thermal throttling by limiting peak performance</string>
     <string name="preference_force_english_title">Force language to english</string>
     <string name="preference_force_english_description">Allows you to see original strings, as intended by developers. Requires a restart</string>
     <string name="preference_edit_controls_title">Edit custom controls</string>
     <string name="preference_edit_controls_summary">Tweak the control scheme to fit your needs</string>
+
+    <string name="preference_category_gyro_controls">Gyro controls</string>
+    <string name="preference_category_virtual_mouse">Virtual mouse</string>
+
+    <string name="preference_gyro_invert_x_axis">Invert X axis</string>
+    <string name="preference_gyro_invert_y_axis">Invert Y axis</string>
+    <string name="preference_gyro_invert_x_axis_description">Invert the horizontal axis</string>
+    <string name="preference_gyro_invert_y_axis_description">Invert the vertical axis</string>
 
     <string name="preference_back_title">Back to the last screen</string>
     <string name="gles_hack_title">GL4ES Shrink hack</string>
@@ -323,4 +335,18 @@
     <string name="tasks_ongoing">Tasks are in progress, please wait</string>
     <string name="no_saved_accounts">No saved accounts</string>
     <string name="downloading_versions">Downloading version list…</string>
+    <string name="mc_download_failed">Failed to download Minecraft! This could be due to bad network connection, incorrectly placed files, etc..</string>
+    <string name="xerr_unknown">Unknown Xbox Live API error %d</string>
+    <string name="xerr_no_account">You don\'t seem to have an Xbox Live account. Please log in once on https://minecraft.net/ and try again.</string>
+    <string name="xerr_adult_verification">An adult needs to verify your account.</string>
+    <string name="xerr_child">Your account is a child account, and needs to be added into a Family in order to log in.</string>
+    <string name="minecraft_not_owned">It seems like this account does not have a Minecraft profile. If you have Xbox Game Pass, please log in on https://minecraft.net/ and set it up.</string>
+    <string name="xerr_not_available">Xbox Live is not available in your country</string>
+    <string name="preference_enable_gyro_title">Enable gyroscope controls</string>
+    <string name="preference_enable_gyro_description">Enabling this will allow you to turn in game by turning your phone</string>
+    <string name="preference_gyro_sensitivity_title">Gyroscope controls sensitivity</string>
+    <string name="preference_gyro_sensitivity_description">Adjust the sensitivity of gyroscope controls</string>
+    <string name="toast_turn_on_gyro">Enable gyro controls first to use this!</string>
+    <string name="preference_gyro_sample_rate_title">Gyroscope sampling rate</string>
+    <string name="preference_gyro_sample_rate_description">If you have performance issues with the gyroscope controls, increase this</string>
 </resources>

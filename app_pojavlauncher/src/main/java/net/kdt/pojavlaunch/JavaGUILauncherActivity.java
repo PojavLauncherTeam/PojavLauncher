@@ -271,16 +271,18 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
                 javaArgList.add(modFile.getAbsolutePath());
             }
 
-            Logger.getInstance().appendToLog("Info: Java arguments: " + Arrays.toString(javaArgList.toArray(new String[0])));
             
-            // Run java on sandbox, non-overrideable.
-            Collections.reverse(javaArgList);
-            javaArgList.add("-Xbootclasspath/a:" + Tools.DIR_DATA + "/security/pro-grade.jar");
-            javaArgList.add("-Djava.security.manager=net.sourceforge.prograde.sm.ProGradeJSM");
-            javaArgList.add("-Djava.security.policy=" + Tools.DIR_DATA + "/security/java_sandbox.policy");
-            Collections.reverse(javaArgList);
+            if (LauncherPreferences.PREF_JAVA_SANDBOX) {
+                Collections.reverse(javaArgList);
+                javaArgList.add("-Xbootclasspath/a:" + Tools.DIR_DATA + "/security/pro-grade.jar");
+                javaArgList.add("-Djava.security.manager=net.sourceforge.prograde.sm.ProGradeJSM");
+                javaArgList.add("-Djava.security.policy=" + Tools.DIR_DATA + "/security/java_sandbox.policy");
+                Collections.reverse(javaArgList);
+            }
 
-            return JREUtils.launchJavaVM(this, javaArgList);
+            Logger.getInstance().appendToLog("Info: Java arguments: " + Arrays.toString(javaArgList.toArray(new String[0])));
+
+            return JREUtils.launchJavaVM(this, null,javaArgList);
         } catch (Throwable th) {
             Tools.showError(this, th, true);
             return -1;

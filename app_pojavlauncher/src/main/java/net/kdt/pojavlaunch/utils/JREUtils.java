@@ -190,7 +190,7 @@ public class JREUtils {
         Map<String, String> envMap = new ArrayMap<>();
         envMap.put("POJAV_NATIVEDIR", NATIVE_LIB_DIR);
         envMap.put("JAVA_HOME", Tools.DIR_HOME_JRE);
-        envMap.put("HOME", Tools.DIR_GAME_NEW);
+        envMap.put("HOME", Tools.DIR_GAME_HOME);
         envMap.put("TMPDIR", activity.getCacheDir().getAbsolutePath());
         envMap.put("LIBGL_MIPMAP", "3");
 
@@ -202,6 +202,8 @@ public class JREUtils {
 
         // The OPEN GL version is changed according
         envMap.put("LIBGL_ES", (String) ExtraCore.getValue(ExtraConstants.OPEN_GL_VERSION));
+
+        envMap.put("FORCE_VSYNC", String.valueOf(LauncherPreferences.PREF_FORCE_VSYNC));
 
         envMap.put("MESA_GLSL_CACHE_DIR", activity.getCacheDir().getAbsolutePath());
         if (LOCAL_RENDERER != null) {
@@ -274,7 +276,7 @@ public class JREUtils {
         // return ldLibraryPath;
     }
 
-    public static int launchJavaVM(final Activity activity,final List<String> JVMArgs) throws Throwable {
+    public static int launchJavaVM(final Activity activity, String gameDirectory, final List<String> JVMArgs) throws Throwable {
         JREUtils.relocateLibPath();
         // For debugging only!
 /*
@@ -309,7 +311,7 @@ public class JREUtils {
 
         initJavaRuntime();
         setupExitTrap(activity.getApplication());
-        chdir(Tools.DIR_GAME_NEW);
+        chdir(gameDirectory == null ? Tools.DIR_GAME_NEW : gameDirectory);
         userArgs.add(0,"java"); //argv[0] is the program name according to C standard.
 
         final int exitCode = VMLauncher.launchJVM(userArgs.toArray(new String[0]));
@@ -340,12 +342,13 @@ public class JREUtils {
         ArrayList<String> overridableArguments = new ArrayList<>(Arrays.asList(
                 "-Djava.home=" + Tools.DIR_HOME_JRE,
                 "-Djava.io.tmpdir=" + ctx.getCacheDir().getAbsolutePath(),
-                "-Duser.home=" + new File(Tools.DIR_GAME_NEW).getParent(),
+                "-Duser.home=" + Tools.DIR_GAME_HOME,
                 "-Duser.language=" + System.getProperty("user.language"),
                 "-Dos.name=Linux",
                 "-Dos.version=Android-" + Build.VERSION.RELEASE,
                 "-Dpojav.path.minecraft=" + Tools.DIR_GAME_NEW,
                 "-Dpojav.path.private.account=" + Tools.DIR_ACCOUNT_NEW,
+                "-Duser.timezone=" + TimeZone.getDefault().getID(),
 
                 //LWJGL 3 DEBUG FLAGS
                 //"-Dorg.lwjgl.util.Debug=true",
@@ -385,6 +388,45 @@ public class JREUtils {
         return userArguments;
     }
 
+    /*
+     * more better arguments parser that allows escapes and doesnt change up args
+     * @param _args all args as a string
+     * @return a list of split args
+     */
+    /*public static ArrayList<String> parseJavaArguments(String _args) {
+        char bracketOpen = '\0';
+        char[] str = _args.toCharArray();
+        StringBuilder sb = new StringBuilder();
+        ArrayList<String> ret = new ArrayList<String>();
+        for(int i = 0; i < str.length; i++) {
+            if(str[i] == '\\') {
+                sb.append(str[i+1]);
+                i++;
+                continue;
+            }
+            if(str[i] == ' ' && bracketOpen == '\0') {
+                if(sb.length() > 0) {
+                    ret.add(sb.toString());
+                    sb = new StringBuilder();
+                }
+                continue;
+            }
+            if(str[i] == '"' || str[i] == '\'') {
+                if(bracketOpen == str[i]) {
+                    bracketOpen = '\0';
+                    continue;
+                }else if(bracketOpen == '\0') {
+                    bracketOpen = str[i];
+                    continue;
+                }
+
+            }
+            sb.append(str[i]);
+        }
+        ret.add(sb.toString());
+        return ret;
+    }*/
+
     /**
      * Parse and separate java arguments in a user friendly fashion
      * It supports multi line and absence of spaces between arguments
@@ -397,12 +439,23 @@ public class JREUtils {
         ArrayList<String> parsedArguments = new ArrayList<>(0);
         args = args.trim().replace(" ", "");
         //For each prefixes, we separate args.
-        for(String prefix : new String[]{"-XX:-","-XX:+", "-XX:","--","-"}){
+        String[] separators = new String[]{"-XX:-","-XX:+", "-XX:","--", "-D", "-X", "-javaagent:", "-verbose"};
+        for(String prefix : separators){
             while (true){
                 int start = args.indexOf(prefix);
                 if(start == -1) break;
-                //Get the end of the current argument
-                int end = args.indexOf("-", start + prefix.length());
+                //Get the end of the current argument by checking the nearest separator
+                int end = -1;
+                for(String separator: separators){
+                    int tempEnd = args.indexOf(separator, start + prefix.length());
+                    if(tempEnd == -1) continue;
+                    if(end == -1){
+                        end = tempEnd;
+                        continue;
+                    }
+                    end = Math.min(end, tempEnd);
+                }
+                //Fallback
                 if(end == -1) end = args.length();
 
                 //Extract it

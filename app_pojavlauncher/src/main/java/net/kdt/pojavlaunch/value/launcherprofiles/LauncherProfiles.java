@@ -2,6 +2,7 @@ package net.kdt.pojavlaunch.value.launcherprofiles;
 import com.google.gson.*;
 import net.kdt.pojavlaunch.*;
 import java.io.*;
+import java.util.HashMap;
 
 public class LauncherProfiles {
     public static MinecraftLauncherProfiles mainProfileJson;
@@ -13,6 +14,7 @@ public class LauncherProfiles {
                     mainProfileJson = Tools.GLOBAL_GSON.fromJson(Tools.read(launcherProfilesFile.getAbsolutePath()), MinecraftLauncherProfiles.class);
                 } else {
                     mainProfileJson = new MinecraftLauncherProfiles();
+                    mainProfileJson.profiles = new HashMap<>();
                 }
             } else {
                 Tools.write(launcherProfilesFile.getAbsolutePath(), mainProfileJson.toJson());

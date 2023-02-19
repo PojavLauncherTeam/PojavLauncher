@@ -1,5 +1,7 @@
 package net.kdt.pojavlaunch;
 
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+
 import android.app.*;
 import android.content.*;
 import android.content.pm.*;
@@ -21,7 +23,7 @@ import net.kdt.pojavlaunch.utils.*;
 
 public class PojavApplication extends Application {
 	public static String CRASH_REPORT_TAG = "PojavCrashReport";
-	public static ExecutorService sExecutorService = new ThreadPoolExecutor(0, 4, 500, TimeUnit.MILLISECONDS,  new LinkedBlockingQueue<>());
+	public static ExecutorService sExecutorService = new ThreadPoolExecutor(4, 4, 500, TimeUnit.MILLISECONDS,  new LinkedBlockingQueue<>());
 	
 	@Override
 	public void onCreate() {
@@ -73,11 +75,10 @@ public class PojavApplication extends Application {
 												.concat("/x86");
 			}
 			AsyncAssetManager.unpackRuntime(getAssets(), false);
-			AsyncAssetManager.unpackComponents(this);
-			AsyncAssetManager.unpackSingleFiles(this);
 		} catch (Throwable throwable) {
 			Intent ferrorIntent = new Intent(this, FatalErrorActivity.class);
 			ferrorIntent.putExtra("throwable", throwable);
+			ferrorIntent.setFlags(FLAG_ACTIVITY_NEW_TASK);
 			startActivity(ferrorIntent);
 		}
 	}

@@ -1,13 +1,10 @@
 package net.kdt.pojavlaunch;
 
-import static android.os.Build.VERSION_CODES.P;
-
 import static net.kdt.pojavlaunch.MainActivity.INTENT_MINECRAFT_VERSION;
 
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,14 +20,10 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentContainerView;
 import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.LifecycleEventObserver;
-import androidx.lifecycle.LifecycleOwner;
 
 import com.kdt.mcgui.ProgressLayout;
 import com.kdt.mcgui.mcAccountSpinner;
 
-import net.kdt.pojavlaunch.fragments.LocalLoginFragment;
 import net.kdt.pojavlaunch.fragments.MainMenuFragment;
 import net.kdt.pojavlaunch.fragments.MicrosoftLoginFragment;
 import net.kdt.pojavlaunch.extra.ExtraConstants;
@@ -43,13 +36,10 @@ import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.prefs.screens.LauncherPreferenceFragment;
 import net.kdt.pojavlaunch.progresskeeper.ProgressKeeper;
 import net.kdt.pojavlaunch.services.ProgressServiceKeeper;
-import net.kdt.pojavlaunch.tasks.AsyncAssetManager;
 import net.kdt.pojavlaunch.tasks.AsyncMinecraftDownloader;
 import net.kdt.pojavlaunch.tasks.AsyncVersionList;
 import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
 import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
-
-import java.util.List;
 
 public class LauncherActivity extends BaseActivity {
     public static final String SETTING_FRAGMENT_TAG = "SETTINGS_FRAGMENT";
@@ -134,18 +124,28 @@ public class LauncherActivity extends BaseActivity {
         }
         String normalizedVersionId = AsyncMinecraftDownloader.normalizeVersionId(prof.lastVersionId);
         JMinecraftVersionList.Version mcVersion = AsyncMinecraftDownloader.getListedVersion(normalizedVersionId);
-        new AsyncMinecraftDownloader(this, mcVersion, normalizedVersionId, () -> runOnUiThread(() -> {
-            try {
-                Intent mainIntent = new Intent(getBaseContext(), MainActivity.class);
-                mainIntent.putExtra(INTENT_MINECRAFT_VERSION, normalizedVersionId);
-                mainIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                startActivity(mainIntent);
-                finish();
-                android.os.Process.killProcess(android.os.Process.myPid()); //You should kill yourself, NOW!
-            } catch (Throwable e) {
-                Tools.showError(getBaseContext(), e);
+        new AsyncMinecraftDownloader(this, mcVersion, normalizedVersionId, new AsyncMinecraftDownloader.DoneListener() {
+            @Override
+            public void onDownloadDone() {
+                ProgressKeeper.waitUntilDone(()-> runOnUiThread(() -> {
+                    try {
+                        Intent mainIntent = new Intent(getBaseContext(), MainActivity.class);
+                        mainIntent.putExtra(INTENT_MINECRAFT_VERSION, normalizedVersionId);
+                        mainIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        startActivity(mainIntent);
+                        finish();
+                        android.os.Process.killProcess(android.os.Process.myPid()); //You should kill yourself, NOW!
+                    } catch (Throwable e) {
+                        Tools.showError(getBaseContext(), e);
+                    }
+                }));
             }
-        }));
+
+            @Override
+            public void onDownloadFailed(Throwable th) {
+                if(th != null) Tools.showError(LauncherActivity.this, R.string.mc_download_failed, th);
+            }
+        });
         return false;
     };
 

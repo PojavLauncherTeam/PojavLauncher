@@ -17,8 +17,10 @@ import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.*;
+import android.provider.DocumentsContract;
 import android.util.*;
 import android.view.*;
+import android.webkit.MimeTypeMap;
 import android.widget.*;
 
 import androidx.annotation.NonNull;
@@ -44,7 +46,7 @@ import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 import org.lwjgl.glfw.*;
 import android.net.*;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements ControlButtonMenuListener{
     public static volatile ClipboardManager GLOBAL_CLIPBOARD;
     public static final String INTENT_MINECRAFT_VERSION = "intent_version";
 
@@ -60,6 +62,7 @@ public class MainActivity extends BaseActivity {
     private DrawerLayout drawerLayout;
     private ListView navDrawer;
     private View mDrawerPullButton;
+    private GyroControl mGyroControl = null;
     public static ControlLayout mControlLayout;
 
 
@@ -85,6 +88,7 @@ public class MainActivity extends BaseActivity {
         initLayout(R.layout.activity_basemain);
         CallbackBridge.addGrabListener(touchpad);
         CallbackBridge.addGrabListener(minecraftGLView);
+        if(LauncherPreferences.PREF_ENALBE_GYRO) mGyroControl = new GyroControl(this);
 
         // Enabling this on TextureView results in a broken white result
         if(PREF_USE_ALTERNATE_SURFACE) getWindow().setBackgroundDrawable(null);
@@ -116,8 +120,9 @@ public class MainActivity extends BaseActivity {
     protected void initLayout(int resId) {
         setContentView(resId);
         bindValues();
+        mControlLayout.setMenuListener(this);
 
-        mDrawerPullButton.setOnClickListener(v -> drawerLayout.openDrawer(navDrawer));
+        mDrawerPullButton.setOnClickListener(v -> onClickedMenu());
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
 
         try {
@@ -165,7 +170,8 @@ public class MainActivity extends BaseActivity {
                     case 2: minecraftGLView.togglepointerDebugging(); break;
                     case 3: dialogSendCustomKey(); break;
                     case 4: adjustMouseSpeedLive(); break;
-                    case 5: openCustomControls(); break;
+                    case 5: adjustGyroSensitivityLive(); break;
+                    case 6: openCustomControls(); break;
                 }
                 drawerLayout.closeDrawers();
             };
@@ -210,6 +216,7 @@ public class MainActivity extends BaseActivity {
         } catch (Throwable th) {
             Tools.showError(this, th);
         }
+        mDrawerPullButton.setVisibility(mControlLayout.hasMenuButton() ? View.GONE : View.VISIBLE);
         mControlLayout.toggleControlVisible();
     }
 
@@ -236,6 +243,7 @@ public class MainActivity extends BaseActivity {
     public void onResume() {
         super.onResume();
         mIsResuming = true;
+        if(mGyroControl != null) mGyroControl.enable();
         final int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
         final View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(uiOptions);
@@ -244,6 +252,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void onPause() {
+        if(mGyroControl != null) mGyroControl.disable();
         if (CallbackBridge.isGrabbing()){
             sendKeyPress(LwjglGlfwKeycode.GLFW_KEY_ESCAPE);
         }
@@ -393,6 +402,7 @@ public class MainActivity extends BaseActivity {
         mControlLayout.setModifiable(true);
         navDrawer.setAdapter(ingameControlsEditorArrayAdapter);
         navDrawer.setOnItemClickListener(ingameControlsEditorListener);
+        mDrawerPullButton.setVisibility(View.VISIBLE);
         isInEditor = true;
     }
 
@@ -405,6 +415,7 @@ public class MainActivity extends BaseActivity {
                     minecraftProfile.controlFile == null
                             ? LauncherPreferences.PREF_DEFAULTCTRL_PATH
                             : Tools.CTRLMAP_PATH + "/" + minecraftProfile.controlFile);
+            mDrawerPullButton.setVisibility(mControlLayout.hasMenuButton() ? View.GONE : View.VISIBLE);
         } catch (IOException e) {
             Tools.showError(this,e);
         }
@@ -503,16 +514,99 @@ public class MainActivity extends BaseActivity {
         b.show();
     }
 
+    int tmpGyroSensitivity;
+    public void adjustGyroSensitivityLive() {
+        if(!LauncherPreferences.PREF_ENALBE_GYRO) {
+            Toast.makeText(this, R.string.toast_turn_on_gyro, Toast.LENGTH_LONG).show();
+            return;
+        }
+        AlertDialog.Builder b = new AlertDialog.Builder(this);
+        b.setTitle(R.string.preference_gyro_sensitivity_title);
+        View v = LayoutInflater.from(this).inflate(R.layout.dialog_live_mouse_speed_editor,null);
+        final SeekBar sb = v.findViewById(R.id.mouseSpeed);
+        final TextView tv = v.findViewById(R.id.mouseSpeedTV);
+        sb.setMax(275);
+        tmpGyroSensitivity = (int) ((LauncherPreferences.PREF_GYRO_SENSITIVITY*100));
+        sb.setProgress(tmpGyroSensitivity -25);
+        tv.setText(tmpGyroSensitivity +" %");
+        sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                tmpGyroSensitivity = i+25;
+                tv.setText(tmpGyroSensitivity +" %");
+            }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {}
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {}
+        });
+        b.setView(v);
+        b.setPositiveButton(android.R.string.ok, (dialogInterface, i) -> {
+            LauncherPreferences.PREF_GYRO_SENSITIVITY = ((float) tmpGyroSensitivity)/100f;
+            LauncherPreferences.DEFAULT_PREF.edit().putInt("gyroSensitivity", tmpGyroSensitivity).commit();
+            dialogInterface.dismiss();
+            System.gc();
+        });
+        b.setNegativeButton(android.R.string.cancel, (dialogInterface, i) -> {
+            dialogInterface.dismiss();
+            System.gc();
+        });
+        b.show();
+    }
+
+    private static void setUri(Context context, String input, Intent intent) {
+        if(input.startsWith("file:")) {
+            int truncLength = 5;
+            if(input.startsWith("file://")) truncLength = 7;
+            input = input.substring(truncLength);
+            Log.i("MainActivity", input);
+            boolean isDirectory = new File(input).isDirectory();
+            if(isDirectory) {
+                intent.setType(DocumentsContract.Document.MIME_TYPE_DIR);
+            }else{
+                String type = null;
+                String extension = MimeTypeMap.getFileExtensionFromUrl(input);
+                if(extension != null) type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
+                if(type == null) type = "*/*";
+                intent.setType(type);
+            }
+            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+            intent.setData(DocumentsContract.buildDocumentUri(
+                    context.getString(R.string.storageProviderAuthorities), input
+            ));
+            return;
+        }
+        intent.setDataAndType(Uri.parse(input), "*/*");
+    }
+
     public static void openLink(String link) {
         Context ctx = touchpad.getContext(); // no more better way to obtain a context statically
         ((Activity)ctx).runOnUiThread(() -> {
             try {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setDataAndType(Uri.parse(link.replace("file://", "content://")), "*/*");
+                setUri(ctx, link, intent);
                 ctx.startActivity(intent);
             } catch (Throwable th) {
                 Tools.showError(ctx, th);
             }
         });
+    }
+    public static void openPath(String path) {
+        Context ctx = touchpad.getContext(); // no more better way to obtain a context statically
+        ((Activity)ctx).runOnUiThread(() -> {
+            try {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setDataAndType(DocumentsContract.buildDocumentUri(ctx.getString(R.string.storageProviderAuthorities), path), "*/*");
+                ctx.startActivity(intent);
+            } catch (Throwable th) {
+                Tools.showError(ctx, th);
+            }
+        });
+    }
+
+    @Override
+    public void onClickedMenu() {
+        drawerLayout.openDrawer(navDrawer);
+        navDrawer.requestLayout();
     }
 }

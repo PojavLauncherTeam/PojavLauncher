@@ -29,6 +29,9 @@ public class Cursor {
 	/** Flag set when the cursor has been destroyed */
 	private boolean destroyed;
 
+	/** Flag set if the cursor is empty */
+	private boolean isEmpty;
+
 	/**
 	 * Constructs a new Cursor, with the given parameters. Mouse must have been
 	 * created before you can create Cursor objects. Cursor images are in ARGB
@@ -59,14 +62,19 @@ public class Cursor {
 	 */
 	public Cursor(int width, int height, int xHotspot, int yHotspot, int numImages, IntBuffer images, IntBuffer delays)
 			throws LWJGLException {
-
 		cursors = new CursorElement[numImages];
 
 		IntBuffer flippedImages = BufferUtils.createIntBuffer(images.limit());
 		flipImages(width, height, numImages, images, flippedImages);
 
 		ByteBuffer pixels = convertARGBIntBuffertoRGBAByteBuffer(width, height, flippedImages);
-
+		if(numImages == 1) {
+			isEmpty = true;
+			for(int i = 0; i < width*height; i++) if(pixels.get(i) != 0) {
+				System.out.println("Encountered non-zero byte at "+i+", custom cursor is not empty!");
+				isEmpty = false;
+			}
+		}
 		for (int i = 0; i < numImages; i++) {
 			int size = width * height;
 			ByteBuffer image = BufferUtils.createByteBuffer(size);
@@ -249,6 +257,14 @@ public class Cursor {
 	}
 
 	/**
+	/* Returns wheteher the cursor image is empty or not
+	 */
+
+	/*package-private*/ boolean isEmpty() {
+		return isEmpty;
+	}
+
+	/**
 	 * A single cursor element, used when animating
 	 */
 	private static class CursorElement {
@@ -266,5 +282,4 @@ public class Cursor {
 				throw new RuntimeException("Error creating GLFW cursor");
 		}
 	}
-
 }
