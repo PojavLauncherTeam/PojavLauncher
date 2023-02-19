@@ -147,7 +147,7 @@ public final class Tools {
 
         List<String> javaArgList = new ArrayList<String>();
 
-        getCacioJavaArgs(javaArgList, JREUtils.jreReleaseList.get("JAVA_VERSION").equals("1.8.0"));
+        getCacioJavaArgs(javaArgList, JREUtils.jreReleaseList.get("JAVA_VERSION").startsWith("1.8.0"));
 
 /*
         int mcReleaseDate = Integer.parseInt(versionInfo.releaseTime.substring(0, 10).replace("-", ""));
