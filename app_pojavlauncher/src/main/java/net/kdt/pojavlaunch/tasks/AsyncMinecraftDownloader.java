@@ -40,6 +40,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class AsyncMinecraftDownloader {
+    private static final float BYTE_TO_MB = 1024 * 1024;
     public static final String MINECRAFT_RES = "https://resources.download.minecraft.net/";
 
     /* Allows each downloading thread to have its own RECYCLED buffer */
@@ -128,7 +129,7 @@ public class AsyncMinecraftDownloader {
                     downloadFileMonitored(
                             verInfo.logging.client.file.url, outLib, getByteBuffer(),
                             (curr, max) -> ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT,
-                                    (int) Math.max((float)curr/max*100,0), R.string.mcl_launch_downloading, finalVerInfo.logging.client.file.id)
+                                    (int) Math.max((float)curr/max*100,0), R.string.mcl_launch_downloading_progress, finalVerInfo.logging.client.file.id, curr/BYTE_TO_MB, max/BYTE_TO_MB)
                     );
                 }
             }
@@ -214,7 +215,7 @@ public class AsyncMinecraftDownloader {
                 url,
                 destination, getByteBuffer(),
                 (curr, max) -> ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT,
-                        (int) Math.max((float)curr/max*100,0), R.string.mcl_launch_downloading, destination.getName()));
+                        (int) Math.max((float)curr/max*100,0), R.string.mcl_launch_downloading_progress, destination.getName(), curr/BYTE_TO_MB, max/BYTE_TO_MB));
     }
 
     public void downloadAssets(final JAssets assets, String assetsVersion, final File outputDir) throws IOException {
@@ -268,7 +269,7 @@ public class AsyncMinecraftDownloader {
             while ((!executor.awaitTermination(1000, TimeUnit.MILLISECONDS))&&(!localInterrupt.get()) /*&&mActivity.mIsAssetsProcessing*/) {
                 int DLSize = downloadedSize.get();
                 ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT,(int) Math.max((float) DLSize/assetsSizeBytes*100, 0),
-                        R.string.mcl_launch_downloading, "assets");
+                        R.string.mcl_launch_downloading_progress, "assets", (float)DLSize/BYTE_TO_MB, (float)assetsSizeBytes/BYTE_TO_MB);
             }
 
 
@@ -334,7 +335,7 @@ public class AsyncMinecraftDownloader {
 
                 downloadFileMonitored(libPathURL, outLib, getByteBuffer(),
                         (curr, max) -> ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT,
-                                (int) Math.max((float)curr/max*100,0), R.string.mcl_launch_downloading, outLib.getName())
+                                (int) Math.max((float)curr/max*100,0), R.string.mcl_launch_downloading_progress, outLib.getName(), curr/BYTE_TO_MB, max/BYTE_TO_MB)
                 );
 
                 isFileGood = (libItem.downloads.artifact.sha1 == null
@@ -379,7 +380,7 @@ public class AsyncMinecraftDownloader {
             verJsonDir.delete();
             downloadFileMonitored(verInfo.url, verJsonDir, getByteBuffer(),
                     (curr, max) -> ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT,
-                            (int) Math.max((float)curr/max*100,0), R.string.mcl_launch_downloading, versionName + ".json")
+                            (int) Math.max((float)curr/max*100,0), R.string.mcl_launch_downloading_progress, versionName + ".json", curr/BYTE_TO_MB, max/BYTE_TO_MB)
             );
         }
     }
