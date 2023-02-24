@@ -251,6 +251,7 @@
     <string name="preference_experimental_description">여러 실험적 기능을 사용, 지원 안함</string>
     <string name="preference_sustained_performance_title">성능 유지 모드를 활성화합니다</string>
     <string name="preference_sustained_performance_description">최고 성능을 제한함으로써, 쓰로틀링을 제어합니다</string>
+    <string name="preference_force_vsync_description">최고 성능을 제한함으로써, 쓰로틀링을 제어합니다</string>
     <string name="preference_force_english_title">강제로 영어 사용</string>
     <string name="preference_force_english_description">개발자가 의도한 기본 문자열을 볼 수 있도록 해 줍니다. 재시작 필요</string>
     <string name="preference_edit_controls_title">사용자 지정 조작 편집</string>
