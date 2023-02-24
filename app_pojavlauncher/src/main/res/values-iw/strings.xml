@@ -224,6 +224,7 @@
     <string name="preference_experimental_description">אין תמיכה, יש להשתמש באפשרויות לפי שיקול דעתכם.</string>
     <string name="preference_sustained_performance_title">הפעל \"מצב מאוזן\"</string>
     <string name="preference_sustained_performance_description">מגביל התחממות טרמית (של המכשיר) ע\"י הפחתת ביצועים</string>
+    <string name="preference_force_vsync_description">מגביל התחממות טרמית (של המכשיר) ע\"י הפחתת ביצועים</string>
     <string name="preference_back_title">חזרה אל המסך האחרון</string>
     <string name="gles_hack_title">כיווץ GL4ES</string>
     <string name="gles_hack_none">אל תכווץ טקסטורות</string>
