@@ -251,6 +251,7 @@
     <string name="preference_experimental_description">Використовуйте речі з увагою, підтримка недоступна.</string>
     <string name="preference_sustained_performance_title">Увімкнути режим постійної продуктивности</string>
     <string name="preference_sustained_performance_description">Обмежте терморегуляцію, обмеживши пікову продуктивність</string>
+    <string name="preference_force_vsync_description">Обмежте терморегуляцію, обмеживши пікову продуктивність</string>
     <string name="preference_force_english_title">Примусово перевести мову на англійську</string>
     <string name="preference_force_english_description">Дозволяє бачити оригінальні рядки, як це було задумано розробниками. Вимагає перезавантаження</string>
     <string name="preference_edit_controls_title">Редагувати елементи керування</string>
