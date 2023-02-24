@@ -246,6 +246,7 @@
     <string name="preference_experimental_description">Use estas opções com cuidado, não daremos suporte.</string>
     <string name="preference_sustained_performance_title">Ativar o modo de desempenho sustentado</string>
     <string name="preference_sustained_performance_description">Limitar redução térmica limitando o pico de desempenho</string>
+    <string name="preference_force_vsync_description">Limitar redução térmica limitando o pico de desempenho</string>
     <string name="preference_force_english_title">Forçar linguagem ao inglês</string>
     <string name="preference_force_english_description">Permite que você veja frases originais, como esperado por desenvolvedores. Requer uma reinicialização</string>
     <string name="preference_category_virtual_mouse">Mouse virtual</string>
