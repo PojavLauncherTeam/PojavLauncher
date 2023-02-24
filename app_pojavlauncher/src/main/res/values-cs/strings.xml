@@ -251,6 +251,7 @@
     <string name="preference_experimental_description">Používej tyto věci s uvážením, nepodporujeme.</string>
     <string name="preference_sustained_performance_title">Zapnout režim zmenšeného výkonu</string>
     <string name="preference_sustained_performance_description">Limitujíc termální zpomalování, limituje maximální výkon</string>
+    <string name="preference_force_vsync_description">Limitujíc termální zpomalování, limituje maximální výkon</string>
     <string name="preference_force_english_title">Vynutit angličtinu</string>
     <string name="preference_force_english_description">Umožňuje mít originální text, jak byl vymyšlen vývojáři. Vyžaduje restart</string>
     <string name="preference_edit_controls_title">Upravit vlastní ovládací prvky</string>
