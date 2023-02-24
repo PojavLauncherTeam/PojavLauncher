@@ -251,6 +251,8 @@
     <string name="preference_experimental_description">Cân nhắc sử dụng các tuỳ chọn này. Chúng không được hỗ trợ.</string>
     <string name="preference_sustained_performance_title">Bật chế độ duy trì hiệu suất</string>
     <string name="preference_sustained_performance_description">Hạn chế giảm hiệu suất vì nhiệt bằng cách giới hạn hiệu suất tối đa</string>
+    <string name="preference_force_vsync_title">Bắt buộc kích hoạt vsync</string>
+    <string name="preference_force_vsync_description">Hạn chế giảm hiệu suất vì nhiệt bằng cách giới hạn hiệu suất tối đa</string>
     <string name="preference_force_english_title">Buộc ngôn ngữ Tiếng Anh</string>
     <string name="preference_force_english_description">Cho phép hiển thị các dòng chữ ban đầu, như theo ý của nhà phát triển. Yêu cầu khởi động lại</string>
     <string name="preference_edit_controls_title">Tùy chỉnh điều khiển</string>
@@ -303,4 +305,5 @@
     <string name="toast_turn_on_gyro">Bạn cần bật con quay hồi chuyển để sử dụng!</string>
     <string name="preference_gyro_sample_rate_title">Tốc độ lấy mẫu con quay hồi chuyển</string>
     <string name="preference_gyro_sample_rate_description">Nếu bạn gặp vấn đề hiệu suất với điều khiển bằng con quay hồi chuyển, thử tăng cái này</string>
+    <string name="microsoft_login_retry_later">Có quá nhiều yêu cầu, vui lòng thử lại sau.</string>
 </resources>
