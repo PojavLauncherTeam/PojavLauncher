@@ -238,6 +238,7 @@
     <string name="preference_experimental_description">そこにあるものを考慮し、サポートなしで使用してください。</string>
     <string name="preference_sustained_performance_title">持続的なパフォーマンスモードを有効にする</string>
     <string name="preference_sustained_performance_description">ピーク性能を制限することでサーマルスロットリングを制限</string>
+    <string name="preference_force_vsync_description">ピーク性能を制限することでサーマルスロットリングを制限</string>
     <string name="preference_force_english_title">強制的に言語を英語にする</string>
     <string name="preference_force_english_description">開発者向けのオリジナルの文字列を表示できます。再起動が必要です</string>
     <string name="preference_edit_controls_title">カスタムコントロールの編集</string>
