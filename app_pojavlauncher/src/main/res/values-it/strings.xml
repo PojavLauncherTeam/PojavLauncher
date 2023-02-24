@@ -251,11 +251,18 @@
     <string name="preference_experimental_description">Utilizza le impostazioni a tuo rischio, non si garantisce il supporto.</string>
     <string name="preference_sustained_performance_title">Attiva modalità performance sostenute</string>
     <string name="preference_sustained_performance_description">Limita il thermal throttling limitando le performance massime</string>
+    <string name="preference_force_vsync_title">Forza vsync</string>
+    <string name="preference_force_vsync_description">Limita il thermal throttling limitando le performance massime</string>
     <string name="preference_force_english_title">Forza l\'inglese come lingua</string>
     <string name="preference_force_english_description">Ti consente di vedere le stringhe originali, come previsto dagli sviluppatori. Richiede un riavvio dell\'app</string>
     <string name="preference_edit_controls_title">Modifica i controlli personalizzati</string>
     <string name="preference_edit_controls_summary">Regola lo schema di controllo per soddisfare le tue esigenze</string>
+    <string name="preference_category_gyro_controls">Controlli Gyro</string>
     <string name="preference_category_virtual_mouse">Mouse virtuale</string>
+    <string name="preference_gyro_invert_x_axis">Inverti l\'asse X</string>
+    <string name="preference_gyro_invert_y_axis">Inverti l\'asse Y</string>
+    <string name="preference_gyro_invert_x_axis_description">Inverti l\'asse orizzontale</string>
+    <string name="preference_gyro_invert_y_axis_description">Inverti l\'asse verticale</string>
     <string name="preference_back_title">Ritorna indietro</string>
     <string name="gles_hack_title">GL4ES Shrink hack</string>
     <string name="gles_hack_none">Non rimpicciolire le textures</string>
@@ -304,4 +311,5 @@ La preghiamo di accedere una volta su https://minecraft.net/ e riprova</string>
     <string name="toast_turn_on_gyro">Abilita i controlli giroscopici prima di usarli!</string>
     <string name="preference_gyro_sample_rate_title">Frequenza di campionamento giroscopico</string>
     <string name="preference_gyro_sample_rate_description">Se avete problemi di prestazioni con i controlli del giroscopio, aumentare questo</string>
+    <string name="microsoft_login_retry_later">Troppe richieste, riprova più tardi.</string>
 </resources>
