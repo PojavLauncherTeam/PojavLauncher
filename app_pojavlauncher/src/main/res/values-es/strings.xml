@@ -245,6 +245,7 @@
     <string name="preference_experimental_description">Utilice las cosas con consideración, sin apoyo.</string>
     <string name="preference_sustained_performance_title">Activar el modo de rendimiento sostenido</string>
     <string name="preference_sustained_performance_description">Limita la velocidad térmica limitando el rendimiento máximo</string>
+    <string name="preference_force_vsync_description">Limita la velocidad térmica limitando el rendimiento máximo</string>
     <string name="preference_force_english_title">Forzar idioma a ingles</string>
     <string name="preference_category_virtual_mouse">Ratón virtual</string>
     <string name="preference_gyro_invert_x_axis">Invertir eje X</string>
