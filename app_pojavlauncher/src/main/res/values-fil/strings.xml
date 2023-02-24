@@ -18,6 +18,7 @@
     <string name="login_title_no_saved_account">Walang account na natagpuan!</string>
     <string name="login_dialog_no_saved_account">Wala kang anumang naka-save na account.\nGamitin ang opsyon na <b>\"Panatilihin akong naka-log in\"</b> upang mag-save ng account sa unang pag-log in.</string>
     <!-- Hint -->
+    <string name="hint_control_mapping">"Pindutin ang nasa gitnang taas na icon para buksan ang menu \nMagpindot ng pindutan para ibahin, palakihin/paliitin, alisin, o ibahin ang keybind nito."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Aalisin ang account na ito!</string>
     <!-- AlertDialog title -->
@@ -82,11 +83,18 @@
     <string name="mcl_setting_category_general">Mga pangkalahatang setting</string>
     <string name="mcl_setting_category_scaling">Mga setting ng pag-scale</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
+    <string name="mcl_setting_renderer_gles2_4">Holy Gl4ES - (lahat ng bersyon, mabilis)</string>
+    <string name="mcl_setting_renderer_virgl">virglrenderer - (bersyong 1.7+, mabagal)</string>
+    <string name="mcl_setting_renderer_vgpu">vgpu - (hangang 1.16.5, mabilis)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink - (old_beta b1.8+, mabagal)</string>
+    <string name="mcl_setting_renderer_angle">ANGLE - (bersyong 1.17+, medyo ang bilis)</string>
     <string name="mcl_setting_category_veroption">Ang uri ng bersyon ay nasa listahan ng bersyon</string>
     <string name="mcl_setting_veroption_release">Release</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Lumang-alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Lumang-beta</string>
+    <string name="mcl_setting_java_sandbox">Pang-install ng Sandbox .jar</string>
+    <string name="mcl_setting_java_sandbox_subtitle">Kontrolin ang availability ng sandbox security manager pag nilalaunch ang .jar installer.</string>
     <string name="mcl_version_clone">I-Clone</string>
     <!-- Global strings -->
     <string name="global_edit">I-Edit</string>
@@ -101,6 +109,7 @@
     <string name="global_unpacking">Ina-unpack ang %s</string>
     <string name="global_error_field_empty">Hindi maaaring walang laman ang field na ito</string>
     <string name="global_waiting">Maghintay</string>
+    <string name="global_select">Iselekta</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Lumabas ang application/Laro na may code na %d, tingnan ang latestlog.txt para sa higit pang mga detalye.</string>
     <string name="mcn_exit_call">Umalis</string>
@@ -165,6 +174,8 @@
     <string name="customctrl_addsubbutton">Lagyan ng sub-button</string>
     <string name="customctrl_add_subbutton_message">Naidagdag ang sub-button n°%d !</string>
     <string name="customctrl_selectdefault">Piliin ang default Control json</string>
+    <string name="customctrl_export">I-export ang control</string>
+    <string name="main_share_logs">I-pasa ang log file</string>
     <string name="main_install_jar_file">Install .jar</string>
     <string name="main_options">Mga pilian</string>
     <string name="main_play">Maglaro</string>
@@ -227,13 +238,24 @@
     <string name="preference_control_title">Kontrolin ang customization</string>
     <string name="preference_control_description">Gestures types, triggers, at scaling</string>
     <string name="preference_java_title">Mga tweaks sa Java</string>
+    <string name="preference_java_description">Bersyon ng Java, Argument ng JVM, Amount ng RAM at sandbox</string>
     <string name="preference_misc_title">Karagdagang setting</string>
     <string name="preference_misc_description">Listahan ng bersyon, at mga checke ng mga libs</string>
     <string name="preference_experimental_title">Pang-eksperimentong ng bagay</string>
     <string name="preference_experimental_description">Gamitin ang mga bagay doon nang may considerasyon, walang suporta.</string>
     <string name="preference_sustained_performance_title">I-enable ang sustained performance mode</string>
     <string name="preference_sustained_performance_description">Limitahan ang pang iinit ng device sa pamamagitan ng paglilimita sa peak performance</string>
+    <string name="preference_force_vsync_description">Limitahan ang pang iinit ng device sa pamamagitan ng paglilimita sa peak performance</string>
+    <string name="preference_force_english_title">Pilitin ang wika sa ingles</string>
+    <string name="preference_force_english_description">Pinepwede kang makita ang original na \"strings\", na intended ng mga gumawa. Kailangan ng restart</string>
+    <string name="preference_edit_controls_title">Ibahin ang pasadyang mga kontrol</string>
+    <string name="preference_edit_controls_summary">Ibahin ang kontrol para sa gusto mo</string>
+    <string name="preference_category_gyro_controls">Gyro\'ng kontrol</string>
     <string name="preference_category_virtual_mouse">Virtual mouse</string>
+    <string name="preference_gyro_invert_x_axis">Baliktarin ang X axis</string>
+    <string name="preference_gyro_invert_y_axis">Baliktarin ang Y axis</string>
+    <string name="preference_gyro_invert_x_axis_description">Baliktarin ang pahalang na aksis</string>
+    <string name="preference_gyro_invert_y_axis_description">Baliktarin ang patayong aksis</string>
     <string name="preference_back_title">Bumalik sa huling screen</string>
     <string name="gles_hack_title">GL4ES Shrink hack</string>
     <string name="gles_hack_none">Wag paliitin ang Textures</string>
@@ -251,5 +273,7 @@
     <string name="arc_capes_title">Capes galing sa Cosmetica</string>
     <string name="arc_capes_desc">Pinapagana ang mga kapa mula sa Cosmetica (ang dating Arc). Para sa karagdagang impormasyon mangyaring bisitahin ang https://cosmetica.cc  Kinagangailangan ng OptiFine.</string>
     <string name="migrated_profile_str">%s pagsasaayos ng bersyon</string>
+    <string name="notif_channel_name">Pangkalahatan</string>
+    <string name="lazy_service_default_title">Serbisyong Harapan ng Pojav</string>
     <string name="mcl_setting_veroption_installed">Naka-Install</string>
 </resources>
