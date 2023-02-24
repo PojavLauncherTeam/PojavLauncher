@@ -245,6 +245,7 @@
     <string name="preference_experimental_description">使用這些選項請三思，後果自負。</string>
     <string name="preference_sustained_performance_title">啟用性能限制模式</string>
     <string name="preference_sustained_performance_description">限制峰值效能以減少過熱的發生</string>
+    <string name="preference_force_vsync_description">限制峰值效能以減少過熱的發生</string>
     <string name="preference_force_english_title">強制使用英文</string>
     <string name="preference_force_english_description">\"Allows you to see original strings, as intended by developers.\" 需要重啟</string>
     <string name="preference_edit_controls_title">自訂控制鍵</string>
