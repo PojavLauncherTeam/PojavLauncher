@@ -233,6 +233,7 @@
     <string name="preference_experimental_description">Folosește aceste setări cu atenție, fără ajutor.</string>
     <string name="preference_sustained_performance_title">Activează modul de performanță susținută</string>
     <string name="preference_sustained_performance_description">Reduce limitarea termică prin limitarea performanțelor de vârf</string>
+    <string name="preference_force_vsync_description">Reduce limitarea termică prin limitarea performanțelor de vârf</string>
     <string name="preference_back_title">Înapoi la ultimul ecran</string>
     <string name="gles_hack_title">GL4ES Shrink hack</string>
     <string name="gles_hack_none">Nu se micșorează texturi</string>
