@@ -192,7 +192,7 @@ public class MicrosoftBackgroundLogin {
     }
 
     /** @return [uhs, token]*/
-    private String[] acquireXsts(String xblToken) throws IOException, JSONException, PresentedException {
+    private String[] acquireXsts(String xblToken) throws IOException, JSONException {
         URL url = new URL(xstsAuthUrl);
 
         JSONObject data = new JSONObject();
@@ -268,7 +268,7 @@ public class MicrosoftBackgroundLogin {
         return null;
     }
 
-    private void checkMcProfile(String mcAccessToken) throws IOException, JSONException, PresentedException {
+    private void checkMcProfile(String mcAccessToken) throws IOException, JSONException {
         URL url = new URL(mcProfileUrl);
 
         HttpURLConnection conn = (HttpURLConnection)url.openConnection();
@@ -309,7 +309,7 @@ public class MicrosoftBackgroundLogin {
 
 
     /** Set common properties, and enable interactivity if desired */
-    private static void setCommonProperties(HttpURLConnection conn, String formData, boolean interactive){
+    private static void setCommonProperties(HttpURLConnection conn, String formData, boolean interactive) {
         conn.setRequestProperty("Content-Type", "application/json");
         conn.setRequestProperty("Accept", "application/json");
         conn.setRequestProperty("charset", "utf-8");
@@ -341,6 +341,9 @@ public class MicrosoftBackgroundLogin {
 
     private void throwResponseError(HttpURLConnection conn) throws IOException {
         Log.i("MicrosoftLogin", "Error code: " + conn.getResponseCode() + ": " + conn.getResponseMessage());
+        if(conn.getResponseCode() == 429) {
+            throw new PresentedException(R.string.microsoft_login_retry_later);
+        }
         throw new RuntimeException(conn.getResponseMessage());
     }
 }

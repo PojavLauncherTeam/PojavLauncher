@@ -2,7 +2,7 @@ package net.kdt.pojavlaunch.authenticator.microsoft;
 
 import android.content.Context;
 
-public class PresentedException extends Exception {
+public class PresentedException extends RuntimeException {
     final int localizationStringId;
     final Object[] extraArgs;
 
