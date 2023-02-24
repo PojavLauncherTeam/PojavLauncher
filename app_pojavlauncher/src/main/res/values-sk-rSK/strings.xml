@@ -236,6 +236,7 @@
     <string name="preference_experimental_description">Používajte tieto veci s uvážením, nepodporujeme.</string>
     <string name="preference_sustained_performance_title">Zapnúť režim trvalého výkonu</string>
     <string name="preference_sustained_performance_description">Umožňuje pokles teploty zariadenia pomocou limitovania výkonu</string>
+    <string name="preference_force_vsync_description">Umožňuje pokles teploty zariadenia pomocou limitovania výkonu</string>
     <string name="preference_force_english_title">Vynútiť angličtinu</string>
     <string name="preference_force_english_description">Umožňuje vidieť pôvodné názvy nastavení a iné názvy tak, ako boli pôvodne navrhnuté vývojármi. Na nastavenie je nutný reštart aplikácie</string>
     <string name="preference_back_title">Späť na poslednú stránku</string>
