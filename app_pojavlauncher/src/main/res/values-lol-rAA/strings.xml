@@ -224,6 +224,7 @@
     <string name="preference_experimental_description">Use things thar wif considerashun, no support.</string>
     <string name="preference_sustained_performance_title">Enable sustaind performance mode</string>
     <string name="preference_sustained_performance_description">Limit thermal thrittlin by limitin peak performance</string>
+    <string name="preference_force_vsync_description">Limit thermal thrittlin by limitin peak performance</string>
     <string name="preference_back_title">Bak 2 teh last screen</string>
     <string name="gles_hack_title">GL4ES Shrink heck</string>
     <string name="gles_hack_none">Doan shrink texturez</string>
