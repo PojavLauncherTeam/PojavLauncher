@@ -235,6 +235,7 @@
     <string name="preference_experimental_description">استخدام الأشياء هناك مع الحذر، لا يوجد مساعده او دعم.</string>
     <string name="preference_sustained_performance_title">تمكين وضع الأداء المستقر</string>
     <string name="preference_sustained_performance_description">الحد من الاختناق الحراري عن طريق الحد من أداء الذروة</string>
+    <string name="preference_force_vsync_description">الحد من الاختناق الحراري عن طريق الحد من أداء الذروة</string>
     <string name="preference_back_title">العودة إلى الشاشة الأخيرة</string>
     <string name="gles_hack_title">GL4ES Shrink hack</string>
     <string name="gles_hack_none">لا تقلص Textures</string>
