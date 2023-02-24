@@ -149,6 +149,7 @@
     <string name="preference_misc_description">Versiooniloend ja teekide kontrollid</string>
     <string name="preference_sustained_performance_title">Jätkusuutliku jõudluse režiimi sisselülitamine</string>
     <string name="preference_sustained_performance_description">Vähenda termilist aeglustamist, piirates tippjõudlust</string>
+    <string name="preference_force_vsync_description">Vähenda termilist aeglustamist, piirates tippjõudlust</string>
     <string name="preference_force_english_title">Sunni inglise keele kasutus</string>
     <string name="preference_force_english_description">Võimaldab sul näha originaalseid väljendeid, nagu arendajad need loonud on. Nõuab taaskäivitust</string>
     <string name="preference_category_virtual_mouse">Virtuaalne hiir</string>
