@@ -251,6 +251,8 @@
     <string name="preference_experimental_description">Benutze diese Einstellungen mit Bedacht, wir leisten keinen Support für diese Features.</string>
     <string name="preference_sustained_performance_title">Dauerhaften Leistungsmodus aktivieren</string>
     <string name="preference_sustained_performance_description">Begrenzung der thermischen Drosselung durch Begrenzung der Spitzenleistung</string>
+    <string name="preference_force_vsync_title">Erzwinge vsync</string>
+    <string name="preference_force_vsync_description">Begrenzung der thermischen Drosselung durch Begrenzung der Spitzenleistung</string>
     <string name="preference_force_english_title">Englische Sprache erzwingen</string>
     <string name="preference_force_english_description">Ermöglicht es dir, die ursprünglichen Texte zu sehen, wie sie von Entwicklern vorgesehen sind. Benötigt einen Neustart</string>
     <string name="preference_edit_controls_title">Benutzerdefinierte Steuerung bearbeiten</string>
@@ -308,4 +310,5 @@
     <string name="toast_turn_on_gyro">Aktiviere zuerst die Gyro-Steuerung, um dies zu verwenden!</string>
     <string name="preference_gyro_sample_rate_title">Gyroskop-Abtastrate</string>
     <string name="preference_gyro_sample_rate_description">Wenn du Performanceprobleme mit der Gyroskop-Steuerung hast, erhöhe diese Einstellung</string>
+    <string name="microsoft_login_retry_later">Zu viele Anfragen – bitte versuche es später erneut.</string>
 </resources>
