@@ -242,6 +242,7 @@
     <string name="preference_experimental_description">از چیزهایی که در آنجا هست با ملاحظه استفاده کنید، بدون پشتیبانی.</string>
     <string name="preference_sustained_performance_title">حالت عملکرد پایدار را فعال کنید</string>
     <string name="preference_sustained_performance_description">با محدود کردن عملکرد اوج، فشار حرارتی را محدود کنید</string>
+    <string name="preference_force_vsync_description">با محدود کردن عملکرد اوج، فشار حرارتی را محدود کنید</string>
     <string name="preference_force_english_title">اجبار کردن به زبان انگلیسی</string>
     <string name="preference_force_english_description">به شما امکان می دهد رشته های اصلی را همانطور که توسعه دهندگان در نظر گرفته اند مشاهده کنید. نیاز به راه‌اندازی مجدد دارد</string>
     <string name="preference_edit_controls_title">ویرایش کنترل های شخصی</string>
