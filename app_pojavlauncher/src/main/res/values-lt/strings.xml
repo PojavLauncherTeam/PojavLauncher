@@ -233,6 +233,7 @@
     <string name="preference_experimental_description">Naudokite šiuos dalykus atsargiai, jokio palaikymo.</string>
     <string name="preference_sustained_performance_title">Įjungti nuolatinio našumo režimą</string>
     <string name="preference_sustained_performance_description">Apriboti terminį limitą limituojant didžiausią našumą</string>
+    <string name="preference_force_vsync_description">Apriboti terminį limitą limituojant didžiausią našumą</string>
     <string name="preference_back_title">Atgal į paskutinį ekraną</string>
     <string name="gles_hack_title">GL4ES mažinimo modifikacija</string>
     <string name="gles_hack_none">Nemažinti tekstūrų</string>
