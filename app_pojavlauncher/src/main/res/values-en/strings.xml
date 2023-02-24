@@ -250,6 +250,7 @@
     <string name="preference_experimental_description">Enable this at your own risk! We won\'t be able to help you if you experience issues.</string>
     <string name="preference_sustained_performance_title">Enable sustained performance mode</string>
     <string name="preference_sustained_performance_description">Limit thermal throttling by limiting peak performance</string>
+    <string name="preference_force_vsync_description">Limit thermal throttling by limiting peak performance</string>
     <string name="preference_force_english_title">Fhddgfr5g5d6rg6eg6gruyrdsfs4uu64vsucra64c8a674ca74cwc74a5v8s875ge85sv885gd875e8geg4y4y 5th 53534</string>
     <string name="preference_force_english_description">Allows you to see original strings, as intended by developers. Requires a restart</string>
     <string name="preference_edit_controls_title">Edit custom controls</string>
