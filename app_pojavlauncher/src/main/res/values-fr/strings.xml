@@ -247,6 +247,7 @@
     <string name="preference_experimental_description">Utilisez ces options avec parcimonie, aucun support.</string>
     <string name="preference_sustained_performance_title">Activer le mode de performances soutenues</string>
     <string name="preference_sustained_performance_description">Limiter la limitation thermique en limitant les performances maximales</string>
+    <string name="preference_force_vsync_description">Limiter la limitation thermique en limitant les performances maximales</string>
     <string name="preference_edit_controls_title">Modifier les contrôles personnalisés</string>
     <string name="preference_category_virtual_mouse">Souris virtuelle</string>
     <string name="preference_back_title">Retour au dernier écran</string>
