@@ -251,6 +251,7 @@
     <string name="preference_experimental_description">这里的内容是不受支持的。</string>
     <string name="preference_sustained_performance_title">启用持续性能模式</string>
     <string name="preference_sustained_performance_description">通过限制峰值性能来限制过热降频</string>
+    <string name="preference_force_vsync_description">通过限制峰值性能来限制过热降频</string>
     <string name="preference_force_english_title">强制使用英文</string>
     <string name="preference_force_english_description">允许您按开发者的原意看到原始字符串。此操作需要重启</string>
     <string name="preference_edit_controls_title">编辑自定义控制按键</string>
