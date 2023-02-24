@@ -231,6 +231,7 @@ Dá-te uma experiência de tela cheia melhorada.</string>
     <string name="preference_experimental_description">Use estas coisas com consideração, sem suporte.</string>
     <string name="preference_sustained_performance_title">Habilitar modo de desempenho constante</string>
     <string name="preference_sustained_performance_description">Limitar a Redução Térmica limitando o pico do desempenho</string>
+    <string name="preference_force_vsync_description">Limitar a Redução Térmica limitando o pico do desempenho</string>
     <string name="preference_back_title">Voltar à tela anterior</string>
     <string name="gles_hack_title">Hack de Redução do GL4ES</string>
     <string name="gles_hack_none">Não diminuir texturas</string>
