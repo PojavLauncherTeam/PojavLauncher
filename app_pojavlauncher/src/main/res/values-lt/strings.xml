@@ -82,11 +82,17 @@
     <string name="mcl_setting_category_general">Pagrindiniai nustatymai</string>
     <string name="mcl_setting_category_scaling">Didinimo nustatymai</string>
     <string name="mcl_setting_category_renderer">Vaizdo generatorius</string>
+    <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (visos versijos, greičiausias)</string>
+    <string name="mcl_setting_renderer_virgl">virglrenderer - (versija, skirta 1.7+, lėčiausias)</string>
+    <string name="mcl_setting_renderer_vgpu">vgpu - (tinka iki 1.16.5, greičiausias)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink - (senoji_beta b1.8+, lėčiausias)</string>
+    <string name="mcl_setting_renderer_angle">ANGLE - (versija 1.17+, vidutinio greitumo)</string>
     <string name="mcl_setting_category_veroption">Versijų tipai bus versijų sąraše</string>
     <string name="mcl_setting_veroption_release">Leidimai</string>
     <string name="mcl_setting_veroption_snapshot">Naujinimai</string>
     <string name="mcl_setting_veroption_oldalpha">Alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Beta</string>
+    <string name="mcl_setting_java_sandbox">Smėlio dežės .jar įdiegtuvas</string>
     <string name="mcl_version_clone">Klonuoti</string>
     <!-- Global strings -->
     <string name="global_edit">Redaguoti</string>
@@ -101,6 +107,7 @@
     <string name="global_unpacking">Išpakuojama %s</string>
     <string name="global_error_field_empty">Šis laukas negali būti tuščias</string>
     <string name="global_waiting">Palaukite</string>
+    <string name="global_select">Pasirinkti</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Applikacija išsijungė su kodu %d, patikrinkite latestlog.txt kad gautumėte detalių.</string>
     <string name="mcn_exit_call">Išeiti</string>
@@ -233,7 +240,10 @@
     <string name="preference_experimental_description">Naudokite šiuos dalykus atsargiai, jokio palaikymo.</string>
     <string name="preference_sustained_performance_title">Įjungti nuolatinio našumo režimą</string>
     <string name="preference_sustained_performance_description">Apriboti terminį limitą limituojant didžiausią našumą</string>
+    <string name="preference_force_vsync_title">Priversti įjungti vSync</string>
     <string name="preference_force_vsync_description">Apriboti terminį limitą limituojant didžiausią našumą</string>
+    <string name="preference_force_english_title">Priversti Anglų kalbą</string>
+    <string name="preference_category_gyro_controls">Gyro kontrolės</string>
     <string name="preference_back_title">Atgal į paskutinį ekraną</string>
     <string name="gles_hack_title">GL4ES mažinimo modifikacija</string>
     <string name="gles_hack_none">Nemažinti tekstūrų</string>
@@ -251,4 +261,5 @@
     <string name="arc_capes_title">\"Cosmetica\" apvalkalai</string>
     <string name="arc_capes_desc">Įjungia apvalkalus iš \"Cosmetica\" (anksčiau \"Arc\"). Daugiau informacijos rasite https://cosmetica.cc. Reikalingas OptiFine.</string>
     <string name="migrated_profile_str">%s versijos konfiguracija</string>
+    <string name="notif_channel_name">Pagrindinis</string>
 </resources>
