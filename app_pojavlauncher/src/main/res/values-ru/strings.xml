@@ -252,6 +252,7 @@
     <string name="preference_experimental_description">Используйте эти функции с осторожностью; поддержка не предоставляется.</string>
     <string name="preference_sustained_performance_title">Включить режим стабилизации производительности</string>
     <string name="preference_sustained_performance_description">Уменьшает тротлинга от нагрева путём уменьшения производительности</string>
+    <string name="preference_force_vsync_title">Принудительная вертикальная синхронизация</string>
     <string name="preference_force_vsync_description">Уменьшает тротлинга от нагрева путём уменьшения производительности</string>
     <string name="preference_force_english_title">Принудительно включить английский</string>
     <string name="preference_force_english_description">Позволяет увидеть оригинальные строки такими, какими их задумали разработчики. Требует перезапуска.</string>
@@ -310,4 +311,5 @@
     <string name="toast_turn_on_gyro">Сначала включите \"Управление наклоном\".</string>
     <string name="preference_gyro_sample_rate_title">Интервал опроса гироскопа</string>
     <string name="preference_gyro_sample_rate_description">Увеличьте, если управление наклоном снижает производительность.</string>
+    <string name="microsoft_login_retry_later">Слишком много запросов, попробуйте ещё раз позднее.</string>
 </resources>
