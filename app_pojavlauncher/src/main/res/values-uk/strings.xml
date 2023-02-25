@@ -251,12 +251,18 @@
     <string name="preference_experimental_description">Використовуйте речі з увагою, підтримка недоступна.</string>
     <string name="preference_sustained_performance_title">Увімкнути режим постійної продуктивности</string>
     <string name="preference_sustained_performance_description">Обмежте терморегуляцію, обмеживши пікову продуктивність</string>
+    <string name="preference_force_vsync_title">Примусова вертикальна синхронізація</string>
     <string name="preference_force_vsync_description">Обмежте терморегуляцію, обмеживши пікову продуктивність</string>
     <string name="preference_force_english_title">Примусово перевести мову на англійську</string>
     <string name="preference_force_english_description">Дозволяє бачити оригінальні рядки, як це було задумано розробниками. Вимагає перезавантаження</string>
     <string name="preference_edit_controls_title">Редагувати елементи керування</string>
     <string name="preference_edit_controls_summary">Налаштуйте схему керування на ваше вподобання</string>
+    <string name="preference_category_gyro_controls">Гіроконтроль</string>
     <string name="preference_category_virtual_mouse">Віртуальна миша</string>
+    <string name="preference_gyro_invert_x_axis">Обернути вісь X</string>
+    <string name="preference_gyro_invert_y_axis">Обернути вісь Y</string>
+    <string name="preference_gyro_invert_x_axis_description">Обернути горизонтальну вісь</string>
+    <string name="preference_gyro_invert_y_axis_description">Обернути вертикальну вісь</string>
     <string name="preference_back_title">Повернутися назад</string>
     <string name="gles_hack_title">Скорочення GL4ES</string>
     <string name="gles_hack_none">Не стискати текстури</string>
@@ -304,4 +310,5 @@
     <string name="toast_turn_on_gyro">Увімкніть контроль гіроскопа, перш ніж використовувати це!</string>
     <string name="preference_gyro_sample_rate_title">Частота дискретності Гіроскопа</string>
     <string name="preference_gyro_sample_rate_description">Якщо у вас виникають проблеми з продуктивністю разом з керуванням гіроскопом, то збільшить це</string>
+    <string name="microsoft_login_retry_later">Забагато запитів, повторіть спробу пізніше.</string>
 </resources>
