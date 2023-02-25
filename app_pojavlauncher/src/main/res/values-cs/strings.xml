@@ -251,6 +251,7 @@
     <string name="preference_experimental_description">Používej tyto věci s uvážením, nepodporujeme.</string>
     <string name="preference_sustained_performance_title">Zapnout režim zmenšeného výkonu</string>
     <string name="preference_sustained_performance_description">Limitujíc termální zpomalování, limituje maximální výkon</string>
+    <string name="preference_force_vsync_title">Vynutit zapnutí vsync</string>
     <string name="preference_force_vsync_description">Limitujíc termální zpomalování, limituje maximální výkon</string>
     <string name="preference_force_english_title">Vynutit angličtinu</string>
     <string name="preference_force_english_description">Umožňuje mít originální text, jak byl vymyšlen vývojáři. Vyžaduje restart</string>
@@ -309,4 +310,5 @@
     <string name="toast_turn_on_gyro">Pro použití tohoto zapněte gyroskopové ovládání!</string>
     <string name="preference_gyro_sample_rate_title">Vzorkovací kmitočet gyroskopu</string>
     <string name="preference_gyro_sample_rate_description">Máte-li problémy výkonu, užívajíce gyroskopové ovládání, zvyšte toto</string>
+    <string name="microsoft_login_retry_later">Příliš mnoho požadavků, zkuste to znovu později.</string>
 </resources>
