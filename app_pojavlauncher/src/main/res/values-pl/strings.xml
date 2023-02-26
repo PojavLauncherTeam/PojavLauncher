@@ -236,7 +236,6 @@
     <string name="preference_control_offset_title">Przesunięcia boczne sterowania</string>
     <string name="preference_control_offset_description">Ustaw niestandardowe przesunięcie na każdą stronę ekranu</string>
     <string name="preference_mouse_start_title">Uruchom z włączoną myszą wirtualną</string>
-    <string name="preference_mouse_start_description">Używanie tej opcji naraża Cię na komentarze ze strony Mathiasa-Boulay\'a</string>
     <string name="preference_video_title">Grafika i silnik renderujący</string>
     <string name="preference_video_description">Rozdzielczość, typ skalowania i renderowanie</string>
     <string name="preference_control_title">Sterowanie</string>
