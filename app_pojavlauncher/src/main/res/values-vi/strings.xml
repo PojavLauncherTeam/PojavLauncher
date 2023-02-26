@@ -238,7 +238,6 @@
     <string name="preference_control_offset_title">Khoảng bù trừ theo cạnh của bộ điều khiển</string>
     <string name="preference_control_offset_description">Đặt khoảng bù trừ tuỳ chỉnh cho mỗi cạnh của màn hình</string>
     <string name="preference_mouse_start_title">Khởi động với chuột ảo bật</string>
-    <string name="preference_mouse_start_description">Khi dùng tùy chọn này, bạn sẽ bị *chỉ giáo* bởi Mathias Boulay :)</string>
     <string name="preference_video_title">Hình ảnh và trình kết xuất</string>
     <string name="preference_video_description">Độ phân giải, dạng thu phóng, và trình kết xuất</string>
     <string name="preference_control_title">Tuỳ chỉnh bộ điều khiển</string>
