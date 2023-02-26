@@ -229,7 +229,6 @@
     <string name="preference_control_offset_title">حاشیه کناره های کنترلر</string>
     <string name="preference_control_offset_description">برای هر سمت صفحه یک مقدار حاشیه‌ی سفارشی تنظیم کنید</string>
     <string name="preference_mouse_start_title">شروع با موسِ مجازیِ روشن</string>
-    <string name="preference_mouse_start_description">استفاده از این شما را توسط Mathias-Boulay مورد قضاوت قرار میگیرید</string>
     <string name="preference_video_title">ویدئو و رندر کننده</string>
     <string name="preference_video_description">وضوح(رزولوشن)، نوع بزرگنمایی، و رندر کننده</string>
     <string name="preference_control_title">شخصی سازی کنترلر</string>
