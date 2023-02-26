@@ -238,7 +238,6 @@
     <string name="preference_control_offset_title">조작 사이드 오프셋</string>
     <string name="preference_control_offset_description">화면의 사이드 부분에 사용자 지정 오프셋을 지정합니다</string>
     <string name="preference_mouse_start_title">가상마우스가 켜진 상태로 시작합니다</string>
-    <string name="preference_mouse_start_description">이 옵션을 사용하면 당신은 Mathias-Boulay에 의해 판단될것 입니다</string>
     <string name="preference_video_title">비디오와 렌더러</string>
     <string name="preference_video_description">해상도, 스케일링 타입, 렌더러</string>
     <string name="preference_control_title">사용자 지정 조작</string>
