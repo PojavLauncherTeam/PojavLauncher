@@ -233,7 +233,6 @@
     <string name="preference_control_offset_title">Control de desplazamiento lateral</string>
     <string name="preference_control_offset_description">Establecer un desplazamiento personalizado a cada lado de la pantalla</string>
     <string name="preference_mouse_start_title">Iniciar con el ratón virtual encendido</string>
-    <string name="preference_mouse_start_description">Usando esta opción podrás ser juzgado por Mathias-Boulay</string>
     <string name="preference_video_title">Video y renderizador</string>
     <string name="preference_video_description">Resolución, tipo de escalado y renderizador</string>
     <string name="preference_control_title">Personalización del control</string>
