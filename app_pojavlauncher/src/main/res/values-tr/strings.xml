@@ -239,7 +239,6 @@
     <string name="preference_control_offset_title">Kontrol köşe uzaklıkları</string>
     <string name="preference_control_offset_description">Ekranın her köşesine özel uzaklık ayarla</string>
     <string name="preference_mouse_start_title">Sanal fare açık olarak başla</string>
-    <string name="preference_mouse_start_description">Bu seçeneği kullanmak Mathias-Boulay tarafından yargılanmanıza sebep olacaktır</string>
     <string name="preference_video_title">Video ve işleyici</string>
     <string name="preference_video_description">Çözünürlük, ölçekleme türü, ve işleyici</string>
     <string name="preference_control_title">Kontrol özelleştirmesi</string>
