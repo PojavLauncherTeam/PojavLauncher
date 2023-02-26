@@ -184,8 +184,9 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
             minecraftGLView.setSurfaceReadyListener(() -> {
                 try {
                     // Setup virtual mouse right before launching
-                    if (PREF_VIRTUAL_MOUSE_START)
-                        touchpad.switchState();
+                    if (PREF_VIRTUAL_MOUSE_START) {
+                        touchpad.post(() -> touchpad.switchState());
+                    }
 
                     runCraft();
                 }catch (Throwable e){
