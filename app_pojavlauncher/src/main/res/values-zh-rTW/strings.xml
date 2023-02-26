@@ -232,7 +232,6 @@
     <string name="preference_control_offset_title">控制鍵偏移</string>
     <string name="preference_control_offset_description">自訂控制鍵與螢幕兩邊的偏移。</string>
     <string name="preference_mouse_start_title">啟動時開啟虛擬滑鼠</string>
-    <string name="preference_mouse_start_description">(開啟此選項會受到開發者Mathias-Boulay的審判)</string>
     <string name="preference_video_title">顯示設定</string>
     <string name="preference_video_description">解析度縮放和渲染器</string>
     <string name="preference_control_title">自定義控制</string>
