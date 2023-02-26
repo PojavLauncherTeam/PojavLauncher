@@ -212,7 +212,6 @@
     <string name="storage_warning_title">שינויי אחסון</string>
     <string name="storage_warning_text"><![CDATA[בשל אכיפות האחסון החדשות של Google שנוספו ב- Android 10 ואילך, עלינו להעביר את ספריית המשחק לתיקייה פרטית לאפליקציות.<br /> התיקיה החדשה לקובצי Pojav היא <b>Android/data/%s/files/</b> (נגיש גם באמצעות ספק אחסון בסייר הקבצים שלך).<br /> אם אתה צריך להעתיק את קבצי המשחק שלך, העתק הכל מהתיקיה המקורית ב <b>games/PojavLauncher</b> באופן ידני.]]></string>
     <string name="preference_mouse_start_title">התחל עם עכבר וירטואלי מופעל</string>
-    <string name="preference_mouse_start_description">בעת השימוש באפשרות זו, \"תישפטו\" ע\"י Mathias-Boulay</string>
     <string name="preference_video_title">וידאו ועיבוד</string>
     <string name="preference_video_description">רזולוציה, סוג קנה מידה, ומעבד (וידאו)</string>
     <string name="preference_control_title">התאמה אישית של פקדים</string>
