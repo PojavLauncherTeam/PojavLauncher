@@ -235,7 +235,6 @@
     <string name="preference_control_offset_title">Marges sur les contrôles</string>
     <string name="preference_control_offset_description">Définir une marge personnalisé pour chaque côté de l\'écran</string>
     <string name="preference_mouse_start_title">Démarrer avec la souris virtuelle activée</string>
-    <string name="preference_mouse_start_description">Utiliser cette option vous fera être jugé par Mathias-Boulay</string>
     <string name="preference_video_title">Vidéo et moteur de rendu</string>
     <string name="preference_video_description">Résolution, mise à échelle et moteur de rendu</string>
     <string name="preference_control_title">Contrôlez la customisation</string>
