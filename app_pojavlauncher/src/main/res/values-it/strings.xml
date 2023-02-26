@@ -238,7 +238,6 @@
     <string name="preference_control_offset_title">Controlli offset laterali</string>
     <string name="preference_control_offset_description">Imposta un offset personalizza ad ogni lato dello schermo</string>
     <string name="preference_mouse_start_title">Inizia con il mouse virtuale attivo</string>
-    <string name="preference_mouse_start_description">Utilizzando questa opzione sarai giudicato da Mathias-Boulay</string>
     <string name="preference_video_title">Video e render</string>
     <string name="preference_video_description">Risoluzione, scala, e render</string>
     <string name="preference_control_title">Controlla personalizzazioni</string>
