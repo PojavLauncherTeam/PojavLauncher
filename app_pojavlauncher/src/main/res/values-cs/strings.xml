@@ -238,7 +238,6 @@
     <string name="preference_control_offset_title">Strana odsazení ovládání</string>
     <string name="preference_control_offset_description">Nastavit vlastní odsazení na každou stranu obrazovky</string>
     <string name="preference_mouse_start_title">Spouštět s zapnutou virtuální myší</string>
-    <string name="preference_mouse_start_description">Užívaje této možnosti, budeš souzen Mathiasem-Boulayem</string>
     <string name="preference_video_title">Video a vykreslovač</string>
     <string name="preference_video_description">Rozlišení, typ škálování, a vykreslovač</string>
     <string name="preference_control_title">Přizpůsobení ovládání</string>
