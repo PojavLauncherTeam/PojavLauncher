@@ -224,7 +224,6 @@
     <string name="preference_control_offset_title">Strana odsadenie ovládania</string>
     <string name="preference_control_offset_description">Nastaviť vlastné odsadenie pre každú stranu obrazovky</string>
     <string name="preference_mouse_start_title">Spustiť so zapnutou virtuálnou myškou</string>
-    <string name="preference_mouse_start_description">Používaním tohto nastavenia budete súdení Mathiasom Boulayom</string>
     <string name="preference_video_title">Video a renderer</string>
     <string name="preference_video_description">Rozlíšenie, typ škálovania, a vykresľovač</string>
     <string name="preference_control_title">Ovládanie</string>
