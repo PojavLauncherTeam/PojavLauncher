@@ -239,7 +239,7 @@
     <string name="preference_control_offset_title">Смещение управления</string>
     <string name="preference_control_offset_description">Устанавливает пользовательское смещение для каждой стороны экрана</string>
     <string name="preference_mouse_start_title">Запуск с виртуальной мышью</string>
-    <string name="preference_mouse_start_description">Mathias-Boulay осудит вас, если вы будете использовать эту опцию</string>
+    <string name="preference_mouse_start_description">При запуске игры виртуальная мышь будет включена по умолчанию.</string>
     <string name="preference_video_title">Видео и визуализатор</string>
     <string name="preference_video_description">Разрешение, тип масштабирования и визуализатор</string>
     <string name="preference_control_title">Настройка управления</string>
