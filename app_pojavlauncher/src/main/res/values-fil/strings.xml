@@ -232,7 +232,6 @@
     <string name="preference_control_offset_title">Kontrolin ang mga side offset</string>
     <string name="preference_control_offset_description">Magtakda ng custom na offset sa bawat panig ng screen</string>
     <string name="preference_mouse_start_title">Magsimula sa virtual na mouse</string>
-    <string name="preference_mouse_start_description">Ang paggamit sa opsyong ito ay hahatulan ka ni Mathias-Boulay</string>
     <string name="preference_video_title">Video at renderer</string>
     <string name="preference_video_description">Resolution, scaling type, at renderer</string>
     <string name="preference_control_title">Kontrolin ang customization</string>
