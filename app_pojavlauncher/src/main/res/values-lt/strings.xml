@@ -228,7 +228,6 @@
     <string name="preference_control_offset_title">Controlių šoninis offset\'as</string>
     <string name="preference_control_offset_description">Nustatytį offset\'ą kiekvienai ekrano pusei pasirinktinai</string>
     <string name="preference_mouse_start_title">Pradėti su virtualia įjungta</string>
-    <string name="preference_mouse_start_description">Naudojant šią funkciją būsite nuteistas Mathias-Boulay\'o</string>
     <string name="preference_video_title">Vaizdas</string>
     <string name="preference_video_description">Rezoliucija, skalių tipas ir vaizdavimas</string>
     <string name="preference_control_title">Kontrolių redagavimas</string>
