@@ -234,7 +234,6 @@
     <string name="preference_control_offset_title">Deslocamento lateral dos controles</string>
     <string name="preference_control_offset_description">Defina um deslocamento personalizado para cada lado da tela</string>
     <string name="preference_mouse_start_title">Iniciar com o mouse virtual ligado</string>
-    <string name="preference_mouse_start_description">Usando esta opção fará com que você seja julgado pelo Mathias-Boulay</string>
     <string name="preference_video_title">Vídeo e renderizador</string>
     <string name="preference_video_description">Resolução, tipo de escala e renderizador</string>
     <string name="preference_control_title">Personalização dos controles</string>
