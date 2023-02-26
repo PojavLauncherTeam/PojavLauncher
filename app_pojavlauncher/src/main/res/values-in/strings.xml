@@ -234,7 +234,6 @@
     <string name="preference_control_offset_title">Kontrol sisi offset</string>
     <string name="preference_control_offset_description">Atur offset khusus ke setiap sisi layar</string>
     <string name="preference_mouse_start_title">Mulai dengan mouse virtual nyala</string>
-    <string name="preference_mouse_start_description">Menggunakan opsi ini akan membuat anda dihakimi oleh Mathias-Boulay</string>
     <string name="preference_video_title">Video dan renderer</string>
     <string name="preference_video_description">Resolusi, jenis penskalaan, dan renderer</string>
     <string name="preference_control_title">Kustomisasi kontrol</string>
