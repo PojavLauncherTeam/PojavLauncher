@@ -223,7 +223,6 @@
     <string name="preference_control_offset_title">التحكم في التعويضات الجنبيه</string>
     <string name="preference_control_offset_description">قم بتعيين إزاحة مخصصة لكل جانب من الشاشة</string>
     <string name="preference_mouse_start_title">البَدْء بالفأرة الافتراضية مشغله</string>
-    <string name="preference_mouse_start_description">استخدام هذا الخيار سيحصلك على الحكم من قبل ماثياس بولاي</string>
     <string name="preference_video_title">الفيديو والعرض</string>
     <string name="preference_video_description">الاستدانة، نوع التوسيع، والعرض</string>
     <string name="preference_control_title">تخصيص التحكم</string>
