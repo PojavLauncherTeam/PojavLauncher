@@ -226,7 +226,6 @@
     <string name="preference_control_offset_title">オフセットを制御する</string>
     <string name="preference_control_offset_description">画面のそれぞれの側にカスタムオフセットを設定します</string>
     <string name="preference_mouse_start_title">仮想マウスをオンにして開始</string>
-    <string name="preference_mouse_start_description">このオプションを使用すると、Mathias-Boulayはあなたの人生に疑問を投げかけようとします</string>
     <string name="preference_video_title">ビデオとレンダラー</string>
     <string name="preference_video_description">解像度、スケーリングタイプ、レンダラー</string>
     <string name="preference_control_title">制御のカスタマイズ</string>
