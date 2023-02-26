@@ -262,7 +262,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
 
             // Enable Caciocavallo
             JREUtils.jreReleaseList = JREUtils.readJREReleaseProperties(LauncherPreferences.PREF_DEFAULT_RUNTIME);
-            Tools.getCacioJavaArgs(javaArgList,JREUtils.jreReleaseList.get("JAVA_VERSION").equals("1.8.0"));
+            Tools.getCacioJavaArgs(javaArgList,JREUtils.jreReleaseList.get("JAVA_VERSION").startsWith("1.8.0"));
             
             if (javaArgs != null) {
                 javaArgList.addAll(Arrays.asList(javaArgs.split(" ")));
