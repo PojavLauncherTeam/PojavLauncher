@@ -54,7 +54,7 @@ public class LauncherPreferences {
     public static boolean PREF_JAVA_SANDBOX = true;
     public static int PREF_SCALE_FACTOR = 100;
     public static boolean PREF_ENALBE_GYRO = false;
-    public static float PREF_GYRO_SENSITIVITY = 100;
+    public static float PREF_GYRO_SENSITIVITY = 1f;
     public static int PREF_GYRO_SAMPLE_RATE = 16;
 
     public static boolean PREF_GYRO_INVERT_X = false;

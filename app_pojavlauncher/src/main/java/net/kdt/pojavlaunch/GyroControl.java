@@ -22,9 +22,13 @@ public class GyroControl implements SensorEventListener, GrabListener{
     private float yFactor;
     private boolean mSwapXY;
 
+    private final float[] mPreviousRotation = new float[16];
+    private final float[] mCurrentRotation = new float[16];
+    private final float[] mAngleDifference = new float[3];
+
     public GyroControl(Context context) {
         mSensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
-        mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+        mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GAME_ROTATION_VECTOR);
         mCorrectionListener = new OrientationCorrectionListener(context);
     }
 
@@ -45,21 +49,25 @@ public class GyroControl implements SensorEventListener, GrabListener{
     }
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
-        if(mShouldHandleEvents && sensorEvent.sensor == mSensor) {
-            float factor = LauncherPreferences.PREF_GYRO_SENSITIVITY;
-            if(!mFirstPass) {
-                factor *= (sensorEvent.timestamp - mPreviousTimestamp) * 0.000001;
-            }else mFirstPass = false;
-            if(mSwapXY) {
-                float interm = sensorEvent.values[0];
-                sensorEvent.values[0] = sensorEvent.values[1];
-                sensorEvent.values[1] = interm;
-            }
-            CallbackBridge.mouseX += sensorEvent.values[0] * factor * xFactor;
-            CallbackBridge.mouseY += sensorEvent.values[1] * factor * yFactor;
-            CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
+        if (!mShouldHandleEvents) return;
+        // Copy the old array content
+        System.arraycopy(mCurrentRotation, 0, mPreviousRotation, 0, 16);
+        SensorManager.getRotationMatrixFromVector(mCurrentRotation, sensorEvent.values);
+
+        if(mFirstPass){  // Setup initial position
+            mFirstPass = false;
             mPreviousTimestamp = sensorEvent.timestamp;
+            return;
         }
+
+        SensorManager.getAngleChange(mAngleDifference, mCurrentRotation, mPreviousRotation);
+        double factor = (sensorEvent.timestamp - mPreviousTimestamp) * 0.000001;
+
+        CallbackBridge.mouseX -= mAngleDifference[mSwapXY ? 2 : 1] * 100 * LauncherPreferences.PREF_GYRO_SENSITIVITY * xFactor * factor;
+        CallbackBridge.mouseY += mAngleDifference[mSwapXY ? 1 : 2] * 100 * LauncherPreferences.PREF_GYRO_SENSITIVITY * yFactor * factor;
+        CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
+
+        mPreviousTimestamp = sensorEvent.timestamp;
     }
 
     @Override
@@ -84,7 +92,7 @@ public class GyroControl implements SensorEventListener, GrabListener{
             if((315 < i && i <= 360) || (i < 45) ) {
                 mSwapXY = true;
                 xFactor = 1;
-                yFactor = -1;
+                yFactor = 1;
             }else if(45 < i && i < 135) {
                 mSwapXY = false;
                 xFactor = 1;
@@ -92,7 +100,7 @@ public class GyroControl implements SensorEventListener, GrabListener{
             }else if(135 < i && i < 225) {
                 mSwapXY = true;
                 xFactor = -1;
-                yFactor = 1;
+                yFactor = -1;
             }else if(225 <  i && i < 315) {
                 mSwapXY = false;
                 xFactor = -1;
