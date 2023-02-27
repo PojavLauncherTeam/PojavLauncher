@@ -238,6 +238,7 @@
     <string name="preference_control_offset_title">Seitliche Verschiebungen steuern</string>
     <string name="preference_control_offset_description">Setzte für jede Seite des Bildschirms eine benutzerdefinierte Verschiebung</string>
     <string name="preference_mouse_start_title">Mit virtueller Maus starten</string>
+    <string name="preference_mouse_start_description">Virtuelle Maus wird beim Start angezeigt, wenn diese Option aktiviert ist</string>
     <string name="preference_video_title">Grafik und Renderer</string>
     <string name="preference_video_description">Auflösung, Skalierungstyp und Renderer</string>
     <string name="preference_control_title">Steuerung anpassen</string>
