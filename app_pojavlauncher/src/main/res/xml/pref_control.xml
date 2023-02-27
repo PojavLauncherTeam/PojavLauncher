@@ -10,7 +10,7 @@
         android:summary="@string/preference_edit_controls_summary"
         app2:icon="@drawable/ic_menu_custom_controls"
         >
-        <intent android:action=".CustomControlsActivity"/>
+        <intent android:targetPackage="net.kdt.pojavlaunch" android:targetClass="net.kdt.pojavlaunch.CustomControlsActivity"/>
     </Preference>
 
     <PreferenceCategory

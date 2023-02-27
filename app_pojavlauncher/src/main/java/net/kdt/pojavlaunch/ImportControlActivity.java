@@ -67,6 +67,10 @@ public class ImportControlActivity extends Activity {
         if(!mHasIntentChanged) return;
         mIsFileVerified = false;
         getUriData();
+        if(mUriData == null) {
+            finishAndRemoveTask();
+            return;
+        }
         mEditText.setText(getNameFromURI(mUriData));
         mHasIntentChanged = false;
 

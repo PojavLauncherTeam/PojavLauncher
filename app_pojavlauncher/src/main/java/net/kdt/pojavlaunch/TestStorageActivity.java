@@ -56,6 +56,10 @@ public class TestStorageActivity extends Activity {
     }
 
     private void exit() {
+        if(!Tools.checkStorageRoot(this)) {
+            startActivity(new Intent(this, MissingStorageActivity.class));
+            return;
+        }
         //Only run them once we get a definitive green light to use storage
         AsyncAssetManager.unpackComponents(this);
         AsyncAssetManager.unpackSingleFiles(this);

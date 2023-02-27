@@ -86,6 +86,26 @@ public final class Tools {
     public static final String LIBNAME_OPTIFINE = "optifine:OptiFine";
     public static final int RUN_MOD_INSTALLER = 2050;
 
+
+    private static File getPojavStorageRoot(Context ctx) {
+        if(SDK_INT >= 29) {
+            return ctx.getExternalFilesDir(null);
+        }else{
+            return new File(Environment.getExternalStorageDirectory(),"games/PojavLauncher");
+        }
+    }
+
+    /**
+     * Checks if the Pojav's storage root is accessible and read-writable
+     * @param context context to get the storage root if it's not set yet
+     * @return true if storage is fine, false if storage is not accessible
+     */
+    public static boolean checkStorageRoot(Context context) {
+        File externalFilesDir = DIR_GAME_HOME  == null ? Tools.getPojavStorageRoot(context) : new File(DIR_GAME_HOME);
+        //externalFilesDir == null when the storage is not mounted if it was obtained with the context call
+        return externalFilesDir != null && Environment.getExternalStorageState(externalFilesDir).equals(Environment.MEDIA_MOUNTED);
+    }
+
     /**
      * Since some constant requires the use of the Context object
      * You can call this function to initialize them.
@@ -94,11 +114,7 @@ public final class Tools {
     public static void initContextConstants(Context ctx){
         DIR_DATA = ctx.getFilesDir().getParent();
         MULTIRT_HOME = DIR_DATA+"/runtimes";
-        if(SDK_INT >= 29) {
-            DIR_GAME_HOME = ctx.getExternalFilesDir(null).getAbsolutePath();
-        }else{
-            DIR_GAME_HOME = new File(Environment.getExternalStorageDirectory(),"games/PojavLauncher").getAbsolutePath();
-        }
+        DIR_GAME_HOME = getPojavStorageRoot(ctx).getAbsolutePath();
         DIR_GAME_NEW = DIR_GAME_HOME + "/.minecraft";
         DIR_HOME_VERSION = DIR_GAME_NEW + "/versions";
         DIR_HOME_LIBRARY = DIR_GAME_NEW + "/libraries";
