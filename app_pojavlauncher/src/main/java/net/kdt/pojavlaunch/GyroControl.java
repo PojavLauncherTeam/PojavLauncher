@@ -5,7 +5,6 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.util.Log;
 import android.view.OrientationEventListener;
 
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
@@ -18,7 +17,6 @@ public class GyroControl implements SensorEventListener, GrabListener{
     private final OrientationCorrectionListener mCorrectionListener;
     private boolean mShouldHandleEvents;
     private boolean mFirstPass;
-    private long mPreviousTimestamp;
     private float xFactor; // -1 or 1 depending on device orientation
     private float yFactor;
     private boolean mSwapXY;
@@ -57,7 +55,6 @@ public class GyroControl implements SensorEventListener, GrabListener{
 
         if(mFirstPass){  // Setup initial position
             mFirstPass = false;
-            mPreviousTimestamp = sensorEvent.timestamp;
             return;
         }
         SensorManager.getAngleChange(mAngleDifference, mCurrentRotation, mPreviousRotation);
@@ -65,8 +62,6 @@ public class GyroControl implements SensorEventListener, GrabListener{
         CallbackBridge.mouseX -= (mAngleDifference[mSwapXY ? 2 : 1] * 1000 * LauncherPreferences.PREF_GYRO_SENSITIVITY * xFactor);
         CallbackBridge.mouseY += (mAngleDifference[mSwapXY ? 1 : 2] * 1000  * LauncherPreferences.PREF_GYRO_SENSITIVITY * yFactor);
         CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
-
-        mPreviousTimestamp = sensorEvent.timestamp;
     }
 
     @Override
