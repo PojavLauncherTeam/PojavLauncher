@@ -350,4 +350,6 @@
     <string name="preference_gyro_sample_rate_description">If you have performance issues with the gyroscope controls, increase this</string>
     <string name="microsoft_login_retry_later">Too many requests, please try again later.</string>
     <string name="storage_required">PojavLauncher requires an attached external storage. Please reconnect your storage and restart the app.</string>
+    <string name="mcl_setting_title_buttonallcaps">Button name all caps</string>
+    <string name="mcl_setting_subtitle_buttonallcaps">Force control button name text to all caps</string>
 </resources>

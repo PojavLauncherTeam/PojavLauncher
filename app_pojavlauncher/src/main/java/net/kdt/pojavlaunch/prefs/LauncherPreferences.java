@@ -62,6 +62,8 @@ public class LauncherPreferences {
     public static boolean PREF_GYRO_INVERT_Y = false;
     public static boolean PREF_FORCE_VSYNC = false;
 
+    public static boolean PREF_BUTTON_ALL_CAPS = true;
+
 
     public static void loadPreferences(Context ctx) {
         //Required for the data folder.
@@ -101,6 +103,7 @@ public class LauncherPreferences {
         PREF_GYRO_INVERT_X = DEFAULT_PREF.getBoolean("gyroInvertX", false);
         PREF_GYRO_INVERT_Y = DEFAULT_PREF.getBoolean("gyroInvertY", false);
         PREF_FORCE_VSYNC = DEFAULT_PREF.getBoolean("force_vsync", false);
+        PREF_BUTTON_ALL_CAPS = DEFAULT_PREF.getBoolean("buttonAllCaps", true);
 
 /*
         if (PREF_CUSTOM_JAVA_ARGS.isEmpty()) {

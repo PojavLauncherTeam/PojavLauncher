@@ -12,6 +12,7 @@ import net.kdt.pojavlaunch.customcontrols.ControlData;
 import net.kdt.pojavlaunch.customcontrols.ControlLayout;
 import net.kdt.pojavlaunch.customcontrols.handleview.*;
 import net.kdt.pojavlaunch.*;
+import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 
 import org.lwjgl.glfw.*;
 
@@ -32,7 +33,7 @@ public class ControlButton extends TextView implements ControlInterface {
         super(layout.getContext());
         mControlLayout = layout;
         setGravity(Gravity.CENTER);
-        setAllCaps(true);
+        setAllCaps(LauncherPreferences.PREF_BUTTON_ALL_CAPS);
         setTextColor(Color.WHITE);
         setPadding(4, 4, 4, 4);
         setTextSize(14); // Nullify the default size setting
