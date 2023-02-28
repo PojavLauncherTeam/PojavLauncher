@@ -89,7 +89,7 @@
         <activity
             android:name=".CustomControlsActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"
-            android:exported="true"
+            android:exported="false"
             android:screenOrientation="sensorLandscape">
             <intent-filter>
                 <action android:name=".CustomControlsActivity" />
