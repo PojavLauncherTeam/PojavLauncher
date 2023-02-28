@@ -89,6 +89,9 @@ public class GyroControl implements SensorEventListener, GrabListener{
 
         @Override
         public void onOrientationChanged(int i) {
+            // Force to wait to be in game before setting factors
+            // Theoretically, one could use the whole interface in portrait...
+            if(!mShouldHandleEvents) return;
             int surfaceRotation = mWindowManager.getDefaultDisplay().getRotation();
             if(surfaceRotation == mSurfaceRotation) return;
 
