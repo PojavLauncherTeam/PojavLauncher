@@ -238,6 +238,7 @@
     <string name="preference_control_offset_title">Зміщення керування</string>
     <string name="preference_control_offset_description">Встановіть користувацьке зміщення для кожної сторони екрану</string>
     <string name="preference_mouse_start_title">Запуск разом з віртуальною мишею</string>
+    <string name="preference_mouse_start_description">Віртуальна Миша з\'являється при запуску коли ця опція увімк.</string>
     <string name="preference_video_title">Відео та візуалізатор</string>
     <string name="preference_video_description">Роздільна здатність, тип масштабування та візуалізатор</string>
     <string name="preference_control_title">Налаштування керування</string>
@@ -310,4 +311,7 @@
     <string name="preference_gyro_sample_rate_title">Частота дискретності Гіроскопа</string>
     <string name="preference_gyro_sample_rate_description">Якщо у вас виникають проблеми з продуктивністю разом з керуванням гіроскопом, то збільшить це</string>
     <string name="microsoft_login_retry_later">Забагато запитів, повторіть спробу пізніше.</string>
+    <string name="storage_required">PojavLauncher потребує прикріпленого зовнішнього сховища. Будь ласка, пере під\'єднайте сховище та перезапустіть додаток.</string>
+    <string name="mcl_setting_title_buttonallcaps">Використовувати лише великі букви на кнопках</string>
+    <string name="mcl_setting_subtitle_buttonallcaps">Вимкніть це, якщо ви хочете використовувати маленькі букви в керуванні</string>
 </resources>
