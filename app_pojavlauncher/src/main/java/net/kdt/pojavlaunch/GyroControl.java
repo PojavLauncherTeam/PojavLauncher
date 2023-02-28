@@ -5,6 +5,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.util.Log;
 import android.view.OrientationEventListener;
 
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
@@ -87,6 +88,9 @@ public class GyroControl implements SensorEventListener, GrabListener{
 
         @Override
         public void onOrientationChanged(int i) {
+            if(i == OrientationEventListener.ORIENTATION_UNKNOWN) {
+                return; //change nothing
+            }
             if((315 < i && i <= 360) || (i < 45) ) {
                 mSwapXY = true;
                 xFactor = 1;
