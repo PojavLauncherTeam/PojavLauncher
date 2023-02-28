@@ -2,7 +2,7 @@
 <com.kdt.DefocusableScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="@dimen/_230sdp"
+    android:layout_width="@dimen/_280sdp"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/background_app"
@@ -58,7 +58,7 @@
 
         <EditText
             android:id="@+id/editSize_editTextX"
-            android:layout_width="140dp"
+            android:layout_width="@dimen/_138sdp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:imeOptions="flagNoExtractUi"

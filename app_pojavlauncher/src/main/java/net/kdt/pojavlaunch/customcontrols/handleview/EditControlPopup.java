@@ -101,7 +101,7 @@ public class EditControlPopup {
 
         mColorSelector = new ColorSelector(context, parent, null);
         mColorSelector.getRootView().setElevation(11);
-        mColorSelector.getRootView().setX(-context.getResources().getDimensionPixelOffset(R.dimen._230sdp));
+        mColorSelector.getRootView().setX(-context.getResources().getDimensionPixelOffset(R.dimen._280sdp));
 
         mEditPopupAnimator = ObjectAnimator.ofFloat(mScrollView, "x", 0).setDuration(1000);
         mColorEditorAnimator = ObjectAnimator.ofFloat(mColorSelector.getRootView(), "x", 0).setDuration(1000);
@@ -110,7 +110,7 @@ public class EditControlPopup {
         mColorEditorAnimator.setInterpolator(decelerate);
 
         mScrollView.setElevation(10);
-        mScrollView.setX(-context.getResources().getDimensionPixelOffset(R.dimen._230sdp));
+        mScrollView.setX(-context.getResources().getDimensionPixelOffset(R.dimen._280sdp));
 
         bindLayout();
         loadAdapter();
