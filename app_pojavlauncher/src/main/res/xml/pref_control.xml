@@ -47,6 +47,12 @@
             app2:seekBarIncrement="5"
             android:icon="@drawable/ic_setting_control_scale"
             />
+        <SwitchPreference
+            android:key="buttonAllCaps"
+            android:defaultValue="true"
+            android:title="@string/mcl_setting_title_buttonallcaps"
+            android:summary="@string/mcl_setting_subtitle_buttonallcaps"
+            />
 
     </PreferenceCategory>
 
