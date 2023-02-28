@@ -59,12 +59,10 @@ public class GyroControl implements SensorEventListener, GrabListener{
             mPreviousTimestamp = sensorEvent.timestamp;
             return;
         }
-
         SensorManager.getAngleChange(mAngleDifference, mCurrentRotation, mPreviousRotation);
-        double factor = (sensorEvent.timestamp - mPreviousTimestamp) * 0.000001;
 
-        CallbackBridge.mouseX -= mAngleDifference[mSwapXY ? 2 : 1] * 100 * LauncherPreferences.PREF_GYRO_SENSITIVITY * xFactor * factor;
-        CallbackBridge.mouseY += mAngleDifference[mSwapXY ? 1 : 2] * 100 * LauncherPreferences.PREF_GYRO_SENSITIVITY * yFactor * factor;
+        CallbackBridge.mouseX -= (mAngleDifference[mSwapXY ? 2 : 1] * 1000 * LauncherPreferences.PREF_GYRO_SENSITIVITY * xFactor);
+        CallbackBridge.mouseY += (mAngleDifference[mSwapXY ? 1 : 2] * 1000  * LauncherPreferences.PREF_GYRO_SENSITIVITY * yFactor);
         CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
 
         mPreviousTimestamp = sensorEvent.timestamp;
