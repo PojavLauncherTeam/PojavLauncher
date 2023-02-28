@@ -1,17 +1,21 @@
 package net.kdt.pojavlaunch;
 
+import android.app.Activity;
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.view.OrientationEventListener;
+import android.view.WindowManager;
 
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 
 import org.lwjgl.glfw.CallbackBridge;
 
 public class GyroControl implements SensorEventListener, GrabListener{
+    private final WindowManager mWindowManager;
+    private int mSurfaceRotation;
     private final SensorManager mSensorManager;
     private final Sensor mSensor;
     private final OrientationCorrectionListener mCorrectionListener;
@@ -25,10 +29,12 @@ public class GyroControl implements SensorEventListener, GrabListener{
     private final float[] mCurrentRotation = new float[16];
     private final float[] mAngleDifference = new float[3];
 
-    public GyroControl(Context context) {
-        mSensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+    public GyroControl(Activity activity) {
+        mWindowManager = activity.getWindowManager();
+        mSurfaceRotation = -10;
+        mSensorManager = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
         mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GAME_ROTATION_VECTOR);
-        mCorrectionListener = new OrientationCorrectionListener(context);
+        mCorrectionListener = new OrientationCorrectionListener(activity);
     }
 
     public void enable() {
@@ -83,9 +89,14 @@ public class GyroControl implements SensorEventListener, GrabListener{
 
         @Override
         public void onOrientationChanged(int i) {
+            int surfaceRotation = mWindowManager.getDefaultDisplay().getRotation();
+            if(surfaceRotation == mSurfaceRotation) return;
+            mSurfaceRotation = surfaceRotation;
+
             if(i == OrientationEventListener.ORIENTATION_UNKNOWN) {
                 return; //change nothing
             }
+
             if((315 < i && i <= 360) || (i < 45) ) {
                 mSwapXY = true;
                 xFactor = 1;
