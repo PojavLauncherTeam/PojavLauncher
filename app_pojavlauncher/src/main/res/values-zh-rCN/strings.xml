@@ -311,4 +311,7 @@
     <string name="preference_gyro_sample_rate_title">陀螺仪采样率</string>
     <string name="preference_gyro_sample_rate_description">如果您在陀螺仪控制上遇到性能问题，请增加此值</string>
     <string name="microsoft_login_retry_later">您的操作过于频繁，请稍后再试</string>
+    <string name="storage_required">PojavLauncher 需要连接外部存储。请重新连接存储并重新启动应用程序。</string>
+    <string name="mcl_setting_title_buttonallcaps">在按钮标签中仅使用大写字母</string>
+    <string name="mcl_setting_subtitle_buttonallcaps">如果您想在控件中使用小写字母，请禁用此功能</string>
 </resources>
