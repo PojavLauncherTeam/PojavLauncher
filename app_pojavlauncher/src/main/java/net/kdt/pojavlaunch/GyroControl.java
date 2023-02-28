@@ -91,11 +91,11 @@ public class GyroControl implements SensorEventListener, GrabListener{
         public void onOrientationChanged(int i) {
             int surfaceRotation = mWindowManager.getDefaultDisplay().getRotation();
             if(surfaceRotation == mSurfaceRotation) return;
-            mSurfaceRotation = surfaceRotation;
 
             if(i == OrientationEventListener.ORIENTATION_UNKNOWN) {
                 return; //change nothing
             }
+            mSurfaceRotation = surfaceRotation;
 
             if((315 < i && i <= 360) || (i < 45) ) {
                 mSwapXY = true;
