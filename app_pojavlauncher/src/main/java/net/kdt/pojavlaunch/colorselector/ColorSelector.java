@@ -160,6 +160,7 @@ public class ColorSelector implements HueSelectionListener, RectangleSelectionLi
     public void setAlphaEnabled(boolean alphaEnabled){
         mAlphaEnabled = alphaEnabled;
         mAlphaView.setVisibility(alphaEnabled ? View.VISIBLE : View.GONE);
+        mAlphaView.setAlpha(255);
     }
 
     private void notifyColorSelector(int color){

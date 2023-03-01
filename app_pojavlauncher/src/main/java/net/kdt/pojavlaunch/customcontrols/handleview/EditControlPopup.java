@@ -8,6 +8,7 @@ import static net.kdt.pojavlaunch.Tools.currentDisplayMetrics;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -168,8 +169,7 @@ public class EditControlPopup {
         }
 
         mDisplayingColor = true;
-        if(color != -1)
-            mColorSelector.show(color);
+        mColorSelector.show(color == -1 ? Color.WHITE : color);
     }
 
     /** Slide out the layout */
