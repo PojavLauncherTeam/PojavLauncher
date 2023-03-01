@@ -109,8 +109,8 @@ public class ControlButton extends TextView implements ControlInterface {
             case MotionEvent.ACTION_MOVE:
                 //Send the event to be taken as a mouse action
                 if(getProperties().passThruEnabled && CallbackBridge.isGrabbing()){
-                    MinecraftGLSurface v = getControlLayoutParent().findViewById(R.id.main_game_render_view);
-                    if (v != null) v.dispatchTouchEvent(event);
+                    View gameSurface = getControlLayoutParent().getGameSurface();
+                    if(gameSurface != null) gameSurface.dispatchTouchEvent(event);
                 }
 
                 //If out of bounds
@@ -149,8 +149,8 @@ public class ControlButton extends TextView implements ControlInterface {
             case MotionEvent.ACTION_CANCEL: // 3
             case MotionEvent.ACTION_POINTER_UP: // 6
                 if(getProperties().passThruEnabled){
-                    MinecraftGLSurface v = getControlLayoutParent().findViewById(R.id.main_game_render_view);
-                    if (v != null) v.dispatchTouchEvent(event);
+                    View gameSurface = getControlLayoutParent().getGameSurface();
+                    if(gameSurface != null) gameSurface.dispatchTouchEvent(event);
                 }
                 if(mIsPointerOutOfBounds) getControlLayoutParent().onTouch(this, event);
                 mIsPointerOutOfBounds = false;

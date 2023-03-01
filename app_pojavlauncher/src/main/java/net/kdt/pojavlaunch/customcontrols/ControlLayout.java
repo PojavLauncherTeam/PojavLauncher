@@ -26,6 +26,8 @@ import net.kdt.pojavlaunch.prefs.*;
 
 public class ControlLayout extends FrameLayout {
 	protected CustomControls mLayout;
+	/* Accessible when inside the game by ControlInterface implementations, cached for perf. */
+	private MinecraftGLSurface mGameSurface = null;
 	private boolean mModifiable = false;
 	private CustomControlsActivity mActivity;
 	private boolean mControlVisible = false;
@@ -385,5 +387,13 @@ public class ControlLayout extends FrameLayout {
 
 	public void notifyAppMenu() {
 		if(mMenuListener != null) mMenuListener.onClickedMenu();
+	}
+
+	/** Cached getter for perf purposes */
+	public MinecraftGLSurface getGameSurface(){
+		if(mGameSurface == null){
+			mGameSurface = findViewById(R.id.main_game_render_view);
+		}
+		return mGameSurface;
 	}
 }
