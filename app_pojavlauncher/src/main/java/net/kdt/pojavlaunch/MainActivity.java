@@ -245,9 +245,6 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         super.onResume();
         mIsResuming = true;
         if(mGyroControl != null) mGyroControl.enable();
-        final int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
-        final View decorView = getWindow().getDecorView();
-        decorView.setSystemUiVisibility(uiOptions);
         CallbackBridge.nativeSetWindowAttrib(LwjglGlfwKeycode.GLFW_HOVERED, 1);
     }
 

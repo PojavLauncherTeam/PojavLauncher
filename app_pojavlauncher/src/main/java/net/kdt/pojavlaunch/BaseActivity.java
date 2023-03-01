@@ -46,6 +46,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onPostResume() {
         super.onPostResume();
+        Tools.setFullscreen(this, setFullscreen());
         Tools.ignoreNotch(PREF_IGNORE_NOTCH,this);
     }
 }
