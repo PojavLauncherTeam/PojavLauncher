@@ -238,6 +238,7 @@
     <string name="preference_control_offset_title">Strana odsazení ovládání</string>
     <string name="preference_control_offset_description">Nastavit vlastní odsazení na každou stranu obrazovky</string>
     <string name="preference_mouse_start_title">Spouštět s zapnutou virtuální myší</string>
+    <string name="preference_mouse_start_description">Při spuštění se objeví virtuální myš, je-li tato možnost zapnuta</string>
     <string name="preference_video_title">Video a vykreslovač</string>
     <string name="preference_video_description">Rozlišení, typ škálování, a vykreslovač</string>
     <string name="preference_control_title">Přizpůsobení ovládání</string>
@@ -310,4 +311,7 @@
     <string name="preference_gyro_sample_rate_title">Vzorkovací kmitočet gyroskopu</string>
     <string name="preference_gyro_sample_rate_description">Máte-li problémy výkonu, užívajíce gyroskopové ovládání, zvyšte toto</string>
     <string name="microsoft_login_retry_later">Příliš mnoho požadavků, zkuste to znovu později.</string>
+    <string name="storage_required">PojavLauncher vyžaduje mít připojeno externí úložiště. Prosím znovu připojte své úložiště a restartujte aplikaci.</string>
+    <string name="mcl_setting_title_buttonallcaps">Zobrazovat pouze velká písmena v textě tlačítek</string>
+    <string name="mcl_setting_subtitle_buttonallcaps">Vypněte toto, chcete-li užívat malá písmena ve vlastních ovládání</string>
 </resources>
