@@ -311,4 +311,7 @@
     <string name="preference_gyro_sample_rate_title">Gyroskop-Abtastrate</string>
     <string name="preference_gyro_sample_rate_description">Wenn du Performanceprobleme mit der Gyroskop-Steuerung hast, erhöhe diese Einstellung</string>
     <string name="microsoft_login_retry_later">Zu viele Anfragen – bitte versuche es später erneut.</string>
+    <string name="storage_required">PojavLauncher benötigt einen angeschlossenen externen Speicher. Bitte verbinde deinen Speicher erneut und starte die App neu.</string>
+    <string name="mcl_setting_title_buttonallcaps">Nur Großbuchstaben in Button-Labels verwenden</string>
+    <string name="mcl_setting_subtitle_buttonallcaps">Deaktiviere dies, wenn du Kleinbuchstaben in deinen Steuerelementen verwenden möchtest</string>
 </resources>
