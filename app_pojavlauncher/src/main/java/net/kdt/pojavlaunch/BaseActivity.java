@@ -8,6 +8,12 @@ import net.kdt.pojavlaunch.utils.*;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_IGNORE_NOTCH;
 
 public abstract class BaseActivity extends AppCompatActivity {
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleUtils.setLocale(newBase));
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,8 +35,18 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        if(!Tools.checkStorageRoot(this)) {
+            startActivity(new Intent(this, MissingStorageActivity.class));
+            finish();
+        }
+    }
+
+    @Override
     protected void onPostResume() {
         super.onPostResume();
+        Tools.setFullscreen(this, setFullscreen());
         Tools.ignoreNotch(PREF_IGNORE_NOTCH,this);
     }
 }

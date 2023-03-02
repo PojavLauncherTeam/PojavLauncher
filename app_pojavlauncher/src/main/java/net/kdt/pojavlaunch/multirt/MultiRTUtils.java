@@ -161,7 +161,7 @@ public class MultiRTUtils {
     public static Runtime read(String name) {
         if(sCache.containsKey(name)) return sCache.get(name);
         Runtime returnRuntime;
-        File release = new File(RUNTIME_FOLDER,"/"+name+"/release");
+        File release = new File(RUNTIME_FOLDER,name+"/release");
         if(!release.exists()) {
             return new Runtime(name);
         }

@@ -44,6 +44,17 @@
         app:layout_constraintTop_toBottomOf="@id/custom_control_button"
         />
 
+    <com.kdt.mcgui.LauncherMenuButton
+        android:id="@+id/share_logs_button"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_66sdp"
+        android:background="?android:attr/selectableItemBackground"
+        android:drawableStart="@android:drawable/ic_menu_share"
+        android:text="@string/main_share_logs"
+
+        app:layout_constraintTop_toBottomOf="@id/install_jar_button"
+        />
+
 
     <com.kdt.mcgui.mcVersionSpinner
         android:id="@+id/mc_version_spinner"

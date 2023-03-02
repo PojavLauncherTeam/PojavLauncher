@@ -7,10 +7,12 @@ import android.view.*;
 import android.widget.*;
 
 
+import net.kdt.pojavlaunch.customcontrols.ControlButtonMenuListener;
 import net.kdt.pojavlaunch.customcontrols.ControlData;
 import net.kdt.pojavlaunch.customcontrols.ControlLayout;
 import net.kdt.pojavlaunch.customcontrols.handleview.*;
 import net.kdt.pojavlaunch.*;
+import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 
 import org.lwjgl.glfw.*;
 
@@ -22,16 +24,19 @@ import static org.lwjgl.glfw.CallbackBridge.sendMouseButton;
 public class ControlButton extends TextView implements ControlInterface {
     private final Paint mRectPaint = new Paint();
     protected ControlData mProperties;
+    private final ControlLayout mControlLayout;
 
     protected boolean mIsToggled = false;
     protected boolean mIsPointerOutOfBounds = false;
 
     public ControlButton(ControlLayout layout, ControlData properties) {
         super(layout.getContext());
+        mControlLayout = layout;
         setGravity(Gravity.CENTER);
-        setAllCaps(true);
+        setAllCaps(LauncherPreferences.PREF_BUTTON_ALL_CAPS);
         setTextColor(Color.WHITE);
         setPadding(4, 4, 4, 4);
+        setTextSize(14); // Nullify the default size setting
 
         //setOnLongClickListener(this);
 
@@ -104,8 +109,8 @@ public class ControlButton extends TextView implements ControlInterface {
             case MotionEvent.ACTION_MOVE:
                 //Send the event to be taken as a mouse action
                 if(getProperties().passThruEnabled && CallbackBridge.isGrabbing()){
-                    MinecraftGLSurface v = getControlLayoutParent().findViewById(R.id.main_game_render_view);
-                    if (v != null) v.dispatchTouchEvent(event);
+                    View gameSurface = getControlLayoutParent().getGameSurface();
+                    if(gameSurface != null) gameSurface.dispatchTouchEvent(event);
                 }
 
                 //If out of bounds
@@ -144,8 +149,8 @@ public class ControlButton extends TextView implements ControlInterface {
             case MotionEvent.ACTION_CANCEL: // 3
             case MotionEvent.ACTION_POINTER_UP: // 6
                 if(getProperties().passThruEnabled){
-                    MinecraftGLSurface v = getControlLayoutParent().findViewById(R.id.main_game_render_view);
-                    if (v != null) v.dispatchTouchEvent(event);
+                    View gameSurface = getControlLayoutParent().getGameSurface();
+                    if(gameSurface != null) gameSurface.dispatchTouchEvent(event);
                 }
                 if(mIsPointerOutOfBounds) getControlLayoutParent().onTouch(this, event);
                 mIsPointerOutOfBounds = false;
@@ -182,6 +187,7 @@ public class ControlButton extends TextView implements ControlInterface {
                 sendKeyPress(keycode, CallbackBridge.getCurrentMods(), isDown);
                 CallbackBridge.setModifiers(keycode, isDown);
             }else{
+                Log.i("punjabilauncher", "sendSpecialKey("+keycode+","+isDown+")");
                 sendSpecialKey(keycode, isDown);
             }
         }
@@ -219,6 +225,9 @@ public class ControlButton extends TextView implements ControlInterface {
 
             case ControlData.SPECIALBTN_SCROLLUP:
                 if (!isDown) CallbackBridge.sendScroll(0, -1d);
+                break;
+            case ControlData.SPECIALBTN_MENU:
+                mControlLayout.notifyAppMenu();
                 break;
         }
     }

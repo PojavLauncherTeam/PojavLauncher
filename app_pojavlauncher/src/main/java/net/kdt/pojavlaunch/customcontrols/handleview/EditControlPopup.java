@@ -8,6 +8,7 @@ import static net.kdt.pojavlaunch.Tools.currentDisplayMetrics;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -63,10 +64,13 @@ public class EditControlPopup {
             if(internalChanges) return;
 
             internalChanges = true;
-            if(right != (int)safeParseFloat(mWidthEditText.getText().toString())){
+            int width = (int)(safeParseFloat(mWidthEditText.getText().toString()));
+
+            if(width >= 0 && Math.abs(right - width) > 1){
                 mWidthEditText.setText(String.valueOf(right - left));
             }
-            if(bottom != (int) safeParseFloat(mHeightEditText.getText().toString())){
+            int height = (int)(safeParseFloat(mHeightEditText.getText().toString()));
+            if(height >= 0 && Math.abs(bottom - height) > 1){
                 mHeightEditText.setText(String.valueOf(bottom - top));
             }
 
@@ -98,7 +102,8 @@ public class EditControlPopup {
 
         mColorSelector = new ColorSelector(context, parent, null);
         mColorSelector.getRootView().setElevation(11);
-        mColorSelector.getRootView().setX(-context.getResources().getDimensionPixelOffset(R.dimen._230sdp));
+        mColorSelector.getRootView().setTranslationZ(11);
+        mColorSelector.getRootView().setX(-context.getResources().getDimensionPixelOffset(R.dimen._280sdp));
 
         mEditPopupAnimator = ObjectAnimator.ofFloat(mScrollView, "x", 0).setDuration(1000);
         mColorEditorAnimator = ObjectAnimator.ofFloat(mColorSelector.getRootView(), "x", 0).setDuration(1000);
@@ -107,7 +112,8 @@ public class EditControlPopup {
         mColorEditorAnimator.setInterpolator(decelerate);
 
         mScrollView.setElevation(10);
-        mScrollView.setX(-context.getResources().getDimensionPixelOffset(R.dimen._230sdp));
+        mScrollView.setTranslationZ(10);
+        mScrollView.setX(-context.getResources().getDimensionPixelOffset(R.dimen._280sdp));
 
         bindLayout();
         loadAdapter();
@@ -163,8 +169,7 @@ public class EditControlPopup {
         }
 
         mDisplayingColor = true;
-        if(color != -1)
-            mColorSelector.show(color);
+        mColorSelector.show(color == -1 ? Color.WHITE : color);
     }
 
     /** Slide out the layout */
@@ -211,7 +216,6 @@ public class EditControlPopup {
         mAdapter = new ArrayAdapter<>(mRootView.getContext(), R.layout.item_centered_textview);
         mSpecialArray = ControlData.buildSpecialButtonArray();
         for (int i = 0; i < mSpecialArray.length; i++) {
-            //TODO this will break for sure
             mSpecialArray[i] = "SPECIAL_" + mSpecialArray[i];
         }
         Collections.reverse(Arrays.asList(mSpecialArray));
@@ -386,8 +390,11 @@ public class EditControlPopup {
             public void afterTextChanged(Editable s) {
                 if(internalChanges) return;
 
-                mCurrentlyEditedButton.getProperties().setWidth(safeParseFloat(s.toString()));
-                mCurrentlyEditedButton.updateProperties();
+                float width = safeParseFloat(s.toString());
+                if(width >= 0){
+                    mCurrentlyEditedButton.getProperties().setWidth(width);
+                    mCurrentlyEditedButton.updateProperties();
+                }
             }
         });
 
@@ -401,8 +408,11 @@ public class EditControlPopup {
             public void afterTextChanged(Editable s) {
                 if(internalChanges) return;
 
-                mCurrentlyEditedButton.getProperties().setHeight(safeParseFloat(s.toString()));
-                mCurrentlyEditedButton.updateProperties();
+                float height = safeParseFloat(s.toString());
+                if(height >= 0){
+                    mCurrentlyEditedButton.getProperties().setHeight(height);
+                    mCurrentlyEditedButton.updateProperties();
+                }
             }
         });
 
@@ -522,7 +532,7 @@ public class EditControlPopup {
     }
 
     private float safeParseFloat(String string){
-        float out = 10; // 10 px as a fallback
+        float out = -1; // -1
         try {
             out = Float.parseFloat(string);
         }catch (NumberFormatException e){

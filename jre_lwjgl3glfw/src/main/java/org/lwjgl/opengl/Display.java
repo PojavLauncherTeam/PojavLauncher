@@ -82,6 +82,7 @@ public class Display {
 
         mode = desktopDisplayMode = new DisplayMode(monitorWidth, monitorHeight, monitorBitPerPixel, monitorRefreshRate);
         LWJGLUtil.log("Initial mode: " + desktopDisplayMode);
+        if("opengles2".equals(System.getenv("POJAV_RENDERER"))) GLContext.initCapabilities();
     }
     
     public static void setSwapInterval(int value) {
@@ -416,7 +417,7 @@ public class Display {
 
         //glfwSwapInterval(0);
         glfwShowWindow(Window.handle);
-
+        if(parent != null) parent.setSize(displayWidth, displayHeight);
         Mouse.create();
         Keyboard.create();
 
@@ -953,7 +954,7 @@ public class Display {
     }
 
     public static void setResizable(boolean resizable) {
-        displayResizable = resizable;
+        //displayResizable = resizable;
         if (displayResizable ^ resizable) {
             if (Window.handle != 0) {
                 IntBuffer width = BufferUtils.createIntBuffer(1);

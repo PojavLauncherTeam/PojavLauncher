@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
 
 
-        android:layout_marginHorizontal="15dp"
+        android:layout_marginHorizontal="@dimen/_15sdp"
         android:background="@drawable/menu_background"
         android:paddingVertical="20dp"
         app:layout_constraintBottom_toBottomOf="parent"

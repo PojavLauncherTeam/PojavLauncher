@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="@dimen/_230sdp"
+    android:layout_width="@dimen/_280sdp"
     android:layout_height="match_parent"
     android:background="@color/background_app"
     android:paddingHorizontal="@dimen/_5sdp"
@@ -14,7 +14,7 @@
     <net.kdt.pojavlaunch.colorselector.SVRectangleView
         android:id="@+id/color_selector_rectangle_view"
         android:layout_width="0dp"
-        android:layout_height="150dp"
+        android:layout_height="@dimen/_150sdp"
         android:focusable="true"
         android:layout_marginEnd="8dp"
 
@@ -25,7 +25,7 @@
     <net.kdt.pojavlaunch.colorselector.ColorSideBySideView
         android:id="@+id/color_selector_color_view"
         android:layout_width="0dp"
-        android:layout_height="94dp"
+        android:layout_height="@dimen/_94sdp"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="@+id/color_selector_rectangle_view"
         app:layout_constraintStart_toStartOf="@+id/color_selector_rectangle_view"
@@ -39,7 +39,7 @@
         android:gravity="center"
         android:importantForAutofill="no"
         android:inputType="text"
-        android:minHeight="48dp"
+        android:minHeight="@dimen/_48sdp"
         android:typeface="monospace"
         app:layout_constraintEnd_toEndOf="@+id/color_selector_color_view"
         app:layout_constraintStart_toStartOf="@+id/color_selector_color_view"

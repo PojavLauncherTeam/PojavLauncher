@@ -5,17 +5,22 @@ import com.google.gson.JsonSyntaxException;
 import net.kdt.pojavlaunch.LwjglGlfwKeycode;
 import net.kdt.pojavlaunch.Tools;
 
+import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.lwjgl.glfw.CallbackBridge;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class LayoutConverter {
     public static boolean convertLookType = false; //false = flat; true = classic
     public static CustomControls loadAndConvertIfNecessary(String jsonPath) throws IOException, JsonSyntaxException {
+
         String jsonLayoutData = Tools.read(jsonPath);
         try {
             JSONObject layoutJobj = new JSONObject(jsonLayoutData);

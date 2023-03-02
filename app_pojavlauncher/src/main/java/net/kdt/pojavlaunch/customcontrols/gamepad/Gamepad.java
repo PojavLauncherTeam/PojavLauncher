@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.math.MathUtils;
 
+import net.kdt.pojavlaunch.GrabListener;
 import net.kdt.pojavlaunch.LwjglGlfwKeycode;
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
@@ -37,7 +38,7 @@ import static net.kdt.pojavlaunch.utils.MCOptionUtils.getMcScale;
 import static org.lwjgl.glfw.CallbackBridge.sendKeyPress;
 import static org.lwjgl.glfw.CallbackBridge.sendMouseButton;
 
-public class Gamepad {
+public class Gamepad implements GrabListener {
 
     /* Resolution scaler option, allow downsizing a window */
     private final float mScaleFactor = LauncherPreferences.DEFAULT_PREF.getInt("resolutionRatio",100)/100f;
@@ -67,7 +68,8 @@ public class Gamepad {
     private final GamepadMap mMenuMap = GamepadMap.getDefaultMenuMap();
     private GamepadMap mCurrentMap = mGameMap;
 
-    private boolean mLastGrabbingState = true;
+    // The negation is to force trigger the onGrabState
+    private boolean isGrabbing = !CallbackBridge.isGrabbing();
     //private final boolean mModifierDigitalTriggers;
     private final boolean mModifierAnalogTriggers;
     private boolean mModifierSwappedAxis = true; //Triggers and right stick axis are swapped.
@@ -84,7 +86,6 @@ public class Gamepad {
         Choreographer.FrameCallback frameCallback = new Choreographer.FrameCallback() {
             @Override
             public void doFrame(long frameTimeNanos) {
-                updateGrabbingState();
                 tick(frameTimeNanos);
                 mScreenChoreographer.postFrameCallback(this);
             }
@@ -129,6 +130,8 @@ public class Gamepad {
         placePointerView(CallbackBridge.physicalWidth/2, CallbackBridge.physicalHeight/2);
 
         ((ViewGroup)contextView.getParent()).addView(mPointerImageView);
+
+        CallbackBridge.addGrabListener(this);
     }
 
 
@@ -278,7 +281,7 @@ public class Gamepad {
     private void tick(long frameTimeNanos){
         //update mouse position
         if(mLastHorizontalValue != 0 || mLastVerticalValue != 0){
-            GamepadJoystick currentJoystick = mLastGrabbingState ? mLeftJoystick : mRightJoystick;
+            GamepadJoystick currentJoystick = isGrabbing ? mLeftJoystick : mRightJoystick;
 
             double acceleration = (mMouseMagnitude - currentJoystick.getDeadzone()) / (1 - currentJoystick.getDeadzone());
             acceleration = Math.pow(acceleration, MOUSE_MAX_ACCELERATION);
@@ -294,7 +297,7 @@ public class Gamepad {
             CallbackBridge.mouseX += deltaX;
             CallbackBridge.mouseY -= deltaY;
 
-            if(!mLastGrabbingState){
+            if(!isGrabbing){
                 CallbackBridge.mouseX = MathUtils.clamp(CallbackBridge.mouseX, 0, CallbackBridge.windowWidth);
                 CallbackBridge.mouseY = MathUtils.clamp(CallbackBridge.mouseY, 0, CallbackBridge.windowHeight);
                 placePointerView((int) (CallbackBridge.mouseX / mScaleFactor), (int) (CallbackBridge.mouseY/ mScaleFactor));
@@ -311,36 +314,8 @@ public class Gamepad {
         mLastFrameTime = frameTimeNanos;
     }
 
-    /** Update the grabbing state, and change the currentMap, mouse position and sensibility */
-    private void updateGrabbingState() {
-        boolean lastGrabbingValue = mLastGrabbingState;
-        mLastGrabbingState = CallbackBridge.isGrabbing();
-        if(lastGrabbingValue == mLastGrabbingState) return;
-
-        // Switch grabbing state then
-        mCurrentMap.resetPressedState();
-        if(mLastGrabbingState){
-            mCurrentMap = mGameMap;
-            mPointerImageView.setVisibility(View.INVISIBLE);
-            mMouseSensitivity = 18;
-            return;
-        }
-
-        mCurrentMap = mMenuMap;
-        sendDirectionalKeycode(mCurrentJoystickDirection, false, mGameMap); // removing what we were doing
-
-        mMouse_x = CallbackBridge.windowWidth/2;
-        mMouse_y = CallbackBridge.windowHeight/2;
-        CallbackBridge.sendCursorPos(mMouse_x, mMouse_y);
-        placePointerView(CallbackBridge.physicalWidth/2, CallbackBridge.physicalHeight/2);
-        mPointerImageView.setVisibility(View.VISIBLE);
-        // Sensitivity in menu is MC and HARDWARE resolution dependent
-        mMouseSensitivity = 19 * mScaleFactor / mSensitivityFactor;
-
-    }
-
     private void updateMouseJoystick(MotionEvent event){
-        GamepadJoystick currentJoystick = mLastGrabbingState ? mRightJoystick : mLeftJoystick;
+        GamepadJoystick currentJoystick = isGrabbing ? mRightJoystick : mLeftJoystick;
         float horizontalValue = currentJoystick.getHorizontalAxis(event);
         float verticalValue = currentJoystick.getVerticalAxis(event);
         if(horizontalValue != mLastHorizontalValue || verticalValue != mLastVerticalValue){
@@ -362,7 +337,7 @@ public class Gamepad {
     }
 
     private void updateDirectionalJoystick(MotionEvent event){
-        GamepadJoystick currentJoystick = mLastGrabbingState ? mLeftJoystick : mRightJoystick;
+        GamepadJoystick currentJoystick = isGrabbing ? mLeftJoystick : mRightJoystick;
 
         int lastJoystickDirection = mCurrentJoystickDirection;
         mCurrentJoystickDirection = currentJoystick.getHeightDirection(event);
@@ -445,5 +420,33 @@ public class Gamepad {
     private void placePointerView(int x, int y){
         mPointerImageView.setX(x - mPointerImageView.getWidth()/2);
         mPointerImageView.setY(y - mPointerImageView.getHeight()/2);
+    }
+
+    /** Update the grabbing state, and change the currentMap, mouse position and sensibility */
+    @Override
+    public void onGrabState(boolean isGrabbing) {
+        boolean lastGrabbingValue = this.isGrabbing;
+        this.isGrabbing = isGrabbing;
+        if(lastGrabbingValue == isGrabbing) return;
+
+        // Switch grabbing state then
+        mCurrentMap.resetPressedState();
+        if(isGrabbing){
+            mCurrentMap = mGameMap;
+            mPointerImageView.setVisibility(View.INVISIBLE);
+            mMouseSensitivity = 18;
+            return;
+        }
+
+        mCurrentMap = mMenuMap;
+        sendDirectionalKeycode(mCurrentJoystickDirection, false, mGameMap); // removing what we were doing
+
+        mMouse_x = CallbackBridge.windowWidth/2;
+        mMouse_y = CallbackBridge.windowHeight/2;
+        CallbackBridge.sendCursorPos(mMouse_x, mMouse_y);
+        placePointerView(CallbackBridge.physicalWidth/2, CallbackBridge.physicalHeight/2);
+        mPointerImageView.setVisibility(View.VISIBLE);
+        // Sensitivity in menu is MC and HARDWARE resolution dependent
+        mMouseSensitivity = 19 * mScaleFactor / mSensitivityFactor;
     }
 }

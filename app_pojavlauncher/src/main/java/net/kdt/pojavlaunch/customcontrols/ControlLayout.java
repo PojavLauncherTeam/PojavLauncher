@@ -11,6 +11,7 @@ import com.google.gson.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 
 import net.kdt.pojavlaunch.*;
@@ -26,12 +27,18 @@ import net.kdt.pojavlaunch.prefs.*;
 
 public class ControlLayout extends FrameLayout {
 	protected CustomControls mLayout;
+	/* Accessible when inside the game by ControlInterface implementations, cached for perf. */
+	private MinecraftGLSurface mGameSurface = null;
+
+	/* Cache to buttons for performance purposes */
+	private List<ControlInterface> mButtons;
 	private boolean mModifiable = false;
 	private CustomControlsActivity mActivity;
 	private boolean mControlVisible = false;
 
 	private EditControlPopup mControlPopup = null;
 	private ControlHandleView mHandleView;
+	private ControlButtonMenuListener mMenuListener;
 	public ActionRow actionRow = null;
 
 	public ControlLayout(Context ctx) {
@@ -87,6 +94,8 @@ public class ControlLayout extends FrameLayout {
 		mLayout.scaledAt = LauncherPreferences.PREF_BUTTONSIZE;
 
 		setModified(false);
+		mButtons = null;
+		getButtonChildren(); // Force refresh
 	} // loadLayout
 
 	//CONTROL BUTTON
@@ -222,14 +231,17 @@ public class ControlLayout extends FrameLayout {
 
 	}
 
-	public ArrayList<ControlInterface> getButtonChildren(){
-		ArrayList<ControlInterface> children = new ArrayList<>();
-		for(int i=0; i<getChildCount(); ++i){
-			View v = getChildAt(i);
-			if(v instanceof ControlInterface)
-				children.add(((ControlInterface) v));
+	public List<ControlInterface> getButtonChildren(){
+		if(mModifiable || mButtons == null){
+			mButtons = new ArrayList<>();
+			for(int i=0; i<getChildCount(); ++i){
+				View v = getChildAt(i);
+				if(v instanceof ControlInterface)
+					mButtons.add(((ControlInterface) v));
+			}
 		}
-		return children;
+
+		return mButtons;
 	}
 
 	public void refreshControlButtonPositions(){
@@ -287,48 +299,42 @@ public class ControlLayout extends FrameLayout {
 
 
 	HashMap<View, ControlInterface> mapTable = new HashMap<>();
+	int[] location = new int[2];
 	//While this is called onTouch, this should only be called from a ControlButton.
 	public boolean onTouch(View v, MotionEvent ev) {
-		ControlInterface lastControlButton = mapTable.get(v);
-
 		//Check if the action is cancelling, reset the lastControl button associated to the view
 		if(ev.getActionMasked() == MotionEvent.ACTION_UP || ev.getActionMasked() == MotionEvent.ACTION_CANCEL){
-			if(lastControlButton != null) lastControlButton.sendKeyPresses(false);
-			mapTable.put(v, null);
+			for(ControlInterface control : mapTable.values()){
+				control.sendKeyPresses(false);
+			}
+			mapTable.clear();
 			return true;
 		}
 
 		if(ev.getActionMasked() != MotionEvent.ACTION_MOVE) return false;
 
-		//Optimization pass to avoid looking at all children again
-		if(lastControlButton != null){
-			if(	ev.getRawX() > lastControlButton.getControlView().getX() && ev.getRawX() < lastControlButton.getControlView().getX() + lastControlButton.getControlView().getWidth() &&
-					ev.getRawY() > lastControlButton.getControlView().getY() && ev.getRawY() < lastControlButton.getControlView().getY() + lastControlButton.getControlView().getHeight()){
-				return true;
-			}
-		}
-
-		//Release last keys
-		if (lastControlButton != null) lastControlButton.sendKeyPresses(false);
-		mapTable.put(v, null);
-
-		//Look for another SWIPEABLE button
+		getLocationOnScreen(location);
+		// Update the state of all swipeable buttons
 		for(ControlInterface button : getButtonChildren()){
 			if(!button.getProperties().isSwipeable) continue;
 
-			if(	ev.getRawX() > button.getControlView().getX() && ev.getRawX() < button.getControlView().getX() + button.getControlView().getWidth() &&
-					ev.getRawY() > button.getControlView().getY() && ev.getRawY() < button.getControlView().getY() + button.getControlView().getHeight()){
+			if(	ev.getRawX() > button.getControlView().getX() + location[0]
+					&& ev.getRawX() - getGameSurface().getX() < button.getControlView().getX() + button.getControlView().getWidth() + location[0]
+					&& ev.getRawY() > button.getControlView().getY()
+					&& ev.getRawY() < button.getControlView().getY() + button.getControlView().getHeight()){
 
-				//Press the new key
-				if(!button.equals(lastControlButton)){
+				if(mapTable.get(button.getControlView()) == null){
 					button.sendKeyPresses(true);
-
-					mapTable.put(v, button);
+					mapTable.put(button.getControlView(), button);
 				}
-				return true;
+			}else{
+				if(mapTable.get(button.getControlView()) != null){
+					button.sendKeyPresses(false);
+					mapTable.remove(button.getControlView());
+				}
 			}
 		}
-		return false;
+		return true;
 	}
 
 	@Override
@@ -366,5 +372,31 @@ public class ControlLayout extends FrameLayout {
 		try {
 			mLayout.save(path);
 		} catch (IOException e) {Log.e("ControlLayout", "Failed to save the layout at:" + path);}
+	}
+
+
+	public boolean hasMenuButton() {
+		for(ControlInterface controlInterface : getButtonChildren()){
+			for (int keycode : controlInterface.getProperties().keycodes) {
+				if (keycode == ControlData.SPECIALBTN_MENU) return true;
+			}
+		}
+		return false;
+	}
+
+	public void setMenuListener(ControlButtonMenuListener menuListener) {
+		this.mMenuListener = menuListener;
+	}
+
+	public void notifyAppMenu() {
+		if(mMenuListener != null) mMenuListener.onClickedMenu();
+	}
+
+	/** Cached getter for perf purposes */
+	public MinecraftGLSurface getGameSurface(){
+		if(mGameSurface == null){
+			mGameSurface = findViewById(R.id.main_game_render_view);
+		}
+		return mGameSurface;
 	}
 }

@@ -33,7 +33,6 @@ public class Touchpad extends FrameLayout implements GrabListener{
     private final ImageView mMousePointerImageView = new ImageView(getContext());
     /* Detect a classic android Tap */
     private final GestureDetector mSingleTapDetector = new GestureDetector(getContext(), new SingleTapConfirm());
-    private final Handler uiThreadHandler = new Handler();
     /* Resolution scaler option, allow downsizing a window */
     private final float mScaleFactor = DEFAULT_PREF.getInt("resolutionRatio",100)/100f;
     /* Current pointer ID to move the mouse */
@@ -181,7 +180,7 @@ public class Touchpad extends FrameLayout implements GrabListener{
 
     @Override
     public void onGrabState(boolean isGrabbing) {
-        uiThreadHandler.post(()->updateGrabState(isGrabbing));
+        post(()->updateGrabState(isGrabbing));
     }
     private void updateGrabState(boolean isGrabbing) {
         if(!isGrabbing) {

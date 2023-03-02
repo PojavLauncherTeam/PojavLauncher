@@ -94,11 +94,8 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
      */
     public boolean switchKeyboardState(){
         InputMethodManager imm = (InputMethodManager) getContext().getSystemService(INPUT_METHOD_SERVICE);
-        //If an hard keyboard is present, never trigger the soft one
-        if(hasFocus()
-                || (getResources().getConfiguration().keyboard == Configuration.KEYBOARD_QWERTY
-                && getResources().getConfiguration().hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_YES)){
-            imm.hideSoftInputFromWindow(getWindowToken(), 0);
+        // Allow, regardless of whether or not a hardware keyboard is declared
+        if(hasFocus()){
             clear();
             disable();
             return false;
@@ -130,7 +127,6 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
         setFocusable(true);
         setVisibility(VISIBLE);
         requestFocus();
-
     }
 
     /** Lose ability to exist, take focus and have some text being input */
@@ -139,6 +135,7 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
         setVisibility(GONE);
         clearFocus();
         setEnabled(false);
+        //setFocusable(false);
     }
 
     /** Send the enter key. */

@@ -44,7 +44,6 @@ import org.lwjgl.glfw.CallbackBridge;
  * Class dealing with showing minecraft surface and taking inputs to dispatch them to minecraft
  */
 public class MinecraftGLSurface extends View implements GrabListener{
-    Handler uiThreadHandler = new Handler();
     /* Gamepad object for gamepad inputs, instantiated on need */
     private Gamepad mGamepad = null;
     /* Pointer Debug textview, used to show info about the pointer state */
@@ -168,6 +167,7 @@ public class MinecraftGLSurface extends View implements GrabListener{
         }else{
             TextureView textureView = new TextureView(getContext());
             textureView.setOpaque(true);
+            textureView.setAlpha(1.0f);
             mSurface = textureView;
 
             textureView.setSurfaceTextureListener(new TextureView.SurfaceTextureListener() {
@@ -388,7 +388,6 @@ public class MinecraftGLSurface extends View implements GrabListener{
 
     /**
      * The event for mouse/joystick movements
-     * We don't do the gamepad right now.
      */
     @SuppressLint("NewApi")
     @Override
@@ -411,6 +410,10 @@ public class MinecraftGLSurface extends View implements GrabListener{
             break;
         }
         if(mouseCursorIndex == -1) return false; // we cant consoom that, theres no mice!
+
+        // Make sure we grabbed the mouse if necessary
+        updateGrabState(CallbackBridge.isGrabbing());
+
         switch(event.getActionMasked()) {
             case MotionEvent.ACTION_HOVER_MOVE:
                 CallbackBridge.mouseX = (event.getX(mouseCursorIndex) * mScaleFactor);
@@ -420,7 +423,7 @@ public class MinecraftGLSurface extends View implements GrabListener{
                 CallbackBridge.DEBUG_STRING.setLength(0);
                 return true;
             case MotionEvent.ACTION_SCROLL:
-                CallbackBridge.sendScroll((double) event.getAxisValue(MotionEvent.AXIS_VSCROLL), (double) event.getAxisValue(MotionEvent.AXIS_HSCROLL));
+                CallbackBridge.sendScroll((double) event.getAxisValue(MotionEvent.AXIS_HSCROLL), (double) event.getAxisValue(MotionEvent.AXIS_VSCROLL));
                 return true;
             case MotionEvent.ACTION_BUTTON_PRESS:
                 return sendMouseButtonUnconverted(event.getActionButton(),true);
@@ -634,10 +637,12 @@ public class MinecraftGLSurface extends View implements GrabListener{
 
         new Thread(() -> {
             try {
-                Thread.sleep(200);
-                if(mSurfaceReadyListener != null){
-                    mSurfaceReadyListener.isReady();
+                // Wait until the listener is attached
+                while (mSurfaceReadyListener == null){
+                    Thread.sleep(100);
                 }
+
+                mSurfaceReadyListener.isReady();
             } catch (Throwable e) {
                 Tools.showError(getContext(), e, true);
             }
@@ -646,20 +651,24 @@ public class MinecraftGLSurface extends View implements GrabListener{
 
     @Override
     public void onGrabState(boolean isGrabbing) {
-        uiThreadHandler.post(()->updateGrabState(isGrabbing));
+        post(()->updateGrabState(isGrabbing));
     }
 
     private void updateGrabState(boolean isGrabbing) {
-        if(MainActivity.isAndroid8OrHigher()) {
-            if (isGrabbing && !hasPointerCapture()) {
+        if(!MainActivity.isAndroid8OrHigher()) return;
+
+        boolean hasPointerCapture = hasPointerCapture();
+        if(isGrabbing){
+            if(!hasPointerCapture) {
                 requestFocus();
                 requestPointerCapture();
             }
+            return;
+        }
 
-            if (!isGrabbing && hasPointerCapture()) {
-                releasePointerCapture();
-                clearFocus();
-            }
+        if(hasPointerCapture) {
+            releasePointerCapture();
+            clearFocus();
         }
     }
 
@@ -670,5 +679,6 @@ public class MinecraftGLSurface extends View implements GrabListener{
 
     public void setSurfaceReadyListener(SurfaceReadyListener listener){
         mSurfaceReadyListener = listener;
+
     }
 }

@@ -14,6 +14,7 @@ import javax.annotation.*;
 import org.lwjgl.*;
 import org.lwjgl.system.*;
 
+import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
@@ -1369,5 +1370,11 @@ public class GLFW
         }
         xpos[0] = mGLFWCursorX;
         ypos[0] = mGLFWCursorY;
+    }
+
+    public static boolean glfwExtensionSupported(String ext) {
+        //return Arrays.stream(glGetString(GL_EXTENSIONS).split(" ")).anyMatch(ext::equals);
+        // Fast path, but will return true if one has the same prefix
+        return glGetString(GL_EXTENSIONS).contains(ext);
     }
 }

@@ -25,7 +25,7 @@
     <string name="login_dialog_no_saved_account">You don\'t have any saved account.\nUse the option <b>\"Keep me logged in\"</b> to save an account upon first login.</string>
 
     <!-- Hint -->
-    <string name="hint_control_mapping">"Swipe from right to left to open menu ◀\nHold a button to customize: edit, resize or delete."</string>
+    <string name="hint_control_mapping">"Tap the top center cog icon to open the context menu ⚙\nTap a button to customize: edit, resize, delete, or customize it's keybind."</string>
 
     <!-- Warnings -->
     <string name="warning_remove_account">This account will be removed!</string>
@@ -52,7 +52,7 @@
     <string name="mcl_tab_news">News</string>
     <string name="mcl_tab_console">Development console</string>
     <string name="mcl_tab_crash">Crash log</string>
-    
+
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Connected</string>
     <string name="mcl_account_local">Local</string>
@@ -110,6 +110,8 @@
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Old-beta</string>
+    <string name="mcl_setting_java_sandbox">Sandbox .jar installer</string>
+    <string name="mcl_setting_java_sandbox_subtitle">Control the availability of sandbox security manager when launching .jar installer.</string>
     <string name="mcl_version_clone">Clone</string>
 
     <!-- Global strings -->
@@ -125,6 +127,7 @@
     <string name="global_unpacking">Unpacking %s</string>
     <string name="global_error_field_empty">This field can\'t be empty</string>
     <string name="global_waiting">Wait</string>
+    <string name="global_select">Select</string>
 
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Application/Game exited with code %d, check latestlog.txt for more details.</string>
@@ -168,13 +171,13 @@
     <string name="import_control_verifying_file">File is being verified, please wait and try again…</string>
     <string name="import_control_invalid_name">Invalid name or file already exists</string>
     <string name="import_control_done">Importation done</string>
-<!--
+    <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
     <string name="customctrl_edit">Editing %s</string>
     <string name="customctrl_remove">Remove %s?</string>
-    
+
     <string name="customctrl_keyname">Keycode</string>
     <string name="customctrl_toggle">Toggleable</string>
     <string name="customctrl_size">Size</string>
@@ -187,7 +190,7 @@
     <string name="customctrl_corner_radius">Corner radius</string>
     <string name="customctrl_stroke_width">Stroke width</string>
     <string name="customctrl_stroke_color">Stroke color</string>
-    
+
     <string name="customctrl_dynamicpos">Manual Dynamic position</string>
     <string name="customctrl_dynamicpos_x">Dynamic X</string>
     <string name="customctrl_dynamicpos_y">Dynamic Y</string>
@@ -207,7 +210,7 @@
     <string name="customctrl_selectdefault">Select default Control json</string>
     <string name="customctrl_export">Export control</string>
 
-
+    <string name="main_share_logs">Share log file</string>
     <string name="main_install_jar_file">Install .jar</string>
     <string name="main_options">Options</string>
     <string name="main_play">Play</string>
@@ -268,21 +271,33 @@
     <string name="preference_control_offset_title">Control side offsets</string>
     <string name="preference_control_offset_description">Set a custom offset to each side of the screen</string>
     <string name="preference_mouse_start_title">Start with virtual mouse on</string>
-    <string name="preference_mouse_start_description">Using this option will get you judged by Mathias-Boulay</string>
+    <string name="preference_mouse_start_description">Virtual Mouse appears at startup when this option is on</string>
     <string name="preference_video_title">Video and renderer</string>
     <string name="preference_video_description">Resolution, scaling type, and renderer</string>
     <string name="preference_control_title">Control customization</string>
     <string name="preference_control_description">Gestures types, triggers, and scaling</string>
     <string name="preference_java_title">Java Tweaks</string>
-    <string name="preference_java_description">Java versions, JVM Arguments, and RAM amount</string>
+    <string name="preference_java_description">Java versions, JVM Arguments, RAM amount and sandbox</string>
     <string name="preference_misc_title">Miscellaneous settings</string>
     <string name="preference_misc_description">Version list, and libs checks</string>
     <string name="preference_experimental_title">Experimental Stuff</string>
     <string name="preference_experimental_description">Use things there with consideration, no support.</string>
     <string name="preference_sustained_performance_title">Enable sustained performance mode</string>
     <string name="preference_sustained_performance_description">Limit thermal throttling by limiting peak performance</string>
+    <string name="preference_force_vsync_title">Force enable vsync</string>
+    <string name="preference_force_vsync_description">Limit thermal throttling by limiting peak performance</string>
     <string name="preference_force_english_title">Force language to english</string>
     <string name="preference_force_english_description">Allows you to see original strings, as intended by developers. Requires a restart</string>
+    <string name="preference_edit_controls_title">Edit custom controls</string>
+    <string name="preference_edit_controls_summary">Tweak the control scheme to fit your needs</string>
+
+    <string name="preference_category_gyro_controls">Gyro controls</string>
+    <string name="preference_category_virtual_mouse">Virtual mouse</string>
+
+    <string name="preference_gyro_invert_x_axis">Invert X axis</string>
+    <string name="preference_gyro_invert_y_axis">Invert Y axis</string>
+    <string name="preference_gyro_invert_x_axis_description">Invert the horizontal axis</string>
+    <string name="preference_gyro_invert_y_axis_description">Invert the vertical axis</string>
 
     <string name="preference_back_title">Back to the last screen</string>
     <string name="gles_hack_title">GL4ES Shrink hack</string>
@@ -319,4 +334,23 @@
     <string name="tasks_ongoing">Tasks are in progress, please wait</string>
     <string name="no_saved_accounts">No saved accounts</string>
     <string name="downloading_versions">Downloading version list…</string>
+    <string name="mc_download_failed">Failed to download Minecraft! This could be due to bad network connection, incorrectly placed files, etc..</string>
+    <string name="xerr_unknown">Unknown Xbox Live API error %d</string>
+    <string name="xerr_no_account">You don\'t seem to have an Xbox Live account. Please log in once on https://minecraft.net/ and try again.</string>
+    <string name="xerr_adult_verification">An adult needs to verify your account.</string>
+    <string name="xerr_child">Your account is a child account, and needs to be added into a Family in order to log in.</string>
+    <string name="minecraft_not_owned">It seems like this account does not have a Minecraft profile. If you have Xbox Game Pass, please log in on https://minecraft.net/ and set it up.</string>
+    <string name="xerr_not_available">Xbox Live is not available in your country</string>
+    <string name="preference_enable_gyro_title">Enable gyroscope controls</string>
+    <string name="preference_enable_gyro_description">Enabling this will allow you to turn in game by turning your phone</string>
+    <string name="preference_gyro_sensitivity_title">Gyroscope controls sensitivity</string>
+    <string name="preference_gyro_sensitivity_description">Adjust the sensitivity of gyroscope controls</string>
+    <string name="toast_turn_on_gyro">Enable gyro controls first to use this!</string>
+    <string name="preference_gyro_sample_rate_title">Gyroscope sampling rate</string>
+    <string name="preference_gyro_sample_rate_description">If you have performance issues with the gyroscope controls, increase this</string>
+    <string name="microsoft_login_retry_later">Too many requests, please try again later.</string>
+    <string name="storage_required">PojavLauncher requires an attached external storage. Please reconnect your storage and restart the app.</string>
+    <string name="mcl_setting_title_buttonallcaps">Use only capital letters in button labels</string>
+    <string name="mcl_setting_subtitle_buttonallcaps">Disable this if you want to use lowercase letters in your controls</string>
+    <string name="create_profile">Create new profile</string>
 </resources>

@@ -31,6 +31,7 @@
  */
         package org.lwjgl.input;
 
+import java.lang.reflect.Constructor;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.security.AccessController;
@@ -144,12 +145,23 @@ public class Mouse {
     private static boolean		isGrabbed;
 
     private static InputImplementation implementation;
+    private static EmptyCursorGrabListener grabListener = null;
 
     /** Whether we need cursor animation emulation */
     private static final boolean emulateCursorAnimation = 	LWJGLUtil.getPlatform() == LWJGLUtil.PLATFORM_WINDOWS ||
             LWJGLUtil.getPlatform() == LWJGLUtil.PLATFORM_MACOSX;
 
     private static  boolean clipMouseCoordinatesToWindow = !getPrivilegedBoolean("org.lwjgl.input.Mouse.allowNegativeMouseCoords");
+
+    static {
+        try {
+            Class infdevMouse = Class.forName("org.lwjgl.input.InfdevMouse");
+            Constructor constructor = infdevMouse.getConstructor();
+            grabListener = (EmptyCursorGrabListener) constructor.newInstance();
+        }catch (Throwable e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * Mouse cannot be constructed.
@@ -164,7 +176,6 @@ public class Mouse {
      */
     public static Cursor getNativeCursor() {
             return currentCursor;
-
     }
 
     /**
@@ -181,6 +192,14 @@ public class Mouse {
      */
     public static Cursor setNativeCursor(Cursor cursor) throws LWJGLException {
         //dummy
+        if(cursor == null && currentCursor.isEmpty()) {
+            Mouse.setGrabbed(false);
+            if(grabListener != null) grabListener.onGrab(false);
+        }
+        if(cursor != null && cursor.isEmpty()) {
+            Mouse.setGrabbed(true);
+            if(grabListener != null) grabListener.onGrab(true);
+        }
         currentCursor = cursor;
         return currentCursor;
     }
@@ -624,5 +643,19 @@ public class Mouse {
      */
     public static boolean isInsideWindow() {
         return implementation.isInsideWindow();
+    }
+
+    /*
+     * Package private methods to get the absolute unclipped X/Y coordiates
+     */
+    /*package-private*/ static int getAbsoluteX() {
+        return absolute_x;
+    }
+    /*package-private*/ static int getAbsoluteY() {
+        return absolute_y;
+    }
+
+    interface EmptyCursorGrabListener {
+        void onGrab(boolean grabbing);
     }
 }

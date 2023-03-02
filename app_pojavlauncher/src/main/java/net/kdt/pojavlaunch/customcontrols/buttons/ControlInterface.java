@@ -276,7 +276,7 @@ public interface ControlInterface extends View.OnLongClickListener {
     }
 
     default void injectProperties(){
-        getControlView().setTranslationZ(10);
+        getControlView().post(() -> getControlView().setTranslationZ(10));
     }
 
     /** Inject a touch listener on the view to make editing controls straight forward */

@@ -3,12 +3,14 @@ package net.kdt.pojavlaunch.authenticator.microsoft;
 import static net.kdt.pojavlaunch.PojavApplication.sExecutorService;
 
 import android.os.Looper;
+import android.util.ArrayMap;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
 
 import com.kdt.mcgui.ProgressLayout;
 
+import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.value.MinecraftAccount;
 import net.kdt.pojavlaunch.authenticator.listener.*;
@@ -39,6 +41,15 @@ public class MicrosoftBackgroundLogin {
     private final boolean mIsRefresh;
     private final String mAuthCode;
     private final android.os.Handler mHandler = new android.os.Handler(Looper.getMainLooper());
+    private static final Map<Long, Integer> XSTS_ERRORS;
+    static {
+        XSTS_ERRORS = new ArrayMap<>();
+        XSTS_ERRORS.put(2148916233L, R.string.xerr_no_account);
+        XSTS_ERRORS.put(2148916235L, R.string.xerr_not_available);
+        XSTS_ERRORS.put(2148916236L ,R.string.xerr_adult_verification);
+        XSTS_ERRORS.put(2148916237L ,R.string.xerr_adult_verification);
+        XSTS_ERRORS.put(2148916238L ,R.string.xerr_child);
+    }
 
     /* Fields used to fill the account  */
     public boolean isRefresh;
@@ -211,6 +222,15 @@ public class MicrosoftBackgroundLogin {
             Log.i("MicrosoftLogin","Xbl Xsts = " + token + "; Uhs = " + uhs);
             return new String[]{uhs, token};
             //acquireMinecraftToken(uhs,jo.getString("Token"));
+        }else if(conn.getResponseCode() == 401) {
+            String responseContents = Tools.read(conn.getErrorStream());
+            JSONObject jo = new JSONObject(responseContents);
+            long xerr = jo.optLong("XErr", -1);
+            Integer locale_id = XSTS_ERRORS.get(xerr);
+            if(locale_id != null) {
+                throw new PresentedException(new RuntimeException(responseContents), locale_id);
+            }
+            throw new PresentedException(new RuntimeException(responseContents), R.string.xerr_unknown, xerr);
         }else{
             throwResponseError(conn);
         }
@@ -274,8 +294,8 @@ public class MicrosoftBackgroundLogin {
         }else{
             Log.i("MicrosoftLogin","It seems that this Microsoft Account does not own the game.");
             doesOwnGame = false;
-
-            throwResponseError(conn);
+            throw new PresentedException(new RuntimeException(conn.getResponseMessage()), R.string.minecraft_not_owned);
+            //throwResponseError(conn);
         }
     }
 
@@ -289,7 +309,7 @@ public class MicrosoftBackgroundLogin {
 
 
     /** Set common properties, and enable interactivity if desired */
-    private static void setCommonProperties(HttpURLConnection conn, String formData, boolean interactive){
+    private static void setCommonProperties(HttpURLConnection conn, String formData, boolean interactive) {
         conn.setRequestProperty("Content-Type", "application/json");
         conn.setRequestProperty("Accept", "application/json");
         conn.setRequestProperty("charset", "utf-8");
@@ -321,6 +341,9 @@ public class MicrosoftBackgroundLogin {
 
     private void throwResponseError(HttpURLConnection conn) throws IOException {
         Log.i("MicrosoftLogin", "Error code: " + conn.getResponseCode() + ": " + conn.getResponseMessage());
+        if(conn.getResponseCode() == 429) {
+            throw new PresentedException(R.string.microsoft_login_retry_later);
+        }
         throw new RuntimeException(conn.getResponseMessage());
     }
 }

@@ -19,7 +19,7 @@ import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.extra.ExtraConstants;
 import net.kdt.pojavlaunch.extra.ExtraCore;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
-import net.kdt.pojavlaunch.services.ProgressService;
+import net.kdt.pojavlaunch.progresskeeper.ProgressKeeper;
 import net.kdt.pojavlaunch.utils.DownloadUtils;
 import net.kdt.pojavlaunch.value.DependentLibrary;
 import net.kdt.pojavlaunch.value.MinecraftClientInfo;
@@ -40,6 +40,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class AsyncMinecraftDownloader {
+    private static final float BYTE_TO_MB = 1024 * 1024;
     public static final String MINECRAFT_RES = "https://resources.download.minecraft.net/";
 
     /* Allows each downloading thread to have its own RECYCLED buffer */
@@ -48,12 +49,16 @@ public class AsyncMinecraftDownloader {
     public AsyncMinecraftDownloader(@NonNull Activity activity, JMinecraftVersionList.Version version, String realVersion,
                                     @NonNull DoneListener listener){ // this was there for a reason
         sExecutorService.execute(() -> {
-            if(downloadGame(activity, version, realVersion))
+            try {
+                downloadGame(activity, version, realVersion);
                 listener.onDownloadDone();
+            }catch (DownloaderException e) {
+                listener.onDownloadFailed(e.getCause());
+            }
         });
     }
-
-    private boolean downloadGame(@NonNull Activity activity, JMinecraftVersionList.Version verInfo, String versionName){
+    /* we do the throws DownloaderException thing to avoid blanket-catching Exception as a form of anti-lazy-developer protection */
+    private void downloadGame(@NonNull Activity activity, JMinecraftVersionList.Version verInfo, String versionName) throws DownloaderException {
         final String downVName = "/" + versionName + "/" + versionName;
 
         //Downloading libraries
@@ -61,22 +66,22 @@ public class AsyncMinecraftDownloader {
         JAssets assets = null;
         try {
             File verJsonDir = new File(Tools.DIR_HOME_VERSION + downVName + ".json");
-
             if (verInfo != null && verInfo.url != null) {
-                if(!LauncherPreferences.PREF_CHECK_LIBRARY_SHA)  Log.w("Chk","Checker is off");
-
-                boolean isManifestGood = verJsonDir.exists()
-                        && (!LauncherPreferences.PREF_CHECK_LIBRARY_SHA
-                        || verInfo.sha1 == null
-                        || Tools.compareSHA1(verJsonDir, verInfo.sha1));
-
-                if(!isManifestGood) {
-                    ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT, 0, R.string.mcl_launch_downloading, versionName + ".json");
-                    verJsonDir.delete();
-                    downloadFileMonitored(verInfo.url, verJsonDir, getByteBuffer(),
-                            (curr, max) -> ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT,
-                                    (int) Math.max((float)curr/max*100,0), R.string.mcl_launch_downloading, versionName + ".json")
-                    );
+                downloadVersionJson(versionName, verJsonDir, verInfo);
+            }
+            JMinecraftVersionList.Version originalVersion = Tools.getVersionInfo(versionName, true);
+            if(originalVersion.inheritsFrom != null && !originalVersion.inheritsFrom.isEmpty()) {
+                Log.i("Downloader", "probe: inheritsFrom="+originalVersion.inheritsFrom);
+                String version = originalVersion.inheritsFrom;
+                String downName = Tools.DIR_HOME_VERSION+"/"+version+"/"+version+".json";
+                JMinecraftVersionList.Version listedVersion = getListedVersion(originalVersion.inheritsFrom);
+                if(listedVersion != null) {
+                    Log.i("Downloader", "probe: verifying "+version);
+                    downloadVersionJson(version, new File(downName), listedVersion);
+                }else{
+                    Log.i("Downloader", "failed to test source version before downloading.");
+                    Log.i("Downloader", "Inheriting from versions not in the Mojang list?");
+                    Log.i("Downloader", "If so, feel free to open a PR at our GitHub repository to add this feature!");
                 }
             }
 
@@ -84,13 +89,16 @@ public class AsyncMinecraftDownloader {
 
             // THIS one function need the activity in the case of an error
             if(!JRE17Util.installNewJreIfNeeded(activity, verInfo)){
-                return false;
+                ProgressKeeper.submitProgress(ProgressLayout.DOWNLOAD_MINECRAFT, -1, -1);
+                throw new DownloaderException();
             }
 
             try {
-                assets = downloadIndex(verInfo, new File(Tools.ASSETS_PATH, "indexes/" + verInfo.assets + ".json"));
+                if(verInfo.assets != null)
+                    assets = downloadIndex(verInfo, new File(Tools.ASSETS_PATH, "indexes/" + verInfo.assets + ".json"));
             } catch (IOException e) {
                 Log.e("AsyncMcDownloader", e.toString(), e);
+                throw new DownloaderException(e);
             }
 
             File outLib;
@@ -121,7 +129,7 @@ public class AsyncMinecraftDownloader {
                     downloadFileMonitored(
                             verInfo.logging.client.file.url, outLib, getByteBuffer(),
                             (curr, max) -> ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT,
-                                    (int) Math.max((float)curr/max*100,0), R.string.mcl_launch_downloading, finalVerInfo.logging.client.file.id)
+                                    (int) Math.max((float)curr/max*100,0), R.string.mcl_launch_downloading_progress, finalVerInfo.logging.client.file.id, curr/BYTE_TO_MB, max/BYTE_TO_MB)
                     );
                 }
             }
@@ -154,7 +162,6 @@ public class AsyncMinecraftDownloader {
                 }
             }
             File minecraftMainFile = new File(minecraftMainJar);
-            JMinecraftVersionList.Version originalVersion = Tools.getVersionInfo(versionName, true);
             Log.i("Downloader", "originalVersion.inheritsFrom="+originalVersion.inheritsFrom);
             Log.i("Downloader", "originalVersion.downloads="+originalVersion.downloads);
             MinecraftClientInfo originalClientInfo;
@@ -178,6 +185,8 @@ public class AsyncMinecraftDownloader {
             }
         } catch (Throwable e) {
             Log.e("AsyncMcDownloader", e.toString(),e );
+            ProgressKeeper.submitProgress(ProgressLayout.DOWNLOAD_MINECRAFT, -1, -1);
+            throw new DownloaderException(e);
         }
 
         ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT, 0, R.string.mcl_launch_cleancache);
@@ -191,12 +200,14 @@ public class AsyncMinecraftDownloader {
 
 
         try {
-            downloadAssets(assets, verInfo.assets, assets.mapToResources ? new File(Tools.OBSOLETE_RESOURCES_PATH) : new File(Tools.ASSETS_PATH));
+            if(assets != null)
+                downloadAssets(assets, verInfo.assets, assets.mapToResources ? new File(Tools.OBSOLETE_RESOURCES_PATH) : new File(Tools.ASSETS_PATH));
         } catch (Exception e) {
             Log.e("AsyncMcDownloader", e.toString(), e);
+            ProgressKeeper.submitProgress(ProgressLayout.DOWNLOAD_MINECRAFT, -1, -1);
+            throw new DownloaderException(e);
         }
-
-        return true;
+        ProgressKeeper.submitProgress(ProgressLayout.DOWNLOAD_MINECRAFT, -1, -1);
     }
 
     public void verifyAndDownloadMainJar(String url, String sha1, File destination) throws Exception{
@@ -204,7 +215,7 @@ public class AsyncMinecraftDownloader {
                 url,
                 destination, getByteBuffer(),
                 (curr, max) -> ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT,
-                        (int) Math.max((float)curr/max*100,0), R.string.mcl_launch_downloading, destination.getName()));
+                        (int) Math.max((float)curr/max*100,0), R.string.mcl_launch_downloading_progress, destination.getName(), curr/BYTE_TO_MB, max/BYTE_TO_MB));
     }
 
     public void downloadAssets(final JAssets assets, String assetsVersion, final File outputDir) throws IOException {
@@ -258,7 +269,7 @@ public class AsyncMinecraftDownloader {
             while ((!executor.awaitTermination(1000, TimeUnit.MILLISECONDS))&&(!localInterrupt.get()) /*&&mActivity.mIsAssetsProcessing*/) {
                 int DLSize = downloadedSize.get();
                 ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT,(int) Math.max((float) DLSize/assetsSizeBytes*100, 0),
-                        R.string.mcl_launch_downloading, "assets");
+                        R.string.mcl_launch_downloading_progress, "assets", (float)DLSize/BYTE_TO_MB, (float)assetsSizeBytes/BYTE_TO_MB);
             }
 
 
@@ -324,7 +335,7 @@ public class AsyncMinecraftDownloader {
 
                 downloadFileMonitored(libPathURL, outLib, getByteBuffer(),
                         (curr, max) -> ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT,
-                                (int) Math.max((float)curr/max*100,0), R.string.mcl_launch_downloading, outLib.getName())
+                                (int) Math.max((float)curr/max*100,0), R.string.mcl_launch_downloading_progress, outLib.getName(), curr/BYTE_TO_MB, max/BYTE_TO_MB)
                 );
 
                 isFileGood = (libItem.downloads.artifact.sha1 == null
@@ -354,6 +365,24 @@ public class AsyncMinecraftDownloader {
         }
 
         return Tools.GLOBAL_GSON.fromJson(Tools.read(output.getAbsolutePath()), JAssets.class);
+    }
+
+    public void downloadVersionJson(String versionName, File verJsonDir, JMinecraftVersionList.Version verInfo) throws IOException {
+        if(!LauncherPreferences.PREF_CHECK_LIBRARY_SHA)  Log.w("Chk","Checker is off");
+
+        boolean isManifestGood = verJsonDir.exists()
+                && (!LauncherPreferences.PREF_CHECK_LIBRARY_SHA
+                || verInfo.sha1 == null
+                || Tools.compareSHA1(verJsonDir, verInfo.sha1));
+
+        if(!isManifestGood) {
+            ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT, 0, R.string.mcl_launch_downloading, versionName + ".json");
+            verJsonDir.delete();
+            downloadFileMonitored(verInfo.url, verJsonDir, getByteBuffer(),
+                    (curr, max) -> ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT,
+                            (int) Math.max((float)curr/max*100,0), R.string.mcl_launch_downloading_progress, versionName + ".json", curr/BYTE_TO_MB, max/BYTE_TO_MB)
+            );
+        }
     }
 
     public static String normalizeVersionId(String versionString) {
@@ -391,6 +420,14 @@ public class AsyncMinecraftDownloader {
 
     public interface DoneListener{
         void onDownloadDone();
+        void onDownloadFailed(Throwable throwable);
+    }
+
+    private static class DownloaderException extends Exception {
+        public DownloaderException() {}
+        public DownloaderException(Throwable e) {
+            super(e);
+        }
     }
 
 }

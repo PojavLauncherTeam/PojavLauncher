@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.transition.Slide;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -74,6 +75,7 @@ public class mcVersionSpinner extends ExtendedTextView {
     /** Initialize various behaviors */
     private void init(){
         // Setup various attributes
+        setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen._12ssp));
         setGravity(Gravity.CENTER_VERTICAL);
         int startPadding = getContext().getResources().getDimensionPixelOffset(R.dimen._17sdp);
         int endPadding = getContext().getResources().getDimensionPixelOffset(R.dimen._5sdp);
