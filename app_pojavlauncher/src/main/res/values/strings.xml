@@ -352,4 +352,5 @@
     <string name="storage_required">PojavLauncher requires an attached external storage. Please reconnect your storage and restart the app.</string>
     <string name="mcl_setting_title_buttonallcaps">Use only capital letters in button labels</string>
     <string name="mcl_setting_subtitle_buttonallcaps">Disable this if you want to use lowercase letters in your controls</string>
+    <string name="create_profile">Create new profile</string>
 </resources>

@@ -35,7 +35,7 @@ public class ProfileAdapter extends BaseAdapter {
         mProfiles = new HashMap<>(LauncherProfiles.mainProfileJson.profiles);
         if(enableCreateButton) {
             mCreateProfile = new MinecraftProfile();
-            mCreateProfile.name = "Create new profile";
+            mCreateProfile.name = context.getString(R.string.create_profile);
             mCreateProfile.lastVersionId = null;
         }
         mProfileList = new ArrayList<>(Arrays.asList(mProfiles.keySet().toArray(new String[0])));
