@@ -167,11 +167,10 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
                 switch(position) {
                     case 0: dialogForceClose(MainActivity.this); break;
                     case 1: openLogOutput(); break;
-                    case 2: minecraftGLView.togglepointerDebugging(); break;
-                    case 3: dialogSendCustomKey(); break;
-                    case 4: adjustMouseSpeedLive(); break;
-                    case 5: adjustGyroSensitivityLive(); break;
-                    case 6: openCustomControls(); break;
+                    case 2: dialogSendCustomKey(); break;
+                    case 3: adjustMouseSpeedLive(); break;
+                    case 4: adjustGyroSensitivityLive(); break;
+                    case 5: openCustomControls(); break;
                 }
                 drawerLayout.closeDrawers();
             };

@@ -27,7 +27,6 @@
     <string-array name="menu_ingame">
         <item>@string/control_forceclose</item>
         <item>@string/control_viewout</item>
-        <item>@string/control_adebug</item>
         <item>@string/control_customkey</item>
         <item>@string/mcl_setting_title_mousespeed</item>
         <item>@string/preference_gyro_sensitivity_title</item>

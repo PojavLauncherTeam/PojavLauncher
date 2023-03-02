@@ -124,9 +124,6 @@ public class Touchpad extends FrameLayout implements GrabListener{
                 break;
         }
 
-        //debugText.setText(CallbackBridge.DEBUG_STRING.toString());
-        CallbackBridge.DEBUG_STRING.setLength(0);
-
         return true;
     }
 

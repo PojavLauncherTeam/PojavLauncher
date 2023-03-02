@@ -93,8 +93,6 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
                     }
                 }
 
-                // debugText.setText(CallbackBridge.DEBUG_STRING.toString());
-                CallbackBridge.DEBUG_STRING.setLength(0);
                 prevY = y;
                 prevX = x;
                 return true;

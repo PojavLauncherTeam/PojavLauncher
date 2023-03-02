@@ -46,8 +46,6 @@ import org.lwjgl.glfw.CallbackBridge;
 public class MinecraftGLSurface extends View implements GrabListener{
     /* Gamepad object for gamepad inputs, instantiated on need */
     private Gamepad mGamepad = null;
-    /* Pointer Debug textview, used to show info about the pointer state */
-    private TextView mPointerDebugTextView;
     /* Resolution scaler option, allow downsizing a window */
     private final float mScaleFactor = LauncherPreferences.PREF_SCALE_FACTOR/100f;
     /* Sensitivity, adjusted according to screen size */
@@ -130,13 +128,6 @@ public class MinecraftGLSurface extends View implements GrabListener{
 
     /** Initialize the view and all its settings */
     public void start(){
-        // Add the pointer debug textview
-        mPointerDebugTextView = new TextView(getContext());
-        mPointerDebugTextView.setX(0);
-        mPointerDebugTextView.setY(0);
-        mPointerDebugTextView.setVisibility(GONE);
-        ((ViewGroup)getParent()).addView(mPointerDebugTextView);
-
         if(LauncherPreferences.PREF_USE_ALTERNATE_SURFACE){
             SurfaceView surfaceView = new SurfaceView(getContext());
             mSurface = surfaceView;
@@ -380,9 +371,6 @@ public class MinecraftGLSurface extends View implements GrabListener{
         // Actualise the pointer count
         mLastPointerCount = e.getPointerCount();
 
-        //debugText.setText(CallbackBridge.DEBUG_STRING.toString());
-        CallbackBridge.DEBUG_STRING.setLength(0);
-
         return true;
     }
 
@@ -419,8 +407,6 @@ public class MinecraftGLSurface extends View implements GrabListener{
                 CallbackBridge.mouseX = (event.getX(mouseCursorIndex) * mScaleFactor);
                 CallbackBridge.mouseY = (event.getY(mouseCursorIndex) * mScaleFactor);
                 CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
-                //debugText.setText(CallbackBridge.DEBUG_STRING.toString());
-                CallbackBridge.DEBUG_STRING.setLength(0);
                 return true;
             case MotionEvent.ACTION_SCROLL:
                 CallbackBridge.sendScroll((double) event.getAxisValue(MotionEvent.AXIS_HSCROLL), (double) event.getAxisValue(MotionEvent.AXIS_VSCROLL));
@@ -443,33 +429,6 @@ public class MinecraftGLSurface extends View implements GrabListener{
         CallbackBridge.mouseX += (e.getX()* mScaleFactor);
         CallbackBridge.mouseY += (e.getY()* mScaleFactor);
 
-        if (mPointerDebugTextView.getVisibility() == View.VISIBLE && !debugErrored) {
-            StringBuilder builder = new StringBuilder();
-            try {
-                builder.append("PointerCapture debug\n");
-                builder.append("MotionEvent=").append(e.getActionMasked()).append("\n");
-                builder.append("PressingBtn=").append(MotionEvent.class.getDeclaredMethod("buttonStateToString").invoke(null, e.getButtonState())).append("\n\n");
-
-                builder.append("PointerX=").append(e.getX()).append("\n");
-                builder.append("PointerY=").append(e.getY()).append("\n");
-                builder.append("RawX=").append(e.getRawX()).append("\n");
-                builder.append("RawY=").append(e.getRawY()).append("\n\n");
-
-                builder.append("XPos=").append(CallbackBridge.mouseX).append("\n");
-                builder.append("YPos=").append(CallbackBridge.mouseY).append("\n\n");
-                builder.append("MovingX=").append(getMoving(e.getX(), true)).append("\n");
-                builder.append("MovingY=").append(getMoving(e.getY(), false)).append("\n");
-            } catch (Throwable th) {
-                debugErrored = true;
-                builder.append("Error getting debug. The debug will be stopped!\n").append(Log.getStackTraceString(th));
-            } finally {
-                mPointerDebugTextView.setText(builder.toString());
-                builder.setLength(0);
-            }
-        }
-
-        mPointerDebugTextView.setText(CallbackBridge.DEBUG_STRING.toString());
-        CallbackBridge.DEBUG_STRING.setLength(0);
         switch (e.getActionMasked()) {
             case MotionEvent.ACTION_MOVE:
                 CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
@@ -588,11 +547,6 @@ public class MinecraftGLSurface extends View implements GrabListener{
     /** Return the size, given the UI scale size */
     private int mcscale(int input) {
         return (int)((mGuiScale * input)/ mScaleFactor);
-    }
-
-    /** Toggle the pointerDebugText visibility state */
-    public void togglepointerDebugging() {
-        mPointerDebugTextView.setVisibility(mPointerDebugTextView.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
     }
 
     /** Called when the size need to be set at any point during the surface lifecycle **/

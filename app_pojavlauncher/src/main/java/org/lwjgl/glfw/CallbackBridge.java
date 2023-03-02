@@ -22,7 +22,6 @@ public class CallbackBridge {
     public static volatile int windowWidth, windowHeight;
     public static volatile int physicalWidth, physicalHeight;
     public static float mouseX, mouseY;
-    public static StringBuilder DEBUG_STRING = new StringBuilder();
     private static boolean threadAttached;
     public volatile static boolean holdingAlt, holdingCapslock, holdingCtrl,
             holdingNumlock, holdingShift;
@@ -44,19 +43,16 @@ public class CallbackBridge {
             threadAttached = CallbackBridge.nativeAttachThreadToOther(true, MainActivity.isInputStackCall);
         }
 
-        DEBUG_STRING.append("CursorPos=").append(x).append(", ").append(y).append("\n");
         mouseX = x;
         mouseY = y;
         nativeSendCursorPos(mouseX, mouseY);
     }
     
     public static void sendPrepareGrabInitialPos() {
-        DEBUG_STRING.append("Prepare set grab initial posititon: ignored");
         //sendMouseKeycode(-1, CallbackBridge.getCurrentMods(), false);
     }
 
     public static void sendKeycode(int keycode, char keychar, int scancode, int modifiers, boolean isDown) {
-        DEBUG_STRING.append("KeyCode=").append(keycode).append(", Char=").append(keychar);
         // TODO CHECK: This may cause input issue, not receive input!
 /*
         if (!nativeSendCharMods((int) keychar, modifiers) || !nativeSendChar(keychar)) {
@@ -102,7 +98,6 @@ public class CallbackBridge {
     }
 
     public static void sendMouseKeycode(int button, int modifiers, boolean isDown) {
-        DEBUG_STRING.append("MouseKey=").append(button).append(", down=").append(isDown).append("\n");
         // if (isGrabbing()) DEBUG_STRING.append("MouseGrabStrace: " + android.util.Log.getStackTraceString(new Throwable()) + "\n");
         nativeSendMouseButton(button, isDown ? 1 : 0, modifiers);
     }
@@ -113,7 +108,6 @@ public class CallbackBridge {
     }
     
     public static void sendScroll(double xoffset, double yoffset) {
-        DEBUG_STRING.append("ScrollX=").append(xoffset).append(",ScrollY=").append(yoffset);
         nativeSendScroll(xoffset, yoffset);
     }
 
