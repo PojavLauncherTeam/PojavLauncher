@@ -487,7 +487,6 @@ public class GLFW
     /* volatile */ public static GLFWWindowSizeCallback mGLFWWindowSizeCallback;
 
     volatile public static int mGLFWWindowWidth, mGLFWWindowHeight;
-    volatile public static double mGLFWCursorX, mGLFWCursorY, mGLFWCursorLastX, mGLFWCursorLastY;
 
     private static GLFWGammaRamp mGLFWGammaRamp;
     private static Map<Integer, String> mGLFWKeyCodes;
@@ -497,8 +496,7 @@ public class GLFW
     private static double mGLFWInitialTime;
 
     private static ArrayMap<Long, GLFWWindowProperties> mGLFWWindowMap;
-
-    public static boolean mGLFWIsGrabbing, mGLFWIsInputReady, mGLFWIsUseStackQueue = false;
+    public static boolean mGLFWIsInputReady;
     public static final ByteBuffer keyDownBuffer = ByteBuffer.allocateDirect(317);
     private static final String PROP_WINDOW_WIDTH = "glfwstub.windowWidth";
     private static final String PROP_WINDOW_HEIGHT= "glfwstub.windowHeight";
@@ -526,7 +524,6 @@ public class GLFW
         } catch (UnsatisfiedLinkError e) {
             e.printStackTrace();
         }
-        CallbackBridge.setClass();
         mGLFWErrorCallback = GLFWErrorCallback.createPrint();
         mGLFWKeyCodes = new ArrayMap<>();
 
@@ -1056,30 +1053,11 @@ public class GLFW
     public static void glfwPollEvents() {
         if (!mGLFWIsInputReady) {
             mGLFWIsInputReady = true;
-            mGLFWIsUseStackQueue = CallbackBridge.nativeSetInputReady(true);
-        }
-        if(!CallbackBridge.PENDING_EVENT_READY) {
-            CallbackBridge.PENDING_EVENT_READY = true;
+            CallbackBridge.nativeSetInputReady(true);
         }
 
         for (Long ptr : mGLFWWindowMap.keySet()) callJV(ptr, Functions.PumpEvents);
         callV(Functions.RewindEvents);
-        if ((mGLFWCursorX != mGLFWCursorLastX || mGLFWCursorY != mGLFWCursorLastY) && mGLFWCursorPosCallback != null) {
-            mGLFWCursorLastX = mGLFWCursorX;
-            mGLFWCursorLastY = mGLFWCursorY;
-            for (Long ptr : mGLFWWindowMap.keySet()) {
-                if (!mGLFWIsGrabbing && mGLFWWindowSizeCallback != null) {
-                    try {
-                        mGLFWWindowSizeCallback.invoke(ptr, mGLFWWindowWidth, mGLFWWindowHeight);
-                    }catch (Throwable throwable){
-                        throwable.printStackTrace();
-                    }
-
-                }
-                mGLFWCursorPosCallback.invoke(ptr, mGLFWCursorX, mGLFWCursorY);
-            }
-            // System.out.println("CursorPos updated to x=" + mGLFWCursorX + ",y=" + mGLFWCursorY);
-        }
     }
 
     public static void internalWindowSizeChanged(long window, int w, int h) {
@@ -1116,9 +1094,9 @@ public class GLFW
         if (mode == GLFW_CURSOR) {
             switch (value) {
                 case GLFW_CURSOR_DISABLED:
-                    CallbackBridge.sendGrabbing(true, (int) mGLFWCursorX, (int) mGLFWCursorY);
+                    CallbackBridge.nativeSetGrabbing(true);
                     break;
-                default: CallbackBridge.sendGrabbing(false, (int) mGLFWCursorX, (int) mGLFWCursorY);
+                default: CallbackBridge.nativeSetGrabbing(false);
             }
         }
 
@@ -1140,23 +1118,24 @@ public class GLFW
     public static int glfwGetMouseButton(@NativeType("GLFWwindow *") long window, int button) {
         return 0;
     }
-
     public static void glfwGetCursorPos(@NativeType("GLFWwindow *") long window, @Nullable @NativeType("double *") DoubleBuffer xpos, @Nullable @NativeType("double *") DoubleBuffer ypos) {
         if (CHECKS) {
             checkSafe(xpos, 1);
             checkSafe(ypos, 1);
         }
-
-        xpos.put(mGLFWCursorX);
-        ypos.put(mGLFWCursorY);
+        nglfwGetCursorPos(window, xpos, ypos);
     }
 
-    public static void glfwSetCursorPos(@NativeType("GLFWwindow *") long window, double xpos, double ypos) {
+
+    public static native void nglfwGetCursorPos(@NativeType("GLFWwindow *") long window, @Nullable @NativeType("double *") DoubleBuffer xpos, @Nullable @NativeType("double *") DoubleBuffer ypos);
+    public static native void nglfwGetCursorPosA(@NativeType("GLFWwindow *") long window, @Nullable @NativeType("double *") double[] xpos, @Nullable @NativeType("double *") double[] ypos);
+
+    public static native void glfwSetCursorPos(@NativeType("GLFWwindow *") long window, double xpos, double ypos); /*{
         mGLFWCursorX = mGLFWCursorLastX = xpos;
         mGLFWCursorY = mGLFWCursorLastY = ypos;
 
         CallbackBridge.sendGrabbing(mGLFWIsGrabbing, (int) xpos, (int) ypos);
-    }
+    }*/
 
     public static long glfwCreateCursor(@NativeType("const GLFWimage *") GLFWImage image, int xhot, int yhot) {
         return 4L;
@@ -1368,8 +1347,7 @@ public class GLFW
             checkSafe(xpos, 1);
             checkSafe(ypos, 1);
         }
-        xpos[0] = mGLFWCursorX;
-        ypos[0] = mGLFWCursorY;
+        nglfwGetCursorPosA(window, xpos, ypos);
     }
 
     public static boolean glfwExtensionSupported(String ext) {
