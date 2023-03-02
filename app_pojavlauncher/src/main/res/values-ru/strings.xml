@@ -312,4 +312,5 @@
     <string name="preference_gyro_sample_rate_title">Интервал опроса гироскопа</string>
     <string name="preference_gyro_sample_rate_description">Увеличьте, если управление наклоном снижает производительность.</string>
     <string name="microsoft_login_retry_later">Слишком много запросов, попробуйте ещё раз позднее.</string>
+    <string name="storage_required">Для работы PojavLauncher необходим ваш съёмный накопитель. Пожалуйста, переподключите его и запустите приложение ещё раз.</string>
 </resources>
