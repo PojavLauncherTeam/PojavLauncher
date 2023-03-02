@@ -21,7 +21,7 @@ public class LayoutConverter {
     public static boolean convertLookType = false; //false = flat; true = classic
     public static CustomControls loadAndConvertIfNecessary(String jsonPath) throws IOException, JsonSyntaxException {
 
-        String jsonLayoutData = IOUtils.toString(new InputStreamReader(new FileInputStream(jsonPath), StandardCharsets.UTF_8));
+        String jsonLayoutData = Tools.read(jsonPath);
         try {
             JSONObject layoutJobj = new JSONObject(jsonLayoutData);
 

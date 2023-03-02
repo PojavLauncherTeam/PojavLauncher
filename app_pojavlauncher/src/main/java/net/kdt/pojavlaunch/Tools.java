@@ -523,7 +523,11 @@ public final class Tools {
         }
         File destinationFile = new File(output, outputName);
         if(!destinationFile.exists() || overwrite){
-            IOUtils.copy(ctx.getAssets().open(fileName), new FileOutputStream(destinationFile));
+            try(InputStream inputStream = ctx.getAssets().open(fileName)) {
+                try (OutputStream outputStream = new FileOutputStream(destinationFile)){
+                    IOUtils.copy(inputStream, outputStream);
+                }
+            }
         }
     }
 
@@ -768,15 +772,19 @@ public final class Tools {
     }
 
     public static String read(InputStream is) throws IOException {
-        return IOUtils.toString(new InputStreamReader(is, StandardCharsets.UTF_8));
+        String readResult = IOUtils.toString(is, StandardCharsets.UTF_8);
+        is.close();
+        return readResult;
     }
 
     public static String read(String path) throws IOException {
-        return IOUtils.toString(new InputStreamReader(new FileInputStream(path), StandardCharsets.UTF_8));
+        return read(new FileInputStream(path));
     }
 
     public static void write(String path, String content) throws IOException {
-        IOUtils.write(content, new FileOutputStream(path));
+        try(FileOutputStream outStream = new FileOutputStream(path)) {
+            IOUtils.write(content, outStream);
+        }
     }
 
     public static void downloadFile(String urlInput, String nameOutput) throws IOException {
@@ -930,7 +938,9 @@ public final class Tools {
                 final String name = getFileName(activity, uri);
                 final File modInstallerFile = new File(activity.getCacheDir(), name);
                 FileOutputStream fos = new FileOutputStream(modInstallerFile);
-                IOUtils.copy(activity.getContentResolver().openInputStream(uri), fos);
+                InputStream input = activity.getContentResolver().openInputStream(uri);
+                IOUtils.copy(input, fos);
+                input.close();
                 fos.close();
                 activity.runOnUiThread(() -> {
                     alertDialog.dismiss();
