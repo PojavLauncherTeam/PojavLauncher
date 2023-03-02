@@ -106,13 +106,12 @@ public class LauncherActivity extends BaseActivity {
         }
 
         String selectedProfile = LauncherPreferences.DEFAULT_PREF.getString(LauncherPreferences.PREF_KEY_CURRENT_PROFILE,"");
-        if (LauncherProfiles.mainProfileJson == null  || LauncherProfiles.mainProfileJson.profiles == null
-                || !LauncherProfiles.mainProfileJson.profiles.containsKey(selectedProfile)){
+        if (LauncherProfiles.mainProfileJson == null || !LauncherProfiles.mainProfileJson.profiles.containsKey(selectedProfile)){
             Toast.makeText(this, R.string.error_no_version, Toast.LENGTH_LONG).show();
             return false;
         }
         MinecraftProfile prof = LauncherProfiles.mainProfileJson.profiles.get(selectedProfile);
-        if (prof == null || prof.lastVersionId == null){
+        if (prof == null || prof.lastVersionId == null || "Unknown".equals(prof.lastVersionId)){
             Toast.makeText(this, R.string.error_no_version, Toast.LENGTH_LONG).show();
             return false;
         }

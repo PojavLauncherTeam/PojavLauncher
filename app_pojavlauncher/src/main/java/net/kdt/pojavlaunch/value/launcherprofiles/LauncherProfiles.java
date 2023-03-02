@@ -12,6 +12,7 @@ public class LauncherProfiles {
             if (mainProfileJson == null) {
                 if (launcherProfilesFile.exists()) {
                     mainProfileJson = Tools.GLOBAL_GSON.fromJson(Tools.read(launcherProfilesFile.getAbsolutePath()), MinecraftLauncherProfiles.class);
+                    if(mainProfileJson.profiles == null) mainProfileJson.profiles = new HashMap<>();
                 } else {
                     mainProfileJson = new MinecraftLauncherProfiles();
                     mainProfileJson.profiles = new HashMap<>();
