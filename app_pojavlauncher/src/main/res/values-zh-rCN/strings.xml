@@ -13,7 +13,7 @@
     <string name="login_online_login_label">登录</string>
     <string name="login_error_invalid_username">用户名无效。用户名必须在 3-16 个字符的范围内，且只能包含 A-Z、a-z、0-9 和下划线。</string>
     <string name="login_error_exist_username">用户名已存在</string>
-    <string name="login_microsoft">微软帐号登录</string>
+    <string name="login_microsoft">微软账号登录</string>
     <string name="login_select_account">选择账户</string>
     <string name="login_title_no_saved_account">该账户不存在！</string>
     <string name="login_dialog_no_saved_account">尚未保存任何账户。\n使用<b>“保持登录状态”</b>选项以在首次登录后保存账户。</string>
