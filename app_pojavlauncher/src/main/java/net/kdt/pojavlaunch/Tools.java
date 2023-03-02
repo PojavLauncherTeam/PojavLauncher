@@ -846,22 +846,14 @@ public final class Tools {
     }
 
     public static String getFileName(Context ctx, Uri uri) {
-        String result = null;
-        if (uri.getScheme().equals("content")) {
-            try (Cursor cursor = ctx.getContentResolver().query(uri, null, null, null, null)) {
-                if (cursor != null && cursor.moveToFirst()) {
-                    result = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
-                }
-            }
-        }
-        if (result == null) {
-            result = uri.getPath();
-            int cut = result.lastIndexOf('/');
-            if (cut != -1) {
-                result = result.substring(cut + 1);
-            }
-        }
-        return result;
+        Cursor c = ctx.getContentResolver().query(uri, null, null, null, null);
+        if(c == null) return uri.getLastPathSegment(); // idk myself but it happens on asus file manager
+        c.moveToFirst();
+        int columnIndex = c.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+        if(columnIndex == -1) return uri.getLastPathSegment();
+        String fileName = c.getString(columnIndex);
+        c.close();
+        return fileName;
     }
 
     /** Swap the main fragment with another */
