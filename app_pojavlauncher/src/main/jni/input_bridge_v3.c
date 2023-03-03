@@ -16,6 +16,7 @@
 #include <libgen.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdatomic.h>
 
 #include "log.h"
 #include "utils.h"
@@ -43,15 +44,16 @@ typedef void GLFW_invoke_Scroll_func(void* window, double xoffset, double yoffse
 typedef void GLFW_invoke_WindowSize_func(void* window, int width, int height);
 
 static float grabCursorX, grabCursorY, lastCursorX, lastCursorY;
+static double cursorX, cursorY, cLastX, cLastY;
 
-jclass inputBridgeClass_ANDROID, inputBridgeClass_JRE;
-jmethodID inputBridgeMethod_ANDROID, inputBridgeMethod_JRE;
 jmethodID method_accessAndroidClipboard;
 jmethodID method_onGrabStateChanged;
 jmethodID method_glftSetWindowAttrib;
+jmethodID method_internalWindowSizeChanged;
 jclass bridgeClazz;
 jclass vmGlfwClass;
 jboolean isGrabbing;
+jbyte* keyDownBuffer;
 
 jint JNI_OnLoad(JavaVM* vm, void* reserved) {
     if (dalvikJavaVMPtr == NULL) {
@@ -67,6 +69,10 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved) {
         (*vm)->GetEnv(vm, (void**) &runtimeJNIEnvPtr_JRE, JNI_VERSION_1_4);
         vmGlfwClass = (*runtimeJNIEnvPtr_JRE)->NewGlobalRef(runtimeJNIEnvPtr_JRE, (*runtimeJNIEnvPtr_JRE)->FindClass(runtimeJNIEnvPtr_JRE, "org/lwjgl/glfw/GLFW"));
         method_glftSetWindowAttrib = (*runtimeJNIEnvPtr_JRE)->GetStaticMethodID(runtimeJNIEnvPtr_JRE, vmGlfwClass, "glfwSetWindowAttrib", "(JII)V");
+        method_internalWindowSizeChanged = (*runtimeJNIEnvPtr_JRE)->GetStaticMethodID(runtimeJNIEnvPtr_JRE, vmGlfwClass, "internalWindowSizeChanged", "(JII)V");
+        jfieldID field_keyDownBuffer = (*runtimeJNIEnvPtr_JRE)->GetStaticFieldID(runtimeJNIEnvPtr_JRE, vmGlfwClass, "keyDownBuffer", "Ljava/nio/ByteBuffer;");
+        jobject keyDownBufferJ = (*runtimeJNIEnvPtr_JRE)->GetStaticObjectField(runtimeJNIEnvPtr_JRE, vmGlfwClass, field_keyDownBuffer);
+        keyDownBuffer = (*runtimeJNIEnvPtr_JRE)->GetDirectBufferAddress(runtimeJNIEnvPtr_JRE, keyDownBufferJ);
         hookExec();
     }
     
@@ -86,7 +92,7 @@ void JNI_OnUnload(JavaVM* vm, void* reserved) {
 */
 
     //dalvikJNIEnvPtr_JRE = NULL;
-    runtimeJNIEnvPtr_ANDROID = NULL;
+    //runtimeJNIEnvPtr_ANDROID = NULL;
 }
 
 #define ADD_CALLBACK_WWIN(NAME) \
@@ -127,22 +133,106 @@ jboolean attachThread(bool isAndroid, JNIEnv** secondJNIEnvPtr) {
     return JNI_FALSE;
 }
 
-void sendData(int type, int i1, int i2, int i3, int i4) {
-#ifdef DEBUG
-    LOGD("Debug: Send data, jnienv.isNull=%d\n", runtimeJNIEnvPtr_ANDROID == NULL);
-#endif
-    if (runtimeJNIEnvPtr_ANDROID == NULL) {
-        LOGE("BUG: Input is ready but thread is not attached yet.");
-        return;
+typedef struct {
+    int type;
+    int i1;
+    int i2;
+    int i3;
+    int i4;
+} GLFWInputEvent;
+static atomic_size_t eventCounter = 0;
+static GLFWInputEvent events[500];
+
+void handleFramebufferSizeJava(long window, int w, int h) {
+    (*runtimeJNIEnvPtr_JRE)->CallStaticVoidMethod(runtimeJNIEnvPtr_JRE, vmGlfwClass, method_internalWindowSizeChanged, (long)window, w, h);
+}
+
+void pojavPumpEvents(void* window) {
+    //__android_log_print(ANDROID_LOG_INFO, "input_bridge_v3", "pojavPumpEvents %d", eventCounter);
+    size_t counter = atomic_load_explicit(&eventCounter, memory_order_acquire);
+    for(size_t i = 0; i < counter; i++) {
+        GLFWInputEvent event = events[i];
+        switch(event.type) {
+            case EVENT_TYPE_CHAR:
+                if(GLFW_invoke_Char) GLFW_invoke_Char(window, event.i1);
+                break;
+            case EVENT_TYPE_CHAR_MODS:
+                if(GLFW_invoke_CharMods) GLFW_invoke_CharMods(window, event.i1, event.i2);
+                break;
+            case EVENT_TYPE_KEY:
+                if(GLFW_invoke_Key) GLFW_invoke_Key(window, event.i1, event.i2, event.i3, event.i4);
+                break;
+            case EVENT_TYPE_MOUSE_BUTTON:
+                if(GLFW_invoke_MouseButton) GLFW_invoke_MouseButton(window, event.i1, event.i2, event.i3);
+                break;
+            case EVENT_TYPE_SCROLL:
+                if(GLFW_invoke_Scroll) GLFW_invoke_Scroll(window, event.i1, event.i2);
+                break;
+            case EVENT_TYPE_FRAMEBUFFER_SIZE:
+                handleFramebufferSizeJava(showingWindow, event.i1, event.i2);
+                __android_log_print(ANDROID_LOG_INFO, "NativeInput", "Pumped size event: %i %i",event.i1, event.i2);
+                if(GLFW_invoke_FramebufferSize) GLFW_invoke_FramebufferSize(window, event.i1, event.i2);
+                break;
+            case EVENT_TYPE_WINDOW_SIZE:
+                handleFramebufferSizeJava(showingWindow, event.i1, event.i2);
+                __android_log_print(ANDROID_LOG_INFO, "NativeInput", "Pumped size event: %i %i",event.i1, event.i2);
+                if(GLFW_invoke_WindowSize) GLFW_invoke_WindowSize(window, event.i1, event.i2);
+                break;
+        }
     }
-    if(inputBridgeClass_ANDROID == NULL) return;
-    (*runtimeJNIEnvPtr_ANDROID)->CallStaticVoidMethod(
-        runtimeJNIEnvPtr_ANDROID,
-        inputBridgeClass_ANDROID,
-        inputBridgeMethod_ANDROID,
-        type,
-        i1, i2, i3, i4
-    );
+    if((cLastX != cursorX || cLastY != cursorY) && GLFW_invoke_CursorPos) {
+        cLastX = cursorX;
+        cLastY = cursorY;
+        GLFW_invoke_CursorPos(window, cursorX, cursorY);
+    }
+    atomic_store_explicit(&eventCounter, counter, memory_order_release);
+}
+void pojavRewindEvents() {
+    atomic_store_explicit(&eventCounter, 0, memory_order_release);
+}
+
+JNIEXPORT void JNICALL
+Java_org_lwjgl_glfw_GLFW_nglfwGetCursorPos(JNIEnv *env, jclass clazz, jlong window, jobject xpos,
+                                          jobject ypos) {
+    *(double*)(*env)->GetDirectBufferAddress(env, xpos) = cursorX;
+    *(double*)(*env)->GetDirectBufferAddress(env, ypos) = cursorY;
+    // TODO: implement glfwGetCursorPos()
+}
+
+JNIEXPORT void JNICALL
+Java_org_lwjgl_glfw_GLFW_nglfwGetCursorPosA(JNIEnv *env, jclass clazz, jlong window,
+                                            jdoubleArray xpos, jdoubleArray ypos) {
+    (*env)->SetDoubleArrayRegion(env, xpos, 0,1, &cursorX);
+    (*env)->SetDoubleArrayRegion(env, ypos, 0,1, &cursorY);
+    // TODO: implement nglfwGetCursorPosA()
+}
+
+JNIEXPORT void JNICALL
+Java_org_lwjgl_glfw_GLFW_glfwSetCursorPos(JNIEnv *env, jclass clazz, jlong window, jdouble xpos,
+                                          jdouble ypos) {
+    cLastX = cursorX = xpos;
+    cLastY = cursorY = ypos;
+    // TODO: implement glfwSetCursorPos()
+}
+
+
+
+void sendData(int type, int i1, int i2, int i3, int i4) {
+    if(type == EVENT_TYPE_CURSOR_POS) {
+        cursorX = i1;
+        cursorY = i2;
+    }else {
+        size_t counter = atomic_load_explicit(&eventCounter, memory_order_acquire);
+        if (counter < 499) {
+            GLFWInputEvent *event = &events[counter++];
+            event->type = type;
+            event->i1 = i1;
+            event->i2 = i2;
+            event->i3 = i3;
+            event->i4 = i4;
+        }
+        atomic_store_explicit(&eventCounter, counter, memory_order_release);
+    }
 }
 
 void closeGLFWWindow() {
@@ -206,21 +296,10 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeAttachThread
 #ifdef DEBUG
     LOGD("Debug: JNI attaching thread, isUseStackQueue=%d\n", isUseStackQueueBool);
 #endif
-
-    jboolean result;
-
-    //isUseStackQueueCall = (int) isUseStackQueueBool;
-    if (isAndroid) {
-        result = attachThread(true, &runtimeJNIEnvPtr_ANDROID);
-    } /* else {
-        result = attachThread(false, &dalvikJNIEnvPtr_JRE);
-        // getJavaInputBridge(&inputBridgeClass_JRE, &inputBridgeMethod_JRE);
-    } */
-    
-    if (isUseStackQueueCall && isAndroid && result) {
+    if (isUseStackQueueCall && isAndroid) {
         isPrepareGrabPos = true;
     }
-    return result;
+    return true;
 }
 
 JNIEXPORT jstring JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeClipboard(JNIEnv* env, jclass clazz, jint action, jbyteArray copySrc) {
@@ -256,21 +335,26 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSetInputRead
 #ifdef DEBUG
     LOGD("Debug: Changing input state, isReady=%d, isUseStackQueueCall=%d\n", inputReady, isUseStackQueueCall);
 #endif
+    __android_log_print(ANDROID_LOG_INFO, "NativeInput", "Input ready: %i", inputReady);
     isInputReady = inputReady;
     return isUseStackQueueCall;
 }
 
-JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSetGrabbing(JNIEnv* env, jclass clazz, jboolean grabbing, jint xset, jint yset) {
-    JNIEnv *dalvikEnv;
-    (*dalvikJavaVMPtr)->AttachCurrentThread(dalvikJavaVMPtr, &dalvikEnv, NULL);
-    (*dalvikEnv)->CallStaticVoidMethod(dalvikEnv, bridgeClazz, method_onGrabStateChanged, grabbing);
-    (*dalvikJavaVMPtr)->DetachCurrentThread(dalvikJavaVMPtr);
-    isGrabbing = grabbing;
+static void updateGrabCursor(jint xset, jint yset) {
     if (isGrabbing == JNI_TRUE) {
         grabCursorX = xset; // savedWidth / 2;
         grabCursorY = yset; // savedHeight / 2;
         isPrepareGrabPos = true;
     }
+}
+
+JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSetGrabbing(JNIEnv* env, jclass clazz, jboolean grabbing) {
+    JNIEnv *dalvikEnv;
+    (*dalvikJavaVMPtr)->AttachCurrentThread(dalvikJavaVMPtr, &dalvikEnv, NULL);
+    (*dalvikEnv)->CallStaticVoidMethod(dalvikEnv, bridgeClazz, method_onGrabStateChanged, grabbing);
+    (*dalvikJavaVMPtr)->DetachCurrentThread(dalvikJavaVMPtr);
+    isGrabbing = grabbing;
+    updateGrabCursor((jint)cursorX, (jint)cursorY);
 }
 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeIsGrabbing(JNIEnv* env, jclass clazz) {
@@ -356,9 +440,13 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendCursorPos(JN
         lastCursorY = y;
     }
 }
-
+#define max(a,b) \
+   ({ __typeof__ (a) _a = (a); \
+       __typeof__ (b) _b = (b); \
+     _a > _b ? _a : _b; })
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendKey(JNIEnv* env, jclass clazz, jint key, jint scancode, jint action, jint mods) {
     if (GLFW_invoke_Key && isInputReady) {
+        keyDownBuffer[max(0, key-31)]=(jbyte)action;
         if (isUseStackQueueCall) {
             sendData(EVENT_TYPE_KEY, key, scancode, action, mods);
         } else {
@@ -387,7 +475,6 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendMouseButton(
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendScreenSize(JNIEnv* env, jclass clazz, jint width, jint height) {
     savedWidth = width;
     savedHeight = height;
-    
     if (isInputReady) {
         if (GLFW_invoke_FramebufferSize) {
             if (isUseStackQueueCall) {
@@ -435,10 +522,4 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSetWindowAttrib(
         vmGlfwClass, method_glftSetWindowAttrib,
         (jlong) showingWindow, attrib, value
     );
-}
-
-JNIEXPORT void JNICALL
-Java_org_lwjgl_glfw_CallbackBridge_setClass(JNIEnv *env, jclass clazz) {
-    inputBridgeMethod_ANDROID = (*env)->GetStaticMethodID(env, clazz, "receiveCallback", "(IIIII)V");
-    inputBridgeClass_ANDROID = (*env)->NewGlobalRef(env, clazz);
 }

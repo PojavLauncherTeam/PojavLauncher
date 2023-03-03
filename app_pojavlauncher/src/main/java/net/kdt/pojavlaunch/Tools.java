@@ -782,7 +782,10 @@ public final class Tools {
     }
 
     public static void write(String path, String content) throws IOException {
-        try(FileOutputStream outStream = new FileOutputStream(path)) {
+        File file = new File(path);
+        File parent = file.getParentFile();
+        if(!parent.exists()) parent.mkdirs();
+        try(FileOutputStream outStream = new FileOutputStream(file)) {
             IOUtils.write(content, outStream);
         }
     }

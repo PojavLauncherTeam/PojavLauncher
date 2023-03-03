@@ -39,7 +39,6 @@ public class CallbackBridge {
 
     public static void sendCursorPos(float x, float y) {
         if (!threadAttached) {
-            nativeSetUseInputStackQueue(MainActivity.isInputStackCall);
             threadAttached = CallbackBridge.nativeAttachThreadToOther(true, MainActivity.isInputStackCall);
         }
 

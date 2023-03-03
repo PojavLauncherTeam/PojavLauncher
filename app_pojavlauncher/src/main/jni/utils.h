@@ -3,7 +3,6 @@
 #include <stdbool.h>
 
 static JavaVM* runtimeJavaVMPtr;
-static JNIEnv* runtimeJNIEnvPtr_ANDROID;
 static JNIEnv* runtimeJNIEnvPtr_JRE;
 
 static JavaVM* dalvikJavaVMPtr;
