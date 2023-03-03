@@ -172,4 +172,5 @@
     <string name="folder_dialog_create">Loo</string>
     <string name="main_login_done">Sisenemine õnnestus</string>
     <string name="main_add_account">Lisa konto</string>
+    <string name="create_profile">Loo uus profiil</string>
 </resources>
