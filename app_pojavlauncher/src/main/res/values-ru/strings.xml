@@ -3,7 +3,7 @@
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition для Android)</string>
     <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">Запустите Minecraft: Java Edition на вашем устройстве!</string>
+    <string name="app_motd">Запускайте Minecraft: Java Edition на вашем устройстве!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
@@ -74,21 +74,21 @@
     <string name="mcl_setting_subtitle_backtorightmouse">Некоторые устройства считают правую кнопку внешней мыши как кнопку назад. Если вы используете внешнюю мышь, рекомендуется включить эту функцию.</string>
     <string name="mcl_setting_title_flat_button_style">Плоский стиль кнопок</string>
     <string name="mcl_setting_subtitle_flat_button_style">Включите эту функцию, чтобы изменить стиль кнопок управления на плоский.</string>
-    <string name="mcl_setting_title_buttonscale">Масштабирование кнопок</string>
+    <string name="mcl_setting_title_buttonscale">Размер кнопок</string>
     <string name="mcl_setting_subtitle_buttonscale">Увеличьте, если они слишком малы.</string>
-    <string name="mcl_setting_title_mousescale">Масштабирование курсора</string>
+    <string name="mcl_setting_title_mousescale">Размер курсора</string>
     <string name="mcl_setting_subtitle_mousescale">Изменяет размер курсора мыши.</string>
     <string name="mcl_setting_title_javaargs">Аргументы запуска JVM</string>
     <string name="mcl_setting_subtitle_javaargs">Будьте осторожны, это может привести к сбою игры, если изменить их без особых знаний.</string>
     <string name="mcl_setting_category_general">Общие настройки</string>
     <string name="mcl_setting_category_scaling">Настройки масштабирования</string>
     <string name="mcl_setting_category_renderer">Визуализатор</string>
-    <string name="mcl_setting_renderer_gles2_4">Holy GL4ES (универсальный и быстрый)</string>
+    <string name="mcl_setting_renderer_gles2_4">Holy GL4ES (все версии, быстрый)</string>
     <string name="mcl_setting_renderer_virgl">virglrenderer (1.7 и выше, медленный)</string>
-    <string name="mcl_setting_renderer_vgpu">vgpu (1.16.5 и ниже, быстрый)</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink (бета b1.8 и выше, медленный)</string>
+    <string name="mcl_setting_renderer_vgpu">vgpu (до 1.16.5, быстрый)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink (старые бета b1.8 и выше, медленный)</string>
     <string name="mcl_setting_renderer_angle">ANGLE (1.17 и выше, средний)</string>
-    <string name="mcl_setting_category_veroption">Типы версий, которые будут отображаться в списке версий</string>
+    <string name="mcl_setting_category_veroption">Типы версий, которые будут отображаться в списке</string>
     <string name="mcl_setting_veroption_release">Релизы</string>
     <string name="mcl_setting_veroption_snapshot">Снапшоты</string>
     <string name="mcl_setting_veroption_oldalpha">Старые альфа</string>
@@ -113,7 +113,7 @@
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Произошёл собой приложения/игры с кодом %d. Проверьте latestlog.txt, чтобы получить больше информации.</string>
     <string name="mcn_exit_call">Выйти</string>
-    <string name="mcn_exit_confirm">Вы уверены, что хотите принудительно закрыть его?</string>
+    <string name="mcn_exit_confirm">Вы уверены, что хотите принудительно завершить игру?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 не установлен!</string>
     <string name="mcn_check_fail_vulkan_support">Визуализатор Vulkan Zink не поддерживается на этом устройстве!</string>
     <!-- MainActivity: Control buttons -->
@@ -180,8 +180,8 @@
     <string name="customctrl_addsubbutton">Добавить под-кнопку</string>
     <string name="customctrl_add_subbutton_message">Подкнопка №%d добавлена!</string>
     <string name="customctrl_selectdefault">Выбрать управление по умолчанию</string>
-    <string name="customctrl_export">Экспорт раскладки</string>
-    <string name="main_share_logs">Отправить журнал</string>
+    <string name="customctrl_export">Экспортировать управление</string>
+    <string name="main_share_logs">Поделится файлом журнала</string>
     <string name="main_install_jar_file">Установите .jar</string>
     <string name="main_options">Опции</string>
     <string name="main_play">Играть</string>
@@ -244,16 +244,16 @@
     <string name="preference_video_description">Разрешение, тип масштабирования и визуализатор</string>
     <string name="preference_control_title">Настройка управления</string>
     <string name="preference_control_description">Типы жестов, флажки и масштабирование</string>
-    <string name="preference_java_title">Корректировка Java</string>
+    <string name="preference_java_title">Настройки Java</string>
     <string name="preference_java_description">Версии Java, аргументы JVM, выделение памяти и безопасность среды</string>
     <string name="preference_misc_title">Другие настройки</string>
     <string name="preference_misc_description">Список версий и проверка библиотек</string>
     <string name="preference_experimental_title">Экспериментальные штуки</string>
     <string name="preference_experimental_description">Используйте эти функции с осторожностью; поддержка не предоставляется.</string>
     <string name="preference_sustained_performance_title">Включить режим стабилизации производительности</string>
-    <string name="preference_sustained_performance_description">Уменьшает тротлинга от нагрева путём уменьшения производительности</string>
+    <string name="preference_sustained_performance_description">Уменьшает перегрев устройства за счёт ограничения максимальной производительности.</string>
     <string name="preference_force_vsync_title">Принудительная вертикальная синхронизация</string>
-    <string name="preference_force_vsync_description">Уменьшает тротлинга от нагрева путём уменьшения производительности</string>
+    <string name="preference_force_vsync_description">Уменьшает перегрев устройства за счёт ограничения максимальной производительности.</string>
     <string name="preference_force_english_title">Принудительно включить английский</string>
     <string name="preference_force_english_description">Позволяет увидеть оригинальные строки такими, какими их задумали разработчики. Требует перезапуска.</string>
     <string name="preference_edit_controls_title">Изменить раскладку</string>
@@ -313,4 +313,7 @@
     <string name="preference_gyro_sample_rate_description">Увеличьте, если управление наклоном снижает производительность.</string>
     <string name="microsoft_login_retry_later">Слишком много запросов, попробуйте ещё раз позднее.</string>
     <string name="storage_required">Для работы PojavLauncher необходим ваш съёмный накопитель. Пожалуйста, переподключите его и запустите приложение ещё раз.</string>
+    <string name="mcl_setting_title_buttonallcaps">Заглавные буквы на кнопках</string>
+    <string name="mcl_setting_subtitle_buttonallcaps">Отключите, если хотите использовать строчные буквы в своей раскладке управления.</string>
+    <string name="create_profile">Новый профиль</string>
 </resources>
