@@ -141,7 +141,7 @@ typedef struct {
     int i4;
 } GLFWInputEvent;
 static atomic_size_t eventCounter = 0;
-static GLFWInputEvent events[500];
+static GLFWInputEvent events[8000];
 
 void handleFramebufferSizeJava(long window, int w, int h) {
     (*runtimeJNIEnvPtr_JRE)->CallStaticVoidMethod(runtimeJNIEnvPtr_JRE, vmGlfwClass, method_internalWindowSizeChanged, (long)window, w, h);
@@ -223,7 +223,7 @@ void sendData(int type, int i1, int i2, int i3, int i4) {
         cursorY = i2;
     }else {
         size_t counter = atomic_load_explicit(&eventCounter, memory_order_acquire);
-        if (counter < 499) {
+        if (counter < 7999) {
             GLFWInputEvent *event = &events[counter++];
             event->type = type;
             event->i1 = i1;
