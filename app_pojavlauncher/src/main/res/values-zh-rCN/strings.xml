@@ -314,4 +314,5 @@
     <string name="storage_required">PojavLauncher 需要连接外部存储。请重新连接存储并重新启动应用程序。</string>
     <string name="mcl_setting_title_buttonallcaps">在按钮标签中仅使用大写字母</string>
     <string name="mcl_setting_subtitle_buttonallcaps">如果您想在控件中使用小写字母，请禁用此功能</string>
+    <string name="create_profile">创建新配置</string>
 </resources>
