@@ -314,4 +314,5 @@
     <string name="storage_required">PojavLauncher потребує прикріпленого зовнішнього сховища. Будь ласка, пере під\'єднайте сховище та перезапустіть додаток.</string>
     <string name="mcl_setting_title_buttonallcaps">Використовувати лише великі букви на кнопках</string>
     <string name="mcl_setting_subtitle_buttonallcaps">Вимкніть це, якщо ви хочете використовувати маленькі букви в керуванні</string>
+    <string name="create_profile">Створити профіль</string>
 </resources>
