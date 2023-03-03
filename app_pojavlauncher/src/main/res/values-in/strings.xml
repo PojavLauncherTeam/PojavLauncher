@@ -18,6 +18,7 @@
     <string name="login_title_no_saved_account">Tidak ada akun yang ditemukan!</string>
     <string name="login_dialog_no_saved_account">Anda tidak punya akun yang sudah disimpan.\nGunakan opsi <b>\"Tetap masuk\"</b> untuk menyimpan sebuah akun waktu login pertama kali.</string>
     <!-- Hint -->
+    <string name="hint_control_mapping">"Ketuk ikon beroda gigi untuk membuka menu konteks \nKetuk tombol untuk menyesuaikan: ubah, ubah ukuran, atau ubah tombol pintasannya."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Akun ini akan dihapus!</string>
     <!-- AlertDialog title -->
@@ -106,6 +107,7 @@
     <string name="global_unpacking">Membongkar %s</string>
     <string name="global_error_field_empty">Kolom ini tidak boleh kosong</string>
     <string name="global_waiting">Tunggu</string>
+    <string name="global_select">Pilih</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Aplikasi/permainan keluar dengan kode %d, cek latestlog.txt untuk detail lebih lanjut.</string>
     <string name="mcn_exit_call">Keluar</string>
@@ -246,10 +248,15 @@
     <string name="preference_experimental_description">Gunakan hal-hal di sana dengan pertimbangan, tanpa dukungan.</string>
     <string name="preference_sustained_performance_title">Aktifkan mode kinerja berkelanjutan</string>
     <string name="preference_sustained_performance_description">Limit thermal throttling dengan menglimit perfoma maksimal</string>
+    <string name="preference_force_vsync_title">Paksa nyalakan vsync</string>
     <string name="preference_force_vsync_description">Limit thermal throttling dengan menglimit perfoma maksimal</string>
     <string name="preference_force_english_title">Paksa bahasa menggunakan Bahasa Inggris</string>
     <string name="preference_force_english_description">Memperbolehkan anda untuk melihat string asli, seperti diinginkan oleh para pengembang. Membutuhkan sebuah restart</string>
+    <string name="preference_edit_controls_title">Ubah kontrol kustom</string>
+    <string name="preference_category_gyro_controls">Kontrol giro</string>
     <string name="preference_category_virtual_mouse">Mouse virtual</string>
+    <string name="preference_gyro_invert_x_axis">Balikkan sumbu X</string>
+    <string name="preference_gyro_invert_y_axis">Balikkan sumbu Y</string>
     <string name="preference_back_title">Kembali ke layar terakhir</string>
     <string name="gles_hack_title">GL4ES Shrink hack</string>
     <string name="gles_hack_none">Jangan mengecilkan tekstur</string>
@@ -285,7 +292,13 @@
     <string name="downloading_versions">Mengunduh daftar versi…</string>
     <string name="mc_download_failed">Gagal mengunduh Minecraft! Ini mungkin karena jaringan yang buruk, file yang salah ditempatkan, dll..</string>
     <string name="xerr_no_account">Kamu sepertinya tidak memiliki akun Xbox Live. Tolong login ke https://minecraft.net/ dan ulang kembali.</string>
+    <string name="xerr_adult_verification">Orang tua perlu memverifikasikan akunmu.</string>
+    <string name="xerr_child">Akunmu adalah akun anak, dan perlu ditambahkan ke keluarga agar dapat masuk.</string>
     <string name="minecraft_not_owned">Sepertinya akun ini tidak mempunyai profil Minecraft. Jika kamu memiliki Xbox Game Pass, tolong login ke https://minecraft.net/ dan mengaturnya.</string>
     <string name="xerr_not_available">Xbox Live tidak tersedia dinegaramu</string>
-    <string name="preference_enable_gyro_title">Hidupkan kontrol gyroscope</string>
+    <string name="preference_enable_gyro_title">Hidupkan kontrol giroskop</string>
+    <string name="toast_turn_on_gyro">Nyalakan kontrol giro sebelum menggunakan ini!</string>
+    <string name="storage_required">PojavLauncher memerlukan penyimpanan eksternal. Mohon hubungkan ulang penyimpanan Anda dan mulai ulang aplikasi.</string>
+    <string name="mcl_setting_subtitle_buttonallcaps">Matikan ini jika Anda hanya ingin menggunakan huruf kecil dalam kontrol Anda</string>
+    <string name="create_profile">Buat profil baru</string>
 </resources>
