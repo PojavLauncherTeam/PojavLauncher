@@ -11,8 +11,7 @@ static JNIEnv* dalvikJNIEnvPtr_ANDROID;
 
 static long showingWindow;
 
-static volatile bool isInputReady;
-static bool isCursorEntered, isPrepareGrabPos, isUseStackQueueCall;
+static bool isInputReady, isCursorEntered, isPrepareGrabPos, isUseStackQueueCall;
 
 static int savedWidth, savedHeight;
 
