@@ -3,7 +3,6 @@
 #include <stdbool.h>
 
 static JavaVM* runtimeJavaVMPtr;
-static JNIEnv* runtimeJNIEnvPtr_ANDROID;
 static JNIEnv* runtimeJNIEnvPtr_JRE;
 
 static JavaVM* dalvikJavaVMPtr;
@@ -12,7 +11,8 @@ static JNIEnv* dalvikJNIEnvPtr_ANDROID;
 
 static long showingWindow;
 
-static bool isInputReady, isCursorEntered, isPrepareGrabPos, isUseStackQueueCall;
+static volatile bool isInputReady;
+static bool isCursorEntered, isPrepareGrabPos, isUseStackQueueCall;
 
 static int savedWidth, savedHeight;
 

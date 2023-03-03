@@ -154,6 +154,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
 
             mVersionId = version;
             isInputStackCall = Tools.getVersionInfo(mVersionId).arguments != null;
+            CallbackBridge.nativeSetUseInputStackQueue(isInputStackCall);
 
             Tools.getDisplayMetrics(this);
             windowWidth = Tools.getDisplayFriendlyRes(currentDisplayMetrics.widthPixels, scaleFactor);

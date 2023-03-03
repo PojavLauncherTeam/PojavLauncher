@@ -16,6 +16,7 @@
 #include <libgen.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdatomic.h>
 
 #include "log.h"
 #include "utils.h"
@@ -91,7 +92,7 @@ void JNI_OnUnload(JavaVM* vm, void* reserved) {
 */
 
     //dalvikJNIEnvPtr_JRE = NULL;
-    runtimeJNIEnvPtr_ANDROID = NULL;
+    //runtimeJNIEnvPtr_ANDROID = NULL;
 }
 
 #define ADD_CALLBACK_WWIN(NAME) \
@@ -139,7 +140,7 @@ typedef struct {
     int i3;
     int i4;
 } GLFWInputEvent;
-static size_t eventCounter = 0;
+static atomic_size_t eventCounter = 0;
 static GLFWInputEvent events[500];
 
 void handleFramebufferSizeJava(long window, int w, int h) {
@@ -148,7 +149,8 @@ void handleFramebufferSizeJava(long window, int w, int h) {
 
 void pojavPumpEvents(void* window) {
     //__android_log_print(ANDROID_LOG_INFO, "input_bridge_v3", "pojavPumpEvents %d", eventCounter);
-    for(size_t i = 0; i < eventCounter; i++) {
+    size_t counter = atomic_load_explicit(&eventCounter, memory_order_acquire);
+    for(size_t i = 0; i < counter; i++) {
         GLFWInputEvent event = events[i];
         switch(event.type) {
             case EVENT_TYPE_CHAR:
@@ -183,9 +185,10 @@ void pojavPumpEvents(void* window) {
         cLastY = cursorY;
         GLFW_invoke_CursorPos(window, cursorX, cursorY);
     }
+    atomic_store_explicit(&eventCounter, counter, memory_order_release);
 }
 void pojavRewindEvents() {
-    eventCounter = 0;
+    atomic_store_explicit(&eventCounter, 0, memory_order_release);
 }
 
 JNIEXPORT void JNICALL
@@ -215,25 +218,20 @@ Java_org_lwjgl_glfw_GLFW_glfwSetCursorPos(JNIEnv *env, jclass clazz, jlong windo
 
 
 void sendData(int type, int i1, int i2, int i3, int i4) {
-#ifdef DEBUG
-    LOGD("Debug: Send data, jnienv.isNull=%d\n", runtimeJNIEnvPtr_ANDROID == NULL);
-#endif
-    if (runtimeJNIEnvPtr_ANDROID == NULL) {
-        LOGE("BUG: Input is ready but thread is not attached yet.");
-        return;
-    }
     if(type == EVENT_TYPE_CURSOR_POS) {
         cursorX = i1;
         cursorY = i2;
     }else {
-        if (eventCounter < 499) {
-            GLFWInputEvent *event = &events[eventCounter++];
+        size_t counter = atomic_load_explicit(&eventCounter, memory_order_acquire);
+        if (counter < 499) {
+            GLFWInputEvent *event = &events[counter++];
             event->type = type;
             event->i1 = i1;
             event->i2 = i2;
             event->i3 = i3;
             event->i4 = i4;
         }
+        atomic_store_explicit(&eventCounter, counter, memory_order_release);
     }
 }
 
@@ -298,21 +296,10 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeAttachThread
 #ifdef DEBUG
     LOGD("Debug: JNI attaching thread, isUseStackQueue=%d\n", isUseStackQueueBool);
 #endif
-
-    jboolean result;
-
-    //isUseStackQueueCall = (int) isUseStackQueueBool;
-    if (isAndroid) {
-        result = attachThread(true, &runtimeJNIEnvPtr_ANDROID);
-    } /* else {
-        result = attachThread(false, &dalvikJNIEnvPtr_JRE);
-        // getJavaInputBridge(&inputBridgeClass_JRE, &inputBridgeMethod_JRE);
-    } */
-    
-    if (isUseStackQueueCall && isAndroid && result) {
+    if (isUseStackQueueCall && isAndroid) {
         isPrepareGrabPos = true;
     }
-    return result;
+    return true;
 }
 
 JNIEXPORT jstring JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeClipboard(JNIEnv* env, jclass clazz, jint action, jbyteArray copySrc) {
@@ -488,10 +475,8 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendMouseButton(
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendScreenSize(JNIEnv* env, jclass clazz, jint width, jint height) {
     savedWidth = width;
     savedHeight = height;
-    __android_log_print(ANDROID_LOG_INFO, "NativeInput","Updated screen size: %i %i", width, height);
     if (isInputReady) {
         if (GLFW_invoke_FramebufferSize) {
-            __android_log_print(ANDROID_LOG_INFO, "NativeInput","Framebuffer submitted");
             if (isUseStackQueueCall) {
                 sendData(EVENT_TYPE_FRAMEBUFFER_SIZE, width, height, 0, 0);
             } else {
@@ -500,15 +485,12 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendScreenSize(J
         }
         
         if (GLFW_invoke_WindowSize) {
-            __android_log_print(ANDROID_LOG_INFO, "NativeInput","Window submitted");
             if (isUseStackQueueCall) {
                 sendData(EVENT_TYPE_WINDOW_SIZE, width, height, 0, 0);
             } else {
                 GLFW_invoke_WindowSize((void*) showingWindow, width, height);
             }
         }
-    }else{
-        __android_log_print(ANDROID_LOG_INFO, "NativeInput","INR");
     }
     
     // return (isInputReady && (GLFW_invoke_FramebufferSize || GLFW_invoke_WindowSize));
