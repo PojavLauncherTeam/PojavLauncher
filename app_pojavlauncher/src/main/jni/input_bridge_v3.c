@@ -150,6 +150,7 @@ void handleFramebufferSizeJava(long window, int w, int h) {
 void pojavPumpEvents(void* window) {
     //__android_log_print(ANDROID_LOG_INFO, "input_bridge_v3", "pojavPumpEvents %d", eventCounter);
     size_t counter = atomic_load_explicit(&eventCounter, memory_order_acquire);
+    __android_log_print(ANDROID_LOG_INFO, "NativeInput", "Pumping %i events (window=%p)", counter, window);
     for(size_t i = 0; i < counter; i++) {
         GLFWInputEvent event = events[i];
         switch(event.type) {
@@ -170,12 +171,10 @@ void pojavPumpEvents(void* window) {
                 break;
             case EVENT_TYPE_FRAMEBUFFER_SIZE:
                 handleFramebufferSizeJava(showingWindow, event.i1, event.i2);
-                __android_log_print(ANDROID_LOG_INFO, "NativeInput", "Pumped size event: %i %i",event.i1, event.i2);
                 if(GLFW_invoke_FramebufferSize) GLFW_invoke_FramebufferSize(window, event.i1, event.i2);
                 break;
             case EVENT_TYPE_WINDOW_SIZE:
                 handleFramebufferSizeJava(showingWindow, event.i1, event.i2);
-                __android_log_print(ANDROID_LOG_INFO, "NativeInput", "Pumped size event: %i %i",event.i1, event.i2);
                 if(GLFW_invoke_WindowSize) GLFW_invoke_WindowSize(window, event.i1, event.i2);
                 break;
         }
@@ -218,6 +217,7 @@ Java_org_lwjgl_glfw_GLFW_glfwSetCursorPos(JNIEnv *env, jclass clazz, jlong windo
 
 
 void sendData(int type, int i1, int i2, int i3, int i4) {
+    __android_log_print(ANDROID_LOG_INFO, "NativeInput", "Submitting event %d (%d %d %d %d)", type, i1, i2, i3, i4);
     if(type == EVENT_TYPE_CURSOR_POS) {
         cursorX = i1;
         cursorY = i2;
