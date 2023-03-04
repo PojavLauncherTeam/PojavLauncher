@@ -8,7 +8,6 @@ import android.view.*;
 
 import java.util.*;
 import net.kdt.pojavlaunch.utils.*;
-import org.lwjgl.glfw.*;
 
 public class AWTCanvasView extends TextureView implements TextureView.SurfaceTextureListener, Runnable {
     public static final int AWT_CANVAS_WIDTH = 720;
@@ -19,7 +18,6 @@ public class AWTCanvasView extends TextureView implements TextureView.SurfaceTex
     private int mWidth, mHeight;
     private boolean mIsDestroyed = false;
     private final TextPaint mFpsPaint;
-    private boolean mAttached = false;
     private boolean mDrawing;
 
     // Temporary count fps https://stackoverflow.com/a/13729241
@@ -80,20 +78,14 @@ public class AWTCanvasView extends TextureView implements TextureView.SurfaceTex
                 canvas = surface.lockCanvas(null);
                 canvas.drawRGB(0, 0, 0);
 
-                if (!mAttached) {
-                    mAttached = CallbackBridge.nativeAttachThreadToOther(true, MainActivity.isInputStackCall);
-                } else {
-                    int[] rgbArray = JREUtils.renderAWTScreenFrame(/* canvas, mWidth, mHeight */);
-                    mDrawing = rgbArray != null;
-                    if (rgbArray != null) {
-
-                        canvas.save();
-
-                        canvas.drawBitmap(rgbArray, 0, AWT_CANVAS_WIDTH, 0, 0, AWT_CANVAS_WIDTH, AWT_CANVAS_HEIGHT, true, null);
-                        canvas.restore();
-                    }
+                int[] rgbArray = JREUtils.renderAWTScreenFrame(/* canvas, mWidth, mHeight */);
+                mDrawing = rgbArray != null;
+                if (rgbArray != null) {
+                    canvas.save();
+                    canvas.drawBitmap(rgbArray, 0, AWT_CANVAS_WIDTH, 0, 0, AWT_CANVAS_WIDTH, AWT_CANVAS_HEIGHT, true, null);
+                    canvas.restore();
                 }
-                canvas.drawText("FPS: " + (Math.round(fps() * 10) / 10) + ", attached=" + mAttached + ", drawing=" + mDrawing, 0, 20, mFpsPaint);
+                canvas.drawText("FPS: " + (Math.round(fps() * 10) / 10) + ", drawing=" + mDrawing, 0, 20, mFpsPaint);
                 surface.unlockCanvasAndPost(canvas);
             }
         } catch (Throwable throwable) {

@@ -203,16 +203,6 @@ Java_org_lwjgl_glfw_CallbackBridge_nativeSetUseInputStackQueue(__attribute__((un
     pojav_environ->isUseStackQueueCall = (int) use_input_stack_queue;
 }
 
-JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeAttachThreadToOther(__attribute__((unused)) JNIEnv* env, __attribute__((unused)) jclass clazz, jboolean isAndroid, jboolean __attribute__((unused)) isUseStackQueueBool) {
-#ifdef DEBUG
-    LOGD("Debug: JNI attaching thread, isUseStackQueue=%d\n", isUseStackQueueBool);
-#endif
-    if (pojav_environ->isUseStackQueueCall && isAndroid) {
-        pojav_environ->isPrepareGrabPos = true;
-    }
-    return true;
-}
-
 JNIEXPORT jstring JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeClipboard(JNIEnv* env, __attribute__((unused)) jclass clazz, jint action, jbyteArray copySrc) {
 #ifdef DEBUG
     LOGD("Debug: Clipboard access is going on\n", pojav_environ->isUseStackQueueCall);
@@ -251,21 +241,12 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSetInputRead
     return pojav_environ->isUseStackQueueCall;
 }
 
-static void updateGrabCursor(float xset, float yset) {
-    if (pojav_environ->isGrabbing == JNI_TRUE) {
-        pojav_environ->grabCursorX = xset; // pojav_environ->savedWidth / 2;
-        pojav_environ->grabCursorY = yset; // pojav_environ->savedHeight / 2;
-        pojav_environ->isPrepareGrabPos = true;
-    }
-}
-
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSetGrabbing(__attribute__((unused)) JNIEnv* env, __attribute__((unused)) jclass clazz, jboolean grabbing) {
     JNIEnv *dalvikEnv;
     (*pojav_environ->dalvikJavaVMPtr)->AttachCurrentThread(pojav_environ->dalvikJavaVMPtr, &dalvikEnv, NULL);
     (*dalvikEnv)->CallStaticVoidMethod(dalvikEnv, pojav_environ->bridgeClazz, pojav_environ->method_onGrabStateChanged, grabbing);
     (*pojav_environ->dalvikJavaVMPtr)->DetachCurrentThread(pojav_environ->dalvikJavaVMPtr);
     pojav_environ->isGrabbing = grabbing;
-    updateGrabCursor((float)pojav_environ->cursorX, (float)pojav_environ->cursorY);
 }
 
 JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendChar(__attribute__((unused)) JNIEnv* env, __attribute__((unused)) jclass clazz, jchar codepoint /* jint codepoint */) {
@@ -321,30 +302,12 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendCursorPos(__
             }
         }
 
-        if (pojav_environ->isGrabbing) {
-            if (!pojav_environ->isPrepareGrabPos) {
-                pojav_environ->grabCursorX += x - pojav_environ->lastCursorX;
-                pojav_environ->grabCursorY += y - pojav_environ->lastCursorY;
-            }
-            
-            pojav_environ->lastCursorX = x;
-            pojav_environ->lastCursorY = y;
-            
-            if (pojav_environ->isPrepareGrabPos) {
-                pojav_environ->isPrepareGrabPos = false;
-                return;
-            }
-        }
-
         if (!pojav_environ->isUseStackQueueCall) {
             pojav_environ->GLFW_invoke_CursorPos((void*) pojav_environ->showingWindow, (double) (x), (double) (y));
         } else {
             pojav_environ->cursorX = x;
             pojav_environ->cursorY = y;
         }
-        
-        pojav_environ->lastCursorX = x;
-        pojav_environ->lastCursorY = y;
     }
 }
 #define max(a,b) \
@@ -367,8 +330,6 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendKey(__attrib
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendMouseButton(__attribute__((unused)) JNIEnv* env, __attribute__((unused)) jclass clazz, jint button, jint action, jint mods) {
     if (pojav_environ->isInputReady) {
         if (button == -1) {
-            // Notify to prepare set new grab pos
-            pojav_environ->isPrepareGrabPos = true;
         } else if (pojav_environ->GLFW_invoke_MouseButton) {
             if (pojav_environ->isUseStackQueueCall) {
                 sendData(EVENT_TYPE_MOUSE_BUTTON, button, action, mods, 0);

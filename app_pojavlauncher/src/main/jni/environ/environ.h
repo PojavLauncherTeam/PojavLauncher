@@ -34,7 +34,6 @@ struct pojav_environ_s {
     bool force_vsync;
     atomic_size_t eventCounter;
     GLFWInputEvent events[8000];
-    float grabCursorX, grabCursorY, lastCursorX, lastCursorY;
     double cursorX, cursorY, cLastX, cLastY;
     jmethodID method_accessAndroidClipboard;
     jmethodID method_onGrabStateChanged;
@@ -49,7 +48,7 @@ struct pojav_environ_s {
     JavaVM* dalvikJavaVMPtr;
     JNIEnv* dalvikJNIEnvPtr_ANDROID;
     long showingWindow;
-    bool isInputReady, isCursorEntered, isPrepareGrabPos, isUseStackQueueCall;
+    bool isInputReady, isCursorEntered, isUseStackQueueCall;
     int savedWidth, savedHeight;
 #define ADD_CALLBACK_WWIN(NAME) \
     GLFW_invoke_##NAME##_func* GLFW_invoke_##NAME;
