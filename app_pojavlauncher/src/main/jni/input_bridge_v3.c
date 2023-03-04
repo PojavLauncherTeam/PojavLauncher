@@ -25,7 +25,6 @@
 #define EVENT_TYPE_CHAR 1000
 #define EVENT_TYPE_CHAR_MODS 1001
 #define EVENT_TYPE_CURSOR_ENTER 1002
-#define EVENT_TYPE_CURSOR_POS 1003
 #define EVENT_TYPE_FRAMEBUFFER_SIZE 1004
 #define EVENT_TYPE_KEY 1005
 #define EVENT_TYPE_MOUSE_BUTTON 1006
@@ -35,7 +34,7 @@
 jint (*orig_ProcessImpl_forkAndExec)(JNIEnv *env, jobject process, jint mode, jbyteArray helperpath, jbyteArray prog, jbyteArray argBlock, jint argc, jbyteArray envBlock, jint envc, jbyteArray dir, jintArray std_fds, jboolean redirectErrorStream);
 
 
-jint JNI_OnLoad(JavaVM* vm, void* reserved) {
+jint JNI_OnLoad(JavaVM* vm, __attribute__((unused)) void* reserved) {
     if (pojav_environ->dalvikJavaVMPtr == NULL) {
         __android_log_print(ANDROID_LOG_INFO, "Native", "Saving DVM environ...");
         //Save dalvik global JavaVM pointer
@@ -63,66 +62,30 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved) {
     return JNI_VERSION_1_4;
 }
 
-// Should be?
-void JNI_OnUnload(JavaVM* vm, void* reserved) {
-/*
-    if (pojav_environ->dalvikJavaVMPtr == vm) {
-    } else {
-    }
-    
-    DetachCurrentThread(vm);
-*/
-
-    //dalvikJNIEnvPtr_JRE = NULL;
-    //runtimeJNIEnvPtr_ANDROID = NULL;
-}
-
 #define ADD_CALLBACK_WWIN(NAME) \
 JNIEXPORT jlong JNICALL Java_org_lwjgl_glfw_GLFW_nglfwSet##NAME##Callback(JNIEnv * env, jclass cls, jlong window, jlong callbackptr) { \
-    __android_log_print(ANDROID_LOG_INFO, "NativeInput", "%p Set callback for #NAME to %p", &JNI_OnLoad, callbackptr);                            \
     void** oldCallback = (void**) &pojav_environ->GLFW_invoke_##NAME; \
     pojav_environ->GLFW_invoke_##NAME = (GLFW_invoke_##NAME##_func*) (uintptr_t) callbackptr; \
     return (jlong) (uintptr_t) *oldCallback; \
 }
 
-ADD_CALLBACK_WWIN(Char);
-ADD_CALLBACK_WWIN(CharMods);
-ADD_CALLBACK_WWIN(CursorEnter);
-ADD_CALLBACK_WWIN(CursorPos);
-ADD_CALLBACK_WWIN(FramebufferSize);
-ADD_CALLBACK_WWIN(Key);
-ADD_CALLBACK_WWIN(MouseButton);
-ADD_CALLBACK_WWIN(Scroll);
-ADD_CALLBACK_WWIN(WindowSize);
+ADD_CALLBACK_WWIN(Char)
+ADD_CALLBACK_WWIN(CharMods)
+ADD_CALLBACK_WWIN(CursorEnter)
+ADD_CALLBACK_WWIN(CursorPos)
+ADD_CALLBACK_WWIN(FramebufferSize)
+ADD_CALLBACK_WWIN(Key)
+ADD_CALLBACK_WWIN(MouseButton)
+ADD_CALLBACK_WWIN(Scroll)
+ADD_CALLBACK_WWIN(WindowSize)
 
 #undef ADD_CALLBACK_WWIN
-
-jboolean attachThread(bool isAndroid, JNIEnv** secondJNIEnvPtr) {
-#ifdef DEBUG
-    LOGD("Debug: Attaching %s thread to %s, javavm.isNull=%d\n", isAndroid ? "Android" : "JRE", isAndroid ? "JRE" : "Android", (isAndroid ? pojav_environ->runtimeJavaVMPtr : pojav_environ->dalvikJavaVMPtr) == NULL);
-#endif
-
-    if (*secondJNIEnvPtr != NULL || (!pojav_environ->isUseStackQueueCall)) return JNI_TRUE;
-
-    if (isAndroid && pojav_environ->runtimeJavaVMPtr) {
-        (*pojav_environ->runtimeJavaVMPtr)->AttachCurrentThread(pojav_environ->runtimeJavaVMPtr, secondJNIEnvPtr, NULL);
-        return JNI_TRUE;
-    } else if (!isAndroid && pojav_environ->dalvikJavaVMPtr) {
-        (*pojav_environ->dalvikJavaVMPtr)->AttachCurrentThread(pojav_environ->dalvikJavaVMPtr, secondJNIEnvPtr, NULL);
-        return JNI_TRUE;
-    }
-    
-    return JNI_FALSE;
-}
-
-
 
 void handleFramebufferSizeJava(long window, int w, int h) {
     (*pojav_environ->runtimeJNIEnvPtr_JRE)->CallStaticVoidMethod(pojav_environ->runtimeJNIEnvPtr_JRE, pojav_environ->vmGlfwClass, pojav_environ->method_internalWindowSizeChanged, (long)window, w, h);
 }
 
 void pojavPumpEvents(void* window) {
-    //__android_log_print(ANDROID_LOG_INFO, "input_bridge_v3", "pojavPumppojav_environ->events %d", pojav_environ->eventCounter);
     size_t counter = atomic_load_explicit(&pojav_environ->eventCounter, memory_order_acquire);
     for(size_t i = 0; i < counter; i++) {
         GLFWInputEvent event = pojav_environ->events[i];
@@ -164,63 +127,39 @@ void pojavRewindEvents() {
 }
 
 JNIEXPORT void JNICALL
-Java_org_lwjgl_glfw_GLFW_nglfwGetCursorPos(JNIEnv *env, jclass clazz, jlong window, jobject xpos,
+Java_org_lwjgl_glfw_GLFW_nglfwGetCursorPos(JNIEnv *env, __attribute__((unused)) jclass clazz, __attribute__((unused)) jlong window, jobject xpos,
                                           jobject ypos) {
     *(double*)(*env)->GetDirectBufferAddress(env, xpos) = pojav_environ->cursorX;
     *(double*)(*env)->GetDirectBufferAddress(env, ypos) = pojav_environ->cursorY;
-    // TODO: implement glfwGetCursorPos()
 }
 
 JNIEXPORT void JNICALL
-Java_org_lwjgl_glfw_GLFW_nglfwGetCursorPosA(JNIEnv *env, jclass clazz, jlong window,
+Java_org_lwjgl_glfw_GLFW_nglfwGetCursorPosA(JNIEnv *env, __attribute__((unused)) jclass clazz, __attribute__((unused)) jlong window,
                                             jdoubleArray xpos, jdoubleArray ypos) {
     (*env)->SetDoubleArrayRegion(env, xpos, 0,1, &pojav_environ->cursorX);
     (*env)->SetDoubleArrayRegion(env, ypos, 0,1, &pojav_environ->cursorY);
-    // TODO: implement nglfwGetCursorPosA()
 }
 
 JNIEXPORT void JNICALL
-Java_org_lwjgl_glfw_GLFW_glfwSetCursorPos(JNIEnv *env, jclass clazz, jlong window, jdouble xpos,
+Java_org_lwjgl_glfw_GLFW_glfwSetCursorPos(__attribute__((unused)) JNIEnv *env, __attribute__((unused)) jclass clazz, __attribute__((unused)) jlong window, jdouble xpos,
                                           jdouble ypos) {
     pojav_environ->cLastX = pojav_environ->cursorX = xpos;
     pojav_environ->cLastY = pojav_environ->cursorY = ypos;
-    // TODO: implement glfwSetCursorPos()
 }
 
 
 
 void sendData(int type, int i1, int i2, int i3, int i4) {
-    if(type == EVENT_TYPE_CURSOR_POS) {
-        pojav_environ->cursorX = i1;
-        pojav_environ->cursorY = i2;
-    }else {
-        size_t counter = atomic_load_explicit(&pojav_environ->eventCounter, memory_order_acquire);
-        if (counter < 7999) {
-            GLFWInputEvent *event = &pojav_environ->events[counter++];
-            event->type = type;
-            event->i1 = i1;
-            event->i2 = i2;
-            event->i3 = i3;
-            event->i4 = i4;
-        }
-        atomic_store_explicit(&pojav_environ->eventCounter, counter, memory_order_release);
+    size_t counter = atomic_load_explicit(&pojav_environ->eventCounter, memory_order_acquire);
+    if (counter < 7999) {
+        GLFWInputEvent *event = &pojav_environ->events[counter++];
+        event->type = type;
+        event->i1 = i1;
+        event->i2 = i2;
+        event->i3 = i3;
+        event->i4 = i4;
     }
-}
-
-void closeGLFWWindow() {
-    /*
-    jclass glfwClazz = (*pojav_environ->runtimeJNIEnvPtr_JRE)->FindClass(pojav_environ->runtimeJNIEnvPtr_JRE, "org/lwjgl/glfw/GLFW");
-    assert(glfwClazz != NULL);
-    jmethodID glfwMethod = (*pojav_environ->runtimeJNIEnvPtr_JRE)->GetStaticMethodID(pojav_environ->runtimeJNIEnvPtr_JRE, glfwMethod, "glfwSetWindowShouldClose", "(JZ)V");
-    assert(glfwMethod != NULL);
-    
-    (*pojav_environ->runtimeJNIEnvPtr_JRE)->CallStaticVoidMethod(
-        pojav_environ->runtimeJNIEnvPtr_JRE,
-        glfwClazz, glfwMethod,
-        (jlong) pojav_environ->showingWindow, JNI_TRUE
-    );
-    */
-    exit(-1);
+    atomic_store_explicit(&pojav_environ->eventCounter, counter, memory_order_release);
 }
 
 /**
@@ -232,7 +171,7 @@ hooked_ProcessImpl_forkAndExec(JNIEnv *env, jobject process, jint mode, jbyteArr
     char *pProg = (char *)((*env)->GetByteArrayElements(env, prog, NULL));
 
     // Here we only handle the "xdg-open" command
-    if (strcmp(basename(pProg), "xdg-open")) {
+    if (strcmp(basename(pProg), "xdg-open") != 0) {
         (*env)->ReleaseByteArrayElements(env, prog, (jbyte *)pProg, 0);
         return orig_ProcessImpl_forkAndExec(env, process, mode, helperpath, prog, argBlock, argc, envBlock, envc, dir, std_fds, redirectErrorStream);
     }
@@ -259,12 +198,12 @@ void hookExec() {
 }
 
 JNIEXPORT void JNICALL
-Java_org_lwjgl_glfw_CallbackBridge_nativeSetUseInputStackQueue(JNIEnv *env, jclass clazz,
+Java_org_lwjgl_glfw_CallbackBridge_nativeSetUseInputStackQueue(__attribute__((unused)) JNIEnv *env, __attribute__((unused)) jclass clazz,
                                                                jboolean use_input_stack_queue) {
     pojav_environ->isUseStackQueueCall = (int) use_input_stack_queue;
 }
 
-JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeAttachThreadToOther(JNIEnv* env, jclass clazz, jboolean isAndroid, jboolean isUseStackQueueBool) {
+JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeAttachThreadToOther(__attribute__((unused)) JNIEnv* env, __attribute__((unused)) jclass clazz, jboolean isAndroid, jboolean __attribute__((unused)) isUseStackQueueBool) {
 #ifdef DEBUG
     LOGD("Debug: JNI attaching thread, isUseStackQueue=%d\n", isUseStackQueueBool);
 #endif
@@ -274,7 +213,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeAttachThread
     return true;
 }
 
-JNIEXPORT jstring JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeClipboard(JNIEnv* env, jclass clazz, jint action, jbyteArray copySrc) {
+JNIEXPORT jstring JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeClipboard(JNIEnv* env, __attribute__((unused)) jclass clazz, jint action, jbyteArray copySrc) {
 #ifdef DEBUG
     LOGD("Debug: Clipboard access is going on\n", pojav_environ->isUseStackQueueCall);
 #endif
@@ -285,7 +224,7 @@ JNIEXPORT jstring JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeClipboard(JNI
     assert(pojav_environ->bridgeClazz != NULL);
     
     LOGD("Clipboard: Converting string\n");
-    char *copySrcC = NULL;
+    char *copySrcC;
     jstring copyDst = NULL;
     if (copySrc) {
         copySrcC = (char *)((*env)->GetByteArrayElements(env, copySrc, NULL));
@@ -303,7 +242,7 @@ JNIEXPORT jstring JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeClipboard(JNI
     return pasteDst;
 }
 
-JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSetInputReady(JNIEnv* env, jclass clazz, jboolean inputReady) {
+JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSetInputReady(__attribute__((unused)) JNIEnv* env, __attribute__((unused)) jclass clazz, jboolean inputReady) {
 #ifdef DEBUG
     LOGD("Debug: Changing input state, isReady=%d, pojav_environ->isUseStackQueueCall=%d\n", inputReady, pojav_environ->isUseStackQueueCall);
 #endif
@@ -312,7 +251,7 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSetInputRead
     return pojav_environ->isUseStackQueueCall;
 }
 
-static void updateGrabCursor(jint xset, jint yset) {
+static void updateGrabCursor(float xset, float yset) {
     if (pojav_environ->isGrabbing == JNI_TRUE) {
         pojav_environ->grabCursorX = xset; // pojav_environ->savedWidth / 2;
         pojav_environ->grabCursorY = yset; // pojav_environ->savedHeight / 2;
@@ -320,36 +259,31 @@ static void updateGrabCursor(jint xset, jint yset) {
     }
 }
 
-JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSetGrabbing(JNIEnv* env, jclass clazz, jboolean grabbing) {
+JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSetGrabbing(__attribute__((unused)) JNIEnv* env, __attribute__((unused)) jclass clazz, jboolean grabbing) {
     JNIEnv *dalvikEnv;
     (*pojav_environ->dalvikJavaVMPtr)->AttachCurrentThread(pojav_environ->dalvikJavaVMPtr, &dalvikEnv, NULL);
     (*dalvikEnv)->CallStaticVoidMethod(dalvikEnv, pojav_environ->bridgeClazz, pojav_environ->method_onGrabStateChanged, grabbing);
     (*pojav_environ->dalvikJavaVMPtr)->DetachCurrentThread(pojav_environ->dalvikJavaVMPtr);
     pojav_environ->isGrabbing = grabbing;
-    updateGrabCursor((jint)pojav_environ->cursorX, (jint)pojav_environ->cursorY);
+    updateGrabCursor((float)pojav_environ->cursorX, (float)pojav_environ->cursorY);
 }
 
-JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeisGrabbing(JNIEnv* env, jclass clazz) {
-    return pojav_environ->isGrabbing;
-}
-
-JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendChar(JNIEnv* env, jclass clazz, jchar codepoint /* jint codepoint */) {
+JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendChar(__attribute__((unused)) JNIEnv* env, __attribute__((unused)) jclass clazz, jchar codepoint /* jint codepoint */) {
     if (pojav_environ->GLFW_invoke_Char && pojav_environ->isInputReady) {
         if (pojav_environ->isUseStackQueueCall) {
             sendData(EVENT_TYPE_CHAR, codepoint, 0, 0, 0);
         } else {
             pojav_environ->GLFW_invoke_Char((void*) pojav_environ->showingWindow, (unsigned int) codepoint);
-            // return lwjgl2_triggerCharEvent(codepoint);
         }
         return JNI_TRUE;
     }
     return JNI_FALSE;
 }
 
-JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendCharMods(JNIEnv* env, jclass clazz, jchar codepoint, jint mods) {
+JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendCharMods(__attribute__((unused)) JNIEnv* env, __attribute__((unused)) jclass clazz, jchar codepoint, jint mods) {
     if (pojav_environ->GLFW_invoke_CharMods && pojav_environ->isInputReady) {
         if (pojav_environ->isUseStackQueueCall) {
-            sendData(EVENT_TYPE_CHAR_MODS, (unsigned int) codepoint, mods, 0, 0);
+            sendData(EVENT_TYPE_CHAR_MODS, (int) codepoint, mods, 0, 0);
         } else {
             pojav_environ->GLFW_invoke_CharMods((void*) pojav_environ->showingWindow, codepoint, mods);
         }
@@ -364,7 +298,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendCursorEnter(
     }
 }
 */
-JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendCursorPos(JNIEnv* env, jclass clazz, jfloat x, jfloat y) {
+JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendCursorPos(__attribute__((unused)) JNIEnv* env, __attribute__((unused)) jclass clazz, jfloat x, jfloat y) {
 #ifdef DEBUG
     LOGD("Sending cursor position \n");
 #endif
@@ -405,7 +339,8 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendCursorPos(JN
         if (!pojav_environ->isUseStackQueueCall) {
             pojav_environ->GLFW_invoke_CursorPos((void*) pojav_environ->showingWindow, (double) (x), (double) (y));
         } else {
-            sendData(EVENT_TYPE_CURSOR_POS, (pojav_environ->isGrabbing ? pojav_environ->grabCursorX : x), (pojav_environ->isGrabbing ? pojav_environ->grabCursorY : y), 0, 0);
+            pojav_environ->cursorX = x;
+            pojav_environ->cursorY = y;
         }
         
         pojav_environ->lastCursorX = x;
@@ -416,7 +351,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendCursorPos(JN
    ({ __typeof__ (a) _a = (a); \
        __typeof__ (b) _b = (b); \
      _a > _b ? _a : _b; })
-JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendKey(JNIEnv* env, jclass clazz, jint key, jint scancode, jint action, jint mods) {
+JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendKey(__attribute__((unused)) JNIEnv* env, __attribute__((unused)) jclass clazz, jint key, jint scancode, jint action, jint mods) {
     if (pojav_environ->GLFW_invoke_Key && pojav_environ->isInputReady) {
         pojav_environ->keyDownBuffer[max(0, key-31)]=(jbyte)action;
         if (pojav_environ->isUseStackQueueCall) {
@@ -429,7 +364,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendKey(JNIEnv* 
 
 
 
-JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendMouseButton(JNIEnv* env, jclass clazz, jint button, jint action, jint mods) {
+JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendMouseButton(__attribute__((unused)) JNIEnv* env, __attribute__((unused)) jclass clazz, jint button, jint action, jint mods) {
     if (pojav_environ->isInputReady) {
         if (button == -1) {
             // Notify to prepare set new grab pos
@@ -444,7 +379,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendMouseButton(
     }
 }
 
-JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendScreenSize(JNIEnv* env, jclass clazz, jint width, jint height) {
+JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendScreenSize(__attribute__((unused)) JNIEnv* env, __attribute__((unused)) jclass clazz, jint width, jint height) {
     pojav_environ->savedWidth = width;
     pojav_environ->savedHeight = height;
     if (pojav_environ->isInputReady) {
@@ -468,21 +403,21 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendScreenSize(J
     // return (pojav_environ->isInputReady && (pojav_environ->GLFW_invoke_FramebufferSize || pojav_environ->GLFW_invoke_WindowSize));
 }
 
-JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendScroll(JNIEnv* env, jclass clazz, jdouble xoffset, jdouble yoffset) {
+JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendScroll(__attribute__((unused)) JNIEnv* env, __attribute__((unused)) jclass clazz, jdouble xoffset, jdouble yoffset) {
     if (pojav_environ->GLFW_invoke_Scroll && pojav_environ->isInputReady) {
         if (pojav_environ->isUseStackQueueCall) {
-            sendData(EVENT_TYPE_SCROLL, xoffset, yoffset, 0, 0);
+            sendData(EVENT_TYPE_SCROLL, (int)xoffset, (int)yoffset, 0, 0);
         } else {
             pojav_environ->GLFW_invoke_Scroll((void*) pojav_environ->showingWindow, (double) xoffset, (double) yoffset);
         }
     }
 }
 
-JNIEXPORT void JNICALL Java_org_lwjgl_glfw_GLFW_nglfwSetShowingWindow(JNIEnv* env, jclass clazz, jlong window) {
+JNIEXPORT void JNICALL Java_org_lwjgl_glfw_GLFW_nglfwSetShowingWindow(__attribute__((unused)) JNIEnv* env, __attribute__((unused)) jclass clazz, jlong window) {
     pojav_environ->showingWindow = (long) window;
 }
 
-JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSetWindowAttrib(JNIEnv* env, jclass clazz, jint attrib, jint value) {
+JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSetWindowAttrib(__attribute__((unused)) JNIEnv* env, __attribute__((unused)) jclass clazz, jint attrib, jint value) {
     if (!pojav_environ->showingWindow || !pojav_environ->isUseStackQueueCall) {
         // If the window is not shown, there is nothing to do yet.
         // For Minecraft < 1.13, calling to JNI functions here crashes the JVM for some reason, therefore it is skipped for now.
