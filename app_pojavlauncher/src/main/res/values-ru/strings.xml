@@ -182,7 +182,7 @@
     <string name="customctrl_selectdefault">Выбрать управление по умолчанию</string>
     <string name="customctrl_export">Экспортировать управление</string>
     <string name="main_share_logs">Поделится файлом журнала</string>
-    <string name="main_install_jar_file">Установите .jar</string>
+    <string name="main_install_jar_file">Установить .jar</string>
     <string name="main_options">Опции</string>
     <string name="main_play">Играть</string>
     <string name="main_welcome">Добро пожаловать, %s</string>
@@ -202,9 +202,9 @@
     <string name="dl_library_sha_pass">Библиотека %s проверена и может быть использована</string>
     <string name="mcl_disable_gestures">Отключение жестов</string>
     <string name="mcl_disable_gestures_subtitle">Отключает жесты, такие как удержание, чтобы сломать блок, и нажатие, чтобы разместить блок.</string>
-    <string name="mcl_setting_title_mousespeed">Чувствительность мыши</string>
+    <string name="mcl_setting_title_mousespeed">Чувствительность курсора</string>
     <string name="mcl_setting_subtitle_mousespeed">Изменяет чувствительность виртуальной мыши</string>
-    <string name="customctrl_passthru">Пропуск мыши</string>
+    <string name="customctrl_passthru">Пропускать касание</string>
     <string name="customctrl_swipeable">Пролистываемый</string>
     <string name="customctrl_rounded">Скруглённые</string>
     <string name="memory_warning_msg">Текущий объем свободной оперативной памяти (%d) меньше, чем выделенная (%d), что может привести к сбоям. Измените количество выделенной памяти при сбое игры.</string>
@@ -243,14 +243,14 @@
     <string name="preference_video_title">Видео и визуализатор</string>
     <string name="preference_video_description">Разрешение, тип масштабирования и визуализатор</string>
     <string name="preference_control_title">Настройка управления</string>
-    <string name="preference_control_description">Типы жестов, флажки и масштабирование</string>
+    <string name="preference_control_description">Типы жестов, нажатия и размеры</string>
     <string name="preference_java_title">Настройки Java</string>
     <string name="preference_java_description">Версии Java, аргументы JVM, выделение памяти и безопасность среды</string>
     <string name="preference_misc_title">Другие настройки</string>
     <string name="preference_misc_description">Список версий и проверка библиотек</string>
     <string name="preference_experimental_title">Экспериментальные штуки</string>
     <string name="preference_experimental_description">Используйте эти функции с осторожностью; поддержка не предоставляется.</string>
-    <string name="preference_sustained_performance_title">Включить режим стабилизации производительности</string>
+    <string name="preference_sustained_performance_title">Режим стабилизации производительности</string>
     <string name="preference_sustained_performance_description">Уменьшает перегрев устройства за счёт ограничения максимальной производительности.</string>
     <string name="preference_force_vsync_title">Принудительная вертикальная синхронизация</string>
     <string name="preference_force_vsync_description">Уменьшает перегрев устройства за счёт ограничения максимальной производительности.</string>
