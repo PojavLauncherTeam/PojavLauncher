@@ -287,8 +287,6 @@ public class MinecraftGLSurface extends View implements GrabListener{
                 break;
 
             case MotionEvent.ACTION_DOWN: // 0
-                CallbackBridge.sendPrepareGrabInitialPos();
-
                 hudKeyHandled = handleGuiBar((int)e.getX(), (int) e.getY());
                 boolean isTouchInHotbar = hudKeyHandled != -1;
                 if (isTouchInHotbar) {

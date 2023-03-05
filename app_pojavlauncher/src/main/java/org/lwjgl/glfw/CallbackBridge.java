@@ -36,10 +36,6 @@ public class CallbackBridge {
         mouseY = y;
         nativeSendCursorPos(mouseX, mouseY);
     }
-    
-    public static void sendPrepareGrabInitialPos() {
-        //sendMouseKeycode(-1, CallbackBridge.getCurrentMods(), false);
-    }
 
     public static void sendKeycode(int keycode, char keychar, int scancode, int modifiers, boolean isDown) {
         // TODO CHECK: This may cause input issue, not receive input!
