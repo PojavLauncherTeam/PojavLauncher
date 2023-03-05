@@ -7,7 +7,6 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 
 import androidx.preference.PreferenceCategory;
-import androidx.preference.SwitchPreference;
 
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.prefs.CustomSeekBarPreference;

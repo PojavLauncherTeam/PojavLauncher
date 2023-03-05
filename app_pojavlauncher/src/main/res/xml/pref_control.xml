@@ -23,6 +23,12 @@
             android:summary="@string/mcl_disable_gestures_subtitle"
             android:title="@string/mcl_disable_gestures" />
 
+        <androidx.preference.SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:key="disableDoubleTap"
+            android:summary="@string/mcl_disable_swap_hand_subtitle"
+            android:title="@string/mcl_disable_swap_hand" />
+
         <net.kdt.pojavlaunch.prefs.CustomSeekBarPreference
             android:key="timeLongPressTrigger"
             android:summary="@string/mcl_setting_subtitle_longpresstrigger"

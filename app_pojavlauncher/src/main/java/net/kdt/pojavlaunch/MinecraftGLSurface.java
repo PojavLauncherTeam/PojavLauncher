@@ -1,6 +1,7 @@
 package net.kdt.pojavlaunch;
 
 import static net.kdt.pojavlaunch.MainActivity.touchCharInput;
+import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_DISABLE_SWAP_HAND;
 import static net.kdt.pojavlaunch.utils.MCOptionUtils.getMcScale;
 import static org.lwjgl.glfw.CallbackBridge.sendKeyPress;
 import static org.lwjgl.glfw.CallbackBridge.sendMouseButton;
@@ -291,7 +292,7 @@ public class MinecraftGLSurface extends View implements GrabListener{
                 boolean isTouchInHotbar = hudKeyHandled != -1;
                 if (isTouchInHotbar) {
                     sendKeyPress(hudKeyHandled);
-                    if(hasDoubleTapped && hudKeyHandled == mLastHotbarKey){
+                    if(hasDoubleTapped && hudKeyHandled == mLastHotbarKey && !PREF_DISABLE_SWAP_HAND){
                         //Prevent double tapping Event on two different slots
                         sendKeyPress(LwjglGlfwKeycode.GLFW_KEY_F);
                     }

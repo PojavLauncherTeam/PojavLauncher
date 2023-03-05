@@ -231,6 +231,8 @@
     <string name="dl_library_sha_pass">Library %s is fine and usable</string>
     <string name="mcl_disable_gestures">Disable gestures</string>
     <string name="mcl_disable_gestures_subtitle">Disables gestures, such as hold to break block, and tap to place a block.</string>
+    <string name="mcl_disable_swap_hand">Disable double tap to swap hands</string>
+    <string name="mcl_disable_swap_hand_subtitle">Disables double tap on an hotbar item to swap it in the second hand</string>
     <string name="mcl_setting_title_mousespeed">Mouse Speed</string>
     <string name="mcl_setting_subtitle_mousespeed">Changes the speed of the software mouse</string>
     <string name="customctrl_passthru">Mouse pass-thru</string>
