@@ -302,18 +302,33 @@ public class ControlLayout extends FrameLayout {
 	int[] location = new int[2];
 	//While this is called onTouch, this should only be called from a ControlButton.
 	public boolean onTouch(View v, MotionEvent ev) {
+		ControlInterface lastControlButton = mapTable.get(v);
+
 		//Check if the action is cancelling, reset the lastControl button associated to the view
 		if(ev.getActionMasked() == MotionEvent.ACTION_UP || ev.getActionMasked() == MotionEvent.ACTION_CANCEL){
-			for(ControlInterface control : mapTable.values()){
-				control.sendKeyPresses(false);
-			}
-			mapTable.clear();
+			if(lastControlButton != null) lastControlButton.sendKeyPresses(false);
+			mapTable.put(v, null);
 			return true;
 		}
 
 		if(ev.getActionMasked() != MotionEvent.ACTION_MOVE) return false;
 
 		getLocationOnScreen(location);
+
+		//Optimization pass to avoid looking at all children again
+		if(lastControlButton != null){
+			if(	ev.getRawX() > lastControlButton.getControlView().getX() + location[0]
+					&& ev.getRawX() < lastControlButton.getControlView().getX() + lastControlButton.getControlView().getWidth() + location[0]
+					&& ev.getRawY() > lastControlButton.getControlView().getY()
+					&& ev.getRawY() < lastControlButton.getControlView().getY() + lastControlButton.getControlView().getHeight()){
+				return true;
+			}
+		}
+
+		//Release last keys
+		if (lastControlButton != null) lastControlButton.sendKeyPresses(false);
+		mapTable.remove(v);
+
 		// Update the state of all swipeable buttons
 		for(ControlInterface button : getButtonChildren()){
 			if(!button.getProperties().isSwipeable) continue;
@@ -323,18 +338,16 @@ public class ControlLayout extends FrameLayout {
 					&& ev.getRawY() > button.getControlView().getY()
 					&& ev.getRawY() < button.getControlView().getY() + button.getControlView().getHeight()){
 
-				if(mapTable.get(button.getControlView()) == null){
+				//Press the new key
+				if(!button.equals(lastControlButton)){
 					button.sendKeyPresses(true);
-					mapTable.put(button.getControlView(), button);
+					mapTable.put(v, button);
+					return true;
 				}
-			}else{
-				if(mapTable.get(button.getControlView()) != null){
-					button.sendKeyPresses(false);
-					mapTable.remove(button.getControlView());
-				}
+
 			}
 		}
-		return true;
+		return false;
 	}
 
 	@Override
