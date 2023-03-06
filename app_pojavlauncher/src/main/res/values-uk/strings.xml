@@ -202,6 +202,8 @@
     <string name="dl_library_sha_pass">Бібліотека %s готова і придатна для використання</string>
     <string name="mcl_disable_gestures">Вимкнути жести</string>
     <string name="mcl_disable_gestures_subtitle">Вимикає жести, наприклад утримувати, щоб розбити блок та торкнутися щоб поставити.</string>
+    <string name="mcl_disable_swap_hand">Вимкнути подвійний дотик для зміни рук</string>
+    <string name="mcl_disable_swap_hand_subtitle">Вимикає подвійний дотик на панелі швидкого доступу для заміни її в другій руці</string>
     <string name="mcl_setting_title_mousespeed">Чутливість миші</string>
     <string name="mcl_setting_subtitle_mousespeed">Змінює чутливість віртуальної миші</string>
     <string name="customctrl_passthru">Курсор миші</string>
