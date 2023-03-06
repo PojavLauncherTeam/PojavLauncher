@@ -7,7 +7,7 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">Indirizzo Email o nome utente</string>
+    <string name="login_online_username_hint">Indirizzo email o nome utente</string>
     <string name="login_online_password_hint">Password</string>
     <string name="login_online_check_keeplogin">Resta collegato</string>
     <string name="login_online_login_label">Accedi</string>
@@ -137,7 +137,7 @@
     <string name="control_mouseon">Mouse: on </string>
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">Chiusura forzata</string>
-    <string name="control_viewout">Uscita</string>
+    <string name="control_viewout">Registro log</string>
     <string name="control_adebug">Debug input</string>
     <string name="control_customkey">Invia keycode personalizzato</string>
     <string name="control_scaleup">Aumenta</string>
