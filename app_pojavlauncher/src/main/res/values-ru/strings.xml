@@ -202,6 +202,8 @@
     <string name="dl_library_sha_pass">Библиотека %s проверена и может быть использована</string>
     <string name="mcl_disable_gestures">Отключение жестов</string>
     <string name="mcl_disable_gestures_subtitle">Отключает жесты, такие как удержание, чтобы сломать блок, и нажатие, чтобы разместить блок.</string>
+    <string name="mcl_disable_swap_hand">Отключить жест перемещения по двойному касанию</string>
+    <string name="mcl_disable_swap_hand_subtitle">Отключает перемещение предмета во вторую руку при двойном касании по нему в панели инструментов.</string>
     <string name="mcl_setting_title_mousespeed">Чувствительность курсора</string>
     <string name="mcl_setting_subtitle_mousespeed">Изменяет чувствительность виртуальной мыши</string>
     <string name="customctrl_passthru">Пропускать касание</string>
@@ -291,7 +293,7 @@
     <string name="notification_terminate">Завершить</string>
     <string name="notification_game_runs">Игра запущена</string>
     <string name="folder_dialog_create">Создать</string>
-    <string name="folder_dialog_insert_name">Имя новой папки</string>
+    <string name="folder_dialog_insert_name">Введите название папки</string>
     <string name="main_login_done">Вход выполнен</string>
     <string name="main_add_account">Добавить учётную запись</string>
     <string name="tasks_ongoing">Уже в процессе, подождите…</string>
