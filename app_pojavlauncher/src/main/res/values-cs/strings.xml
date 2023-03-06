@@ -202,6 +202,8 @@
     <string name="dl_library_sha_pass">Knihovna %s je v pořádku a použitelná</string>
     <string name="mcl_disable_gestures">Vypnout gesta</string>
     <string name="mcl_disable_gestures_subtitle">Zakáže gesta, například podržení pro rozbití bloku a klepnutí pro položení bloku.</string>
+    <string name="mcl_disable_swap_hand">Vypnout dvojité klepnutí pro výměnu rukou</string>
+    <string name="mcl_disable_swap_hand_subtitle">Vypne dvojité kliknutí na předmět v hotbaru pro vyměnění do druhé ruky</string>
     <string name="mcl_setting_title_mousespeed">Rychlost myši</string>
     <string name="mcl_setting_subtitle_mousespeed">Změní rychlost softwarové myši</string>
     <string name="customctrl_passthru">Převést dotyk</string>
@@ -314,4 +316,5 @@
     <string name="storage_required">PojavLauncher vyžaduje mít připojeno externí úložiště. Prosím znovu připojte své úložiště a restartujte aplikaci.</string>
     <string name="mcl_setting_title_buttonallcaps">Zobrazovat pouze velká písmena v textě tlačítek</string>
     <string name="mcl_setting_subtitle_buttonallcaps">Vypněte toto, chcete-li užívat malá písmena ve vlastních ovládání</string>
+    <string name="create_profile">Vytvořit nový profil</string>
 </resources>
