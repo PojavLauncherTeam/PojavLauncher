@@ -54,6 +54,9 @@ jint JNI_OnLoad(JavaVM* vm, __attribute__((unused)) void* reserved) {
         jfieldID field_keyDownBuffer = (*pojav_environ->runtimeJNIEnvPtr_JRE)->GetStaticFieldID(pojav_environ->runtimeJNIEnvPtr_JRE, pojav_environ->vmGlfwClass, "keyDownBuffer", "Ljava/nio/ByteBuffer;");
         jobject keyDownBufferJ = (*pojav_environ->runtimeJNIEnvPtr_JRE)->GetStaticObjectField(pojav_environ->runtimeJNIEnvPtr_JRE, pojav_environ->vmGlfwClass, field_keyDownBuffer);
         pojav_environ->keyDownBuffer = (*pojav_environ->runtimeJNIEnvPtr_JRE)->GetDirectBufferAddress(pojav_environ->runtimeJNIEnvPtr_JRE, keyDownBufferJ);
+        jfieldID field_mouseDownBuffer = (*pojav_environ->runtimeJNIEnvPtr_JRE)->GetStaticFieldID(pojav_environ->runtimeJNIEnvPtr_JRE, pojav_environ->vmGlfwClass, "mouseDownBuffer", "Ljava/nio/ByteBuffer;");
+        jobject mouseDownBufferJ = (*pojav_environ->runtimeJNIEnvPtr_JRE)->GetStaticObjectField(pojav_environ->runtimeJNIEnvPtr_JRE, pojav_environ->vmGlfwClass, field_mouseDownBuffer);
+        pojav_environ->mouseDownBuffer = (*pojav_environ->runtimeJNIEnvPtr_JRE)->GetDirectBufferAddress(pojav_environ->runtimeJNIEnvPtr_JRE, mouseDownBufferJ);
         hookExec();
     }
     
@@ -316,7 +319,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendCursorPos(__
      _a > _b ? _a : _b; })
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendKey(__attribute__((unused)) JNIEnv* env, __attribute__((unused)) jclass clazz, jint key, jint scancode, jint action, jint mods) {
     if (pojav_environ->GLFW_invoke_Key && pojav_environ->isInputReady) {
-        pojav_environ->keyDownBuffer[max(0, key-31)]=(jbyte)action;
+        pojav_environ->keyDownBuffer[max(0, key-31)] = (jbyte) action;
         if (pojav_environ->isUseStackQueueCall) {
             sendData(EVENT_TYPE_KEY, key, scancode, action, mods);
         } else {
@@ -328,14 +331,12 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendKey(__attrib
 
 
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSendMouseButton(__attribute__((unused)) JNIEnv* env, __attribute__((unused)) jclass clazz, jint button, jint action, jint mods) {
-    if (pojav_environ->isInputReady) {
-        if (button == -1) {
-        } else if (pojav_environ->GLFW_invoke_MouseButton) {
-            if (pojav_environ->isUseStackQueueCall) {
-                sendData(EVENT_TYPE_MOUSE_BUTTON, button, action, mods, 0);
-            } else {
-                pojav_environ->GLFW_invoke_MouseButton((void*) pojav_environ->showingWindow, button, action, mods);
-            }
+    if (pojav_environ->GLFW_invoke_MouseButton && pojav_environ->isInputReady) {
+        pojav_environ->mouseDownBuffer[max(0, button)] = (jbyte) action;
+        if (pojav_environ->isUseStackQueueCall) {
+            sendData(EVENT_TYPE_MOUSE_BUTTON, button, action, mods, 0);
+        } else {
+            pojav_environ->GLFW_invoke_MouseButton((void*) pojav_environ->showingWindow, button, action, mods);
         }
     }
 }

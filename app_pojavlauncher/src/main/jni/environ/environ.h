@@ -43,6 +43,7 @@ struct pojav_environ_s {
     jclass vmGlfwClass;
     jboolean isGrabbing;
     jbyte* keyDownBuffer;
+    jbyte* mouseDownBuffer;
     JavaVM* runtimeJavaVMPtr;
     JNIEnv* runtimeJNIEnvPtr_JRE;
     JavaVM* dalvikJavaVMPtr;

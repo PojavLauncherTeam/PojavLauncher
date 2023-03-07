@@ -498,6 +498,8 @@ public class GLFW
     private static ArrayMap<Long, GLFWWindowProperties> mGLFWWindowMap;
     public static boolean mGLFWIsInputReady;
     public static final ByteBuffer keyDownBuffer = ByteBuffer.allocateDirect(317);
+    public static final ByteBuffer mouseDownBuffer = ByteBuffer.allocateDirect(8);
+
     private static final String PROP_WINDOW_WIDTH = "glfwstub.windowWidth";
     private static final String PROP_WINDOW_HEIGHT= "glfwstub.windowHeight";
     public static long mainContext = 0;
@@ -1116,7 +1118,7 @@ public class GLFW
     }
 
     public static int glfwGetMouseButton(@NativeType("GLFWwindow *") long window, int button) {
-        return 0;
+        return mouseDownBuffer.get(button);
     }
     public static void glfwGetCursorPos(@NativeType("GLFWwindow *") long window, @Nullable @NativeType("double *") DoubleBuffer xpos, @Nullable @NativeType("double *") DoubleBuffer ypos) {
         if (CHECKS) {
