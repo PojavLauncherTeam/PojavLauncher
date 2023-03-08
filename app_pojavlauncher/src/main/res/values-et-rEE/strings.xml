@@ -17,6 +17,7 @@
     <!-- Warnings -->
     <!-- AlertDialog title -->
     <!-- Error messages -->
+    <string name="error_no_version">Versioon puudub!</string>
     <string name="error_show_more">Kuva rohkem</string>
     <string name="error_show_less">Kuva vähem</string>
     <!-- Toast messages -->
