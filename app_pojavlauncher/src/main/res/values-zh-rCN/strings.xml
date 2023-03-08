@@ -115,7 +115,7 @@
     <string name="mcn_exit_call">退出</string>
     <string name="mcn_exit_confirm">确定强制关闭？</string>
     <string name="mcn_check_fail_lwjgl">未安装 LWJGL3！</string>
-    <string name="mcn_check_fail_vulkan_support">此设备不支持Vulkan Zink 渲染器！</string>
+    <string name="mcn_check_fail_vulkan_support">此设备不支持 Vulkan Zink 渲染器！</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">界面</string>
     <string name="control_keyboard">键盘</string>
@@ -143,11 +143,11 @@
     <string name="control_scaleup">放大</string>
     <string name="control_scaledown">缩小</string>
     <!-- ImportControlActivity Strings -->
-    <string name="import_control_label">导入键盘</string>
+    <string name="import_control_label">导入控制键</string>
     <string name="import_control_invalid_file">文件无效或已损坏</string>
-    <string name="import_control_import_button">导入键盘</string>
+    <string name="import_control_import_button">导入控制键</string>
     <string name="import_control_verifying_file">文件正在校检中，请稍候重试…</string>
-    <string name="import_control_invalid_name">无效的名称或文件已存在</string>
+    <string name="import_control_invalid_name">名称无效或文件已存在</string>
     <string name="import_control_done">导入完成</string>
     <!--
     <string name="control_more3"></string>
@@ -202,10 +202,12 @@
     <string name="dl_library_sha_pass">依赖库 %s 正常</string>
     <string name="mcl_disable_gestures">禁用手势</string>
     <string name="mcl_disable_gestures_subtitle">禁用手势，例如长按破坏方块和点击放置方块。</string>
+    <string name="mcl_disable_swap_hand">禁用双击交换手中物品</string>
+    <string name="mcl_disable_swap_hand_subtitle">禁用双击快捷栏上的物品来在副手中将其交换</string>
     <string name="mcl_setting_title_mousespeed">鼠标速度</string>
     <string name="mcl_setting_subtitle_mousespeed">更改虚拟鼠标的速度</string>
     <string name="customctrl_passthru">鼠标透传</string>
-    <string name="customctrl_swipeable">可滑动的</string>
+    <string name="customctrl_swipeable">可滑动</string>
     <string name="customctrl_rounded">圆角</string>
     <string name="memory_warning_msg">当前可用内存（%d）低于所分配的内存（%d），这可能会导致游戏崩溃。如果游戏崩溃请更改配置。</string>
     <string name="mcl_memory_allocation">内存分配</string>
@@ -241,7 +243,7 @@
     <string name="preference_mouse_start_description">此选项打开时，虚拟鼠标会在启动时显示</string>
     <string name="preference_video_title">视频和渲染器</string>
     <string name="preference_video_description">分辨率、缩放类型和渲染器</string>
-    <string name="preference_control_title">自定义控制</string>
+    <string name="preference_control_title">自定义控制键</string>
     <string name="preference_control_description">手势类型、触发器和缩放</string>
     <string name="preference_java_title">Java 调整</string>
     <string name="preference_java_description">Java 版本、JVM 参数、内存量及沙盒</string>
