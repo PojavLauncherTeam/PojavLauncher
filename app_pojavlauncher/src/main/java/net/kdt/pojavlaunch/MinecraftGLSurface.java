@@ -569,9 +569,6 @@ public class MinecraftGLSurface extends View implements GrabListener{
         }
 
         CallbackBridge.sendUpdateWindowSize(windowWidth, windowHeight);
-        //getMcScale();
-        //Toast.makeText(getContext(), "width: " + width, Toast.LENGTH_SHORT).show();
-        //Toast.makeText(getContext(), "height: " + height, Toast.LENGTH_SHORT).show();
 
     }
 

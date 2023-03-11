@@ -74,31 +74,6 @@ public class CustomControlsActivity extends BaseActivity {
 			}
 			mDrawerLayout.closeDrawers();
 		});
-		/*mDrawerNavigationView.setNavigationItemSelectedListener(
-				menuItem -> {
-					switch (menuItem.getItemId()) {
-						case R.id.menu_ctrl_load:
-							load(mControlLayout);
-							break;
-						case R.id.menu_ctrl_add:
-							mControlLayout.addControlButton(new ControlData("New"));
-							break;
-						case R.id.menu_ctrl_add_drawer:
-							mControlLayout.addDrawer(new ControlDrawerData());
-							break;
-						case R.id.menu_ctrl_selectdefault:
-							dialogSelectDefaultCtrl(mControlLayout);
-							break;
-						case R.id.menu_ctrl_save:
-							save(false, mControlLayout);
-							break;
-					}
-					//Toast.makeText(MainActivity.this, menuItem.getTitle() + ":" + menuItem.getItemId(), Toast.LENGTH_SHORT).show();
-
-					mDrawerLayout.closeDrawers();
-					return true;
-				});
-		*/
 		mControlLayout.setActivity(this);
 		mControlLayout.setModifiable(true);
 
@@ -159,8 +134,6 @@ public class CustomControlsActivity extends BaseActivity {
 						((CustomControlsActivity) ctx).isModified = false;
 						((Activity)ctx).onBackPressed();
 					}
-					//			    setResult(Activity.RESULT_OK, new Intent());
-					//				CustomControlsActivity.super.onBackPressed();
 				}
 			});
 		}

@@ -290,19 +290,6 @@ public final class Tools {
                 if (arg instanceof String) {
                     minecraftArgs.add((String) arg);
                 } else {
-                    /*
-                     JMinecraftVersionList.Arguments.ArgValue argv = (JMinecraftVersionList.Arguments.ArgValue) arg;
-                     if (argv.values != null) {
-                     minecraftArgs.add(argv.values[0]);
-                     } else {
-
-                     for (JMinecraftVersionList.Arguments.ArgValue.ArgRules rule : arg.rules) {
-                     // rule.action = allow
-                     // TODO implement this
-                     }
-
-                     }
-                     */
                 }
             }
         }
@@ -346,19 +333,6 @@ public final class Tools {
                 if (arg instanceof String) {
                     minecraftArgs.add((String) arg);
                 } else {
-                    /*
-                    JMinecraftVersionList.Arguments.ArgValue argv = (JMinecraftVersionList.Arguments.ArgValue) arg;
-                    if (argv.values != null) {
-                        minecraftArgs.add(argv.values[0]);
-                    } else {
-
-                         for (JMinecraftVersionList.Arguments.ArgValue.ArgRules rule : arg.rules) {
-                         // rule.action = allow
-                         // TODO implement this
-                         }
-
-                    }
-                    */
                 }
             }
         }
@@ -669,11 +643,6 @@ public final class Tools {
                 return customVer;
             } else {
                 JMinecraftVersionList.Version inheritsVer = null;
-                /*for (JMinecraftVersionList.Version valueVer : ((JMinecraftVersionList) ExtraCore.getValue(ExtraConstants.RELEASE_TABLE)).versions) {
-                    if (valueVer.id.equals(customVer.inheritsFrom) && (!new File(DIR_HOME_VERSION + "/" + customVer.inheritsFrom + "/" + customVer.inheritsFrom + ".json").exists()) && (valueVer.url != null)) {
-                        Tools.downloadFile(valueVer.url,DIR_HOME_VERSION + "/" + customVer.inheritsFrom + "/" + customVer.inheritsFrom + ".json");
-                    }
-                }*/
                 //If it won't download, just search for it
                 try{
                     inheritsVer = Tools.GLOBAL_GSON.fromJson(read(DIR_HOME_VERSION + "/" + customVer.inheritsFrom + "/" + customVer.inheritsFrom + ".json"), JMinecraftVersionList.Version.class);

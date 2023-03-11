@@ -27,14 +27,4 @@ public class LauncherProfiles {
             throw new RuntimeException(th);
         }
     }
-    /*
-     public static String insert;
-
-     private static void insertMissing() {
-     if (mainProfileJson.authenticationDatabase == null) {
-     MinecraftAuthenticationDatabase mad = new MinecraftAuthenticationDatabase();
-     mainProfileJson.authenticationDatabase = mad;
-     }
-     }
-     */
 }

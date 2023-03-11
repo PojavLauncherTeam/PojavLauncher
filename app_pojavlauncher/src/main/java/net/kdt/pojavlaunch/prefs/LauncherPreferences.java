@@ -95,34 +95,6 @@ public class LauncherPreferences {
         PREF_FORCE_VSYNC = DEFAULT_PREF.getBoolean("force_vsync", false);
         PREF_BUTTON_ALL_CAPS = DEFAULT_PREF.getBoolean("buttonAllCaps", true);
 
-/*
-        if (PREF_CUSTOM_JAVA_ARGS.isEmpty()) {
-            String DEFAULT_JAVA_ARGS = "";
-                "-Xms" + (androidHeap > 800 ? 800 : androidHeap) + "m " +
-                // (32bit) More than 800mb may make JVM not allocateable and crash
-                "-Xmx" + (doubleAndroidHeap > 800 ? 800 : doubleAndroidHeap) + "m" +
-                "-XX:+UseG1GC " +
-                "-XX:+ParallelRefProcEnabled " +
-                "-XX:MaxGCPauseMillis=200 " +
-                "-XX:+UnlockExperimentalVMOptions " +
-                "-XX:+AlwaysPreTouch " +
-		"-XX:G1NewSizePercent=30 " +
-		"-XX:G1MaxNewSizePercent=40 " +
-		"-XX:G1HeapRegionSize=8M " +
-		"-XX:G1ReservePercent=20 " +
-		"-XX:G1HeapWastePercent=5 " +
-	        "-XX:G1MixedGCCountTarget=4 " +
-		"-XX:InitiatingHeapOccupancyPercent=15 " +
-		"-XX:G1MixedGCLiveThresholdPercent=90 " +
-		"-XX:G1RSetUpdatingPauseTimePercent=5 " +
-		"-XX:SurvivorRatio=32 " +
-		"-XX:+PerfDisableSharedMem " +
-                "-XX:MaxTenuringThreshold=1";
-            PREF_CUSTOM_JAVA_ARGS = DEFAULT_JAVA_ARGS;
-            DEFAULT_PREF.edit().putString("javaArgs", DEFAULT_JAVA_ARGS).commit();
-        }
-*/
-
         String argLwjglLibname = "-Dorg.lwjgl.opengl.libname=";
         for (String arg : JREUtils.parseJavaArguments(PREF_CUSTOM_JAVA_ARGS)) {
             if (arg.startsWith(argLwjglLibname)) {

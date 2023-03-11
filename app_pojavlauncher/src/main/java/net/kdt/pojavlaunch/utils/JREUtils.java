@@ -393,39 +393,6 @@ public class JREUtils {
      * @param _args all args as a string
      * @return a list of split args
      */
-    /*public static ArrayList<String> parseJavaArguments(String _args) {
-        char bracketOpen = '\0';
-        char[] str = _args.toCharArray();
-        StringBuilder sb = new StringBuilder();
-        ArrayList<String> ret = new ArrayList<String>();
-        for(int i = 0; i < str.length; i++) {
-            if(str[i] == '\\') {
-                sb.append(str[i+1]);
-                i++;
-                continue;
-            }
-            if(str[i] == ' ' && bracketOpen == '\0') {
-                if(sb.length() > 0) {
-                    ret.add(sb.toString());
-                    sb = new StringBuilder();
-                }
-                continue;
-            }
-            if(str[i] == '"' || str[i] == '\'') {
-                if(bracketOpen == str[i]) {
-                    bracketOpen = '\0';
-                    continue;
-                }else if(bracketOpen == '\0') {
-                    bracketOpen = str[i];
-                    continue;
-                }
-
-            }
-            sb.append(str[i]);
-        }
-        ret.add(sb.toString());
-        return ret;
-    }*/
 
     /**
      * Parse and separate java arguments in a user friendly fashion

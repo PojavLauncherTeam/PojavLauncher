@@ -39,11 +39,6 @@ public class CallbackBridge {
 
     public static void sendKeycode(int keycode, char keychar, int scancode, int modifiers, boolean isDown) {
         // TODO CHECK: This may cause input issue, not receive input!
-/*
-        if (!nativeSendCharMods((int) keychar, modifiers) || !nativeSendChar(keychar)) {
-            nativeSendKey(keycode, 0, isDown ? 1 : 0, modifiers);
-        }
-*/
 
         //nativeSendKeycode(keycode, keychar, scancode, isDown ? 1 : 0, modifiers);
         if(keycode != 0)  nativeSendKey(keycode,scancode,isDown ? 1 : 0, modifiers);
@@ -52,8 +47,6 @@ public class CallbackBridge {
             nativeSendCharMods(keychar,modifiers);
             nativeSendChar(keychar);
         }
-        //throw new IllegalStateException("Tracing call");
-        // sendData(JRE_TYPE_KEYCODE_CONTROL, keycode, Character.toString(keychar), Boolean.toString(isDown), modifiers);
     }
 
     public static void sendChar(char keychar, int modifiers){
@@ -125,24 +118,6 @@ public class CallbackBridge {
             default: return null;
         }
     }
-/*
-    private static String currData;
-    public static void sendData(int type, Object... dataArr) {
-        currData = "";
-        for (int i = 0; i < dataArr.length; i++) {
-            if (dataArr[i] instanceof Integer) {
-                currData += Integer.toString((int) dataArr[i]);
-            } else if (dataArr[i] instanceof String) {
-                currData += (String) dataArr[i];
-            } else {
-                currData += dataArr[i].toString();
-            }
-            currData += (i + 1 < dataArr.length ? ":" : "");
-        }
-        nativeSendData(true, type, currData);
-    }
-    private static native void nativeSendData(boolean isAndroid, int type, String data);
-*/
 
 
     public static int getCurrentMods() {
