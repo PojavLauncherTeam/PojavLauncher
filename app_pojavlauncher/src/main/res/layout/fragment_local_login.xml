@@ -52,7 +52,6 @@
         android:layout_height="@dimen/_42sdp"
         android:layout_marginHorizontal="@dimen/_25sdp"
         android:layout_marginTop="@dimen/_8sdp"
-        android:onClick="loginMC"
         android:text="@string/login_online_login_label"
 
         android:textColor="@android:color/white"
