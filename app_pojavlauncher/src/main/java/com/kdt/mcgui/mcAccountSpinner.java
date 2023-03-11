@@ -159,7 +159,8 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
         }
 
         pickAccount(position);
-        performLogin(mSelectecAccount);
+        if(mSelectecAccount != null)
+            performLogin(mSelectecAccount);
     }
 
     @Override
@@ -278,6 +279,16 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
         if(position != -1){
             PojavProfile.setCurrentProfile(getContext(), mAccountList.get(position));
             selectedAccount = PojavProfile.getCurrentProfileContent(getContext(), mAccountList.get(position));
+
+
+            // WORKAROUND
+            // Account file corrupted due to previous versions having improper encoding
+            if (selectedAccount == null){
+                removeCurrentAccount();
+                pickAccount(-1);
+                setSelection(0);
+                return;
+            }
             setSelection(position);
         }else {
             // Get the current profile, or the first available profile if the wanted one is unavailable

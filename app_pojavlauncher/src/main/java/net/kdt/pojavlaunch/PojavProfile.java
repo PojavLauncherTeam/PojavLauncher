@@ -25,7 +25,7 @@ public class PojavProfile {
 		return ctx.getSharedPreferences(PROFILE_PREF, Context.MODE_PRIVATE);
 	}
 
-    public static MinecraftAccount getCurrentProfileContent(@NonNull Context ctx, @Nullable String profileName) throws JsonSyntaxException {
+    public static MinecraftAccount getCurrentProfileContent(@NonNull Context ctx, @Nullable String profileName) {
         return MinecraftAccount.load(profileName == null ? getCurrentProfileName(ctx) : profileName);
     }
 

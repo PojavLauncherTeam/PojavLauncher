@@ -62,7 +62,7 @@ public class MinecraftAccount {
         return Tools.GLOBAL_GSON.fromJson(content, MinecraftAccount.class);
     }
 
-    public static MinecraftAccount load(String name) throws JsonSyntaxException {
+    public static MinecraftAccount load(String name) {
         if(!accountExists(name)) return null;
         try {
             MinecraftAccount acc = parse(Tools.read(Tools.DIR_ACCOUNT_NEW + "/" + name + ".json"));
@@ -88,7 +88,7 @@ public class MinecraftAccount {
                 // acc.updateSkinFace("MHF_Steve");
             }
             return acc;
-        } catch(IOException e) {
+        } catch(IOException | JsonSyntaxException e) {
             Log.e(MinecraftAccount.class.getName(), "Caught an exception while loading the profile",e);
             return null;
         }
