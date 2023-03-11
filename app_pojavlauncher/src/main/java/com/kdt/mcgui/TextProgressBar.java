@@ -37,6 +37,7 @@ public class TextProgressBar extends ProgressBar {
         mTextPaint = new Paint();
         mTextPaint.setColor(Color.WHITE);
         mTextPaint.setFlags(Paint.FAKE_BOLD_TEXT_FLAG);
+        mTextPaint.setAntiAlias(true);
     }
 
     @Override
