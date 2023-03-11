@@ -31,7 +31,6 @@
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_news">ข่าวสาร</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">เชื่อมต่อแล้ว</string>
     <!-- MCLauncherActivity: Strings -->

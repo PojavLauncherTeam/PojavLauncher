@@ -37,7 +37,6 @@
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_news">Haberler</string>
     <string name="mcl_tab_console">Geliştirici konsolu</string>
     <string name="mcl_tab_crash">Çökme günlüğü</string>
     <!-- MCLauncherActivity: Account status -->
