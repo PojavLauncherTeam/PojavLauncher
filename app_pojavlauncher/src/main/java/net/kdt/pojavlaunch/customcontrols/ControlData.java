@@ -32,7 +32,7 @@ public class ControlData {
     public static final int SPECIALBTN_MENU = -9;
     
     private static ControlData[] SPECIAL_BUTTONS;
-    private static String[] SPECIAL_BUTTON_NAME_ARRAY;
+    private static List<String> SPECIAL_BUTTON_NAME_ARRAY;
 
     // Internal usage only
     public boolean isHideable;
@@ -74,13 +74,14 @@ public class ControlData {
         return SPECIAL_BUTTONS;
     }
 
-    public static String[] buildSpecialButtonArray() {
+    public static List<String> buildSpecialButtonArray() {
         if (SPECIAL_BUTTON_NAME_ARRAY == null) {
             List<String> nameList = new ArrayList<String>();
             for (ControlData btn : getSpecialButtons()) {
-                nameList.add(btn.name);
+                nameList.add("SPECIAL_" + btn.name);
             }
-            SPECIAL_BUTTON_NAME_ARRAY = nameList.toArray(new String[0]);
+            SPECIAL_BUTTON_NAME_ARRAY = nameList;
+            Collections.reverse(SPECIAL_BUTTON_NAME_ARRAY);
         }
 
         return SPECIAL_BUTTON_NAME_ARRAY;

@@ -42,6 +42,7 @@ import net.kdt.pojavlaunch.customcontrols.buttons.ControlInterface;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * Class providing a sort of popup on top of a Layout, allowing to edit a given ControlButton
@@ -87,7 +88,7 @@ public class EditControlPopup {
     protected TextView mStrokePercentTextView, mCornerRadiusPercentTextView, mAlphaPercentTextView;
     protected TextView mSelectBackgroundColor, mSelectStrokeColor;
     protected ArrayAdapter<String> mAdapter;
-    protected String[] mSpecialArray;
+    protected List<String> mSpecialArray;
 
     // Decorative textviews
     private TextView mOrientationTextView, mMappingTextView, mNameTextView, mCornerRadiusTextView;
@@ -215,10 +216,7 @@ public class EditControlPopup {
         //Initialize adapter for keycodes
         mAdapter = new ArrayAdapter<>(mRootView.getContext(), R.layout.item_centered_textview);
         mSpecialArray = ControlData.buildSpecialButtonArray();
-        for (int i = 0; i < mSpecialArray.length; i++) {
-            mSpecialArray[i] = "SPECIAL_" + mSpecialArray[i];
-        }
-        Collections.reverse(Arrays.asList(mSpecialArray));
+
         mAdapter.addAll(mSpecialArray);
         mAdapter.addAll(EfficientAndroidLWJGLKeycode.generateKeyName());
         mAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
@@ -278,9 +276,9 @@ public class EditControlPopup {
 
         for(int i = 0; i< data.keycodes.length; i++){
             if (data.keycodes[i] < 0) {
-                mKeycodeSpinners[i].setSelection(data.keycodes[i] + mSpecialArray.length);
+                mKeycodeSpinners[i].setSelection(data.keycodes[i] + mSpecialArray.size());
             } else {
-                mKeycodeSpinners[i].setSelection(EfficientAndroidLWJGLKeycode.getIndexByValue(data.keycodes[i]) + mSpecialArray.length);
+                mKeycodeSpinners[i].setSelection(EfficientAndroidLWJGLKeycode.getIndexByValue(data.keycodes[i]) + mSpecialArray.size());
             }
         }
     }
@@ -482,10 +480,10 @@ public class EditControlPopup {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     // Side note, spinner listeners are fired later than all the other ones.
                     // Meaning the internalChanges bool is useless here.
-                    if (position < mSpecialArray.length) {
-                        mCurrentlyEditedButton.getProperties().keycodes[finalI] = mKeycodeSpinners[finalI].getSelectedItemPosition() - mSpecialArray.length;
+                    if (position < mSpecialArray.size()) {
+                        mCurrentlyEditedButton.getProperties().keycodes[finalI] = mKeycodeSpinners[finalI].getSelectedItemPosition() - mSpecialArray.size();
                     } else {
-                        mCurrentlyEditedButton.getProperties().keycodes[finalI] = EfficientAndroidLWJGLKeycode.getValueByIndex(mKeycodeSpinners[finalI].getSelectedItemPosition() - mSpecialArray.length);
+                        mCurrentlyEditedButton.getProperties().keycodes[finalI] = EfficientAndroidLWJGLKeycode.getValueByIndex(mKeycodeSpinners[finalI].getSelectedItemPosition() - mSpecialArray.size());
                     }
                 }
 
