@@ -49,7 +49,7 @@
     -->
 
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_news">News</string>
+    <string name="mcl_tab_wiki">Wiki</string>
     <string name="mcl_tab_console">Development console</string>
     <string name="mcl_tab_crash">Crash log</string>
 

@@ -17,7 +17,7 @@
 		android:layout_height="@dimen/_66sdp"
 		android:background="?android:attr/selectableItemBackground"
 
-		android:text="@string/mcl_tab_news"
+		android:text="@string/mcl_tab_wiki"
 		android:drawableStart="@drawable/ic_menu_news"
 		app:layout_constraintTop_toTopOf="parent"
 		/>
