@@ -37,7 +37,6 @@
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_news">Новини</string>
     <string name="mcl_tab_console">Консоль розробника</string>
     <string name="mcl_tab_crash">Журнал збоїв</string>
     <!-- MCLauncherActivity: Account status -->
