@@ -486,6 +486,7 @@ public class JREUtils {
             final String arg = argList.get(i);
             if(arg.startsWith(argStart)) {
                 argList.remove(i);
+                i--;
             }
         }
     }
