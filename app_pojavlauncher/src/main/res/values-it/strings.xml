@@ -7,17 +7,17 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">Indirizzo Email o nome utente</string>
+    <string name="login_online_username_hint">Indirizzo email o nome utente</string>
     <string name="login_online_password_hint">Password</string>
     <string name="login_online_check_keeplogin">Resta collegato</string>
     <string name="login_online_login_label">Accedi</string>
-    <string name="login_offline_label">Accedi come account Offline</string>
-    <string name="login_error_short_username">Il nome utente deve essere lungo almeno 3 caratteri</string>
+    <string name="login_offline_label">Accedi come account offline</string>
+    <string name="login_error_short_username">Il nome utente deve essere lungo almeno tre caratteri</string>
     <string name="login_error_exist_username">Nome utente già esistente</string>
-    <string name="login_microsoft">Accedi Da Microsoft</string>
+    <string name="login_microsoft">Accedi con Microsoft</string>
     <string name="login_select_account">Seleziona account</string>
-    <string name="login_title_no_saved_account">Non ci sono account !</string>
-    <string name="login_dialog_no_saved_account">Non hai account salvati.\nUsa l\'opzione <b>\"ricordami\"</b> per salvare un account al login.</string>
+    <string name="login_title_no_saved_account">Nessun account trovato!</string>
+    <string name="login_dialog_no_saved_account">Non hai account salvati.\nUsa l\'opzione <b>\"ricordami\"</b> per salvare un account al primo login.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Apri il menu scorrendo da destra verso sinistra ◀\nTieni premuto per personalizzare: modificare, ridimensionare o rimuovere."</string>
     <!-- Warnings -->
@@ -61,11 +61,11 @@
     <string name="mcl_setting_title_freeform">Avvia Minecraft in modalità finestra</string>
     <string name="mcl_setting_subtitle_freeform">Avvia Minecraft in finestra fluttuante. Necessario Android 7.0+</string>
     <string name="mcl_setting_title_hide_sidebar">Nascondi barra laterale</string>
-    <string name="mcl_setting_subtitle_hide_sidebar">Potrebbe piacere a coloro che preferivano la vecchia l\'interfaccia v1. Offre un\'esperienza migliore a schermo intero.</string>
-    <string name="mcl_setting_title_ignore_notch">Ignora il notch</string>
-    <string name="mcl_setting_subtitle_ignore_notch">Allarga lo schermo fino al di sotto della notch.\nDandoti un\'esperienza più immersiva.</string>
-    <string name="mcl_setting_title_resolution_scaler">Proporzioni risoluzione</string>
-    <string name="mcl_setting_subtitle_resolution_scaler">Ti permetti di diminuire la risoluzione del gioco. 100% è la risoluzione completa</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">Potrebbe piacere alle persone che preferiscono la vecchia interfaccia utente v1. Offre un\'esperienza migliore a schermo intero.</string>
+    <string name="mcl_setting_title_ignore_notch">Ignora notch</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Estende lo schermo al di sotto del notch.\nOffre un\'esperienza più immersiva.</string>
+    <string name="mcl_setting_title_resolution_scaler">Scala Risoluzione</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">Ti permette di diminuire la risoluzione del gioco. 100% è la risoluzione massima</string>
     <string name="mcl_setting_title_longpresstrigger">Per quanto tempo rimarrà attivo dopo una pressione prolungata</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Cambia il tempo di attivazione per una pressione prolungata nel rompimento di un blocco e il drop di un item.</string>
     <string name="mcl_setting_title_backtorightmouse">Usa il pulsante indietro come destro mouse</string>
@@ -76,10 +76,10 @@
     <string name="mcl_setting_subtitle_buttonscale">Aumenta le dimensioni se i pulsanti sono troppo piccoli.</string>
     <string name="mcl_setting_title_mousescale">Dimensioni mouse</string>
     <string name="mcl_setting_subtitle_mousescale">Cambia dimensioni mouse virtuale.</string>
-    <string name="mcl_setting_title_javaargs">Impostazioni di avvio JVM</string>
-    <string name="mcl_setting_subtitle_javaargs">Fa attenzione, se effettui modifiche senza sapere quello che fai potresti crashare.</string>
+    <string name="mcl_setting_title_javaargs">Argomenti di avvio della JVM</string>
+    <string name="mcl_setting_subtitle_javaargs">Attenzione, il gioco potrebbe crashare se effettui modifiche senza sapere quello che fai.</string>
     <string name="mcl_setting_category_general">Impostazioni generali</string>
-    <string name="mcl_setting_category_scaling">Modifica dimensioni</string>
+    <string name="mcl_setting_category_scaling">Impostazioni dimensioni</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
     <string name="mcl_setting_renderer_gles2">OpenGL ES 2</string>
     <string name="mcl_setting_renderer_gles3">OpenGL ES 3</string>
@@ -154,7 +154,7 @@
     <string name="control_mouseon">Mouse: on </string>
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">Chiusura forzata</string>
-    <string name="control_viewout">Uscita</string>
+    <string name="control_viewout">Registro log</string>
     <string name="control_adebug">Debug input</string>
     <string name="control_customkey">Invia keycode personalizzato</string>
     <string name="control_scaleup">Aumenta</string>
@@ -171,10 +171,10 @@
     <string name="customctrl_size_width">Larghezza</string>
     <string name="customctrl_size_height">Altezza</string>
     <string name="customctrl_dynamicpos">Posizione dinamica</string>
-    <string name="customctrl_dynamicpos_x">X dinamica</string>
-    <string name="customctrl_dynamicpos_y">Y dinamica</string>
+    <string name="customctrl_dynamicpos_x">Altezza dinamica</string>
+    <string name="customctrl_dynamicpos_y">Larghezza dinamica</string>
     <string name="customctrl_transparency_bg">Trasparenza sfondo</string>
-    <string name="customctrl_keycombine">Combinazioni tasti</string>
+    <string name="customctrl_keycombine">Combinazione di tasti</string>
     <string name="customctrl_keycombine_alt">Alt</string>
     <string name="customctrl_keycombine_control">Ctrl</string>
     <string name="customctrl_keycombine_shift">Shift</string>
@@ -188,19 +188,19 @@
     <string name="main_version">Versione:</string>
     <string name="main_nocrash">Nessun crash rilevato</string>
     <string name="main_nolog">Nessun log.</string>
-    <string name="main_no_news_feed">Collegamento alle news fallito !</string>
+    <string name="main_no_news_feed">Scaricamento ultime novità fallito!</string>
     <string name="auto_ram_subtitle">Attiva regolatore RAM automatico</string>
-    <string name="auto_ram_title">Auto RAM</string>
-    <string name="autoram_info_msg">Memory impostata a %d MB</string>
+    <string name="auto_ram_title">RAM automatica</string>
+    <string name="autoram_info_msg">RAM impostata a %dMB</string>
     <string name="mcl_setting_check_libraries">Controlla le librerie dopo il download</string>
-    <string name="mcl_setting_check_libraries_subtitle">Questa opzione forza il launcher a controllare l\'hash delle librerie se disponibile. Prevenendo download corrotti.</string>
-    <string name="dl_library_sha_fail">La libreria %s è danneggiata e sarà riscaricata</string>
+    <string name="mcl_setting_check_libraries_subtitle">Questa opzione forza il launcher a controllare l\'integrità della libreria se è possibile. Previene i download corrotti.</string>
+    <string name="dl_library_sha_fail">La libreria %s è danneggiata e sarà scaricata nuovamente</string>
     <string name="dl_library_sha_unknown">La libreria %s non può essere controllata, sarà ignorata e applicata comunque</string>
     <string name="dl_library_sha_pass">La libreria %s va bene ed è usabile</string>
     <string name="mcl_disable_gestures">Disattiva gestures</string>
     <string name="mcl_disable_gestures_subtitle">Disattiva gestures, ad esempio premere per rompere un blocco, e cliccare per piazzarlo.</string>
     <string name="mcl_setting_title_mousespeed">Velocità mouse</string>
-    <string name="mcl_setting_subtitle_mousespeed">Cambia la velocità del mouse via software</string>
+    <string name="mcl_setting_subtitle_mousespeed">Cambia la velocità del mouse</string>
     <string name="customctrl_passthru">Bypassa mouse</string>
     <string name="customctrl_rounded">Arrotondato</string>
     <string name="memory_warning_msg">L\'attuale quantità di RAM libera (%d) è minore di quella allocata (%d), la quale potrebbe portare a crash inaspettati. Modifica la quantità di RAM allocata in caso di crash.</string>
