@@ -16,14 +16,14 @@
     <string name="login_error_exist_username">این یوزرنیم قبلا استفاده شده</string>
     <string name="login_microsoft">ورود با مایکروسافت</string>
     <string name="login_select_account">انتخاب اکانت</string>
-    <string name="login_title_no_saved_account">اکانتی پیدا نشد!</string>
-    <string name="login_dialog_no_saved_account">هیچ اکانت ذخیره شده‌ای ندارید.\nاز گزینه <b>\"مرا وارد شده نگه دار\"</b> استفاده کنید تا اکانت را به محض ورود ذخیره کنید.</string>
+    <string name="login_title_no_saved_account">هیچ حساب کاربری پیدا نشد!</string>
+    <string name="login_dialog_no_saved_account">شما هیچ حساب ذخیره‌شده‌ای ندارید.\nاز گزینه <b>\"من را وارد سیستم نگه دارید\"</b> برای ذخیره یک حساب در اولین ورود به سیستم استفاده کنید.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"از راست به چپ بکشید تا منو را باز کنید ◀️\nدکمه‌ای را نگه دارید تا شخصی‌سازی کنید: ویرایش، تغییر سایز یا حذف."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">این اکانت حذف خواهد شد!</string>
     <!-- AlertDialog title -->
-    <string name="alerttitle_install_jre">جاوا ران‌تایم را نصب کنید %s (.tar.xz)</string>
+    <string name="alerttitle_install_jre">نصب Java Runtime %s (tar.xz.)</string>
     <string name="alerttitle_installmod">یک نصب کننده ماد را انتخاب کنید</string>
     <!-- Error messages -->
     <string name="error_fatal">پوجاو لانچر بصورت غیرمنتظره کرش خورد</string>
@@ -42,44 +42,44 @@
     <string name="mcl_tab_console">کنسول توسعه</string>
     <string name="mcl_tab_crash">گزارش (لاگ) کرش</string>
     <!-- MCLauncherActivity: Account status -->
-    <string name="mcl_account_connected">متصل شد</string>
+    <string name="mcl_account_connected">متصل</string>
     <string name="mcl_account_offline">آفلاین</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">آماده برای اجرای ماینکرفت %s</string>
     <string name="mcl_launch_cleancache">پاکسازی فایل‌های کَش</string>
     <string name="mcl_launch_downloading">در حال دانلود %s</string>
-    <string name="mcl_launch_downloading_progress">"در حال دانلود %s (%.2f MB / %.2f MB)"</string>
+    <string name="mcl_launch_downloading_progress">"درحال دانلود %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">آماده‌سازی برای دانلود منابع</string>
     <string name="mcl_options">گزینه‌ها</string>
-    <string name="mcl_option_modinstall">یک نصب کننده ماد را باز کنید (فورج، لیبی‌ماد، فابریک، ...)</string>
-    <string name="mcl_option_modinstallwitharg">یک نصب کننده ماد را باز کنید (با متغیر شخصی)</string>
+    <string name="mcl_option_modinstall">نصب کننده مد (فورج، لبی‌ماد، فبریک، و غیره) را راه‌اندازی کنید</string>
+    <string name="mcl_option_modinstallwitharg">نصب کننده ماد را راه اندازی کنید (با آرگومان های سفارشی)</string>
     <string name="mcl_option_customcontrol">کنترل‌های شخصی</string>
     <string name="mcl_option_settings">تنظیمات</string>
     <string name="mcl_option_about">درباره</string>
-    <string name="mcl_setting_title_uninstalljre">حذف نصب جاوا ران تایم</string>
-    <string name="mcl_setting_subtitle_uninstalljre">[ری‌استارت لانچر نیاز است] می‌توانید جاوا ران تایم را مجددا نصب کنید</string>
+    <string name="mcl_setting_title_uninstalljre">جاوا Runtime را حذف نصب کنید</string>
+    <string name="mcl_setting_subtitle_uninstalljre">[راه‌اندازی مجدد لازم است] این به شما امکان می‌دهد جاوا Runtime را دوباره نصب کنید</string>
     <string name="mcl_setting_title_freeform">بازکردن ماینکرفت در حالت Freeform</string>
     <string name="mcl_setting_subtitle_freeform">بازکردن ماینکرفت در پنجره شناور. نیازمند اندروید 7.0 به بالا</string>
-    <string name="mcl_setting_title_hide_sidebar">پنهان کردن نوار جانبی</string>
-    <string name="mcl_setting_subtitle_hide_sidebar">افراد قدیمی که رابط کاربری v1 را ترجیح می‌دهند، ممکن است این را دوست داشته باشند. تجربه تمام‌صفحه بهتری به شما می‌دهد.</string>
+    <string name="mcl_setting_title_hide_sidebar">پنهان کردن نوار کناری</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">افراد قدیمی که رابط کاربری قدیمی v1 را ترجیح می دهند ممکن است این را دوست داشته باشند. تجربه تمام صفحه بیشتری را به شما می دهد.</string>
     <string name="mcl_setting_title_ignore_notch">حفره دوربین را نادیده بگیر</string>
-    <string name="mcl_setting_subtitle_ignore_notch">حفره دوربین را نادیده می‌گیرد و صفحه زیر آن را گسترش می‌دهد.\nتجربه کنترل بهتری به شما می‌دهد.</string>
-    <string name="mcl_setting_title_resolution_scaler">تغییر مقیاس رزولوشن</string>
+    <string name="mcl_setting_subtitle_ignore_notch">حفره دوربین را نادیده می‌گیرد و صفحه زیر آن را گسترش می‌دهد.\nتجربه ای فراگیرتر به شما می دهد.</string>
+    <string name="mcl_setting_title_resolution_scaler">تغییر مقیاس وضوح (رزولوشن)</string>
     <string name="mcl_setting_subtitle_resolution_scaler">به شما اجازه می‌دهد رزولوشن (کیفیت) بازی را کاهش دهید. 100% به معنای کیفیت تمام صفحه است</string>
     <string name="mcl_setting_title_longpresstrigger">زمان مورد نیاز برای فعال کردن فشردن طولانی</string>
     <string name="mcl_setting_subtitle_longpresstrigger">تغییر زمان برای فعال شدن فشردن طولانی جهت کَندَن بلاک و دراپ کردن آیتم.</string>
     <string name="mcl_setting_title_backtorightmouse">دکمه برگشت به عنوان راست کلیک ماوس</string>
     <string name="mcl_setting_subtitle_backtorightmouse">بعضی دستگاه‌ها راست کلیک خارجی را به عنوان دکمه برگشت در نظر می‌گیرند. اگر شما نیز از ماوس خارجی استفاده می‌کنید، باید این را فعال کنید.</string>
-    <string name="mcl_setting_title_flat_button_style">ظاهر دکمه صاف</string>
-    <string name="mcl_setting_subtitle_flat_button_style">این را فعال کنید تا ظاهر دکمه کنترل را به صاف تغییر دهید.</string>
-    <string name="mcl_setting_title_buttonscale">تنظیم مقیاس دکمه‌های کنترل</string>
-    <string name="mcl_setting_subtitle_buttonscale">آن‌ها را بزرگ‌تر کنید اگر کوچک هستند.</string>
-    <string name="mcl_setting_title_mousescale">تغییر مقیاس ماوس</string>
-    <string name="mcl_setting_subtitle_mousescale">سایز ماوس مجازی را تغییر دهید.</string>
-    <string name="mcl_setting_title_javaargs">آرگومان‌های جاوا در هنگام لانچ</string>
-    <string name="mcl_setting_subtitle_javaargs">مراقب باشید، اگر بدون دانش آن را تغییر دهید ممکن است باعث کرش بازی شود.</string>
+    <string name="mcl_setting_title_flat_button_style">سبک دکمه صاف</string>
+    <string name="mcl_setting_subtitle_flat_button_style">برای تغییر سبک دکمه کنترل به صاف، این را فعال کنید.</string>
+    <string name="mcl_setting_title_buttonscale">تغییر مقیاس دکمه های کنترل</string>
+    <string name="mcl_setting_subtitle_buttonscale">اگر دکمه ها خیلی کوچک هستند، آنها را بزرگتر کنید.</string>
+    <string name="mcl_setting_title_mousescale">تغییر مقیاس موس</string>
+    <string name="mcl_setting_subtitle_mousescale">تغییر اندازه ماوس مجازی.</string>
+    <string name="mcl_setting_title_javaargs">آرگومان‌های جاوا در هنگام اجرا</string>
+    <string name="mcl_setting_subtitle_javaargs">مراقب باشید، این ممکن است باعث از کار افتادن بازی در صورت اصلاح بدون اطلاع شود.</string>
     <string name="mcl_setting_category_general">تنظیمات عمومی</string>
-    <string name="mcl_setting_category_scaling">تنظیمات مقیاسی</string>
+    <string name="mcl_setting_category_scaling">تنظیمات مقیاس</string>
     <string name="mcl_setting_category_renderer">رندر کننده</string>
     <string name="mcl_setting_renderer_gles2">OpenGL ES 2</string>
     <string name="mcl_setting_renderer_gles3">OpenGL ES 3</string>
@@ -152,13 +152,13 @@
     <string name="control_adebug">ورودی دیباگ</string>
     <string name="control_customkey">ارسال keycode شخصی</string>
     <string name="control_scaleup">بزرگنمایی</string>
-    <string name="control_scaledown">کوچکنمایی</string>
+    <string name="control_scaledown">کوچک نمایی</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
     <string name="customctrl_edit">ویرایش %s</string>
-    <string name="customctrl_remove">حذفِ %s؟</string>
+    <string name="customctrl_remove">حذف %s?</string>
     <string name="customctrl_keyname">Keycode</string>
     <string name="customctrl_toggle">حالت فعال/غیرفعال</string>
     <string name="customctrl_size">اندازه</string>
