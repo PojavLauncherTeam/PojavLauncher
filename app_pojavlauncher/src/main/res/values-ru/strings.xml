@@ -3,7 +3,7 @@
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition для Android)</string>
     <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">Запустите Minecraft: Java Edition на вашем устройстве!</string>
+    <string name="app_motd">Запускайте Minecraft: Java Edition на вашем устройстве!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
@@ -72,9 +72,9 @@
     <string name="mcl_setting_subtitle_backtorightmouse">Некоторые устройства считают правую кнопку внешней мыши как кнопку назад. Если вы используете внешнюю мышь, рекомендуется включить эту функцию.</string>
     <string name="mcl_setting_title_flat_button_style">Плоский стиль кнопок</string>
     <string name="mcl_setting_subtitle_flat_button_style">Включите эту функцию, чтобы изменить стиль кнопок управления на плоский.</string>
-    <string name="mcl_setting_title_buttonscale">Масштабирование кнопок</string>
+    <string name="mcl_setting_title_buttonscale">Размер кнопок</string>
     <string name="mcl_setting_subtitle_buttonscale">Увеличьте, если они слишком малы.</string>
-    <string name="mcl_setting_title_mousescale">Масштабирование курсора</string>
+    <string name="mcl_setting_title_mousescale">Размер курсора</string>
     <string name="mcl_setting_subtitle_mousescale">Изменяет размер курсора мыши.</string>
     <string name="mcl_setting_title_javaargs">Аргументы запуска JVM</string>
     <string name="mcl_setting_subtitle_javaargs">Будьте осторожны, это может привести к сбою игры, если изменить их без особых знаний.</string>
@@ -83,7 +83,7 @@
     <string name="mcl_setting_category_renderer">Визуализатор</string>
     <string name="mcl_setting_renderer_gles2">OpenGL ES 2</string>
     <string name="mcl_setting_renderer_gles3">OpenGL ES 3</string>
-    <string name="mcl_setting_category_veroption">Типы версий, которые будут отображаться в списке версий</string>
+    <string name="mcl_setting_category_veroption">Типы версий, которые будут отображаться в списке</string>
     <string name="mcl_setting_veroption_release">Релизы</string>
     <string name="mcl_setting_veroption_snapshot">Снапшоты</string>
     <string name="mcl_setting_veroption_oldalpha">Старые альфа</string>
@@ -130,7 +130,7 @@
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Произошел сбой приложения/игры с кодом %d</string>
     <string name="mcn_exit_call">Выйти</string>
-    <string name="mcn_exit_confirm">Вы уверены, что хотите принудительно закрыть его?</string>
+    <string name="mcn_exit_confirm">Вы уверены, что хотите принудительно завершить игру?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 не установлен!</string>
     <string name="mcn_check_fail_incompatiblearch">Архитектура %1$s несовместима с Java Runtime %2$s.</string>
     <!-- MainActivity: Control buttons -->
@@ -199,9 +199,9 @@
     <string name="dl_library_sha_pass">Библиотека %s проверена и может быть использована</string>
     <string name="mcl_disable_gestures">Отключение жестов</string>
     <string name="mcl_disable_gestures_subtitle">Отключает жесты, такие как удержание, чтобы сломать блок, и нажатие, чтобы разместить блок.</string>
-    <string name="mcl_setting_title_mousespeed">Чувствительность мыши</string>
+    <string name="mcl_setting_title_mousespeed">Чувствительность курсора</string>
     <string name="mcl_setting_subtitle_mousespeed">Изменяет чувствительность виртуальной мыши</string>
-    <string name="customctrl_passthru">Пропуск мыши</string>
+    <string name="customctrl_passthru">Пропускать касание</string>
     <string name="customctrl_rounded">Скруглённые</string>
     <string name="memory_warning_msg">Текущий объем свободной оперативной памяти (%d) меньше, чем выделенная (%d), что может привести к сбоям. Измените количество выделенной памяти при сбое игры.</string>
     <string name="mcl_memory_allocation">Выделение памяти</string>
