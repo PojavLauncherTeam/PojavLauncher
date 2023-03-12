@@ -3,7 +3,6 @@ package com.kdt.mcgui;
 import android.content.*;
 import android.util.*;
 import android.graphics.*;
-import android.widget.EditText;
 
 public class MineEditText extends androidx.appcompat.widget.AppCompatEditText {
 	public MineEditText(Context ctx) {

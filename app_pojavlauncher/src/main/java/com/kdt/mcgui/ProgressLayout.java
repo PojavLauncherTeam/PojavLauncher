@@ -12,15 +12,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
-import androidx.collection.ArrayMap;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import net.kdt.pojavlaunch.R;
-import net.kdt.pojavlaunch.extra.ExtraCore;
 import net.kdt.pojavlaunch.progresskeeper.ProgressKeeper;
 import net.kdt.pojavlaunch.progresskeeper.ProgressListener;
 import net.kdt.pojavlaunch.progresskeeper.TaskCountListener;
-import net.kdt.pojavlaunch.services.ProgressService;
 
 import java.util.ArrayList;
 

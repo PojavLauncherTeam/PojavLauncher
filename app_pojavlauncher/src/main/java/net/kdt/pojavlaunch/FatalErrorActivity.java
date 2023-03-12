@@ -4,7 +4,6 @@ import android.content.*;
 import android.os.*;
 import androidx.appcompat.app.*;
 import android.util.*;
-import androidx.appcompat.app.AlertDialog;
 
 public class FatalErrorActivity extends AppCompatActivity {
 

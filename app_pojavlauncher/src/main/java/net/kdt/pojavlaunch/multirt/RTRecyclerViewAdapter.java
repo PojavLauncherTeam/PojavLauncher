@@ -2,7 +2,6 @@ package net.kdt.pojavlaunch.multirt;
 
 import static net.kdt.pojavlaunch.PojavApplication.sExecutorService;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;

@@ -1,5 +1,4 @@
 package net.kdt.pojavlaunch.value.launcherprofiles;
-import com.google.gson.*;
 import net.kdt.pojavlaunch.*;
 import java.io.*;
 import java.util.HashMap;

@@ -1,7 +1,5 @@
 package net.kdt.pojavlaunch.utils;
 
-import android.util.*;
-
 import androidx.annotation.Nullable;
 
 import java.io.*;

@@ -1,7 +1,6 @@
 package net.kdt.pojavlaunch.extra;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 /**
  * Listener class for the ExtraCore

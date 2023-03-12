@@ -1,7 +1,6 @@
 package net.kdt.pojavlaunch.services;
 
 import android.content.Context;
-import android.util.Log;
 
 import net.kdt.pojavlaunch.progresskeeper.TaskCountListener;
 

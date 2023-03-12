@@ -1,7 +1,5 @@
 package net.kdt.pojavlaunch;
 
-import static androidx.core.content.FileProvider.getUriForFile;
-
 import android.app.Activity;
 import android.content.*;
 import android.net.Uri;

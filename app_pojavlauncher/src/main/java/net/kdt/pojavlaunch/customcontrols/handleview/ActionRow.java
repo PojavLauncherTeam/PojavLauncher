@@ -7,14 +7,12 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.widget.Button;
 import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 import androidx.core.math.MathUtils;
 
 import net.kdt.pojavlaunch.R;
-import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.customcontrols.buttons.ControlInterface;
 
 /**

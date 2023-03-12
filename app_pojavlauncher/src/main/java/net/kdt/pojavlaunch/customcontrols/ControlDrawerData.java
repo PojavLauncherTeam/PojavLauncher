@@ -10,8 +10,6 @@ import static net.kdt.pojavlaunch.customcontrols.ControlDrawerData.Orientation.R
 import static net.kdt.pojavlaunch.customcontrols.ControlDrawerData.Orientation.UP;
 import static net.kdt.pojavlaunch.customcontrols.ControlDrawerData.Orientation.FREE;
 
-import androidx.annotation.Keep;
-
 @androidx.annotation.Keep
 public class ControlDrawerData {
 

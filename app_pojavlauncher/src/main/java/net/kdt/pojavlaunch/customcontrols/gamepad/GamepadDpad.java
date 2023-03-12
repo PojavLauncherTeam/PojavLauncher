@@ -5,7 +5,6 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 
 import static android.view.InputDevice.KEYBOARD_TYPE_ALPHABETIC;
-import static android.view.InputDevice.KEYBOARD_TYPE_NON_ALPHABETIC;
 import static android.view.InputDevice.SOURCE_GAMEPAD;
 import static android.view.KeyEvent.KEYCODE_DPAD_CENTER;
 import static android.view.KeyEvent.KEYCODE_DPAD_DOWN;

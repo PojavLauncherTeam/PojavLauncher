@@ -1,7 +1,6 @@
 package com.kdt.mcgui;
 
 import android.content.*;
-import android.graphics.*;
 import android.util.*;
 
 import androidx.core.content.res.ResourcesCompat;

@@ -3,11 +3,8 @@ package net.kdt.pojavlaunch.customcontrols.keyboard;
 
 import static android.content.Context.INPUT_METHOD_SERVICE;
 
-import static org.lwjgl.glfw.CallbackBridge.sendKeyPress;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.res.Configuration;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.inputmethod.InputMethodManager;
@@ -15,10 +12,7 @@ import android.view.inputmethod.InputMethodManager;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.kdt.pojavlaunch.LwjglGlfwKeycode;
 import net.kdt.pojavlaunch.R;
-
-import org.lwjgl.glfw.CallbackBridge;
 
 /**
  * This class is intended for sending characters used in chat via the virtual keyboard

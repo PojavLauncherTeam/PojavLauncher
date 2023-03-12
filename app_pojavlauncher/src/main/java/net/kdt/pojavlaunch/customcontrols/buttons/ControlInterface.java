@@ -2,9 +2,7 @@ package net.kdt.pojavlaunch.customcontrols.buttons;
 
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_BUTTONSIZE;
 
-import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
-import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +11,6 @@ import android.widget.FrameLayout;
 import androidx.annotation.CallSuper;
 import androidx.core.math.MathUtils;
 
-import net.kdt.pojavlaunch.MinecraftGLSurface;
-import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.customcontrols.ControlData;
 import net.kdt.pojavlaunch.customcontrols.ControlLayout;

@@ -1,20 +1,15 @@
 package net.kdt.pojavlaunch;
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.google.gson.JsonSyntaxException;
 import java.io.File;
 import java.io.IOException;
 
 import net.kdt.pojavlaunch.value.MinecraftAccount;
-import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
-import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 
 public class PojavProfile {
 	private static final String PROFILE_PREF = "pojav_profile";

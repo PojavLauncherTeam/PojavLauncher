@@ -8,7 +8,6 @@ import android.content.res.*;
 import android.os.Build;
 import android.os.LocaleList;
 
-import androidx.core.os.ConfigurationCompat;
 import androidx.preference.*;
 import java.util.*;
 import net.kdt.pojavlaunch.prefs.*;

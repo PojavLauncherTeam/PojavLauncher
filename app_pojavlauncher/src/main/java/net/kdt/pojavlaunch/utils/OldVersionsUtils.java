@@ -5,7 +5,6 @@ import android.util.Log;
 import net.kdt.pojavlaunch.JMinecraftVersionList;
 import net.kdt.pojavlaunch.extra.ExtraConstants;
 import net.kdt.pojavlaunch.extra.ExtraCore;
-import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

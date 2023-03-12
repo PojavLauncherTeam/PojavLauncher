@@ -2,7 +2,6 @@ package net.kdt.pojavlaunch.customcontrols.buttons;
 
 import android.annotation.SuppressLint;
 import android.view.MotionEvent;
-import android.view.View;
 import android.view.ViewGroup;
 
 import net.kdt.pojavlaunch.Tools;

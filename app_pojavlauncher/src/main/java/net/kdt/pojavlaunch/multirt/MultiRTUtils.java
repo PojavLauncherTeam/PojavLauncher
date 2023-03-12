@@ -3,7 +3,6 @@ package net.kdt.pojavlaunch.multirt;
 import static net.kdt.pojavlaunch.Tools.NATIVE_LIB_DIR;
 import static org.apache.commons.io.FileUtils.listFiles;
 
-import android.content.Context;
 import android.system.Os;
 import android.util.Log;
 
@@ -19,7 +18,6 @@ import org.apache.commons.compress.compressors.xz.XZCompressorInputStream;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 
-import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
