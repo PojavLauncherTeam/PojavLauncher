@@ -12,7 +12,7 @@ import org.apache.commons.io.*;
 
 public class DownloadUtils {
     public static final String USER_AGENT = Tools.APP_NAME;
-    public static final Charset utf8 = Charset.forName("UTF-8");
+    public static final Charset utf8 = StandardCharsets.UTF_8;
 
     public static void download(String url, OutputStream os) throws IOException {
         download(new URL(url), os);
@@ -34,7 +34,7 @@ public class DownloadUtils {
             is = conn.getInputStream();
             IOUtils.copy(is, os);
         } catch (IOException e) {
-            throw new IOException("Unable to download from " + url.toString(), e);
+            throw new IOException("Unable to download from " + url, e);
         } finally {
             if (is != null) {
                 try {

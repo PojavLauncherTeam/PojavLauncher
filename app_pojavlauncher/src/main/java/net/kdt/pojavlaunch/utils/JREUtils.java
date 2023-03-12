@@ -172,18 +172,13 @@ public class JREUtils {
         }
 
         String libName = is64BitsDevice() ? "lib64" : "lib";
-        StringBuilder ldLibraryPath = new StringBuilder();
-        ldLibraryPath.append(
-                Tools.DIR_HOME_JRE + "/" +  Tools.DIRNAME_HOME_JRE + "/jli:" +
-                        Tools.DIR_HOME_JRE + "/" + Tools.DIRNAME_HOME_JRE + ":"
-        );
-        ldLibraryPath.append(
+        String ldLibraryPath = Tools.DIR_HOME_JRE + "/" + Tools.DIRNAME_HOME_JRE + "/jli:" +
+                Tools.DIR_HOME_JRE + "/" + Tools.DIRNAME_HOME_JRE + ":" +
                 "/system/" + libName + ":" +
-                        "/vendor/" + libName + ":" +
-                        "/vendor/" + libName + "/hw:" +
-                        NATIVE_LIB_DIR
-        );
-        LD_LIBRARY_PATH = ldLibraryPath.toString();
+                "/vendor/" + libName + ":" +
+                "/vendor/" + libName + "/hw:" +
+                NATIVE_LIB_DIR;
+        LD_LIBRARY_PATH = ldLibraryPath;
     }
 
     public static void setJavaEnvironment(Activity activity) throws Throwable {

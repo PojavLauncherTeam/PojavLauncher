@@ -26,6 +26,7 @@ import java.net.HttpURLConnection;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.Map;
 
@@ -133,14 +134,14 @@ public class MicrosoftBackgroundLogin {
         HttpURLConnection conn = (HttpURLConnection)url.openConnection();
         conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
         conn.setRequestProperty("charset", "utf-8");
-        conn.setRequestProperty("Content-Length", Integer.toString(formData.getBytes("UTF-8").length));
+        conn.setRequestProperty("Content-Length", Integer.toString(formData.getBytes(StandardCharsets.UTF_8).length));
         conn.setRequestMethod("POST");
         conn.setUseCaches(false);
         conn.setDoInput(true);
         conn.setDoOutput(true);
         conn.connect();
         try(OutputStream wr = conn.getOutputStream()) {
-            wr.write(formData.getBytes("UTF-8"));
+            wr.write(formData.getBytes(StandardCharsets.UTF_8));
         }
         if(conn.getResponseCode() >= 200 && conn.getResponseCode() < 300) {
             JSONObject jo = new JSONObject(Tools.read(conn.getInputStream()));
@@ -175,7 +176,7 @@ public class MicrosoftBackgroundLogin {
         conn.connect();
 
         try(OutputStream wr = conn.getOutputStream()) {
-            wr.write(req.getBytes("UTF-8"));
+            wr.write(req.getBytes(StandardCharsets.UTF_8));
         }
         if(conn.getResponseCode() >= 200 && conn.getResponseCode() < 300) {
             JSONObject jo = new JSONObject(Tools.read(conn.getInputStream()));
@@ -211,7 +212,7 @@ public class MicrosoftBackgroundLogin {
         conn.connect();
 
         try(OutputStream wr = conn.getOutputStream()) {
-            wr.write(req.getBytes("UTF-8"));
+            wr.write(req.getBytes(StandardCharsets.UTF_8));
         }
 
         if(conn.getResponseCode() >= 200 && conn.getResponseCode() < 300) {
@@ -250,7 +251,7 @@ public class MicrosoftBackgroundLogin {
         conn.connect();
 
         try(OutputStream wr = conn.getOutputStream()) {
-            wr.write(req.getBytes("UTF-8"));
+            wr.write(req.getBytes(StandardCharsets.UTF_8));
         }
 
         if(conn.getResponseCode() >= 200 && conn.getResponseCode() < 300) {
@@ -314,9 +315,9 @@ public class MicrosoftBackgroundLogin {
         conn.setRequestProperty("Accept", "application/json");
         conn.setRequestProperty("charset", "utf-8");
         try {
-            conn.setRequestProperty("Content-Length", Integer.toString(formData.getBytes("UTF-8").length));
+            conn.setRequestProperty("Content-Length", Integer.toString(formData.getBytes(StandardCharsets.UTF_8).length));
             conn.setRequestMethod("POST");
-        }catch (ProtocolException | UnsupportedEncodingException e) {
+        }catch (ProtocolException e) {
             Log.e("MicrosoftAuth", e.toString());
         }
         conn.setUseCaches(false);

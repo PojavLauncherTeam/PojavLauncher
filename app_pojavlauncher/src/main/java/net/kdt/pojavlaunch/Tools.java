@@ -294,9 +294,8 @@ public final class Tools {
             }
         }
 
-        String[] argsFromJson = JSONUtils.insertJSONValueList(minecraftArgs.toArray(new String[0]), varArgMap);
         // Tools.dialogOnUiThread(this, "Result args", Arrays.asList(argsFromJson).toString());
-        return argsFromJson;
+        return JSONUtils.insertJSONValueList(minecraftArgs.toArray(new String[0]), varArgMap);
     }
 
     public static String[] getMinecraftClientArgs(MinecraftAccount profile, JMinecraftVersionList.Version versionInfo, String strGameDir) {
@@ -337,15 +336,14 @@ public final class Tools {
             }
         }
 
-        String[] argsFromJson = JSONUtils.insertJSONValueList(
+        // Tools.dialogOnUiThread(this, "Result args", Arrays.asList(argsFromJson).toString());
+        return JSONUtils.insertJSONValueList(
                 splitAndFilterEmpty(
                         versionInfo.minecraftArguments == null ?
                                 fromStringArray(minecraftArgs.toArray(new String[0])):
                                 versionInfo.minecraftArguments
                 ), varArgMap
         );
-        // Tools.dialogOnUiThread(this, "Result args", Arrays.asList(argsFromJson).toString());
-        return argsFromJson;
     }
 
     public static String fromStringArray(String[] strArr) {
@@ -682,8 +680,7 @@ public final class Tools {
 
                 // Inheriting Minecraft 1.13+ with append custom args
                 if (inheritsVer.arguments != null && customVer.arguments != null) {
-                    List totalArgList = new ArrayList();
-                    totalArgList.addAll(Arrays.asList(inheritsVer.arguments.game));
+                    List<Object> totalArgList = new ArrayList<>(Arrays.asList(inheritsVer.arguments.game));
 
                     int nskip = 0;
                     for (int i = 0; i < customVer.arguments.game.length; i++) {

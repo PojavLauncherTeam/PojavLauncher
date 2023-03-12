@@ -419,8 +419,6 @@ public class MinecraftGLSurface extends View implements GrabListener{
         }
     }
 
-    //TODO MOVE THIS SOMEWHERE ELSE
-    private boolean debugErrored = false;
     /** The input event for mouse with a captured pointer */
     @RequiresApi(26)
     @Override

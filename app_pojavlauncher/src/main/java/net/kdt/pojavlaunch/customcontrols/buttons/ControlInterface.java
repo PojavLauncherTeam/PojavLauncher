@@ -282,7 +282,6 @@ public interface ControlInterface extends View.OnLongClickListener {
     /** Inject a touch listener on the view to make editing controls straight forward */
     default void injectTouchEventBehavior(){
         getControlView().setOnTouchListener(new View.OnTouchListener() {
-            private boolean mIsPointerOutOfBounds = false;
             private boolean mCanTriggerLongClick = true;
             private float downX, downY;
             private float downRawX, downRawY;
