@@ -36,6 +36,7 @@
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_wiki">Wiki</string>
     <string name="mcl_tab_console">Console de développement</string>
     <string name="mcl_tab_crash">Journal d\'erreurs</string>
     <!-- MCLauncherActivity: Account status -->
@@ -198,6 +199,8 @@
     <string name="dl_library_sha_pass">La bibliothèque %s est en bon état et utilisable</string>
     <string name="mcl_disable_gestures">Désactiver les gestes</string>
     <string name="mcl_disable_gestures_subtitle">Désactive les gestes tels que maintenir enfoncé pour casser le bloc, et appuyer pour placer un bloc.</string>
+    <string name="mcl_disable_swap_hand">Désactiver le double appui pour échanger de mains</string>
+    <string name="mcl_disable_swap_hand_subtitle">Désactive le double appui sur un item de la barre de l\'inventaire pour l\'échanger dans la seconde main</string>
     <string name="mcl_setting_title_mousespeed">Vitesse du curseur</string>
     <string name="mcl_setting_subtitle_mousespeed">Change la vitesse de la souris logicielle</string>
     <string name="customctrl_passthru">Souris pass-thru</string>
@@ -234,6 +237,7 @@
     <string name="preference_control_offset_title">Marges sur les contrôles</string>
     <string name="preference_control_offset_description">Définir une marge personnalisé pour chaque côté de l\'écran</string>
     <string name="preference_mouse_start_title">Démarrer avec la souris virtuelle activée</string>
+    <string name="preference_mouse_start_description">La souris virtuelle apparaît au démarrage quand cette option est activée</string>
     <string name="preference_video_title">Vidéo et moteur de rendu</string>
     <string name="preference_video_description">Résolution, mise à échelle et moteur de rendu</string>
     <string name="preference_control_title">Contrôlez la customisation</string>
@@ -245,7 +249,9 @@
     <string name="preference_experimental_description">Utilisez ces options avec parcimonie, aucun support.</string>
     <string name="preference_sustained_performance_title">Activer le mode de performances soutenues</string>
     <string name="preference_sustained_performance_description">Limiter la limitation thermique en limitant les performances maximales</string>
+    <string name="preference_force_vsync_title">Forcer l\'activation du vsync</string>
     <string name="preference_force_vsync_description">Limiter la limitation thermique en limitant les performances maximales</string>
+    <string name="preference_force_english_title">Forcer la langue en anglais</string>
     <string name="preference_edit_controls_title">Modifier les contrôles personnalisés</string>
     <string name="preference_category_virtual_mouse">Souris virtuelle</string>
     <string name="preference_back_title">Retour au dernier écran</string>
@@ -282,4 +288,5 @@
     <string name="xerr_child">Vous avez un compte enfant, pour vous connecter vous devez être relié à une famille.</string>
     <string name="minecraft_not_owned">Il semble que ce compte n\'ait pas de profil Minecraft. Si vous avez le Xbox Game Pas, connectez-vous sur https://minecraft.net/ et configurez-le.</string>
     <string name="xerr_not_available">Xbox Live n\'est pas disponible dans votre pays</string>
+    <string name="preference_enable_gyro_description">Activer ceci vous permettra de tourner dans le jeu en tournant votre téléphone</string>
 </resources>
