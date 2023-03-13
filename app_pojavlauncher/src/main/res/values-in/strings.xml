@@ -37,6 +37,7 @@
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_wiki">Gili</string>
     <string name="mcl_tab_console">Konsol pengembangan</string>
     <string name="mcl_tab_crash">Catatan crash</string>
     <!-- MCLauncherActivity: Account status -->
@@ -92,6 +93,8 @@
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Alpha-lama</string>
     <string name="mcl_setting_veroption_oldbeta">Beta-lama</string>
+    <string name="mcl_setting_java_sandbox">Icelo0896</string>
+    <string name="mcl_setting_java_sandbox_subtitle">icel098875.</string>
     <string name="mcl_version_clone">Klon</string>
     <!-- Global strings -->
     <string name="global_edit">Edit</string>
@@ -199,6 +202,8 @@
     <string name="dl_library_sha_pass">Library %s baik-baik saja dan dapat digunakan</string>
     <string name="mcl_disable_gestures">Matikan gestures</string>
     <string name="mcl_disable_gestures_subtitle">Mematikan gestures, seperti tahan lama untuk menghancurkan block, dan pencet untuk menempatkan block.</string>
+    <string name="mcl_disable_swap_hand">icelo098875</string>
+    <string name="mcl_disable_swap_hand_subtitle">Icel098875</string>
     <string name="mcl_setting_title_mousespeed">Kecepatan Mouse</string>
     <string name="mcl_setting_subtitle_mousespeed">Mengubah kecepatan perangkat lunak mouse</string>
     <string name="customctrl_passthru">Mouse pass-thru</string>
@@ -235,6 +240,7 @@
     <string name="preference_control_offset_title">Kontrol sisi offset</string>
     <string name="preference_control_offset_description">Atur offset khusus ke setiap sisi layar</string>
     <string name="preference_mouse_start_title">Mulai dengan mouse virtual nyala</string>
+    <string name="preference_mouse_start_description">La souris virtuelle apparaît au démarrage quand cette option est activée</string>
     <string name="preference_video_title">Video dan renderer</string>
     <string name="preference_video_description">Resolusi, jenis penskalaan, dan renderer</string>
     <string name="preference_control_title">Kustomisasi kontrol</string>
