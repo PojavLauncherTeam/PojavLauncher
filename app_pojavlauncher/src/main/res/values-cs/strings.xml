@@ -37,6 +37,7 @@
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_wiki">Wiki</string>
     <string name="mcl_tab_console">Vývojářská konzole</string>
     <string name="mcl_tab_crash">Záznam pádu</string>
     <!-- MCLauncherActivity: Account status -->
@@ -107,7 +108,7 @@
     <string name="global_save">Uložit</string>
     <string name="global_unpacking">Rozbalování %s</string>
     <string name="global_error_field_empty">Toto pole nemůže být prázdné</string>
-    <string name="global_waiting">Čekej</string>
+    <string name="global_waiting">Čekejte</string>
     <string name="global_select">Vybrat</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Aplikace/Hra spadla s kódem %d, zkontroluj latestlog.txt pro více informací.</string>
