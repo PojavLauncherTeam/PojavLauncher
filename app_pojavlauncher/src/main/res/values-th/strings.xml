@@ -153,10 +153,22 @@
     <string name="main_version">เวอร์ชัน:</string>
     <string name="main_nocrash">ไม่พบข้อผิดผลาด</string>
     <string name="main_nolog">ไม่มีประวัติบันทึกไว้</string>
+    <string name="main_no_news_feed">ไม่สามารถเอาข้อมูลข่าวสารได้!</string>
     <string name="auto_ram_subtitle">เปิดใช้งานตัวปรับ RAM อัตโนมัติ</string>
     <string name="auto_ram_title">RAM อัตโนมัติ</string>
     <string name="autoram_info_msg">ตั้งหน่วยความจำเป็น %d MB</string>
+    <string name="mcl_setting_check_libraries">ตรวจสอบไฟล์หลังจากดาวโหลด</string>
+    <string name="mcl_setting_check_libraries_subtitle">ออฟชั่นนี้บังคับให้รันเชอร์ตรวจสอบไฟล์เเฮสถ้ามี. ป้องกันการดาวน์โหลดพัง</string>
+    <string name="dl_library_sha_fail">ไลบรารี %s ได้เสียหายเเละจะทำการดาวโหลดใหม่</string>
+    <string name="dl_library_sha_unknown">ไลบรารี %s ไม่สามารถตรวจสอบได้ ขอให้ดีก็พอ</string>
+    <string name="dl_library_sha_pass">ไลบรารี %s ดีเเละใช้การได้</string>
+    <string name="mcl_disable_gestures">ปิดท่าทางสัมผัส</string>
+    <string name="mcl_disable_gestures_subtitle">ปิดท่าทางสัมผัส เช่นเเตะค้างเพื่อทำลายบล็อกเเละ เเตะเพื่อวางบล็อก</string>
     <string name="mcl_setting_title_mousespeed">ความเร็วเมาส์</string>
+    <string name="mcl_setting_subtitle_mousespeed">ปรับความเร็วของเมาส์ชอฟแวร์</string>
+    <string name="customctrl_passthru">เมาส์ผ่านได้</string>
     <string name="customctrl_rounded">โค้งมน</string>
+    <string name="memory_warning_msg">ขณะนี้เเรมที่เหลือในเครืองของคุณ (%d) น้อยกว่าเเรมที่ตั้งไว้ (%d) อาจะทำให้เด้งได้ ปรับค่าเเรมที่ต้องการเมื่อเกมเด้ง</string>
     <string name="mcl_memory_allocation">การจัดสรรหน่วยความจำ</string>
+    <string name="mcl_memory_allocation_subtitle">ควบคุมเเรมที่จะให้กับเกมมายคราฟ</string>
 </resources>
