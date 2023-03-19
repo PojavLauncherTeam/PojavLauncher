@@ -15,10 +15,9 @@
     <string name="login_error_exist_username">Este nombre de usuario ya existe</string>
     <string name="login_microsoft">Cuenta de Microsoft</string>
     <string name="login_select_account">Seleccione una cuenta</string>
-    <string name="login_title_no_saved_account">No se encontraron cuentas!</string>
+    <string name="login_title_no_saved_account">¡Cuenta no encontrada!</string>
     <string name="login_dialog_no_saved_account">No tienes ninguna cuenta guardada.\nUsa la opción <b>\"Mantenme conectado\"</b> para guardar una cuenta al iniciar sesión por primera vez.</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Desliza de derecha a izquierda para abrir el menú ◀\nMantén pulsado un botón para personalizar: editar, cambiar de tamaño o eliminar."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">¡Esta cuenta será borrada!</string>
     <!-- AlertDialog title -->
@@ -37,7 +36,6 @@
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_news">Noticias</string>
     <string name="mcl_tab_console">Consola de desarrollador</string>
     <string name="mcl_tab_crash">Registro de errores</string>
     <!-- MCLauncherActivity: Account status -->
@@ -83,10 +81,11 @@
     <string name="mcl_setting_category_general">Configuración general</string>
     <string name="mcl_setting_category_scaling">Ajustes de escala</string>
     <string name="mcl_setting_category_renderer">Renderizador</string>
-    <string name="mcl_setting_renderer_gles2_4">gl4es milagroso: soporta 1.0-1.19+</string>
-    <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): exporta a OpenGL 4.3</string>
-    <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): exporta a OpenGL 3.0</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exporta a OpenGL 4.6</string>
+    <string name="mcl_setting_renderer_gles2_4">Hola, GASES - (ay versión, fase)</string>
+    <string name="mcl_setting_renderer_virgl">virglrenderer - (release 1.7+, slow)</string>
+    <string name="mcl_setting_renderer_vgpu">vgpu - (up to 1.16.5, fast)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">Zinc - (antiguo b1.8+, lento)</string>
+    <string name="mcl_setting_renderer_angle">Java edieditio</string>
     <string name="mcl_setting_category_veroption">El tipo de versión aparecerá en la lista de versiones</string>
     <string name="mcl_setting_veroption_release">Lanzamientos</string>
     <string name="mcl_setting_veroption_snapshot">Snapshots</string>
@@ -176,6 +175,7 @@
     <string name="customctrl_addsubbutton">Añadir sub-botón</string>
     <string name="customctrl_add_subbutton_message">¡El sub-botón n°%d ha sido añadido!</string>
     <string name="customctrl_selectdefault">Seleccionar controles por defecto</string>
+    <string name="customctrl_export">Exporte control</string>
     <string name="main_install_jar_file">Instalar .jar</string>
     <string name="main_options">Opciones</string>
     <string name="main_play">Jugar</string>
@@ -232,19 +232,24 @@
     <string name="preference_control_offset_title">Control de desplazamiento lateral</string>
     <string name="preference_control_offset_description">Establecer un desplazamiento personalizado a cada lado de la pantalla</string>
     <string name="preference_mouse_start_title">Iniciar con el ratón virtual encendido</string>
-    <string name="preference_mouse_start_description">Usando esta opción podrás ser juzgado por Mathias-Boulay</string>
     <string name="preference_video_title">Video y renderizador</string>
     <string name="preference_video_description">Resolución, tipo de escalado y renderizador</string>
     <string name="preference_control_title">Personalización del control</string>
     <string name="preference_control_description">Tipos de gestos, disparadores y escalado</string>
     <string name="preference_java_title">Ajustes de Java</string>
-    <string name="preference_java_description">Versiones de Java, argumentos JVM y cantidad de RAM</string>
     <string name="preference_misc_title">Ajustes varios</string>
     <string name="preference_misc_description">Lista de versiones, y comprobación de librerías</string>
     <string name="preference_experimental_title">Cosas experimentales</string>
     <string name="preference_experimental_description">Utilice las cosas con consideración, sin apoyo.</string>
     <string name="preference_sustained_performance_title">Activar el modo de rendimiento sostenido</string>
     <string name="preference_sustained_performance_description">Limita la velocidad térmica limitando el rendimiento máximo</string>
+    <string name="preference_force_vsync_description">Limita la velocidad térmica limitando el rendimiento máximo</string>
+    <string name="preference_force_english_title">Forzar idioma a ingles</string>
+    <string name="preference_category_virtual_mouse">Ratón virtual</string>
+    <string name="preference_gyro_invert_x_axis">Invertir eje X</string>
+    <string name="preference_gyro_invert_y_axis">Invertir eje Y</string>
+    <string name="preference_gyro_invert_x_axis_description">Invertir el eje horizontal</string>
+    <string name="preference_gyro_invert_y_axis_description">Invertir el eje vertical</string>
     <string name="preference_back_title">Regresar a la pantalla anterior</string>
     <string name="gles_hack_title">GL4ES Reducir hack</string>
     <string name="gles_hack_none">No reducir las texturas</string>
@@ -262,4 +267,8 @@
     <string name="arc_capes_title">Capas de Comestica</string>
     <string name="arc_capes_desc">Activa las capas de Cosmetica (anteriormente Arc). Para más información ve a esta página https://cosmetica.cc. Necesitas Optifine.</string>
     <string name="migrated_profile_str">%s Configuración de la versión</string>
+    <string name="mcl_setting_veroption_installed">Instalada</string>
+    <string name="tasks_ongoing">Tareas en curso, por favor espere</string>
+    <string name="no_saved_accounts">No hay cuentas guardadas</string>
+    <string name="xerr_not_available">Xbox Live no está disponible en su país</string>
 </resources>

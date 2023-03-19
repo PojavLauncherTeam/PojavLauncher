@@ -18,7 +18,7 @@
     <string name="login_title_no_saved_account">Es konnte kein Konto gefunden werden!</string>
     <string name="login_dialog_no_saved_account">Sie haben keine Konten eingespeichert.\nWähle die Option <b>\"Angemeldet bleiben\"</b> während des Anmeldens aus, um das Konto einzuspeichern.</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Wische von rechts nach links um das Menü zu öffnen ◀\nDrücke auf eine Schaltfläche um Sie anzupassen: Editieren, Vergrößern und Verkleinern oder Löschen."</string>
+    <string name="hint_control_mapping">"Tippe auf das Zahnradsymbol mittig oben, um das Kontextmenü zu öffnen ⚙\nTippe auf eine Schaltfläche, um sie anzupassen: Bearbeiten, Vergrößern, Löschen oder ihre Tastenzuordnung anpassen."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Dieses Konto wird entfernt!</string>
     <!-- AlertDialog title -->
@@ -37,7 +37,7 @@
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_news">Neuigkeiten</string>
+    <string name="mcl_tab_wiki">Wiki</string>
     <string name="mcl_tab_console">Entwickler-Konsole</string>
     <string name="mcl_tab_crash">Absturzbericht</string>
     <!-- MCLauncherActivity: Account status -->
@@ -83,15 +83,18 @@
     <string name="mcl_setting_category_general">Allgemeine Einstellungen</string>
     <string name="mcl_setting_category_scaling">Einstellungen für die Größe der Benutzeroberfläche</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
-    <string name="mcl_setting_renderer_gles2_4">holy gl4es: unterstützt 1.0-1.19+</string>
-    <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): Gibt OpenGL 4.3 aus</string>
-    <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): Gibt OpenGL 3.0 aus</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): Gibt OpenGL 4.6 aus</string>
+    <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (alle Versionen, schnell)</string>
+    <string name="mcl_setting_renderer_virgl">virglrenderer - (Release 1.7+, langsam)</string>
+    <string name="mcl_setting_renderer_vgpu">vgpu - (bis 1.16.5, schnell)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink - (old_beta b1.8+, langsam)</string>
+    <string name="mcl_setting_renderer_angle">ANGLE - (Vollversion 1.17+, mittel schnell)</string>
     <string name="mcl_setting_category_veroption">Versionsarten, welche in der Versionsliste sind:</string>
     <string name="mcl_setting_veroption_release">Vollversionen</string>
     <string name="mcl_setting_veroption_snapshot">Entwicklungsversionen</string>
     <string name="mcl_setting_veroption_oldalpha">Old-Alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Old-Beta</string>
+    <string name="mcl_setting_java_sandbox">Sandbox-.jar-Installer</string>
+    <string name="mcl_setting_java_sandbox_subtitle">Steuern Sie die Verfügbarkeit des Sandbox-Sicherheitsmanagers beim Starten des .jar-Installers.</string>
     <string name="mcl_version_clone">Duplizieren</string>
     <!-- Global strings -->
     <string name="global_edit">Bearbeiten</string>
@@ -106,6 +109,7 @@
     <string name="global_unpacking">Entpacke %s</string>
     <string name="global_error_field_empty">Dieses Feld darf nicht leer sein</string>
     <string name="global_waiting">Bitte warte einen kleinen Moment</string>
+    <string name="global_select">Auswählen</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Anwendung/Spiel mit dem Code %d beendet, für weitere Details, latestlog.txt lesen.</string>
     <string name="mcn_exit_call">Beenden</string>
@@ -176,6 +180,8 @@
     <string name="customctrl_addsubbutton">Sub-Schaltfläche hinzufügen</string>
     <string name="customctrl_add_subbutton_message">Unter-Schaltfläche Nr. %d wurde hinzugefügt!</string>
     <string name="customctrl_selectdefault">Wähle die Standardsteuerung</string>
+    <string name="customctrl_export">Steuerung exportieren</string>
+    <string name="main_share_logs">Protokoll-/Logdatei teilen</string>
     <string name="main_install_jar_file">.jar installieren</string>
     <string name="main_options">Optionen</string>
     <string name="main_play">Spielen</string>
@@ -196,6 +202,8 @@
     <string name="dl_library_sha_pass">Die Bibliothek %s ist unbeschädigt und verwendbar</string>
     <string name="mcl_disable_gestures">Gesten deaktivieren</string>
     <string name="mcl_disable_gestures_subtitle">Diese Einstellung deaktiviert Gesten, wie zum Beispiel gedrückt halten, um einen Block zu zerstören und eine kurze Berührung, um einen Block zu platzieren.</string>
+    <string name="mcl_disable_swap_hand">Doppeltes Tippen zum Tauschen der Hände deaktivieren</string>
+    <string name="mcl_disable_swap_hand_subtitle">Deaktiviert doppeltes Tippen auf einen Hotbar-Gegenstand, um ihn in der zweiten Hand zu tauschen</string>
     <string name="mcl_setting_title_mousespeed">Geschwindigkeit der Maus</string>
     <string name="mcl_setting_subtitle_mousespeed">Ändert die Geschwindigkeit der Software-Maus</string>
     <string name="customctrl_passthru">Maus ignoriert Schaltflächen</string>
@@ -232,19 +240,31 @@
     <string name="preference_control_offset_title">Seitliche Verschiebungen steuern</string>
     <string name="preference_control_offset_description">Setzte für jede Seite des Bildschirms eine benutzerdefinierte Verschiebung</string>
     <string name="preference_mouse_start_title">Mit virtueller Maus starten</string>
-    <string name="preference_mouse_start_description">Mit dieser Option wirst du von Mathias-Boulay beurteilt</string>
+    <string name="preference_mouse_start_description">Virtuelle Maus wird beim Start angezeigt, wenn diese Option aktiviert ist</string>
     <string name="preference_video_title">Grafik und Renderer</string>
     <string name="preference_video_description">Auflösung, Skalierungstyp und Renderer</string>
     <string name="preference_control_title">Steuerung anpassen</string>
     <string name="preference_control_description">Gestentypen, Auslöser und Skalierung</string>
     <string name="preference_java_title">Java-Optimierungen</string>
-    <string name="preference_java_description">Java-Versionen, JVM-Argumente und RAM-Menge</string>
+    <string name="preference_java_description">Java-Versionen, JVM-Argumente, RAM und Sandbox</string>
     <string name="preference_misc_title">Sonstige Einstellungen</string>
     <string name="preference_misc_description">Versionsliste und Bibliotheksüberprüfungen</string>
     <string name="preference_experimental_title">Experimentell</string>
     <string name="preference_experimental_description">Benutze diese Einstellungen mit Bedacht, wir leisten keinen Support für diese Features.</string>
     <string name="preference_sustained_performance_title">Dauerhaften Leistungsmodus aktivieren</string>
     <string name="preference_sustained_performance_description">Begrenzung der thermischen Drosselung durch Begrenzung der Spitzenleistung</string>
+    <string name="preference_force_vsync_title">Erzwinge vsync</string>
+    <string name="preference_force_vsync_description">Begrenzung der thermischen Drosselung durch Begrenzung der Spitzenleistung</string>
+    <string name="preference_force_english_title">Englische Sprache erzwingen</string>
+    <string name="preference_force_english_description">Ermöglicht es dir, die ursprünglichen Texte zu sehen, wie sie von Entwicklern vorgesehen sind. Benötigt einen Neustart</string>
+    <string name="preference_edit_controls_title">Benutzerdefinierte Steuerung bearbeiten</string>
+    <string name="preference_edit_controls_summary">Passe die Steuerung deinen Ansprüchen an</string>
+    <string name="preference_category_gyro_controls">Gyroskop-Steuerung</string>
+    <string name="preference_category_virtual_mouse">Virtuelle Maus</string>
+    <string name="preference_gyro_invert_x_axis">X-Achse invertieren</string>
+    <string name="preference_gyro_invert_y_axis">Y-Achse invertieren</string>
+    <string name="preference_gyro_invert_x_axis_description">Invertiert die horizontale Achse</string>
+    <string name="preference_gyro_invert_y_axis_description">Invertiert die vertikale Achse</string>
     <string name="preference_back_title">Zum übergeordneten Menü gehen</string>
     <string name="gles_hack_title">GL4ES-Schrumpfhack</string>
     <string name="gles_hack_none">Texturen nicht verkleinern</string>
@@ -262,4 +282,39 @@
     <string name="arc_capes_title">Cosmetica-Umhänge</string>
     <string name="arc_capes_desc">Aktiviert Umhänge von Cosmetica (früher Arc). Für weitere Informationen https://cosmetica.cc besuchen. OptiFine wird benötigt.</string>
     <string name="migrated_profile_str">%s Versionskonfiguration</string>
+    <string name="notif_channel_name">Allgemein</string>
+    <string name="lazy_service_default_title">Pojav-Vordergrunddienst</string>
+    <string name="lazy_service_default_description">Der Dienst wird verwendet, um lange laufende Operationen auszuführen</string>
+    <string name="mcl_setting_veroption_installed">Installiert</string>
+    <string name="use_global_default">(Standardvorgaben verwenden)</string>
+    <string name="default_control">Standardsteuerung</string>
+    <string name="progresslayout_tasks_in_progress">%d Aufgaben in Bearbeitung</string>
+    <string name="notification_terminate">Beenden</string>
+    <string name="notification_game_runs">Das Spiel läuft!</string>
+    <string name="folder_dialog_create">Erstellen</string>
+    <string name="folder_dialog_insert_name">Ordnernamen eingeben</string>
+    <string name="main_login_done">Anmeldung abgeschlossen</string>
+    <string name="main_add_account">Konto hinzufügen</string>
+    <string name="tasks_ongoing">Mehrere Aufgaben im Gange, bitte warten</string>
+    <string name="no_saved_accounts">Keine eingespeicherten Konten</string>
+    <string name="downloading_versions">Lade Versionsliste herunter…</string>
+    <string name="mc_download_failed">Fehler beim Herunterladen von Minecraft! Dies kann aufgrund einer schlechte Netzwerkverbindung, falsch platzierter Dateien, etc. passiert sein.</string>
+    <string name="xerr_unknown">Unbekannter Xbox-Live-API-Fehler %d</string>
+    <string name="xerr_no_account">Du scheinst kein Xbox-Live-Konto zu haben. Bitte melde dich einmal auf https://minecraft.net/ an und versuche es erneut.</string>
+    <string name="xerr_adult_verification">Ein Erwachsener muss dein Konto verifizieren.</string>
+    <string name="xerr_child">Dein Konto ist ein Kinderkonto und muss in einer Familie hinzugefügt werden, um sich anzumelden.</string>
+    <string name="minecraft_not_owned">Es scheint, als hätte dieses Konto kein Minecraft-Profil. Wenn du den Xbox-Game-Pass hast, logge dich bitte auf https://minecraft.net/ ein und stelle ihn ein.</string>
+    <string name="xerr_not_available">Xbox-Live ist in deinem Land nicht verfügbar</string>
+    <string name="preference_enable_gyro_title">Aktiviere Gyroskop-Steuerung</string>
+    <string name="preference_enable_gyro_description">Wenn du dies aktivierst, kannst du dich im Spiel umsehen, indem du dein Telefon dreht</string>
+    <string name="preference_gyro_sensitivity_title">Gyroskop-Steuerungs-Empfindlichkeit</string>
+    <string name="preference_gyro_sensitivity_description">Passe die Empfindlichkeit der Gyroskop-Steuerung an</string>
+    <string name="toast_turn_on_gyro">Aktiviere zuerst die Gyro-Steuerung, um dies zu verwenden!</string>
+    <string name="preference_gyro_sample_rate_title">Gyroskop-Abtastrate</string>
+    <string name="preference_gyro_sample_rate_description">Wenn du Performanceprobleme mit der Gyroskop-Steuerung hast, erhöhe diese Einstellung</string>
+    <string name="microsoft_login_retry_later">Zu viele Anfragen – bitte versuche es später erneut.</string>
+    <string name="storage_required">PojavLauncher benötigt einen angeschlossenen externen Speicher. Bitte verbinde deinen Speicher erneut und starte die App neu.</string>
+    <string name="mcl_setting_title_buttonallcaps">Nur Großbuchstaben in Button-Labels verwenden</string>
+    <string name="mcl_setting_subtitle_buttonallcaps">Deaktiviere dies, wenn du Kleinbuchstaben in deinen Steuerelementen verwenden möchtest</string>
+    <string name="create_profile">Neues Profil erstellen</string>
 </resources>

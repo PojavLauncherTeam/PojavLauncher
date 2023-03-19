@@ -17,7 +17,6 @@
     <string name="login_title_no_saved_account">No account found !</string>
     <string name="login_dialog_no_saved_account">You don\'t have any saved account.\nUse the option <b>\"Keep me logged in\"</b> to save an account upon first login.</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Swipe from right to left to open menu ◀\nHold a button to customize: edit, resize or delete."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">This account will be removed!</string>
     <!-- AlertDialog title -->
@@ -36,7 +35,6 @@
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_news">News</string>
     <string name="mcl_tab_console">Development console</string>
     <string name="mcl_tab_crash">Crash log</string>
     <!-- MCLauncherActivity: Account status -->
@@ -78,7 +76,6 @@
     <string name="mcl_setting_category_general">General settings</string>
     <string name="mcl_setting_category_scaling">Scaling settings</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exports OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Version type will be in version list</string>
     <string name="mcl_setting_veroption_release">Release</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>

@@ -7,7 +7,7 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">Email я қолданушы аты</string>
+    <string name="login_online_username_hint">Emailнемесеқолданушы аты</string>
     <string name="login_online_password_hint">Құпиясөз</string>
     <string name="login_online_check_keeplogin">Мені кірген күйде қалдыру</string>
     <string name="login_online_login_label">Кіру</string>
@@ -17,7 +17,6 @@
     <string name="login_title_no_saved_account">Тіркелгі табылмады!</string>
     <string name="login_dialog_no_saved_account">Сақталған тіркелгіңіз жоқ.\n<b>\"Мені кірген күйде қалдыру\"</b> функциясын қолданып, кірген күйде қала беріңіз.</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Мәзірді ашу үшін экранды оңнан солға сипаңыз ◀\nБаптау (өңдеу, көлем өзгерту я жою) үшін батырманы басып ұстаңыз."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Бұл тіркелгі жойылады!</string>
     <!-- AlertDialog title -->
@@ -36,7 +35,6 @@
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_news">Жаңалық</string>
     <string name="mcl_tab_console">Әзірлеу консолі</string>
     <string name="mcl_tab_crash">Іркіліс жорналы</string>
     <!-- MCLauncherActivity: Account status -->

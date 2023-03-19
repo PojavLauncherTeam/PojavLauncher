@@ -17,7 +17,6 @@
     <string name="login_title_no_saved_account">Ingen konto funnet!</string>
     <string name="login_dialog_no_saved_account">Du har ingen lagrede konto.\nBruk alternativet <b>\"Hold meg logget inn\" </b> for å lagre en konto ved første innlogging.</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Dra fra høyre til venstre for å åpne menyen ◀\nHold en knapp for å tilpasse: endre størrelse eller slette."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Denne kontoen blir fjernet!</string>
     <!-- AlertDialog title -->
@@ -36,7 +35,6 @@
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_news">Nyheter</string>
     <string name="mcl_tab_console">Utviklerkonsoll</string>
     <string name="mcl_tab_crash">Krasj logg</string>
     <!-- MCLauncherActivity: Account status -->
@@ -78,7 +76,6 @@
     <string name="mcl_setting_category_general">Generelle innstillinger</string>
     <string name="mcl_setting_category_scaling">Innstillinger for skalering</string>
     <string name="mcl_setting_category_renderer">Gjengir</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): eksporterer OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Versjonstype vil være i versjonslisten</string>
     <string name="mcl_setting_veroption_release">Release</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>

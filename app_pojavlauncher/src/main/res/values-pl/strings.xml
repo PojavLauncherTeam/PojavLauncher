@@ -18,7 +18,7 @@
     <string name="login_title_no_saved_account">Nie znaleziono żadnego konta!</string>
     <string name="login_dialog_no_saved_account">Nie masz zapisanego żadnego konta.\nZaznacz opcję <b>\"Zapamiętaj dane logowania\"</b>, aby zapisać konto po pierwszym zalogowaniu.</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Przesuń palcem od prawej krawędzi, aby otworzyć menu ◀\nPrzytrzymaj przycisk, aby go dostosować: edytować, zmienić rozmiar lub usunąć."</string>
+    <string name="hint_control_mapping">"Naciśnij na ikonę koła zębatego, aby otworzyć menu kontekstowe ⚙\nNaciśnij na przycisk, aby dostosować: edytuj, zmień rozmiar, usuń lub zmień przypisanie klawiszy."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">To konto zostanie usunięte!</string>
     <!-- AlertDialog title -->
@@ -37,8 +37,7 @@
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_news">Aktualności</string>
-    <string name="mcl_tab_console">Konsola programistyczna</string>
+    <string name="mcl_tab_console">Konsola</string>
     <string name="mcl_tab_crash">Rejestr awarii</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Połączono</string>
@@ -49,15 +48,15 @@
     <string name="mcl_launch_downloading">Pobieranie %s</string>
     <string name="mcl_launch_downloading_progress">"Pobieranie %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Przygotowywanie do pobrania zasobów</string>
-    <string name="mcl_launch_error_localmode">Minecraft nie może być zainstalowany legalnie, gdy używasz lokalnego konta. Zaloguj się na konto online, aby kontynuować.</string>
+    <string name="mcl_launch_error_localmode">Nie można legalnie zainstalować Minecraft, gdy używane jest konto lokalne. Przełącz na konto online, aby kontynuować.</string>
     <string name="mcl_options">Opcje</string>
     <string name="mcl_option_modinstall">Zainstaluj modyfikację (Forge, LabyMod, Fabric itp.)</string>
     <string name="mcl_option_modinstallwitharg">Zainstaluj modyfikację (z niestandardowymi argumentami)</string>
-    <string name="mcl_option_customcontrol">Dostosuj sterowanie</string>
+    <string name="mcl_option_customcontrol">Sterowanie</string>
     <string name="mcl_option_settings">Ustawienia</string>
     <string name="mcl_option_about">Informacje</string>
     <string name="mcl_setting_title_use_surface_view">Użyj alternatywnego renderowania powierzchni</string>
-    <string name="mcl_setting_subtitle_use_surface_view">Może pomóc z wydajnością w przypadkach problemów z gpu</string>
+    <string name="mcl_setting_subtitle_use_surface_view">Ta opcja może okazać się pomocna w przypadku problemów z wydajnością</string>
     <string name="mcl_setting_title_uninstalljre">Odinstaluj środowisko wykonawcze Java</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Wymagane ponowne uruchomienie launchera] Umożliwi to ponowną instalację środowiska wykonawczego Java</string>
     <string name="mcl_setting_title_freeform">Funkcja \"Obraz w obrazie\"</string>
@@ -83,15 +82,17 @@
     <string name="mcl_setting_category_general">Ustawienia ogólne</string>
     <string name="mcl_setting_category_scaling">Ustawienia skalowania</string>
     <string name="mcl_setting_category_renderer">Silnik renderujący</string>
-    <string name="mcl_setting_renderer_gles2_4">gl4es: wspiera 1.0-1.19+</string>
-    <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): eksportuje OpenGL 4.3</string>
-    <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): eksportuje OpenGL 3.0</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): eksportuje OpenGL 4.6</string>
+    <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (wszystkie wersje, szybki)</string>
+    <string name="mcl_setting_renderer_virgl">virglrenderer - (wersja 1.7+, wolny)</string>
+    <string name="mcl_setting_renderer_vgpu">vgpu - (do wersji 1.16.5, szybki)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink - (old_beta b1.8+, wolny)</string>
+    <string name="mcl_setting_renderer_angle">ANGLE - (wersja 1.17+, zrównoważony)</string>
     <string name="mcl_setting_category_veroption">Opcje widoczne na liście wersji</string>
     <string name="mcl_setting_veroption_release">Oficjalne wydanie</string>
     <string name="mcl_setting_veroption_snapshot">Wersja deweloperska</string>
     <string name="mcl_setting_veroption_oldalpha">Dawna Alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Dawna Beta</string>
+    <string name="mcl_setting_java_sandbox">Izolacja instalatora .jar</string>
     <string name="mcl_version_clone">Klonuj</string>
     <!-- Global strings -->
     <string name="global_edit">Edytuj</string>
@@ -176,6 +177,7 @@
     <string name="customctrl_addsubbutton">Dodaj przycisk podrzędny</string>
     <string name="customctrl_add_subbutton_message">Dodano przycisk podrzędny n°%d !</string>
     <string name="customctrl_selectdefault">Wybierz domyślny plik json dla sterowania</string>
+    <string name="customctrl_export">Eksportuj ustawienia sterowania</string>
     <string name="main_install_jar_file">Zainstaluj .jar</string>
     <string name="main_options">Opcje</string>
     <string name="main_play">Graj</string>
@@ -216,15 +218,15 @@
     <string name="multirt_config_setdefault">Ustaw jako domyślny</string>
     <string name="multirt_config_setdefault_already">Domyślny</string>
     <string name="multirt_config_removeerror_last">Należy mieć zainstalowane co najmniej jedno środowisko wykonawcze Java</string>
-    <string name="multirt_nocompartiblert">Nie można znaleźć żadnej kompatybilnej wersji Javy. Ta wersja wymaga Javy %d lub nowszej.</string>
-    <string name="multirt_nojava8rt">Nie można znaleźć Javy 8. Aby użyć tej opcji, musisz zainstalować Javę 8.</string>
+    <string name="multirt_nocompartiblert">Nie można znaleźć żadnej zgodnej wersji środowiska Java. Ta wersja wymaga Java %d lub nowszych.</string>
+    <string name="multirt_nojava8rt">Nie można znaleźć Java 8. Aby korzystać z tej opcji, należy zainstalować Java 8.</string>
     <string name="compat_117_message">Minecraft 21w10a+ wymaga OpenGL 3.2. Niestety twoja karta graficzna nie obsługuje OpenGL ES 3.0 lub wyższych, ale możesz zainstalować dodatkowe zasoby, dzięki którym możesz uruchomić te wersje. Naciśnij OK, aby potwierdzić instalacje lub Anuluj, aby ją przerwać.</string>
     <string name="compat_11x_playanyway">Uruchom mimo to</string>
     <string name="pvc_gameDirectory">Katalog gry</string>
     <string name="pvc_jvmArgs">Argumenty JVM</string>
     <string name="pvc_title">Ustawienia dla wersji</string>
     <string name="storage_warning_title">Zmiany w przechowywaniu</string>
-    <string name="storage_warning_text"><![CDATA[Ze względu na nowe wymagania Google skupione na pamięci, dodane w systemie Android 10 i wyższych, musimy przenieść katalog gry do prywatnego folderu aplikacji.<br /> Nowy folder Pojav to <b>Android/data/%s/files/</b> (dostępny również poprzez posiadany eksplorator plików).<br /> Jeśli potrzebujesz kopii swoich plików gry, skopiuj wszystko ręcznie z oryginalnego folderu <b>games/PojavLauncher</b>.]]></string>
+    <string name="storage_warning_text"><![CDATA[Ze względu na nowe wymagania Google dotyczące pamięci dodane w systemie Android 10 i nowszych, konieczne jest przeniesienie katalogu gry do prywatnego folderu aplikacji.<br /> Nowy folder Pojav to <b>Android/data/%s/files/</b> (do którego możesz uzyskać dostęp poprzez przeglądarkę plików).<br /> Jeśli potrzebujesz kopii swoich plików gry, skopiuj wszystko ręcznie z oryginalnego folderu <b>games/PojavLauncher</b>.]]></string>
     <string name="control_offset_title">Przesunięcie sterowania</string>
     <string name="control_top_offset">Górne przesunięcie: </string>
     <string name="control_right_offset">prawe przesunięcie: </string>
@@ -233,25 +235,32 @@
     <string name="preference_control_offset_title">Przesunięcia boczne sterowania</string>
     <string name="preference_control_offset_description">Ustaw niestandardowe przesunięcie na każdą stronę ekranu</string>
     <string name="preference_mouse_start_title">Uruchom z włączoną myszą wirtualną</string>
-    <string name="preference_mouse_start_description">Używanie tej opcji naraża Cię na komentarze ze strony Mathiasa-Boulay\'a</string>
-    <string name="preference_video_title">Wideo i renderowanie</string>
+    <string name="preference_video_title">Grafika i silnik renderujący</string>
     <string name="preference_video_description">Rozdzielczość, typ skalowania i renderowanie</string>
-    <string name="preference_control_title">Kontroluj dostosowywanie</string>
+    <string name="preference_control_title">Sterowanie</string>
     <string name="preference_control_description">Typy gestów, wyzwalacze i skalowanie</string>
-    <string name="preference_java_title">Ulepszenia Javy</string>
-    <string name="preference_java_description">Wersje Java, Argumenty JVM i ilość RAM</string>
+    <string name="preference_java_title">Konfiguracja Java</string>
     <string name="preference_misc_title">Pozostałe ustawienia</string>
-    <string name="preference_misc_description">Sprawdzanie listy wersji i lib</string>
-    <string name="preference_experimental_title">Eksperymentalna faza</string>
-    <string name="preference_experimental_description">Używaj tam rzeczy z rozwagą, bez wsparcia.</string>
+    <string name="preference_misc_description">Lista wersji oraz sprawdzanie bibliotek</string>
+    <string name="preference_experimental_title">Eksperymentalne</string>
+    <string name="preference_experimental_description">Nie pomożemy Ci, jeśli coś zepsujesz używając tych opcji.</string>
     <string name="preference_sustained_performance_title">Włącz tryb zrównoważonej wydajności</string>
-    <string name="preference_sustained_performance_description">Ogranicz przegrzewanie zmniejszając górny próg wydajności</string>
+    <string name="preference_sustained_performance_description">Zmniejsz nagrzewanie urządzenia ograniczając górny próg wydajności</string>
+    <string name="preference_force_vsync_description">Zmniejsz nagrzewanie urządzenia ograniczając górny próg wydajności</string>
+    <string name="preference_force_english_title">Wymuś język angielski</string>
+    <string name="preference_force_english_description">Umożliwia wyświetlanie zdań w oryginalnym języku produkcyjnym. Wymagane ponowne uruchomienie</string>
+    <string name="preference_category_gyro_controls">Sterowanie ruchem</string>
+    <string name="preference_category_virtual_mouse">Wirtualna mysz</string>
+    <string name="preference_gyro_invert_x_axis">Odwróć oś X</string>
+    <string name="preference_gyro_invert_y_axis">Odwróć oś Y</string>
+    <string name="preference_gyro_invert_x_axis_description">Odwróć oś poziomą</string>
+    <string name="preference_gyro_invert_y_axis_description">Odwróć oś pionową</string>
     <string name="preference_back_title">Powrót do ostatniego ekranu</string>
     <string name="gles_hack_title">Poprawka zmniejszająca GL4ES</string>
     <string name="gles_hack_none">Nie zmniejszaj tekstur</string>
     <string name="gles_hack_always">Dzieli wszystkie tekstury przez 2</string>
     <string name="gles_hack_sometimes">Dzieli wszystkie tekstury przez /2 lub /4</string>
-    <string name="unnamed">Nienazwany</string>
+    <string name="unnamed">Bez nazwy</string>
     <string name="profiles_latest_snapshot">Najnowsza wersja deweloperska</string>
     <string name="profiles_latest_release">Najnowsze wydanie</string>
     <string name="profiles_editing">Edytowanie profilu</string>
@@ -263,4 +272,20 @@
     <string name="arc_capes_title">Peleryny Cosmetica</string>
     <string name="arc_capes_desc">Aktywuje peleryny z Cosmetica (wcześniej Arc). Aby dowiedzieć się więcej, odwiedź https://cosmetica.cc. Wymaga OptiFine.</string>
     <string name="migrated_profile_str">%s konfiguracja wersji</string>
+    <string name="notif_channel_name">Ogólne</string>
+    <string name="lazy_service_default_title">Usługa Pojav Foreground</string>
+    <string name="lazy_service_default_description">Ta usługa jest używana do wykonywania długich operacji</string>
+    <string name="mcl_setting_veroption_installed">Zainstalowane</string>
+    <string name="use_global_default">(Użyj ustawień domyślnych)</string>
+    <string name="default_control">Domyślne sterowanie</string>
+    <string name="progresslayout_tasks_in_progress">%d zadań w toku</string>
+    <string name="notification_terminate">Przerwij</string>
+    <string name="notification_game_runs">Gra jest uruchomiona!</string>
+    <string name="folder_dialog_create">Utwórz</string>
+    <string name="folder_dialog_insert_name">Wpisz nazwę folderu</string>
+    <string name="main_login_done">Logowanie zakończone</string>
+    <string name="main_add_account">Dodaj konto</string>
+    <string name="tasks_ongoing">Zadania są w toku, proszę czekać</string>
+    <string name="no_saved_accounts">Brak zapisanych kont</string>
+    <string name="downloading_versions">Pobieranie listy wersji…</string>
 </resources>

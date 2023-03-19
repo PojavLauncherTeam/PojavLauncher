@@ -18,7 +18,6 @@
     <string name="login_title_no_saved_account">No akownt findz !</string>
     <string name="login_dialog_no_saved_account">U doan has any savd akownt.\nUse teh opshun <b>\"Keep me loggd in\"</b> 2 save an akownt upon furst login.</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Swiep frum riet 2 left 2 open meun ◀\nHold button 2 customiez: edit, resiez or deleet."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Dis akownt wil be removed!</string>
     <!-- AlertDialog title -->
@@ -37,7 +36,6 @@
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_news">Newz</string>
     <string name="mcl_tab_console">Developmnt consol</string>
     <string name="mcl_tab_crash">Crash trunk</string>
     <!-- MCLauncherActivity: Account status -->
@@ -83,8 +81,6 @@
     <string name="mcl_setting_category_general">General settingz</string>
     <string name="mcl_setting_category_scaling">Scalin settingz</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
-    <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): iksportz OpenGL 3.0</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): givez OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Vershun type will be in vershun list</string>
     <string name="mcl_setting_veroption_release">RELEASD</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
@@ -221,13 +217,13 @@
     <string name="preference_control_offset_description">Set a custom offset 2 each side ov teh screen</string>
     <string name="preference_control_description">Gesturez typez, triggers, an scalin</string>
     <string name="preference_java_title">Java Tweakz</string>
-    <string name="preference_java_description">Java vershuns, jvm arguments, an ram amount</string>
     <string name="preference_misc_title">Miscellaneous settings</string>
     <string name="preference_misc_description">Vershun list, an libz checkz</string>
     <string name="preference_experimental_title">Experimental Stuff</string>
     <string name="preference_experimental_description">Use things thar wif considerashun, no support.</string>
     <string name="preference_sustained_performance_title">Enable sustaind performance mode</string>
     <string name="preference_sustained_performance_description">Limit thermal thrittlin by limitin peak performance</string>
+    <string name="preference_force_vsync_description">Limit thermal thrittlin by limitin peak performance</string>
     <string name="preference_back_title">Bak 2 teh last screen</string>
     <string name="gles_hack_title">GL4ES Shrink heck</string>
     <string name="gles_hack_none">Doan shrink texturez</string>

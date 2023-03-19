@@ -17,7 +17,6 @@
     <string name="login_title_no_saved_account">Geen account gevonden!</string>
     <string name="login_dialog_no_saved_account">U hebt geen opgeslagen account.\nGebruik de optie <b>\"Ingelogd blijven\"</b> om een account op te slaan bij de eerste aanmelding.</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Veeg van rechts naar links om het menu te openen ◀\nHoud een knop ingedrukt om aan te passen: bewerken, verkleinen of verwijderen."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Dit account wordt verwijderd!</string>
     <!-- AlertDialog title -->
@@ -36,7 +35,6 @@
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_news">Nieuws</string>
     <string name="mcl_tab_console">Ontwikkelings console</string>
     <string name="mcl_tab_crash">Crash-logbestand</string>
     <!-- MCLauncherActivity: Account status -->

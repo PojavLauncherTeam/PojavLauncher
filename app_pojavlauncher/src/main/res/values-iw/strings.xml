@@ -18,7 +18,6 @@
     <string name="login_title_no_saved_account">לא נמצאו חשבונות!</string>
     <string name="login_dialog_no_saved_account">אין לך אף חשבון שמור.\nהשתמש באפשרות <b>\"השאר אותי מחובר\"</b> כדי לשמור חשבון בכניסה הראשונה.</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"החלק מימין לשמאל כדי לפתוח את התפריט ◀\nלחץ לחיצה ארוכה על כפתור כדי לעצב: לערוך, לשנות גודל, או למחוק."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">החשבון יוסר!</string>
     <!-- AlertDialog title -->
@@ -37,7 +36,6 @@
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_news">חדשות</string>
     <string name="mcl_tab_console">מסוף מפתחים</string>
     <string name="mcl_tab_crash">רשומת קריסה</string>
     <!-- MCLauncherActivity: Account status -->
@@ -82,10 +80,6 @@
     <string name="mcl_setting_category_general">הגדרות כלליות</string>
     <string name="mcl_setting_category_scaling">הגדרות קנה מידה</string>
     <string name="mcl_setting_category_renderer">רינדור</string>
-    <string name="mcl_setting_renderer_gles2_4">gl4es הקדוש: תומך בגירסאות 1.0-1.19+</string>
-    <string name="mcl_setting_renderer_virgl">virglrenderer (OpenGL ES 3): מייצא את OpenGL 4.3</string>
-    <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): מייצא את OpenGL 3.0</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): מייצא את OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">סוג הגרסה שיופיע ברשימת הגרסאות</string>
     <string name="mcl_setting_veroption_release">הפצה</string>
     <string name="mcl_setting_veroption_snapshot">סנאפשוט</string>
@@ -217,19 +211,18 @@
     <string name="storage_warning_title">שינויי אחסון</string>
     <string name="storage_warning_text"><![CDATA[בשל אכיפות האחסון החדשות של Google שנוספו ב- Android 10 ואילך, עלינו להעביר את ספריית המשחק לתיקייה פרטית לאפליקציות.<br /> התיקיה החדשה לקובצי Pojav היא <b>Android/data/%s/files/</b> (נגיש גם באמצעות ספק אחסון בסייר הקבצים שלך).<br /> אם אתה צריך להעתיק את קבצי המשחק שלך, העתק הכל מהתיקיה המקורית ב <b>games/PojavLauncher</b> באופן ידני.]]></string>
     <string name="preference_mouse_start_title">התחל עם עכבר וירטואלי מופעל</string>
-    <string name="preference_mouse_start_description">בעת השימוש באפשרות זו, \"תישפטו\" ע\"י Mathias-Boulay</string>
     <string name="preference_video_title">וידאו ועיבוד</string>
     <string name="preference_video_description">רזולוציה, סוג קנה מידה, ומעבד (וידאו)</string>
     <string name="preference_control_title">התאמה אישית של פקדים</string>
     <string name="preference_control_description">סוגי מחוות, טריגרים, וקנה מידה</string>
     <string name="preference_java_title">התאמות ל- Java</string>
-    <string name="preference_java_description">גירסאות Java, JVM arguments, וזיכרון עבודה (RAM)</string>
     <string name="preference_misc_title">הגדרות שונות</string>
     <string name="preference_misc_description">רשימת גירסאות, ובדיקת ספריות</string>
     <string name="preference_experimental_title">דברים ניסיוניים</string>
     <string name="preference_experimental_description">אין תמיכה, יש להשתמש באפשרויות לפי שיקול דעתכם.</string>
     <string name="preference_sustained_performance_title">הפעל \"מצב מאוזן\"</string>
     <string name="preference_sustained_performance_description">מגביל התחממות טרמית (של המכשיר) ע\"י הפחתת ביצועים</string>
+    <string name="preference_force_vsync_description">מגביל התחממות טרמית (של המכשיר) ע\"י הפחתת ביצועים</string>
     <string name="preference_back_title">חזרה אל המסך האחרון</string>
     <string name="gles_hack_title">כיווץ GL4ES</string>
     <string name="gles_hack_none">אל תכווץ טקסטורות</string>

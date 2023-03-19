@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App name part -->
+    <string name="app_name">PojavLauncher (Minecraft: Java Edition Androidile)</string>
+    <string name="app_short_name">PojavLauncher</string>
+    <string name="app_motd">Käivita oma seadmes Minecraft: Java Edition!</string>
+    <!-- Action bar part -->
+    <!-- Languages list part -->
+    <!-- Login strings -->
+    <string name="login_online_username_hint">E-post või kasutajanimi</string>
+    <string name="login_online_password_hint">Parool</string>
+    <string name="login_online_check_keeplogin">Hoia mind sisselogituna</string>
+    <string name="login_online_login_label">Logi sisse</string>
+    <string name="login_select_account">Vali konto</string>
+    <!-- Hint -->
+    <!-- Warnings -->
+    <!-- AlertDialog title -->
+    <!-- Error messages -->
+    <string name="error_no_version">Versioon puudub!</string>
+    <string name="error_show_more">Kuva rohkem</string>
+    <string name="error_show_less">Kuva vähem</string>
+    <!-- Toast messages -->
+    <!--
+    <string name="toast_3">Exit</string>
+    -->
+    <!-- MCLauncherActivity: Tabs -->
+    <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">Ühendatud</string>
+    <string name="mcl_account_local">Kohalik</string>
+    <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_options">Valikud</string>
+    <string name="mcl_option_customcontrol">Kohandatud juhtnupud</string>
+    <string name="mcl_option_settings">Seaded</string>
+    <string name="mcl_option_about">Teave</string>
+    <string name="mcl_setting_title_use_surface_view">Kasuta alternatiivset pinnarenderdust</string>
+    <string name="mcl_setting_subtitle_use_surface_view">Võib jõudlust aidata graafikamootorit tugevalt kasutavatel olukordadel</string>
+    <string name="mcl_setting_title_hide_sidebar">Peida külgriba</string>
+    <string name="mcl_setting_title_ignore_notch">Ignoreeri kulmu</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Ignoreerib kulmu, laiendades ekraaniala selle alla.\nAnnab kaasahaaravama kogemuse.</string>
+    <string name="mcl_setting_title_resolution_scaler">Eraldusvõime skaala</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">Võimaldav vähendada mängu eraldusvõimet. 100% on täielik eraldusvõime</string>
+    <string name="mcl_setting_title_longpresstrigger">Kui kiiresti reageeritakse pärast pikka vajutust</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Muuda pika vajutuse reageerimisaega plokkide lõhkumiseks ja esemete viskamiseks.</string>
+    <string name="mcl_setting_title_buttonscale">Juhtnuppude suurus</string>
+    <string name="mcl_setting_title_mousescale">Kursori suurus</string>
+    <string name="mcl_setting_category_renderer">Renderdaja</string>
+    <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (kõik versioonid, kiire)</string>
+    <string name="mcl_setting_renderer_virgl">virglrenderer - (väljalase 1.7+, aeglane)</string>
+    <string name="mcl_setting_renderer_vgpu">vgpu - (kuni 1.16.5, kiire)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink - (vana beeta b1.8+, aeglane)</string>
+    <string name="mcl_setting_renderer_angle">ANGLE - (väljalase 1.17+, keskm.)</string>
+    <string name="mcl_setting_veroption_release">Väljalase</string>
+    <string name="mcl_setting_veroption_snapshot">Katsetus</string>
+    <string name="mcl_setting_veroption_oldalpha">Vana alfa</string>
+    <string name="mcl_setting_veroption_oldbeta">Vana beeta</string>
+    <string name="mcl_version_clone">Klooni</string>
+    <!-- Global strings -->
+    <string name="global_edit">Muuda</string>
+    <string name="global_error">Viga</string>
+    <string name="global_warinng">Hoiatus</string>
+    <string name="global_load">Laadi</string>
+    <string name="global_name">Nimi</string>
+    <string name="global_remove">Eemalda</string>
+    <string name="global_clone">Klooni</string>
+    <string name="global_restart">Taaskäivita</string>
+    <string name="global_save">Salvesta</string>
+    <string name="global_unpacking">%s lahtipakkimine</string>
+    <string name="global_error_field_empty">See väli ei tohi olla tühi</string>
+    <string name="global_waiting">Ootamine</string>
+    <!-- MainActivity: strings -->
+    <string name="mcn_exit_call">Välju</string>
+    <string name="mcn_check_fail_vulkan_support">Vulkan Zink renderdaja ei ole selles seadmes toetatud!</string>
+    <!-- MainActivity: Control buttons -->
+    <string name="control_toggle">NUPUD</string>
+    <string name="control_keyboard">Klaviat.</string>
+    <string name="control_chat">Vestlus</string>
+    <string name="control_debug">Silur</string>
+    <string name="control_primary">Vasak</string>
+    <string name="control_secondary">Parem</string>
+    <string name="control_inventory">Kott</string>
+    <string name="control_thirdperson">Keskmine</string>
+    <string name="control_listplayers">Mängijad</string>
+    <string name="control_mouse">Hiir</string>
+    <string name="control_mouseoff">Hiir: väljas</string>
+    <string name="control_mouseon">Hiir: sees</string>
+    <!-- MainActivity: Menu advanced controls -->
+    <string name="control_forceclose">Sundsulge</string>
+    <string name="control_viewout">Logiväljund</string>
+    <string name="control_adebug">Sisendite silumine</string>
+    <string name="control_customkey">Saada kohandatud klahvikood</string>
+    <string name="control_scaleup">Suurendamine</string>
+    <string name="control_scaledown">Vähendamine</string>
+    <!-- ImportControlActivity Strings -->
+    <!--
+    <string name="control_more3"></string>
+    <string name="control_more4"></string>
+-->
+    <string name="customctrl_edit">%s redigeerimine</string>
+    <string name="customctrl_remove">Eemaldad %s?</string>
+    <string name="customctrl_keyname">Klahvikood</string>
+    <string name="customctrl_toggle">Lülitatav</string>
+    <string name="customctrl_size">Suurus</string>
+    <string name="customctrl_size_width">Laius</string>
+    <string name="customctrl_size_height">Kõrgus</string>
+    <string name="customctrl_mapping">Kaardistamine</string>
+    <string name="customctrl_orientation">Orientatsioon</string>
+    <string name="customctrl_dynamicpos_x">Dünaamiline X</string>
+    <string name="customctrl_dynamicpos_y">Dünaamiline Y</string>
+    <string name="customctrl_addbutton">Lisa nupp</string>
+    <string name="customctrl_selectdefault">Vali vaikimisi juhtnuppude json</string>
+    <string name="main_install_jar_file">Paigalda .jar</string>
+    <string name="main_options">Valikud</string>
+    <string name="main_play">Mängi</string>
+    <string name="main_welcome">Tere tulemast, %s</string>
+    <string name="main_infodev">Info (arendus)</string>
+    <string name="main_switchuser">Vaheta kasutajat</string>
+    <string name="main_version">Versioon:</string>
+    <string name="main_nocrash">Krahhi ei tuvastatud</string>
+    <string name="main_nolog">Logi puudub.</string>
+    <string name="auto_ram_title">Automaatne RAM</string>
+    <string name="autoram_info_msg">Muutmäluks seatud %d MB</string>
+    <string name="mcl_setting_check_libraries">Kontrolli teeke pärast allalaadimist</string>
+    <string name="mcl_setting_check_libraries_subtitle">See valik sunnib käivitajat teekide räsisid kontrollima, kui need on saadaval. Väldib katkiseid allalaadimisi.</string>
+    <string name="mcl_disable_gestures">Keela viiped</string>
+    <string name="mcl_disable_gestures_subtitle">Keelab viiped, s.h. ploki lõhkumiseks hoidmine ja asetamiseks koputamine.</string>
+    <string name="mcl_setting_title_mousespeed">Kursori kiirus</string>
+    <string name="customctrl_passthru">Kursori läbivus</string>
+    <string name="customctrl_swipeable">Viibatav</string>
+    <string name="customctrl_rounded">Ümardatud</string>
+    <string name="memory_warning_msg">Hetkel saadaolev muutmälu (%d) on madalam kui eraldatud muutmälu (%d), mis võib krahhe põhjustada. Kui mäng jookseb kokku, muuda mälueraldust.</string>
+    <string name="mcl_memory_allocation">Mälueraldus</string>
+    <string name="mcl_memory_allocation_subtitle">Juhib, kui palju mälu Minecraftile antakse</string>
+    <string name="multirt_config_title">Java virtuaalmasinad</string>
+    <string name="multirt_config_add">Lisa uus</string>
+    <string name="multirt_title">Runtime-haldur</string>
+    <string name="multirt_subtitle">Halda paigaldatud Java virtuaalmasinaid</string>
+    <string name="multirt_config_setdefault">Määra vaikimisi</string>
+    <string name="multirt_config_setdefault_already">Vaikimisi</string>
+    <string name="compat_11x_playanyway">Mängi siiski</string>
+    <string name="pvc_jvmArgs">JVM argumendid</string>
+    <string name="preference_mouse_start_title">Käivita lubatud virtuaalse hiirega</string>
+    <string name="preference_video_title">Video ja renderdaja</string>
+    <string name="preference_video_description">Eraldusvõime, skaleerimistüüp ja renderdaja</string>
+    <string name="preference_control_title">Juhtnuppude kohandamine</string>
+    <string name="preference_control_description">Viibete liigid, päästikud ja suurused</string>
+    <string name="preference_java_title">Java trikid</string>
+    <string name="preference_java_description">Java versioonid, JVM argumendid, RAMi kogus ja liivakast</string>
+    <string name="preference_misc_title">Mitmesugused seaded</string>
+    <string name="preference_misc_description">Versiooniloend ja teekide kontrollid</string>
+    <string name="preference_sustained_performance_title">Jätkusuutliku jõudluse režiimi sisselülitamine</string>
+    <string name="preference_sustained_performance_description">Vähenda termilist aeglustamist, piirates tippjõudlust</string>
+    <string name="preference_force_vsync_description">Vähenda termilist aeglustamist, piirates tippjõudlust</string>
+    <string name="preference_force_english_title">Sunni inglise keele kasutus</string>
+    <string name="preference_force_english_description">Võimaldab sul näha originaalseid väljendeid, nagu arendajad need loonud on. Nõuab taaskäivitust</string>
+    <string name="preference_category_virtual_mouse">Virtuaalne hiir</string>
+    <string name="preference_back_title">Tagasi viimasele kuvale</string>
+    <string name="unnamed">Nimetu</string>
+    <string name="profiles_latest_snapshot">Viimatine katsetus</string>
+    <string name="profiles_latest_release">Viimatine väljalase</string>
+    <string name="profiles_profile_name">Nimi</string>
+    <string name="profiles_profile_version">Versioon</string>
+    <string name="global_delete">Kustuta</string>
+    <string name="pedit_java_runtime">Java Runtime</string>
+    <string name="pedit_renderer">Renderdaja</string>
+    <string name="arc_capes_title">Cosmetica keebid</string>
+    <string name="arc_capes_desc">Lubab Cosmetica (endine Arc) keebid. Rohkema teabe saamiseks külasta https://cosmetica.cc. Nõuab OptiFine\'i.</string>
+    <string name="notif_channel_name">Üldine</string>
+    <string name="lazy_service_default_title">Pojav esiplaaniteenus</string>
+    <string name="default_control">Vaikimisi juhtnupud</string>
+    <string name="notification_terminate">Sundsulge</string>
+    <string name="notification_game_runs">Mäng on käimas!</string>
+    <string name="folder_dialog_create">Loo</string>
+    <string name="main_login_done">Sisenemine õnnestus</string>
+    <string name="main_add_account">Lisa konto</string>
+    <string name="create_profile">Loo uus profiil</string>
+</resources>

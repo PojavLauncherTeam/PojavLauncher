@@ -11,13 +11,13 @@
     <string name="login_online_password_hint">Шифра</string>
     <string name="login_online_check_keeplogin">Остави ме пријављеног</string>
     <string name="login_online_login_label">Пријава</string>
+    <string name="login_error_invalid_username">Инвалид корисничко име. Корисничко име мора да буде у кругу од 3-16 карактера, и да садржи А-Z, a-z, 0-9 и доњу црту.</string>
     <string name="login_error_exist_username">Ово корицничко име већ постоји</string>
     <string name="login_microsoft">Microsoft Пријава</string>
     <string name="login_select_account">Изаберите налог</string>
     <string name="login_title_no_saved_account">Налог није пронађен !</string>
     <string name="login_dialog_no_saved_account">Ви немате сачувани налог.\nКористите опцију <b>\"Сачувај налог\"</b>да сачувате налог прије него што се пријавите.</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Повуците са десна на лево да отворите мени ◀\nДржите дугме да га прилагодиш: едит, промени величину или избриши."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Овај налог ће бити уклоњен!</string>
     <!-- AlertDialog title -->
@@ -36,23 +36,26 @@
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_news">Вести</string>
     <string name="mcl_tab_console">Програмерска конзола</string>
     <string name="mcl_tab_crash">Лог Грешака</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Повезано</string>
+    <string name="mcl_account_local">Локал</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Спремно играти Минецрафт %s</string>
     <string name="mcl_launch_cleancache">Чишћење кеш фајлова</string>
     <string name="mcl_launch_downloading">Преузимање %s</string>
     <string name="mcl_launch_downloading_progress">"Преузимање %s (%.2f МБ / %.2f МБ)"</string>
     <string name="mcl_launch_download_assets">Спремање да се преузимају ресурси</string>
+    <string name="mcl_launch_error_localmode">Минецрафт не може бити легално инсталиран када сте пријављени са локалним налогом. Молим вас да се пребаците на онлајн налог да би сте наставили.</string>
     <string name="mcl_options">Опције</string>
     <string name="mcl_option_modinstall">Покрени мод инсталер (Форге, Лабумод, Фабрик, итд...)</string>
     <string name="mcl_option_modinstallwitharg">Покрени мод инсталер (са прилагоћеним аргументима)</string>
     <string name="mcl_option_customcontrol">Прилагођене контроле</string>
     <string name="mcl_option_settings">Подешавања</string>
     <string name="mcl_option_about">О Pojavu</string>
+    <string name="mcl_setting_title_use_surface_view">Користите алтернате сурфаце рендеринг</string>
+    <string name="mcl_setting_subtitle_use_surface_view">Мође помоћи перформансама у гпу боунд сценаријима</string>
     <string name="mcl_setting_title_uninstalljre">Деисталирајте Java Runtime</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Лаунчер рестарт потребан] Ово ће вам дозволити да ре-инсталирајте Java Runtime</string>
     <string name="mcl_setting_title_freeform">Покрените Minecraft у моду прозора</string>
@@ -79,7 +82,6 @@
     <string name="mcl_setting_category_general">Општа подешавања</string>
     <string name="mcl_setting_category_scaling">Подешавања величине</string>
     <string name="mcl_setting_category_renderer">Рендерер</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): eкспортира OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Верзије које ће бити у листи верзија</string>
     <string name="mcl_setting_veroption_release">Стабилно</string>
     <string name="mcl_setting_veroption_snapshot">Снепшот</string>
@@ -100,6 +102,7 @@
     <string name="global_error_field_empty">Ово поље не може остати празно</string>
     <string name="global_waiting">Чекај</string>
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">Апликација/Игра изашла је са кодом %d, провјерите latestlog.txt за више детаља.</string>
     <string name="mcn_exit_call">Изађи</string>
     <string name="mcn_exit_confirm">Да ли желите да форсе-изаћете?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 није инсталиран!</string>
@@ -125,6 +128,12 @@
     <string name="control_scaleup">Зумирање</string>
     <string name="control_scaledown">Смањивање</string>
     <!-- ImportControlActivity Strings -->
+    <string name="import_control_label">Убаците контроле</string>
+    <string name="import_control_invalid_file">Инвалид или коруптирани фајл</string>
+    <string name="import_control_import_button">убаците контроле</string>
+    <string name="import_control_verifying_file">Фајл се верификује, молим вас да сачекате и покушате поново…</string>
+    <string name="import_control_invalid_name">Инвалид назив или фајл већ постоји</string>
+    <string name="import_control_done">убацивање завршено</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -136,15 +145,26 @@
     <string name="customctrl_size">Величина</string>
     <string name="customctrl_size_width">Ширина</string>
     <string name="customctrl_size_height">Висина</string>
+    <string name="customctrl_mapping">Мапирање</string>
+    <string name="customctrl_orientation">Оријентација</string>
+    <string name="customctrl_background_color">Боја позадине</string>
+    <string name="customctrl_corner_radius">радијус угла</string>
+    <string name="customctrl_stroke_width">Ширина потеза</string>
+    <string name="customctrl_stroke_color">Боја потеза</string>
     <string name="customctrl_dynamicpos">Динамична позиција</string>
     <string name="customctrl_dynamicpos_x">Динамични Х</string>
     <string name="customctrl_dynamicpos_y">Динамични У</string>
     <string name="customctrl_transparency_bg">Провидна позадина</string>
+    <string name="customctrl_button_opacity">Непрозирност дугмади</string>
     <string name="customctrl_keycombine">Комбинација типка</string>
     <string name="customctrl_keycombine_alt">Алт</string>
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Додај дугме</string>
+    <string name="customctrl_addbutton_drawer">Додај ладицу дугмета</string>
+    <string name="customctrl_addsubbutton">Додај суб-дугме</string>
+    <string name="customctrl_add_subbutton_message">Суб-дугме н°%d је додано !</string>
     <string name="customctrl_selectdefault">Селектујте опћенити Control json</string>
+    <string name="main_install_jar_file">Инсталирај .jar</string>
     <string name="main_options">Опције</string>
     <string name="main_play">Играј</string>
     <string name="main_welcome">Добродошли, %s</string>

@@ -18,7 +18,6 @@
     <string name="login_title_no_saved_account">Документы не найдены!</string>
     <string name="login_dialog_no_saved_account">Вы не сохраняли ни одни документы.\nИспользуйте настройку <b>\"Запомнить меня\"</b>, чтобы сохранить документы при первомъ входѣ.</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Проведите справа налѣво, чтобы открыть меню ◀\nУдерживайте кнопку для настройки: редактированія, измѣненія размѣра или удаленія."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Сіи документы будутъ удалены!</string>
     <!-- AlertDialog title -->
@@ -37,7 +36,6 @@
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_news">Извѣстія лаунчера</string>
     <string name="mcl_tab_console">Консоль разработчика</string>
     <string name="mcl_tab_crash">Регистръ сбоевъ</string>
     <!-- MCLauncherActivity: Account status -->
@@ -79,8 +77,6 @@
     <string name="mcl_setting_category_general">Основныя настройки</string>
     <string name="mcl_setting_category_scaling">Настройки масштабированія</string>
     <string name="mcl_setting_category_renderer">Визуализаторъ</string>
-    <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): экспортируетъ OpenGL 3.0</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): экспортируетъ OpenGL 4.6</string>
     <string name="mcl_setting_category_veroption">Типы версій, которые будутъ отображаться въ спискѣ версій</string>
     <string name="mcl_setting_veroption_release">Выпущенныя версіи</string>
     <string name="mcl_setting_veroption_snapshot">Пробныя версіи</string>

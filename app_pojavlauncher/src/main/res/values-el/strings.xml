@@ -11,13 +11,13 @@
     <string name="login_online_password_hint">Κωδικός Πρόσβασης</string>
     <string name="login_online_check_keeplogin">Να παραμείνω συνδεδεμένος</string>
     <string name="login_online_login_label">Είσοδος</string>
+    <string name="login_error_invalid_username">σφάλμα_σύνδεσης_μη_έγκυρο_όνομα_χρήστη</string>
     <string name="login_error_exist_username">Αυτό το όνομα χρήστη υπάρχει ήδη</string>
     <string name="login_microsoft">Microsoft Είσοδος</string>
     <string name="login_select_account">Επιλέξτε λογαριασμό</string>
     <string name="login_title_no_saved_account">Δεν βρέθηκε κανένας λογαριασμός !</string>
     <string name="login_dialog_no_saved_account">Δεν έχετε αποθηκευμένο λογαριασμό.\nΧρησιμοποιήστε την επιλογή <b>\"Κρατήστε με συνδεδεμένο\"</b> για να αποθηκεύσετε έναν λογαριασμό κατά την πρώτη σύνδεση.</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Σύρετε από δεξιά προς τα αριστερά για να ανοίξετε το μενού ◀\nΚρατήστε ένα κουμπί για προσαρμογή: επεξεργασία, αλλαγή μεγέθους ή διαγραφή."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Αυτός ο λογαριασμός θα αφαιρεθεί!</string>
     <!-- AlertDialog title -->
@@ -36,23 +36,26 @@
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_news">Νέα</string>
     <string name="mcl_tab_console">Κονσόλα προγραμματιστή</string>
     <string name="mcl_tab_crash">Αρχείο καταγραφής κατάρρευσης</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">Συνδεδεμένος</string>
+    <string name="mcl_account_local">Τοπικό</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Ετοιμο για να παίξεις Minecraft %s</string>
     <string name="mcl_launch_cleancache">Εκκαθάριση χώρου προσωρινής αποθήκευσης αρχείων</string>
     <string name="mcl_launch_downloading">Γίνεται λήψη %s</string>
     <string name="mcl_launch_downloading_progress">"Λήψη %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Προετοιμασία για λήψη πόρων</string>
+    <string name="mcl_launch_error_localmode">Το Minecraft δεν μπορεί να εγκατασταθεί νόμιμα όταν είναι συνδεδεμένο με έναν τοπικό λογαριασμό.  Μεταβείτε σε έναν διαδικτυακό λογαριασμό για να συνεχίσετε.</string>
     <string name="mcl_options">Ρυθμίσεις</string>
     <string name="mcl_option_modinstall">Εκκινήστε ένα πρόγραμμα εγκατάστασης mod (Forge, LabyMod, Fabric, κλπ...)</string>
     <string name="mcl_option_modinstallwitharg">Εκκινήστε ένα πρόγραμμα εγκατάστασης mod (με προσαρμοσμένες παραμέτρους)</string>
     <string name="mcl_option_customcontrol">Προσαρμοσμένα controls</string>
     <string name="mcl_option_settings">Ρυθμίσεις</string>
     <string name="mcl_option_about">Σχετικά</string>
+    <string name="mcl_setting_title_use_surface_view">Χρησιμοποιήστε εναλλακτική απόδοση επιφανειών</string>
+    <string name="mcl_setting_subtitle_use_surface_view">Μπορεί να βοηθήσει στην απόδοση σε σενάρια με δεσμευμένο gpu</string>
     <string name="mcl_setting_title_uninstalljre">Απεγκατάστησε το Java Runtime</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Απαιτείται επανεκκίνηση Launcher] Αυτό σας επιτρέπει να επανεγκαταστήσετε το Java Runtime</string>
     <string name="mcl_setting_title_freeform">Εκκινήστε το Minecraft σε λειτουργία ελεύθερης μορφής</string>
@@ -78,7 +81,8 @@
     <string name="mcl_setting_category_general">Γενικές ρυθμίσεις</string>
     <string name="mcl_setting_category_scaling">Ρυθμίσεις κλιμάκωσης</string>
     <string name="mcl_setting_category_renderer">Απόδοση</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): exports OpenGL 4.6</string>
+    <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (όλες οι εκδόσεις, γρήγορα)</string>
+    <string name="mcl_setting_renderer_virgl">virglrenderer - (έκδοση 1.7+, αργή)</string>
     <string name="mcl_setting_category_veroption">Ο τύπος έκδοσης θα είναι στη λίστα εκδόσεων</string>
     <string name="mcl_setting_veroption_release">Κυκλοφορία</string>
     <string name="mcl_setting_veroption_snapshot">Στιγμιότυπο</string>

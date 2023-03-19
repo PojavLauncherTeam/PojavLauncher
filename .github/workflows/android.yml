@@ -4,6 +4,7 @@ on:
   pull_request:
     branches-ignore:
       - 'l10n_v3_openjdk2'
+    types: [opened, reopened]
   push:
     branches-ignore:
       - 'l10n_v3_openjdk2'

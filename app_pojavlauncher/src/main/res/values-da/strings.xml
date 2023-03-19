@@ -4,24 +4,51 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_error_invalid_username">Ugyldigt brugernavn. Brugernavn skal være mellem 3-16 tegn langt, bør kun indeholde A-Z, a-z, 0-9 og understregning.</string>
+    <string name="login_microsoft">Microsoft login</string>
+    <string name="login_title_no_saved_account">Ingen konto fundet!</string>
+    <string name="login_dialog_no_saved_account">Du har ikke nogen gemt konto.\nBrug indstillingen <b>\"Hold mig logget ind\"</b> for at gemme en konto ved første login.</string>
     <!-- Hint -->
     <!-- Warnings -->
     <!-- AlertDialog title -->
+    <string name="alerttitle_install_jre">Installer Java Runtime %s (.tar.xz)</string>
+    <string name="alerttitle_installmod">Vælg et mod-installationsprogram</string>
     <!-- Error messages -->
     <!-- Toast messages -->
+    <string name="toast_uninstalljre_done">Udført afinstallationen af Java RunTime</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
     <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">Tilsuttet</string>
+    <string name="mcl_account_local">Lokal</string>
     <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_launch_downloading_progress">"Henter %s (%.2f MB / %.2f MB)"</string>
+    <string name="mcl_launch_error_localmode">Minecraft kan ikke lovligt installeres, når du er logget ind med en lokal konto. Skift til en online konto for at fortsætte.</string>
+    <string name="mcl_option_modinstall">Start et mod-installationsprogram (Forge, LabyMod, Fabric, osv...)</string>
+    <string name="mcl_option_modinstallwitharg">Start et mod-installationsprogram (med brugerdefinerede argumenter)</string>
+    <string name="mcl_setting_title_use_surface_view">Brug alternativ overflade rendering</string>
+    <string name="mcl_setting_subtitle_use_surface_view">Kan hjælpe ydeevne i gpu bundne scenarier</string>
+    <string name="mcl_setting_title_uninstalljre">Afinstaller Java Runtime</string>
+    <string name="mcl_setting_subtitle_uninstalljre">[Launcher genstart påkrævet] Dette giver dig mulighed for at geninstallere Java Runtime</string>
+    <string name="mcl_setting_title_hide_sidebar">Skjul sidepanel</string>
+    <string name="mcl_setting_subtitle_hide_sidebar">Nostalgiske folk foretrækker den gamle v1 brugerflade kan måske lide dette. Giver dig en mere fuld skærm oplevelse.</string>
+    <string name="mcl_setting_title_ignore_notch">Ignorer kamerahak</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Ignorer kamerahakket og udvider skærmen under det.\nGiver dig en mere fordybende oplevelse.</string>
     <!-- Global strings -->
     <!-- MainActivity: strings -->
     <!-- MainActivity: Control buttons -->
     <!-- MainActivity: Menu advanced controls -->
     <!-- ImportControlActivity Strings -->
+    <string name="import_control_invalid_file">Filen er ugyldig eller beskadiget</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
+    <string name="customctrl_size">Størrelse</string>
+    <string name="customctrl_size_width">Bredde</string>
+    <string name="customctrl_size_height">Højde</string>
+    <string name="customctrl_orientation">Orientering</string>
+    <string name="customctrl_background_color">Baggrundsfarve</string>
 </resources>

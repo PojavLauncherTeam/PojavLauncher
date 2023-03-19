@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App name part -->
+    <string name="app_name">পোজাভলন্চার(মাইনক্রাফট: জাভা এডিশন আ্যন্ডরয়েডের জন্য)</string>
+    <string name="app_short_name">পোজাভলন্চার</string>
+    <string name="app_motd">লন্চ করুন মাইনক্রাফট: জাভা এডিশন আপনার ডিভাইসে!</string>
+    <!-- Action bar part -->
+    <!-- Languages list part -->
+    <!-- Login strings -->
+    <string name="login_online_username_hint">ব্যবহারকারীর নাম বা ইমেল</string>
+    <string name="login_online_password_hint">পাসওয়ার্ড</string>
+    <string name="login_online_check_keeplogin">আমাকে লগ ইন করে রাখুন</string>
+    <string name="login_online_login_label">লগইন</string>
+    <string name="login_error_exist_username">ব্যবহারকারীর নাম আগে থেকেই আছে</string>
+    <string name="login_select_account">আ্যকাউন্ট নির্বাচন করুন</string>
+    <!-- Hint -->
+    <!-- Warnings -->
+    <!-- AlertDialog title -->
+    <!-- Error messages -->
+    <!-- Toast messages -->
+    <!--
+    <string name="toast_3">Exit</string>
+    -->
+    <!-- MCLauncherActivity: Tabs -->
+    <!-- MCLauncherActivity: Account status -->
+    <!-- MCLauncherActivity: Strings -->
+    <!-- Global strings -->
+    <string name="global_warinng">Jidan minecraft </string>
+    <!-- MainActivity: strings -->
+    <!-- MainActivity: Control buttons -->
+    <!-- MainActivity: Menu advanced controls -->
+    <string name="control_viewout">লগ আউটপুট</string>
+    <!-- ImportControlActivity Strings -->
+    <!--
+    <string name="control_more3"></string>
+    <string name="control_more4"></string>
+-->
+</resources>

@@ -18,7 +18,6 @@
     <string name="login_title_no_saved_account">Inget konto hittades!</string>
     <string name="login_dialog_no_saved_account">Du har inget sparat konto.\nAnvänd alternativet <b>\"Håll mig inloggad\"</b> för att spara ett konto vid första inloggningen.</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Svep från höger till vänster för att öppna menyn: reverse&lt;unk&gt;\nHåll en knapp för att anpassa: redigera, ändra storlek eller ta bort."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Detta konto kommer att tas bort!</string>
     <!-- AlertDialog title -->
@@ -37,7 +36,6 @@
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_news">Nyheter</string>
     <string name="mcl_tab_console">Utveckling konsol</string>
     <string name="mcl_tab_crash">Kraschlogg</string>
     <!-- MCLauncherActivity: Account status -->

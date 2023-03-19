@@ -7,7 +7,7 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">Электрон почтасы яки кулланучы исеме</string>
+    <string name="login_online_username_hint">Электрон почтасы яки кулланучының исеме</string>
     <string name="login_online_password_hint">Серсүз</string>
     <string name="login_online_check_keeplogin">Хәтердә калдырырга</string>
     <string name="login_online_login_label">Керергә</string>
@@ -17,14 +17,13 @@
     <string name="login_title_no_saved_account">Аккаунт табылмады!</string>
     <string name="login_dialog_no_saved_account">Сакланган аккаунтлар юк.\nАккаунтны беренче керү вакытында саклап өчен <b>«Хәтердә калдырырга»</b> опциясен кулланыгыз.</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Менюны ачу өчен экран аннан сулга сызыгыз ◀\nКөйләү (үзгәрту, зурлыгын үзгәртү яки бетерү) өчен төймәне тотыгыз."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Бу аккаунт бетереләчәк!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">Java Runtime уртыртуы %s (.tar.xz)</string>
     <string name="alerttitle_installmod">Мод утырткычын сайлагыз</string>
     <!-- Error messages -->
-    <string name="error_fatal">PojavLauncher сафтан чыкты</string>
+    <string name="error_fatal">PojavLauncher сафтан көтелмичә чыкты</string>
     <string name="error_no_version">Версия юк!</string>
     <string name="error_show_more">Күбрәк күрсәтү</string>
     <string name="error_show_less">Әзрәк күрсәтү</string>
@@ -36,7 +35,6 @@
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_news">Яңалыклар</string>
     <string name="mcl_tab_console">Эшкәртүче консоле</string>
     <string name="mcl_tab_crash">Сафтан чыгарулар журналы</string>
     <!-- MCLauncherActivity: Account status -->
@@ -46,7 +44,7 @@
     <string name="mcl_version_msg">Minecraft %s кушылуга әзер</string>
     <string name="mcl_launch_cleancache">Кеш-файллар бетерүе</string>
     <string name="mcl_launch_downloading">%s йөкләтүе</string>
-    <string name="mcl_launch_downloading_progress">"%s йөкләтүе (%.2f МБ / %.2f МБ)"</string>
+    <string name="mcl_launch_downloading_progress">"%s йөкләтү (%.2f МБ / %.2f МБ)"</string>
     <string name="mcl_launch_download_assets">Ресурс йөкләүгә әзерләнү</string>
     <string name="mcl_options">Көйләүләр</string>
     <string name="mcl_option_modinstall">Мод утырткычын кушу (Forge, LabyMod, Fabric, h. б.)</string>
@@ -67,7 +65,12 @@
     <string name="mcl_setting_title_javaargs">JVM кушу аргументлары</string>
     <string name="mcl_setting_category_general">Төп көйләүләр</string>
     <string name="mcl_setting_category_scaling">Масштаб көйләүләр</string>
-    <string name="mcl_setting_category_renderer">Рендерер</string>
+    <string name="mcl_setting_category_renderer">Күрсәткеч</string>
+    <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (барлык версияләр өчен, тиз)</string>
+    <string name="mcl_setting_renderer_virgl">virglrenderer - (соңгы 1.7 һәм югарырак версияләр өчен, акрын)</string>
+    <string name="mcl_setting_renderer_vgpu">vgpu (1.16.5 һәм түбәнрәк версияләр өчен, тиз)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink - (иске бета b1.8 һәм югарырак версияләр өчен, акрын)</string>
+    <string name="mcl_setting_renderer_angle">ANGLE - (соңгы 1.17 һәм югарырак версияләр өчен, уртача)</string>
     <string name="mcl_setting_category_veroption">Версия исемлегендә күрсәтелгән версия төре</string>
     <string name="mcl_setting_veroption_release">Чыгарылыш</string>
     <string name="mcl_setting_veroption_snapshot">Снапшотлар</string>
@@ -75,22 +78,23 @@
     <string name="mcl_setting_veroption_oldbeta">Иске бета</string>
     <string name="mcl_version_clone">Клонларга</string>
     <!-- Global strings -->
-    <string name="global_edit">Үзгәртергә</string>
+    <string name="global_edit">Үзгәртү</string>
     <string name="global_error">Хата</string>
     <string name="global_warinng">Кисәтү</string>
-    <string name="global_load">Йөкләргә</string>
+    <string name="global_load">Йөкләү</string>
     <string name="global_name">Исем</string>
-    <string name="global_remove">Бетерергә</string>
+    <string name="global_remove">Бетерү</string>
     <string name="global_clone">Клонларга</string>
     <string name="global_restart">Яңадан кушу</string>
     <string name="global_save">Сакларга</string>
     <string name="global_unpacking">%s ачылу</string>
     <string name="global_error_field_empty">Бу кыр буш булап алмады</string>
     <string name="global_waiting">Көтегез</string>
+    <string name="global_select">Сайлау</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_call">Чыгу</string>
     <string name="mcn_exit_confirm">Сез мәҗбүри ябырга телисезме?</string>
-    <string name="mcn_check_fail_lwjgl">LWJGL3 утыртмалды!</string>
+    <string name="mcn_check_fail_lwjgl">LWJGL3 утыртылмады!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Төймәсар</string>
@@ -114,7 +118,10 @@
     <string name="control_forceclose">Мәҗбүри ябу</string>
     <string name="control_viewout">Журнал</string>
     <string name="control_adebug">Кертү төзәтүе</string>
+    <string name="control_scaleup">Зурайту</string>
+    <string name="control_scaledown">Кечерәйтү</string>
     <!-- ImportControlActivity Strings -->
+    <string name="import_control_invalid_file">Хаталы яки бозылган файл</string>
     <string name="import_control_done">Импортлау тәмамланды</string>
     <!--
     <string name="control_more3"></string>
@@ -143,13 +150,14 @@
     <string name="main_install_jar_file">.jar-файлны урнату</string>
     <string name="main_options">Көйләүләр</string>
     <string name="main_play">Уйнарга</string>
-    <string name="main_welcome">Рәхим итегез, %s</string>
+    <string name="main_welcome">%s, рәхим итегез</string>
     <string name="main_infodev">Мәгълүмат (Эшкәрт.)</string>
     <string name="main_switchuser">Кулланучыны алыштырырга</string>
     <string name="main_version">Версия:</string>
     <string name="main_nocrash">Сафтан чыгару табылмады</string>
     <string name="main_nolog">Журнал буш</string>
     <string name="main_no_news_feed">Яңалыклар тасмасын алып булмады!</string>
+    <string name="auto_ram_title">Автоматик тиз хәтер билгеләү</string>
     <string name="mcl_setting_check_libraries">Йөкләтүдән соң китапханәләрне тикшерергә</string>
     <string name="dl_library_sha_fail">%s китапханәсе ватылган һәм яңадан йөкләтәчәк</string>
     <string name="dl_library_sha_unknown">%s китапханәсе тикшереп булмады; аның белән барысы да яхшы дип уйларга туры килә</string>
@@ -158,26 +166,28 @@
     <string name="mcl_setting_title_mousespeed">Тычкан сизгерлеге</string>
     <string name="customctrl_passthru">Тычкан күрсәткече</string>
     <string name="customctrl_rounded">Түгәрәкләнгән</string>
-    <string name="mcl_memory_allocation">Компьютер хәтере бүлеп бирү</string>
+    <string name="mcl_memory_allocation">Хәтер билгеләү</string>
     <string name="multirt_runtime_corrupt">Java Runtime зарарланган</string>
     <string name="multirt_runtime_incompatiblearch">Яраксыз архитектура: %s</string>
     <string name="multirt_config_title">Java виртуаль машиналар</string>
     <string name="multirt_config_add">Яңаны өстәргә</string>
     <string name="multirt_config_add_subtitle">Яңа Java VM импортлау</string>
     <string name="multirt_title">Runtime менеджер</string>
-    <string name="multirt_progress_caching">Кешлау...</string>
+    <string name="multirt_progress_caching">Кэшлау...</string>
     <string name="multirt_config_setdefault">Әүвәлге</string>
     <string name="multirt_config_setdefault_already">Гадәттәге</string>
     <string name="compat_11x_playanyway">Барыбер уйнарга</string>
     <string name="pvc_gameDirectory">Уен папкасы</string>
     <string name="pvc_jvmArgs">JVM аргументлары</string>
     <string name="pvc_title">Версиягә-версия көйләүләр</string>
+    <string name="preference_video_title">Видео һәм күрсәткеч</string>
+    <string name="preference_video_description">Ачыклык, масштаблау төре һәм күрсәткеч</string>
     <string name="preference_control_title">Идарә элементлары</string>
     <string name="preference_java_title">Java төзәтмәләре</string>
-    <string name="preference_java_description">Java версияләр, JVM аргументлар һәм Оператив хәтер күләмен</string>
     <string name="preference_misc_title">Башка көйләүләр</string>
     <string name="preference_misc_description">Версияләр исемлеге һәм китапханә тикшерү</string>
     <string name="preference_experimental_title">Эксперименталь нәрсәләр</string>
+    <string name="preference_category_virtual_mouse">Виртуаль тычкан</string>
     <string name="preference_back_title">Артка</string>
     <string name="unnamed">Исемсез</string>
     <string name="profiles_latest_snapshot">Соңгы ярдәмче версия</string>
@@ -187,5 +197,17 @@
     <string name="profiles_profile_version">Версия</string>
     <string name="global_delete">Бетерү</string>
     <string name="pedit_java_runtime">Java Runtime</string>
-    <string name="pedit_renderer">Рендерер</string>
+    <string name="pedit_renderer">Күрсәткеч</string>
+    <string name="arc_capes_title">Cosmetica япмалары</string>
+    <string name="migrated_profile_str">%s версиясе көйләү</string>
+    <string name="notif_channel_name">Гомуми</string>
+    <string name="mcl_setting_veroption_installed">Утыртылган</string>
+    <string name="notification_terminate">Тәмамлау</string>
+    <string name="notification_game_runs">Уен эшләде инде!</string>
+    <string name="folder_dialog_create">Ясау</string>
+    <string name="main_login_done">Керү үтәлде</string>
+    <string name="main_add_account">Аккаунт өстәү</string>
+    <string name="no_saved_accounts">Сакланган аккаунтлар юк</string>
+    <string name="downloading_versions">Версияләр исемлеге йөкләү…</string>
+    <string name="mc_download_failed">Minecraft йөкләнеп булмады! Бу акрын тоташу яки файл урнашуда хаталар аркасында туа ала торган.</string>
 </resources>

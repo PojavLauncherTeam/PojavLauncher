@@ -18,7 +18,6 @@
     <string name="login_title_no_saved_account">Tiada akaun dijumpai!</string>
     <string name="login_dialog_no_saved_account">Kamu tidak mempunyai sebarang akaun yang disimpan.\nGunakan pilihan <b>\"Kekalkan saya terlog masuk\"</b> untuk menyimpan sebuah akaun pada log masuk pertama.</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Leret dari kanan untuk membuka menu ◀\nTekan dan tahan sebuah butang untuk menyesuaikan: edit, mengubah saiz atau padam."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Akaun ini akan dihapus!</string>
     <!-- AlertDialog title -->
@@ -37,7 +36,6 @@
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_news">Berita</string>
     <string name="mcl_tab_console">Konsol development</string>
     <string name="mcl_tab_crash">Log ranap</string>
     <!-- MCLauncherActivity: Account status -->
@@ -49,6 +47,7 @@
     <string name="mcl_launch_downloading">Memuat turun %s</string>
     <string name="mcl_launch_downloading_progress">"Memuat turun %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Bersedia untuk memuat turun sumber</string>
+    <string name="mcl_launch_error_localmode">Minecraft tidak boleh dipasang secara sah apabila mengelog masuk dengan akaun tempatan. Sila tukar ke akaun dalam talian untuk teruskan.</string>
     <string name="mcl_options">Pilihan</string>
     <string name="mcl_option_modinstall">Lancarkan sebuah pemasang mod (Forge, LabyMod, Fabric, dll...)</string>
     <string name="mcl_option_modinstallwitharg">Lancarkan sebuah pemasang mod (dengan argumen custom)</string>
@@ -80,8 +79,9 @@
     <string name="mcl_setting_category_general">Tetapan umum</string>
     <string name="mcl_setting_category_scaling">Tetapan Skala</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
-    <string name="mcl_setting_renderer_vgpu">vgpu (OpenGL ES 3): eksport OpenGL 3.0</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink (Vulkan): eksport OpenGL 4.6</string>
+    <string name="mcl_setting_renderer_vgpu">vgpu - (hingga 1.16.5, pantas)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink - (old_beta b1.+, perlahan)</string>
+    <string name="mcl_setting_renderer_angle">ANGLE - (terbitan 1.17+, sederhana)</string>
     <string name="mcl_setting_category_veroption">Jenis versi akan ada di dalam senarai versi</string>
     <string name="mcl_setting_veroption_release">Rilis</string>
     <string name="mcl_setting_veroption_snapshot">Petikan</string>
@@ -102,6 +102,7 @@
     <string name="global_error_field_empty">Medan ini tidak boleh dibiarkan kosong</string>
     <string name="global_waiting">Tunggu</string>
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">Aplikasi/Permainan keluar dengan kod %d, semak latestlog.txt untuk butiran lebih lanjut.</string>
     <string name="mcn_exit_call">Keluar</string>
     <string name="mcn_exit_confirm">Adakah anda mahu paksa tutup aplikasi?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 tidak terpasang!</string>
@@ -130,6 +131,9 @@
     <string name="import_control_label">Import Kawalan</string>
     <string name="import_control_invalid_file">Fail tidak sah atau rosak</string>
     <string name="import_control_import_button">import kawalan</string>
+    <string name="import_control_verifying_file">Fail sedang disahkan, sila tunggu dan cuba lagi…</string>
+    <string name="import_control_invalid_name">Nama tidak sah atau fail sudah wujud</string>
+    <string name="import_control_done">Pengimportan selesai</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -141,6 +145,7 @@
     <string name="customctrl_size">Saiz</string>
     <string name="customctrl_size_width">Lebar</string>
     <string name="customctrl_size_height">Tinggi</string>
+    <string name="customctrl_mapping">Pemetaan</string>
     <string name="customctrl_orientation">Orientasi</string>
     <string name="customctrl_background_color">Warna Latar Belakang</string>
     <string name="customctrl_dynamicpos">Posisi Dinamik</string>
@@ -180,16 +185,31 @@
     <string name="mcl_memory_allocation_subtitle">Mengawal berapa banyak memori yang diberikan kepada Minecraft</string>
     <string name="multirt_runtime_corrupt">Java Runtime Rosak</string>
     <string name="multirt_runtime_incompatiblearch">Seni bina tidak serasi: %s</string>
+    <string name="multirt_config_setdefault">Tetapkan lalai</string>
+    <string name="multirt_config_setdefault_already">Lalai</string>
+    <string name="multirt_config_removeerror_last">Anda mesti mempunyai sekurang-kurangnya satu Java Runtime dipasang</string>
+    <string name="multirt_nocompartiblert">Tidak menemui sebarang Java Runtime yang serasi. Versi ini memerlukan Java %d atau lebih baru.</string>
+    <string name="multirt_nojava8rt">Tidak menemui Java 8. Untuk menggunakan pilihan ini, anda perlu memasang Java 8.</string>
+    <string name="compat_117_message">Minecraft 21w10a+ memerlukan profil teras OpenGL 3.2. Malangnya, cip grafik anda tidak menyokong OpenGL ES 3.0 atau lebih tinggi, tetapi terdapat beberapa sumber tambahan yang boleh anda pasang untuk menjalankan versi ini. Tekan OK untuk mengesahkan pemasangan, dan tekan Batal untuk membatalkan pelancaran.</string>
     <string name="compat_11x_playanyway">Mainkan saja</string>
     <string name="pvc_gameDirectory">Direktori permainan</string>
     <string name="pvc_jvmArgs">Argumen JVM</string>
     <string name="pvc_title">Tetapan per-versi</string>
     <string name="storage_warning_title">Tetapan Storan</string>
     <string name="storage_warning_text"><![CDATA[Oleh kerana penguatkuasaan penyimpanan skop baru Google yang ditambahkan dalam Android 10 dan yang lebih tinggi, kami diminta untuk memindahkan direktori permainan ke folder peribadi aplikasi. <br/>Folder baru untuk fail Pojav adalah <b>Android/data/%s/files/</b> (juga dapat diakses menggunakan penyedia penyimpanan di penjelajah fail anda).<br/>Sekiranya anda perlu menyalin fail permainan anda, sila salin semuanya dari folder asal di <b>games/PojavLauncher</b> secara manual.]]></string>
+    <string name="control_top_offset">Ofset atas: </string>
+    <string name="control_right_offset">ofset kanan: </string>
+    <string name="control_bottom_offset">ofset bawah: </string>
+    <string name="control_left_offset">ofset kiri: </string>
     <string name="preference_misc_title">Tetapan lain-lain</string>
+    <string name="preference_experimental_title">Benda Uji Kaji</string>
+    <string name="preference_force_english_title">Paksa bahasa menjadi bahasa inggeris</string>
+    <string name="preference_force_english_description">Membenarkan anda melihat teks asal, seperti yang ditentukan oleh pembangun. Memerlukan pemulaan semula</string>
+    <string name="preference_back_title">Kembali ke skrin terakhir</string>
     <string name="gles_hack_none">Jangan mengecilkan tekstur</string>
     <string name="gles_hack_always">Membahagi semua textur dengan 2</string>
     <string name="gles_hack_sometimes">Membahagikan tekstur yang besar dengan /2 atau /4</string>
+    <string name="unnamed">Tidak dinamakan</string>
     <string name="profiles_latest_snapshot">Petikan Terkini</string>
     <string name="profiles_latest_release">Terbitan terkini</string>
     <string name="profiles_editing">Menyunting profil</string>
@@ -201,4 +221,7 @@
     <string name="arc_capes_title">Mantel Cosmetica</string>
     <string name="arc_capes_desc">Mendayakan jubah daripada Cosmetica (sebelum ini Arc). Untuk maklumat lanjut sila layari https://cosmetica.cc. Memerlukan OptiFine.</string>
     <string name="migrated_profile_str">Konfigurasi versi %s</string>
+    <string name="notif_channel_name">Umum</string>
+    <string name="progresslayout_tasks_in_progress">%d tugas sedang dijalankan</string>
+    <string name="notification_terminate">Tamatkan</string>
 </resources>

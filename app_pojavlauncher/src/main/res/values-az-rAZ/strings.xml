@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App name part -->
+    <!-- Action bar part -->
+    <!-- Languages list part -->
+    <!-- Login strings -->
+    <string name="login_microsoft">Microsoft girişi</string>
+    <string name="login_title_no_saved_account">Hesab tapılmadı !</string>
+    <!-- Hint -->
+    <!-- Warnings -->
+    <!-- AlertDialog title -->
+    <!-- Error messages -->
+    <!-- Toast messages -->
+    <!--
+    <string name="toast_3">Exit</string>
+    -->
+    <!-- MCLauncherActivity: Tabs -->
+    <!-- MCLauncherActivity: Account status -->
+    <string name="mcl_account_connected">Əlagədar</string>
+    <!-- MCLauncherActivity: Strings -->
+    <!-- Global strings -->
+    <string name="global_waiting">Gözləyin</string>
+    <!-- MainActivity: strings -->
+    <!-- MainActivity: Control buttons -->
+    <!-- MainActivity: Menu advanced controls -->
+    <!-- ImportControlActivity Strings -->
+    <!--
+    <string name="control_more3"></string>
+    <string name="control_more4"></string>
+-->
+</resources>
