@@ -8,6 +8,8 @@ import android.util.*;
 import android.view.*;
 import android.widget.*;
 
+import androidx.activity.OnBackPressedCallback;
+
 import java.io.*;
 import java.util.*;
 
@@ -155,6 +157,14 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
         } catch (Throwable th) {
             Tools.showError(this, th, true);
         }
+
+
+        getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                MainActivity.dialogForceClose(JavaGUILauncherActivity.this);
+            }
+        });
     }
 
     @Override
@@ -164,6 +174,8 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
         final View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(uiOptions);
     }
+
+
 
     @Override
     public boolean onTouch(View v, MotionEvent e) {
