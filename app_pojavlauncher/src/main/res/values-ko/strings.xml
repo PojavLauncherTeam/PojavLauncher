@@ -37,6 +37,7 @@
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_wiki">위키</string>
     <string name="mcl_tab_console">개발자 콘솔</string>
     <string name="mcl_tab_crash">충돌 로그</string>
     <!-- MCLauncherActivity: Account status -->
@@ -254,6 +255,7 @@
     <string name="preference_force_english_description">개발자가 의도한 기본 문자열을 볼 수 있도록 해 줍니다. 재시작 필요</string>
     <string name="preference_edit_controls_title">사용자 지정 조작 편집</string>
     <string name="preference_edit_controls_summary">원하는대로 조작을 변경하기</string>
+    <string name="preference_category_virtual_mouse">가상 마우스</string>
     <string name="preference_back_title">이전 화면으로</string>
     <string name="gles_hack_title">GL4ES 축소 핵</string>
     <string name="gles_hack_none">텍스쳐 축소하지 않기</string>
@@ -276,6 +278,7 @@ https://cosmetica.cc 를 방문해주세요.
     <string name="migrated_profile_str">%s 버전 설정</string>
     <string name="notif_channel_name">일반</string>
     <string name="lazy_service_default_title">Pojav 포그라운드 서비스</string>
+    <string name="mcl_setting_veroption_installed">설치됨</string>
     <string name="use_global_default">(글로벌 기본값 사용)</string>
     <string name="default_control">기본 조작</string>
     <string name="progresslayout_tasks_in_progress">작업 %d개 진행 중</string>
