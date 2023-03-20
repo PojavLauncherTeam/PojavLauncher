@@ -31,7 +31,7 @@ public class LauncherPreferenceVideoFragment extends LauncherPreferenceFragment 
 
         // #724 bug fix
         if (seek5.getValue() < 25) {
-            seek5.setValue(100);
+            seek5.setValue(200);
         }
 
         // Sustained performance is only available since Nougat
