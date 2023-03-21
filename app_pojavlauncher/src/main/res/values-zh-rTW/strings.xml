@@ -32,11 +32,12 @@
     <!-- Toast messages -->
     <string name="toast_permission_denied">需要儲存寫入權限！</string>
     <string name="toast_optifine_success">安裝成功</string>
-    <string name="toast_uninstalljre_done">Java 運行庫解除安裝成功</string>
+    <string name="toast_uninstalljre_done">Java 執行環境解除安裝成功</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_wiki">維基</string>
     <string name="mcl_tab_console">開發控制台</string>
     <string name="mcl_tab_crash">崩潰日誌</string>
     <!-- MCLauncherActivity: Account status -->
@@ -136,7 +137,7 @@
     <string name="control_scaleup">放大</string>
     <string name="control_scaledown">縮小</string>
     <!-- ImportControlActivity Strings -->
-    <string name="import_control_label">導入控制鍵</string>
+    <string name="import_control_label">匯入控制鍵</string>
     <string name="import_control_invalid_file">無效或損毀的的檔案</string>
     <string name="import_control_import_button">導入控制鍵</string>
     <string name="import_control_verifying_file">正在效驗檔案，請稍候再試...</string>
@@ -200,10 +201,10 @@
     <string name="customctrl_passthru">滑鼠透傳</string>
     <string name="customctrl_swipeable">可滑動</string>
     <string name="customctrl_rounded">圓角</string>
-    <string name="memory_warning_msg">目前可用RAM (%d) 低於分配的RAM (%d)，遊戲可能會崩潰。 如果遊戲崩潰請增加記憶體的分配量。</string>
+    <string name="memory_warning_msg">目前可用記憶體 (%d) 低於分配的記憶體 (%d)，遊戲可能會崩潰。 如果遊戲崩潰請增加記憶體的分配量。</string>
     <string name="mcl_memory_allocation">分配記憶體</string>
     <string name="mcl_memory_allocation_subtitle">分配多少記憶體給Minecraft</string>
-    <string name="multirt_runtime_corrupt">Java運行環境毀損</string>
+    <string name="multirt_runtime_corrupt">Java執行環境毀損</string>
     <string name="multirt_runtime_incompatiblearch">%s 與您的硬體架構不相容</string>
     <string name="multirt_config_title">Java VM</string>
     <string name="multirt_config_add">新建</string>
@@ -213,14 +214,14 @@
     <string name="multirt_progress_caching">正在快取……</string>
     <string name="multirt_config_setdefault">設為預設</string>
     <string name="multirt_config_setdefault_already">預設</string>
-    <string name="multirt_config_removeerror_last">您必須至少安裝一個Java運行庫</string>
-    <string name="multirt_nocompartiblert">無可用Java運行庫。此版本需要Java %d 以上。</string>
+    <string name="multirt_config_removeerror_last">您必須至少安裝一個Java執行庫</string>
+    <string name="multirt_nocompartiblert">沒有可用的Java執行庫。此版本需要Java %d 以上。</string>
     <string name="multirt_nojava8rt">找不到已安裝的Java 8。請安裝Java 8以使用此功能。</string>
     <string name="compat_117_message">Minecraft 21w10a+ 需要 OpenGL 3.2 。 遺憾的是，GL4ES 渲染器目前並不支援，但是您可以安裝一些額外的補釘來運行這些版本。 按 確認鍵 確認安裝，按 取消鍵 中止啟動。</string>
     <string name="compat_11x_playanyway">仍然開始遊戲</string>
     <string name="pvc_gameDirectory">遊戲資料夾</string>
     <string name="pvc_jvmArgs">JVM 參數</string>
-    <string name="pvc_title">Per-version 設定</string>
+    <string name="pvc_title">個別版本設定</string>
     <string name="storage_warning_title">儲存位置已變更</string>
     <string name="storage_warning_text"><![CDATA[由於Google在Android 10所加入的儲存規範，我們把遊戲的目錄移動到app的私有資料夾下了。<br />Pojav的新資料夾位於<b>Android/data/%s/files/</b> (可用檔案瀏覽器存取) <br /> 如果有需要移動先前的遊戲檔案，請手動從<b>/games/PojavLauncher</b>將資料複製到新的位置。]]></string>
     <string name="control_offset_title">控制鍵偏移</string>
@@ -233,7 +234,7 @@
     <string name="preference_mouse_start_title">啟動時開啟虛擬滑鼠</string>
     <string name="preference_video_title">顯示設定</string>
     <string name="preference_video_description">解析度縮放和渲染器</string>
-    <string name="preference_control_title">自定義控制</string>
+    <string name="preference_control_title">自定控制鍵</string>
     <string name="preference_control_description">手勢類型、觸發器和縮放</string>
     <string name="preference_java_title">Java 選項</string>
     <string name="preference_java_description">Java版本、JVM args、記憶體用量和限制器</string>
@@ -245,7 +246,7 @@
     <string name="preference_sustained_performance_description">限制峰值效能以減少過熱的發生</string>
     <string name="preference_force_vsync_description">限制峰值效能以減少過熱的發生</string>
     <string name="preference_force_english_title">強制使用英文</string>
-    <string name="preference_force_english_description">\"Allows you to see original strings, as intended by developers.\" 需要重啟</string>
+    <string name="preference_force_english_description">\"允許您依照開發人員的意圖查看原始字符串。\" 需要重新啟動</string>
     <string name="preference_edit_controls_title">自訂控制鍵</string>
     <string name="preference_edit_controls_summary">依個人習慣調整控制鍵</string>
     <string name="preference_category_virtual_mouse">虛擬滑鼠</string>
@@ -261,31 +262,31 @@
     <string name="profiles_profile_name">名稱</string>
     <string name="profiles_profile_version">版本</string>
     <string name="global_delete">刪除</string>
-    <string name="pedit_java_runtime">Java運行環境</string>
+    <string name="pedit_java_runtime">Java執行環境</string>
     <string name="pedit_renderer">渲染器</string>
     <string name="arc_capes_title">Cosmetica披風</string>
     <string name="arc_capes_desc">透過Cosmetica(前身為Arc)啟用披風。需要Optifine。更多資訊請至https://cosmetica.cc。</string>
     <string name="migrated_profile_str">%s 版本設定</string>
     <string name="notif_channel_name">一般設定</string>
-    <string name="lazy_service_default_title">Pojav前景服務</string>
+    <string name="lazy_service_default_title">Pojav背景服務</string>
     <string name="lazy_service_default_description">下載檔案&amp;耗時較久的活動將由此服務接手</string>
     <string name="mcl_setting_veroption_installed">已安裝</string>
     <string name="use_global_default">(使用全域預設控制鍵)</string>
     <string name="default_control">預設控制鍵</string>
-    <string name="progresslayout_tasks_in_progress">%d 程序執行中</string>
+    <string name="progresslayout_tasks_in_progress">%d 程式執行中</string>
     <string name="notification_terminate">終止</string>
-    <string name="notification_game_runs">遊戲運行中!</string>
+    <string name="notification_game_runs">遊戲執行中！</string>
     <string name="folder_dialog_create">新增</string>
     <string name="folder_dialog_insert_name">請輸入資料夾名稱</string>
-    <string name="main_login_done">登入完畢</string>
+    <string name="main_login_done">登入完成</string>
     <string name="main_add_account">新增帳號</string>
-    <string name="tasks_ongoing">程序執行中，請稍等</string>
+    <string name="tasks_ongoing">程式執行中，請稍後</string>
     <string name="no_saved_accounts">無已儲存帳號</string>
     <string name="downloading_versions">正在下載版本列表...</string>
     <string name="mc_download_failed">Minecraft下載失敗! 可能導致失敗的原因有: 不穩定的網路連線、位置不正確的檔案......等</string>
     <string name="xerr_unknown">未知的Xbox Live API錯誤 %d</string>
     <string name="xerr_no_account">您似乎沒有Xbox Live帳號。請先登入https://minecraft.net/後再試一次。</string>
-    <string name="xerr_adult_verification">您的帳號需要被家長驗證(南韓限定)</string>
+    <string name="xerr_adult_verification">您的帳號需要被家長驗證</string>
     <string name="xerr_child">因為您的Xbox帳號未成年，若要登入，請將該帳號加入一個microsoft家庭</string>
     <string name="minecraft_not_owned">這個Xbox Live帳號似乎沒有[Minecraft:Java Edition]的設定檔。如果您仍有Xbox Game Pass訂閱，請至https://minecraft.net/登入並架設您的設定檔。</string>
     <string name="xerr_not_available">Xbox Live服務在您所在的國家無法使用</string>
