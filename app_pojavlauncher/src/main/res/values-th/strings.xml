@@ -37,7 +37,7 @@
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_wiki">วิกี</string>
+    <string name="mcl_tab_wiki">วิกิ</string>
     <string name="mcl_tab_console">คอนโซลผู้พัฒนา</string>
     <string name="mcl_tab_crash">บันทึกข้อขัดข้อง</string>
     <!-- MCLauncherActivity: Account status -->
@@ -64,25 +64,25 @@
     <string name="mcl_setting_title_hide_sidebar">ซ่อนแถบด้านข้าง</string>
     <string name="mcl_setting_subtitle_hide_sidebar">ผู้ที่คิดถึงอดีตที่ชอบ v1 UI แบบเก่าอาจชอบสิ่งนี้ ให้ประสบการณ์เต็มหน้าจอมากขึ้น</string>
     <string name="mcl_setting_title_ignore_notch">เต็มจอ</string>
-    <string name="mcl_setting_subtitle_ignore_notch">ไม่ต้องสนใจรอยบากและขยายหน้าจอข้างใต้\nให้ประสบการณ์ที่สมจริงยิ่งขึ้น</string>
+    <string name="mcl_setting_subtitle_ignore_notch">ซ่อนรอยบากและขยายหน้าจอข้างใต้\nให้ประสบการณ์ที่สมจริงยิ่งขึ้น</string>
     <string name="mcl_setting_title_resolution_scaler">มาตราส่วนความละเอียด</string>
-    <string name="mcl_setting_subtitle_resolution_scaler">อนุญาตให้คุณลดความละเอียดเกมลง. 100% คือความละเอียดเต็มที่</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">อนุญาตให้คุณลดความละเอียดเกมลง. 100% คือความละเอียดสูงสุด</string>
     <string name="mcl_setting_title_flat_button_style">สไตล์ปุ่มแบน</string>
     <string name="mcl_setting_subtitle_flat_button_style">เปิดใช้งานตัวเลือกนี้เพื่อเปลี่ยนรูปแบบปุ่มควบคุมเป็นแบบแบน</string>
     <string name="mcl_setting_title_buttonscale">ปรับขนาดปุ่มควบคุม</string>
     <string name="mcl_setting_subtitle_buttonscale">เพิ่มขนาดหากปุ่มมีขนาดเล็กเกินไป</string>
-    <string name="mcl_setting_title_mousescale">การปรับมาตราเมาส์</string>
+    <string name="mcl_setting_title_mousescale">การปรับขนาดเมาส์</string>
     <string name="mcl_setting_subtitle_mousescale">เปลี่ยนขนาดของเมาส์เสมือน.</string>
     <string name="mcl_setting_title_javaargs">JVM Launch arguments</string>
     <string name="mcl_setting_subtitle_javaargs">ระวัง อาจทำให้เกมพังได้หากแก้ไขโดยขาดความรู้</string>
     <string name="mcl_setting_category_general">การตั้งค่าทั่วไป</string>
     <string name="mcl_setting_category_scaling">การตั้งค่าการปรับขนาด</string>
     <string name="mcl_setting_category_renderer">การแสดงผล</string>
-    <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (all versions, fast)</string>
-    <string name="mcl_setting_renderer_virgl">virglrenderer - (release 1.7+, ช้า)</string>
-    <string name="mcl_setting_renderer_vgpu">vgpu - (up to 1.16.5, เร็ว)</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink - (old_beta b1.8+, ช้า)</string>
-    <string name="mcl_setting_renderer_angle">ANGLE - (release 1.17+, กลาง)</string>
+    <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (รองรับทุกเวอร์ชั่น, เร็ว)</string>
+    <string name="mcl_setting_renderer_virgl">virglrenderer - (1.7+, ช้า)</string>
+    <string name="mcl_setting_renderer_vgpu">vgpu - (1.16.5, เร็ว)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink - ( b1.8+, ช้า)</string>
+    <string name="mcl_setting_renderer_angle">ANGLE - (1.17+, กลาง)</string>
     <string name="mcl_setting_category_veroption">ประเภทเวอร์ชันจะอยู่ในรายการเวอร์ชัน</string>
     <string name="mcl_setting_veroption_snapshot">ภาพรวม</string>
     <string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
@@ -130,7 +130,7 @@
     <string name="import_control_invalid_file">ไฟล์ไม่ถูกต้องหรือเสียหาย</string>
     <string name="import_control_import_button">นำเข้าควบคุม</string>
     <string name="import_control_verifying_file">กำลังตรวจสอบไฟล์ โปรดรอและลองอีกครั้ง</string>
-    <string name="import_control_invalid_name">ชื่อหรือไฟล์ไม่ถูกต้องมีอยู่แล้ว</string>
+    <string name="import_control_invalid_name">ชื่อหรือไฟล์ไม่ถูกต้องหรือมีอยู่แล้ว</string>
     <string name="import_control_done">นำเข้าสำเร็จ</string>
     <!--
     <string name="control_more3"></string>
@@ -138,11 +138,11 @@
 -->
     <string name="customctrl_edit">การแก้ไข %s</string>
     <string name="customctrl_remove">ลบ %s?</string>
-    <string name="customctrl_toggle">Toggleable</string>
+    <string name="customctrl_toggle">ค้างไว้</string>
     <string name="customctrl_size">ขนาด</string>
     <string name="customctrl_size_width">ความกว้าง</string>
     <string name="customctrl_size_height">ความสูง</string>
-    <string name="customctrl_mapping">Mapping</string>
+    <string name="customctrl_mapping">ปุ่มที่ให้กด</string>
     <string name="customctrl_orientation">ทิคทางการหัน</string>
     <string name="customctrl_background_color">สีพื้นหลัง</string>
     <string name="customctrl_corner_radius">ระยะของมุม</string>
