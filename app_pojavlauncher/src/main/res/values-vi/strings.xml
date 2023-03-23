@@ -37,6 +37,7 @@
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_wiki">Wiki</string>
     <string name="mcl_tab_console">Bảng điều khiển phát triển</string>
     <string name="mcl_tab_crash">Nhật ký sự cố</string>
     <!-- MCLauncherActivity: Account status -->
@@ -201,6 +202,8 @@
     <string name="dl_library_sha_pass">Library %s tốt và có thể sử dụng được</string>
     <string name="mcl_disable_gestures">Tắt cử chỉ</string>
     <string name="mcl_disable_gestures_subtitle">Tắt cử chỉ, ví dụ như giữ để phá khối, và chạm để đặt khối.</string>
+    <string name="mcl_disable_swap_hand">Tắt nhấn đúp để đổi tay</string>
+    <string name="mcl_disable_swap_hand_subtitle">Vô hiệu hóa chạm hai lần vào một vật phẩm trên thanh nóng để trao đổi nó trong tay thứ hai</string>
     <string name="mcl_setting_title_mousespeed">Tốc độ chuột</string>
     <string name="mcl_setting_subtitle_mousespeed">Chỉnh tốc độ của phầm mềm chuột</string>
     <string name="customctrl_passthru">Di chuyển chuột</string>
@@ -237,6 +240,7 @@
     <string name="preference_control_offset_title">Khoảng bù trừ theo cạnh của bộ điều khiển</string>
     <string name="preference_control_offset_description">Đặt khoảng bù trừ tuỳ chỉnh cho mỗi cạnh của màn hình</string>
     <string name="preference_mouse_start_title">Khởi động với chuột ảo bật</string>
+    <string name="preference_mouse_start_description">Chuột ảo xuất hiện khi khởi động khi tùy chọn này được bật</string>
     <string name="preference_video_title">Hình ảnh và trình kết xuất</string>
     <string name="preference_video_description">Độ phân giải, dạng thu phóng, và trình kết xuất</string>
     <string name="preference_control_title">Tuỳ chỉnh bộ điều khiển</string>
@@ -255,7 +259,12 @@
     <string name="preference_force_english_description">Cho phép hiển thị các dòng chữ ban đầu, như theo ý của nhà phát triển. Yêu cầu khởi động lại</string>
     <string name="preference_edit_controls_title">Tùy chỉnh điều khiển</string>
     <string name="preference_edit_controls_summary">Sửa cách điểu khiển theo ý muốn của bạn</string>
+    <string name="preference_category_gyro_controls">điều khiển con quay hồi chuyển</string>
     <string name="preference_category_virtual_mouse">Chuột ảo</string>
+    <string name="preference_gyro_invert_x_axis">Đảo ngược trục X</string>
+    <string name="preference_gyro_invert_y_axis">Đảo ngược trục Y</string>
+    <string name="preference_gyro_invert_x_axis_description">Đảo ngược trục ngang</string>
+    <string name="preference_gyro_invert_y_axis_description">Đảo ngược trục tung</string>
     <string name="preference_back_title">Quay về màn hình trước đó</string>
     <string name="gles_hack_title">Giải pháp thu nhỏ texture của gl4es</string>
     <string name="gles_hack_none">Không thu nhỏ kết cấu</string>
@@ -304,4 +313,8 @@
     <string name="preference_gyro_sample_rate_title">Tốc độ lấy mẫu con quay hồi chuyển</string>
     <string name="preference_gyro_sample_rate_description">Nếu bạn gặp vấn đề hiệu suất với điều khiển bằng con quay hồi chuyển, thử tăng cái này</string>
     <string name="microsoft_login_retry_later">Có quá nhiều yêu cầu, vui lòng thử lại sau.</string>
+    <string name="storage_required">PojavLauncher yêu cầu bộ nhớ ngoài đi kèm. Vui lòng kết nối lại bộ nhớ của bạn và khởi động lại ứng dụng.</string>
+    <string name="mcl_setting_title_buttonallcaps">Chỉ sử dụng chữ in hoa trong nhãn nút</string>
+    <string name="mcl_setting_subtitle_buttonallcaps">Vô hiệu hóa điều này nếu bạn muốn sử dụng chữ thường trong điều khiển của mình</string>
+    <string name="create_profile">Tạo cấu hình mới</string>
 </resources>
