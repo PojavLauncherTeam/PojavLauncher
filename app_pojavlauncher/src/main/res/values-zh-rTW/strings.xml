@@ -70,8 +70,8 @@
     <string name="mcl_setting_subtitle_resolution_scaler">允許降低遊戲畫面解析度。原生解析度為 100%</string>
     <string name="mcl_setting_title_longpresstrigger">長按觸發時長</string>
     <string name="mcl_setting_subtitle_longpresstrigger">修改長按摧毀方塊、丟棄物品的觸發時長。</string>
-    <string name="mcl_setting_title_backtorightmouse">將返回鍵視爲滑鼠右鍵</string>
-    <string name="mcl_setting_subtitle_backtorightmouse">某些設備將外置滑鼠右鍵作爲返回鍵處理。如果您使用外置滑鼠，您應該啓用此功能。</string>
+    <string name="mcl_setting_title_backtorightmouse">將返回鍵預設為滑鼠右鍵</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">某些裝置將外接滑鼠右鍵作預設為返回鍵。如果您使用外接滑鼠，您應該要啟用此功能。</string>
     <string name="mcl_setting_title_flat_button_style">扁平化風格按鍵</string>
     <string name="mcl_setting_subtitle_flat_button_style">啟用此選項可以使按鍵風格扁平化</string>
     <string name="mcl_setting_title_buttonscale">控制鍵縮放</string>
@@ -232,6 +232,7 @@
     <string name="preference_control_offset_title">控制鍵偏移</string>
     <string name="preference_control_offset_description">自訂控制鍵與螢幕兩邊的偏移。</string>
     <string name="preference_mouse_start_title">啟動時開啟虛擬滑鼠</string>
+    <string name="preference_mouse_start_description">啟用此選項後，虛擬滑鼠會在啟動時顯示</string>
     <string name="preference_video_title">顯示設定</string>
     <string name="preference_video_description">解析度縮放和渲染器</string>
     <string name="preference_control_title">自定控制鍵</string>
@@ -244,12 +245,16 @@
     <string name="preference_experimental_description">使用這些選項請三思，後果自負。</string>
     <string name="preference_sustained_performance_title">啟用性能限制模式</string>
     <string name="preference_sustained_performance_description">限制峰值效能以減少過熱的發生</string>
+    <string name="preference_force_vsync_title">強制啟用垂直模式</string>
     <string name="preference_force_vsync_description">限制峰值效能以減少過熱的發生</string>
     <string name="preference_force_english_title">強制使用英文</string>
     <string name="preference_force_english_description">\"允許您依照開發人員的意圖查看原始字符串。\" 需要重新啟動</string>
     <string name="preference_edit_controls_title">自訂控制鍵</string>
     <string name="preference_edit_controls_summary">依個人習慣調整控制鍵</string>
+    <string name="preference_category_gyro_controls">陀螺儀控制</string>
     <string name="preference_category_virtual_mouse">虛擬滑鼠</string>
+    <string name="preference_gyro_invert_x_axis">反轉X軸</string>
+    <string name="preference_gyro_invert_y_axis">反轉Y軸</string>
     <string name="preference_back_title">返回上一個頁面</string>
     <string name="gles_hack_title">gl4es貼圖縮放</string>
     <string name="gles_hack_none">不縮放貼圖</string>
@@ -297,4 +302,5 @@
     <string name="toast_turn_on_gyro">要使用此功能，請先啟用陀螺儀控制</string>
     <string name="preference_gyro_sample_rate_title">陀螺儀採樣率</string>
     <string name="preference_gyro_sample_rate_description">如果您在使用陀螺儀控制時遇到問題，可以嘗試增加這個數值</string>
+    <string name="create_profile">新增設定檔</string>
 </resources>
