@@ -37,6 +37,7 @@
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_wiki">Instrukcja Obsługi</string>
     <string name="mcl_tab_console">Konsola</string>
     <string name="mcl_tab_crash">Rejestr awarii</string>
     <!-- MCLauncherActivity: Account status -->
@@ -107,6 +108,7 @@
     <string name="global_unpacking">Wypakowywanie %s</string>
     <string name="global_error_field_empty">To pole nie może być puste</string>
     <string name="global_waiting">Czekaj</string>
+    <string name="global_select">Wybierz</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Aplikacja/gra zakończyła się błędem o kodzie %d, sprawdź latestlog.txt, aby uzyskać więcej informacji.</string>
     <string name="mcn_exit_call">Wyjdź</string>
@@ -178,6 +180,7 @@
     <string name="customctrl_add_subbutton_message">Dodano przycisk podrzędny n°%d !</string>
     <string name="customctrl_selectdefault">Wybierz domyślny plik json dla sterowania</string>
     <string name="customctrl_export">Eksportuj ustawienia sterowania</string>
+    <string name="main_share_logs">Udostępnij plik dziennika</string>
     <string name="main_install_jar_file">Zainstaluj .jar</string>
     <string name="main_options">Opcje</string>
     <string name="main_play">Graj</string>
@@ -198,6 +201,7 @@
     <string name="dl_library_sha_pass">Biblioteka %s jest dobra i nadaje się do użytku</string>
     <string name="mcl_disable_gestures">Wyłącz gesty</string>
     <string name="mcl_disable_gestures_subtitle">Wyłącza gesty, takie jak \"Przytrzymaj, aby niszczyć blok\" oraz \"Naciśnij, aby postawić blok\".</string>
+    <string name="mcl_disable_swap_hand">Wyłącz podwójne dotknięcie aby zamienić ręce</string>
     <string name="mcl_setting_title_mousespeed">Prędkość myszy</string>
     <string name="mcl_setting_subtitle_mousespeed">Zmienia prędkość wirtualnej myszy</string>
     <string name="customctrl_passthru">Przekaz sygnału myszy</string>
@@ -246,6 +250,7 @@
     <string name="preference_experimental_description">Nie pomożemy Ci, jeśli coś zepsujesz używając tych opcji.</string>
     <string name="preference_sustained_performance_title">Włącz tryb zrównoważonej wydajności</string>
     <string name="preference_sustained_performance_description">Zmniejsz nagrzewanie urządzenia ograniczając górny próg wydajności</string>
+    <string name="preference_force_vsync_title">Wymuś synchronizację vsync</string>
     <string name="preference_force_vsync_description">Zmniejsz nagrzewanie urządzenia ograniczając górny próg wydajności</string>
     <string name="preference_force_english_title">Wymuś język angielski</string>
     <string name="preference_force_english_description">Umożliwia wyświetlanie zdań w oryginalnym języku produkcyjnym. Wymagane ponowne uruchomienie</string>
@@ -288,4 +293,13 @@
     <string name="tasks_ongoing">Zadania są w toku, proszę czekać</string>
     <string name="no_saved_accounts">Brak zapisanych kont</string>
     <string name="downloading_versions">Pobieranie listy wersji…</string>
+    <string name="mc_download_failed">Nie udało się pobrać Minecraft! Może to być spowodowane złym połączeniem z siecią, niepoprawnie umieszczonymi plikami, itp..</string>
+    <string name="xerr_unknown">Nieznany błąd API Xbox Live %d</string>
+    <string name="xerr_adult_verification">Osoba dorosła musi zweryfikować Twoje konto.</string>
+    <string name="xerr_child">Twoje konto jest kontem dziecięcym i musi być dodane to rodziny, aby się zalogować.</string>
+    <string name="xerr_not_available">Usługa Xbox Live nie jest dostępna w twoim kraju</string>
+    <string name="preference_enable_gyro_title">Włącz sterowanie żyroskopem</string>
+    <string name="preference_enable_gyro_description">Włączenie tej opcji pozwoli ci obracać się w grze przez przekręcanie telefonu</string>
+    <string name="preference_gyro_sensitivity_title">Czułość sterowania żyroskopem</string>
+    <string name="preference_gyro_sensitivity_description">Dostosuj czułość sterowania żyroskopem</string>
 </resources>
