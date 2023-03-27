@@ -302,4 +302,8 @@
     <string name="preference_enable_gyro_description">Włączenie tej opcji pozwoli ci obracać się w grze przez przekręcanie telefonu</string>
     <string name="preference_gyro_sensitivity_title">Czułość sterowania żyroskopem</string>
     <string name="preference_gyro_sensitivity_description">Dostosuj czułość sterowania żyroskopem</string>
+    <string name="toast_turn_on_gyro">Włącz sterowanie żyroskopem, aby tego użyć!</string>
+    <string name="microsoft_login_retry_later">Zbyt wiele zapytań. Spróbuj ponownie później.</string>
+    <string name="mcl_setting_title_buttonallcaps">Używaj tylko dużych liter w etykietach przycisków</string>
+    <string name="create_profile">Utwórz nowy profil</string>
 </resources>
