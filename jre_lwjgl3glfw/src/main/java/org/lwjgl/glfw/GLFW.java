@@ -6,6 +6,7 @@ package org.lwjgl.glfw;
 
 import android.util.*;
 
+import java.lang.annotation.Native;
 import java.lang.reflect.*;
 import java.nio.*;
 
@@ -1352,7 +1353,8 @@ public class GLFW
         nglfwGetCursorPosA(window, xpos, ypos);
     }
 
-    public static boolean glfwExtensionSupported(String ext) {
+    @NativeType("int")
+    public static boolean glfwExtensionSupported(@NativeType("char const *") CharSequence ext) {
         //return Arrays.stream(glGetString(GL_EXTENSIONS).split(" ")).anyMatch(ext::equals);
         // Fast path, but will return true if one has the same prefix
         return glGetString(GL_EXTENSIONS).contains(ext);
