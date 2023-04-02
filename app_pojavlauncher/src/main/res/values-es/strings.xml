@@ -251,7 +251,6 @@
     <string name="preference_gyro_invert_x_axis_description">Invertir el eje horizontal</string>
     <string name="preference_gyro_invert_y_axis_description">Invertir el eje vertical</string>
     <string name="preference_back_title">Regresar a la pantalla anterior</string>
-    <string name="gles_hack_title">GL4ES Reducir hack</string>
     <string name="gles_hack_none">No reducir las texturas</string>
     <string name="gles_hack_always">Divida todas las texturas por 2</string>
     <string name="gles_hack_sometimes">Divida grandes texturas por /2 o /4</string>

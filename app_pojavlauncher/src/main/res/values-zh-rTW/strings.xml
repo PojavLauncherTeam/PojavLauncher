@@ -250,7 +250,6 @@
     <string name="preference_edit_controls_summary">依個人習慣調整控制鍵</string>
     <string name="preference_category_virtual_mouse">虛擬滑鼠</string>
     <string name="preference_back_title">返回上一個頁面</string>
-    <string name="gles_hack_title">gl4es貼圖縮放</string>
     <string name="gles_hack_none">不縮放貼圖</string>
     <string name="gles_hack_always">將所有貼圖大小除以 2</string>
     <string name="gles_hack_sometimes">將較大的貼圖大小除以 2 或 4</string>

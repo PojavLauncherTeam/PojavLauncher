@@ -255,7 +255,6 @@
     <string name="preference_gyro_invert_x_axis_description">Baliktarin ang pahalang na aksis</string>
     <string name="preference_gyro_invert_y_axis_description">Baliktarin ang patayong aksis</string>
     <string name="preference_back_title">Bumalik sa huling screen</string>
-    <string name="gles_hack_title">GL4ES Shrink hack</string>
     <string name="gles_hack_none">Wag paliitin ang Textures</string>
     <string name="gles_hack_always">I pag-hati ang lahat na texture</string>
     <string name="gles_hack_sometimes">Hinahati ang malalaking texture sa Dalawa (2) o Apat (4)</string>

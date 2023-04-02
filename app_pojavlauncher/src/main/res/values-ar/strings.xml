@@ -235,7 +235,6 @@
     <string name="preference_sustained_performance_description">الحد من الاختناق الحراري عن طريق الحد من أداء الذروة</string>
     <string name="preference_force_vsync_description">الحد من الاختناق الحراري عن طريق الحد من أداء الذروة</string>
     <string name="preference_back_title">العودة إلى الشاشة الأخيرة</string>
-    <string name="gles_hack_title">GL4ES Shrink hack</string>
     <string name="gles_hack_none">لا تقلص Textures</string>
     <string name="gles_hack_always">تقسم كل textures على 2</string>
     <string name="gles_hack_sometimes">تقسم textures الكبيرة بمقدار /2 أو /4</string>

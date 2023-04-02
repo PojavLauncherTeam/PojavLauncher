@@ -257,7 +257,6 @@
     <string name="preference_edit_controls_summary">Sửa cách điểu khiển theo ý muốn của bạn</string>
     <string name="preference_category_virtual_mouse">Chuột ảo</string>
     <string name="preference_back_title">Quay về màn hình trước đó</string>
-    <string name="gles_hack_title">Giải pháp thu nhỏ texture của gl4es</string>
     <string name="gles_hack_none">Không thu nhỏ kết cấu</string>
     <string name="gles_hack_always">Chia tất cả các kết cấu cho 2</string>
     <string name="gles_hack_sometimes">Chia những kết cấu lớn cho 2 hoặc 4</string>

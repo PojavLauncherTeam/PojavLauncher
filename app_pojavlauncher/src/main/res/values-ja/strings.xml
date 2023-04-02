@@ -243,7 +243,6 @@
     <string name="preference_edit_controls_summary">コントロールスキームを調整する</string>
     <string name="preference_category_virtual_mouse">仮想マウス</string>
     <string name="preference_back_title">最後の画面に戻る</string>
-    <string name="gles_hack_title">GL4ES シュリンク・ハック</string>
     <string name="gles_hack_none">テクスチャを縮小しない</string>
     <string name="gles_hack_always">すべてのテクスチャを2で分割</string>
     <string name="gles_hack_sometimes">大きなテクスチャを/2または/4で分割</string>

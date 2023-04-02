@@ -256,7 +256,6 @@
     <string name="preference_gyro_invert_x_axis_description">Odwróć oś poziomą</string>
     <string name="preference_gyro_invert_y_axis_description">Odwróć oś pionową</string>
     <string name="preference_back_title">Powrót do ostatniego ekranu</string>
-    <string name="gles_hack_title">Poprawka zmniejszająca GL4ES</string>
     <string name="gles_hack_none">Nie zmniejszaj tekstur</string>
     <string name="gles_hack_always">Dzieli wszystkie tekstury przez 2</string>
     <string name="gles_hack_sometimes">Dzieli wszystkie tekstury przez /2 lub /4</string>

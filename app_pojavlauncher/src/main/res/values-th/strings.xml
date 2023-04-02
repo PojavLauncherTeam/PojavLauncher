@@ -244,7 +244,6 @@
     <string name="preference_gyro_invert_x_axis_description">กลับเเกนตรง</string>
     <string name="preference_gyro_invert_y_axis_description">กลับเเกนเเนวนอน</string>
     <string name="preference_back_title">กลับไปหน้าที่เเล้ว</string>
-    <string name="gles_hack_title">แฮกปรับขนาดจิเเอล</string>
     <string name="gles_hack_none">อย่าย่อขนาดพื้นผิว</string>
     <string name="gles_hack_always">หารขนาดโดย 2</string>
     <string name="gles_hack_sometimes">หารขนาดพื้นผิวใหญ่ โดย /2 หรือ /4</string>

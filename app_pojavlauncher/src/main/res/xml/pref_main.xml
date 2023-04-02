@@ -45,13 +45,13 @@
             android:icon="@drawable/ic_setting_misc"
             />
 
-        <!-- Not needed for now
+
         <Preference
             android:key="experimental_screen_setting"
             android:title="@string/preference_experimental_title"
             android:summary="@string/preference_experimental_description"
-            android:fragment="net.kdt.pojavlaunch.prefs.screens.settings.LauncherPreferenceExperimentalFragment"
-            /> -->
+            android:fragment="net.kdt.pojavlaunch.prefs.screens.LauncherPreferenceExperimentalFragment"
+            />
     </PreferenceCategory>
 
     <SwitchPreference

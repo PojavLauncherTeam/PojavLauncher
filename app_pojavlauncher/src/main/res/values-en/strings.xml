@@ -255,7 +255,6 @@
     <string name="preference_edit_controls_summary">Tweak the control scheme to fit your needs</string>
     <string name="preference_category_virtual_mouse">Virtual mouse</string>
     <string name="preference_back_title">Back to the last screen</string>
-    <string name="gles_hack_title">GL4ES Shrink hack</string>
     <string name="gles_hack_none">Don\'t shrink textures</string>
     <string name="gles_hack_always">Divides all textures by 2</string>
     <string name="gles_hack_sometimes">Divides big textures by /2 or /4</string>

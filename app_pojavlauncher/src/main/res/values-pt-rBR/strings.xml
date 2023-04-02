@@ -267,7 +267,6 @@
     <string name="preference_gyro_invert_x_axis_description">Inverter o eixo horizontal</string>
     <string name="preference_gyro_invert_y_axis_description">Inverter o eixo vertical</string>
     <string name="preference_back_title">Voltar para última tela</string>
-    <string name="gles_hack_title">Compressão GL4ES</string>
     <string name="gles_hack_none">Não encolher texturas</string>
     <string name="gles_hack_always">Dividir todas texturas por 2</string>
     <string name="gles_hack_sometimes">Dividir texturas grandes por 2 ou 4</string>

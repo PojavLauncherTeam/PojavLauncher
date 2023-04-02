@@ -40,14 +40,4 @@
         <item>opengles3_desktopgl_angle_vulkan</item>
     </string-array>
 
-    <string-array name="hack_gles_shrink">
-        <item name="0">@string/gles_hack_none</item>
-        <item name="1">@string/gles_hack_always</item>
-        <item name="4">@string/gles_hack_sometimes</item>
-    </string-array>
-    <string-array name="hack_gles_shrink_values">
-        <item>0</item>
-        <item>1</item>
-        <item>4</item>
-    </string-array>
 </resources>

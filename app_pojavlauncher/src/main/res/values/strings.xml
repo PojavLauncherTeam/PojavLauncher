@@ -302,7 +302,6 @@
     <string name="preference_gyro_invert_y_axis_description">Invert the vertical axis</string>
 
     <string name="preference_back_title">Back to the last screen</string>
-    <string name="gles_hack_title">GL4ES Shrink hack</string>
     <string name="gles_hack_none">Don\'t shrink textures</string>
     <string name="gles_hack_always">Divides all textures by 2</string>
     <string name="gles_hack_sometimes">Divides big textures by /2 or /4</string>
@@ -355,4 +354,6 @@
     <string name="mcl_setting_title_buttonallcaps">Use only capital letters in button labels</string>
     <string name="mcl_setting_subtitle_buttonallcaps">Disable this if you want to use lowercase letters in your controls</string>
     <string name="create_profile">Create new profile</string>
+    <string name="preference_shader_dump_title">Enable shader dumping</string>
+    <string name="preference_shader_dump_description">Log converted shaders into the log file</string>
 </resources>

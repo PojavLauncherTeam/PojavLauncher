@@ -56,6 +56,7 @@ public class LauncherPreferences {
     public static boolean PREF_FORCE_VSYNC = false;
 
     public static boolean PREF_BUTTON_ALL_CAPS = true;
+    public static boolean PREF_DUMP_SHADERS = false;
 
 
     public static void loadPreferences(Context ctx) {
@@ -94,6 +95,7 @@ public class LauncherPreferences {
         PREF_GYRO_INVERT_Y = DEFAULT_PREF.getBoolean("gyroInvertY", false);
         PREF_FORCE_VSYNC = DEFAULT_PREF.getBoolean("force_vsync", false);
         PREF_BUTTON_ALL_CAPS = DEFAULT_PREF.getBoolean("buttonAllCaps", true);
+        PREF_DUMP_SHADERS = DEFAULT_PREF.getBoolean("dump_shaders", false);
 
 /*
         if (PREF_CUSTOM_JAVA_ARGS.isEmpty()) {

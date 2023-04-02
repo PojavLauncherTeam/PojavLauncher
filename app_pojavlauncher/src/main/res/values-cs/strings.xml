@@ -266,7 +266,6 @@
     <string name="preference_gyro_invert_x_axis_description">Invertovat vodorovnou osu</string>
     <string name="preference_gyro_invert_y_axis_description">Invertovat svislou osu</string>
     <string name="preference_back_title">Zpět na předchozí obrazovku</string>
-    <string name="gles_hack_title">GL4ES Zmenšovátko</string>
     <string name="gles_hack_none">Nezmenšit textury</string>
     <string name="gles_hack_always">Vydělit všechny textury dvěma</string>
     <string name="gles_hack_sometimes">Vydělit velké textury dvěma či čtyřmi</string>

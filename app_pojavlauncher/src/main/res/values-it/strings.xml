@@ -263,7 +263,6 @@
     <string name="preference_gyro_invert_x_axis_description">Inverti l\'asse orizzontale</string>
     <string name="preference_gyro_invert_y_axis_description">Inverti l\'asse verticale</string>
     <string name="preference_back_title">Ritorna alla schermata precedente</string>
-    <string name="gles_hack_title">GL4ES Shrink hack</string>
     <string name="gles_hack_none">Non rimpicciolire le textures</string>
     <string name="gles_hack_always">Dividi tutte le texture di 2</string>
     <string name="gles_hack_sometimes">Dividi le texture più grandi di /2 o /4</string>

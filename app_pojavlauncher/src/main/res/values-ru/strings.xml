@@ -267,7 +267,6 @@
     <string name="preference_gyro_invert_x_axis_description">Поменять направление поворота по горизонтали</string>
     <string name="preference_gyro_invert_y_axis_description">Поменять направление поворота по вертикали</string>
     <string name="preference_back_title">Вернуться назад</string>
-    <string name="gles_hack_title">Сжатие GL4ES</string>
     <string name="gles_hack_none">Не сжимать текстуры</string>
     <string name="gles_hack_always">Сжимать все текстуры в 2 раза</string>
     <string name="gles_hack_sometimes">Сжимать большие текстуры в 2 или 4 раза</string>

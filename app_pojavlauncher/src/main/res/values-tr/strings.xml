@@ -257,7 +257,6 @@
     <string name="preference_edit_controls_summary">İhtiyaçlarını gidermesi için kontrol şemasını ayarla</string>
     <string name="preference_category_virtual_mouse">Sanal Fare</string>
     <string name="preference_back_title">Son ekrana geri dön</string>
-    <string name="gles_hack_title">GL4ES Küçültme hilesi</string>
     <string name="gles_hack_none">Dokuları sakın küçültme</string>
     <string name="gles_hack_always">Bütün dokuları 2\'ye böler</string>
     <string name="gles_hack_sometimes">Büyük dokuları 2\'ye ya da 4\'e böler</string>

@@ -224,7 +224,6 @@
     <string name="preference_sustained_performance_description">מגביל התחממות טרמית (של המכשיר) ע\"י הפחתת ביצועים</string>
     <string name="preference_force_vsync_description">מגביל התחממות טרמית (של המכשיר) ע\"י הפחתת ביצועים</string>
     <string name="preference_back_title">חזרה אל המסך האחרון</string>
-    <string name="gles_hack_title">כיווץ GL4ES</string>
     <string name="gles_hack_none">אל תכווץ טקסטורות</string>
     <string name="gles_hack_always">חלק את כל הטקסטורות ב2</string>
     <string name="gles_hack_sometimes">חלק טקסטורות גדולות ב-2 או 4</string>

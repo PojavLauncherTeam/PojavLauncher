@@ -255,7 +255,6 @@
     <string name="preference_edit_controls_title">사용자 지정 조작 편집</string>
     <string name="preference_edit_controls_summary">원하는대로 조작을 변경하기</string>
     <string name="preference_back_title">이전 화면으로</string>
-    <string name="gles_hack_title">GL4ES 축소 핵</string>
     <string name="gles_hack_none">텍스쳐 축소하지 않기</string>
     <string name="gles_hack_always">모든 텍스쳐를 반으로 줄이기</string>
     <string name="gles_hack_sometimes">큰 텍스쳐를 반 또는 반의 반으로 줄이기</string>

@@ -266,7 +266,6 @@
     <string name="preference_gyro_invert_x_axis_description">Invertiert die horizontale Achse</string>
     <string name="preference_gyro_invert_y_axis_description">Invertiert die vertikale Achse</string>
     <string name="preference_back_title">Zum übergeordneten Menü gehen</string>
-    <string name="gles_hack_title">GL4ES-Schrumpfhack</string>
     <string name="gles_hack_none">Texturen nicht verkleinern</string>
     <string name="gles_hack_always">Teilt alle Texturen durch 2</string>
     <string name="gles_hack_sometimes">Teilt große Texturen durch /2 oder /4</string>
