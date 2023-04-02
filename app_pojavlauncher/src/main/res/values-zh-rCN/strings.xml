@@ -132,7 +132,7 @@
     <string name="mcn_exit_call">退出</string>
     <string name="mcn_exit_confirm">确定强制关闭？</string>
     <string name="mcn_check_fail_lwjgl">未安装 LWJGL3！</string>
-    <string name="mcn_check_fail_incompatiblearch">%1$s 架构不兼容 Java 运行时 %2$s 。</string>
+    <string name="mcn_check_fail_incompatiblearch">%1$s 架构不兼容 Java 运行时 %2$s。</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">界面</string>
     <string name="control_keyboard">键盘</string>
