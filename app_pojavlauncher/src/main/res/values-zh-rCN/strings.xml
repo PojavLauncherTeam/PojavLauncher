@@ -83,11 +83,11 @@
     <string name="mcl_setting_category_general">常规设置</string>
     <string name="mcl_setting_category_scaling">缩放设置</string>
     <string name="mcl_setting_category_renderer">渲染器</string>
-    <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (全版本可用，速度较快)</string>
-    <string name="mcl_setting_renderer_virgl">virglrenderer - (1.7 及以上版本可用，速度较慢)</string>
+    <string name="mcl_setting_renderer_gles2_4">Holy GL4ES -（全版本可用，速度较快）</string>
+    <string name="mcl_setting_renderer_virgl">virglrenderer -（1.7 及以上版本可用，速度较慢）</string>
     <string name="mcl_setting_renderer_vgpu">vgpu - (1.16.5 及以下版本可用，速度较快)</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink - (beta 版 b1.8 及以上可用，速度较慢)</string>
-    <string name="mcl_setting_renderer_angle">ANGLE - (1.17 及以上版本可用，速度一般)</string>
+    <string name="mcl_setting_renderer_angle">ANGLE -（1.17 及以上版本可用，速度一般）</string>
     <string name="mcl_setting_category_veroption">将在版本列表中显示的版本类型</string>
     <string name="mcl_setting_veroption_release">正式版</string>
     <string name="mcl_setting_veroption_snapshot">快照</string>
@@ -213,11 +213,11 @@
     <string name="mcl_memory_allocation">内存分配</string>
     <string name="mcl_memory_allocation_subtitle">控制给 Minecraft 分配多少内存</string>
     <string name="multirt_runtime_corrupt">Java 运行时损坏</string>
-    <string name="multirt_runtime_incompatiblearch">不兼容的CPU架构： %s</string>
+    <string name="multirt_runtime_incompatiblearch">不兼容的架构：%s</string>
     <string name="multirt_config_title">Java虚拟机</string>
     <string name="multirt_config_add">新建</string>
     <string name="multirt_config_add_subtitle">导入新的 Java VM</string>
-    <string name="multirt_title">Java环境管理器</string>
+    <string name="multirt_title">运行时管理器</string>
     <string name="multirt_subtitle">管理已安装的 Java 虚拟机</string>
     <string name="multirt_progress_caching">正在缓存……</string>
     <string name="multirt_config_setdefault">设为默认</string>
@@ -277,7 +277,7 @@
     <string name="profiles_profile_name">名称</string>
     <string name="profiles_profile_version">版本</string>
     <string name="global_delete">删除</string>
-    <string name="pedit_java_runtime">Java 环境</string>
+    <string name="pedit_java_runtime">Java 运行时</string>
     <string name="pedit_renderer">渲染器</string>
     <string name="arc_capes_title">Cosmetica 披风</string>
     <string name="arc_capes_desc">启用来自 Cosmetica（原 Arc ）的披风。欲了解更多信息，请访问 https://arcapes.com。需要 OptiFine。</string>
