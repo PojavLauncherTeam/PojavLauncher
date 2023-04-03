@@ -243,7 +243,6 @@
     <string name="preference_force_english_title">Priversti Anglų kalbą</string>
     <string name="preference_category_gyro_controls">Gyro kontrolės</string>
     <string name="preference_back_title">Atgal į paskutinį ekraną</string>
-    <string name="gles_hack_title">GL4ES mažinimo modifikacija</string>
     <string name="gles_hack_none">Nemažinti tekstūrų</string>
     <string name="gles_hack_always">Dalinti visas tekstūras per pusę.</string>
     <string name="gles_hack_sometimes">Naudoti antradalį arba ketvirtadalį tekstūrų</string>
