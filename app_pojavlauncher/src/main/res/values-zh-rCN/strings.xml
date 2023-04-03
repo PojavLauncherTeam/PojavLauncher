@@ -266,7 +266,6 @@
     <string name="preference_gyro_invert_x_axis_description">反转水平轴</string>
     <string name="preference_gyro_invert_y_axis_description">反转垂直轴</string>
     <string name="preference_back_title">返回到上一个屏幕</string>
-    <string name="gles_hack_title">GL4ES 缩放设置</string>
     <string name="gles_hack_none">不缩小纹理</string>
     <string name="gles_hack_always">将所有纹理除以 2</string>
     <string name="gles_hack_sometimes">将大纹理除以 2 或 4</string>
@@ -317,4 +316,6 @@
     <string name="mcl_setting_title_buttonallcaps">在按钮标签中仅使用大写字母</string>
     <string name="mcl_setting_subtitle_buttonallcaps">如果您想在控件中使用小写字母，请禁用此功能</string>
     <string name="create_profile">创建新配置</string>
+    <string name="preference_shader_dump_title">启用着色器存储</string>
+    <string name="preference_shader_dump_description">记录转换的着色器到日志文件</string>
 </resources>
