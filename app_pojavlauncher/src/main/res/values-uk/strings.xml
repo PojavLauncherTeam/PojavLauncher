@@ -266,7 +266,6 @@
     <string name="preference_gyro_invert_x_axis_description">Обернути горизонтальну вісь</string>
     <string name="preference_gyro_invert_y_axis_description">Обернути вертикальну вісь</string>
     <string name="preference_back_title">Повернутися назад</string>
-    <string name="gles_hack_title">Скорочення GL4ES</string>
     <string name="gles_hack_none">Не стискати текстури</string>
     <string name="gles_hack_always">Стиснути всі текстури у 2 рази</string>
     <string name="gles_hack_sometimes">Розділяє великі текстури на 2 або 4</string>
