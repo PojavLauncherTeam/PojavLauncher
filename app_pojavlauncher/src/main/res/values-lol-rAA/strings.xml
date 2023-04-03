@@ -225,7 +225,6 @@
     <string name="preference_sustained_performance_description">Limit thermal thrittlin by limitin peak performance</string>
     <string name="preference_force_vsync_description">Limit thermal thrittlin by limitin peak performance</string>
     <string name="preference_back_title">Bak 2 teh last screen</string>
-    <string name="gles_hack_title">GL4ES Shrink heck</string>
     <string name="gles_hack_none">Doan shrink texturez</string>
     <string name="gles_hack_always">Dividez all texturez by 2</string>
     <string name="gles_hack_sometimes">Dividez big texturez by /2 or /4</string>
