@@ -247,7 +247,6 @@
     <string name="preference_edit_controls_summary">طرح کنترل را متناسب با نیازهای خود تغییر دهید</string>
     <string name="preference_category_virtual_mouse">ماوس مجازی</string>
     <string name="preference_back_title">بازگشت به صفحه آخر</string>
-    <string name="gles_hack_title">ترفند کرچک شدن GL4ES</string>
     <string name="gles_hack_none">تکسچر ها را کوچک نکن</string>
     <string name="gles_hack_always">نصف کردن تکسچر ها</string>
     <string name="gles_hack_sometimes">تقسیم تکسچر های بزرگ در 2 یا 4 قسمت</string>
