@@ -228,7 +228,7 @@
     <string name="pvc_jvmArgs">Arguments de la JVM</string>
     <string name="pvc_title">Réglages par version</string>
     <string name="storage_warning_title">Changements liés au stockage</string>
-    <string name="storage_warning_text"><![CDATA[À cause des restrictions imposées par Google sur l\'emplacement de sauvegarde, nous sommes obligés de déplacer le répertoire du jeu dans un répertoire d\'application.<br /> The répertoire est maintenant présent dans <b>Android/data/%s/files/</b> (aussi accessible via l\'explorateur de fichier)<br />Si vous avez besoin de vos anciens fichiers, deplacez les depuis <b>games/PojavLauncher</b> manuellement.]]></string>
+    <string name="storage_warning_text"><![CDATA[À cause des restrictions imposées par Google sur l'emplacement de sauvegarde, nous sommes obligés de déplacer le répertoire du jeu dans un répertoire d'application.<br /> The répertoire est maintenant présent dans <b>Android/data/%s/files/</b> (aussi accessible via l'explorateur de fichier)<br />Si vous avez besoin de vos anciens fichiers, deplacez les depuis <b>games/PojavLauncher</b> manuellement.]]></string>
     <string name="control_offset_title">Marge sur les contrôles</string>
     <string name="control_top_offset">Marge supérieure: </string>
     <string name="control_right_offset">Marge de droite: </string>
@@ -255,7 +255,6 @@
     <string name="preference_edit_controls_title">Modifier les contrôles personnalisés</string>
     <string name="preference_category_virtual_mouse">Souris virtuelle</string>
     <string name="preference_back_title">Retour au dernier écran</string>
-    <string name="gles_hack_title">GL4ES hack réduction des textures</string>
     <string name="gles_hack_none">Ne pas rétrécir les textures</string>
     <string name="gles_hack_always">Divise toutes les textures par 2</string>
     <string name="gles_hack_sometimes">Divise les grosses textures par 2 ou par 4</string>
