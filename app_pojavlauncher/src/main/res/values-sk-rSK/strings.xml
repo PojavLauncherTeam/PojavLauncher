@@ -238,7 +238,6 @@
     <string name="preference_force_english_title">Vynútiť angličtinu</string>
     <string name="preference_force_english_description">Umožňuje vidieť pôvodné názvy nastavení a iné názvy tak, ako boli pôvodne navrhnuté vývojármi. Na nastavenie je nutný reštart aplikácie</string>
     <string name="preference_back_title">Späť na poslednú stránku</string>
-    <string name="gles_hack_title">Hack na zmenšenie všetkých textúr pre renderer GL4ES</string>
     <string name="gles_hack_none">Nezmenšiť textúry</string>
     <string name="gles_hack_always">Vydeliť všetky textúry dvoma</string>
     <string name="gles_hack_sometimes">Vydeliť veľké textúry dvoma alebo štyrmi</string>
