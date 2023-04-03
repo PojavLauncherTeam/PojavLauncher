@@ -263,7 +263,6 @@
     <string name="preference_gyro_invert_x_axis">Balikkan sumbu X</string>
     <string name="preference_gyro_invert_y_axis">Balikkan sumbu Y</string>
     <string name="preference_back_title">Kembali ke layar terakhir</string>
-    <string name="gles_hack_title">GL4ES Shrink hack</string>
     <string name="gles_hack_none">Jangan mengecilkan tekstur</string>
     <string name="gles_hack_always">Membagi semua tekstur dengan 2</string>
     <string name="gles_hack_sometimes">Membagi tekstur besar dengan /2 atau /4</string>
