@@ -233,7 +233,6 @@
     <string name="preference_sustained_performance_description">Reduce limitarea termică prin limitarea performanțelor de vârf</string>
     <string name="preference_force_vsync_description">Reduce limitarea termică prin limitarea performanțelor de vârf</string>
     <string name="preference_back_title">Înapoi la ultimul ecran</string>
-    <string name="gles_hack_title">GL4ES Shrink hack</string>
     <string name="gles_hack_none">Nu se micșorează texturi</string>
     <string name="gles_hack_always">Toate texturile se împart la 2</string>
     <string name="gles_hack_sometimes">Se împart texturile mari la 2 sau la 4</string>
