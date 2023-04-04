@@ -15,6 +15,7 @@ jobs:
     runs-on: ubuntu-20.04
     env:
       GPLAY_KEYSTORE_PASSWORD: ${{ secrets.GPLAY_KEYSTORE_PASSWORD }}
+      HGL4ES_TOKEN: ${{ secrets.READ_HGL4ES_EXTRA }}
     steps:
     - uses: actions/checkout@v2
       with:
@@ -27,7 +28,7 @@ jobs:
 
     - name: Get gl4es latest commit hash
       id: gl4es-sha
-      run: echo "::set-output name=sha::$(echo $(git ls-remote https://artdeell:${{secrets.READ_HGL4ES_EXTRA}}@github.com/PojavLauncherTeam/gl4es_extra_extra refs/heads/progressive_upstream_v2 | grep -io '^\S*'))"
+      run: echo "::set-output name=sha::$(echo $(git ls-remote https://artdeell:${HGL4ES_TOKEN}@github.com/PojavLauncherTeam/gl4es_extra_extra refs/heads/progressive_upstream_v2 | grep -io '^\S*'))"
       shell: bash
       
     - name: Cache gl4es
