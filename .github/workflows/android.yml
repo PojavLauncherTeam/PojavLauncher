@@ -15,7 +15,6 @@ jobs:
     runs-on: ubuntu-20.04
     env:
       GPLAY_KEYSTORE_PASSWORD: ${{ secrets.GPLAY_KEYSTORE_PASSWORD }}
-      HGL4ES_TOKEN: ${{ secrets.READ_HGL4ES_EXTRA }}
     steps:
     - uses: actions/checkout@v2
       with:
@@ -25,46 +24,6 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
-
-    - name: Get gl4es latest commit hash
-      id: gl4es-sha
-      run: |
-       echo "sha=$(git ls-remote https://artdeell:${HGL4ES_TOKEN}@github.com/PojavLauncherTeam/gl4es_extra_extra refs/heads/progressive_upstream_v2 | grep -io '^\S*')" >> $GITHUB_OUTPUT
-      shell: bash
-      
-    - name: Cache gl4es
-      uses: actions/cache@v2
-      id: gl4es-cache
-      with:
-        path: gl4es/libs
-        key: gl4es-holy-android-shared-${{ steps.gl4es-sha.outputs.sha }}
-
-    - name: Get gl4es
-      if: steps.gl4es-cache.outputs.cache-hit != 'true'
-      uses: actions/checkout@v3
-      with:
-        token: '${{secrets.READ_HGL4ES_EXTRA}}'
-        repository: 'PojavLauncherTeam/gl4es_extra_extra'
-        ref: 'progressive_upstream_v2'
-        path: 'gl4es'
-
-    - name: Build gl4es
-      if: steps.gl4es-cache.outputs.cache-hit != 'true'
-      continue-on-error: true
-      run: |
-        cd gl4es
-        git config --global user.email "github-actions@users.noreply.github.com"
-        git config --global user.name "github-actions"
-        $ANDROID_NDK_HOME/ndk-build NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=./Android.mk
-        cp -R libs/* ../app_pojavlauncher/src/main/jniLibs/
-    
-    - name: Push gl4es
-      if: github.event != 'pull_request' && steps.gl4es-cache.outputs.cache-hit != 'true'
-      continue-on-error: true
-      run: |
-        git add .
-        git commit -am "CI: Update gl4es"
-        git push
     
     - name: Get JRE8
       uses: dawidd6/action-download-artifact@v2
