@@ -27,7 +27,7 @@ jobs:
 
     - name: Get gl4es latest commit hash
       id: gl4es-sha
-      run: echo "::set-output name=sha::$(echo $(git ls-remote https://github.com/PojavLauncherTeam/gl4es_extra_extra refs/heads/progressive_upstream_v2 | grep -io '^\S*'))"
+      run: echo "::set-output name=sha::$(echo $(git ls-remote https://artdeell:${{secrets.READ_HGL4ES_EXTRA}}@github.com/PojavLauncherTeam/gl4es_extra_extra refs/heads/progressive_upstream_v2 | grep -io '^\S*'))"
       shell: bash
       
     - name: Cache gl4es
@@ -41,6 +41,7 @@ jobs:
       if: steps.gl4es-cache.outputs.cache-hit != 'true'
       uses: actions/checkout@v2
       with:
+        token: '${{secrets.READ_HGL4ES_EXTRA}}'
         repository: 'PojavLauncherTeam/gl4es_extra_extra'
         path: 'gl4es'
 
