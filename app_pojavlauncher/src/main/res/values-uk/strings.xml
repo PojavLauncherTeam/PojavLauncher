@@ -316,4 +316,6 @@
     <string name="mcl_setting_title_buttonallcaps">Використовувати лише великі букви на кнопках</string>
     <string name="mcl_setting_subtitle_buttonallcaps">Вимкніть це, якщо ви хочете використовувати маленькі букви в керуванні</string>
     <string name="create_profile">Створити профіль</string>
+    <string name="preference_shader_dump_title">Увімкнути відкидання шейдерів</string>
+    <string name="preference_shader_dump_description">Журнал конвертував шейдери в файл записів</string>
 </resources>
