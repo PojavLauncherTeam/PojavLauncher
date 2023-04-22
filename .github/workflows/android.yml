@@ -64,7 +64,8 @@ jobs:
         ./gradlew :app_pojavlauncher:bundleGplay
         mv app_pojavlauncher/build/outputs/bundle/gplay/app_pojavlauncher-gplay.aab out/app-gplay.aab
     
-    - name: Build Debug .apk
+    - name: Build Debug .a
+pk
       run: |
         # Build the launcher
         ./gradlew :app_pojavlauncher:assembleDebug
