@@ -255,7 +255,7 @@
     <string name="preference_sustained_performance_description">Обмежте терморегуляцію, обмеживши пікову продуктивність</string>
     <string name="preference_force_vsync_title">Примусова вертикальна синхронізація</string>
     <string name="preference_force_vsync_description">Обмежте терморегуляцію, обмеживши пікову продуктивність</string>
-    <string name="preference_force_english_title">Примусово перевести мову на англійську</string>
+    <string name="preference_force_english_title">Примусова англійська</string>
     <string name="preference_force_english_description">Дозволяє бачити оригінальні рядки, як це було задумано розробниками. Вимагає перезавантаження</string>
     <string name="preference_edit_controls_title">Редагувати елементи керування</string>
     <string name="preference_edit_controls_summary">Налаштуйте схему керування на ваше вподобання</string>
