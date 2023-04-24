@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
+    <string name="app_name">PojavLauncher (Minecraft: Java Edition Android üçün)</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_online_username_hint">E-poçt və ya istifadəçi adı</string>
+    <string name="login_online_password_hint">Şifrə</string>
+    <string name="login_online_check_keeplogin">Məni xəttdə saxla</string>
+    <string name="login_online_login_label">Daxil ol</string>
+    <string name="login_error_invalid_username">Etibarsız istifadəçi adı. İstifadəçi adı 3-16 simvol diapazonunda olmalıdır, yalnız A-Z, a-z, 0-9 və alt xəttdən ibarət olmalıdır.</string>
+    <string name="login_error_exist_username">Bu istifadəçi adı artıq var</string>
     <string name="login_microsoft">Microsoft girişi</string>
+    <string name="login_select_account">Hesabı seçin</string>
     <string name="login_title_no_saved_account">Hesab tapılmadı !</string>
     <!-- Hint -->
     <!-- Warnings -->
+    <string name="warning_remove_account">Bu hesab silinəcək!</string>
     <!-- AlertDialog title -->
     <!-- Error messages -->
     <!-- Toast messages -->
