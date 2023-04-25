@@ -324,7 +324,6 @@ public class JREUtils {
         initJavaRuntime();
         setupExitTrap(activity.getApplication());
         chdir(gameDirectory == null ? Tools.DIR_GAME_NEW : gameDirectory);
-        FFmpegPlugin.selfTest();
         userArgs.add(0,"java"); //argv[0] is the program name according to C standard.
 
         final int exitCode = VMLauncher.launchJVM(userArgs.toArray(new String[0]));
