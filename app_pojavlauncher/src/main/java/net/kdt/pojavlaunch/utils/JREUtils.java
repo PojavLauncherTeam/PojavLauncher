@@ -20,6 +20,7 @@ import java.util.*;
 import net.kdt.pojavlaunch.*;
 import net.kdt.pojavlaunch.extra.ExtraConstants;
 import net.kdt.pojavlaunch.extra.ExtraCore;
+import net.kdt.pojavlaunch.plugins.FFmpegPlugin;
 import net.kdt.pojavlaunch.prefs.*;
 import org.lwjgl.glfw.*;
 
@@ -174,6 +175,9 @@ public class JREUtils {
 
         String libName = is64BitsDevice() ? "lib64" : "lib";
         StringBuilder ldLibraryPath = new StringBuilder();
+        if(FFmpegPlugin.isAvailable) {
+            ldLibraryPath.append(FFmpegPlugin.libraryPath+":");
+        }
         ldLibraryPath.append(
                 Tools.DIR_HOME_JRE + "/" +  Tools.DIRNAME_HOME_JRE + "/jli:" +
                         Tools.DIR_HOME_JRE + "/" + Tools.DIRNAME_HOME_JRE + ":"
@@ -223,6 +227,9 @@ public class JREUtils {
 
         envMap.put("LD_LIBRARY_PATH", LD_LIBRARY_PATH);
         envMap.put("PATH", Tools.DIR_HOME_JRE + "/bin:" + Os.getenv("PATH"));
+        if(FFmpegPlugin.isAvailable) {
+            envMap.put("PATH", FFmpegPlugin.libraryPath+":"+envMap.get("PATH"));
+        }
 
         envMap.put("REGAL_GL_VENDOR", "Android");
         envMap.put("REGAL_GL_RENDERER", "Regal");

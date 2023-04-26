@@ -120,5 +120,7 @@
             android:name=".services.GameService"
             android:process=":game" />
     </application>
-
+    <queries>
+        <package android:name="net.kdt.pojavlaunch.ffmpeg"/>
+    </queries>
 </manifest>
