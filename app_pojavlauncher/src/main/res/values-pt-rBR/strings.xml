@@ -308,4 +308,5 @@
     <string name="preference_enable_gyro_title">Habilitar controles do gyrocópio</string>
     <string name="preference_enable_gyro_description">Habilitar isto permitirá que você visualize o jogo girando o seu telefone</string>
     <string name="preference_gyro_sensitivity_title">Sensibilidade de controles do Giroscópio</string>
+    <string name="preference_gyro_sensitivity_description">Ajustar a sensibilidade dos controles do giroscópio</string>
 </resources>
