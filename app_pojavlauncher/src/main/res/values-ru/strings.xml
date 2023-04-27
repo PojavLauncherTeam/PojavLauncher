@@ -180,7 +180,7 @@
     <string name="customctrl_addsubbutton">Добавить под-кнопку</string>
     <string name="customctrl_add_subbutton_message">Подкнопка №%d добавлена!</string>
     <string name="customctrl_selectdefault">Выбрать управление по умолчанию</string>
-    <string name="customctrl_export">Экспортировать управление</string>
+    <string name="customctrl_export">Поделиться раскладкой</string>
     <string name="main_share_logs">Поделится файлом журнала</string>
     <string name="main_install_jar_file">Установить .jar</string>
     <string name="main_options">Опции</string>
