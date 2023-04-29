@@ -967,4 +967,13 @@ public final class Tools {
             }
         });
     }
+
+    public static String extractUntilCharacter(String input, String whatFor, char terminator) {
+        int whatForStart = input.indexOf(whatFor);
+        if(whatForStart == -1) return null;
+        whatForStart += whatFor.length();
+        int terminatorIndex = input.indexOf(terminator, whatForStart);
+        if(terminatorIndex == -1) return null;
+        return input.substring(whatForStart, terminatorIndex);
+    }
 }

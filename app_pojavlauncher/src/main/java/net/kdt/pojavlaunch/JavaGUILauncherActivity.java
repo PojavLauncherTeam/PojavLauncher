@@ -11,7 +11,10 @@ import android.widget.*;
 import androidx.activity.OnBackPressedCallback;
 
 import java.io.*;
+import java.nio.ByteBuffer;
 import java.util.*;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
 import net.kdt.pojavlaunch.customcontrols.keyboard.AwtCharSender;
 import net.kdt.pojavlaunch.customcontrols.keyboard.TouchCharInput;
@@ -123,12 +126,19 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
         });
 
         try {
-            MultiRTUtils.setRuntimeNamed(LauncherPreferences.PREF_DEFAULT_RUNTIME);
 
             placeMouseAt(CallbackBridge.physicalWidth / 2, CallbackBridge.physicalHeight / 2);
             
             final File modFile = (File) getIntent().getExtras().getSerializable("modFile");
             final String javaArgs = getIntent().getExtras().getString("javaArgs");
+
+            int javaVersion = getJavaVersion(modFile);
+            String jreName = javaVersion == -1 ? null : MultiRTUtils.getNearestJreName(javaVersion);
+            if(jreName != null) {
+                MultiRTUtils.setRuntimeNamed(jreName);
+            }else{
+                MultiRTUtils.setRuntimeNamed(LauncherPreferences.PREF_DEFAULT_RUNTIME);
+            }
 
             mSkipDetectMod = getIntent().getExtras().getBoolean("skipDetectMod", false);
             if (mSkipDetectMod) {
@@ -308,5 +318,35 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
 
     public void toggleKeyboard(View view) {
         mTouchCharInput.switchKeyboardState();
+    }
+    public int getJavaVersion(File modFile) {
+        try (ZipFile zipFile = new ZipFile(modFile)){
+            ZipEntry manifest = zipFile.getEntry("META-INF/MANIFEST.MF");
+            if(manifest == null) return -1;
+            String manifestString = Tools.read(zipFile.getInputStream(manifest));
+            String mainClass = Tools.extractUntilCharacter(manifestString, "Main-Class:", '\n');
+            if(mainClass == null) return -1;
+            mainClass = mainClass.trim().replace('.', '/') + ".class";
+            ZipEntry mainClassFile = zipFile.getEntry(mainClass);
+            if(mainClassFile == null) return -1;
+            InputStream classStream = zipFile.getInputStream(mainClassFile);
+            byte[] bytesWeNeed = new byte[8];
+            int readCount = classStream.read(bytesWeNeed);
+            if(readCount < 8) return -1;
+            classStream.close();
+            ByteBuffer byteBuffer = ByteBuffer.wrap(bytesWeNeed);
+            if(byteBuffer.getInt() != 0xCAFEBABE) return -1;
+            short minorVersion = byteBuffer.getShort();
+            short majorVersion = byteBuffer.getShort();
+            Log.i("JavaGUILauncher", majorVersion+","+minorVersion);
+            return classVersionToJavaVersion(majorVersion);
+        }catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+    public static int classVersionToJavaVersion(int majorVersion) {
+        if(majorVersion < 46) return 2; // there isn't even an arm64 port of jre 1.1 (or anything before 1.8 in fact)
+        return majorVersion - 44;
     }
 }
