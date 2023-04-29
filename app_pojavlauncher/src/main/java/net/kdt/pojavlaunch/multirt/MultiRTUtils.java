@@ -167,12 +167,9 @@ public class MultiRTUtils {
         }
         try {
             String content = Tools.read(release.getAbsolutePath());
-            int javaVersionIndex = content.indexOf(JAVA_VERSION_STR);
-            int osArchIndex = content.indexOf(OS_ARCH_STR);
-            if(javaVersionIndex != -1 && osArchIndex != -1) {
-                javaVersionIndex += JAVA_VERSION_STR.length();
-                osArchIndex += OS_ARCH_STR.length();
-                String javaVersion = content.substring(javaVersionIndex,content.indexOf('"', javaVersionIndex));
+            String javaVersion = Tools.extractUntilCharacter(content, JAVA_VERSION_STR, '"');
+            String osArch = Tools.extractUntilCharacter(content, OS_ARCH_STR, '"');
+            if(javaVersion != null && osArch != null) {
                 String[] javaVersionSplit = javaVersion.split("\\.");
                 int javaVersionInt;
                 if (javaVersionSplit[0].equals("1")) {
@@ -181,7 +178,7 @@ public class MultiRTUtils {
                     javaVersionInt = Integer.parseInt(javaVersionSplit[0]);
                 }
                 Runtime runtime = new Runtime(name);
-                runtime.arch = content.substring(osArchIndex,content.indexOf('"', osArchIndex));
+                runtime.arch = osArch;
                 runtime.javaVersion = javaVersionInt;
                 runtime.versionString = javaVersion;
                 returnRuntime = runtime;
