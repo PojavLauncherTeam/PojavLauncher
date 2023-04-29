@@ -316,4 +316,6 @@
     <string name="mcl_setting_title_buttonallcaps">Chỉ sử dụng chữ in hoa trong nhãn nút</string>
     <string name="mcl_setting_subtitle_buttonallcaps">Vô hiệu hóa điều này nếu bạn muốn sử dụng chữ thường trong điều khiển của mình</string>
     <string name="create_profile">Tạo cấu hình mới</string>
+    <string name="preference_shader_dump_title">Kích hoạt đổ bóng</string>
+    <string name="preference_shader_dump_description">Ghi các shader đã chuyển đổi vào tệp nhật ký</string>
 </resources>
