@@ -323,17 +323,21 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
         try (ZipFile zipFile = new ZipFile(modFile)){
             ZipEntry manifest = zipFile.getEntry("META-INF/MANIFEST.MF");
             if(manifest == null) return -1;
+
             String manifestString = Tools.read(zipFile.getInputStream(manifest));
             String mainClass = Tools.extractUntilCharacter(manifestString, "Main-Class:", '\n');
             if(mainClass == null) return -1;
+
             mainClass = mainClass.trim().replace('.', '/') + ".class";
             ZipEntry mainClassFile = zipFile.getEntry(mainClass);
             if(mainClassFile == null) return -1;
+
             InputStream classStream = zipFile.getInputStream(mainClassFile);
             byte[] bytesWeNeed = new byte[8];
             int readCount = classStream.read(bytesWeNeed);
-            if(readCount < 8) return -1;
             classStream.close();
+            if(readCount < 8) return -1;
+
             ByteBuffer byteBuffer = ByteBuffer.wrap(bytesWeNeed);
             if(byteBuffer.getInt() != 0xCAFEBABE) return -1;
             short minorVersion = byteBuffer.getShort();
