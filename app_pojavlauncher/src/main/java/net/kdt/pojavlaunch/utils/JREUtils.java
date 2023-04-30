@@ -20,6 +20,7 @@ import java.util.*;
 import net.kdt.pojavlaunch.*;
 import net.kdt.pojavlaunch.extra.ExtraConstants;
 import net.kdt.pojavlaunch.extra.ExtraCore;
+import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.plugins.FFmpegPlugin;
 import net.kdt.pojavlaunch.prefs.*;
 import org.lwjgl.glfw.*;
@@ -33,7 +34,6 @@ public class JREUtils {
     private JREUtils() {}
 
     public static String LD_LIBRARY_PATH;
-    public static Map<String, String> jreReleaseList;
     public static String jvmLibraryPath;
 
     public static String findInLdLibPath(String libName) {
@@ -92,27 +92,6 @@ public class JREUtils {
         dlopen(NATIVE_LIB_DIR + "/libopenal.so");
     }
 
-    public static Map<String, String> readJREReleaseProperties() throws IOException {
-        return readJREReleaseProperties(Tools.DIR_HOME_JRE);
-    }
-
-    public static Map<String, String> readJREReleaseProperties(String name) throws IOException {
-        Map<String, String> jreReleaseMap = new ArrayMap<>();
-        if (!name.contains("/")) {
-            name = Tools.MULTIRT_HOME + "/" + name;
-        }
-        BufferedReader jreReleaseReader = new BufferedReader(new FileReader(name + "/release"));
-        String currLine;
-        while ((currLine = jreReleaseReader.readLine()) != null) {
-            if (!currLine.isEmpty() || currLine.contains("=")) {
-                String[] keyValue = currLine.split("=");
-                jreReleaseMap.put(keyValue[0], keyValue[1].replace("\"", ""));
-            }
-        }
-        jreReleaseReader.close();
-        return jreReleaseMap;
-    }
-
     public static void redirectAndPrintJRELog() {
 
         Log.v("jrelog","Log starts here");
@@ -148,7 +127,6 @@ public class JREUtils {
                         } else {
                             Logger.getInstance().appendToLog("ERROR: Unable to get more log.");
                         }
-                        return;
                     }
                 } catch (Throwable e) {
                     Log.e("jrelog-logcat", "Exception on logging thread", e);
@@ -160,8 +138,8 @@ public class JREUtils {
 
     }
 
-    public static void relocateLibPath() throws IOException {
-        String JRE_ARCHITECTURE = readJREReleaseProperties().get("OS_ARCH");
+    public static void relocateLibPath() {
+        String JRE_ARCHITECTURE = MultiRTUtils.getSelectedRuntime().arch;
         if (Architecture.archAsInt(JRE_ARCHITECTURE) == ARCH_X86){
             JRE_ARCHITECTURE = "i386/i486/i586";
         }
@@ -176,18 +154,16 @@ public class JREUtils {
         String libName = is64BitsDevice() ? "lib64" : "lib";
         StringBuilder ldLibraryPath = new StringBuilder();
         if(FFmpegPlugin.isAvailable) {
-            ldLibraryPath.append(FFmpegPlugin.libraryPath+":");
+            ldLibraryPath.append(FFmpegPlugin.libraryPath).append(":");
         }
-        ldLibraryPath.append(
-                Tools.DIR_HOME_JRE + "/" +  Tools.DIRNAME_HOME_JRE + "/jli:" +
-                        Tools.DIR_HOME_JRE + "/" + Tools.DIRNAME_HOME_JRE + ":"
-        );
-        ldLibraryPath.append(
-                "/system/" + libName + ":" +
-                        "/vendor/" + libName + ":" +
-                        "/vendor/" + libName + "/hw:" +
-                        NATIVE_LIB_DIR
-        );
+        ldLibraryPath.append(Tools.DIR_HOME_JRE)
+                .append("/").append(Tools.DIRNAME_HOME_JRE)
+                .append("/jli:").append(Tools.DIR_HOME_JRE).append("/").append(Tools.DIRNAME_HOME_JRE)
+                .append(":");
+        ldLibraryPath.append("/system/").append(libName).append(":")
+                .append("/vendor/").append(libName).append(":")
+                .append("/vendor/").append(libName).append("/hw:")
+                .append(NATIVE_LIB_DIR);
         LD_LIBRARY_PATH = ldLibraryPath.toString();
     }
 
@@ -288,7 +264,7 @@ public class JREUtils {
         // return ldLibraryPath;
     }
 
-    public static int launchJavaVM(final Activity activity, String gameDirectory, final List<String> JVMArgs) throws Throwable {
+    public static int launchJavaVM(final Activity activity, String gameDirectory, final List<String> JVMArgs, final String userArgsString) throws Throwable {
         JREUtils.relocateLibPath();
         // For debugging only!
 /*
@@ -302,7 +278,7 @@ public class JREUtils {
         setJavaEnvironment(activity);
 
         final String graphicsLib = loadGraphicsLibrary();
-        List<String> userArgs = getJavaArgs(activity);
+        List<String> userArgs = getJavaArgs(activity, userArgsString);
 
         //Remove arguments that can interfere with the good working of the launcher
         purgeArg(userArgs,"-Xms");
@@ -346,8 +322,8 @@ public class JREUtils {
      * @param ctx The application context
      * @return A list filled with args.
      */
-    public static List<String> getJavaArgs(Context ctx) {
-        List<String> userArguments = parseJavaArguments(LauncherPreferences.PREF_CUSTOM_JAVA_ARGS);
+    public static List<String> getJavaArgs(Context ctx, String userArgumentsString) {
+        List<String> userArguments = parseJavaArguments(userArgumentsString);
         String resolvFile;
         resolvFile = new File(Tools.DIR_DATA,"resolv.conf").getAbsolutePath();
 

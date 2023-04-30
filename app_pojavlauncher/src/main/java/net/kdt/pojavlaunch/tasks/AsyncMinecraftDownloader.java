@@ -70,7 +70,7 @@ public class AsyncMinecraftDownloader {
                 downloadVersionJson(versionName, verJsonDir, verInfo);
             }
             JMinecraftVersionList.Version originalVersion = Tools.getVersionInfo(versionName, true);
-            if(originalVersion.inheritsFrom != null && !originalVersion.inheritsFrom.isEmpty()) {
+            if(Tools.isValidString(originalVersion.inheritsFrom)) {
                 Log.i("Downloader", "probe: inheritsFrom="+originalVersion.inheritsFrom);
                 String version = originalVersion.inheritsFrom;
                 String downName = Tools.DIR_HOME_VERSION+"/"+version+"/"+version+".json";

@@ -1,5 +1,6 @@
 package net.kdt.pojavlaunch.services;
 
+import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
@@ -15,8 +16,6 @@ import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
-
-import com.kdt.mcgui.ProgressLayout;
 
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
@@ -54,6 +53,7 @@ public class ProgressService extends Service implements TaskCountListener {
                 .setNotificationSilent();
     }
 
+    @SuppressLint("StringFormatInvalid")
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         if(intent != null) {

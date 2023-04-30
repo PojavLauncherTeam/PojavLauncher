@@ -38,7 +38,7 @@ import java.util.List;
  * "A document provider and ACTION_GET_CONTENT should be considered mutually exclusive. If you
  * support both of them simultaneously, your app will appear twice in the system picker UI,
  * offering two different ways of accessing your stored data. This would be confusing for users."
- * - http://developer.android.com/guide/topics/providers/document-provider.html#43
+ * - <a href="http://developer.android.com/guide/topics/providers/document-provider.html#43">...</a>
  */
 public class FolderProvider extends DocumentsProvider {
 
@@ -99,7 +99,9 @@ public class FolderProvider extends DocumentsProvider {
     public Cursor queryChildDocuments(String parentDocumentId, String[] projection, String sortOrder) throws FileNotFoundException {
         final MatrixCursor result = new MatrixCursor(projection != null ? projection : DEFAULT_DOCUMENT_PROJECTION);
         final File parent = getFileForDocId(parentDocumentId);
-        for (File file : parent.listFiles()) {
+        final File[] children = parent.listFiles();
+        if(children == null) throw new FileNotFoundException("Unable to list files in "+parent.getAbsolutePath());
+        for (File file : children) {
             includeFile(result, null, file);
         }
         return result;
@@ -150,7 +152,9 @@ public class FolderProvider extends DocumentsProvider {
     @Override
     public String renameDocument(String documentId, String displayName) throws FileNotFoundException {
         File sourceFile = getFileForDocId(documentId);
-        File targetFile = new File(getDocIdForFile(sourceFile.getParentFile()) + "/" + displayName);
+        File sourceParent = sourceFile.getParentFile();
+        if(sourceParent == null) throw new FileNotFoundException("Cannot rename root");
+        File targetFile = new File(getDocIdForFile(sourceParent) + "/" + displayName);
         if(!sourceFile.renameTo(targetFile)){
             throw new FileNotFoundException("Couldn't rename the document with id" + documentId);
         }
@@ -220,7 +224,8 @@ public class FolderProvider extends DocumentsProvider {
             }
             if (isInsideHome) {
                 if (file.isDirectory()) {
-                    Collections.addAll(pending, file.listFiles());
+                    File[] listing = file.listFiles();
+                    if(listing != null) Collections.addAll(pending, listing);
                 } else {
                     if (file.getName().toLowerCase().contains(query)) {
                         includeFile(result, null, file);
@@ -292,7 +297,10 @@ public class FolderProvider extends DocumentsProvider {
         } else if (file.canWrite()) {
             flags |= Document.FLAG_SUPPORTS_WRITE;
         }
-        if (file.getParentFile().canWrite()) flags |= Document.FLAG_SUPPORTS_DELETE;
+        File parent = file.getParentFile();
+        if(parent != null) { // Only fails in one case: when the parent is /, which you can't delete.
+            if(parent.canWrite()) flags |= Document.FLAG_SUPPORTS_DELETE;
+        }
 
         final String displayName = file.getName();
         final String mimeType = getMimeType(file);

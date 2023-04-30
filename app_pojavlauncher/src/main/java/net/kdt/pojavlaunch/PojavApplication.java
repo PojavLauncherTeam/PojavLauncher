@@ -33,13 +33,13 @@ public class PojavApplication extends Application {
 			File crashFile = new File(storagePermAllowed ? Tools.DIR_GAME_HOME : Tools.DIR_DATA, "latestcrash.txt");
 			try {
 				// Write to file, since some devices may not able to show error
-				crashFile.getParentFile().mkdirs();
-				crashFile.createNewFile();
+				File crashHome = crashFile.getParentFile();
+				if(crashHome != null) crashHome.mkdirs();
 				PrintStream crashStream = new PrintStream(crashFile);
 				crashStream.append("PojavLauncher crash report\n");
-				crashStream.append(" - Time: " + DateFormat.getDateTimeInstance().format(new Date()) + "\n");
-				crashStream.append(" - Device: " + Build.PRODUCT + " " + Build.MODEL + "\n");
-				crashStream.append(" - Android version: " + Build.VERSION.RELEASE + "\n");
+				crashStream.append(" - Time: ").append(DateFormat.getDateTimeInstance().format(new Date())).append("\n");
+				crashStream.append(" - Device: ").append(Build.PRODUCT).append(" ").append(Build.MODEL).append("\n");
+				crashStream.append(" - Android version: ").append(Build.VERSION.RELEASE).append("\n");
 				crashStream.append(" - Crash stack trace:\n");
 				crashStream.append(" - Launcher version: " + BuildConfig.VERSION_NAME + "\n");
 				crashStream.append(Log.getStackTraceString(th));
@@ -62,7 +62,7 @@ public class PojavApplication extends Application {
 			Tools.DIR_DATA = getDir("files", MODE_PRIVATE).getParent();
             //Tools.DIR_HOME_JRE = Tools.DIR_DATA + "/jre_runtime".replace("/data/user/0", "/data/data");
             Tools.DIR_ACCOUNT_OLD = Tools.DIR_DATA + "/Users";
-            Tools.DIR_ACCOUNT_NEW = Tools.DIR_DATA + "/accounts";
+			Tools.DIR_ACCOUNT_NEW = Tools.DIR_DATA + "/accounts";
             // Tools.FILE_ACCOUNT_JSON = getFilesDir().getAbsolutePath() + "/account_profiles.json";
 
 

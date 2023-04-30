@@ -29,7 +29,6 @@ import androidx.drawerlayout.widget.*;
 import com.kdt.LoggerView;
 
 import java.io.*;
-import java.util.*;
 import net.kdt.pojavlaunch.customcontrols.*;
 
 import net.kdt.pojavlaunch.customcontrols.keyboard.LwjglCharSender;
@@ -53,7 +52,6 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
     volatile public static boolean isInputStackCall;
 
     public float scaleFactor = 1;
-    private boolean mIsResuming = false;
 
     public static TouchCharInput touchCharInput;
     private MinecraftGLSurface minecraftGLView;
@@ -243,7 +241,6 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
     @Override
     public void onResume() {
         super.onResume();
-        mIsResuming = true;
         if(mGyroControl != null) mGyroControl.enable();
         CallbackBridge.nativeSetWindowAttrib(LwjglGlfwKeycode.GLFW_HOVERED, 1);
     }
@@ -255,7 +252,6 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
             sendKeyPress(LwjglGlfwKeycode.GLFW_KEY_ESCAPE);
         }
         CallbackBridge.nativeSetWindowAttrib(LwjglGlfwKeycode.GLFW_HOVERED, 0);
-        mIsResuming = false;
         super.onPause();
     }
 
@@ -322,38 +318,23 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
             Tools.LOCAL_RENDERER = LauncherPreferences.PREF_RENDERER;
         }
         Logger.getInstance().appendToLog("--------- beginning with launcher debug");
-        Logger.getInstance().appendToLog("Info: Launcher version: " + BuildConfig.VERSION_NAME);
+        printLauncherInfo();
         if (Tools.LOCAL_RENDERER.equals("vulkan_zink")) {
             checkVulkanZinkIsSupported();
         }
-        checkLWJGL3Installed();
-
-        JREUtils.jreReleaseList = JREUtils.readJREReleaseProperties();
-        Logger.getInstance().appendToLog("Architecture: " + Architecture.archAsString(Tools.DEVICE_ARCHITECTURE));
-        checkJavaArgsIsLaunchable(JREUtils.jreReleaseList.get("JAVA_VERSION"));
-        // appendlnToLog("Info: Custom Java arguments: \"" + LauncherPreferences.PREF_CUSTOM_JAVA_ARGS + "\"");
-
-        Logger.getInstance().appendToLog("Info: Selected Minecraft version: " + mVersionId);
-
-
         JREUtils.redirectAndPrintJRELog();
-
         LauncherProfiles.update();
         Tools.launchMinecraft(this, mProfile, minecraftProfile, mVersionId);
     }
 
-    private void checkJavaArgsIsLaunchable(String jreVersion) throws Throwable {
-        Logger.getInstance().appendToLog("Info: Custom Java arguments: \"" + LauncherPreferences.PREF_CUSTOM_JAVA_ARGS + "\"");
-    }
-
-    private void checkLWJGL3Installed() {
-        File lwjgl3dir = new File(Tools.DIR_GAME_HOME, "lwjgl3");
-        if (!lwjgl3dir.exists() || lwjgl3dir.isFile() || lwjgl3dir.list().length == 0) {
-            Logger.getInstance().appendToLog("Error: LWJGL3 was not installed!");
-            throw new RuntimeException(getString(R.string.mcn_check_fail_lwjgl));
-        } else {
-            Logger.getInstance().appendToLog("Info: LWJGL3 directory: " + Arrays.toString(lwjgl3dir.list()));
-        }
+    private void printLauncherInfo() {
+        Logger logger = Logger.getInstance();
+        logger.appendToLog("Info: Launcher version: " + BuildConfig.VERSION_NAME);
+        logger.appendToLog("Info: Architecture: " + Architecture.archAsString(Tools.DEVICE_ARCHITECTURE));
+        logger.appendToLog("Info: Device model: " + Build.MANUFACTURER + " " +Build.MODEL);
+        logger.appendToLog("Info: API version: " + Build.VERSION.SDK_INT);
+        logger.appendToLog("Info: Selected Minecraft version: " + mVersionId);
+        logger.appendToLog("Info: Custom Java arguments: \"" + LauncherPreferences.PREF_CUSTOM_JAVA_ARGS + "\"");
     }
 
     private void checkVulkanZinkIsSupported() {
@@ -364,26 +345,6 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
             Logger.getInstance().appendToLog("Error: Vulkan Zink renderer is not supported!");
             throw new RuntimeException(getString(R.string. mcn_check_fail_vulkan_support));
         }
-    }
-
-    public void printStream(InputStream stream) {
-        try {
-            BufferedReader buffStream = new BufferedReader(new InputStreamReader(stream));
-            String line = null;
-            while ((line = buffStream.readLine()) != null) {
-                Logger.getInstance().appendToLog(line);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static String fromArray(List<String> arr) {
-        StringBuilder s = new StringBuilder();
-        for (String exec : arr) {
-            s.append(" ").append(exec);
-        }
-        return s.toString();
     }
 
     private void dialogSendCustomKey() {
@@ -424,16 +385,6 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
     }
     private void openLogOutput() {
         loggerView.setVisibility(View.VISIBLE);
-        mIsResuming = false;
-    }
-
-    public void closeLogOutput(View view) {
-        loggerView.setVisibility(View.GONE);
-        mIsResuming = true;
-    }
-
-    public void toggleMenu(View v) {
-        drawerLayout.openDrawer(Gravity.RIGHT);
     }
 
     public static void toggleMouse(Context ctx) {
@@ -486,12 +437,12 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         sb.setMax(275);
         tmpMouseSpeed = (int) ((LauncherPreferences.PREF_MOUSESPEED*100));
         sb.setProgress(tmpMouseSpeed-25);
-        tv.setText(tmpMouseSpeed +" %");
+        tv.setText(getString(R.string.percent_format, tmpGyroSensitivity));
         sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 tmpMouseSpeed = i+25;
-                tv.setText(tmpMouseSpeed +" %");
+                tv.setText(getString(R.string.percent_format, tmpGyroSensitivity));
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {}
@@ -501,7 +452,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         b.setView(v);
         b.setPositiveButton(android.R.string.ok, (dialogInterface, i) -> {
             LauncherPreferences.PREF_MOUSESPEED = ((float)tmpMouseSpeed)/100f;
-            LauncherPreferences.DEFAULT_PREF.edit().putInt("mousespeed",tmpMouseSpeed).commit();
+            LauncherPreferences.DEFAULT_PREF.edit().putInt("mousespeed",tmpMouseSpeed).apply();
             dialogInterface.dismiss();
             System.gc();
         });
@@ -526,12 +477,12 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         sb.setMax(275);
         tmpGyroSensitivity = (int) ((LauncherPreferences.PREF_GYRO_SENSITIVITY*100));
         sb.setProgress(tmpGyroSensitivity -25);
-        tv.setText(tmpGyroSensitivity +" %");
+        tv.setText(getString(R.string.percent_format, tmpGyroSensitivity));
         sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 tmpGyroSensitivity = i+25;
-                tv.setText(tmpGyroSensitivity +" %");
+                tv.setText(getString(R.string.percent_format, tmpGyroSensitivity));
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {}
@@ -541,7 +492,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         b.setView(v);
         b.setPositiveButton(android.R.string.ok, (dialogInterface, i) -> {
             LauncherPreferences.PREF_GYRO_SENSITIVITY = ((float) tmpGyroSensitivity)/100f;
-            LauncherPreferences.DEFAULT_PREF.edit().putInt("gyroSensitivity", tmpGyroSensitivity).commit();
+            LauncherPreferences.DEFAULT_PREF.edit().putInt("gyroSensitivity", tmpGyroSensitivity).apply();
             dialogInterface.dismiss();
             System.gc();
         });
@@ -589,6 +540,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
             }
         });
     }
+    @SuppressWarnings("unused") //TODO: actually use it
     public static void openPath(String path) {
         Context ctx = touchpad.getContext(); // no more better way to obtain a context statically
         ((Activity)ctx).runOnUiThread(() -> {

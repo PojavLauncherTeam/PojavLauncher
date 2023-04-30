@@ -27,9 +27,8 @@ public class Logger {
     private Logger(String fileName){
         mLogFile = new File(Tools.DIR_GAME_HOME, fileName);
         // Make a new instance of the log file
-        mLogFile.delete();
+        // Default PrintStream constructor will overwrite the file for us
         try {
-            mLogFile.createNewFile();
             mLogStream = new PrintStream(mLogFile.getAbsolutePath());
         }catch (IOException e){e.printStackTrace();}
 
@@ -62,8 +61,7 @@ public class Logger {
     /** Reset the log file, effectively erasing any previous logs */
     public void reset(){
         try{
-            mLogFile.delete();
-            mLogFile.createNewFile();
+            //Refer to line 30
             mLogStream = new PrintStream(mLogFile.getAbsolutePath());
         }catch (IOException e){ e.printStackTrace();}
     }
@@ -80,8 +78,7 @@ public class Logger {
      * @return Whether the log should be censored
      */
     private static boolean shouldCensorLog(String text){
-        if(text.contains("Session ID is")) return true;
-        return false;
+        return text.contains("Session ID is");
     }
 
     /** Small listener for anything listening to the log */

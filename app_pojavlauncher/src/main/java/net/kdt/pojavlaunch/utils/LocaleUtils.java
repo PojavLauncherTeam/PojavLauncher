@@ -8,7 +8,6 @@ import android.content.res.*;
 import android.os.Build;
 import android.os.LocaleList;
 
-import androidx.core.os.ConfigurationCompat;
 import androidx.preference.*;
 import java.util.*;
 import net.kdt.pojavlaunch.prefs.*;
@@ -17,10 +16,6 @@ public class LocaleUtils extends ContextWrapper {
 
     public LocaleUtils(Context base) {
         super(base);
-    }
-
-    public static Locale getLocale(){
-        return Locale.getDefault();
     }
 
     public static ContextWrapper setLocale(Context context) {

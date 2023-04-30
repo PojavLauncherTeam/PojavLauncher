@@ -24,13 +24,14 @@ package net.kdt.pojavlaunch;
      * or visit www.oracle.com if you need additional information or have any
      * questions.
      */
+@SuppressWarnings("unused")
 public class AWTInputEvent {
 // InputEvent
     /**
      * This flag indicates that the Shift key was down when the event
      * occurred.
      */
-    public static final int SHIFT_MASK          = 1 << 0;
+    public static final int SHIFT_MASK          = 1; //first bit
 
     /**
      * This flag indicates that the Control key was down when the event

@@ -1,6 +1,7 @@
 package net.kdt.pojavlaunch.multirt;
 
 import static net.kdt.pojavlaunch.Tools.NATIVE_LIB_DIR;
+import static net.kdt.pojavlaunch.Tools.getMinecraftClientArgs;
 import static org.apache.commons.io.FileUtils.listFiles;
 
 import android.content.Context;
@@ -37,6 +38,7 @@ public class MultiRTUtils {
     private static final File RUNTIME_FOLDER = new File(Tools.MULTIRT_HOME);
     private static final String JAVA_VERSION_STR = "JAVA_VERSION=\"";
     private static final String OS_ARCH_STR = "OS_ARCH=\"";
+    private static String sSelectedRuntimeName;
 
     public static List<Runtime> getRuntimes() {
         if(!RUNTIME_FOLDER.exists()) RUNTIME_FOLDER.mkdirs();
@@ -150,7 +152,13 @@ public class MultiRTUtils {
         File dest = new File(RUNTIME_FOLDER,"/"+name);
         if((!dest.exists()) || MultiRTUtils.forceReread(name).versionString == null) throw new RuntimeException("Selected runtime is broken!");
         Tools.DIR_HOME_JRE = dest.getAbsolutePath();
+        sSelectedRuntimeName = name;
         JREUtils.relocateLibPath();
+    }
+
+    public static Runtime getSelectedRuntime() {
+        if(sSelectedRuntimeName == null) throw new RuntimeException("getSelectedRuntime() called before a runtime was selected");
+        return read(sSelectedRuntimeName);
     }
 
     public static Runtime forceReread(String name) {
@@ -159,8 +167,8 @@ public class MultiRTUtils {
     }
 
     public static Runtime read(String name) {
-        if(sCache.containsKey(name)) return sCache.get(name);
-        Runtime returnRuntime;
+        Runtime returnRuntime = sCache.get(name);
+        if(returnRuntime != null) return returnRuntime;
         File release = new File(RUNTIME_FOLDER,name+"/release");
         if(!release.exists()) {
             return new Runtime(name);

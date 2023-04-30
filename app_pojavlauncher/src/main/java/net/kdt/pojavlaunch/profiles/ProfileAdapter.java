@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import net.kdt.pojavlaunch.R;
+import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
 import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 
@@ -71,10 +72,6 @@ public class ProfileAdapter extends BaseAdapter {
         return mProfileList.indexOf(name);
     }
 
-    public void fireProfileEdit() {
-        notifyDataSetChanged();
-    }
-
     @Override
     public long getItemId(int position) {
         return position;
@@ -109,7 +106,7 @@ public class ProfileAdapter extends BaseAdapter {
         }
         extendedTextView.setCompoundDrawablesRelative(cachedIcon, null, extendedTextView.getCompoundsDrawables()[2], null);
 
-        if(minecraftProfile.name != null && !minecraftProfile.name.isEmpty())
+        if(Tools.isValidString(minecraftProfile.name))
             extendedTextView.setText(minecraftProfile.name);
         else
             extendedTextView.setText(R.string.unnamed);

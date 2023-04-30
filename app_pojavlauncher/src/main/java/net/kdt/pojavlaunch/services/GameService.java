@@ -24,12 +24,6 @@ public class GameService extends Service {
         ContextCompat.startForegroundService(context, intent);
     }
 
-    public static void stopService() {
-        Service gameService = sGameService.get();
-        if(gameService != null)
-            gameService.stopSelf();
-    }
-
     @Override
     public void onCreate() {
         Tools.buildNotificationChannel(getApplicationContext());

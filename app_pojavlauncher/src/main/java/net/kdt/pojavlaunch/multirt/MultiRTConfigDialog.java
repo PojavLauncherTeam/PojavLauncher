@@ -1,5 +1,6 @@
 package net.kdt.pojavlaunch.multirt;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -14,7 +15,6 @@ import net.kdt.pojavlaunch.R;
 
 public class MultiRTConfigDialog {
     public static final int MULTIRT_PICK_RUNTIME = 2048;
-    public static final int MULTIRT_PICK_RUNTIME_STARTUP = 2049;
     private AlertDialog mDialog;
     private RecyclerView mDialogView;
 
@@ -24,9 +24,10 @@ public class MultiRTConfigDialog {
         mDialog.show();
     }
 
+    @SuppressLint("NotifyDataSetChanged") //only used to completely refresh the list, it is necessary
     public void refresh() {
-        RecyclerView.Adapter adapter = mDialogView.getAdapter();
-        if(adapter != null) mDialogView.getAdapter().notifyDataSetChanged();
+        RecyclerView.Adapter<?> adapter = mDialogView.getAdapter();
+        if(adapter != null) adapter.notifyDataSetChanged();
     }
 
     /** Build the dialog behavior and style */

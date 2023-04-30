@@ -149,8 +149,6 @@ public final class Tools {
         LauncherProfiles.update();
         String gamedirPath = Tools.getGameDirPath(minecraftProfile);
 
-        if(minecraftProfile.javaArgs != null && !minecraftProfile.javaArgs.isEmpty())
-            LauncherPreferences.PREF_CUSTOM_JAVA_ARGS = minecraftProfile.javaArgs;
 
         // Pre-process specific files
         disableSplash(gamedirPath);
@@ -164,7 +162,7 @@ public final class Tools {
 
         List<String> javaArgList = new ArrayList<String>();
 
-        getCacioJavaArgs(javaArgList, JREUtils.jreReleaseList.get("JAVA_VERSION").startsWith("1.8.0"));
+        getCacioJavaArgs(javaArgList, MultiRTUtils.getSelectedRuntime().javaVersion == 8);
 
         if (versionInfo.logging != null) {
             String configFile = Tools.DIR_DATA + "/security/" + versionInfo.logging.client.file.id.replace("client", "log4j-rce-patch");
@@ -181,7 +179,9 @@ public final class Tools {
         javaArgList.addAll(Arrays.asList(launchArgs));
         // ctx.appendlnToLog("full args: "+javaArgList.toString());
         FFmpegPlugin.discover(activity);
-        JREUtils.launchJavaVM(activity, gamedirPath, javaArgList);
+        String args = LauncherPreferences.PREF_CUSTOM_JAVA_ARGS;
+        if(Tools.isValidString(minecraftProfile.javaArgs)) args = minecraftProfile.javaArgs;
+        JREUtils.launchJavaVM(activity, gamedirPath, javaArgList, args);
     }
 
     public static String getGameDirPath(@NonNull MinecraftProfile minecraftProfile){
@@ -975,5 +975,9 @@ public final class Tools {
         int terminatorIndex = input.indexOf(terminator, whatForStart);
         if(terminatorIndex == -1) return null;
         return input.substring(whatForStart, terminatorIndex);
+    }
+
+    public static boolean isValidString(String string) {
+        return string != null && !string.isEmpty();
     }
 }

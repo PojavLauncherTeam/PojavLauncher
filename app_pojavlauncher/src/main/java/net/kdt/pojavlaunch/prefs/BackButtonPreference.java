@@ -15,7 +15,7 @@ public class BackButtonPreference extends Preference {
         init();
     }
 
-    public BackButtonPreference(Context context) {
+    @SuppressWarnings("unused") public BackButtonPreference(Context context) {
         this(context, null);
     }
 

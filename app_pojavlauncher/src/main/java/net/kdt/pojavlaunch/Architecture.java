@@ -2,8 +2,6 @@ package net.kdt.pojavlaunch;
 
 import android.os.Build;
 
-import java.util.Locale;
-
 /**
  * This class aims at providing a simple and easy way to deal with the device architecture.
  */
