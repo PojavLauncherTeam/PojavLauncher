@@ -2,7 +2,10 @@ package net.kdt.pojavlaunch.value.launcherprofiles;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import net.kdt.pojavlaunch.Tools;
+import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -34,6 +37,14 @@ public class LauncherProfiles {
         } catch (Throwable th) {
             throw new RuntimeException(th);
         }
+    }
+
+    public static @NonNull MinecraftProfile getCurrentProfile() {
+        if(mainProfileJson == null) LauncherProfiles.update();
+        String defaultProfileName = LauncherPreferences.DEFAULT_PREF.getString(LauncherPreferences.PREF_KEY_CURRENT_PROFILE, "");
+        MinecraftProfile profile = mainProfileJson.profiles.get(defaultProfileName);
+        if(profile == null) throw new RuntimeException("The current profile stopped existing :(");
+        return profile;
     }
 
     /**

@@ -40,7 +40,6 @@ public class LocalLoginFragment extends Fragment {
 
     /** @return Whether the mail (and password) text are eligible to make an auth request  */
     private boolean checkEditText(){
-        new File(Tools.DIR_ACCOUNT_OLD).mkdir();
 
         String text = mUsernameEditText.getText().toString();
 

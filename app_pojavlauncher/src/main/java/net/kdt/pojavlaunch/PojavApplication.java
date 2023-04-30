@@ -34,7 +34,9 @@ public class PojavApplication extends Application {
 			try {
 				// Write to file, since some devices may not able to show error
 				File crashHome = crashFile.getParentFile();
-				if(crashHome != null) crashHome.mkdirs();
+				if(crashHome != null && !crashHome.exists() && !crashHome.mkdirs()) {
+					throw new IOException("Failed to create crash log home");
+				}
 				PrintStream crashStream = new PrintStream(crashFile);
 				crashStream.append("PojavLauncher crash report\n");
 				crashStream.append(" - Time: ").append(DateFormat.getDateTimeInstance().format(new Date())).append("\n");
@@ -50,8 +52,6 @@ public class PojavApplication extends Application {
 			}
 
 			FatalErrorActivity.showError(PojavApplication.this, crashFile.getAbsolutePath(), storagePermAllowed, th);
-			// android.os.Process.killProcess(android.os.Process.myPid());
-
 			MainActivity.fullyExit();
 		});
 		
@@ -60,12 +60,7 @@ public class PojavApplication extends Application {
 			Tools.APP_NAME = getResources().getString(R.string.app_short_name);
 			
 			Tools.DIR_DATA = getDir("files", MODE_PRIVATE).getParent();
-            //Tools.DIR_HOME_JRE = Tools.DIR_DATA + "/jre_runtime".replace("/data/user/0", "/data/data");
-            Tools.DIR_ACCOUNT_OLD = Tools.DIR_DATA + "/Users";
 			Tools.DIR_ACCOUNT_NEW = Tools.DIR_DATA + "/accounts";
-            // Tools.FILE_ACCOUNT_JSON = getFilesDir().getAbsolutePath() + "/account_profiles.json";
-
-
 			Tools.DEVICE_ARCHITECTURE = Architecture.getDeviceArchitecture();
 			//Force x86 lib directory for Asus x86 based zenfones
 			if(Architecture.isx86Device() && Architecture.is32BitsDevice()){

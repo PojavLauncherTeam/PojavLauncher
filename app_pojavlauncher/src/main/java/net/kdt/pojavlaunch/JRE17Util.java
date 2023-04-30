@@ -57,11 +57,9 @@ public class JRE17Util {
             return true;
 
         LauncherProfiles.update();
-        MinecraftProfile minecraftProfile = LauncherProfiles.mainProfileJson.profiles.get(LauncherPreferences.DEFAULT_PREF.getString(LauncherPreferences.PREF_KEY_CURRENT_PROFILE, ""));
+        MinecraftProfile minecraftProfile = LauncherProfiles.getCurrentProfile();
 
-        String selectedRuntime = null;
-        if (minecraftProfile.javaDir != null && minecraftProfile.javaDir.startsWith(Tools.LAUNCHERPROFILES_RTPREFIX))
-            selectedRuntime = minecraftProfile.javaDir.substring(Tools.LAUNCHERPROFILES_RTPREFIX.length());
+        String selectedRuntime = Tools.pickRuntime(minecraftProfile);
 
         Runtime runtime = selectedRuntime != null ? MultiRTUtils.read(selectedRuntime) : MultiRTUtils.read(LauncherPreferences.PREF_DEFAULT_RUNTIME);
         if (runtime.javaVersion >= versionInfo.javaVersion.majorVersion) return true;

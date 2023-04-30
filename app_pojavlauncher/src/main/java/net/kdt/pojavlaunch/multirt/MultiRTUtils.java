@@ -145,7 +145,8 @@ public class MultiRTUtils {
     }
 
     public static File getRuntimeHome(String name) {
-        File dest = new File(RUNTIME_FOLDER,"/"+name);
+        File dest = new File(RUNTIME_FOLDER, name);
+        Log.i("MiltiRTUitls", "Dest exists? "+dest.exists());
         if((!dest.exists()) || MultiRTUtils.forceReread(name).versionString == null) throw new RuntimeException("Selected runtime is broken!");
         return dest;
     }

@@ -77,8 +77,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         super.onCreate(savedInstanceState);
 
         mProfile = PojavProfile.getCurrentProfileContent(this, null);
-        if(LauncherProfiles.mainProfileJson == null) LauncherProfiles.update();
-        minecraftProfile = LauncherProfiles.mainProfileJson.profiles.get(LauncherPreferences.DEFAULT_PREF.getString(LauncherPreferences.PREF_KEY_CURRENT_PROFILE,""));
+        minecraftProfile = LauncherProfiles.getCurrentProfile();
         MCOptionUtils.load(Tools.getGameDirPath(minecraftProfile).getAbsolutePath());
         GameService.startService(this);
         initLayout(R.layout.activity_basemain);
