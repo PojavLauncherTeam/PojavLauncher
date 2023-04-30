@@ -144,17 +144,10 @@ public class MultiRTUtils {
         }
     }
 
-    public static void setRuntimeNamed(String name) {
+    public static File getRuntimeHome(String name) {
         File dest = new File(RUNTIME_FOLDER,"/"+name);
         if((!dest.exists()) || MultiRTUtils.forceReread(name).versionString == null) throw new RuntimeException("Selected runtime is broken!");
-        Tools.DIR_HOME_JRE = dest.getAbsolutePath();
-        sSelectedRuntimeName = name;
-        JREUtils.relocateLibPath();
-    }
-
-    public static Runtime getSelectedRuntime() {
-        if(sSelectedRuntimeName == null) throw new RuntimeException("getSelectedRuntime() called before a runtime was selected");
-        return read(sSelectedRuntimeName);
+        return dest;
     }
 
     public static Runtime forceReread(String name) {

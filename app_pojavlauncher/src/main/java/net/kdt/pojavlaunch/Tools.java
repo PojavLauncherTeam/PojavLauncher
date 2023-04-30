@@ -44,6 +44,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import net.kdt.pojavlaunch.multirt.MultiRTUtils;
+import net.kdt.pojavlaunch.multirt.Runtime;
 import net.kdt.pojavlaunch.plugins.FFmpegPlugin;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.utils.DownloadUtils;
@@ -96,7 +97,6 @@ public final class Tools {
     public static String DIR_GAME_NEW;
 
     // New since 3.0.0
-    public static String DIR_HOME_JRE;
     public static String DIRNAME_HOME_JRE = "lib";
 
     // New since 2.4.2
@@ -168,6 +168,7 @@ public final class Tools {
                 memoryErrorLock.wait();
             }
         }
+        Runtime runtime = MultiRTUtils.forceReread(Tools.pickRuntime(minecraftProfile));
         JMinecraftVersionList.Version versionInfo = Tools.getVersionInfo(versionId);
         LauncherProfiles.update();
         File gamedir = Tools.getGameDirPath(minecraftProfile);
@@ -185,7 +186,7 @@ public final class Tools {
 
         List<String> javaArgList = new ArrayList<>();
 
-        getCacioJavaArgs(javaArgList, MultiRTUtils.getSelectedRuntime().javaVersion == 8);
+        getCacioJavaArgs(javaArgList, runtime.javaVersion == 8);
 
         if (versionInfo.logging != null) {
             String configFile = Tools.DIR_DATA + "/security/" + versionInfo.logging.client.file.id.replace("client", "log4j-rce-patch");
@@ -201,10 +202,10 @@ public final class Tools {
         javaArgList.add(versionInfo.mainClass);
         javaArgList.addAll(Arrays.asList(launchArgs));
         // ctx.appendlnToLog("full args: "+javaArgList.toString());
-        FFmpegPlugin.discover(activity);
         String args = LauncherPreferences.PREF_CUSTOM_JAVA_ARGS;
         if(Tools.isValidString(minecraftProfile.javaArgs)) args = minecraftProfile.javaArgs;
-        JREUtils.launchJavaVM(activity, gamedir, javaArgList, args);
+        FFmpegPlugin.discover(activity);
+        JREUtils.launchJavaVM(activity, runtime, gamedir, javaArgList, args);
     }
 
     public static File getGameDirPath(@NonNull MinecraftProfile minecraftProfile){
@@ -937,5 +938,15 @@ public final class Tools {
 
     public static boolean isValidString(String string) {
         return string != null && !string.isEmpty();
+    }
+    public static String pickRuntime(MinecraftProfile minecraftProfile) {
+        String runtime = LauncherPreferences.PREF_DEFAULT_RUNTIME;
+        if(minecraftProfile.javaDir != null && minecraftProfile.javaDir.startsWith(Tools.LAUNCHERPROFILES_RTPREFIX)) {
+            String runtimeName = minecraftProfile.javaDir.substring(Tools.LAUNCHERPROFILES_RTPREFIX.length());
+            if(MultiRTUtils.forceReread(runtimeName).versionString != null) {
+                runtime = runtimeName;
+            }
+        }
+        return runtime;
     }
 }

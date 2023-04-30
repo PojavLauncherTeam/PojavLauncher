@@ -20,6 +20,7 @@ import com.kdt.LoggerView;
 import net.kdt.pojavlaunch.customcontrols.keyboard.AwtCharSender;
 import net.kdt.pojavlaunch.customcontrols.keyboard.TouchCharInput;
 import net.kdt.pojavlaunch.multirt.MultiRTUtils;
+import net.kdt.pojavlaunch.multirt.Runtime;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.utils.JREUtils;
 import net.kdt.pojavlaunch.utils.MathUtils;
@@ -141,18 +142,19 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
             
             final File modFile = (File) getIntent().getExtras().getSerializable("modFile");
             final String javaArgs = getIntent().getExtras().getString("javaArgs");
-
-            int javaVersion = getJavaVersion(modFile);
-            String jreName = javaVersion == -1 ? null : MultiRTUtils.getNearestJreName(javaVersion);
-            if(jreName != null) {
-                MultiRTUtils.setRuntimeNamed(jreName);
-            }else{
-                MultiRTUtils.setRuntimeNamed(LauncherPreferences.PREF_DEFAULT_RUNTIME);
+            String jreName = LauncherPreferences.PREF_DEFAULT_RUNTIME;
+            if(modFile != null) {
+                int javaVersion = getJavaVersion(modFile);
+                if(javaVersion != -1) {
+                    String autoselectRuntime = MultiRTUtils.getNearestJreName(javaVersion);
+                    if (autoselectRuntime != null) jreName = autoselectRuntime;
+                }
             }
+            final Runtime runtime = MultiRTUtils.forceReread(jreName);
 
             mSkipDetectMod = getIntent().getExtras().getBoolean("skipDetectMod", false);
             if (mSkipDetectMod) {
-                new Thread(() -> launchJavaRuntime(modFile, javaArgs), "JREMainThread").start();
+                new Thread(() -> launchJavaRuntime(runtime, modFile, javaArgs), "JREMainThread").start();
                 return;
             }
 
@@ -160,7 +162,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
             openLogOutput(null);
             new Thread(() -> {
                 try {
-                    final int exit = doCustomInstall(modFile, javaArgs);
+                    final int exit = doCustomInstall(runtime, modFile, javaArgs);
                     Logger.getInstance().appendToLog(getString(R.string.toast_optifine_success));
                     if (exit != 0) return;
                     runOnUiThread(() -> {
@@ -274,13 +276,13 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
                 Toast.LENGTH_SHORT).show();
     }
 
-    public int launchJavaRuntime(File modFile, String javaArgs) {
+    public int launchJavaRuntime(Runtime runtime, File modFile, String javaArgs) {
         JREUtils.redirectAndPrintJRELog();
         try {
             List<String> javaArgList = new ArrayList<>();
 
             // Enable Caciocavallo
-            Tools.getCacioJavaArgs(javaArgList,MultiRTUtils.getSelectedRuntime().javaVersion == 8);
+            Tools.getCacioJavaArgs(javaArgList,runtime.javaVersion == 8);
             
             if (javaArgs != null) {
                 javaArgList.addAll(Arrays.asList(javaArgs.split(" ")));
@@ -300,7 +302,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
 
             Logger.getInstance().appendToLog("Info: Java arguments: " + Arrays.toString(javaArgList.toArray(new String[0])));
 
-            return JREUtils.launchJavaVM(this, null,javaArgList, LauncherPreferences.PREF_CUSTOM_JAVA_ARGS);
+            return JREUtils.launchJavaVM(this, runtime,null,javaArgList, LauncherPreferences.PREF_CUSTOM_JAVA_ARGS);
         } catch (Throwable th) {
             Tools.showError(this, th, true);
             return -1;
@@ -309,9 +311,9 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
 
 
 
-    private int doCustomInstall(File modFile, String javaArgs) {
+    private int doCustomInstall(Runtime runtime, File modFile, String javaArgs) {
         mSkipDetectMod = true;
-        return launchJavaRuntime(modFile, javaArgs);
+        return launchJavaRuntime(runtime, modFile, javaArgs);
     }
 
     public void toggleKeyboard(View view) {
