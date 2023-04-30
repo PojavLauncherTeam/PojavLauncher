@@ -184,17 +184,18 @@ public interface ControlInterface extends View.OnLongClickListener {
      * @param button The button to check
      * @return whether or not the button
      */
-    default boolean cantSnap(ControlInterface button){
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
+    default boolean canSnap(ControlInterface button){
         float MIN_DISTANCE = Tools.dpToPx(8);
 
-        if(button == this) return true;
-        return net.kdt.pojavlaunch.utils.MathUtils.dist(
+        if(button == this) return false;
+        return !(net.kdt.pojavlaunch.utils.MathUtils.dist(
                 button.getControlView().getX() + button.getControlView().getWidth() / 2f,
                 button.getControlView().getY() + button.getControlView().getHeight() / 2f,
                 getControlView().getX() + getControlView().getWidth() / 2f,
                 getControlView().getY() + getControlView().getHeight() / 2f)
                 > Math.max(button.getControlView().getWidth() / 2f + getControlView().getWidth() / 2f,
-                button.getControlView().getHeight() / 2f + getControlView().getHeight() / 2f) + MIN_DISTANCE;
+                button.getControlView().getHeight() / 2f + getControlView().getHeight() / 2f) + MIN_DISTANCE);
     }
 
     /**
@@ -217,7 +218,7 @@ public interface ControlInterface extends View.OnLongClickListener {
 
         for(ControlInterface button :  ((ControlLayout) getControlView().getParent()).getButtonChildren()){
             //Step 1: Filter unwanted buttons
-            if(cantSnap(button)) continue;
+            if(!canSnap(button)) continue;
 
             //Step 2: Get Coordinates
             float button_top = button.getControlView().getY();

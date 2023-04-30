@@ -128,6 +128,7 @@ public class ControlDrawer extends ControlButton {
         setVisibility(isVisible ? VISIBLE : GONE);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if(!getControlLayoutParent().getModifiable()){
@@ -163,9 +164,9 @@ public class ControlDrawer extends ControlButton {
     }
 
     @Override
-    public boolean cantSnap(ControlInterface button) {
-        boolean result = !super.cantSnap(button);
-        return !result || containsChild(button);
+    public boolean canSnap(ControlInterface button) {
+        boolean result = super.canSnap(button);
+        return result && !containsChild(button);
     }
 
     //Getters
