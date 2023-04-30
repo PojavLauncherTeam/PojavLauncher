@@ -27,9 +27,8 @@ public class AsyncAssetManager {
     /**
      * Attempt to install the java 8 runtime, if necessary
      * @param am App context
-     * @param otherRuntimesAvailable Whether other runtimes have been detected
      */
-    public static void unpackRuntime(AssetManager am, boolean otherRuntimesAvailable) {
+    public static void unpackRuntime(AssetManager am) {
         /* Check if JRE is included */
         String rt_version = null;
         String current_rt_version = MultiRTUtils.__internal__readBinpackVersion("Internal");

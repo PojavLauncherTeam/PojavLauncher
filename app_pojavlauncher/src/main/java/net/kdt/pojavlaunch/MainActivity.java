@@ -51,8 +51,6 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
 
     volatile public static boolean isInputStackCall;
 
-    public float scaleFactor = 1;
-
     public static TouchCharInput touchCharInput;
     private MinecraftGLSurface minecraftGLView;
     private static Touchpad touchpad;
@@ -81,7 +79,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         mProfile = PojavProfile.getCurrentProfileContent(this, null);
         if(LauncherProfiles.mainProfileJson == null) LauncherProfiles.update();
         minecraftProfile = LauncherProfiles.mainProfileJson.profiles.get(LauncherPreferences.DEFAULT_PREF.getString(LauncherPreferences.PREF_KEY_CURRENT_PROFILE,""));
-        MCOptionUtils.load(Tools.getGameDirPath(minecraftProfile));
+        MCOptionUtils.load(Tools.getGameDirPath(minecraftProfile).getAbsolutePath());
         GameService.startService(this);
         initLayout(R.layout.activity_basemain);
         CallbackBridge.addGrabListener(touchpad);
@@ -155,8 +153,8 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
             CallbackBridge.nativeSetUseInputStackQueue(isInputStackCall);
 
             Tools.getDisplayMetrics(this);
-            windowWidth = Tools.getDisplayFriendlyRes(currentDisplayMetrics.widthPixels, scaleFactor);
-            windowHeight = Tools.getDisplayFriendlyRes(currentDisplayMetrics.heightPixels, scaleFactor);
+            windowWidth = Tools.getDisplayFriendlyRes(currentDisplayMetrics.widthPixels, 1f);
+            windowHeight = Tools.getDisplayFriendlyRes(currentDisplayMetrics.heightPixels, 1f);
 
 
             // Menu

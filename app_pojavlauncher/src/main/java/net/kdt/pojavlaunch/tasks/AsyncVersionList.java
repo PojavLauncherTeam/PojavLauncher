@@ -50,6 +50,7 @@ public class AsyncVersionList {
     }
 
 
+    @SuppressWarnings("SameParameterValue")
     private JMinecraftVersionList downloadVersionList(String mirror){
         JMinecraftVersionList list = null;
         try{

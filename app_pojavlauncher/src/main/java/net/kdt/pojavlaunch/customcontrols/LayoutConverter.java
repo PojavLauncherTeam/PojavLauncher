@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class LayoutConverter {
-    public static boolean convertLookType = false; //false = flat; true = classic
     public static CustomControls loadAndConvertIfNecessary(String jsonPath) throws IOException, JsonSyntaxException {
 
         String jsonLayoutData = Tools.read(jsonPath);
@@ -107,14 +106,8 @@ public class LayoutConverter {
             n_button.isToggle = button.getBoolean("isToggle");
             n_button.setHeight(button.getInt("height"));
             n_button.setWidth(button.getInt("width"));
-            if(convertLookType) {
-                n_button.strokeColor = 0xdd7f7f7f;
-                n_button.bgColor = 0x807f7f7f;
-                n_button.strokeWidth = 10;
-            }else{
-                n_button.bgColor = 0x4d000000;
-                n_button.strokeWidth = 0;
-            }
+            n_button.bgColor = 0x4d000000;
+            n_button.strokeWidth = 0;
             if(button.getBoolean("isRound")) { n_button.cornerRadius =  35f; }
             int next_idx = 0;
             if(button.getBoolean("holdShift")) { keycodes[next_idx] = LwjglGlfwKeycode.GLFW_KEY_LEFT_SHIFT; next_idx++; }

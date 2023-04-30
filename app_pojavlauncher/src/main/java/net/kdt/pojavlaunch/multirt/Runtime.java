@@ -3,14 +3,24 @@ package net.kdt.pojavlaunch.multirt;
 import java.util.Objects;
 
 public class Runtime {
+    public final String name;
+    public final String versionString;
+    public final String arch;
+    public final int javaVersion;
     public Runtime(String name) {
         this.name = name;
+        this.versionString = null;
+        this.arch = null;
+        this.javaVersion = 0;
+    }
+    Runtime(String name, String versionString, String arch, int javaVersion) {
+        this.name = name;
+        this.versionString = versionString;
+        this.arch = arch;
+        this.javaVersion = javaVersion;
     }
     
-    public String name;
-    public String versionString;
-    public String arch;
-    public int javaVersion;
+
 
     @Override
     public boolean equals(Object o) {

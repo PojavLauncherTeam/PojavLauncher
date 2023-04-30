@@ -264,16 +264,8 @@ public class JREUtils {
         // return ldLibraryPath;
     }
 
-    public static int launchJavaVM(final Activity activity, String gameDirectory, final List<String> JVMArgs, final String userArgsString) throws Throwable {
+    public static int launchJavaVM(final Activity activity, File gameDirectory, final List<String> JVMArgs, final String userArgsString) throws Throwable {
         JREUtils.relocateLibPath();
-        // For debugging only!
-/*
-        StringBuilder sbJavaArgs = new StringBuilder();
-        for (String s : javaArgList) {
-            sbJavaArgs.append(s + " ");
-        }
-        ctx.appendlnToLog("Executing JVM: \"" + sbJavaArgs.toString() + "\"");
-*/
 
         setJavaEnvironment(activity);
 
@@ -299,7 +291,7 @@ public class JREUtils {
 
         initJavaRuntime();
         setupExitTrap(activity.getApplication());
-        chdir(gameDirectory == null ? Tools.DIR_GAME_NEW : gameDirectory);
+        chdir(gameDirectory == null ? Tools.DIR_GAME_NEW : gameDirectory.getAbsolutePath());
         userArgs.add(0,"java"); //argv[0] is the program name according to C standard.
 
         final int exitCode = VMLauncher.launchJVM(userArgs.toArray(new String[0]));
@@ -375,45 +367,6 @@ public class JREUtils {
         userArguments.addAll(additionalArguments);
         return userArguments;
     }
-
-    /*
-     * more better arguments parser that allows escapes and doesnt change up args
-     * @param _args all args as a string
-     * @return a list of split args
-     */
-    /*public static ArrayList<String> parseJavaArguments(String _args) {
-        char bracketOpen = '\0';
-        char[] str = _args.toCharArray();
-        StringBuilder sb = new StringBuilder();
-        ArrayList<String> ret = new ArrayList<String>();
-        for(int i = 0; i < str.length; i++) {
-            if(str[i] == '\\') {
-                sb.append(str[i+1]);
-                i++;
-                continue;
-            }
-            if(str[i] == ' ' && bracketOpen == '\0') {
-                if(sb.length() > 0) {
-                    ret.add(sb.toString());
-                    sb = new StringBuilder();
-                }
-                continue;
-            }
-            if(str[i] == '"' || str[i] == '\'') {
-                if(bracketOpen == str[i]) {
-                    bracketOpen = '\0';
-                    continue;
-                }else if(bracketOpen == '\0') {
-                    bracketOpen = str[i];
-                    continue;
-                }
-
-            }
-            sb.append(str[i]);
-        }
-        ret.add(sb.toString());
-        return ret;
-    }*/
 
     /**
      * Parse and separate java arguments in a user friendly fashion
@@ -508,16 +461,16 @@ public class JREUtils {
      * @param argStart The argument to purge from the list.
      */
     private static void purgeArg(List<String> argList, String argStart) {
-        for(int i = 0; i < argList.size(); i++) {
-            final String arg = argList.get(i);
-            if(arg.startsWith(argStart)) {
-                argList.remove(i);
-            }
+        Iterator<String> args = argList.iterator();
+        while(args.hasNext()) {
+            String arg = args.next();
+            if(arg.startsWith(argStart)) args.remove();
         }
     }
     private static final int EGL_OPENGL_ES_BIT = 0x0001;
     private static final int EGL_OPENGL_ES2_BIT = 0x0004;
     private static final int EGL_OPENGL_ES3_BIT_KHR = 0x0040;
+    @SuppressWarnings("SameParameterValue")
     private static boolean hasExtension(String extensions, String name) {
         int start = extensions.indexOf(name);
         while (start >= 0) {

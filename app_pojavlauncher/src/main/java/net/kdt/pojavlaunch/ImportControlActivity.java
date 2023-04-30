@@ -28,6 +28,7 @@ import java.io.OutputStream;
 /**
  * An activity dedicated to importing control files.
  */
+@SuppressWarnings("IOStreamConstructor")
 public class ImportControlActivity extends Activity {
 
     private Uri mUriData;
@@ -75,7 +76,7 @@ public class ImportControlActivity extends Activity {
         //Import and verify thread
         //Kill the app if the file isn't valid.
         new Thread(() -> {
-            importControlFile("TMP_IMPORT_FILE");
+            importControlFile();
 
             if(verify())mIsFileVerified = true;
             else runOnUiThread(() -> {
@@ -118,23 +119,19 @@ public class ImportControlActivity extends Activity {
 
     /**
      * Copy a the file from the Intent data with a provided name into the controlmap folder.
-     * @param fileName The file name to use.
-     * @return whether the file was successfully imported
      */
-    private boolean importControlFile(String fileName){
+    private void importControlFile(){
         InputStream is;
         try {
             is = getContentResolver().openInputStream(mUriData);
-            OutputStream os = new FileOutputStream(Tools.CTRLMAP_PATH + "/" + fileName + ".json");
+            OutputStream os = new FileOutputStream(Tools.CTRLMAP_PATH + "/" + "TMP_IMPORT_FILE" + ".json");
             IOUtils.copy(is, os);
 
             os.close();
             is.close();
-            return true;
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return false;
     }
 
     /**
@@ -146,9 +143,7 @@ public class ImportControlActivity extends Activity {
         fileName = trimFileName(fileName);
 
         if(fileName.isEmpty()) return false;
-        if (FileUtils.exists(Tools.CTRLMAP_PATH + "/" + fileName + ".json")) return false;
-
-        return true;
+        return !FileUtils.exists(Tools.CTRLMAP_PATH + "/" + fileName + ".json");
     }
 
     /**

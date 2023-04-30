@@ -22,8 +22,8 @@ import net.kdt.pojavlaunch.tasks.AsyncAssetManager;
 import net.kdt.pojavlaunch.utils.*;
 
 public class PojavApplication extends Application {
-	public static String CRASH_REPORT_TAG = "PojavCrashReport";
-	public static ExecutorService sExecutorService = new ThreadPoolExecutor(4, 4, 500, TimeUnit.MILLISECONDS,  new LinkedBlockingQueue<>());
+	public static final String CRASH_REPORT_TAG = "PojavCrashReport";
+	public static final ExecutorService sExecutorService = new ThreadPoolExecutor(4, 4, 500, TimeUnit.MILLISECONDS,  new LinkedBlockingQueue<>());
 	
 	@Override
 	public void onCreate() {
@@ -74,7 +74,7 @@ public class PojavApplication extends Application {
 												originalJNIDirectory.lastIndexOf("/"))
 												.concat("/x86");
 			}
-			AsyncAssetManager.unpackRuntime(getAssets(), false);
+			AsyncAssetManager.unpackRuntime(getAssets());
 		} catch (Throwable throwable) {
 			Intent ferrorIntent = new Intent(this, FatalErrorActivity.class);
 			ferrorIntent.putExtra("throwable", throwable);

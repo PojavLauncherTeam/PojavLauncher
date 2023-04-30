@@ -58,7 +58,7 @@ public class Gamepad implements GrabListener {
     private float mLastHorizontalValue = 0.0f;
     private float mLastVerticalValue = 0.0f;
 
-    private final double MOUSE_MAX_ACCELERATION = 2f;
+    private static final double MOUSE_MAX_ACCELERATION = 2f;
 
     private double mMouseMagnitude;
     private double mMouseAngle;
@@ -79,7 +79,8 @@ public class Gamepad implements GrabListener {
     private long mLastFrameTime;
 
     /* Listen for change in gui scale */
-    private MCOptionUtils.MCOptionListener mGuiScaleListener = () -> notifyGUISizeChange(getMcScale());
+    @SuppressWarnings("FieldCanBeLocal") //the field is used in a WeakReference
+    private final MCOptionUtils.MCOptionListener mGuiScaleListener = () -> notifyGUISizeChange(getMcScale());
 
     public Gamepad(View contextView, InputDevice inputDevice){
         mScreenChoreographer = Choreographer.getInstance();
@@ -124,8 +125,8 @@ public class Gamepad implements GrabListener {
         int size = (int) ((22 * getMcScale()) / mScaleFactor);
         mPointerImageView.setLayoutParams(new FrameLayout.LayoutParams(size, size));
 
-        mMouse_x = CallbackBridge.windowWidth/2;
-        mMouse_y = CallbackBridge.windowHeight/2;
+        mMouse_x = CallbackBridge.windowWidth/2f;
+        mMouse_y = CallbackBridge.windowHeight/2f;
         CallbackBridge.sendCursorPos(mMouse_x, mMouse_y);
         placePointerView(CallbackBridge.physicalWidth/2, CallbackBridge.physicalHeight/2);
 
@@ -418,8 +419,8 @@ public class Gamepad implements GrabListener {
     }
 
     private void placePointerView(int x, int y){
-        mPointerImageView.setX(x - mPointerImageView.getWidth()/2);
-        mPointerImageView.setY(y - mPointerImageView.getHeight()/2);
+        mPointerImageView.setX(x - mPointerImageView.getWidth()/2f);
+        mPointerImageView.setY(y - mPointerImageView.getHeight()/2f);
     }
 
     /** Update the grabbing state, and change the currentMap, mouse position and sensibility */
@@ -441,8 +442,8 @@ public class Gamepad implements GrabListener {
         mCurrentMap = mMenuMap;
         sendDirectionalKeycode(mCurrentJoystickDirection, false, mGameMap); // removing what we were doing
 
-        mMouse_x = CallbackBridge.windowWidth/2;
-        mMouse_y = CallbackBridge.windowHeight/2;
+        mMouse_x = CallbackBridge.windowWidth/2f;
+        mMouse_y = CallbackBridge.windowHeight/2f;
         CallbackBridge.sendCursorPos(mMouse_x, mMouse_y);
         placePointerView(CallbackBridge.physicalWidth/2, CallbackBridge.physicalHeight/2);
         mPointerImageView.setVisibility(View.VISIBLE);

@@ -12,12 +12,13 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  *
  * This class uses a singleton pattern to simplify access to it
  */
+@SuppressWarnings({"rawtypes", "unchecked"})
 public final class ExtraCore {
     // No unwanted instantiation
     private ExtraCore(){}
 
     // Singleton instance
-    private static ExtraCore sExtraCoreSingleton = null;
+    private static volatile ExtraCore sExtraCoreSingleton = null;
 
     // Store the key-value pair
     private final Map<String, Object> mValueMap = new ConcurrentHashMap<>();

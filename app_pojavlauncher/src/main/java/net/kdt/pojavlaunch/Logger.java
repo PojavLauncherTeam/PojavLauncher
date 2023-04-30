@@ -12,7 +12,7 @@ import java.lang.ref.WeakReference;
  */
 @Keep
 public class Logger {
-    private static Logger sLoggerSingleton = null;
+    private static volatile Logger sLoggerSingleton = null;
 
     /* Instance variables */
     private final File mLogFile;
@@ -21,11 +21,7 @@ public class Logger {
 
     /* No public construction */
     private Logger(){
-        this("latestlog.txt");
-    }
-
-    private Logger(String fileName){
-        mLogFile = new File(Tools.DIR_GAME_HOME, fileName);
+        mLogFile = new File(Tools.DIR_GAME_HOME, "latestlog.txt");
         // Make a new instance of the log file
         // Default PrintStream constructor will overwrite the file for us
         try {
@@ -64,11 +60,6 @@ public class Logger {
             //Refer to line 30
             mLogStream = new PrintStream(mLogFile.getAbsolutePath());
         }catch (IOException e){ e.printStackTrace();}
-    }
-
-    /** Disables the printing */
-    public void shutdown(){
-        mLogStream.close();
     }
 
     /**

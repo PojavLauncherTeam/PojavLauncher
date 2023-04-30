@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListAdapter;
-import android.widget.ExpandableListView;
 import android.widget.TextView;
 
 import net.kdt.pojavlaunch.JMinecraftVersionList;
@@ -23,17 +22,16 @@ public class VersionListAdapter extends BaseExpandableListAdapter implements Exp
     private final LayoutInflater mLayoutInflater;
 
     private final String[] mGroups;
-    private final List<JMinecraftVersionList.Version> mReleaseList, mSnapshotList, mBetaList, mAlphaList;
     private final String[] mInstalledVersions;
-    private final List<JMinecraftVersionList.Version>[] mData;
+    private final List<?>[] mData;
 
     public VersionListAdapter(JMinecraftVersionList.Version[] versionList, Context ctx){
         mLayoutInflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        mReleaseList = new FilteredSubList<>(versionList, item -> item.type.equals("release"));
-        mSnapshotList = new FilteredSubList<>(versionList, item -> item.type.equals("snapshot"));
-        mBetaList = new FilteredSubList<>(versionList, item -> item.type.equals("old_beta"));
-        mAlphaList = new FilteredSubList<>(versionList, item -> item.type.equals("old_alpha"));
+        List<JMinecraftVersionList.Version> releaseList = new FilteredSubList<>(versionList, item -> item.type.equals("release"));
+        List<JMinecraftVersionList.Version> snapshotList = new FilteredSubList<>(versionList, item -> item.type.equals("snapshot"));
+        List<JMinecraftVersionList.Version> betaList = new FilteredSubList<>(versionList, item -> item.type.equals("old_beta"));
+        List<JMinecraftVersionList.Version> alphaList = new FilteredSubList<>(versionList, item -> item.type.equals("old_alpha"));
 
         // Query installed versions
         mInstalledVersions = new File(Tools.DIR_GAME_NEW + "/versions").list();
@@ -44,7 +42,7 @@ public class VersionListAdapter extends BaseExpandableListAdapter implements Exp
                     ctx.getString(R.string.mcl_setting_veroption_oldbeta),
                     ctx.getString(R.string.mcl_setting_veroption_oldalpha)
             };
-            mData = new List[]{ mReleaseList, mSnapshotList, mBetaList, mAlphaList};
+            mData = new List[]{ releaseList, snapshotList, betaList, alphaList};
         }else{
             mGroups = new String[]{
                     ctx.getString(R.string.mcl_setting_veroption_installed),
@@ -53,7 +51,7 @@ public class VersionListAdapter extends BaseExpandableListAdapter implements Exp
                     ctx.getString(R.string.mcl_setting_veroption_oldbeta),
                     ctx.getString(R.string.mcl_setting_veroption_oldalpha)
             };
-            mData = new List[]{Arrays.asList(mInstalledVersions), mReleaseList, mSnapshotList, mBetaList, mAlphaList};
+            mData = new List[]{Arrays.asList(mInstalledVersions), releaseList, snapshotList, betaList, alphaList};
         }
     }
 
@@ -77,7 +75,7 @@ public class VersionListAdapter extends BaseExpandableListAdapter implements Exp
         if(isInstalledVersionSelected(groupPosition)){
             return mInstalledVersions[childPosition];
         }
-        return mData[groupPosition].get(childPosition).id;
+        return ((JMinecraftVersionList.Version)mData[groupPosition].get(childPosition)).id;
     }
 
     @Override
@@ -109,14 +107,7 @@ public class VersionListAdapter extends BaseExpandableListAdapter implements Exp
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         if(convertView == null)
             convertView = mLayoutInflater.inflate(android.R.layout.simple_expandable_list_item_1, parent, false);
-        if(isInstalledVersionSelected(groupPosition)){
-            // Installed version is a String inside
-            ((TextView) convertView).setText(mInstalledVersions[childPosition]);
-        }else{
-            ((TextView) convertView).setText(mData[groupPosition].get(childPosition).id);
-        }
-
-
+        ((TextView) convertView).setText(getChild(groupPosition, childPosition));
         return convertView;
     }
 

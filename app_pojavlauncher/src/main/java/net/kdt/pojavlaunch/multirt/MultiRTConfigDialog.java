@@ -6,7 +6,6 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.webkit.MimeTypeMap;
 
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,7 +33,7 @@ public class MultiRTConfigDialog {
     public void prepare(Activity activity) {
         mDialogView = new RecyclerView(activity);
         mDialogView.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
-        mDialogView.setAdapter(new RTRecyclerViewAdapter(this));
+        mDialogView.setAdapter(new RTRecyclerViewAdapter());
 
         mDialog = new AlertDialog.Builder(activity)
                 .setTitle(R.string.multirt_config_title)

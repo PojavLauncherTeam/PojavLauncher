@@ -26,11 +26,6 @@ import java.util.List;
 
 public class RTRecyclerViewAdapter extends RecyclerView.Adapter<RTRecyclerViewAdapter.RTViewHolder> {
 
-    MultiRTConfigDialog mConfigDialog;
-    public RTRecyclerViewAdapter(MultiRTConfigDialog dialog) {
-        this.mConfigDialog = dialog;
-    }
-
     @NonNull
     @Override
     public RTViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -81,6 +76,7 @@ public class RTRecyclerViewAdapter extends RecyclerView.Adapter<RTRecyclerViewAd
             itemView.findViewById(R.id.multirt_view_removebtn).setOnClickListener(this);
         }
 
+        @SuppressLint("NotifyDataSetChanged") // same as all the other ones
         @Override
         public void onClick(View view) {
             if(view.getId() == R.id.multirt_view_removebtn) {

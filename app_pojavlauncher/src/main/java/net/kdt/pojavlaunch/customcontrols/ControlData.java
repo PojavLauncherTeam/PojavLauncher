@@ -1,22 +1,24 @@
 package net.kdt.pojavlaunch.customcontrols;
 
-import android.util.*;
-
-import java.lang.ref.WeakReference;
-import java.lang.reflect.Modifier;
-import java.util.*;
-import net.kdt.pojavlaunch.*;
-import net.kdt.pojavlaunch.prefs.LauncherPreferences;
-import net.kdt.pojavlaunch.utils.*;
-import net.objecthunter.exp4j.*;
-import net.objecthunter.exp4j.function.Function;
-
-import org.lwjgl.glfw.*;
-
 import static net.kdt.pojavlaunch.LwjglGlfwKeycode.GLFW_KEY_UNKNOWN;
-import static org.lwjgl.glfw.CallbackBridge.sendKeyPress;
+
+import android.util.ArrayMap;
 
 import androidx.annotation.Keep;
+
+import net.kdt.pojavlaunch.Tools;
+import net.kdt.pojavlaunch.prefs.LauncherPreferences;
+import net.kdt.pojavlaunch.utils.JSONUtils;
+import net.objecthunter.exp4j.ExpressionBuilder;
+import net.objecthunter.exp4j.function.Function;
+
+import org.lwjgl.glfw.CallbackBridge;
+
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 @Keep
 public class ControlData {
@@ -76,7 +78,7 @@ public class ControlData {
 
     public static List<String> buildSpecialButtonArray() {
         if (SPECIAL_BUTTON_NAME_ARRAY == null) {
-            List<String> nameList = new ArrayList<String>();
+            List<String> nameList = new ArrayList<>();
             for (ControlData btn : getSpecialButtons()) {
                 nameList.add("SPECIAL_" + btn.name);
             }
@@ -107,7 +109,7 @@ public class ControlData {
     }
 
     public ControlData(String name, int[] keycodes) {
-        this(name, keycodes, Tools.currentDisplayMetrics.widthPixels/2, Tools.currentDisplayMetrics.heightPixels/2);
+        this(name, keycodes, Tools.currentDisplayMetrics.widthPixels/2f, Tools.currentDisplayMetrics.heightPixels/2f);
     }
 
     public ControlData(String name, int[] keycodes, float x, float y) {
@@ -176,12 +178,6 @@ public class ControlData {
                 controlData.cornerRadius
         );
     }
-    
-    public void execute(boolean isDown) {
-        for(int keycode : keycodes){
-            sendKeyPress(keycode, 0, isDown);
-        }
-    }
 
     
     public float insertDynamicPos(String dynamicPos) {
@@ -204,6 +200,7 @@ public class ControlData {
     }
 
 
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public boolean containsKeycode(int keycodeToCheck){
         for(int keycode : keycodes)
             if(keycodeToCheck == keycode)

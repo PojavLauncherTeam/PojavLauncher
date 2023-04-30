@@ -230,6 +230,7 @@ public class LauncherActivity extends BaseActivity {
         LauncherPreferences.computeNotchSize(this);
     }
 
+    @SuppressWarnings("SameParameterValue")
     private Fragment getVisibleFragment(String tag){
         Fragment fragment = getSupportFragmentManager().findFragmentByTag(tag);
         if(fragment != null && fragment.isVisible()) {
@@ -238,6 +239,7 @@ public class LauncherActivity extends BaseActivity {
         return null;
     }
 
+    @SuppressWarnings("unused")
     private Fragment getVisibleFragment(int id){
         Fragment fragment = getSupportFragmentManager().findFragmentById(id);
         if(fragment != null && fragment.isVisible()) {

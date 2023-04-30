@@ -8,6 +8,7 @@ import java.nio.charset.*;
 import net.kdt.pojavlaunch.*;
 import org.apache.commons.io.*;
 
+@SuppressWarnings("IOStreamConstructor")
 public class DownloadUtils {
     public static final String USER_AGENT = Tools.APP_NAME;
 

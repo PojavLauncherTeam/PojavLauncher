@@ -1,11 +1,9 @@
 package net.kdt.pojavlaunch.customcontrols.handleview;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +13,6 @@ import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
 
 import net.kdt.pojavlaunch.R;
-import net.kdt.pojavlaunch.customcontrols.buttons.ControlButton;
 import net.kdt.pojavlaunch.customcontrols.buttons.ControlInterface;
 
 public class ControlHandleView extends View {
@@ -66,6 +63,7 @@ public class ControlHandleView extends View {
         setY(controlInterface.getControlView().getY() + controlInterface.getControlView().getHeight());
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getActionMasked()){

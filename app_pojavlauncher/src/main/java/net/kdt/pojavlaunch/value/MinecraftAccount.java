@@ -14,6 +14,7 @@ import androidx.annotation.Keep;
 
 import org.apache.commons.io.IOUtils;
 
+@SuppressWarnings("IOStreamConstructor")
 @Keep
 public class MinecraftAccount {
     public String accessToken = "0"; // access token

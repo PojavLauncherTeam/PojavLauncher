@@ -54,6 +54,7 @@ public class MinecraftGLSurface extends View implements GrabListener{
     private final TapDetector mDoubleTapDetector = new TapDetector(2, TapDetector.DETECTION_METHOD_DOWN);
     /* MC GUI scale, listened by MCOptionUtils */
     private int mGuiScale;
+    @SuppressWarnings("FieldCanBeLocal") // it can't, otherwise the weak reference will disappear
     private final MCOptionUtils.MCOptionListener mGuiScaleListener = () -> mGuiScale = getMcScale();
     /* Surface ready listener, used by the activity to launch minecraft */
     SurfaceReadyListener mSurfaceReadyListener = null;

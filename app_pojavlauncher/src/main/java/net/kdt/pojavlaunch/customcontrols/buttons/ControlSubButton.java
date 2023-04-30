@@ -1,12 +1,10 @@
 package net.kdt.pojavlaunch.customcontrols.buttons;
 
 import android.annotation.SuppressLint;
-import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
-import net.kdt.pojavlaunch.SingleTapConfirm;
 import net.kdt.pojavlaunch.customcontrols.ControlData;
 import net.kdt.pojavlaunch.customcontrols.ControlDrawerData;
 import net.kdt.pojavlaunch.customcontrols.ControlLayout;
@@ -14,7 +12,7 @@ import net.kdt.pojavlaunch.customcontrols.ControlLayout;
 @SuppressLint("ViewConstructor")
 public class ControlSubButton extends ControlButton {
 
-    public ControlDrawer parentDrawer;
+    public final ControlDrawer parentDrawer;
 
     public ControlSubButton(ControlLayout layout, ControlData properties, ControlDrawer parentDrawer) {
         super(layout, properties);
@@ -44,6 +42,7 @@ public class ControlSubButton extends ControlButton {
         super.setLayoutParams(params);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if(!getControlLayoutParent().getModifiable() || parentDrawer.drawerData.orientation == ControlDrawerData.Orientation.FREE){

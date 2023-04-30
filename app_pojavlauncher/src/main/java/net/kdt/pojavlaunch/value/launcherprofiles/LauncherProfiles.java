@@ -1,16 +1,17 @@
 package net.kdt.pojavlaunch.value.launcherprofiles;
+
 import android.util.Log;
 
-import com.google.gson.*;
-import net.kdt.pojavlaunch.*;
-import java.io.*;
+import net.kdt.pojavlaunch.Tools;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
 public class LauncherProfiles {
     public static MinecraftLauncherProfiles mainProfileJson;
-    public static File launcherProfilesFile = new File(Tools.DIR_GAME_NEW + "/launcher_profiles.json");
+    public static final File launcherProfilesFile = new File(Tools.DIR_GAME_NEW, "launcher_profiles.json");
     public static MinecraftLauncherProfiles update() {
         try {
             if (mainProfileJson == null) {
@@ -47,7 +48,7 @@ public class LauncherProfiles {
         // Detect denormalized keys
         for(String profileKey : launcherProfiles.profiles.keySet()){
             try{
-                UUID.fromString(profileKey);
+                if(!UUID.fromString(profileKey).toString().equals(profileKey)) keys.add(profileKey);
             }catch (IllegalArgumentException exception){
                 keys.add(profileKey);
                 Log.w(LauncherProfiles.class.toString(), "Illegal profile uuid: " + profileKey);
@@ -68,14 +69,4 @@ public class LauncherProfiles {
 
         return hasNormalized;
     }
-    /*
-     public static String insert;
-
-     private static void insertMissing() {
-     if (mainProfileJson.authenticationDatabase == null) {
-     MinecraftAuthenticationDatabase mad = new MinecraftAuthenticationDatabase();
-     mainProfileJson.authenticationDatabase = mad;
-     }
-     }
-     */
 }

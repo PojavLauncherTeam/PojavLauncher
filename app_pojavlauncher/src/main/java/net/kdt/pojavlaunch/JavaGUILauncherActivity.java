@@ -3,32 +3,41 @@ package net.kdt.pojavlaunch;
 import static net.kdt.pojavlaunch.MainActivity.fullyExit;
 
 import android.annotation.SuppressLint;
-import android.os.*;
-import android.util.*;
-import android.view.*;
-import android.widget.*;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 
-import java.io.*;
-import java.nio.ByteBuffer;
-import java.util.*;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
+import com.kdt.LoggerView;
 
 import net.kdt.pojavlaunch.customcontrols.keyboard.AwtCharSender;
 import net.kdt.pojavlaunch.customcontrols.keyboard.TouchCharInput;
 import net.kdt.pojavlaunch.multirt.MultiRTUtils;
-import net.kdt.pojavlaunch.multirt.Runtime;
-import net.kdt.pojavlaunch.prefs.*;
-import net.kdt.pojavlaunch.utils.*;
-import org.lwjgl.glfw.*;
+import net.kdt.pojavlaunch.prefs.LauncherPreferences;
+import net.kdt.pojavlaunch.utils.JREUtils;
+import net.kdt.pojavlaunch.utils.MathUtils;
 
-import com.kdt.LoggerView;
+import org.lwjgl.glfw.CallbackBridge;
+
+import java.io.File;
+import java.io.InputStream;
+import java.nio.ByteBuffer;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
 public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouchListener {
-    private static final int MSG_LEFT_MOUSE_BUTTON_CHECK = 1028;
-    
+
     private AWTCanvasView mTextureView;
     private LoggerView mLoggerView;
     private TouchCharInput mTouchCharInput;
@@ -128,7 +137,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
 
         try {
 
-            placeMouseAt(CallbackBridge.physicalWidth / 2, CallbackBridge.physicalHeight / 2);
+            placeMouseAt(CallbackBridge.physicalWidth / 2f, CallbackBridge.physicalHeight / 2f);
             
             final File modFile = (File) getIntent().getExtras().getSerializable("modFile");
             final String javaArgs = getIntent().getExtras().getString("javaArgs");
@@ -188,6 +197,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
 
 
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouch(View v, MotionEvent e) {
         boolean isDown;
@@ -231,16 +241,12 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
         return true;
     }
 
-    public void placeMouseAdd(float x, float y) {
-        mMousePointerImageView.setX(mMousePointerImageView.getX() + x);
-        mMousePointerImageView.setY(mMousePointerImageView.getY() + y);
-    }
-
     public void placeMouseAt(float x, float y) {
         mMousePointerImageView.setX(x);
         mMousePointerImageView.setY(y);
     }
 
+    @SuppressWarnings("SuspiciousNameCombination")
     void sendScaledMousePosition(float x, float y){
         // Clamp positions to the borders of the usable view, then scale them
         x = androidx.core.math.MathUtils.clamp(x, mTextureView.getX(), mTextureView.getX() + mTextureView.getWidth());
@@ -260,14 +266,6 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
         mLoggerView.setVisibility(View.VISIBLE);
     }
 
-    public void closeLogOutput(View view) {
-        if (mSkipDetectMod) {
-            mLoggerView.setVisibility(View.GONE);
-        } else {
-            forceClose(null);
-        }
-    }
-
     public void toggleVirtualMouse(View v) {
         mIsVirtualMouseEnabled = !mIsVirtualMouseEnabled;
         mTouchPad.setVisibility(mIsVirtualMouseEnabled ? View.VISIBLE : View.GONE);
@@ -279,7 +277,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
     public int launchJavaRuntime(File modFile, String javaArgs) {
         JREUtils.redirectAndPrintJRELog();
         try {
-            List<String> javaArgList = new ArrayList<String>();
+            List<String> javaArgList = new ArrayList<>();
 
             // Enable Caciocavallo
             Tools.getCacioJavaArgs(javaArgList,MultiRTUtils.getSelectedRuntime().javaVersion == 8);
@@ -311,7 +309,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
 
 
 
-    private int doCustomInstall(File modFile, String javaArgs) throws IOException {
+    private int doCustomInstall(File modFile, String javaArgs) {
         mSkipDetectMod = true;
         return launchJavaRuntime(modFile, javaArgs);
     }

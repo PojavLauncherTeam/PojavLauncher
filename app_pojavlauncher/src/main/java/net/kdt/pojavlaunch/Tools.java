@@ -1,43 +1,37 @@
 package net.kdt.pojavlaunch;
 
-import android.app.*;
-import android.content.*;
-import android.content.res.Configuration;
-import android.database.Cursor;
-import android.net.*;
-import android.os.*;
-import android.provider.OpenableColumns;
-import android.util.*;
-import com.google.gson.*;
-
-import java.io.*;
-import java.lang.reflect.*;
-import java.nio.charset.*;
-import java.util.*;
-
-import net.kdt.pojavlaunch.extra.ExtraConstants;
-import net.kdt.pojavlaunch.extra.ExtraCore;
-import net.kdt.pojavlaunch.multirt.MultiRTUtils;
-import net.kdt.pojavlaunch.plugins.FFmpegPlugin;
-import net.kdt.pojavlaunch.prefs.*;
-import net.kdt.pojavlaunch.utils.*;
-import net.kdt.pojavlaunch.value.*;
-import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
-import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
-
-import org.apache.commons.codec.binary.Hex;
-import org.apache.commons.io.IOUtils;
-import org.lwjgl.glfw.*;
-import android.view.*;
-import android.webkit.MimeTypeMap;
-import android.widget.EditText;
-import android.widget.Toast;
-
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.P;
 import static net.kdt.pojavlaunch.PojavApplication.sExecutorService;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_IGNORE_NOTCH;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_NOTCH_SIZE;
+
+import android.app.Activity;
+import android.app.ActivityManager;
+import android.app.AlertDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.ProgressDialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Environment;
+import android.provider.OpenableColumns;
+import android.util.ArrayMap;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.View;
+import android.view.WindowManager;
+import android.webkit.MimeTypeMap;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -46,9 +40,42 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 
-public final class Tools {
-    public static final boolean ENABLE_DEV_FEATURES = BuildConfig.DEBUG;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
+import net.kdt.pojavlaunch.multirt.MultiRTUtils;
+import net.kdt.pojavlaunch.plugins.FFmpegPlugin;
+import net.kdt.pojavlaunch.prefs.LauncherPreferences;
+import net.kdt.pojavlaunch.utils.DownloadUtils;
+import net.kdt.pojavlaunch.utils.JREUtils;
+import net.kdt.pojavlaunch.utils.JSONUtils;
+import net.kdt.pojavlaunch.utils.OldVersionsUtils;
+import net.kdt.pojavlaunch.value.DependentLibrary;
+import net.kdt.pojavlaunch.value.MinecraftAccount;
+import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
+import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
+
+import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.io.IOUtils;
+import org.lwjgl.glfw.CallbackBridge;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.lang.reflect.Field;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+
+@SuppressWarnings("IOStreamConstructor")
+public final class Tools {
     public static String APP_NAME = "null";
 
     public static final Gson GLOBAL_GSON = new GsonBuilder().setPrettyPrinting().create();
@@ -60,14 +87,13 @@ public final class Tools {
     public static String MULTIRT_HOME;
     public static String LOCAL_RENDERER = null;
     public static int DEVICE_ARCHITECTURE;
-    public static String LAUNCHERPROFILES_RTPREFIX = "pojav://";
+    public static final String LAUNCHERPROFILES_RTPREFIX = "pojav://";
 
     // New since 3.3.1
     public static String DIR_ACCOUNT_NEW;
     public static String DIR_ACCOUNT_OLD;
     public static String DIR_GAME_HOME = Environment.getExternalStorageDirectory().getAbsolutePath() + "/games/PojavLauncher";
     public static String DIR_GAME_NEW;
-    public static String DIR_GAME_OLD = Environment.getExternalStorageDirectory().getAbsolutePath() + "/games/.minecraft";
 
     // New since 3.0.0
     public static String DIR_HOME_JRE;
@@ -83,8 +109,6 @@ public final class Tools {
     public static String OBSOLETE_RESOURCES_PATH;
     public static String CTRLMAP_PATH;
     public static String CTRLDEF_FILE;
-
-    public static final String LIBNAME_OPTIFINE = "optifine:OptiFine";
     public static final int RUN_MOD_INSTALLER = 2050;
 
 
@@ -130,13 +154,12 @@ public final class Tools {
 
     public static void launchMinecraft(final Activity activity, MinecraftAccount minecraftAccount,
                                        MinecraftProfile minecraftProfile, String versionId) throws Throwable {
-        ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
-        ((ActivityManager)activity.getSystemService(Context.ACTIVITY_SERVICE)).getMemoryInfo(mi);
-        if(LauncherPreferences.PREF_RAM_ALLOCATION > (mi.availMem/1048576L)) {
+        int freeDeviceMemory = getFreeDeviceMemory(activity);
+        if(LauncherPreferences.PREF_RAM_ALLOCATION > freeDeviceMemory) {
             Object memoryErrorLock = new Object();
             activity.runOnUiThread(() -> {
                 androidx.appcompat.app.AlertDialog.Builder b = new androidx.appcompat.app.AlertDialog.Builder(activity)
-                        .setMessage(activity.getString(R.string.memory_warning_msg,(mi.availMem/1048576L),LauncherPreferences.PREF_RAM_ALLOCATION))
+                        .setMessage(activity.getString(R.string.memory_warning_msg, freeDeviceMemory ,LauncherPreferences.PREF_RAM_ALLOCATION))
                         .setPositiveButton(android.R.string.ok, (dialogInterface, i) -> {synchronized(memoryErrorLock){memoryErrorLock.notifyAll();}})
                         .setOnCancelListener((i) -> {synchronized(memoryErrorLock){memoryErrorLock.notifyAll();}});
                 b.show();
@@ -147,12 +170,12 @@ public final class Tools {
         }
         JMinecraftVersionList.Version versionInfo = Tools.getVersionInfo(versionId);
         LauncherProfiles.update();
-        String gamedirPath = Tools.getGameDirPath(minecraftProfile);
+        File gamedir = Tools.getGameDirPath(minecraftProfile);
 
 
         // Pre-process specific files
-        disableSplash(gamedirPath);
-        String[] launchArgs = getMinecraftClientArgs(minecraftAccount, versionInfo, gamedirPath);
+        disableSplash(gamedir);
+        String[] launchArgs = getMinecraftClientArgs(minecraftAccount, versionInfo, gamedir);
 
         // Select the appropriate openGL version
         OldVersionsUtils.selectOpenGlVersion(versionInfo);
@@ -160,7 +183,7 @@ public final class Tools {
 
         String launchClassPath = generateLaunchClassPath(versionInfo, versionId);
 
-        List<String> javaArgList = new ArrayList<String>();
+        List<String> javaArgList = new ArrayList<>();
 
         getCacioJavaArgs(javaArgList, MultiRTUtils.getSelectedRuntime().javaVersion == 8);
 
@@ -171,7 +194,7 @@ public final class Tools {
             }
             javaArgList.add("-Dlog4j.configurationFile=" + configFile);
         }
-        javaArgList.addAll(Arrays.asList(getMinecraftJVMArgs(versionId, gamedirPath)));
+        javaArgList.addAll(Arrays.asList(getMinecraftJVMArgs(versionId, gamedir)));
         javaArgList.add("-cp");
         javaArgList.add(getLWJGL3ClassPath() + ":" + launchClassPath);
 
@@ -181,17 +204,17 @@ public final class Tools {
         FFmpegPlugin.discover(activity);
         String args = LauncherPreferences.PREF_CUSTOM_JAVA_ARGS;
         if(Tools.isValidString(minecraftProfile.javaArgs)) args = minecraftProfile.javaArgs;
-        JREUtils.launchJavaVM(activity, gamedirPath, javaArgList, args);
+        JREUtils.launchJavaVM(activity, gamedir, javaArgList, args);
     }
 
-    public static String getGameDirPath(@NonNull MinecraftProfile minecraftProfile){
+    public static File getGameDirPath(@NonNull MinecraftProfile minecraftProfile){
         if(minecraftProfile.gameDir != null){
             if(minecraftProfile.gameDir.startsWith(Tools.LAUNCHERPROFILES_RTPREFIX))
-                return minecraftProfile.gameDir.replace(Tools.LAUNCHERPROFILES_RTPREFIX,Tools.DIR_GAME_HOME+"/");
+                return new File(minecraftProfile.gameDir.replace(Tools.LAUNCHERPROFILES_RTPREFIX,Tools.DIR_GAME_HOME+"/"));
             else
-                return Tools.DIR_GAME_HOME + '/' + minecraftProfile.gameDir;
+                return new File(Tools.DIR_GAME_HOME,minecraftProfile.gameDir);
         }
-        return Tools.DIR_GAME_NEW;
+        return new File(Tools.DIR_GAME_NEW);
     }
 
     public static void buildNotificationChannel(Context context){
@@ -202,26 +225,24 @@ public final class Tools {
         NotificationManagerCompat manager = NotificationManagerCompat.from(context);
         manager.createNotificationChannel(channel);
     }
-
-    private static boolean mkdirs(String path) {
-        File file = new File(path);
-        return file.mkdirs();
-    }
-
-    public static void disableSplash(String dir) {
-        mkdirs(dir + "/config");
-        File forgeSplashFile = new File(dir, "config/splash.properties");
-        String forgeSplashContent = "enabled=true";
-        try {
-            if (forgeSplashFile.exists()) {
-                forgeSplashContent = Tools.read(forgeSplashFile.getAbsolutePath());
+    public static void disableSplash(File dir) {
+        File configDir = new File(dir, "config");
+        if(configDir.exists() || configDir.mkdirs()) {
+            File forgeSplashFile = new File(dir, "config/splash.properties");
+            String forgeSplashContent = "enabled=true";
+            try {
+                if (forgeSplashFile.exists()) {
+                    forgeSplashContent = Tools.read(forgeSplashFile.getAbsolutePath());
+                }
+                if (forgeSplashContent.contains("enabled=true")) {
+                    Tools.write(forgeSplashFile.getAbsolutePath(),
+                            forgeSplashContent.replace("enabled=true", "enabled=false"));
+                }
+            } catch (IOException e) {
+                Log.w(Tools.APP_NAME, "Could not disable Forge 1.12.2 and below splash screen!", e);
             }
-            if (forgeSplashContent.contains("enabled=true")) {
-                Tools.write(forgeSplashFile.getAbsolutePath(),
-                        forgeSplashContent.replace("enabled=true", "enabled=false"));
-            }
-        } catch (IOException e) {
-            Log.w(Tools.APP_NAME, "Could not disable Forge 1.12.2 and below splash screen!", e);
+        } else {
+            Log.w(Tools.APP_NAME, "Failed to create the configuration directory");
         }
     }
 
@@ -261,19 +282,20 @@ public final class Tools {
         }
 
         StringBuilder cacioClasspath = new StringBuilder();
-        cacioClasspath.append("-Xbootclasspath/" + (isJava8 ? "p" : "a"));
+        cacioClasspath.append("-Xbootclasspath/").append(isJava8 ? "p" : "a");
         File cacioDir = new File(DIR_GAME_HOME + "/caciocavallo" + (isJava8 ? "" : "17"));
-        if (cacioDir.exists() && cacioDir.isDirectory()) {
-            for (File file : cacioDir.listFiles()) {
+        File[] cacioFiles = cacioDir.listFiles();
+        if (cacioFiles != null) {
+            for (File file : cacioFiles) {
                 if (file.getName().endsWith(".jar")) {
-                    cacioClasspath.append(":" + file.getAbsolutePath());
+                    cacioClasspath.append(":").append(file.getAbsolutePath());
                 }
             }
         }
         javaArgList.add(cacioClasspath.toString());
     }
 
-    public static String[] getMinecraftJVMArgs(String versionName, String strGameDir) {
+    public static String[] getMinecraftJVMArgs(String versionName, File gameDir) {
         JMinecraftVersionList.Version versionInfo = Tools.getVersionInfo(versionName, true);
         // Parse Forge 1.17+ additional JVM Arguments
         if (versionInfo.inheritsFrom == null || versionInfo.arguments == null || versionInfo.arguments.jvm == null) {
@@ -282,39 +304,22 @@ public final class Tools {
 
         Map<String, String> varArgMap = new ArrayMap<>();
         varArgMap.put("classpath_separator", ":");
-        varArgMap.put("library_directory", strGameDir + "/libraries");
+        varArgMap.put("library_directory", new File(gameDir, "libraries").getAbsolutePath());
         varArgMap.put("version_name", versionInfo.id);
         varArgMap.put("natives_directory", Tools.NATIVE_LIB_DIR);
 
-        List<String> minecraftArgs = new ArrayList<String>();
+        List<String> minecraftArgs = new ArrayList<>();
         if (versionInfo.arguments != null) {
             for (Object arg : versionInfo.arguments.jvm) {
                 if (arg instanceof String) {
                     minecraftArgs.add((String) arg);
-                } else {
-                    /*
-                     JMinecraftVersionList.Arguments.ArgValue argv = (JMinecraftVersionList.Arguments.ArgValue) arg;
-                     if (argv.values != null) {
-                     minecraftArgs.add(argv.values[0]);
-                     } else {
-
-                     for (JMinecraftVersionList.Arguments.ArgValue.ArgRules rule : arg.rules) {
-                     // rule.action = allow
-                     // TODO implement this
-                     }
-
-                     }
-                     */
-                }
+                } //TODO: implement (?maybe?)
             }
         }
-
-        String[] argsFromJson = JSONUtils.insertJSONValueList(minecraftArgs.toArray(new String[0]), varArgMap);
-        // Tools.dialogOnUiThread(this, "Result args", Arrays.asList(argsFromJson).toString());
-        return argsFromJson;
+        return JSONUtils.insertJSONValueList(minecraftArgs.toArray(new String[0]), varArgMap);
     }
 
-    public static String[] getMinecraftClientArgs(MinecraftAccount profile, JMinecraftVersionList.Version versionInfo, String strGameDir) {
+    public static String[] getMinecraftClientArgs(MinecraftAccount profile, JMinecraftVersionList.Version versionInfo, File gameDir) {
         String username = profile.username;
         String versionName = versionInfo.id;
         if (versionInfo.inheritsFrom != null) {
@@ -322,9 +327,6 @@ public final class Tools {
         }
 
         String userType = "mojang";
-
-        File gameDir = new File(strGameDir);
-        gameDir.mkdirs();
 
         Map<String, String> varArgMap = new ArrayMap<>();
         varArgMap.put("auth_session", profile.accessToken); // For legacy versions of MC
@@ -341,39 +343,23 @@ public final class Tools {
         varArgMap.put("version_name", versionName);
         varArgMap.put("version_type", versionInfo.type);
 
-        List<String> minecraftArgs = new ArrayList<String>();
+        List<String> minecraftArgs = new ArrayList<>();
         if (versionInfo.arguments != null) {
             // Support Minecraft 1.13+
             for (Object arg : versionInfo.arguments.game) {
                 if (arg instanceof String) {
                     minecraftArgs.add((String) arg);
-                } else {
-                    /*
-                    JMinecraftVersionList.Arguments.ArgValue argv = (JMinecraftVersionList.Arguments.ArgValue) arg;
-                    if (argv.values != null) {
-                        minecraftArgs.add(argv.values[0]);
-                    } else {
-
-                         for (JMinecraftVersionList.Arguments.ArgValue.ArgRules rule : arg.rules) {
-                         // rule.action = allow
-                         // TODO implement this
-                         }
-
-                    }
-                    */
-                }
+                } //TODO: implement else clause
             }
         }
 
-        String[] argsFromJson = JSONUtils.insertJSONValueList(
+        return JSONUtils.insertJSONValueList(
                 splitAndFilterEmpty(
                         versionInfo.minecraftArguments == null ?
                                 fromStringArray(minecraftArgs.toArray(new String[0])):
                                 versionInfo.minecraftArguments
                 ), varArgMap
         );
-        // Tools.dialogOnUiThread(this, "Result args", Arrays.asList(argsFromJson).toString());
-        return argsFromJson;
     }
 
     public static String fromStringArray(String[] strArr) {
@@ -387,7 +373,7 @@ public final class Tools {
     }
 
     private static String[] splitAndFilterEmpty(String argStr) {
-        List<String> strList = new ArrayList<String>();
+        List<String> strList = new ArrayList<>();
         for (String arg : argStr.split(" ")) {
             if (!arg.isEmpty()) {
                 strList.add(arg);
@@ -415,10 +401,11 @@ public final class Tools {
     private static String getLWJGL3ClassPath() {
         StringBuilder libStr = new StringBuilder();
         File lwjgl3Folder = new File(Tools.DIR_GAME_HOME, "lwjgl3");
-        if (/* info.arguments != null && */ lwjgl3Folder.exists()) {
-            for (File file: lwjgl3Folder.listFiles()) {
+        File[] lwjgl3Files = lwjgl3Folder.listFiles();
+        if (lwjgl3Files != null) {
+            for (File file: lwjgl3Files) {
                 if (file.getName().endsWith(".jar")) {
-                    libStr.append(file.getAbsolutePath() + ":");
+                    libStr.append(file.getAbsolutePath()).append(":");
                 }
             }
         }
@@ -427,7 +414,7 @@ public final class Tools {
         return libStr.toString();
     }
 
-    private static boolean isClientFirst = false;
+    private final static boolean isClientFirst = false;
     public static String generateLaunchClassPath(JMinecraftVersionList.Version info,String actualname) {
         StringBuilder libStr = new StringBuilder(); //versnDir + "/" + version + "/" + version + ".jar:";
 
@@ -441,7 +428,7 @@ public final class Tools {
                 Log.d(APP_NAME, "Ignored non-exists file: " + perJar);
                 continue;
             }
-            libStr.append((isClientFirst ? ":" : "") + perJar + (!isClientFirst ? ":" : ""));
+            libStr.append((isClientFirst ? ":" : "")).append(perJar).append(!isClientFirst ? ":" : "");
         }
         if (!isClientFirst) {
             libStr.append(getPatchedFile(actualname));
@@ -520,8 +507,8 @@ public final class Tools {
 
     public static void copyAssetFile(Context ctx, String fileName, String output, String outputName, boolean overwrite) throws IOException {
         File parentFolder = new File(output);
-        if(!parentFolder.exists()) {
-            parentFolder.mkdirs();
+        if(!parentFolder.exists() && !parentFolder.mkdirs()) {
+            throw new IOException("Failed to create parent directory");
         }
         File destinationFile = new File(output, outputName);
         if(!destinationFile.exists() || overwrite){
@@ -611,32 +598,6 @@ public final class Tools {
                 .show());
     }
 
-    public static void moveInside(String from, String to) {
-        File fromFile = new File(from);
-        for (File fromInside : fromFile.listFiles()) {
-            moveRecursive(fromInside.getAbsolutePath(), to);
-        }
-        fromFile.delete();
-    }
-
-    public static void moveRecursive(String from, String to) {
-        moveRecursive(new File(from), new File(to));
-    }
-
-    public static void moveRecursive(File from, File to) {
-        File toFrom = new File(to, from.getName());
-        try {
-            if (from.isDirectory()) {
-                for (File child : from.listFiles()) {
-                    moveRecursive(child, toFrom);
-                }
-            }
-        } finally {
-            from.getParentFile().mkdirs();
-            from.renameTo(toFrom);
-        }
-    }
-
     public static void openURL(Activity act, String url) {
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         act.startActivity(browserIntent);
@@ -652,7 +613,7 @@ public final class Tools {
         return true; // allow if none match
     }
     public static String[] generateLibClasspath(JMinecraftVersionList.Version info) {
-        List<String> libDir = new ArrayList<String>();
+        List<String> libDir = new ArrayList<>();
         for (DependentLibrary libItem: info.libraries) {
             if(!checkRules(libItem.rules)) continue;
             libDir.add(Tools.DIR_HOME_LIBRARY + "/" + Tools.artifactToPath(libItem.name));
@@ -664,18 +625,14 @@ public final class Tools {
         return getVersionInfo(versionName, false);
     }
 
+    @SuppressWarnings({"unchecked", "rawtypes"})
     public static JMinecraftVersionList.Version getVersionInfo(String versionName, boolean skipInheriting) {
         try {
             JMinecraftVersionList.Version customVer = Tools.GLOBAL_GSON.fromJson(read(DIR_HOME_VERSION + "/" + versionName + "/" + versionName + ".json"), JMinecraftVersionList.Version.class);
             if (skipInheriting || customVer.inheritsFrom == null || customVer.inheritsFrom.equals(customVer.id)) {
                 return customVer;
             } else {
-                JMinecraftVersionList.Version inheritsVer = null;
-                /*for (JMinecraftVersionList.Version valueVer : ((JMinecraftVersionList) ExtraCore.getValue(ExtraConstants.RELEASE_TABLE)).versions) {
-                    if (valueVer.id.equals(customVer.inheritsFrom) && (!new File(DIR_HOME_VERSION + "/" + customVer.inheritsFrom + "/" + customVer.inheritsFrom + ".json").exists()) && (valueVer.url != null)) {
-                        Tools.downloadFile(valueVer.url,DIR_HOME_VERSION + "/" + customVer.inheritsFrom + "/" + customVer.inheritsFrom + ".json");
-                    }
-                }*/
+                JMinecraftVersionList.Version inheritsVer;
                 //If it won't download, just search for it
                 try{
                     inheritsVer = Tools.GLOBAL_GSON.fromJson(read(DIR_HOME_VERSION + "/" + customVer.inheritsFrom + "/" + customVer.inheritsFrom + ".json"), JMinecraftVersionList.Version.class);
@@ -689,7 +646,7 @@ public final class Tools {
                         "releaseTime", "time", "type"
                 );
 
-                List<DependentLibrary> libList = new ArrayList<DependentLibrary>(Arrays.asList(inheritsVer.libraries));
+                List<DependentLibrary> libList = new ArrayList<>(Arrays.asList(inheritsVer.libraries));
                 try {
                     loop_1:
                     for (DependentLibrary lib : customVer.libraries) {
@@ -715,8 +672,7 @@ public final class Tools {
 
                 // Inheriting Minecraft 1.13+ with append custom args
                 if (inheritsVer.arguments != null && customVer.arguments != null) {
-                    List totalArgList = new ArrayList();
-                    totalArgList.addAll(Arrays.asList(inheritsVer.arguments.game));
+                    List totalArgList = new ArrayList(Arrays.asList(inheritsVer.arguments.game));
 
                     int nskip = 0;
                     for (int i = 0; i < customVer.arguments.game.length; i++) {
@@ -786,7 +742,9 @@ public final class Tools {
     public static void write(String path, String content) throws IOException {
         File file = new File(path);
         File parent = file.getParentFile();
-        if(!parent.exists()) parent.mkdirs();
+        if(parent != null && !parent.exists()) {
+            if(!parent.mkdirs()) throw new IOException("Failed to create parent directory");
+        }
         try(FileOutputStream outStream = new FileOutputStream(file)) {
             IOUtils.write(content, outStream);
         }
@@ -807,7 +765,7 @@ public final class Tools {
             try (InputStream is = new FileInputStream(f)) {
                 sha1_dst = new String(Hex.encodeHex(org.apache.commons.codec.digest.DigestUtils.sha1(is)));
             }
-            if(sha1_dst != null && sourceSHA != null) {
+            if(sourceSHA != null) {
                 return sha1_dst.equalsIgnoreCase(sourceSHA);
             } else{
                 return true; // fake match
