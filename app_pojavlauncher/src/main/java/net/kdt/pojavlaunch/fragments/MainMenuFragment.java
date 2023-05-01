@@ -21,8 +21,6 @@ import net.kdt.pojavlaunch.extra.ExtraConstants;
 import net.kdt.pojavlaunch.extra.ExtraCore;
 import net.kdt.pojavlaunch.progresskeeper.ProgressKeeper;
 
-import java.io.File;
-
 public class MainMenuFragment extends Fragment {
     public static final String TAG = "MainMenuFragment";
 

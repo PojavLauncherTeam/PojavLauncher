@@ -5,20 +5,15 @@ import com.google.gson.JsonSyntaxException;
 import net.kdt.pojavlaunch.LwjglGlfwKeycode;
 import net.kdt.pojavlaunch.Tools;
 
-import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.lwjgl.glfw.CallbackBridge;
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class LayoutConverter {
-    public static boolean convertLookType = false; //false = flat; true = classic
     public static CustomControls loadAndConvertIfNecessary(String jsonPath) throws IOException, JsonSyntaxException {
 
         String jsonLayoutData = Tools.read(jsonPath);
@@ -49,12 +44,12 @@ public class LayoutConverter {
         for(int i = 0; i < layoutMainArray.length(); i++) {
             JSONObject button = layoutMainArray.getJSONObject(i);
             ControlData n_button = Tools.GLOBAL_GSON.fromJson(button.toString(), ControlData.class);
-            if((n_button.dynamicX == null || n_button.dynamicX.isEmpty())&&button.has("x")) {
+            if(!Tools.isValidString(n_button.dynamicX) && button.has("x")) {
                 double buttonC = button.getDouble("x");
                 double ratio = buttonC/CallbackBridge.physicalWidth;
                 n_button.dynamicX = ratio + " * ${screen_width}";
             }
-            if((n_button.dynamicY == null || n_button.dynamicY.isEmpty())&&button.has("y")) {
+            if(!Tools.isValidString(n_button.dynamicY) && button.has("y")) {
                 double buttonC = button.getDouble("y");
                 double ratio = buttonC/CallbackBridge.physicalHeight;
                 n_button.dynamicY = ratio + " * ${screen_height}";
@@ -67,12 +62,12 @@ public class LayoutConverter {
             JSONObject button = layoutDrawerArray.getJSONObject(i);
             JSONObject buttonProperties = button.getJSONObject("properties");
             ControlDrawerData n_button = Tools.GLOBAL_GSON.fromJson(button.toString(), ControlDrawerData.class);
-            if((n_button.properties.dynamicX == null || n_button.properties.dynamicX.isEmpty())&&buttonProperties.has("x")) {
+            if(!Tools.isValidString(n_button.properties.dynamicX) && buttonProperties.has("x")) {
                 double buttonC = buttonProperties.getDouble("x");
                 double ratio = buttonC/CallbackBridge.physicalWidth;
                 n_button.properties.dynamicX = ratio + " * ${screen_width}";
             }
-            if((n_button.properties.dynamicY == null || n_button.properties.dynamicY.isEmpty())&&buttonProperties.has("y")) {
+            if(!Tools.isValidString(n_button.properties.dynamicY) && buttonProperties.has("y")) {
                 double buttonC = buttonProperties.getDouble("y");
                 double ratio = buttonC/CallbackBridge.physicalHeight;
                 n_button.properties.dynamicY = ratio + " * ${screen_height}";
@@ -95,12 +90,12 @@ public class LayoutConverter {
             n_button.isDynamicBtn = button.getBoolean("isDynamicBtn");
             n_button.dynamicX = button.getString("dynamicX");
             n_button.dynamicY = button.getString("dynamicY");
-            if((n_button.dynamicX == null || n_button.dynamicX.isEmpty())&&button.has("x")) {
+            if(!Tools.isValidString(n_button.dynamicX) && button.has("x")) {
                 double buttonC = button.getDouble("x");
                 double ratio = buttonC/CallbackBridge.physicalWidth;
                 n_button.dynamicX = ratio + " * ${screen_width}";
             }
-            if((n_button.dynamicY == null || n_button.dynamicY.isEmpty())&&button.has("y")) {
+            if(!Tools.isValidString(n_button.dynamicY) && button.has("y")) {
                 double buttonC = button.getDouble("y");
                 double ratio = buttonC/CallbackBridge.physicalHeight;
                 n_button.dynamicY = ratio + " * ${screen_height}";
@@ -111,14 +106,8 @@ public class LayoutConverter {
             n_button.isToggle = button.getBoolean("isToggle");
             n_button.setHeight(button.getInt("height"));
             n_button.setWidth(button.getInt("width"));
-            if(convertLookType) {
-                n_button.strokeColor = 0xdd7f7f7f;
-                n_button.bgColor = 0x807f7f7f;
-                n_button.strokeWidth = 10;
-            }else{
-                n_button.bgColor = 0x4d000000;
-                n_button.strokeWidth = 0;
-            }
+            n_button.bgColor = 0x4d000000;
+            n_button.strokeWidth = 0;
             if(button.getBoolean("isRound")) { n_button.cornerRadius =  35f; }
             int next_idx = 0;
             if(button.getBoolean("holdShift")) { keycodes[next_idx] = LwjglGlfwKeycode.GLFW_KEY_LEFT_SHIFT; next_idx++; }

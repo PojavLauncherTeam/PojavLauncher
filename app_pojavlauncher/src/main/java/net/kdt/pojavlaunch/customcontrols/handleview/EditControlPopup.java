@@ -16,7 +16,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -32,16 +31,12 @@ import com.kdt.DefocusableScrollView;
 
 import net.kdt.pojavlaunch.EfficientAndroidLWJGLKeycode;
 import net.kdt.pojavlaunch.R;
-import net.kdt.pojavlaunch.colorselector.ColorSelectionListener;
 import net.kdt.pojavlaunch.colorselector.ColorSelector;
 import net.kdt.pojavlaunch.customcontrols.ControlData;
 import net.kdt.pojavlaunch.customcontrols.ControlDrawerData;
-import net.kdt.pojavlaunch.customcontrols.buttons.ControlButton;
 import net.kdt.pojavlaunch.customcontrols.buttons.ControlDrawer;
 import net.kdt.pojavlaunch.customcontrols.buttons.ControlInterface;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -83,7 +78,7 @@ public class EditControlPopup {
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     protected Switch mToggleSwitch, mPassthroughSwitch, mSwipeableSwitch;
     protected Spinner mOrientationSpinner;
-    protected Spinner[] mKeycodeSpinners = new Spinner[4];
+    protected final Spinner[] mKeycodeSpinners = new Spinner[4];
     protected SeekBar mStrokeWidthSeekbar, mCornerRadiusSeekbar, mAlphaSeekbar;
     protected TextView mStrokePercentTextView, mCornerRadiusPercentTextView, mAlphaPercentTextView;
     protected TextView mSelectBackgroundColor, mSelectStrokeColor;
@@ -247,7 +242,7 @@ public class EditControlPopup {
 
 
     public static void setPercentageText(TextView textView, int progress){
-        textView.setText(progress + " %");
+        textView.setText(textView.getContext().getString(R.string.percent_format, progress));
     }
 
     /* LOADING VALUES */
@@ -305,7 +300,7 @@ public class EditControlPopup {
     }
 
     /** Load values for the joystick */
-    public void loadJoystickValues(ControlData data){
+    @SuppressWarnings("unused") public void loadJoystickValues(ControlData data){
         loadValues(data);
 
         mMappingTextView.setVisibility(GONE);

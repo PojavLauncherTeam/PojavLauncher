@@ -2,7 +2,6 @@ package net.kdt.pojavlaunch.customcontrols.buttons;
 
 import android.annotation.SuppressLint;
 import android.view.MotionEvent;
-import android.view.View;
 import android.view.ViewGroup;
 
 import net.kdt.pojavlaunch.Tools;
@@ -19,9 +18,9 @@ import java.util.ArrayList;
 public class ControlDrawer extends ControlButton {
 
 
-    public ArrayList<ControlSubButton> buttons;
-    public ControlDrawerData drawerData;
-    public ControlLayout parentLayout;
+    public final ArrayList<ControlSubButton> buttons;
+    public final ControlDrawerData drawerData;
+    public final ControlLayout parentLayout;
     public boolean areButtonsVisible;
 
 
@@ -129,6 +128,7 @@ public class ControlDrawer extends ControlButton {
         setVisibility(isVisible ? VISIBLE : GONE);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if(!getControlLayoutParent().getModifiable()){

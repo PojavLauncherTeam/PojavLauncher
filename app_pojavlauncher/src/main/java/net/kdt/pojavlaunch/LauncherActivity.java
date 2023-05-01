@@ -165,9 +165,7 @@ public class LauncherActivity extends BaseActivity {
 
         ExtraCore.addExtraListener(ExtraConstants.LAUNCH_GAME, mLaunchGameListener);
 
-        new AsyncVersionList().getVersionList(versions -> {
-            ExtraCore.setValue(ExtraConstants.RELEASE_TABLE, versions);
-        });
+        new AsyncVersionList().getVersionList(versions -> ExtraCore.setValue(ExtraConstants.RELEASE_TABLE, versions));
 
         mProgressLayout.observe(ProgressLayout.DOWNLOAD_MINECRAFT);
         mProgressLayout.observe(ProgressLayout.UNPACK_RUNTIME);
@@ -216,8 +214,8 @@ public class LauncherActivity extends BaseActivity {
     /** Custom implementation to feel more natural when a backstack isn't present */
     @Override
     public void onBackPressed() {
-        if(isFragmentVisible(MicrosoftLoginFragment.TAG)){
-            MicrosoftLoginFragment fragment = (MicrosoftLoginFragment) getSupportFragmentManager().findFragmentByTag(MicrosoftLoginFragment.TAG);
+        MicrosoftLoginFragment fragment = (MicrosoftLoginFragment) getVisibleFragment(MicrosoftLoginFragment.TAG);
+        if(fragment != null){
             if(fragment.canGoBack()){
                 fragment.goBack();
                 return;
@@ -232,14 +230,22 @@ public class LauncherActivity extends BaseActivity {
         LauncherPreferences.computeNotchSize(this);
     }
 
-    private boolean isFragmentVisible(String tag){
+    @SuppressWarnings("SameParameterValue")
+    private Fragment getVisibleFragment(String tag){
         Fragment fragment = getSupportFragmentManager().findFragmentByTag(tag);
-        return fragment != null && fragment.isVisible();
+        if(fragment != null && fragment.isVisible()) {
+            return fragment;
+        }
+        return null;
     }
 
-    private boolean isFragmentVisible(int id){
+    @SuppressWarnings("unused")
+    private Fragment getVisibleFragment(int id){
         Fragment fragment = getSupportFragmentManager().findFragmentById(id);
-        return fragment != null && fragment.isVisible();
+        if(fragment != null && fragment.isVisible()) {
+            return fragment;
+        }
+        return null;
     }
 
     private void askForStoragePermission(){

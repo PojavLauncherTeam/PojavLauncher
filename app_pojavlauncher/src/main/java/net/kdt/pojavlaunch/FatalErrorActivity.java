@@ -36,12 +36,12 @@ public class FatalErrorActivity extends AppCompatActivity {
 	}
 
 	public static void showError(Context ctx, String savePath, boolean storageAllow, Throwable th) {
-		Intent ferrorIntent = new Intent(ctx, FatalErrorActivity.class);
-		ferrorIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-		ferrorIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		ferrorIntent.putExtra("throwable", th);
-		ferrorIntent.putExtra("savePath", savePath);
-		ferrorIntent.putExtra("storageAllow", storageAllow);
-		ctx.startActivity(ferrorIntent);
+		Intent fatalErrorIntent = new Intent(ctx, FatalErrorActivity.class);
+		fatalErrorIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+		fatalErrorIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		fatalErrorIntent.putExtra("throwable", th);
+		fatalErrorIntent.putExtra("savePath", savePath);
+		fatalErrorIntent.putExtra("storageAllow", storageAllow);
+		ctx.startActivity(fatalErrorIntent);
 	}
 }

@@ -6,6 +6,7 @@ import android.os.Looper;
 import android.util.ArrayMap;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.kdt.mcgui.ProgressLayout;
@@ -26,6 +27,7 @@ import java.net.HttpURLConnection;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.Map;
 
@@ -52,17 +54,12 @@ public class MicrosoftBackgroundLogin {
     }
 
     /* Fields used to fill the account  */
-    public boolean isRefresh;
     public String msRefreshToken;
     public String mcName;
     public String mcToken;
     public String mcUuid;
     public boolean doesOwnGame;
     public long expiresAt;
-
-    public MicrosoftBackgroundLogin(String filename){
-        this(false, MinecraftAccount.load(filename).accessToken);
-    }
 
     public MicrosoftBackgroundLogin(boolean isRefresh, String authCode){
         mIsRefresh = isRefresh;
@@ -133,14 +130,14 @@ public class MicrosoftBackgroundLogin {
         HttpURLConnection conn = (HttpURLConnection)url.openConnection();
         conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
         conn.setRequestProperty("charset", "utf-8");
-        conn.setRequestProperty("Content-Length", Integer.toString(formData.getBytes("UTF-8").length));
+        conn.setRequestProperty("Content-Length", Integer.toString(formData.getBytes(StandardCharsets.UTF_8).length));
         conn.setRequestMethod("POST");
         conn.setUseCaches(false);
         conn.setDoInput(true);
         conn.setDoOutput(true);
         conn.connect();
         try(OutputStream wr = conn.getOutputStream()) {
-            wr.write(formData.getBytes("UTF-8"));
+            wr.write(formData.getBytes(StandardCharsets.UTF_8));
         }
         if(conn.getResponseCode() >= 200 && conn.getResponseCode() < 300) {
             JSONObject jo = new JSONObject(Tools.read(conn.getInputStream()));
@@ -150,11 +147,8 @@ public class MicrosoftBackgroundLogin {
             return jo.getString("access_token");
             //acquireXBLToken(jo.getString("access_token"));
         }else{
-            throwResponseError(conn);
+            throw getResponseThrowable(conn);
         }
-
-        // Shouldn't happen
-        return null;
     }
 
     private String acquireXBLToken(String accessToken) throws IOException, JSONException {
@@ -171,11 +165,11 @@ public class MicrosoftBackgroundLogin {
 
         String req = data.toString();
         HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-        setCommonProperties(conn, req, true);
+        setCommonProperties(conn, req);
         conn.connect();
 
         try(OutputStream wr = conn.getOutputStream()) {
-            wr.write(req.getBytes("UTF-8"));
+            wr.write(req.getBytes(StandardCharsets.UTF_8));
         }
         if(conn.getResponseCode() >= 200 && conn.getResponseCode() < 300) {
             JSONObject jo = new JSONObject(Tools.read(conn.getInputStream()));
@@ -184,15 +178,12 @@ public class MicrosoftBackgroundLogin {
             return jo.getString("Token");
             //acquireXsts(jo.getString("Token"));
         }else{
-            throwResponseError(conn);
+            throw getResponseThrowable(conn);
         }
-
-        // Shouldn't happen
-        return null;
     }
 
     /** @return [uhs, token]*/
-    private String[] acquireXsts(String xblToken) throws IOException, JSONException {
+    private @NonNull String[] acquireXsts(String xblToken) throws IOException, JSONException {
         URL url = new URL(xstsAuthUrl);
 
         JSONObject data = new JSONObject();
@@ -206,12 +197,12 @@ public class MicrosoftBackgroundLogin {
         String req = data.toString();
         Log.i("MicroAuth", req);
         HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-        setCommonProperties(conn, req, true);
+        setCommonProperties(conn, req);
         Log.i("MicroAuth", conn.getRequestMethod());
         conn.connect();
 
         try(OutputStream wr = conn.getOutputStream()) {
-            wr.write(req.getBytes("UTF-8"));
+            wr.write(req.getBytes(StandardCharsets.UTF_8));
         }
 
         if(conn.getResponseCode() >= 200 && conn.getResponseCode() < 300) {
@@ -232,10 +223,8 @@ public class MicrosoftBackgroundLogin {
             }
             throw new PresentedException(new RuntimeException(responseContents), R.string.xerr_unknown, xerr);
         }else{
-            throwResponseError(conn);
+            throw getResponseThrowable(conn);
         }
-
-        return null;
     }
 
     private String acquireMinecraftToken(String xblUhs, String xblXsts) throws IOException, JSONException {
@@ -246,11 +235,11 @@ public class MicrosoftBackgroundLogin {
 
         String req = data.toString();
         HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-        setCommonProperties(conn, req, true);
+        setCommonProperties(conn, req);
         conn.connect();
 
         try(OutputStream wr = conn.getOutputStream()) {
-            wr.write(req.getBytes("UTF-8"));
+            wr.write(req.getBytes(StandardCharsets.UTF_8));
         }
 
         if(conn.getResponseCode() >= 200 && conn.getResponseCode() < 300) {
@@ -262,10 +251,8 @@ public class MicrosoftBackgroundLogin {
             //checkMcProfile(jo.getString("access_token"));
             return jo.getString("access_token");
         }else{
-            throwResponseError(conn);
+            throw getResponseThrowable(conn);
         }
-
-        return null;
     }
 
     private void checkMcProfile(String mcAccessToken) throws IOException, JSONException {
@@ -308,20 +295,20 @@ public class MicrosoftBackgroundLogin {
     }
 
 
-    /** Set common properties, and enable interactivity if desired */
-    private static void setCommonProperties(HttpURLConnection conn, String formData, boolean interactive) {
+    /** Set common properties for the connection. Given that all requests are POST, interactivity is always enabled */
+    private static void setCommonProperties(HttpURLConnection conn, String formData) {
         conn.setRequestProperty("Content-Type", "application/json");
         conn.setRequestProperty("Accept", "application/json");
         conn.setRequestProperty("charset", "utf-8");
         try {
-            conn.setRequestProperty("Content-Length", Integer.toString(formData.getBytes("UTF-8").length));
+            conn.setRequestProperty("Content-Length", Integer.toString(formData.getBytes(StandardCharsets.UTF_8).length));
             conn.setRequestMethod("POST");
-        }catch (ProtocolException | UnsupportedEncodingException e) {
+        }catch (ProtocolException e) {
             Log.e("MicrosoftAuth", e.toString());
         }
         conn.setUseCaches(false);
         conn.setDoInput(true);
-        conn.setDoOutput(interactive);
+        conn.setDoOutput(true);
     }
 
     /**
@@ -339,11 +326,11 @@ public class MicrosoftBackgroundLogin {
         return builder.toString();
     }
 
-    private void throwResponseError(HttpURLConnection conn) throws IOException {
+    private RuntimeException getResponseThrowable(HttpURLConnection conn) throws IOException {
         Log.i("MicrosoftLogin", "Error code: " + conn.getResponseCode() + ": " + conn.getResponseMessage());
         if(conn.getResponseCode() == 429) {
-            throw new PresentedException(R.string.microsoft_login_retry_later);
+            return new PresentedException(R.string.microsoft_login_retry_later);
         }
-        throw new RuntimeException(conn.getResponseMessage());
+        return new RuntimeException(conn.getResponseMessage());
     }
 }

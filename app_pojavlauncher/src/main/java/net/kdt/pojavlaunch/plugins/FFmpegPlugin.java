@@ -5,12 +5,6 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.util.Log;
 
-import net.kdt.pojavlaunch.Tools;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.Scanner;
-
 public class FFmpegPlugin {
     public static boolean isAvailable = false;
     public static String libraryPath;

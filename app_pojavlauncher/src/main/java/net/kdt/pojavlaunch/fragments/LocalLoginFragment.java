@@ -2,7 +2,6 @@ package net.kdt.pojavlaunch.fragments;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
@@ -20,7 +19,6 @@ public class LocalLoginFragment extends Fragment {
     public static final String TAG = "LOCAL_LOGIN_FRAGMENT";
 
     private EditText mUsernameEditText;
-    private Button mLoginButton;
 
     public LocalLoginFragment(){
         super(R.layout.fragment_local_login);
@@ -29,8 +27,7 @@ public class LocalLoginFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mUsernameEditText = view.findViewById(R.id.login_edit_email);
-        mLoginButton = view.findViewById(R.id.login_button);
-        mLoginButton.setOnClickListener(v -> {
+        view.findViewById(R.id.login_button).setOnClickListener(v -> {
             if(!checkEditText()) return;
 
             ExtraCore.setValue(ExtraConstants.MOJANG_LOGIN_TODO, new String[]{
@@ -43,7 +40,6 @@ public class LocalLoginFragment extends Fragment {
 
     /** @return Whether the mail (and password) text are eligible to make an auth request  */
     private boolean checkEditText(){
-        new File(Tools.DIR_ACCOUNT_OLD).mkdir();
 
         String text = mUsernameEditText.getText().toString();
 

@@ -2,9 +2,8 @@ package net.kdt.pojavlaunch.customcontrols.buttons;
 
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_BUTTONSIZE;
 
-import android.graphics.Color;
+import android.annotation.SuppressLint;
 import android.graphics.drawable.GradientDrawable;
-import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +12,6 @@ import android.widget.FrameLayout;
 import androidx.annotation.CallSuper;
 import androidx.core.math.MathUtils;
 
-import net.kdt.pojavlaunch.MinecraftGLSurface;
-import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.customcontrols.ControlData;
 import net.kdt.pojavlaunch.customcontrols.ControlLayout;
@@ -182,24 +179,23 @@ public interface ControlInterface extends View.OnLongClickListener {
     }
 
     /**
-     * Passe a series of checks to determine if the ControlButton is available to be snapped on.
+     * Passe a series of checks to determine if the ControlButton isn't available to be snapped on.
      *
      * @param button The button to check
      * @return whether or not the button
      */
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     default boolean canSnap(ControlInterface button){
         float MIN_DISTANCE = Tools.dpToPx(8);
 
         if(button == this) return false;
-        if(net.kdt.pojavlaunch.utils.MathUtils.dist(
-                button.getControlView().getX() + button.getControlView().getWidth()/2f,
-                button.getControlView().getY() + button.getControlView().getHeight()/2f,
-                getControlView().getX() + getControlView().getWidth()/2f,
-                getControlView().getY() + getControlView().getHeight()/2f)
-                > Math.max(button.getControlView().getWidth()/2f + getControlView().getWidth()/2f,
-                button.getControlView().getHeight()/2f + getControlView().getHeight()/2f) + MIN_DISTANCE) return false;
-
-        return true;
+        return !(net.kdt.pojavlaunch.utils.MathUtils.dist(
+                button.getControlView().getX() + button.getControlView().getWidth() / 2f,
+                button.getControlView().getY() + button.getControlView().getHeight() / 2f,
+                getControlView().getX() + getControlView().getWidth() / 2f,
+                getControlView().getY() + getControlView().getHeight() / 2f)
+                > Math.max(button.getControlView().getWidth() / 2f + getControlView().getWidth() / 2f,
+                button.getControlView().getHeight() / 2f + getControlView().getHeight() / 2f) + MIN_DISTANCE);
     }
 
     /**
@@ -282,11 +278,11 @@ public interface ControlInterface extends View.OnLongClickListener {
     /** Inject a touch listener on the view to make editing controls straight forward */
     default void injectTouchEventBehavior(){
         getControlView().setOnTouchListener(new View.OnTouchListener() {
-            private boolean mIsPointerOutOfBounds = false;
             private boolean mCanTriggerLongClick = true;
             private float downX, downY;
             private float downRawX, downRawY;
 
+            @SuppressLint("ClickableViewAccessibility")
             @Override
             public boolean onTouch(View view, MotionEvent event) {
                 if(!getControlLayoutParent().getModifiable()){

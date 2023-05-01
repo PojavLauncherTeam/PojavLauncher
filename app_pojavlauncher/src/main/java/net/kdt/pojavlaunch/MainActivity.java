@@ -5,55 +5,67 @@ import static net.kdt.pojavlaunch.Tools.currentDisplayMetrics;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_SUSTAINED_PERFORMANCE;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_USE_ALTERNATE_SURFACE;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_VIRTUAL_MOUSE_START;
-
 import static org.lwjgl.glfw.CallbackBridge.sendKeyPress;
 import static org.lwjgl.glfw.CallbackBridge.windowHeight;
 import static org.lwjgl.glfw.CallbackBridge.windowWidth;
 
-import android.app.*;
-import android.content.*;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.ClipboardManager;
+import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.*;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.DocumentsContract;
-import android.util.*;
-import android.view.*;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.webkit.MimeTypeMap;
-import android.widget.*;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.SeekBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.drawerlayout.widget.*;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.kdt.LoggerView;
 
-import java.io.*;
-import java.util.*;
-import net.kdt.pojavlaunch.customcontrols.*;
-
+import net.kdt.pojavlaunch.customcontrols.ControlButtonMenuListener;
+import net.kdt.pojavlaunch.customcontrols.ControlData;
+import net.kdt.pojavlaunch.customcontrols.ControlDrawerData;
+import net.kdt.pojavlaunch.customcontrols.ControlLayout;
+import net.kdt.pojavlaunch.customcontrols.CustomControls;
 import net.kdt.pojavlaunch.customcontrols.keyboard.LwjglCharSender;
 import net.kdt.pojavlaunch.customcontrols.keyboard.TouchCharInput;
-import net.kdt.pojavlaunch.multirt.MultiRTUtils;
-
-import net.kdt.pojavlaunch.prefs.*;
+import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.services.GameService;
-import net.kdt.pojavlaunch.utils.*;
-import net.kdt.pojavlaunch.value.*;
+import net.kdt.pojavlaunch.utils.JREUtils;
+import net.kdt.pojavlaunch.utils.MCOptionUtils;
+import net.kdt.pojavlaunch.value.MinecraftAccount;
 import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
 import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 
-import org.lwjgl.glfw.*;
-import android.net.*;
+import org.lwjgl.glfw.CallbackBridge;
+
+import java.io.File;
+import java.io.IOException;
 
 public class MainActivity extends BaseActivity implements ControlButtonMenuListener{
     public static volatile ClipboardManager GLOBAL_CLIPBOARD;
     public static final String INTENT_MINECRAFT_VERSION = "intent_version";
 
     volatile public static boolean isInputStackCall;
-
-    public float scaleFactor = 1;
-    private boolean mIsResuming = false;
 
     public static TouchCharInput touchCharInput;
     private MinecraftGLSurface minecraftGLView;
@@ -65,8 +77,6 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
     private GyroControl mGyroControl = null;
     public static ControlLayout mControlLayout;
 
-
-    MinecraftAccount mProfile;
     MinecraftProfile minecraftProfile;
 
     private ArrayAdapter<String> gameActionArrayAdapter;
@@ -74,16 +84,11 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
     public ArrayAdapter<String> ingameControlsEditorArrayAdapter;
     public AdapterView.OnItemClickListener ingameControlsEditorListener;
 
-    protected volatile String mVersionId;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        mProfile = PojavProfile.getCurrentProfileContent(this, null);
-        if(LauncherProfiles.mainProfileJson == null) LauncherProfiles.update();
-        minecraftProfile = LauncherProfiles.mainProfileJson.profiles.get(LauncherPreferences.DEFAULT_PREF.getString(LauncherPreferences.PREF_KEY_CURRENT_PROFILE,""));
-        MCOptionUtils.load(Tools.getGameDirPath(minecraftProfile));
+        minecraftProfile = LauncherProfiles.getCurrentProfile();
+        MCOptionUtils.load(Tools.getGameDirPath(minecraftProfile).getAbsolutePath());
         GameService.startService(this);
         initLayout(R.layout.activity_basemain);
         CallbackBridge.addGrabListener(touchpad);
@@ -126,19 +131,11 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
 
         try {
-            Logger.getInstance().reset();
+            Logger.begin(new File(Tools.DIR_GAME_HOME, "latestlog.txt").getAbsolutePath());
             // FIXME: is it safe for multi thread?
             GLOBAL_CLIPBOARD = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
             touchCharInput.setCharacterSender(new LwjglCharSender());
 
-
-            String runtime = LauncherPreferences.PREF_DEFAULT_RUNTIME;
-            if(minecraftProfile.javaDir != null && minecraftProfile.javaDir.startsWith(Tools.LAUNCHERPROFILES_RTPREFIX)) {
-                String runtimeName = minecraftProfile.javaDir.substring(Tools.LAUNCHERPROFILES_RTPREFIX.length());
-                if(MultiRTUtils.forceReread(runtimeName).versionString != null) {
-                    runtime = runtimeName;
-                }
-            }
             if(minecraftProfile.pojavRendererName != null) {
                 Log.i("RdrDebug","__P_renderer="+minecraftProfile.pojavRendererName);
                 Tools.LOCAL_RENDERER = minecraftProfile.pojavRendererName;
@@ -146,19 +143,18 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
 
             setTitle("Minecraft " + minecraftProfile.lastVersionId);
 
-            MultiRTUtils.setRuntimeNamed(runtime);
             // Minecraft 1.13+
 
             String version = getIntent().getStringExtra(INTENT_MINECRAFT_VERSION);
             version = version == null ? minecraftProfile.lastVersionId : version;
 
-            mVersionId = version;
-            isInputStackCall = Tools.getVersionInfo(mVersionId).arguments != null;
+            JMinecraftVersionList.Version mVersionInfo = Tools.getVersionInfo(version);
+            isInputStackCall = mVersionInfo.arguments != null;
             CallbackBridge.nativeSetUseInputStackQueue(isInputStackCall);
 
             Tools.getDisplayMetrics(this);
-            windowWidth = Tools.getDisplayFriendlyRes(currentDisplayMetrics.widthPixels, scaleFactor);
-            windowHeight = Tools.getDisplayFriendlyRes(currentDisplayMetrics.heightPixels, scaleFactor);
+            windowWidth = Tools.getDisplayFriendlyRes(currentDisplayMetrics.widthPixels, 1f);
+            windowHeight = Tools.getDisplayFriendlyRes(currentDisplayMetrics.heightPixels, 1f);
 
 
             // Menu
@@ -180,7 +176,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
             drawerLayout.closeDrawers();
 
 
-
+            final String finalVersion = version;
             minecraftGLView.setSurfaceReadyListener(() -> {
                 try {
                     // Setup virtual mouse right before launching
@@ -188,7 +184,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
                         touchpad.post(() -> touchpad.switchState());
                     }
 
-                    runCraft();
+                    runCraft(finalVersion, mVersionInfo);
                 }catch (Throwable e){
                     Tools.showError(getApplicationContext(), e, true);
                 }
@@ -243,7 +239,6 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
     @Override
     public void onResume() {
         super.onResume();
-        mIsResuming = true;
         if(mGyroControl != null) mGyroControl.enable();
         CallbackBridge.nativeSetWindowAttrib(LwjglGlfwKeycode.GLFW_HOVERED, 1);
     }
@@ -255,7 +250,6 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
             sendKeyPress(LwjglGlfwKeycode.GLFW_KEY_ESCAPE);
         }
         CallbackBridge.nativeSetWindowAttrib(LwjglGlfwKeycode.GLFW_HOVERED, 0);
-        mIsResuming = false;
         super.onPause();
     }
 
@@ -317,43 +311,30 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         return Build.VERSION.SDK_INT >= 26;
     }
 
-    private void runCraft() throws Throwable {
+    private void runCraft(String versionId, JMinecraftVersionList.Version version) throws Throwable {
         if(Tools.LOCAL_RENDERER == null) {
             Tools.LOCAL_RENDERER = LauncherPreferences.PREF_RENDERER;
         }
-        Logger.getInstance().appendToLog("--------- beginning with launcher debug");
-        Logger.getInstance().appendToLog("Info: Launcher version: " + BuildConfig.VERSION_NAME);
+        MinecraftAccount minecraftAccount = PojavProfile.getCurrentProfileContent(this, null);
+        Logger.appendToLog("--------- beginning with launcher debug");
+        printLauncherInfo(versionId);
         if (Tools.LOCAL_RENDERER.equals("vulkan_zink")) {
             checkVulkanZinkIsSupported();
         }
-        checkLWJGL3Installed();
-
-        JREUtils.jreReleaseList = JREUtils.readJREReleaseProperties();
-        Logger.getInstance().appendToLog("Architecture: " + Architecture.archAsString(Tools.DEVICE_ARCHITECTURE));
-        checkJavaArgsIsLaunchable(JREUtils.jreReleaseList.get("JAVA_VERSION"));
-        // appendlnToLog("Info: Custom Java arguments: \"" + LauncherPreferences.PREF_CUSTOM_JAVA_ARGS + "\"");
-
-        Logger.getInstance().appendToLog("Info: Selected Minecraft version: " + mVersionId);
-
-
         JREUtils.redirectAndPrintJRELog();
-
         LauncherProfiles.update();
-        Tools.launchMinecraft(this, mProfile, minecraftProfile, mVersionId);
+        int requiredJavaVersion = 8;
+        if(version.javaVersion != null) requiredJavaVersion = version.javaVersion.majorVersion;
+        Tools.launchMinecraft(this, minecraftAccount, minecraftProfile, versionId, requiredJavaVersion);
     }
 
-    private void checkJavaArgsIsLaunchable(String jreVersion) throws Throwable {
-        Logger.getInstance().appendToLog("Info: Custom Java arguments: \"" + LauncherPreferences.PREF_CUSTOM_JAVA_ARGS + "\"");
-    }
-
-    private void checkLWJGL3Installed() {
-        File lwjgl3dir = new File(Tools.DIR_GAME_HOME, "lwjgl3");
-        if (!lwjgl3dir.exists() || lwjgl3dir.isFile() || lwjgl3dir.list().length == 0) {
-            Logger.getInstance().appendToLog("Error: LWJGL3 was not installed!");
-            throw new RuntimeException(getString(R.string.mcn_check_fail_lwjgl));
-        } else {
-            Logger.getInstance().appendToLog("Info: LWJGL3 directory: " + Arrays.toString(lwjgl3dir.list()));
-        }
+    private void printLauncherInfo(String gameVersion) {
+        Logger.appendToLog("Info: Launcher version: " + BuildConfig.VERSION_NAME);
+        Logger.appendToLog("Info: Architecture: " + Architecture.archAsString(Tools.DEVICE_ARCHITECTURE));
+        Logger.appendToLog("Info: Device model: " + Build.MANUFACTURER + " " +Build.MODEL);
+        Logger.appendToLog("Info: API version: " + Build.VERSION.SDK_INT);
+        Logger.appendToLog("Info: Selected Minecraft version: " + gameVersion);
+        Logger.appendToLog("Info: Custom Java arguments: \"" + LauncherPreferences.PREF_CUSTOM_JAVA_ARGS + "\"");
     }
 
     private void checkVulkanZinkIsSupported() {
@@ -361,29 +342,9 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
                 || Build.VERSION.SDK_INT < 25
                 || !getPackageManager().hasSystemFeature(PackageManager.FEATURE_VULKAN_HARDWARE_LEVEL)
                 || !getPackageManager().hasSystemFeature(PackageManager.FEATURE_VULKAN_HARDWARE_VERSION)) {
-            Logger.getInstance().appendToLog("Error: Vulkan Zink renderer is not supported!");
+            Logger.appendToLog("Error: Vulkan Zink renderer is not supported!");
             throw new RuntimeException(getString(R.string. mcn_check_fail_vulkan_support));
         }
-    }
-
-    public void printStream(InputStream stream) {
-        try {
-            BufferedReader buffStream = new BufferedReader(new InputStreamReader(stream));
-            String line = null;
-            while ((line = buffStream.readLine()) != null) {
-                Logger.getInstance().appendToLog(line);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static String fromArray(List<String> arr) {
-        StringBuilder s = new StringBuilder();
-        for (String exec : arr) {
-            s.append(" ").append(exec);
-        }
-        return s.toString();
     }
 
     private void dialogSendCustomKey() {
@@ -424,16 +385,6 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
     }
     private void openLogOutput() {
         loggerView.setVisibility(View.VISIBLE);
-        mIsResuming = false;
-    }
-
-    public void closeLogOutput(View view) {
-        loggerView.setVisibility(View.GONE);
-        mIsResuming = true;
-    }
-
-    public void toggleMenu(View v) {
-        drawerLayout.openDrawer(Gravity.RIGHT);
     }
 
     public static void toggleMouse(Context ctx) {
@@ -486,12 +437,12 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         sb.setMax(275);
         tmpMouseSpeed = (int) ((LauncherPreferences.PREF_MOUSESPEED*100));
         sb.setProgress(tmpMouseSpeed-25);
-        tv.setText(tmpMouseSpeed +" %");
+        tv.setText(getString(R.string.percent_format, tmpGyroSensitivity));
         sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 tmpMouseSpeed = i+25;
-                tv.setText(tmpMouseSpeed +" %");
+                tv.setText(getString(R.string.percent_format, tmpGyroSensitivity));
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {}
@@ -501,7 +452,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         b.setView(v);
         b.setPositiveButton(android.R.string.ok, (dialogInterface, i) -> {
             LauncherPreferences.PREF_MOUSESPEED = ((float)tmpMouseSpeed)/100f;
-            LauncherPreferences.DEFAULT_PREF.edit().putInt("mousespeed",tmpMouseSpeed).commit();
+            LauncherPreferences.DEFAULT_PREF.edit().putInt("mousespeed",tmpMouseSpeed).apply();
             dialogInterface.dismiss();
             System.gc();
         });
@@ -526,12 +477,12 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         sb.setMax(275);
         tmpGyroSensitivity = (int) ((LauncherPreferences.PREF_GYRO_SENSITIVITY*100));
         sb.setProgress(tmpGyroSensitivity -25);
-        tv.setText(tmpGyroSensitivity +" %");
+        tv.setText(getString(R.string.percent_format, tmpGyroSensitivity));
         sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 tmpGyroSensitivity = i+25;
-                tv.setText(tmpGyroSensitivity +" %");
+                tv.setText(getString(R.string.percent_format, tmpGyroSensitivity));
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {}
@@ -541,7 +492,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         b.setView(v);
         b.setPositiveButton(android.R.string.ok, (dialogInterface, i) -> {
             LauncherPreferences.PREF_GYRO_SENSITIVITY = ((float) tmpGyroSensitivity)/100f;
-            LauncherPreferences.DEFAULT_PREF.edit().putInt("gyroSensitivity", tmpGyroSensitivity).commit();
+            LauncherPreferences.DEFAULT_PREF.edit().putInt("gyroSensitivity", tmpGyroSensitivity).apply();
             dialogInterface.dismiss();
             System.gc();
         });
@@ -589,6 +540,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
             }
         });
     }
+    @SuppressWarnings("unused") //TODO: actually use it
     public static void openPath(String path) {
         Context ctx = touchpad.getContext(); // no more better way to obtain a context statically
         ((Activity)ctx).runOnUiThread(() -> {

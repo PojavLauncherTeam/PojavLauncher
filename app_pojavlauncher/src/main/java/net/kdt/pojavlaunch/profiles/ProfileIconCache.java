@@ -4,7 +4,6 @@ import static net.kdt.pojavlaunch.profiles.ProfileAdapter.CREATE_PROFILE_MAGIC;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -12,7 +11,6 @@ import android.util.Base64;
 import android.util.Log;
 
 import androidx.core.content.res.ResourcesCompat;
-import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 
 import net.kdt.pojavlaunch.R;
 
@@ -28,11 +26,7 @@ public class ProfileIconCache {
     public static void initDefault(Context context) {
         if(sDefaultIcon != null) return;
         sDefaultIcon = ResourcesCompat.getDrawable(context.getResources(), R.mipmap.ic_launcher_foreground, null);
-        sDefaultIcon.setBounds(0, 0, 10, 10);
-    }
-
-    public static void clearIconCache() {
-        sIconCache.clear();
+        if(sDefaultIcon != null) sDefaultIcon.setBounds(0, 0, 10, 10);
     }
 
     public static Drawable getCachedIcon(String key) {

@@ -70,7 +70,7 @@ public class AsyncMinecraftDownloader {
                 downloadVersionJson(versionName, verJsonDir, verInfo);
             }
             JMinecraftVersionList.Version originalVersion = Tools.getVersionInfo(versionName, true);
-            if(originalVersion.inheritsFrom != null && !originalVersion.inheritsFrom.isEmpty()) {
+            if(Tools.isValidString(originalVersion.inheritsFrom)) {
                 Log.i("Downloader", "probe: inheritsFrom="+originalVersion.inheritsFrom);
                 String version = originalVersion.inheritsFrom;
                 String downName = Tools.DIR_HOME_VERSION+"/"+version+"/"+version+".json";
@@ -218,7 +218,7 @@ public class AsyncMinecraftDownloader {
                         (int) Math.max((float)curr/max*100,0), R.string.mcl_launch_downloading_progress, destination.getName(), curr/BYTE_TO_MB, max/BYTE_TO_MB));
     }
 
-    public void downloadAssets(final JAssets assets, String assetsVersion, final File outputDir) throws IOException {
+    public void downloadAssets(final JAssets assets, String assetsVersion, final File outputDir) {
         LinkedBlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<>();
         final ThreadPoolExecutor executor = new ThreadPoolExecutor(5, 5, 500, TimeUnit.MILLISECONDS, workQueue);
 

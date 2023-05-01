@@ -160,8 +160,8 @@ public class EfficientAndroidLWJGLKeycode {
 
     }
 
-    public static boolean containsKey(int keycode){
-        return getIndexByKey(keycode) >= 0;
+    public static boolean containsIndex(int index){
+        return index >= 0;
     }
 
     public static String[] generateKeyName() {
@@ -172,10 +172,6 @@ public class EfficientAndroidLWJGLKeycode {
             }
         }
         return androidKeyNameArray;
-    }
-
-    public static void execKey(KeyEvent keyEvent) {
-        execKey(keyEvent, getIndexByKey(keyEvent.getKeyCode()));
     }
 
     public static void execKey(KeyEvent keyEvent, int valueIndex) {
@@ -207,10 +203,6 @@ public class EfficientAndroidLWJGLKeycode {
 
     public static int getIndexByKey(int key){
         return Arrays.binarySearch(sAndroidKeycodes, key);
-    }
-
-    public static short getValue(int key){
-        return sLwjglKeycodes[Arrays.binarySearch(sAndroidKeycodes, key)];
     }
 
     /** @return the index at which the key is in the array, searching linearly */

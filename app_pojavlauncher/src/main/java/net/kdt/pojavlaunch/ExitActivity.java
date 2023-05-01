@@ -1,7 +1,7 @@
 package net.kdt.pojavlaunch;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 @Keep
 public class ExitActivity extends AppCompatActivity {
 
+    @SuppressLint("StringFormatInvalid") //invalid on some translations but valid on most, cant fix that atm
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

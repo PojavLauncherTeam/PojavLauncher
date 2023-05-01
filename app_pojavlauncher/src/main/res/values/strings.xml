@@ -356,4 +356,5 @@
     <string name="create_profile">Create new profile</string>
     <string name="preference_shader_dump_title">Enable shader dumping</string>
     <string name="preference_shader_dump_description">Log converted shaders into the log file</string>
+    <string name="percent_format">%d%%</string>
 </resources>

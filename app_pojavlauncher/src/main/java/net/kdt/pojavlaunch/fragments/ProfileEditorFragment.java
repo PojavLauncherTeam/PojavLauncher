@@ -142,12 +142,11 @@ public class ProfileEditorFragment extends Fragment {
 
 
 
-        loadValues(LauncherPreferences.DEFAULT_PREF.getString(LauncherPreferences.PREF_KEY_CURRENT_PROFILE, ""));
+        loadValues(LauncherPreferences.DEFAULT_PREF.getString(LauncherPreferences.PREF_KEY_CURRENT_PROFILE, ""), view.getContext());
     }
 
 
-    private void loadValues(@NonNull String profile){
-        Context context = getContext();
+    private void loadValues(@NonNull String profile, @NonNull Context context){
         if(mTempProfile == null){
             mTempProfile = getProfile(profile);
         }
@@ -237,10 +236,4 @@ public class ProfileEditorFragment extends Fragment {
         LauncherProfiles.update();
         ExtraCore.setValue(ExtraConstants.REFRESH_VERSION_SPINNER, mProfileKey);
     }
-
-    /** Called on the UI thread, the profile is already saved in the files */
-    public interface ProfileEditorDone {
-        void onProfileSaved(MinecraftProfile profile);
-    }
-
 }

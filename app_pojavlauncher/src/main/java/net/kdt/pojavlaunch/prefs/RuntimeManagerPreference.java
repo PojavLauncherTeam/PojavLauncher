@@ -12,7 +12,7 @@ import net.kdt.pojavlaunch.multirt.MultiRTConfigDialog;
 public class RuntimeManagerPreference extends Preference{
     private MultiRTConfigDialog mDialogScreen;
 
-    public RuntimeManagerPreference(Context ctx) {
+    @SuppressWarnings("unused") public RuntimeManagerPreference(Context ctx) {
         this(ctx, null);
     }
 

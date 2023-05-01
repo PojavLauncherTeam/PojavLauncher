@@ -1,24 +1,29 @@
 package net.kdt.pojavlaunch.customcontrols.buttons;
 
-import android.annotation.SuppressLint;
-import android.graphics.*;
-import android.util.*;
-import android.view.*;
-import android.widget.*;
-
-
-import net.kdt.pojavlaunch.customcontrols.ControlButtonMenuListener;
-import net.kdt.pojavlaunch.customcontrols.ControlData;
-import net.kdt.pojavlaunch.customcontrols.ControlLayout;
-import net.kdt.pojavlaunch.customcontrols.handleview.*;
-import net.kdt.pojavlaunch.*;
-import net.kdt.pojavlaunch.prefs.LauncherPreferences;
-
-import org.lwjgl.glfw.*;
-
 import static net.kdt.pojavlaunch.LwjglGlfwKeycode.GLFW_KEY_UNKNOWN;
 import static org.lwjgl.glfw.CallbackBridge.sendKeyPress;
 import static org.lwjgl.glfw.CallbackBridge.sendMouseButton;
+
+import android.annotation.SuppressLint;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.util.Log;
+import android.util.TypedValue;
+import android.view.Gravity;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.TextView;
+
+import net.kdt.pojavlaunch.LwjglGlfwKeycode;
+import net.kdt.pojavlaunch.MainActivity;
+import net.kdt.pojavlaunch.R;
+import net.kdt.pojavlaunch.customcontrols.ControlData;
+import net.kdt.pojavlaunch.customcontrols.ControlLayout;
+import net.kdt.pojavlaunch.customcontrols.handleview.EditControlPopup;
+import net.kdt.pojavlaunch.prefs.LauncherPreferences;
+
+import org.lwjgl.glfw.CallbackBridge;
 
 @SuppressLint({"ViewConstructor", "AppCompatCustomView"})
 public class ControlButton extends TextView implements ControlInterface {
@@ -103,6 +108,7 @@ public class ControlButton extends TextView implements ControlInterface {
     }
 
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getActionMasked()){
@@ -169,6 +175,7 @@ public class ControlButton extends TextView implements ControlInterface {
 
 
 
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public boolean triggerToggle(){
         //returns true a the toggle system is triggered
         if(mProperties.isToggle){

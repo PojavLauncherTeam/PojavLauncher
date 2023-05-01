@@ -2,7 +2,7 @@ package net.kdt.pojavlaunch.multirt;
 
 import static net.kdt.pojavlaunch.PojavApplication.sExecutorService;
 
-import android.app.ProgressDialog;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -26,11 +26,6 @@ import java.util.List;
 
 public class RTRecyclerViewAdapter extends RecyclerView.Adapter<RTRecyclerViewAdapter.RTViewHolder> {
 
-    MultiRTConfigDialog mConfigDialog;
-    public RTRecyclerViewAdapter(MultiRTConfigDialog dialog) {
-        this.mConfigDialog = dialog;
-    }
-
     @NonNull
     @Override
     public RTViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -53,6 +48,7 @@ public class RTRecyclerViewAdapter extends RecyclerView.Adapter<RTRecyclerViewAd
         return LauncherPreferences.PREF_DEFAULT_RUNTIME.equals(rt.name);
     }
 
+    @SuppressLint("NotifyDataSetChanged") //not a problem, given the typical size of the list
     public void setDefault(Runtime rt){
         LauncherPreferences.PREF_DEFAULT_RUNTIME = rt.name;
         LauncherPreferences.DEFAULT_PREF.edit().putString("defaultRuntime",LauncherPreferences.PREF_DEFAULT_RUNTIME).apply();
@@ -80,6 +76,7 @@ public class RTRecyclerViewAdapter extends RecyclerView.Adapter<RTRecyclerViewAd
             itemView.findViewById(R.id.multirt_view_removebtn).setOnClickListener(this);
         }
 
+        @SuppressLint("NotifyDataSetChanged") // same as all the other ones
         @Override
         public void onClick(View view) {
             if(view.getId() == R.id.multirt_view_removebtn) {

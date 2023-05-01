@@ -2,6 +2,7 @@ package net.kdt.pojavlaunch.customcontrols;
 import static android.content.Context.INPUT_METHOD_SERVICE;
 import static net.kdt.pojavlaunch.Tools.currentDisplayMetrics;
 
+import android.annotation.SuppressLint;
 import android.content.*;
 import android.util.*;
 import android.view.*;
@@ -213,12 +214,9 @@ public class ControlLayout extends FrameLayout {
 	}
 
 	public void setModifiable(boolean isModifiable) {
-		if(isModifiable){
-		}else {
-			if(mModifiable)
-				removeEditWindow();
+		if(!isModifiable && mModifiable){
+			removeEditWindow();
 		}
-
 		mModifiable = isModifiable;
 	}
 
@@ -298,20 +296,20 @@ public class ControlLayout extends FrameLayout {
 	}
 
 
-	HashMap<View, ControlInterface> mapTable = new HashMap<>();
-	int[] location = new int[2];
+	final HashMap<View, ControlInterface> mapTable = new HashMap<>();
+	final int[] location = new int[2];
 	//While this is called onTouch, this should only be called from a ControlButton.
-	public boolean onTouch(View v, MotionEvent ev) {
+	public void onTouch(View v, MotionEvent ev) {
 		ControlInterface lastControlButton = mapTable.get(v);
 
 		//Check if the action is cancelling, reset the lastControl button associated to the view
 		if(ev.getActionMasked() == MotionEvent.ACTION_UP || ev.getActionMasked() == MotionEvent.ACTION_CANCEL){
 			if(lastControlButton != null) lastControlButton.sendKeyPresses(false);
 			mapTable.put(v, null);
-			return true;
+			return;
 		}
 
-		if(ev.getActionMasked() != MotionEvent.ACTION_MOVE) return false;
+		if(ev.getActionMasked() != MotionEvent.ACTION_MOVE) return;
 
 		getLocationOnScreen(location);
 
@@ -321,7 +319,7 @@ public class ControlLayout extends FrameLayout {
 					&& ev.getRawX() < lastControlButton.getControlView().getX() + lastControlButton.getControlView().getWidth() + location[0]
 					&& ev.getRawY() > lastControlButton.getControlView().getY()
 					&& ev.getRawY() < lastControlButton.getControlView().getY() + lastControlButton.getControlView().getHeight()){
-				return true;
+				return;
 			}
 		}
 
@@ -342,14 +340,14 @@ public class ControlLayout extends FrameLayout {
 				if(!button.equals(lastControlButton)){
 					button.sendKeyPresses(true);
 					mapTable.put(v, button);
-					return true;
+					return;
 				}
 
 			}
 		}
-		return false;
 	}
 
+	@SuppressLint("ClickableViewAccessibility")
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		if (mModifiable && event.getActionMasked() != MotionEvent.ACTION_UP || mControlPopup == null)

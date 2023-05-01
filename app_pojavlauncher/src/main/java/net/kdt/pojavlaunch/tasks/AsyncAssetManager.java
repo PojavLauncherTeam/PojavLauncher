@@ -27,10 +27,8 @@ public class AsyncAssetManager {
     /**
      * Attempt to install the java 8 runtime, if necessary
      * @param am App context
-     * @param otherRuntimesAvailable Whether other runtimes have been detected
-     * @return False if no runtime, true if there is one present/
      */
-    public static boolean unpackRuntime(AssetManager am, boolean otherRuntimesAvailable) {
+    public static void unpackRuntime(AssetManager am) {
         /* Check if JRE is included */
         String rt_version = null;
         String current_rt_version = MultiRTUtils.__internal__readBinpackVersion("Internal");
@@ -40,9 +38,9 @@ public class AsyncAssetManager {
             Log.e("JREAuto", "JRE was not included on this APK.", e);
         }
         String exactJREName = MultiRTUtils.getExactJreName(8);
-        if(current_rt_version == null && exactJREName != null && !exactJREName.equals("Internal")/*this clause is for when the internal runtime is goofed*/) return true; //Assume user maintains his own runtime
-        if(rt_version == null) return otherRuntimesAvailable; // On noruntime builds, skip if there is at least 1 runtime installed (no matter if it is 8 or not)
-        if(rt_version.equals(current_rt_version)) return true; //If we already have an integrated one installed, check if it's up-to-date
+        if(current_rt_version == null && exactJREName != null && !exactJREName.equals("Internal")/*this clause is for when the internal runtime is goofed*/) return;
+        if(rt_version == null) return;
+        if(rt_version.equals(current_rt_version)) return;
 
         // Install the runtime in an async manner, hope for the best
         String finalRt_version = rt_version;
@@ -58,8 +56,6 @@ public class AsyncAssetManager {
                 Log.e("JREAuto", "Internal JRE unpack failed", e);
             }
         });
-
-        return true; // we have at least one runtime, and it's compatible, good to go
     }
 
     /** Unpack single files, with no regard to version tracking */
@@ -97,7 +93,7 @@ public class AsyncAssetManager {
         });
     }
 
-    private static boolean unpackComponent(Context ctx, String component, boolean privateDirectory) throws IOException {
+    private static void unpackComponent(Context ctx, String component, boolean privateDirectory) throws IOException {
         AssetManager am = ctx.getAssets();
         String rootDir = privateDirectory ? Tools.DIR_DATA : Tools.DIR_GAME_HOME;
 
@@ -130,12 +126,7 @@ public class AsyncAssetManager {
                 }
             } else {
                 Log.i("UnpackPrep", component + ": Pack is up-to-date with the launcher, continuing...");
-                return false;
             }
         }
-        return true;
     }
-
-
-
 }

@@ -1,26 +1,33 @@
 package net.kdt.pojavlaunch;
 
-import static androidx.core.content.FileProvider.getUriForFile;
-
 import android.app.Activity;
-import android.content.*;
+import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
-import android.os.*;
-
-import androidx.appcompat.app.*;
-
+import android.os.Build;
+import android.os.Bundle;
 import android.provider.DocumentsContract;
 import android.view.View;
-import android.widget.*;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.gson.JsonSyntaxException;
-import com.kdt.pickafile.*;
-import java.io.*;
+import com.kdt.pickafile.FileListView;
+import com.kdt.pickafile.FileSelectedListener;
 
-import net.kdt.pojavlaunch.prefs.*;
-import net.kdt.pojavlaunch.customcontrols.*;
+import net.kdt.pojavlaunch.customcontrols.ControlData;
+import net.kdt.pojavlaunch.customcontrols.ControlDrawerData;
+import net.kdt.pojavlaunch.customcontrols.ControlLayout;
+import net.kdt.pojavlaunch.prefs.LauncherPreferences;
+
+import java.io.File;
+import java.io.IOException;
 
 
 public class CustomControlsActivity extends BaseActivity {
@@ -74,31 +81,6 @@ public class CustomControlsActivity extends BaseActivity {
 			}
 			mDrawerLayout.closeDrawers();
 		});
-		/*mDrawerNavigationView.setNavigationItemSelectedListener(
-				menuItem -> {
-					switch (menuItem.getItemId()) {
-						case R.id.menu_ctrl_load:
-							load(mControlLayout);
-							break;
-						case R.id.menu_ctrl_add:
-							mControlLayout.addControlButton(new ControlData("New"));
-							break;
-						case R.id.menu_ctrl_add_drawer:
-							mControlLayout.addDrawer(new ControlDrawerData());
-							break;
-						case R.id.menu_ctrl_selectdefault:
-							dialogSelectDefaultCtrl(mControlLayout);
-							break;
-						case R.id.menu_ctrl_save:
-							save(false, mControlLayout);
-							break;
-					}
-					//Toast.makeText(MainActivity.this, menuItem.getTitle() + ":" + menuItem.getItemId(), Toast.LENGTH_SHORT).show();
-
-					mDrawerLayout.closeDrawers();
-					return true;
-				});
-		*/
 		mControlLayout.setActivity(this);
 		mControlLayout.setModifiable(true);
 
@@ -149,18 +131,13 @@ public class CustomControlsActivity extends BaseActivity {
 		builder.setPositiveButton(android.R.string.ok, null);
 		builder.setNegativeButton(android.R.string.cancel, null);
 		if (exit) {
-			builder.setNeutralButton(R.string.mcn_exit_call, new AlertDialog.OnClickListener(){
-				@Override
-				public void onClick(DialogInterface p1, int p2) {
-					layout.setModifiable(false);
-					if(ctx instanceof MainActivity) {
-						((MainActivity) ctx).leaveCustomControls();
-					}else{
-						((CustomControlsActivity) ctx).isModified = false;
-						((Activity)ctx).onBackPressed();
-					}
-					//			    setResult(Activity.RESULT_OK, new Intent());
-					//				CustomControlsActivity.super.onBackPressed();
+			builder.setNeutralButton(R.string.mcn_exit_call, (p1, p2) -> {
+				layout.setModifiable(false);
+				if(ctx instanceof MainActivity) {
+					((MainActivity) ctx).leaveCustomControls();
+				}else{
+					((CustomControlsActivity) ctx).isModified = false;
+					((Activity)ctx).onBackPressed();
 				}
 			});
 		}

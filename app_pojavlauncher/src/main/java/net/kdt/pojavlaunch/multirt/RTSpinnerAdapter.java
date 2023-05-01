@@ -17,11 +17,10 @@ import java.util.List;
 
 public class RTSpinnerAdapter implements SpinnerAdapter {
     final Context mContext;
-    List<Runtime> mRuntimes;
+    final List<Runtime> mRuntimes;
     public RTSpinnerAdapter(@NonNull Context context, List<Runtime> runtimes) {
         mRuntimes = runtimes;
-        Runtime runtime = new Runtime("<Default>");
-        runtime.versionString = "";
+        Runtime runtime = new Runtime("<Default>", "", null, 0);
         mRuntimes.add(runtime);
         mContext = context;
     }

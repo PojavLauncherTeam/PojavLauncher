@@ -3,11 +3,8 @@ package net.kdt.pojavlaunch.customcontrols.keyboard;
 
 import static android.content.Context.INPUT_METHOD_SERVICE;
 
-import static org.lwjgl.glfw.CallbackBridge.sendKeyPress;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.res.Configuration;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.inputmethod.InputMethodManager;
@@ -15,15 +12,13 @@ import android.view.inputmethod.InputMethodManager;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.kdt.pojavlaunch.LwjglGlfwKeycode;
 import net.kdt.pojavlaunch.R;
-
-import org.lwjgl.glfw.CallbackBridge;
 
 /**
  * This class is intended for sending characters used in chat via the virtual keyboard
  */
 public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText {
+    public static final String TEXT_FILLER = "                              ";
     public TouchCharInput(@NonNull Context context) {
         this(context, null);
     }
@@ -89,20 +84,16 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
 
     /**
      * Toggle on and off the soft keyboard, depending of the state
-     *
-     * @return if the keyboard is set to be shown.
      */
-    public boolean switchKeyboardState(){
+    public void switchKeyboardState(){
         InputMethodManager imm = (InputMethodManager) getContext().getSystemService(INPUT_METHOD_SERVICE);
         // Allow, regardless of whether or not a hardware keyboard is declared
         if(hasFocus()){
             clear();
             disable();
-            return false;
         }else{
             enable();
             imm.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT);
-            return true;
         }
     }
 
@@ -116,8 +107,8 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
         mIsDoingInternalChanges = true;
         //Braille space, doesn't trigger keyboard auto-complete
         //replacing directly the text without though setText avoids notifying changes
-        setText("                              ");
-        setSelection(getText().length());
+        setText(TEXT_FILLER);
+        setSelection(TEXT_FILLER.length());
         mIsDoingInternalChanges = false;
     }
 

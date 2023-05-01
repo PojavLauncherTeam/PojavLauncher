@@ -26,18 +26,16 @@ import android.view.SurfaceView;
 import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
 import net.kdt.pojavlaunch.customcontrols.ControlLayout;
-import net.kdt.pojavlaunch.utils.MathUtils;
-
 import net.kdt.pojavlaunch.customcontrols.gamepad.Gamepad;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.utils.JREUtils;
 import net.kdt.pojavlaunch.utils.MCOptionUtils;
+import net.kdt.pojavlaunch.utils.MathUtils;
 
 import org.lwjgl.glfw.CallbackBridge;
 
@@ -56,9 +54,11 @@ public class MinecraftGLSurface extends View implements GrabListener{
     private final TapDetector mDoubleTapDetector = new TapDetector(2, TapDetector.DETECTION_METHOD_DOWN);
     /* MC GUI scale, listened by MCOptionUtils */
     private int mGuiScale;
+    @SuppressWarnings("FieldCanBeLocal") // it can't, otherwise the weak reference will disappear
     private final MCOptionUtils.MCOptionListener mGuiScaleListener = () -> mGuiScale = getMcScale();
     /* Surface ready listener, used by the activity to launch minecraft */
     SurfaceReadyListener mSurfaceReadyListener = null;
+    final Object mSurfaceReadyListenerLock = new Object();
     /* View holding the surface, either a SurfaceView or a TextureView */
     View mSurface;
 
@@ -108,9 +108,7 @@ public class MinecraftGLSurface extends View implements GrabListener{
                     sendKeyPress(LwjglGlfwKeycode.GLFW_KEY_Q);
                     mHandler.sendEmptyMessageDelayed(MSG_DROP_ITEM_BUTTON_CHECK, 600);
                 }
-                return;
             }
-
         }
     };
 
@@ -202,6 +200,7 @@ public class MinecraftGLSurface extends View implements GrabListener{
      * Does not cover the virtual mouse touchpad
      */
     @Override
+    @SuppressWarnings("accessibility")
     public boolean onTouchEvent(MotionEvent e) {
         // Kinda need to send this back to the layout
         if(((ControlLayout)getParent()).getModifiable()) return false;
@@ -420,7 +419,6 @@ public class MinecraftGLSurface extends View implements GrabListener{
     }
 
     //TODO MOVE THIS SOMEWHERE ELSE
-    private boolean debugErrored = false;
     /** The input event for mouse with a captured pointer */
     @RequiresApi(26)
     @Override
@@ -486,23 +484,13 @@ public class MinecraftGLSurface extends View implements GrabListener{
         }
 
         int index = EfficientAndroidLWJGLKeycode.getIndexByKey(eventKeycode);
-        if(index >= 0) {
-            //Toast.makeText(this,"THIS IS A KEYBOARD EVENT !", Toast.LENGTH_SHORT).show();
+        if(EfficientAndroidLWJGLKeycode.containsIndex(index)) {
             EfficientAndroidLWJGLKeycode.execKey(event, index);
             return true;
         }
 
         // Some events will be generated an infinite number of times when no consumed
-        if((event.getFlags() & KeyEvent.FLAG_FALLBACK) == KeyEvent.FLAG_FALLBACK) return true;
-
-        return false;
-    }
-
-    /** Get the mouse direction as a string */
-    private String getMoving(float pos, boolean xOrY) {
-        if (pos == 0) return "STOPPED";
-        if (pos > 0) return xOrY ? "RIGHT" : "DOWN";
-        return xOrY ? "LEFT" : "UP";
+        return (event.getFlags() & KeyEvent.FLAG_FALLBACK) == KeyEvent.FLAG_FALLBACK;
     }
 
     /** Convert the mouse button, then send it
@@ -569,9 +557,6 @@ public class MinecraftGLSurface extends View implements GrabListener{
         }
 
         CallbackBridge.sendUpdateWindowSize(windowWidth, windowHeight);
-        //getMcScale();
-        //Toast.makeText(getContext(), "width: " + width, Toast.LENGTH_SHORT).show();
-        //Toast.makeText(getContext(), "height: " + height, Toast.LENGTH_SHORT).show();
 
     }
 
@@ -591,8 +576,8 @@ public class MinecraftGLSurface extends View implements GrabListener{
         new Thread(() -> {
             try {
                 // Wait until the listener is attached
-                while (mSurfaceReadyListener == null){
-                    Thread.sleep(100);
+                synchronized(mSurfaceReadyListenerLock) {
+                    if(mSurfaceReadyListener == null) mSurfaceReadyListenerLock.wait();
                 }
 
                 mSurfaceReadyListener.isReady();
@@ -631,7 +616,9 @@ public class MinecraftGLSurface extends View implements GrabListener{
     }
 
     public void setSurfaceReadyListener(SurfaceReadyListener listener){
-        mSurfaceReadyListener = listener;
-
+        synchronized (mSurfaceReadyListenerLock) {
+            mSurfaceReadyListener = listener;
+            mSurfaceReadyListenerLock.notifyAll();
+        }
     }
 }

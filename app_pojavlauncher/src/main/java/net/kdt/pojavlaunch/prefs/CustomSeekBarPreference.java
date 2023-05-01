@@ -1,5 +1,6 @@
 package net.kdt.pojavlaunch.prefs;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
@@ -23,6 +24,7 @@ public class CustomSeekBarPreference extends SeekBarPreference {
     private TextView mTextView;
 
 
+    @SuppressLint("PrivateResource")
     public CustomSeekBarPreference(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         TypedArray a = context.obtainStyledAttributes(
@@ -39,7 +41,7 @@ public class CustomSeekBarPreference extends SeekBarPreference {
         this(context, attrs, R.attr.seekBarPreferenceStyle);
     }
 
-    public CustomSeekBarPreference(Context context) {
+    @SuppressWarnings("unused") public CustomSeekBarPreference(Context context) {
         this(context, null);
     }
 
