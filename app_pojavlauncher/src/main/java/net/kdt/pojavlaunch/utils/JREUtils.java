@@ -96,7 +96,6 @@ public class JREUtils {
     public static void redirectAndPrintJRELog() {
 
         Log.v("jrelog","Log starts here");
-        JREUtils.logToLogger(Logger.getInstance());
         new Thread(new Runnable(){
             int failTime = 0;
             ProcessBuilder logcatPb;
@@ -545,7 +544,6 @@ public class JREUtils {
         }
     }
     public static native int chdir(String path);
-    public static native void logToLogger(final Logger logger);
     public static native boolean dlopen(String libPath);
     public static native void setLdLibraryPath(String ldLibraryPath);
     public static native void setupBridgeWindow(Object surface);

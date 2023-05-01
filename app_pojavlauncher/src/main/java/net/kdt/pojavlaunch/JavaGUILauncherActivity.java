@@ -55,7 +55,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_java_gui_launcher);
 
-        Logger.getInstance().reset();
+        Logger.begin(new File(Tools.DIR_GAME_HOME, "latestlog.txt").getAbsolutePath());
         mTouchCharInput = findViewById(R.id.awt_touch_char);
         mTouchCharInput.setCharacterSender(new AwtCharSender());
 

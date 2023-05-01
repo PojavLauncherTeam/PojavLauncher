@@ -2,75 +2,24 @@ package net.kdt.pojavlaunch;
 
 import androidx.annotation.Keep;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintStream;
-import java.lang.ref.WeakReference;
-
 /** Singleton class made to log on one file
  * The singleton part can be removed but will require more implementation from the end-dev
  */
 @Keep
 public class Logger {
-    private static volatile Logger sLoggerSingleton = null;
 
-    /* Instance variables */
-    private final File mLogFile;
-    private PrintStream mLogStream;
-    private WeakReference<eventLogListener> mLogListenerWeakReference = null;
-
-    /* No public construction */
-    private Logger(){
-        mLogFile = new File(Tools.DIR_GAME_HOME, "latestlog.txt");
-        // Make a new instance of the log file
-        // Default PrintStream constructor will overwrite the file for us
-        try {
-            mLogStream = new PrintStream(mLogFile.getAbsolutePath());
-        }catch (IOException e){e.printStackTrace();}
-
-    }
+    private static final Logger dummyLogger = new Logger();
 
     public static Logger getInstance(){
-        if(sLoggerSingleton == null){
-            synchronized(Logger.class){
-                if(sLoggerSingleton == null){
-                    sLoggerSingleton = new Logger();
-                }
-            }
-        }
-        return sLoggerSingleton;
+        return dummyLogger;
     }
-
 
     /** Print the text to the log file if not censored */
-    public void appendToLog(String text){
-        if(shouldCensorLog(text)) return;
-        appendToLogUnchecked(text);
-    }
+    public static native void appendToLog(String text);
 
-    /** Print the text to the log file, no china censoring there */
-    public void appendToLogUnchecked(String text){
-        mLogStream.println(text);
-        notifyLogListener(text);
-    }
 
     /** Reset the log file, effectively erasing any previous logs */
-    public void reset(){
-        try{
-            //Refer to line 30
-            mLogStream = new PrintStream(mLogFile.getAbsolutePath());
-        }catch (IOException e){ e.printStackTrace();}
-    }
-
-    /**
-     * Perform various checks to see if the log is safe to print
-     * Subclasses may want to override this behavior
-     * @param text The text to check
-     * @return Whether the log should be censored
-     */
-    private static boolean shouldCensorLog(String text){
-        return text.contains("Session ID is");
-    }
+    public static native void begin(String logFilePath);
 
     /** Small listener for anything listening to the log */
     public interface eventLogListener {
@@ -78,18 +27,5 @@ public class Logger {
     }
 
     /** Link a log listener to the logger */
-    public void setLogListener(eventLogListener logListener){
-        this.mLogListenerWeakReference = new WeakReference<>(logListener);
-    }
-
-    /** Notifies the event listener, if it exists */
-    private void notifyLogListener(String text){
-        if(mLogListenerWeakReference == null) return;
-        eventLogListener logListener = mLogListenerWeakReference.get();
-        if(logListener == null){
-            mLogListenerWeakReference = null;
-            return;
-        }
-        logListener.onEventLogged(text);
-    }
+    public static native void setLogListener(eventLogListener logListener);
 }

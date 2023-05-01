@@ -35,7 +35,6 @@ public class MultiRTUtils {
     private static final File RUNTIME_FOLDER = new File(Tools.MULTIRT_HOME);
     private static final String JAVA_VERSION_STR = "JAVA_VERSION=\"";
     private static final String OS_ARCH_STR = "OS_ARCH=\"";
-    private static String sSelectedRuntimeName;
 
     public static List<Runtime> getRuntimes() {
         if(!RUNTIME_FOLDER.exists() && !RUNTIME_FOLDER.mkdirs()) {
