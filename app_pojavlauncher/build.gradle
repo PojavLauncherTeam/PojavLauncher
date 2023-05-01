@@ -1,51 +1,61 @@
-apply plugin: 'com.android.application'
+plugins {
+    id 'com.android.application' version '7.4.2'
+}
 
-static def getDate() { return new Date().format('yyyyMMdd')}
+static def getDate() { return new Date().format('yyyyMMdd') }
 
 static def getDateSeconds() {
-    if(System.getenv("GITHUB_ACTIONS") == "true") {
-        return 9934841+Integer.parseInt(System.getenv("GITHUB_RUN_NUMBER"))
-    }else{
+    if (System.getenv("GITHUB_ACTIONS") == "true") {
+        return 9934841 + Integer.parseInt(System.getenv("GITHUB_RUN_NUMBER"))
+    } else {
         return 172005
     }
 }
 
-def getVersionName =  {
+def getVersionName = {
     // Get the last version tag, as well as the short head of the last commit
     ByteArrayOutputStream TAG = new ByteArrayOutputStream()
     ByteArrayOutputStream BRANCH = new ByteArrayOutputStream()
     exec {
-        try{
+        try {
             commandLine 'git', 'describe', '--tags'
             ignoreExitValue true
             standardOutput = TAG
-        }catch(Exception e){}
+        } catch (Exception e) {
+        }
     }
-    exec{
-        try{
+    exec {
+        try {
             commandLine 'git', 'branch', '--show-current'
             ignoreExitValue true
             standardOutput = BRANCH
-        }catch(Exception e){}
+        } catch (Exception e) {
+        }
     }
 
-    if(TAG.toString() == ""){
+    if (TAG.toString() == "") {
         return ("LOCAL-" + "${getDate()}")
     }
 
-    return TAG.toString().trim().replace("-g","-") + "-" + BRANCH.toString().trim();
+    return TAG.toString().trim().replace("-g", "-") + "-" + BRANCH.toString().trim()
+}
+
+configurations {
+    instrumentedClasspath {
+        canBeConsumed = false
+        canBeResolved = true
+    }
 }
 
 android {
-    compileSdkVersion 33
-    dexOptions {
-        javaMaxHeapSize "4g"
-    }
-	
+    namespace 'net.kdt.pojavlaunch'
+
+    compileSdk = 33
+
     lintOptions {
         abortOnError false
     }
-	
+
     signingConfigs {
         customDebug {
             storeFile file("debug.keystore")
@@ -60,7 +70,7 @@ android {
             keyPassword System.getenv("GPLAY_KEYSTORE_PASSWORD")
         }
     }
-	
+
     defaultConfig {
         applicationId "net.kdt.pojavlaunch"
         minSdkVersion 21
@@ -86,14 +96,14 @@ android {
             minifyEnabled true
             shrinkResources true
         }
-		
+
         release {
-	    // Don't set to true or java.awt will be a.a or something similar.
+            // Don't set to true or java.awt will be a.a or something similar.
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-	    // defaultConfig already set
+            // defaultConfig already set
             // multiDexEnabled = true
-           // debuggable = true
+            // debuggable = true
             resValue 'string', 'storageProviderAuthorities', 'net.kdt.pojavlaunch.scoped.gamefolder'
             resValue 'string', 'application_package', 'net.kdt.pojavlaunch'
         }
@@ -102,8 +112,10 @@ android {
             signingConfig signingConfigs.googlePlayBuild
         }
     }
-	
-	externalNativeBuild {
+
+    ndkVersion = "25.2.9519653"
+
+    externalNativeBuild {
         ndkBuild {
             path file('src/main/jni/Android.mk')
         }
@@ -113,38 +125,46 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     bundle {
         language {
             enableSplit = false
         }
     }
 
-    buildToolsVersion '30.0.2'
+    packagingOptions {
+        jniLibs {
+            useLegacyPackaging = true
+        }
+    }
+
+    buildToolsVersion = '33.0.2'
 }
 
 dependencies {
     implementation 'javax.annotation:javax.annotation-api:1.3.2'
-    implementation 'commons-codec:commons-codec:1.14'
+    implementation 'commons-codec:commons-codec:1.15'
     // implementation 'com.wu-man:android-bsf-api:3.1.3'
-    implementation 'androidx.preference:preference:1.1.1'
+    implementation 'androidx.preference:preference:1.2.0'
     //implementation 'androidx.core:core:1.7.0'
-    implementation 'androidx.drawerlayout:drawerlayout:1.1.1'
-    implementation 'androidx.viewpager2:viewpager2:1.0.0'
-    implementation 'androidx.annotation:annotation:1.3.0'
+    implementation 'androidx.drawerlayout:drawerlayout:1.2.0'
+    implementation 'androidx.viewpager2:viewpager2:1.1.0-beta01'
+    implementation 'androidx.annotation:annotation:1.5.0'
 
-    implementation "androidx.constraintlayout:constraintlayout:2.1.2"
+    implementation "androidx.constraintlayout:constraintlayout:2.1.4"
 
     implementation 'com.github.duanhong169:checkerboarddrawable:1.0.2'
     implementation 'com.github.PojavLauncherTeam:portrait-sdp:ed33e89cbc'
     implementation 'com.github.PojavLauncherTeam:portrait-ssp:6c02fd739b'
     implementation 'com.github.Mathias-Boulay:ExtendedView:1.0.0'
 
-    
+
     // implementation 'com.intuit.sdp:sdp-android:1.0.5'
     // implementation 'com.intuit.ssp:ssp-android:1.0.5'
 
     implementation 'org.tukaani:xz:1.8'
     implementation 'com.github.PojavLauncherTeam:exp4j:60eaec6f78'
     // implementation 'net.sourceforge.streamsupport:streamsupport-cfuture:1.7.0'
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
