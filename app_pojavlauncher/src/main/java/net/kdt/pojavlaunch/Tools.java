@@ -15,7 +15,6 @@ import android.app.ProgressDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.Cursor;
@@ -152,7 +151,7 @@ public final class Tools {
 
 
     public static void launchMinecraft(final Activity activity, MinecraftAccount minecraftAccount,
-                                       MinecraftProfile minecraftProfile, String versionId) throws Throwable {
+                                       MinecraftProfile minecraftProfile, String versionId, int versionJavaRequirement) throws Throwable {
         int freeDeviceMemory = getFreeDeviceMemory(activity);
         if(LauncherPreferences.PREF_RAM_ALLOCATION > freeDeviceMemory) {
             Object memoryErrorLock = new Object();
@@ -167,7 +166,7 @@ public final class Tools {
                 memoryErrorLock.wait();
             }
         }
-        Runtime runtime = MultiRTUtils.forceReread(Tools.pickRuntime(minecraftProfile));
+        Runtime runtime = MultiRTUtils.forceReread(Tools.pickRuntime(minecraftProfile, versionJavaRequirement));
         JMinecraftVersionList.Version versionInfo = Tools.getVersionInfo(versionId);
         LauncherProfiles.update();
         File gamedir = Tools.getGameDirPath(minecraftProfile);
@@ -551,10 +550,10 @@ public final class Tools {
 
         Runnable runnable = () -> {
             final String errMsg = showMore ? printToString(e) : rolledMessage != null ? rolledMessage : e.getMessage();
-            AlertDialog.Builder builder = new AlertDialog.Builder((Context) ctx)
+            AlertDialog.Builder builder = new AlertDialog.Builder(ctx)
                     .setTitle(titleId)
                     .setMessage(errMsg)
-                    .setPositiveButton(android.R.string.ok, (DialogInterface.OnClickListener) (p1, p2) -> {
+                    .setPositiveButton(android.R.string.ok, (p1, p2) -> {
                         if(exitIfOk) {
                             if (ctx instanceof MainActivity) {
                                 MainActivity.fullyExit();
@@ -563,8 +562,8 @@ public final class Tools {
                             }
                         }
                     })
-                    .setNegativeButton(showMore ? R.string.error_show_less : R.string.error_show_more, (DialogInterface.OnClickListener) (p1, p2) -> showError(ctx, titleId, rolledMessage, e, exitIfOk, !showMore))
-                    .setNeutralButton(android.R.string.copy, (DialogInterface.OnClickListener) (p1, p2) -> {
+                    .setNegativeButton(showMore ? R.string.error_show_less : R.string.error_show_more, (p1, p2) -> showError(ctx, titleId, rolledMessage, e, exitIfOk, !showMore))
+                    .setNeutralButton(android.R.string.copy, (p1, p2) -> {
                         ClipboardManager mgr = (ClipboardManager) ctx.getSystemService(Context.CLIPBOARD_SERVICE);
                         mgr.setPrimaryClip(ClipData.newPlainText("error", Log.getStackTraceString(e)));
                         if(exitIfOk) {
@@ -938,13 +937,33 @@ public final class Tools {
     public static boolean isValidString(String string) {
         return string != null && !string.isEmpty();
     }
-    public static String pickRuntime(MinecraftProfile minecraftProfile) {
+
+    public static String getRuntimeName(String prefixedName) {
+        if(prefixedName == null) return prefixedName;
+        if(!prefixedName.startsWith(Tools.LAUNCHERPROFILES_RTPREFIX)) return null;
+        return prefixedName.substring(Tools.LAUNCHERPROFILES_RTPREFIX.length());
+    }
+
+    public static String getSelectedRuntime(MinecraftProfile minecraftProfile) {
         String runtime = LauncherPreferences.PREF_DEFAULT_RUNTIME;
-        if(minecraftProfile.javaDir != null && minecraftProfile.javaDir.startsWith(Tools.LAUNCHERPROFILES_RTPREFIX)) {
-            String runtimeName = minecraftProfile.javaDir.substring(Tools.LAUNCHERPROFILES_RTPREFIX.length());
-            if(MultiRTUtils.forceReread(runtimeName).versionString != null) {
-                runtime = runtimeName;
+        String profileRuntime = getRuntimeName(minecraftProfile.javaDir);
+        if(profileRuntime != null) {
+            if(MultiRTUtils.forceReread(profileRuntime).versionString != null) {
+                runtime = profileRuntime;
             }
+        }
+        return runtime;
+    }
+
+    public static @NonNull String pickRuntime(MinecraftProfile minecraftProfile, int targetJavaVersion) {
+        String runtime = getSelectedRuntime(minecraftProfile);
+        String profileRuntime = getRuntimeName(minecraftProfile.javaDir);
+        Runtime pickedRuntime = MultiRTUtils.read(runtime);
+        if(runtime == null || pickedRuntime.javaVersion == 0 || pickedRuntime.javaVersion < targetJavaVersion) {
+            String preferredRuntime = MultiRTUtils.getNearestJreName(targetJavaVersion);
+            if(preferredRuntime == null) throw new RuntimeException("Failed to autopick runtime!");
+            if(profileRuntime != null) minecraftProfile.javaDir = Tools.LAUNCHERPROFILES_RTPREFIX+preferredRuntime;
+            runtime = preferredRuntime;
         }
         return runtime;
     }
