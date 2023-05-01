@@ -163,7 +163,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
             new Thread(() -> {
                 try {
                     final int exit = doCustomInstall(runtime, modFile, javaArgs);
-                    Logger.getInstance().appendToLog(getString(R.string.toast_optifine_success));
+                    Logger.appendToLog(getString(R.string.toast_optifine_success));
                     if (exit != 0) return;
                     runOnUiThread(() -> {
                         Toast.makeText(JavaGUILauncherActivity.this, R.string.toast_optifine_success, Toast.LENGTH_SHORT).show();
@@ -171,8 +171,8 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
                     });
 
                 } catch (Throwable e) {
-                    Logger.getInstance().appendToLog("Install failed:");
-                    Logger.getInstance().appendToLog(Log.getStackTraceString(e));
+                    Logger.appendToLog("Install failed:");
+                    Logger.appendToLog(Log.getStackTraceString(e));
                     Tools.showError(JavaGUILauncherActivity.this, e);
                 }
             }, "Installer").start();
@@ -300,7 +300,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
                 Collections.reverse(javaArgList);
             }
 
-            Logger.getInstance().appendToLog("Info: Java arguments: " + Arrays.toString(javaArgList.toArray(new String[0])));
+            Logger.appendToLog("Info: Java arguments: " + Arrays.toString(javaArgList.toArray(new String[0])));
 
             return JREUtils.launchJavaVM(this, runtime,null,javaArgList, LauncherPreferences.PREF_CUSTOM_JAVA_ARGS);
         } catch (Throwable th) {

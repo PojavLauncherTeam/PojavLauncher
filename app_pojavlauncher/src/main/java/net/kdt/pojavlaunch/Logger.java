@@ -7,13 +7,6 @@ import androidx.annotation.Keep;
  */
 @Keep
 public class Logger {
-
-    private static final Logger dummyLogger = new Logger();
-
-    public static Logger getInstance(){
-        return dummyLogger;
-    }
-
     /** Print the text to the log file if not censored */
     public static native void appendToLog(String text);
 

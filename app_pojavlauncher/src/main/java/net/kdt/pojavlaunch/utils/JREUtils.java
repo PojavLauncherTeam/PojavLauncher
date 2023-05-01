@@ -115,7 +115,7 @@ public class JREUtils {
                     int len;
                     while ((len = p.getInputStream().read(buf)) != -1) {
                         String currStr = new String(buf, 0, len);
-                        Logger.getInstance().appendToLog(currStr);
+                        Logger.appendToLog(currStr);
                     }
 
                     if (p.waitFor() != 0) {
@@ -125,12 +125,12 @@ public class JREUtils {
                         if (failTime <= 10) {
                             run();
                         } else {
-                            Logger.getInstance().appendToLog("ERROR: Unable to get more log.");
+                            Logger.appendToLog("ERROR: Unable to get more log.");
                         }
                     }
                 } catch (Throwable e) {
                     Log.e("jrelog-logcat", "Exception on logging thread", e);
-                    Logger.getInstance().appendToLog("Exception on logging thread:\n" + Log.getStackTraceString(e));
+                    Logger.appendToLog("Exception on logging thread:\n" + Log.getStackTraceString(e));
                 }
             }
         }).start();
@@ -247,7 +247,7 @@ public class JREUtils {
             }
         }
         for (Map.Entry<String, String> env : envMap.entrySet()) {
-            Logger.getInstance().appendToLog("Added custom env: " + env.getKey() + "=" + env.getValue());
+            Logger.appendToLog("Added custom env: " + env.getKey() + "=" + env.getValue());
             try {
                 Os.setenv(env.getKey(), env.getValue(), true);
             }catch (NullPointerException exception){
@@ -297,7 +297,7 @@ public class JREUtils {
         userArgs.add(0,"java"); //argv[0] is the program name according to C standard.
 
         final int exitCode = VMLauncher.launchJVM(userArgs.toArray(new String[0]));
-        Logger.getInstance().appendToLog("Java Exit code: " + exitCode);
+        Logger.appendToLog("Java Exit code: " + exitCode);
         if (exitCode != 0) {
             activity.runOnUiThread(() -> {
                 AlertDialog.Builder dialog = new AlertDialog.Builder(activity);

@@ -316,7 +316,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
             Tools.LOCAL_RENDERER = LauncherPreferences.PREF_RENDERER;
         }
         MinecraftAccount minecraftAccount = PojavProfile.getCurrentProfileContent(this, null);
-        Logger.getInstance().appendToLog("--------- beginning with launcher debug");
+        Logger.appendToLog("--------- beginning with launcher debug");
         printLauncherInfo(versionId);
         if (Tools.LOCAL_RENDERER.equals("vulkan_zink")) {
             checkVulkanZinkIsSupported();
@@ -329,13 +329,12 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
     }
 
     private void printLauncherInfo(String gameVersion) {
-        Logger logger = Logger.getInstance();
-        logger.appendToLog("Info: Launcher version: " + BuildConfig.VERSION_NAME);
-        logger.appendToLog("Info: Architecture: " + Architecture.archAsString(Tools.DEVICE_ARCHITECTURE));
-        logger.appendToLog("Info: Device model: " + Build.MANUFACTURER + " " +Build.MODEL);
-        logger.appendToLog("Info: API version: " + Build.VERSION.SDK_INT);
-        logger.appendToLog("Info: Selected Minecraft version: " + gameVersion);
-        logger.appendToLog("Info: Custom Java arguments: \"" + LauncherPreferences.PREF_CUSTOM_JAVA_ARGS + "\"");
+        Logger.appendToLog("Info: Launcher version: " + BuildConfig.VERSION_NAME);
+        Logger.appendToLog("Info: Architecture: " + Architecture.archAsString(Tools.DEVICE_ARCHITECTURE));
+        Logger.appendToLog("Info: Device model: " + Build.MANUFACTURER + " " +Build.MODEL);
+        Logger.appendToLog("Info: API version: " + Build.VERSION.SDK_INT);
+        Logger.appendToLog("Info: Selected Minecraft version: " + gameVersion);
+        Logger.appendToLog("Info: Custom Java arguments: \"" + LauncherPreferences.PREF_CUSTOM_JAVA_ARGS + "\"");
     }
 
     private void checkVulkanZinkIsSupported() {
@@ -343,7 +342,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
                 || Build.VERSION.SDK_INT < 25
                 || !getPackageManager().hasSystemFeature(PackageManager.FEATURE_VULKAN_HARDWARE_LEVEL)
                 || !getPackageManager().hasSystemFeature(PackageManager.FEATURE_VULKAN_HARDWARE_VERSION)) {
-            Logger.getInstance().appendToLog("Error: Vulkan Zink renderer is not supported!");
+            Logger.appendToLog("Error: Vulkan Zink renderer is not supported!");
             throw new RuntimeException(getString(R.string. mcn_check_fail_vulkan_support));
         }
     }
