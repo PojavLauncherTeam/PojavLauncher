@@ -318,4 +318,5 @@
     <string name="create_profile">Neues Profil erstellen</string>
     <string name="preference_shader_dump_title">Shader-Dumping aktivieren</string>
     <string name="preference_shader_dump_description">Konvertierte Shader in die Protokolldatei protokollieren</string>
+    <string name="percent_format">%d%%</string>
 </resources>
