@@ -312,4 +312,5 @@
     <string name="storage_required">PojavLauncher memerlukan penyimpanan eksternal. Mohon hubungkan ulang penyimpanan Anda dan mulai ulang aplikasi.</string>
     <string name="mcl_setting_subtitle_buttonallcaps">Matikan ini jika Anda hanya ingin menggunakan huruf kecil dalam kontrol Anda</string>
     <string name="create_profile">Buat profil baru</string>
+    <string name="percent_format">%d%%</string>
 </resources>
