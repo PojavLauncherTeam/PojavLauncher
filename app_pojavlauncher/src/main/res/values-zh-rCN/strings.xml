@@ -318,4 +318,5 @@
     <string name="create_profile">创建新配置</string>
     <string name="preference_shader_dump_title">启用着色器存储</string>
     <string name="preference_shader_dump_description">记录转换的着色器到日志文件</string>
+    <string name="percent_format">%d%%</string>
 </resources>
