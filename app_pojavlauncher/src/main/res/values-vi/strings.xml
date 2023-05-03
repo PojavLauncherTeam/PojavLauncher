@@ -318,4 +318,5 @@
     <string name="create_profile">Tạo cấu hình mới</string>
     <string name="preference_shader_dump_title">Kích hoạt đổ bóng</string>
     <string name="preference_shader_dump_description">Ghi các shader đã chuyển đổi vào tệp nhật ký</string>
+    <string name="percent_format">%d%%</string>
 </resources>
