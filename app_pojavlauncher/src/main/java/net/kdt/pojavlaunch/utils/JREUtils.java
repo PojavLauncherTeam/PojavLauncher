@@ -198,6 +198,7 @@ public class JREUtils {
         envMap.put("force_glsl_extensions_warn", "true");
         envMap.put("allow_higher_compat_version", "true");
         envMap.put("allow_glsl_extension_directive_midshader", "true");
+        envMap.put("mesa_glthread", "true");
         envMap.put("MESA_LOADER_DRIVER_OVERRIDE", "zink");
         envMap.put("VTEST_SOCKET_NAME", activity.getCacheDir().getAbsolutePath() + "/.virgl_test");
 
