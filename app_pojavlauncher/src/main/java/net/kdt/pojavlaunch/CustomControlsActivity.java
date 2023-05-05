@@ -22,14 +22,14 @@ import com.kdt.pickafile.FileSelectedListener;
 import net.kdt.pojavlaunch.customcontrols.ControlData;
 import net.kdt.pojavlaunch.customcontrols.ControlDrawerData;
 import net.kdt.pojavlaunch.customcontrols.ControlLayout;
-import net.kdt.pojavlaunch.customcontrols.Exitable;
+import net.kdt.pojavlaunch.customcontrols.EditorExitable;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 
 import java.io.File;
 import java.io.IOException;
 
 
-public class CustomControlsActivity extends BaseActivity implements Exitable {
+public class CustomControlsActivity extends BaseActivity implements EditorExitable {
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerNavigationView;
 	private ControlLayout mControlLayout;
@@ -109,7 +109,7 @@ public class CustomControlsActivity extends BaseActivity implements Exitable {
 	}
 
 
-	public static void save(final ControlLayout layout, final Exitable exitListener) {
+	public static void save(final ControlLayout layout, final EditorExitable exitListener) {
 		final Context ctx = layout.getContext();
 		final EditText edit = new EditText(ctx);
 		edit.setSingleLine();
@@ -136,9 +136,9 @@ public class CustomControlsActivity extends BaseActivity implements Exitable {
 		private final AlertDialog mDialog;
 		private final EditText mEditText;
 		private final ControlLayout mLayout;
-		private final Exitable mListener;
+		private final EditorExitable mListener;
 
-		public OnClickExitListener(AlertDialog mDialog, EditText mEditText, ControlLayout mLayout, Exitable mListener) {
+		public OnClickExitListener(AlertDialog mDialog, EditText mEditText, ControlLayout mLayout, EditorExitable mListener) {
 			this.mDialog = mDialog;
 			this.mEditText = mEditText;
 			this.mLayout = mLayout;
@@ -163,7 +163,7 @@ public class CustomControlsActivity extends BaseActivity implements Exitable {
 		}
 	}
 
-	public static void showExitDialog(Context context, Exitable exitListener) {
+	public static void showExitDialog(Context context, EditorExitable exitListener) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(context);
 		builder.setTitle(R.string.customctrl_editor_exit_title);
 		builder.setMessage(R.string.customctrl_editor_exit_msg);

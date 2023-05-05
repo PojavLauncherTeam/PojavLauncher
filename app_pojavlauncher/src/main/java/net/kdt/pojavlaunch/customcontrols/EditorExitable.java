@@ -1,5 +1,5 @@
 package net.kdt.pojavlaunch.customcontrols;
 
-public interface Exitable {
+public interface EditorExitable {
     void exitEditor();
 }

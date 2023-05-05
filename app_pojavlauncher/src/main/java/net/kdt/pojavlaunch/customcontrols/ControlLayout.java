@@ -408,11 +408,11 @@ public class ControlLayout extends FrameLayout {
 		return mGameSurface;
 	}
 
-	public void askToExit(Exitable exitable) {
+	public void askToExit(EditorExitable editorExitable) {
 		if(mIsModified) {
-			CustomControlsActivity.save(this, exitable);
+			CustomControlsActivity.save(this, editorExitable);
 		}else{
-			CustomControlsActivity.showExitDialog(getContext(), exitable);
+			CustomControlsActivity.showExitDialog(getContext(), editorExitable);
 		}
 	}
 }
