@@ -270,4 +270,9 @@
     <string name="tasks_ongoing">Tareas en curso, por favor espere</string>
     <string name="no_saved_accounts">No hay cuentas guardadas</string>
     <string name="xerr_not_available">Xbox Live no está disponible en su país</string>
+    <string name="customctrl_editor_exit_msg">¿Seguro que quieres salir?</string>
+    <string name="customctrl_editor_exit">Salir del editor</string>
+    <string name="global_save_and_exit">Guardar y salir</string>
+    <string name="global_yes">Si</string>
+    <string name="global_no">No</string>
 </resources>
