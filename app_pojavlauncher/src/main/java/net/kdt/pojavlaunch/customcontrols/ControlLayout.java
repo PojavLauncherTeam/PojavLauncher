@@ -303,7 +303,9 @@ public class ControlLayout extends FrameLayout {
 		ControlInterface lastControlButton = mapTable.get(v);
 
 		//Check if the action is cancelling, reset the lastControl button associated to the view
-		if(ev.getActionMasked() == MotionEvent.ACTION_UP || ev.getActionMasked() == MotionEvent.ACTION_CANCEL){
+		if(ev.getActionMasked() == MotionEvent.ACTION_UP
+				|| ev.getActionMasked() == MotionEvent.ACTION_CANCEL
+				|| ev.getActionMasked() == MotionEvent.ACTION_POINTER_UP){
 			if(lastControlButton != null) lastControlButton.sendKeyPresses(false);
 			mapTable.put(v, null);
 			return;
