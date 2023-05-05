@@ -34,7 +34,7 @@ public class ControlLayout extends FrameLayout {
 	/* Cache to buttons for performance purposes */
 	private List<ControlInterface> mButtons;
 	private boolean mModifiable = false;
-	private CustomControlsActivity mActivity;
+	private boolean mIsModified;
 	private boolean mControlVisible = false;
 
 	private EditControlPopup mControlPopup = null;
@@ -187,10 +187,6 @@ public class ControlLayout extends FrameLayout {
 		setModified(false);
 	}
 
-	public void setActivity(CustomControlsActivity activity) {
-		mActivity = activity;
-	}
-
 	public void toggleControlVisible(){
 		mControlVisible = !mControlVisible;
 		setControlVisible(mControlVisible);
@@ -225,8 +221,7 @@ public class ControlLayout extends FrameLayout {
 	}
 
 	public void setModified(boolean isModified) {
-		if (mActivity != null) mActivity.isModified = isModified;
-
+		mIsModified = isModified;
 	}
 
 	public List<ControlInterface> getButtonChildren(){
@@ -411,5 +406,13 @@ public class ControlLayout extends FrameLayout {
 			mGameSurface = findViewById(R.id.main_game_render_view);
 		}
 		return mGameSurface;
+	}
+
+	public void askToExit(Exitable exitable) {
+		if(mIsModified) {
+			CustomControlsActivity.save(this, exitable);
+		}else{
+			CustomControlsActivity.showExitDialog(getContext(), exitable);
+		}
 	}
 }

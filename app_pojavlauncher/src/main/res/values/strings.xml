@@ -357,4 +357,10 @@
     <string name="preference_shader_dump_title">Enable shader dumping</string>
     <string name="preference_shader_dump_description">Log converted shaders into the log file</string>
     <string name="percent_format">%d%%</string>
+    <string name="customctrl_editor_exit_title">Leaving?</string>
+    <string name="customctrl_editor_exit_msg">Are you sure you want to exit?</string>
+    <string name="customctrl_editor_exit">Leave editor</string>
+    <string name="global_save_and_exit">Save and exit</string>
+    <string name="global_yes">Yes</string>
+    <string name="global_no">No</string>
 </resources>

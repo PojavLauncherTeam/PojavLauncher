@@ -1,6 +1,5 @@
 package net.kdt.pojavlaunch;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -9,7 +8,6 @@ import android.os.Bundle;
 import android.provider.DocumentsContract;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -24,18 +22,17 @@ import com.kdt.pickafile.FileSelectedListener;
 import net.kdt.pojavlaunch.customcontrols.ControlData;
 import net.kdt.pojavlaunch.customcontrols.ControlDrawerData;
 import net.kdt.pojavlaunch.customcontrols.ControlLayout;
+import net.kdt.pojavlaunch.customcontrols.Exitable;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 
 import java.io.File;
 import java.io.IOException;
 
 
-public class CustomControlsActivity extends BaseActivity {
+public class CustomControlsActivity extends BaseActivity implements Exitable {
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerNavigationView;
 	private ControlLayout mControlLayout;
-
-	public boolean isModified = false;
 	private static String sSelectedName = "new_control";
 
 	@Override
@@ -59,7 +56,7 @@ public class CustomControlsActivity extends BaseActivity {
 				case 1: mControlLayout.addDrawer(new ControlDrawerData()); break;
 				//case 2: mControlLayout.addJoystickButton(new ControlData()); break;
 				case 2: load(mControlLayout); break;
-				case 3: save(false, mControlLayout); break;
+				case 3: save( mControlLayout, this); break;
 				case 4: dialogSelectDefaultCtrl(mControlLayout); break;
 				case 5: // Saving the currently shown control
 					try {
@@ -81,7 +78,6 @@ public class CustomControlsActivity extends BaseActivity {
 			}
 			mDrawerLayout.closeDrawers();
 		});
-		mControlLayout.setActivity(this);
 		mControlLayout.setModifiable(true);
 
 		loadControl(LauncherPreferences.PREF_DEFAULTCTRL_PATH, mControlLayout);
@@ -89,13 +85,7 @@ public class CustomControlsActivity extends BaseActivity {
 
 	@Override
 	public void onBackPressed() {
-		if (!isModified) {
-			setResult(Activity.RESULT_OK, new Intent());
-			super.onBackPressed();
-			return;
-		}
-
-		save(true, mControlLayout);
+		mControlLayout.askToExit(this);
 	}
 
 	public static void dialogSelectDefaultCtrl(final ControlLayout layout) {
@@ -119,7 +109,7 @@ public class CustomControlsActivity extends BaseActivity {
 	}
 
 
-	public static void save(final boolean exit, final ControlLayout layout) {
+	public static void save(final ControlLayout layout, final Exitable exitListener) {
 		final Context ctx = layout.getContext();
 		final EditText edit = new EditText(ctx);
 		edit.setSingleLine();
@@ -130,47 +120,56 @@ public class CustomControlsActivity extends BaseActivity {
 		builder.setView(edit);
 		builder.setPositiveButton(android.R.string.ok, null);
 		builder.setNegativeButton(android.R.string.cancel, null);
-		if (exit) {
-			builder.setNeutralButton(R.string.mcn_exit_call, (p1, p2) -> {
-				layout.setModifiable(false);
-				if(ctx instanceof MainActivity) {
-					((MainActivity) ctx).leaveCustomControls();
-				}else{
-					((CustomControlsActivity) ctx).isModified = false;
-					((Activity)ctx).onBackPressed();
-				}
-			});
-		}
+		if(exitListener != null) builder.setNeutralButton(R.string.global_save_and_exit, null);
 		final AlertDialog dialog = builder.create();
 		dialog.setOnShowListener(dialogInterface -> {
-
-			Button button = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
-			button.setOnClickListener(view -> {
-				if (edit.getText().toString().isEmpty()) {
-					edit.setError(ctx.getResources().getString(R.string.global_error_field_empty));
-					return;
-				}
-
-				try {
-					String jsonPath = doSaveCtrl(edit.getText().toString(),layout);
-					Toast.makeText(ctx, ctx.getString(R.string.global_save) + ": " + jsonPath, Toast.LENGTH_SHORT).show();
-
-					dialog.dismiss();
-					if (!exit) return;
-
-					if(ctx instanceof MainActivity) {
-						((MainActivity) ctx).leaveCustomControls();
-					}else{
-						((Activity)ctx).onBackPressed();
-					}
-				} catch (Throwable th) {
-					Tools.showError(ctx, th, exit);
-				}
-
-			});
+			dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+					.setOnClickListener(new OnClickExitListener(dialog, edit, layout, null));
+			if(exitListener != null) dialog.getButton(AlertDialog.BUTTON_NEUTRAL)
+					.setOnClickListener(new OnClickExitListener(dialog, edit, layout, exitListener));
 		});
 		dialog.show();
 
+	}
+
+	static class OnClickExitListener implements View.OnClickListener {
+		private final AlertDialog mDialog;
+		private final EditText mEditText;
+		private final ControlLayout mLayout;
+		private final Exitable mListener;
+
+		public OnClickExitListener(AlertDialog mDialog, EditText mEditText, ControlLayout mLayout, Exitable mListener) {
+			this.mDialog = mDialog;
+			this.mEditText = mEditText;
+			this.mLayout = mLayout;
+			this.mListener = mListener;
+		}
+
+		@Override
+		public void onClick(View v) {
+			Context context = v.getContext();
+			if (mEditText.getText().toString().isEmpty()) {
+				mEditText.setError(context.getString(R.string.global_error_field_empty));
+				return;
+			}
+			try {
+				String jsonPath = doSaveCtrl(mEditText.getText().toString(),mLayout);
+				Toast.makeText(context, context.getString(R.string.global_save) + ": " + jsonPath, Toast.LENGTH_SHORT).show();
+				mDialog.dismiss();
+				if(mListener != null) mListener.exitEditor();
+			} catch (Throwable th) {
+				Tools.showError(context, th, mListener != null);
+			}
+		}
+	}
+
+	public static void showExitDialog(Context context, Exitable exitListener) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+		builder.setTitle(R.string.customctrl_editor_exit_title);
+		builder.setMessage(R.string.customctrl_editor_exit_msg);
+		builder.setPositiveButton(R.string.global_yes, (d,w)->exitListener.exitEditor());
+		builder.setNegativeButton(R.string.global_no, (d,w)->{});
+		builder.show();
 	}
 
 	public static void load(final ControlLayout layout) {
@@ -221,5 +220,10 @@ public class CustomControlsActivity extends BaseActivity {
 		} catch (Exception e) {
 			Tools.showError(layout.getContext(), e);
 		}
+	}
+
+	@Override
+	public void exitEditor() {
+		super.onBackPressed();
 	}
 }

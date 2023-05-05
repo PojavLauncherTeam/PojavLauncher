@@ -46,6 +46,7 @@ import net.kdt.pojavlaunch.customcontrols.ControlData;
 import net.kdt.pojavlaunch.customcontrols.ControlDrawerData;
 import net.kdt.pojavlaunch.customcontrols.ControlLayout;
 import net.kdt.pojavlaunch.customcontrols.CustomControls;
+import net.kdt.pojavlaunch.customcontrols.Exitable;
 import net.kdt.pojavlaunch.customcontrols.keyboard.LwjglCharSender;
 import net.kdt.pojavlaunch.customcontrols.keyboard.TouchCharInput;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
@@ -61,7 +62,7 @@ import org.lwjgl.glfw.CallbackBridge;
 import java.io.File;
 import java.io.IOException;
 
-public class MainActivity extends BaseActivity implements ControlButtonMenuListener{
+public class MainActivity extends BaseActivity implements ControlButtonMenuListener, Exitable {
     public static volatile ClipboardManager GLOBAL_CLIPBOARD;
     public static final String INTENT_MINECRAFT_VERSION = "intent_version";
 
@@ -111,8 +112,9 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
                 case 1: mControlLayout.addDrawer(new ControlDrawerData()); break;
                 //case 2: mControlLayout.addJoystickButton(new ControlData()); break;
                 case 2 : CustomControlsActivity.load(mControlLayout); break;
-                case 3: CustomControlsActivity.save(true,mControlLayout); break;
+                case 3: CustomControlsActivity.save(mControlLayout, this); break;
                 case 4: CustomControlsActivity.dialogSelectDefaultCtrl(mControlLayout); break;
+                case 5: CustomControlsActivity.showExitDialog(this, this);
             }
         };
 
@@ -365,24 +367,6 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         isInEditor = true;
     }
 
-    public void leaveCustomControls() {
-        try {
-            MainActivity.mControlLayout.loadLayout((CustomControls)null);
-            MainActivity.mControlLayout.setModifiable(false);
-            System.gc();
-            MainActivity.mControlLayout.loadLayout(
-                    minecraftProfile.controlFile == null
-                            ? LauncherPreferences.PREF_DEFAULTCTRL_PATH
-                            : Tools.CTRLMAP_PATH + "/" + minecraftProfile.controlFile);
-            mDrawerPullButton.setVisibility(mControlLayout.hasMenuButton() ? View.GONE : View.VISIBLE);
-        } catch (IOException e) {
-            Tools.showError(this,e);
-        }
-        //((MainActivity) this).mControlLayout.loadLayout((CustomControls)null);
-        navDrawer.setAdapter(gameActionArrayAdapter);
-        navDrawer.setOnItemClickListener(gameActionClickListener);
-        isInEditor = false;
-    }
     private void openLogOutput() {
         loggerView.setVisibility(View.VISIBLE);
     }
@@ -410,7 +394,13 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
 
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
-        if(isInEditor) return super.dispatchKeyEvent(event);
+        if(isInEditor) {
+            if(event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+                if(event.getAction() == KeyEvent.ACTION_DOWN) mControlLayout.askToExit(this);
+                return true;
+            }
+            return super.dispatchKeyEvent(event);
+        }
         boolean handleEvent;
         if(!(handleEvent = minecraftGLView.processKeyEvent(event))) {
             if (event.getKeyCode() == KeyEvent.KEYCODE_BACK && !touchCharInput.isEnabled()) {
@@ -558,5 +548,25 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
     public void onClickedMenu() {
         drawerLayout.openDrawer(navDrawer);
         navDrawer.requestLayout();
+    }
+
+    @Override
+    public void exitEditor() {
+        try {
+            MainActivity.mControlLayout.loadLayout((CustomControls)null);
+            MainActivity.mControlLayout.setModifiable(false);
+            System.gc();
+            MainActivity.mControlLayout.loadLayout(
+                    minecraftProfile.controlFile == null
+                            ? LauncherPreferences.PREF_DEFAULTCTRL_PATH
+                            : Tools.CTRLMAP_PATH + "/" + minecraftProfile.controlFile);
+            mDrawerPullButton.setVisibility(mControlLayout.hasMenuButton() ? View.GONE : View.VISIBLE);
+        } catch (IOException e) {
+            Tools.showError(this,e);
+        }
+        //((MainActivity) this).mControlLayout.loadLayout((CustomControls)null);
+        navDrawer.setAdapter(gameActionArrayAdapter);
+        navDrawer.setOnItemClickListener(gameActionClickListener);
+        isInEditor = false;
     }
 }

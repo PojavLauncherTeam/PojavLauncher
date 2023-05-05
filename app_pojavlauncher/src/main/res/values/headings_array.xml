@@ -13,6 +13,7 @@
         <item name="2">@string/global_load</item>
         <item name="3">@string/global_save</item>
         <item name="4">@string/customctrl_selectdefault</item>
+        <item name="5">@string/customctrl_editor_exit</item>
     </string-array>
 
     <string-array name="menu_customcontrol_customactivity">
