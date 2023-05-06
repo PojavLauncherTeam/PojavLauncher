@@ -320,4 +320,10 @@
     <string name="preference_shader_dump_title">Сохранять дамп шейдеров</string>
     <string name="preference_shader_dump_description">Записывать в файл журнала данные о конвертации шейдеров</string>
     <string name="percent_format">%d%%</string>
+    <string name="customctrl_editor_exit_title">Выйти?</string>
+    <string name="customctrl_editor_exit_msg">Вы действительно хотите выйти?</string>
+    <string name="customctrl_editor_exit">Покинуть редактор</string>
+    <string name="global_save_and_exit">Сохранить и выйти</string>
+    <string name="global_yes">Да</string>
+    <string name="global_no">Нет</string>
 </resources>
