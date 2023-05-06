@@ -319,4 +319,10 @@
     <string name="preference_shader_dump_title">Kích hoạt đổ bóng</string>
     <string name="preference_shader_dump_description">Ghi các shader đã chuyển đổi vào tệp nhật ký</string>
     <string name="percent_format">%d%%</string>
+    <string name="customctrl_editor_exit_title">Rời đi?</string>
+    <string name="customctrl_editor_exit_msg">Bạn có chắc bạn muốn thoát ra không?</string>
+    <string name="customctrl_editor_exit">Rời khỏi trình chỉnh sửa</string>
+    <string name="global_save_and_exit">Lưu và thoát</string>
+    <string name="global_yes">Đồng ý</string>
+    <string name="global_no">Không</string>
 </resources>
