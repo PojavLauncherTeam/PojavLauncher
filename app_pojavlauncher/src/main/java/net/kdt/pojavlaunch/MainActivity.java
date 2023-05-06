@@ -111,10 +111,10 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
                 case 0: mControlLayout.addControlButton(new ControlData("New")); break;
                 case 1: mControlLayout.addDrawer(new ControlDrawerData()); break;
                 //case 2: mControlLayout.addJoystickButton(new ControlData()); break;
-                case 2 : CustomControlsActivity.load(mControlLayout); break;
-                case 3: CustomControlsActivity.save(mControlLayout, this); break;
-                case 4: CustomControlsActivity.dialogSelectDefaultCtrl(mControlLayout); break;
-                case 5: CustomControlsActivity.showExitDialog(this, this);
+                case 2 : mControlLayout.openLoadDialog(); break;
+                case 3: mControlLayout.openSaveDialog(this); break;
+                case 4: mControlLayout.openSetDefaultDialog(); break;
+                case 5: mControlLayout.openExitDialog(this);
             }
         };
 

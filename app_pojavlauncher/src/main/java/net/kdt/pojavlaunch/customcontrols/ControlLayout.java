@@ -1,21 +1,29 @@
 package net.kdt.pojavlaunch.customcontrols;
+
 import static android.content.Context.INPUT_METHOD_SERVICE;
 import static net.kdt.pojavlaunch.Tools.currentDisplayMetrics;
 
 import android.annotation.SuppressLint;
-import android.content.*;
-import android.util.*;
-import android.view.*;
+import android.content.Context;
+import android.os.Build;
+import android.util.AttributeSet;
+import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.*;
-import com.google.gson.*;
-import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 
-import net.kdt.pojavlaunch.*;
+import com.google.gson.JsonSyntaxException;
+import com.kdt.pickafile.FileListView;
+import com.kdt.pickafile.FileSelectedListener;
+
+import net.kdt.pojavlaunch.MinecraftGLSurface;
+import net.kdt.pojavlaunch.R;
+import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.customcontrols.buttons.ControlButton;
 import net.kdt.pojavlaunch.customcontrols.buttons.ControlDrawer;
 import net.kdt.pojavlaunch.customcontrols.buttons.ControlInterface;
@@ -23,8 +31,13 @@ import net.kdt.pojavlaunch.customcontrols.buttons.ControlSubButton;
 import net.kdt.pojavlaunch.customcontrols.handleview.ActionRow;
 import net.kdt.pojavlaunch.customcontrols.handleview.ControlHandleView;
 import net.kdt.pojavlaunch.customcontrols.handleview.EditControlPopup;
+import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 
-import net.kdt.pojavlaunch.prefs.*;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class ControlLayout extends FrameLayout {
 	protected CustomControls mLayout;
@@ -40,7 +53,8 @@ public class ControlLayout extends FrameLayout {
 	private EditControlPopup mControlPopup = null;
 	private ControlHandleView mHandleView;
 	private ControlButtonMenuListener mMenuListener;
-	public ActionRow actionRow = null;
+	public ActionRow mActionRow = null;
+	public String mLayoutFileName;
 
 	public ControlLayout(Context ctx) {
 		super(ctx);
@@ -55,6 +69,7 @@ public class ControlLayout extends FrameLayout {
 		CustomControls layout = LayoutConverter.loadAndConvertIfNecessary(jsonPath);
 		if(layout != null) {
 			loadLayout(layout);
+			updateLoadedFileName(jsonPath);
 			return;
 		}
 
@@ -62,9 +77,9 @@ public class ControlLayout extends FrameLayout {
 	}
 
 	public void loadLayout(CustomControls controlLayout) {
-		if(actionRow == null){
-			actionRow = new ActionRow(getContext());
-			addView(actionRow);
+		if(mActionRow == null){
+			mActionRow = new ActionRow(getContext());
+			addView(mActionRow);
 		}
 
 		removeAllButtons();
@@ -355,7 +370,7 @@ public class ControlLayout extends FrameLayout {
 		// When the input window cannot be hidden, it returns false
 		if(!imm.hideSoftInputFromWindow(getWindowToken(), 0)){
 			if(mControlPopup.disappearLayer()){
-				actionRow.setFollowedButton(null);
+				mActionRow.setFollowedButton(null);
 				mHandleView.hide();
 			}
 		}
@@ -372,7 +387,7 @@ public class ControlLayout extends FrameLayout {
 			mControlPopup.disappear();
 		}
 
-		if(actionRow != null) actionRow.setFollowedButton(null);
+		if(mActionRow != null) mActionRow.setFollowedButton(null);
 		if(mHandleView != null) mHandleView.hide();
 	}
 
@@ -410,9 +425,131 @@ public class ControlLayout extends FrameLayout {
 
 	public void askToExit(EditorExitable editorExitable) {
 		if(mIsModified) {
-			CustomControlsActivity.save(this, editorExitable);
+			openSaveDialog(editorExitable);
 		}else{
-			CustomControlsActivity.showExitDialog(getContext(), editorExitable);
+			openExitDialog(editorExitable);
 		}
+	}
+
+	public void updateLoadedFileName(String path) {
+		path = path.replace(Tools.CTRLMAP_PATH, ".");
+		path = path.substring(0, path.length() - 5);
+		mLayoutFileName = path;
+	}
+
+	public String saveToDirectory(String name) throws Exception{
+		String jsonPath = Tools.CTRLMAP_PATH + "/" + name + ".json";
+		saveLayout(jsonPath);
+		return jsonPath;
+	}
+
+	class OnClickExitListener implements View.OnClickListener {
+		private final AlertDialog mDialog;
+		private final EditText mEditText;
+		private final EditorExitable mListener;
+
+		public OnClickExitListener(AlertDialog mDialog, EditText mEditText, EditorExitable mListener) {
+			this.mDialog = mDialog;
+			this.mEditText = mEditText;
+			this.mListener = mListener;
+		}
+
+		@Override
+		public void onClick(View v) {
+			Context context = v.getContext();
+			if (mEditText.getText().toString().isEmpty()) {
+				mEditText.setError(context.getString(R.string.global_error_field_empty));
+				return;
+			}
+			try {
+				String jsonPath = saveToDirectory(mEditText.getText().toString());
+				Toast.makeText(context, context.getString(R.string.global_save) + ": " + jsonPath, Toast.LENGTH_SHORT).show();
+				mDialog.dismiss();
+				if(mListener != null) mListener.exitEditor();
+			} catch (Throwable th) {
+				Tools.showError(context, th, mListener != null);
+			}
+		}
+	}
+
+	public void openSaveDialog(EditorExitable editorExitable) {
+		final Context context = getContext();
+		final EditText edit = new EditText(context);
+		edit.setSingleLine();
+		edit.setText(mLayoutFileName);
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+		builder.setTitle(R.string.global_save);
+		builder.setView(edit);
+		builder.setPositiveButton(android.R.string.ok, null);
+		builder.setNegativeButton(android.R.string.cancel, null);
+		if(editorExitable != null) builder.setNeutralButton(R.string.global_save_and_exit, null);
+		final AlertDialog dialog = builder.create();
+		dialog.setOnShowListener(dialogInterface -> {
+			dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+					.setOnClickListener(new OnClickExitListener(dialog, edit, null));
+			if(editorExitable != null) dialog.getButton(AlertDialog.BUTTON_NEUTRAL)
+					.setOnClickListener(new OnClickExitListener(dialog, edit, editorExitable));
+		});
+		dialog.show();
+	}
+
+	public void openLoadDialog() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+		builder.setTitle(R.string.global_load);
+		builder.setPositiveButton(android.R.string.cancel, null);
+
+		final AlertDialog dialog = builder.create();
+		FileListView flv = new FileListView(dialog, "json");
+		if(Build.VERSION.SDK_INT < 29)flv.listFileAt(new File(Tools.CTRLMAP_PATH));
+		else flv.lockPathAt(new File(Tools.CTRLMAP_PATH));
+		flv.setFileSelectedListener(new FileSelectedListener(){
+
+			@Override
+			public void onFileSelected(File file, String path) {
+				try {
+					loadLayout(path);
+				}catch (IOException e) {
+					Tools.showError(getContext(), e);
+				}
+				dialog.dismiss();
+			}
+		});
+		dialog.setView(flv);
+		dialog.show();
+	}
+
+	public void openSetDefaultDialog() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+		builder.setTitle(R.string.customctrl_selectdefault);
+		builder.setPositiveButton(android.R.string.cancel, null);
+
+		final AlertDialog dialog = builder.create();
+		FileListView flv = new FileListView(dialog, "json");
+		flv.lockPathAt(new File(Tools.CTRLMAP_PATH));
+		flv.setFileSelectedListener(new FileSelectedListener(){
+
+			@Override
+			public void onFileSelected(File file, String path) {
+				try {
+					LauncherPreferences.DEFAULT_PREF.edit().putString("defaultCtrl", path).apply();
+					LauncherPreferences.PREF_DEFAULTCTRL_PATH = path;loadLayout(path);
+				}catch (IOException|JsonSyntaxException e) {
+					Tools.showError(getContext(), e);
+				}
+				dialog.dismiss();
+			}
+		});
+		dialog.setView(flv);
+		dialog.show();
+	}
+
+	public void openExitDialog(EditorExitable exitListener) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+		builder.setTitle(R.string.customctrl_editor_exit_title);
+		builder.setMessage(R.string.customctrl_editor_exit_msg);
+		builder.setPositiveButton(R.string.global_yes, (d,w)->exitListener.exitEditor());
+		builder.setNegativeButton(R.string.global_no, (d,w)->{});
+		builder.show();
 	}
 }

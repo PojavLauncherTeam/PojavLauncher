@@ -348,7 +348,7 @@ public interface ControlInterface extends View.OnLongClickListener {
     default boolean onLongClick(View v){
         if (getControlLayoutParent().getModifiable()) {
             getControlLayoutParent().editControlButton(this);
-            getControlLayoutParent().actionRow.setFollowedButton(this);
+            getControlLayoutParent().mActionRow.setFollowedButton(this);
         }
 
         return true;
