@@ -18,6 +18,7 @@
     <string name="login_title_no_saved_account">アカウントが見つかりません！</string>
     <string name="login_dialog_no_saved_account">保存されたアカウントがありません。\n <b>\"ログイン状態を保持\"</b> オプションを使用して、最初にログインするとアカウントを保存します。</string>
     <!-- Hint -->
+    <string name="hint_control_mapping">"中央上部の歯車アイコンをタップするとコンテキストメニューを開けます。⚙\nボタンをタップすると、編集、サイズ変更、削除、キーバインドのカスタマイズをすることができます。"</string>
     <!-- Warnings -->
     <string name="warning_remove_account">このアカウントが削除されます！</string>
     <!-- AlertDialog title -->
@@ -36,6 +37,7 @@
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_wiki">ウィキペディア</string>
     <string name="mcl_tab_console">開発コンソール</string>
     <string name="mcl_tab_crash">クラッシュログ</string>
     <!-- MCLauncherActivity: Account status -->
@@ -91,6 +93,8 @@
     <string name="mcl_setting_veroption_snapshot">スナップショット</string>
     <string name="mcl_setting_veroption_oldalpha">Alpha 版</string>
     <string name="mcl_setting_veroption_oldbeta">Beta 版</string>
+    <string name="mcl_setting_java_sandbox">サンドボックス.jarファイルのインストーラー</string>
+    <string name="mcl_setting_java_sandbox_subtitle">.jarインストーラー起動時のサンドボックスセキュリティマネージャーの利用可否を制御</string>
     <string name="mcl_version_clone">複製</string>
     <!-- Global strings -->
     <string name="global_edit">編集</string>
@@ -119,7 +123,13 @@
     <string name="control_debug">デバッグ</string>
     <string name="control_primary">左</string>
     <string name="control_secondary">右</string>
+    <string name="control_shift">◇</string>
     <string name="control_inventory">持ち物</string>
+    <string name="control_up">▲</string>
+    <string name="control_left">◀</string>
+    <string name="control_right">▶</string>
+    <string name="control_down">▼</string>
+    <string name="control_jump">⬛</string>
     <string name="control_thirdperson">三人称</string>
     <string name="control_listplayers">プレイヤー</string>
     <string name="control_mouse">カーソル</string>
@@ -189,6 +199,8 @@
     <string name="dl_library_sha_pass">ライブラリ %s は問題なく使用できます</string>
     <string name="mcl_disable_gestures">ジェスチャーの無効化</string>
     <string name="mcl_disable_gestures_subtitle">ブロックを壊すためのホールドなどのジェスチャーを無効にしたり、タップしてブロックを配置します。</string>
+    <string name="mcl_disable_swap_hand">ダブルタップで手を入れ替えることができないようにする</string>
+    <string name="mcl_disable_swap_hand_subtitle">ホットバーにあるアイテムを2回タップしても、反対の手に入れ替えないようにする</string>
     <string name="mcl_setting_title_mousespeed">カーソルの速度</string>
     <string name="mcl_setting_subtitle_mousespeed">仮想カーソルの速度を変更します</string>
     <string name="customctrl_passthru">マウスパススルー</string>
@@ -225,23 +237,31 @@
     <string name="preference_control_offset_title">オフセットを制御する</string>
     <string name="preference_control_offset_description">画面のそれぞれの側にカスタムオフセットを設定します</string>
     <string name="preference_mouse_start_title">仮想マウスをオンにして開始</string>
+    <string name="preference_mouse_start_description">オンにすると、起動した時にマウスカーソルも出てくるようになります</string>
     <string name="preference_video_title">ビデオとレンダラー</string>
     <string name="preference_video_description">解像度、スケーリングタイプ、レンダラー</string>
     <string name="preference_control_title">制御のカスタマイズ</string>
     <string name="preference_control_description">ジェスチャーの種類、トリガー、およびスケーリング</string>
     <string name="preference_java_title">Java の調整</string>
+    <string name="preference_java_description">Javaのバージョン、JVMの引数、RAM、サンドボックス</string>
     <string name="preference_misc_title">その他の設定</string>
     <string name="preference_misc_description">バージョンリストとlibsチェック</string>
     <string name="preference_experimental_title">実験的なもの</string>
     <string name="preference_experimental_description">そこにあるものを考慮し、サポートなしで使用してください。</string>
     <string name="preference_sustained_performance_title">持続的なパフォーマンスモードを有効にする</string>
     <string name="preference_sustained_performance_description">ピーク性能を制限することでサーマルスロットリングを制限</string>
+    <string name="preference_force_vsync_title">強制的に垂直同期をオンにする</string>
     <string name="preference_force_vsync_description">ピーク性能を制限することでサーマルスロットリングを制限</string>
     <string name="preference_force_english_title">強制的に言語を英語にする</string>
     <string name="preference_force_english_description">開発者向けのオリジナルの文字列を表示できます。再起動が必要です</string>
     <string name="preference_edit_controls_title">カスタムコントロールの編集</string>
     <string name="preference_edit_controls_summary">コントロールスキームを調整する</string>
+    <string name="preference_category_gyro_controls">ジャイロコントロール</string>
     <string name="preference_category_virtual_mouse">仮想マウス</string>
+    <string name="preference_gyro_invert_x_axis">X軸を反転させる</string>
+    <string name="preference_gyro_invert_y_axis">Y軸を反転させる</string>
+    <string name="preference_gyro_invert_x_axis_description">水平軸を反転させる</string>
+    <string name="preference_gyro_invert_y_axis_description">縦軸を反転させる</string>
     <string name="preference_back_title">最後の画面に戻る</string>
     <string name="gles_hack_none">テクスチャを縮小しない</string>
     <string name="gles_hack_always">すべてのテクスチャを2で分割</string>
@@ -274,4 +294,32 @@
     <string name="tasks_ongoing">タスクが進行中です。しばらくお待ちください。</string>
     <string name="no_saved_accounts">保存されたアカウントはありません</string>
     <string name="downloading_versions">バージョンリストをダウンロード中…</string>
+    <string name="mc_download_failed">マインクラフトのダウンロードに失敗しました！ネットワークの接続が悪い、ファイルが正しく配置されていない等の可能性があります。</string>
+    <string name="xerr_unknown">原因不明のXbox Live APIエラー %d</string>
+    <string name="xerr_no_account">Java版マインクラフトのアカウントをお持ちでないようです。https://minecraft.net/ で一度ログインして、再度お試しください。</string>
+    <string name="xerr_adult_verification">大人の方がアカウントを確認する必要があります。</string>
+    <string name="xerr_child">このアカウントは、お子さんのアカウントであり、ログインするためにはファミリーに追加する必要があります。</string>
+    <string name="minecraft_not_owned">このアカウントにはMinecraftのプロファイルがないようです。Xbox Game Passをお持ちの方は、https://minecraft.net/ からログインして設定してください。</string>
+    <string name="xerr_not_available">お住まいの国ではXbox Liveをご利用になれません。</string>
+    <string name="preference_enable_gyro_title">ジャイロコントロールをオンにする</string>
+    <string name="preference_enable_gyro_description">これを有効にすると、携帯電話の電源を入れるとゲームが起動されるようになります。</string>
+    <string name="preference_gyro_sensitivity_title">ジャイロコントロールの感度</string>
+    <string name="preference_gyro_sensitivity_description">ジャイロコントロールの感度の調整</string>
+    <string name="toast_turn_on_gyro">これを使うには、ジャイロコントロールを有効にして下さい。</string>
+    <string name="preference_gyro_sample_rate_title">ジャイロコントロールサンプリングの速度</string>
+    <string name="preference_gyro_sample_rate_description">ジャイロコントロールの性能に問題がある場合はこの値を大きくしてください。</string>
+    <string name="microsoft_login_retry_later">リクエストが多すぎるため、後でもう一度お試しください。</string>
+    <string name="storage_required">PojavLauncherは、接続された外部ストレージを必要とします。ストレージを再接続し、アプリを再起動してください。</string>
+    <string name="mcl_setting_title_buttonallcaps">ボタンラベルには大文字のみを使用する</string>
+    <string name="mcl_setting_subtitle_buttonallcaps">コントロールに小文字を使用したい場合はオフにしてください</string>
+    <string name="create_profile">新規プロフィールの作成</string>
+    <string name="preference_shader_dump_title">シェーダーダンプをオンにする</string>
+    <string name="preference_shader_dump_description">変換されたシェーダをログファイルに記録する</string>
+    <string name="percent_format">%d%%</string>
+    <string name="customctrl_editor_exit_title">終了しますか？</string>
+    <string name="customctrl_editor_exit_msg">本当に終了しますか？</string>
+    <string name="customctrl_editor_exit">編集を中止する</string>
+    <string name="global_save_and_exit">保存して終了する</string>
+    <string name="global_yes">はい</string>
+    <string name="global_no">いいえ</string>
 </resources>
