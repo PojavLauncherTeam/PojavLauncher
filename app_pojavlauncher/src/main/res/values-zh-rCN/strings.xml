@@ -146,7 +146,7 @@
     <string name="import_control_label">导入控制键</string>
     <string name="import_control_invalid_file">文件无效或已损坏</string>
     <string name="import_control_import_button">导入控制键</string>
-    <string name="import_control_verifying_file">文件正在校检中，请稍候重试…</string>
+    <string name="import_control_verifying_file">文件正在校检中，请稍后重试…</string>
     <string name="import_control_invalid_name">名称无效或文件已存在</string>
     <string name="import_control_done">导入完成</string>
     <!--
@@ -180,7 +180,7 @@
     <string name="customctrl_addsubbutton">添加子按钮</string>
     <string name="customctrl_add_subbutton_message">子按钮 n°%d 已添加！</string>
     <string name="customctrl_selectdefault">选择默认 .json 控制键位</string>
-    <string name="customctrl_export">导出键盘</string>
+    <string name="customctrl_export">导出控制键位</string>
     <string name="main_share_logs">共享日志文件</string>
     <string name="main_install_jar_file">安装 .jar</string>
     <string name="main_options">选项</string>
@@ -257,7 +257,7 @@
     <string name="preference_force_vsync_description">通过限制峰值性能来限制过热降频</string>
     <string name="preference_force_english_title">强制使用英文</string>
     <string name="preference_force_english_description">允许您按开发者的原意看到原始字符串。此操作需要重启</string>
-    <string name="preference_edit_controls_title">编辑自定义控制按键</string>
+    <string name="preference_edit_controls_title">编辑自定义控制键</string>
     <string name="preference_edit_controls_summary">调整控制方案以适应您的需求</string>
     <string name="preference_category_gyro_controls">陀螺仪控制</string>
     <string name="preference_category_virtual_mouse">虚拟鼠标</string>
@@ -319,4 +319,10 @@
     <string name="preference_shader_dump_title">启用着色器存储</string>
     <string name="preference_shader_dump_description">记录转换的着色器到日志文件</string>
     <string name="percent_format">%d%%</string>
+    <string name="customctrl_editor_exit_title">是否离开？</string>
+    <string name="customctrl_editor_exit_msg">您是否确认退出？</string>
+    <string name="customctrl_editor_exit">退出编辑器</string>
+    <string name="global_save_and_exit">保存并退出</string>
+    <string name="global_yes">是</string>
+    <string name="global_no">否</string>
 </resources>
