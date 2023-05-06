@@ -318,4 +318,11 @@
     <string name="create_profile">Vytvořit nový profil</string>
     <string name="preference_shader_dump_title">Povolit vyhazování shaderů</string>
     <string name="preference_shader_dump_description">Zaznamenat převedené shadery do souboru záznamu</string>
+    <string name="percent_format">%d%%</string>
+    <string name="customctrl_editor_exit_title">Odcházíte?</string>
+    <string name="customctrl_editor_exit_msg">Určitě chcete odejít?</string>
+    <string name="customctrl_editor_exit">Opustit editor</string>
+    <string name="global_save_and_exit">Uložit a ukončit</string>
+    <string name="global_yes">Ano</string>
+    <string name="global_no">Ne</string>
 </resources>
