@@ -318,4 +318,10 @@
     <string name="create_profile">Créer un nouveau profil</string>
     <string name="preference_shader_dump_title">Activer le dumping du shader</string>
     <string name="preference_shader_dump_description">Shaders convertis en log dans le fichier log</string>
+    <string name="customctrl_editor_exit_title">Partir?</string>
+    <string name="customctrl_editor_exit_msg">Êtes-vous sûr·e de vouloir quitter?</string>
+    <string name="customctrl_editor_exit">Quitter l\'éditeur</string>
+    <string name="global_save_and_exit">Sauvegarder et quitter</string>
+    <string name="global_yes">Oui</string>
+    <string name="global_no">Non</string>
 </resources>
