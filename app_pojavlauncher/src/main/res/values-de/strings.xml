@@ -319,4 +319,10 @@
     <string name="preference_shader_dump_title">Shader-Dumping aktivieren</string>
     <string name="preference_shader_dump_description">Konvertierte Shader in die Protokolldatei protokollieren</string>
     <string name="percent_format">%d%%</string>
+    <string name="customctrl_editor_exit_title">Gehst Du?</string>
+    <string name="customctrl_editor_exit_msg">Wollen Sie das Spiel wirklich beenden?</string>
+    <string name="customctrl_editor_exit">Editor beenden</string>
+    <string name="global_save_and_exit">Speichern und schließen</string>
+    <string name="global_yes">Ja</string>
+    <string name="global_no">Nein</string>
 </resources>
