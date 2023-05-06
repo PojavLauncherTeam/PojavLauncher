@@ -49,7 +49,7 @@ struct pojav_environ_s {
     JavaVM* dalvikJavaVMPtr;
     JNIEnv* dalvikJNIEnvPtr_ANDROID;
     long showingWindow;
-    bool isInputReady, isCursorEntered, isUseStackQueueCall;
+    bool isInputReady, isCursorEntered, isUseStackQueueCall, isPumpingEvents;
     int savedWidth, savedHeight;
 #define ADD_CALLBACK_WWIN(NAME) \
     GLFW_invoke_##NAME##_func* GLFW_invoke_##NAME;

@@ -96,6 +96,10 @@ void handleFramebufferSizeJava(long window, int w, int h) {
 }
 
 void pojavPumpEvents(void* window) {
+    if(pojav_environ->isPumpingEvents) return;
+    // prevent further calls until we exit the loop
+    // by spec, they will be called on the same thread so no synchronization here
+    pojav_environ->isPumpingEvents = true;
     size_t counter = atomic_load_explicit(&pojav_environ->eventCounter, memory_order_acquire);
     for(size_t i = 0; i < counter; i++) {
         GLFWInputEvent event = pojav_environ->events[i];
@@ -131,6 +135,7 @@ void pojavPumpEvents(void* window) {
         pojav_environ->GLFW_invoke_CursorPos(window, pojav_environ->cursorX, pojav_environ->cursorY);
     }
     atomic_store_explicit(&pojav_environ->eventCounter, counter, memory_order_release);
+    pojav_environ->isPumpingEvents = false;
 }
 void pojavRewindEvents() {
     atomic_store_explicit(&pojav_environ->eventCounter, 0, memory_order_release);
