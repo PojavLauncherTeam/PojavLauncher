@@ -123,6 +123,22 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory
+        android:title="@string/preference_category_controller_settings"
+        >
+        <net.kdt.pojavlaunch.prefs.GamepadRemapPreference
+            android:title="@string/preference_wipe_controller_title"
+            android:summary="@string/preference_wipe_controller_description"
+            />
+        <net.kdt.pojavlaunch.prefs.CustomSeekBarPreference
+            android:key="gamepad_deadzone_scale"
+            android:title="@string/preference_deadzone_scale_title"
+            android:summary="@string/preference_deadzone_scale_description"
+            app2:showSeekBarValue="true"
+            app2:seekBarIncrement="5"
+            />
+    </PreferenceCategory>
+
 
 
 

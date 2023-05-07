@@ -363,4 +363,10 @@
     <string name="global_save_and_exit">Save and exit</string>
     <string name="global_yes">Yes</string>
     <string name="global_no">No</string>
+    <string name="preference_controller_map_wiped">The controller config has been wiped</string>
+    <string name="preference_category_controller_settings">Controller settings</string>
+    <string name="preference_wipe_controller_title">Reset controller mapping</string>
+    <string name="preference_wipe_controller_description">Allow you to remap the controller buttons</string>
+    <string name="preference_deadzone_scale_title">Joystick deadzone scale</string>
+    <string name="preference_deadzone_scale_description">Increase it if the joystick drifts</string>
 </resources>

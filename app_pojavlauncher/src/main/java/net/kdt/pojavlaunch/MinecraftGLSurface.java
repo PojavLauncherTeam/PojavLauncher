@@ -39,12 +39,32 @@ import net.kdt.pojavlaunch.utils.MathUtils;
 
 import org.lwjgl.glfw.CallbackBridge;
 
+import fr.spse.gamepad_remapper.RemapperManager;
+import fr.spse.gamepad_remapper.RemapperView;
+
 /**
  * Class dealing with showing minecraft surface and taking inputs to dispatch them to minecraft
  */
-public class MinecraftGLSurface extends View implements GrabListener{
+public class MinecraftGLSurface extends View implements GrabListener {
     /* Gamepad object for gamepad inputs, instantiated on need */
     private Gamepad mGamepad = null;
+    /* The RemapperView.Builder object allows you to set which buttons to remap */
+    private final RemapperManager mInputManager = new RemapperManager(getContext(), new RemapperView.Builder(null)
+            .remapA(true)
+            .remapB(true)
+            .remapX(true)
+            .remapY(true)
+
+            .remapDpad(true)
+            .remapLeftJoystick(true)
+            .remapRightJoystick(true)
+            .remapStart(true)
+            .remapSelect(true)
+            .remapLeftShoulder(true)
+            .remapRightShoulder(true)
+            .remapLeftTrigger(true)
+            .remapRightTrigger(true));
+
     /* Resolution scaler option, allow downsizing a window */
     private final float mScaleFactor = LauncherPreferences.PREF_SCALE_FACTOR/100f;
     /* Sensitivity, adjusted according to screen size */
@@ -385,7 +405,7 @@ public class MinecraftGLSurface extends View implements GrabListener{
                 mGamepad = new Gamepad(this, event.getDevice());
             }
 
-            mGamepad.update(event);
+            mInputManager.handleMotionEventInput(getContext(), event, mGamepad);
             return true;
         }
 
@@ -479,7 +499,7 @@ public class MinecraftGLSurface extends View implements GrabListener{
                 mGamepad = new Gamepad(this, event.getDevice());
             }
 
-            mGamepad.update(event);
+            mInputManager.handleKeyEventInput(getContext(), event, mGamepad);
             return true;
         }
 
