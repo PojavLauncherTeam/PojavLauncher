@@ -183,6 +183,7 @@ public class Gamepad implements GrabListener, GamepadHandler {
      */
     private void tick(long frameTimeNanos){
         //update mouse position
+        long newFrameTime = System.nanoTime();
         if(mLastHorizontalValue != 0 || mLastVerticalValue != 0){
             GamepadJoystick currentJoystick = isGrabbing ? mLeftJoystick : mRightJoystick;
 
@@ -193,7 +194,8 @@ public class Gamepad implements GrabListener, GamepadHandler {
             // Compute delta since last tick time
             float deltaX = (float) (Math.cos(mMouseAngle) * acceleration * mMouseSensitivity);
             float deltaY = (float) (Math.sin(mMouseAngle) * acceleration * mMouseSensitivity);
-            float deltaTimeScale = ((frameTimeNanos - mLastFrameTime) / 16666666f); // Scale of 1 = 60Hz
+            newFrameTime = System.nanoTime();  // More accurate delta
+            float deltaTimeScale = ((newFrameTime - mLastFrameTime) / 16666666f); // Scale of 1 = 60Hz
             deltaX *= deltaTimeScale;
             deltaY *= deltaTimeScale;
 
@@ -211,7 +213,7 @@ public class Gamepad implements GrabListener, GamepadHandler {
         }
 
         // Update last nano time
-        mLastFrameTime = frameTimeNanos;
+        mLastFrameTime = newFrameTime;
     }
 
     private void updateMouseJoystick(){
