@@ -70,7 +70,7 @@ public class GyroControl implements SensorEventListener, GrabListener {
         // Copy the old array content
         System.arraycopy(mCurrentRotation, 0, mPreviousRotation, 0, 16);
         SensorManager.getRotationMatrixFromVector(mCurrentRotation, sensorEvent.values);
-        System.out.println(Arrays.toString(sensorEvent.values));
+        
 
         if(mFirstPass){  // Setup initial position
             mFirstPass = false;
