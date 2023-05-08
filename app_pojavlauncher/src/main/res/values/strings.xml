@@ -363,4 +363,6 @@
     <string name="global_save_and_exit">Save and exit</string>
     <string name="global_yes">Yes</string>
     <string name="global_no">No</string>
+    <string name="preference_gyro_damper_window_title">Smoothing time</string>
+    <string name="preference_gyro_damper_window_description">Reduce jitter in exchange of latency. 0 to disable it</string>
 </resources>

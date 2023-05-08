@@ -23,6 +23,7 @@ public class LauncherPreferenceControlFragment extends LauncherPreferenceFragmen
         int gyroSampleRate = LauncherPreferences.PREF_GYRO_SAMPLE_RATE;
         float mouseSpeed = LauncherPreferences.PREF_MOUSESPEED;
         float gyroSpeed = LauncherPreferences.PREF_GYRO_SENSITIVITY;
+        int damperWindow = LauncherPreferences.PREF_GYRO_DAMPER_WINDOW;
 
         //Triggers a write for some reason which resets the value
         addPreferencesFromResource(R.xml.pref_control);
@@ -46,6 +47,11 @@ public class LauncherPreferenceControlFragment extends LauncherPreferenceFragmen
         seek6.setRange(25, 300);
         seek6.setValue((int)(mouseSpeed *100f));
         seek6.setSuffix(" %");
+
+        CustomSeekBarPreference gyroDamperWindow = findPreference("gyroDamperWindow");
+        gyroDamperWindow.setRange(0, 200);
+        gyroDamperWindow.setValue(damperWindow);
+        gyroDamperWindow.setSuffix(" ms");
 
         Context context = getContext();
         if(context != null) {
