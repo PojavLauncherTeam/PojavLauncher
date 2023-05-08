@@ -53,8 +53,7 @@ public class Gamepad implements GrabListener, GamepadHandler {
 
     /* Resolution scaler option, allow downsizing a window */
     private final float mScaleFactor = LauncherPreferences.DEFAULT_PREF.getInt("resolutionRatio",100)/100f;
-    /* Mouse positions, scaled by the scaleFactor */
-    private float mMouse_x, mMouse_y;
+
     /* Sensitivity, adjusted according to screen size */
     private final double mSensitivityFactor = (1.4 * (1080f/ currentDisplayMetrics.heightPixels));
 
@@ -104,8 +103,6 @@ public class Gamepad implements GrabListener, GamepadHandler {
         /* Add the listener for the cross hair */
         MCOptionUtils.addMCOptionListener(mGuiScaleListener);
 
-
-
         mLeftJoystick = new GamepadJoystick(AXIS_X, AXIS_Y, inputDevice);
         mRightJoystick = new GamepadJoystick(AXIS_Z, AXIS_RZ, inputDevice);
 
@@ -118,9 +115,7 @@ public class Gamepad implements GrabListener, GamepadHandler {
         int size = (int) ((22 * getMcScale()) / mScaleFactor);
         mPointerImageView.setLayoutParams(new FrameLayout.LayoutParams(size, size));
 
-        mMouse_x = CallbackBridge.windowWidth/2f;
-        mMouse_y = CallbackBridge.windowHeight/2f;
-        CallbackBridge.sendCursorPos(mMouse_x, mMouse_y);
+        CallbackBridge.sendCursorPos(CallbackBridge.windowWidth/2f, CallbackBridge.windowHeight/2f);
         ((ViewGroup)contextView.getParent()).addView(mPointerImageView);
 
         placePointerView(CallbackBridge.physicalWidth/2, CallbackBridge.physicalHeight/2);
@@ -210,9 +205,6 @@ public class Gamepad implements GrabListener, GamepadHandler {
                 CallbackBridge.mouseY = MathUtils.clamp(CallbackBridge.mouseY, 0, CallbackBridge.windowHeight);
                 placePointerView((int) (CallbackBridge.mouseX / mScaleFactor), (int) (CallbackBridge.mouseY/ mScaleFactor));
             }
-
-            mMouse_x = CallbackBridge.mouseX;
-            mMouse_y = CallbackBridge.mouseY;
 
             //Send the mouse to the game
             CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
@@ -319,9 +311,7 @@ public class Gamepad implements GrabListener, GamepadHandler {
         mCurrentMap = mMenuMap;
         sendDirectionalKeycode(mCurrentJoystickDirection, false, mGameMap); // removing what we were doing
 
-        mMouse_x = CallbackBridge.windowWidth/2f;
-        mMouse_y = CallbackBridge.windowHeight/2f;
-        CallbackBridge.sendCursorPos(mMouse_x, mMouse_y);
+        CallbackBridge.sendCursorPos(CallbackBridge.windowWidth/2f, CallbackBridge.windowHeight/2f);
         placePointerView(CallbackBridge.physicalWidth/2, CallbackBridge.physicalHeight/2);
         mPointerImageView.setVisibility(View.VISIBLE);
         // Sensitivity in menu is MC and HARDWARE resolution dependent
