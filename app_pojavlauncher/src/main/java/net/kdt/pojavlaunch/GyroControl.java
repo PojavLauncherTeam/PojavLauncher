@@ -1,5 +1,8 @@
 package net.kdt.pojavlaunch;
 
+import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_GYRO_DAMPER_WINDOW;
+import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_GYRO_SAMPLE_RATE;
+
 import android.app.Activity;
 import android.content.Context;
 import android.hardware.Sensor;
@@ -16,7 +19,6 @@ import org.lwjgl.glfw.CallbackBridge;
 import java.util.Arrays;
 
 public class GyroControl implements SensorEventListener, GrabListener {
-    public final static float DAMPENING_TIME_WINDOW = 100F; // Dampening time in ms
     private final WindowManager mWindowManager;
     private int mSurfaceRotation;
     private final SensorManager mSensorManager;
@@ -32,7 +34,11 @@ public class GyroControl implements SensorEventListener, GrabListener {
     private final float[] mCurrentRotation = new float[16];
     private final float[] mAngleDifference = new float[3];
 
-    private final float[][] mAngleHistory = new float[(int) Math.min(Math.floor(DAMPENING_TIME_WINDOW/LauncherPreferences.PREF_GYRO_SAMPLE_RATE), 2)][3];
+
+    private final float[][] mAngleHistory = new float[(int) Math.max(
+            PREF_GYRO_DAMPER_WINDOW/PREF_GYRO_SAMPLE_RATE,
+            PREF_GYRO_DAMPER_WINDOW > 0 ? 2 : 1  // Force dampening if bigger than 0
+    )][3];
     private float xTotal = 0;
     private float yTotal = 0;
 
@@ -51,7 +57,7 @@ public class GyroControl implements SensorEventListener, GrabListener {
     public void enable() {
         if(mSensor == null) return;
         mFirstPass = true;
-        mSensorManager.registerListener(this, mSensor, 1000 * LauncherPreferences.PREF_GYRO_SAMPLE_RATE);
+        mSensorManager.registerListener(this, mSensor, 1000 * PREF_GYRO_SAMPLE_RATE);
         mCorrectionListener.enable();
         mShouldHandleEvents = CallbackBridge.isGrabbing();
         CallbackBridge.addGrabListener(this);
@@ -70,7 +76,7 @@ public class GyroControl implements SensorEventListener, GrabListener {
         // Copy the old array content
         System.arraycopy(mCurrentRotation, 0, mPreviousRotation, 0, 16);
         SensorManager.getRotationMatrixFromVector(mCurrentRotation, sensorEvent.values);
-        
+
 
         if(mFirstPass){  // Setup initial position
             mFirstPass = false;
