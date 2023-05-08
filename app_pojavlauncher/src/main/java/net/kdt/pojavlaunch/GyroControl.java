@@ -13,7 +13,10 @@ import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 
 import org.lwjgl.glfw.CallbackBridge;
 
-public class GyroControl implements SensorEventListener, GrabListener{
+import java.util.Arrays;
+
+public class GyroControl implements SensorEventListener, GrabListener {
+    public final static float DAMPENING_TIME_WINDOW = 100F; // Dampening time in ms
     private final WindowManager mWindowManager;
     private int mSurfaceRotation;
     private final SensorManager mSensorManager;
@@ -28,6 +31,14 @@ public class GyroControl implements SensorEventListener, GrabListener{
     private final float[] mPreviousRotation = new float[16];
     private final float[] mCurrentRotation = new float[16];
     private final float[] mAngleDifference = new float[3];
+
+    private final float[][] mAngleHistory = new float[(int) Math.min(Math.floor(DAMPENING_TIME_WINDOW/LauncherPreferences.PREF_GYRO_SAMPLE_RATE), 2)][3];
+    private float xTotal = 0;
+    private float yTotal = 0;
+
+    private float xAverage = 0;
+    private float yAverage = 0;
+    private int mHistoryIndex = -1;
 
     public GyroControl(Activity activity) {
         mWindowManager = activity.getWindowManager();
@@ -50,6 +61,7 @@ public class GyroControl implements SensorEventListener, GrabListener{
         if(mSensor == null) return;
         mSensorManager.unregisterListener(this);
         mCorrectionListener.disable();
+        resetDamper();
         CallbackBridge.removeGrabListener(this);
     }
     @Override
@@ -58,27 +70,61 @@ public class GyroControl implements SensorEventListener, GrabListener{
         // Copy the old array content
         System.arraycopy(mCurrentRotation, 0, mPreviousRotation, 0, 16);
         SensorManager.getRotationMatrixFromVector(mCurrentRotation, sensorEvent.values);
+        System.out.println(Arrays.toString(sensorEvent.values));
 
         if(mFirstPass){  // Setup initial position
             mFirstPass = false;
             return;
         }
         SensorManager.getAngleChange(mAngleDifference, mCurrentRotation, mPreviousRotation);
+        damperValue(mAngleDifference);
 
-        CallbackBridge.mouseX -= (mAngleDifference[mSwapXY ? 2 : 1] * 1000 * LauncherPreferences.PREF_GYRO_SENSITIVITY * xFactor);
-        CallbackBridge.mouseY += (mAngleDifference[mSwapXY ? 1 : 2] * 1000  * LauncherPreferences.PREF_GYRO_SENSITIVITY * yFactor);
+        CallbackBridge.mouseX -= ((mSwapXY ? yAverage : xAverage) * 1000 * LauncherPreferences.PREF_GYRO_SENSITIVITY * xFactor);
+        CallbackBridge.mouseY += ((mSwapXY ? xAverage : yAverage) * 1000  * LauncherPreferences.PREF_GYRO_SENSITIVITY * yFactor);
         CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
     }
 
     @Override
-    public void onAccuracyChanged(Sensor sensor, int i) {
-
-    }
+    public void onAccuracyChanged(Sensor sensor, int i) {}
 
     @Override
     public void onGrabState(boolean isGrabbing) {
         mFirstPass = true;
         mShouldHandleEvents = isGrabbing;
+    }
+
+
+    /**
+     * Compute the moving average of the gyroscope to reduce jitter
+     * @param newAngleDifference The new angle difference
+     */
+    private void damperValue(float[] newAngleDifference){
+        mHistoryIndex ++;
+        if(mHistoryIndex >= mAngleHistory.length) mHistoryIndex = 0;
+
+        xTotal -= mAngleHistory[mHistoryIndex][1];
+        yTotal -= mAngleHistory[mHistoryIndex][2];
+
+        System.arraycopy(newAngleDifference, 0, mAngleHistory[mHistoryIndex], 0, 3);
+
+        xTotal += mAngleHistory[mHistoryIndex][1];
+        yTotal += mAngleHistory[mHistoryIndex][2];
+
+        // compute the moving average
+        xAverage = xTotal / mAngleHistory.length;
+        yAverage = yTotal / mAngleHistory.length;
+    }
+
+    /** Reset the moving average data */
+    private void resetDamper(){
+        mHistoryIndex = -1;
+        xTotal = 0;
+        yTotal = 0;
+        xAverage = 0;
+        yAverage = 0;
+        for(float[] oldAngle : mAngleHistory){
+            Arrays.fill(oldAngle, 0);
+        }
     }
 
     class OrientationCorrectionListener extends OrientationEventListener {
