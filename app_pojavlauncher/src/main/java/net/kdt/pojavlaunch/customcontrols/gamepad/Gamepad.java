@@ -121,9 +121,9 @@ public class Gamepad implements GrabListener, GamepadHandler {
         mMouse_x = CallbackBridge.windowWidth/2f;
         mMouse_y = CallbackBridge.windowHeight/2f;
         CallbackBridge.sendCursorPos(mMouse_x, mMouse_y);
-        placePointerView(CallbackBridge.physicalWidth/2, CallbackBridge.physicalHeight/2);
-
         ((ViewGroup)contextView.getParent()).addView(mPointerImageView);
+
+        placePointerView(CallbackBridge.physicalWidth/2, CallbackBridge.physicalHeight/2);
 
         CallbackBridge.addGrabListener(this);
     }
