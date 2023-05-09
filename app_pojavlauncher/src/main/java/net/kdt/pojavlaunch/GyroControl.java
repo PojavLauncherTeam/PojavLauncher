@@ -19,6 +19,9 @@ import org.lwjgl.glfw.CallbackBridge;
 import java.util.Arrays;
 
 public class GyroControl implements SensorEventListener, GrabListener {
+    /* How much distance has to be moved before taking into account the gyro */
+    private static final float REALLY_LOW_PASS_THRESHOLD = 1.4F;
+
     private final WindowManager mWindowManager;
     private int mSurfaceRotation;
     private final SensorManager mSensorManager;
@@ -45,6 +48,10 @@ public class GyroControl implements SensorEventListener, GrabListener {
     private float xAverage = 0;
     private float yAverage = 0;
     private int mHistoryIndex = -1;
+
+    /* Store the gyro movement under the threshold */
+    private float mStoredX = 0;
+    private float mStoredY = 0;
 
     public GyroControl(Activity activity) {
         mWindowManager = activity.getWindowManager();
@@ -84,10 +91,19 @@ public class GyroControl implements SensorEventListener, GrabListener {
         }
         SensorManager.getAngleChange(mAngleDifference, mCurrentRotation, mPreviousRotation);
         damperValue(mAngleDifference);
+        mStoredX += xAverage * 1000;
+        mStoredY += yAverage * 1000;
 
-        CallbackBridge.mouseX -= ((mSwapXY ? yAverage : xAverage) * 1000 * LauncherPreferences.PREF_GYRO_SENSITIVITY * xFactor);
-        CallbackBridge.mouseY += ((mSwapXY ? xAverage : yAverage) * 1000  * LauncherPreferences.PREF_GYRO_SENSITIVITY * yFactor);
-        CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
+        if(Math.abs(mStoredX) + Math.abs(mStoredY) > REALLY_LOW_PASS_THRESHOLD){
+            CallbackBridge.mouseX -= ((mSwapXY ? mStoredY : mStoredX)  * LauncherPreferences.PREF_GYRO_SENSITIVITY * xFactor);
+            CallbackBridge.mouseY += ((mSwapXY ? mStoredX : mStoredY) * LauncherPreferences.PREF_GYRO_SENSITIVITY * yFactor);
+            CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
+
+            mStoredX = 0;
+            mStoredY = 0;
+        }
+
+
     }
 
     @Override
