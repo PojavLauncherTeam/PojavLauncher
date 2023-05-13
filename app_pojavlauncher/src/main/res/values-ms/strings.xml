@@ -18,6 +18,7 @@
     <string name="login_title_no_saved_account">Tiada akaun dijumpai!</string>
     <string name="login_dialog_no_saved_account">Kamu tidak mempunyai sebarang akaun yang disimpan.\nGunakan pilihan <b>\"Kekalkan saya terlog masuk\"</b> untuk menyimpan sebuah akaun pada log masuk pertama.</string>
     <!-- Hint -->
+    <string name="hint_control_mapping">"Ketik ikon roda tengah atas untuk membuka menu konteks ⚙\nKetik butang untuk menyesuaikan: edit, ubah saiz, padam atau sesuaikan ikatan kekuncinya."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Akaun ini akan dihapus!</string>
     <!-- AlertDialog title -->
@@ -36,6 +37,7 @@
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_wiki">Wiki</string>
     <string name="mcl_tab_console">Konsol development</string>
     <string name="mcl_tab_crash">Log ranap</string>
     <!-- MCLauncherActivity: Account status -->
@@ -54,6 +56,8 @@
     <string name="mcl_option_customcontrol">Kawalan custom</string>
     <string name="mcl_option_settings">Tetapan</string>
     <string name="mcl_option_about">Tentang</string>
+    <string name="mcl_setting_title_use_surface_view">Gunakan pemaparan permukaan ganti</string>
+    <string name="mcl_setting_subtitle_use_surface_view">Boleh membantu prestasi dalam senario terikat gpu</string>
     <string name="mcl_setting_title_uninstalljre">Nyahpasang Java Runtime</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Pemulaan semula Pelancar diperlukan] Ini membenarkan anda untuk memasang semula Java Runtime</string>
     <string name="mcl_setting_title_freeform">Lancarkan Minecraft dalam mod Freeform</string>
@@ -79,6 +83,8 @@
     <string name="mcl_setting_category_general">Tetapan umum</string>
     <string name="mcl_setting_category_scaling">Tetapan Skala</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
+    <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (semua versi, pantas)</string>
+    <string name="mcl_setting_renderer_virgl">virglrenderer - (keluaran 1.7+, perlahan)</string>
     <string name="mcl_setting_renderer_vgpu">vgpu - (hingga 1.16.5, pantas)</string>
     <string name="mcl_setting_renderer_vulkan_zink">zink - (old_beta b1.+, perlahan)</string>
     <string name="mcl_setting_renderer_angle">ANGLE - (terbitan 1.17+, sederhana)</string>
@@ -87,6 +93,7 @@
     <string name="mcl_setting_veroption_snapshot">Petikan</string>
     <string name="mcl_setting_veroption_oldalpha">Alfa-lama</string>
     <string name="mcl_setting_veroption_oldbeta">Beta-lama</string>
+    <string name="mcl_setting_java_sandbox">Pemasang Sandbox .jar</string>
     <string name="mcl_version_clone">Klon</string>
     <!-- Global strings -->
     <string name="global_edit">Sunting</string>
