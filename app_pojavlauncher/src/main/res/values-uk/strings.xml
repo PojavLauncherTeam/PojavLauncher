@@ -319,4 +319,10 @@
     <string name="preference_shader_dump_title">Увімкнути відкидання шейдерів</string>
     <string name="preference_shader_dump_description">Журнал конвертував шейдери в файл записів</string>
     <string name="percent_format">%d%%</string>
+    <string name="customctrl_editor_exit_title">Вже йдете?</string>
+    <string name="customctrl_editor_exit_msg">Ви дійсно бажаєте вийти?</string>
+    <string name="customctrl_editor_exit">Залишити редактор</string>
+    <string name="global_save_and_exit">Зберегти та вийти</string>
+    <string name="global_yes">Так</string>
+    <string name="global_no">Ні</string>
 </resources>
