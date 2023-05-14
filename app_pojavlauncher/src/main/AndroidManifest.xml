@@ -83,7 +83,7 @@
             android:theme="@style/Theme.AppCompat.DayNight.Dialog" />
         <activity
             android:name=".JavaGUILauncherActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"
+            android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|keyboard|navigation|uiMode"
             android:screenOrientation="sensorLandscape" />
         <activity
             android:name=".CustomControlsActivity"
