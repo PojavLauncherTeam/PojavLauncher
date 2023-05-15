@@ -247,6 +247,12 @@ public class ControlLayout extends FrameLayout {
 			removeEditWindow();
 		}
 		mModifiable = isModifiable;
+		if(isModifiable){
+			// In edit mode, all controls have to be shown
+			for(ControlInterface button : getButtonChildren()){
+				button.setVisible(true);
+			}
+		}
 	}
 
 	public boolean getModifiable(){

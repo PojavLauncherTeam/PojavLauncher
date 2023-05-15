@@ -100,6 +100,9 @@ public class ControlData {
     public float cornerRadius;  //0-100%
     public boolean isSwipeable;
 
+    public boolean displayInGame;
+    public boolean displayInMenu;
+
     public ControlData() {
         this("button");
     }
@@ -142,10 +145,10 @@ public class ControlData {
     }
 
     public ControlData(String name, int[] keycodes, String dynamicX, String dynamicY, float width, float height, boolean isToggle){
-        this(name, keycodes, dynamicX, dynamicY, width, height, isToggle, 1,0x4D000000, 0xFFFFFFFF,0,0);
+        this(name, keycodes, dynamicX, dynamicY, width, height, isToggle, 1,0x4D000000, 0xFFFFFFFF,0,0, true, true);
     }
 
-    public ControlData(String name, int[] keycodes, String dynamicX, String dynamicY, float width, float height, boolean isToggle, float opacity, int bgColor, int strokeColor, int strokeWidth, float cornerRadius) {
+    public ControlData(String name, int[] keycodes, String dynamicX, String dynamicY, float width, float height, boolean isToggle, float opacity, int bgColor, int strokeColor, int strokeWidth, float cornerRadius, boolean displayInGame, boolean displayInMenu) {
         this.name = name;
         this.keycodes = inflateKeycodeArray(keycodes);
         this.dynamicX = dynamicX;
@@ -159,6 +162,8 @@ public class ControlData {
         this.strokeColor = strokeColor;
         this.strokeWidth = strokeWidth;
         this.cornerRadius = cornerRadius;
+        this.displayInGame = displayInGame;
+        this.displayInMenu = displayInMenu;
     }
 
     //Deep copy constructor
@@ -175,7 +180,9 @@ public class ControlData {
                 controlData.bgColor,
                 controlData.strokeColor,
                 controlData.strokeWidth,
-                controlData.cornerRadius
+                controlData.cornerRadius,
+                controlData.displayInGame,
+                controlData.displayInMenu
         );
     }
 
