@@ -300,7 +300,7 @@ public class EditControlPopup {
     }
 
     /** Load values for the joystick */
-    @SuppressWarnings("unused") public void loadJoystickValues(ControlData data){
+    public void loadJoystickValues(ControlData data){
         loadValues(data);
 
         mMappingTextView.setVisibility(GONE);

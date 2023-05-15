@@ -205,6 +205,7 @@
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Add button</string>
     <string name="customctrl_addbutton_drawer">Add button drawer</string>
+    <string name="customctrl_addbutton_joystick">Add joystick</string>
     <string name="customctrl_addsubbutton">Add sub-button</string>
     <string name="customctrl_add_subbutton_message">Sub-button n°%d has been added !</string>
 
