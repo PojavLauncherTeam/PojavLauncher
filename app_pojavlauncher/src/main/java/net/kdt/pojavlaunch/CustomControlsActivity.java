@@ -43,11 +43,11 @@ public class CustomControlsActivity extends BaseActivity implements EditorExitab
 			switch(position) {
 				case 0: mControlLayout.addControlButton(new ControlData("New")); break;
 				case 1: mControlLayout.addDrawer(new ControlDrawerData()); break;
-				//case 2: mControlLayout.addJoystickButton(new ControlData()); break;
-				case 2: mControlLayout.openLoadDialog(); break;
-				case 3: mControlLayout.openSaveDialog(this); break;
-				case 4: mControlLayout.openSetDefaultDialog(); break;
-				case 5: // Saving the currently shown control
+				case 2: mControlLayout.addJoystickButton(new ControlData()); break;
+				case 3: mControlLayout.openLoadDialog(); break;
+				case 4: mControlLayout.openSaveDialog(this); break;
+				case 5: mControlLayout.openSetDefaultDialog(); break;
+				case 6: // Saving the currently shown control
 					try {
 						Uri contentUri = DocumentsContract.buildDocumentUri(getString(R.string.storageProviderAuthorities), mControlLayout.saveToDirectory(mControlLayout.mLayoutFileName));
 

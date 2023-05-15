@@ -13,16 +13,18 @@ public class CustomControls {
     public float scaledAt;
 	public List<ControlData> mControlDataList;
 	public List<ControlDrawerData> mDrawerDataList;
+	public List<ControlData> mJoystickDataList;
 	public CustomControls() {
-		this(new ArrayList<>(), new ArrayList<>());
+		this(new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
 	}
 
 
 
-	public CustomControls(List<ControlData> mControlDataList, List<ControlDrawerData> mDrawerDataList) {
+	public CustomControls(List<ControlData> mControlDataList, List<ControlDrawerData> mDrawerDataList, List<ControlData> mJoystickDataList) {
 		this.mControlDataList = mControlDataList;
 		this.mDrawerDataList = mDrawerDataList;
-        this.scaledAt = 100f;
+		this.mJoystickDataList = mJoystickDataList;
+		this.scaledAt = 100f;
 	}
 	
 	// Generate default control
