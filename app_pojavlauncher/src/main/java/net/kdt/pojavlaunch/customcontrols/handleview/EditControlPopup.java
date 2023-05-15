@@ -89,7 +89,8 @@ public class EditControlPopup {
     protected CheckBox mDisplayInGameCheckbox, mDisplayInMenuCheckbox;
 
     // Decorative textviews
-    private TextView mOrientationTextView, mMappingTextView, mNameTextView, mCornerRadiusTextView;
+    private TextView mOrientationTextView, mMappingTextView, mNameTextView,
+            mCornerRadiusTextView, mVisibilityTextView, mSizeTextview, mSizeXTextView;
 
 
 
@@ -327,6 +328,22 @@ public class EditControlPopup {
         mToggleSwitch.setVisibility(View.GONE);
     }
 
+    /** Load values for sub buttons */
+    public void loadSubButtonValues(ControlData data){
+        loadValues(data);
+
+        // Size linked to the parent drawer
+        mSizeTextview.setVisibility(GONE);
+        mSizeXTextView.setVisibility(GONE);
+        mWidthEditText.setVisibility(GONE);
+        mHeightEditText.setVisibility(GONE);
+
+        // No conditional, already depends on the parent drawer visibility
+        mVisibilityTextView.setVisibility(GONE);
+        mDisplayInMenuCheckbox.setVisibility(GONE);
+        mDisplayInGameCheckbox.setVisibility(GONE);
+    }
+
 
     private void bindLayout(){
         mRootView = mScrollView.findViewById(R.id.edit_layout);
@@ -357,6 +374,9 @@ public class EditControlPopup {
         mOrientationTextView = mScrollView.findViewById(R.id.editOrientation_textView);
         mNameTextView = mScrollView.findViewById(R.id.editName_textView);
         mCornerRadiusTextView = mScrollView.findViewById(R.id.editCornerRadius_textView);
+        mVisibilityTextView = mScrollView.findViewById(R.id.visibility_textview);
+        mSizeTextview = mScrollView.findViewById(R.id.editSize_textView);
+        mSizeXTextView = mScrollView.findViewById(R.id.editSize_x_textView);
     }
 
     /**
