@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.kdt.DefocusableScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.kdt.DefocusableScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="@dimen/_280sdp"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/background_app"
     android:layout_marginVertical="@dimen/_14sdp"
-    >
+    android:background="@drawable/background_control_editor">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/edit_layout"
@@ -199,6 +197,7 @@
             android:id="@+id/editOrientation_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_2sdp"
             android:gravity="center"
             android:paddingEnd="5dp"
             android:text="@string/customctrl_orientation"
@@ -221,7 +220,7 @@
         <Switch
             android:id="@+id/checkboxToggle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/_36sdp"
             android:text="@string/customctrl_toggle"
 
             app:layout_constraintStart_toStartOf="parent"
@@ -232,7 +231,7 @@
         <Switch
             android:id="@+id/checkboxPassThrough"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="@dimen/_36sdp"
             android:text="@string/customctrl_passthru"
 
             app:layout_constraintStart_toStartOf="parent"
@@ -243,7 +242,7 @@
         <Switch
             android:id="@+id/checkboxSwipeable"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="@dimen/_36sdp"
             android:text="@string/customctrl_swipeable"
 
             app:layout_constraintStart_toStartOf="parent"
@@ -253,15 +252,15 @@
         <!-- BACKGROUND COLOR SECTION -->
         <fr.spse.extended_view.ExtendedTextView
             android:id="@+id/editBackgroundColor_textView"
-            android:background="?attr/selectableItemBackground"
             android:layout_width="0dp"
             android:layout_height="35dp"
+            android:background="?attr/selectableItemBackground"
+            android:drawableEnd="@drawable/spinner_arrow_right"
             android:gravity="center_vertical"
             android:paddingEnd="5dp"
             android:text="@string/customctrl_background_color"
-            android:drawableEnd="@drawable/spinner_arrow_right"
-            app:drawableEndSize="20dp"
             app:drawableEndIntegerScaling="true"
+            app:drawableEndSize="20dp"
 
 
             app:layout_constraintEnd_toEndOf="parent"
@@ -269,12 +268,12 @@
             app:layout_constraintTop_toBottomOf="@id/checkboxSwipeable" />
 
 
-
         <!-- STROKE WIDTH -->
         <TextView
             android:id="@+id/editStrokeWidth_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
             android:gravity="center"
             android:paddingEnd="5dp"
             android:text="@string/customctrl_stroke_width"
@@ -286,7 +285,7 @@
         <SeekBar
             android:id="@+id/editStrokeWidth_seekbar"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/_36sdp"
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.538"
@@ -338,7 +337,7 @@
         <SeekBar
             android:id="@+id/editCornerRadius_seekbar"
             android:layout_width="0dp"
-            android:layout_height="30dp"
+            android:layout_height="@dimen/_36sdp"
 
 
             app:layout_constraintEnd_toEndOf="parent"
@@ -372,7 +371,7 @@
         <SeekBar
             android:id="@+id/editButtonOpacity_seekbar"
             android:layout_width="0dp"
-            android:layout_height="30dp"
+            android:layout_height="@dimen/_36sdp"
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -403,16 +402,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="In game"
-            app:layout_constraintTop_toBottomOf="@+id/visibility_textview"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/visibility_textview" />
 
         <CheckBox
             android:id="@+id/visibility_menu_checkbox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="In Menu"
-            app:layout_constraintTop_toBottomOf="@+id/visibility_game_checkbox"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/visibility_game_checkbox" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
