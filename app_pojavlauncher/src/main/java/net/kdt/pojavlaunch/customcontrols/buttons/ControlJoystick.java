@@ -25,7 +25,7 @@ import org.lwjgl.glfw.CallbackBridge;
 import io.github.controlwear.virtual.joystick.android.JoystickView;
 
 @SuppressLint("ViewConstructor")
-public class ControlJoystick extends JoystickView implements ControlInterface{
+public class ControlJoystick extends JoystickView implements ControlInterface {
     public ControlJoystick(ControlLayout parent, ControlData data) {
         super(parent.getContext());
         init(data, parent);
@@ -48,16 +48,12 @@ public class ControlJoystick extends JoystickView implements ControlInterface{
     private void init(ControlData data, ControlLayout layout){
         mControlData = data;
         setProperties(preProcessProperties(data, layout));
-        setDeadzone(40);
+        setDeadzone(35);
         setFixedCenter(false);
         setAutoReCenterButton(true);
-        //postDelayed(() -> setForwardLockDistance((int) (data.getHeight()* 0.66f)), 500);
-        setForwardLockDistance((int) Tools.dpToPx(30));
-        layout.setClipChildren(false);
+        postDelayed(() -> setForwardLockDistance((int) Tools.dpToPx(35)), 10);
 
-
-        injectTouchEventBehavior();
-        injectLayoutParamBehavior();
+        injectBehaviors();
 
         setOnMoveListener(new OnMoveListener() {
             @Override
