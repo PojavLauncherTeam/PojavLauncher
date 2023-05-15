@@ -60,10 +60,12 @@ public class ControlLayout extends FrameLayout {
 
 	public ControlLayout(Context ctx) {
 		super(ctx);
+		setClipChildren(false);
 	}
 
 	public ControlLayout(Context ctx, AttributeSet attrs) {
 		super(ctx, attrs);
+		setClipChildren(false);
 	}
 
 
@@ -243,6 +245,9 @@ public class ControlLayout extends FrameLayout {
 	}
 
 	public void setModifiable(boolean isModifiable) {
+		// Hack to allow joystick free placement and resize while seeing the forward lock
+		setClipChildren(isModifiable);
+
 		if(!isModifiable && mModifiable){
 			removeEditWindow();
 		}
