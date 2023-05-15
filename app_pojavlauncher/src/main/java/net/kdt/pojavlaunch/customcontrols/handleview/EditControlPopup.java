@@ -19,6 +19,8 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Spinner;
@@ -84,6 +86,7 @@ public class EditControlPopup {
     protected TextView mSelectBackgroundColor, mSelectStrokeColor;
     protected ArrayAdapter<String> mAdapter;
     protected List<String> mSpecialArray;
+    protected CheckBox mDisplayInGameCheckbox, mDisplayInMenuCheckbox;
 
     // Decorative textviews
     private TextView mOrientationTextView, mMappingTextView, mNameTextView, mCornerRadiusTextView;
@@ -269,6 +272,9 @@ public class EditControlPopup {
         mPassthroughSwitch.setChecked(data.passThruEnabled);
         mSwipeableSwitch.setChecked(data.isSwipeable);
 
+        mDisplayInGameCheckbox.setChecked(data.displayInGame);
+        mDisplayInMenuCheckbox.setChecked(data.displayInMenu);
+
         for(int i = 0; i< data.keycodes.length; i++){
             if (data.keycodes[i] < 0) {
                 mKeycodeSpinners[i].setSelection(data.keycodes[i] + mSpecialArray.size());
@@ -343,6 +349,8 @@ public class EditControlPopup {
         mStrokePercentTextView = mScrollView.findViewById(R.id.editStrokeWidth_textView_percent);
         mAlphaPercentTextView = mScrollView.findViewById(R.id.editButtonOpacity_textView_percent);
         mCornerRadiusPercentTextView = mScrollView.findViewById(R.id.editCornerRadius_textView_percent);
+        mDisplayInGameCheckbox = mScrollView.findViewById(R.id.visibility_game_checkbox);
+        mDisplayInMenuCheckbox = mScrollView.findViewById(R.id.visibility_menu_checkbox);
 
         //Decorative stuff
         mMappingTextView = mScrollView.findViewById(R.id.editMapping_textView);
@@ -504,6 +512,15 @@ public class EditControlPopup {
             public void onNothingSelected(AdapterView<?> parent) {}
         });
 
+        mDisplayInGameCheckbox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if(internalChanges) return;
+            mCurrentlyEditedButton.getProperties().displayInGame = isChecked;
+        });
+
+        mDisplayInMenuCheckbox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if(internalChanges) return;
+            mCurrentlyEditedButton.getProperties().displayInMenu = isChecked;
+        });
 
         mSelectStrokeColor.setOnClickListener(v -> {
             mColorSelector.setAlphaEnabled(false);

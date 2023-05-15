@@ -220,7 +220,7 @@
         <Switch
             android:id="@+id/checkboxToggle"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:text="@string/customctrl_toggle"
 
             app:layout_constraintStart_toStartOf="parent"
@@ -373,8 +373,6 @@
             android:layout_width="0dp"
             android:layout_height="30dp"
 
-            app:layout_constraintBottom_toBottomOf="parent"
-
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/editButtonOpacity_textView" />
@@ -389,6 +387,31 @@
             app:layout_constraintBottom_toBottomOf="@id/editButtonOpacity_textView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/editButtonOpacity_textView" />
+
+        <!-- Button visibility -->
+        <TextView
+            android:id="@+id/visibility_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Visibility"
+            app:layout_constraintTop_toBottomOf="@+id/editButtonOpacity_seekbar"
+            tools:layout_editor_absoluteX="6dp" />
+
+        <CheckBox
+            android:id="@+id/visibility_game_checkbox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="In game"
+            app:layout_constraintTop_toBottomOf="@+id/visibility_textview"
+            />
+
+        <CheckBox
+            android:id="@+id/visibility_menu_checkbox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="In Menu"
+            app:layout_constraintTop_toBottomOf="@+id/visibility_game_checkbox"
+            />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
