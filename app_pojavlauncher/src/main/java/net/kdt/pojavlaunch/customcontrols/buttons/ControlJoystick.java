@@ -26,26 +26,28 @@ import io.github.controlwear.virtual.joystick.android.JoystickView;
 
 @SuppressLint("ViewConstructor")
 public class ControlJoystick extends JoystickView implements ControlInterface {
-    public ControlJoystick(ControlLayout parent, ControlData data) {
-        super(parent.getContext());
-        init(data, parent);
-    }
-
-
     public final static int DIRECTION_FORWARD_LOCK = 8;
-
-    private ControlData mControlData;
-    private int mLastDirectionInt = GamepadJoystick.DIRECTION_NONE;
-    private int mCurrentDirectionInt = GamepadJoystick.DIRECTION_NONE;
-
     // Directions keycode
     private final int[] mDirectionForwardLock = new int[]{LwjglGlfwKeycode.GLFW_KEY_LEFT_CONTROL};
     private final int[] mDirectionForward = new int[]{LwjglGlfwKeycode.GLFW_KEY_W};
     private final int[] mDirectionRight = new int[]{LwjglGlfwKeycode.GLFW_KEY_D};
     private final int[] mDirectionBackward = new int[]{LwjglGlfwKeycode.GLFW_KEY_S};
     private final int[] mDirectionLeft = new int[]{LwjglGlfwKeycode.GLFW_KEY_A};
+    private ControlData mControlData;
+    private int mLastDirectionInt = GamepadJoystick.DIRECTION_NONE;
+    private int mCurrentDirectionInt = GamepadJoystick.DIRECTION_NONE;
+    public ControlJoystick(ControlLayout parent, ControlData data) {
+        super(parent.getContext());
+        init(data, parent);
+    }
 
-    private void init(ControlData data, ControlLayout layout){
+    private static void sendInput(int[] keys, boolean isDown) {
+        for (int key : keys) {
+            CallbackBridge.sendKeyPress(key, CallbackBridge.getCurrentMods(), isDown);
+        }
+    }
+
+    private void init(ControlData data, ControlLayout layout) {
         mControlData = data;
         setProperties(preProcessProperties(data, layout));
         setDeadzone(35);
@@ -61,7 +63,7 @@ public class ControlJoystick extends JoystickView implements ControlInterface {
                 mLastDirectionInt = mCurrentDirectionInt;
                 mCurrentDirectionInt = getDirectionInt(angle, strength);
 
-                if(mLastDirectionInt != mCurrentDirectionInt){
+                if (mLastDirectionInt != mCurrentDirectionInt) {
                     sendDirectionalKeycode(mLastDirectionInt, false);
                     sendDirectionalKeycode(mCurrentDirectionInt, true);
                 }
@@ -75,7 +77,9 @@ public class ControlJoystick extends JoystickView implements ControlInterface {
     }
 
     @Override
-    public View getControlView() {return this;}
+    public View getControlView() {
+        return this;
+    }
 
     @Override
     public ControlData getProperties() {
@@ -107,7 +111,7 @@ public class ControlJoystick extends JoystickView implements ControlInterface {
 
     @Override
     public void setBackground() {
-        setBorderWidth(computeStrokeWidth(getProperties().strokeWidth));
+        setBorderWidth((int) Tools.dpToPx(getProperties().strokeWidth));
         setBorderColor(getProperties().strokeColor);
         setBackgroundColor(getProperties().bgColor);
     }
@@ -120,13 +124,13 @@ public class ControlJoystick extends JoystickView implements ControlInterface {
         editControlPopup.loadJoystickValues(mControlData);
     }
 
-    private int getDirectionInt(int angle, int intensity){
-        if(intensity == 0) return DIRECTION_NONE;
-        return (int) (((angle+22.5)/45) % 8);
+    private int getDirectionInt(int angle, int intensity) {
+        if (intensity == 0) return DIRECTION_NONE;
+        return (int) (((angle + 22.5) / 45) % 8);
     }
 
-    private void sendDirectionalKeycode(int direction, boolean isDown){
-        switch (direction){
+    private void sendDirectionalKeycode(int direction, boolean isDown) {
+        switch (direction) {
             case DIRECTION_NORTH:
                 sendInput(mDirectionForward, isDown);
                 break;
@@ -158,12 +162,6 @@ public class ControlJoystick extends JoystickView implements ControlInterface {
             case DIRECTION_FORWARD_LOCK:
                 sendInput(mDirectionForwardLock, isDown);
                 break;
-        }
-    }
-
-    private static void sendInput(int[] keys, boolean isDown){
-        for(int key : keys){
-            CallbackBridge.sendKeyPress(key, CallbackBridge.getCurrentMods(), isDown);
         }
     }
 
