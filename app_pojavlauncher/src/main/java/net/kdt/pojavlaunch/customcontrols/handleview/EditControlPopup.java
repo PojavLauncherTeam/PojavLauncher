@@ -269,11 +269,11 @@ public class EditControlPopup {
         mHeightEditText.setText(String.valueOf(data.getHeight()));
 
         mAlphaSeekbar.setProgress((int) (data.opacity * 100));
-        mStrokeWidthSeekbar.setProgress(data.strokeWidth);
+        mStrokeWidthSeekbar.setProgress((int) data.strokeWidth * 10);
         mCornerRadiusSeekbar.setProgress((int) data.cornerRadius);
 
         setPercentageText(mAlphaPercentTextView, (int) (data.opacity * 100));
-        setPercentageText(mStrokePercentTextView, data.strokeWidth);
+        setPercentageText(mStrokePercentTextView, (int) data.strokeWidth * 10);
         setPercentageText(mCornerRadiusPercentTextView, (int) data.cornerRadius);
 
         mToggleSwitch.setChecked(data.isToggle);
@@ -498,7 +498,7 @@ public class EditControlPopup {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 if (internalChanges) return;
-                mCurrentlyEditedButton.getProperties().strokeWidth = mStrokeWidthSeekbar.getProgress();
+                mCurrentlyEditedButton.getProperties().strokeWidth = mStrokeWidthSeekbar.getProgress() / 10F;
                 mCurrentlyEditedButton.setBackground();
                 setPercentageText(mStrokePercentTextView, progress);
             }
