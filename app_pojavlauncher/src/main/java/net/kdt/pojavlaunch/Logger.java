@@ -2,23 +2,47 @@ package net.kdt.pojavlaunch;
 
 import androidx.annotation.Keep;
 
-/** Singleton class made to log on one file
+import java.io.File;
+import java.io.IOException;
+
+/**
+ * Singleton class made to log on one file
  * The singleton part can be removed but will require more implementation from the end-dev
  */
 @Keep
 public class Logger {
-    /** Print the text to the log file if not censored */
+    /**
+     * Print the text to the log file if not censored
+     */
     public static native void appendToLog(String text);
 
+    public static void beginLog(File logFile) {
+        try {
+            if (logFile.exists())
+                logFile.delete();
 
-    /** Reset the log file, effectively erasing any previous logs */
+            logFile.createNewFile();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        Logger.begin(logFile.getAbsolutePath());
+    }
+
+    /**
+     * Reset the log file, effectively erasing any previous logs
+     */
     public static native void begin(String logFilePath);
 
-    /** Small listener for anything listening to the log */
+    /**
+     * Link a log listener to the logger
+     */
+    public static native void setLogListener(eventLogListener logListener);
+
+    /**
+     * Small listener for anything listening to the log
+     */
     public interface eventLogListener {
         void onEventLogged(String text);
     }
-
-    /** Link a log listener to the logger */
-    public static native void setLogListener(eventLogListener logListener);
 }

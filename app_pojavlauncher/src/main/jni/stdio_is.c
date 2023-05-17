@@ -84,9 +84,9 @@ Java_net_kdt_pojavlaunch_Logger_begin(JNIEnv *env, __attribute((unused)) jclass 
     dup2(pfd[1], 2);
 
     /* open latestlog.txt for writing */
-    const char* logFilePath = (*env)->GetStringUTFChars(env, logPath, NULL);
-    latestlog_fd = open(logFilePath, O_WRONLY | O_TRUNC | O_CREAT, 644);
-    if(latestlog_fd == -1) {
+    const char *logFilePath = (*env)->GetStringUTFChars(env, logPath, NULL);
+    latestlog_fd = open(logFilePath, O_WRONLY | O_APPEND, 644);
+    if (latestlog_fd == -1) {
         latestlog_fd = 0;
         (*env)->ThrowNew(env, ioeClass, strerror(errno));
         return;
