@@ -3,8 +3,11 @@ package net.kdt.pojavlaunch.multirt;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.view.View;
 import android.webkit.MimeTypeMap;
+import android.widget.Button;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,14 +36,25 @@ public class MultiRTConfigDialog {
     public void prepare(Activity activity) {
         mDialogView = new RecyclerView(activity);
         mDialogView.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
-        mDialogView.setAdapter(new RTRecyclerViewAdapter());
+        RTRecyclerViewAdapter adapter = new RTRecyclerViewAdapter();
+        mDialogView.setAdapter(adapter);
 
         mDialog = new AlertDialog.Builder(activity)
                 .setTitle(R.string.multirt_config_title)
                 .setView(mDialogView)
                 .setPositiveButton(R.string.multirt_config_add, (dialog, which) -> openRuntimeSelector(activity,MULTIRT_PICK_RUNTIME))
-                .setNegativeButton(R.string.mcn_exit_call, (dialog, which) -> dialog.cancel())
+                .setNeutralButton(R.string.multirt_delete_runtime, null)
                 .create();
+
+        // Custom button behavior without dismiss
+        mDialog.setOnShowListener(dialog -> {
+            Button button = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_NEUTRAL);
+            button.setOnClickListener(view -> {
+                boolean isEditing = !adapter.getIsEditing();
+                adapter.setIsEditing(isEditing);
+                button.setText(isEditing ? R.string.multirt_config_setdefault : R.string.multirt_delete_runtime);
+            });
+        });
     }
 
     public static void openRuntimeSelector(Activity activity, int code) {
