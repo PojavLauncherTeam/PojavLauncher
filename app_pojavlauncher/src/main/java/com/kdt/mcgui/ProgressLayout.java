@@ -132,6 +132,7 @@ public class ProgressLayout extends ConstraintLayout implements View.OnClickList
         public LayoutProgressListener(String progressKey) {
             this.progressKey = progressKey;
             textView = new TextProgressBar(getContext());
+            textView.setTextPadding(getContext().getResources().getDimensionPixelOffset(R.dimen._6sdp));
             params = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, getResources().getDimensionPixelOffset(R.dimen._20sdp));
             params.bottomMargin = getResources().getDimensionPixelOffset(R.dimen._6sdp);
             ProgressKeeper.addListener(progressKey, this);
