@@ -12,7 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="@dimen/_22sdp">
+        android:paddingHorizontal="@dimen/fragment_padding_medium">
 
         <TextView
             android:id="@+id/vprof_editor_profile_name_sub"

@@ -8,7 +8,7 @@
     android:background="@color/background_app"
     android:gravity="center"
     android:orientation="vertical"
-    android:paddingHorizontal="@dimen/_16sdp">
+    android:paddingHorizontal="@dimen/fragment_padding_medium">
 
     <View
         android:id="@+id/login_menu"

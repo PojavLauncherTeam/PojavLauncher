@@ -22,4 +22,7 @@
     <dimen name="navigation_item_height">48dp</dimen>
     <dimen name="navigation_item_icon_size">24dp</dimen>
 
+    <!-- Fragment padding -->
+    <dimen name="fragment_padding_medium">@dimen/_10sdp</dimen>
+
 </resources>
