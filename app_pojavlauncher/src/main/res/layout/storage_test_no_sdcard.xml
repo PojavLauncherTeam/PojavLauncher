@@ -19,5 +19,6 @@
         android:paddingStart="@dimen/_8sdp"
         android:paddingTop="@dimen/_10sdp"
         android:paddingEnd="@dimen/_8sdp"
-        android:text="@string/storage_required" />
+        android:text="@string/storage_required"
+        android:gravity="center"/>
 </LinearLayout>
