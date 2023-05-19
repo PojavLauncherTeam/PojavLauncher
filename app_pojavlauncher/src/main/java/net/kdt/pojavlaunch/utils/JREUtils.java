@@ -5,6 +5,7 @@ import static net.kdt.pojavlaunch.Architecture.is64BitsDevice;
 import static net.kdt.pojavlaunch.Tools.LOCAL_RENDERER;
 import static net.kdt.pojavlaunch.Tools.NATIVE_LIB_DIR;
 import static net.kdt.pojavlaunch.Tools.currentDisplayMetrics;
+import static net.kdt.pojavlaunch.Tools.shareLog;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_DUMP_SHADERS;
 
 import android.app.*;
@@ -303,7 +304,10 @@ public class JREUtils {
                 AlertDialog.Builder dialog = new AlertDialog.Builder(activity);
                 dialog.setMessage(activity.getString(R.string.mcn_exit_title, exitCode));
 
-                dialog.setPositiveButton(android.R.string.ok, (p1, p2) -> MainActivity.fullyExit());
+                dialog.setPositiveButton(R.string.main_share_logs, (p1, p2) -> {
+                    shareLog(activity);
+                    MainActivity.fullyExit();
+                });
                 dialog.show();
             });
         }

@@ -1,7 +1,10 @@
 package net.kdt.pojavlaunch;
 
+import static net.kdt.pojavlaunch.Tools.shareLog;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -25,7 +28,7 @@ public class ExitActivity extends AppCompatActivity {
 
         new AlertDialog.Builder(this)
                 .setMessage(getString(R.string.mcn_exit_title,code))
-                .setPositiveButton(android.R.string.ok, null)
+                .setPositiveButton(R.string.main_share_logs, (dialog, which) -> shareLog(this))
                 .setOnDismissListener(dialog -> ExitActivity.this.finish())
                 .show();
     }
