@@ -225,6 +225,7 @@
     <string name="multirt_config_removeerror_last">Vous devez avoir au moins un Java Runtime installé</string>
     <string name="multirt_nocompartiblert">Impossible de trouver une version de Java compatible. Cette version nécessite au moins Java %d.</string>
     <string name="multirt_nojava8rt">Java 8 est introuvable. Pour utiliser cette option, vous devez installer Java 8.</string>
+    <string name="multirt_delete_runtime">Supprimer le runtime</string>
     <string name="compat_117_message">Minecraft 21w10a+ requiert d\'OpenGL 3.2 core. Malheureusement, votre GPU ne supporte pas OpenGL ES 3 ou plus, mais il y a des ressources supplémentaires que vous pouvez installer pour exécuter ces versions. Appuyez sur OK pour confirmer l\'installation et appuyez sur Annuler pour annuler le lancement.</string>
     <string name="compat_11x_playanyway">Jouer quand même</string>
     <string name="pvc_gameDirectory">Répertoire du jeu</string>
