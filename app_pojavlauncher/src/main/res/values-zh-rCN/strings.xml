@@ -225,6 +225,7 @@
     <string name="multirt_config_removeerror_last">您必须至少安装一个 Java 运行时</string>
     <string name="multirt_nocompartiblert">找不到合适的 Java 运行时。此版本需要 Java %d 或更高版本。</string>
     <string name="multirt_nojava8rt">无法找到 Java 8。要使用此选项，您需要安装 Java 8。</string>
+    <string name="multirt_delete_runtime">删除运行时</string>
     <string name="compat_117_message">Minecraft 21w10a+ 需要 OpenGL 3.2 核心配置文件。遗憾的是，GL4ES 渲染器目前并不完全支持它，但是您可以安装额外的资源包来运行这些版本。按\"确认\"以确认安装，按\"取消\"以中止启动。</string>
     <string name="compat_11x_playanyway">仍然开始游戏</string>
     <string name="pvc_gameDirectory">游戏目录</string>
@@ -316,7 +317,7 @@
     <string name="mcl_setting_title_buttonallcaps">在按钮标签中仅使用大写字母</string>
     <string name="mcl_setting_subtitle_buttonallcaps">如果您想在控件中使用小写字母，请禁用此功能</string>
     <string name="create_profile">创建新配置</string>
-    <string name="preference_shader_dump_title">启用着色器存储</string>
+    <string name="preference_shader_dump_title">启用着色器输出</string>
     <string name="preference_shader_dump_description">记录转换的着色器到日志文件</string>
     <string name="percent_format">%d%%</string>
     <string name="customctrl_editor_exit_title">是否离开？</string>
