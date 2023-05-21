@@ -226,6 +226,7 @@
     <string name="multirt_config_removeerror_last">Você precisa ter pelo menos um Java Runtime instalado</string>
     <string name="multirt_nocompartiblert">Não foi possível encontrar um Java Runtime compatível. Esta versão requer Java %d ou mais recente.</string>
     <string name="multirt_nojava8rt">Não foi possível encontrar o Java 8. Para usar esta opção, você precisa instalar o Java 8.</string>
+    <string name="multirt_delete_runtime">Excluir runtime</string>
     <string name="compat_117_message">Minecraft 21w10a+ requer o núcleo do OpenGL 3.2. Infelizmente, seu chip gráfico não suporta OpenGL ES 3.0 ou superior, mas há alguns recursos adicionais que você pode instalar para executar estas versões. Pressione em OK para confirmar a instalação, pressione Cancelar para abortar a inicialização.</string>
     <string name="compat_11x_playanyway">Jogar mesmo assim</string>
     <string name="pvc_gameDirectory">Diretório do jogo</string>
@@ -309,4 +310,21 @@
     <string name="preference_enable_gyro_description">Habilitar isto permitirá que você visualize o jogo girando o seu telefone</string>
     <string name="preference_gyro_sensitivity_title">Sensibilidade de controles do Giroscópio</string>
     <string name="preference_gyro_sensitivity_description">Ajustar a sensibilidade dos controles do giroscópio</string>
+    <string name="toast_turn_on_gyro">Ative os controles gyro antes de usar isso!</string>
+    <string name="preference_gyro_sample_rate_title">Taxa de amostragem Giroscópio</string>
+    <string name="preference_gyro_sample_rate_description">Se você tiver problemas de desempenho com os controles de giroscópio, aumente isto</string>
+    <string name="microsoft_login_retry_later">Você fez muitas solicitações. Por favor, tente novamente mais tarde.</string>
+    <string name="storage_required">O PojavLauncher requer um armazenamento externo conectado. Por favor, reconecte seu armazenamento e reinicie o aplicativo.</string>
+    <string name="mcl_setting_title_buttonallcaps">Use apenas letras maiúsculas nos rótulos do botão</string>
+    <string name="mcl_setting_subtitle_buttonallcaps">Desative isso se você quiser usar letras minúsculas em seus controles</string>
+    <string name="create_profile">Criar novo perfil</string>
+    <string name="preference_shader_dump_title">Habilitar dumping por shader</string>
+    <string name="preference_shader_dump_description">Registrar shaders convertidos no arquivo de log</string>
+    <string name="percent_format">%d%%</string>
+    <string name="customctrl_editor_exit_title">Saindo?</string>
+    <string name="customctrl_editor_exit_msg">Tem certeza que deseja sair?</string>
+    <string name="customctrl_editor_exit">Sair do editor</string>
+    <string name="global_save_and_exit">Salvar e sair</string>
+    <string name="global_yes">Sim</string>
+    <string name="global_no">Não</string>
 </resources>
