@@ -1,5 +1,8 @@
 package net.kdt.pojavlaunch.customcontrols.gamepad;
 
+import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_DEADZONE_SCALE;
+
+import android.util.Log;
 import android.view.InputDevice;
 import android.view.MotionEvent;
 
@@ -21,42 +24,46 @@ public class GamepadJoystick {
     public static final int DIRECTION_SOUTH_EAST = 7;
 
     private final InputDevice mInputDevice;
-    private final int mVerticalAxis;
+
     private final int mHorizontalAxis;
+    private final int mVerticalAxis;
+    private float mVerticalAxisValue = 0;
+    private float mHorizontalAxisValue = 0;
 
     public GamepadJoystick(int horizontalAxis, int verticalAxis, InputDevice device){
-        this.mVerticalAxis = verticalAxis;
-        this.mHorizontalAxis = horizontalAxis;
+        mHorizontalAxis = horizontalAxis;
+        mVerticalAxis = verticalAxis;
         this.mInputDevice = device;
     }
 
-    public double getAngleRadian(MotionEvent event){
+    public double getAngleRadian(){
         //From -PI to PI
-        return -Math.atan2(getVerticalAxis(event), getHorizontalAxis(event));
+        // TODO misuse of the deadzone here !
+        return -Math.atan2(getVerticalAxis(), getHorizontalAxis());
     }
 
 
-    public double getAngleDegree(MotionEvent event){
+    public double getAngleDegree(){
         //From 0 to 360 degrees
-        double result = Math.toDegrees(getAngleRadian(event));
+        double result = Math.toDegrees(getAngleRadian());
         if(result < 0) result += 360;
 
         return result;
     }
 
-    public double getMagnitude(MotionEvent event){
-        float x = Math.abs(event.getAxisValue(mHorizontalAxis));
-        float y = Math.abs(event.getAxisValue(mVerticalAxis));
+    public double getMagnitude(){
+        float x = Math.abs(mHorizontalAxisValue);
+        float y = Math.abs(mVerticalAxisValue);
 
         return MathUtils.dist(0,0, x, y);
     }
 
-    public float getVerticalAxis(MotionEvent event){
-        return applyDeadzone(event, mVerticalAxis);
+    public float getVerticalAxis(){
+        return applyDeadzone(mVerticalAxisValue);
     }
 
-    public float getHorizontalAxis(MotionEvent event){
-        return applyDeadzone(event, mHorizontalAxis);
+    public float getHorizontalAxis(){
+        return applyDeadzone(mHorizontalAxisValue);
     }
 
     public static boolean isJoystickEvent(MotionEvent event){
@@ -65,9 +72,9 @@ public class GamepadJoystick {
     }
 
 
-    public int getHeightDirection(MotionEvent event){
-        if(getMagnitude(event) <= getDeadzone()) return DIRECTION_NONE;
-        return ((int) ((getAngleDegree(event)+22.5)/45)) % 8;
+    public int getHeightDirection(){
+        if(getMagnitude() <= getDeadzone()) return DIRECTION_NONE;
+        return ((int) ((getAngleDegree()+22.5)/45)) % 8;
     }
 
     /**
@@ -77,20 +84,31 @@ public class GamepadJoystick {
      */
     public float getDeadzone() {
         try{
-            return Math.max(mInputDevice.getMotionRange(mHorizontalAxis).getFlat() * 1.9f, 0.2f);
+            return mInputDevice.getMotionRange(mHorizontalAxis).getFlat() * PREF_DEADZONE_SCALE;
         }catch (Exception e){
+            Log.e(GamepadJoystick.class.toString(), "Dynamic Deadzone is not supported ");
             return 0.2f;
         }
     }
 
-    private float applyDeadzone(MotionEvent event, int axis){
+    private float applyDeadzone(float value){
         //This piece of code also modifies the value
         //to make it seem like there was no deadzone in the first place
 
-        double magnitude = getMagnitude(event);
+        double magnitude = getMagnitude();
         float deadzone = getDeadzone();
         if (magnitude < deadzone) return 0;
 
-        return (float) ( (event.getAxisValue(axis) / magnitude) * ((magnitude - deadzone) / (1 - deadzone)) );
+        return (float) ( (value / magnitude) * ((magnitude - deadzone) / (1 - deadzone)) );
+    }
+
+
+    /* Setters */
+    public void setXAxisValue(float value){
+        this.mHorizontalAxisValue = value;
+    }
+
+    public void setYAxisValue(float value){
+        this.mVerticalAxisValue = value;
     }
 }
