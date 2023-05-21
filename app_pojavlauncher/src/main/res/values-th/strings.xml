@@ -60,6 +60,7 @@
     <string name="mcl_setting_subtitle_use_surface_view">อาจช่วยประสิทธิภาพในสถานการณ์ที่ผูกกับ GPU</string>
     <string name="mcl_setting_title_uninstalljre">ถอนการติดตั้ง Java Runtime</string>
     <string name="mcl_setting_subtitle_uninstalljre">[ต้องรีสตาร์ท Launcher] ซึ่งจะช่วยให้คุณติดตั้ง Java Runtime ใหม่ได้</string>
+    <string name="mcl_setting_title_freeform">Launch Minecraft in Freeform mode</string>
     <string name="mcl_setting_subtitle_freeform">เปิด Minecraft ในหน้าต่างลอย. ต้องใช้ Android 7.0+</string>
     <string name="mcl_setting_title_hide_sidebar">ซ่อนแถบด้านข้าง</string>
     <string name="mcl_setting_subtitle_hide_sidebar">ผู้ที่คิดถึงอดีตที่ชอบ v1 UI แบบเก่าอาจชอบสิ่งนี้ ให้ประสบการณ์เต็มหน้าจอมากขึ้น</string>
