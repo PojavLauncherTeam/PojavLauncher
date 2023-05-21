@@ -37,9 +37,9 @@ struct pojav_environ_s {
     bool force_vsync;
     atomic_size_t eventCounter; // Count the number of events to be pumped out
     GLFWInputEvent events[EVENT_WINDOW_SIZE];
-    unsigned outEventIndex; // Point to the current event that has yet to be pumped out to MC
-    unsigned outTargetIndex; // Point to the newt index to stop by
-    unsigned inEventIndex; // Point to the next event that has to be filled
+    size_t outEventIndex; // Point to the current event that has yet to be pumped out to MC
+    size_t outTargetIndex; // Point to the newt index to stop by
+    size_t inEventIndex; // Point to the next event that has to be filled
     size_t inEventCount; // Count registered right before pumping OUT events. Used as a cache.
     double cursorX, cursorY, cLastX, cLastY;
     jmethodID method_accessAndroidClipboard;
