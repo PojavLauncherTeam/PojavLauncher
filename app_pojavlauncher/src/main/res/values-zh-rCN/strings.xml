@@ -326,4 +326,10 @@
     <string name="global_save_and_exit">保存并退出</string>
     <string name="global_yes">是</string>
     <string name="global_no">否</string>
+    <string name="preference_controller_map_wiped">手柄配置已被清除</string>
+    <string name="preference_category_controller_settings">手柄设置</string>
+    <string name="preference_wipe_controller_title">重置手柄映射</string>
+    <string name="preference_wipe_controller_description">允许您重新映射手柄按键</string>
+    <string name="preference_deadzone_scale_title">摇杆死区（deadzone）缩放</string>
+    <string name="preference_deadzone_scale_description">若摇杆偏移，请调高此选项</string>
 </resources>
