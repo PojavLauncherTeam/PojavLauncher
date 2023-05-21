@@ -101,8 +101,8 @@ void pojavPumpEvents(void* window) {
     // by spec, they will be called on the same thread so no synchronization here
     pojav_environ->isPumpingEvents = true;
 
-    unsigned index = pojav_environ->outEventIndex;
-    unsigned targetIndex = pojav_environ->outTargetIndex;
+    size_t index = pojav_environ->outEventIndex;
+    size_t targetIndex = pojav_environ->outTargetIndex;
 
     while (targetIndex != index) {
         GLFWInputEvent event = pojav_environ->events[index];
@@ -149,7 +149,7 @@ void pojavPumpEvents(void* window) {
 /** Setup the amount of event that will get pumped into each window */
 void pojavComputeEventTarget() {
     size_t counter = atomic_load_explicit(&pojav_environ->eventCounter, memory_order_acquire);
-    unsigned index = pojav_environ->outEventIndex;
+    size_t index = pojav_environ->outEventIndex;
 
     unsigned targetIndex = index + counter;
     if (targetIndex >= EVENT_WINDOW_SIZE)
