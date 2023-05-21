@@ -617,7 +617,8 @@ public class GLFW
         SwapBuffers = apiGetFunctionAddress(GLFW, "pojavSwapBuffers"),
         SwapInterval = apiGetFunctionAddress(GLFW, "pojavSwapInterval"),
         PumpEvents = apiGetFunctionAddress(GLFW, "pojavPumpEvents"),
-        RewindEvents = apiGetFunctionAddress(GLFW, "pojavRewindEvents");
+        RewindEvents = apiGetFunctionAddress(GLFW, "pojavRewindEvents"),
+        SetupEvents = apiGetFunctionAddress(GLFW, "pojavComputeEventTarget");
     }
 
     public static SharedLibrary getLibrary() {
@@ -1058,7 +1059,7 @@ public class GLFW
             mGLFWIsInputReady = true;
             CallbackBridge.nativeSetInputReady(true);
         }
-
+        callV(Functions.SetupEvents);
         for (Long ptr : mGLFWWindowMap.keySet()) callJV(ptr, Functions.PumpEvents);
         callV(Functions.RewindEvents);
     }

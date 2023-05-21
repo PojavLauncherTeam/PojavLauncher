@@ -100,10 +100,13 @@ void pojavPumpEvents(void* window) {
     // prevent further calls until we exit the loop
     // by spec, they will be called on the same thread so no synchronization here
     pojav_environ->isPumpingEvents = true;
-    size_t counter = atomic_load_explicit(&pojav_environ->eventCounter, memory_order_acquire);
-    for(size_t i = 0; i < counter; i++) {
-        GLFWInputEvent event = pojav_environ->events[i];
-        switch(event.type) {
+
+    size_t index = pojav_environ->outEventIndex;
+    size_t targetIndex = pojav_environ->outTargetIndex;
+
+    while (targetIndex != index) {
+        GLFWInputEvent event = pojav_environ->events[index];
+        switch (event.type) {
             case EVENT_TYPE_CHAR:
                 if(pojav_environ->GLFW_invoke_Char) pojav_environ->GLFW_invoke_Char(window, event.i1);
                 break;
@@ -128,17 +131,41 @@ void pojavPumpEvents(void* window) {
                 if(pojav_environ->GLFW_invoke_WindowSize) pojav_environ->GLFW_invoke_WindowSize(window, event.i1, event.i2);
                 break;
         }
+
+        index++;
+        if (index >= EVENT_WINDOW_SIZE)
+            index -= EVENT_WINDOW_SIZE;
     }
     if((pojav_environ->cLastX != pojav_environ->cursorX || pojav_environ->cLastY != pojav_environ->cursorY) && pojav_environ->GLFW_invoke_CursorPos) {
         pojav_environ->cLastX = pojav_environ->cursorX;
         pojav_environ->cLastY = pojav_environ->cursorY;
         pojav_environ->GLFW_invoke_CursorPos(window, pojav_environ->cursorX, pojav_environ->cursorY);
     }
-    atomic_store_explicit(&pojav_environ->eventCounter, counter, memory_order_release);
+
+    // The out target index is updated by the rewinder
     pojav_environ->isPumpingEvents = false;
 }
+
+/** Setup the amount of event that will get pumped into each window */
+void pojavComputeEventTarget() {
+    size_t counter = atomic_load_explicit(&pojav_environ->eventCounter, memory_order_acquire);
+    size_t index = pojav_environ->outEventIndex;
+
+    unsigned targetIndex = index + counter;
+    if (targetIndex >= EVENT_WINDOW_SIZE)
+        targetIndex -= EVENT_WINDOW_SIZE;
+
+    // Only accessed by one unique thread, no need for atomic store
+    pojav_environ->inEventCount = counter;
+    pojav_environ->outTargetIndex = targetIndex;
+}
+
+/** Apply index offsets after events have been pumped */
 void pojavRewindEvents() {
-    atomic_store_explicit(&pojav_environ->eventCounter, 0, memory_order_release);
+    pojav_environ->outEventIndex = pojav_environ->outTargetIndex;
+
+    // New events may have arrived while pumping, so remove only the difference before the start and end of execution
+    atomic_fetch_sub_explicit(&pojav_environ->eventCounter, pojav_environ->inEventCount, memory_order_acquire);
 }
 
 JNIEXPORT void JNICALL
@@ -175,16 +202,17 @@ Java_org_lwjgl_glfw_GLFW_glfwSetCursorPos(__attribute__((unused)) JNIEnv *env, _
 
 
 void sendData(int type, int i1, int i2, int i3, int i4) {
-    size_t counter = atomic_load_explicit(&pojav_environ->eventCounter, memory_order_acquire);
-    if (counter < 7999) {
-        GLFWInputEvent *event = &pojav_environ->events[counter++];
-        event->type = type;
-        event->i1 = i1;
-        event->i2 = i2;
-        event->i3 = i3;
-        event->i4 = i4;
-    }
-    atomic_store_explicit(&pojav_environ->eventCounter, counter, memory_order_release);
+    GLFWInputEvent *event = &pojav_environ->events[pojav_environ->inEventIndex];
+    event->type = type;
+    event->i1 = i1;
+    event->i2 = i2;
+    event->i3 = i3;
+    event->i4 = i4;
+
+    if (++pojav_environ->inEventIndex >= EVENT_WINDOW_SIZE)
+        pojav_environ->inEventIndex -= EVENT_WINDOW_SIZE;
+
+    atomic_fetch_add_explicit(&pojav_environ->eventCounter, 1, memory_order_acquire);
 }
 
 /**
