@@ -326,4 +326,10 @@
     <string name="global_save_and_exit">Speichern und schließen</string>
     <string name="global_yes">Ja</string>
     <string name="global_no">Nein</string>
+    <string name="preference_controller_map_wiped">Die Controller-Konfiguration wurde gelöscht</string>
+    <string name="preference_category_controller_settings">Controller Einstellungen</string>
+    <string name="preference_wipe_controller_title">Standard-Controller-Belegung festlegen</string>
+    <string name="preference_wipe_controller_description">Erlaubt Ihnen die Controller-Tasten neu zuordnen</string>
+    <string name="preference_deadzone_scale_title">Joystick Deadzone Skala</string>
+    <string name="preference_deadzone_scale_description">Erhöhe es, wenn der Joystick abdriftet</string>
 </resources>
