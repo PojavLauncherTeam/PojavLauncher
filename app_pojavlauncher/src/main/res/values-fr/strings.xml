@@ -326,4 +326,10 @@
     <string name="global_save_and_exit">Sauvegarder et quitter</string>
     <string name="global_yes">Oui</string>
     <string name="global_no">Non</string>
+    <string name="preference_controller_map_wiped">La configuration du contrôleur a été effacée</string>
+    <string name="preference_category_controller_settings">Paramètres du contrôleur</string>
+    <string name="preference_wipe_controller_title">Réinitialiser le mapping du contrôleur</string>
+    <string name="preference_wipe_controller_description">Permet de remapper les boutons du contrôleur</string>
+    <string name="preference_deadzone_scale_title">Échelle de la zone morte du joystick</string>
+    <string name="preference_deadzone_scale_description">Augmentez ceci si le joystick dérive</string>
 </resources>
