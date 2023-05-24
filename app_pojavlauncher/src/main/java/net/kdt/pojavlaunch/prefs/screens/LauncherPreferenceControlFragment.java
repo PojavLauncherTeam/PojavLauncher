@@ -24,7 +24,7 @@ public class LauncherPreferenceControlFragment extends LauncherPreferenceFragmen
         float mouseSpeed = LauncherPreferences.PREF_MOUSESPEED;
         float gyroSpeed = LauncherPreferences.PREF_GYRO_SENSITIVITY;
         float joystickDeadzone = LauncherPreferences.PREF_DEADZONE_SCALE;
-        int damperWindow = LauncherPreferences.PREF_GYRO_DAMPER_WINDOW;
+
 
         //Triggers a write for some reason which resets the value
         addPreferencesFromResource(R.xml.pref_control);
@@ -54,10 +54,6 @@ public class LauncherPreferenceControlFragment extends LauncherPreferenceFragmen
         deadzoneSeek.setValue((int) joystickDeadzone * 100);
         deadzoneSeek.setSuffix(" %");
 
-        CustomSeekBarPreference gyroDamperWindow = findPreference("gyroDamperWindow");
-        gyroDamperWindow.setRange(0, 200);
-        gyroDamperWindow.setValue(damperWindow);
-        gyroDamperWindow.setSuffix(" ms");
 
         Context context = getContext();
         if(context != null) {
