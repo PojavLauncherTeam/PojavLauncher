@@ -1,6 +1,9 @@
 package net.kdt.pojavlaunch;
 
-import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_GYRO_DAMPER_WINDOW;
+import static android.view.Surface.ROTATION_0;
+import static android.view.Surface.ROTATION_180;
+import static android.view.Surface.ROTATION_270;
+import static android.view.Surface.ROTATION_90;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_GYRO_SAMPLE_RATE;
 
 import android.app.Activity;
@@ -38,10 +41,10 @@ public class GyroControl implements SensorEventListener, GrabListener {
     private final float[] mAngleDifference = new float[3];
 
 
-    private final float[][] mAngleHistory = new float[(int) Math.max(
-            PREF_GYRO_DAMPER_WINDOW/PREF_GYRO_SAMPLE_RATE,
-            PREF_GYRO_DAMPER_WINDOW > 0 ? 2 : 1  // Force dampening if bigger than 0
-    )][3];
+    /* Used to average the last values, if smoothing is enabled */
+    private final float[][] mAngleHistory = new float[
+            LauncherPreferences.PREF_GYRO_SMOOTHING ? 2 : 1
+            ][3];
     private float xTotal = 0;
     private float yTotal = 0;
 
@@ -59,6 +62,7 @@ public class GyroControl implements SensorEventListener, GrabListener {
         mSensorManager = (SensorManager) activity.getSystemService(Context.SENSOR_SERVICE);
         mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_GAME_ROTATION_VECTOR);
         mCorrectionListener = new OrientationCorrectionListener(activity);
+        updateOrientation();
     }
 
     public void enable() {
@@ -104,6 +108,36 @@ public class GyroControl implements SensorEventListener, GrabListener {
         }
 
 
+    }
+
+    /** Update the axis mapping in accordance to activity rotation, used for initial rotation */
+    public void updateOrientation(){
+        int rotation = mWindowManager.getDefaultDisplay().getRotation();
+        switch (rotation){
+            case ROTATION_0:
+                mSwapXY = true;
+                xFactor = 1;
+                yFactor = 1;
+                break;
+            case ROTATION_90:
+                mSwapXY = false;
+                xFactor = -1;
+                yFactor = 1;
+                break;
+            case ROTATION_180:
+                mSwapXY = true;
+                xFactor = -1;
+                yFactor = -1;
+                break;
+            case ROTATION_270:
+                mSwapXY = false;
+                xFactor = 1;
+                yFactor = -1;
+                break;
+        }
+
+        if(LauncherPreferences.PREF_GYRO_INVERT_X) xFactor *= -1;
+        if(LauncherPreferences.PREF_GYRO_INVERT_Y) yFactor *= -1;
     }
 
     @Override
@@ -167,24 +201,34 @@ public class GyroControl implements SensorEventListener, GrabListener {
                 return; //change nothing
             }
             mSurfaceRotation = surfaceRotation;
+            System.out.println(i);
 
-            if((315 < i && i <= 360) || (i < 45) ) {
-                mSwapXY = true;
-                xFactor = 1;
-                yFactor = 1;
-            }else if(45 < i && i < 135) {
-                mSwapXY = false;
-                xFactor = 1;
-                yFactor = -1;
-            }else if(135 < i && i < 225) {
-                mSwapXY = true;
-                xFactor = -1;
-                yFactor = -1;
-            }else if(225 <  i && i < 315) {
-                mSwapXY = false;
-                xFactor = -1;
-                yFactor = 1;
+            switch (mWindowManager.getDefaultDisplay().getRotation()){
+                case ROTATION_90:
+                case ROTATION_270:
+                    mSwapXY = false;
+                    if(225 <  i && i < 315) {
+                        xFactor = -1;
+                        yFactor = 1;
+                    }else if(45 < i && i < 135) {
+                        xFactor = 1;
+                        yFactor = -1;
+                    }
+                    break;
+
+                case ROTATION_0:
+                case ROTATION_180:
+                    mSwapXY = true;
+                    if((315 < i && i <= 360) || (i < 45) ) {
+                        xFactor = 1;
+                        yFactor = 1;
+                    }else if(135 < i && i < 225) {
+                        xFactor = -1;
+                        yFactor = -1;
+                    }
+                    break;
             }
+
             if(LauncherPreferences.PREF_GYRO_INVERT_X) xFactor *= -1;
             if(LauncherPreferences.PREF_GYRO_INVERT_Y) yFactor *= -1;
         }

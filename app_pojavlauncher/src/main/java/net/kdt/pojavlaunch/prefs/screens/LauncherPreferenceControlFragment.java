@@ -89,6 +89,7 @@ public class LauncherPreferenceControlFragment extends LauncherPreferenceFragmen
         findPreference("gyroSampleRate").setVisible(LauncherPreferences.PREF_ENABLE_GYRO);
         findPreference("gyroInvertX").setVisible(LauncherPreferences.PREF_ENABLE_GYRO);
         findPreference("gyroInvertY").setVisible(LauncherPreferences.PREF_ENABLE_GYRO);
+        findPreference("gyroSmoothing").setVisible(LauncherPreferences.PREF_ENABLE_GYRO);
     }
 
 }

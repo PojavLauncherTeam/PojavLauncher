@@ -279,6 +279,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
+        if(mGyroControl != null) mGyroControl.updateOrientation();
         Tools.updateWindowSize(this);
         minecraftGLView.refreshSize();
         runOnUiThread(() -> mControlLayout.refreshControlButtonPositions());
