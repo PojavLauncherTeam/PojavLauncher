@@ -90,12 +90,12 @@ public class GyroControl implements SensorEventListener, GrabListener {
         }
         SensorManager.getAngleChange(mAngleDifference, mCurrentRotation, mPreviousRotation);
         damperValue(mAngleDifference);
-        mStoredX += xAverage * 1000;
-        mStoredY += yAverage * 1000;
+        mStoredX += xAverage * 1000 * LauncherPreferences.PREF_GYRO_SENSITIVITY;
+        mStoredY += yAverage * 1000 * LauncherPreferences.PREF_GYRO_SENSITIVITY;
 
         if(Math.abs(mStoredX) + Math.abs(mStoredY) > REALLY_LOW_PASS_THRESHOLD){
-            CallbackBridge.mouseX -= ((mSwapXY ? mStoredY : mStoredX)  * LauncherPreferences.PREF_GYRO_SENSITIVITY * xFactor);
-            CallbackBridge.mouseY += ((mSwapXY ? mStoredX : mStoredY) * LauncherPreferences.PREF_GYRO_SENSITIVITY * yFactor);
+            CallbackBridge.mouseX -= ((mSwapXY ? mStoredY : mStoredX) * xFactor);
+            CallbackBridge.mouseY += ((mSwapXY ? mStoredX : mStoredY) * yFactor);
             CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
 
             mStoredX = 0;
