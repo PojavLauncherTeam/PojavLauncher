@@ -108,6 +108,7 @@ public class GyroControl implements SensorEventListener, GrabListener {
     /** Update the axis mapping in accordance to activity rotation, used for initial rotation */
     public void updateOrientation(){
         int rotation = mWindowManager.getDefaultDisplay().getRotation();
+        mSurfaceRotation = rotation;
         switch (rotation){
             case Surface.ROTATION_0:
                 mSwapXY = true;
@@ -189,16 +190,14 @@ public class GyroControl implements SensorEventListener, GrabListener {
             // Force to wait to be in game before setting factors
             // Theoretically, one could use the whole interface in portrait...
             if(!mShouldHandleEvents) return;
-            int surfaceRotation = mWindowManager.getDefaultDisplay().getRotation();
-            if(surfaceRotation == mSurfaceRotation) return;
 
             if(i == OrientationEventListener.ORIENTATION_UNKNOWN) {
                 return; //change nothing
             }
-            mSurfaceRotation = surfaceRotation;
 
 
-            switch (mWindowManager.getDefaultDisplay().getRotation()){
+
+            switch (mSurfaceRotation){
                 case Surface.ROTATION_90:
                 case Surface.ROTATION_270:
                     mSwapXY = false;
