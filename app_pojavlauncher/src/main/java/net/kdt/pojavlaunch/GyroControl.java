@@ -1,11 +1,5 @@
 package net.kdt.pojavlaunch;
 
-import static android.view.Surface.ROTATION_0;
-import static android.view.Surface.ROTATION_180;
-import static android.view.Surface.ROTATION_270;
-import static android.view.Surface.ROTATION_90;
-import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_GYRO_SAMPLE_RATE;
-
 import android.app.Activity;
 import android.content.Context;
 import android.hardware.Sensor;
@@ -13,6 +7,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.view.OrientationEventListener;
+import android.view.Surface;
 import android.view.WindowManager;
 
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
@@ -68,7 +63,7 @@ public class GyroControl implements SensorEventListener, GrabListener {
     public void enable() {
         if(mSensor == null) return;
         mFirstPass = true;
-        mSensorManager.registerListener(this, mSensor, 1000 * PREF_GYRO_SAMPLE_RATE);
+        mSensorManager.registerListener(this, mSensor, 1000 * LauncherPreferences.PREF_GYRO_SAMPLE_RATE);
         mCorrectionListener.enable();
         mShouldHandleEvents = CallbackBridge.isGrabbing();
         CallbackBridge.addGrabListener(this);
@@ -114,22 +109,22 @@ public class GyroControl implements SensorEventListener, GrabListener {
     public void updateOrientation(){
         int rotation = mWindowManager.getDefaultDisplay().getRotation();
         switch (rotation){
-            case ROTATION_0:
+            case Surface.ROTATION_0:
                 mSwapXY = true;
                 xFactor = 1;
                 yFactor = 1;
                 break;
-            case ROTATION_90:
+            case Surface.ROTATION_90:
                 mSwapXY = false;
                 xFactor = -1;
                 yFactor = 1;
                 break;
-            case ROTATION_180:
+            case Surface.ROTATION_180:
                 mSwapXY = true;
                 xFactor = -1;
                 yFactor = -1;
                 break;
-            case ROTATION_270:
+            case Surface.ROTATION_270:
                 mSwapXY = false;
                 xFactor = 1;
                 yFactor = -1;
@@ -201,11 +196,11 @@ public class GyroControl implements SensorEventListener, GrabListener {
                 return; //change nothing
             }
             mSurfaceRotation = surfaceRotation;
-            System.out.println(i);
+
 
             switch (mWindowManager.getDefaultDisplay().getRotation()){
-                case ROTATION_90:
-                case ROTATION_270:
+                case Surface.ROTATION_90:
+                case Surface.ROTATION_270:
                     mSwapXY = false;
                     if(225 <  i && i < 315) {
                         xFactor = -1;
@@ -216,8 +211,8 @@ public class GyroControl implements SensorEventListener, GrabListener {
                     }
                     break;
 
-                case ROTATION_0:
-                case ROTATION_180:
+                case Surface.ROTATION_0:
+                case Surface.ROTATION_180:
                     mSwapXY = true;
                     if((315 < i && i <= 360) || (i < 45) ) {
                         xFactor = 1;
