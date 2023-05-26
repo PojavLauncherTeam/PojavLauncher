@@ -179,7 +179,7 @@
     <string name="customctrl_addbutton_drawer">添加组合键</string>
     <string name="customctrl_addsubbutton">添加子按钮</string>
     <string name="customctrl_add_subbutton_message">子按钮 n°%d 已添加！</string>
-    <string name="customctrl_selectdefault">选择默认 .json 控制键位</string>
+    <string name="customctrl_selectdefault">选择默认 json 控制键位</string>
     <string name="customctrl_export">导出控制键位</string>
     <string name="main_share_logs">共享日志文件</string>
     <string name="main_install_jar_file">安装 .jar</string>
