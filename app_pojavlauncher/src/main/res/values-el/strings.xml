@@ -18,6 +18,7 @@
     <string name="login_title_no_saved_account">Δεν βρέθηκε κανένας λογαριασμός !</string>
     <string name="login_dialog_no_saved_account">Δεν έχετε αποθηκευμένο λογαριασμό.\nΧρησιμοποιήστε την επιλογή <b>\"Κρατήστε με συνδεδεμένο\"</b> για να αποθηκεύσετε έναν λογαριασμό κατά την πρώτη σύνδεση.</string>
     <!-- Hint -->
+    <string name="hint_control_mapping">"Πατήστε στο επάνω κεντρικό εικονίδιο για να ανοίξετε το σχετικό μενού ⚙️\nΠατήστε ένα κουμπί για να προσαρμόσετε: επεξεργασία, αλλαγή μεγέθους, διαγραφή ή προσαρμογή του συντόμευσης πλήκτρου."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Αυτός ο λογαριασμός θα αφαιρεθεί!</string>
     <!-- AlertDialog title -->
@@ -36,6 +37,7 @@
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_wiki">Wiki</string>
     <string name="mcl_tab_console">Κονσόλα προγραμματιστή</string>
     <string name="mcl_tab_crash">Αρχείο καταγραφής κατάρρευσης</string>
     <!-- MCLauncherActivity: Account status -->
@@ -83,11 +85,16 @@
     <string name="mcl_setting_category_renderer">Απόδοση</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (όλες οι εκδόσεις, γρήγορα)</string>
     <string name="mcl_setting_renderer_virgl">virglrenderer - (έκδοση 1.7+, αργή)</string>
+    <string name="mcl_setting_renderer_vgpu">vgpu - (έως 1.16.5, γρήγορα)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">zink - (παλιά_βήτα b1.8+, αργή)</string>
+    <string name="mcl_setting_renderer_angle">ΓΩΝΙΑ - (απελευθέρωση 1.17+, μέση)</string>
     <string name="mcl_setting_category_veroption">Ο τύπος έκδοσης θα είναι στη λίστα εκδόσεων</string>
     <string name="mcl_setting_veroption_release">Κυκλοφορία</string>
     <string name="mcl_setting_veroption_snapshot">Στιγμιότυπο</string>
     <string name="mcl_setting_veroption_oldalpha">Παλιά-alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Παλιά-Beta</string>
+    <string name="mcl_setting_java_sandbox">Sandbox .jar εγκαταστάτης</string>
+    <string name="mcl_setting_java_sandbox_subtitle">Ελέγξτε τη διαθεσιμότητα του διαχειριστή ασφαλείας sandbox κατά την έναρξη εγκατάστασης .jar.</string>
     <string name="mcl_version_clone">Κλώνος</string>
     <!-- Global strings -->
     <string name="global_edit">Επεξεργασία</string>
@@ -102,7 +109,9 @@
     <string name="global_unpacking">Αποσυμπίεση %s</string>
     <string name="global_error_field_empty">Αυτό το πεδίο δεν μπορεί να είναι κενό</string>
     <string name="global_waiting">Περιμένετε</string>
+    <string name="global_select">Επιλέξτε</string>
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">Η εφαρμογή/παιχνίδι τερμάτισε με τον κωδικό %d, ελέγξτε το latestlog.txt για περισσότερες λεπτομέρειες.</string>
     <string name="mcn_exit_call">Έξοδος</string>
     <string name="mcn_exit_confirm">Είστε βέβαιοι ότι θέλετε να αναγκάσετε το κλείσιμο;</string>
     <string name="mcn_check_fail_lwjgl">Το LWJGL3 δεν έχει εγκατασταθεί!</string>
@@ -114,7 +123,13 @@
     <string name="control_debug">Αποσφαλμάτωση</string>
     <string name="control_primary">Pri</string>
     <string name="control_secondary">Sec</string>
+    <string name="control_shift">◇</string>
     <string name="control_inventory">Κατα</string>
+    <string name="control_up">▲</string>
+    <string name="control_left">◀</string>
+    <string name="control_right">▶</string>
+    <string name="control_down">▼</string>
+    <string name="control_jump">⬛</string>
     <string name="control_thirdperson">3ος</string>
     <string name="control_listplayers">Καρτέλα</string>
     <string name="control_mouse">Ποντίκι</string>
@@ -128,6 +143,10 @@
     <string name="control_scaleup">Κλιμάκωση πάνω</string>
     <string name="control_scaledown">Κλιμάκωση προς τα κάτω</string>
     <!-- ImportControlActivity Strings -->
+    <string name="import_control_label">Έλεγχοι εισαγωγών</string>
+    <string name="import_control_invalid_file">Κατεστραμμένο ή άκυρο αρχείο</string>
+    <string name="import_control_import_button">έλεγχοι εισαγωγής</string>
+    <string name="import_control_verifying_file">Το αρχείο επαληθεύεται, παρακαλώ περιμένετε και προσπαθήστε ξανά…</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
