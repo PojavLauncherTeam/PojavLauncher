@@ -327,4 +327,5 @@
     <string name="global_save_and_exit">Salvar e sair</string>
     <string name="global_yes">Sim</string>
     <string name="global_no">Não</string>
+    <string name="preference_controller_map_wiped">A configuração do controller foi apagada</string>
 </resources>
