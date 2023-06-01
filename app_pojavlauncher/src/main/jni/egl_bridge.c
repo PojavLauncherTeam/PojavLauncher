@@ -643,6 +643,13 @@ JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_utils_JREUtils_setupBridgeWindow
     }
 }
 
+JNIEXPORT void JNICALL
+Java_net_kdt_pojavlaunch_utils_JREUtils_destroyEGLSurface(JNIEnv *env, jclass clazz) {
+    if(pojav_environ->config_renderer == RENDERER_GL4ES) {
+        gl_destroy_window();
+    }
+}
+
 
 JNIEXPORT void JNICALL
 Java_net_kdt_pojavlaunch_utils_JREUtils_releaseBridgeWindow(JNIEnv *env, jclass clazz) {
@@ -1033,4 +1040,3 @@ void pojavSwapInterval(int interval) {
         } break;
     }
 }
-

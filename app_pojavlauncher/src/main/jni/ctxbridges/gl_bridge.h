@@ -21,6 +21,7 @@ render_window_t* gl_init_context(render_window_t* share);
 void gl_make_current(render_window_t* bundle);
 void gl_swap_buffers();
 void gl_setup_window();
+void gl_destroy_window();
 void gl_swap_interval(int swapInterval);
 
 

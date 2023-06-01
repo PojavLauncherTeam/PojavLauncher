@@ -164,6 +164,14 @@ void gl_setup_window() {
     }
 }
 
+void gl_destroy_window() {
+    if(pojav_environ->mainWindowBundle != NULL) {
+        __android_log_print(ANDROID_LOG_INFO, g_LogTag, "Main window bundle is not NULL, killing the EGL window");
+        pojav_environ->mainWindowBundle->state = STATE_RENDERER_NEW_WINDOW;
+        pojav_environ->mainWindowBundle->newNativeSurface = NULL; // this will cause the window to be switched out for a Pbuffer, until we have a new one
+    }
+}
+
 void gl_swap_interval(int swapInterval) {
     if(pojav_environ->force_vsync) swapInterval = 1;
 
