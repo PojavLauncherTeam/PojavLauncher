@@ -69,7 +69,7 @@ public class mcVersionSpinner extends ExtendedTextView {
     public void setSelection(int position){
         mSelectedProfilePosition = position;
         if(mListView != null) mListView.setSelection(position);
-        mProfileAdapter.setViewProfile(this, (String) mProfileAdapter.getItem(position));
+        mProfileAdapter.setViewProfile(this, (String) mProfileAdapter.getItem(position), false);
     }
 
     /** Initialize various behaviors */

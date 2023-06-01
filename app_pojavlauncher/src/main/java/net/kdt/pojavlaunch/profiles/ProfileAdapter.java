@@ -1,14 +1,18 @@
 package net.kdt.pojavlaunch.profiles;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import androidx.core.graphics.ColorUtils;
+
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
+import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
 import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 
@@ -90,11 +94,11 @@ public class ProfileAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = convertView;
         if (v == null) v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_version_profile_layout,parent,false);
-        setViewProfile(v,mProfileList.get(position));
+        setViewProfile(v,mProfileList.get(position), true);
         return v;
     }
 
-    public void setViewProfile(View v, String nm) {
+    public void setViewProfile(View v, String nm, boolean displaySelection) {
         ExtendedTextView extendedTextView = (ExtendedTextView) v;
 
         MinecraftProfile minecraftProfile = mProfiles.get(nm);
@@ -121,6 +125,13 @@ public class ProfileAdapter extends BaseAdapter {
             }
 
         } else extendedTextView.setText(extendedTextView.getText());
+
+        // Set selected background if needed
+        if(displaySelection){
+            String selectedProfile = LauncherPreferences.DEFAULT_PREF.getString(LauncherPreferences.PREF_KEY_CURRENT_PROFILE,"");
+            extendedTextView.setBackgroundColor(selectedProfile.equals(nm) ? ColorUtils.setAlphaComponent(Color.WHITE,60) : Color.TRANSPARENT);
+        }else extendedTextView.setBackgroundColor(Color.TRANSPARENT);
+
 
     }
 }
