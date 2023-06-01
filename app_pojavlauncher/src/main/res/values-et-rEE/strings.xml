@@ -11,7 +11,12 @@
     <string name="login_online_password_hint">Parool</string>
     <string name="login_online_check_keeplogin">Hoia mind sisselogituna</string>
     <string name="login_online_login_label">Logi sisse</string>
+    <string name="login_error_invalid_username">Kehtetu kasutajanimi. Kasutajanimi peab olema 3-16 tähemärki ja peaks sisaldama ainult A-Z, a-z, 0-9 ja alakriipsu.</string>
+    <string name="login_error_exist_username">See kasutajanimi juba eksisteerib</string>
+    <string name="login_microsoft">Microsofti sisselogimine</string>
     <string name="login_select_account">Vali konto</string>
+    <string name="login_title_no_saved_account">Kontot ei leitud!</string>
+    <string name="login_dialog_no_saved_account">Teil pole salvestatud kontot.\nKasuta valikut <b>\"Pea mind meeles\"</b>, et salvestada konto esimesel sisse logimisel.</string>
     <!-- Hint -->
     <!-- Warnings -->
     <!-- AlertDialog title -->
