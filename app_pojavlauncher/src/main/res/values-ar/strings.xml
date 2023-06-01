@@ -226,6 +226,7 @@
     <string name="multirt_config_removeerror_last">يجب أن يكون لديك على الأقل مشغل جافا واحد مثبت</string>
     <string name="multirt_nocompartiblert">لا يمكن العثور على أي اصدار جافا صالح. هذا الإصدار يتطلب جافا %d أو أحدث.</string>
     <string name="multirt_nojava8rt">لا يمكن العثور على Java 8. لاستخدام هذا الخيار، تحتاج إلى تثبيت Java 8.</string>
+    <string name="multirt_delete_runtime">حذف runtime</string>
     <string name="compat_117_message">ماينكرافت 21w10a+ يتطلب ملف التعريف الأساسي OpenGL 3.2 من المحزن أن لوحة الرسومات الخاصة بك لا يدعم GL4ES بشكل كامل في الوقت الحالي، ولكن هناك بعض الموارد الإضافية التي يمكنك تثبيتها لتشغيل هذه الإصدارات اضغط على OK لتأكيد التثبيت، واضغط على Cancel لعدم المتابعه.</string>
     <string name="compat_11x_playanyway">تشغيل على أي حال</string>
     <string name="pvc_gameDirectory">مكان تخزين اللعبة</string>
@@ -326,4 +327,10 @@
     <string name="global_save_and_exit">حفظ وخروج</string>
     <string name="global_yes">نعم</string>
     <string name="global_no">لا</string>
+    <string name="preference_controller_map_wiped">تم مسح إعدادات ذراع التحكم</string>
+    <string name="preference_category_controller_settings">إعدادات ذراع التحكم</string>
+    <string name="preference_wipe_controller_title">إعادة تعيين إعدادات ذراع التحكم</string>
+    <string name="preference_wipe_controller_description">يسمح لك بتغيير أزرار ذراع التحكم</string>
+    <string name="preference_deadzone_scale_title">مقياس كمية تحرك عصا التحكم</string>
+    <string name="preference_deadzone_scale_description">قم بالزيادة إذا انحدرت عصا التحكم</string>
 </resources>
