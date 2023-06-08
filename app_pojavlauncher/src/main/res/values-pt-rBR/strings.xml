@@ -328,4 +328,6 @@
     <string name="global_yes">Sim</string>
     <string name="global_no">Não</string>
     <string name="preference_controller_map_wiped">A configuração do controller foi apagada</string>
+    <string name="preference_category_controller_settings">Configurações de cont</string>
+    <string name="preference_wipe_controller_title">Erro</string>
 </resources>
