@@ -446,9 +446,10 @@ public class MinecraftGLSurface extends View implements GrabListener {
         CallbackBridge.mouseX += (e.getX()* mScaleFactor);
         CallbackBridge.mouseY += (e.getY()* mScaleFactor);
 
+        CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
+
         switch (e.getActionMasked()) {
             case MotionEvent.ACTION_MOVE:
-                CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
                 return true;
             case MotionEvent.ACTION_BUTTON_PRESS:
                 return sendMouseButtonUnconverted(e.getActionButton(), true);
