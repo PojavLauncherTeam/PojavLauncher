@@ -18,7 +18,8 @@ import java.util.Arrays;
 
 public class GyroControl implements SensorEventListener, GrabListener {
     /* How much distance has to be moved before taking into account the gyro */
-    private static final float REALLY_LOW_PASS_THRESHOLD = 1.3F;
+    private static final float SINGLE_AXIS_LOW_PASS_THRESHOLD = 1.1F;
+    private static final float MULTI_AXIS_LOW_PASS_THRESHOLD = 1.3F;
 
     private final WindowManager mWindowManager;
     private int mSurfaceRotation;
@@ -37,7 +38,7 @@ public class GyroControl implements SensorEventListener, GrabListener {
 
 
     /* Used to average the last values, if smoothing is enabled */
-    private final float[][] mAngleHistory = new float[
+    private final float[][] mAngleBuffer = new float[
             LauncherPreferences.PREF_GYRO_SMOOTHING ? 2 : 1
             ][3];
     private float xTotal = 0;
@@ -76,6 +77,7 @@ public class GyroControl implements SensorEventListener, GrabListener {
         resetDamper();
         CallbackBridge.removeGrabListener(this);
     }
+
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
         if (!mShouldHandleEvents) return;
@@ -93,16 +95,33 @@ public class GyroControl implements SensorEventListener, GrabListener {
         mStoredX += xAverage * 1000 * LauncherPreferences.PREF_GYRO_SENSITIVITY;
         mStoredY += yAverage * 1000 * LauncherPreferences.PREF_GYRO_SENSITIVITY;
 
-        if(Math.abs(mStoredX) + Math.abs(mStoredY) > REALLY_LOW_PASS_THRESHOLD){
+        boolean updatePosition = false;
+        float absX = Math.abs(mStoredX);
+        float absY = Math.abs(mStoredY);
+
+        if(absX + absY > MULTI_AXIS_LOW_PASS_THRESHOLD) {
             CallbackBridge.mouseX -= ((mSwapXY ? mStoredY : mStoredX) * xFactor);
             CallbackBridge.mouseY += ((mSwapXY ? mStoredX : mStoredY) * yFactor);
-            CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
-
             mStoredX = 0;
             mStoredY = 0;
+            updatePosition = true;
+        } else {
+            if(Math.abs(mStoredX) > SINGLE_AXIS_LOW_PASS_THRESHOLD){
+                CallbackBridge.mouseX -= ((mSwapXY ? mStoredY : mStoredX) * xFactor);
+                mStoredX = 0;
+                updatePosition = true;
+            }
+
+            if(Math.abs(mStoredY) > SINGLE_AXIS_LOW_PASS_THRESHOLD) {
+                CallbackBridge.mouseY += ((mSwapXY ? mStoredX : mStoredY) * yFactor);
+                mStoredY = 0;
+                updatePosition = true;
+            }
         }
 
-
+        if(updatePosition){
+            CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
+        }
     }
 
     /** Update the axis mapping in accordance to activity rotation, used for initial rotation */
@@ -152,19 +171,19 @@ public class GyroControl implements SensorEventListener, GrabListener {
      */
     private void damperValue(float[] newAngleDifference){
         mHistoryIndex ++;
-        if(mHistoryIndex >= mAngleHistory.length) mHistoryIndex = 0;
+        if(mHistoryIndex >= mAngleBuffer.length) mHistoryIndex = 0;
 
-        xTotal -= mAngleHistory[mHistoryIndex][1];
-        yTotal -= mAngleHistory[mHistoryIndex][2];
+        xTotal -= mAngleBuffer[mHistoryIndex][1];
+        yTotal -= mAngleBuffer[mHistoryIndex][2];
 
-        System.arraycopy(newAngleDifference, 0, mAngleHistory[mHistoryIndex], 0, 3);
+        System.arraycopy(newAngleDifference, 0, mAngleBuffer[mHistoryIndex], 0, 3);
 
-        xTotal += mAngleHistory[mHistoryIndex][1];
-        yTotal += mAngleHistory[mHistoryIndex][2];
+        xTotal += mAngleBuffer[mHistoryIndex][1];
+        yTotal += mAngleBuffer[mHistoryIndex][2];
 
         // compute the moving average
-        xAverage = xTotal / mAngleHistory.length;
-        yAverage = yTotal / mAngleHistory.length;
+        xAverage = xTotal / mAngleBuffer.length;
+        yAverage = yTotal / mAngleBuffer.length;
     }
 
     /** Reset the moving average data */
@@ -174,7 +193,7 @@ public class GyroControl implements SensorEventListener, GrabListener {
         yTotal = 0;
         xAverage = 0;
         yAverage = 0;
-        for(float[] oldAngle : mAngleHistory){
+        for(float[] oldAngle : mAngleBuffer){
             Arrays.fill(oldAngle, 0);
         }
     }
