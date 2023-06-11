@@ -225,6 +225,7 @@
     <string name="multirt_config_removeerror_last">Bạn cần có ít nhất một phiên bản Java Runtime đã được cài đặt</string>
     <string name="multirt_nocompartiblert">Không thể tìm thấy phiên bản Java tương thích. Phiên bản Minecraft này yêu cầu Java %d trở lên.</string>
     <string name="multirt_nojava8rt">Không thể tìm thấy Java 8. Để sử dụng tùy chọn này, bạn cần cài đặt Java 8.</string>
+    <string name="multirt_delete_runtime">Xóa runtime</string>
     <string name="compat_117_message">Minecraft phiên bản 21w10a trở đi yêu cầu OpenGL lõi phiên bản 3.2 trở lên. Mặc dù bộ xử lí đồ hoạ của bạn không hỗ trợ OpenGL ES 3.0 hoặc hơn, bạn có thể cài đặt một số phần tài nguyên bổ sung để khởi chạy những phiên bản này. Chọn OK để bắt đầu cài đặt, hoặc Huỷ để huỷ khởi chạy.</string>
     <string name="compat_11x_playanyway">Vẫn chơi</string>
     <string name="pvc_gameDirectory">Đường dẫn thư mục của trò chơi</string>
@@ -325,4 +326,8 @@
     <string name="global_save_and_exit">Lưu và thoát</string>
     <string name="global_yes">Đồng ý</string>
     <string name="global_no">Không</string>
+    <string name="preference_controller_map_wiped">Cấu hình điều khiển đã bị xóa</string>
+    <string name="preference_category_controller_settings">Cài đặt điều khiển</string>
+    <string name="preference_wipe_controller_title">Thiết đặt lại cấu hình điều khiển</string>
+    <string name="preference_wipe_controller_description">Cho phép bạn thay đổi cấu hình điều khiển</string>
 </resources>
