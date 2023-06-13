@@ -255,9 +255,9 @@
     <string name="preference_experimental_description">Use estas opções com cuidado, não daremos suporte.</string>
     <string name="preference_sustained_performance_title">Ativar o modo de desempenho sustentado</string>
     <string name="preference_sustained_performance_description">Limitar redução térmica limitando o pico de desempenho</string>
-    <string name="preference_force_vsync_title">Forçar ativação do vsync</string>
+    <string name="preference_force_vsync_title">Forçar ativação da sincronização vertical</string>
     <string name="preference_force_vsync_description">Limitar redução térmica limitando o pico de desempenho</string>
-    <string name="preference_force_english_title">Forçar linguagem ao inglês</string>
+    <string name="preference_force_english_title">Forçar linguagem para o inglês</string>
     <string name="preference_force_english_description">Permite que você veja frases originais, como esperado por desenvolvedores. Requer uma reinicialização</string>
     <string name="preference_edit_controls_title">Editar controles personalizados</string>
     <string name="preference_edit_controls_summary">Ajuste o esquema de controle para atender às suas necessidades</string>
@@ -330,4 +330,7 @@
     <string name="preference_controller_map_wiped">A configuração do controller foi apagada</string>
     <string name="preference_category_controller_settings">Configurações de cont</string>
     <string name="preference_wipe_controller_title">Erro</string>
+    <string name="preference_wipe_controller_description">Permite você remapear os botões do controlador</string>
+    <string name="preference_deadzone_scale_title">Escala de zona morta do controle de videogame</string>
+    <string name="preference_deadzone_scale_description">Aumente se o joystick desviar</string>
 </resources>
