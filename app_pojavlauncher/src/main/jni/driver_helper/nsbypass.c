@@ -18,6 +18,19 @@
 #include <sys/stat.h>
 #include <elf.h>
 
+/* upper 6 bits of an ARM64 instruction are the instruction name */
+#define OP_MS 0b11111100000000000000000000000000
+/* Branch Label instruction opcode and immediate mask */
+#define BL_OP 0b10010100000000000000000000000000
+#define BL_IM 0b00000011111111111111111111111111
+/* Library search path */
+#define SEARCH_PATH "/system/lib"
+#define ELF_EHDR Elf32_Ehdr
+#define ELF_SHDR Elf32_Shdr
+#define ELF_HALF Elf32_Half
+#define ELF_XWORD Elf32_Word
+#define ELF_DYN Elf32_Dyn
+
 //#define ADRENO_POSSIBLE
 
 typedef void* (*loader_dlopen_t)(const char* filename, int flags, const void* caller_addr);
