@@ -326,4 +326,10 @@
     <string name="global_save_and_exit">Uložit a ukončit</string>
     <string name="global_yes">Ano</string>
     <string name="global_no">Ne</string>
+    <string name="preference_controller_map_wiped">Konfigurace ovladače byla smazána</string>
+    <string name="preference_category_controller_settings">Nastavení ovladače</string>
+    <string name="preference_wipe_controller_title">Resetovat mapování ovladače</string>
+    <string name="preference_wipe_controller_description">Umožní přemapovaní tlačítek ovladače</string>
+    <string name="preference_deadzone_scale_title">Měřítko mrtvé zóny joysticku</string>
+    <string name="preference_deadzone_scale_description">Zvětšte ujíždí-li joystick</string>
 </resources>
