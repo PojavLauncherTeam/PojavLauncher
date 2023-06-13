@@ -55,15 +55,12 @@ LOCAL_SRC_FILES := \
 LOCAL_CFLAGS += -DADRENO_POSSIBLE
 LOCAL_LDLIBS += -lEGL -lGLESv2
 include $(BUILD_SHARED_LIBRARY)
-
-#ifeq ($(TARGET_ARCH_ABI),arm64-v8a)
 include $(CLEAR_VARS)
 LOCAL_MODULE := linkerhook
 LOCAL_SRC_FILES := driver_helper/hook.c
 LOCAL_LDLIBS := -llog
 LOCAL_LDFLAGS := -z global
 include $(BUILD_SHARED_LIBRARY)
-#endif
 
 
 include $(CLEAR_VARS)
