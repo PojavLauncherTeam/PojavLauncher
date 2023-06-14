@@ -16,12 +16,14 @@ def getVersionName = {
     // Get the last version tag, as well as the short head of the last commit
     ByteArrayOutputStream TAG = new ByteArrayOutputStream()
     ByteArrayOutputStream BRANCH = new ByteArrayOutputStream()
+    boolean fallback = false;
     exec {
         try {
             commandLine 'git', 'describe', '--tags'
             ignoreExitValue true
             standardOutput = TAG
         } catch (Exception e) {
+            fallback = true;
         }
     }
     exec {
@@ -30,8 +32,30 @@ def getVersionName = {
             ignoreExitValue true
             standardOutput = BRANCH
         } catch (Exception e) {
+            fallback = true;
         }
     }
+    
+    if(fallback){
+        // Fallback to absolute path to executable, namely for CI/CD purposes
+        exec {
+            try {
+                commandLine '/usr/bin/git', 'describe', '--tags'
+                ignoreExitValue true
+                standardOutput = TAG
+            } catch (Exception e) {
+            }
+        }
+        exec {
+            try {
+                commandLine '/usr/bin/git', 'branch', '--show-current'
+                ignoreExitValue true
+                standardOutput = BRANCH
+            } catch (Exception e) {
+            }
+        }
+    }
+
 
     if (TAG.toString() == "") {
         return ("LOCAL-" + "${getDate()}")
