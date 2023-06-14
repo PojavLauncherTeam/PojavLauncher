@@ -23,6 +23,7 @@ def getVersionName = {
             ignoreExitValue true
             standardOutput = TAG
         } catch (Exception e) {
+            e.printStackTrace();
             fallback = true;
         }
     }
@@ -32,10 +33,11 @@ def getVersionName = {
             ignoreExitValue true
             standardOutput = BRANCH
         } catch (Exception e) {
+            e.printStackTrace();
             fallback = true;
         }
     }
-    
+
     if(fallback){
         // Fallback to absolute path to executable, namely for CI/CD purposes
         exec {
