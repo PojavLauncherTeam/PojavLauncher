@@ -12,7 +12,7 @@
 
 * PojavLauncher is a launcher that allows you to play Minecraft: Java Edition on your Android device!
 
-* It can run almost every version of the Minecraft, allowing you to use .jar only installers to install modloaders like [forge](https://files.minecraftforge.net/), [fabric](http://fabricmc.net/), [optifine](https://optifine.net); Utility and hack clients like [LabyMod](https://www.labymod.net/en), [Wurst](https://www.wurstclient.net/) and much more!
+* It can run almost every version of the Minecraft, allowing you to use .jar only installers to install modloaders like [forge](https://files.minecraftforge.net/), [fabric](http://fabricmc.net/), [optifine](https://optifine.net), [LabyMod](https://www.labymod.net/en); Utility and hack clients like [Wurst](https://www.wurstclient.net/) and much more!
 
 * For more details [check out our wiki](https://github.com/PojavLauncherTeam/PojavLauncher/wiki)
 ## Some notes to start with
