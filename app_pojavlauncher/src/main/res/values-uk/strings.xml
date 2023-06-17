@@ -225,6 +225,7 @@
     <string name="multirt_config_removeerror_last">Ви повинні мати принаймні одну встановлену Java Runtime</string>
     <string name="multirt_nocompartiblert">Не вдалося знайти будь-який відповідний Java Runtime. Ця версія потребує Java %d версії або вище.</string>
     <string name="multirt_nojava8rt">Не вдалося знайти Java 8. Для того, щоб скористатися цією опцією, вам потрібно встановити Java 8.</string>
+    <string name="multirt_delete_runtime">Видалити runtime</string>
     <string name="compat_117_message">Minecraft 21w10a+ (1.17+) потребує OpenGL 3.2. На жаль, наразі ваш графічний чип не підтримує OpenGL ES 3.0 чи вище, але є деякі інші ресурси, які ви можете встановити, щоб запустити ці версії. Натисніть «ОК», щоб підтвердити інсталяцію або «Скасувати», щоб скасувати запуск.</string>
     <string name="compat_11x_playanyway">Запустити в будь-якому випадку</string>
     <string name="pvc_gameDirectory">Тека гри</string>
