@@ -184,6 +184,7 @@ public final class Tools {
         String launchClassPath = generateLaunchClassPath(versionInfo, versionId);
 
         List<String> javaArgList = new ArrayList<>();
+        javaArgList.add("-Dorg.lwjgl.util.NoChecks=true");
 
         getCacioJavaArgs(javaArgList, runtime.javaVersion == 8);
 
