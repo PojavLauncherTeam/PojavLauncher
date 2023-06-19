@@ -332,4 +332,6 @@
     <string name="preference_wipe_controller_description">Erlaubt Ihnen die Controller-Tasten neu zuordnen</string>
     <string name="preference_deadzone_scale_title">Joystick Deadzone Skala</string>
     <string name="preference_deadzone_scale_description">Erhöhe es, wenn der Joystick abdriftet</string>
+    <string name="preference_force_big_core_title">Renderer zwingen, auf dem Big-Core zu laufen</string>
+    <string name="preference_force_big_core_desc">Erzwingt den Minecraft-Renderthread mit der höchsten maximalen Frequenz auf dem Core zu laufen</string>
 </resources>
