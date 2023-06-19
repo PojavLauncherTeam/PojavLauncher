@@ -384,6 +384,15 @@ public final class Tools {
         return strList.toArray(new String[0]);
     }
 
+    public static String artifactToPath(DependentLibrary library) {
+        if (library.downloads != null &&
+            library.downloads.artifact != null &&
+            library.downloads.artifact.path != null)
+            return library.downloads.artifact.path;
+        String[] libInfos = library.name.split(":");
+        return libInfos[0].replaceAll("\\.", "/") + "/" + libInfos[1] + "/" + libInfos[2] + "/" + libInfos[1] + "-" + libInfos[2] + ".jar";
+    }
+
     public static String getPatchedFile(String version) {
         return DIR_HOME_VERSION + "/" + version + "/" + version + ".jar";
     }
@@ -606,7 +615,7 @@ public final class Tools {
         List<String> libDir = new ArrayList<>();
         for (DependentLibrary libItem: info.libraries) {
             if(!checkRules(libItem.rules)) continue;
-            libDir.add(Tools.DIR_HOME_LIBRARY + "/" + libItem.downloads.artifact.path);
+            libDir.add(Tools.DIR_HOME_LIBRARY + "/" + artifactToPath(libItem));
         }
         return libDir.toArray(new String[0]);
     }
