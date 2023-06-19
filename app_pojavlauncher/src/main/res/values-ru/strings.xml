@@ -319,7 +319,7 @@
     <string name="mcl_setting_subtitle_buttonallcaps">Отключите, если хотите использовать строчные буквы в своей раскладке управления.</string>
     <string name="create_profile">Новый профиль</string>
     <string name="preference_shader_dump_title">Сохранять дамп шейдеров</string>
-    <string name="preference_shader_dump_description">Записывать в файл журнала данные о конвертации шейдеров</string>
+    <string name="preference_shader_dump_description">Записывать в файл журнала данные о конвертации шейдеров.</string>
     <string name="percent_format">%d %%</string>
     <string name="customctrl_editor_exit_title">Выйти?</string>
     <string name="customctrl_editor_exit_msg">Вы действительно хотите выйти?</string>
@@ -329,4 +329,6 @@
     <string name="global_no">Нет</string>
     <string name="preference_controller_map_wiped">Настройки контроллера были сброшены</string>
     <string name="preference_category_controller_settings">Настройки контроллера</string>
+    <string name="preference_force_big_core_title">Запускать визуализатор на мощном ядре</string>
+    <string name="preference_force_big_core_desc">Принудительно запускать поток графического движка на ядре ЦП с наибольшей тактовой частотой.</string>
 </resources>
