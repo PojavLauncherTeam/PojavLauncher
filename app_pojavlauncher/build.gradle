@@ -62,7 +62,7 @@ def getVersionName = {
         //}else {
             // Used by github actions
             TAG_STRING = TAG_PART_REMOTE.toString().trim() + '-' + "${getDate()}" + "-" + TAG_PART_COMMIT.toString().trim()
-        }
+        //}
 
     }
 
