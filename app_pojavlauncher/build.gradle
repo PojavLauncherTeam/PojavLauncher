@@ -56,10 +56,10 @@ def getVersionName = {
     if(TAG.toString() != ""){
         TAG_STRING = TAG.toString()
     }else {
-        if(TAG_PART_REMOTE.toString().trim() == ""){
+        //if(TAG_PART_REMOTE.toString().trim() == ""){
             // Fallback no repo
-            return ("LOCAL-" + "${getDate()}")
-        }else {
+          //  return ("LOCAL-" + "${getDate()}")
+        //}else {
             // Used by github actions
             TAG_STRING = TAG_PART_REMOTE.toString().trim() + '-' + "${getDate()}" + "-" + TAG_PART_COMMIT.toString().trim()
         }
