@@ -18,7 +18,7 @@ import java.util.Arrays;
 
 public class GyroControl implements SensorEventListener, GrabListener {
     /* How much distance has to be moved before taking into account the gyro */
-    private static final float SINGLE_AXIS_LOW_PASS_THRESHOLD = 1.1F;
+    private static final float SINGLE_AXIS_LOW_PASS_THRESHOLD = 1.13F;
     private static final float MULTI_AXIS_LOW_PASS_THRESHOLD = 1.3F;
 
     private final WindowManager mWindowManager;
