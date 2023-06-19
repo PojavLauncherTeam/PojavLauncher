@@ -72,7 +72,6 @@ jobs:
       - name: Build APK without runtime
         run: |
           rm -r app_pojavlauncher/src/main/assets/components/jre
-          rm -r app_pojavlauncher/src/main/assets/components/jre-new
           gradle assembleDebug
           mv app_pojavlauncher/build/outputs/apk/debug/app_pojavlauncher-debug.apk out/app-debug-noruntime.apk
 
