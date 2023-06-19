@@ -26,8 +26,16 @@ def getVersionName = {
         }
 
         if (TAG.toString() == ""){
+            // Fallback for action builds
             try {
-                commandLine 'git', 'describe', '--dirty', '--always', '--tags'
+                commandLine 'git', 'describe', '--always', '--tags'
+                ignoreExitValue true
+                standardOutput = TAG
+            } catch (Exception e) {
+            }
+
+            try {
+                commandLine 'git', 'ls-remotes', '--tags', '--sort=committerdate', '|', 'tail' ,'--lines=1' ,'|', 'cut', '--delimiter="/"', '--fields=3'
                 ignoreExitValue true
                 standardOutput = TAG
             } catch (Exception e) {
