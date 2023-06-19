@@ -333,4 +333,6 @@
     <string name="preference_wipe_controller_description">Permite você remapear os botões do controlador</string>
     <string name="preference_deadzone_scale_title">Escala de zona morta do controle de videogame</string>
     <string name="preference_deadzone_scale_description">Aumente se o joystick desviar</string>
+    <string name="preference_force_big_core_title">Forçar a renderização no núcleo maior</string>
+    <string name="preference_force_big_core_desc">Força a renderização do Minecraft a rodar o núcleo numa frequência mais alta</string>
 </resources>
