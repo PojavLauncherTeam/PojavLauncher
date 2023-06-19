@@ -35,7 +35,7 @@ def getVersionName = {
             }
 
             try {
-                commandLine 'git', 'ls-remote', '--tags', '--sort=committerdate', '|', 'tail' ,'--lines=1' ,'|', 'cut', '--delimiter="/"', '--fields=3'
+                commandLine 'git', 'ls-remote', '--tags', '--sort=committerdate', 'origin', '|', 'tail' ,'--lines=1' ,'|', 'cut', '--delimiter="/"', '--fields=3'
                 ignoreExitValue true
                 standardOutput = TAG
             } catch (Exception e) {
