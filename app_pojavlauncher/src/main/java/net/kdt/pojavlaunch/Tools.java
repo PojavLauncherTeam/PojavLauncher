@@ -606,7 +606,7 @@ public final class Tools {
         List<String> libDir = new ArrayList<>();
         for (DependentLibrary libItem: info.libraries) {
             if(!checkRules(libItem.rules)) continue;
-            libDir.add(Tools.DIR_HOME_LIBRARY + "/" + libItem.downloads.artifact.path;
+            libDir.add(Tools.DIR_HOME_LIBRARY + "/" + libItem.downloads.artifact.path);
         }
         return libDir.toArray(new String[0]);
     }
