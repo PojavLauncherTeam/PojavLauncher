@@ -598,6 +598,7 @@ struct PotatoBridge potatoBridge;
 #include "ctxbridges/osmesa_loader.h"
 int (*vtest_main_p) (int argc, char** argv);
 void (*vtest_swap_buffers_p) (void);
+void bigcore_set_affinity();
 
 #define RENDERER_GL4ES 1
 #define RENDERER_VK_ZINK 2
@@ -926,6 +927,7 @@ void* egl_make_current(void* window) {
 
 bool locked = false;
 void pojavMakeCurrent(void* window) {
+    if(getenv("POJAV_BIG_CORE_AFFINITY") != NULL) bigcore_set_affinity();
     //if(OSMesaGetCurrentContext_p() != NULL) {
     //    printf("OSMDroid: skipped context reset\n");
     //    return JNI_TRUE;

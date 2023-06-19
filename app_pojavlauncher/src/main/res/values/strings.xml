@@ -370,4 +370,6 @@
     <string name="preference_wipe_controller_description">Allow you to remap the controller buttons</string>
     <string name="preference_deadzone_scale_title">Joystick deadzone scale</string>
     <string name="preference_deadzone_scale_description">Increase it if the joystick drifts</string>
+    <string name="preference_force_big_core_title">Force renderer to run on the big core</string>
+    <string name="preference_force_big_core_desc">Forces the Minecraft render thread to run on the core with the highest max frequency</string>
 </resources>
