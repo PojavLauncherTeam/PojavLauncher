@@ -332,4 +332,6 @@
     <string name="preference_wipe_controller_description">允许您重新映射手柄按键</string>
     <string name="preference_deadzone_scale_title">摇杆死区（deadzone）缩放</string>
     <string name="preference_deadzone_scale_description">若摇杆偏移，请调高此选项</string>
+    <string name="preference_force_big_core_title">强制渲染器在大核上运行</string>
+    <string name="preference_force_big_core_desc">强制 Minecraft 渲染线程在最高频率的核心运行</string>
 </resources>
