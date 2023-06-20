@@ -18,7 +18,6 @@ def getVersionName = {
     ByteArrayOutputStream BRANCH = new ByteArrayOutputStream()
     // Used by the fallback for github actions
     ByteArrayOutputStream TAG_PART_COMMIT = new ByteArrayOutputStream()
-    ByteArrayOutputStream TAG_PART_REMOTE = new ByteArrayOutputStream()
     String TAG_STRING
 
     exec {
@@ -41,28 +40,19 @@ def getVersionName = {
             } catch (Exception e) {
             }
         }
-
-        exec {
-            try {
-                commandLine 'bash', '-c', 'git ls-remote --tags --sort=committerdate origin | tail --lines=1 | cut --delimiter="/" --fields=3'
-                ignoreExitValue true
-                standardOutput = TAG_PART_REMOTE
-            } catch (Exception e) {
-            }
-        }
     }
 
 
     if(TAG.toString() != ""){
         TAG_STRING = TAG.toString()
     }else {
-        //if(TAG_PART_REMOTE.toString().trim() == ""){
-            // Fallback no repo
-          //  return ("LOCAL-" + "${getDate()}")
-        //}else {
+        if(TAG_PART_COMMIT.toString().trim() == ""){
+             //Fallback no repo
+            return ("LOCAL-" + "${getDate()}")
+        }else {
             // Used by github actions
-            TAG_STRING = TAG_PART_REMOTE.toString().trim() + '-' + "${getDate()}" + "-" + TAG_PART_COMMIT.toString().trim()
-        //}
+            TAG_STRING =  'dahlia-' + "${getDate()}" + "-" + TAG_PART_COMMIT.toString().trim()
+        }
 
     }
 
