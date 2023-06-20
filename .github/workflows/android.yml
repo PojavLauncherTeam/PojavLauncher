@@ -16,6 +16,7 @@ jobs:
     env:
       GPLAY_KEYSTORE_PASSWORD: ${{ secrets.GPLAY_KEYSTORE_PASSWORD }}
     steps:
+      - name: Checkout
       - uses: actions/checkout@v3
 
       - name: Set up JDK 8

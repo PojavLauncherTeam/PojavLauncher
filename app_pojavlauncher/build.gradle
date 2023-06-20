@@ -16,28 +16,57 @@ def getVersionName = {
     // Get the last version tag, as well as the short head of the last commit
     ByteArrayOutputStream TAG = new ByteArrayOutputStream()
     ByteArrayOutputStream BRANCH = new ByteArrayOutputStream()
+    // Used by the fallback for github actions
+    ByteArrayOutputStream TAG_PART_COMMIT = new ByteArrayOutputStream()
+    String TAG_STRING
+
     exec {
         try {
             commandLine 'git', 'describe', '--tags'
             ignoreExitValue true
             standardOutput = TAG
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
+
+    if (TAG.toString() == "") {
+        exec {
+            // Fallback for action builds
+            try {
+                commandLine 'git', 'describe', '--always', '--tags'
+                ignoreExitValue true
+                standardOutput = TAG_PART_COMMIT
+            } catch (Exception e) {
+            }
+        }
+    }
+
+
+    if(TAG.toString() != ""){
+        TAG_STRING = TAG.toString()
+    }else {
+        if(TAG_PART_COMMIT.toString().trim() == ""){
+             //Fallback no repo
+            return ("LOCAL-" + "${getDate()}")
+        }else {
+            // Used by github actions
+            TAG_STRING =  'dahlia-' + "${getDate()}" + "-" + TAG_PART_COMMIT.toString().trim()
+        }
+
+    }
+
     exec {
         try {
             commandLine 'git', 'branch', '--show-current'
             ignoreExitValue true
             standardOutput = BRANCH
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
-    if (TAG.toString() == "") {
-        return ("LOCAL-" + "${getDate()}")
-    }
-
-    return TAG.toString().trim().replace("-g", "-") + "-" + BRANCH.toString().trim()
+    return TAG_STRING.trim().replace("-g", "-") + "-" + BRANCH.toString().trim()
 }
 
 configurations {
