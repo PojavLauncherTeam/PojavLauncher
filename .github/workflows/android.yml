@@ -16,11 +16,8 @@ jobs:
     env:
       GPLAY_KEYSTORE_PASSWORD: ${{ secrets.GPLAY_KEYSTORE_PASSWORD }}
     steps:
-      - name: Checkout with fetch-tags=true
-        uses: RobertWieczoreck/checkout@add-fetch-tags-option
-        with:
-          fetch-depth: 1
-          fetch-tags: true
+      - name: Checkout
+      - uses: actions/checkout@v3
 
       - name: Set up JDK 8
         uses: actions/setup-java@v3
