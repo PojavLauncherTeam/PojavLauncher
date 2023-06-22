@@ -37,7 +37,7 @@
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_wiki">Gili</string>
+    <string name="mcl_tab_wiki">Wiki</string>
     <string name="mcl_tab_console">Konsol pengembangan</string>
     <string name="mcl_tab_crash">Catatan crash</string>
     <!-- MCLauncherActivity: Account status -->
@@ -93,8 +93,8 @@
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Alpha-lama</string>
     <string name="mcl_setting_veroption_oldbeta">Beta-lama</string>
-    <string name="mcl_setting_java_sandbox">Icelo0896</string>
-    <string name="mcl_setting_java_sandbox_subtitle">icel098875.</string>
+    <string name="mcl_setting_java_sandbox">Penginstal Sandbox .jar</string>
+    <string name="mcl_setting_java_sandbox_subtitle">Kontrol ketersediaan pengelola keamanan sandbox saat meluncurkan penginstal .jar.</string>
     <string name="mcl_version_clone">Klon</string>
     <!-- Global strings -->
     <string name="global_edit">Edit</string>
@@ -202,8 +202,8 @@
     <string name="dl_library_sha_pass">Library %s baik-baik saja dan dapat digunakan</string>
     <string name="mcl_disable_gestures">Matikan gestures</string>
     <string name="mcl_disable_gestures_subtitle">Mematikan gestures, seperti tahan lama untuk menghancurkan block, dan pencet untuk menempatkan block.</string>
-    <string name="mcl_disable_swap_hand">icelo098875</string>
-    <string name="mcl_disable_swap_hand_subtitle">Icel098875</string>
+    <string name="mcl_disable_swap_hand">Nonaktifkan ketuk dua kali untuk bertukar tangan</string>
+    <string name="mcl_disable_swap_hand_subtitle">Nonaktifkan ketuk dua kali pada item hotbar untuk menukarnya di tangan kedua</string>
     <string name="mcl_setting_title_mousespeed">Kecepatan Mouse</string>
     <string name="mcl_setting_subtitle_mousespeed">Mengubah kecepatan perangkat lunak mouse</string>
     <string name="customctrl_passthru">Mouse pass-thru</string>
@@ -225,6 +225,7 @@
     <string name="multirt_config_removeerror_last">Kamu harus menginstal setidaknya satu Java Runtime</string>
     <string name="multirt_nocompartiblert">Tidak dapat menemukan Java Runtime yang kompatibel. Versi ini membutuhkan Java %d atau yang lebih baru.</string>
     <string name="multirt_nojava8rt">Tidak dapat menemukan Java 8. Untuk menggunakan opsi ini, kamu perlu menginstal Java 8.</string>
+    <string name="multirt_delete_runtime">Hapus runtime</string>
     <string name="compat_117_message">Minecraft 21w10a+ membutuhkan profil inti OpenGL 3.2. Sayangnya chip grafis anda tidak sepenuhnya mendukung OpenGL ES 3.0 atau lebih tinggi, tetapi ada beberapa sumber daya tambahan yang dapat kamu instal untuk menjalankan versi ini. Tekan OK untuk mengkonfirmasi penginstalan, dan tekan Batal untuk membatalkan peluncuran.</string>
     <string name="compat_11x_playanyway">Mainkan saja</string>
     <string name="pvc_gameDirectory">Direktori game</string>
@@ -240,7 +241,7 @@
     <string name="preference_control_offset_title">Kontrol sisi offset</string>
     <string name="preference_control_offset_description">Atur offset khusus ke setiap sisi layar</string>
     <string name="preference_mouse_start_title">Mulai dengan mouse virtual nyala</string>
-    <string name="preference_mouse_start_description">La souris virtuelle apparaît au démarrage quand cette option est activée</string>
+    <string name="preference_mouse_start_description">Tetikus Virtual akan muncul saat opsi ini aktif</string>
     <string name="preference_video_title">Video dan renderer</string>
     <string name="preference_video_description">Resolusi, jenis penskalaan, dan renderer</string>
     <string name="preference_control_title">Kustomisasi kontrol</string>
@@ -309,8 +310,28 @@
     <string name="preference_gyro_sensitivity_title">Giroskop mengontrol sensitivitas</string>
     <string name="preference_gyro_sensitivity_description">Sesuaikan sensitivitas kontrol giroskop</string>
     <string name="toast_turn_on_gyro">Nyalakan kontrol giro sebelum menggunakan ini!</string>
+    <string name="preference_gyro_sample_rate_title">Tingkat pengambilan sampel giroskop</string>
+    <string name="preference_gyro_sample_rate_description">Jika Anda memiliki masalah kinerja dengan kontrol giroskop, tingkatkan ini</string>
+    <string name="microsoft_login_retry_later">Terlalu banyak permintaan, coba lagi nanti.</string>
     <string name="storage_required">PojavLauncher memerlukan penyimpanan eksternal. Mohon hubungkan ulang penyimpanan Anda dan mulai ulang aplikasi.</string>
+    <string name="mcl_setting_title_buttonallcaps">Gunakan hanya huruf kapital pada label tombol</string>
     <string name="mcl_setting_subtitle_buttonallcaps">Matikan ini jika Anda hanya ingin menggunakan huruf kecil dalam kontrol Anda</string>
     <string name="create_profile">Buat profil baru</string>
+    <string name="preference_shader_dump_title">Aktifkan shader dumping</string>
+    <string name="preference_shader_dump_description">Catat shader yang dikonversi kedalam berkas log</string>
     <string name="percent_format">%d%%</string>
+    <string name="customctrl_editor_exit_title">Meninggalkan?</string>
+    <string name="customctrl_editor_exit_msg">Anda yakin ingin keluar?</string>
+    <string name="customctrl_editor_exit">Tinggalkan editor</string>
+    <string name="global_save_and_exit">Simpan dan keluar</string>
+    <string name="global_yes">Ya</string>
+    <string name="global_no">Tidak</string>
+    <string name="preference_controller_map_wiped">Konfigurasi kontroler telah dihapus</string>
+    <string name="preference_category_controller_settings">Pengaturan kontroler</string>
+    <string name="preference_wipe_controller_title">Setel ulang pemetaan pengontrol</string>
+    <string name="preference_wipe_controller_description">Memungkinkan Anda untuk memetakan tombol pengontrol</string>
+    <string name="preference_deadzone_scale_title">Skala Joystick deadzone</string>
+    <string name="preference_deadzone_scale_description">Tingkatkan jika joystick \"drifts\"</string>
+    <string name="preference_force_big_core_title">Paksa perender untuk berjalan di inti(core) besar</string>
+    <string name="preference_force_big_core_desc">Memaksa utas render Minecraft untuk berjalan pada inti dengan frekuensi tertinggi</string>
 </resources>
