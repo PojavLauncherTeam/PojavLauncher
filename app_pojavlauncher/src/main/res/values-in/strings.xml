@@ -318,7 +318,7 @@
     <string name="mcl_setting_subtitle_buttonallcaps">Matikan ini jika Anda hanya ingin menggunakan huruf kecil dalam kontrol Anda</string>
     <string name="create_profile">Buat profil baru</string>
     <string name="preference_shader_dump_title">Aktifkan shader dumping</string>
-    <string name="preference_shader_dump_description">Catat shader yang dikonversi kedalam berkas log</string>
+    <string name="preference_shader_dump_description">Catat shader yang dikonversi ke dalam berkas log</string>
     <string name="percent_format">%d%%</string>
     <string name="customctrl_editor_exit_title">Meninggalkan?</string>
     <string name="customctrl_editor_exit_msg">Anda yakin ingin keluar?</string>
@@ -328,7 +328,7 @@
     <string name="global_no">Tidak</string>
     <string name="preference_controller_map_wiped">Konfigurasi kontroler telah dihapus</string>
     <string name="preference_category_controller_settings">Pengaturan kontroler</string>
-    <string name="preference_wipe_controller_title">Setel ulang pemetaan pengontrol</string>
+    <string name="preference_wipe_controller_title">Setel ulang pemetaan kontroler</string>
     <string name="preference_wipe_controller_description">Memungkinkan Anda untuk memetakan tombol pengontrol</string>
     <string name="preference_deadzone_scale_title">Skala Joystick deadzone</string>
     <string name="preference_deadzone_scale_description">Tingkatkan jika joystick \"drifts\"</string>
