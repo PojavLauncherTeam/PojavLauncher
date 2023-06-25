@@ -887,7 +887,7 @@ void pojavSetWindowHint(int hint, int value) {
     if (hint != GLFW_CLIENT_API) return;
     switch (value) {
         case GLFW_NO_API:
-            config_renderer = RENDERER_VULKAN;
+            pojav_environ->config_renderer = RENDERER_VULKAN;
             /* Nothing to do: initialization is handled in Java-side */
             // pojavInitVulkan();
             break;
@@ -1007,7 +1007,7 @@ Java_org_lwjgl_glfw_GLFW_nativeEglDetachOnCurrentThread(JNIEnv *env, jclass claz
 */
 
 void* pojavCreateContext(void* contextSrc) {
-    if (config_renderer == RENDERER_VULKAN) {
+    if (pojav_environ->config_renderer == RENDERER_VULKAN) {
         return (void *)pojav_environ->pojavWindow;
     }
 
