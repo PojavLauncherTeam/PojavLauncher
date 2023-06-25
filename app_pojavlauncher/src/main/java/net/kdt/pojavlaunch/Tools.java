@@ -590,11 +590,15 @@ public final class Tools {
     }
 
     public static void dialogOnUiThread(final Activity activity, final CharSequence title, final CharSequence message) {
-        activity.runOnUiThread(() -> new AlertDialog.Builder(activity)
+        activity.runOnUiThread(()->dialog(activity, title, message));
+    }
+
+    public static void dialog(final Context context, final CharSequence title, final CharSequence message) {
+        new AlertDialog.Builder(context)
                 .setTitle(title)
                 .setMessage(message)
                 .setPositiveButton(android.R.string.ok, null)
-                .show());
+                .show();
     }
 
     public static void openURL(Activity act, String url) {

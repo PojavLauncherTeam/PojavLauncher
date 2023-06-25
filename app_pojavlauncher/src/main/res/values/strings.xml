@@ -372,4 +372,7 @@
     <string name="preference_deadzone_scale_description">Increase it if the joystick drifts</string>
     <string name="preference_force_big_core_title">Force renderer to run on the big core</string>
     <string name="preference_force_big_core_desc">Forces the Minecraft render thread to run on the core with the highest max frequency</string>
+    <string name="forge_dl_progress">Downloading installer for %s</string>
+    <string name="forge_dl_failed_to_load_list">Failed to load the version list</string>
+    <string name="forge_dl_no_installer">Sorry, but this version of Forge does not have an installer, which is not yet supported.</string>
 </resources>
