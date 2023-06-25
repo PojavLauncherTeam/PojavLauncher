@@ -616,18 +616,16 @@ public final class Tools {
         for (int i = 0; i < libraries.length; i++) {
             DependentLibrary libItem = libraries[i];
             String[] version = libItem.name.split(":")[2].split("\\.");
-            int major = Integer.parseInt(version[0]);
-            int minor = Integer.parseInt(version[1]);
             if (libItem.name.startsWith("net.java.dev.jna:jna:")) {
                 // Special handling for LabyMod 1.8.9, Forge 1.12.2(?) and oshi
                 // we have libjnidispatch 5.13.0 in jniLibs directory
-                if (major >= 5 && minor >= 13) return;
+                if (Integer.parseInt(version[0]) >= 5 && Integer.parseInt(version[1]) >= 13) return;
                 Log.d(APP_NAME, "Library " + libItem.name + " has been changed to version 5.13.0");
                 libItem.name = "net.java.dev.jna:jna:5.13.0";
                 libItem.downloads.artifact.path = "net/java/dev/jna/jna/5.13.0/jna-5.13.0.jar";
                 libItem.downloads.artifact.url = "https://repo1.maven.org/maven2/net/java/dev/jna/jna/5.13.0/jna-5.13.0.jar";
             } else if (libItem.name.startsWith("com.github.oshi:oshi-core:")) {
-                if (major >= 6 && minor >= 3) return;
+                if ((Integer.parseInt(version[0]) >= 6 && (Integer.parseInt(version[1]) >= 3) return;
                 // FIXME: ensure compatibility
                 Log.d(APP_NAME, "Library " + libItem.name + " has been changed to version 6.3.0");
                 libItem.name = "com.github.oshi:oshi-core:6.3.0";
