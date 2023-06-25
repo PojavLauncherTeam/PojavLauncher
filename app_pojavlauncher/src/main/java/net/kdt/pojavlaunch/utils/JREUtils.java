@@ -329,6 +329,7 @@ public class JREUtils {
         ArrayList<String> overridableArguments = new ArrayList<>(Arrays.asList(
                 "-Djava.home=" + runtimeHome,
                 "-Djava.io.tmpdir=" + ctx.getCacheDir().getAbsolutePath(),
+                "-Djna.boot.library.path=" + NATIVE_LIB_DIR,
                 "-Duser.home=" + Tools.DIR_GAME_HOME,
                 "-Duser.language=" + System.getProperty("user.language"),
                 "-Dos.name=Linux",
@@ -338,6 +339,7 @@ public class JREUtils {
                 "-Duser.timezone=" + TimeZone.getDefault().getID(),
 
                 //LWJGL 3 DEBUG FLAGS
+                 "-Dorg.lwjgl.util.NoChecks=true",
                 //"-Dorg.lwjgl.util.Debug=true",
                 //"-Dorg.lwjgl.util.DebugFunctions=true",
                 //"-Dorg.lwjgl.util.DebugLoader=true",

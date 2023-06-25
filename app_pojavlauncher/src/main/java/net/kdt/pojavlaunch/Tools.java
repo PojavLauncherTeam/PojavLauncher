@@ -184,7 +184,6 @@ public final class Tools {
         String launchClassPath = generateLaunchClassPath(versionInfo, versionId);
 
         List<String> javaArgList = new ArrayList<>();
-        javaArgList.add("-Dorg.lwjgl.util.NoChecks=true");
 
         getCacioJavaArgs(javaArgList, runtime.javaVersion == 8);
 
@@ -625,11 +624,13 @@ public final class Tools {
                 libItem.downloads.artifact.path = "net/java/dev/jna/jna/5.13.0/jna-5.13.0.jar";
                 libItem.downloads.artifact.url = "https://repo1.maven.org/maven2/net/java/dev/jna/jna/5.13.0/jna-5.13.0.jar";
             } else if (libItem.name.startsWith("com.github.oshi:oshi-core:")) {
-                if (Integer.parseInt(version[0]) >= 6 && Integer.parseInt(version[1]) >= 3) return;
+                //if (Integer.parseInt(version[0]) >= 6 && Integer.parseInt(version[1]) >= 3) return;
                 // FIXME: ensure compatibility
+
+                if (Integer.parseInt(version[0]) != 6 || Integer.parseInt(version[1]) != 2) return;
                 Log.d(APP_NAME, "Library " + libItem.name + " has been changed to version 6.3.0");
                 libItem.name = "com.github.oshi:oshi-core:6.3.0";
-                libItem.downloads.artifact.path = "com/github/oshi/oshi-core/6.2.2/oshi-core-6.2.2.jar";
+                libItem.downloads.artifact.path = "com/github/oshi/oshi-core/6.3.0/oshi-core-6.3.0.jar";
                 libItem.downloads.artifact.url = "https://repo1.maven.org/maven2/com/github/oshi/oshi-core/6.3.0/oshi-core-6.3.0.jar";
             }
         }
