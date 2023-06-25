@@ -611,6 +611,32 @@ public final class Tools {
         }
         return true; // allow if none match
     }
+
+    private static void preProcessLibraries(DependentLibrary[] libraries) {
+        for (int i = 0; i < libraries.length; i++) {
+            DependentLibrary libItem = libraries[i];
+            String[] version = libItem.name.split(":")[2].split("\\.");
+            int major = Integer.parseInt(version[0]);
+            int minor = Integer.parseInt(version[1]);
+            if (libItem.name.startsWith("net.java.dev.jna:jna:")) {
+                // Special handling for LabyMod 1.8.9, Forge 1.12.2(?) and oshi
+                // we have libjnidispatch 5.13.0 in jniLibs directory
+                if (major >= 5 && minor >= 13) return;
+                Log.d("Library " + libItem.name + " has been changed to version 5.13.0");
+                libItem.name = "net.java.dev.jna:jna:5.13.0";
+                libItem.downloads.artifact.path = "net/java/dev/jna/jna/5.13.0/jna-5.13.0.jar";
+                libItem.downloads.artifact.url = "https://repo1.maven.org/maven2/net/java/dev/jna/jna/5.13.0/jna-5.13.0.jar";
+            } else if (libItem.name.startsWith("com.github.oshi:oshi-core:")) {
+                if (major >= 6 && minor >= 3) return;
+                // FIXME: ensure compatibility
+                Log.d("Library " + libItem.name + " has been changed to version 6.3.0");
+                libItem.name = "com.github.oshi:oshi-core:6.3.0";
+                libItem.downloads.artifact.path = "com/github/oshi/oshi-core/6.2.2/oshi-core-6.2.2.jar";
+                libItem.downloads.artifact.url = "https://repo1.maven.org/maven2/com/github/oshi/oshi-core/6.3.0/oshi-core-6.3.0.jar";
+            }
+        }
+    }
+
     public static String[] generateLibClasspath(JMinecraftVersionList.Version info) {
         List<String> libDir = new ArrayList<>();
         for (DependentLibrary libItem: info.libraries) {
@@ -629,6 +655,7 @@ public final class Tools {
         try {
             JMinecraftVersionList.Version customVer = Tools.GLOBAL_GSON.fromJson(read(DIR_HOME_VERSION + "/" + versionName + "/" + versionName + ".json"), JMinecraftVersionList.Version.class);
             if (skipInheriting || customVer.inheritsFrom == null || customVer.inheritsFrom.equals(customVer.id)) {
+                preProcessLibraries(customVer.libraries);
                 return customVer;
             } else {
                 JMinecraftVersionList.Version inheritsVer;
@@ -666,7 +693,7 @@ public final class Tools {
                         libList.add(0, lib);
                     }
                 } finally {
-                    inheritsVer.libraries = libList.toArray(new DependentLibrary[0]);
+                    inheritsVer.libraries = preProcessLibraries(libList.toArray(new DependentLibrary[0]));
                 }
 
                 // Inheriting Minecraft 1.13+ with append custom args
