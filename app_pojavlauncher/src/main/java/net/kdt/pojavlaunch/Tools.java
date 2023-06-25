@@ -622,14 +622,14 @@ public final class Tools {
                 // Special handling for LabyMod 1.8.9, Forge 1.12.2(?) and oshi
                 // we have libjnidispatch 5.13.0 in jniLibs directory
                 if (major >= 5 && minor >= 13) return;
-                Log.d("Library " + libItem.name + " has been changed to version 5.13.0");
+                Log.d(APP_NAME, "Library " + libItem.name + " has been changed to version 5.13.0");
                 libItem.name = "net.java.dev.jna:jna:5.13.0";
                 libItem.downloads.artifact.path = "net/java/dev/jna/jna/5.13.0/jna-5.13.0.jar";
                 libItem.downloads.artifact.url = "https://repo1.maven.org/maven2/net/java/dev/jna/jna/5.13.0/jna-5.13.0.jar";
             } else if (libItem.name.startsWith("com.github.oshi:oshi-core:")) {
                 if (major >= 6 && minor >= 3) return;
                 // FIXME: ensure compatibility
-                Log.d("Library " + libItem.name + " has been changed to version 6.3.0");
+                Log.d(APP_NAME, "Library " + libItem.name + " has been changed to version 6.3.0");
                 libItem.name = "com.github.oshi:oshi-core:6.3.0";
                 libItem.downloads.artifact.path = "com/github/oshi/oshi-core/6.2.2/oshi-core-6.2.2.jar";
                 libItem.downloads.artifact.url = "https://repo1.maven.org/maven2/com/github/oshi/oshi-core/6.3.0/oshi-core-6.3.0.jar";
@@ -693,7 +693,8 @@ public final class Tools {
                         libList.add(0, lib);
                     }
                 } finally {
-                    inheritsVer.libraries = preProcessLibraries(libList.toArray(new DependentLibrary[0]));
+                    inheritsVer.libraries = libList.toArray(new DependentLibrary[0]);
+                    preProcessLibraries(inheritsVer.libraries);
                 }
 
                 // Inheriting Minecraft 1.13+ with append custom args
