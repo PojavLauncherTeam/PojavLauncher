@@ -615,12 +615,6 @@ void* gbuffer;
 
 void* egl_make_current(void* window);
 
-void pojav_openGLOnLoad() {
-}
-void pojav_openGLOnUnload() {
-
-}
-
 void pojavTerminate() {
     printf("EGLBridge: Terminating\n");
 
@@ -892,7 +886,8 @@ void pojavSetWindowHint(int hint, int value) {
             // pojavInitVulkan();
             break;
         case GLFW_OPENGL_API:
-            pojavInitOpenGL();
+            /* Nothing to do: initialization is called in pojavCreateContext */
+            // pojavInitOpenGL();
             break;
         default:
             printf("GLFW: Unimplemented API 0x%x\n", value);
@@ -1010,6 +1005,8 @@ void* pojavCreateContext(void* contextSrc) {
     if (pojav_environ->config_renderer == RENDERER_VULKAN) {
         return (void *)pojav_environ->pojavWindow;
     }
+
+    pojavInitOpenGL();
 
     if (pojav_environ->config_renderer == RENDERER_GL4ES) {
         /*const EGLint ctx_attribs[] = {
