@@ -21,8 +21,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.provider.DocumentsContract;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -287,7 +285,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
     protected void onPostResume() {
         super.onPostResume();
         if(minecraftGLView != null)  // Useful when backing out of the app
-            new Handler(Looper.getMainLooper()).postDelayed(() -> minecraftGLView.refreshSize(), 500);
+            Tools.MAIN_HANDLER.postDelayed(() -> minecraftGLView.refreshSize(), 500);
     }
 
     @Override

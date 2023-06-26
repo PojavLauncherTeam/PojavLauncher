@@ -153,6 +153,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
             final Runtime runtime = MultiRTUtils.forceReread(jreName);
 
             mSkipDetectMod = getIntent().getExtras().getBoolean("skipDetectMod", false);
+            if(getIntent().getExtras().getBoolean("openLogOutput", false)) openLogOutput(null);
             if (mSkipDetectMod) {
                 new Thread(() -> launchJavaRuntime(runtime, modFile, javaArgs), "JREMainThread").start();
                 return;

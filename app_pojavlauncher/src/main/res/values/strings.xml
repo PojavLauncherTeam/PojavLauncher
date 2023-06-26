@@ -128,6 +128,7 @@
     <string name="global_error_field_empty">This field can\'t be empty</string>
     <string name="global_waiting">Wait</string>
     <string name="global_select">Select</string>
+    <string name="global_retry">Retry</string>
 
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Application/Game exited with code %d, check latestlog.txt for more details.</string>
@@ -372,7 +373,14 @@
     <string name="preference_deadzone_scale_description">Increase it if the joystick drifts</string>
     <string name="preference_force_big_core_title">Force renderer to run on the big core</string>
     <string name="preference_force_big_core_desc">Forces the Minecraft render thread to run on the core with the highest max frequency</string>
+    <string name="version_select_hint">Select a version</string>
     <string name="forge_dl_progress">Downloading installer for %s</string>
-    <string name="forge_dl_failed_to_load_list">Failed to load the version list</string>
+    <string name="forge_dl_failed_to_load_list">Failed to load the version list!</string>
     <string name="forge_dl_no_installer">Sorry, but this version of Forge does not have an installer, which is not yet supported.</string>
+    <string name="forge_dl_select_version">Select Forge version</string>
+    <string name="fabric_dl_progress">Downloading Fabric installer</string>
+    <string name="fabric_dl_loader_version">Fabric loader version</string>
+    <string name="fabric_dl_game_version">Minecraft version</string>
+    <string name="fabric_dl_install">Install</string>
+    <string name="fabric_dl_cant_read_meta">Failed to read Fabric metadata. Please try again later.</string>
 </resources>

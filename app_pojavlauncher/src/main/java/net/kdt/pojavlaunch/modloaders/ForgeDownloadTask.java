@@ -14,9 +14,9 @@ import java.io.IOException;
 public class ForgeDownloadTask implements Runnable, Tools.DownloaderFeedback {
     private final String mForgeUrl;
     private final String mForgeVersion;
-    private final File mDestinationFile;
-    private final ForgeDownloadListener mListener;
-    public ForgeDownloadTask(ForgeDownloadListener listener, String forgeVersion, File destinationFile) {
+    public final File mDestinationFile;
+    private final ModloaderDownloadListener mListener;
+    public ForgeDownloadTask(ModloaderDownloadListener listener, String forgeVersion, File destinationFile) {
         this.mListener = listener;
         this.mForgeUrl = ForgeUtils.getInstallerUrl(forgeVersion);
         this.mForgeVersion = forgeVersion;
@@ -28,10 +28,10 @@ public class ForgeDownloadTask implements Runnable, Tools.DownloaderFeedback {
         try {
             byte[] buffer = new byte[8192];
             DownloadUtils.downloadFileMonitored(mForgeUrl, mDestinationFile, buffer, this);
-            mListener.onDownloadFinished();
+            mListener.onDownloadFinished(mDestinationFile);
         }catch (IOException e) {
             if(e instanceof FileNotFoundException) {
-                mListener.onInstallerNotAvailable();
+                mListener.onDataNotAvailable();
             }else{
                 mListener.onDownloadError(e);
             }

@@ -53,7 +53,7 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="@dimen/_4sdp"
             android:background="@drawable/background_line"
-            android:hint="Select a version"
+            android:hint="@string/version_select_hint"
             android:paddingHorizontal="@dimen/_12sdp"
             android:textSize="@dimen/_13ssp"
 
