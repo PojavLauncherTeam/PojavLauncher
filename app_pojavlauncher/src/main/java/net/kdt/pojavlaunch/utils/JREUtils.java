@@ -338,6 +338,7 @@ public class JREUtils {
                 "-Dpojav.path.private.account=" + Tools.DIR_ACCOUNT_NEW,
                 "-Duser.timezone=" + TimeZone.getDefault().getID(),
 
+                "-Dorg.lwjgl.vulkan.libname=libvulkan.so",
                 //LWJGL 3 DEBUG FLAGS
                  "-Dorg.lwjgl.util.NoChecks=true",
                 //"-Dorg.lwjgl.util.Debug=true",

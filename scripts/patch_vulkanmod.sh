@@ -27,12 +27,15 @@ fi
 
 export TMPDIR=$TMPDIR/vkmodpatch
 rm -rf $TMPDIR; mkdir $TMPDIR; cd $TMPDIR
-unzip $1 'META-INF/jars/lwjgl-*-3.3.1-natives-linux.jar'
+unzip $1 'META-INF/jars/lwjgl-*-3.3.1-natives-linux.jar' META-INF/jars/lwjgl-vulkan-3.3.1.jar
 
 # Overwrite lwjgl-vulkan.jar
+unzip META-INF/jars/lwjgl-vulkan-3.3.1.jar 'META-INF/*' fabric.mod.json -d lwjgl-vulkan
 wget -q https://nightly.link/PojavLauncherTeam/lwjgl3/workflows/build-android/3.3.1/lwjgl3-android-modules.zip
 unzip lwjgl3-android-modules.zip lwjgl-vulkan/lwjgl-vulkan.jar; rm lwjgl3-android-modules.zip
 mv lwjgl-vulkan/lwjgl-vulkan.jar META-INF/jars/lwjgl-vulkan-3.3.1.jar
+(cd lwjgl-vulkan && zip -r ../META-INF/jars/lwjgl-vulkan-3.3.1.jar META-INF fabric.mod.json)
+rm -r lwjgl-vulkan
 
 # Process every arch
 for arg in "$@"; do
