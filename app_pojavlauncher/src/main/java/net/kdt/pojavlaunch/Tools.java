@@ -622,6 +622,7 @@ public final class Tools {
                 Log.d(APP_NAME, "Library " + libItem.name + " has been changed to version 5.13.0");
                 libItem.name = "net.java.dev.jna:jna:5.13.0";
                 libItem.downloads.artifact.path = "net/java/dev/jna/jna/5.13.0/jna-5.13.0.jar";
+                libItem.downloads.artifact.sha1 = "1200e7ebeedbe0d10062093f32925a912020e747";
                 libItem.downloads.artifact.url = "https://repo1.maven.org/maven2/net/java/dev/jna/jna/5.13.0/jna-5.13.0.jar";
             } else if (libItem.name.startsWith("com.github.oshi:oshi-core:")) {
                 //if (Integer.parseInt(version[0]) >= 6 && Integer.parseInt(version[1]) >= 3) return;
@@ -631,6 +632,7 @@ public final class Tools {
                 Log.d(APP_NAME, "Library " + libItem.name + " has been changed to version 6.3.0");
                 libItem.name = "com.github.oshi:oshi-core:6.3.0";
                 libItem.downloads.artifact.path = "com/github/oshi/oshi-core/6.3.0/oshi-core-6.3.0.jar";
+                libItem.downloads.artifact.sha1 = "9e98cf55be371cafdb9c70c35d04ec2a8c2b42ac";
                 libItem.downloads.artifact.url = "https://repo1.maven.org/maven2/com/github/oshi/oshi-core/6.3.0/oshi-core-6.3.0.jar";
             }
         }
