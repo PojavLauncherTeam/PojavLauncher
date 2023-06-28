@@ -332,4 +332,6 @@
     <string name="preference_wipe_controller_description">Permet de remapper les boutons du contrôleur</string>
     <string name="preference_deadzone_scale_title">Échelle de la zone morte du joystick</string>
     <string name="preference_deadzone_scale_description">Augmentez ceci si le joystick dérive</string>
+    <string name="preference_force_big_core_title">Forcer le rendu à s\'exécuter sur le gros cœur</string>
+    <string name="preference_force_big_core_desc">Force le thread de rendu Minecraft à s\'exécuter sur le cœur avec la fréquence max la plus élevée</string>
 </resources>
