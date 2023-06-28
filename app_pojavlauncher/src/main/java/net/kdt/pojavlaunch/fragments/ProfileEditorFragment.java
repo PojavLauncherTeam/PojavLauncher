@@ -1,7 +1,5 @@
 package net.kdt.pojavlaunch.fragments;
 
-import static net.kdt.pojavlaunch.profiles.ProfileAdapter.CREATE_PROFILE_MAGIC;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -157,7 +155,7 @@ public class ProfileEditorFragment extends Fragment {
 
     private MinecraftProfile getProfile(@NonNull String profile){
         MinecraftProfile minecraftProfile;
-        if(getArguments() == null && !profile.equals(CREATE_PROFILE_MAGIC)) {
+        if(getArguments() == null) {
             minecraftProfile = new MinecraftProfile(LauncherProfiles.mainProfileJson.profiles.get(profile));
             mProfileKey = profile;
         }else{

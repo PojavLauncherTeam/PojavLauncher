@@ -375,7 +375,7 @@
     <string name="preference_force_big_core_desc">Forces the Minecraft render thread to run on the core with the highest max frequency</string>
     <string name="version_select_hint">Select a version</string>
     <string name="forge_dl_progress">Downloading installer for %s</string>
-    <string name="forge_dl_failed_to_load_list">Failed to load the version list!</string>
+    <string name="modloader_dl_failed_to_load_list">Failed to load the version list!</string>
     <string name="forge_dl_no_installer">Sorry, but this version of Forge does not have an installer, which is not yet supported.</string>
     <string name="forge_dl_select_version">Select Forge version</string>
     <string name="fabric_dl_progress">Downloading Fabric installer</string>
@@ -383,4 +383,7 @@
     <string name="fabric_dl_game_version">Minecraft version</string>
     <string name="fabric_dl_install">Install</string>
     <string name="fabric_dl_cant_read_meta">Failed to read Fabric metadata. Please try again later.</string>
+    <string name="modloader_dl_install_fabric">Create Fabric profile</string>
+    <string name="modloader_dl_install_forge">Create Forge profile</string>
+    <string name="create_profile_modded">Create modded profile</string>
 </resources>

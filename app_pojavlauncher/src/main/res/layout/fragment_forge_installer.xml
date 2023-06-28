@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/background_app">
+    android:background="@color/background_app"
+    android:paddingHorizontal="@dimen/fragment_padding_medium">
 
     <TextView
         android:layout_width="match_parent"
@@ -38,7 +39,7 @@
             android:layout_marginStart="10dp"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="@string/forge_dl_failed_to_load_list"
+            android:text="@string/modloader_dl_failed_to_load_list"
             android:textColor="#FFFF0000"
             android:textStyle="bold" />
 
