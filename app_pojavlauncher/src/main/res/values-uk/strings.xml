@@ -326,4 +326,12 @@
     <string name="global_save_and_exit">Зберегти та вийти</string>
     <string name="global_yes">Так</string>
     <string name="global_no">Ні</string>
+    <string name="preference_controller_map_wiped">Налаштування контролера були стерті</string>
+    <string name="preference_category_controller_settings">Налаштування контролера</string>
+    <string name="preference_wipe_controller_title">Скинути показ контролера</string>
+    <string name="preference_wipe_controller_description">Дозволяє вам перезаписати кнопки контролера</string>
+    <string name="preference_deadzone_scale_title">Шкала неробочих зон джойстика</string>
+    <string name="preference_deadzone_scale_description">Збільште це, якщо джойстик ковзає</string>
+    <string name="preference_force_big_core_title">Змусити рендер запускатися на потужному ядрі</string>
+    <string name="preference_force_big_core_desc">Змушує потік рендерингу працювати на ядрі з найвищою максимальною частотою</string>
 </resources>
