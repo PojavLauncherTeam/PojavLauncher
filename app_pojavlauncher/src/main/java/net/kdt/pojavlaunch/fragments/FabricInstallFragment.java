@@ -48,7 +48,7 @@ public class FabricInstallFragment extends Fragment implements AdapterView.OnIte
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        this.mDestinationDir = new File(context.getCacheDir(), "fabric-installer");
+        this.mDestinationDir = new File(Tools.DIR_CACHE, "fabric-installer");
     }
 
     @Override

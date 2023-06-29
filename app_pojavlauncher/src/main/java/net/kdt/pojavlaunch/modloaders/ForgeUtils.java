@@ -21,17 +21,32 @@ public class ForgeUtils {
     private static final String FORGE_METADATA_URL = "https://maven.minecraftforge.net/net/minecraftforge/forge/maven-metadata.xml";
     private static final String FORGE_INSTALLER_URL = "https://maven.minecraftforge.net/net/minecraftforge/forge/%1$s/forge-%1$s-installer.jar";
     public static List<String> downloadForgeVersions() throws IOException {
-        String forgeMetadata = DownloadUtils.downloadString(FORGE_METADATA_URL);
+        SAXParser saxParser;
         try {
             SAXParserFactory parserFactory = SAXParserFactory.newInstance();
-            SAXParser parser = parserFactory.newSAXParser();
-            ForgeVersionListHandler handler = new ForgeVersionListHandler();
-            parser.parse(new InputSource(new StringReader(forgeMetadata)), handler);
-            return handler.getVersions();
+            saxParser = parserFactory.newSAXParser();
         }catch (SAXException | ParserConfigurationException e) {
+            e.printStackTrace();
+            // if we cant make a parser we might as well not even try to parse anything
+            return null;
+        }
+        try {
+            return DownloadUtils.downloadStringCached(FORGE_METADATA_URL, "forge_versions", input -> {
+                try {
+                    ForgeVersionListHandler handler = new ForgeVersionListHandler();
+                    saxParser.parse(new InputSource(new StringReader(input)), handler);
+                    return handler.getVersions();
+                    // IOException is present here StringReader throws it only if the parser called close()
+                    // sooner than needed, which is a parser issue and not an I/O one
+                }catch (SAXException | IOException e) {
+                    throw new DownloadUtils.ParseException(e);
+                }
+            });
+        }catch (DownloadUtils.ParseException e) {
             e.printStackTrace();
             return null;
         }
+
     }
     public static String getInstallerUrl(String version) {
         return String.format(FORGE_INSTALLER_URL, version);

@@ -42,7 +42,7 @@ public class ForgeInstallFragment extends Fragment implements Runnable, View.OnC
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         this.mInflater = LayoutInflater.from(context);
-        this.mDestinationFile = new File(context.getCacheDir(), "forge-installer.jar");
+        this.mDestinationFile = new File(Tools.DIR_CACHE, "forge-installer.jar");
     }
 
     @Override

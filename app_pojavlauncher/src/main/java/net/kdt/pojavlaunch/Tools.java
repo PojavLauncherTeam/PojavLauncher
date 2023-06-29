@@ -85,9 +85,9 @@ public final class Tools {
     public static final Gson GLOBAL_GSON = new GsonBuilder().setPrettyPrinting().create();
 
     public static final String URL_HOME = "https://pojavlauncherteam.github.io";
-
     public static String NATIVE_LIB_DIR;
     public static String DIR_DATA; //Initialized later to get context
+    public static File DIR_CACHE;
     public static String MULTIRT_HOME;
     public static String LOCAL_RENDERER = null;
     public static int DEVICE_ARCHITECTURE;
@@ -139,6 +139,7 @@ public final class Tools {
      * Any value (in)directly dependant on DIR_DATA should be set only here.
      */
     public static void initContextConstants(Context ctx){
+        DIR_CACHE = ctx.getCacheDir();
         DIR_DATA = ctx.getFilesDir().getParent();
         MULTIRT_HOME = DIR_DATA+"/runtimes";
         DIR_GAME_HOME = getPojavStorageRoot(ctx).getAbsolutePath();
@@ -897,7 +898,7 @@ public final class Tools {
         sExecutorService.execute(() -> {
             try {
                 final String name = getFileName(activity, uri);
-                final File modInstallerFile = new File(activity.getCacheDir(), name);
+                final File modInstallerFile = new File(Tools.DIR_CACHE, name);
                 FileOutputStream fos = new FileOutputStream(modInstallerFile);
                 InputStream input = activity.getContentResolver().openInputStream(uri);
                 IOUtils.copy(input, fos);
