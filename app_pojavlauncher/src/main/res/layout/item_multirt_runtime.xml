@@ -45,7 +45,7 @@
         android:layout_width="@dimen/_35sdp"
         android:layout_height="0dp"
         android:background="?attr/selectableItemBackground"
-        android:paddingVertical="@dimen/_12sdp"
+        android:paddingVertical="@dimen/padding_heavy"
         android:scaleType="fitCenter"
 
         android:src="@drawable/ic_menu_delete_forever"
