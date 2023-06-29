@@ -7,29 +7,49 @@
     android:background="@color/background_app"
     android:paddingHorizontal="@dimen/fragment_padding_medium">
 
+
+    <TextView
+        android:id="@+id/title_textview"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding_large"
+        android:text="@string/fabric_dl_loader_title"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view"
+        style="@style/ThickDivider"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/padding_large"
+        app:layout_constraintTop_toBottomOf="@+id/title_textview" />
+
+
     <TextView
         android:id="@+id/fabric_installer_label_loader_ver"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+
         android:text="@string/fabric_dl_loader_version"
         app:layout_constraintBottom_toTopOf="@+id/fabric_installer_loader_ver_spinner"
-        app:layout_constraintStart_toStartOf="@+id/fabric_installer_loader_ver_spinner"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/fabric_installer_loader_ver_spinner" />
 
     <Spinner
         android:id="@+id/fabric_installer_loader_ver_spinner"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding_extra_large"
         android:background="@drawable/background_line"
         android:minHeight="48dp"
         android:paddingVertical="0dp"
         android:paddingStart="7dp"
         android:paddingEnd="7dp"
-        android:layout_marginTop="@dimen/_24sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/view" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -81,12 +101,15 @@
         android:id="@+id/fabric_installer_version_select_label"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_24sdp"
+        android:layout_marginTop="@dimen/padding_extra_large"
+        android:layout_marginEnd="@dimen/padding_medium"
         android:background="@drawable/background_line"
         android:hint="@string/version_select_hint"
-        android:paddingHorizontal="@dimen/_12sdp"
+        android:paddingHorizontal="@dimen/padding_heavy"
+
+
         app:layout_constraintEnd_toStartOf="@+id/fabric_installer_game_version_change"
-        app:layout_constraintHorizontal_bias="1.0"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fabric_installer_retry_layout" />
 
@@ -103,8 +126,8 @@
         android:id="@+id/fabric_installer_start_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="@dimen/padding_heavy"
+        android:layout_marginBottom="@dimen/padding_heavy"
         android:enabled="false"
         android:text="@string/fabric_dl_install"
         app:layout_constraintBottom_toTopOf="@+id/fabric_installer_progress_bar"

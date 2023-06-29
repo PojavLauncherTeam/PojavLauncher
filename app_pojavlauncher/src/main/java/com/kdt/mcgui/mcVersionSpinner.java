@@ -6,7 +6,6 @@ import static net.kdt.pojavlaunch.fragments.ProfileEditorFragment.DELETED_PROFIL
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
-import android.os.Bundle;
 import android.transition.Slide;
 import android.transition.Transition;
 import android.util.AttributeSet;
@@ -26,8 +25,7 @@ import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.extra.ExtraConstants;
 import net.kdt.pojavlaunch.extra.ExtraCore;
-import net.kdt.pojavlaunch.fragments.ModdedProfileSelectFragment;
-import net.kdt.pojavlaunch.fragments.ProfileEditorFragment;
+import net.kdt.pojavlaunch.fragments.ProfileTypeSelectFragment;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.profiles.ProfileAdapter;
 import net.kdt.pojavlaunch.profiles.ProfileAdapterExtra;
@@ -62,9 +60,6 @@ public class mcVersionSpinner extends ExtendedTextView {
             new ProfileAdapterExtra(VERSION_SPINNER_PROFILE_CREATE,
                     R.string.create_profile,
                     ResourcesCompat.getDrawable(getResources(), R.drawable.ic_add, null)),
-            new ProfileAdapterExtra(VERSION_SPINNER_PROFILE_CREATE_MODDED,
-                    R.string.create_profile_modded,
-                    ResourcesCompat.getDrawable(getResources(), R.drawable.ic_add_modded, null))
     });
 
 
@@ -91,6 +86,7 @@ public class mcVersionSpinner extends ExtendedTextView {
         int endPadding = getContext().getResources().getDimensionPixelOffset(R.dimen._5sdp);
         setPaddingRelative(startPadding, 0, endPadding, 0);
         setCompoundDrawablePadding(startPadding);
+
         int profileIndex;
         String extra_value = (String) ExtraCore.consumeValue(ExtraConstants.REFRESH_VERSION_SPINNER);
         if(extra_value != null){
@@ -134,12 +130,8 @@ public class mcVersionSpinner extends ExtendedTextView {
                 ProfileAdapterExtra extra = (ProfileAdapterExtra) item;
                 switch (extra.id) {
                     case VERSION_SPINNER_PROFILE_CREATE:
-                        Tools.swapFragment((FragmentActivity) getContext(), ProfileEditorFragment.class,
-                                ProfileEditorFragment.TAG, true, new Bundle(1));
-                        break;
-                    case VERSION_SPINNER_PROFILE_CREATE_MODDED:
-                        Tools.swapFragment((FragmentActivity) getContext(), ModdedProfileSelectFragment.class,
-                                ModdedProfileSelectFragment.TAG, true, null);
+                        Tools.swapFragment((FragmentActivity) getContext(), ProfileTypeSelectFragment.class,
+                                ProfileTypeSelectFragment.TAG, true, null);
                         break;
                 }
             }

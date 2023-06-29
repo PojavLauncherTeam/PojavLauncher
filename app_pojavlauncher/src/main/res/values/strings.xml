@@ -385,5 +385,8 @@
     <string name="fabric_dl_cant_read_meta">Failed to read Fabric metadata. Please try again later.</string>
     <string name="modloader_dl_install_fabric">Create Fabric profile</string>
     <string name="modloader_dl_install_forge">Create Forge profile</string>
-    <string name="create_profile_modded">Create modded profile</string>
+    <string name="create_profile_vanilla">Create vanilla profile</string>
+    <string name="create_profile_vanilla_like_versions">Vanilla-like versions</string>
+    <string name="create_profile_modded_versions">Modded versions</string>
+    <string name="fabric_dl_loader_title">Select versions</string>
 </resources>
