@@ -100,4 +100,8 @@ public class ProgressKeeper {
     public static synchronized int getTaskCount() {
         return sProgressStates.size();
     }
+
+    public static boolean hasOngoingTasks() {
+        return getTaskCount() > 0;
+    }
 }

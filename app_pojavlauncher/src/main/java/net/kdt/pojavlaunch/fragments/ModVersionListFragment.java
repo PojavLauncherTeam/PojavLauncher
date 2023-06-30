@@ -8,6 +8,7 @@ import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,13 +18,13 @@ import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.modloaders.ModloaderDownloadListener;
 import net.kdt.pojavlaunch.modloaders.ModloaderListenerProxy;
+import net.kdt.pojavlaunch.progresskeeper.ProgressKeeper;
 
 import java.io.File;
 import java.io.IOException;
 
 public abstract class ModVersionListFragment<T> extends Fragment implements Runnable, View.OnClickListener, ExpandableListView.OnChildClickListener, ModloaderDownloadListener {
     public static final String TAG = "ForgeInstallFragment";
-    //private static ModloaderListenerProxy sTaskProxy;
     private ExpandableListView mExpandableListView;
     private ProgressBar mProgressBar;
     private LayoutInflater mInflater;
@@ -37,7 +38,6 @@ public abstract class ModVersionListFragment<T> extends Fragment implements Runn
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         this.mInflater = LayoutInflater.from(context);
-        //this.mDestinationFile = new File(Tools.DIR_CACHE, "forge-installer.jar");
     }
 
     @Override
@@ -96,10 +96,13 @@ public abstract class ModVersionListFragment<T> extends Fragment implements Runn
 
     @Override
     public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
+        if(ProgressKeeper.hasOngoingTasks()) {
+            Toast.makeText(expandableListView.getContext(), R.string.tasks_ongoing, Toast.LENGTH_LONG).show();
+            return true;
+        }
         Object forgeVersion = expandableListView.getExpandableListAdapter().getChild(i, i1);
         ModloaderListenerProxy taskProxy = new ModloaderListenerProxy();
         Runnable downloadTask = createDownloadTask(forgeVersion, taskProxy);
-        //ForgeDownloadTask downloadTask = new ForgeDownloadTask(taskProxy, forgeVersion, mDestinationFile);
         setTaskProxy(taskProxy);
         taskProxy.attachListener(this);
         mExpandableListView.setEnabled(false);

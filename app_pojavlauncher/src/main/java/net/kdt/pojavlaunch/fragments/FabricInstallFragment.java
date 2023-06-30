@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,6 +25,7 @@ import net.kdt.pojavlaunch.modloaders.FabricUtils;
 import net.kdt.pojavlaunch.modloaders.ModloaderDownloadListener;
 import net.kdt.pojavlaunch.modloaders.ModloaderListenerProxy;
 import net.kdt.pojavlaunch.profiles.VersionSelectorDialog;
+import net.kdt.pojavlaunch.progresskeeper.ProgressKeeper;
 
 import java.io.File;
 import java.io.IOException;
@@ -79,6 +81,10 @@ public class FabricInstallFragment extends Fragment implements AdapterView.OnIte
     }
 
     private void onClickStart(View v) {
+        if(ProgressKeeper.hasOngoingTasks()) {
+            Toast.makeText(v.getContext(), R.string.tasks_ongoing, Toast.LENGTH_LONG).show();
+            return;
+        }
         sTaskProxy = new ModloaderListenerProxy();
         FabricDownloadTask fabricDownloadTask = new FabricDownloadTask(sTaskProxy, mDestinationDir);
         sTaskProxy.attachListener(this);
@@ -105,7 +111,7 @@ public class FabricInstallFragment extends Fragment implements AdapterView.OnIte
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        Adapter adapter = (Adapter) adapterView.getAdapter();
+        Adapter adapter = adapterView.getAdapter();
         mSelectedLoaderVersion = (String) adapter.getItem(i);
     }
 
