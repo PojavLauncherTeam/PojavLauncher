@@ -15,23 +15,23 @@ public class ProfileFixer {
     private static final Random random = new Random();
     private static final Path profilesPath = Paths.get(System.getProperty("user.home"), ".minecraft", "launcher_profiles.json");
     private static JSONObject oldProfile = null;
-    public static void storeProfile() {
+    public static void storeProfile(String profileName) {
         try {
             JSONObject minecraftProfiles = new JSONObject(
                     new String(Files.readAllBytes(profilesPath),
                             StandardCharsets.UTF_8)
             );
             JSONObject profilesArray = minecraftProfiles.getJSONObject("profiles");
-            oldProfile = profilesArray.optJSONObject("forge", null);
+            oldProfile = profilesArray.optJSONObject(profileName, null);
         }catch (IOException | JSONException e) {
             System.out.println("Failed to store Forge profile: "+e);
         }
     }
 
-    private static String pickProfileName() {
-        return "forge"+random.nextInt();
+    private static String pickProfileName(String profileName) {
+        return profileName+random.nextInt();
     }
-    public static void reinsertProfile(boolean suppressProfileCreation) {
+    public static void reinsertProfile(String profileName, boolean suppressProfileCreation) {
             try {
                 JSONObject minecraftProfiles = new JSONObject(
                         new String(Files.readAllBytes(profilesPath),
@@ -41,8 +41,8 @@ public class ProfileFixer {
                 if(oldProfile != null) {
                     if(suppressProfileCreation) profilesArray.put("forge", oldProfile); // restore the old profile
                     else {
-                        String name = pickProfileName();
-                        while(profilesArray.has(name)) name = pickProfileName();
+                        String name = pickProfileName(profileName);
+                        while(profilesArray.has(name)) name = pickProfileName(profileName);
                         profilesArray.put(name, oldProfile); // restore the old profile under a new name
                     }
                 }else{

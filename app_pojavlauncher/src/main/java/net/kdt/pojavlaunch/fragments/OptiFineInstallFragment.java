@@ -1,9 +1,11 @@
 package net.kdt.pojavlaunch.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.widget.ExpandableListAdapter;
 
+import net.kdt.pojavlaunch.JavaGUILauncherActivity;
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.modloaders.ModloaderListenerProxy;
@@ -55,6 +57,8 @@ public class OptiFineInstallFragment extends ModVersionListFragment<OptiFineUtil
 
     @Override
     public void onDownloadFinished(Context context, File downloadedFile) {
-        Tools.dialog(context, "Not yet complete", "Installation of OptiFine is not yet implemented. To be done!");
+        Intent modInstallerStartIntent = new Intent(context, JavaGUILauncherActivity.class);
+        OptiFineUtils.addAutoInstallArgs(modInstallerStartIntent, downloadedFile);
+        context.startActivity(modInstallerStartIntent);
     }
 }

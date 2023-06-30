@@ -55,6 +55,7 @@ public class OptiFineScraper implements DownloadUtils.ParseCallback<OptiFineUtil
 
     private void traverseDownloadLine(TagNode tagNode) {
         OptiFineUtils.OptiFineVersion optiFineVersion = new OptiFineUtils.OptiFineVersion();
+        optiFineVersion.minecraftVersion = mMinecraftVersion;
         for(TagNode subNode : tagNode.getChildTags()) {
             if(!subNode.getName().equals("td")) continue;
             switch(subNode.getAttributeByName("class")) {

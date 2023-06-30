@@ -20,11 +20,12 @@ import javax.swing.JOptionPane;
 public class Agent implements AWTEventListener {
     private boolean forgeWindowHandled = false;
     private final boolean suppressProfileCreation;
-
+    private final boolean optiFineInstallation;
     private final Timer componentTimer = new Timer();
 
-    public Agent(boolean ps) {
-        this.suppressProfileCreation = ps;
+    public Agent(boolean nps, boolean of) {
+        this.suppressProfileCreation = !nps;
+        this.optiFineInstallation = of;
     }
 
     @Override
@@ -33,7 +34,7 @@ public class Agent implements AWTEventListener {
         Window window = windowEvent.getWindow();
         if(windowEvent.getID() == WindowEvent.WINDOW_OPENED) {
             if(!forgeWindowHandled) { // false at startup, so we will handle the first window as the Forge one
-                forgeWindowHandled =  handleForgeWindow(window);
+                forgeWindowHandled =  handleMainWindow(window);
                 if(forgeWindowHandled) {
                     componentTimer.cancel();
                     componentTimer.purge();
@@ -46,32 +47,45 @@ public class Agent implements AWTEventListener {
         }
     }
 
-    public boolean handleForgeWindow(Window window) {
+    public boolean handleMainWindow(Window window) {
         List<Component> components = new ArrayList<>();
         insertAllComponents(components, window, new MainWindowFilter());
         AbstractButton okButton = null;
         for(Component component : components) {
             if(component instanceof AbstractButton) {
                 AbstractButton abstractButton = (AbstractButton) component;
-                switch(abstractButton.getText()) {
-                    case "OK":
-                        okButton = abstractButton; // store the button, so we can press it after processing other stuff
-                        break;
-                    case "Install client":
-                        abstractButton.doClick(); // It should be the default, but let's make sure
-                }
-
+                abstractButton = optiFineInstallation ?
+                        handleOptiFineButton(abstractButton) :
+                        handleForgeButton(abstractButton);
+                if(abstractButton != null) okButton = abstractButton;
             }
         }
         if(okButton == null) {
             System.out.println("Failed to set all the UI components, wil try again in the next window");
-            System.exit(17);
             return false;
         }else{
-            ProfileFixer.storeProfile();
+            ProfileFixer.storeProfile(optiFineInstallation ? "OptiFine" : "forge");
             EventQueue.invokeLater(okButton::doClick); // do that after forge actually builds its window, otherwise we set the path too fast
             return true;
         }
+    }
+
+
+    public AbstractButton handleForgeButton(AbstractButton abstractButton) {
+        switch(abstractButton.getText()) {
+            case "OK":
+                return  abstractButton; // return the button, so we can press it after processing other stuff
+            case "Install client":
+                abstractButton.doClick(); // It should be the default, but let's make sure
+        }
+        return null;
+    }
+
+    public AbstractButton handleOptiFineButton(AbstractButton abstractButton) {
+        if ("Install".equals(abstractButton.getText())) {
+            return abstractButton;
+        }
+        return null;
     }
 
     public void handleDialog(Window window) {
@@ -84,7 +98,7 @@ public class Agent implements AWTEventListener {
             JOptionPane optionPane = (JOptionPane) components.get(0);
             if(optionPane.getMessageType() == JOptionPane.INFORMATION_MESSAGE) { // forge doesn't emit information messages for other reasons yet
                 System.out.println("The install was successful!");
-                ProfileFixer.reinsertProfile(suppressProfileCreation);
+                ProfileFixer.reinsertProfile(optiFineInstallation ? "OptiFine" : "forge", suppressProfileCreation);
                 System.exit(0); // again, forge doesn't call exit for some reason, so we do that ourselves here
             }
         }
@@ -102,8 +116,15 @@ public class Agent implements AWTEventListener {
     }
 
     public static void premain(String args, Instrumentation inst) {
+        boolean noProfileSuppression = false;
+        boolean optifine = false;
+        if(args != null ) {
+            noProfileSuppression = args.contains("NPS"); // No Profile Suppression
+            optifine = args.contains("OF"); // OptiFine
+        }
+        Agent agent = new Agent(noProfileSuppression, optifine);
         Toolkit.getDefaultToolkit()
-                .addAWTEventListener(new Agent(!"NPS".equals(args)), // No Profile Suppression
+                .addAWTEventListener(agent,
                         AWTEvent.WINDOW_EVENT_MASK);
     }
 }

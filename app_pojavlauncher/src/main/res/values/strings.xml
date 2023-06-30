@@ -392,7 +392,7 @@
     <string name="create_profile_modded_versions">Modded versions</string>
     <string name="fabric_dl_loader_title">Select versions</string>
     <string name="of_dl_select_version">Select OptiFine version</string>
-    <string name="of_dl_failed_to_scrape">Failed to get the OptiFine download link</string>
+    <string name="of_dl_failed_to_scrape">Failed to collect data for OptiFine installation</string>
     <string name="of_dl_progress">Downloading %s</string>
     <string name="create_profile_optifine">Create OptiFine profile</string>
 </resources>
