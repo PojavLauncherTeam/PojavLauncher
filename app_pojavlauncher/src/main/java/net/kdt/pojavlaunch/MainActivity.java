@@ -131,7 +131,10 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
 
         try {
-            Logger.begin(new File(Tools.DIR_GAME_HOME, "latestlog.txt").getAbsolutePath());
+            File latestLogFile = new File(Tools.DIR_GAME_HOME, "latestlog.txt");
+            if(!latestLogFile.exists() && !latestLogFile.createNewFile())
+                throw new IOException("Failed to create a new log file");
+            Logger.begin(latestLogFile.getAbsolutePath());
             // FIXME: is it safe for multi thread?
             GLOBAL_CLIPBOARD = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
             touchCharInput.setCharacterSender(new LwjglCharSender());
