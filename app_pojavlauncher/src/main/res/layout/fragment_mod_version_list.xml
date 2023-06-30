@@ -36,7 +36,7 @@
 
     <ExpandableListView
         android:scrollbarThumbVertical="@color/minebutton_color"
-        android:id="@+id/forge_expandable_version_list"
+        android:id="@+id/mod_dl_expandable_version_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
@@ -44,7 +44,7 @@
     </ExpandableListView>
 
     <LinearLayout
-        android:id="@+id/forge_installer_retry_layout"
+        android:id="@+id/mod_dl_retry_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -70,7 +70,7 @@
     </LinearLayout>
 
     <ProgressBar
-        android:id="@+id/forge_list_progress_bar"
+        android:id="@+id/mod_dl_list_progress"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

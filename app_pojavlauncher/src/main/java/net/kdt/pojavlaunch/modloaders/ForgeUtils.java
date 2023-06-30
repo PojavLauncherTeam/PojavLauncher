@@ -31,6 +31,7 @@ public class ForgeUtils {
             return null;
         }
         try {
+            //of_test();
             return DownloadUtils.downloadStringCached(FORGE_METADATA_URL, "forge_versions", input -> {
                 try {
                     ForgeVersionListHandler handler = new ForgeVersionListHandler();

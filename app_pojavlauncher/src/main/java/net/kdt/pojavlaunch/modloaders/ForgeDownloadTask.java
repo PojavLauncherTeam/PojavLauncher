@@ -14,7 +14,7 @@ import java.io.IOException;
 public class ForgeDownloadTask implements Runnable, Tools.DownloaderFeedback {
     private final String mForgeUrl;
     private final String mForgeVersion;
-    public final File mDestinationFile;
+    private final File mDestinationFile;
     private final ModloaderDownloadListener mListener;
     public ForgeDownloadTask(ModloaderDownloadListener listener, String forgeVersion, File destinationFile) {
         this.mListener = listener;

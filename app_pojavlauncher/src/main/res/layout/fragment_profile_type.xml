@@ -49,6 +49,15 @@
             android:layout_marginTop="@dimen/padding_large"
             app:layout_constraintTop_toBottomOf="@+id/view" />
 
+        <com.kdt.mcgui.MineButton
+            android:id="@+id/optifine_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/padding_large"
+            android:text="@string/create_profile_optifine"
+            android:layout_marginTop="@dimen/padding_large"
+            app:layout_constraintTop_toBottomOf="@+id/view" />
+
 
 
         <!-- Modded versions -->
