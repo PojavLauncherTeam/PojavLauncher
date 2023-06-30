@@ -19,7 +19,7 @@ jar {
     versionFile.write(String.valueOf(new Date().getTime()))
     manifest {
         attributes("Manifest-Version": "1.0",
-                "PreMain-Class": "git.artdeell.forgeinstaller.Agent")
+                "PreMain-Class": "git.artdeell.installer_agent.Agent")
     }
     destinationDirectory.set(file("../app_pojavlauncher/src/main/assets/components/forge_installer/"))
 }

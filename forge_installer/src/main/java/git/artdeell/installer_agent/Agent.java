@@ -1,4 +1,4 @@
-package git.artdeell.forgeinstaller;
+package git.artdeell.installer_agent;
 
 import java.awt.AWTEvent;
 import java.awt.Component;
@@ -32,19 +32,25 @@ public class Agent implements AWTEventListener {
     public void eventDispatched(AWTEvent event) {
         WindowEvent windowEvent = (WindowEvent) event;
         Window window = windowEvent.getWindow();
-        if(windowEvent.getID() == WindowEvent.WINDOW_OPENED) {
-            if(!forgeWindowHandled) { // false at startup, so we will handle the first window as the Forge one
-                forgeWindowHandled =  handleMainWindow(window);
-                if(forgeWindowHandled) {
-                    componentTimer.cancel();
-                    componentTimer.purge();
-                }else{
-                    componentTimer.schedule(new ComponentTimeoutTask(), 30000);
-                }
-            }else if(window instanceof JDialog) { // expecting a new dialog
-                handleDialog(window);
-            }
+        if(windowEvent.getID() != WindowEvent.WINDOW_OPENED) return;
+        if(forgeWindowHandled && window instanceof JDialog) { // expecting a new dialog
+            handleDialog(window);
+            return;
         }
+        if(!forgeWindowHandled) { // false at startup, so we will handle the first window as the Forge one
+            forgeWindowHandled =  handleMainWindow(window);
+            checkComponentTimer();
+        }
+    }
+
+    public void checkComponentTimer() {
+        if(forgeWindowHandled) {
+            componentTimer.cancel();
+            componentTimer.purge();
+            return;
+        }
+        componentTimer.schedule(new ComponentTimeoutTask(), 30000);
+
     }
 
     public boolean handleMainWindow(Window window) {

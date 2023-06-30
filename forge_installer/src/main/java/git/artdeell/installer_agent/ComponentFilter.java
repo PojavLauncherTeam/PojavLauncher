@@ -1,4 +1,4 @@
-package git.artdeell.forgeinstaller;
+package git.artdeell.installer_agent;
 
 import java.awt.*;
 
