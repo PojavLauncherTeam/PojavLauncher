@@ -330,4 +330,7 @@
     <string name="preference_category_controller_settings">Cài đặt điều khiển</string>
     <string name="preference_wipe_controller_title">Thiết đặt lại cấu hình điều khiển</string>
     <string name="preference_wipe_controller_description">Cho phép bạn thay đổi cấu hình điều khiển</string>
+    <string name="preference_deadzone_scale_description">Tăng nếu cần điều khiển drift</string>
+    <string name="preference_force_big_core_title">Buộc trình kết xuất chạy trên nhân lớn</string>
+    <string name="preference_force_big_core_desc">Buộc luồng trình kết xuất Minecraft chạy trên nhân có tần số cao nhất</string>
 </resources>
