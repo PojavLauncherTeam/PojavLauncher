@@ -117,6 +117,8 @@ public abstract class ModVersionListFragment<T> extends Fragment implements Runn
             getTaskProxy().detachListener();
             setTaskProxy(null);
             mExpandableListView.setEnabled(true);
+            // Read FabricInstallFragment line 132-137 to see why
+            getParentFragmentManager().popBackStack();
             onDownloadFinished(context, downloadedFile);
         });
     }

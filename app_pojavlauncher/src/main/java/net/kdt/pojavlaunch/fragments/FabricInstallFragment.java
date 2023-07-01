@@ -3,6 +3,7 @@ package net.kdt.pojavlaunch.fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import net.kdt.pojavlaunch.JavaGUILauncherActivity;
 import net.kdt.pojavlaunch.R;
@@ -127,6 +129,13 @@ public class FabricInstallFragment extends Fragment implements AdapterView.OnIte
             sTaskProxy.detachListener();
             sTaskProxy = null;
             mStartButton.setEnabled(true);
+            // This works because the due to the fact that we have transitioned here
+            // without adding a transaction to the back stack, which caused the previous
+            // transaction to be amended (i guess?? thats how the back stack dump looks like)
+            // we can get back to the main fragment with just one back stack pop.
+            // For some reason that amendment causes the transaction to lose its tag
+            // so we cant use the tag here.
+            getParentFragmentManager().popBackStackImmediate();
             Intent intent = new Intent(context, JavaGUILauncherActivity.class);
             FabricUtils.addAutoInstallArgs(intent, downloadedFile, mSelectedGameVersion, mSelectedLoaderVersion, mSelectedSnapshot, true);
             context.startActivity(intent);
