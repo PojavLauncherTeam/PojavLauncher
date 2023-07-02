@@ -25,6 +25,7 @@ public class LauncherPreferenceControlFragment extends LauncherPreferenceFragmen
         float gyroSpeed = LauncherPreferences.PREF_GYRO_SENSITIVITY;
         float joystickDeadzone = LauncherPreferences.PREF_DEADZONE_SCALE;
 
+
         //Triggers a write for some reason which resets the value
         addPreferencesFromResource(R.xml.pref_control);
 
@@ -52,6 +53,7 @@ public class LauncherPreferenceControlFragment extends LauncherPreferenceFragmen
         deadzoneSeek.setRange(50, 200);
         deadzoneSeek.setValue((int) joystickDeadzone * 100);
         deadzoneSeek.setSuffix(" %");
+
 
         Context context = getContext();
         if(context != null) {
@@ -83,6 +85,7 @@ public class LauncherPreferenceControlFragment extends LauncherPreferenceFragmen
         findPreference("gyroSampleRate").setVisible(LauncherPreferences.PREF_ENABLE_GYRO);
         findPreference("gyroInvertX").setVisible(LauncherPreferences.PREF_ENABLE_GYRO);
         findPreference("gyroInvertY").setVisible(LauncherPreferences.PREF_ENABLE_GYRO);
+        findPreference("gyroSmoothing").setVisible(LauncherPreferences.PREF_ENABLE_GYRO);
     }
 
 }

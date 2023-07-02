@@ -302,6 +302,8 @@
     <string name="preference_gyro_invert_y_axis">Invert Y axis</string>
     <string name="preference_gyro_invert_x_axis_description">Invert the horizontal axis</string>
     <string name="preference_gyro_invert_y_axis_description">Invert the vertical axis</string>
+    <string name="preference_gyro_smoothing_title">Enable gyro smoothing</string>
+    <string name="preference_gyro_smoothing_description">Reduce jitter in exchange of latency.</string>
 
     <string name="preference_back_title">Back to the last screen</string>
     <string name="gles_hack_none">Don\'t shrink textures</string>
@@ -367,12 +369,15 @@
     <string name="global_save_and_exit">Save and exit</string>
     <string name="global_yes">Yes</string>
     <string name="global_no">No</string>
+
     <string name="preference_controller_map_wiped">The controller config has been wiped</string>
     <string name="preference_category_controller_settings">Controller settings</string>
     <string name="preference_wipe_controller_title">Reset controller mapping</string>
     <string name="preference_wipe_controller_description">Allow you to remap the controller buttons</string>
     <string name="preference_deadzone_scale_title">Joystick deadzone scale</string>
     <string name="preference_deadzone_scale_description">Increase it if the joystick drifts</string>
+
+
     <string name="preference_force_big_core_title">Force renderer to run on the big core</string>
     <string name="preference_force_big_core_desc">Forces the Minecraft render thread to run on the core with the highest max frequency</string>
     <string name="version_select_hint">Select a version</string>
@@ -395,4 +400,10 @@
     <string name="of_dl_failed_to_scrape">Failed to collect data for OptiFine installation</string>
     <string name="of_dl_progress">Downloading %s</string>
     <string name="create_profile_optifine">Create OptiFine profile</string>
+
+
+    <string name="preference_gyro_damper_window_title">Smoothing time</string>
+    <string name="preference_gyro_damper_window_description">Reduce jitter in exchange of latency. 0 to disable it</string>
+
+
 </resources>
