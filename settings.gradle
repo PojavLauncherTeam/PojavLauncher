@@ -19,3 +19,4 @@ include ':jre_lwjgl3glfw'
 include ':app_pojavlauncher'
 
 include ':arc_dns_injector'
+include ':forge_installer'

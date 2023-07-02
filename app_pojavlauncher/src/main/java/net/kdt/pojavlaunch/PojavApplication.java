@@ -60,6 +60,7 @@ public class PojavApplication extends Application {
 			Tools.APP_NAME = getResources().getString(R.string.app_short_name);
 			
 			Tools.DIR_DATA = getDir("files", MODE_PRIVATE).getParent();
+			Tools.DIR_CACHE = getCacheDir();
 			Tools.DIR_ACCOUNT_NEW = Tools.DIR_DATA + "/accounts";
 			Tools.DEVICE_ARCHITECTURE = Architecture.getDeviceArchitecture();
 			//Force x86 lib directory for Asus x86 based zenfones

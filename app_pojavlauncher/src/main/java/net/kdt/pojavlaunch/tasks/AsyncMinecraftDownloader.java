@@ -46,7 +46,7 @@ public class AsyncMinecraftDownloader {
     /* Allows each downloading thread to have its own RECYCLED buffer */
     private final ConcurrentHashMap<Thread, byte[]> mThreadBuffers = new ConcurrentHashMap<>(5);
 
-    public AsyncMinecraftDownloader(@NonNull Activity activity, JMinecraftVersionList.Version version, String realVersion,
+    public AsyncMinecraftDownloader(Activity activity, JMinecraftVersionList.Version version, String realVersion,
                                     @NonNull DoneListener listener){ // this was there for a reason
         sExecutorService.execute(() -> {
             try {
@@ -58,7 +58,7 @@ public class AsyncMinecraftDownloader {
         });
     }
     /* we do the throws DownloaderException thing to avoid blanket-catching Exception as a form of anti-lazy-developer protection */
-    private void downloadGame(@NonNull Activity activity, JMinecraftVersionList.Version verInfo, String versionName) throws DownloaderException {
+    private void downloadGame(Activity activity, JMinecraftVersionList.Version verInfo, String versionName) throws DownloaderException {
         final String downVName = "/" + versionName + "/" + versionName;
 
         //Downloading libraries
@@ -88,7 +88,7 @@ public class AsyncMinecraftDownloader {
             verInfo = Tools.getVersionInfo(versionName);
 
             // THIS one function need the activity in the case of an error
-            if(!JRE17Util.installNewJreIfNeeded(activity, verInfo)){
+            if(activity != null && !JRE17Util.installNewJreIfNeeded(activity, verInfo)){
                 ProgressKeeper.submitProgress(ProgressLayout.DOWNLOAD_MINECRAFT, -1, -1);
                 throw new DownloaderException();
             }
@@ -183,6 +183,8 @@ public class AsyncMinecraftDownloader {
                     os.close();
                 }
             }
+        } catch (DownloaderException e) {
+            throw e;
         } catch (Throwable e) {
             Log.e("AsyncMcDownloader", e.toString(),e );
             ProgressKeeper.submitProgress(ProgressLayout.DOWNLOAD_MINECRAFT, -1, -1);

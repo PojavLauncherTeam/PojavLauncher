@@ -194,6 +194,8 @@ dependencies {
 
     implementation 'org.tukaani:xz:1.8'
     implementation 'com.github.PojavLauncherTeam:exp4j:60eaec6f78'
+    implementation 'net.sourceforge.htmlcleaner:htmlcleaner:2.6.1'
+
     // implementation 'net.sourceforge.streamsupport:streamsupport-cfuture:1.7.0'
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])

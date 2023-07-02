@@ -173,7 +173,7 @@ public class JREUtils {
         envMap.put("POJAV_NATIVEDIR", NATIVE_LIB_DIR);
         envMap.put("JAVA_HOME", jreHome);
         envMap.put("HOME", Tools.DIR_GAME_HOME);
-        envMap.put("TMPDIR", activity.getCacheDir().getAbsolutePath());
+        envMap.put("TMPDIR", Tools.DIR_CACHE.getAbsolutePath());
         envMap.put("LIBGL_MIPMAP", "3");
 
         // On certain GLES drivers, overloading default functions shader hack fails, so disable it
@@ -191,7 +191,7 @@ public class JREUtils {
 
         envMap.put("FORCE_VSYNC", String.valueOf(LauncherPreferences.PREF_FORCE_VSYNC));
 
-        envMap.put("MESA_GLSL_CACHE_DIR", activity.getCacheDir().getAbsolutePath());
+        envMap.put("MESA_GLSL_CACHE_DIR", Tools.DIR_CACHE.getAbsolutePath());
         if (LOCAL_RENDERER != null) {
             envMap.put("MESA_GL_VERSION_OVERRIDE", LOCAL_RENDERER.equals("opengles3_virgl")?"4.3":"4.6");
             envMap.put("MESA_GLSL_VERSION_OVERRIDE", LOCAL_RENDERER.equals("opengles3_virgl")?"430":"460");
@@ -200,7 +200,7 @@ public class JREUtils {
         envMap.put("allow_higher_compat_version", "true");
         envMap.put("allow_glsl_extension_directive_midshader", "true");
         envMap.put("MESA_LOADER_DRIVER_OVERRIDE", "zink");
-        envMap.put("VTEST_SOCKET_NAME", activity.getCacheDir().getAbsolutePath() + "/.virgl_test");
+        envMap.put("VTEST_SOCKET_NAME", new File(Tools.DIR_CACHE, ".virgl_test").getAbsolutePath());
 
         envMap.put("LD_LIBRARY_PATH", LD_LIBRARY_PATH);
         envMap.put("PATH", jreHome + "/bin:" + Os.getenv("PATH"));
@@ -328,7 +328,7 @@ public class JREUtils {
 
         ArrayList<String> overridableArguments = new ArrayList<>(Arrays.asList(
                 "-Djava.home=" + runtimeHome,
-                "-Djava.io.tmpdir=" + ctx.getCacheDir().getAbsolutePath(),
+                "-Djava.io.tmpdir=" + Tools.DIR_CACHE.getAbsolutePath(),
                 "-Duser.home=" + Tools.DIR_GAME_HOME,
                 "-Duser.language=" + System.getProperty("user.language"),
                 "-Dos.name=Linux",
@@ -352,7 +352,7 @@ public class JREUtils {
                 "-Dfml.earlyprogresswindow=false" //Forge 1.14+ workaround
         ));
         if(LauncherPreferences.PREF_ARC_CAPES) {
-            overridableArguments.add("-javaagent:"+new File(Tools.DIR_DATA,"arc_dns_injector.jar").getAbsolutePath()+"=23.95.137.176");
+            overridableArguments.add("-javaagent:"+new File(Tools.DIR_DATA,"arc_dns_injector/arc_dns_injector.jar").getAbsolutePath()+"=23.95.137.176");
         }
         List<String> additionalArguments = new ArrayList<>();
         for(String arg : overridableArguments) {

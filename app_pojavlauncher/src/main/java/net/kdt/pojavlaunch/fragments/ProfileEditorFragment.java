@@ -1,8 +1,5 @@
 package net.kdt.pojavlaunch.fragments;
 
-import static net.kdt.pojavlaunch.extra.ExtraCore.getValue;
-import static net.kdt.pojavlaunch.profiles.ProfileAdapter.CREATE_PROFILE_MAGIC;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,17 +8,13 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ExpandableListAdapter;
-import android.widget.ExpandableListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
-import net.kdt.pojavlaunch.JMinecraftVersionList;
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.extra.ExtraConstants;
@@ -30,7 +23,7 @@ import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.multirt.RTSpinnerAdapter;
 import net.kdt.pojavlaunch.multirt.Runtime;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
-import net.kdt.pojavlaunch.profiles.VersionListAdapter;
+import net.kdt.pojavlaunch.profiles.VersionSelectorDialog;
 import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
 import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 
@@ -117,28 +110,10 @@ public class ProfileEditorFragment extends Fragment {
         });
 
         // Setup the expendable list behavior
-        mVersionSelectButton.setOnClickListener(v -> {
-            AlertDialog.Builder builder = new AlertDialog.Builder(mDefaultVersion.getContext());
-            ExpandableListView expandableListView = (ExpandableListView) LayoutInflater.from(mDefaultVersion.getContext())
-                    .inflate(R.layout.dialog_expendable_list_view , null);
-            JMinecraftVersionList jMinecraftVersionList = (JMinecraftVersionList) getValue(ExtraConstants.RELEASE_TABLE);
-            JMinecraftVersionList.Version[] versionArray;
-            if(jMinecraftVersionList == null || jMinecraftVersionList.versions == null) versionArray = new JMinecraftVersionList.Version[0];
-            else versionArray = jMinecraftVersionList.versions;
-            ExpandableListAdapter adapter = new VersionListAdapter(versionArray, mDefaultVersion.getContext());
-
-            expandableListView.setAdapter(adapter);
-            builder.setView(expandableListView);
-            AlertDialog dialog = builder.show();
-
-            expandableListView.setOnChildClickListener((parent, v1, groupPosition, childPosition, id) -> {
-                String version = ((String) adapter.getChild(groupPosition, childPosition));
-                mTempProfile.lastVersionId = version;
-                mDefaultVersion.setText(version);
-                dialog.dismiss();
-                return true;
-            });
-        });
+        mVersionSelectButton.setOnClickListener(v -> VersionSelectorDialog.open(v.getContext(), false, (id, snapshot)->{
+            mTempProfile.lastVersionId = id;
+            mDefaultVersion.setText(id);
+        }));
 
 
 
@@ -180,7 +155,7 @@ public class ProfileEditorFragment extends Fragment {
 
     private MinecraftProfile getProfile(@NonNull String profile){
         MinecraftProfile minecraftProfile;
-        if(getArguments() == null && !profile.equals(CREATE_PROFILE_MAGIC)) {
+        if(getArguments() == null) {
             minecraftProfile = new MinecraftProfile(LauncherProfiles.mainProfileJson.profiles.get(profile));
             mProfileKey = profile;
         }else{
