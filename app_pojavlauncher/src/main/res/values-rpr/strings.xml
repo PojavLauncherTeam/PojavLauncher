@@ -195,4 +195,5 @@
     <string name="storage_warning_text"><![CDATA[Изъ-за новыхъ ограниченій хранилища добавленныхъ компаніей Google въ Android 10, приложенію нужно перемѣстить папку игры во внутреннюю папку приложенія.<br /> Новая папка для файловъ Pojav - <b>Android/data/%s/files/</b> (также доступна изъ провайдера хранилища въ вашемъ проводникѣ).<br /> Если вамъ необходимо перенести файлы игры, пожалуйста скопируйте ихъ вручную изъ папки <b>games/PojavLauncher</b>.]]></string>
     <string name="profiles_profile_name">Имя</string>
     <string name="pedit_renderer">Визуализаторъ</string>
+    <string name="of_dl_progress">Загрузка %s</string>
 </resources>
