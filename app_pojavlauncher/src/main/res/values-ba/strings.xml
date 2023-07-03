@@ -84,4 +84,5 @@
     <string name="main_version">Версия:</string>
     <string name="profiles_profile_name">Исем</string>
     <string name="pedit_renderer">Рендерер</string>
+    <string name="of_dl_progress">Йөкләү %s</string>
 </resources>
