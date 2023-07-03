@@ -333,4 +333,5 @@
     <string name="preference_wipe_controller_description">يسمح لك بتغيير أزرار ذراع التحكم</string>
     <string name="preference_deadzone_scale_title">مقياس كمية تحرك عصا التحكم</string>
     <string name="preference_deadzone_scale_description">قم بالزيادة إذا انحدرت عصا التحكم</string>
+    <string name="of_dl_progress">التحميل جارٍ %s</string>
 </resources>
