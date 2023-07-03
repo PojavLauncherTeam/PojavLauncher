@@ -110,6 +110,7 @@
     <string name="global_error_field_empty">此处表单不能为空</string>
     <string name="global_waiting">请稍等</string>
     <string name="global_select">选择</string>
+    <string name="global_retry">重试</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">应用程序/游戏以代码 %d退出，请查看 latestlog.txt 了解更多详情。</string>
     <string name="mcn_exit_call">退出</string>
@@ -293,6 +294,8 @@
     <string name="notification_game_runs">游戏正在进行！</string>
     <string name="folder_dialog_create">新建</string>
     <string name="folder_dialog_insert_name">插入文件夹名称</string>
+    <string name="folder_fragment_create">创建文件夹</string>
+    <string name="folder_fragment_select">选择文件夹</string>
     <string name="main_login_done">登录完成</string>
     <string name="main_add_account">添加账户</string>
     <string name="tasks_ongoing">任务正在执行中，请稍候</string>
@@ -334,4 +337,24 @@
     <string name="preference_deadzone_scale_description">若摇杆偏移，请调高此选项</string>
     <string name="preference_force_big_core_title">强制渲染器在大核上运行</string>
     <string name="preference_force_big_core_desc">强制 Minecraft 渲染线程在最高频率的核心运行</string>
+    <string name="version_select_hint">选择版本</string>
+    <string name="forge_dl_progress">正在下载 %s 的安装程序</string>
+    <string name="modloader_dl_failed_to_load_list">加载版本列表失败！</string>
+    <string name="forge_dl_no_installer">抱歉，此版本的 Forge 没有安装程序，尚不支持。</string>
+    <string name="forge_dl_select_version">选择 Forge 版本</string>
+    <string name="fabric_dl_progress">正在下载 Fabric 安装程序</string>
+    <string name="fabric_dl_loader_version">Fabric 加载器版本</string>
+    <string name="fabric_dl_game_version">Minecraft 版本</string>
+    <string name="fabric_dl_install">安装</string>
+    <string name="fabric_dl_cant_read_meta">无法读取 Fabric 元数据。请稍后再试。</string>
+    <string name="modloader_dl_install_fabric">创建 Fabric 配置</string>
+    <string name="modloader_dl_install_forge">创建 Forge 配置</string>
+    <string name="create_profile_vanilla">创建原版配置</string>
+    <string name="create_profile_vanilla_like_versions">类原版版本</string>
+    <string name="create_profile_modded_versions">已修改版本</string>
+    <string name="fabric_dl_loader_title">选择版本</string>
+    <string name="of_dl_select_version">选择 OptiFine 版本</string>
+    <string name="of_dl_failed_to_scrape">无法收集 OptiFine 安装数据</string>
+    <string name="of_dl_progress">正在下载 %s</string>
+    <string name="create_profile_optifine">创建 OptiFine 配置</string>
 </resources>
