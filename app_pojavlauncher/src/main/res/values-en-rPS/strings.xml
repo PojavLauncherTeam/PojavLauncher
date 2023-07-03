@@ -95,4 +95,5 @@
     <string name="global_delete">Keelhaul</string>
     <string name="arc_capes_title">Cosmetica Mantles</string>
     <string name="arc_capes_desc">Enables mantles from Cosmetica (previously Arc). Fer mor\' information be visitin\' https://cosmetica.cc. Requires OptiFine.</string>
+    <string name="of_dl_progress">Downloadin %s</string>
 </resources>
