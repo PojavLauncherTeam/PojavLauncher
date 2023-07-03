@@ -292,4 +292,5 @@
     <string name="toast_turn_on_gyro">برای استفاده از این، ابتدا کنترل های ژیروسکوپ را فعال کنید!</string>
     <string name="preference_gyro_sample_rate_title">نرخ نمونه برداری ژیروسکوپ</string>
     <string name="preference_gyro_sample_rate_description">اگر با کنترل های ژیروسکوپ مشکلی دارید، این را افزایش دهید</string>
+    <string name="of_dl_progress">در حال دانلود %s</string>
 </resources>
