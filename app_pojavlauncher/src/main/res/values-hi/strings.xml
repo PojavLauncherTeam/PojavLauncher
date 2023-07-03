@@ -56,4 +56,5 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
+    <string name="of_dl_progress">%s डाउनलोड हो रहा है</string>
 </resources>
