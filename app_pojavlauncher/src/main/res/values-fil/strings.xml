@@ -276,4 +276,5 @@
     <string name="notif_channel_name">Pangkalahatan</string>
     <string name="lazy_service_default_title">Serbisyong Harapan ng Pojav</string>
     <string name="mcl_setting_veroption_installed">Naka-Install</string>
+    <string name="of_dl_progress">Nagda-download %s</string>
 </resources>
