@@ -305,4 +305,5 @@
     <string name="microsoft_login_retry_later">Zbyt wiele zapytań. Spróbuj ponownie później.</string>
     <string name="mcl_setting_title_buttonallcaps">Używaj tylko dużych liter w etykietach przycisków</string>
     <string name="create_profile">Utwórz nowy profil</string>
+    <string name="of_dl_progress">Pobieranie %s</string>
 </resources>
