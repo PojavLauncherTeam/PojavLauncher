@@ -327,4 +327,5 @@
     <string name="preference_wipe_controller_description">Umožňuje prebindovať tlačidlá ovládača</string>
     <string name="preference_deadzone_scale_title">Nulová zóna joysticku</string>
     <string name="preference_deadzone_scale_description">Zvýšte ho, ak sa joystick posúva sám od seba</string>
+    <string name="of_dl_progress">Sťahuje sa %s</string>
 </resources>
