@@ -334,4 +334,5 @@
     <string name="preference_deadzone_scale_description">Tingkatkan jika joystick \"drifts\"</string>
     <string name="preference_force_big_core_title">Paksa perender untuk berjalan di inti(core) besar</string>
     <string name="preference_force_big_core_desc">Memaksa utas render Minecraft untuk berjalan pada inti dengan frekuensi tertinggi</string>
+    <string name="of_dl_progress">Mengunduh %s</string>
 </resources>
