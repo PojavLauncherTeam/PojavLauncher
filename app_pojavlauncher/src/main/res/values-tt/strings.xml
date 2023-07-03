@@ -210,4 +210,5 @@
     <string name="no_saved_accounts">Сакланган аккаунтлар юк</string>
     <string name="downloading_versions">Версияләр исемлеге йөкләү…</string>
     <string name="mc_download_failed">Minecraft йөкләнеп булмады! Бу акрын тоташу яки файл урнашуда хаталар аркасында туа ала торган.</string>
+    <string name="of_dl_progress">%s йөкләтүе</string>
 </resources>
