@@ -238,4 +238,5 @@
     <string name="pedit_java_runtime">Java runtime</string>
     <string name="pedit_renderer">Renderer</string>
     <string name="migrated_profile_str">%s vershun configuration</string>
+    <string name="of_dl_progress">Downloadin %s</string>
 </resources>
