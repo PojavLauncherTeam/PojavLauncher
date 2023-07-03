@@ -57,7 +57,7 @@
     <string name="mcl_option_settings">Настройки</string>
     <string name="mcl_option_about">О лаунчере</string>
     <string name="mcl_setting_title_use_surface_view">Использовать альтернативный визуализатор</string>
-    <string name="mcl_setting_subtitle_use_surface_view">Может повысить производительность в сценариях, связанных с графическим процессором</string>
+    <string name="mcl_setting_subtitle_use_surface_view">Может повысить производительность в сценариях, связанных с графическим процессором.</string>
     <string name="mcl_setting_title_uninstalljre">Удалить Java Runtime</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Требуется перезапуск лаунчера] Это позволит вам переустановить Java Runtime</string>
     <string name="mcl_setting_title_freeform">Запуск Minecraft в плавающем окне</string>
@@ -110,6 +110,7 @@
     <string name="global_error_field_empty">Это поле не может быть пустым</string>
     <string name="global_waiting">Подождите</string>
     <string name="global_select">Выбрать</string>
+    <string name="global_retry">Обновить</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Произошёл собой приложения/игры с кодом %d. Проверьте latestlog.txt, чтобы получить больше информации.</string>
     <string name="mcn_exit_call">Выйти</string>
@@ -146,7 +147,7 @@
     <string name="import_control_label">Импортирование управления</string>
     <string name="import_control_invalid_file">Недопустимый или повреждённый файл</string>
     <string name="import_control_import_button">импортировать управление</string>
-    <string name="import_control_verifying_file">Идёт проверка файла. Пожалуйста, подождите и попробуйте снова…</string>
+    <string name="import_control_verifying_file">Идёт проверка файла. Подождите и попробуйте еще раз.</string>
     <string name="import_control_invalid_name">Недопустимое имя файла или файл с таким именем уже существует</string>
     <string name="import_control_done">Импортирование завершено</string>
     <!--
@@ -205,7 +206,7 @@
     <string name="mcl_disable_swap_hand">Отключить двойное нажатие для замены предмета</string>
     <string name="mcl_disable_swap_hand_subtitle">Отключает двойное нажатие по слоту для замены предмета во второй руке</string>
     <string name="mcl_setting_title_mousespeed">Чувствительность курсора</string>
-    <string name="mcl_setting_subtitle_mousespeed">Изменяет чувствительность виртуальной мыши</string>
+    <string name="mcl_setting_subtitle_mousespeed">Изменяет чувствительность виртуальной мыши.</string>
     <string name="customctrl_passthru">Пропускать касание</string>
     <string name="customctrl_swipeable">Пролистываемый</string>
     <string name="customctrl_rounded">Скруглённые</string>
@@ -223,7 +224,7 @@
     <string name="multirt_progress_caching">Кэширование...</string>
     <string name="multirt_config_setdefault">Выбрать</string>
     <string name="multirt_config_setdefault_already">По умолчанию</string>
-    <string name="multirt_config_removeerror_last">Должно быть установлено хотя бы один Java Runtime</string>
+    <string name="multirt_config_removeerror_last">Должна быть установлена хотя бы одна среда выполнения Java</string>
     <string name="multirt_nocompartiblert">Не удалось найти подходящий Java Runtime. Эта версия требует Java %d версии или позднее.</string>
     <string name="multirt_nojava8rt">Не удалось найти Java 8. Чтобы использовать эту опцию, необходимо установить Java 8.</string>
     <string name="multirt_delete_runtime">Удалить</string>
@@ -258,7 +259,7 @@
     <string name="preference_force_vsync_title">Принудительная вертикальная синхронизация</string>
     <string name="preference_force_vsync_description">Уменьшает перегрев устройства за счёт ограничения максимальной производительности.</string>
     <string name="preference_force_english_title">Принудительно включить английский</string>
-    <string name="preference_force_english_description">Позволяет увидеть оригинальные строки такими, какими их задумали разработчики. Требует перезапуска.</string>
+    <string name="preference_force_english_description">Позволяет увидеть оригинальные строки такими, какими их задумали разработчики. Требуется перезапуск.</string>
     <string name="preference_edit_controls_title">Изменить раскладку</string>
     <string name="preference_edit_controls_summary">Настройте кнопки управления по вашему желанию</string>
     <string name="preference_category_gyro_controls">Управление гироскопом</string>
@@ -281,12 +282,12 @@
     <string name="pedit_java_runtime">Java Runtime</string>
     <string name="pedit_renderer">Визуализатор</string>
     <string name="arc_capes_title">Плащи Cosmetica</string>
-    <string name="arc_capes_desc">Включает плащи от Cosmetica (ранее Arc). Для получения дополнительной информации, пожалуйста, посетите https://cosmetica.cc. Требуется OptiFine.</string>
+    <string name="arc_capes_desc">Включает плащи от Cosmetica (ранее Arc). Для получения дополнительной информации посетите https://cosmetica.cc. Требуется OptiFine.</string>
     <string name="migrated_profile_str">Конфигурация версии %s</string>
     <string name="notif_channel_name">Общее</string>
     <string name="lazy_service_default_title">Активная служба Pojav</string>
     <string name="lazy_service_default_description">Используется для выполнения длительных операций</string>
-    <string name="mcl_setting_veroption_installed">Установлено</string>
+    <string name="mcl_setting_veroption_installed">Установленные</string>
     <string name="use_global_default">(Как везде)</string>
     <string name="default_control">Раскладка управления</string>
     <string name="progresslayout_tasks_in_progress">Задач в процессе выполнения: %d</string>
@@ -294,6 +295,8 @@
     <string name="notification_game_runs">Игра запущена!</string>
     <string name="folder_dialog_create">Создать</string>
     <string name="folder_dialog_insert_name">Введите название папки</string>
+    <string name="folder_fragment_create">Создать папку</string>
+    <string name="folder_fragment_select">Выбрать</string>
     <string name="main_login_done">Вход выполнен</string>
     <string name="main_add_account">Добавить учётную запись</string>
     <string name="tasks_ongoing">Уже в процессе, подождите…</string>
@@ -306,15 +309,15 @@
     <string name="xerr_child">Для входа в игру учётная запись ребёнка должна быть добавлена в семью.</string>
     <string name="minecraft_not_owned">Похоже, к вашей учётной записи не привязан профиль Minecraft с лицензией. Если у вас есть подписка Xbox Game Pass, войдите на https://minecraft.net и настройте её.</string>
     <string name="xerr_not_available">Xbox Live недоступен в вашей стране</string>
-    <string name="preference_enable_gyro_title">Включить управление гироскопом</string>
-    <string name="preference_enable_gyro_description">Это позволит вам управлять положением камеры в игре путём вращения устройства.</string>
+    <string name="preference_enable_gyro_title">Управление наклоном</string>
+    <string name="preference_enable_gyro_description">Позволяет управлять положением камеры в игре путём вращения устройства.</string>
     <string name="preference_gyro_sensitivity_title">Чувствительность гироскопа</string>
     <string name="preference_gyro_sensitivity_description">Изменить чувствительность датчика вращения.</string>
     <string name="toast_turn_on_gyro">Сначала включите \"Управление наклоном\".</string>
     <string name="preference_gyro_sample_rate_title">Интервал опроса гироскопа</string>
     <string name="preference_gyro_sample_rate_description">Увеличьте, если управление наклоном снижает производительность.</string>
     <string name="microsoft_login_retry_later">Слишком много запросов, попробуйте ещё раз позже.</string>
-    <string name="storage_required">Для работы PojavLauncher необходим ваш съёмный накопитель. Пожалуйста, переподключите его и запустите приложение ещё раз.</string>
+    <string name="storage_required">Для работы PojavLauncher необходим ваш съёмный накопитель. Переподключите его и запустите приложение ещё раз.</string>
     <string name="mcl_setting_title_buttonallcaps">Заглавные буквы на кнопках</string>
     <string name="mcl_setting_subtitle_buttonallcaps">Отключите, если хотите использовать строчные буквы в своей раскладке управления.</string>
     <string name="create_profile">Новый профиль</string>
@@ -331,4 +334,24 @@
     <string name="preference_category_controller_settings">Настройки контроллера</string>
     <string name="preference_force_big_core_title">Запускать визуализатор на мощном ядре</string>
     <string name="preference_force_big_core_desc">Принудительно запускать поток графического движка на ядре ЦП с наибольшей тактовой частотой.</string>
+    <string name="version_select_hint">Укажите версию</string>
+    <string name="forge_dl_progress">Загрузка установщика %s</string>
+    <string name="modloader_dl_failed_to_load_list">Не удалось загрузить список версий.</string>
+    <string name="forge_dl_no_installer">К сожалению, у этой версии Forge отсутствует поддерживаемый установщик.</string>
+    <string name="forge_dl_select_version">Выбор версии Forge</string>
+    <string name="fabric_dl_progress">Загрузка установщика Fabric</string>
+    <string name="fabric_dl_loader_version">Версия загрузчика</string>
+    <string name="fabric_dl_game_version">Версия игры</string>
+    <string name="fabric_dl_install">Установить</string>
+    <string name="fabric_dl_cant_read_meta">Не удалось прочитать метаданные Fabric. Повторите попытку позже.</string>
+    <string name="modloader_dl_install_fabric">Версия с Fabric</string>
+    <string name="modloader_dl_install_forge">Версия с Forge</string>
+    <string name="create_profile_vanilla">Немодифицированная версия</string>
+    <string name="create_profile_vanilla_like_versions">Стандартные версии</string>
+    <string name="create_profile_modded_versions">Загрузчики модов</string>
+    <string name="fabric_dl_loader_title">Выбор версий</string>
+    <string name="of_dl_select_version">Выбор версии OptiFine</string>
+    <string name="of_dl_failed_to_scrape">Не удалось собрать данные для установки OptiFine.</string>
+    <string name="of_dl_progress">Загрузка %s</string>
+    <string name="create_profile_optifine">Версия с OptiFine</string>
 </resources>
