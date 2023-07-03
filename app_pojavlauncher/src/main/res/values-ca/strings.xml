@@ -138,4 +138,5 @@
     <string name="main_nolog">No log.</string>
     <string name="profiles_profile_name">Name</string>
     <string name="pedit_renderer">Renderitzador</string>
+    <string name="of_dl_progress">Downloading %s</string>
 </resources>
