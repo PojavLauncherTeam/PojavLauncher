@@ -11,6 +11,14 @@ copy_libs() {
   mv libshaderc.so linux/$1/org/lwjgl/shaderc/
   mv liblwjgl_vma.so linux/$1/org/lwjgl/vma/
 
+  # Init arch table
+  arm64=arm64-v8a
+  arm32=armeabi-v7a
+  x86=x86
+  x64=x86_64
+  # Get C++ library
+  wget -O "linux/$1/org/lwjgl/vma/libc++_shared.so" "https://github.com/PojavLauncherTeam/PojavLauncher/raw/523e33dd0ee64bd0457b19bdf6fd2d7b7bfd3097/app_pojavlauncher/src/main/jniLibs/${!1}/libc%2B%2B_shared.so"
+
   # Overwrite natives
   zip -gr META-INF/jars/lwjgl-shaderc-3.3.1-natives-linux.jar linux/$1/org/lwjgl/shaderc
   zip -gr META-INF/jars/lwjgl-vma-3.3.1-natives-linux.jar linux/$1/org/lwjgl/vma
