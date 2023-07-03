@@ -275,4 +275,5 @@
     <string name="global_save_and_exit">Guardar y salir</string>
     <string name="global_yes">Si</string>
     <string name="global_no">No</string>
+    <string name="of_dl_progress">Descargando %s</string>
 </resources>
