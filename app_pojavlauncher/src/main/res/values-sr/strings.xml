@@ -193,4 +193,5 @@
     <string name="mcl_memory_allocation_subtitle">Колико меморије може да корости Minecraft</string>
     <string name="profiles_profile_name">Име</string>
     <string name="pedit_renderer">Рендерер</string>
+    <string name="of_dl_progress">Преузимање %s</string>
 </resources>
