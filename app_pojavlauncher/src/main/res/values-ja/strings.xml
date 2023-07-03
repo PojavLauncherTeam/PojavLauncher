@@ -322,4 +322,5 @@
     <string name="global_save_and_exit">保存して終了する</string>
     <string name="global_yes">はい</string>
     <string name="global_no">いいえ</string>
+    <string name="of_dl_progress">%s をダウンロード中</string>
 </resources>
