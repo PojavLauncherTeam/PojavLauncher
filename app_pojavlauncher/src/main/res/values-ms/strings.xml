@@ -231,4 +231,5 @@
     <string name="notif_channel_name">Umum</string>
     <string name="progresslayout_tasks_in_progress">%d tugas sedang dijalankan</string>
     <string name="notification_terminate">Tamatkan</string>
+    <string name="of_dl_progress">Memuat turun %s</string>
 </resources>
