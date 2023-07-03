@@ -290,4 +290,5 @@ https://cosmetica.cc 를 방문해주세요.
     <string name="tasks_ongoing">작업이 진행 중이에요. 기다려 주세요</string>
     <string name="no_saved_accounts">저장된 계정 없음</string>
     <string name="downloading_versions">버전 목록 다운로드 중...</string>
+    <string name="of_dl_progress">%s 다운로드 중</string>
 </resources>
