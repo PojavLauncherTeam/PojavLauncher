@@ -259,4 +259,5 @@
     <string name="arc_capes_desc">Įjungia apvalkalus iš \"Cosmetica\" (anksčiau \"Arc\"). Daugiau informacijos rasite https://cosmetica.cc. Reikalingas OptiFine.</string>
     <string name="migrated_profile_str">%s versijos konfiguracija</string>
     <string name="notif_channel_name">Pagrindinis</string>
+    <string name="of_dl_progress">Atsisiunčiama %s</string>
 </resources>
