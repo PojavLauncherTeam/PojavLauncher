@@ -123,4 +123,5 @@
     <string name="pvc_gameDirectory">Spelkatalog</string>
     <string name="pvc_jvmArgs">JVM argument</string>
     <string name="pvc_title">Inställningar för per-version</string>
+    <string name="of_dl_progress">Laddar ned %s</string>
 </resources>
