@@ -267,6 +267,7 @@
     <string name="preference_gyro_invert_y_axis">Đảo ngược trục Y</string>
     <string name="preference_gyro_invert_x_axis_description">Đảo ngược trục ngang</string>
     <string name="preference_gyro_invert_y_axis_description">Đảo ngược trục tung</string>
+    <string name="preference_gyro_smoothing_title">Bật tính năng làm mịn con lăn hồi chuyển</string>
     <string name="preference_back_title">Quay về màn hình trước đó</string>
     <string name="gles_hack_none">Không thu nhỏ kết cấu</string>
     <string name="gles_hack_always">Chia tất cả các kết cấu cho 2</string>
@@ -346,5 +347,15 @@
     <string name="fabric_dl_game_version">Phiên bản Minecraft</string>
     <string name="fabric_dl_install">Cài đặt</string>
     <string name="fabric_dl_cant_read_meta">Không đọc được Fabric metadata. Vui lòng thử lại sau.</string>
+    <string name="modloader_dl_install_fabric">Tạo hồ sơ Fabric mới</string>
+    <string name="modloader_dl_install_forge">Tạo hồ sơ Forge mới</string>
+    <string name="create_profile_vanilla">Tạo hồ sơ Vanilla mới</string>
+    <string name="create_profile_vanilla_like_versions">Phiên bản giống Vanilla</string>
+    <string name="create_profile_modded_versions">Phiên bản đã được sửa đổi</string>
+    <string name="fabric_dl_loader_title">Chọn phiên bản</string>
+    <string name="of_dl_select_version">Chọn phiên bản OptiFine</string>
+    <string name="of_dl_failed_to_scrape">Không thể thu thập dữ liệu để cài đặt OptiFine</string>
     <string name="of_dl_progress">Đang tải xuống %s</string>
+    <string name="create_profile_optifine">Tạo hồ sơ OptiFine</string>
+    <string name="preference_gyro_damper_window_title">Thời gian làm mịn</string>
 </resources>
