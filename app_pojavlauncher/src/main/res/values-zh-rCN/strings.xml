@@ -267,6 +267,8 @@
     <string name="preference_gyro_invert_y_axis">反转 Y 轴</string>
     <string name="preference_gyro_invert_x_axis_description">反转水平轴</string>
     <string name="preference_gyro_invert_y_axis_description">反转垂直轴</string>
+    <string name="preference_gyro_smoothing_title">启用陀螺仪平滑</string>
+    <string name="preference_gyro_smoothing_description">减少抖动以换取延迟。</string>
     <string name="preference_back_title">返回到上一个屏幕</string>
     <string name="gles_hack_none">不缩小纹理</string>
     <string name="gles_hack_always">将所有纹理除以 2</string>
@@ -357,4 +359,6 @@
     <string name="of_dl_failed_to_scrape">无法收集 OptiFine 安装数据</string>
     <string name="of_dl_progress">正在下载 %s</string>
     <string name="create_profile_optifine">创建 OptiFine 配置</string>
+    <string name="preference_gyro_damper_window_title">平滑时间</string>
+    <string name="preference_gyro_damper_window_description">减少抖动以换取延迟。输入 0 以禁用</string>
 </resources>
