@@ -90,7 +90,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: app-debug
-          path: out/app-debug.z
+          path: out/app-debug.*
 
       - name: Upload onto the Google Play testing track
         continue-on-error: true
