@@ -199,8 +199,8 @@
     <string name="mcl_setting_check_libraries">Проверка библиотек после загрузки</string>
     <string name="mcl_setting_check_libraries_subtitle">Эта опция принуждает лаунчер проверять хеш библиотеки, если он доступен. Предотвращает использование поврежденных библиотек.</string>
     <string name="dl_library_sha_fail">Библиотека %s повреждена и будет загружена повторно</string>
-    <string name="dl_library_sha_unknown">Библиотека %s не может быть проверена; придется предположить, что с ней все хорошо</string>
-    <string name="dl_library_sha_pass">Библиотека %s проверена и может быть использована</string>
+    <string name="dl_library_sha_unknown">Библиотеку %s не удалось проверить; допустим, она в порядке</string>
+    <string name="dl_library_sha_pass">Библиотека %s проверена и готова к использованию</string>
     <string name="mcl_disable_gestures">Отключить жесты</string>
     <string name="mcl_disable_gestures_subtitle">Отключает жесты, такие как удержание для разрушения и нажатие для размещения блока.</string>
     <string name="mcl_disable_swap_hand">Отключить двойное нажатие для замены предмета</string>
