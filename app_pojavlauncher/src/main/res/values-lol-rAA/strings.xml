@@ -99,7 +99,7 @@
     <string name="global_save">Saev</string>
     <string name="global_unpacking">Unpacking %s</string>
     <string name="global_error_field_empty">Dis field can\'t bees empty</string>
-    <string name="global_waiting">Waitin’, meow~</string>
+    <string name="global_waiting">Wait</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Applicashun/game exitd wif code %d, chek lastestlog.txt 4 moar details.</string>
     <string name="mcn_exit_call">Exit</string>
