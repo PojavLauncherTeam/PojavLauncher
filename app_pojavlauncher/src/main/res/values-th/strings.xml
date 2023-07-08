@@ -68,6 +68,9 @@
     <string name="mcl_setting_subtitle_ignore_notch">ซ่อนรอยบากและขยายหน้าจอข้างใต้\nให้ประสบการณ์ที่สมจริงยิ่งขึ้น</string>
     <string name="mcl_setting_title_resolution_scaler">มาตราส่วนความละเอียด</string>
     <string name="mcl_setting_subtitle_resolution_scaler">อนุญาตให้คุณลดความละเอียดเกมลง. 100% คือความละเอียดสูงสุด</string>
+    <string name="mcl_setting_title_longpresstrigger">กดค้างยาวเเค่ไหนถึงจะตอบสนอง</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">เปลี่ยนระยะเวลาในการกดค้างเพื่อทำลายบล็อกเเละทิ้งของ</string>
+    <string name="mcl_setting_title_backtorightmouse">เเปลงปุ่มกลับเป็นเมาส์ข้างขวา</string>
     <string name="mcl_setting_title_flat_button_style">สไตล์ปุ่มแบน</string>
     <string name="mcl_setting_subtitle_flat_button_style">เปิดใช้งานตัวเลือกนี้เพื่อเปลี่ยนรูปแบบปุ่มควบคุมเป็นแบบแบน</string>
     <string name="mcl_setting_title_buttonscale">ปรับขนาดปุ่มควบคุม</string>
@@ -263,6 +266,7 @@
     <string name="notif_channel_name">ทั่วไป</string>
     <string name="lazy_service_default_title">เรียกใช้บริการpojavที่ใช้งานอยู่</string>
     <string name="lazy_service_default_description">เชอร์วิสนี้ใช้ในการทำงานยาวๆ</string>
+    <string name="mcl_setting_veroption_installed">ติดตั้งแล้ว</string>
     <string name="use_global_default">(ใช้การตั้งค่าหลัก)</string>
     <string name="default_control">การควบคุมเดิม</string>
     <string name="progresslayout_tasks_in_progress">%d กำลังดำเนินงาน
