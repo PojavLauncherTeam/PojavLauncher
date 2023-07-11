@@ -110,6 +110,7 @@
     <string name="global_error_field_empty">Bu alan boş bırakılamaz</string>
     <string name="global_waiting">Bekleyin</string>
     <string name="global_select">Seç</string>
+    <string name="global_retry">Tekrar Dene</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Uygulama/Oyundan %d koduyla çıkıldı, daha fazla bilgi için latestlog.txt\'ye bakın.</string>
     <string name="mcn_exit_call">Çıkış</string>
@@ -267,6 +268,8 @@
     <string name="preference_gyro_invert_y_axis">Y eksenini tersine çevir</string>
     <string name="preference_gyro_invert_x_axis_description">Yatay ekseni ters çevir</string>
     <string name="preference_gyro_invert_y_axis_description">Dikey ekseni ters çevir</string>
+    <string name="preference_gyro_smoothing_title">Jiroskopik yumuşatmayı etkinleştir</string>
+    <string name="preference_gyro_smoothing_description">Gecikme karşılığında titremeyi azaltın.</string>
     <string name="preference_back_title">Son ekrana geri dön</string>
     <string name="gles_hack_none">Dokuları sakın küçültme</string>
     <string name="gles_hack_always">Bütün dokuları 2\'ye böler</string>
@@ -335,9 +338,28 @@
     <string name="preference_wipe_controller_description">Kontrol düğmelerini yeniden eşleştirmesine izin ver</string>
     <string name="preference_deadzone_scale_title">Joystick deadzone ölçeği</string>
     <string name="preference_deadzone_scale_description">Joystick kayarsa artırın</string>
+    <string name="preference_force_big_core_title">İşleyiciyi ana işlemcide çalışmasına zorla</string>
+    <string name="preference_force_big_core_desc">Minecraft\'ın en yüksek frekansta çalışan işlemcide çalışmasına zorlar</string>
     <string name="version_select_hint">Bir Sürüm Seçin</string>
+    <string name="forge_dl_progress">%s için yükleyici indiriliyor</string>
+    <string name="modloader_dl_failed_to_load_list">Sürüm listesi yüklenemedi!</string>
+    <string name="forge_dl_no_installer">Özür dileriz, bu Forge sürümünün yükleyicisi olmadığından, desteklenmemektedir.</string>
     <string name="forge_dl_select_version">Forge sürümünü seç</string>
+    <string name="fabric_dl_progress">Fabric yükleyicisi indiriliyor</string>
     <string name="fabric_dl_loader_version">Fabric yükleyici sürümü</string>
     <string name="fabric_dl_game_version">Minecraft sürümü</string>
+    <string name="fabric_dl_install">Yükle</string>
+    <string name="fabric_dl_cant_read_meta">Fabric bilgisi okunumadı. Lütfen sonra yeniden deneyiniz.</string>
+    <string name="modloader_dl_install_fabric">Fabric profili oluştur</string>
+    <string name="modloader_dl_install_forge">Forge profili oluştur</string>
+    <string name="create_profile_vanilla">Vanilla profil oluştur</string>
+    <string name="create_profile_vanilla_like_versions">Vanilla usülü sürümler</string>
+    <string name="create_profile_modded_versions">Modlu sürümler</string>
+    <string name="fabric_dl_loader_title">Sürümleri seçiniz</string>
+    <string name="of_dl_select_version">OptiFine sürümü seçiniz</string>
+    <string name="of_dl_failed_to_scrape">OptiFine yükleyicisi için bilgi toplanamadı</string>
     <string name="of_dl_progress">%s indiriliyor</string>
+    <string name="create_profile_optifine">OptiFine profili oluştur</string>
+    <string name="preference_gyro_damper_window_title">Yumuşatma süresi</string>
+    <string name="preference_gyro_damper_window_description">Gecikme karşılığında titremeyi azaltın. Kapatmak için 0\'a ayarlayın</string>
 </resources>
