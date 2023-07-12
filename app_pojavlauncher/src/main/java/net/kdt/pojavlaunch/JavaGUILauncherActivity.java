@@ -3,6 +3,7 @@ package net.kdt.pojavlaunch;
 import static net.kdt.pojavlaunch.MainActivity.fullyExit;
 
 import android.annotation.SuppressLint;
+import android.content.ClipboardManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -64,6 +65,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
         }catch (IOException e) {
             Tools.showError(this, e, true);
         }
+        MainActivity.GLOBAL_CLIPBOARD = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
         mTouchCharInput = findViewById(R.id.awt_touch_char);
         mTouchCharInput.setCharacterSender(new AwtCharSender());
 
@@ -328,6 +330,18 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
     public void toggleKeyboard(View view) {
         mTouchCharInput.switchKeyboardState();
     }
+    public void performCopy(View view) {
+        AWTInputBridge.sendKey(' ', AWTInputEvent.VK_CONTROL, 1);
+        AWTInputBridge.sendKey(' ', AWTInputEvent.VK_C);
+        AWTInputBridge.sendKey(' ', AWTInputEvent.VK_CONTROL, 0);
+    }
+
+    public void performPaste(View view) {
+        AWTInputBridge.sendKey(' ', AWTInputEvent.VK_CONTROL, 1);
+        AWTInputBridge.sendKey(' ', AWTInputEvent.VK_V);
+        AWTInputBridge.sendKey(' ', AWTInputEvent.VK_CONTROL, 0);
+    }
+
     public int getJavaVersion(File modFile) {
         try (ZipFile zipFile = new ZipFile(modFile)){
             ZipEntry manifest = zipFile.getEntry("META-INF/MANIFEST.MF");

@@ -11,6 +11,7 @@ import static org.lwjgl.glfw.CallbackBridge.windowWidth;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
@@ -543,6 +544,38 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
             } catch (Throwable th) {
                 Tools.showError(ctx, th);
             }
+        });
+    }
+
+    public static void querySystemClipboard() {
+        Tools.runOnUiThread(()->{
+            ClipData clipData = GLOBAL_CLIPBOARD.getPrimaryClip();
+            if(clipData == null) {
+                AWTInputBridge.nativeClipboardReceived(null, null);
+                return;
+            }
+            ClipData.Item firstClipItem = clipData.getItemAt(0);
+            //TODO: coerce to HTML if the clip item is styled
+            CharSequence clipItemText = firstClipItem.getText();
+            if(clipItemText == null) {
+                AWTInputBridge.nativeClipboardReceived(null, null);
+                return;
+            }
+            AWTInputBridge.nativeClipboardReceived(clipItemText.toString(), "plain");
+        });
+    }
+
+    public static void putClipboardData(String data, String mimeType) {
+        Tools.runOnUiThread(()-> {
+            ClipData clipData = null;
+            switch(mimeType) {
+                case "text/plain":
+                    clipData = ClipData.newPlainText("AWT Paste", data);
+                    break;
+                case "text/html":
+                    clipData = ClipData.newHtmlText("AWT Paste", data, data);
+            }
+            if(clipData != null) GLOBAL_CLIPBOARD.setPrimaryClip(clipData);
         });
     }
 
