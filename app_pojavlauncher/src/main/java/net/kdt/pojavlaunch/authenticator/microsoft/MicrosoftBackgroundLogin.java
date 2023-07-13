@@ -2,7 +2,6 @@ package net.kdt.pojavlaunch.authenticator.microsoft;
 
 import static net.kdt.pojavlaunch.PojavApplication.sExecutorService;
 
-import android.os.Looper;
 import android.util.ArrayMap;
 import android.util.Log;
 
@@ -13,8 +12,10 @@ import com.kdt.mcgui.ProgressLayout;
 
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
+import net.kdt.pojavlaunch.authenticator.listener.DoneListener;
+import net.kdt.pojavlaunch.authenticator.listener.ErrorListener;
+import net.kdt.pojavlaunch.authenticator.listener.ProgressListener;
 import net.kdt.pojavlaunch.value.MinecraftAccount;
-import net.kdt.pojavlaunch.authenticator.listener.*;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,7 +43,6 @@ public class MicrosoftBackgroundLogin {
 
     private final boolean mIsRefresh;
     private final String mAuthCode;
-    private final android.os.Handler mHandler = new android.os.Handler(Looper.getMainLooper());
     private static final Map<Long, Integer> XSTS_ERRORS;
     static {
         XSTS_ERRORS = new ArrayMap<>();
@@ -100,13 +100,13 @@ public class MicrosoftBackgroundLogin {
 
                 if(doneListener != null) {
                     MinecraftAccount finalAcc = acc;
-                    mHandler.post(() -> doneListener.onLoginDone(finalAcc));
+                    Tools.runOnUiThread(() -> doneListener.onLoginDone(finalAcc));
                 }
 
             }catch (Exception e){
                 Log.e("MicroAuth", e.toString());
                 if(errorListener != null)
-                    mHandler.post(() -> errorListener.onLoginError(e));
+                    Tools.runOnUiThread(() -> errorListener.onLoginError(e));
             }
             ProgressLayout.clearProgress(ProgressLayout.AUTHENTICATE_MICROSOFT);
         });
@@ -289,7 +289,7 @@ public class MicrosoftBackgroundLogin {
     /** Wrapper to ease notifying the listener */
     private void notifyProgress(@Nullable ProgressListener listener, int step){
         if(listener != null){
-            mHandler.post(() -> listener.onLoginProgress(step));
+            Tools.runOnUiThread(() -> listener.onLoginProgress(step));
         }
         ProgressLayout.setProgress(ProgressLayout.AUTHENTICATE_MICROSOFT, step*20);
     }

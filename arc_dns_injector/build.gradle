@@ -11,5 +11,7 @@ jar {
         attributes("Manifest-Version": "1.0",
                 "PreMain-Class": "git.artdeell.arcdns.ArcDNSInjectorAgent")
     }
-    destinationDirectory.set(file("../app_pojavlauncher/src/main/assets/"))
+    File versionFile = file("../app_pojavlauncher/src/main/assets/components/arc_dns_injector/version")
+    versionFile.write(String.valueOf(new Date().getTime()))
+    destinationDirectory.set(file("../app_pojavlauncher/src/main/assets/components/arc_dns_injector/"))
 }

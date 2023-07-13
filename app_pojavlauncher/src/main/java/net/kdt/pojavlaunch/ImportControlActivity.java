@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -89,7 +87,7 @@ public class ImportControlActivity extends Activity {
         }).start();
 
         //Auto show the keyboard
-        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+        Tools.MAIN_HANDLER.postDelayed(() -> {
             InputMethodManager imm = (InputMethodManager) getApplicationContext().getSystemService(INPUT_METHOD_SERVICE);
             imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
             mEditText.setSelection(mEditText.getText().length());

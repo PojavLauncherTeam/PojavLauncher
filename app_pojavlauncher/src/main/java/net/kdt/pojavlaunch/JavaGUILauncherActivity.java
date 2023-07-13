@@ -3,6 +3,7 @@ package net.kdt.pojavlaunch;
 import static net.kdt.pojavlaunch.MainActivity.fullyExit;
 
 import android.annotation.SuppressLint;
+import android.content.ClipboardManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -28,6 +29,7 @@ import net.kdt.pojavlaunch.utils.MathUtils;
 import org.lwjgl.glfw.CallbackBridge;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
@@ -55,7 +57,15 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_java_gui_launcher);
 
-        Logger.begin(new File(Tools.DIR_GAME_HOME, "latestlog.txt").getAbsolutePath());
+        try {
+            File latestLogFile = new File(Tools.DIR_GAME_HOME, "latestlog.txt");
+            if (!latestLogFile.exists() && !latestLogFile.createNewFile())
+                throw new IOException("Failed to create a new log file");
+            Logger.begin(latestLogFile.getAbsolutePath());
+        }catch (IOException e) {
+            Tools.showError(this, e, true);
+        }
+        MainActivity.GLOBAL_CLIPBOARD = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
         mTouchCharInput = findViewById(R.id.awt_touch_char);
         mTouchCharInput.setCharacterSender(new AwtCharSender());
 
@@ -153,6 +163,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
             final Runtime runtime = MultiRTUtils.forceReread(jreName);
 
             mSkipDetectMod = getIntent().getExtras().getBoolean("skipDetectMod", false);
+            if(getIntent().getExtras().getBoolean("openLogOutput", false)) openLogOutput(null);
             if (mSkipDetectMod) {
                 new Thread(() -> launchJavaRuntime(runtime, modFile, javaArgs), "JREMainThread").start();
                 return;
@@ -319,6 +330,18 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
     public void toggleKeyboard(View view) {
         mTouchCharInput.switchKeyboardState();
     }
+    public void performCopy(View view) {
+        AWTInputBridge.sendKey(' ', AWTInputEvent.VK_CONTROL, 1);
+        AWTInputBridge.sendKey(' ', AWTInputEvent.VK_C);
+        AWTInputBridge.sendKey(' ', AWTInputEvent.VK_CONTROL, 0);
+    }
+
+    public void performPaste(View view) {
+        AWTInputBridge.sendKey(' ', AWTInputEvent.VK_CONTROL, 1);
+        AWTInputBridge.sendKey(' ', AWTInputEvent.VK_V);
+        AWTInputBridge.sendKey(' ', AWTInputEvent.VK_CONTROL, 0);
+    }
+
     public int getJavaVersion(File modFile) {
         try (ZipFile zipFile = new ZipFile(modFile)){
             ZipEntry manifest = zipFile.getEntry("META-INF/MANIFEST.MF");

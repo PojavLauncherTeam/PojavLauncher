@@ -37,8 +37,8 @@
 
     <ImageView
         android:id="@+id/progress_flip_arrow"
-        android:layout_width="@dimen/_24sdp"
-        android:layout_height="@dimen/_24sdp"
+        android:layout_width="@dimen/padding_extra_large"
+        android:layout_height="@dimen/padding_extra_large"
         android:layout_marginEnd="@dimen/_8sdp"
         app:layout_constraintBottom_toBottomOf="@id/progress_generic_progressbar"
         app:layout_constraintEnd_toEndOf="parent"
@@ -51,8 +51,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:visibility="gone"
-        android:paddingHorizontal="@dimen/_12sdp"
-        android:paddingTop="@dimen/_12sdp"
+        android:paddingHorizontal="@dimen/padding_heavy"
+        android:paddingTop="@dimen/padding_heavy"
         android:weightSum="3"
 
 
