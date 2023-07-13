@@ -665,7 +665,6 @@ public final class Tools {
             JMinecraftVersionList.Version customVer = Tools.GLOBAL_GSON.fromJson(read(DIR_HOME_VERSION + "/" + versionName + "/" + versionName + ".json"), JMinecraftVersionList.Version.class);
             if (skipInheriting || customVer.inheritsFrom == null || customVer.inheritsFrom.equals(customVer.id)) {
                 preProcessLibraries(customVer.libraries);
-                return customVer;
             } else {
                 JMinecraftVersionList.Version inheritsVer;
                 //If it won't download, just search for it
@@ -741,8 +740,14 @@ public final class Tools {
                     inheritsVer.arguments.game = totalArgList.toArray(new Object[0]);
                 }
 
-                return inheritsVer;
+                customVer = inheritsVer;
             }
+
+            // LabyMod 4 sets version instead of majorVersion
+            if (customVer.javaVersion.majorVersion == 0) {
+                customVer.javaVersion.majorVersion = customVer.javaVersion.version;
+            }
+            return customVer;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
