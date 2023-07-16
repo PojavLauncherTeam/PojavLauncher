@@ -117,6 +117,7 @@ public class JREUtils {
                     while ((len = p.getInputStream().read(buf)) != -1) {
                         String currStr = new String(buf, 0, len);
                         Logger.appendToLog(currStr);
+                        Log.e("jrelog-logcat",currStr);
                     }
 
                     if (p.waitFor() != 0) {
@@ -338,9 +339,9 @@ public class JREUtils {
                 "-Duser.timezone=" + TimeZone.getDefault().getID(),
 
                 //LWJGL 3 DEBUG FLAGS
-                //"-Dorg.lwjgl.util.Debug=true",
-                //"-Dorg.lwjgl.util.DebugFunctions=true",
-                //"-Dorg.lwjgl.util.DebugLoader=true",
+                "-Dorg.lwjgl.util.Debug=true",
+                "-Dorg.lwjgl.util.DebugFunctions=true",
+                "-Dorg.lwjgl.util.DebugLoader=true",
                 // GLFW Stub width height
                 "-Dglfwstub.windowWidth=" + Tools.getDisplayFriendlyRes(currentDisplayMetrics.widthPixels, LauncherPreferences.PREF_SCALE_FACTOR/100F),
                 "-Dglfwstub.windowHeight=" + Tools.getDisplayFriendlyRes(currentDisplayMetrics.heightPixels, LauncherPreferences.PREF_SCALE_FACTOR/100F),

@@ -201,11 +201,14 @@ public final class Tools {
         }
         javaArgList.addAll(Arrays.asList(getMinecraftJVMArgs(versionId, gamedir)));
         javaArgList.add("-cp");
-        javaArgList.add(getLWJGL3ClassPath() + ":" + launchClassPath);
 
-        javaArgList.add(versionInfo.mainClass);
-        javaArgList.addAll(Arrays.asList(launchArgs));
+        javaArgList.add(getLWJGL3ClassPath()+":"+Tools.DIR_DATA+"/rt4.jar");
+
+        //javaArgList.add(versionInfo.mainClass);
+        //javaArgList.addAll(Arrays.asList(launchArgs));
         // ctx.appendlnToLog("full args: "+javaArgList.toString());
+        //javaArgList.add("HelloWorld"); //For hello.jar LWJGL test (red screen)
+        javaArgList.add("rt4.client"); //runescape mainclass
         String args = LauncherPreferences.PREF_CUSTOM_JAVA_ARGS;
         if(Tools.isValidString(minecraftProfile.javaArgs)) args = minecraftProfile.javaArgs;
         FFmpegPlugin.discover(activity);
