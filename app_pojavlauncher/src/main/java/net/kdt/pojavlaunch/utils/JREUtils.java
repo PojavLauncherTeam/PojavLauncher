@@ -119,17 +119,6 @@ public class JREUtils {
                         Logger.appendToLog(currStr);
                         Log.e("jrelog-logcat",currStr);
                     }
-
-                    if (p.waitFor() != 0) {
-                        Log.e("jrelog-logcat", "Logcat exited with code " + p.exitValue());
-                        failTime++;
-                        Log.i("jrelog-logcat", (failTime <= 10 ? "Restarting logcat" : "Too many restart fails") + " (attempt " + failTime + "/10");
-                        if (failTime <= 10) {
-                            run();
-                        } else {
-                            Logger.appendToLog("ERROR: Unable to get more log.");
-                        }
-                    }
                 } catch (Throwable e) {
                     Log.e("jrelog-logcat", "Exception on logging thread", e);
                     Logger.appendToLog("Exception on logging thread:\n" + Log.getStackTraceString(e));
@@ -353,7 +342,7 @@ public class JREUtils {
                 "-Dfml.earlyprogresswindow=false" //Forge 1.14+ workaround
         ));
         if(LauncherPreferences.PREF_ARC_CAPES) {
-            overridableArguments.add("-javaagent:"+new File(Tools.DIR_DATA,"arc_dns_injector/arc_dns_injector.jar").getAbsolutePath()+"=23.95.137.176");
+            //overridableArguments.add("-javaagent:"+new File(Tools.DIR_DATA,"arc_dns_injector/arc_dns_injector.jar").getAbsolutePath()+"=23.95.137.176");
         }
         List<String> additionalArguments = new ArrayList<>();
         for(String arg : overridableArguments) {
