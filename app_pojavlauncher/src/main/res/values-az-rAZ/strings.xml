@@ -8,7 +8,7 @@
     <!-- Login strings -->
     <string name="login_online_username_hint">E-poçt və ya istifadəçi adı</string>
     <string name="login_online_password_hint">Şifrə</string>
-    <string name="login_online_check_keeplogin">Məni yadda saxla</string>
+    <string name="login_online_check_keeplogin">Keep me logged in</string>
     <string name="login_online_login_label">Daxil ol</string>
     <string name="login_error_invalid_username">Etibarsız istifadəçi adı. İstifadəçi adı 3-16 simvol diapazonunda olmalıdır, yalnız A-Z, a-z, 0-9 və alt xəttdən ibarət olmalıdır.</string>
     <string name="login_error_exist_username">Bu istifadəçi adı artıq mövcuddur</string>
@@ -40,7 +40,7 @@
     <string name="mcl_tab_console">İnkişaf konsolu</string>
     <string name="mcl_tab_crash">Çökmə qeydi</string>
     <!-- MCLauncherActivity: Account status -->
-    <string name="mcl_account_connected">Əlagədar</string>
+    <string name="mcl_account_connected">Qoşulub</string>
     <string name="mcl_account_local">Yerli</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">Minecraft %s oynamağa hazırdır</string>
@@ -65,7 +65,7 @@
     <string name="mcl_setting_subtitle_hide_sidebar">Köhnə v1 UI-yə üstünlük verən nostalji insanlar bunu bəyənə bilər. Sizə daha çox tam ekran təcrübəsi təqdim edir.</string>
     <string name="mcl_setting_title_ignore_notch">Çərçivəyə məhəl qoyma</string>
     <string name="mcl_setting_subtitle_ignore_notch">Çərçivəyə məhəl qoymayın və onun altındakı ekranı genişləndirin.\nSizə daha təsirli təcrübə təqdim edir.</string>
-    <string name="mcl_setting_title_resolution_scaler">Rezulyasiya Ölçəkləyicisi</string>
+    <string name="mcl_setting_title_resolution_scaler">Rezulyasiya Şkalası</string>
     <string name="mcl_setting_subtitle_resolution_scaler">Oyunun rezulyasiyasını azaltmağa imkan verir. 100% tam rezulyasiyadır</string>
     <string name="mcl_setting_title_longpresstrigger">Uzun basdıqdan sonra nə qədər müddət ərzində işə salınacaq</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Bloku qırmaq və əşyaları atmaq üçün nə qədər müddət basılı tutmaq lazım olduğunu dəyişdir.</string>
