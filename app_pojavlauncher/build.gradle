@@ -186,7 +186,7 @@ dependencies {
     implementation 'com.github.PojavLauncherTeam:portrait-sdp:ed33e89cbc'
     implementation 'com.github.PojavLauncherTeam:portrait-ssp:6c02fd739b'
     implementation 'com.github.Mathias-Boulay:ExtendedView:1.0.0'
-    implementation 'com.github.Mathias-Boulay:android_gamepad_remapper:71397676b5'
+    implementation 'com.github.Mathias-Boulay:android_gamepad_remapper:9c4e285ce8'
 
 
     // implementation 'com.intuit.sdp:sdp-android:1.0.5'
