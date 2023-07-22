@@ -110,6 +110,7 @@
     <string name="global_error_field_empty">이 칸은 비워둘 수 없습니다</string>
     <string name="global_waiting">기다려주세요</string>
     <string name="global_select">선택</string>
+    <string name="global_retry">다시시도</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">애플리케이션/게임이 코드 %d와 함께 종료되었습니다, lastestlog.txt를 확인하여 추가 정보를 확인하세요.</string>
     <string name="mcn_exit_call">나가기</string>
@@ -250,6 +251,7 @@
     <string name="preference_experimental_description">여러 실험적 기능을 사용, 지원 안함</string>
     <string name="preference_sustained_performance_title">성능 유지 모드를 활성화합니다</string>
     <string name="preference_sustained_performance_description">최고 성능을 제한함으로써, 쓰로틀링을 제어합니다</string>
+    <string name="preference_force_vsync_title">vsync 강제 활성화</string>
     <string name="preference_force_vsync_description">최고 성능을 제한함으로써, 쓰로틀링을 제어합니다</string>
     <string name="preference_force_english_title">강제로 영어 사용</string>
     <string name="preference_force_english_description">개발자가 의도한 기본 문자열을 볼 수 있도록 해 줍니다. 재시작 필요</string>
