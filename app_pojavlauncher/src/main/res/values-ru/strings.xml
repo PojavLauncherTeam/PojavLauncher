@@ -95,7 +95,7 @@
     <string name="mcl_setting_veroption_oldbeta">Старые бета</string>
     <string name="mcl_setting_java_sandbox">Безопасная установка .jar</string>
     <string name="mcl_setting_java_sandbox_subtitle">Управление доступностью менеджера безопасной среды Java при установке из .jar-файла.</string>
-    <string name="mcl_version_clone">Клонировать</string>
+    <string name="mcl_version_clone">Копировать</string>
     <!-- Global strings -->
     <string name="global_edit">Редактировать</string>
     <string name="global_error">Ошибка</string>
@@ -103,7 +103,7 @@
     <string name="global_load">Загрузка</string>
     <string name="global_name">Имя</string>
     <string name="global_remove">Удалить</string>
-    <string name="global_clone">Клонировать</string>
+    <string name="global_clone">Копировать</string>
     <string name="global_restart">Перезапуск</string>
     <string name="global_save">Сохранить</string>
     <string name="global_unpacking">Распаковка %s</string>
