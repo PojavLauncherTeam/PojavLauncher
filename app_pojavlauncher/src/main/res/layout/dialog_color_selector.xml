@@ -5,11 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="@dimen/_280sdp"
     android:layout_height="match_parent"
-    android:background="@color/background_app"
-    android:paddingHorizontal="@dimen/_5sdp"
-    android:paddingVertical="@dimen/_5sdp"
+    android:background="@drawable/background_control_editor"
+    android:paddingHorizontal="@dimen/padding_moderate"
+    android:paddingVertical="@dimen/padding_moderate"
     android:id="@+id/color_picker_layout"
-    android:layout_marginVertical="@dimen/_14sdp">
+    android:layout_marginVertical="@dimen/padding_heavy">
 
     <net.kdt.pojavlaunch.colorselector.SVRectangleView
         android:id="@+id/color_selector_rectangle_view"
