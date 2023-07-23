@@ -340,6 +340,7 @@
     <string name="version_select_hint">Обрати версію</string>
     <string name="forge_dl_progress">Завантаження встановлювача для %s</string>
     <string name="modloader_dl_failed_to_load_list">Не вдалося завантажити список версій!</string>
+    <string name="forge_dl_no_installer">Вибачте, але ця версія Forge ще не має інсталятора, що підтримується.</string>
     <string name="forge_dl_select_version">Обрати версію Forge</string>
     <string name="fabric_dl_progress">Завантаження встановлювача Fabric</string>
     <string name="fabric_dl_loader_version">Версія завантажувача Fabric</string>
