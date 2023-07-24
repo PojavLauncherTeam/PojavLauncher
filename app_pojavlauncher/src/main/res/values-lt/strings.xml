@@ -107,6 +107,7 @@
     <string name="global_error_field_empty">Šis laukas negali būti tuščias</string>
     <string name="global_waiting">Palaukite</string>
     <string name="global_select">Pasirinkti</string>
+    <string name="global_retry">Hd</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Applikacija išsijungė su kodu %d, patikrinkite latestlog.txt kad gautumėte detalių.</string>
     <string name="mcn_exit_call">Išeiti</string>
@@ -120,6 +121,7 @@
     <string name="control_debug">Taisyti</string>
     <string name="control_primary">Pro.</string>
     <string name="control_secondary">Deš</string>
+    <string name="control_shift">◇</string>
     <string name="control_inventory">Inv</string>
     <string name="control_thirdperson">3</string>
     <string name="control_listplayers">TAB</string>
