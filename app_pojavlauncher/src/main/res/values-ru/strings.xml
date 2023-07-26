@@ -100,7 +100,7 @@
     <string name="global_edit">Редактировать</string>
     <string name="global_error">Ошибка</string>
     <string name="global_warinng">Предупреждение</string>
-    <string name="global_load">Загрузка</string>
+    <string name="global_load">Загрузить</string>
     <string name="global_name">Имя</string>
     <string name="global_remove">Удалить</string>
     <string name="global_clone">Копировать</string>
@@ -165,13 +165,13 @@
     <string name="customctrl_orientation">Сторона разворота</string>
     <string name="customctrl_background_color">Цвет фона</string>
     <string name="customctrl_corner_radius">Радиус скругления</string>
-    <string name="customctrl_stroke_width">Толщина обводки</string>
-    <string name="customctrl_stroke_color">Цвет обводки</string>
+    <string name="customctrl_stroke_width">Ширина контура</string>
+    <string name="customctrl_stroke_color">Цвет контура</string>
     <string name="customctrl_dynamicpos">Ручная настройка динамической позиции</string>
     <string name="customctrl_dynamicpos_x">Динамика по оси X</string>
     <string name="customctrl_dynamicpos_y">Динамика по оси Y</string>
     <string name="customctrl_transparency_bg">Прозрачность фона</string>
-    <string name="customctrl_button_opacity">Прозрачность кнопки</string>
+    <string name="customctrl_button_opacity">Непрозрачность кнопки</string>
     <string name="customctrl_keycombine">Комбинация клавиш</string>
     <string name="customctrl_keycombine_alt">Alt</string>
     <string name="customctrl_keycombine_control">Ctrl</string>
