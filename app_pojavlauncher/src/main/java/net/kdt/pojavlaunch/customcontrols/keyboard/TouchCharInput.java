@@ -3,16 +3,22 @@ package net.kdt.pojavlaunch.customcontrols.keyboard;
 
 import static android.content.Context.INPUT_METHOD_SERVICE;
 
+import static org.lwjgl.glfw.CallbackBridge.sendKeyPress;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.inputmethod.InputMethodManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.kdt.pojavlaunch.AWTInputBridge;
+import net.kdt.pojavlaunch.LwjglGlfwKeycode;
 import net.kdt.pojavlaunch.R;
+import net.kdt.pojavlaunch.utils.KeyEncoder;
 
 /**
  * This class is intended for sending characters used in chat via the virtual keyboard
@@ -41,21 +47,18 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
      */
     @Override
     protected void onTextChanged(CharSequence text, int start, int lengthBefore, int lengthAfter) {
-        super.onTextChanged(text, start, lengthBefore, lengthAfter);
-        if(mIsDoingInternalChanges)return;
-        if(mCharacterSender != null){
-            for(int i=0; i < lengthBefore; ++i){
-                mCharacterSender.sendBackspace();
-            }
-
-            for(int i=start, count = 0; count < lengthAfter; ++i){
-                mCharacterSender.sendChar(text.charAt(i));
-                ++count;
-            }
+        if(lengthBefore == lengthAfter || lengthAfter == 30) return;
+        Log.i("TouchCharInput","New Event (before/after)!: "+ lengthBefore + " : " + lengthAfter);
+        boolean isBackSpace = (lengthBefore > lengthAfter);
+        if(isBackSpace) {
+            sendKeyPress(LwjglGlfwKeycode.GLFW_KEY_BACKSPACE);
+            return;
         }
-
-        //Reset the keyboard state
-        if(text.length() < 1) clear();
+        char c = text.charAt(text.length()-1);
+        Log.i("TouchCharInput","New Event!: "+c);
+        if(mCharacterSender != null) {
+            sendKeyPress(c);
+        }
     }
 
 

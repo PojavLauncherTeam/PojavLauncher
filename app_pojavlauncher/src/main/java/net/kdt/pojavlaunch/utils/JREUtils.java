@@ -8,6 +8,7 @@ import static net.kdt.pojavlaunch.Tools.currentDisplayMetrics;
 import static net.kdt.pojavlaunch.Tools.shareLog;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_DUMP_SHADERS;
 
+import android.annotation.SuppressLint;
 import android.app.*;
 import android.content.*;
 import android.os.Build;
@@ -256,6 +257,7 @@ public class JREUtils {
         // return ldLibraryPath;
     }
 
+    @SuppressLint("StringFormatInvalid")
     public static int launchJavaVM(final Activity activity, final Runtime runtime, File gameDirectory, final List<String> JVMArgs, final String userArgsString) throws Throwable {
         String runtimeHome = MultiRTUtils.getRuntimeHome(runtime.name).getAbsolutePath();
 
@@ -315,7 +317,8 @@ public class JREUtils {
         List<String> userArguments = parseJavaArguments(userArgumentsString);
         String resolvFile;
         resolvFile = new File(Tools.DIR_DATA,"resolv.conf").getAbsolutePath();
-
+        // TODO: MOVE THIS TO OUR NEW SETTINGS
+        LauncherPreferences.PREF_SCALE_FACTOR = 50;
         ArrayList<String> overridableArguments = new ArrayList<>(Arrays.asList(
                 "-Djava.home=" + runtimeHome,
                 "-Djava.io.tmpdir=" + Tools.DIR_CACHE.getAbsolutePath(),

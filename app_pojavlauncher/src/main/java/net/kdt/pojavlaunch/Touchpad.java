@@ -7,6 +7,7 @@ import static net.kdt.pojavlaunch.prefs.LauncherPreferences.DEFAULT_PREF;
 import android.content.Context;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -80,9 +81,20 @@ public class Touchpad extends FrameLayout implements GrabListener{
 
         switch (action) {
             case MotionEvent.ACTION_POINTER_DOWN: // 5
+
+                // Check if there are two fingers on the screen
+                if (event.getPointerCount() == 2) {
+                    // Right-click event when a second finger touches the screen
+                    // Simulating right-click by sending GLFW_MOUSE_BUTTON_RIGHT event
+                    Log.i("downthecrop","Hi from a rightclick event!");
+                    CallbackBridge.putMouseEventWithCoords(LwjglGlfwKeycode.GLFW_MOUSE_BUTTON_RIGHT, CallbackBridge.mouseX, CallbackBridge.mouseY);
+                }
+
                 mScrollLastInitialX = event.getX();
                 mScrollLastInitialY = event.getY();
                 break;
+
+
 
             case MotionEvent.ACTION_DOWN:
                 mPrevX = x;

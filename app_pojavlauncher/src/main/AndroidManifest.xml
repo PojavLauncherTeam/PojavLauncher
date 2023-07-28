@@ -40,13 +40,12 @@
             android:value="ratio_float" />
 
         <activity
-            android:name=".TestStorageActivity"
+            android:name=".DummyLauncher"
             android:exported="true"
             android:label="@string/app_short_name"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -119,7 +118,4 @@
             android:name=".services.GameService"
             android:process=":game" />
     </application>
-    <queries>
-        <package android:name="net.kdt.pojavlaunch.ffmpeg"/>
-    </queries>
 </manifest>

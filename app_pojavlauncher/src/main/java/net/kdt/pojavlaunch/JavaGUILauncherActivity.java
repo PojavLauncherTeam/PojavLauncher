@@ -7,6 +7,7 @@ import android.content.ClipboardManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.multirt.Runtime;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.utils.JREUtils;
+import net.kdt.pojavlaunch.utils.KeyEncoder;
 import net.kdt.pojavlaunch.utils.MathUtils;
 
 import org.lwjgl.glfw.CallbackBridge;
@@ -149,23 +151,13 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
         try {
 
             placeMouseAt(CallbackBridge.physicalWidth / 2f, CallbackBridge.physicalHeight / 2f);
-            
-            final File modFile = (File) getIntent().getExtras().getSerializable("modFile");
-            final String javaArgs = getIntent().getExtras().getString("javaArgs");
+
             String jreName = LauncherPreferences.PREF_DEFAULT_RUNTIME;
-            if(modFile != null) {
-                int javaVersion = getJavaVersion(modFile);
-                if(javaVersion != -1) {
-                    String autoselectRuntime = MultiRTUtils.getNearestJreName(javaVersion);
-                    if (autoselectRuntime != null) jreName = autoselectRuntime;
-                }
-            }
             final Runtime runtime = MultiRTUtils.forceReread(jreName);
 
-            mSkipDetectMod = getIntent().getExtras().getBoolean("skipDetectMod", false);
-            if(getIntent().getExtras().getBoolean("openLogOutput", false)) openLogOutput(null);
+            mSkipDetectMod = false;
             if (mSkipDetectMod) {
-                new Thread(() -> launchJavaRuntime(runtime, modFile, javaArgs), "JREMainThread").start();
+                new Thread(() -> launchJavaRuntime(runtime, ""), "JREMainThread").start();
                 return;
             }
 
@@ -173,7 +165,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
             openLogOutput(null);
             new Thread(() -> {
                 try {
-                    final int exit = doCustomInstall(runtime, modFile, javaArgs);
+                    final int exit = launchJavaRuntime(runtime, "");
                     Logger.appendToLog(getString(R.string.toast_optifine_success));
                     if (exit != 0) return;
                     runOnUiThread(() -> {
@@ -254,6 +246,14 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
         return true;
     }
 
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        if(event.getAction() == KeyEvent.ACTION_DOWN){
+            KeyEncoder.sendEncodedChar(event.getKeyCode(),(char)event.getUnicodeChar());
+        }
+        return true;
+    }
+
     public void placeMouseAt(float x, float y) {
         mMousePointerImageView.setX(x);
         mMousePointerImageView.setY(y);
@@ -287,33 +287,23 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
                 Toast.LENGTH_SHORT).show();
     }
 
-    public int launchJavaRuntime(Runtime runtime, File modFile, String javaArgs) {
+    public int launchJavaRuntime(Runtime runtime, String javaArgs) {
+        runtime = MultiRTUtils.forceReread("Internal");
         JREUtils.redirectAndPrintJRELog();
         try {
             List<String> javaArgList = new ArrayList<>();
+            File gamedir = new File(Tools.DIR_DATA);
 
             // Enable Caciocavallo
             Tools.getCacioJavaArgs(javaArgList,runtime.javaVersion == 8);
-            
-            if (javaArgs != null) {
-                javaArgList.addAll(Arrays.asList(javaArgs.split(" ")));
-            } else {
-                javaArgList.add("-jar");
-                javaArgList.add(modFile.getAbsolutePath());
-            }
-
-            
-            if (LauncherPreferences.PREF_JAVA_SANDBOX) {
-                Collections.reverse(javaArgList);
-                javaArgList.add("-Xbootclasspath/a:" + Tools.DIR_DATA + "/security/pro-grade.jar");
-                javaArgList.add("-Djava.security.manager=net.sourceforge.prograde.sm.ProGradeJSM");
-                javaArgList.add("-Djava.security.policy=" + Tools.DIR_DATA + "/security/java_sandbox.policy");
-                Collections.reverse(javaArgList);
-            }
+            javaArgList.add("-DconfigFile="+Tools.DIR_DATA + "/config.json");
+            javaArgList.add("-DpluginDir="+ Tools.DIR_DATA + "/plugins/");
+            javaArgList.add("-jar");
+            javaArgList.add(Tools.DIR_DATA+"/rt4.jar");
 
             Logger.appendToLog("Info: Java arguments: " + Arrays.toString(javaArgList.toArray(new String[0])));
 
-            return JREUtils.launchJavaVM(this, runtime,null,javaArgList, LauncherPreferences.PREF_CUSTOM_JAVA_ARGS);
+            return JREUtils.launchJavaVM(this, runtime,gamedir,javaArgList, LauncherPreferences.PREF_CUSTOM_JAVA_ARGS);
         } catch (Throwable th) {
             Tools.showError(this, th, true);
             return -1;
@@ -324,7 +314,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
 
     private int doCustomInstall(Runtime runtime, File modFile, String javaArgs) {
         mSkipDetectMod = true;
-        return launchJavaRuntime(runtime, modFile, javaArgs);
+        return launchJavaRuntime(runtime, javaArgs);
     }
 
     public void toggleKeyboard(View view) {

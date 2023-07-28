@@ -10,10 +10,12 @@
 	android:background="@drawable/no_focus_shown"
 	android:keepScreenOn="true">
 
+	<!--You can add padding here just paddingLeft, paddingRight-->
 	<FrameLayout
 		android:id="@+id/content_frame"
 		android:layout_width="match_parent"
-		android:layout_height="match_parent">
+		android:layout_height="match_parent"
+		>
 
 		<net.kdt.pojavlaunch.customcontrols.ControlLayout
 			android:id="@+id/main_control_layout"

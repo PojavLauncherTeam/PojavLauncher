@@ -1,0 +1,10 @@
+{
+    "ip_management": "play.2009scape.org",
+    "ip_address": "play.2009scape.org",
+    "world": 1,
+    "server_port": 43594,
+    "wl_port": 43595,
+    "js5_port": 43595,
+    "mouseWheelZoom": true,
+    "pluginsFolder": "plugins"
+}

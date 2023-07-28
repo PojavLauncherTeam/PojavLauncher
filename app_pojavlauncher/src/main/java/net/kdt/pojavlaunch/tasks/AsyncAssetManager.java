@@ -65,8 +65,7 @@ public class AsyncAssetManager {
             try {
                 Tools.copyAssetFile(ctx, "options.txt", Tools.DIR_GAME_NEW, false);
                 Tools.copyAssetFile(ctx, "default.json", Tools.CTRLMAP_PATH, false);
-
-                    Tools.copyAssetFile(ctx, "launcher_profiles.json", Tools.DIR_GAME_NEW, false);
+                Tools.copyAssetFile(ctx, "launcher_profiles.json", Tools.DIR_GAME_NEW, false);
                 Tools.copyAssetFile(ctx,"resolv.conf",Tools.DIR_DATA, false);
             } catch (IOException e) {
                 Log.e("AsyncAssetManager", "Failed to unpack critical components !");
@@ -87,13 +86,33 @@ public class AsyncAssetManager {
                 unpackComponent(ctx, "security", true);
                 unpackComponent(ctx, "arc_dns_injector", true);
                 unpackComponent(ctx, "forge_installer", true);
-                Tools.copyAssetFile(ctx,"hello.jar",Tools.DIR_DATA, true);
                 Tools.copyAssetFile(ctx,"rt4.jar",Tools.DIR_DATA, true);
+                Tools.copyAssetFile(ctx,"config.json",Tools.DIR_DATA, true);
+
+                // Unzip the plugins for use.
+                extractAllPlugins(ctx); // Can comment this out to keep the plugins saved, rewrites them ever time it launches...
+
             } catch (IOException e) {
                 Log.e("AsyncAssetManager", "Failed o unpack components !",e );
             }
             ProgressLayout.clearProgress(ProgressLayout.EXTRACT_COMPONENTS);
         });
+    }
+
+
+    private static void extractAllPlugins(Context ctx) throws IOException {
+        String pluginsPath = "plugins"; // The folder where your plugins reside in the assets
+        AssetManager am = ctx.getAssets();
+        String[] plugins = am.list(pluginsPath);
+        if(plugins != null) {
+            for(String plugin : plugins) {
+                Tools.copyAssetFile(ctx, pluginsPath + "/" + plugin, Tools.DIR_DATA, true);
+                Tools.ZipTool.unzip(
+                        new File(Tools.DIR_DATA + "/" + plugin),
+                        new File(Tools.DIR_DATA + "/plugins/")
+                );
+            }
+        }
     }
 
     private static void unpackComponent(Context ctx, String component, boolean privateDirectory) throws IOException {

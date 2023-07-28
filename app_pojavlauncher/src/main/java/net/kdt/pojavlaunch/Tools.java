@@ -45,6 +45,8 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import net.kdt.pojavlaunch.extra.ExtraConstants;
+import net.kdt.pojavlaunch.extra.ExtraCore;
 import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.multirt.Runtime;
 import net.kdt.pojavlaunch.plugins.FFmpegPlugin;
@@ -62,8 +64,11 @@ import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.io.IOUtils;
 import org.lwjgl.glfw.CallbackBridge;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -76,12 +81,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
+import java.util.zip.ZipOutputStream;
 
 @SuppressWarnings("IOStreamConstructor")
 public final class Tools {
     public static final Handler MAIN_HANDLER = new Handler(Looper.getMainLooper());
     public static String APP_NAME = "null";
 
+
+    public static final String RT4_MAIN_CLASS = "rt4.client";
     public static final Gson GLOBAL_GSON = new GsonBuilder().setPrettyPrinting().create();
 
     public static final String URL_HOME = "https://pojavlauncherteam.github.io";
@@ -155,63 +165,24 @@ public final class Tools {
     }
 
 
-    public static void launchMinecraft(final Activity activity, MinecraftAccount minecraftAccount,
-                                       MinecraftProfile minecraftProfile, String versionId, int versionJavaRequirement) throws Throwable {
-        int freeDeviceMemory = getFreeDeviceMemory(activity);
-        if(LauncherPreferences.PREF_RAM_ALLOCATION > freeDeviceMemory) {
-            Object memoryErrorLock = new Object();
-            activity.runOnUiThread(() -> {
-                androidx.appcompat.app.AlertDialog.Builder b = new androidx.appcompat.app.AlertDialog.Builder(activity)
-                        .setMessage(activity.getString(R.string.memory_warning_msg, freeDeviceMemory ,LauncherPreferences.PREF_RAM_ALLOCATION))
-                        .setPositiveButton(android.R.string.ok, (dialogInterface, i) -> {synchronized(memoryErrorLock){memoryErrorLock.notifyAll();}})
-                        .setOnCancelListener((i) -> {synchronized(memoryErrorLock){memoryErrorLock.notifyAll();}});
-                b.show();
-            });
-            synchronized (memoryErrorLock) {
-                memoryErrorLock.wait();
-            }
-        }
-        Runtime runtime = MultiRTUtils.forceReread(Tools.pickRuntime(minecraftProfile, versionJavaRequirement));
-        JMinecraftVersionList.Version versionInfo = Tools.getVersionInfo(versionId);
-        LauncherProfiles.update();
-        File gamedir = Tools.getGameDirPath(minecraftProfile);
+    public static void launchGLJRE(final Activity activity) throws Throwable {
 
+        Runtime runtime = MultiRTUtils.forceReread("Internal");
+        File gamedir = new File(Tools.DIR_DATA);
 
-        // Pre-process specific files
-        disableSplash(gamedir);
-        String[] launchArgs = getMinecraftClientArgs(minecraftAccount, versionInfo, gamedir);
-
-        // Select the appropriate openGL version
-        OldVersionsUtils.selectOpenGlVersion(versionInfo);
-
-
-        String launchClassPath = generateLaunchClassPath(versionInfo, versionId);
+        ExtraCore.setValue(ExtraConstants.OPEN_GL_VERSION, "2");
 
         List<String> javaArgList = new ArrayList<>();
         javaArgList.add("-Dorg.lwjgl.util.NoChecks=true");
 
         getCacioJavaArgs(javaArgList, runtime.javaVersion == 8);
 
-        if (versionInfo.logging != null) {
-            String configFile = Tools.DIR_DATA + "/security/" + versionInfo.logging.client.file.id.replace("client", "log4j-rce-patch");
-            if (!new File(configFile).exists()) {
-                configFile = Tools.DIR_GAME_NEW + "/" + versionInfo.logging.client.file.id;
-            }
-            javaArgList.add("-Dlog4j.configurationFile=" + configFile);
-        }
-        javaArgList.addAll(Arrays.asList(getMinecraftJVMArgs(versionId, gamedir)));
+        javaArgList.add("-DpluginDir="+ Tools.DIR_DATA + "/plugins/");
+        javaArgList.add("-DconfigFile="+Tools.DIR_DATA + "/config.json");
         javaArgList.add("-cp");
-
         javaArgList.add(getLWJGL3ClassPath()+":"+Tools.DIR_DATA+"/rt4.jar");
-
-        //javaArgList.add(versionInfo.mainClass);
-        //javaArgList.addAll(Arrays.asList(launchArgs));
-        // ctx.appendlnToLog("full args: "+javaArgList.toString());
-        //javaArgList.add("HelloWorld"); //For hello.jar LWJGL test (red screen)
-        javaArgList.add("rt4.client"); //runescape mainclass
+        javaArgList.add(RT4_MAIN_CLASS);
         String args = LauncherPreferences.PREF_CUSTOM_JAVA_ARGS;
-        if(Tools.isValidString(minecraftProfile.javaArgs)) args = minecraftProfile.javaArgs;
-        FFmpegPlugin.discover(activity);
         JREUtils.launchJavaVM(activity, runtime, gamedir, javaArgList, args);
     }
 
@@ -764,8 +735,74 @@ public final class Tools {
         File file = new File(nameOutput);
         DownloadUtils.downloadFile(urlInput, file);
     }
+
     public interface DownloaderFeedback {
         void updateProgress(int curr, int max);
+    }
+
+    public static class ZipTool
+    {
+        private ZipTool(){}
+        public static void zip(List<File> files, File zipFile) throws IOException {
+            final int BUFFER_SIZE = 2048;
+
+            BufferedInputStream origin = null;
+            ZipOutputStream out = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(zipFile)));
+
+            try {
+                byte data[] = new byte[BUFFER_SIZE];
+
+                for (File file : files) {
+                    FileInputStream fileInputStream = new FileInputStream( file );
+
+                    origin = new BufferedInputStream(fileInputStream, BUFFER_SIZE);
+
+                    try {
+                        ZipEntry entry = new ZipEntry(file.getName());
+
+                        out.putNextEntry(entry);
+
+                        int count;
+                        while ((count = origin.read(data, 0, BUFFER_SIZE)) != -1) {
+                            out.write(data, 0, count);
+                        }
+                    }
+                    finally {
+                        origin.close();
+                    }
+                }
+            } finally {
+                out.close();
+            }
+        }
+        public static void unzip(File zipFile, File targetDirectory) throws IOException {
+            final int BUFFER_SIZE = 1024;
+            ZipInputStream zis = new ZipInputStream(
+                    new BufferedInputStream(new FileInputStream(zipFile)));
+            try {
+                ZipEntry ze;
+                int count;
+                byte[] buffer = new byte[BUFFER_SIZE];
+                while ((ze = zis.getNextEntry()) != null) {
+                    File file = new File(targetDirectory, ze.getName());
+                    File dir = ze.isDirectory() ? file : file.getParentFile();
+                    if (!dir.isDirectory() && !dir.mkdirs())
+                        throw new FileNotFoundException("Failed to ensure directory: " +
+                                dir.getAbsolutePath());
+                    if (ze.isDirectory())
+                        continue;
+                    FileOutputStream fout = new FileOutputStream(file);
+                    try {
+                        while ((count = zis.read(buffer)) != -1)
+                            fout.write(buffer, 0, count);
+                    } finally {
+                        fout.close();
+                    }
+                }
+            } finally {
+                zis.close();
+            }
+        }
     }
 
 

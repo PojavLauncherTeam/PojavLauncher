@@ -11,6 +11,7 @@ import static org.lwjgl.glfw.CallbackBridge.windowWidth;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.SurfaceTexture;
 import android.os.Handler;
 import android.os.Looper;
@@ -20,6 +21,7 @@ import android.util.Log;
 import android.view.InputDevice;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -48,6 +50,10 @@ import fr.spse.gamepad_remapper.RemapperView;
 public class MinecraftGLSurface extends View implements GrabListener {
     /* Gamepad object for gamepad inputs, instantiated on need */
     private Gamepad mGamepad = null;
+
+    float startX = 0;
+    float startY = 0;
+    ScaleGestureDetector scaleGestureDetector;
     /* The RemapperView.Builder object allows you to set which buttons to remap */
     private final RemapperManager mInputManager = new RemapperManager(getContext(), new RemapperView.Builder(null)
             .remapA(true)
@@ -125,7 +131,6 @@ public class MinecraftGLSurface extends View implements GrabListener {
             }
             if(msg.what == MSG_DROP_ITEM_BUTTON_CHECK) {
                 if(CallbackBridge.isGrabbing()){
-                    sendKeyPress(LwjglGlfwKeycode.GLFW_KEY_Q);
                     mHandler.sendEmptyMessageDelayed(MSG_DROP_ITEM_BUTTON_CHECK, 600);
                 }
             }
@@ -146,7 +151,9 @@ public class MinecraftGLSurface extends View implements GrabListener {
     }
 
     /** Initialize the view and all its settings */
+    @SuppressLint("ClickableViewAccessibility")
     public void start(){
+        scaleGestureDetector = new ScaleGestureDetector(this.getContext(), new ScaleListener());
         if(LauncherPreferences.PREF_USE_ALTERNATE_SURFACE){
             SurfaceView surfaceView = new SurfaceView(getContext());
             mSurface = surfaceView;
@@ -210,8 +217,6 @@ public class MinecraftGLSurface extends View implements GrabListener {
 
             ((ViewGroup)getParent()).addView(textureView);
         }
-
-
     }
 
 
@@ -222,6 +227,10 @@ public class MinecraftGLSurface extends View implements GrabListener {
     @Override
     @SuppressWarnings("accessibility")
     public boolean onTouchEvent(MotionEvent e) {
+        scaleGestureDetector.onTouchEvent(e);
+
+        Log.i("downthecrop","ya I still see these events");
+
         // Kinda need to send this back to the layout
         if(((ControlLayout)getParent()).getModifiable()) return false;
 
@@ -243,7 +252,7 @@ public class MinecraftGLSurface extends View implements GrabListener {
             CallbackBridge.mouseX =  (e.getX() * mScaleFactor);
             CallbackBridge.mouseY =  (e.getY() * mScaleFactor);
             //One android click = one MC click
-            if(mSingleTapDetector.onTouchEvent(e)){
+            if(mSingleTapDetector.onTouchEvent(e)){ // Touch Mode
                 CallbackBridge.putMouseEventWithCoords(LwjglGlfwKeycode.GLFW_MOUSE_BUTTON_LEFT, CallbackBridge.mouseX, CallbackBridge.mouseY);
                 return true;
             }
@@ -254,6 +263,23 @@ public class MinecraftGLSurface extends View implements GrabListener {
 
         switch (e.getActionMasked()) {
             case MotionEvent.ACTION_MOVE:
+                // Maybe here we do camera panning?
+                // Calculate the distance moved
+                float dx = (e.getX()) - startX;
+                float dy = (e.getY()) - startY;
+
+                // Do something with dx and dy here, like adjusting the camera position
+                try {
+                    panCamera(dx, dy);
+                } catch (InterruptedException ex) {
+                    throw new RuntimeException(ex);
+                }
+
+                // Update start position
+                startX = e.getX();
+                startY = e.getY();
+
+
                 int pointerCount = e.getPointerCount();
 
                 // In-menu interactions
@@ -307,8 +333,8 @@ public class MinecraftGLSurface extends View implements GrabListener {
                 break;
 
             case MotionEvent.ACTION_DOWN: // 0
-                sendMouseButton(LwjglGlfwKeycode.GLFW_MOUSE_BUTTON_LEFT, true);
-                sendMouseButton(LwjglGlfwKeycode.GLFW_MOUSE_BUTTON_LEFT, false);
+                startX = e.getX();
+                startY = e.getY();
                 hudKeyHandled = handleGuiBar((int)e.getX(), (int) e.getY());
                 boolean isTouchInHotbar = hudKeyHandled != -1;
                 if (isTouchInHotbar) {
@@ -339,6 +365,10 @@ public class MinecraftGLSurface extends View implements GrabListener {
                 break;
 
             case MotionEvent.ACTION_UP: // 1
+                // End of drag, reset the start position
+                startX = 0;
+                startY = 0;
+                break;
             case MotionEvent.ACTION_CANCEL: // 3
                 mShouldBeDown = false;
                 mCurrentPointerID = -1;
@@ -392,6 +422,28 @@ public class MinecraftGLSurface extends View implements GrabListener {
         mLastPointerCount = e.getPointerCount();
 
         return true;
+    }
+
+    private void panCamera(float dx, float dy) throws InterruptedException {
+        //Log.i("downthecrop-pan","dx: " +dx + " dy: " + dy);
+        final float threshold = 8.0f; // adjust this value as needed to control the sensitivity of the panning
+
+        // Check horizontal panning
+        if(dx > threshold) {
+            // Finger moved to the right, pan camera to the right
+            AWTInputBridge.sendKey((char)AWTInputEvent.VK_RIGHT, AWTInputEvent.VK_RIGHT);
+        } else if(dx < -threshold) {
+            AWTInputBridge.sendKey((char)AWTInputEvent.VK_LEFT, AWTInputEvent.VK_LEFT);
+        }
+
+        // Check vertical panning
+        if(dy > threshold) {
+            // Finger moved down, pan camera up
+            AWTInputBridge.sendKey((char)AWTInputEvent.VK_UP, AWTInputEvent.VK_UP);
+        } else if(dy < -threshold) {
+            // Finger moved up, pan camera down
+            AWTInputBridge.sendKey((char)AWTInputEvent.VK_DOWN, AWTInputEvent.VK_DOWN);
+        }
     }
 
     /**
@@ -481,7 +533,6 @@ public class MinecraftGLSurface extends View implements GrabListener {
         //Even weirder, is is unknown why a key or another is selected to trigger a keyEvent
         if((event.getFlags() & KeyEvent.FLAG_SOFT_KEYBOARD) == KeyEvent.FLAG_SOFT_KEYBOARD){
             if(eventKeycode == KeyEvent.KEYCODE_ENTER) return true; //We already listen to it.
-            touchCharInput.dispatchKeyEvent(event);
             return true;
         }
 
@@ -534,6 +585,32 @@ public class MinecraftGLSurface extends View implements GrabListener {
         if(glfwButton == -256) return false;
         sendMouseButton(glfwButton, status);
         return true;
+    }
+
+
+    public static class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener {
+
+        @Override
+        public boolean onScale(ScaleGestureDetector detector) {
+            Log.i("downthecrop","SCALE EVENT!");
+            float scaleFactor = detector.getScaleFactor();
+            if (scaleFactor > 1) { //Send F4 To Zoom Out
+                AWTInputBridge.sendKey((char)AWTInputEvent.VK_F3, AWTInputEvent.VK_F3);
+            } else { //116 F3 To Zoom In
+                AWTInputBridge.sendKey((char)AWTInputEvent.VK_F4,AWTInputEvent.VK_F4);
+            }
+            return true;
+        }
+
+        @Override
+        public boolean onScaleBegin(ScaleGestureDetector detector) {
+            return true;
+        }
+
+        @Override
+        public void onScaleEnd(ScaleGestureDetector detector) {
+
+        }
     }
 
 
@@ -630,6 +707,10 @@ public class MinecraftGLSurface extends View implements GrabListener {
             releasePointerCapture();
             clearFocus();
         }
+    }
+
+    public int dpToPx(int dp) {
+        return (int) (dp * Resources.getSystem().getDisplayMetrics().density);
     }
 
     /** A small interface called when the listener is ready for the first time */

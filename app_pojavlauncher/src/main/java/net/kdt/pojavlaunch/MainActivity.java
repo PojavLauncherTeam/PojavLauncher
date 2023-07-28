@@ -1,6 +1,5 @@
 package net.kdt.pojavlaunch;
 
-import static net.kdt.pojavlaunch.Architecture.ARCH_X86;
 import static net.kdt.pojavlaunch.Tools.currentDisplayMetrics;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_SUSTAINED_PERFORMANCE;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_USE_ALTERNATE_SURFACE;
@@ -170,7 +169,6 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
                     case 1: openLogOutput(); break;
                     case 2: dialogSendCustomKey(); break;
                     case 3: adjustMouseSpeedLive(); break;
-                    case 4: adjustGyroSensitivityLive(); break;
                     case 5: openCustomControls(); break;
                 }
                 drawerLayout.closeDrawers();
@@ -187,8 +185,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
                     if (PREF_VIRTUAL_MOUSE_START) {
                         touchpad.post(() -> touchpad.switchState());
                     }
-
-                    runCraft(finalVersion, mVersionInfo);
+                    runCraft();
                 }catch (Throwable e){
                     Tools.showError(getApplicationContext(), e, true);
                 }
@@ -317,40 +314,11 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         return Build.VERSION.SDK_INT >= 26;
     }
 
-    private void runCraft(String versionId, JMinecraftVersionList.Version version) throws Throwable {
+    private void runCraft() throws Throwable {
         if(Tools.LOCAL_RENDERER == null) {
             Tools.LOCAL_RENDERER = LauncherPreferences.PREF_RENDERER;
         }
-        MinecraftAccount minecraftAccount = PojavProfile.getCurrentProfileContent(this, null);
-        Logger.appendToLog("--------- beginning with launcher debug");
-        printLauncherInfo(versionId);
-        if (Tools.LOCAL_RENDERER.equals("vulkan_zink")) {
-            checkVulkanZinkIsSupported();
-        }
-        JREUtils.redirectAndPrintJRELog();
-        LauncherProfiles.update();
-        int requiredJavaVersion = 8;
-        if(version.javaVersion != null) requiredJavaVersion = version.javaVersion.majorVersion;
-        Tools.launchMinecraft(this, minecraftAccount, minecraftProfile, versionId, requiredJavaVersion);
-    }
-
-    private void printLauncherInfo(String gameVersion) {
-        Logger.appendToLog("Info: Launcher version: " + BuildConfig.VERSION_NAME);
-        Logger.appendToLog("Info: Architecture: " + Architecture.archAsString(Tools.DEVICE_ARCHITECTURE));
-        Logger.appendToLog("Info: Device model: " + Build.MANUFACTURER + " " +Build.MODEL);
-        Logger.appendToLog("Info: API version: " + Build.VERSION.SDK_INT);
-        Logger.appendToLog("Info: Selected Minecraft version: " + gameVersion);
-        Logger.appendToLog("Info: Custom Java arguments: \"" + LauncherPreferences.PREF_CUSTOM_JAVA_ARGS + "\"");
-    }
-
-    private void checkVulkanZinkIsSupported() {
-        if (Tools.DEVICE_ARCHITECTURE == ARCH_X86
-                || Build.VERSION.SDK_INT < 25
-                || !getPackageManager().hasSystemFeature(PackageManager.FEATURE_VULKAN_HARDWARE_LEVEL)
-                || !getPackageManager().hasSystemFeature(PackageManager.FEATURE_VULKAN_HARDWARE_VERSION)) {
-            Logger.appendToLog("Error: Vulkan Zink renderer is not supported!");
-            throw new RuntimeException(getString(R.string. mcn_check_fail_vulkan_support));
-        }
+        Tools.launchGLJRE(this);
     }
 
     private void dialogSendCustomKey() {
@@ -420,7 +388,6 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         if(touchCharInput != null) touchCharInput.switchKeyboardState();
     }
 
-
     int tmpMouseSpeed;
     public void adjustMouseSpeedLive() {
         AlertDialog.Builder b = new AlertDialog.Builder(this);
@@ -431,12 +398,10 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         sb.setMax(275);
         tmpMouseSpeed = (int) ((LauncherPreferences.PREF_MOUSESPEED*100));
         sb.setProgress(tmpMouseSpeed-25);
-        tv.setText(getString(R.string.percent_format, tmpGyroSensitivity));
         sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 tmpMouseSpeed = i+25;
-                tv.setText(getString(R.string.percent_format, tmpGyroSensitivity));
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {}
@@ -456,47 +421,6 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         });
         b.show();
     }
-
-    int tmpGyroSensitivity;
-    public void adjustGyroSensitivityLive() {
-        if(!LauncherPreferences.PREF_ENABLE_GYRO) {
-            Toast.makeText(this, R.string.toast_turn_on_gyro, Toast.LENGTH_LONG).show();
-            return;
-        }
-        AlertDialog.Builder b = new AlertDialog.Builder(this);
-        b.setTitle(R.string.preference_gyro_sensitivity_title);
-        View v = LayoutInflater.from(this).inflate(R.layout.dialog_live_mouse_speed_editor,null);
-        final SeekBar sb = v.findViewById(R.id.mouseSpeed);
-        final TextView tv = v.findViewById(R.id.mouseSpeedTV);
-        sb.setMax(275);
-        tmpGyroSensitivity = (int) ((LauncherPreferences.PREF_GYRO_SENSITIVITY*100));
-        sb.setProgress(tmpGyroSensitivity -25);
-        tv.setText(getString(R.string.percent_format, tmpGyroSensitivity));
-        sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                tmpGyroSensitivity = i+25;
-                tv.setText(getString(R.string.percent_format, tmpGyroSensitivity));
-            }
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {}
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {}
-        });
-        b.setView(v);
-        b.setPositiveButton(android.R.string.ok, (dialogInterface, i) -> {
-            LauncherPreferences.PREF_GYRO_SENSITIVITY = ((float) tmpGyroSensitivity)/100f;
-            LauncherPreferences.DEFAULT_PREF.edit().putInt("gyroSensitivity", tmpGyroSensitivity).apply();
-            dialogInterface.dismiss();
-            System.gc();
-        });
-        b.setNegativeButton(android.R.string.cancel, (dialogInterface, i) -> {
-            dialogInterface.dismiss();
-            System.gc();
-        });
-        b.show();
-    }
-
     private static void setUri(Context context, String input, Intent intent) {
         if(input.startsWith("file:")) {
             int truncLength = 5;
