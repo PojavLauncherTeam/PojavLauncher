@@ -79,7 +79,7 @@
     <string name="mcl_setting_title_mousescale">마우스 크기</string>
     <string name="mcl_setting_subtitle_mousescale">가상 마우스 크기 변경.</string>
     <string name="mcl_setting_title_javaargs">JVM 시작 스크립트</string>
-    <string name="mcl_setting_subtitle_javaargs">조심하세요, 정보 없이 수정하면 게임 충돌이 발생할 수 있습니다.</string>
+    <string name="mcl_setting_subtitle_javaargs">조심하세요. 사전 지식 없이 이것을 수정하면 게임이 충돌할 수 있습니다.</string>
     <string name="mcl_setting_category_general">일반 설정</string>
     <string name="mcl_setting_category_scaling">크기 설정</string>
     <string name="mcl_setting_category_renderer">렌더러</string>
