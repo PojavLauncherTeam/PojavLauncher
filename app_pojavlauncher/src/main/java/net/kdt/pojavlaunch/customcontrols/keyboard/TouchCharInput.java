@@ -51,13 +51,13 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
         Log.i("TouchCharInput","New Event (before/after)!: "+ lengthBefore + " : " + lengthAfter);
         boolean isBackSpace = (lengthBefore > lengthAfter);
         if(isBackSpace) {
-            sendKeyPress(LwjglGlfwKeycode.GLFW_KEY_BACKSPACE);
+            KeyEncoder.sendEncodedChar(KeyEncoder.backspaceUnicode,KeyEncoder.backspaceUnicode);
             return;
         }
         char c = text.charAt(text.length()-1);
         Log.i("TouchCharInput","New Event!: "+c);
         if(mCharacterSender != null) {
-            sendKeyPress(c);
+            KeyEncoder.sendEncodedChar(c,c);
         }
     }
 

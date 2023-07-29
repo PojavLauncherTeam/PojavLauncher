@@ -20,18 +20,18 @@ public class LauncherPreferences {
     public static SharedPreferences DEFAULT_PREF;
     public static String PREF_RENDERER = "opengles2";
 
-	public static boolean PREF_VERTYPE_RELEASE = true;
-	public static boolean PREF_VERTYPE_SNAPSHOT = false;
-	public static boolean PREF_VERTYPE_OLDALPHA = false;
-	public static boolean PREF_VERTYPE_OLDBETA = false;
-	public static boolean PREF_HIDE_SIDEBAR = false;
-	public static boolean PREF_IGNORE_NOTCH = false;
-	public static int PREF_NOTCH_SIZE = 0;
-	public static float PREF_BUTTONSIZE = 100f;
-	public static float PREF_MOUSESCALE = 100f;
-	public static int PREF_LONGPRESS_TRIGGER = 300;
-	public static String PREF_DEFAULTCTRL_PATH = Tools.CTRLDEF_FILE;
-	public static String PREF_CUSTOM_JAVA_ARGS;
+    public static boolean PREF_VERTYPE_RELEASE = true;
+    public static boolean PREF_VERTYPE_SNAPSHOT = false;
+    public static boolean PREF_VERTYPE_OLDALPHA = false;
+    public static boolean PREF_VERTYPE_OLDBETA = false;
+    public static boolean PREF_HIDE_SIDEBAR = false;
+    public static boolean PREF_IGNORE_NOTCH = false;
+    public static int PREF_NOTCH_SIZE = 0;
+    public static float PREF_BUTTONSIZE = 100f;
+    public static float PREF_MOUSESCALE = 100f;
+    public static int PREF_LONGPRESS_TRIGGER = 300;
+    public static String PREF_DEFAULTCTRL_PATH = Tools.CTRLDEF_FILE;
+    public static String PREF_CUSTOM_JAVA_ARGS;
     public static boolean PREF_FORCE_ENGLISH = false;
     public static final String PREF_VERSION_REPOS = "https://piston-meta.mojang.com/mc/game/version_manifest_v2.json";
     public static boolean PREF_CHECK_LIBRARY_SHA = true;
@@ -45,7 +45,7 @@ public class LauncherPreferences {
     public static boolean PREF_ARC_CAPES = false;
     public static boolean PREF_USE_ALTERNATE_SURFACE = true;
     public static boolean PREF_JAVA_SANDBOX = true;
-    public static int PREF_SCALE_FACTOR = 50;
+    public static int PREF_SCALE_FACTOR = 100;
     public static boolean PREF_ENABLE_GYRO = false;
     public static float PREF_GYRO_SENSITIVITY = 1f;
     public static int PREF_GYRO_SAMPLE_RATE = 16;
@@ -69,17 +69,17 @@ public class LauncherPreferences {
 
         PREF_RENDERER = DEFAULT_PREF.getString("renderer", "opengles2");
 
-		PREF_BUTTONSIZE = DEFAULT_PREF.getInt("buttonscale", 100);
-		PREF_MOUSESCALE = DEFAULT_PREF.getInt("mousescale", 100);
-		PREF_MOUSESPEED = ((float)DEFAULT_PREF.getInt("mousespeed",100))/100f;
-		PREF_HIDE_SIDEBAR = DEFAULT_PREF.getBoolean("hideSidebar", false);
-		PREF_IGNORE_NOTCH = DEFAULT_PREF.getBoolean("ignoreNotch", false);
-		PREF_VERTYPE_RELEASE = DEFAULT_PREF.getBoolean("vertype_release", true);
-		PREF_VERTYPE_SNAPSHOT = DEFAULT_PREF.getBoolean("vertype_snapshot", false);
-		PREF_VERTYPE_OLDALPHA = DEFAULT_PREF.getBoolean("vertype_oldalpha", false);
-		PREF_VERTYPE_OLDBETA = DEFAULT_PREF.getBoolean("vertype_oldbeta", false);
-		PREF_LONGPRESS_TRIGGER = DEFAULT_PREF.getInt("timeLongPressTrigger", 300);
-		PREF_DEFAULTCTRL_PATH = DEFAULT_PREF.getString("defaultCtrl", Tools.CTRLDEF_FILE);
+        PREF_BUTTONSIZE = DEFAULT_PREF.getInt("buttonscale", 100);
+        PREF_MOUSESCALE = DEFAULT_PREF.getInt("mousescale", 100);
+        PREF_MOUSESPEED = ((float)DEFAULT_PREF.getInt("mousespeed",100))/100f;
+        PREF_HIDE_SIDEBAR = DEFAULT_PREF.getBoolean("hideSidebar", false);
+        PREF_IGNORE_NOTCH = DEFAULT_PREF.getBoolean("ignoreNotch", false);
+        PREF_VERTYPE_RELEASE = DEFAULT_PREF.getBoolean("vertype_release", true);
+        PREF_VERTYPE_SNAPSHOT = DEFAULT_PREF.getBoolean("vertype_snapshot", false);
+        PREF_VERTYPE_OLDALPHA = DEFAULT_PREF.getBoolean("vertype_oldalpha", false);
+        PREF_VERTYPE_OLDBETA = DEFAULT_PREF.getBoolean("vertype_oldbeta", false);
+        PREF_LONGPRESS_TRIGGER = DEFAULT_PREF.getInt("timeLongPressTrigger", 300);
+        PREF_DEFAULTCTRL_PATH = DEFAULT_PREF.getString("defaultCtrl", Tools.CTRLDEF_FILE);
         PREF_FORCE_ENGLISH = DEFAULT_PREF.getBoolean("force_english", false);
         PREF_CHECK_LIBRARY_SHA = DEFAULT_PREF.getBoolean("checkLibraries",true);
         PREF_DISABLE_GESTURES = DEFAULT_PREF.getBoolean("disableGestures",false);
@@ -91,7 +91,7 @@ public class LauncherPreferences {
         PREF_ARC_CAPES = DEFAULT_PREF.getBoolean("arc_capes",false);
         PREF_USE_ALTERNATE_SURFACE = DEFAULT_PREF.getBoolean("alternate_surface", false);
         PREF_JAVA_SANDBOX = DEFAULT_PREF.getBoolean("java_sandbox", true);
-        PREF_SCALE_FACTOR = DEFAULT_PREF.getInt("resolutionRatio", 50);
+        PREF_SCALE_FACTOR = DEFAULT_PREF.getInt("resolutionRatio", 100);
         PREF_ENABLE_GYRO = DEFAULT_PREF.getBoolean("enableGyro", false);
         PREF_GYRO_SENSITIVITY = ((float)DEFAULT_PREF.getInt("gyroSensitivity", 100))/100f;
         PREF_GYRO_SAMPLE_RATE = DEFAULT_PREF.getInt("gyroSampleRate", 16);
@@ -109,7 +109,7 @@ public class LauncherPreferences {
             if (arg.startsWith(argLwjglLibname)) {
                 // purge arg
                 DEFAULT_PREF.edit().putString("javaArgs",
-                    PREF_CUSTOM_JAVA_ARGS.replace(arg, "")).apply();
+                        PREF_CUSTOM_JAVA_ARGS.replace(arg, "")).apply();
             }
         }
         if(DEFAULT_PREF.contains("defaultRuntime")) {
