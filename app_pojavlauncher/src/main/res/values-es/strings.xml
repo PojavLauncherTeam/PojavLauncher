@@ -18,6 +18,7 @@
     <string name="login_title_no_saved_account">¡Cuenta no encontrada!</string>
     <string name="login_dialog_no_saved_account">No tienes ninguna cuenta guardada.\nUsa la opción <b>\"Mantenme conectado\"</b> para guardar una cuenta al iniciar sesión por primera vez.</string>
     <!-- Hint -->
+    <string name="hint_control_mapping">"Pulsa el icono del engranaje en la parte superior central para abrir el menú contextual ⚙\nPulsa un botón para editar, redimensionar, eliminar o personalizarlo."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">¡Esta cuenta será borrada!</string>
     <!-- AlertDialog title -->
@@ -91,6 +92,7 @@
     <string name="mcl_setting_veroption_snapshot">Snapshots</string>
     <string name="mcl_setting_veroption_oldalpha">Alphas</string>
     <string name="mcl_setting_veroption_oldbeta">Betas</string>
+    <string name="mcl_setting_java_sandbox">Instalador Sandbox .jar</string>
     <string name="mcl_version_clone">Clonar</string>
     <!-- Global strings -->
     <string name="global_edit">Editar</string>
@@ -105,6 +107,7 @@
     <string name="global_unpacking">Descomprimiendo</string>
     <string name="global_error_field_empty">Este campo es obligatorio</string>
     <string name="global_waiting">Espere</string>
+    <string name="global_retry">Volver a intentar</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">La aplicación/juego ha finalizado con el código %d, mira el archivo latestlog.txt para más detalles.</string>
     <string name="mcn_exit_call">Salir</string>
@@ -243,6 +246,7 @@
     <string name="preference_experimental_description">Utilice las cosas con consideración, sin apoyo.</string>
     <string name="preference_sustained_performance_title">Activar el modo de rendimiento sostenido</string>
     <string name="preference_sustained_performance_description">Limita la velocidad térmica limitando el rendimiento máximo</string>
+    <string name="preference_force_vsync_title">Forzar sincronización vertical</string>
     <string name="preference_force_vsync_description">Limita la velocidad térmica limitando el rendimiento máximo</string>
     <string name="preference_force_english_title">Forzar idioma a ingles</string>
     <string name="preference_category_virtual_mouse">Ratón virtual</string>
@@ -266,14 +270,20 @@
     <string name="arc_capes_title">Capas de Comestica</string>
     <string name="arc_capes_desc">Activa las capas de Cosmetica (anteriormente Arc). Para más información ve a esta página https://cosmetica.cc. Necesitas Optifine.</string>
     <string name="migrated_profile_str">%s Configuración de la versión</string>
+    <string name="notif_channel_name">General</string>
     <string name="mcl_setting_veroption_installed">Instalada</string>
     <string name="tasks_ongoing">Tareas en curso, por favor espere</string>
     <string name="no_saved_accounts">No hay cuentas guardadas</string>
     <string name="xerr_not_available">Xbox Live no está disponible en su país</string>
+    <string name="mcl_setting_title_buttonallcaps">Usa únicamente mayúsculas en las etiquetas de los botones</string>
     <string name="customctrl_editor_exit_msg">¿Seguro que quieres salir?</string>
     <string name="customctrl_editor_exit">Salir del editor</string>
     <string name="global_save_and_exit">Guardar y salir</string>
     <string name="global_yes">Si</string>
     <string name="global_no">No</string>
+    <string name="preference_controller_map_wiped">La configuración de control ha sido borrada</string>
+    <string name="forge_dl_progress">Descargando instalador para %s</string>
+    <string name="create_profile_modded_versions">Versiones modificadas</string>
+    <string name="of_dl_select_version">Seleciona la versión de OptiFine</string>
     <string name="of_dl_progress">Descargando %s</string>
 </resources>
