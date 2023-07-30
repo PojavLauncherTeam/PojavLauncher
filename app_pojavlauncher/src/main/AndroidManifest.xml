@@ -40,7 +40,7 @@
             android:value="ratio_float" />
 
         <activity
-            android:name=".DummyLauncher"
+            android:name=".TestStorageActivity"
             android:exported="true"
             android:label="@string/app_short_name"
             android:launchMode="singleTop">
@@ -51,6 +51,9 @@
         </activity>
         <activity
             android:name=".LauncherActivity"
+            android:label="@string/app_short_name" />
+        <activity
+            android:name=".DummyLauncher"
             android:label="@string/app_short_name" />
         <activity
             android:name=".ImportControlActivity"

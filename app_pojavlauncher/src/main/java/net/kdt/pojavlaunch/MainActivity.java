@@ -86,8 +86,6 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        minecraftProfile = LauncherProfiles.getCurrentProfile();
-        MCOptionUtils.load(Tools.getGameDirPath(minecraftProfile).getAbsolutePath());
         GameService.startService(this);
         initLayout(R.layout.activity_basemain);
         CallbackBridge.addGrabListener(touchpad);
@@ -138,23 +136,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
             // FIXME: is it safe for multi thread?
             GLOBAL_CLIPBOARD = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
             touchCharInput.setCharacterSender(new LwjglCharSender());
-
-            if(minecraftProfile.pojavRendererName != null) {
-                Log.i("RdrDebug","__P_renderer="+minecraftProfile.pojavRendererName);
-                Tools.LOCAL_RENDERER = minecraftProfile.pojavRendererName;
-            }
-
-            setTitle("Minecraft " + minecraftProfile.lastVersionId);
-
-            // Minecraft 1.13+
-
-            String version = getIntent().getStringExtra(INTENT_MINECRAFT_VERSION);
-            version = version == null ? minecraftProfile.lastVersionId : version;
-
-            JMinecraftVersionList.Version mVersionInfo = Tools.getVersionInfo(version);
-            isInputStackCall = mVersionInfo.arguments != null;
-            CallbackBridge.nativeSetUseInputStackQueue(isInputStackCall);
-
+            CallbackBridge.nativeSetUseInputStackQueue(false);
             Tools.getDisplayMetrics(this);
             windowWidth = Tools.getDisplayFriendlyRes(currentDisplayMetrics.widthPixels, 1f);
             windowHeight = Tools.getDisplayFriendlyRes(currentDisplayMetrics.heightPixels, 1f);
@@ -176,9 +158,6 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
             navDrawer.setAdapter(gameActionArrayAdapter);
             navDrawer.setOnItemClickListener(gameActionClickListener);
             drawerLayout.closeDrawers();
-
-
-            final String finalVersion = version;
             minecraftGLView.setSurfaceReadyListener(() -> {
                 try {
                     // Setup virtual mouse right before launching
@@ -200,10 +179,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
     private void loadControls() {
         try {
             // Load keys
-            mControlLayout.loadLayout(
-                    minecraftProfile.controlFile == null
-                            ? LauncherPreferences.PREF_DEFAULTCTRL_PATH
-                            : Tools.CTRLMAP_PATH + "/" + minecraftProfile.controlFile);
+            mControlLayout.loadLayout(LauncherPreferences.PREF_DEFAULTCTRL_PATH);
         } catch(IOException e) {
             try {
                 Log.w("MainActivity", "Unable to load the control file, loading the default now", e);
@@ -516,15 +492,11 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
             MainActivity.mControlLayout.loadLayout((CustomControls)null);
             MainActivity.mControlLayout.setModifiable(false);
             System.gc();
-            MainActivity.mControlLayout.loadLayout(
-                    minecraftProfile.controlFile == null
-                            ? LauncherPreferences.PREF_DEFAULTCTRL_PATH
-                            : Tools.CTRLMAP_PATH + "/" + minecraftProfile.controlFile);
+            MainActivity.mControlLayout.loadLayout(LauncherPreferences.PREF_DEFAULTCTRL_PATH);
             mDrawerPullButton.setVisibility(mControlLayout.hasMenuButton() ? View.GONE : View.VISIBLE);
         } catch (IOException e) {
             Tools.showError(this,e);
         }
-        //((MainActivity) this).mControlLayout.loadLayout((CustomControls)null);
         navDrawer.setAdapter(gameActionArrayAdapter);
         navDrawer.setOnItemClickListener(gameActionClickListener);
         isInEditor = false;

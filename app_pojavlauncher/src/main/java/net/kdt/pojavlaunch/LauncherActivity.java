@@ -301,8 +301,4 @@ public class LauncherActivity extends BaseActivity {
         mAccountSpinner = findViewById(R.id.account_spinner);
         mProgressLayout = findViewById(R.id.progress_layout);
     }
-
-
-
-
 }

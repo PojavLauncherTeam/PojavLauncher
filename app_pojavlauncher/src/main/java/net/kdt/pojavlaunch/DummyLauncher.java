@@ -1,9 +1,5 @@
 package net.kdt.pojavlaunch;
 
-import static net.kdt.pojavlaunch.Tools.launchGLJRE;
-
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
@@ -21,15 +17,12 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import net.kdt.pojavlaunch.value.MinecraftAccount;
-import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class DummyLauncher extends AppCompatActivity {
+public class DummyLauncher extends BaseActivity {
 
     private FloatingActionButton fab;
     private Button playHD;
@@ -57,7 +50,6 @@ public class DummyLauncher extends AppCompatActivity {
             Intent intent = new Intent(DummyLauncher.this, JavaGUILauncherActivity.class);
             startActivity(intent);
         });
-
         fab.setOnClickListener(view -> showBottomDialog());
     }
 
