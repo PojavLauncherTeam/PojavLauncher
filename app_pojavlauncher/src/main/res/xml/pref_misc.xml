@@ -16,6 +16,11 @@
             android:key="arc_capes"
             android:summary="@string/arc_capes_desc"
             android:title="@string/arc_capes_title" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="zinkPreferSystemDriver"
+            android:summary="@string/preference_vulkan_driver_system_description"
+            android:title="@string/preference_vulkan_driver_system_title"/>
 
     </PreferenceCategory>
 

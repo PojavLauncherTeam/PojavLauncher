@@ -21,7 +21,7 @@ void (*glReadPixels_p) (GLint x, GLint y, GLsizei width, GLsizei height, GLenum 
 void dlsym_OSMesa() {
     char* main_path = NULL;
     char* alt_path = NULL;
-    if(asprintf(&main_path, "%s/libOSMesa_8.so", getenv("POJAV_NATIVEDIR")) == -1 ||
+    if(asprintf(&main_path, "%s/libOSMesa.so", getenv("POJAV_NATIVEDIR")) == -1 ||
             asprintf(&alt_path, "%s/libOSMesa.so.8", getenv("POJAV_NATIVEDIR")) == -1) {
         abort();
     }

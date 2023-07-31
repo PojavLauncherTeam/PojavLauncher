@@ -51,8 +51,22 @@ LOCAL_SRC_FILES := \
     environ/environ.c \
     input_bridge_v3.c \
     jre_launcher.c \
-    utils.c
+    utils.c \
+    driver_helper/nsbypass.c
+ifeq ($(TARGET_ARCH_ABI),arm64-v8a)
+LOCAL_CFLAGS += -DADRENO_POSSIBLE
+LOCAL_LDLIBS += -lEGL -lGLESv2
+endif
 include $(BUILD_SHARED_LIBRARY)
+
+#ifeq ($(TARGET_ARCH_ABI),arm64-v8a)
+include $(CLEAR_VARS)
+LOCAL_MODULE := linkerhook
+LOCAL_SRC_FILES := driver_helper/hook.c
+LOCAL_LDFLAGS := -z global
+include $(BUILD_SHARED_LIBRARY)
+#endif
+
 
 include $(CLEAR_VARS)
 LOCAL_MODULE := istdio
