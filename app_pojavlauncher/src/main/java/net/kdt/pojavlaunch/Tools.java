@@ -178,6 +178,8 @@ public final class Tools {
         getCacioJavaArgs(javaArgList, runtime.javaVersion == 8);
 
         javaArgList.add("-DpluginDir="+ Tools.DIR_DATA + "/plugins/");
+        javaArgList.add("-DglfwWidth="+CallbackBridge.windowWidth);
+        javaArgList.add("-DglfwHeight="+CallbackBridge.windowHeight);
         javaArgList.add("-DconfigFile="+Tools.DIR_DATA + "/config.json");
         javaArgList.add("-cp");
         javaArgList.add(getLWJGL3ClassPath()+":"+Tools.DIR_DATA+"/rt4.jar");

@@ -13,7 +13,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/prefContainer"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -73,10 +79,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"
-                    android:hint="Username"
                     android:background="#6F000000"
-                    android:textColor="#ffffff"
+                    android:hint="Username"
                     android:padding="10dp"
+                    android:textColor="#ffffff"
                     android:textSize="16sp" />
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -84,10 +90,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"
+                    android:background="#6F000000"
                     android:hint="Password"
                     android:inputType="textPassword"
                     android:padding="10dp"
-                    android:background="#6F000000"
                     android:textColor="#ffffff"
                     android:textSize="16sp" />
 
@@ -197,16 +203,10 @@
                     android:textSize="16sp" />
 
             </LinearLayout>
+
         </LinearLayout>
 
+
     </ScrollView>
-
-    <ImageView
-        android:layout_width="70dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center|top"
-        android:scaleType="centerCrop"
-        app:srcCompat="@drawable/ic_gamepad_pointer" />
-
 
 </LinearLayout>
