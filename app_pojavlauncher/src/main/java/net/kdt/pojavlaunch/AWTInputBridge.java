@@ -8,7 +8,13 @@ public class AWTInputBridge {
     
     public static void sendKey(char keychar, int keycode) {
         // TODO: Android -> AWT keycode mapping
+        nativeSendData(EVENT_TYPE_KEY, (int) keychar, keycode, 1, 0);
         nativeSendData(EVENT_TYPE_KEY, (int) keychar, keycode, 0, 0);
+    }
+
+    public static void sendKey(char keychar, int keycode, int state) {
+        // TODO: Android -> AWT keycode mapping
+        nativeSendData(EVENT_TYPE_KEY, (int) keychar, keycode, state, 0);
     }
 
     public static void sendChar(char keychar){
@@ -33,6 +39,6 @@ public class AWTInputBridge {
     }
     
     public static native void nativeSendData(int type, int i1, int i2, int i3, int i4);
-    @SuppressWarnings("unused") public static native void nativePutClipboard(String data); //TODO: feed the AWT clipboard
+    public static native void nativeClipboardReceived(String data, String mimeTypeSub);
     public static native void nativeMoveWindow(int xoff, int yoff);
 }

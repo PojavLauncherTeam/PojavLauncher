@@ -16,7 +16,8 @@ jobs:
     env:
       GPLAY_KEYSTORE_PASSWORD: ${{ secrets.GPLAY_KEYSTORE_PASSWORD }}
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
 
       - name: Set up JDK 8
         uses: actions/setup-java@v3
@@ -80,12 +81,16 @@ jobs:
           rm -r app_pojavlauncher/src/main/assets/components/jre-new
           gradle assembleDebug
           mv app_pojavlauncher/build/outputs/apk/debug/app_pojavlauncher-debug.apk out/app-debug-noruntime.apk
-
+      - name: Gen md5sums
+        run: |
+          md5sum out/app-debug.apk > out/app-debug.md5
+          md5sum out/app-debug-noruntime.apk > out/app-debug-noruntime.md5
+          
       - name: Upload APK
         uses: actions/upload-artifact@v3
         with:
           name: app-debug
-          path: out/app-debug.apk
+          path: out/app-debug.*
 
       - name: Upload onto the Google Play testing track
         continue-on-error: true
@@ -103,4 +108,5 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: app-debug-noruntime
-          path: out/app-debug-noruntime.apk
+          path: out/app-debug-noruntime.*
+

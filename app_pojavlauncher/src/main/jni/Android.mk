@@ -43,6 +43,7 @@ LOCAL_MODULE := pojavexec
 # LOCAL_CFLAGS += -DDEBUG
 # -DGLES_TEST
 LOCAL_SRC_FILES := \
+    bigcoreaffinity.c \
     egl_bridge.c \
     ctxbridges/gl_bridge.c \
     ctxbridges/egl_loader.c \

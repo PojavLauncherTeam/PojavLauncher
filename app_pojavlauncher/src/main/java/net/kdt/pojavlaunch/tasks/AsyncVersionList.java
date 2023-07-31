@@ -7,6 +7,8 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.stream.JsonReader;
 
 import net.kdt.pojavlaunch.JMinecraftVersionList;
@@ -22,7 +24,7 @@ import java.io.IOException;
 /** Class getting the version list, and that's all really */
 public class AsyncVersionList {
 
-    public void getVersionList(@Nullable VersionDoneListener listener){
+    public void getVersionList(@Nullable VersionDoneListener listener, boolean secondPass){
         sExecutorService.execute(() -> {
             File versionFile = new File(Tools.DIR_DATA + "/version_list.json");
             JMinecraftVersionList versionList = null;
@@ -41,6 +43,11 @@ public class AsyncVersionList {
                     versionList = Tools.GLOBAL_GSON.fromJson(new JsonReader(new FileReader(versionFile)), JMinecraftVersionList.class);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
+                } catch (JsonIOException | JsonSyntaxException e) {
+                    e.printStackTrace();
+                    versionFile.delete();
+                    if(!secondPass)
+                        getVersionList(listener, true);
                 }
             }
 

@@ -6,9 +6,7 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.os.Handler;
 import android.os.IBinder;
-import android.os.Looper;
 import android.os.Process;
 import android.util.Log;
 
@@ -28,7 +26,6 @@ import net.kdt.pojavlaunch.progresskeeper.TaskCountListener;
  */
 public class ProgressService extends Service implements TaskCountListener {
 
-    private final Handler mainThreadHandler = new Handler(Looper.getMainLooper());
     private NotificationManagerCompat notificationManagerCompat;
 
     /** Simple wrapper to start the service */
@@ -85,7 +82,7 @@ public class ProgressService extends Service implements TaskCountListener {
 
     @Override
     public void onUpdateTaskCount(int taskCount) {
-        mainThreadHandler.post(()->{
+        Tools.MAIN_HANDLER.post(()->{
             if(taskCount > 0) {
                 mNotificationBuilder.setContentText(getString(R.string.progresslayout_tasks_in_progress, taskCount));
                 notificationManagerCompat.notify(1, mNotificationBuilder.build());
