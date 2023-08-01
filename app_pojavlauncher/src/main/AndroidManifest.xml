@@ -54,6 +54,7 @@
             android:label="@string/app_short_name" />
         <activity
             android:name=".DummyLauncher"
+            android:screenOrientation="sensorLandscape"
             android:label="@string/app_short_name" />
         <activity
             android:name=".ImportControlActivity"

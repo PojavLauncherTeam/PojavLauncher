@@ -56,7 +56,8 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
     private long lastPress = 0;
     private ScaleGestureDetector scaleGestureDetector;
     private boolean rcState = false;
-    private boolean mSkipDetectMod, mIsVirtualMouseEnabled;
+    private boolean mSkipDetectMod;
+    private static boolean mIsVirtualMouseEnabled;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -100,7 +101,6 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
             float prevX = 0, prevY = 0;
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                scaleGestureDetector.onTouchEvent(event);
                 // MotionEvent reports input details from the touch screen
                 // and other input controls. In this case, you are only
                 // interested in events where the touch position changed.
@@ -124,6 +124,16 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
                         placeMouseAt(mouseX, mouseY);
                         sendScaledMousePosition(mouseX, mouseY);
                     }
+                    // Check if there are two fingers on the screen
+                    if (action == MotionEvent.ACTION_POINTER_DOWN) {
+                        if (event.getPointerCount() == 2) {
+                            // Right-click event when a second finger touches the screen
+                            // Simulating right-click by sending GLFW_MOUSE_BUTTON_RIGHT event
+                            Log.i("downthecrop","Hi from a rightclick event!");
+                            activateRC();
+                            AWTInputBridge.sendMousePress(AWTInputEvent.BUTTON1_DOWN_MASK);
+                        }
+                    }
                 }
 
                 prevY = y;
@@ -133,6 +143,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
         });
 
         mTextureView.setOnTouchListener((v, event) -> {
+            scaleGestureDetector.onTouchEvent(event);
             float x = event.getX();
             float y = event.getY();
             if (mGestureDetector.onTouchEvent(event)) {
@@ -244,10 +255,9 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
                     }
                     break;
                 case R.id.camera:
-                    AWTInputBridge.sendKey((char) AWTInputEvent.VK_F9, AWTInputEvent.VK_F9);
                     if (!cameraMode) { // Camera Mode On
                         Log.i("downthecrop", "Hello from the camrea Button");
-                        //AWTInputBridge.sendKey((char) AWTInputEvent.VK_F9, AWTInputEvent.VK_F9); // Send F9
+                        AWTInputBridge.sendKey((char) AWTInputEvent.VK_F9, AWTInputEvent.VK_F9); // Send F9
                         cameraMode = true;
                     } else { // Camera Mode off
                         AWTInputBridge.sendKey((char) AWTInputEvent.VK_F8, AWTInputEvent.VK_F8);
