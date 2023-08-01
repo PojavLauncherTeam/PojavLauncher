@@ -59,21 +59,13 @@ public class DummyLauncher extends BaseActivity {
         mProgressLayout.observe(ProgressLayout.INSTALL_MODPACK);
 
         playHD.setOnClickListener(view -> {
-            Log.i("downthecrop","hello from play HD touch");
-            if(mProgressLayout.hasProcesses()){
-                Toast.makeText(this, R.string.tasks_ongoing, Toast.LENGTH_LONG).show();
-                return;
-            }
+            if(!runtimeReady()) return;
             Intent intent = new Intent(DummyLauncher.this, MainActivity.class);
             startActivity(intent);
         });
 
         playSD.setOnClickListener(view -> {
-            Log.i("downthecrop","hello from play SD touch");
-            if(mProgressLayout.hasProcesses()){
-                Toast.makeText(this, R.string.tasks_ongoing, Toast.LENGTH_LONG).show();
-                return;
-            }
+            if(!runtimeReady()) return;
             Intent intent = new Intent(DummyLauncher.this, JavaGUILauncherActivity.class);
             startActivity(intent);
         });
@@ -81,74 +73,18 @@ public class DummyLauncher extends BaseActivity {
     }
 
 
+    private boolean runtimeReady(){
+        if(mProgressLayout.hasProcesses()){
+            Toast.makeText(this, R.string.tasks_ongoing, Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
+    }
 
     @SuppressLint("ClickableViewAccessibility")
     private void showBottomDialog() {
         MyDialogFragment dialog = new MyDialogFragment();
         dialog.show(getSupportFragmentManager(), "tag");
-    }
-
-    private void showFileChooser(int requestCode) {
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-
-        switch(requestCode){
-            case FILE_SELECT_CODE_JSON:
-                intent.setType("application/json");
-                intent.addCategory(Intent.CATEGORY_OPENABLE);
-                break;
-            case FILE_SELECT_CODE_ZIP:
-                intent.setType("application/zip");
-                intent.addCategory(Intent.CATEGORY_OPENABLE);
-                break;
-            default:
-                intent.setType("*/*");
-                intent.addCategory(Intent.CATEGORY_OPENABLE);
-        }
-
-
-
-        try {
-            startActivityForResult(
-                    Intent.createChooser(intent, "Select a File to Upload"),
-                    requestCode);
-        } catch (android.content.ActivityNotFoundException ex) {
-            // Potentially direct the user to the Market with a Dialog
-            Toast.makeText(this, "Please install a File Manager.",
-                    Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == FILE_SELECT_CODE_JSON) {
-            if (resultCode == RESULT_OK) {
-                Uri uri = data.getData();
-
-                // TODO: Change destination based on file type
-                File config = new File(Tools.DIR_DATA, "config.json");
-                try {
-                    Log.d("TAG", "Starting copy: " + uri.getPath());
-                    InputStream inputStream = getContentResolver().openInputStream(uri);
-                    FileOutputStream fileOutputStream = new FileOutputStream(config);
-                    byte buf[] = new byte[1024];
-                    int len;
-                    while ((len = inputStream.read(buf)) > 0) {
-                        fileOutputStream.write(buf, 0, len);
-                    }
-
-                    Toast.makeText(this, "Config loaded. Please restart the app.",
-                            Toast.LENGTH_SHORT).show();
-
-                    fileOutputStream.close();
-                    inputStream.close();
-
-                    // TODO: unzip the plugin here
-                } catch (IOException e1) {
-                    Log.d("error", "Error with file " + e1);
-                }
-            }
-        }
-        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override

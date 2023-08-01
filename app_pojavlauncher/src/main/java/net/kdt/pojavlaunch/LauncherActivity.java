@@ -286,7 +286,8 @@ public class LauncherActivity extends BaseActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == REQUEST_STORAGE_REQUEST_CODE){
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_STORAGE_REQUEST_CODE) {
             synchronized (mLockStoragePerm) {
                 mLockStoragePerm.notifyAll();
             }

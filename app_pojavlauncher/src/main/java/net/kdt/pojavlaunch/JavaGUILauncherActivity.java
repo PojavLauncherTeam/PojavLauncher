@@ -4,13 +4,16 @@ import static net.kdt.pojavlaunch.MainActivity.fullyExit;
 
 import android.annotation.SuppressLint;
 import android.content.ClipboardManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -36,7 +39,6 @@ import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
@@ -50,9 +52,12 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
     private LinearLayout mTouchPad;
     private ImageView mMousePointerImageView;
     private GestureDetector mGestureDetector;
-
+    private boolean cameraMode = false;
+    private long lastPress = 0;
+    private ScaleGestureDetector scaleGestureDetector;
+    private boolean rcState = false;
     private boolean mSkipDetectMod, mIsVirtualMouseEnabled;
-    
+
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,20 +76,19 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
         mTouchCharInput = findViewById(R.id.awt_touch_char);
         mTouchCharInput.setCharacterSender(new AwtCharSender());
 
+        findViewById(R.id.mouseMode).setOnTouchListener(this);
+        findViewById(R.id.keyboard).setOnTouchListener(this);
+        findViewById(R.id.camera).setOnTouchListener(this);
+        findViewById(R.id.mb2).setOnTouchListener(this);
+
         mTouchPad = findViewById(R.id.main_touchpad);
         mLoggerView = findViewById(R.id.launcherLoggerView);
         mMousePointerImageView = findViewById(R.id.main_mouse_pointer);
         mTextureView = findViewById(R.id.installmod_surfaceview);
+        scaleGestureDetector = new ScaleGestureDetector(this, new ScaleListener());
         mGestureDetector = new GestureDetector(this, new SingleTapConfirm());
         mTouchPad.setFocusable(false);
         mTouchPad.setVisibility(View.GONE);
-
-        findViewById(R.id.installmod_mouse_pri).setOnTouchListener(this);
-        findViewById(R.id.installmod_mouse_sec).setOnTouchListener(this);
-        findViewById(R.id.installmod_window_moveup).setOnTouchListener(this);
-        findViewById(R.id.installmod_window_movedown).setOnTouchListener(this);
-        findViewById(R.id.installmod_window_moveleft).setOnTouchListener(this);
-        findViewById(R.id.installmod_window_moveright).setOnTouchListener(this);
 
         mMousePointerImageView.post(() -> {
             ViewGroup.LayoutParams params = mMousePointerImageView.getLayoutParams();
@@ -96,6 +100,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
             float prevX = 0, prevY = 0;
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                scaleGestureDetector.onTouchEvent(event);
                 // MotionEvent reports input details from the touch screen
                 // and other input controls. In this case, you are only
                 // interested in events where the touch position changed.
@@ -200,48 +205,59 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
         decorView.setSystemUiVisibility(uiOptions);
     }
 
+    public static class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener {
+        @Override
+        public boolean onScale(ScaleGestureDetector detector) {
+            float scaleFactor = detector.getScaleFactor();
+            if (scaleFactor > 1) { //Send F4 To Zoom Out
+                AWTInputBridge.sendKey((char)AWTInputEvent.VK_F3, AWTInputEvent.VK_F3);
+            } else { //116 F3 To Zoom In
+                AWTInputBridge.sendKey((char)AWTInputEvent.VK_F4,AWTInputEvent.VK_F4);
+            }
+            return true;
+        }
 
+        @Override
+        public boolean onScaleBegin(ScaleGestureDetector detector) {
+            return true;
+        }
 
-    @SuppressLint("ClickableViewAccessibility")
+        @Override
+        public void onScaleEnd(ScaleGestureDetector detector) {
+
+        }
+    }
+
     @Override
-    public boolean onTouch(View v, MotionEvent e) {
-        boolean isDown;
-        switch (e.getActionMasked()) {
-            case MotionEvent.ACTION_DOWN: // 0
-            case MotionEvent.ACTION_POINTER_DOWN: // 5
-                isDown = true;
-                break;
-            case MotionEvent.ACTION_UP: // 1
-            case MotionEvent.ACTION_CANCEL: // 3
-            case MotionEvent.ACTION_POINTER_UP: // 6
-                isDown = false;
-                break;
-            default:
-                return false;
-        }
-        
-        switch (v.getId()) {
-            case R.id.installmod_mouse_pri:
-                AWTInputBridge.sendMousePress(AWTInputEvent.BUTTON1_DOWN_MASK, isDown);
-                break;
-                
-            case R.id.installmod_mouse_sec:
-                AWTInputBridge.sendMousePress(AWTInputEvent.BUTTON3_DOWN_MASK, isDown);
-                break;
-        }
-        if(isDown) switch(v.getId()) {
-            case R.id.installmod_window_moveup:
-                AWTInputBridge.nativeMoveWindow(0, -10);
-                break;
-            case R.id.installmod_window_movedown:
-                AWTInputBridge.nativeMoveWindow(0, 10);
-                break;
-            case R.id.installmod_window_moveleft:
-                AWTInputBridge.nativeMoveWindow(-10, 0);
-                break;
-            case R.id.installmod_window_moveright:
-                AWTInputBridge.nativeMoveWindow(10, 0);
-                break;
+    public boolean onTouch(View v, MotionEvent e) { // these AWTInputEvent doesn't work for some reason
+        long time = System.currentTimeMillis();
+        if (time > lastPress + 500) {
+            switch (v.getId()) {
+                case R.id.keyboard:
+                    toggleKeyboard(this.getCurrentFocus());
+                    break;
+                case R.id.mb2:
+                    if (!rcState) {
+                        activateRC(); // Send F11 to activate RightClick
+                    } else {
+                        clearRC(); // Send F10 to clear RightClick
+                    }
+                    break;
+                case R.id.camera:
+                    AWTInputBridge.sendKey((char) AWTInputEvent.VK_F9, AWTInputEvent.VK_F9);
+                    if (!cameraMode) { // Camera Mode On
+                        Log.i("downthecrop", "Hello from the camrea Button");
+                        //AWTInputBridge.sendKey((char) AWTInputEvent.VK_F9, AWTInputEvent.VK_F9); // Send F9
+                        cameraMode = true;
+                    } else { // Camera Mode off
+                        AWTInputBridge.sendKey((char) AWTInputEvent.VK_F8, AWTInputEvent.VK_F8);
+                        cameraMode = false;
+                    }
+                    break;
+                case R.id.mouseMode:
+                    toggleVirtualMouse(this.getCurrentFocus());
+            }
+            lastPress = time;
         }
         return true;
     }
@@ -259,6 +275,16 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
         mMousePointerImageView.setY(y);
     }
 
+    private void clearRC(){
+        rcState = false;
+        AWTInputBridge.sendKey((char)AWTInputEvent.VK_F10,AWTInputEvent.VK_F10);
+    }
+
+    private void activateRC(){
+        rcState = true;
+        AWTInputBridge.sendKey((char)AWTInputEvent.VK_F11,AWTInputEvent.VK_F11);
+    }
+
     @SuppressWarnings("SuspiciousNameCombination")
     void sendScaledMousePosition(float x, float y){
         // Clamp positions to the borders of the usable view, then scale them
@@ -269,10 +295,6 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
                 (int) MathUtils.map(x, mTextureView.getX(), mTextureView.getX() + mTextureView.getWidth(), 0, AWTCanvasView.AWT_CANVAS_WIDTH),
                 (int) MathUtils.map(y, mTextureView.getY(), mTextureView.getY() + mTextureView.getHeight(), 0, AWTCanvasView.AWT_CANVAS_HEIGHT)
                 );
-    }
-
-    public void forceClose(View v) {
-        MainActivity.dialogForceClose(this);
     }
 
     public void openLogOutput(View v) {
@@ -309,61 +331,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
             return -1;
         }
     }
-
-
-
-    private int doCustomInstall(Runtime runtime, File modFile, String javaArgs) {
-        mSkipDetectMod = true;
-        return launchJavaRuntime(runtime, javaArgs);
-    }
-
     public void toggleKeyboard(View view) {
         mTouchCharInput.switchKeyboardState();
-    }
-    public void performCopy(View view) {
-        AWTInputBridge.sendKey(' ', AWTInputEvent.VK_CONTROL, 1);
-        AWTInputBridge.sendKey(' ', AWTInputEvent.VK_C);
-        AWTInputBridge.sendKey(' ', AWTInputEvent.VK_CONTROL, 0);
-    }
-
-    public void performPaste(View view) {
-        AWTInputBridge.sendKey(' ', AWTInputEvent.VK_CONTROL, 1);
-        AWTInputBridge.sendKey(' ', AWTInputEvent.VK_V);
-        AWTInputBridge.sendKey(' ', AWTInputEvent.VK_CONTROL, 0);
-    }
-
-    public int getJavaVersion(File modFile) {
-        try (ZipFile zipFile = new ZipFile(modFile)){
-            ZipEntry manifest = zipFile.getEntry("META-INF/MANIFEST.MF");
-            if(manifest == null) return -1;
-
-            String manifestString = Tools.read(zipFile.getInputStream(manifest));
-            String mainClass = Tools.extractUntilCharacter(manifestString, "Main-Class:", '\n');
-            if(mainClass == null) return -1;
-
-            mainClass = mainClass.trim().replace('.', '/') + ".class";
-            ZipEntry mainClassFile = zipFile.getEntry(mainClass);
-            if(mainClassFile == null) return -1;
-
-            InputStream classStream = zipFile.getInputStream(mainClassFile);
-            byte[] bytesWeNeed = new byte[8];
-            int readCount = classStream.read(bytesWeNeed);
-            classStream.close();
-            if(readCount < 8) return -1;
-
-            ByteBuffer byteBuffer = ByteBuffer.wrap(bytesWeNeed);
-            if(byteBuffer.getInt() != 0xCAFEBABE) return -1;
-            short minorVersion = byteBuffer.getShort();
-            short majorVersion = byteBuffer.getShort();
-            Log.i("JavaGUILauncher", majorVersion+","+minorVersion);
-            return classVersionToJavaVersion(majorVersion);
-        }catch (Exception e) {
-            e.printStackTrace();
-            return -1;
-        }
-    }
-    public static int classVersionToJavaVersion(int majorVersion) {
-        if(majorVersion < 46) return 2; // there isn't even an arm64 port of jre 1.1 (or anything before 1.8 in fact)
-        return majorVersion - 44;
     }
 }
