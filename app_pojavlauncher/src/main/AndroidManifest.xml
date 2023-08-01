@@ -50,32 +50,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LauncherActivity"
-            android:label="@string/app_short_name" />
-        <activity
             android:name=".DummyLauncher"
             android:screenOrientation="sensorLandscape"
             android:label="@string/app_short_name" />
-        <activity
-            android:name=".ImportControlActivity"
-            android:configChanges="keyboard|keyboardHidden"
-            android:exported="true"
-            android:launchMode="singleInstance"
-            android:windowSoftInputMode="stateVisible">
-            <intent-filter
-                android:label="@string/import_control_label"
-                android:scheme="content"
-                tools:ignore="AppLinkUrlError">
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.intent.action.SEND" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <data android:mimeType="application/json" />
-                <data android:mimeType="text/json" />
-                <data android:mimeType="text/plain" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".FatalErrorActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|keyboard|navigation"
@@ -106,20 +83,6 @@
             android:process=":game"
             android:screenOrientation="sensorLandscape" />
 
-        <provider
-            android:name=".scoped.FolderProvider"
-            android:authorities="@string/storageProviderAuthorities"
-            android:exported="true"
-            android:grantUriPermissions="true"
-            android:permission="android.permission.MANAGE_DOCUMENTS">
-            <intent-filter>
-                <action android:name="android.content.action.DOCUMENTS_PROVIDER" />
-            </intent-filter>
-        </provider>
-
         <service android:name=".services.ProgressService" />
-        <service
-            android:name=".services.GameService"
-            android:process=":game" />
     </application>
 </manifest>

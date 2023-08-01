@@ -2,7 +2,6 @@ package net.kdt.pojavlaunch;
 
 import androidx.annotation.Keep;
 import java.util.*;
-import net.kdt.pojavlaunch.value.*;
 
 @Keep
 @SuppressWarnings("unused") // all unused fields here are parts of JSON structures
@@ -23,10 +22,8 @@ public class JMinecraftVersionList {
         public AssetIndex assetIndex;
 
         public String assets;
-        public Map<String, MinecraftClientInfo> downloads;
         public String inheritsFrom;
         public JavaVersionInfo javaVersion;
-        public DependentLibrary[] libraries;
         public LoggingConfig logging;
         public String mainClass;
         public String minecraftArguments;

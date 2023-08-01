@@ -8,8 +8,6 @@ import android.util.Log;
 
 import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.multirt.Runtime;
-import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
-import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 
 import java.io.IOException;
 
@@ -49,46 +47,6 @@ public class JRE17Util {
         return NEW_JRE_NAME.equals(runtime.name);
     }
 
-    /** @return true if everything is good, false otherwise.  */
-    public static boolean installNewJreIfNeeded(Activity activity, JMinecraftVersionList.Version versionInfo) {
-        //Now we have the reliable information to check if our runtime settings are good enough
-        if (versionInfo.javaVersion == null || versionInfo.javaVersion.component.equalsIgnoreCase("jre-legacy"))
-            return true;
-
-        LauncherProfiles.update();
-        MinecraftProfile minecraftProfile = LauncherProfiles.getCurrentProfile();
-
-        String selectedRuntime = Tools.getSelectedRuntime(minecraftProfile);
-
-        Runtime runtime = MultiRTUtils.read(selectedRuntime);
-        if (runtime.javaVersion >= versionInfo.javaVersion.majorVersion) {
-            return true;
-        }
-
-        String appropriateRuntime = MultiRTUtils.getNearestJreName(versionInfo.javaVersion.majorVersion);
-        if (appropriateRuntime != null) {
-            if (JRE17Util.isInternalNewJRE(appropriateRuntime)) {
-                JRE17Util.checkInternalNewJre(activity.getAssets());
-            }
-            minecraftProfile.javaDir = Tools.LAUNCHERPROFILES_RTPREFIX + appropriateRuntime;
-            LauncherProfiles.update();
-        } else {
-            if (versionInfo.javaVersion.majorVersion <= 17) { // there's a chance we have an internal one for this case
-                if (!JRE17Util.checkInternalNewJre(activity.getAssets())){
-                    showRuntimeFail(activity, versionInfo);
-                    return false;
-                } else {
-                    minecraftProfile.javaDir = Tools.LAUNCHERPROFILES_RTPREFIX + JRE17Util.NEW_JRE_NAME;
-                    LauncherProfiles.update();
-                }
-            } else {
-                showRuntimeFail(activity, versionInfo);
-                return false;
-            }
-        }
-
-        return true;
-    }
 
     private static void showRuntimeFail(Activity activity, JMinecraftVersionList.Version verInfo) {
         Tools.dialogOnUiThread(activity, activity.getString(R.string.global_error),

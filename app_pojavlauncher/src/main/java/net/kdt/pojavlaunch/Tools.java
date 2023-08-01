@@ -49,16 +49,11 @@ import net.kdt.pojavlaunch.extra.ExtraConstants;
 import net.kdt.pojavlaunch.extra.ExtraCore;
 import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.multirt.Runtime;
-import net.kdt.pojavlaunch.plugins.FFmpegPlugin;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.utils.DownloadUtils;
 import net.kdt.pojavlaunch.utils.JREUtils;
 import net.kdt.pojavlaunch.utils.JSONUtils;
 import net.kdt.pojavlaunch.utils.OldVersionsUtils;
-import net.kdt.pojavlaunch.value.DependentLibrary;
-import net.kdt.pojavlaunch.value.MinecraftAccount;
-import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
-import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.io.IOUtils;
@@ -188,15 +183,6 @@ public final class Tools {
         JREUtils.launchJavaVM(activity, runtime, gamedir, javaArgList, args);
     }
 
-    public static File getGameDirPath(@NonNull MinecraftProfile minecraftProfile){
-        if(minecraftProfile.gameDir != null){
-            if(minecraftProfile.gameDir.startsWith(Tools.LAUNCHERPROFILES_RTPREFIX))
-                return new File(minecraftProfile.gameDir.replace(Tools.LAUNCHERPROFILES_RTPREFIX,Tools.DIR_GAME_HOME+"/"));
-            else
-                return new File(Tools.DIR_GAME_HOME,minecraftProfile.gameDir);
-        }
-        return new File(Tools.DIR_GAME_NEW);
-    }
 
     public static void buildNotificationChannel(Context context){
         if(Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return;
@@ -276,72 +262,6 @@ public final class Tools {
         javaArgList.add(cacioClasspath.toString());
     }
 
-    public static String[] getMinecraftJVMArgs(String versionName, File gameDir) {
-        JMinecraftVersionList.Version versionInfo = Tools.getVersionInfo(versionName, true);
-        // Parse Forge 1.17+ additional JVM Arguments
-        if (versionInfo.inheritsFrom == null || versionInfo.arguments == null || versionInfo.arguments.jvm == null) {
-            return new String[0];
-        }
-
-        Map<String, String> varArgMap = new ArrayMap<>();
-        varArgMap.put("classpath_separator", ":");
-        varArgMap.put("library_directory", DIR_HOME_LIBRARY);
-        varArgMap.put("version_name", versionInfo.id);
-        varArgMap.put("natives_directory", Tools.NATIVE_LIB_DIR);
-
-        List<String> minecraftArgs = new ArrayList<>();
-        if (versionInfo.arguments != null) {
-            for (Object arg : versionInfo.arguments.jvm) {
-                if (arg instanceof String) {
-                    minecraftArgs.add((String) arg);
-                } //TODO: implement (?maybe?)
-            }
-        }
-        return JSONUtils.insertJSONValueList(minecraftArgs.toArray(new String[0]), varArgMap);
-    }
-
-    public static String[] getMinecraftClientArgs(MinecraftAccount profile, JMinecraftVersionList.Version versionInfo, File gameDir) {
-        String username = profile.username;
-        String versionName = versionInfo.id;
-        if (versionInfo.inheritsFrom != null) {
-            versionName = versionInfo.inheritsFrom;
-        }
-
-        String userType = "mojang";
-
-        Map<String, String> varArgMap = new ArrayMap<>();
-        varArgMap.put("auth_session", profile.accessToken); // For legacy versions of MC
-        varArgMap.put("auth_access_token", profile.accessToken);
-        varArgMap.put("auth_player_name", username);
-        varArgMap.put("auth_uuid", profile.profileId.replace("-", ""));
-        varArgMap.put("auth_xuid", profile.xuid);
-        varArgMap.put("assets_root", Tools.ASSETS_PATH);
-        varArgMap.put("assets_index_name", versionInfo.assets);
-        varArgMap.put("game_assets", Tools.ASSETS_PATH);
-        varArgMap.put("game_directory", gameDir.getAbsolutePath());
-        varArgMap.put("user_properties", "{}");
-        varArgMap.put("user_type", userType);
-        varArgMap.put("version_name", versionName);
-        varArgMap.put("version_type", versionInfo.type);
-
-        List<String> minecraftArgs = new ArrayList<>();
-        if (versionInfo.arguments != null) {
-            // Support Minecraft 1.13+
-            for (Object arg : versionInfo.arguments.game) {
-                if (arg instanceof String) {
-                    minecraftArgs.add((String) arg);
-                } //TODO: implement else clause
-            }
-        }
-
-        return JSONUtils.insertJSONValueList(
-                splitAndFilterEmpty(
-                        versionInfo.minecraftArguments == null ?
-                                fromStringArray(minecraftArgs.toArray(new String[0])):
-                                versionInfo.minecraftArguments
-                ), varArgMap
-        );
-    }
 
     public static String fromStringArray(String[] strArr) {
         StringBuilder builder = new StringBuilder();
@@ -362,15 +282,6 @@ public final class Tools {
         }
         //strList.add("--fullscreen");
         return strList.toArray(new String[0]);
-    }
-
-    public static String artifactToPath(DependentLibrary library) {
-        if (library.downloads != null &&
-            library.downloads.artifact != null &&
-            library.downloads.artifact.path != null)
-            return library.downloads.artifact.path;
-        String[] libInfos = library.name.split(":");
-        return libInfos[0].replaceAll("\\.", "/") + "/" + libInfos[1] + "/" + libInfos[2] + "/" + libInfos[1] + "-" + libInfos[2] + ".jar";
     }
 
     public static String getPatchedFile(String version) {
@@ -394,27 +305,6 @@ public final class Tools {
     }
 
     private final static boolean isClientFirst = false;
-    public static String generateLaunchClassPath(JMinecraftVersionList.Version info,String actualname) {
-        StringBuilder libStr = new StringBuilder(); //versnDir + "/" + version + "/" + version + ".jar:";
-
-        String[] classpath = generateLibClasspath(info);
-
-        if (isClientFirst) {
-            libStr.append(getPatchedFile(actualname));
-        }
-        for (String perJar : classpath) {
-            if (!new File(perJar).exists()) {
-                Log.d(APP_NAME, "Ignored non-exists file: " + perJar);
-                continue;
-            }
-            libStr.append((isClientFirst ? ":" : "")).append(perJar).append(!isClientFirst ? ":" : "");
-        }
-        if (!isClientFirst) {
-            libStr.append(getPatchedFile(actualname));
-        }
-
-        return libStr.toString();
-    }
 
     public static DisplayMetrics getDisplayMetrics(Activity activity) {
         DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -595,105 +485,9 @@ public final class Tools {
         }
         return true; // allow if none match
     }
-    public static String[] generateLibClasspath(JMinecraftVersionList.Version info) {
-        List<String> libDir = new ArrayList<>();
-        for (DependentLibrary libItem: info.libraries) {
-            if(!checkRules(libItem.rules)) continue;
-            libDir.add(Tools.DIR_HOME_LIBRARY + "/" + artifactToPath(libItem));
-        }
-        return libDir.toArray(new String[0]);
-    }
-
-    public static JMinecraftVersionList.Version getVersionInfo(String versionName) {
-        return getVersionInfo(versionName, false);
-    }
 
     @SuppressWarnings({"unchecked", "rawtypes"})
-    public static JMinecraftVersionList.Version getVersionInfo(String versionName, boolean skipInheriting) {
-        try {
-            JMinecraftVersionList.Version customVer = Tools.GLOBAL_GSON.fromJson(read(DIR_HOME_VERSION + "/" + versionName + "/" + versionName + ".json"), JMinecraftVersionList.Version.class);
-            if (skipInheriting || customVer.inheritsFrom == null || customVer.inheritsFrom.equals(customVer.id)) {
-                return customVer;
-            } else {
-                JMinecraftVersionList.Version inheritsVer;
-                //If it won't download, just search for it
-                try{
-                    inheritsVer = Tools.GLOBAL_GSON.fromJson(read(DIR_HOME_VERSION + "/" + customVer.inheritsFrom + "/" + customVer.inheritsFrom + ".json"), JMinecraftVersionList.Version.class);
-                }catch(IOException e) {
-                    throw new RuntimeException("Can't find the source version for "+ versionName +" (req version="+customVer.inheritsFrom+")");
-                }
-                //inheritsVer.inheritsFrom = inheritsVer.id;
-                insertSafety(inheritsVer, customVer,
-                        "assetIndex", "assets", "id",
-                        "mainClass", "minecraftArguments",
-                        "releaseTime", "time", "type"
-                );
 
-                List<DependentLibrary> libList = new ArrayList<>(Arrays.asList(inheritsVer.libraries));
-                try {
-                    loop_1:
-                    for (DependentLibrary lib : customVer.libraries) {
-                        String libName = lib.name.substring(0, lib.name.lastIndexOf(":"));
-                        for (int i = 0; i < libList.size(); i++) {
-                            DependentLibrary libAdded = libList.get(i);
-                            String libAddedName = libAdded.name.substring(0, libAdded.name.lastIndexOf(":"));
-
-                            if (libAddedName.equals(libName)) {
-                                Log.d(APP_NAME, "Library " + libName + ": Replaced version " +
-                                        libName.substring(libName.lastIndexOf(":") + 1) + " with " +
-                                        libAddedName.substring(libAddedName.lastIndexOf(":") + 1));
-                                libList.set(i, lib);
-                                continue loop_1;
-                            }
-                        }
-
-                        libList.add(0, lib);
-                    }
-                } finally {
-                    inheritsVer.libraries = libList.toArray(new DependentLibrary[0]);
-                }
-
-                // Inheriting Minecraft 1.13+ with append custom args
-                if (inheritsVer.arguments != null && customVer.arguments != null) {
-                    List totalArgList = new ArrayList(Arrays.asList(inheritsVer.arguments.game));
-
-                    int nskip = 0;
-                    for (int i = 0; i < customVer.arguments.game.length; i++) {
-                        if (nskip > 0) {
-                            nskip--;
-                            continue;
-                        }
-
-                        Object perCustomArg = customVer.arguments.game[i];
-                        if (perCustomArg instanceof String) {
-                            String perCustomArgStr = (String) perCustomArg;
-                            // Check if there is a duplicate argument on combine
-                            if (perCustomArgStr.startsWith("--") && totalArgList.contains(perCustomArgStr)) {
-                                perCustomArg = customVer.arguments.game[i + 1];
-                                if (perCustomArg instanceof String) {
-                                    perCustomArgStr = (String) perCustomArg;
-                                    // If the next is argument value, skip it
-                                    if (!perCustomArgStr.startsWith("--")) {
-                                        nskip++;
-                                    }
-                                }
-                            } else {
-                                totalArgList.add(perCustomArgStr);
-                            }
-                        } else if (!totalArgList.contains(perCustomArg)) {
-                            totalArgList.add(perCustomArg);
-                        }
-                    }
-
-                    inheritsVer.arguments.game = totalArgList.toArray(new Object[0]);
-                }
-
-                return inheritsVer;
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     // Prevent NullPointerException
     private static void insertSafety(JMinecraftVersionList.Version targetVer, JMinecraftVersionList.Version fromVer, String... keyArr) {
@@ -868,18 +662,6 @@ public final class Tools {
         return fileName;
     }
 
-    /** Swap the main fragment with another */
-    public static void swapFragment(FragmentActivity fragmentActivity , Class<? extends Fragment> fragmentClass,
-                                    @Nullable String fragmentTag, boolean addCurrentToBackstack, @Nullable Bundle bundle) {
-        // When people tab out, it might happen
-        //TODO handle custom animations
-        FragmentTransaction transaction = fragmentActivity.getSupportFragmentManager().beginTransaction()
-                .setReorderingAllowed(true)
-                .replace(R.id.container_fragment, fragmentClass, bundle, fragmentTag);
-        if(addCurrentToBackstack) transaction.addToBackStack(null);
-
-        transaction.commit();
-    }
 
     /** Remove the current fragment */
     public static void removeCurrentFragment(FragmentActivity fragmentActivity){
@@ -994,32 +776,8 @@ public final class Tools {
         return prefixedName.substring(Tools.LAUNCHERPROFILES_RTPREFIX.length());
     }
 
-    public static String getSelectedRuntime(MinecraftProfile minecraftProfile) {
-        String runtime = LauncherPreferences.PREF_DEFAULT_RUNTIME;
-        String profileRuntime = getRuntimeName(minecraftProfile.javaDir);
-        if(profileRuntime != null) {
-            if(MultiRTUtils.forceReread(profileRuntime).versionString != null) {
-                runtime = profileRuntime;
-            }
-        }
-        return runtime;
-    }
-
     public static void runOnUiThread(Runnable runnable) {
         MAIN_HANDLER.post(runnable);
-    }
-
-    public static @NonNull String pickRuntime(MinecraftProfile minecraftProfile, int targetJavaVersion) {
-        String runtime = getSelectedRuntime(minecraftProfile);
-        String profileRuntime = getRuntimeName(minecraftProfile.javaDir);
-        Runtime pickedRuntime = MultiRTUtils.read(runtime);
-        if(runtime == null || pickedRuntime.javaVersion == 0 || pickedRuntime.javaVersion < targetJavaVersion) {
-            String preferredRuntime = MultiRTUtils.getNearestJreName(targetJavaVersion);
-            if(preferredRuntime == null) throw new RuntimeException("Failed to autopick runtime!");
-            if(profileRuntime != null) minecraftProfile.javaDir = Tools.LAUNCHERPROFILES_RTPREFIX+preferredRuntime;
-            runtime = preferredRuntime;
-        }
-        return runtime;
     }
 
     /** Triggers the share intent chooser, with the latestlog file attached to it */

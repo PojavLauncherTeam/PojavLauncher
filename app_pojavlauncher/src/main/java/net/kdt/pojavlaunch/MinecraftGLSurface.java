@@ -18,6 +18,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.InputDevice;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -53,14 +54,15 @@ public class MinecraftGLSurface extends View implements GrabListener {
 
     float startX = 0;
     float startY = 0;
-    ScaleGestureDetector scaleGestureDetector;
+    private ScaleGestureDetector scaleGestureDetector;
+    private GestureDetector longPressDetector;
+
     /* The RemapperView.Builder object allows you to set which buttons to remap */
     private final RemapperManager mInputManager = new RemapperManager(getContext(), new RemapperView.Builder(null)
             .remapA(true)
             .remapB(true)
             .remapX(true)
             .remapY(true)
-
             .remapDpad(true)
             .remapLeftJoystick(true)
             .remapRightJoystick(true)
@@ -215,6 +217,30 @@ public class MinecraftGLSurface extends View implements GrabListener {
                 public void onSurfaceTextureUpdated(@NonNull SurfaceTexture surface) {}
             });
 
+            this.longPressDetector = new GestureDetector(getContext(), new GestureDetector.SimpleOnGestureListener() {
+
+                boolean isDragClicking = false;
+                @Override
+                public void onLongPress(MotionEvent e) {
+                    super.onLongPress(e);
+                    if(!isDragClicking) {
+                        isDragClicking = true;
+                        AWTInputBridge.sendKey((char)AWTInputEvent.VK_F5, AWTInputEvent.VK_F5);
+                    }
+                }
+
+                @Override
+                public boolean onSingleTapUp(MotionEvent e) {
+                    if(isDragClicking) {
+                        isDragClicking = false;
+                        AWTInputBridge.sendKey((char)AWTInputEvent.VK_F5, AWTInputEvent.VK_F5);
+                    }
+                    return super.onSingleTapUp(e);
+                }
+            });
+
+            //this.longPressDetector.setIsLongpressEnabled(true);
+
             ((ViewGroup)getParent()).addView(textureView);
         }
     }
@@ -228,9 +254,7 @@ public class MinecraftGLSurface extends View implements GrabListener {
     @SuppressWarnings("accessibility")
     public boolean onTouchEvent(MotionEvent e) {
         scaleGestureDetector.onTouchEvent(e);
-
-        Log.i("downthecrop","ya I still see these events");
-
+        //longPressDetector.onTouchEvent(e);
         // Kinda need to send this back to the layout
         if(((ControlLayout)getParent()).getModifiable()) return false;
 
@@ -252,7 +276,8 @@ public class MinecraftGLSurface extends View implements GrabListener {
             CallbackBridge.mouseX =  (e.getX() * mScaleFactor);
             CallbackBridge.mouseY =  (e.getY() * mScaleFactor);
             //One android click = one MC click
-            if(mSingleTapDetector.onTouchEvent(e)){ // Touch Mode
+            if(mSingleTapDetector.onTouchEvent(e)){ //
+                //longPressDetector.onTouchEvent(e);// Touch Mode
                 CallbackBridge.putMouseEventWithCoords(LwjglGlfwKeycode.GLFW_MOUSE_BUTTON_LEFT, CallbackBridge.mouseX, CallbackBridge.mouseY);
                 return true;
             }
@@ -397,25 +422,6 @@ public class MinecraftGLSurface extends View implements GrabListener {
                     sendMouseButton(LwjglGlfwKeycode.GLFW_MOUSE_BUTTON_RIGHT, false);
                 }
                 break;
-
-            case MotionEvent.ACTION_POINTER_DOWN: // 5
-                //TODO Hey we could have some sort of middle click detection ?
-                
-                mScrollLastInitialX = e.getX();
-                mScrollLastInitialY = e.getY();
-                //Checking if we are pressing the hotbar to select the item
-                hudKeyHandled = handleGuiBar((int)e.getX(e.getPointerCount()-1), (int) e.getY(e.getPointerCount()-1));
-                if(hudKeyHandled != -1){
-                    sendKeyPress(hudKeyHandled);
-                    if(hasDoubleTapped && hudKeyHandled == mLastHotbarKey){
-                        //Prevent double tapping Event on two different slots
-                        sendKeyPress(LwjglGlfwKeycode.GLFW_KEY_F);
-                    }
-                }
-
-                mLastHotbarKey = hudKeyHandled;
-                break;
-
         }
 
         // Actualise the pointer count
