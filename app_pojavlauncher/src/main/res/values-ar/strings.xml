@@ -45,7 +45,7 @@
     <string name="mcl_account_connected">متصل</string>
     <string name="mcl_account_local">محلي</string>
     <!-- MCLauncherActivity: Strings -->
-    <string name="mcl_version_msg">جاهز للعب ماين كرافت %s</string>
+    <string name="mcl_version_msg">جاهز للعب Minecraft %s</string>
     <string name="mcl_launch_cleancache">تنظيف ملفات ذاكرة التخزين المؤقت</string>
     <string name="mcl_launch_downloading">التحميل جارٍ %s</string>
     <string name="mcl_launch_downloading_progress">"جارٍ تنزيل %s (%.2f ميغابايت / %.2f ميغابايت)"</string>
@@ -61,7 +61,7 @@
     <string name="mcl_setting_subtitle_use_surface_view">قد تساعد الأداء في سيناريوهات gpu</string>
     <string name="mcl_setting_title_uninstalljre">إلغاء تثبيت محرك جافا</string>
     <string name="mcl_setting_subtitle_uninstalljre">[يتطلب إعادة تشغيل التطبيق] هذا يسمح لك بإعادة تثبيت محرك تشغيل جافا</string>
-    <string name="mcl_setting_title_freeform">تشغيل ماينكرافت في وضع حر</string>
+    <string name="mcl_setting_title_freeform">تشغيل Minecraft في وضع حر</string>
     <string name="mcl_setting_subtitle_freeform">تشغيل ماين كرافت في النافذة العائمة. يتطلب أندرويد 7.0+</string>
     <string name="mcl_setting_title_hide_sidebar">أخفِ الشّريط الجانبيّ</string>
     <string name="mcl_setting_subtitle_hide_sidebar">قد يعجب الأشخاص الذين يفضلون واجهة المستخدم القديمة v1 بهذا. يمنحك تجربة ملء الشاشة بشكل أكبر.</string>
@@ -111,6 +111,7 @@
     <string name="global_error_field_empty">لا يمكن لهذه الخانة ان تكون فارغة</string>
     <string name="global_waiting">انتظر</string>
     <string name="global_select">اختر</string>
+    <string name="global_retry">أعد المحاولة</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">تم الخروج من التطبيق/اللعبة بخلل %d، تحقق من latestlog.txt لمزيد من التفاصيل.</string>
     <string name="mcn_exit_call">خروج</string>
@@ -227,7 +228,7 @@
     <string name="multirt_nocompartiblert">لا يمكن العثور على أي اصدار جافا صالح. هذا الإصدار يتطلب جافا %d أو أحدث.</string>
     <string name="multirt_nojava8rt">لا يمكن العثور على Java 8. لاستخدام هذا الخيار، تحتاج إلى تثبيت Java 8.</string>
     <string name="multirt_delete_runtime">حذف runtime</string>
-    <string name="compat_117_message">ماينكرافت 21w10a+ يتطلب ملف التعريف الأساسي OpenGL 3.2 من المحزن أن لوحة الرسومات الخاصة بك لا يدعم GL4ES بشكل كامل في الوقت الحالي، ولكن هناك بعض الموارد الإضافية التي يمكنك تثبيتها لتشغيل هذه الإصدارات اضغط على OK لتأكيد التثبيت، واضغط على Cancel لعدم المتابعه.</string>
+    <string name="compat_117_message">Minecraft 21w10a+ يتطلب ملف التعريف الأساسي OpenGL 3.2 من المحزن أن لوحة الرسومات الخاصة بك لا يدعم GL4ES بشكل كامل في الوقت الحالي، ولكن هناك بعض الموارد الإضافية التي يمكنك تثبيتها لتشغيل هذه الإصدارات اضغط على OK لتأكيد التثبيت، واضغط على Cancel لعدم المتابعه.</string>
     <string name="compat_11x_playanyway">تشغيل على أي حال</string>
     <string name="pvc_gameDirectory">مكان تخزين اللعبة</string>
     <string name="pvc_jvmArgs">مدخلات JVM</string>
@@ -294,6 +295,8 @@
     <string name="notification_game_runs">اللعبة قيد التشغيل!</string>
     <string name="folder_dialog_create">إنشاء</string>
     <string name="folder_dialog_insert_name">إدراج اسم المجلد</string>
+    <string name="folder_fragment_create">إنشاء مجلد</string>
+    <string name="folder_fragment_select">إختر مجلد</string>
     <string name="main_login_done">تم تسجيل الدخول</string>
     <string name="main_add_account">أضف حساباً</string>
     <string name="tasks_ongoing">المهام قيد التقدم، يرجى الانتظار</string>
@@ -333,5 +336,13 @@
     <string name="preference_wipe_controller_description">يسمح لك بتغيير أزرار ذراع التحكم</string>
     <string name="preference_deadzone_scale_title">مقياس كمية تحرك عصا التحكم</string>
     <string name="preference_deadzone_scale_description">قم بالزيادة إذا انحدرت عصا التحكم</string>
+    <string name="version_select_hint">إختر إصدار</string>
+    <string name="forge_dl_progress">تنزيل المثبت ل %s</string>
+    <string name="modloader_dl_failed_to_load_list">فشل تحميل قائمة الإصدارات!</string>
+    <string name="forge_dl_no_installer">عذراً، لكن هذا الإصدار من Forge لا يحتوي على مثبت، الذي لم يتم دعمه بعد.</string>
+    <string name="forge_dl_select_version">إختر إصدار Forge</string>
+    <string name="fabric_dl_game_version">إصدار Minecraft</string>
+    <string name="fabric_dl_install">تثبيت</string>
+    <string name="fabric_dl_loader_title">حدد إصدارات</string>
     <string name="of_dl_progress">التحميل جارٍ %s</string>
 </resources>
