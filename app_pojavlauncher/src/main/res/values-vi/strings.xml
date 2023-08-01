@@ -268,6 +268,7 @@
     <string name="preference_gyro_invert_x_axis_description">Đảo ngược trục ngang</string>
     <string name="preference_gyro_invert_y_axis_description">Đảo ngược trục tung</string>
     <string name="preference_gyro_smoothing_title">Bật tính năng làm mịn con lăn hồi chuyển</string>
+    <string name="preference_gyro_smoothing_description">Reduce jitter in exchange of latency.</string>
     <string name="preference_back_title">Quay về màn hình trước đó</string>
     <string name="gles_hack_none">Không thu nhỏ kết cấu</string>
     <string name="gles_hack_always">Chia tất cả các kết cấu cho 2</string>
