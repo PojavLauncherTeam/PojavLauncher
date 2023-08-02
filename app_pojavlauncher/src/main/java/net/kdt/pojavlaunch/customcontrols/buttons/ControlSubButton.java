@@ -21,8 +21,10 @@ public class ControlSubButton extends ControlButton {
     }
 
     private void filterProperties(){
-        mProperties.setHeight(parentDrawer.getProperties().getHeight());
-        mProperties.setWidth(parentDrawer.getProperties().getWidth());
+        if (parentDrawer != null && parentDrawer.drawerData.orientation != ControlDrawerData.Orientation.FREE) {
+            mProperties.setHeight(parentDrawer.getProperties().getHeight());
+            mProperties.setWidth(parentDrawer.getProperties().getWidth());
+        }
         mProperties.isDynamicBtn = false;
 
         setProperties(mProperties, false);
@@ -35,7 +37,7 @@ public class ControlSubButton extends ControlButton {
 
     @Override
     public void setLayoutParams(ViewGroup.LayoutParams params) {
-        if(parentDrawer != null){
+        if(parentDrawer != null && parentDrawer.drawerData.orientation != ControlDrawerData.Orientation.FREE){
             params.width = (int)parentDrawer.mProperties.getWidth();
             params.height = (int)parentDrawer.mProperties.getHeight();
         }
