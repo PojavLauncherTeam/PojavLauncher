@@ -38,6 +38,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.kdt.LoggerView;
 
+import net.kdt.pojavlaunch.customcontrols.GyroControl;
 import net.kdt.pojavlaunch.customcontrols.ControlButtonMenuListener;
 import net.kdt.pojavlaunch.customcontrols.ControlData;
 import net.kdt.pojavlaunch.customcontrols.ControlDrawerData;
@@ -47,6 +48,8 @@ import net.kdt.pojavlaunch.customcontrols.EditorExitable;
 import net.kdt.pojavlaunch.customcontrols.keyboard.LwjglCharSender;
 import net.kdt.pojavlaunch.customcontrols.keyboard.TouchCharInput;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
+import net.kdt.pojavlaunch.utils.EfficientAndroidLWJGLKeycode;
+import net.kdt.pojavlaunch.utils.LwjglGlfwKeycode;
 import net.kdt.pojavlaunch.utils.MCOptionUtils;
 
 import org.lwjgl.glfw.CallbackBridge;
@@ -61,7 +64,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
     volatile public static boolean isInputStackCall;
 
     public static TouchCharInput touchCharInput;
-    private MinecraftGLSurface minecraftGLView;
+    private GLFWGLSurface minecraftGLView;
     private static Touchpad touchpad;
     private LoggerView loggerView;
     private DrawerLayout drawerLayout;

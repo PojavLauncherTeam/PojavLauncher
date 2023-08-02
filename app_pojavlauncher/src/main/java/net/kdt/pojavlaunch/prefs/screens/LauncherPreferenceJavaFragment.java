@@ -1,6 +1,6 @@
 package net.kdt.pojavlaunch.prefs.screens;
 
-import static net.kdt.pojavlaunch.Architecture.is32BitsDevice;
+import static net.kdt.pojavlaunch.utils.Architecture.is32BitsDevice;
 import static net.kdt.pojavlaunch.Tools.getTotalDeviceMemory;
 
 import android.os.Bundle;

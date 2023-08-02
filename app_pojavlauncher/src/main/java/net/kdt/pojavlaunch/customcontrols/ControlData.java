@@ -1,6 +1,6 @@
 package net.kdt.pojavlaunch.customcontrols;
 
-import static net.kdt.pojavlaunch.LwjglGlfwKeycode.GLFW_KEY_UNKNOWN;
+import static net.kdt.pojavlaunch.utils.LwjglGlfwKeycode.GLFW_KEY_UNKNOWN;
 
 import android.util.ArrayMap;
 

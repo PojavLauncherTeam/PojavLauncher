@@ -2,7 +2,7 @@ package net.kdt.pojavlaunch.customcontrols;
 
 import com.google.gson.JsonSyntaxException;
 
-import net.kdt.pojavlaunch.LwjglGlfwKeycode;
+import net.kdt.pojavlaunch.utils.LwjglGlfwKeycode;
 import net.kdt.pojavlaunch.Tools;
 
 import org.json.JSONArray;

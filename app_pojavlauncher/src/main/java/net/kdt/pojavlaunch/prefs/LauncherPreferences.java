@@ -3,7 +3,7 @@ package net.kdt.pojavlaunch.prefs;
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.P;
 
-import static net.kdt.pojavlaunch.Architecture.is32BitsDevice;
+import static net.kdt.pojavlaunch.utils.Architecture.is32BitsDevice;
 
 import android.app.Activity;
 import android.content.*;

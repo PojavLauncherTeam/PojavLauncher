@@ -6,6 +6,7 @@ import androidx.annotation.Keep;
 import java.io.IOException;
 import java.util.*;
 import net.kdt.pojavlaunch.*;
+import net.kdt.pojavlaunch.utils.LwjglGlfwKeycode;
 
 @Keep
 public class CustomControls {

@@ -1,6 +1,8 @@
 package org.lwjgl.glfw;
 
 import net.kdt.pojavlaunch.*;
+import net.kdt.pojavlaunch.utils.LwjglGlfwKeycode;
+
 import android.content.*;
 import android.view.Choreographer;
 import java.util.ArrayList;

@@ -1,41 +1,20 @@
 package net.kdt.pojavlaunch;
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.MotionEvent;
-import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.kdt.mcgui.ProgressLayout;
 
-import net.kdt.pojavlaunch.extra.ExtraConstants;
-import net.kdt.pojavlaunch.extra.ExtraCore;
-import net.kdt.pojavlaunch.prefs.screens.LauncherPreferenceFragment;
 import net.kdt.pojavlaunch.progresskeeper.ProgressKeeper;
 import net.kdt.pojavlaunch.services.ProgressServiceKeeper;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+public class ScapeLauncher extends BaseActivity {
 
-public class DummyLauncher extends BaseActivity {
-
-    private FloatingActionButton fab;
+    private TextView settings;
     private Button playHD;
     private Button playSD;
     private static final int FILE_SELECT_CODE_JSON = 0;
@@ -47,7 +26,7 @@ public class DummyLauncher extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dummy_launcher);
-        fab = findViewById(R.id.myFab);
+        settings = findViewById(R.id.settings);
         playHD = findViewById(R.id.playHD);
         playSD = findViewById(R.id.playSD);
         mProgressLayout = findViewById(R.id.progress_layout);
@@ -60,16 +39,16 @@ public class DummyLauncher extends BaseActivity {
 
         playHD.setOnClickListener(view -> {
             if(!runtimeReady()) return;
-            Intent intent = new Intent(DummyLauncher.this, MainActivity.class);
+            Intent intent = new Intent(ScapeLauncher.this, MainActivity.class);
             startActivity(intent);
         });
 
         playSD.setOnClickListener(view -> {
             if(!runtimeReady()) return;
-            Intent intent = new Intent(DummyLauncher.this, JavaGUILauncherActivity.class);
+            Intent intent = new Intent(ScapeLauncher.this, JavaGUILauncherActivity.class);
             startActivity(intent);
         });
-        fab.setOnClickListener(view -> showBottomDialog());
+        settings.setOnClickListener(view -> showBottomDialog());
     }
 
 

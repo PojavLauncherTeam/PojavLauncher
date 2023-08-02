@@ -1,6 +1,5 @@
 package net.kdt.pojavlaunch;
 
-import static net.kdt.pojavlaunch.MainActivity.touchCharInput;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_DISABLE_SWAP_HAND;
 import static net.kdt.pojavlaunch.utils.MCOptionUtils.getMcScale;
 import static org.lwjgl.glfw.CallbackBridge.sendKeyPress;
@@ -36,7 +35,9 @@ import androidx.annotation.RequiresApi;
 import net.kdt.pojavlaunch.customcontrols.ControlLayout;
 import net.kdt.pojavlaunch.customcontrols.gamepad.Gamepad;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
+import net.kdt.pojavlaunch.utils.EfficientAndroidLWJGLKeycode;
 import net.kdt.pojavlaunch.utils.JREUtils;
+import net.kdt.pojavlaunch.utils.LwjglGlfwKeycode;
 import net.kdt.pojavlaunch.utils.MCOptionUtils;
 import net.kdt.pojavlaunch.utils.MathUtils;
 
@@ -48,7 +49,7 @@ import fr.spse.gamepad_remapper.RemapperView;
 /**
  * Class dealing with showing minecraft surface and taking inputs to dispatch them to minecraft
  */
-public class MinecraftGLSurface extends View implements GrabListener {
+public class GLFWGLSurface extends View implements GrabListener {
     /* Gamepad object for gamepad inputs, instantiated on need */
     private Gamepad mGamepad = null;
 
@@ -141,11 +142,11 @@ public class MinecraftGLSurface extends View implements GrabListener {
 
 
 
-    public MinecraftGLSurface(Context context) {
+    public GLFWGLSurface(Context context) {
         this(context, null);
     }
 
-    public MinecraftGLSurface(Context context, AttributeSet attributeSet) {
+    public GLFWGLSurface(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         setFocusable(true);
 
@@ -225,7 +226,7 @@ public class MinecraftGLSurface extends View implements GrabListener {
                     super.onLongPress(e);
                     if(!isDragClicking) {
                         isDragClicking = true;
-                        AWTInputBridge.sendKey((char)AWTInputEvent.VK_F5, AWTInputEvent.VK_F5);
+                        AWTInputBridge.sendKey((char) AWTInputEvent.VK_F5, AWTInputEvent.VK_F5);
                     }
                 }
 

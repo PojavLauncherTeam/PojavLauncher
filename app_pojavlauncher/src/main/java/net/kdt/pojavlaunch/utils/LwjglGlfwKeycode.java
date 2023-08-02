@@ -28,7 +28,7 @@
  *
  *************************************************************************/
 
-package net.kdt.pojavlaunch;
+package net.kdt.pojavlaunch.utils;
 
 @SuppressWarnings("unused")
 public class LwjglGlfwKeycode {

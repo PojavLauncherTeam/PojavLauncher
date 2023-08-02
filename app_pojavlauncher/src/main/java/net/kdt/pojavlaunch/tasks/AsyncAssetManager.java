@@ -1,7 +1,7 @@
 package net.kdt.pojavlaunch.tasks;
 
 
-import static net.kdt.pojavlaunch.Architecture.archAsString;
+import static net.kdt.pojavlaunch.utils.Architecture.archAsString;
 import static net.kdt.pojavlaunch.PojavApplication.sExecutorService;
 
 import android.content.Context;
@@ -68,7 +68,6 @@ public class AsyncAssetManager {
                 Tools.copyAssetFile(ctx, "options.txt", Tools.DIR_GAME_NEW, false);
                 Tools.copyAssetFile(ctx, "default.json", Tools.CTRLMAP_PATH, false);
                 Tools.copyAssetFile(ctx, "launcher_profiles.json", Tools.DIR_GAME_NEW, false);
-                Tools.copyAssetFile(ctx,"resolv.conf",Tools.DIR_DATA, false);
             } catch (IOException e) {
                 Log.e("AsyncAssetManager", "Failed to unpack critical components !");
             }
@@ -86,13 +85,11 @@ public class AsyncAssetManager {
                 // we repack them to a single file here
                 unpackComponent(ctx, "lwjgl3", false);
                 unpackComponent(ctx, "security", true);
-                unpackComponent(ctx, "arc_dns_injector", true);
-                unpackComponent(ctx, "forge_installer", true);
-                Tools.copyAssetFile(ctx,"rt4.jar",Tools.DIR_DATA, true); // Change this to true for debugging
+                Tools.copyAssetFile(ctx,"rt4.jar",Tools.DIR_DATA, false); // Change this to true if you're working on client features.
                 Tools.copyAssetFile(ctx,"config.json",Tools.DIR_DATA, false);
 
                 // Unzip the plugins for use.
-                extractAllPlugins(ctx); // Can comment this out to keep the plugins saved, rewrites them ever time it launches...
+                extractAllPlugins(ctx);
 
             } catch (IOException e) {
                 Log.e("AsyncAssetManager", "Failed o unpack components !",e );

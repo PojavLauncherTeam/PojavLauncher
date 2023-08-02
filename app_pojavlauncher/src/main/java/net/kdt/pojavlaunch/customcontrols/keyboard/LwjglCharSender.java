@@ -2,7 +2,7 @@ package net.kdt.pojavlaunch.customcontrols.keyboard;
 
 import static org.lwjgl.glfw.CallbackBridge.sendKeyPress;
 
-import net.kdt.pojavlaunch.LwjglGlfwKeycode;
+import net.kdt.pojavlaunch.utils.LwjglGlfwKeycode;
 
 import org.lwjgl.glfw.CallbackBridge;
 

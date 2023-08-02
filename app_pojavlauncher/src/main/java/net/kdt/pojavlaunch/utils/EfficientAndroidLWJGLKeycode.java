@@ -1,4 +1,4 @@
-package net.kdt.pojavlaunch;
+package net.kdt.pojavlaunch.utils;
 
 import static org.lwjgl.glfw.CallbackBridge.sendKeyPress;
 
