@@ -88,7 +88,7 @@ public class ControlDrawer extends ControlButton {
 
 
     private void resizeButtons(){
-        if (buttons == null) return;
+        if (buttons == null || drawerData.orientation == ControlDrawerData.Orientation.FREE) return;
         for(ControlSubButton subButton : buttons){
             subButton.mProperties.setWidth(mProperties.getWidth());
             subButton.mProperties.setHeight(mProperties.getHeight());
