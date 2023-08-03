@@ -42,12 +42,12 @@ public class LayoutConverter {
 
 
     /**
-     * Normalize the layout to v5 from v3/4: The stroke width is no longer dependant on the button size
+     * Normalize the layout to v6 from v3/4: The stroke width is no longer dependant on the button size
      */
     public static CustomControls convertV3_4Layout(JSONObject oldLayoutJson) {
         CustomControls layout = Tools.GLOBAL_GSON.fromJson(oldLayoutJson.toString(), CustomControls.class);
         convertStrokeWidth(layout);
-        layout.version = 5;
+        layout.version = 6;
         return layout;
     }
 
