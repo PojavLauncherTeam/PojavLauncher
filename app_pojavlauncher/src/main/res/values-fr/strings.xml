@@ -110,6 +110,7 @@
     <string name="global_error_field_empty">Ce champ ne peut pas être vide</string>
     <string name="global_waiting">Patientez</string>
     <string name="global_select">Sélectionner</string>
+    <string name="global_retry">Réessayer</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">L\'Application/Jeu a quitté avec le code %d, vérifiez le fichier latestlog.txt pour plus de détails.</string>
     <string name="mcn_exit_call">Quitter</string>
@@ -266,6 +267,7 @@
     <string name="preference_gyro_invert_y_axis">Inverser l\'axe Y</string>
     <string name="preference_gyro_invert_x_axis_description">Inverser l\'axe horizontal</string>
     <string name="preference_gyro_invert_y_axis_description">Inverser l\'axe vertical</string>
+    <string name="preference_gyro_smoothing_title">Activer le lissage du gyroscope</string>
     <string name="preference_back_title">Retour au dernier écran</string>
     <string name="gles_hack_none">Ne pas rétrécir les textures</string>
     <string name="gles_hack_always">Divise toutes les textures par 2</string>
@@ -293,6 +295,8 @@
     <string name="notification_game_runs">Le jeu est en cours d\'exécution !</string>
     <string name="folder_dialog_create">Créer</string>
     <string name="folder_dialog_insert_name">Insérer le nom du dossier</string>
+    <string name="folder_fragment_create">Créer un dossier</string>
+    <string name="folder_fragment_select">Sélectionnez le dossier</string>
     <string name="main_login_done">Connexion effectuée</string>
     <string name="main_add_account">Ajouter un compte</string>
     <string name="tasks_ongoing">Les tâches sont en cours, veuillez patienter</string>
@@ -334,5 +338,24 @@
     <string name="preference_deadzone_scale_description">Augmentez ceci si le joystick dérive</string>
     <string name="preference_force_big_core_title">Forcer le rendu à s\'exécuter sur le gros cœur</string>
     <string name="preference_force_big_core_desc">Force le thread de rendu Minecraft à s\'exécuter sur le cœur avec la fréquence max la plus élevée</string>
+    <string name="version_select_hint">Sélectionnez une version</string>
+    <string name="forge_dl_progress">Téléchargement de l\'installateur de %s</string>
+    <string name="modloader_dl_failed_to_load_list">Échec du chargement de la liste des versions !</string>
+    <string name="forge_dl_no_installer">Désolé, mais cette version de Forge n\'a pas d\'installateur, qui n\'est pas encore supportée.</string>
+    <string name="forge_dl_select_version">Sélectionner une version de Forge</string>
+    <string name="fabric_dl_progress">Téléchargement de l\'installateur de Fabric</string>
+    <string name="fabric_dl_loader_version">Version du lanceur Fabric</string>
+    <string name="fabric_dl_game_version">Version de Minecraft</string>
+    <string name="fabric_dl_install">Installer</string>
+    <string name="fabric_dl_cant_read_meta">Impossible de lire les métadonnées de Fabric. Veuillez réessayer plus tard.</string>
+    <string name="modloader_dl_install_fabric">Créer un profil Fabric</string>
+    <string name="modloader_dl_install_forge">Créer un profil Forge</string>
+    <string name="create_profile_vanilla">Créer un profil vanilla</string>
+    <string name="create_profile_vanilla_like_versions">Versions ressemblantes à une version Vanilla</string>
+    <string name="create_profile_modded_versions">Versions moddées</string>
+    <string name="fabric_dl_loader_title">Sélectionner des versions</string>
+    <string name="of_dl_select_version">Sélectionnez la version OptiFine</string>
+    <string name="of_dl_failed_to_scrape">Échec de la collecte des données pour l\'installation d\'OptiFine</string>
     <string name="of_dl_progress">Téléchargement de %s</string>
+    <string name="create_profile_optifine">Créer un profil OptiFine</string>
 </resources>
