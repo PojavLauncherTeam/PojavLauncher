@@ -109,61 +109,57 @@
         -->
         <Spinner
             android:id="@+id/editMapping_spinner_1"
-            android:layout_width="1px"
+            android:layout_width="0dp"
             android:layout_height="30dp"
-            android:layout_marginTop="@dimen/padding_small"
-            android:background="@android:color/transparent"
-            android:dropDownWidth="@dimen/_267sdp"
+            android:dropDownWidth="match_parent"
             android:dropDownVerticalOffset="30dp"
             android:gravity="center"
 
-            app:layout_constraintBottom_toTopOf="@id/editMapping_spinner_3"
+            android:visibility="invisible"
 
-
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editMapping_textView" />
 
 
         <Spinner
             android:id="@+id/editMapping_spinner_2"
-            android:layout_width="1px"
+            android:layout_width="0dp"
             android:layout_height="30dp"
-            android:background="@android:color/transparent"
-            android:dropDownWidth="@dimen/_267sdp"
+            android:dropDownWidth="match_parent"
             android:dropDownHorizontalOffset="30dp"
             android:dropDownVerticalOffset="30dp"
             android:gravity="center"
+            android:visibility="invisible"
 
-            app:layout_constraintBottom_toBottomOf="@+id/editMapping_spinner_1"
-
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/editMapping_spinner_1" />
+            app:layout_constraintTop_toBottomOf="@+id/editMapping_textView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Spinner
             android:id="@+id/editMapping_spinner_3"
-            android:layout_width="1px"
+            android:layout_width="0dp"
             android:layout_height="30dp"
-            android:background="@android:color/transparent"
-            android:dropDownWidth="@dimen/_267sdp"
+            android:dropDownWidth="match_parent"
             android:dropDownVerticalOffset="30dp"
             android:gravity="center"
-
-
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/editMapping_spinner_1" />
+            android:visibility="invisible"
+            app:layout_constraintTop_toTopOf="@+id/mapping_3_textview"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
 
         <Spinner
             android:id="@+id/editMapping_spinner_4"
-            android:layout_width="1px"
+            android:layout_width="0dp"
             android:layout_height="30dp"
-            android:background="@android:color/transparent"
-            android:dropDownWidth="@dimen/_267sdp"
+            android:dropDownWidth="match_parent"
             android:dropDownVerticalOffset="30dp"
+            android:visibility="invisible"
 
-
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/editMapping_spinner_2" />
+            app:layout_constraintTop_toTopOf="@+id/mapping_3_textview"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <!-- Clickable textview linked to the spinners
             Spinners are hidden at the same place because the dropdown offset doesn't work
