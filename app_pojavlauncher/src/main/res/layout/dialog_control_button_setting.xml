@@ -114,8 +114,8 @@
             android:dropDownWidth="match_parent"
             android:dropDownVerticalOffset="30dp"
             android:gravity="center"
-
             android:visibility="invisible"
+            android:background="@android:color/transparent"
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -131,6 +131,7 @@
             android:dropDownVerticalOffset="30dp"
             android:gravity="center"
             android:visibility="invisible"
+            android:background="@android:color/transparent"
 
             app:layout_constraintTop_toBottomOf="@+id/editMapping_textView"
             app:layout_constraintEnd_toEndOf="parent"
@@ -144,6 +145,8 @@
             android:dropDownVerticalOffset="30dp"
             android:gravity="center"
             android:visibility="invisible"
+            android:background="@android:color/transparent"
+
             app:layout_constraintTop_toTopOf="@+id/mapping_3_textview"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -156,6 +159,7 @@
             android:dropDownWidth="match_parent"
             android:dropDownVerticalOffset="30dp"
             android:visibility="invisible"
+            android:background="@android:color/transparent"
 
             app:layout_constraintTop_toTopOf="@+id/mapping_3_textview"
             app:layout_constraintEnd_toEndOf="parent"
