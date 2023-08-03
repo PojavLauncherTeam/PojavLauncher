@@ -334,6 +334,10 @@
     <string name="global_no">Нет</string>
     <string name="preference_controller_map_wiped">Настройки контроллера были сброшены</string>
     <string name="preference_category_controller_settings">Настройки контроллера</string>
+    <string name="preference_wipe_controller_title">Сбросить раскладку контроллера</string>
+    <string name="preference_wipe_controller_description">Позволяет вам переназначать кнопки контроллера</string>
+    <string name="preference_deadzone_scale_title">Размер мертвой зоны контроллера</string>
+    <string name="preference_deadzone_scale_description">Увеличьте этот параметр, если стики дрифтят</string>
     <string name="preference_force_big_core_title">Запускать визуализатор на мощном ядре</string>
     <string name="preference_force_big_core_desc">Принудительно запускать поток графического движка на ядре ЦП с наибольшей тактовой частотой.</string>
     <string name="version_select_hint">Укажите версию</string>
