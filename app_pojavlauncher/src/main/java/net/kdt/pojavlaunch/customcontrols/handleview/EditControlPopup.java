@@ -248,6 +248,9 @@ public class EditControlPopup {
         for (int i = 0; i < mRootView.getChildCount(); ++i) {
             mRootView.getChildAt(i).setVisibility(VISIBLE);
         }
+        for(Spinner s : mKeycodeSpinners) {
+            s.setVisibility(View.INVISIBLE);
+        }
     }
 
     private boolean isAtRight() {
