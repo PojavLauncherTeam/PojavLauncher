@@ -267,6 +267,8 @@
     <string name="preference_gyro_invert_y_axis">Обернути вісь Y</string>
     <string name="preference_gyro_invert_x_axis_description">Обернути горизонтальну вісь</string>
     <string name="preference_gyro_invert_y_axis_description">Обернути вертикальну вісь</string>
+    <string name="preference_gyro_smoothing_title">Увімкнути згладжування руху</string>
+    <string name="preference_gyro_smoothing_description">Збільшує плавність руху камери в обмін на невелику затримку відклику з миші.</string>
     <string name="preference_back_title">Повернутися назад</string>
     <string name="gles_hack_none">Не стискати текстури</string>
     <string name="gles_hack_always">Стиснути всі текстури у 2 рази</string>
@@ -357,4 +359,6 @@
     <string name="of_dl_failed_to_scrape">Не вдалося зібрати дані для встановлення OptiFine</string>
     <string name="of_dl_progress">Завантаження %s</string>
     <string name="create_profile_optifine">Створити профіль з OptiFine</string>
+    <string name="preference_gyro_damper_window_title">Затримка згладжування</string>
+    <string name="preference_gyro_damper_window_description">Збільшує плавність руху камери в обмін на невелику затримку відклику з миші. Установіть значення 0 щоб відключити цю функцію</string>
 </resources>
