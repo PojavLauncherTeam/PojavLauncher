@@ -3,7 +3,7 @@
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition para Android)</string>
     <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">¡Juega Minecraft: Java Edition en tu celular!</string>
+    <string name="app_motd">¡Juega Minecraft: Java Edition en tu telefono movil!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
@@ -82,7 +82,7 @@
     <string name="mcl_setting_category_general">Configuración general</string>
     <string name="mcl_setting_category_scaling">Ajustes de escala</string>
     <string name="mcl_setting_category_renderer">Renderizador</string>
-    <string name="mcl_setting_renderer_gles2_4">Hola, GASES - (ay versión, fase)</string>
+    <string name="mcl_setting_renderer_gles2_4">Divinas, GL4ES - (ay versión, fase)</string>
     <string name="mcl_setting_renderer_virgl">virglrenderer - (release 1.7+, slow)</string>
     <string name="mcl_setting_renderer_vgpu">vgpu - (up to 1.16.5, fast)</string>
     <string name="mcl_setting_renderer_vulkan_zink">Zinc - (antiguo b1.8+, lento)</string>
@@ -276,14 +276,39 @@
     <string name="no_saved_accounts">No hay cuentas guardadas</string>
     <string name="xerr_not_available">Xbox Live no está disponible en su país</string>
     <string name="mcl_setting_title_buttonallcaps">Usa únicamente mayúsculas en las etiquetas de los botones</string>
+    <string name="create_profile">Crear una nueva instancia</string>
+    <string name="preference_shader_dump_title">Activar dumpeo de shaders</string>
+    <string name="preference_shader_dump_description">El archivo de log ha convertido a los shaders en aún mas log</string>
+    <string name="percent_format">%d%%</string>
+    <string name="customctrl_editor_exit_title">¿Vas a salir?</string>
     <string name="customctrl_editor_exit_msg">¿Seguro que quieres salir?</string>
     <string name="customctrl_editor_exit">Salir del editor</string>
     <string name="global_save_and_exit">Guardar y salir</string>
     <string name="global_yes">Si</string>
     <string name="global_no">No</string>
     <string name="preference_controller_map_wiped">La configuración de control ha sido borrada</string>
+    <string name="preference_force_big_core_title">Obligar al renderizador a usarse en el núcleo grande</string>
+    <string name="preference_force_big_core_desc">Obliga a el procesamiento de Minecraft a correr en núcleo con la mayor frecuencia maxima</string>
+    <string name="version_select_hint">Elige una versión</string>
     <string name="forge_dl_progress">Descargando instalador para %s</string>
+    <string name="modloader_dl_failed_to_load_list">Oh no, ¡Ocurrió un error cargando la lista de versiones!</string>
+    <string name="forge_dl_no_installer">Lo siento, pero esta versión de Forge no tiene un instalador, lo cúal aún no esta soportado por Pojav.</string>
+    <string name="forge_dl_select_version">Elige la versión de Forge</string>
+    <string name="fabric_dl_progress">Descargando el instalador de Fabric</string>
+    <string name="fabric_dl_loader_version">Versión de cargador de Fabric</string>
+    <string name="fabric_dl_game_version">Versión de Minecraft</string>
+    <string name="fabric_dl_install">Instalar</string>
+    <string name="fabric_dl_cant_read_meta">Ocurrió un error leyendo la metadata de Fabric. Porfa intentalo más tarde.</string>
+    <string name="modloader_dl_install_fabric">Crear instancia de Fabric</string>
+    <string name="modloader_dl_install_forge">Crear instancia de Forge</string>
+    <string name="create_profile_vanilla">Crear instancia de Minecraft Vanilla</string>
+    <string name="create_profile_vanilla_like_versions">Versiones de Minecraft Vanilla</string>
     <string name="create_profile_modded_versions">Versiones modificadas</string>
+    <string name="fabric_dl_loader_title">Elige versiones</string>
     <string name="of_dl_select_version">Seleciona la versión de OptiFine</string>
+    <string name="of_dl_failed_to_scrape">Fallo al recolectar datos para la instalacion de OptiFine</string>
     <string name="of_dl_progress">Descargando %s</string>
+    <string name="create_profile_optifine">Crear instancia de OptiFine</string>
+    <string name="preference_gyro_damper_window_title">Tiempo de suavizado</string>
+    <string name="preference_gyro_damper_window_description">Reduce el jitter a cambio de latencia. 0 para desactivarlo</string>
 </resources>
