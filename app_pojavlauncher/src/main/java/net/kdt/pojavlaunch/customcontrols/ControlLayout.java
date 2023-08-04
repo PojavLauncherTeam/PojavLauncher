@@ -185,11 +185,12 @@ public class ControlLayout extends FrameLayout {
 			view.setFocusable(false);
 			view.setFocusableInTouchMode(false);
 		}else{
-			view.setVisible(drawer.areButtonsVisible);
+			view.setVisible(true);
 		}
 
-		drawer.addButton(view);
 		addView(view);
+		drawer.addButton(view);
+
 
 		setModified(true);
 	}
