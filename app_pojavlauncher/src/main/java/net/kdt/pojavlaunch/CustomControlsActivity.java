@@ -12,6 +12,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import net.kdt.pojavlaunch.customcontrols.ControlData;
 import net.kdt.pojavlaunch.customcontrols.ControlDrawerData;
+import net.kdt.pojavlaunch.customcontrols.ControlJoystickData;
 import net.kdt.pojavlaunch.customcontrols.ControlLayout;
 import net.kdt.pojavlaunch.customcontrols.EditorExitable;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
@@ -43,7 +44,7 @@ public class CustomControlsActivity extends BaseActivity implements EditorExitab
 			switch(position) {
 				case 0: mControlLayout.addControlButton(new ControlData("New")); break;
 				case 1: mControlLayout.addDrawer(new ControlDrawerData()); break;
-				case 2: mControlLayout.addJoystickButton(new ControlData()); break;
+				case 2: mControlLayout.addJoystickButton(new ControlJoystickData()); break;
 				case 3: mControlLayout.openLoadDialog(); break;
 				case 4: mControlLayout.openSaveDialog(this); break;
 				case 5: mControlLayout.openSetDefaultDialog(); break;

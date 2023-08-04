@@ -16,6 +16,7 @@ import android.view.View;
 import net.kdt.pojavlaunch.LwjglGlfwKeycode;
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.customcontrols.ControlData;
+import net.kdt.pojavlaunch.customcontrols.ControlJoystickData;
 import net.kdt.pojavlaunch.customcontrols.ControlLayout;
 import net.kdt.pojavlaunch.customcontrols.gamepad.GamepadJoystick;
 import net.kdt.pojavlaunch.customcontrols.handleview.EditControlPopup;
@@ -33,10 +34,10 @@ public class ControlJoystick extends JoystickView implements ControlInterface {
     private final int[] mDirectionRight = new int[]{LwjglGlfwKeycode.GLFW_KEY_D};
     private final int[] mDirectionBackward = new int[]{LwjglGlfwKeycode.GLFW_KEY_S};
     private final int[] mDirectionLeft = new int[]{LwjglGlfwKeycode.GLFW_KEY_A};
-    private ControlData mControlData;
+    private ControlJoystickData mControlData;
     private int mLastDirectionInt = GamepadJoystick.DIRECTION_NONE;
     private int mCurrentDirectionInt = GamepadJoystick.DIRECTION_NONE;
-    public ControlJoystick(ControlLayout parent, ControlData data) {
+    public ControlJoystick(ControlLayout parent, ControlJoystickData data) {
         super(parent.getContext());
         init(data, parent);
     }
@@ -47,13 +48,12 @@ public class ControlJoystick extends JoystickView implements ControlInterface {
         }
     }
 
-    private void init(ControlData data, ControlLayout layout) {
+    private void init(ControlJoystickData data, ControlLayout layout) {
         mControlData = data;
         setProperties(preProcessProperties(data, layout));
         setDeadzone(35);
         setFixedCenter(false);
         setAutoReCenterButton(true);
-        postDelayed(() -> setForwardLockDistance((int) Tools.dpToPx(35)), 10);
 
         injectBehaviors();
 
@@ -88,8 +88,9 @@ public class ControlJoystick extends JoystickView implements ControlInterface {
 
     @Override
     public void setProperties(ControlData properties, boolean changePos) {
-        mControlData = properties;
+        mControlData = (ControlJoystickData) properties;
         ControlInterface.super.setProperties(properties, changePos);
+        postDelayed(() -> setForwardLockDistance(mControlData.forwardLock ? (int) Tools.dpToPx(60) : 0), 10);
     }
 
     @Override
@@ -100,8 +101,8 @@ public class ControlJoystick extends JoystickView implements ControlInterface {
 
     @Override
     public void cloneButton() {
-        ControlData data = new ControlData(getProperties());
-        getControlLayoutParent().addJoystickButton(data);
+        ControlData data = new ControlJoystickData(getProperties());
+        getControlLayoutParent().addJoystickButton((ControlJoystickData) data);
     }
 
     @Override

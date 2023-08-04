@@ -20,6 +20,7 @@ import android.view.animation.Interpolator;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Spinner;
@@ -35,6 +36,7 @@ import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.colorselector.ColorSelector;
 import net.kdt.pojavlaunch.customcontrols.ControlData;
 import net.kdt.pojavlaunch.customcontrols.ControlDrawerData;
+import net.kdt.pojavlaunch.customcontrols.ControlJoystickData;
 import net.kdt.pojavlaunch.customcontrols.buttons.ControlDrawer;
 import net.kdt.pojavlaunch.customcontrols.buttons.ControlInterface;
 
@@ -73,7 +75,7 @@ public class EditControlPopup {
     };
     protected EditText mNameEditText, mWidthEditText, mHeightEditText;
     @SuppressLint("UseSwitchCompatOrMaterialCode")
-    protected Switch mToggleSwitch, mPassthroughSwitch, mSwipeableSwitch;
+    protected Switch mToggleSwitch, mPassthroughSwitch, mSwipeableSwitch, mForwardLockSwitch;
     protected Spinner mOrientationSpinner;
     protected TextView[] mKeycodeTextviews = new TextView[4];
     protected SeekBar mStrokeWidthSeekbar, mCornerRadiusSeekbar, mAlphaSeekbar;
@@ -266,6 +268,7 @@ public class EditControlPopup {
         setDefaultVisibilitySetting();
         mOrientationTextView.setVisibility(GONE);
         mOrientationSpinner.setVisibility(GONE);
+        mForwardLockSwitch.setVisibility(GONE);
 
         mNameEditText.setText(data.name);
         mWidthEditText.setText(String.valueOf(data.getWidth()));
@@ -321,7 +324,7 @@ public class EditControlPopup {
     /**
      * Load values for the joystick
      */
-    public void loadJoystickValues(ControlData data) {
+    public void loadJoystickValues(ControlJoystickData data) {
         loadValues(data);
 
         mMappingTextView.setVisibility(GONE);
@@ -340,6 +343,9 @@ public class EditControlPopup {
         mSwipeableSwitch.setVisibility(View.GONE);
         mPassthroughSwitch.setVisibility(View.GONE);
         mToggleSwitch.setVisibility(View.GONE);
+
+        mForwardLockSwitch.setVisibility(VISIBLE);
+        mForwardLockSwitch.setChecked(data.forwardLock);
     }
 
     /**
@@ -369,6 +375,7 @@ public class EditControlPopup {
         mToggleSwitch = mScrollView.findViewById(R.id.checkboxToggle);
         mPassthroughSwitch = mScrollView.findViewById(R.id.checkboxPassThrough);
         mSwipeableSwitch = mScrollView.findViewById(R.id.checkboxSwipeable);
+        mForwardLockSwitch = mScrollView.findViewById(R.id.checkboxForwardLock);
         mKeycodeSpinners[0] = mScrollView.findViewById(R.id.editMapping_spinner_1);
         mKeycodeSpinners[1] = mScrollView.findViewById(R.id.editMapping_spinner_2);
         mKeycodeSpinners[2] = mScrollView.findViewById(R.id.editMapping_spinner_3);
@@ -477,6 +484,12 @@ public class EditControlPopup {
         mPassthroughSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (internalChanges) return;
             mCurrentlyEditedButton.getProperties().passThruEnabled = isChecked;
+        });
+        mForwardLockSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (internalChanges) return;
+            if(mCurrentlyEditedButton.getProperties() instanceof ControlJoystickData){
+                ((ControlJoystickData) mCurrentlyEditedButton.getProperties()).forwardLock = isChecked;
+            }
         });
 
         mAlphaSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
