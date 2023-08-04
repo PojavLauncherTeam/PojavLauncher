@@ -110,7 +110,7 @@ public class ControlLayout extends FrameLayout {
 		}
 
 		// Joystick(s)
-		for(ControlData joystick : mLayout.mJoystickDataList){
+		for(ControlJoystickData joystick : mLayout.mJoystickDataList){
 			addJoystickView(joystick);
 		}
 
@@ -196,12 +196,12 @@ public class ControlLayout extends FrameLayout {
 	}
 
 	// JOYSTICK BUTTON
-	public void addJoystickButton(ControlData data){
+	public void addJoystickButton(ControlJoystickData data){
 		mLayout.mJoystickDataList.add(data);
 		addJoystickView(data);
 	}
 
-	private void addJoystickView(ControlData data){
+	private void addJoystickView(ControlJoystickData data){
 		addView(new ControlJoystick(this, data));
 	}
 

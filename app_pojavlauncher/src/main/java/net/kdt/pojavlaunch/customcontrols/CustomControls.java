@@ -13,14 +13,14 @@ public class CustomControls {
     public float scaledAt;
 	public List<ControlData> mControlDataList;
 	public List<ControlDrawerData> mDrawerDataList;
-	public List<ControlData> mJoystickDataList;
+	public List<ControlJoystickData> mJoystickDataList;
 	public CustomControls() {
 		this(new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
 	}
 
 
 
-	public CustomControls(List<ControlData> mControlDataList, List<ControlDrawerData> mDrawerDataList, List<ControlData> mJoystickDataList) {
+	public CustomControls(List<ControlData> mControlDataList, List<ControlDrawerData> mDrawerDataList, List<ControlJoystickData> mJoystickDataList) {
 		this.mControlDataList = mControlDataList;
 		this.mDrawerDataList = mDrawerDataList;
 		this.mJoystickDataList = mJoystickDataList;
