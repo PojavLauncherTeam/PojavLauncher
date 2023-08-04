@@ -446,6 +446,7 @@ public class MinecraftGLSurface extends View implements GrabListener {
         CallbackBridge.mouseX += (e.getX()* mScaleFactor);
         CallbackBridge.mouseY += (e.getY()* mScaleFactor);
 
+        // Position is updated by many events, hence it is send regardless of the event value
         CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
 
         switch (e.getActionMasked()) {
