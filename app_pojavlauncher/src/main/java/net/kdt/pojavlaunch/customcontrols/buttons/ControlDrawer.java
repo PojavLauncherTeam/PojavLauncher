@@ -126,6 +126,9 @@ public class ControlDrawer extends ControlButton {
     public void setVisible(boolean isVisible) {
         //TODO replicate changes to his children ?
         setVisibility(isVisible ? VISIBLE : GONE);
+        if(!isVisible){
+            areButtonsVisible = false;
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
