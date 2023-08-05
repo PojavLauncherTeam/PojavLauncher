@@ -75,7 +75,7 @@ public class ProfileEditorFragment extends Fragment {
         List<String> renderList = new ArrayList<>(5);
         Collections.addAll(renderList, getResources().getStringArray(R.array.renderer));
         renderList.add("Default");
-        mDefaultRenderer.setAdapter(new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, renderList));
+        mDefaultRenderer.setAdapter(new ArrayAdapter<>(getContext(), R.layout.item_simple_list_1, renderList));
 
         // Set up behaviors
         mSaveButton.setOnClickListener(v -> {

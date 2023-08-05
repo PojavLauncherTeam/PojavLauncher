@@ -16,6 +16,10 @@
     <dimen name="padding_extra_large">@dimen/_24sdp</dimen>
     <dimen name="padding_extra_extra_large">@dimen/_32sdp</dimen>
 
+    <!-- Input text padding -->
+    <dimen name="padding_input_bottom">@dimen/padding_heavy</dimen>
+    <dimen name="padding_input_top">@dimen/_11sdp</dimen>
+
     <!-- Main Activity components -->
     <dimen name="empty_icon_width">60dp</dimen>
     <dimen name="empty_icon_height">60dp</dimen>
