@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_app"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingHorizontal="@dimen/fragment_padding_medium"
+    android:paddingVertical="@dimen/fragment_padding_medium">
+
+    <EditText
+        android:id="@+id/search_mod_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_line"
+        android:textSize="@dimen/_13ssp"
+        android:layout_marginBottom="@dimen/padding_large"
+
+        android:ems="10"
+        android:hint="@string/hint_search_modpack"
+        android:inputType="textPersonName"
+        android:paddingHorizontal="@dimen/padding_heavy"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/search_mod_mc_version_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/profiles_profile_version"
+        app:layout_constraintBottom_toTopOf="@+id/search_mod_selected_mc_version_textview"
+        app:layout_constraintStart_toStartOf="@+id/search_mod_selected_mc_version_textview" />
+
+    <TextView
+        android:id="@+id/search_mod_selected_mc_version_textview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="32dp"
+        android:layout_marginEnd="@dimen/padding_medium"
+
+        android:background="@drawable/background_line"
+        android:hint="@string/version_select_hint"
+        android:paddingHorizontal="@dimen/padding_heavy"
+        android:textSize="@dimen/_13ssp"
+
+        app:layout_constraintEnd_toStartOf="@+id/search_mod_mc_version_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_mod_edittext" />
+
+    <Button
+        android:id="@+id/search_mod_mc_version_button"
+        android:layout_width="@dimen/_72sdp"
+        android:layout_height="0dp"
+
+        android:text="@string/global_select"
+
+        app:layout_constraintBottom_toBottomOf="@+id/search_mod_selected_mc_version_textview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/search_mod_selected_mc_version_textview" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/search_mod_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_mod_selected_mc_version_textview"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
