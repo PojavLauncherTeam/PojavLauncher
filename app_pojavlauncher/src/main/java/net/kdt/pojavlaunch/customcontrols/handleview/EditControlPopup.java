@@ -104,8 +104,8 @@ public class EditControlPopup {
         mColorSelector.getRootView().setTranslationZ(11);
         mColorSelector.getRootView().setX(-context.getResources().getDimensionPixelOffset(R.dimen._280sdp));
 
-        mEditPopupAnimator = ObjectAnimator.ofFloat(mScrollView, "x", 0).setDuration(1000);
-        mColorEditorAnimator = ObjectAnimator.ofFloat(mColorSelector.getRootView(), "x", 0).setDuration(1000);
+        mEditPopupAnimator = ObjectAnimator.ofFloat(mScrollView, "x", 0).setDuration(600);
+        mColorEditorAnimator = ObjectAnimator.ofFloat(mColorSelector.getRootView(), "x", 0).setDuration(600);
         Interpolator decelerate = new AccelerateDecelerateInterpolator();
         mEditPopupAnimator.setInterpolator(decelerate);
         mColorEditorAnimator.setInterpolator(decelerate);
