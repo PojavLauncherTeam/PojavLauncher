@@ -63,8 +63,11 @@
 
         <Button
             android:id="@+id/vprof_editor_version_button"
-            android:layout_width="@dimen/_72sdp"
+            android:layout_width="wrap_content"
             android:layout_height="0dp"
+            android:paddingHorizontal="@dimen/padding_large"
+            android:paddingVertical="0px"
+
 
             android:text="@string/global_select"
 
@@ -99,9 +102,9 @@
 
         <Button
             android:id="@+id/vprof_editor_ctrl_button"
-            android:layout_width="@dimen/_72sdp"
+            android:layout_width="wrap_content"
             android:layout_height="0dp"
-
+            android:paddingHorizontal="@dimen/padding_large"
             android:text="@string/global_select"
 
 
@@ -161,8 +164,9 @@
 
         <Button
             android:id="@+id/vprof_editor_path_button"
-            android:layout_width="@dimen/_72sdp"
+            android:layout_width="wrap_content"
             android:layout_height="0dp"
+            android:paddingHorizontal="@dimen/padding_large"
             android:text="@string/global_select"
 
             app:layout_constraintBottom_toBottomOf="@id/vprof_editor_path"
