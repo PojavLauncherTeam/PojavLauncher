@@ -406,6 +406,9 @@
 
     <string name="preference_gyro_damper_window_title">Smoothing time</string>
     <string name="preference_gyro_damper_window_description">Reduce jitter in exchange of latency. 0 to disable it</string>
+    <string name="hint_search_modpack">Search for modpacks</string>
+
+    <string name="generic_install">Install</string>
 
 
 </resources>

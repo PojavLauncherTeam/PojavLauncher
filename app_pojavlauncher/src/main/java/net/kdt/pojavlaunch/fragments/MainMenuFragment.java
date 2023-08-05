@@ -51,7 +51,7 @@ public class MainMenuFragment extends Fragment {
         mShareLogsButton.setOnClickListener((v) -> shareLog(requireContext()));
 
         mNewsButton.setOnLongClickListener((v)->{
-            Tools.swapFragment(requireActivity(), FabricInstallFragment.class, FabricInstallFragment.TAG, true, null);
+            Tools.swapFragment(requireActivity(), SearchModFragment.class, SearchModFragment.TAG, true, null);
             return true;
         });
     }
