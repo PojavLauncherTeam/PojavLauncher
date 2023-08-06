@@ -3,9 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="@dimen/_280sdp"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginVertical="@dimen/padding_heavy"
-    android:background="@drawable/background_control_editor">
+    android:background="@drawable/background_control_editor"
+    android:layout_gravity="center_vertical"
+    >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/edit_layout"

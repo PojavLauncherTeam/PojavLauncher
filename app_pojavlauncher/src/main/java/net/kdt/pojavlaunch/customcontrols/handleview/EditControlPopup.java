@@ -176,6 +176,11 @@ public class EditControlPopup {
             }
         }
 
+        // Adjust the color selector to have the same size as the control settings
+        ViewGroup.LayoutParams params = mColorSelector.getRootView().getLayoutParams();
+        params.height = mScrollView.getHeight();
+        mColorSelector.getRootView().setLayoutParams(params);
+
         mDisplayingColor = true;
         mColorSelector.show(color == -1 ? Color.WHITE : color);
     }

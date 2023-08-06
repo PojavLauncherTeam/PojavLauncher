@@ -9,7 +9,9 @@
     android:paddingHorizontal="@dimen/padding_moderate"
     android:paddingVertical="@dimen/padding_moderate"
     android:id="@+id/color_picker_layout"
-    android:layout_marginVertical="@dimen/padding_heavy">
+    android:layout_marginVertical="@dimen/padding_heavy"
+    android:layout_gravity="center_vertical"
+    >
 
     <net.kdt.pojavlaunch.colorselector.SVRectangleView
         android:id="@+id/color_selector_rectangle_view"
