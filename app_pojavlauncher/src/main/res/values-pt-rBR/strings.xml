@@ -178,6 +178,7 @@
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Adicionar botão</string>
     <string name="customctrl_addbutton_drawer">Adicionar botão gaveta</string>
+    <string name="customctrl_addbutton_joystick">Adicionar controle</string>
     <string name="customctrl_addsubbutton">Adicionar sub-botão</string>
     <string name="customctrl_add_subbutton_message">Sub-botão n°%d foi adicionado!</string>
     <string name="customctrl_selectdefault">Selecionar o json de controle padrão</string>
