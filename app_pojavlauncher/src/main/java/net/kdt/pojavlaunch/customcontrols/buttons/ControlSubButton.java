@@ -92,6 +92,6 @@ public class ControlSubButton extends ControlButton {
 
     @Override
     public void loadEditValues(EditControlPopup editControlPopup) {
-        editControlPopup.loadSubButtonValues(getProperties());
+        editControlPopup.loadSubButtonValues(getProperties(), parentDrawer.drawerData.orientation);
     }
 }
