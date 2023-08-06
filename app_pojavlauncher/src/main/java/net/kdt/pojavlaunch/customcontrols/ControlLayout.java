@@ -4,6 +4,8 @@ import static android.content.Context.INPUT_METHOD_SERVICE;
 import static net.kdt.pojavlaunch.MainActivity.mControlLayout;
 import static net.kdt.pojavlaunch.Tools.currentDisplayMetrics;
 
+import static org.lwjgl.glfw.CallbackBridge.isGrabbing;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
@@ -239,7 +241,7 @@ public class ControlLayout extends FrameLayout {
 
 		mControlVisible = isVisible;
 		for(ControlInterface button : getButtonChildren()){
-			button.setVisible(isVisible);
+			button.setVisible(((button.getProperties().displayInGame && isGrabbing()) || (button.getProperties().displayInMenu && !isGrabbing())) && isVisible);
 		}
 	}
 

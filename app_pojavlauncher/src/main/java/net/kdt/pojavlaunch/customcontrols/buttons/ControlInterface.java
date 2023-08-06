@@ -1,5 +1,7 @@
 package net.kdt.pojavlaunch.customcontrols.buttons;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_BUTTONSIZE;
 
 import android.annotation.SuppressLint;
@@ -49,7 +51,10 @@ public interface ControlInterface extends View.OnLongClickListener, GrabListener
      */
     void cloneButton();
 
-    void setVisible(boolean isVisible);
+    default void setVisible(boolean isVisible) {
+        if(getProperties().isHideable)
+            getControlView().setVisibility(isVisible ? VISIBLE : GONE);
+    }
 
     void sendKeyPresses(boolean isDown);
 

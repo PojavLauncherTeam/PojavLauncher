@@ -89,6 +89,7 @@ public class ControlJoystick extends JoystickView implements ControlInterface {
     @Override
     public void setProperties(ControlData properties, boolean changePos) {
         mControlData = (ControlJoystickData) properties;
+        mControlData.isHideable = true;
         ControlInterface.super.setProperties(properties, changePos);
         postDelayed(() -> setForwardLockDistance(mControlData.forwardLock ? (int) Tools.dpToPx(60) : 0), 10);
     }
@@ -105,10 +106,6 @@ public class ControlJoystick extends JoystickView implements ControlInterface {
         getControlLayoutParent().addJoystickButton((ControlJoystickData) data);
     }
 
-    @Override
-    public void setVisible(boolean isVisible) {
-        setVisibility(isVisible ? VISIBLE : GONE);
-    }
 
     @Override
     public void setBackground() {

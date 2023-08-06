@@ -2,6 +2,7 @@ package net.kdt.pojavlaunch.customcontrols.buttons;
 
 import android.annotation.SuppressLint;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
@@ -46,13 +47,14 @@ public class ControlDrawer extends ControlButton {
     }
 
     private void setControlButtonVisibility(ControlButton button, boolean isVisible){
-        post(() -> button.setVisible(isVisible));
+        button.getControlView().setVisibility(isVisible ? VISIBLE : GONE);
     }
 
     private void switchButtonVisibility(){
         areButtonsVisible = !areButtonsVisible;
+        int visibility = areButtonsVisible ? VISIBLE : GONE;
         for(ControlButton button : buttons){
-            button.setVisible(areButtonsVisible);
+            button.getControlView().setVisibility(visibility);
         }
     }
 
@@ -129,7 +131,7 @@ public class ControlDrawer extends ControlButton {
         setVisibility(visibility);
         if(visibility == GONE || areButtonsVisible) {
             for(ControlSubButton button : buttons){
-                button.setVisible(isVisible);
+                button.getControlView().setVisibility(isVisible ? VISIBLE : (!mProperties.isHideable && getVisibility() == GONE) ? VISIBLE : View.GONE);
             }
         }
     }

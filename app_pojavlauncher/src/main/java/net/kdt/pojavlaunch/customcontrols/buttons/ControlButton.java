@@ -80,11 +80,6 @@ public class ControlButton extends TextView implements ControlInterface {
         setText(properties.name);
     }
 
-    public void setVisible(boolean isVisible){
-        if(mProperties.isHideable)
-            setVisibility(isVisible ? VISIBLE : GONE);
-    }
-
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
