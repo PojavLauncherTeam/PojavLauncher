@@ -55,8 +55,7 @@ public class ModItemAdapter extends RecyclerView.Adapter<ModItemAdapter.ViewHold
                         public void onClick(View v) {
                             mModpackApi.handleInstallation(
                                     mModDetail,
-                                    mModDetail.versionUrls[mExtendedSpinner.getSelectedItemPosition()],
-                                    mTargetMcVersion);
+                                    mExtendedSpinner.getSelectedItemPosition());
 
                             //TODO do something !
                         }
@@ -68,7 +67,7 @@ public class ModItemAdapter extends RecyclerView.Adapter<ModItemAdapter.ViewHold
 
                 if(isExtended() && mModDetail == null) {
                     PojavApplication.sExecutorService.execute(() -> {
-                        mModDetail = mModpackApi.getModDetails(mModItem, mTargetMcVersion);
+                        mModDetail = mModpackApi.getModDetails(mModItem);
                         System.out.println(mModDetail);
                         Tools.runOnUiThread(() -> setStateDetailed(mModDetail));
                     });

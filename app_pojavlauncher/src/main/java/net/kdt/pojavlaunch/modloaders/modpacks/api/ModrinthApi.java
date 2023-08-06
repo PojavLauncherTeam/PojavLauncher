@@ -10,6 +10,7 @@ import net.kdt.pojavlaunch.modloaders.modpacks.models.ModDetail;
 import net.kdt.pojavlaunch.modloaders.modpacks.models.ModItem;
 import net.kdt.pojavlaunch.modloaders.modpacks.models.ModrinthIndex;
 import net.kdt.pojavlaunch.modloaders.modpacks.models.Constants;
+import net.kdt.pojavlaunch.modloaders.modpacks.models.SearchFilters;
 import net.kdt.pojavlaunch.utils.DownloadUtils;
 import net.kdt.pojavlaunch.utils.FileUtils;
 import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
@@ -27,14 +28,18 @@ public class ModrinthApi implements ModpackApi {
     }
 
     @Override
-    public ModItem[] searchMod(boolean searchModpack, String minecraftVersion, String name) {
+    public ModItem[] searchMod(SearchFilters searchFilters) {
         HashMap<String, Object> params = new HashMap<>();
 
-        params.put("facets", String.format("[[\"project_type:%s\"],[\"versions:%s\"]]",
-                searchModpack ? "modpack" : "mod",
-                minecraftVersion
-        ));
-        params.put("query", name);
+        // Build the facets filters
+        StringBuilder facetString = new StringBuilder();
+        facetString.append("[");
+        facetString.append(String.format("[\"project_type:%s\"]", searchFilters.isModpack ? "modpack" : "mod"));
+        if(searchFilters.mcVersion != null && !searchFilters.mcVersion.isEmpty())
+            facetString.append(String.format(",[\"versions:%s\"]", searchFilters.mcVersion));
+        facetString.append("]");
+        params.put("facets", facetString.toString());
+        params.put("query", searchFilters.name);
 
         JsonObject response = mApiHandler.get("search", params, JsonObject.class);
         JsonArray responseHits = response.getAsJsonArray("hits");
@@ -56,26 +61,31 @@ public class ModrinthApi implements ModpackApi {
     }
 
     @Override
-    public ModDetail getModDetails(ModItem item, String targetMcVersion) {
-        HashMap<String, Object> queryParams  = new HashMap<>();
-        queryParams.put("game_versions", String.format("[\"%s\"]", targetMcVersion));
-        JsonArray response = mApiHandler.get(String.format("project/%s/version", item.id), queryParams, JsonArray.class);
+    public ModDetail getModDetails(ModItem item) {
+
+        JsonArray response = mApiHandler.get(String.format("project/%s/version", item.id), JsonArray.class);
         System.out.println(response.toString());
         String[] names = new String[response.size()];
+        String[] mcNames = new String[response.size()];
         String[] urls = new String[response.size()];
 
         for (int i=0; i<response.size(); ++i) {
             JsonObject version = response.get(i).getAsJsonObject();
             names[i] = version.get("name").getAsString();
+            mcNames[i] = version.get("game_versions").getAsJsonArray().get(0).getAsString();
             urls[i] = version.get("files").getAsJsonArray().get(0).getAsJsonObject().get("url").getAsString();
+
+            if (!names[i].contains(mcNames[i]))
+                names[i] += " - " + mcNames[i];
         }
 
-        return new ModDetail(item, names, urls);
+        return new ModDetail(item, names, mcNames, urls);
     }
 
     @Override
-    public void installMod(ModDetail modDetail, String versionUrl, String mcVersion) {
+    public void installMod(ModDetail modDetail, int selectedVersion){
         //TODO considering only modpacks for now
+        String versionUrl = modDetail.versionUrls[selectedVersion];
         String modpackName = modDetail.title.toLowerCase(Locale.ROOT).trim().replace(" ", "_" );
 
         // Build a new minecraft instance, folder first
@@ -133,7 +143,7 @@ public class ModrinthApi implements ModpackApi {
         profile.gameDir = "./custom_instances/" + modpackName;
         profile.name = modpackName;
         //FIXME add the proper version !
-        profile.lastVersionId = mcVersion;
+        profile.lastVersionId = "1.7.10";
 
         LauncherProfiles.mainProfileJson.profiles.put(modpackName, profile);
         LauncherProfiles.update();
