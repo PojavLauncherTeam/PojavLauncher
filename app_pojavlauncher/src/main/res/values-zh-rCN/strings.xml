@@ -53,7 +53,7 @@
     <string name="mcl_options">选项</string>
     <string name="mcl_option_modinstall">启动模组安装器（例如 Forge、LabyMod、Fabric...）</string>
     <string name="mcl_option_modinstallwitharg">以自定义参数启动模组安装器</string>
-    <string name="mcl_option_customcontrol">自定义控制按键</string>
+    <string name="mcl_option_customcontrol">自定义控制键</string>
     <string name="mcl_option_settings">设置</string>
     <string name="mcl_option_about">关于</string>
     <string name="mcl_setting_title_use_surface_view">使用备用表面渲染（Surface Rendering）</string>
@@ -178,6 +178,7 @@
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">添加按键</string>
     <string name="customctrl_addbutton_drawer">添加组合键</string>
+    <string name="customctrl_addbutton_joystick">添加摇杆</string>
     <string name="customctrl_addsubbutton">添加子按钮</string>
     <string name="customctrl_add_subbutton_message">子按钮 n°%d 已添加！</string>
     <string name="customctrl_selectdefault">选择默认 json 控制键位</string>
@@ -209,6 +210,7 @@
     <string name="mcl_setting_subtitle_mousespeed">更改虚拟鼠标的速度</string>
     <string name="customctrl_passthru">鼠标穿透</string>
     <string name="customctrl_swipeable">可滑动</string>
+    <string name="customctrl_forward_lock">前向锁（Forward lock）</string>
     <string name="customctrl_rounded">圆角</string>
     <string name="memory_warning_msg">当前可用内存（%d）低于所分配的内存（%d），这可能会导致游戏崩溃。如果游戏崩溃请更改配置。</string>
     <string name="mcl_memory_allocation">内存分配</string>
@@ -234,12 +236,12 @@
     <string name="pvc_title">预发布版本设置</string>
     <string name="storage_warning_title">存储位置变更</string>
     <string name="storage_warning_text"><![CDATA[由于 Google 在 Android 10 及更高版本中增加了新的存储限制，我们需要将游戏目录移动到应用的私有文件夹中。<br />新的 Pojav 文件夹是 <b>Android/data/%s/files/</b> （同样可以通过您的文件管理器访问）。<br />如果您需要复制您的游戏文件，请从 <b>games/PojavLauncher</b> 中手动复制所有内容]]></string>
-    <string name="control_offset_title">控件偏移</string>
+    <string name="control_offset_title">控制键偏移</string>
     <string name="control_top_offset">顶端偏移： </string>
     <string name="control_right_offset">右偏移： </string>
     <string name="control_bottom_offset">底部偏移： </string>
     <string name="control_left_offset">左偏移： </string>
-    <string name="preference_control_offset_title">控件侧偏移</string>
+    <string name="preference_control_offset_title">控制键侧偏移</string>
     <string name="preference_control_offset_description">设置屏幕每边的自定义偏移</string>
     <string name="preference_mouse_start_title">启动游戏时默认打开虚拟鼠标</string>
     <string name="preference_mouse_start_description">此选项打开时，虚拟鼠标会在启动时显示</string>
@@ -290,7 +292,7 @@
     <string name="lazy_service_default_description">该服务用于执行耗时时间长的任务</string>
     <string name="mcl_setting_veroption_installed">已安装</string>
     <string name="use_global_default">（使用全局默认值）</string>
-    <string name="default_control">默认控件布局</string>
+    <string name="default_control">默认控制键布局</string>
     <string name="progresslayout_tasks_in_progress">%d 项任务正在进行中</string>
     <string name="notification_terminate">终止</string>
     <string name="notification_game_runs">游戏正在进行！</string>
@@ -320,7 +322,7 @@
     <string name="microsoft_login_retry_later">您的操作过于频繁，请稍后再试</string>
     <string name="storage_required">PojavLauncher 需要连接外部存储。请重新连接存储并重新启动应用程序。</string>
     <string name="mcl_setting_title_buttonallcaps">在按钮标签中仅使用大写字母</string>
-    <string name="mcl_setting_subtitle_buttonallcaps">如果您想在控件中使用小写字母，请禁用此功能</string>
+    <string name="mcl_setting_subtitle_buttonallcaps">如果您想在控制键中使用小写字母，请禁用此功能</string>
     <string name="create_profile">创建新配置</string>
     <string name="preference_shader_dump_title">启用着色器输出</string>
     <string name="preference_shader_dump_description">记录转换的着色器到日志文件</string>
