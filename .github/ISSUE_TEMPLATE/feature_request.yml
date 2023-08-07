@@ -1,31 +1,37 @@
-name: Feature request
-description: 'Ask for new features.'
-title: "[F-Req] <Short description>"
-labels: [enhancement]
+name: 未被翻译的部分反馈
+description: ' 提交一份反馈报告！ '
+title: "[未被翻译] 标题"
+labels: [未被翻译]
 body:
 - type: textarea
   id: version
   attributes:
-    label: Is this request related to a bug?
-    description: |
-      Give us some details into the problem, and how this affects it.
-    placeholder: 'Example: You should add a version selector because of the text box being too small.'
+    label: 什么地方没有被翻译呢？
+    description: >-
+      简单描述下翻译问题，提供您认为正确的翻译！
   validations:
-    required: false
+    required: true
 
 - type: textarea
   attributes:
-    label: Describe the request.
-    description: |
-      What do you want to see changed, added, or removed? Make sure to be specific.
-      placeholder: 'Example: A scrollable version picker.'
+    label: 截图/视频
+    description: >-
+      如果可以，还请带上您的截图，这会让我更快确定是哪个位置未被翻译！
   validations:
-    required: false
+    required: true
+
 
 - type: textarea
   attributes:
-    label: Anything else?
+    label: 其他信息
     description: |
-      Add any other context about the problem here.
+     提供您认为翻译错误的PojavLauncher的版本信息！
+       例如：
+         - 是否为独立软件版本：是/否
+         - PojavLauncher版本：[dahlia-20230807-8c7c72f-v3_openjdk]
+    value: |
+        - 是否为独立软件版本：
+        - PojavLauncher版本: 
+    render: markdown
   validations:
-    required: false
+    required: true
