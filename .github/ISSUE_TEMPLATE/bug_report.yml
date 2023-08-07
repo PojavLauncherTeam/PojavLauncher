@@ -1,7 +1,7 @@
 name: 翻译问题反馈
 description: ' 提交一份反馈报告！ '
 title: "[翻译问题] 标题"
-labels: [bug]
+labels: [翻译问题]
 body:
 - type: textarea
   id: version
