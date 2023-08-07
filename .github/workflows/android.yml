@@ -89,7 +89,7 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v3
         with:
-          name: app-debug
+          name: Pojav汉化更新
           path: out/app-debug.*
 
       - name: Upload onto the Google Play testing track
@@ -107,6 +107,6 @@ jobs:
       - name: Upload APK (without runtime)
         uses: actions/upload-artifact@v3
         with:
-          name: app-debug-noruntime
+          name: Pojav汉化更新-noruntime
           path: out/app-debug-noruntime.*
 
