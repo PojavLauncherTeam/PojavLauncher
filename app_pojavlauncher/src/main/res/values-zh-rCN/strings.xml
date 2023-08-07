@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
-    <string name="app_name">PojavLauncher（适用于 Android 的《Minecraft：Java版》）</string>
-    <string name="app_short_name">PojavLauncher</string>
+    <string name="app_name">PojavLauncher（中文语言更新）</string>
+    <string name="app_short_name">Pojav CN</string>
     <string name="app_motd">在您的设备上启动《Minecraft：Java版》！</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
