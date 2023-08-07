@@ -1,5 +1,5 @@
 # PojavLauncher-非官方中文语言翻译更新
-<img src="https://github.com/PojavLauncherTeam/PojavLauncher/blob/v3_openjdk/app_pojavlauncher/src/main/assets/pojavlauncher.png" align="left" width="130" height="150" alt="PojavLauncher logo">
+<img src="https://github.com/PojavLauncherTeam/PojavLauncher/blob/v3_openjdk/PojavCN.png" align="left" width="130" height="150" alt="PojavLauncher logo">
 
 ## 介绍
 你好！欢迎来到PojavLauncher非官方中文语言翻译更新的分支！
