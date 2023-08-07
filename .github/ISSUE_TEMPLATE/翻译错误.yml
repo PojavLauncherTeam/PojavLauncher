@@ -27,10 +27,8 @@ body:
     description: |
      提供您认为翻译错误的PojavLauncher的版本信息！
        例如：
-         - 是否为独立软件版本：是/否
          - PojavLauncher版本：[例如：dahlia-20230807-8c7c72f-v3_openjdk]
     value: |
-        - 是否为独立软件版本：
         - PojavLauncher版本: 
     render: markdown
   validations:
