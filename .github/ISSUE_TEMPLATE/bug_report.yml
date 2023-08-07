@@ -30,7 +30,7 @@ body:
        例如：
          - 是否为独立软件版本：是/否
          - PojavLauncher版本：[上一个版本]
-      value: |
+    value: |
         - PojavLauncher version: 
     render: markdown
   validations:
