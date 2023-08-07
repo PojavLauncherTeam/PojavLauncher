@@ -6,7 +6,7 @@ static def getDate() { return new Date().format('yyyyMMdd') }
 
 static def getDateSeconds() {
     if (System.getenv("GITHUB_ACTIONS") == "true") {
-        return 9934841 + Integer.parseInt(System.getenv("GITHUB_RUN_NUMBER"))
+        return 9939242 + Integer.parseInt(System.getenv("GITHUB_RUN_NUMBER"))
     } else {
         return 172005
     }
