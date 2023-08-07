@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_app"
@@ -21,6 +22,16 @@
         android:paddingHorizontal="@dimen/padding_heavy"
         app:layout_constraintTop_toTopOf="parent"
         />
+
+    <ProgressBar
+        android:id="@+id/search_mod_progressbar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/search_mod_edittext"
+        tools:layout_editor_absoluteX="13dp" />
 
     <TextView
         android:id="@+id/search_mod_mc_version_textview"
@@ -44,7 +55,7 @@
 
         app:layout_constraintEnd_toStartOf="@+id/search_mod_mc_version_button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_mod_edittext" />
+        app:layout_constraintTop_toBottomOf="@+id/search_mod_progressbar" />
 
     <Button
         android:id="@+id/search_mod_mc_version_button"

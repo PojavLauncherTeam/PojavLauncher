@@ -1,10 +1,12 @@
 package net.kdt.pojavlaunch.modloaders.modpacks;
 
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +20,8 @@ import net.kdt.pojavlaunch.PojavApplication;
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.modloaders.modpacks.api.ModpackApi;
+import net.kdt.pojavlaunch.modloaders.modpacks.imagecache.ImageReceiver;
+import net.kdt.pojavlaunch.modloaders.modpacks.imagecache.ModIconCache;
 import net.kdt.pojavlaunch.modloaders.modpacks.models.ModDetail;
 import net.kdt.pojavlaunch.modloaders.modpacks.models.ModItem;
 
@@ -25,9 +29,9 @@ import java.util.Arrays;
 
 public class ModItemAdapter extends RecyclerView.Adapter<ModItemAdapter.ViewHolder> {
 
+    private final ModIconCache mIconCache = new ModIconCache();
     private ModItem[] mModItems;
     private final ModpackApi mModpackApi;
-    private String mTargetMcVersion;
 
     /**
      * Basic viewholder with expension capabilities
@@ -40,6 +44,9 @@ public class ModItemAdapter extends RecyclerView.Adapter<ModItemAdapter.ViewHold
         private View mExtendedLayout;
         private Spinner mExtendedSpinner;
         private Button mExtendedButton;
+        private ImageView mIconView;
+        private Bitmap mThumbnailBitmap;
+        private ImageReceiver mImageReceiver;
         public ViewHolder(View view) {
             super(view);
 
@@ -50,15 +57,12 @@ public class ModItemAdapter extends RecyclerView.Adapter<ModItemAdapter.ViewHold
                     mExtendedButton = mExtendedLayout.findViewById(R.id.mod_extended_select_version_button);
                     mExtendedSpinner = mExtendedLayout.findViewById(R.id.mod_extended_version_spinner);
 
-                    mExtendedButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            mModpackApi.handleInstallation(
-                                    mModDetail,
-                                    mExtendedSpinner.getSelectedItemPosition());
+                    mExtendedButton.setOnClickListener(v1 -> {
+                        mModpackApi.handleInstallation(
+                                mModDetail,
+                                mExtendedSpinner.getSelectedItemPosition());
 
-                            //TODO do something !
-                        }
+                        //TODO do something !
                     });
                 } else {
                     if(isExtended()) mExtendedLayout.setVisibility(View.GONE);
@@ -77,13 +81,28 @@ public class ModItemAdapter extends RecyclerView.Adapter<ModItemAdapter.ViewHold
             // Define click listener for the ViewHolder's View
             mTitle = view.findViewById(R.id.mod_title_textview);
             mDescription = view.findViewById(R.id.mod_body_textview);
+            mIconView = view.findViewById(R.id.mod_thumbnail_imageview);
         }
 
         /** Display basic info about the moditem */
         public void setStateLimited(ModItem item) {
             mModDetail = null;
+            if(mThumbnailBitmap != null) {
+                mIconView.setImageBitmap(null);
+                mThumbnailBitmap.recycle();
+            }
+            if(mImageReceiver != null) {
+                mIconCache.cancelImage(mImageReceiver);
+            }
 
             mModItem = item;
+            // here the previous reference to the image receiver will disappear
+            mImageReceiver = bm->{
+                mImageReceiver = null;
+                mThumbnailBitmap = bm;
+                mIconView.setImageBitmap(bm);
+            };
+            mIconCache.getImage(mImageReceiver, mModItem.apiSource+"_"+mModItem.id, mModItem.imageUrl);
             mTitle.setText(item.title);
             mDescription.setText(item.description);
 
@@ -116,7 +135,6 @@ public class ModItemAdapter extends RecyclerView.Adapter<ModItemAdapter.ViewHold
     public void setModItems(ModItem[] items, String targetMcVersion){
         mModItems = items;
         notifyDataSetChanged();
-        mTargetMcVersion = targetMcVersion;
     }
 
     @NonNull

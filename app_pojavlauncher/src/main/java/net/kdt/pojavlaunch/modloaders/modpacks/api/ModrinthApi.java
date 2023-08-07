@@ -40,9 +40,12 @@ public class ModrinthApi implements ModpackApi {
         facetString.append("]");
         params.put("facets", facetString.toString());
         params.put("query", searchFilters.name);
+        params.put("limit", 100);
 
         JsonObject response = mApiHandler.get("search", params, JsonObject.class);
+        if(response == null) return null;
         JsonArray responseHits = response.getAsJsonArray("hits");
+        if(responseHits == null) return null;
 
         ModItem[] items = new ModItem[responseHits.size()];
         for(int i=0; i<responseHits.size(); ++i){
@@ -64,6 +67,7 @@ public class ModrinthApi implements ModpackApi {
     public ModDetail getModDetails(ModItem item) {
 
         JsonArray response = mApiHandler.get(String.format("project/%s/version", item.id), JsonArray.class);
+        if(response == null) return null;
         System.out.println(response.toString());
         String[] names = new String[response.size()];
         String[] mcNames = new String[response.size()];
