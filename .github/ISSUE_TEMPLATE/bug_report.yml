@@ -1,5 +1,5 @@
 name: 翻译问题反馈
-description: ' Create a report to help us improve '
+description: ' 提交一份反馈报告！ '
 title: "[翻译问题] 标题"
 labels: [bug]
 body:
@@ -9,7 +9,6 @@ body:
     label: 什么地方没有翻译正确呢？
     description: >-
       简单描述下翻译问题，提供您认为正确的翻译！
-    placeholder: 'Example: Application exited with code 1'
   validations:
     required: true
 
