@@ -4,7 +4,7 @@
 
     <net.kdt.pojavlaunch.prefs.BackButtonPreference/>
 
-    <PreferenceCategory android:title="Video settings" >
+    <PreferenceCategory android:title="视频设置" >
         <androidx.preference.ListPreference
             android:title="@string/mcl_setting_category_renderer"
             android:key="renderer"

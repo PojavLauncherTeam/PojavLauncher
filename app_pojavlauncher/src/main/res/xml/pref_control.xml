@@ -14,7 +14,7 @@
     </Preference>
 
     <PreferenceCategory
-        android:title="Gestures ">
+        android:title="手势">
 
         <androidx.preference.SwitchPreferenceCompat
             android:defaultValue="false"
@@ -42,7 +42,7 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="Buttons">
+        android:title="控制键">
 
         <net.kdt.pojavlaunch.prefs.CustomSeekBarPreference
             android:key="buttonscale"
