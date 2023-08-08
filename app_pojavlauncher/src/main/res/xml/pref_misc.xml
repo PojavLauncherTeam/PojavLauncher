@@ -4,7 +4,7 @@
 
     <net.kdt.pojavlaunch.prefs.BackButtonPreference/>
 
-    <PreferenceCategory android:title="其他设置">
+    <PreferenceCategory android:title="@string/cn_miscellaneous_settings">
         <SwitchPreference
             android:defaultValue="true"
             android:icon="@drawable/ic_setting_hash_verification"
