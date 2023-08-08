@@ -224,7 +224,7 @@
     <string name="mcl_setting_subtitle_mousespeed">更改虚拟鼠标的速度</string>
     <string name="customctrl_passthru">鼠标穿透</string>
     <string name="customctrl_swipeable">可滑动</string>
-    <string name="customctrl_forward_lock">前向锁（Forward lock）</string>
+    <string name="customctrl_forward_lock">前进锁定</string>
     <string name="customctrl_rounded">圆角</string>
     <string name="memory_warning_msg">当前可用内存（%d）低于所分配的内存（%d），这可能会导致游戏崩溃。如果游戏崩溃请更改配置。</string>
     <string name="mcl_memory_allocation">内存分配</string>
