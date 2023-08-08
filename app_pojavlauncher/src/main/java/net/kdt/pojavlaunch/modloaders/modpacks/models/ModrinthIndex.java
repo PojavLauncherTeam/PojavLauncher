@@ -1,11 +1,12 @@
 package net.kdt.pojavlaunch.modloaders.modpacks.models;
 
 
-import com.google.gson.annotations.SerializedName;
+import androidx.annotation.NonNull;
 
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
+import java.util.Map;
 
 /**
  * POJO to represent the modrinth index inside mrpacks
@@ -20,6 +21,7 @@ public class ModrinthIndex {
     public String summary;
 
     public ModrinthIndexFile[] files;
+    public Map<String, String> dependencies;
 
 
     public static class ModrinthIndexFile {
@@ -31,6 +33,7 @@ public class ModrinthIndex {
 
         @Nullable public ModrinthIndexFileEnv env;
 
+        @NonNull
         @Override
         public String toString() {
             return "ModrinthIndexFile{" +
@@ -45,6 +48,7 @@ public class ModrinthIndex {
             public String sha1;
             public String sha512;
 
+            @NonNull
             @Override
             public String toString() {
                 return "ModrinthIndexFileHashes{" +
@@ -58,6 +62,7 @@ public class ModrinthIndex {
             public String client;
             public String server;
 
+            @NonNull
             @Override
             public String toString() {
                 return "ModrinthIndexFileEnv{" +
@@ -68,27 +73,7 @@ public class ModrinthIndex {
         }
     }
 
-
-    public static class ModrinthIndexDependencies {
-        @Nullable public String minecraft;
-        @Nullable public String forge;
-        @SerializedName("fabric-loader")
-        @Nullable public String fabricLoader;
-        @SerializedName("quilt-loader")
-        @Nullable public String quiltLoader;
-
-        @Override
-        public String toString() {
-            return "ModrinthIndexDependencies{" +
-                    "minecraft='" + minecraft + '\'' +
-                    ", forge='" + forge + '\'' +
-                    ", fabricLoader='" + fabricLoader + '\'' +
-                    ", quiltLoader='" + quiltLoader + '\'' +
-                    '}';
-        }
-
-    }
-
+    @NonNull
     @Override
     public String toString() {
         return "ModrinthIndex{" +

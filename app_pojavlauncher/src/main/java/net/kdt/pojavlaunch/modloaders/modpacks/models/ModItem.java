@@ -1,5 +1,7 @@
 package net.kdt.pojavlaunch.modloaders.modpacks.models;
 
+import androidx.annotation.NonNull;
+
 public class ModItem extends ModSource {
 
     public String id;
@@ -16,6 +18,7 @@ public class ModItem extends ModSource {
         this.imageUrl = imageUrl;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "ModItem{" +
@@ -26,5 +29,9 @@ public class ModItem extends ModSource {
                 ", apiSource=" + apiSource +
                 ", isModpack=" + isModpack +
                 '}';
+    }
+
+    public String getIconCacheTag() {
+        return apiSource+"_"+id;
     }
 }

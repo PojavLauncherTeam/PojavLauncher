@@ -1,10 +1,15 @@
 package net.kdt.pojavlaunch.modloaders.modpacks.imagecache;
 
+import android.util.Base64;
 import android.util.Log;
 
 import net.kdt.pojavlaunch.Tools;
 
+import org.apache.commons.io.IOUtils;
+
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -69,5 +74,33 @@ public class ModIconCache {
         }
         if(isCanceled) Log.i("IconCache", "checkCancelled("+imageReceiver.hashCode()+") == true");
         return isCanceled;
+    }
+
+    /**
+     * Get the base64-encoded version of a cached icon by its tag.
+     * Note: this functions performs I/O operations, and should not be called on the UI
+     * thread.
+     * @param imageTag the icon tag
+     * @return the base64 encoded image or null if not cached
+     */
+
+    public static String getBase64Image(String imageTag) {
+        File imagePath = new File(Tools.DIR_CACHE, "mod_icons/"+imageTag+".ca");
+        Log.i("IconCache", "Creating base64 version of icon "+imageTag);
+        if(!imagePath.canRead() || !imagePath.isFile()) {
+            Log.i("IconCache", "Icon does not exist");
+            return null;
+        }
+        try {
+            try(FileInputStream fileInputStream = new FileInputStream(imagePath)) {
+                byte[] imageBytes = IOUtils.toByteArray(fileInputStream);
+                // reencode to png? who cares! our profile icon cache is an omnivore!
+                // if some other launcher parses this and dies it is not our problem :troll:
+                return "data:image/png;base64,"+ Base64.encodeToString(imageBytes, Base64.DEFAULT);
+            }
+        }catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

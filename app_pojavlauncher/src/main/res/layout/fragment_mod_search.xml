@@ -77,4 +77,15 @@
         app:layout_constraintTop_toBottomOf="@id/search_mod_selected_mc_version_textview"
         />
 
+    <TextView
+        android:id="@+id/search_mod_status_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/search_mod_list"
+        app:layout_constraintEnd_toEndOf="@+id/search_mod_list"
+        app:layout_constraintStart_toStartOf="@+id/search_mod_list"
+        app:layout_constraintTop_toTopOf="@+id/search_mod_list" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

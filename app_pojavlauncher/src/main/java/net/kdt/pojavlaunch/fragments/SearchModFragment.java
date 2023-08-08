@@ -1,5 +1,7 @@
 package net.kdt.pojavlaunch.fragments;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -37,6 +39,8 @@ public class SearchModFragment extends Fragment {
     private ModItemAdapter mModItemAdapter;
     private ProgressBar mSearchProgressBar;
     private Future<?> mSearchFuture;
+    private TextView mStatusTextView;
+    private ColorStateList mDefaultTextColor;
 
     private ModpackApi modpackApi;
 
@@ -59,6 +63,9 @@ public class SearchModFragment extends Fragment {
         mSelectedVersion = view.findViewById(R.id.search_mod_selected_mc_version_textview);
         mSelectVersionButton = view.findViewById(R.id.search_mod_mc_version_button);
         mRecyclerview = view.findViewById(R.id.search_mod_list);
+        mStatusTextView = view.findViewById(R.id.search_mod_status_text);
+
+        mDefaultTextColor = mStatusTextView.getTextColors();
 
         mRecyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerview.setAdapter(mModItemAdapter);
@@ -81,6 +88,7 @@ public class SearchModFragment extends Fragment {
             return true;
         });
     }
+
     class SearchModRunnable implements Runnable{
         private final Object mFutureLock = new Object();
         private final SearchFilters mRunnableFilters;
@@ -109,9 +117,22 @@ public class SearchModFragment extends Fragment {
             ModItem[] items = modpackApi.searchMod(mRunnableFilters);
             Log.d(SearchModFragment.class.toString(), Arrays.toString(items));
             Tools.runOnUiThread(() -> {
+                ModItem[] localItems = items;
                 if(mMyFuture.isCancelled()) return;
                 mSearchProgressBar.setVisibility(View.GONE);
-                mModItemAdapter.setModItems(items, mSelectedVersion.getText().toString());
+                if(localItems == null) {
+                    mStatusTextView.setVisibility(View.VISIBLE);
+                    mStatusTextView.setTextColor(Color.RED);
+                    mStatusTextView.setText(R.string.search_modpack_error);
+                }else if(localItems.length == 0) {
+                    mStatusTextView.setVisibility(View.VISIBLE);
+                    mStatusTextView.setTextColor(mDefaultTextColor);
+                    mStatusTextView.setText(R.string.search_modpack_no_result);
+                    localItems = null;
+                }else{
+                    mStatusTextView.setVisibility(View.GONE);
+                }
+                mModItemAdapter.setModItems(localItems, mSelectedVersion.getText().toString());
             });
         }
     }

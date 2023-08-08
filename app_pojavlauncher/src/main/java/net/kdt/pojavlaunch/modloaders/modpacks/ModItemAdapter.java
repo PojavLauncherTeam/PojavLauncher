@@ -1,5 +1,6 @@
 package net.kdt.pojavlaunch.modloaders.modpacks;
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +10,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,7 +28,7 @@ import net.kdt.pojavlaunch.modloaders.modpacks.models.ModItem;
 import java.util.Arrays;
 
 public class ModItemAdapter extends RecyclerView.Adapter<ModItemAdapter.ViewHolder> {
-
+    private static final ModItem[] MOD_ITEMS_EMPTY = new ModItem[0];
     private final ModIconCache mIconCache = new ModIconCache();
     private ModItem[] mModItems;
     private final ModpackApi mModpackApi;
@@ -44,7 +44,7 @@ public class ModItemAdapter extends RecyclerView.Adapter<ModItemAdapter.ViewHold
         private View mExtendedLayout;
         private Spinner mExtendedSpinner;
         private Button mExtendedButton;
-        private ImageView mIconView;
+        private final ImageView mIconView;
         private Bitmap mThumbnailBitmap;
         private ImageReceiver mImageReceiver;
         public ViewHolder(View view) {
@@ -102,7 +102,7 @@ public class ModItemAdapter extends RecyclerView.Adapter<ModItemAdapter.ViewHold
                 mThumbnailBitmap = bm;
                 mIconView.setImageBitmap(bm);
             };
-            mIconCache.getImage(mImageReceiver, mModItem.apiSource+"_"+mModItem.id, mModItem.imageUrl);
+            mIconCache.getImage(mImageReceiver, mModItem.getIconCacheTag(), mModItem.imageUrl);
             mTitle.setText(item.title);
             mDescription.setText(item.description);
 
@@ -132,8 +132,11 @@ public class ModItemAdapter extends RecyclerView.Adapter<ModItemAdapter.ViewHold
         mModItems = new ModItem[]{};
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void setModItems(ModItem[] items, String targetMcVersion){
-        mModItems = items;
+        // TODO: Use targetMcVersion to affect default selected modpack version
+        if(items != null) mModItems = items;
+        else mModItems = MOD_ITEMS_EMPTY;
         notifyDataSetChanged();
     }
 

@@ -5,9 +5,6 @@ import net.kdt.pojavlaunch.PojavApplication;
 import net.kdt.pojavlaunch.modloaders.modpacks.models.ModDetail;
 import net.kdt.pojavlaunch.modloaders.modpacks.models.ModItem;
 import net.kdt.pojavlaunch.modloaders.modpacks.models.SearchFilters;
-import net.kdt.pojavlaunch.progresskeeper.ProgressKeeper;
-
-import org.jetbrains.annotations.Nullable;
 
 /**
  *

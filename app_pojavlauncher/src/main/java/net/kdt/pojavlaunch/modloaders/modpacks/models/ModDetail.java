@@ -1,6 +1,8 @@
 package net.kdt.pojavlaunch.modloaders.modpacks.models;
 
 
+import androidx.annotation.NonNull;
+
 import java.util.Arrays;
 
 public class ModDetail extends ModItem {
@@ -15,6 +17,7 @@ public class ModDetail extends ModItem {
         this.versionUrls = versionUrls;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "ModDetail{" +
