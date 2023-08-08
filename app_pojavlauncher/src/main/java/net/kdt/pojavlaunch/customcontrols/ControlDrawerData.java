@@ -27,7 +27,7 @@ public class ControlDrawerData {
     }
 
     public static Orientation[] getOrientations(){
-        return new Orientation[]{下,左,上,右,自由};
+        return new Orientation[]{DOWN,LEFT,UP,RIGHT,FREE};
     }
 
     public static int orientationToInt(Orientation orientation){
