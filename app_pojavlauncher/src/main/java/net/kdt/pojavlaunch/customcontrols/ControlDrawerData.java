@@ -19,11 +19,11 @@ public class ControlDrawerData {
 
     @androidx.annotation.Keep
     public enum Orientation {
-        DOWN,
-        LEFT,
-        UP,
-        RIGHT,
-        FREE
+        下,
+        左,
+        上,
+        右,
+        自由
     }
 
     public static Orientation[] getOrientations(){
