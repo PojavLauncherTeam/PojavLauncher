@@ -6,6 +6,20 @@
     <string name="app_motd">在您的设备上启动《Minecraft：Java版》！</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
+    <!-- Pojav CN -->
+    <string name="cn_microsoft_ccount">微软账号</string>
+    <string name="cn_local_account">离线账号</string>
+    <string name="cn_custom_path">自定义路径</string>
+    <string name="cn_gestures">手势</string>
+    <string name="cn_buttons">控制键</string>
+    <string name="cn_experimental_fuckury">实验性的补丁</string>
+    <string name="cn_java_tweaks">Java调整</string>
+    <string name="cn_categories">类别</string>
+    <string name="cn_miscellaneous_settings">其他设置</string>
+    <string name="cn_video_settings">视频设置</string>
+    <string name="cn_visibility">可见性</string>
+    <string name="cn_in_game">游戏内</string>
+    <string name="cn_in_menu">菜单内</string>
     <!-- Login strings -->
     <string name="login_online_username_hint">电子邮箱或用户名</string>
     <string name="login_online_password_hint">密码</string>
