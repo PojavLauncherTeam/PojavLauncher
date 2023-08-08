@@ -474,7 +474,7 @@
             android:id="@+id/visibility_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="按键可见性"
+            android:text="@string/cn_visibility"
             app:layout_constraintTop_toBottomOf="@+id/editButtonOpacity_seekbar"
             tools:layout_editor_absoluteX="6dp" />
 
@@ -482,14 +482,14 @@
             android:id="@+id/visibility_game_checkbox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="游戏内"
+            android:text="@string/cn_in_game"
             app:layout_constraintTop_toBottomOf="@+id/visibility_textview" />
 
         <CheckBox
             android:id="@+id/visibility_menu_checkbox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="菜单内"
+            android:text="@string/cn_in_menu"
             app:layout_constraintTop_toBottomOf="@+id/visibility_game_checkbox" />
 
 
