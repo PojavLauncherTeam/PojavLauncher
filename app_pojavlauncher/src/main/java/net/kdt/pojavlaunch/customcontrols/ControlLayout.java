@@ -77,7 +77,7 @@ public class ControlLayout extends FrameLayout {
 			return;
 		}
 
-		throw new IOException("Unsupported control layout version");
+		throw new IOException("不支持的控制布局版本");
 	}
 
 	public void loadLayout(CustomControls controlLayout) {
@@ -357,7 +357,7 @@ public class ControlLayout extends FrameLayout {
 
 		//Optimization pass to avoid looking at all children again
 		if (lastControlButton != null) {
-			System.out.println("last control button check" + ev.getX() + "-" + ev.getY() + "-" + lastControlButton.getControlView().getX() + "-" + lastControlButton.getControlView().getY());
+			System.out.println("上次控制布局检查" + ev.getX() + "-" + ev.getY() + "-" + lastControlButton.getControlView().getX() + "-" + lastControlButton.getControlView().getY());
 			if (ev.getX() > lastControlButton.getControlView().getX()
 					&& ev.getX() < lastControlButton.getControlView().getX() + lastControlButton.getControlView().getWidth()
 					&& ev.getY() > lastControlButton.getControlView().getY()
@@ -425,7 +425,7 @@ public class ControlLayout extends FrameLayout {
 	public void save(String path){
 		try {
 			mLayout.save(path);
-		} catch (IOException e) {Log.e("ControlLayout", "Failed to save the layout at:" + path);}
+		} catch (IOException e) {Log.e("ControlLayout", "未能将控制布局保存在：" + path);}
 	}
 
 
