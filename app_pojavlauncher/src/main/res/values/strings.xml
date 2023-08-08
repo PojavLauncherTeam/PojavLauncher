@@ -8,7 +8,20 @@
     <!-- Action bar part -->
 
     <!-- Languages list part -->
-
+    <!-- Pojav CN -->
+    <string name="cn_microsoft_ccount">Microsoft Account</string>
+    <string name="cn_local_account">Local account</string>
+    <string name="cn_custom_path">Custom path</string>
+    <string name="cn_gestures">Gestures</string>
+    <string name="cn_buttons">Buttons</string>
+    <string name="cn_experimental_fuckury">Experimental fuckury</string>
+    <string name="cn_java_tweaks">Java Tweaks</string>
+    <string name="cn_categories">Categories</string>
+    <string name="cn_miscellaneous_settings">Miscellaneous settings</string>
+    <string name="cn_video_settings">Video settings</string>
+    <string name="cn_visibility">Visibility</string>
+    <string name="cn_in_game">In game</string>
+    <string name="cn_in_menu">In menu</string>
     <!-- Login strings -->
     <string name="login_online_username_hint">Email or username</string>
     <string name="login_online_password_hint">Password</string>
