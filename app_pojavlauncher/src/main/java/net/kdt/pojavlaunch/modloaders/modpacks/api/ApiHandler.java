@@ -3,17 +3,16 @@ package net.kdt.pojavlaunch.modloaders.modpacks.api;
 import android.util.Log;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 
 import net.kdt.pojavlaunch.Tools;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.stream.Collectors;
 
 public class ApiHandler {
     public final String baseUrl;

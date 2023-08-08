@@ -1,6 +1,7 @@
 package net.kdt.pojavlaunch.tasks;
 
 import static net.kdt.pojavlaunch.PojavApplication.sExecutorService;
+import static net.kdt.pojavlaunch.Tools.BYTE_TO_MB;
 import static net.kdt.pojavlaunch.utils.DownloadUtils.downloadFileMonitored;
 
 import android.app.Activity;
@@ -40,7 +41,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class AsyncMinecraftDownloader {
-    private static final float BYTE_TO_MB = 1024 * 1024;
+
     public static final String MINECRAFT_RES = "https://resources.download.minecraft.net/";
 
     /* Allows each downloading thread to have its own RECYCLED buffer */
