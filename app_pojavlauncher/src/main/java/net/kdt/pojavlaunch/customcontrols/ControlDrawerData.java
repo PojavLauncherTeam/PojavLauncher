@@ -4,11 +4,11 @@ import net.kdt.pojavlaunch.Tools;
 
 import java.util.ArrayList;
 
-import static net.kdt.pojavlaunch.customcontrols.ControlDrawerData.Orientation.DOWN;
-import static net.kdt.pojavlaunch.customcontrols.ControlDrawerData.Orientation.LEFT;
-import static net.kdt.pojavlaunch.customcontrols.ControlDrawerData.Orientation.RIGHT;
-import static net.kdt.pojavlaunch.customcontrols.ControlDrawerData.Orientation.UP;
-import static net.kdt.pojavlaunch.customcontrols.ControlDrawerData.Orientation.FREE;
+import static net.kdt.pojavlaunch.customcontrols.ControlDrawerData.Orientation.下;
+import static net.kdt.pojavlaunch.customcontrols.ControlDrawerData.Orientation.左;
+import static net.kdt.pojavlaunch.customcontrols.ControlDrawerData.Orientation.右;
+import static net.kdt.pojavlaunch.customcontrols.ControlDrawerData.Orientation.上;
+import static net.kdt.pojavlaunch.customcontrols.ControlDrawerData.Orientation.自由;
 
 @androidx.annotation.Keep
 public class ControlDrawerData {
@@ -19,35 +19,35 @@ public class ControlDrawerData {
 
     @androidx.annotation.Keep
     public enum Orientation {
-        DOWN,
-        LEFT,
-        UP,
-        RIGHT,
-        FREE
+        下,
+        左,
+        上,
+        右,
+        自由
     }
 
     public static Orientation[] getOrientations(){
-        return new Orientation[]{DOWN,LEFT,UP,RIGHT,FREE};
+        return new Orientation[]{下,左,上,右,自由};
     }
 
     public static int orientationToInt(Orientation orientation){
         switch (orientation){
-            case DOWN: return 0;
-            case LEFT: return 1;
-            case UP: return 2;
-            case RIGHT: return 3;
-            case FREE: return 4;
+            case 下: return 0;
+            case 左: return 1;
+            case 上: return 2;
+            case 右: return 3;
+            case 自由: return 4;
         }
         return -1;
     }
 
     public static Orientation intToOrientation(int by){
         switch (by){
-            case 0: return DOWN;
-            case 1: return LEFT;
-            case 2: return UP;
-            case 3: return RIGHT;
-            case 4: return FREE;
+            case 0: return 下;
+            case 1: return 左;
+            case 2: return 上;
+            case 3: return 右;
+            case 4: return 自由;
         }
         return null;
     }
@@ -61,7 +61,7 @@ public class ControlDrawerData {
     }
 
     public ControlDrawerData(ArrayList<ControlData> buttonProperties, ControlData properties){
-        this(buttonProperties, properties, Orientation.LEFT);
+        this(buttonProperties, properties, Orientation.左);
     }
 
 
