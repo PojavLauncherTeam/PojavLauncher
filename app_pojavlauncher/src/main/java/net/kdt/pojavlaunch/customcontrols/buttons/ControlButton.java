@@ -45,6 +45,7 @@ public class ControlButton extends TextView implements ControlInterface {
         setTextColor(Color.WHITE);
         setPadding(4, 4, 4, 4);
         setTextSize(14); // Nullify the default size setting
+        setOutlineProvider(null); // Disable shadow casting, removing one drawing pass
 
         //setOnLongClickListener(this);
 
