@@ -11,7 +11,7 @@ Unoffical, unsupported, and unethical app to run 2009Scape on your Android devic
 
 # Download
   
-[Releases](https://github.com/downthecrop/2009Scape-mobile/releases)
+[Releases](https://github.com/2009scape/2009Scape-mobile/releases/)
 
 <hr>
 
