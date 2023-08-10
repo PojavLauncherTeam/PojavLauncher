@@ -12,7 +12,7 @@
     <string name="login_online_login_label">Daxil ol</string>
     <string name="login_error_invalid_username">Etibarsız istifadəçi adı. İstifadəçi adı 3-16 simvol diapazonunda olmalıdır, yalnız A-Z, a-z, 0-9 və alt xəttdən ibarət olmalıdır.</string>
     <string name="login_error_exist_username">Bu istifadəçi adı artıq mövcuddur</string>
-    <string name="login_microsoft">Microsoft girişi</string>
+    <string name="login_microsoft">Microsoft login</string>
     <string name="login_select_account">Hesab seçin</string>
     <string name="login_title_no_saved_account">Hesab tapılmadı !</string>
     <string name="login_dialog_no_saved_account">Yadda saxlanmış hesabınız yoxdur.\nİlk giriş zamanı hesabı yadda saxlamaq üçün <b>\"Hesabımı yadda saxla\"</b> seçimindən istifadə edin.</string>
