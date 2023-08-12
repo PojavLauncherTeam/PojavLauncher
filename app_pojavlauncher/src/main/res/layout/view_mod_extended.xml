@@ -6,11 +6,20 @@
     xmlns:tools="http://schemas.android.com/tools">
 
 
+    <TextView
+        android:id="@+id/mod_extended_error_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/search_modpack_download_error"
+        android:textColor="#FFFF0000"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.appcompat.widget.AppCompatSpinner
         android:id="@+id/mod_extended_version_spinner"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_30sdp"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mod_extended_error_textview"
         />
 
     <com.kdt.mcgui.MineButton
@@ -18,9 +27,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/padding_large"
+        android:enabled="false"
         android:text="@string/generic_install"
-        app:layout_constraintTop_toBottomOf="@id/mod_extended_version_spinner"
 
-        />
+        app:layout_constraintTop_toBottomOf="@id/mod_extended_version_spinner" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
