@@ -26,6 +26,7 @@ import net.kdt.pojavlaunch.modloaders.modpacks.models.ModDetail;
 import net.kdt.pojavlaunch.modloaders.modpacks.models.ModItem;
 
 import java.util.Arrays;
+import java.util.concurrent.Future;
 
 public class ModItemAdapter extends RecyclerView.Adapter<ModItemAdapter.ViewHolder> {
     private static final ModItem[] MOD_ITEMS_EMPTY = new ModItem[0];
@@ -41,10 +42,12 @@ public class ModItemAdapter extends RecyclerView.Adapter<ModItemAdapter.ViewHold
         private ModDetail mModDetail = null;
         private ModItem mModItem = null;
         private final TextView mTitle, mDescription;
+        private final ImageView mIconView;
         private View mExtendedLayout;
         private Spinner mExtendedSpinner;
         private Button mExtendedButton;
-        private final ImageView mIconView;
+        private TextView mExtendedErrorTextView;
+        private Future<?> mExtensionFuture;
         private Bitmap mThumbnailBitmap;
         private ImageReceiver mImageReceiver;
         public ViewHolder(View view) {
@@ -56,6 +59,7 @@ public class ModItemAdapter extends RecyclerView.Adapter<ModItemAdapter.ViewHold
                     mExtendedLayout = ((ViewStub)v.findViewById(R.id.mod_limited_state_stub)).inflate();
                     mExtendedButton = mExtendedLayout.findViewById(R.id.mod_extended_select_version_button);
                     mExtendedSpinner = mExtendedLayout.findViewById(R.id.mod_extended_version_spinner);
+                    mExtendedErrorTextView = mExtendedLayout.findViewById(R.id.mod_extended_error_textview);
 
                     mExtendedButton.setOnClickListener(v1 -> {
                         mModpackApi.handleInstallation(
@@ -69,12 +73,39 @@ public class ModItemAdapter extends RecyclerView.Adapter<ModItemAdapter.ViewHold
                     else mExtendedLayout.setVisibility(View.VISIBLE);
                 }
 
-                if(isExtended() && mModDetail == null) {
-                    PojavApplication.sExecutorService.execute(() -> {
+                if(isExtended() && mModDetail == null && mExtensionFuture == null) { // only reload if no reloads are in progress
+                    setDetailedStateDefault();
+                    /*
+                     * Why do we do this?
+                     * The reason is simple: multithreading is difficult as hell to manage
+                     * Let me explain:
+                     */
+                    mExtensionFuture = new SelfReferencingFuture(myFuture -> {
+                        /*
+                         * While we are sitting in the function below doing networking, the view might have already gotten recycled.
+                         * If we didn't use a Future, we would have extended a ViewHolder with completely unrelated content
+                         * or with an error that has never actually happened
+                         */
                         mModDetail = mModpackApi.getModDetails(mModItem);
                         System.out.println(mModDetail);
-                        Tools.runOnUiThread(() -> setStateDetailed(mModDetail));
-                    });
+                        Tools.runOnUiThread(() -> {
+                            /*
+                             * Once we enter here, the state we're in is already defined - no view shuffling can happen on the UI
+                             * thread while we are on the UI thread ourselves. If we were cancelled, this means that the future
+                             * we were supposed to have no longer makes sense, so we return and do not alter the state (since we might
+                             * alter the state of an unrelated item otherwise)
+                             */
+                            if(myFuture.isCancelled()) return;
+                            /*
+                             * We do not null the future before returning since this field might already belong to a different item with its
+                             * own Future, which we don't want to interfere with.
+                             * But if the future is not cancelled, it is the right one for this ViewHolder, and we don't need it anymore, so
+                             * let's help GC clean it up once we exit!
+                             */
+                            mExtensionFuture = null;
+                            setStateDetailed(mModDetail);
+                        });
+                    }).startOnExecutor(PojavApplication.sExecutorService);
                 }
             });
 
@@ -93,6 +124,14 @@ public class ModItemAdapter extends RecyclerView.Adapter<ModItemAdapter.ViewHold
             }
             if(mImageReceiver != null) {
                 mIconCache.cancelImage(mImageReceiver);
+            }
+            if(mExtensionFuture != null) {
+                /*
+                 * Since this method reinitializes the ViewHolder for a new mod, this Future stops being ours, so we cancel it
+                 * and null it. The rest is handled above
+                 */
+                mExtensionFuture.cancel(true);
+                mExtensionFuture = null;
             }
 
             mModItem = item;
@@ -114,7 +153,22 @@ public class ModItemAdapter extends RecyclerView.Adapter<ModItemAdapter.ViewHold
         /** Display extended info/interaction about a modpack */
         private void setStateDetailed(ModDetail detailedItem) {
             mExtendedLayout.setVisibility(View.VISIBLE);
-            mExtendedSpinner.setAdapter(new SimpleArrayAdapter<>(Arrays.asList(detailedItem.versionNames)));
+            if(detailedItem != null) {
+                mExtendedButton.setEnabled(true);
+                mExtendedErrorTextView.setVisibility(View.GONE);
+                mExtendedSpinner.setAdapter(new SimpleArrayAdapter<>(Arrays.asList(detailedItem.versionNames)));
+            } else {
+                mExtendedButton.setEnabled(false);
+                mExtendedErrorTextView.setVisibility(View.VISIBLE);
+                mExtendedSpinner.setAdapter(null);
+            }
+
+        }
+
+        private void setDetailedStateDefault() {
+            mExtendedButton.setEnabled(false);
+            mExtendedSpinner.setAdapter(null);
+            mExtendedErrorTextView.setVisibility(View.GONE);
         }
 
         private boolean hasExtended(){

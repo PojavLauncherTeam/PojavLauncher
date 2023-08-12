@@ -20,6 +20,8 @@ import net.kdt.pojavlaunch.PojavApplication;
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.modloaders.modpacks.ModItemAdapter;
+import net.kdt.pojavlaunch.modloaders.modpacks.SelfReferencingFuture;
+import net.kdt.pojavlaunch.modloaders.modpacks.api.CurseforgeApi;
 import net.kdt.pojavlaunch.modloaders.modpacks.api.ModpackApi;
 import net.kdt.pojavlaunch.modloaders.modpacks.api.ModrinthApi;
 import net.kdt.pojavlaunch.modloaders.modpacks.models.ModItem;
@@ -50,7 +52,7 @@ public class SearchModFragment extends Fragment {
 
     public SearchModFragment(){
         super(R.layout.fragment_mod_search);
-        modpackApi = new ModrinthApi();
+        modpackApi = new CurseforgeApi();
         mModItemAdapter = new ModItemAdapter(modpackApi);
         mSearchFilters = new SearchFilters();
         mSearchFilters.isModpack = true;
@@ -82,43 +84,26 @@ public class SearchModFragment extends Fragment {
             }
             mSearchProgressBar.setVisibility(View.VISIBLE);
             mSearchFilters.name = mSearchEditText.getText().toString();
-            SearchModRunnable searchModRunnable = new SearchModRunnable(mSearchFilters);
-            mSearchFuture = PojavApplication.sExecutorService.submit(searchModRunnable);
-            searchModRunnable.setFuture(mSearchFuture);
+            mSearchFuture = new SelfReferencingFuture(new SearchModTask(mSearchFilters))
+                    .startOnExecutor(PojavApplication.sExecutorService);
             return true;
         });
     }
 
-    class SearchModRunnable implements Runnable{
-        private final Object mFutureLock = new Object();
-        private final SearchFilters mRunnableFilters;
-        private Future<?> mMyFuture;
+    class SearchModTask implements SelfReferencingFuture.FutureInterface {
 
-        SearchModRunnable(SearchFilters mSearchFilters) {
-            this.mRunnableFilters = mSearchFilters;
-        }
-
-        public void setFuture(Future<?> future) {
-            synchronized (mFutureLock) {
-                mMyFuture = future;
-                mFutureLock.notifyAll();
-            }
+        private final SearchFilters mTaskFilters;
+        SearchModTask(SearchFilters mSearchFilters) {
+            this.mTaskFilters = mSearchFilters;
         }
 
         @Override
-        public void run() {
-            synchronized (mFutureLock) {
-                try {
-                    if (mMyFuture == null) mFutureLock.wait();
-                }catch (InterruptedException e) {
-                    return; // if we got interrupted on the future lock theres no point in proceeding
-                }
-            }
-            ModItem[] items = modpackApi.searchMod(mRunnableFilters);
+        public void run(Future<?> myFuture) {
+            ModItem[] items = modpackApi.searchMod(mTaskFilters);
             Log.d(SearchModFragment.class.toString(), Arrays.toString(items));
             Tools.runOnUiThread(() -> {
                 ModItem[] localItems = items;
-                if(mMyFuture.isCancelled()) return;
+                if(myFuture.isCancelled()) return;
                 mSearchProgressBar.setVisibility(View.GONE);
                 if(localItems == null) {
                     mStatusTextView.setVisibility(View.VISIBLE);

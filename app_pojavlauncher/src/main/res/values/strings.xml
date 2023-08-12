@@ -412,6 +412,8 @@
 
     <string name="search_modpack_no_result">No modpacks found</string>
     <string name="search_modpack_error">Failed to find modpacks</string>
+    <string name="search_modpack_download_error">Failed to download modpack metadata</string>
+
     <string name="modpack_download_downloading_metadata">Downloading modpack metadata (%.2f MB / %.2f MB)</string>
     <string name="modpack_download_downloading_mods">Downloading mods (%.2f MB / %.2f MB)</string>
     <string name="modpack_download_applying_overrides">Applying overrides (%d/%d)</string>
