@@ -20,15 +20,28 @@ public class ModDownloader {
     private final AtomicLong mDownloadSize = new AtomicLong(0);
     private final Object mExceptionSyncPoint = new Object();
     private final File mDestinationDirectory;
+    private final boolean mUseFileCount;
     private IOException mFirstIOException;
     private long mTotalSize;
 
     public ModDownloader(File destinationDirectory) {
+        this(destinationDirectory, false);
+    }
+
+    public ModDownloader(File destinationDirectory, boolean useFileCount) {
         this.mDestinationDirectory = destinationDirectory;
+        this.mUseFileCount = useFileCount;
     }
 
     public void submitDownload(int fileSize, String relativePath, String... url) {
-        mTotalSize += fileSize;
+        if(mUseFileCount) mTotalSize += 1;
+        else mTotalSize += fileSize;
+        mDownloadPool.execute(new DownloadTask(url, new File(mDestinationDirectory, relativePath)));
+    }
+
+    public void submitDownload(String relativePath, String... url) {
+        if(!mUseFileCount) throw new RuntimeException("This method can only be used in a file-counting ModDownloader");
+        mTotalSize += 1;
         mDownloadPool.execute(new DownloadTask(url, new File(mDestinationDirectory, relativePath)));
     }
 
@@ -95,6 +108,7 @@ public class ModDownloader {
             for (int i = 0; i < 5; i++) {
                 try {
                     DownloadUtils.downloadFileMonitored(sourceUrl, mDestination, getThreadLocalBuffer(), this);
+                    if(mUseFileCount) mDownloadSize.addAndGet(1);
                     return null;
                 } catch (InterruptedIOException e) {
                     throw new InterruptedException();
@@ -102,14 +116,17 @@ public class ModDownloader {
                     e.printStackTrace();
                     exception = e;
                 }
-                mDownloadSize.addAndGet(-last);
-                last = 0;
+                if(!mUseFileCount) {
+                    mDownloadSize.addAndGet(-last);
+                    last = 0;
+                }
             }
             return exception;
         }
 
         @Override
         public void updateProgress(int curr, int max) {
+            if(mUseFileCount) return;
             mDownloadSize.addAndGet(curr - last);
             last = curr;
         }

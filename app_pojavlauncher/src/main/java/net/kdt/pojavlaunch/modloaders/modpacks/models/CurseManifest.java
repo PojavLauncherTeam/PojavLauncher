@@ -12,6 +12,7 @@ public class CurseManifest {
     public static class CurseFile {
         public long projectID;
         public long fileID;
+        public boolean required;
     }
     public static class CurseMinecraft {
         public String version;

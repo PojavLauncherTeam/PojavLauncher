@@ -1,5 +1,10 @@
 package net.kdt.pojavlaunch.modloaders.modpacks.api;
 
+import android.content.Context;
+import android.content.Intent;
+
+import net.kdt.pojavlaunch.JavaGUILauncherActivity;
+
 public class ModLoaderInfo {
     public static final int MOD_LOADER_FORGE = 0;
     public static final int MOD_LOADER_FABRIC = 1;
@@ -21,7 +26,7 @@ public class ModLoaderInfo {
             case MOD_LOADER_FABRIC:
                 return "fabric-loader-"+modLoaderVersion+"-"+minecraftVersion;
             case MOD_LOADER_QUILT:
-                // TODO
+                throw new RuntimeException("Quilt is gay af");
             default:
                 return null;
         }
