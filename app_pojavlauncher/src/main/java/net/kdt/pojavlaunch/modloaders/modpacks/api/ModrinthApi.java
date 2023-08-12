@@ -6,22 +6,17 @@ import com.kdt.mcgui.ProgressLayout;
 
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
-import net.kdt.pojavlaunch.modloaders.modpacks.imagecache.ModIconCache;
 import net.kdt.pojavlaunch.modloaders.modpacks.models.Constants;
 import net.kdt.pojavlaunch.modloaders.modpacks.models.ModDetail;
 import net.kdt.pojavlaunch.modloaders.modpacks.models.ModItem;
 import net.kdt.pojavlaunch.modloaders.modpacks.models.ModrinthIndex;
 import net.kdt.pojavlaunch.modloaders.modpacks.models.SearchFilters;
 import net.kdt.pojavlaunch.progresskeeper.DownloaderProgressWrapper;
-import net.kdt.pojavlaunch.utils.DownloadUtils;
 import net.kdt.pojavlaunch.utils.ZipUtils;
-import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
-import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 import java.util.zip.ZipFile;
 
@@ -93,41 +88,7 @@ public class ModrinthApi implements ModpackApi{
     @Override
     public void installMod(ModDetail modDetail, int selectedVersion) {
         //TODO considering only modpacks for now
-        String versionUrl = modDetail.versionUrls[selectedVersion];
-        String modpackName = modDetail.title.toLowerCase(Locale.ROOT).trim().replace(" ", "_" );
-
-        // Build a new minecraft instance, folder first
-
-        // Get the mrpack
-        File modpackFile = new File(Tools.DIR_CACHE, modpackName + ".mrpack");
-        ModLoaderInfo modLoaderInfo;
-        try {
-            byte[] downloadBuffer = new byte[8192];
-            DownloadUtils.downloadFileMonitored(versionUrl, modpackFile, downloadBuffer,
-                    new DownloaderProgressWrapper(R.string.modpack_download_downloading_metadata,
-                            ProgressLayout.INSTALL_MODPACK));
-            ModrinthIndex modrinthIndex = installMrpack(modpackFile, new File(Tools.DIR_GAME_HOME, "custom_instances/"+modpackName));
-            modLoaderInfo = createInfo(modrinthIndex);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } finally {
-            modpackFile.delete();
-            ProgressLayout.clearProgress(ProgressLayout.INSTALL_MODPACK);
-        }
-        if(modLoaderInfo == null) {
-            return;
-        }
-
-        // Create the instance
-        MinecraftProfile profile = new MinecraftProfile();
-        profile.gameDir = "./custom_instances/" + modpackName;
-        profile.name = modDetail.title;
-        profile.lastVersionId = modLoaderInfo.getVersionId();
-        profile.icon = ModIconCache.getBase64Image(modDetail.getIconCacheTag());
-
-
-        LauncherProfiles.mainProfileJson.profiles.put(modpackName, profile);
-        LauncherProfiles.update();
+        ModpackInstaller.installModpack(modDetail, selectedVersion, this::installMrpack);
     }
 
     private static ModLoaderInfo createInfo(ModrinthIndex modrinthIndex) {
@@ -143,13 +104,12 @@ public class ModrinthApi implements ModpackApi{
             return new ModLoaderInfo(ModLoaderInfo.MOD_LOADER_FABRIC, modLoaderVersion, mcVersion);
         }
         if((modLoaderVersion = dependencies.get("quilt-loader")) != null) {
-            throw new RuntimeException("Quilt is gay af");
-            //return new ModLoaderInfo(ModLoaderInfo.MOD_LOADER_QUILT, modLoaderVersion, mcVersion);
+            return new ModLoaderInfo(ModLoaderInfo.MOD_LOADER_QUILT, modLoaderVersion, mcVersion);
         }
         return null;
     }
 
-    private ModrinthIndex installMrpack(File mrpackFile, File instanceDestination) throws IOException {
+    private ModLoaderInfo installMrpack(File mrpackFile, File instanceDestination) throws IOException {
         try (ZipFile modpackZipFile = new ZipFile(mrpackFile)){
             ModrinthIndex modrinthIndex = Tools.GLOBAL_GSON.fromJson(
                     Tools.read(ZipUtils.getEntryStream(modpackZipFile, "modrinth.index.json")),
@@ -164,7 +124,7 @@ public class ModrinthApi implements ModpackApi{
             ZipUtils.zipExtract(modpackZipFile, "overrides/", instanceDestination);
             ProgressLayout.setProgress(ProgressLayout.INSTALL_MODPACK, 50, R.string.modpack_download_applying_overrides, 2, 2);
             ZipUtils.zipExtract(modpackZipFile, "client-overrides/", instanceDestination);
-            return modrinthIndex;
+            return createInfo(modrinthIndex);
         }
     }
 }

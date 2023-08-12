@@ -987,6 +987,12 @@ public final class Tools {
         return prefixedName.substring(Tools.LAUNCHERPROFILES_RTPREFIX.length());
     }
 
+    public static String getFileName(String pathOrUrl) {
+        int lastSlashIndex = pathOrUrl.lastIndexOf('/');
+        if(lastSlashIndex == -1) return null;
+        return pathOrUrl.substring(lastSlashIndex);
+    }
+
     public static String getSelectedRuntime(MinecraftProfile minecraftProfile) {
         String runtime = LauncherPreferences.PREF_DEFAULT_RUNTIME;
         String profileRuntime = getRuntimeName(minecraftProfile.javaDir);
