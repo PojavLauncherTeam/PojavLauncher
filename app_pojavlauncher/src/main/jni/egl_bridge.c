@@ -23,6 +23,12 @@
 #include <environ/environ.h>
 #include "utils.h"
 #include "ctxbridges/gl_bridge.h"
+
+#define GLFW_CLIENT_API 0x22001
+/* Consider GLFW_NO_API as Vulkan API */
+#define GLFW_NO_API 0
+#define GLFW_OPENGL_API 0x30001
+
 // region OSMESA internals
 
 struct pipe_screen;
@@ -603,16 +609,11 @@ void bigcore_set_affinity();
 #define RENDERER_GL4ES 1
 #define RENDERER_VK_ZINK 2
 #define RENDERER_VIRGL 3
+#define RENDERER_VULKAN 4
 
 void* gbuffer;
 
 void* egl_make_current(void* window);
-
-void pojav_openGLOnLoad() {
-}
-void pojav_openGLOnUnload() {
-
-}
 
 void pojavTerminate() {
     printf("EGLBridge: Terminating\n");
@@ -732,7 +733,10 @@ int pojavInit() {
     pojav_environ->savedWidth = ANativeWindow_getWidth(pojav_environ->pojavWindow);
     pojav_environ->savedHeight = ANativeWindow_getHeight(pojav_environ->pojavWindow);
     ANativeWindow_setBuffersGeometry(pojav_environ->pojavWindow,pojav_environ->savedWidth,pojav_environ->savedHeight,AHARDWAREBUFFER_FORMAT_R8G8B8X8_UNORM);
+    return 1;
+}
 
+int pojavInitOpenGL() {
     // Only affects GL4ES as of now
     const char *forceVsync = getenv("FORCE_VSYNC");
     if (strcmp(forceVsync, "true") == 0)
@@ -872,6 +876,25 @@ int pojavInit() {
 
     return 0;
 }
+
+void pojavSetWindowHint(int hint, int value) {
+    if (hint != GLFW_CLIENT_API) return;
+    switch (value) {
+        case GLFW_NO_API:
+            pojav_environ->config_renderer = RENDERER_VULKAN;
+            /* Nothing to do: initialization is handled in Java-side */
+            // pojavInitVulkan();
+            break;
+        case GLFW_OPENGL_API:
+            /* Nothing to do: initialization is called in pojavCreateContext */
+            // pojavInitOpenGL();
+            break;
+        default:
+            printf("GLFW: Unimplemented API 0x%x\n", value);
+            abort();
+    }
+}
+
 ANativeWindow_Buffer buf;
 int32_t stride;
 bool stopSwapBuffers;
@@ -979,6 +1002,12 @@ Java_org_lwjgl_glfw_GLFW_nativeEglDetachOnCurrentThread(JNIEnv *env, jclass claz
 */
 
 void* pojavCreateContext(void* contextSrc) {
+    if (pojav_environ->config_renderer == RENDERER_VULKAN) {
+        return (void *)pojav_environ->pojavWindow;
+    }
+
+    pojavInitOpenGL();
+
     if (pojav_environ->config_renderer == RENDERER_GL4ES) {
         /*const EGLint ctx_attribs[] = {
             EGL_CONTEXT_CLIENT_VERSION, atoi(getenv("LIBGL_ES")),

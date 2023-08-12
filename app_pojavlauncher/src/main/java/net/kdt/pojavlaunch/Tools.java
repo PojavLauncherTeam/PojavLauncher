@@ -618,6 +618,34 @@ public final class Tools {
         }
         return true; // allow if none match
     }
+
+    private static void preProcessLibraries(DependentLibrary[] libraries) {
+        for (int i = 0; i < libraries.length; i++) {
+            DependentLibrary libItem = libraries[i];
+            String[] version = libItem.name.split(":")[2].split("\\.");
+            if (libItem.name.startsWith("net.java.dev.jna:jna:")) {
+                // Special handling for LabyMod 1.8.9, Forge 1.12.2(?) and oshi
+                // we have libjnidispatch 5.13.0 in jniLibs directory
+                if (Integer.parseInt(version[0]) >= 5 && Integer.parseInt(version[1]) >= 13) return;
+                Log.d(APP_NAME, "Library " + libItem.name + " has been changed to version 5.13.0");
+                libItem.name = "net.java.dev.jna:jna:5.13.0";
+                libItem.downloads.artifact.path = "net/java/dev/jna/jna/5.13.0/jna-5.13.0.jar";
+                libItem.downloads.artifact.sha1 = "1200e7ebeedbe0d10062093f32925a912020e747";
+                libItem.downloads.artifact.url = "https://repo1.maven.org/maven2/net/java/dev/jna/jna/5.13.0/jna-5.13.0.jar";
+            } else if (libItem.name.startsWith("com.github.oshi:oshi-core:")) {
+                //if (Integer.parseInt(version[0]) >= 6 && Integer.parseInt(version[1]) >= 3) return;
+                // FIXME: ensure compatibility
+
+                if (Integer.parseInt(version[0]) != 6 || Integer.parseInt(version[1]) != 2) return;
+                Log.d(APP_NAME, "Library " + libItem.name + " has been changed to version 6.3.0");
+                libItem.name = "com.github.oshi:oshi-core:6.3.0";
+                libItem.downloads.artifact.path = "com/github/oshi/oshi-core/6.3.0/oshi-core-6.3.0.jar";
+                libItem.downloads.artifact.sha1 = "9e98cf55be371cafdb9c70c35d04ec2a8c2b42ac";
+                libItem.downloads.artifact.url = "https://repo1.maven.org/maven2/com/github/oshi/oshi-core/6.3.0/oshi-core-6.3.0.jar";
+            }
+        }
+    }
+
     public static String[] generateLibClasspath(JMinecraftVersionList.Version info) {
         List<String> libDir = new ArrayList<>();
         for (DependentLibrary libItem: info.libraries) {
@@ -636,7 +664,7 @@ public final class Tools {
         try {
             JMinecraftVersionList.Version customVer = Tools.GLOBAL_GSON.fromJson(read(DIR_HOME_VERSION + "/" + versionName + "/" + versionName + ".json"), JMinecraftVersionList.Version.class);
             if (skipInheriting || customVer.inheritsFrom == null || customVer.inheritsFrom.equals(customVer.id)) {
-                return customVer;
+                preProcessLibraries(customVer.libraries);
             } else {
                 JMinecraftVersionList.Version inheritsVer;
                 //If it won't download, just search for it
@@ -674,6 +702,7 @@ public final class Tools {
                     }
                 } finally {
                     inheritsVer.libraries = libList.toArray(new DependentLibrary[0]);
+                    preProcessLibraries(inheritsVer.libraries);
                 }
 
                 // Inheriting Minecraft 1.13+ with append custom args
@@ -711,8 +740,14 @@ public final class Tools {
                     inheritsVer.arguments.game = totalArgList.toArray(new Object[0]);
                 }
 
-                return inheritsVer;
+                customVer = inheritsVer;
             }
+
+            // LabyMod 4 sets version instead of majorVersion
+            if (customVer.javaVersion.majorVersion == 0) {
+                customVer.javaVersion.majorVersion = customVer.javaVersion.version;
+            }
+            return customVer;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

@@ -623,6 +623,7 @@ public class GLFW
         //DetachOnCurrentThread = apiGetFunctionAddress(GLFW, "pojavDetachOnCurrentThread"),
         MakeContextCurrent = apiGetFunctionAddress(GLFW, "pojavMakeCurrent"),
         Terminate = apiGetFunctionAddress(GLFW, "pojavTerminate"),
+        SetWindowHint = apiGetFunctionAddress(GLFW, "pojavSetWindowHint"),
         SwapBuffers = apiGetFunctionAddress(GLFW, "pojavSwapBuffers"),
         SwapInterval = apiGetFunctionAddress(GLFW, "pojavSwapInterval"),
         PumpEvents = apiGetFunctionAddress(GLFW, "pojavPumpEvents"),
@@ -990,7 +991,6 @@ public class GLFW
         return invokePP(share, Functions.CreateContext);
     }
     public static long glfwCreateWindow(int width, int height, CharSequence title, long monitor, long share) {
-        EventLoop.OffScreen.check();
         // Create an ACTUAL EGL context
         long ptr = nglfwCreateContext(share);
         //nativeEglMakeCurrent(ptr);
@@ -1045,7 +1045,12 @@ public class GLFW
     public static void glfwShowWindow(long window) {
         nglfwSetShowingWindow(window);
     }
-    public static void glfwWindowHint(int hint, int value) {}
+
+    public static void glfwWindowHint(int hint, int value) {
+        long __functionAddress = Functions.SetWindowHint;
+        invokeV(hint, value, __functionAddress);
+    }
+
     public static void glfwWindowHintString(int hint, @NativeType("const char *") ByteBuffer value) {}
     public static void glfwWindowHintString(int hint, @NativeType("const char *") CharSequence value) {}
 

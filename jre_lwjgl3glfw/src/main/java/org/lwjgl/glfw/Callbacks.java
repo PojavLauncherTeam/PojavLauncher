@@ -31,42 +31,21 @@ public final class Callbacks {
         if (Checks.CHECKS) {
             check(window);
         }
-		
-		try {
-			for (Field callback : GLFW.class.getFields()) {
-				if (callback.getName().startsWith("mGLFW") && callback.getName().endsWith("Callback")) {
-					callback.set(null, null);
-				}
-			}
-		} catch (IllegalAccessException|NullPointerException e) {
-			throw new RuntimeException("org.lwjgl.GLFW.mGLFWxxxCallbacks must be set to public and static", e);
-		}
 
-/*
-        for (long callback : new long[] {
-            GLFW.Functions.SetWindowPosCallback,
-            GLFW.Functions.SetWindowSizeCallback,
-            GLFW.Functions.SetWindowCloseCallback,
-            GLFW.Functions.SetWindowRefreshCallback,
-            GLFW.Functions.SetWindowFocusCallback,
-            GLFW.Functions.SetWindowIconifyCallback,
-            GLFW.Functions.SetWindowMaximizeCallback,
-            GLFW.Functions.SetFramebufferSizeCallback,
-            GLFW.Functions.SetWindowContentScaleCallback,
-            GLFW.Functions.SetKeyCallback,
-            GLFW.Functions.SetCharCallback,
-            GLFW.Functions.SetCharModsCallback,
-            GLFW.Functions.SetMouseButtonCallback,
-            GLFW.Functions.SetCursorPosCallback,
-            GLFW.Functions.SetCursorEnterCallback,
-            GLFW.Functions.SetScrollCallback,
-            GLFW.Functions.SetDropCallback
-        }) {
-            long prevCB = invokePPP(window, NULL, callback);
-            if (prevCB != NULL) {
-                Callback.free(prevCB);
+        try {
+            for (Method callback : GLFW.class.getMethods()) {
+                if (callback.getName().startsWith("glfwSet") && callback.getName().endsWith("Callback")) {
+                    if (callback.getParameterCount() == 1) {
+                        callback.invoke(null, (Object)null);
+                    } else {
+                        callback.invoke(null, GLFW.glfwGetCurrentContext(), null);
+                    }
+                }
             }
+        } catch (IllegalAccessException|NullPointerException e) {
+            throw new RuntimeException("org.lwjgl.GLFW.glfwSetXXXCallback() must be set to public and static", e);
+        } catch (InvocationTargetException e) {
+            throw new RuntimeException(e);
         }
-*/
     }
 }
