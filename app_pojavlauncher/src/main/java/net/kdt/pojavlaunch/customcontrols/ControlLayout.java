@@ -583,4 +583,8 @@ public class ControlLayout extends FrameLayout {
 		builder.setNegativeButton(R.string.global_no, (d,w)->{});
 		builder.show();
 	}
+
+	public boolean areControlVisible(){
+		return mControlVisible;
+	}
 }
