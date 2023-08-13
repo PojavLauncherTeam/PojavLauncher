@@ -86,9 +86,9 @@ public class ModrinthApi implements ModpackApi{
     }
 
     @Override
-    public void installMod(ModDetail modDetail, int selectedVersion) {
+    public ModLoader installMod(ModDetail modDetail, int selectedVersion) {
         //TODO considering only modpacks for now
-        ModpackInstaller.installModpack(modDetail, selectedVersion, this::installMrpack);
+        return ModpackInstaller.installModpack(modDetail, selectedVersion, this::installMrpack);
     }
 
     private static ModLoader createInfo(ModrinthIndex modrinthIndex) {

@@ -63,6 +63,7 @@ public class ModItemAdapter extends RecyclerView.Adapter<ModItemAdapter.ViewHold
 
                     mExtendedButton.setOnClickListener(v1 -> {
                         mModpackApi.handleInstallation(
+                                mExtendedButton.getContext().getApplicationContext(),
                                 mModDetail,
                                 mExtendedSpinner.getSelectedItemPosition());
 
