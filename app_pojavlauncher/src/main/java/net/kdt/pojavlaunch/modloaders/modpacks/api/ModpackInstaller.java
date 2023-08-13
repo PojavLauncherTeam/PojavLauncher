@@ -4,6 +4,7 @@ import com.kdt.mcgui.ProgressLayout;
 
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
+import net.kdt.pojavlaunch.modloaders.ModloaderDownloadListener;
 import net.kdt.pojavlaunch.modloaders.modpacks.imagecache.ModIconCache;
 import net.kdt.pojavlaunch.modloaders.modpacks.models.ModDetail;
 import net.kdt.pojavlaunch.progresskeeper.DownloaderProgressWrapper;
@@ -17,7 +18,7 @@ import java.util.Locale;
 
 public class ModpackInstaller {
 
-    public static void installModpack(ModDetail modDetail, int selectedVersion, InstallFunction installFunction) {
+    public static ModLoader installModpack(ModDetail modDetail, int selectedVersion, InstallFunction installFunction) {
         String versionUrl = modDetail.versionUrls[selectedVersion];
         String modpackName = modDetail.title.toLowerCase(Locale.ROOT).trim().replace(" ", "_" );
 
@@ -33,6 +34,7 @@ public class ModpackInstaller {
                             ProgressLayout.INSTALL_MODPACK));
             // Install the modpack
             modLoaderInfo = installFunction.installModpack(modpackFile, new File(Tools.DIR_GAME_HOME, "custom_instances/"+modpackName));
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         } finally {
@@ -40,7 +42,7 @@ public class ModpackInstaller {
             ProgressLayout.clearProgress(ProgressLayout.INSTALL_MODPACK);
         }
         if(modLoaderInfo == null) {
-            return;
+            return null;
         }
 
         // Create the instance
@@ -53,6 +55,8 @@ public class ModpackInstaller {
 
         LauncherProfiles.mainProfileJson.profiles.put(modpackName, profile);
         LauncherProfiles.update();
+
+        return modLoaderInfo;
     }
 
     interface InstallFunction {

@@ -104,9 +104,9 @@ public class CurseforgeApi implements ModpackApi{
     }
 
     @Override
-    public void installMod(ModDetail modDetail, int selectedVersion) {
+    public ModLoader installMod(ModDetail modDetail, int selectedVersion) {
         //TODO considering only modpacks for now
-        ModpackInstaller.installModpack(modDetail, selectedVersion, this::installCurseforgeZip);
+        return ModpackInstaller.installModpack(modDetail, selectedVersion, this::installCurseforgeZip);
     }
 
 
