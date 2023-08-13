@@ -29,6 +29,7 @@ public class ModDownloader {
     }
 
     public ModDownloader(File destinationDirectory, boolean useFileCount) {
+        this.mDownloadPool.setRejectedExecutionHandler(new ThreadPoolExecutor.DiscardPolicy());
         this.mDestinationDirectory = destinationDirectory;
         this.mUseFileCount = useFileCount;
     }
@@ -39,20 +40,20 @@ public class ModDownloader {
         mDownloadPool.execute(new DownloadTask(url, new File(mDestinationDirectory, relativePath)));
     }
 
-    public void submitDownload(String relativePath, String... url) {
+    public void submitDownload(FileInfoProvider infoProvider) {
         if(!mUseFileCount) throw new RuntimeException("This method can only be used in a file-counting ModDownloader");
         mTotalSize += 1;
-        mDownloadPool.execute(new DownloadTask(url, new File(mDestinationDirectory, relativePath)));
+        mDownloadPool.execute(new FileInfoQueryTask(infoProvider));
     }
 
-    public void awaitFinish(Tools.DownloaderFeedback feedback) throws IOException{
+    public void awaitFinish(Tools.DownloaderFeedback feedback) throws IOException {
         try {
             mDownloadPool.shutdown();
             while(!mDownloadPool.awaitTermination(20, TimeUnit.MILLISECONDS) && !mTerminator.get()) {
                 feedback.updateProgress((int) mDownloadSize.get(), (int) mTotalSize);
             }
-
             if(mTerminator.get()) {
+                mDownloadPool.shutdownNow();
                 synchronized (mExceptionSyncPoint) {
                     if(mFirstIOException == null) mExceptionSyncPoint.wait();
                     throw mFirstIOException;
@@ -69,6 +70,34 @@ public class ModDownloader {
         buffer = new byte[8192];
         sThreadLocalBuffer.set(buffer);
         return buffer;
+    }
+
+    private void downloadFailed(IOException exception) {
+        mTerminator.set(true);
+        synchronized (mExceptionSyncPoint) {
+            if(mFirstIOException == null) {
+                mFirstIOException = exception;
+                mExceptionSyncPoint.notify();
+            }
+        }
+    }
+
+    class FileInfoQueryTask implements Runnable {
+        private final FileInfoProvider mFileInfoProvider;
+        public FileInfoQueryTask(FileInfoProvider fileInfoProvider) {
+            this.mFileInfoProvider = fileInfoProvider;
+        }
+        @Override
+        public void run() {
+            try {
+                FileInfo fileInfo = mFileInfoProvider.getFileInfo();
+                if(fileInfo == null) return;
+                new DownloadTask(new String[]{fileInfo.url},
+                        new File(mDestinationDirectory, fileInfo.relativePath)).run();
+            }catch (IOException e) {
+                downloadFailed(e);
+            }
+        }
     }
 
     class DownloadTask implements Runnable, Tools.DownloaderFeedback {
@@ -94,12 +123,7 @@ public class ModDownloader {
                 }
             }
             if(exception != null) {
-                synchronized (mExceptionSyncPoint) {
-                    if(mFirstIOException == null) {
-                        mFirstIOException = exception;
-                        mExceptionSyncPoint.notify();
-                    }
-                }
+                downloadFailed(exception);
             }
         }
 
@@ -130,5 +154,19 @@ public class ModDownloader {
             mDownloadSize.addAndGet(curr - last);
             last = curr;
         }
+    }
+
+    public static class FileInfo {
+        public final String url;
+        public final String relativePath;
+
+        public FileInfo(String url, String relativePath) {
+            this.url = url;
+            this.relativePath = relativePath;
+        }
+    }
+
+    public interface FileInfoProvider {
+        FileInfo getFileInfo() throws IOException;
     }
 }
