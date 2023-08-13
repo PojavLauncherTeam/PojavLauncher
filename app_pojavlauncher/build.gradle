@@ -172,9 +172,9 @@ android {
 
 dependencies {
     implementation 'javax.annotation:javax.annotation-api:1.3.2'
-    implementation 'commons-codec:commons-codec:1.15'
+    implementation 'commons-codec:commons-codec:1.16.0'
     // implementation 'com.wu-man:android-bsf-api:3.1.3'
-    implementation 'androidx.preference:preference:1.2.0'
+    implementation 'androidx.preference:preference:1.2.1'
     //implementation 'androidx.core:core:1.7.0'
     implementation 'androidx.drawerlayout:drawerlayout:1.2.0'
     implementation 'androidx.viewpager2:viewpager2:1.1.0-beta02'
@@ -186,16 +186,16 @@ dependencies {
     implementation 'com.github.PojavLauncherTeam:portrait-sdp:ed33e89cbc'
     implementation 'com.github.PojavLauncherTeam:portrait-ssp:6c02fd739b'
     implementation 'com.github.Mathias-Boulay:ExtendedView:1.0.0'
-    implementation 'com.github.Mathias-Boulay:android_gamepad_remapper:eb92e3a5bb'
+    implementation 'com.github.Mathias-Boulay:android_gamepad_remapper:2.0.2'
     implementation 'com.github.Mathias-Boulay:virtual-joystick-android:cb7bf45ba5'
 
 
     // implementation 'com.intuit.sdp:sdp-android:1.0.5'
     // implementation 'com.intuit.ssp:ssp-android:1.0.5'
 
-    implementation 'org.tukaani:xz:1.8'
+    implementation 'org.tukaani:xz:1.9'
     implementation 'com.github.PojavLauncherTeam:exp4j:60eaec6f78'
-    implementation 'net.sourceforge.htmlcleaner:htmlcleaner:2.6.1'
+    implementation 'net.sourceforge.htmlcleaner:htmlcleaner:2.29'
 
     // implementation 'net.sourceforge.streamsupport:streamsupport-cfuture:1.7.0'
 
