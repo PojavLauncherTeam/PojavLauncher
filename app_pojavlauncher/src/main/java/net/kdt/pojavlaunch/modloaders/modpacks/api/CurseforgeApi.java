@@ -190,11 +190,20 @@ public class CurseforgeApi implements ModpackApi{
     }
 
     private String getDownloadUrl(long projectID, long fileID) {
+        // First try the official api endpoint
         JsonObject response = mApiHandler.get("mods/"+projectID+"/files/"+fileID+"/download-url", JsonObject.class);
-        if(response == null) return null;
-        JsonElement data = response.get("data");
-        if(data == null || data.isJsonNull()) return null;
-        return data.getAsString();
+        if (response != null && !response.get("data").isJsonNull())
+            return response.get("data").getAsString();
+
+        // Otherwise, fallback to building an edge link
+        JsonObject fallbackResponse = mApiHandler.get(String.format("mods/%s/files/%s", projectID, fileID), JsonObject.class);
+        if (fallbackResponse != null && !fallbackResponse.get("data").isJsonNull()){
+            JsonObject modData = fallbackResponse.get("data").getAsJsonObject();
+            int id = modData.get("id").getAsInt();
+            return String.format("https://edge.forgecdn.net/files/%s/%s/%s", id/1000, id % 1000, modData.get("fileName").getAsString());
+        }
+
+        return null;
     }
 
     private boolean verifyManifest(CurseManifest manifest) {
