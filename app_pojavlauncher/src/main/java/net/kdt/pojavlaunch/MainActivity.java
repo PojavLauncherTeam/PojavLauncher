@@ -430,12 +430,12 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         sb.setMax(275);
         tmpMouseSpeed = (int) ((LauncherPreferences.PREF_MOUSESPEED*100));
         sb.setProgress(tmpMouseSpeed-25);
-        tv.setText(getString(R.string.percent_format, tmpGyroSensitivity));
+        tv.setText(getString(R.string.percent_format, tmpMouseSpeed));
         sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 tmpMouseSpeed = i+25;
-                tv.setText(getString(R.string.percent_format, tmpGyroSensitivity));
+                tv.setText(getString(R.string.percent_format, tmpMouseSpeed));
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {}
