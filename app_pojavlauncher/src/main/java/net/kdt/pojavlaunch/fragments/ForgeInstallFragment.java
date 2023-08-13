@@ -59,7 +59,7 @@ public class ForgeInstallFragment extends ModVersionListFragment<List<String>> {
 
     @Override
     public Runnable createDownloadTask(Object selectedVersion, ModloaderListenerProxy listenerProxy) {
-        return new ForgeDownloadTask(listenerProxy, (String) selectedVersion, new File(Tools.DIR_CACHE, "forge-installer.jar"));
+        return new ForgeDownloadTask(listenerProxy, (String) selectedVersion);
     }
 
     @Override

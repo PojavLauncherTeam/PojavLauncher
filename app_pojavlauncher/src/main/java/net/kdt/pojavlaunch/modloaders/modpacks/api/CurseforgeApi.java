@@ -129,7 +129,7 @@ public class CurseforgeApi implements ModpackApi{
         return index + data.size();
     }
 
-    private ModLoaderInfo installCurseforgeZip(File zipFile, File instanceDestination) throws IOException {
+    private ModLoader installCurseforgeZip(File zipFile, File instanceDestination) throws IOException {
         try (ZipFile modpackZipFile = new ZipFile(zipFile)){
             CurseManifest curseManifest = Tools.GLOBAL_GSON.fromJson(
                     Tools.read(ZipUtils.getEntryStream(modpackZipFile, "manifest.json")),
@@ -160,7 +160,7 @@ public class CurseforgeApi implements ModpackApi{
         }
     }
 
-    private ModLoaderInfo createInfo(CurseManifest.CurseMinecraft minecraft) {
+    private ModLoader createInfo(CurseManifest.CurseMinecraft minecraft) {
         CurseManifest.CurseModLoader primaryModLoader = null;
         for(CurseManifest.CurseModLoader modLoader : minecraft.modLoaders) {
             if(modLoader.primary) {
@@ -177,16 +177,16 @@ public class CurseforgeApi implements ModpackApi{
         int modLoaderTypeInt;
         switch (modLoaderName) {
             case "forge":
-                modLoaderTypeInt = ModLoaderInfo.MOD_LOADER_FORGE;
+                modLoaderTypeInt = ModLoader.MOD_LOADER_FORGE;
                 break;
             case "fabric":
-                modLoaderTypeInt = ModLoaderInfo.MOD_LOADER_FABRIC;
+                modLoaderTypeInt = ModLoader.MOD_LOADER_FABRIC;
                 break;
             default:
                 return null;
             //TODO: Quilt is also Forge? How does that work?
         }
-        return new ModLoaderInfo(modLoaderTypeInt, modLoaderVersion, minecraft.version);
+        return new ModLoader(modLoaderTypeInt, modLoaderVersion, minecraft.version);
     }
 
     private String getDownloadUrl(long projectID, long fileID) {

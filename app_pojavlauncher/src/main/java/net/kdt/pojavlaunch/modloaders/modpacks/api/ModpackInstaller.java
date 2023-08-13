@@ -25,7 +25,7 @@ public class ModpackInstaller {
 
         // Get the modpack file
         File modpackFile = new File(Tools.DIR_CACHE, modpackName + ".cf"); // Cache File
-        ModLoaderInfo modLoaderInfo;
+        ModLoader modLoaderInfo;
         try {
             byte[] downloadBuffer = new byte[8192];
             DownloadUtils.downloadFileMonitored(versionUrl, modpackFile, downloadBuffer,
@@ -56,6 +56,6 @@ public class ModpackInstaller {
     }
 
     interface InstallFunction {
-        ModLoaderInfo installModpack(File modpackFile, File instanceDestination) throws IOException;
+        ModLoader installModpack(File modpackFile, File instanceDestination) throws IOException;
     }
 }

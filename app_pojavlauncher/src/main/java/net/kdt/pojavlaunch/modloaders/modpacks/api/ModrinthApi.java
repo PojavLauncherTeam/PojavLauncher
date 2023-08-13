@@ -91,25 +91,25 @@ public class ModrinthApi implements ModpackApi{
         ModpackInstaller.installModpack(modDetail, selectedVersion, this::installMrpack);
     }
 
-    private static ModLoaderInfo createInfo(ModrinthIndex modrinthIndex) {
+    private static ModLoader createInfo(ModrinthIndex modrinthIndex) {
         if(modrinthIndex == null) return null;
         Map<String, String> dependencies = modrinthIndex.dependencies;
         String mcVersion = dependencies.get("minecraft");
         if(mcVersion == null) return null;
         String modLoaderVersion;
         if((modLoaderVersion = dependencies.get("forge")) != null) {
-            return new ModLoaderInfo(ModLoaderInfo.MOD_LOADER_FORGE, modLoaderVersion, mcVersion);
+            return new ModLoader(ModLoader.MOD_LOADER_FORGE, modLoaderVersion, mcVersion);
         }
         if((modLoaderVersion = dependencies.get("fabric-loader")) != null) {
-            return new ModLoaderInfo(ModLoaderInfo.MOD_LOADER_FABRIC, modLoaderVersion, mcVersion);
+            return new ModLoader(ModLoader.MOD_LOADER_FABRIC, modLoaderVersion, mcVersion);
         }
         if((modLoaderVersion = dependencies.get("quilt-loader")) != null) {
-            return new ModLoaderInfo(ModLoaderInfo.MOD_LOADER_QUILT, modLoaderVersion, mcVersion);
+            return new ModLoader(ModLoader.MOD_LOADER_QUILT, modLoaderVersion, mcVersion);
         }
         return null;
     }
 
-    private ModLoaderInfo installMrpack(File mrpackFile, File instanceDestination) throws IOException {
+    private ModLoader installMrpack(File mrpackFile, File instanceDestination) throws IOException {
         try (ZipFile modpackZipFile = new ZipFile(mrpackFile)){
             ModrinthIndex modrinthIndex = Tools.GLOBAL_GSON.fromJson(
                     Tools.read(ZipUtils.getEntryStream(modpackZipFile, "modrinth.index.json")),

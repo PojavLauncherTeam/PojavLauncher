@@ -22,9 +22,9 @@ public class OptiFineDownloadTask implements Runnable, Tools.DownloaderFeedback,
     private final Object mMinecraftDownloadLock = new Object();
     private Throwable mDownloaderThrowable;
 
-    public OptiFineDownloadTask(OptiFineUtils.OptiFineVersion mOptiFineVersion, File mDestinationFile, ModloaderDownloadListener mListener) {
+    public OptiFineDownloadTask(OptiFineUtils.OptiFineVersion mOptiFineVersion, ModloaderDownloadListener mListener) {
         this.mOptiFineVersion = mOptiFineVersion;
-        this.mDestinationFile = mDestinationFile;
+        this.mDestinationFile = new File(Tools.DIR_CACHE, "optifine-installer.jar");
         this.mListener = mListener;
     }
 

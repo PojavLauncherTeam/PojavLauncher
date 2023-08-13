@@ -15,9 +15,9 @@ public class FabricDownloadTask implements Runnable, Tools.DownloaderFeedback{
     private final File mDestinationFile;
     private final ModloaderDownloadListener mModloaderDownloadListener;
 
-    public FabricDownloadTask(ModloaderDownloadListener modloaderDownloadListener, File mDestinationDir) {
+    public FabricDownloadTask(ModloaderDownloadListener modloaderDownloadListener) {
         this.mModloaderDownloadListener = modloaderDownloadListener;
-        this.mDestinationDir = mDestinationDir;
+        this.mDestinationDir = new File(Tools.DIR_CACHE, "fabric-installer");
         this.mDestinationFile = new File(mDestinationDir, "fabric-installer.jar");
     }
 

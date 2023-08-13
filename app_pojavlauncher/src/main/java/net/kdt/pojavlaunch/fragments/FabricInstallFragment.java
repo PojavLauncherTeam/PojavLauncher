@@ -42,7 +42,6 @@ public class FabricInstallFragment extends Fragment implements AdapterView.OnIte
     private String mSelectedGameVersion;
     private boolean mSelectedSnapshot;
     private ProgressBar mProgressBar;
-    private File mDestinationDir;
     private Button mStartButton;
     private View mRetryView;
     public FabricInstallFragment() {
@@ -52,7 +51,6 @@ public class FabricInstallFragment extends Fragment implements AdapterView.OnIte
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        this.mDestinationDir = new File(Tools.DIR_CACHE, "fabric-installer");
     }
 
     @Override
@@ -88,7 +86,7 @@ public class FabricInstallFragment extends Fragment implements AdapterView.OnIte
             return;
         }
         sTaskProxy = new ModloaderListenerProxy();
-        FabricDownloadTask fabricDownloadTask = new FabricDownloadTask(sTaskProxy, mDestinationDir);
+        FabricDownloadTask fabricDownloadTask = new FabricDownloadTask(sTaskProxy);
         sTaskProxy.attachListener(this);
         mStartButton.setEnabled(false);
         new Thread(fabricDownloadTask).start();
