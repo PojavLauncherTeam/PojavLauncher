@@ -744,7 +744,7 @@ public final class Tools {
             }
 
             // LabyMod 4 sets version instead of majorVersion
-            if (customVer.javaVersion.majorVersion == 0) {
+            if (customVer.javaVersion != null && customVer.javaVersion.majorVersion == 0) {
                 customVer.javaVersion.majorVersion = customVer.javaVersion.version;
             }
             return customVer;
