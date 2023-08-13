@@ -845,7 +845,7 @@ public final class Tools {
 
     public static int getDisplayFriendlyRes(int displaySideRes, float scaling){
         displaySideRes *= scaling;
-        if(displaySideRes % 2 != 0) displaySideRes ++;
+        if(displaySideRes % 2 != 0) displaySideRes --;
         return displaySideRes;
     }
 
