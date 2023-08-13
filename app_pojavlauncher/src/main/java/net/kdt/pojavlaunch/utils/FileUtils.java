@@ -41,6 +41,12 @@ public class FileUtils {
         zis.close();
     }
 
+    public static String getFileName(String pathOrUrl) {
+        int lastSlashIndex = pathOrUrl.lastIndexOf('/');
+        if(lastSlashIndex == -1) return null;
+        return pathOrUrl.substring(lastSlashIndex);
+    }
+
     public static File newFile(File destinationDir, ZipEntry zipEntry) throws IOException {
         File destFile = new File(destinationDir, zipEntry.getName());
 

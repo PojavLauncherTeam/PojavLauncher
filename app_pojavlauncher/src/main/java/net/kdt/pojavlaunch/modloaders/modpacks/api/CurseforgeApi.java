@@ -15,6 +15,7 @@ import net.kdt.pojavlaunch.modloaders.modpacks.models.ModDetail;
 import net.kdt.pojavlaunch.modloaders.modpacks.models.ModItem;
 import net.kdt.pojavlaunch.modloaders.modpacks.models.SearchFilters;
 import net.kdt.pojavlaunch.progresskeeper.ProgressKeeper;
+import net.kdt.pojavlaunch.utils.FileUtils;
 import net.kdt.pojavlaunch.utils.ZipUtils;
 
 import java.io.File;
@@ -140,16 +141,18 @@ public class CurseforgeApi implements ModpackApi{
             ModDownloader modDownloader = new ModDownloader(new File(instanceDestination,"mods"), true);
             int fileCount = curseManifest.files.length;
             for(int i = 0; i < fileCount; i++) {
-                CurseManifest.CurseFile curseFile = curseManifest.files[i];
-                String downloadUrl = getDownloadUrl(curseFile.projectID, curseFile.fileID);
-                if(downloadUrl == null && curseFile.required) throw new IOException("Failed to obtain download URL for "+curseFile.projectID+" "+curseFile.fileID);
-                else if(downloadUrl == null) continue;
-                modDownloader.submitDownload(Tools.getFileName(downloadUrl), downloadUrl);
-                ProgressKeeper.submitProgress(ProgressLayout.INSTALL_MODPACK, (int) Math.max((float)i/fileCount*100,0), R.string.modpack_download_getting_links, i, fileCount);
+                final CurseManifest.CurseFile curseFile = curseManifest.files[i];
+                modDownloader.submitDownload(()->{
+                    String url = getDownloadUrl(curseFile.projectID, curseFile.fileID);
+                    if(url == null && curseFile.required)
+                        throw new IOException("Failed to obtain download URL for "+curseFile.projectID+" "+curseFile.fileID);
+                    else if(url == null) return null;
+                    return new ModDownloader.FileInfo(url, FileUtils.getFileName(url));
+                });
             }
-            modDownloader.awaitFinish((c,m)->{ // insert joke about semen
-                ProgressKeeper.submitProgress(ProgressLayout.INSTALL_MODPACK, (int) Math.max((float)c/m*100,0), R.string.modpack_download_downloading_mods_fc, c, m);
-            });
+            modDownloader.awaitFinish((c,m)->
+                    ProgressKeeper.submitProgress(ProgressLayout.INSTALL_MODPACK, (int) Math.max((float)c/m*100,0), R.string.modpack_download_downloading_mods_fc, c, m)
+            );
             String overridesDir = "overrides";
             if(curseManifest.overrides != null) overridesDir = curseManifest.overrides;
             ZipUtils.zipExtract(modpackZipFile, overridesDir, instanceDestination);
@@ -170,7 +173,8 @@ public class CurseforgeApi implements ModpackApi{
         int dashIndex = modLoaderId.indexOf('-');
         String modLoaderName = modLoaderId.substring(0, dashIndex);
         String modLoaderVersion = modLoaderId.substring(dashIndex+1);
-        int modLoaderTypeInt = -1;
+        Log.i("CurseforgeApi", modLoaderId + " " + modLoaderName + " "+modLoaderVersion);
+        int modLoaderTypeInt;
         switch (modLoaderName) {
             case "forge":
                 modLoaderTypeInt = ModLoaderInfo.MOD_LOADER_FORGE;
@@ -178,9 +182,10 @@ public class CurseforgeApi implements ModpackApi{
             case "fabric":
                 modLoaderTypeInt = ModLoaderInfo.MOD_LOADER_FABRIC;
                 break;
+            default:
+                return null;
             //TODO: Quilt is also Forge? How does that work?
         }
-        if(modLoaderTypeInt == -1) return null;
         return new ModLoaderInfo(modLoaderTypeInt, modLoaderVersion, minecraft.version);
     }
 
