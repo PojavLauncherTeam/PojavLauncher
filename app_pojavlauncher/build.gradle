@@ -177,8 +177,8 @@ dependencies {
     implementation 'androidx.preference:preference:1.2.1'
     //implementation 'androidx.core:core:1.7.0'
     implementation 'androidx.drawerlayout:drawerlayout:1.2.0'
-    implementation 'androidx.viewpager2:viewpager2:1.1.0-beta01'
-    implementation 'androidx.annotation:annotation:1.6.0'
+    implementation 'androidx.viewpager2:viewpager2:1.1.0-beta02'
+    implementation 'androidx.annotation:annotation:1.5.0'
 
     implementation "androidx.constraintlayout:constraintlayout:2.1.4"
 
