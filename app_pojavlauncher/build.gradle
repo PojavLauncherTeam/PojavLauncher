@@ -172,13 +172,13 @@ android {
 
 dependencies {
     implementation 'javax.annotation:javax.annotation-api:1.3.2'
-    implementation 'commons-codec:commons-codec:1.15'
+    implementation 'commons-codec:commons-codec:1.16.0'
     // implementation 'com.wu-man:android-bsf-api:3.1.3'
-    implementation 'androidx.preference:preference:1.2.0'
+    implementation 'androidx.preference:preference:1.2.1'
     //implementation 'androidx.core:core:1.7.0'
     implementation 'androidx.drawerlayout:drawerlayout:1.2.0'
     implementation 'androidx.viewpager2:viewpager2:1.1.0-beta01'
-    implementation 'androidx.annotation:annotation:1.5.0'
+    implementation 'androidx.annotation:annotation:1.6.0'
 
     implementation "androidx.constraintlayout:constraintlayout:2.1.4"
 
@@ -193,7 +193,7 @@ dependencies {
     // implementation 'com.intuit.sdp:sdp-android:1.0.5'
     // implementation 'com.intuit.ssp:ssp-android:1.0.5'
 
-    implementation 'org.tukaani:xz:1.8'
+    implementation 'org.tukaani:xz:1.9'
     implementation 'com.github.PojavLauncherTeam:exp4j:60eaec6f78'
     implementation 'net.sourceforge.htmlcleaner:htmlcleaner:2.29'
 
