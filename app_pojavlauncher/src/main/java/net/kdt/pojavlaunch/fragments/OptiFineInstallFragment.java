@@ -51,8 +51,7 @@ public class OptiFineInstallFragment extends ModVersionListFragment<OptiFineUtil
 
     @Override
     public Runnable createDownloadTask(Object selectedVersion, ModloaderListenerProxy listenerProxy) {
-        return new OptiFineDownloadTask((OptiFineUtils.OptiFineVersion) selectedVersion,
-                new File(Tools.DIR_CACHE, "optifine-installer.jar"), listenerProxy);
+        return new OptiFineDownloadTask((OptiFineUtils.OptiFineVersion) selectedVersion, listenerProxy);
     }
 
     @Override
