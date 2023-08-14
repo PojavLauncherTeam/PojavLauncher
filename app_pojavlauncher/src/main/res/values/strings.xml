@@ -418,4 +418,8 @@
     <string name="modpack_download_downloading_mods">Downloading mods (%.2f MB / %.2f MB)</string>
     <string name="modpack_download_downloading_mods_fc">Downloading mods (File %d out of %d)</string>
     <string name="modpack_download_applying_overrides">Applying overrides (%d/%d)</string>
+    <string name="modpack_install_notification_title">Pojav Modpack Installer</string>
+    <string name="modpack_install_notification_success">Click here to finish modpack installation</string>
+    <string name="modpack_install_notification_data_not_available">Failed to download mod loader information</string>
+    <string name="modpack_install_notification_download_failed">Failed to download the mod loader files</string>
 </resources>
