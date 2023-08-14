@@ -46,7 +46,7 @@ public class TextProgressBar extends ProgressBar {
     protected synchronized void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         mTextPaint.setTextSize((float) ((getHeight()- getPaddingBottom() - getPaddingTop()) * 0.55));
-        int xPos = (int) Math.max(Math.min(getProgress() * getWidth() / getMax(), getWidth() - mTextPaint.measureText(mText)) - mTextPadding, mTextPadding);
+        int xPos = (int) Math.max(Math.min((getProgress() * getWidth() / getMax()) + mTextPadding, getWidth() - mTextPaint.measureText(mText) - mTextPadding) , mTextPadding);
         int yPos = (int) ((getHeight() / 2) - ((mTextPaint.descent() + mTextPaint.ascent()) / 2)) ;
 
         canvas.drawText(mText, xPos, yPos, mTextPaint);
