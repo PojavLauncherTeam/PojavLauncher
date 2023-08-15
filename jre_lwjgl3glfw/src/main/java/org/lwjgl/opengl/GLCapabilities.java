@@ -7525,7 +7525,7 @@ public final class GLCapabilities {
                 "glPolygonMode", "glPolygonOffset", "glReadBuffer", "glReadPixels", "glScissor", "glStencilFunc", "glStencilMask", "glStencilOp", "glTexImage1D",
                 "glTexImage2D", "glCopyTexImage1D", "glCopyTexImage2D", "glCopyTexSubImage1D", "glCopyTexSubImage2D", "glTexParameteri", "glTexParameteriv",
                 "glTexParameterf", "glTexParameterfv", "glTexSubImage1D", "glTexSubImage2D", "glViewport"
-        )) || reportMissing("GL", "OpenGL11");
+        ) && ext.contains("OpenGL11")) || reportMissing("GL", "OpenGL11");
     }
 
     private static boolean check_GL12(FunctionProvider provider, PointerBuffer caps, Set<String> ext) {
@@ -7534,7 +7534,7 @@ public final class GLCapabilities {
                         336, 337, 338, 339
                 },
                 "glTexImage3D", "glTexSubImage3D", "glCopyTexSubImage3D", "glDrawRangeElements"
-        )) || reportMissing("GL", "OpenGL12");
+        ) && ext.contains("OpenGL12")) || reportMissing("GL", "OpenGL12");
     }
 
     private static boolean check_GL13(FunctionProvider provider, PointerBuffer caps, Set<String> ext, boolean fc) {
@@ -7555,7 +7555,7 @@ public final class GLCapabilities {
                 },
                 "glCompressedTexImage3D", "glCompressedTexImage2D", "glCompressedTexImage1D", "glCompressedTexSubImage3D", "glCompressedTexSubImage2D",
                 "glCompressedTexSubImage1D", "glGetCompressedTexImage", "glSampleCoverage", "glActiveTexture"
-        )) || reportMissing("GL", "OpenGL13");
+        ) && ext.contains("OpenGL13")) || reportMissing("GL", "OpenGL13");
     }
 
     private static boolean check_GL14(FunctionProvider provider, PointerBuffer caps, Set<String> ext, boolean fc) {
@@ -7575,7 +7575,7 @@ public final class GLCapabilities {
                 },
                 "glBlendColor", "glBlendEquation", "glMultiDrawArrays", "glMultiDrawElements", "glPointParameterf", "glPointParameteri", "glPointParameterfv",
                 "glPointParameteriv", "glBlendFuncSeparate"
-        )) || reportMissing("GL", "OpenGL14");
+        ) && ext.contains("OpenGL14")) || reportMissing("GL", "OpenGL14");
     }
 
     private static boolean check_GL15(FunctionProvider provider, PointerBuffer caps, Set<String> ext) {
@@ -7586,7 +7586,7 @@ public final class GLCapabilities {
                 "glBindBuffer", "glDeleteBuffers", "glGenBuffers", "glIsBuffer", "glBufferData", "glBufferSubData", "glGetBufferSubData", "glMapBuffer",
                 "glUnmapBuffer", "glGetBufferParameteriv", "glGetBufferPointerv", "glGenQueries", "glDeleteQueries", "glIsQuery", "glBeginQuery", "glEndQuery",
                 "glGetQueryiv", "glGetQueryObjectiv", "glGetQueryObjectuiv"
-        )) || reportMissing("GL", "OpenGL15");
+        ) && ext.contains("OpenGL15")) || reportMissing("GL", "OpenGL15");
     }
 
     private static boolean check_GL20(FunctionProvider provider, PointerBuffer caps, Set<String> ext) {
@@ -7611,7 +7611,7 @@ public final class GLCapabilities {
                 "glEnableVertexAttribArray", "glDisableVertexAttribArray", "glBindAttribLocation", "glGetActiveAttrib", "glGetAttribLocation",
                 "glGetVertexAttribiv", "glGetVertexAttribfv", "glGetVertexAttribdv", "glGetVertexAttribPointerv", "glDrawBuffers", "glBlendEquationSeparate",
                 "glStencilOpSeparate", "glStencilFuncSeparate", "glStencilMaskSeparate"
-        )) || reportMissing("GL", "OpenGL20");
+        ) && ext.contains("OpenGL20")) || reportMissing("GL", "OpenGL20");
     }
 
     private static boolean check_GL21(FunctionProvider provider, PointerBuffer caps, Set<String> ext) {
@@ -7620,7 +7620,7 @@ public final class GLCapabilities {
                         545, 546, 547, 548, 549, 550
                 },
                 "glUniformMatrix2x3fv", "glUniformMatrix3x2fv", "glUniformMatrix2x4fv", "glUniformMatrix4x2fv", "glUniformMatrix3x4fv", "glUniformMatrix4x3fv"
-        )) || reportMissing("GL", "OpenGL21");
+        ) && ext.contains("OpenGL21")) || reportMissing("GL", "OpenGL21");
     }
 
     private static boolean check_GL30(FunctionProvider provider, PointerBuffer caps, Set<String> ext) {
@@ -7644,7 +7644,7 @@ public final class GLCapabilities {
                 "glGetTexParameterIuiv", "glColorMaski", "glGetBooleani_v", "glGetIntegeri_v", "glEnablei", "glDisablei", "glIsEnabledi", "glBindBufferRange",
                 "glBindBufferBase", "glBeginTransformFeedback", "glEndTransformFeedback", "glTransformFeedbackVaryings", "glGetTransformFeedbackVarying",
                 "glBindVertexArray", "glDeleteVertexArrays", "glGenVertexArrays", "glIsVertexArray"
-        )) || reportMissing("GL", "OpenGL30");
+        ) && ext.contains("OpenGL30")) || reportMissing("GL", "OpenGL30");
     }
 
     private static boolean check_GL31(FunctionProvider provider, PointerBuffer caps, Set<String> ext) {
@@ -7655,7 +7655,7 @@ public final class GLCapabilities {
                 "glDrawArraysInstanced", "glDrawElementsInstanced", "glCopyBufferSubData", "glPrimitiveRestartIndex", "glTexBuffer", "glGetUniformIndices",
                 "glGetActiveUniformsiv", "glGetActiveUniformName", "glGetUniformBlockIndex", "glGetActiveUniformBlockiv", "glGetActiveUniformBlockName",
                 "glUniformBlockBinding"
-        )) || reportMissing("GL", "OpenGL31");
+        ) && ext.contains("OpenGL31")) || reportMissing("GL", "OpenGL31");
     }
 
     private static boolean check_GL32(FunctionProvider provider, PointerBuffer caps, Set<String> ext) {
@@ -7667,7 +7667,7 @@ public final class GLCapabilities {
                 "glMultiDrawElementsBaseVertex", "glProvokingVertex", "glTexImage2DMultisample", "glTexImage3DMultisample", "glGetMultisamplefv", "glSampleMaski",
                 "glFramebufferTexture", "glFenceSync", "glIsSync", "glDeleteSync", "glClientWaitSync", "glWaitSync", "glGetInteger64v", "glGetInteger64i_v",
                 "glGetSynciv"
-        )) || reportMissing("GL", "OpenGL32");
+        ) && ext.contains("OpenGL32")) || reportMissing("GL", "OpenGL32");
     }
 
     private static boolean check_GL33(FunctionProvider provider, PointerBuffer caps, Set<String> ext, boolean fc) {
@@ -7689,7 +7689,7 @@ public final class GLCapabilities {
                 "glGetSamplerParameterfv", "glGetSamplerParameterIiv", "glGetSamplerParameterIuiv", "glQueryCounter", "glGetQueryObjecti64v",
                 "glGetQueryObjectui64v", "glVertexAttribDivisor", "glVertexAttribP1ui", "glVertexAttribP2ui", "glVertexAttribP3ui", "glVertexAttribP4ui",
                 "glVertexAttribP1uiv", "glVertexAttribP2uiv", "glVertexAttribP3uiv", "glVertexAttribP4uiv"
-        )) || reportMissing("GL", "OpenGL33");
+        ) && ext.contains("OpenGL33")) || reportMissing("GL", "OpenGL33");
     }
 
     private static boolean check_GL40(FunctionProvider provider, PointerBuffer caps, Set<String> ext) {
