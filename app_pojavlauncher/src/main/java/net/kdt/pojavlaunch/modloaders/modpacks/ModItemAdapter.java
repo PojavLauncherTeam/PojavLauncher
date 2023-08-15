@@ -1,6 +1,7 @@
 package net.kdt.pojavlaunch.modloaders.modpacks;
 
 import android.annotation.SuppressLint;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.graphics.drawable.RoundedBitmapDrawable;
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kdt.SimpleArrayAdapter;
@@ -34,6 +38,9 @@ public class ModItemAdapter extends RecyclerView.Adapter<ModItemAdapter.ViewHold
     private ModItem[] mModItems;
     private final ModpackApi mModpackApi;
 
+    /* Cache for ever so slightly rounding the image for the corner not to stick out of the layout */
+    private final float mCornerDimensionCache;
+
     /**
      * Basic viewholder with expension capabilities
      */
@@ -50,6 +57,10 @@ public class ModItemAdapter extends RecyclerView.Adapter<ModItemAdapter.ViewHold
         private Future<?> mExtensionFuture;
         private Bitmap mThumbnailBitmap;
         private ImageReceiver mImageReceiver;
+
+        /* Used to display available versions of the mod(pack) */
+        private SimpleArrayAdapter<String> mVersionAdapter = new SimpleArrayAdapter<>(null);
+
         public ViewHolder(View view) {
             super(view);
 
@@ -61,17 +72,14 @@ public class ModItemAdapter extends RecyclerView.Adapter<ModItemAdapter.ViewHold
                     mExtendedSpinner = mExtendedLayout.findViewById(R.id.mod_extended_version_spinner);
                     mExtendedErrorTextView = mExtendedLayout.findViewById(R.id.mod_extended_error_textview);
 
-                    mExtendedButton.setOnClickListener(v1 -> {
-                        mModpackApi.handleInstallation(
-                                mExtendedButton.getContext().getApplicationContext(),
-                                mModDetail,
-                                mExtendedSpinner.getSelectedItemPosition());
-
-                        //TODO do something !
-                    });
+                    mExtendedButton.setOnClickListener(v1 -> mModpackApi.handleInstallation(
+                            mExtendedButton.getContext().getApplicationContext(),
+                            mModDetail,
+                            mExtendedSpinner.getSelectedItemPosition()));
+                    mExtendedSpinner.setAdapter(mVersionAdapter);
                 } else {
-                    if(isExtended()) mExtendedLayout.setVisibility(View.GONE);
-                    else mExtendedLayout.setVisibility(View.VISIBLE);
+                    if(isExtended()) closeDetailedView();
+                    else openDetailedView();
                 }
 
                 if(isExtended() && mModDetail == null && mExtensionFuture == null) { // only reload if no reloads are in progress
@@ -140,36 +148,57 @@ public class ModItemAdapter extends RecyclerView.Adapter<ModItemAdapter.ViewHold
             mImageReceiver = bm->{
                 mImageReceiver = null;
                 mThumbnailBitmap = bm;
-                mIconView.setImageBitmap(bm);
+                RoundedBitmapDrawable drawable = RoundedBitmapDrawableFactory.create(mIconView.getResources(), bm);
+                drawable.setCornerRadius(mCornerDimensionCache * bm.getHeight());
+                mIconView.setImageDrawable(drawable);
             };
             mIconCache.getImage(mImageReceiver, mModItem.getIconCacheTag(), mModItem.imageUrl);
             mTitle.setText(item.title);
             mDescription.setText(item.description);
 
             if(hasExtended()){
-                mExtendedLayout.setVisibility(View.GONE);
+                closeDetailedView();
             }
         }
 
         /** Display extended info/interaction about a modpack */
         private void setStateDetailed(ModDetail detailedItem) {
-            mExtendedLayout.setVisibility(View.VISIBLE);
+
             if(detailedItem != null) {
                 mExtendedButton.setEnabled(true);
                 mExtendedErrorTextView.setVisibility(View.GONE);
-                mExtendedSpinner.setAdapter(new SimpleArrayAdapter<>(Arrays.asList(detailedItem.versionNames)));
+                mVersionAdapter.setObjects(Arrays.asList(detailedItem.versionNames));
+                mExtendedSpinner.setAdapter(mVersionAdapter);
             } else {
+                closeDetailedView();
                 mExtendedButton.setEnabled(false);
                 mExtendedErrorTextView.setVisibility(View.VISIBLE);
                 mExtendedSpinner.setAdapter(null);
+                mVersionAdapter.setObjects(null);
             }
+        }
 
+        private void openDetailedView(){
+            mExtendedLayout.setVisibility(View.VISIBLE);
+            mDescription.setMaxLines(99);
+            mExtendedLayout.post(() -> {
+                // We need to align to the longer section
+                ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) mExtendedLayout.getLayoutParams();
+                params.topToBottom = mDescription.getBottom() > mIconView.getBottom() ? R.id.mod_body_textview : R.id.mod_thumbnail_imageview;
+                mExtendedLayout.setLayoutParams(params);
+            });
+        }
+
+        private void closeDetailedView(){
+            mExtendedLayout.setVisibility(View.GONE);
+            mDescription.setMaxLines(3);
         }
 
         private void setDetailedStateDefault() {
             mExtendedButton.setEnabled(false);
             mExtendedSpinner.setAdapter(null);
             mExtendedErrorTextView.setVisibility(View.GONE);
+            openDetailedView();
         }
 
         private boolean hasExtended(){
@@ -182,7 +211,8 @@ public class ModItemAdapter extends RecyclerView.Adapter<ModItemAdapter.ViewHold
     }
 
 
-    public ModItemAdapter(ModpackApi api) {
+    public ModItemAdapter(Resources resources, ModpackApi api) {
+        mCornerDimensionCache = resources.getDimension(R.dimen._1sdp) / 250;
         mModpackApi = api;
         mModItems = new ModItem[]{};
     }
