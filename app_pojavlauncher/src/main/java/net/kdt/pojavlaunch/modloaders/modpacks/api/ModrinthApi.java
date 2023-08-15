@@ -77,9 +77,6 @@ public class ModrinthApi implements ModpackApi{
             names[i] = version.get("name").getAsString();
             mcNames[i] = version.get("game_versions").getAsJsonArray().get(0).getAsString();
             urls[i] = version.get("files").getAsJsonArray().get(0).getAsJsonObject().get("url").getAsString();
-
-            if (!names[i].contains(mcNames[i]))
-                names[i] += " - " + mcNames[i];
         }
 
         return new ModDetail(item, names, mcNames, urls);
