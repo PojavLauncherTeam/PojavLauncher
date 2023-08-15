@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -18,12 +19,24 @@ import java.util.List;
  * @param <T>
  */
 public class SimpleArrayAdapter<T> extends BaseAdapter {
-
-    private final List<T> mObjects;
+    private List<T> mObjects;
     public SimpleArrayAdapter(List<T> objects) {
-        mObjects = objects;
+        setObjects(objects);
     }
 
+    public void setObjects(@Nullable List<T> objects) {
+        if(objects == null){
+            if(mObjects != Collections.emptyList()) {
+                mObjects = Collections.emptyList();
+                notifyDataSetChanged();
+            }
+        } else {
+            if(objects != mObjects){
+                mObjects = objects;
+                notifyDataSetChanged();
+            }
+        }
+    }
 
     @Override
     public int getCount() {
