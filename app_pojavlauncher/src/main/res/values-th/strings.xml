@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
-    <string name="app_name">PojavLauncher (Minecraft: ฉบับ Java สำหรับ Android)</string>
+    <string name="app_name">PojavLauncher (Minecraft: Java Edition for Android)</string>
     <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">เปิด Minecraft: ฉบับ Java ในอุปกรณ์ของคุณ!</string>
+    <string name="app_motd">ขออภัย Forge เวอร์ชันนี้ไม่มีตัวติดตั้งซึ่งยังไม่รองรับ</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
@@ -20,7 +20,7 @@
     <!-- Hint -->
     <string name="hint_control_mapping">"กดปุ่มด้านบนกลางรูปฟันเพืองเพื่อเปิดหน้าต่าง ⚙\nเเตะปุ่มเพื่อปรับเเต่ง: เเก้ไข, ปรับขนาด, ลบ, หรือ ปรับเเต่งตัวคียลัด"</string>
     <!-- Warnings -->
-    <string name="warning_remove_account">This account will be removed!</string>
+    <string name="warning_remove_account">บัญชีนี้จะถูกลบ!</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_install_jre">ติดตั้ง Java Runtime %s (.tar.xz)</string>
     <string name="alerttitle_installmod">เลือกตัวติดตั้งม็อด</string>
@@ -30,7 +30,7 @@
     <string name="error_show_more">แสดงเพิ่มเติม</string>
     <string name="error_show_less">แสดงน้อยลง</string>
     <!-- Toast messages -->
-    <string name="toast_permission_denied">The read/write to storage permission is required!</string>
+    <string name="toast_permission_denied">ต้องได้รับอนุญาตในการอ่าน/เขียนไปยังที่เก็บข้อมูล!</string>
     <string name="toast_optifine_success">ติดตั้งสำเร็จแล้ว</string>
     <string name="toast_uninstalljre_done">ถอนการติดตั่ง Java Runtime สำเร็จ</string>
     <!--
@@ -42,7 +42,7 @@
     <string name="mcl_tab_crash">บันทึกข้อขัดข้อง</string>
     <!-- MCLauncherActivity: Account status -->
     <string name="mcl_account_connected">เชื่อมต่อแล้ว</string>
-    <string name="mcl_account_local">Local</string>
+    <string name="mcl_account_local">ท้องถิ่น</string>
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_version_msg">พร้อมที่จะเล่น Minecraft %s</string>
     <string name="mcl_launch_cleancache">กำลังล้างแฟ้มแคช</string>
@@ -60,7 +60,7 @@
     <string name="mcl_setting_subtitle_use_surface_view">อาจช่วยประสิทธิภาพในสถานการณ์ที่ผูกกับ GPU</string>
     <string name="mcl_setting_title_uninstalljre">ถอนการติดตั้ง Java Runtime</string>
     <string name="mcl_setting_subtitle_uninstalljre">[ต้องรีสตาร์ท Launcher] ซึ่งจะช่วยให้คุณติดตั้ง Java Runtime ใหม่ได้</string>
-    <string name="mcl_setting_title_freeform">Launch Minecraft in Freeform mode</string>
+    <string name="mcl_setting_title_freeform">เปิด Minecraft ในโหมดรูปแบบอิสระ</string>
     <string name="mcl_setting_subtitle_freeform">เปิด Minecraft ในหน้าต่างลอย. ต้องใช้ Android 7.0+</string>
     <string name="mcl_setting_title_hide_sidebar">ซ่อนแถบด้านข้าง</string>
     <string name="mcl_setting_subtitle_hide_sidebar">ผู้ที่คิดถึงอดีตที่ชอบ v1 UI แบบเก่าอาจชอบสิ่งนี้ ให้ประสบการณ์เต็มหน้าจอมากขึ้น</string>
@@ -77,7 +77,7 @@
     <string name="mcl_setting_subtitle_buttonscale">เพิ่มขนาดหากปุ่มมีขนาดเล็กเกินไป</string>
     <string name="mcl_setting_title_mousescale">การปรับขนาดเมาส์</string>
     <string name="mcl_setting_subtitle_mousescale">เปลี่ยนขนาดของเมาส์เสมือน.</string>
-    <string name="mcl_setting_title_javaargs">JVM Launch arguments</string>
+    <string name="mcl_setting_title_javaargs">อาร์กิวเมนต์เปิดใช้ JVM</string>
     <string name="mcl_setting_subtitle_javaargs">ระวัง อาจทำให้เกมพังได้หากแก้ไขโดยขาดความรู้</string>
     <string name="mcl_setting_category_general">การตั้งค่าทั่วไป</string>
     <string name="mcl_setting_category_scaling">การตั้งค่าการปรับขนาด</string>
@@ -89,8 +89,8 @@
     <string name="mcl_setting_renderer_angle">ANGLE - (1.17+, กลาง)</string>
     <string name="mcl_setting_category_veroption">ประเภทเวอร์ชันจะอยู่ในรายการเวอร์ชัน</string>
     <string name="mcl_setting_veroption_snapshot">ภาพรวม</string>
-    <string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
-    <string name="mcl_setting_veroption_oldbeta">เบตาเก่า</string>
+    <string name="mcl_setting_veroption_oldalpha">alpha เก่า</string>
+    <string name="mcl_setting_veroption_oldbeta">เบต้าเก่า</string>
     <string name="mcl_setting_java_sandbox">ตัวลง .jar เเบบปลอดภัย</string>
     <string name="mcl_setting_java_sandbox_subtitle">ควบคุมความสามารถในการปรับเเต่งความปลอดภัยเมื่อเปิด ตัวติดตั้ง .jar</string>
     <string name="mcl_version_clone">คัดลอก</string>
@@ -115,7 +115,7 @@
     <string name="mcn_check_fail_lwjgl">LWJGL3 ไม่ได้ถูกติดตั้ง!</string>
     <string name="mcn_check_fail_vulkan_support">อุปกรณ์นี้ไม่รองรับตัวเรนเดอร์ Vulkan Zink</string>
     <!-- MainActivity: Control buttons -->
-    <string name="control_toggle">GUI</string>
+    <string name="control_toggle">ซ่อน</string>
     <string name="control_keyboard">แป้นพิมพ์</string>
     <string name="control_chat">แชต</string>
     <string name="control_debug">ดีบั๊ก</string>
@@ -127,8 +127,8 @@
     <string name="control_forceclose">บังคับปิด</string>
     <string name="control_viewout">ประวัติที่บันทึกไว้</string>
     <string name="control_adebug">การดีบักอินพุต</string>
-    <string name="control_scaleup">Scale Up</string>
-    <string name="control_scaledown">Scale down</string>
+    <string name="control_scaleup">เพิ่มขึ้น</string>
+    <string name="control_scaledown">ลดขนาดลง</string>
     <!-- ImportControlActivity Strings -->
     <string name="import_control_label">นำเข้า ควบคุม</string>
     <string name="import_control_invalid_file">ไฟล์ไม่ถูกต้องหรือเสียหาย</string>
@@ -208,13 +208,13 @@
     <string name="multirt_config_removeerror_last">อย่างน้อยต้องมีจาวาที่ติดตั้งเเล้วก่อน</string>
     <string name="multirt_nocompartiblert">ไม่สามารถหาตัวจาวาที่รองรับ เวอร์ชั่นนี้ตองการจาวา %d หรือใหม่กว่า</string>
     <string name="multirt_nojava8rt">ไม่สามารถหาจาวา 8 ในการใช้ออฟชั่นนี้คุณต้องติดตั้งจาวา 8</string>
-    <string name="compat_117_message">มายคราฟ 21w10a+ ต้องการ โอเฟ่นจีเเอล 3.2 โปรไฟล์ เสียดาย ชิฟการ์ดจอ</string>
+    <string name="compat_117_message">มายคราฟ 21w10a+ ต้องการ OpenGL 3.2 โปรไฟล์ น่าเศร้าที่ชิปกราฟิกของคุณไม่รองรับ OpenGL ES 3.0 หรือสูงกว่า แต่มีแหล่งข้อมูลเพิ่มเติมที่คุณสามารถติดตั้งเพื่อเรียกใช้เวอร์ชันเหล่านี้ได้ กด ตกลง เพื่อยืนยันการติดตั้ง และกด ยกเลิก เพื่อยกเลิกการเรียกใช้</string>
     <string name="compat_11x_playanyway">เล่นโดยไม่สนใจ</string>
-    <string name="pvc_gameDirectory">ตำเเห่งโฟรเดอร์เกม</string>
+    <string name="pvc_gameDirectory">ตำเเหน่งโฟรเดอร์เกม</string>
     <string name="pvc_jvmArgs">ตัวคำสั่ง เจวิเอ็ม</string>
     <string name="pvc_title">ตั้งค่าเเต่ละเวอร์ชั่น</string>
     <string name="storage_warning_title">ตำแหน่งที่จัดเก็บได้ถูกเปลี่ยน</string>
-    <string name="storage_warning_text"><![CDATA[เนื่องจากระบบใหม่ของ กูเกิล scoped storage enforcement ได้เพื่มลงใน android 10 ขึ้นไป เราขอเเนะนำย้ายไฟล์ลงใน app-private folder.<br /> ตำแหน่งที่จัดเก็บใหม่อยู่ใน <b>Android/datal%s/files/</b> (เข้าได้ผ่าน storage provider ในตัวจัดการไฟล์ในเครื่องคุณ).<br /> ถ้าต้องก็อปปี้ทุกอย่างจากของเดิมอยู่ที่ <b>games/Pojavlauncher</b> ตัวตัวเอง]]></string>
+    <string name="storage_warning_text"><![CDATA[เนื่องจากระบบใหม่ของ Google scoped storage enforcement ได้เพื่มลงใน android 10 ขึ้นไป เราขอเเนะนำย้ายไฟล์ลงใน app-private folder.<br /> ตำแหน่งที่จัดเก็บใหม่อยู่ใน <b>Android/datal%s/files/</b> (เข้าได้ผ่าน storage provider ในตัวจัดการไฟล์ในเครื่องคุณ).<br /> ถ้าต้องก็อปปี้ทุกอย่างจากของเดิมอยู่ที่ <b>games/Pojavlauncher</b> ตัวตัวเอง]]></string>
     <string name="control_offset_title">ปรับค่าควบคุม</string>
     <string name="control_top_offset">ค่าควบคุมบนสุด: </string>
     <string name="control_right_offset">ค่าควบคุมขวา: </string>
