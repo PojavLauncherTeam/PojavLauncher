@@ -15,6 +15,12 @@ public class ModDetail extends ModItem {
         this.versionNames = versionNames;
         this.mcVersionNames = mcVersionNames;
         this.versionUrls = versionUrls;
+
+        // Add the mc version to the version model
+        for (int i=0; i<versionNames.length; i++){
+            if (!versionNames[i].contains(mcVersionNames[i]))
+                versionNames[i] += " - " + mcVersionNames[i];
+        }
     }
 
     @NonNull
