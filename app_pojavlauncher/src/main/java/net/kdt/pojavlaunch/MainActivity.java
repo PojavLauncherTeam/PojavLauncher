@@ -322,7 +322,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         }
         MinecraftAccount minecraftAccount = PojavProfile.getCurrentProfileContent(this, null);
         Logger.appendToLog("--------- beginning with launcher debug");
-        printLauncherInfo(versionId);
+        printLauncherInfo(versionId, Tools.isValidString(minecraftProfile.javaArgs) ? minecraftProfile.javaArgs : LauncherPreferences.PREF_CUSTOM_JAVA_ARGS);
         if (Tools.LOCAL_RENDERER.equals("vulkan_zink")) {
             checkVulkanZinkIsSupported();
         }
@@ -333,13 +333,13 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         Tools.launchMinecraft(this, minecraftAccount, minecraftProfile, versionId, requiredJavaVersion);
     }
 
-    private void printLauncherInfo(String gameVersion) {
+    private void printLauncherInfo(String gameVersion, String javaArguments) {
         Logger.appendToLog("Info: Launcher version: " + BuildConfig.VERSION_NAME);
         Logger.appendToLog("Info: Architecture: " + Architecture.archAsString(Tools.DEVICE_ARCHITECTURE));
         Logger.appendToLog("Info: Device model: " + Build.MANUFACTURER + " " +Build.MODEL);
         Logger.appendToLog("Info: API version: " + Build.VERSION.SDK_INT);
         Logger.appendToLog("Info: Selected Minecraft version: " + gameVersion);
-        Logger.appendToLog("Info: Custom Java arguments: \"" + LauncherPreferences.PREF_CUSTOM_JAVA_ARGS + "\"");
+        Logger.appendToLog("Info: Custom Java arguments: \"" + javaArguments + "\"");
     }
 
     private void checkVulkanZinkIsSupported() {
