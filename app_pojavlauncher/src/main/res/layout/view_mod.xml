@@ -6,17 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/background_line"
-    android:paddingHorizontal="@dimen/padding_medium"
-    android:paddingVertical="@dimen/padding_medium"
+    android:paddingHorizontal="@dimen/_2sdp"
+    android:paddingVertical="@dimen/_2sdp"
     android:layout_marginVertical="@dimen/padding_medium"
     >
 
     <ImageView
         android:id="@+id/mod_thumbnail_imageview"
-        android:layout_width="@dimen/_50sdp"
-        android:layout_height="0dp"
+        android:layout_width="@dimen/_65sdp"
+        android:layout_height="@dimen/_65sdp"
 
-        app:layout_constraintBottom_toBottomOf="@id/mod_limited_state_guideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
 
@@ -38,7 +37,8 @@
         style="@style/TextAppearance.AppCompat.Body2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/padding_small"
+        android:layout_marginStart="@dimen/padding_moderate"
+        android:ellipsize="end"
 
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintEnd_toStartOf="@+id/mod_source_imageview"
@@ -50,22 +50,20 @@
         android:id="@+id/mod_body_textview"
         style="@style/TextAppearance.AppCompat.Body1"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/padding_medium"
         android:layout_marginEnd="@dimen/padding_medium"
-        app:layout_constraintBottom_toTopOf="@+id/mod_limited_state_guideline"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/mod_thumbnail_imageview"
-        app:layout_constraintTop_toBottomOf="@+id/mod_title_textview"
-        tools:text="Feed the beast - Reforged is a machine and magic focused modpack, with no respect for the minimum requirements of minecraft" />
+        android:ellipsize="end"
+        android:maxLines="3"
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/mod_limited_state_guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="@dimen/_65sdp"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/mod_title_textview"
+        app:layout_constraintTop_toBottomOf="@+id/mod_title_textview"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintVertical_bias="0.0"
+        tools:text="Feed the beast - Reforged is a machine and magic focused modpack, with no respect for the minimum requirements of minecraft. Very long text" />
+
 
     <!--
         When clicked for the first time, the view is extended with more information.
@@ -76,7 +74,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout="@layout/view_mod_extended"
-        app:layout_constraintTop_toBottomOf="@id/mod_limited_state_guideline"/>
+        app:layout_constraintTop_toBottomOf="@id/mod_body_textview"/>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

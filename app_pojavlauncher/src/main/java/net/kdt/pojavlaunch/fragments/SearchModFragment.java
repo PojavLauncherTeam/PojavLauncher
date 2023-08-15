@@ -53,13 +53,15 @@ public class SearchModFragment extends Fragment {
     public SearchModFragment(){
         super(R.layout.fragment_mod_search);
         modpackApi = new CurseforgeApi();
-        mModItemAdapter = new ModItemAdapter(modpackApi);
         mSearchFilters = new SearchFilters();
         mSearchFilters.isModpack = true;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        // You can only access resources after attaching to current context
+        mModItemAdapter = new ModItemAdapter(getResources(), modpackApi);
+
         mSearchEditText = view.findViewById(R.id.search_mod_edittext);
         mSearchProgressBar = view.findViewById(R.id.search_mod_progressbar);
         mSelectedVersion = view.findViewById(R.id.search_mod_selected_mc_version_textview);

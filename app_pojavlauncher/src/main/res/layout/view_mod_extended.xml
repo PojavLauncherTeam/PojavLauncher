@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -18,7 +18,9 @@
     <androidx.appcompat.widget.AppCompatSpinner
         android:id="@+id/mod_extended_version_spinner"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_30sdp"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/_30sdp"
+        android:layout_marginVertical="@dimen/padding_moderate"
         app:layout_constraintTop_toBottomOf="@+id/mod_extended_error_textview"
         />
 
@@ -26,10 +28,13 @@
         android:id="@+id/mod_extended_select_version_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/padding_large"
         android:enabled="false"
         android:text="@string/generic_install"
+        android:layout_marginHorizontal="@dimen/padding_large"
+        android:layout_marginTop="@dimen/padding_moderate"
+        android:layout_marginBottom="@dimen/padding_large"
 
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/mod_extended_version_spinner" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
