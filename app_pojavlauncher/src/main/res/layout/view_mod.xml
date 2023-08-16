@@ -24,10 +24,12 @@
 
     <ImageView
         android:id="@+id/mod_source_imageview"
-        android:layout_width="@dimen/_20sdp"
-        android:layout_height="@dimen/_20sdp"
-        android:scaleType="centerCrop"
+        android:layout_width="@dimen/_13sdp"
+        android:layout_height="@dimen/_13sdp"
+        android:layout_marginTop="3dp"
 
+        android:layout_marginEnd="3dp"
+        android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@mipmap/ic_launcher_foreground" />

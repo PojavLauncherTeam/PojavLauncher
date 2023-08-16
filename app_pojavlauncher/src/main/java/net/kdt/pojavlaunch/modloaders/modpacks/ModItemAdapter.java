@@ -26,6 +26,7 @@ import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.modloaders.modpacks.api.ModpackApi;
 import net.kdt.pojavlaunch.modloaders.modpacks.imagecache.ImageReceiver;
 import net.kdt.pojavlaunch.modloaders.modpacks.imagecache.ModIconCache;
+import net.kdt.pojavlaunch.modloaders.modpacks.models.Constants;
 import net.kdt.pojavlaunch.modloaders.modpacks.models.ModDetail;
 import net.kdt.pojavlaunch.modloaders.modpacks.models.ModItem;
 
@@ -49,7 +50,7 @@ public class ModItemAdapter extends RecyclerView.Adapter<ModItemAdapter.ViewHold
         private ModDetail mModDetail = null;
         private ModItem mModItem = null;
         private final TextView mTitle, mDescription;
-        private final ImageView mIconView;
+        private final ImageView mIconView, mSourceView;
         private View mExtendedLayout;
         private Spinner mExtendedSpinner;
         private Button mExtendedButton;
@@ -122,6 +123,7 @@ public class ModItemAdapter extends RecyclerView.Adapter<ModItemAdapter.ViewHold
             mTitle = view.findViewById(R.id.mod_title_textview);
             mDescription = view.findViewById(R.id.mod_body_textview);
             mIconView = view.findViewById(R.id.mod_thumbnail_imageview);
+            mSourceView = view.findViewById(R.id.mod_source_imageview);
         }
 
         /** Display basic info about the moditem */
@@ -153,6 +155,7 @@ public class ModItemAdapter extends RecyclerView.Adapter<ModItemAdapter.ViewHold
                 mIconView.setImageDrawable(drawable);
             };
             mIconCache.getImage(mImageReceiver, mModItem.getIconCacheTag(), mModItem.imageUrl);
+            mSourceView.setImageResource(getSourceDrawable(item.apiSource));
             mTitle.setText(item.title);
             mDescription.setText(item.description);
 
@@ -207,6 +210,17 @@ public class ModItemAdapter extends RecyclerView.Adapter<ModItemAdapter.ViewHold
 
         private boolean isExtended(){
             return hasExtended() && mExtendedLayout.getVisibility() == View.VISIBLE;
+        }
+
+        private int getSourceDrawable(int apiSource) {
+            switch (apiSource) {
+                case Constants.SOURCE_CURSEFORGE:
+                    return R.drawable.ic_curseforge;
+                case Constants.SOURCE_MODRINTH:
+                    return R.drawable.ic_modrinth;
+                default:
+                    throw new RuntimeException("Unknown API source");
+            }
         }
     }
 
