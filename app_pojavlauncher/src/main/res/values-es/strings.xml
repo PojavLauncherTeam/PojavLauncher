@@ -110,7 +110,7 @@
     <string name="global_error_field_empty">Este campo es obligatorio</string>
     <string name="global_waiting">Espere</string>
     <string name="global_select">Seleccionar</string>
-    <string name="global_retry">Volver a intentar</string>
+    <string name="global_retry">Reintentar</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">La aplicación/juego ha finalizado con el código %d, mira el archivo latestlog.txt para más detalles.</string>
     <string name="mcn_exit_call">Salir</string>
