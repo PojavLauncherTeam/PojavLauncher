@@ -76,7 +76,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout="@layout/view_mod_extended"
-        app:layout_constraintTop_toBottomOf="@id/mod_body_textview"/>
+        app:layout_constraintTop_toBottomOf="@id/mod_thumbnail_imageview"/>
 
 
 

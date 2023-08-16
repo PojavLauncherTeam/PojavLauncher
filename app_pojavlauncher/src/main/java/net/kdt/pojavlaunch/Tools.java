@@ -33,6 +33,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.webkit.MimeTypeMap;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -1028,5 +1029,12 @@ public final class Tools {
 
         Intent sendIntent = Intent.createChooser(shareIntent, "latestlog.txt");
         context.startActivity(sendIntent);
+    }
+
+    public static int mesureTextviewHeight(TextView t) {
+        int widthMeasureSpec = View.MeasureSpec.makeMeasureSpec(t.getWidth(), View.MeasureSpec.AT_MOST);
+        int heightMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+        t.measure(widthMeasureSpec, heightMeasureSpec);
+        return t.getMeasuredHeight();
     }
 }

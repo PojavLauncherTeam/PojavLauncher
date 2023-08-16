@@ -31,10 +31,14 @@ import net.kdt.pojavlaunch.modloaders.modpacks.models.ModDetail;
 import net.kdt.pojavlaunch.modloaders.modpacks.models.ModItem;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.concurrent.Future;
 
 public class ModItemAdapter extends RecyclerView.Adapter<ModItemAdapter.ViewHolder> {
     private static final ModItem[] MOD_ITEMS_EMPTY = new ModItem[0];
+
+    /* Used when versions haven't loaded yet, default text to reduce layout shifting */
+    private final SimpleArrayAdapter<String> mLoadingAdapter = new SimpleArrayAdapter<>(Collections.singletonList("Loading"));
     private final ModIconCache mIconCache = new ModIconCache();
     private ModItem[] mModItems;
     private final ModpackApi mModpackApi;
@@ -60,7 +64,7 @@ public class ModItemAdapter extends RecyclerView.Adapter<ModItemAdapter.ViewHold
         private ImageReceiver mImageReceiver;
 
         /* Used to display available versions of the mod(pack) */
-        private SimpleArrayAdapter<String> mVersionAdapter = new SimpleArrayAdapter<>(null);
+        private final SimpleArrayAdapter<String> mVersionAdapter = new SimpleArrayAdapter<>(null);
 
         public ViewHolder(View view) {
             super(view);
@@ -77,7 +81,7 @@ public class ModItemAdapter extends RecyclerView.Adapter<ModItemAdapter.ViewHold
                             mExtendedButton.getContext().getApplicationContext(),
                             mModDetail,
                             mExtendedSpinner.getSelectedItemPosition()));
-                    mExtendedSpinner.setAdapter(mVersionAdapter);
+                    mExtendedSpinner.setAdapter(mLoadingAdapter);
                 } else {
                     if(isExtended()) closeDetailedView();
                     else openDetailedView();
@@ -184,12 +188,12 @@ public class ModItemAdapter extends RecyclerView.Adapter<ModItemAdapter.ViewHold
         private void openDetailedView(){
             mExtendedLayout.setVisibility(View.VISIBLE);
             mDescription.setMaxLines(99);
-            mExtendedLayout.post(() -> {
-                // We need to align to the longer section
-                ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) mExtendedLayout.getLayoutParams();
-                params.topToBottom = mDescription.getBottom() > mIconView.getBottom() ? R.id.mod_body_textview : R.id.mod_thumbnail_imageview;
-                mExtendedLayout.setLayoutParams(params);
-            });
+
+            // We need to align to the longer section
+            int futureBottom = mDescription.getBottom() + Tools.mesureTextviewHeight(mDescription) - mDescription.getHeight();
+            ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) mExtendedLayout.getLayoutParams();
+            params.topToBottom = futureBottom > mIconView.getBottom() ? R.id.mod_body_textview : R.id.mod_thumbnail_imageview;
+            mExtendedLayout.setLayoutParams(params);
         }
 
         private void closeDetailedView(){
@@ -199,7 +203,7 @@ public class ModItemAdapter extends RecyclerView.Adapter<ModItemAdapter.ViewHold
 
         private void setDetailedStateDefault() {
             mExtendedButton.setEnabled(false);
-            mExtendedSpinner.setAdapter(null);
+            mExtendedSpinner.setAdapter(mLoadingAdapter);
             mExtendedErrorTextView.setVisibility(View.GONE);
             openDetailedView();
         }

@@ -6,75 +6,106 @@
     android:background="@color/background_app"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingHorizontal="@dimen/fragment_padding_medium"
-    android:paddingVertical="@dimen/fragment_padding_medium">
+    >
 
-    <EditText
-        android:id="@+id/search_mod_edittext"
+
+
+    <!--
+        Cosmetic layout to have a better scrolling separation
+     -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/search_mod_overlay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/background_line"
-        android:textSize="@dimen/_13ssp"
-        android:layout_marginBottom="@dimen/padding_large"
+        android:translationZ="10dp"
+        android:background="@drawable/background_overlay"
+        android:paddingHorizontal="@dimen/padding_medium"
+        android:paddingVertical="@dimen/padding_medium"
+        android:layout_marginTop="@dimen/fragment_padding_medium"
+        android:layout_marginHorizontal="@dimen/fragment_padding_medium"
 
-        android:ems="10"
-        android:hint="@string/hint_search_modpack"
-        android:inputType="textPersonName"
-        android:paddingHorizontal="@dimen/padding_heavy"
         app:layout_constraintTop_toTopOf="parent"
-        />
 
-    <ProgressBar
-        android:id="@+id/search_mod_progressbar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:indeterminate="true"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@+id/search_mod_edittext"
-        tools:layout_editor_absoluteX="13dp" />
 
-    <TextView
-        android:id="@+id/search_mod_mc_version_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/profiles_profile_version"
-        app:layout_constraintBottom_toTopOf="@+id/search_mod_selected_mc_version_textview"
-        app:layout_constraintStart_toStartOf="@+id/search_mod_selected_mc_version_textview" />
+        >
+        <!-- Search text -->
+        <EditText
+            android:id="@+id/search_mod_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_line"
+            android:textSize="@dimen/_13ssp"
+            android:translationZ="2dp"
 
-    <TextView
-        android:id="@+id/search_mod_selected_mc_version_textview"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="32dp"
-        android:layout_marginEnd="@dimen/padding_medium"
+            android:ems="10"
+            android:hint="@string/hint_search_modpack"
+            android:inputType="textPersonName"
+            android:paddingHorizontal="@dimen/padding_heavy"
+            app:layout_constraintTop_toTopOf="parent"
+            />
 
-        android:background="@drawable/background_line"
-        android:hint="@string/version_select_hint"
-        android:paddingHorizontal="@dimen/padding_heavy"
-        android:textSize="@dimen/_13ssp"
+        <ProgressBar
+            android:id="@+id/search_mod_progressbar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@+id/search_mod_edittext"
+            tools:layout_editor_absoluteX="13dp" />
 
-        app:layout_constraintEnd_toStartOf="@+id/search_mod_mc_version_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_mod_progressbar" />
+        <!-- Version filter -->
+        <TextView
+            android:id="@+id/search_mod_mc_version_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/profiles_profile_version"
+            app:layout_constraintBottom_toTopOf="@+id/search_mod_selected_mc_version_textview"
+            app:layout_constraintStart_toStartOf="@+id/search_mod_selected_mc_version_textview" />
 
-    <Button
-        android:id="@+id/search_mod_mc_version_button"
-        android:layout_width="@dimen/_72sdp"
-        android:layout_height="0dp"
+        <TextView
+            android:id="@+id/search_mod_selected_mc_version_textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="32dp"
+            android:layout_marginEnd="@dimen/padding_medium"
 
-        android:text="@string/global_select"
+            android:background="@drawable/background_line"
+            android:hint="@string/version_select_hint"
+            android:paddingHorizontal="@dimen/padding_heavy"
+            android:textSize="@dimen/_13ssp"
 
-        app:layout_constraintBottom_toBottomOf="@+id/search_mod_selected_mc_version_textview"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/search_mod_selected_mc_version_textview" />
+            app:layout_constraintEnd_toStartOf="@+id/search_mod_mc_version_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/search_mod_progressbar" />
+
+        <Button
+            android:id="@+id/search_mod_mc_version_button"
+            android:layout_width="@dimen/_72sdp"
+            android:layout_height="0dp"
+
+            android:text="@string/global_select"
+
+            app:layout_constraintBottom_toBottomOf="@+id/search_mod_selected_mc_version_textview"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/search_mod_selected_mc_version_textview" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/search_mod_list"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
+        android:paddingTop="@dimen/_65sdp"
+        android:clipToPadding="false"
 
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_mod_selected_mc_version_textview"
+        app:layout_constraintTop_toTopOf="parent"
         />
 
     <TextView
