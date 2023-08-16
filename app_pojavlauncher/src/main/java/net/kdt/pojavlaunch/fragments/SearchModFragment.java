@@ -21,6 +21,7 @@ import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.modloaders.modpacks.ModItemAdapter;
 import net.kdt.pojavlaunch.modloaders.modpacks.SelfReferencingFuture;
+import net.kdt.pojavlaunch.modloaders.modpacks.api.CommonApi;
 import net.kdt.pojavlaunch.modloaders.modpacks.api.CurseforgeApi;
 import net.kdt.pojavlaunch.modloaders.modpacks.api.ModpackApi;
 import net.kdt.pojavlaunch.modloaders.modpacks.api.ModrinthApi;
@@ -52,7 +53,7 @@ public class SearchModFragment extends Fragment {
 
     public SearchModFragment(){
         super(R.layout.fragment_mod_search);
-        modpackApi = new CurseforgeApi();
+        modpackApi = new CommonApi();
         mSearchFilters = new SearchFilters();
         mSearchFilters.isModpack = true;
     }
