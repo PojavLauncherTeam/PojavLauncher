@@ -21,7 +21,7 @@ public interface ModpackApi {
 
     /**
      * @param searchFilters Filters
-     * @param offset the offset into the list of search results
+     * @param previousPageResult
      * @return the list of mod items from specified offset
      */
     SearchResult searchMod(SearchFilters searchFilters, SearchResult previousPageResult);
