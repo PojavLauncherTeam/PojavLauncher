@@ -28,6 +28,12 @@ public class LauncherProfiles {
                     mainProfileJson = new MinecraftLauncherProfiles();
                     mainProfileJson.profiles = new HashMap<>();
                 }
+
+                // Make sure we have a default profile on start
+                if (mainProfileJson.profiles.size() == 0){
+                    mainProfileJson.profiles.put("(Default)", MinecraftProfile.getDefaultProfile());
+                    LauncherProfiles.update();
+                }
             } else {
                 Tools.write(launcherProfilesFile.getAbsolutePath(), mainProfileJson.toJson());
             }

@@ -84,9 +84,12 @@ public class ProfileEditorFragment extends Fragment {
         });
 
         mDeleteButton.setOnClickListener(v -> {
-            LauncherProfiles.mainProfileJson.profiles.remove(mProfileKey);
-            LauncherProfiles.update();
-            ExtraCore.setValue(ExtraConstants.REFRESH_VERSION_SPINNER, DELETED_PROFILE);
+            if(LauncherProfiles.mainProfileJson.profiles.size() > 1){
+                LauncherProfiles.mainProfileJson.profiles.remove(mProfileKey);
+                LauncherProfiles.update();
+                ExtraCore.setValue(ExtraConstants.REFRESH_VERSION_SPINNER, DELETED_PROFILE);
+            }
+
             Tools.removeCurrentFragment(requireActivity());
         });
 
