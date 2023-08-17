@@ -1031,6 +1031,7 @@ public final class Tools {
         context.startActivity(sendIntent);
     }
 
+    /** Mesure the textview height, given its current parameters */
     public static int mesureTextviewHeight(TextView t) {
         int widthMeasureSpec = View.MeasureSpec.makeMeasureSpec(t.getWidth(), View.MeasureSpec.AT_MOST);
         int heightMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
