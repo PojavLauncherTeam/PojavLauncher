@@ -11,6 +11,7 @@ import net.kdt.pojavlaunch.modloaders.modpacks.models.ModDetail;
 import net.kdt.pojavlaunch.modloaders.modpacks.models.ModItem;
 import net.kdt.pojavlaunch.modloaders.modpacks.models.ModrinthIndex;
 import net.kdt.pojavlaunch.modloaders.modpacks.models.SearchFilters;
+import net.kdt.pojavlaunch.modloaders.modpacks.models.SearchResult;
 import net.kdt.pojavlaunch.progresskeeper.DownloaderProgressWrapper;
 import net.kdt.pojavlaunch.utils.ZipUtils;
 
@@ -27,7 +28,8 @@ public class ModrinthApi implements ModpackApi{
     }
 
     @Override
-    public ModItem[] searchMod(SearchFilters searchFilters) {
+    public SearchResult searchMod(SearchFilters searchFilters, SearchResult previousPageResult) {
+        ModrinthSearchResult modrinthSearchResult = (ModrinthSearchResult) previousPageResult;
         HashMap<String, Object> params = new HashMap<>();
 
         // Build the facets filters
@@ -39,7 +41,9 @@ public class ModrinthApi implements ModpackApi{
         facetString.append("]");
         params.put("facets", facetString.toString());
         params.put("query", searchFilters.name);
-        params.put("limit", 100);
+        params.put("limit", 50);
+        if(modrinthSearchResult != null)
+            params.put("offset", modrinthSearchResult.previousOffset);
 
         JsonObject response = mApiHandler.get("search", params, JsonObject.class);
         if(response == null) return null;
@@ -58,8 +62,11 @@ public class ModrinthApi implements ModpackApi{
                     hit.get("icon_url").getAsString()
             );
         }
-
-        return items;
+        if(modrinthSearchResult == null) modrinthSearchResult = new ModrinthSearchResult();
+        modrinthSearchResult.previousOffset += responseHits.size();
+        modrinthSearchResult.results = items;
+        modrinthSearchResult.totalResultCount = response.get("total_hits").getAsInt();
+        return modrinthSearchResult;
     }
 
     @Override
@@ -123,5 +130,9 @@ public class ModrinthApi implements ModpackApi{
             ZipUtils.zipExtract(modpackZipFile, "client-overrides/", instanceDestination);
             return createInfo(modrinthIndex);
         }
+    }
+
+    class ModrinthSearchResult extends SearchResult {
+        int previousOffset;
     }
 }
