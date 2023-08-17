@@ -10,6 +10,7 @@ import net.kdt.pojavlaunch.modloaders.ModloaderDownloadListener;
 import net.kdt.pojavlaunch.modloaders.modpacks.models.ModDetail;
 import net.kdt.pojavlaunch.modloaders.modpacks.models.ModItem;
 import net.kdt.pojavlaunch.modloaders.modpacks.models.SearchFilters;
+import net.kdt.pojavlaunch.modloaders.modpacks.models.SearchResult;
 
 import java.io.File;
 
@@ -20,9 +21,18 @@ public interface ModpackApi {
 
     /**
      * @param searchFilters Filters
+     * @param offset the offset into the list of search results
+     * @return the list of mod items from specified offset
+     */
+    SearchResult searchMod(SearchFilters searchFilters, SearchResult previousPageResult);
+
+    /**
+     * @param searchFilters Filters
      * @return A list of mod items
      */
-    ModItem[] searchMod(SearchFilters searchFilters);
+    default SearchResult searchMod(SearchFilters searchFilters) {
+        return searchMod(searchFilters, null);
+    }
 
     /**
      * Fetch the mod details

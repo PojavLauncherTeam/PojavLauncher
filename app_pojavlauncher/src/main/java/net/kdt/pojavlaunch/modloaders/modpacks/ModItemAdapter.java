@@ -29,22 +29,102 @@ import net.kdt.pojavlaunch.modloaders.modpacks.imagecache.ModIconCache;
 import net.kdt.pojavlaunch.modloaders.modpacks.models.Constants;
 import net.kdt.pojavlaunch.modloaders.modpacks.models.ModDetail;
 import net.kdt.pojavlaunch.modloaders.modpacks.models.ModItem;
+import net.kdt.pojavlaunch.modloaders.modpacks.models.SearchFilters;
+import net.kdt.pojavlaunch.modloaders.modpacks.models.SearchResult;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.concurrent.Future;
 
-public class ModItemAdapter extends RecyclerView.Adapter<ModItemAdapter.ViewHolder> {
+public class ModItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final ModItem[] MOD_ITEMS_EMPTY = new ModItem[0];
+    private static final int VIEW_TYPE_MOD_ITEM = 0;
+    private static final int VIEW_TYPE_LOADING = 1;
 
     /* Used when versions haven't loaded yet, default text to reduce layout shifting */
     private final SimpleArrayAdapter<String> mLoadingAdapter = new SimpleArrayAdapter<>(Collections.singletonList("Loading"));
     private final ModIconCache mIconCache = new ModIconCache();
+    private final SearchResultCallback mSearchResultCallback;
     private ModItem[] mModItems;
     private final ModpackApi mModpackApi;
 
     /* Cache for ever so slightly rounding the image for the corner not to stick out of the layout */
     private final float mCornerDimensionCache;
+
+    private Future<?> mTaskInProgress;
+    private SearchFilters mSearchFilters;
+    private SearchResult mCurrentResult;
+
+
+    public ModItemAdapter(Resources resources, ModpackApi api, SearchResultCallback callback) {
+        mCornerDimensionCache = resources.getDimension(R.dimen._1sdp) / 250;
+        mModpackApi = api;
+        mModItems = new ModItem[]{};
+        mSearchResultCallback = callback;
+    }
+
+    public void performSearchQuery(SearchFilters searchFilters) {
+        if(mTaskInProgress != null) {
+            mTaskInProgress.cancel(true);
+            mTaskInProgress = null;
+        }
+        this.mSearchFilters = searchFilters;
+        mTaskInProgress = new SelfReferencingFuture(new SearchApiTask(mSearchFilters, null))
+                .startOnExecutor(PojavApplication.sExecutorService);
+    }
+
+    @NonNull
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+        LayoutInflater layoutInflater = LayoutInflater.from(viewGroup.getContext());
+        View view;
+        switch (viewType) {
+            case VIEW_TYPE_MOD_ITEM:
+                // Create a new view, which defines the UI of the list item
+                view = layoutInflater.inflate(R.layout.view_mod, viewGroup, false);
+                return new ViewHolder(view);
+            case VIEW_TYPE_LOADING:
+                // Create a new view, which is actually just the progress bar
+                view = layoutInflater.inflate(R.layout.view_loading, viewGroup, false);
+                return new LoadingViewHolder(view);
+            default:
+                throw new RuntimeException("Unimplemented view type!");
+        }
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        switch (getItemViewType(position)) {
+            case VIEW_TYPE_MOD_ITEM:
+                ((ModItemAdapter.ViewHolder)holder).setStateLimited(mModItems[position]);
+                break;
+            case VIEW_TYPE_LOADING:
+                loadMoreResults();
+                break;
+            default:
+                throw new RuntimeException("Unimplemented view type!");
+        }
+    }
+
+    @Override
+    public int getItemCount() {
+        if(mModItems.length == 0) return 0;
+        return mModItems.length+1;
+    }
+
+    private void loadMoreResults() {
+        if(mTaskInProgress != null) return;
+        mTaskInProgress = new SelfReferencingFuture(new SearchApiTask(mSearchFilters, mCurrentResult))
+                .startOnExecutor(PojavApplication.sExecutorService);
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if(position < mModItems.length) return VIEW_TYPE_MOD_ITEM;
+        return VIEW_TYPE_LOADING;
+    }
+
+
 
     /**
      * Basic viewholder with expension capabilities
@@ -228,38 +308,67 @@ public class ModItemAdapter extends RecyclerView.Adapter<ModItemAdapter.ViewHold
         }
     }
 
-
-    public ModItemAdapter(Resources resources, ModpackApi api) {
-        mCornerDimensionCache = resources.getDimension(R.dimen._1sdp) / 250;
-        mModpackApi = api;
-        mModItems = new ModItem[]{};
+    /**
+     * The view holder used to hold the progress bar at the end of the list
+     */
+    private static class LoadingViewHolder extends RecyclerView.ViewHolder {
+        public LoadingViewHolder(View view) {
+            super(view);
+        }
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    public void setModItems(ModItem[] items, String targetMcVersion){
-        // TODO: Use targetMcVersion to affect default selected modpack version
-        if(items != null) mModItems = items;
-        else mModItems = MOD_ITEMS_EMPTY;
-        notifyDataSetChanged();
+    private class SearchApiTask implements SelfReferencingFuture.FutureInterface {
+        private final SearchFilters mSearchFilters;
+        private final SearchResult mPreviousResult;
+
+        private SearchApiTask(SearchFilters searchFilters, SearchResult previousResult) {
+            this.mSearchFilters = searchFilters;
+            this.mPreviousResult = previousResult;
+        }
+
+        @SuppressLint("NotifyDataSetChanged")
+        @Override
+        public void run(Future<?> myFuture) {
+            SearchResult result = mModpackApi.searchMod(mSearchFilters, mPreviousResult);
+            ModItem[] resultModItems = result != null ? result.results : null;
+            Tools.runOnUiThread(() -> {
+                if(myFuture.isCancelled()) return;
+
+                if(resultModItems == null) {
+                    mSearchResultCallback.onSearchError(SearchResultCallback.ERROR_INTERNAL);
+                }else if(resultModItems.length == 0) {
+                    mSearchResultCallback.onSearchError(SearchResultCallback.ERROR_NO_RESULTS);
+                }else{
+                    mSearchResultCallback.onSearchFinished();
+                }
+                mCurrentResult = result;
+                if(resultModItems == null) {
+                    mModItems = MOD_ITEMS_EMPTY;
+                    mTaskInProgress = null;
+                    notifyDataSetChanged();
+                    return;
+                }
+                if(mPreviousResult != null) {
+                    ModItem[] newModItems = new ModItem[resultModItems.length + mModItems.length];
+                    System.arraycopy(mModItems, 0, newModItems, 0, mModItems.length);
+                    System.arraycopy(resultModItems, 0, newModItems, mModItems.length, resultModItems.length);
+                    mModItems = newModItems;
+                    mTaskInProgress = null;
+                    notifyItemChanged(mModItems.length);
+                    notifyItemRangeInserted(mModItems.length+1, newModItems.length);
+                    return;
+                }
+                mModItems = resultModItems;
+                mTaskInProgress = null;
+                notifyDataSetChanged();
+            });
+        }
     }
 
-    @NonNull
-    @Override
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        // Create a new view, which defines the UI of the list item
-        View view = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.view_mod, viewGroup, false);
-
-        return new ViewHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-        viewHolder.setStateLimited(mModItems[position]);
-    }
-
-    @Override
-    public int getItemCount() {
-        return mModItems.length;
+    public interface SearchResultCallback {
+        int ERROR_INTERNAL = 0;
+        int ERROR_NO_RESULTS = 1;
+        void onSearchFinished();
+        void onSearchError(int error);
     }
 }

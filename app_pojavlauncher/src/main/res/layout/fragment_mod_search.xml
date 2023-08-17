@@ -101,7 +101,7 @@
         android:id="@+id/search_mod_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="@dimen/_65sdp"
+        android:paddingTop="@dimen/_15sdp"
         android:clipToPadding="false"
 
         app:layout_constraintBottom_toBottomOf="parent"

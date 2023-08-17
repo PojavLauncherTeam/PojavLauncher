@@ -14,6 +14,7 @@ import net.kdt.pojavlaunch.modloaders.modpacks.models.CurseManifest;
 import net.kdt.pojavlaunch.modloaders.modpacks.models.ModDetail;
 import net.kdt.pojavlaunch.modloaders.modpacks.models.ModItem;
 import net.kdt.pojavlaunch.modloaders.modpacks.models.SearchFilters;
+import net.kdt.pojavlaunch.modloaders.modpacks.models.SearchResult;
 import net.kdt.pojavlaunch.progresskeeper.ProgressKeeper;
 import net.kdt.pojavlaunch.utils.FileUtils;
 import net.kdt.pojavlaunch.utils.ZipUtils;
@@ -40,17 +41,21 @@ public class CurseforgeApi implements ModpackApi{
     private final ApiHandler mApiHandler = new ApiHandler("https://api.curseforge.com/v1", "$2a$10$Vxkj4kH1Ekf8EsS4Mx8b2eVTHsht107Lk2erVEUtnbqvojsLy.jYq");
 
     @Override
-    public ModItem[] searchMod(SearchFilters searchFilters) {
+    public SearchResult searchMod(SearchFilters searchFilters, SearchResult previousPageResult) {
+        CurseforgeSearchResult curseforgeSearchResult = (CurseforgeSearchResult) previousPageResult;
         HashMap<String, Object> params = new HashMap<>();
         params.put("gameId", CURSEFORGE_MINECRAFT_GAME_ID);
         params.put("classId", searchFilters.isModpack ? CURSEFORGE_MODPACK_CLASS_ID : CURSEFORGE_MOD_CLASS_ID);
         params.put("searchFilter", searchFilters.name);
         if(searchFilters.mcVersion != null && !searchFilters.mcVersion.isEmpty())
             params.put("gameVersion", searchFilters.mcVersion);
+        if(previousPageResult != null)
+            params.put("index", curseforgeSearchResult.previousOffset);
         JsonObject response = mApiHandler.get("mods/search", params, JsonObject.class);
         if(response == null) return null;
         JsonArray dataArray = response.getAsJsonArray("data");
         if(dataArray == null) return null;
+        JsonObject paginationInfo = response.getAsJsonObject("pagination");
         ArrayList<ModItem> modItemList = new ArrayList<>(dataArray.size());
         for(int i = 0; i < dataArray.size(); i++) {
             JsonObject dataElement = dataArray.get(i).getAsJsonObject();
@@ -69,7 +74,12 @@ public class CurseforgeApi implements ModpackApi{
                     dataElement.getAsJsonObject("logo").get("thumbnailUrl").getAsString());
             modItemList.add(modItem);
         }
-        return modItemList.toArray(new ModItem[0]);
+        if(curseforgeSearchResult == null) curseforgeSearchResult = new CurseforgeSearchResult();
+        curseforgeSearchResult.results = modItemList.toArray(new ModItem[0]);
+        curseforgeSearchResult.totalResultCount = paginationInfo.get("totalCount").getAsInt();
+        curseforgeSearchResult.previousOffset += dataArray.size();
+        return curseforgeSearchResult;
+
     }
 
     @Override
@@ -214,5 +224,9 @@ public class CurseforgeApi implements ModpackApi{
         if(manifest.minecraft.modLoaders == null) return false;
         if(manifest.minecraft.modLoaders.length < 1) return false;
         return true;
+    }
+
+    class CurseforgeSearchResult extends SearchResult {
+        int previousOffset;
     }
 }
