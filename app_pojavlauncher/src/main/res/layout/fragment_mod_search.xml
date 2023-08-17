@@ -31,7 +31,7 @@
         <!-- Search text -->
         <EditText
             android:id="@+id/search_mod_edittext"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/background_line"
             android:textSize="@dimen/_13ssp"
@@ -42,6 +42,24 @@
             android:inputType="textPersonName"
             android:paddingHorizontal="@dimen/padding_heavy"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/search_mod_filter"
+            />
+
+        <ImageButton
+            android:id="@+id/search_mod_filter"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:minWidth="@dimen/_38sdp"
+            android:src="@drawable/ic_filter"
+
+            android:paddingHorizontal="@dimen/padding_medium"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/search_mod_edittext"
+            app:layout_constraintBottom_toBottomOf="@id/search_mod_edittext"
+
             />
 
         <ProgressBar
@@ -54,41 +72,6 @@
             app:layout_constraintTop_toBottomOf="@+id/search_mod_edittext"
             tools:layout_editor_absoluteX="13dp" />
 
-        <!-- Version filter -->
-        <TextView
-            android:id="@+id/search_mod_mc_version_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/profiles_profile_version"
-            app:layout_constraintBottom_toTopOf="@+id/search_mod_selected_mc_version_textview"
-            app:layout_constraintStart_toStartOf="@+id/search_mod_selected_mc_version_textview" />
-
-        <TextView
-            android:id="@+id/search_mod_selected_mc_version_textview"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="32dp"
-            android:layout_marginEnd="@dimen/padding_medium"
-
-            android:background="@drawable/background_line"
-            android:hint="@string/version_select_hint"
-            android:paddingHorizontal="@dimen/padding_heavy"
-            android:textSize="@dimen/_13ssp"
-
-            app:layout_constraintEnd_toStartOf="@+id/search_mod_mc_version_button"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/search_mod_progressbar" />
-
-        <Button
-            android:id="@+id/search_mod_mc_version_button"
-            android:layout_width="@dimen/_72sdp"
-            android:layout_height="0dp"
-
-            android:text="@string/global_select"
-
-            app:layout_constraintBottom_toBottomOf="@+id/search_mod_selected_mc_version_textview"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/search_mod_selected_mc_version_textview" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
