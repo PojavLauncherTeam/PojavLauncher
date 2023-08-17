@@ -1,16 +1,21 @@
 package net.kdt.pojavlaunch.fragments;
 
+import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.math.MathUtils;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -36,9 +41,8 @@ public class SearchModFragment extends Fragment implements ModItemAdapter.Search
         }
     };
 
-    private TextView mSelectedVersion;
-    private Button mSelectVersionButton;
     private EditText mSearchEditText;
+    private ImageButton mFilterButton;
     private RecyclerView mRecyclerview;
     private ModItemAdapter mModItemAdapter;
     private ProgressBar mSearchProgressBar;
@@ -65,10 +69,9 @@ public class SearchModFragment extends Fragment implements ModItemAdapter.Search
         mOverlay = view.findViewById(R.id.search_mod_overlay);
         mSearchEditText = view.findViewById(R.id.search_mod_edittext);
         mSearchProgressBar = view.findViewById(R.id.search_mod_progressbar);
-        mSelectedVersion = view.findViewById(R.id.search_mod_selected_mc_version_textview);
-        mSelectVersionButton = view.findViewById(R.id.search_mod_mc_version_button);
         mRecyclerview = view.findViewById(R.id.search_mod_list);
         mStatusTextView = view.findViewById(R.id.search_mod_status_text);
+        mFilterButton = view.findViewById(R.id.search_mod_filter);
 
         mDefaultTextColor = mStatusTextView.getTextColors();
 
@@ -76,12 +79,6 @@ public class SearchModFragment extends Fragment implements ModItemAdapter.Search
         mRecyclerview.setAdapter(mModItemAdapter);
 
         mRecyclerview.addOnScrollListener(mOverlayPositionListener);
-
-        // Setup the expendable list behavior
-        mSelectVersionButton.setOnClickListener(v -> VersionSelectorDialog.open(v.getContext(), true, (id, snapshot)->{
-            mSelectedVersion.setText(id);
-            mSearchFilters.mcVersion = id;
-        }));
 
         mSearchEditText.setOnEditorActionListener((v, actionId, event) -> {
             mSearchProgressBar.setVisibility(View.VISIBLE);
@@ -97,6 +94,7 @@ public class SearchModFragment extends Fragment implements ModItemAdapter.Search
                    mRecyclerview.getPaddingRight(),
                    mRecyclerview.getPaddingBottom());
         });
+        mFilterButton.setOnClickListener(v -> displayFilterDialog());
     }
 
     @Override
@@ -115,7 +113,7 @@ public class SearchModFragment extends Fragment implements ModItemAdapter.Search
     public void onSearchError(int error) {
         mSearchProgressBar.setVisibility(View.GONE);
         mStatusTextView.setVisibility(View.VISIBLE);
-        switch(error) {
+        switch (error) {
             case ERROR_INTERNAL:
                 mStatusTextView.setTextColor(Color.RED);
                 mStatusTextView.setText(R.string.search_modpack_error);
@@ -125,5 +123,33 @@ public class SearchModFragment extends Fragment implements ModItemAdapter.Search
                 mStatusTextView.setText(R.string.search_modpack_no_result);
                 break;
         }
+    }
+
+    private void displayFilterDialog() {
+        AlertDialog dialog = new AlertDialog.Builder(requireContext())
+                .setView(R.layout.dialog_mod_filters)
+                .create();
+
+        // setup the view behavior
+        dialog.setOnShowListener(dialogInterface -> {
+            TextView mSelectedVersion = dialog.findViewById(R.id.search_mod_selected_mc_version_textview);
+            Button mSelectVersionButton = dialog.findViewById(R.id.search_mod_mc_version_button);
+            Button mApplyButton = dialog.findViewById(R.id.search_mod_apply_filters);
+
+            // Setup the expendable list behavior
+            mSelectVersionButton.setOnClickListener(v -> VersionSelectorDialog.open(v.getContext(), true, (id, snapshot)-> mSelectedVersion.setText(id)));
+
+            // Apply visually all the current settings
+            mSelectedVersion.setText(mSearchFilters.mcVersion);
+
+            // Apply the new settings
+            mApplyButton.setOnClickListener(v -> {
+                mSearchFilters.mcVersion = mSelectedVersion.getText().toString();
+                dialogInterface.dismiss();
+            });
+        });
+
+
+        dialog.show();
     }
 }

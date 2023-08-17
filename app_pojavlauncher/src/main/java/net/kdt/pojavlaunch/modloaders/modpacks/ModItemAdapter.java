@@ -265,7 +265,7 @@ public class ModItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             }
         }
 
-        private void openDetailedView(){
+        private void openDetailedView() {
             mExtendedLayout.setVisibility(View.VISIBLE);
             mDescription.setMaxLines(99);
 
