@@ -27,12 +27,15 @@ public class ModIconCache {
     File cachePath;
     private final List<WeakReference<ImageReceiver>> mCancelledReceivers = new ArrayList<>();
     public ModIconCache() {
-        cachePath = new File(Tools.DIR_CACHE, "mod_icons");
+        cachePath = getImageCachePath();
         if(!cachePath.exists() && !cachePath.isFile() && Tools.DIR_CACHE.canWrite()) {
             if(!cachePath.mkdirs())
                 throw new RuntimeException("Failed to create icon cache directory");
         }
 
+    }
+    static File getImageCachePath() {
+        return new File(Tools.DIR_CACHE, "mod_icons");
     }
 
     /**
