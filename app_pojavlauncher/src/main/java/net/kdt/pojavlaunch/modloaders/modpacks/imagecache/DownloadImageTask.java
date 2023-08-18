@@ -26,6 +26,7 @@ class DownloadImageTask implements Runnable {
 
     public boolean runCatching() {
         try {
+            IconCacheJanitor.waitForJanitorToFinish();
             DownloadUtils.downloadFile(mParentTask.imageUrl, mParentTask.cacheFile);
             return true;
         }catch (IOException e) {
