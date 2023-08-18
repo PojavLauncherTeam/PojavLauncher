@@ -10,11 +10,14 @@ import net.kdt.pojavlaunch.Tools;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 @SuppressWarnings("unused")
 public class ApiHandler {
@@ -110,8 +113,11 @@ public class ApiHandler {
     private static String parseQueries(HashMap<String, Object> query) {
         StringBuilder params = new StringBuilder("?");
         for (String param : query.keySet()) {
-            Object value = query.get(param);
-            params.append(param).append("=").append(value).append("&");
+            String value = Objects.toString(query.get(param));
+            params.append(urlEncodeUTF8(param))
+                    .append("=")
+                    .append(urlEncodeUTF8(value))
+                    .append("&");
         }
         return params.substring(0, params.length() - 1);
     }
@@ -146,5 +152,13 @@ public class ApiHandler {
 
     public static <T> T postFullUrl(Map<String, String> headers, String url, HashMap<String, Object> query, T body, Class<T> tClass) {
         return new Gson().fromJson(postRaw(headers, url + parseQueries(query), body.toString()), tClass);
+    }
+
+    private static String urlEncodeUTF8(String input) {
+        try {
+            return URLEncoder.encode(input, "UTF-8");
+        }catch (UnsupportedEncodingException e) {
+            throw new RuntimeException("UTF-8 is required");
+        }
     }
 }
