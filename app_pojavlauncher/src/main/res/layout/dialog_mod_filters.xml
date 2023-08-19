@@ -37,8 +37,9 @@
 
     <Button
         android:id="@+id/search_mod_mc_version_button"
-        android:layout_width="@dimen/_72sdp"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
+        android:paddingHorizontal="@dimen/padding_large"
 
         android:text="@string/global_select"
 
