@@ -51,7 +51,7 @@ public class ModLoader {
     public Runnable getDownloadTask(ModloaderDownloadListener listener) {
         switch (modLoaderType) {
             case MOD_LOADER_FORGE:
-                return new ForgeDownloadTask(listener, minecraftVersion+"-"+modLoaderVersion);
+                return new ForgeDownloadTask(listener, minecraftVersion, modLoaderVersion);
             case MOD_LOADER_FABRIC:
                 return new FabricDownloadTask(listener);
             case MOD_LOADER_QUILT:
