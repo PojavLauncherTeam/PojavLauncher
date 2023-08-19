@@ -34,7 +34,7 @@ public class ForgeDownloadTask implements Runnable, Tools.DownloaderFeedback {
         if(determineDownloadUrl()) {
             downloadForge();
         }
-        ProgressKeeper.submitProgress(ProgressLayout.INSTALL_MODPACK, -1, -1);
+        ProgressLayout.clearProgress(ProgressLayout.INSTALL_MODPACK);
     }
 
     @Override
