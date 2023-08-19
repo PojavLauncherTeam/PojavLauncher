@@ -54,6 +54,7 @@ public class ModItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private Future<?> mTaskInProgress;
     private SearchFilters mSearchFilters;
     private SearchResult mCurrentResult;
+    private boolean mLastPage;
 
 
     public ModItemAdapter(Resources resources, ModpackApi api, SearchResultCallback callback) {
@@ -69,6 +70,7 @@ public class ModItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             mTaskInProgress = null;
         }
         this.mSearchFilters = searchFilters;
+        this.mLastPage = false;
         mTaskInProgress = new SelfReferencingFuture(new SearchApiTask(mSearchFilters, null))
                 .startOnExecutor(PojavApplication.sExecutorService);
     }
@@ -108,7 +110,7 @@ public class ModItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public int getItemCount() {
-        if(mModItems.length == 0) return 0;
+        if(mLastPage || mModItems.length == 0) return mModItems.length;
         return mModItems.length+1;
     }
 
@@ -331,36 +333,44 @@ public class ModItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         public void run(Future<?> myFuture) {
             SearchResult result = mModpackApi.searchMod(mSearchFilters, mPreviousResult);
             ModItem[] resultModItems = result != null ? result.results : null;
+            if(resultModItems != null && resultModItems.length != 0 && mPreviousResult != null) {
+                ModItem[] newModItems = new ModItem[resultModItems.length + mModItems.length];
+                System.arraycopy(mModItems, 0, newModItems, 0, mModItems.length);
+                System.arraycopy(resultModItems, 0, newModItems, mModItems.length, resultModItems.length);
+                resultModItems = newModItems;
+            }
+            ModItem[] finalModItems = resultModItems;
             Tools.runOnUiThread(() -> {
                 if(myFuture.isCancelled()) return;
-
-                if(resultModItems == null) {
+                mTaskInProgress = null;
+                if(finalModItems == null) {
                     mSearchResultCallback.onSearchError(SearchResultCallback.ERROR_INTERNAL);
-                }else if(resultModItems.length == 0) {
+                }else if(finalModItems.length == 0) {
+                    if(mPreviousResult != null) {
+                        mLastPage = true;
+                        notifyItemChanged(mModItems.length);
+                        mSearchResultCallback.onSearchFinished();
+                        return;
+                    }
                     mSearchResultCallback.onSearchError(SearchResultCallback.ERROR_NO_RESULTS);
                 }else{
                     mSearchResultCallback.onSearchFinished();
                 }
                 mCurrentResult = result;
-                if(resultModItems == null) {
+                if(finalModItems == null) {
                     mModItems = MOD_ITEMS_EMPTY;
-                    mTaskInProgress = null;
                     notifyDataSetChanged();
                     return;
                 }
                 if(mPreviousResult != null) {
-                    ModItem[] newModItems = new ModItem[resultModItems.length + mModItems.length];
-                    System.arraycopy(mModItems, 0, newModItems, 0, mModItems.length);
-                    System.arraycopy(resultModItems, 0, newModItems, mModItems.length, resultModItems.length);
-                    mModItems = newModItems;
-                    mTaskInProgress = null;
-                    notifyItemChanged(mModItems.length);
-                    notifyItemRangeInserted(mModItems.length+1, newModItems.length);
-                    return;
+                    int prevLength = mModItems.length;
+                    mModItems = finalModItems;
+                    notifyItemChanged(prevLength);
+                    notifyItemRangeInserted(prevLength+1, mModItems.length);
+                }else {
+                    mModItems = finalModItems;
+                    notifyDataSetChanged();
                 }
-                mModItems = resultModItems;
-                mTaskInProgress = null;
-                notifyDataSetChanged();
             });
         }
     }
