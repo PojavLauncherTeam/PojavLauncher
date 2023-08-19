@@ -36,7 +36,7 @@ public class OptiFineDownloadTask implements Runnable, Tools.DownloaderFeedback,
         }catch (IOException e) {
             mListener.onDownloadError(e);
         }
-        ProgressKeeper.submitProgress(ProgressLayout.INSTALL_MODPACK, -1, -1);
+        ProgressLayout.clearProgress(ProgressLayout.INSTALL_MODPACK);
     }
 
     public boolean runCatching() throws IOException {

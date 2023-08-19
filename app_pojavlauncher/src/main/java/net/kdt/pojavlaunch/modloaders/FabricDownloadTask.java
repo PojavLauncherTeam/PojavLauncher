@@ -29,7 +29,7 @@ public class FabricDownloadTask implements Runnable, Tools.DownloaderFeedback{
         }catch (IOException e) {
             mModloaderDownloadListener.onDownloadError(e);
         }
-        ProgressKeeper.submitProgress(ProgressLayout.INSTALL_MODPACK, -1, -1);
+        ProgressLayout.clearProgress(ProgressLayout.INSTALL_MODPACK);
     }
 
     private boolean runCatching() throws IOException {
