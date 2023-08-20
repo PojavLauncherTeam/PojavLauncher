@@ -73,7 +73,7 @@ public class ModLoader {
         Intent baseIntent = new Intent(context, JavaGUILauncherActivity.class);
         switch (modLoaderType) {
             case MOD_LOADER_FORGE:
-                ForgeUtils.addAutoInstallArgs(baseIntent, modInstallerJar, false);
+                ForgeUtils.addAutoInstallArgs(baseIntent, modInstallerJar, getVersionId());
                 return baseIntent;
             case MOD_LOADER_FABRIC:
                 FabricUtils.addAutoInstallArgs(baseIntent, modInstallerJar, minecraftVersion, modLoaderVersion, false, false);
