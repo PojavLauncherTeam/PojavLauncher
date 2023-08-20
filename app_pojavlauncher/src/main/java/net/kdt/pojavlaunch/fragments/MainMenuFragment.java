@@ -19,6 +19,7 @@ import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.extra.ExtraConstants;
 import net.kdt.pojavlaunch.extra.ExtraCore;
 import net.kdt.pojavlaunch.progresskeeper.ProgressKeeper;
+import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
 
 public class MainMenuFragment extends Fragment {
     public static final String TAG = "MainMenuFragment";
@@ -55,6 +56,13 @@ public class MainMenuFragment extends Fragment {
             return true;
         });
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        LauncherProfiles.load();
+    }
+
     private void runInstallerWithConfirmation(boolean isCustomArgs) {
         if (ProgressKeeper.getTaskCount() == 0)
             Tools.installMod(requireActivity(), isCustomArgs);
