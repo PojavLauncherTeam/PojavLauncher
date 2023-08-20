@@ -55,7 +55,7 @@ public class JRE17Util {
         if (versionInfo.javaVersion == null || versionInfo.javaVersion.component.equalsIgnoreCase("jre-legacy"))
             return true;
 
-        LauncherProfiles.update();
+        LauncherProfiles.load();
         MinecraftProfile minecraftProfile = LauncherProfiles.getCurrentProfile();
 
         String selectedRuntime = Tools.getSelectedRuntime(minecraftProfile);
@@ -71,7 +71,7 @@ public class JRE17Util {
                 JRE17Util.checkInternalNewJre(activity.getAssets());
             }
             minecraftProfile.javaDir = Tools.LAUNCHERPROFILES_RTPREFIX + appropriateRuntime;
-            LauncherProfiles.update();
+            LauncherProfiles.load();
         } else {
             if (versionInfo.javaVersion.majorVersion <= 17) { // there's a chance we have an internal one for this case
                 if (!JRE17Util.checkInternalNewJre(activity.getAssets())){
@@ -79,7 +79,7 @@ public class JRE17Util {
                     return false;
                 } else {
                     minecraftProfile.javaDir = Tools.LAUNCHERPROFILES_RTPREFIX + JRE17Util.NEW_JRE_NAME;
-                    LauncherProfiles.update();
+                    LauncherProfiles.load();
                 }
             } else {
                 showRuntimeFail(activity, versionInfo);

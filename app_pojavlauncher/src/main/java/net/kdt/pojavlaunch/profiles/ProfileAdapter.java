@@ -35,7 +35,7 @@ public class ProfileAdapter extends BaseAdapter {
 
     public ProfileAdapter(Context context, ProfileAdapterExtra[] extraEntries) {
         ProfileIconCache.initDefault(context);
-        LauncherProfiles.update();
+        LauncherProfiles.load();
         mProfiles = new HashMap<>(LauncherProfiles.mainProfileJson.profiles);
         if(extraEntries == null) mExtraEntires = new ProfileAdapterExtra[0];
         else mExtraEntires = extraEntries;

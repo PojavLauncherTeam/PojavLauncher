@@ -8,45 +8,51 @@ import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
 public class LauncherProfiles {
     public static MinecraftLauncherProfiles mainProfileJson;
-    public static final File launcherProfilesFile = new File(Tools.DIR_GAME_NEW, "launcher_profiles.json");
-    public static MinecraftLauncherProfiles update() {
-        try {
-            if (mainProfileJson == null) {
-                if (launcherProfilesFile.exists()) {
-                    mainProfileJson = Tools.GLOBAL_GSON.fromJson(Tools.read(launcherProfilesFile.getAbsolutePath()), MinecraftLauncherProfiles.class);
-                    if(mainProfileJson.profiles == null) mainProfileJson.profiles = new HashMap<>();
-                    else if(LauncherProfiles.normalizeProfileIds(mainProfileJson)){
-                        LauncherProfiles.update();
-                    }
-                } else {
-                    mainProfileJson = new MinecraftLauncherProfiles();
-                    mainProfileJson.profiles = new HashMap<>();
-                }
+    private static final File launcherProfilesFile = new File(Tools.DIR_GAME_NEW, "launcher_profiles.json");
 
-                // Make sure we have a default profile on start
-                if (mainProfileJson.profiles.size() == 0){
-                    mainProfileJson.profiles.put("(Default)", MinecraftProfile.getDefaultProfile());
-                    LauncherProfiles.update();
-                }
-            } else {
-                Tools.write(launcherProfilesFile.getAbsolutePath(), mainProfileJson.toJson());
+    /** Reload the profile from the file, creating a default one if necessary */
+    public static void load(){
+        if (launcherProfilesFile.exists()) {
+            try {
+                mainProfileJson = Tools.GLOBAL_GSON.fromJson(Tools.read(launcherProfilesFile.getAbsolutePath()), MinecraftLauncherProfiles.class);
+            } catch (IOException e) {
+                Log.e(LauncherProfiles.class.toString(), "Failed to load file: ", e);
+                throw new RuntimeException(e);
             }
+        }
 
-            // insertMissing();
-            return mainProfileJson;
-        } catch (Throwable th) {
-            throw new RuntimeException(th);
+        // Fill with default
+        if (mainProfileJson == null) mainProfileJson = new MinecraftLauncherProfiles();
+        if (mainProfileJson.profiles == null) mainProfileJson.profiles = new HashMap<>();
+        if (mainProfileJson.profiles.size() == 0)
+            mainProfileJson.profiles.put(UUID.randomUUID().toString(), MinecraftProfile.getDefaultProfile());
+
+        // Normalize profile names from mod installers
+        if(normalizeProfileIds(mainProfileJson)){
+            write();
+            load();
+        }
+    }
+
+    /** Apply the current configuration into a file */
+    public static void write() {
+        try {
+            Tools.write(launcherProfilesFile.getAbsolutePath(), mainProfileJson.toJson());
+        } catch (IOException e) {
+            Log.e(LauncherProfiles.class.toString(), "Failed to write profile file", e);
+            throw new RuntimeException(e);
         }
     }
 
     public static @NonNull MinecraftProfile getCurrentProfile() {
-        if(mainProfileJson == null) LauncherProfiles.update();
+        if(mainProfileJson == null) LauncherProfiles.load();
         String defaultProfileName = LauncherPreferences.DEFAULT_PREF.getString(LauncherPreferences.PREF_KEY_CURRENT_PROFILE, "");
         MinecraftProfile profile = mainProfileJson.profiles.get(defaultProfileName);
         if(profile == null) throw new RuntimeException("The current profile stopped existing :(");

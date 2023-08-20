@@ -86,7 +86,7 @@ public class ProfileEditorFragment extends Fragment {
         mDeleteButton.setOnClickListener(v -> {
             if(LauncherProfiles.mainProfileJson.profiles.size() > 1){
                 LauncherProfiles.mainProfileJson.profiles.remove(mProfileKey);
-                LauncherProfiles.update();
+                LauncherProfiles.write();
                 ExtraCore.setValue(ExtraConstants.REFRESH_VERSION_SPINNER, DELETED_PROFILE);
             }
 
@@ -211,7 +211,7 @@ public class ProfileEditorFragment extends Fragment {
 
 
         LauncherProfiles.mainProfileJson.profiles.put(mProfileKey, mTempProfile);
-        LauncherProfiles.update();
+        LauncherProfiles.write();
         ExtraCore.setValue(ExtraConstants.REFRESH_VERSION_SPINNER, mProfileKey);
     }
 }

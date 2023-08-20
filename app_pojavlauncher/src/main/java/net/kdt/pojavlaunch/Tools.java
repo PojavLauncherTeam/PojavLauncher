@@ -175,7 +175,7 @@ public final class Tools {
         }
         Runtime runtime = MultiRTUtils.forceReread(Tools.pickRuntime(minecraftProfile, versionJavaRequirement));
         JMinecraftVersionList.Version versionInfo = Tools.getVersionInfo(versionId);
-        LauncherProfiles.update();
+        LauncherProfiles.load();
         File gamedir = Tools.getGameDirPath(minecraftProfile);
 
 
