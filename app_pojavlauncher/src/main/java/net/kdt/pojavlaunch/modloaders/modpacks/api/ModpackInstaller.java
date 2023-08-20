@@ -54,7 +54,7 @@ public class ModpackInstaller {
 
 
         LauncherProfiles.mainProfileJson.profiles.put(modpackName, profile);
-        LauncherProfiles.update();
+        LauncherProfiles.write();
 
         return modLoaderInfo;
     }
