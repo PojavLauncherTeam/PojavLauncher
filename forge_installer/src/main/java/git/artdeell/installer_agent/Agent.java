@@ -21,11 +21,13 @@ public class Agent implements AWTEventListener {
     private boolean forgeWindowHandled = false;
     private final boolean suppressProfileCreation;
     private final boolean optiFineInstallation;
+    private final String modpackFixupId;
     private final Timer componentTimer = new Timer();
 
-    public Agent(boolean nps, boolean of) {
+    public Agent(boolean nps, boolean of, String mf) {
         this.suppressProfileCreation = !nps;
         this.optiFineInstallation = of;
+        this.modpackFixupId = mf;
     }
 
     @Override
@@ -104,7 +106,7 @@ public class Agent implements AWTEventListener {
             JOptionPane optionPane = (JOptionPane) components.get(0);
             if(optionPane.getMessageType() == JOptionPane.INFORMATION_MESSAGE) { // forge doesn't emit information messages for other reasons yet
                 System.out.println("The install was successful!");
-                ProfileFixer.reinsertProfile(optiFineInstallation ? "OptiFine" : "forge", suppressProfileCreation);
+                ProfileFixer.reinsertProfile(optiFineInstallation ? "OptiFine" : "forge", modpackFixupId, suppressProfileCreation);
                 System.exit(0); // again, forge doesn't call exit for some reason, so we do that ourselves here
             }
         }
@@ -124,13 +126,30 @@ public class Agent implements AWTEventListener {
     public static void premain(String args, Instrumentation inst) {
         boolean noProfileSuppression = false;
         boolean optifine = false;
+        String modpackFixupId = null;
         if(args != null ) {
-            noProfileSuppression = args.contains("NPS"); // No Profile Suppression
-            optifine = args.contains("OF"); // OptiFine
+            modpackFixupId = findQuotedString(args);
+            if(modpackFixupId != null) {
+                noProfileSuppression = args.contains("NPS") && !modpackFixupId.contains("NPS");
+                // No Profile Suppression
+                optifine = args.contains("OF") && !modpackFixupId.contains("OF");
+                // OptiFine
+            }else {
+                noProfileSuppression = args.contains("NPS"); // No Profile Suppression
+                optifine = args.contains("OF"); // OptiFine
+            }
         }
-        Agent agent = new Agent(noProfileSuppression, optifine);
+        Agent agent = new Agent(noProfileSuppression, optifine, modpackFixupId);
         Toolkit.getDefaultToolkit()
                 .addAWTEventListener(agent,
                         AWTEvent.WINDOW_EVENT_MASK);
+    }
+
+    private static String findQuotedString(String args) {
+        int quoteIndex = args.indexOf('"');
+        if(quoteIndex == -1) return null;
+        int nextQuoteIndex = args.indexOf('"', quoteIndex+1);
+        if(nextQuoteIndex == -1) return null;
+        return args.substring(quoteIndex+1, nextQuoteIndex);
     }
 }
