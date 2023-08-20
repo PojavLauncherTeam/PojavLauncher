@@ -18,9 +18,16 @@ import java.util.concurrent.Future;
  */
 public class CommonApi implements ModpackApi {
 
-    private final ModpackApi mCurseforgeApi =  new CurseforgeApi();
-    private final ModpackApi mModrinthApi =  new ModrinthApi();
-    private final ModpackApi[] mModpackApis = new ModpackApi[]{mModrinthApi, mCurseforgeApi};
+    private final ModpackApi mCurseforgeApi;
+    private final ModpackApi mModrinthApi;
+    private final ModpackApi[] mModpackApis;
+
+    public CommonApi(String curseforgeApiKey) {
+        mCurseforgeApi = new CurseforgeApi(curseforgeApiKey);
+        mModrinthApi = new ModrinthApi();
+        mModpackApis = new ModpackApi[]{mModrinthApi, mCurseforgeApi};
+    }
+
     @Override
     public SearchResult searchMod(SearchFilters searchFilters, SearchResult previousPageResult) {
         CommonApiSearchResult commonApiSearchResult = (CommonApiSearchResult) previousPageResult;

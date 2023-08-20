@@ -1,5 +1,6 @@
 package net.kdt.pojavlaunch.fragments;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -55,9 +56,14 @@ public class SearchModFragment extends Fragment implements ModItemAdapter.Search
 
     public SearchModFragment(){
         super(R.layout.fragment_mod_search);
-        modpackApi = new CommonApi();
         mSearchFilters = new SearchFilters();
         mSearchFilters.isModpack = true;
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        modpackApi = new CommonApi(context.getString(R.string.curseforge_api_key));
     }
 
     @Override
