@@ -69,6 +69,12 @@ def getVersionName = {
     return TAG_STRING.trim().replace("-g", "-") + "-" + BRANCH.toString().trim()
 }
 
+def getCFApiKey = {
+    String key = System.getenv("CURSEFORGE_API_KEY");
+    if(key == null) key = new File("./curseforge_key.txt").text;
+    return key;
+}
+
 configurations {
     instrumentedClasspath {
         canBeConsumed = false
@@ -107,6 +113,7 @@ android {
         versionCode getDateSeconds()
         versionName getVersionName()
         multiDexEnabled true //important
+        resValue 'string', 'curseforge_api_key', getCFApiKey()
     }
 
     buildTypes {

@@ -1,5 +1,6 @@
 package net.kdt.pojavlaunch.modloaders.modpacks.api;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.google.gson.JsonArray;
@@ -38,7 +39,10 @@ public class CurseforgeApi implements ModpackApi{
     private static final int CURSEFORGE_PAGINATION_END_REACHED = -1;
     private static final int CURSEFORGE_PAGINATION_ERROR = -2;
 
-    private final ApiHandler mApiHandler = new ApiHandler("https://api.curseforge.com/v1", "$2a$10$Vxkj4kH1Ekf8EsS4Mx8b2eVTHsht107Lk2erVEUtnbqvojsLy.jYq");
+    private final ApiHandler mApiHandler;
+    public CurseforgeApi(String apiKey) {
+        mApiHandler = new ApiHandler("https://api.curseforge.com/v1", apiKey);
+    }
 
     @Override
     public SearchResult searchMod(SearchFilters searchFilters, SearchResult previousPageResult) {
