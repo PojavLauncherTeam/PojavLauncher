@@ -1,12 +1,9 @@
 package net.kdt.pojavlaunch.fragments;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,6 +25,7 @@ import net.kdt.pojavlaunch.modloaders.modpacks.api.CommonApi;
 import net.kdt.pojavlaunch.modloaders.modpacks.api.ModpackApi;
 import net.kdt.pojavlaunch.modloaders.modpacks.models.SearchFilters;
 import net.kdt.pojavlaunch.profiles.VersionSelectorDialog;
+import net.kdt.pojavlaunch.progresskeeper.ProgressKeeper;
 
 public class SearchModFragment extends Fragment implements ModItemAdapter.SearchResultCallback {
 
@@ -70,6 +68,7 @@ public class SearchModFragment extends Fragment implements ModItemAdapter.Search
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         // You can only access resources after attaching to current context
         mModItemAdapter = new ModItemAdapter(getResources(), modpackApi, this);
+        ProgressKeeper.addTaskCountListener(mModItemAdapter);
         mOverlayTopCache = getResources().getDimension(R.dimen.fragment_padding_medium);
 
         mOverlay = view.findViewById(R.id.search_mod_overlay);
@@ -106,6 +105,7 @@ public class SearchModFragment extends Fragment implements ModItemAdapter.Search
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        ProgressKeeper.removeTaskCountListener(mModItemAdapter);
         mRecyclerview.removeOnScrollListener(mOverlayPositionListener);
     }
 
@@ -141,6 +141,10 @@ public class SearchModFragment extends Fragment implements ModItemAdapter.Search
             TextView mSelectedVersion = dialog.findViewById(R.id.search_mod_selected_mc_version_textview);
             Button mSelectVersionButton = dialog.findViewById(R.id.search_mod_mc_version_button);
             Button mApplyButton = dialog.findViewById(R.id.search_mod_apply_filters);
+
+            assert mSelectVersionButton != null;
+            assert mSelectedVersion != null;
+            assert mApplyButton != null;
 
             // Setup the expendable list behavior
             mSelectVersionButton.setOnClickListener(v -> VersionSelectorDialog.open(v.getContext(), true, (id, snapshot)-> mSelectedVersion.setText(id)));

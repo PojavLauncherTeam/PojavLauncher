@@ -2,17 +2,15 @@ package net.kdt.pojavlaunch.modloaders.modpacks.api;
 
 
 import android.content.Context;
-import android.content.Intent;
-import android.widget.Toast;
+
+import com.kdt.mcgui.ProgressLayout;
 
 import net.kdt.pojavlaunch.PojavApplication;
-import net.kdt.pojavlaunch.modloaders.ModloaderDownloadListener;
+import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.modloaders.modpacks.models.ModDetail;
 import net.kdt.pojavlaunch.modloaders.modpacks.models.ModItem;
 import net.kdt.pojavlaunch.modloaders.modpacks.models.SearchFilters;
 import net.kdt.pojavlaunch.modloaders.modpacks.models.SearchResult;
-
-import java.io.File;
 
 /**
  *
@@ -21,7 +19,7 @@ public interface ModpackApi {
 
     /**
      * @param searchFilters Filters
-     * @param previousPageResult
+     * @param previousPageResult The result from the previous page
      * @return the list of mod items from specified offset
      */
     SearchResult searchMod(SearchFilters searchFilters, SearchResult previousPageResult);
@@ -47,6 +45,9 @@ public interface ModpackApi {
      * @param selectedVersion The selected version
      */
     default void handleInstallation(Context context, ModDetail modDetail, int selectedVersion) {
+        // Doing this here since when starting installation, the progress does not start immediately
+        // which may lead to two concurrent installations (very bad)
+        ProgressLayout.setProgress(ProgressLayout.INSTALL_MODPACK, 0, R.string.global_waiting);
         PojavApplication.sExecutorService.execute(() -> {
             ModLoader loaderInfo = installMod(modDetail, selectedVersion);
             if (loaderInfo == null) return;
