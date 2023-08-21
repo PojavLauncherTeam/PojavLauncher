@@ -118,7 +118,7 @@ public class CurseforgeApi implements ModpackApi{
     }
 
     @Override
-    public ModLoader installMod(ModDetail modDetail, int selectedVersion) {
+    public ModLoader installMod(ModDetail modDetail, int selectedVersion) throws IOException{
         //TODO considering only modpacks for now
         return ModpackInstaller.installModpack(modDetail, selectedVersion, this::installCurseforgeZip);
     }
