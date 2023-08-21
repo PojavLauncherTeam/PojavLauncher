@@ -9,6 +9,7 @@ import net.kdt.pojavlaunch.modloaders.modpacks.models.ModItem;
 import net.kdt.pojavlaunch.modloaders.modpacks.models.SearchFilters;
 import net.kdt.pojavlaunch.modloaders.modpacks.models.SearchResult;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
@@ -92,7 +93,7 @@ public class CommonApi implements ModpackApi {
     }
 
     @Override
-    public ModLoader installMod(ModDetail modDetail, int selectedVersion) {
+    public ModLoader installMod(ModDetail modDetail, int selectedVersion) throws IOException {
         return getModpackApi(modDetail.apiSource).installMod(modDetail, selectedVersion);
     }
 

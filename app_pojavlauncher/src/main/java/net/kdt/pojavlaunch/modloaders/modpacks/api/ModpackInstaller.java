@@ -18,7 +18,7 @@ import java.util.Locale;
 
 public class ModpackInstaller {
 
-    public static ModLoader installModpack(ModDetail modDetail, int selectedVersion, InstallFunction installFunction) {
+    public static ModLoader installModpack(ModDetail modDetail, int selectedVersion, InstallFunction installFunction) throws IOException{
         String versionUrl = modDetail.versionUrls[selectedVersion];
         String modpackName = modDetail.title.toLowerCase(Locale.ROOT).trim().replace(" ", "_" );
 
@@ -35,8 +35,6 @@ public class ModpackInstaller {
             // Install the modpack
             modLoaderInfo = installFunction.installModpack(modpackFile, new File(Tools.DIR_GAME_HOME, "custom_instances/"+modpackName));
 
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         } finally {
             modpackFile.delete();
             ProgressLayout.clearProgress(ProgressLayout.INSTALL_MODPACK);

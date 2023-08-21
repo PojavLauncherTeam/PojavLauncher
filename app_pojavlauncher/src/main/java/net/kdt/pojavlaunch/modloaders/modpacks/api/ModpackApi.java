@@ -7,10 +7,13 @@ import com.kdt.mcgui.ProgressLayout;
 
 import net.kdt.pojavlaunch.PojavApplication;
 import net.kdt.pojavlaunch.R;
+import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.modloaders.modpacks.models.ModDetail;
 import net.kdt.pojavlaunch.modloaders.modpacks.models.ModItem;
 import net.kdt.pojavlaunch.modloaders.modpacks.models.SearchFilters;
 import net.kdt.pojavlaunch.modloaders.modpacks.models.SearchResult;
+
+import java.io.IOException;
 
 /**
  *
@@ -49,9 +52,13 @@ public interface ModpackApi {
         // which may lead to two concurrent installations (very bad)
         ProgressLayout.setProgress(ProgressLayout.INSTALL_MODPACK, 0, R.string.global_waiting);
         PojavApplication.sExecutorService.execute(() -> {
-            ModLoader loaderInfo = installMod(modDetail, selectedVersion);
-            if (loaderInfo == null) return;
-            loaderInfo.getDownloadTask(new NotificationDownloadListener(context, loaderInfo)).run();
+            try {
+                ModLoader loaderInfo = installMod(modDetail, selectedVersion);
+                if (loaderInfo == null) return;
+                loaderInfo.getDownloadTask(new NotificationDownloadListener(context, loaderInfo)).run();
+            }catch (IOException e) {
+                // TODO: pass on the IOException to a relevant handler
+            }
         });
     }
 
@@ -62,5 +69,5 @@ public interface ModpackApi {
      * @param modDetail The mod detail data
      * @param selectedVersion The selected version
      */
-    ModLoader installMod(ModDetail modDetail, int selectedVersion);
+    ModLoader installMod(ModDetail modDetail, int selectedVersion) throws IOException;
 }
