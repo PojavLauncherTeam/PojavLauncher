@@ -31,18 +31,23 @@ import net.kdt.pojavlaunch.modloaders.modpacks.models.ModDetail;
 import net.kdt.pojavlaunch.modloaders.modpacks.models.ModItem;
 import net.kdt.pojavlaunch.modloaders.modpacks.models.SearchFilters;
 import net.kdt.pojavlaunch.modloaders.modpacks.models.SearchResult;
+import net.kdt.pojavlaunch.progresskeeper.TaskCountListener;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Set;
+import java.util.WeakHashMap;
 import java.util.concurrent.Future;
 
-public class ModItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class ModItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements TaskCountListener {
     private static final ModItem[] MOD_ITEMS_EMPTY = new ModItem[0];
     private static final int VIEW_TYPE_MOD_ITEM = 0;
     private static final int VIEW_TYPE_LOADING = 1;
 
     /* Used when versions haven't loaded yet, default text to reduce layout shifting */
     private final SimpleArrayAdapter<String> mLoadingAdapter = new SimpleArrayAdapter<>(Collections.singletonList("Loading"));
+    /* This my seem horribly inefficient but it is in fact the most efficient way without effectively writing a weak collection from scratch */
+    private final Set<ViewHolder> mViewHolderSet = Collections.newSetFromMap(new WeakHashMap<>());
     private final ModIconCache mIconCache = new ModIconCache();
     private final SearchResultCallback mSearchResultCallback;
     private ModItem[] mModItems;
@@ -55,6 +60,7 @@ public class ModItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private SearchFilters mSearchFilters;
     private SearchResult mCurrentResult;
     private boolean mLastPage;
+    private boolean mTasksRunning;
 
 
     public ModItemAdapter(Resources resources, ModpackApi api, SearchResultCallback callback) {
@@ -126,6 +132,15 @@ public class ModItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         return VIEW_TYPE_LOADING;
     }
 
+    @Override
+    public void onUpdateTaskCount(int taskCount) {
+        Tools.runOnUiThread(()->{
+            mTasksRunning = taskCount != 0;
+            for(ViewHolder viewHolder : mViewHolderSet) {
+                viewHolder.updateInstallButtonState();
+            }
+        });
+    }
 
 
     /**
@@ -144,13 +159,14 @@ public class ModItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         private Future<?> mExtensionFuture;
         private Bitmap mThumbnailBitmap;
         private ImageReceiver mImageReceiver;
+        private boolean mInstallEnabled;
 
         /* Used to display available versions of the mod(pack) */
         private final SimpleArrayAdapter<String> mVersionAdapter = new SimpleArrayAdapter<>(null);
 
         public ViewHolder(View view) {
             super(view);
-
+            mViewHolderSet.add(this);
             view.setOnClickListener(v -> {
                 if(!hasExtended()){
                     // Inflate the ViewStub
@@ -252,15 +268,14 @@ public class ModItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         /** Display extended info/interaction about a modpack */
         private void setStateDetailed(ModDetail detailedItem) {
-
             if(detailedItem != null) {
-                mExtendedButton.setEnabled(true);
+                setInstallEnabled(true);
                 mExtendedErrorTextView.setVisibility(View.GONE);
                 mVersionAdapter.setObjects(Arrays.asList(detailedItem.versionNames));
                 mExtendedSpinner.setAdapter(mVersionAdapter);
             } else {
                 closeDetailedView();
-                mExtendedButton.setEnabled(false);
+                setInstallEnabled(false);
                 mExtendedErrorTextView.setVisibility(View.VISIBLE);
                 mExtendedSpinner.setAdapter(null);
                 mVersionAdapter.setObjects(null);
@@ -284,7 +299,7 @@ public class ModItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
 
         private void setDetailedStateDefault() {
-            mExtendedButton.setEnabled(false);
+            setInstallEnabled(false);
             mExtendedSpinner.setAdapter(mLoadingAdapter);
             mExtendedErrorTextView.setVisibility(View.GONE);
             openDetailedView();
@@ -307,6 +322,16 @@ public class ModItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 default:
                     throw new RuntimeException("Unknown API source");
             }
+        }
+
+        private void setInstallEnabled(boolean enabled) {
+            mInstallEnabled = enabled;
+            updateInstallButtonState();
+        }
+
+        private void updateInstallButtonState() {
+            if(mExtendedButton != null)
+                mExtendedButton.setEnabled(mInstallEnabled && !mTasksRunning);
         }
     }
 
