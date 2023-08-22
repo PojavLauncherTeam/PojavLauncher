@@ -24,6 +24,7 @@ import androidx.fragment.app.FragmentManager;
 import com.kdt.mcgui.ProgressLayout;
 import com.kdt.mcgui.mcAccountSpinner;
 
+import net.kdt.pojavlaunch.contextexecutor.ContextExecutor;
 import net.kdt.pojavlaunch.fragments.MainMenuFragment;
 import net.kdt.pojavlaunch.fragments.MicrosoftLoginFragment;
 import net.kdt.pojavlaunch.extra.ExtraConstants;
@@ -183,12 +184,14 @@ public class LauncherActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        ContextExecutor.setActivity(this);
         mInstallTracker.attach();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+        ContextExecutor.clearActivity();
         mInstallTracker.detach();
     }
 

@@ -18,6 +18,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+import net.kdt.pojavlaunch.contextexecutor.ContextExecutor;
 import net.kdt.pojavlaunch.tasks.AsyncAssetManager;
 import net.kdt.pojavlaunch.utils.*;
 
@@ -27,6 +28,7 @@ public class PojavApplication extends Application {
 	
 	@Override
 	public void onCreate() {
+		ContextExecutor.setApplication(this);
 		Thread.setDefaultUncaughtExceptionHandler((thread, th) -> {
 			boolean storagePermAllowed = (Build.VERSION.SDK_INT < 23 || Build.VERSION.SDK_INT >= 29 ||
 					ActivityCompat.checkSelfPermission(PojavApplication.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) && Tools.checkStorageRoot(PojavApplication.this);
@@ -78,8 +80,14 @@ public class PojavApplication extends Application {
 			startActivity(ferrorIntent);
 		}
 	}
-    
-    @Override
+
+	@Override
+	public void onTerminate() {
+		super.onTerminate();
+		ContextExecutor.clearApplication();
+	}
+
+	@Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(LocaleUtils.setLocale(base));
     }
