@@ -606,9 +606,6 @@ public final class Tools {
         // I WILL embrace layer violations because Android's concept of layers is STUPID
         // We live in the same process anyway, why make it any more harder with this needless
         // abstraction?
-        // Also, to @TorchDragon in r/AndroidDev discord: if Android is not for general computing,
-        // and all apps need so much babysitting, why did they put an SoC equivalent to
-        // my main PC in power?
 
         // Add your Context-related rage here
         ContextExecutor.execute(new ShowErrorActivity.RemoteErrorTask(e, rolledMessage));

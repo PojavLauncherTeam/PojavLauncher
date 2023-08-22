@@ -103,6 +103,14 @@
 
             app:layout_constraintTop_toBottomOf="@+id/modded_profile_fabric" />
 
+        <com.kdt.mcgui.MineButton
+            android:id="@+id/modded_profile_modpack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/padding_large"
+            android:layout_marginTop="@dimen/padding_large"
+            android:text="@string/modpack_install_button" />
+
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"
             android:layout_width="wrap_content"
