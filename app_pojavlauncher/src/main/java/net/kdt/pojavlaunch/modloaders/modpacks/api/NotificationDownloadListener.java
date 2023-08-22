@@ -13,6 +13,7 @@ import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.modloaders.ModloaderDownloadListener;
 import net.kdt.pojavlaunch.modloaders.modpacks.ModloaderInstallTracker;
+import net.kdt.pojavlaunch.value.NotificationConstants;
 
 import java.io.File;
 
@@ -46,21 +47,21 @@ public class NotificationDownloadListener implements ModloaderDownloadListener {
 
     @Override
     public void onDownloadError(Exception e) {
-        Tools.runOnUiThread(()->sendEmptyNotification(R.string.modpack_install_notification_download_failed));
+        Tools.showErrorRemote(mContext, R.string.modpack_install_modloader_download_failed, e);
     }
     
     private void sendIntentNotification(Intent intent, int contentText) {
         PendingIntent pendingInstallIntent =
-                PendingIntent.getActivity(mContext, 0,
+                PendingIntent.getActivity(mContext, NotificationConstants.PENDINGINTENT_CODE_DOWNLOAD_SERVICE,
                         intent, Build.VERSION.SDK_INT >=23 ? PendingIntent.FLAG_IMMUTABLE : 0);
 
         mNotificationBuilder.setContentText(mContext.getText(contentText));
         mNotificationBuilder.setContentIntent(pendingInstallIntent);
-        mNotificationManager.notify(3, mNotificationBuilder.build());
+        mNotificationManager.notify(NotificationConstants.NOTIFICATION_ID_DOWNLOAD_LISTENER, mNotificationBuilder.build());
     }
 
     private void sendEmptyNotification(int contentText) {
         mNotificationBuilder.setContentText(mContext.getText(contentText));
-        mNotificationManager.notify(3, mNotificationBuilder.build());
+        mNotificationManager.notify(NotificationConstants.NOTIFICATION_ID_DOWNLOAD_LISTENER, mNotificationBuilder.build());
     }
 }

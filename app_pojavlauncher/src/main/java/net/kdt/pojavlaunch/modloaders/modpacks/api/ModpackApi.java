@@ -57,7 +57,7 @@ public interface ModpackApi {
                 if (loaderInfo == null) return;
                 loaderInfo.getDownloadTask(new NotificationDownloadListener(context, loaderInfo)).run();
             }catch (IOException e) {
-                // TODO: pass on the IOException to a relevant handler
+                Tools.showErrorRemote(context, R.string.modpack_install_download_failed, e);
             }
         });
     }

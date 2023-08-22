@@ -423,5 +423,9 @@
     <string name="modpack_install_notification_title">Pojav Modpack Installer</string>
     <string name="modpack_install_notification_success">Click here to finish modpack installation</string>
     <string name="modpack_install_notification_data_not_available">Failed to download mod loader information</string>
-    <string name="modpack_install_notification_download_failed">Failed to download the mod loader files</string>
+    <string name="modpack_install_modloader_download_failed">Failed to download the mod loader files</string>
+    <string name="modpack_install_download_failed">Failed to download modpack files</string>
+
+    <string name="notif_error_occured">An error has occurred</string>
+    <string name="notif_error_occured_desc">Click to see more details</string>
 </resources>

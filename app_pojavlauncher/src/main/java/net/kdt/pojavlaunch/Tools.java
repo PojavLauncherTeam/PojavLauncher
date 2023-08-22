@@ -46,6 +46,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import net.kdt.pojavlaunch.contextexecutor.ContextExecutor;
 import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.multirt.Runtime;
 import net.kdt.pojavlaunch.plugins.FFmpegPlugin;
@@ -594,6 +595,26 @@ public final class Tools {
             runnable.run();
         }
     }
+
+    public static void showErrorRemote(Throwable e) {
+        showErrorRemote(null, e);
+    }
+    public static void showErrorRemote(Context context, int rolledMessage, Throwable e) {
+        showErrorRemote(context.getString(rolledMessage), e);
+    }
+    public static void showErrorRemote(String rolledMessage, Throwable e) {
+        // I WILL embrace layer violations because Android's concept of layers is STUPID
+        // We live in the same process anyway, why make it any more harder with this needless
+        // abstraction?
+        // Also, to @TorchDragon in r/AndroidDev discord: if Android is not for general computing,
+        // and all apps need so much babysitting, why did they put an SoC equivalent to
+        // my main PC in power?
+
+        // Add your Context-related rage here
+        ContextExecutor.execute(new ShowErrorActivity.RemoteErrorTask(e, rolledMessage));
+    }
+
+
 
     public static void dialogOnUiThread(final Activity activity, final CharSequence title, final CharSequence message) {
         activity.runOnUiThread(()->dialog(activity, title, message));
