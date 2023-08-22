@@ -178,6 +178,7 @@
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Düğme ekle</string>
     <string name="customctrl_addbutton_drawer">Düğme saklama menüsü ekle</string>
+    <string name="customctrl_addbutton_joystick">Joystick ekle</string>
     <string name="customctrl_addsubbutton">Yan-düğme ekle</string>
     <string name="customctrl_add_subbutton_message">Yan-düğme n°%d eklendi !</string>
     <string name="customctrl_selectdefault">Varsayılan Control json\'u seç</string>
@@ -209,6 +210,7 @@
     <string name="mcl_setting_subtitle_mousespeed">Yazılımsal farenin hızını değiştirir</string>
     <string name="customctrl_passthru">Mouse geçişi</string>
     <string name="customctrl_swipeable">Kaydırılabilir</string>
+    <string name="customctrl_forward_lock">İleri kilit</string>
     <string name="customctrl_rounded">Kenarlı</string>
     <string name="memory_warning_msg">Şuanki boş bellek (%d) verilecek bellekten (%d) az, bu çökmeye sebep olacaktır. Eğer oyun çökerse verilen belleği değiştirin.</string>
     <string name="mcl_memory_allocation">Bellek ayırma</string>
