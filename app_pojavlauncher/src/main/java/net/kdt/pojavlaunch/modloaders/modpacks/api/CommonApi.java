@@ -44,6 +44,10 @@ public class CommonApi implements ModpackApi {
             // If there is an array and its length is zero, this means that we've exhausted the results for this
             // search query and we don't need to actually do the search
             if(results[i] != null && results[i].results.length == 0) continue;
+            // If the previous page result is not null (aka the arrays aren't fresh)
+            // and the previous result is null, it means that na error has occured on the previous
+            // page. We lost contingency anyway, so don't bother requesting.
+            if(previousPageResult != null && results[i] == null) continue;
             futures[i] = PojavApplication.sExecutorService.submit(new ApiDownloadTask(i, searchFilters,
                     results[i]));
         }
@@ -52,12 +56,15 @@ public class CommonApi implements ModpackApi {
             cancelAllFutures(futures);
             return null;
         }
+        boolean hasSuccessful = false;
         // Count up all the results
         for(int i = 0; i < mModpackApis.length; i++) {
             Future<?> future = futures[i];
             if(future == null) continue;
             try {
                 SearchResult searchResult = results[i] = (SearchResult) future.get();
+                if(searchResult != null) hasSuccessful = true;
+                else continue;
                 totalSize += searchResult.results.length;
                 totalTotalSize += searchResult.totalResultCount;
             }catch (Exception e) {
@@ -66,10 +73,14 @@ public class CommonApi implements ModpackApi {
                 return null;
             }
         }
+        if(!hasSuccessful) {
+            return null;
+        }
         // Then build an array with all the mods
         ModItem[] concatenatedItems = new ModItem[totalSize];
         int copyOffset = 0;
         for(SearchResult result : results) {
+            if(result == null) continue;
             ModItem[] searchResults = result.results;
             // If the length is zero, we don't need to perform needless copies
             if(searchResults.length == 0) continue;
