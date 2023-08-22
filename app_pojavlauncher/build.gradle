@@ -71,8 +71,12 @@ def getVersionName = {
 
 def getCFApiKey = {
     String key = System.getenv("CURSEFORGE_API_KEY");
-    if(key == null) key = new File("./curseforge_key.txt").text;
-    return key;
+    if(key != null) return key;
+    File curseforgeKeyFile = new File("./curseforge_key.txt");
+    if(curseforgeKeyFile.canRead() && curseforgeKeyFile.isFile()) {
+        return curseforgeKeyFile.text;
+    }
+    return "DUMMY";
 }
 
 configurations {
