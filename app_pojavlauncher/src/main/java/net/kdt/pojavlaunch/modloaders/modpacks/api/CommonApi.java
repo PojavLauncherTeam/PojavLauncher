@@ -10,7 +10,9 @@ import net.kdt.pojavlaunch.modloaders.modpacks.models.SearchFilters;
 import net.kdt.pojavlaunch.modloaders.modpacks.models.SearchResult;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
 
@@ -77,18 +79,19 @@ public class CommonApi implements ModpackApi {
             return null;
         }
         // Then build an array with all the mods
-        ModItem[] concatenatedItems = new ModItem[totalSize];
-        int copyOffset = 0;
+        List<ModItem[]> filteredResults = new ArrayList<>();
+
+        // Sanitize returned values
         for(SearchResult result : results) {
             if(result == null) continue;
             ModItem[] searchResults = result.results;
             // If the length is zero, we don't need to perform needless copies
             if(searchResults.length == 0) continue;
-            System.arraycopy(searchResults, 0, concatenatedItems, copyOffset, searchResults.length);
-            copyOffset += searchResults.length;
+            filteredResults.add(searchResults);
         }
         if(Thread.interrupted()) return null;
-        Arrays.sort(concatenatedItems, (modItem, t1) -> modItem.title.compareToIgnoreCase(t1.title));
+
+        ModItem[] concatenatedItems = buildFusedResponse(filteredResults);
         if(Thread.interrupted()) return null;
         // Recycle or create new search result
         if(commonApiSearchResult == null) commonApiSearchResult = new CommonApiSearchResult();
@@ -117,6 +120,40 @@ public class CommonApi implements ModpackApi {
             default:
                 throw new UnsupportedOperationException("Unknown API source: " + apiSource);
         }
+    }
+
+    /** Fuse the arrays in a way that's fair for every endpoint */
+    private ModItem[] buildFusedResponse(List<ModItem[]> modMatrix){
+        int totalSize = 0;
+
+        // Calculate the total size of the merged array
+        for (ModItem[] array : modMatrix) {
+            totalSize += array.length;
+        }
+
+        ModItem[] fusedItems = new ModItem[totalSize];
+
+        int mergedIndex = 0;
+        int maxLength = 0;
+
+        // Find the maximum length of arrays
+        for (ModItem[] array : modMatrix) {
+            if (array.length > maxLength) {
+                maxLength = array.length;
+            }
+        }
+
+        // Populate the merged array
+        for (int i = 0; i < maxLength; i++) {
+            for (ModItem[] matrix : modMatrix) {
+                if (i < matrix.length) {
+                    fusedItems[mergedIndex] = matrix[i];
+                    mergedIndex++;
+                }
+            }
+        }
+
+        return fusedItems;
     }
 
     private void cancelAllFutures(Future<?>[] futures) {
