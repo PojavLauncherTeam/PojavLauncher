@@ -79,7 +79,7 @@ public class CommonApi implements ModpackApi {
             return null;
         }
         // Then build an array with all the mods
-        List<ModItem[]> filteredResults = new ArrayList<>();
+        ArrayList<ModItem[]> filteredResults = new ArrayList<>(results.length);
 
         // Sanitize returned values
         for(SearchResult result : results) {
@@ -89,6 +89,7 @@ public class CommonApi implements ModpackApi {
             if(searchResults.length == 0) continue;
             filteredResults.add(searchResults);
         }
+        filteredResults.trimToSize();
         if(Thread.interrupted()) return null;
 
         ModItem[] concatenatedItems = buildFusedResponse(filteredResults);
