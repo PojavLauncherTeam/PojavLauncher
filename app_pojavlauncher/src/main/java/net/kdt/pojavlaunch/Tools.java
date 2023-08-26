@@ -666,6 +666,9 @@ public final class Tools {
                 libItem.downloads.artifact.sha1 = "9e98cf55be371cafdb9c70c35d04ec2a8c2b42ac";
                 libItem.downloads.artifact.url = "https://repo1.maven.org/maven2/com/github/oshi/oshi-core/6.3.0/oshi-core-6.3.0.jar";
             } else if (libItem.name.startsWith("org.ow2.asm:asm-all:")) {
+                // Early versions of the ASM library get repalced with 5.0.4 because Pojav's LWJGL is compiled for
+                // Java 8, which is not supported by old ASM versions. Mod loaders like Forge, which depend on this
+                // library, often include lwjgl in their class transformations, which causes errors with old ASM versions.
                 if(Integer.parseInt(version[0]) >= 5) continue;
                 Log.d(APP_NAME, "Library " + libItem.name + " has been changed to version 5.0.4");
                 createLibraryInfo(libItem);
