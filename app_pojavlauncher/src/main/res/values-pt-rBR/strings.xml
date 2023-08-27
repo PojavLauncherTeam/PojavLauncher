@@ -343,6 +343,7 @@
     <string name="preference_force_big_core_desc">Força a renderização do Minecraft a rodar o núcleo numa frequência mais alta</string>
     <string name="version_select_hint">Selecione uma versão</string>
     <string name="forge_dl_progress">Baixando instalador %s</string>
+    <string name="forge_dl_searching">Procurando pelo número da versão do Forge</string>
     <string name="modloader_dl_failed_to_load_list">Falha ao carregar a lista de versão!</string>
     <string name="forge_dl_no_installer">Desculpe, mas essa versão do Forge não tem um instalador compatível.</string>
     <string name="forge_dl_select_version">Selecione a versão do Forge</string>
@@ -362,4 +363,14 @@
     <string name="create_profile_optifine">Criar perfil OptiFine</string>
     <string name="preference_gyro_damper_window_title">Tempo de suavização</string>
     <string name="preference_gyro_damper_window_description">Reduzir jitter por latência. 0 para desativar</string>
+    <string name="hint_search_modpack">Procurar por modpacks</string>
+    <string name="generic_install">Instalar</string>
+    <string name="generic_apply">Aplicar</string>
+    <string name="search_modpack_no_result">Nenhum modpacks encontrado</string>
+    <string name="search_modpack_error">Falha ao encontrar modpacks</string>
+    <string name="search_modpack_download_error">Falha ao baixar os metadados do modpack</string>
+    <string name="modpack_download_downloading_mods_fc">Baixando mods (Arquivo %d de %d)</string>
+    <string name="modpack_install_button">Criar perfil de modpack</string>
+    <string name="notif_error_occured">Ocorreu um erro</string>
+    <string name="notif_error_occured_desc">Clique para mais detalhes</string>
 </resources>
