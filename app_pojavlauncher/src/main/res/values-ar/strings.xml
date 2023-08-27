@@ -345,4 +345,5 @@
     <string name="fabric_dl_install">تثبيت</string>
     <string name="fabric_dl_loader_title">حدد إصدارات</string>
     <string name="of_dl_progress">التحميل جارٍ %s</string>
+    <string name="generic_install">تثبيت</string>
 </resources>
