@@ -225,4 +225,5 @@
     <string name="fabric_dl_game_version">Minecraft версиясе</string>
     <string name="fabric_dl_install">Утырту</string>
     <string name="of_dl_progress">%s йөкләтүе</string>
+    <string name="generic_install">Утырту</string>
 </resources>
