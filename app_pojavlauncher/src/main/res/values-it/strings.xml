@@ -364,4 +364,5 @@ Accedi almeno una volta su https://minecraft.net/ e riprova.</string>
     <string name="create_profile_optifine">Crea profilo Optifine</string>
     <string name="preference_gyro_damper_window_title">Durata smoothing</string>
     <string name="preference_gyro_damper_window_description">Riduce il jitter a discapito della latenza. Mettere 0 per disabilitare</string>
+    <string name="generic_install">Installa</string>
 </resources>
