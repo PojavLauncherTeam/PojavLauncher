@@ -359,4 +359,5 @@
     <string name="of_dl_progress">Đang tải xuống %s</string>
     <string name="create_profile_optifine">Tạo hồ sơ OptiFine</string>
     <string name="preference_gyro_damper_window_title">Thời gian làm mịn</string>
+    <string name="generic_install">Cài đặt</string>
 </resources>
