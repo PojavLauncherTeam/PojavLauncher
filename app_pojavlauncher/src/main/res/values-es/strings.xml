@@ -342,4 +342,5 @@
     <string name="create_profile_optifine">Crear instancia de OptiFine</string>
     <string name="preference_gyro_damper_window_title">Tiempo de suavizado</string>
     <string name="preference_gyro_damper_window_description">Reduce el jitter a cambio de latencia. 0 para desactivarlo</string>
+    <string name="generic_install">Instalar</string>
 </resources>
