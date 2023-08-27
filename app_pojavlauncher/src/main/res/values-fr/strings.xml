@@ -358,4 +358,5 @@
     <string name="of_dl_failed_to_scrape">Échec de la collecte des données pour l\'installation d\'OptiFine</string>
     <string name="of_dl_progress">Téléchargement de %s</string>
     <string name="create_profile_optifine">Créer un profil OptiFine</string>
+    <string name="generic_install">Installer</string>
 </resources>
