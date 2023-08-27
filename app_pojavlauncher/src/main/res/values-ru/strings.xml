@@ -344,6 +344,7 @@
     <string name="preference_force_big_core_desc">Принудительно запускать поток графического движка на ядре ЦП с наибольшей тактовой частотой.</string>
     <string name="version_select_hint">Укажите версию</string>
     <string name="forge_dl_progress">Загрузка установщика %s</string>
+    <string name="forge_dl_searching">Поиск номера версии Forge</string>
     <string name="modloader_dl_failed_to_load_list">Не удалось загрузить список версий.</string>
     <string name="forge_dl_no_installer">К сожалению, у этой версии Forge отсутствует поддерживаемый установщик.</string>
     <string name="forge_dl_select_version">Выбор версии Forge</string>
@@ -364,4 +365,22 @@
     <string name="create_profile_optifine">Версия с OptiFine</string>
     <string name="preference_gyro_damper_window_title">Задержка для сглаживания</string>
     <string name="preference_gyro_damper_window_description">Время для сглаживания рывков движения устройства. Для отключения установите значение \"0\".</string>
+    <string name="hint_search_modpack">Поиск сборок</string>
+    <string name="generic_install">Установить</string>
+    <string name="generic_apply">Применить</string>
+    <string name="search_modpack_no_result">Сборок не найдено</string>
+    <string name="search_modpack_error">Не удалось выполнить поиск сборок</string>
+    <string name="search_modpack_download_error">Не удалось загрузить метаданные сборки</string>
+    <string name="modpack_download_downloading_metadata">Загрузка метаданных сборки (%.2f МБ / %.2f МБ)</string>
+    <string name="modpack_download_downloading_mods">Загрузка модов (%.2f МБ / %.2f МБ)</string>
+    <string name="modpack_download_downloading_mods_fc">Загрузка модов (файл %d из %d)</string>
+    <string name="modpack_download_applying_overrides">Перезапись параметров (%d/%d)</string>
+    <string name="modpack_install_notification_title">Установка сборки PojavLauncher</string>
+    <string name="modpack_install_notification_success">Нажмите для завершения установки сборки</string>
+    <string name="modpack_install_notification_data_not_available">Не удалось загрузить информацию о загрузчике модов</string>
+    <string name="modpack_install_modloader_download_failed">Не удалось загрузить файлы загрузчика модов</string>
+    <string name="modpack_install_download_failed">Не удалось загрузить файлы сборки</string>
+    <string name="modpack_install_button">Сборка</string>
+    <string name="notif_error_occured">Возникла ошибка</string>
+    <string name="notif_error_occured_desc">Нажмите для получения дополнительных сведений</string>
 </resources>
