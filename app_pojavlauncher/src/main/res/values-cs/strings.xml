@@ -363,4 +363,5 @@
     <string name="create_profile_optifine">Vytvořiti profil OptiFinu</string>
     <string name="preference_gyro_damper_window_title">Čas vyhlazování</string>
     <string name="preference_gyro_damper_window_description">Sníží třesení výměnou za latenci. K vypnutí 0</string>
+    <string name="generic_install">Instalovat</string>
 </resources>
