@@ -342,6 +342,7 @@
     <string name="preference_force_big_core_desc">Erzwingt den Minecraft-Renderthread mit der höchsten maximalen Frequenz auf dem Core zu laufen</string>
     <string name="version_select_hint">Wähle eine Version</string>
     <string name="forge_dl_progress">Installer für %s wird heruntergeladen</string>
+    <string name="forge_dl_searching">Suche nach Forge-Versionsnummer</string>
     <string name="modloader_dl_failed_to_load_list">Fehler beim Laden der Versionsliste!</string>
     <string name="forge_dl_no_installer">Entschuldigung, aber diese Version von Forge hat keinen Installer, der noch nicht unterstützt wird.</string>
     <string name="forge_dl_select_version">Forge-Version auswählen</string>
@@ -362,4 +363,22 @@
     <string name="create_profile_optifine">OptiFine-Profil erstellen</string>
     <string name="preference_gyro_damper_window_title">Glättungsdauer</string>
     <string name="preference_gyro_damper_window_description">Reduziert Jitter im Austausch gegen Latenz. 0 zum Deaktivieren</string>
+    <string name="hint_search_modpack">Suche nach Modpacks</string>
+    <string name="generic_install">Installieren</string>
+    <string name="generic_apply">Anwenden</string>
+    <string name="search_modpack_no_result">Keine Modpacks gefunden</string>
+    <string name="search_modpack_error">Es konnten keine Modpacks gefunden werden</string>
+    <string name="search_modpack_download_error">Fehler beim Herunterladen der Modpack-Metadaten</string>
+    <string name="modpack_download_downloading_metadata">Herunterladen von Modpack-Metadaten (%.2f MB / %.2f MB)</string>
+    <string name="modpack_download_downloading_mods">Lade Mods herunter (%.2f MB / %.2f MB)</string>
+    <string name="modpack_download_downloading_mods_fc">Lade Mods herunter ( %d von %d)</string>
+    <string name="modpack_download_applying_overrides">Wende Overrides an (%d/%d)</string>
+    <string name="modpack_install_notification_title">Pojav-Modpack-Installer</string>
+    <string name="modpack_install_notification_success">Klicke hier, um die Installation des Modpack abzuschließen</string>
+    <string name="modpack_install_notification_data_not_available">Fehler beim Herunterladen der Mod-Loader-Informationen</string>
+    <string name="modpack_install_modloader_download_failed">Fehler beim Herunterladen der Mod-Loader-Dateien</string>
+    <string name="modpack_install_download_failed">Fehler beim Herunterladen der Modpack-Dateien</string>
+    <string name="modpack_install_button">Modpack-Profil erstellen</string>
+    <string name="notif_error_occured">Es ist ein Fehler aufgetreten</string>
+    <string name="notif_error_occured_desc">Klicke um mehr Details zu sehen</string>
 </resources>
