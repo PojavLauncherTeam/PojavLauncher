@@ -178,6 +178,7 @@
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Tambah tombol</string>
     <string name="customctrl_addbutton_drawer">Tambahkan tombol drawer</string>
+    <string name="customctrl_addbutton_joystick">Tambah Joystick</string>
     <string name="customctrl_addsubbutton">Tambahkan tombol</string>
     <string name="customctrl_add_subbutton_message">Sub-tombol n°%d telah ditambahkan!</string>
     <string name="customctrl_selectdefault">Pilih \". json\" kontrol default</string>
@@ -209,6 +210,7 @@
     <string name="mcl_setting_subtitle_mousespeed">Mengubah kecepatan perangkat lunak mouse</string>
     <string name="customctrl_passthru">Mouse pass-thru</string>
     <string name="customctrl_swipeable">Bisa digesek</string>
+    <string name="customctrl_forward_lock">Kunci ke depan</string>
     <string name="customctrl_rounded">Melengkung</string>
     <string name="memory_warning_msg">Jumlah RAM kosong saat ini (%d) lebih rendah dari RAM yang dialokasikan (%d), yang dapat menyebabkan crash. Ubah alokasi jika game crash.</string>
     <string name="mcl_memory_allocation">Alokasi Memori</string>
@@ -341,6 +343,7 @@
     <string name="preference_force_big_core_desc">Memaksa utas render Minecraft untuk berjalan pada inti dengan frekuensi tertinggi</string>
     <string name="version_select_hint">Pilih sebuah versi</string>
     <string name="forge_dl_progress">Mengunduh installer dalam %s</string>
+    <string name="forge_dl_searching">Mencari nomor versi Forge</string>
     <string name="modloader_dl_failed_to_load_list">Gagal memuat daftar versi!</string>
     <string name="forge_dl_no_installer">Maaf, versi forge ini tidak memiliki installer, yang berarti tidak didukung sama sekali.</string>
     <string name="forge_dl_select_version">Pilih versi Forge</string>
@@ -361,4 +364,11 @@
     <string name="create_profile_optifine">Buat profil OptiFine</string>
     <string name="preference_gyro_damper_window_title">Menghaluskan waktu</string>
     <string name="preference_gyro_damper_window_description">Mengurangi jitter sebagai ganti latensi. 0 untuk menonaktifkan itu</string>
+    <string name="hint_search_modpack">Cari paket modifikasi</string>
+    <string name="generic_install">Pasang</string>
+    <string name="generic_apply">Terapkan</string>
+    <string name="search_modpack_no_result">Tidak dapat menemukan paket modifikasi</string>
+    <string name="search_modpack_error">Gagal mencari paket modifikasi</string>
+    <string name="search_modpack_download_error">Gagal mengunduh metadata paket modifikasi</string>
+    <string name="modpack_download_downloading_metadata">Mengunduh metadata paket modifikasi (%.2f MB / %.2f MB)</string>
 </resources>
