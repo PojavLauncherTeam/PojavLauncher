@@ -339,6 +339,7 @@
     <string name="preference_force_big_core_desc">Minecraft render ipini ən yüksək maksimum tezliklə nüvədə işləməyə məcbur edir</string>
     <string name="version_select_hint">Bir versiya seçin</string>
     <string name="forge_dl_progress">%s üçün quraşdırıcı endirilir</string>
+    <string name="forge_dl_searching">Forge versiya nömrəsi axtarılır</string>
     <string name="modloader_dl_failed_to_load_list">Versiya siyahısını yükləmək alınmadı!</string>
     <string name="forge_dl_no_installer">Üzr istəyirik, lakin Forge-un bu versiyasında hələ dəstəklənməyən quraşdırıcı yoxdur.</string>
     <string name="forge_dl_select_version">Forge versiyasını seçin</string>
@@ -359,4 +360,22 @@
     <string name="create_profile_optifine">OptiFine profili yaradın</string>
     <string name="preference_gyro_damper_window_title">Hamarlama vaxtı</string>
     <string name="preference_gyro_damper_window_description">Gecikmə qarşılığında titrəməni azaldın. onu söndürmək üçün 0</string>
+    <string name="hint_search_modpack">Mod paketləri axtarın</string>
+    <string name="generic_install">Quraşdır</string>
+    <string name="generic_apply">Tətbiq et</string>
+    <string name="search_modpack_no_result">Heç bir modpaket tapılmadı</string>
+    <string name="search_modpack_error">Mod paketləri tapmaq alınmadı</string>
+    <string name="search_modpack_download_error">Modpack metadatasını endirmək alınmadı</string>
+    <string name="modpack_download_downloading_metadata">Modpack metadatası endirilir (%.2f MB / %.2f MB)</string>
+    <string name="modpack_download_downloading_mods">Modlar endirilir (%.2f MB / %.2f MB)</string>
+    <string name="modpack_download_downloading_mods_fc">Modlar endirilir (%d fayldan %d fayl)</string>
+    <string name="modpack_download_applying_overrides">Ləğvetmələr tətbiq edilir (%d/%d)</string>
+    <string name="modpack_install_notification_title">Pojav Mod paket quraşdırıcısı</string>
+    <string name="modpack_install_notification_success">Modpack quraşdırılmasını başa çatdırmaq üçün bura klikləyin</string>
+    <string name="modpack_install_notification_data_not_available">Mod yükləyicisi məlumatını endirmək alınmadı</string>
+    <string name="modpack_install_modloader_download_failed">Mod yükləyici fayllarını endirmək alınmadı</string>
+    <string name="modpack_install_download_failed">Modpack fayllarını yükləmək alınmadı</string>
+    <string name="modpack_install_button">Modpack profili yarat</string>
+    <string name="notif_error_occured">Bir xəta baş verdi</string>
+    <string name="notif_error_occured_desc">Daha çox təfərrüatları görmək üçün klikləyin</string>
 </resources>
