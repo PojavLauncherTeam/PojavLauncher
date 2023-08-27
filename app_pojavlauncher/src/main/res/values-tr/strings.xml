@@ -364,4 +364,5 @@
     <string name="create_profile_optifine">OptiFine profili oluştur</string>
     <string name="preference_gyro_damper_window_title">Yumuşatma süresi</string>
     <string name="preference_gyro_damper_window_description">Gecikme karşılığında titremeyi azaltın. Kapatmak için 0\'a ayarlayın</string>
+    <string name="generic_install">Yükle</string>
 </resources>
