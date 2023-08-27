@@ -362,4 +362,5 @@
     <string name="create_profile_optifine">Stwórz profil OptiFine</string>
     <string name="preference_gyro_damper_window_title">Czas wygładzania</string>
     <string name="preference_gyro_damper_window_description">Zmniejsz jitter w zamian za opóźnienie. 0, aby wyłączyć</string>
+    <string name="generic_install">Instaluj</string>
 </resources>
