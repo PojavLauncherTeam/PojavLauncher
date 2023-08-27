@@ -343,6 +343,7 @@
     <string name="preference_force_big_core_desc">强制 Minecraft 渲染线程在最高频率的核心运行</string>
     <string name="version_select_hint">选择版本</string>
     <string name="forge_dl_progress">正在下载 %s 的安装程序</string>
+    <string name="forge_dl_searching">正在搜索 Forge 版本号</string>
     <string name="modloader_dl_failed_to_load_list">加载版本列表失败！</string>
     <string name="forge_dl_no_installer">抱歉，此版本的 Forge 没有安装程序，尚不支持。</string>
     <string name="forge_dl_select_version">选择 Forge 版本</string>
@@ -363,4 +364,22 @@
     <string name="create_profile_optifine">创建 OptiFine 配置</string>
     <string name="preference_gyro_damper_window_title">平滑时间</string>
     <string name="preference_gyro_damper_window_description">减少抖动以换取延迟。输入 0 以禁用</string>
+    <string name="hint_search_modpack">搜索整合包</string>
+    <string name="generic_install">安装</string>
+    <string name="generic_apply">应用</string>
+    <string name="search_modpack_no_result">未找到整合包</string>
+    <string name="search_modpack_error">寻找整合包失败</string>
+    <string name="search_modpack_download_error">整合包元数据下载失败</string>
+    <string name="modpack_download_downloading_metadata">正在下载整合包元数据（%.2fMB / %.2fMB）</string>
+    <string name="modpack_download_downloading_mods">正在下载模组（%.2fMB / %.2fMB）</string>
+    <string name="modpack_download_downloading_mods_fc">正在下载模组（文件 %d 中的 %d）</string>
+    <string name="modpack_download_applying_overrides">正在应用覆盖（%d/%d）</string>
+    <string name="modpack_install_notification_title">Pojav 整合包安装器</string>
+    <string name="modpack_install_notification_success">点击此处完成整合包安装</string>
+    <string name="modpack_install_notification_data_not_available">模组加载器信息下载失败</string>
+    <string name="modpack_install_modloader_download_failed">模组加载器文件下载失败</string>
+    <string name="modpack_install_download_failed">整合包文件下载失败</string>
+    <string name="modpack_install_button">创建整合包配置文件</string>
+    <string name="notif_error_occured">发生错误</string>
+    <string name="notif_error_occured_desc">点击查看详细信息</string>
 </resources>
