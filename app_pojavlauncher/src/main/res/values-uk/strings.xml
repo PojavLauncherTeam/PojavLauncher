@@ -361,4 +361,5 @@
     <string name="create_profile_optifine">Створити профіль з OptiFine</string>
     <string name="preference_gyro_damper_window_title">Затримка згладжування</string>
     <string name="preference_gyro_damper_window_description">Збільшує плавність руху камери в обмін на невелику затримку відклику з миші. Установіть значення 0 щоб відключити цю функцію</string>
+    <string name="generic_install">Встановити</string>
 </resources>
