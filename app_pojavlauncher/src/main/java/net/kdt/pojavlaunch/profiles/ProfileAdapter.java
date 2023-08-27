@@ -31,15 +31,11 @@ public class ProfileAdapter extends BaseAdapter {
     private Map<String, MinecraftProfile> mProfiles;
     private final MinecraftProfile dummy = new MinecraftProfile();
     private List<String> mProfileList;
-    private final ProfileAdapterExtra[] mExtraEntires;
+    private ProfileAdapterExtra[] mExtraEntires;
 
     public ProfileAdapter(Context context, ProfileAdapterExtra[] extraEntries) {
         ProfileIconCache.initDefault(context);
-        LauncherProfiles.load();
-        mProfiles = new HashMap<>(LauncherProfiles.mainProfileJson.profiles);
-        if(extraEntries == null) mExtraEntires = new ProfileAdapterExtra[0];
-        else mExtraEntires = extraEntries;
-        mProfileList = new ArrayList<>(Arrays.asList(mProfiles.keySet().toArray(new String[0])));
+        reloadProfiles(extraEntries);
     }
     /*
      * Gets how much profiles are loaded in the adapter right now
@@ -66,6 +62,8 @@ public class ProfileAdapter extends BaseAdapter {
         }
         return null;
     }
+
+
 
     public int resolveProfileIndex(String name) {
         return mProfileList.indexOf(name);
@@ -133,5 +131,20 @@ public class ProfileAdapter extends BaseAdapter {
         extendedTextView.setCompoundDrawablesRelative(extra.icon, null, extendedTextView.getCompoundsDrawables()[2], null);
         extendedTextView.setText(extra.name);
         extendedTextView.setBackgroundColor(Color.TRANSPARENT);
+    }
+
+    /** Reload profiles from the file */
+    public void reloadProfiles(){
+        LauncherProfiles.load();
+        mProfiles = new HashMap<>(LauncherProfiles.mainProfileJson.profiles);
+        mProfileList = new ArrayList<>(Arrays.asList(mProfiles.keySet().toArray(new String[0])));
+        notifyDataSetChanged();
+    }
+
+    /** Reload profiles from the file, with additional extra entries */
+    public void reloadProfiles(ProfileAdapterExtra[] extraEntries) {
+        if(extraEntries == null) mExtraEntires = new ProfileAdapterExtra[0];
+        else mExtraEntires = extraEntries;
+        this.reloadProfiles();
     }
 }

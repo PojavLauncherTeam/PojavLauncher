@@ -13,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.kdt.mcgui.mcVersionSpinner;
+
 import net.kdt.pojavlaunch.CustomControlsActivity;
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
@@ -23,6 +25,8 @@ import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
 
 public class MainMenuFragment extends Fragment {
     public static final String TAG = "MainMenuFragment";
+
+    private mcVersionSpinner mVersionSpinner;
 
     public MainMenuFragment(){
         super(R.layout.fragment_launcher);
@@ -37,6 +41,7 @@ public class MainMenuFragment extends Fragment {
 
         ImageButton mEditProfileButton = view.findViewById(R.id.edit_profile_button);
         Button mPlayButton = view.findViewById(R.id.play_button);
+        mVersionSpinner = view.findViewById(R.id.mc_version_spinner);
 
         mNewsButton.setOnClickListener(v -> Tools.openURL(requireActivity(), Tools.URL_HOME));
         mCustomControlButton.setOnClickListener(v -> startActivity(new Intent(requireContext(), CustomControlsActivity.class)));
@@ -60,7 +65,7 @@ public class MainMenuFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        LauncherProfiles.load();
+        mVersionSpinner.reloadProfiles();
     }
 
     private void runInstallerWithConfirmation(boolean isCustomArgs) {

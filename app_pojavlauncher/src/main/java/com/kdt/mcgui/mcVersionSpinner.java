@@ -77,6 +77,11 @@ public class mcVersionSpinner extends ExtendedTextView {
         mProfileAdapter.setViewProfile(this, (String) mProfileAdapter.getItem(position), false);
     }
 
+    /** Reload profiles from the file, forcing the spinner to consider the new data */
+    public void reloadProfiles(){
+        mProfileAdapter.reloadProfiles();
+    }
+
     /** Initialize various behaviors */
     private void init(){
         // Setup various attributes
