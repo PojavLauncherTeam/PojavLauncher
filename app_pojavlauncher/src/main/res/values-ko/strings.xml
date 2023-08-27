@@ -365,4 +365,5 @@ https://cosmetica.cc 를 방문해주세요.
     <string name="create_profile_optifine">OptiFine 프로필 생성</string>
     <string name="preference_gyro_damper_window_title">스무딩 시간</string>
     <string name="preference_gyro_damper_window_description">대기 시간 대신 지터를 줄입니다. 비활성화 하려면 0으로 두십시오.</string>
+    <string name="generic_install">설치</string>
 </resources>
