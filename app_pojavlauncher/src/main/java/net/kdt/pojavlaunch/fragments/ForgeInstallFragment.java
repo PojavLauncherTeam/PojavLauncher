@@ -49,7 +49,7 @@ public class ForgeInstallFragment extends ModVersionListFragment<List<String>> {
 
     @Override
     public List<String> loadVersionList() throws IOException {
-        return ForgeUtils.downloadForgeVersions();
+        return ForgeUtils.downloadAllForgeVersions();
     }
 
     @Override

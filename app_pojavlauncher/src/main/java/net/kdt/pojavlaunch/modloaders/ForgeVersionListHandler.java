@@ -10,6 +10,17 @@ import java.util.List;
 public class ForgeVersionListHandler extends DefaultHandler {
     private List<String> mForgeVersions;
     private StringBuilder mCurrentVersion = null;
+    private final ForgeForks mForgeFork;
+
+    enum ForgeForks {
+        FORGE,
+        NEOFORGE
+    }
+
+    public ForgeVersionListHandler(ForgeForks fork) {
+        mForgeFork = fork;
+    }
+
     @Override
     public void startDocument() throws SAXException {
         mForgeVersions = new ArrayList<>();
@@ -29,7 +40,7 @@ public class ForgeVersionListHandler extends DefaultHandler {
     public void endElement(String uri, String localName, String qName) throws SAXException {
         if (qName.equals("version")) {
             String version = mCurrentVersion.toString();
-            mForgeVersions.add(version);
+            mForgeVersions.add(mForgeFork == ForgeForks.NEOFORGE ? version + " (NeoForge)" : version);
             mCurrentVersion = null;
         }
     }

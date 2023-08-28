@@ -4,6 +4,7 @@ import com.kdt.mcgui.ProgressLayout;
 
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
+import net.kdt.pojavlaunch.fragments.ForgeInstallFragment;
 import net.kdt.pojavlaunch.progresskeeper.ProgressKeeper;
 import net.kdt.pojavlaunch.utils.DownloadUtils;
 
@@ -73,7 +74,7 @@ public class ForgeDownloadTask implements Runnable, Tools.DownloaderFeedback {
     }
 
     public boolean findVersion() throws IOException {
-        List<String> forgeVersions = ForgeUtils.downloadForgeVersions();
+        List<String> forgeVersions = ForgeUtils.downloadAllForgeVersions();
         if(forgeVersions == null) return false;
         String versionStart = mGameVersion+"-"+mLoaderVersion;
         for(String versionName : forgeVersions) {
