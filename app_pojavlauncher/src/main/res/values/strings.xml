@@ -429,4 +429,5 @@
 
     <string name="notif_error_occured">An error has occurred</string>
     <string name="notif_error_occured_desc">Click to see more details</string>
+    <string name="fabric_dl_only_stable">Show only stable versions</string>
 </resources>
