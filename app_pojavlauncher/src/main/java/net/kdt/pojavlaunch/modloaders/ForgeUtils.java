@@ -24,7 +24,7 @@ import javax.xml.parsers.SAXParserFactory;
 import net.kdt.pojavlaunch.modloaders.ForgeVersionListHandler.ForgeForks;
 
 public class ForgeUtils {
-    private static final String FORGE_METADATA_URL = "`https://maven.minecraftforge.net/net/minecraftforge/forge/maven-metadata.xml`";
+    private static final String FORGE_METADATA_URL = "https://maven.minecraftforge.net/net/minecraftforge/forge/maven-metadata.xml";
     private static final String FORGE_INSTALLER_URL = "https://maven.minecraftforge.net/net/minecraftforge/forge/%1$s/forge-%1$s-installer.jar";
     private static final String NEOFORGE_METADATA_URL = "https://maven.neoforged.net/api/maven/versions/releases/net/neoforged/forge";
     private static final String NEOFORGE_INSTALLER_URL = "https://maven.neoforged.net/net/neoforged/forge/%1$s/forge-%1$s-installer.jar";
