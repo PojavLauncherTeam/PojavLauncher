@@ -343,6 +343,7 @@
     <string name="preference_force_big_core_desc">Nutí vlákno vykreslovače Minecraftu aby běželo na jádře s nejvyšší maximální frekvencí</string>
     <string name="version_select_hint">Vyberte verzi</string>
     <string name="forge_dl_progress">Stahování instalátoru %s</string>
+    <string name="forge_dl_searching">Hlednání čísla verze Forge</string>
     <string name="modloader_dl_failed_to_load_list">Nepodařilo se načísti seznam verzí!</string>
     <string name="forge_dl_no_installer">Omlouváme se, avšak tato verze Forge nemá instalátor, což zatím není podporováno.</string>
     <string name="forge_dl_select_version">Vyberte verzi Forge</string>
@@ -363,5 +364,22 @@
     <string name="create_profile_optifine">Vytvořiti profil OptiFinu</string>
     <string name="preference_gyro_damper_window_title">Čas vyhlazování</string>
     <string name="preference_gyro_damper_window_description">Sníží třesení výměnou za latenci. K vypnutí 0</string>
+    <string name="hint_search_modpack">Hledání modpacků</string>
     <string name="generic_install">Instalovat</string>
+    <string name="generic_apply">Provést Změny</string>
+    <string name="search_modpack_no_result">Nebyly nalezeny žádné modpacky</string>
+    <string name="search_modpack_error">Nepodařilo se nalézt modpacky</string>
+    <string name="search_modpack_download_error">Stahování metadat modpacku selhalo</string>
+    <string name="modpack_download_downloading_metadata">Stahování metadat modpacku (%.2f MB / %.2f MB)</string>
+    <string name="modpack_download_downloading_mods">Stahování módů (%.2f MB / %.2f MB)</string>
+    <string name="modpack_download_downloading_mods_fc">Stahování módů (Soubor %d z %d)</string>
+    <string name="modpack_download_applying_overrides">Provádení přepisů (%d/%d)</string>
+    <string name="modpack_install_notification_title">Instalátor Modpacků Pojavu</string>
+    <string name="modpack_install_notification_success">Klikněte zde k dokončení instalace modpacku</string>
+    <string name="modpack_install_notification_data_not_available">Stahování informací načítače módů selhalo</string>
+    <string name="modpack_install_modloader_download_failed">Stahování souborů načítače módů selhalo</string>
+    <string name="modpack_install_download_failed">Stahování souborů modpacku selhalo</string>
+    <string name="modpack_install_button">Vytvořiti profil modpacku</string>
+    <string name="notif_error_occured">Došlo k chybě</string>
+    <string name="notif_error_occured_desc">Klikněte pro zobrazení podrobností</string>
 </resources>
