@@ -178,6 +178,7 @@
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">버튼 추가</string>
     <string name="customctrl_addbutton_drawer">버튼 드로어 추가</string>
+    <string name="customctrl_addbutton_joystick">조이스틱 추가</string>
     <string name="customctrl_addsubbutton">부속 버튼 추가</string>
     <string name="customctrl_add_subbutton_message">부속 버튼 n°%d가 추가됐습니다!</string>
     <string name="customctrl_selectdefault">기본 조작 프리셋 선택하기</string>
@@ -345,6 +346,7 @@ https://cosmetica.cc 를 방문해주세요.
     <string name="preference_force_big_core_desc">Minecraft의 렌더 스레드를 최대 주파수를 갖는 코어에서 실행하도록 강제합니다.</string>
     <string name="version_select_hint">버전 선택</string>
     <string name="forge_dl_progress">%s 인스톨러 다운로드중</string>
+    <string name="forge_dl_searching">Forge 버전 숫자를 찾는중</string>
     <string name="modloader_dl_failed_to_load_list">버전 리스트 로드 실패</string>
     <string name="forge_dl_no_installer">죄송합니다. 이 버전의 Forge는 아직 지원되는 인스톨러를 가지고 있지 않습니다.</string>
     <string name="forge_dl_select_version">Forge 버전 선택</string>
@@ -365,5 +367,9 @@ https://cosmetica.cc 를 방문해주세요.
     <string name="create_profile_optifine">OptiFine 프로필 생성</string>
     <string name="preference_gyro_damper_window_title">스무딩 시간</string>
     <string name="preference_gyro_damper_window_description">대기 시간 대신 지터를 줄입니다. 비활성화 하려면 0으로 두십시오.</string>
+    <string name="hint_search_modpack">모드팩 검색</string>
     <string name="generic_install">설치</string>
+    <string name="generic_apply">적용</string>
+    <string name="search_modpack_no_result">모드팩이 없습니다.</string>
+    <string name="search_modpack_error">모드팩을 찾는데 실패했습니다.</string>
 </resources>
