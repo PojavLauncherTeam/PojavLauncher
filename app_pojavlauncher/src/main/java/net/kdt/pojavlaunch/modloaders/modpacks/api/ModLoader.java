@@ -44,7 +44,8 @@ public class ModLoader {
     }
 
     /**
-     * Get the Runnable that needs to run in order to download the mod loader
+     * Get the Runnable that needs to run in order to download the mod loader.
+     * The task will also install the mod loader if it does not require GUI installation
      * @param listener the listener that gets notified of the installation status
      * @return the task Runnable that needs to be ran
      */
@@ -53,7 +54,7 @@ public class ModLoader {
             case MOD_LOADER_FORGE:
                 return new ForgeDownloadTask(listener, minecraftVersion, modLoaderVersion);
             case MOD_LOADER_FABRIC:
-                return new FabricDownloadTask(listener);
+                return new FabricDownloadTask(listener, minecraftVersion, modLoaderVersion, false);
             case MOD_LOADER_QUILT:
                 throw new RuntimeException("Quilt is not supported");
             default:
@@ -64,6 +65,7 @@ public class ModLoader {
     /**
      * Get the Intent to start the graphical installation of the mod loader.
      * This method should only be ran after the download task of the specified mod loader finishes.
+     * This method returns null if the mod loader does not require GUI installation
      * @param context the package resolving Context (can be the base context)
      * @param modInstallerJar the JAR file of the mod installer, provided by ModloaderDownloadListener after the installation
      *                        finishes.
@@ -75,13 +77,26 @@ public class ModLoader {
             case MOD_LOADER_FORGE:
                 ForgeUtils.addAutoInstallArgs(baseIntent, modInstallerJar, getVersionId());
                 return baseIntent;
-            case MOD_LOADER_FABRIC:
-                FabricUtils.addAutoInstallArgs(baseIntent, modInstallerJar, minecraftVersion, modLoaderVersion, false, false);
-                return baseIntent;
             case MOD_LOADER_QUILT:
                 throw new RuntimeException("Quilt is not supported");
+            case MOD_LOADER_FABRIC:
             default:
                 return null;
+        }
+    }
+
+    /**
+     * Check whether the mod loader this object denotes requires GUI installation
+     * @return true if mod loader requires GUI installation, false otherwise
+     */
+    public boolean requiresGuiInstallation() {
+        switch (modLoaderType) {
+            case MOD_LOADER_FORGE:
+                return true;
+            case MOD_LOADER_FABRIC:
+            case MOD_LOADER_QUILT:
+            default:
+                return false;
         }
     }
 }

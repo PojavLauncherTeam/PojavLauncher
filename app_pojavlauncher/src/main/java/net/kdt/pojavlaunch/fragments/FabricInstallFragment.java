@@ -1,49 +1,53 @@
 package net.kdt.pojavlaunch.fragments;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
-import net.kdt.pojavlaunch.JavaGUILauncherActivity;
+import net.kdt.pojavlaunch.PojavApplication;
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.modloaders.FabricDownloadTask;
 import net.kdt.pojavlaunch.modloaders.FabricUtils;
+import net.kdt.pojavlaunch.modloaders.FabricVersion;
 import net.kdt.pojavlaunch.modloaders.ModloaderDownloadListener;
 import net.kdt.pojavlaunch.modloaders.ModloaderListenerProxy;
-import net.kdt.pojavlaunch.profiles.VersionSelectorDialog;
+import net.kdt.pojavlaunch.modloaders.modpacks.SelfReferencingFuture;
 import net.kdt.pojavlaunch.progresskeeper.ProgressKeeper;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
+import java.util.ArrayList;
+import java.util.concurrent.Future;
 
-public class FabricInstallFragment extends Fragment implements AdapterView.OnItemSelectedListener, ModloaderDownloadListener, Runnable {
+public class FabricInstallFragment extends Fragment implements ModloaderDownloadListener, CompoundButton.OnCheckedChangeListener {
     public static final String TAG = "FabricInstallTarget";
     private static ModloaderListenerProxy sTaskProxy;
-    private TextView mSelectedVersionLabel;
-    private String mSelectedLoaderVersion;
-    private Spinner mLoaderVersionSpinner;
+    private Spinner mGameVersionSpinner;
+    private FabricVersion[] mGameVersionArray;
+    private Future<?> mGameVersionFuture;
     private String mSelectedGameVersion;
-    private boolean mSelectedSnapshot;
+    private Spinner mLoaderVersionSpinner;
+    private FabricVersion[] mLoaderVersionArray;
+    private Future<?> mLoaderVersionFuture;
+    private String mSelectedLoaderVersion;
     private ProgressBar mProgressBar;
     private Button mStartButton;
     private View mRetryView;
+    private CheckBox mOnlyStableCheckbox;
     public FabricInstallFragment() {
         super(R.layout.fragment_fabric_install);
     }
@@ -58,23 +62,27 @@ public class FabricInstallFragment extends Fragment implements AdapterView.OnIte
         super.onViewCreated(view, savedInstanceState);
         mStartButton = view.findViewById(R.id.fabric_installer_start_button);
         mStartButton.setOnClickListener(this::onClickStart);
-        mSelectedVersionLabel = view.findViewById(R.id.fabric_installer_version_select_label);
-        view.findViewById(R.id.fabric_installer_game_version_change).setOnClickListener(this::onClickSelect);
+        mGameVersionSpinner = view.findViewById(R.id.fabric_installer_game_ver_spinner);
+        mGameVersionSpinner.setOnItemSelectedListener(new GameVersionSelectedListener());
         mLoaderVersionSpinner = view.findViewById(R.id.fabric_installer_loader_ver_spinner);
-        mLoaderVersionSpinner.setOnItemSelectedListener(this);
+        mLoaderVersionSpinner.setOnItemSelectedListener(new LoaderVersionSelectedListener());
         mProgressBar = view.findViewById(R.id.fabric_installer_progress_bar);
         mRetryView = view.findViewById(R.id.fabric_installer_retry_layout);
+        mOnlyStableCheckbox = view.findViewById(R.id.fabric_installer_only_stable_checkbox);
+        mOnlyStableCheckbox.setOnCheckedChangeListener(this);
         view.findViewById(R.id.fabric_installer_retry_button).setOnClickListener(this::onClickRetry);
         if(sTaskProxy != null) {
             mStartButton.setEnabled(false);
             sTaskProxy.attachListener(this);
         }
-        new Thread(this).start();
+        updateGameVersions();
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        cancelFutureChecked(mGameVersionFuture);
+        cancelFutureChecked(mLoaderVersionFuture);
         if(sTaskProxy != null) {
             sTaskProxy.detachListener();
         }
@@ -86,44 +94,28 @@ public class FabricInstallFragment extends Fragment implements AdapterView.OnIte
             return;
         }
         sTaskProxy = new ModloaderListenerProxy();
-        FabricDownloadTask fabricDownloadTask = new FabricDownloadTask(sTaskProxy);
+        FabricDownloadTask fabricDownloadTask = new FabricDownloadTask(sTaskProxy, mSelectedGameVersion, mSelectedLoaderVersion, true);
         sTaskProxy.attachListener(this);
         mStartButton.setEnabled(false);
         new Thread(fabricDownloadTask).start();
     }
 
-    private void onClickSelect(View v) {
-        VersionSelectorDialog.open(v.getContext(), true, (id, snapshot)->{
-            mSelectedGameVersion = id;
-            mSelectedVersionLabel.setText(mSelectedGameVersion);
-            mSelectedSnapshot = snapshot;
-            if(mSelectedLoaderVersion != null && sTaskProxy == null) mStartButton.setEnabled(true);
-        });
-    }
-
     private void onClickRetry(View v) {
-        mLoaderVersionSpinner.setAdapter(null);
         mStartButton.setEnabled(false);
-        mProgressBar.setVisibility(View.VISIBLE);
         mRetryView.setVisibility(View.GONE);
-        new Thread(this).start();
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        Adapter adapter = adapterView.getAdapter();
-        mSelectedLoaderVersion = (String) adapter.getItem(i);
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
-        mSelectedLoaderVersion = null;
+        mLoaderVersionSpinner.setAdapter(null);
+        if(mGameVersionArray == null) {
+            mGameVersionSpinner.setAdapter(null);
+            updateGameVersions();
+            return;
+        }
+        updateLoaderVersions();
     }
 
     @Override
     public void onDownloadFinished(File downloadedFile) {
         Tools.runOnUiThread(()->{
-            Context context = requireContext();
+
             sTaskProxy.detachListener();
             sTaskProxy = null;
             mStartButton.setEnabled(true);
@@ -134,9 +126,6 @@ public class FabricInstallFragment extends Fragment implements AdapterView.OnIte
             // For some reason that amendment causes the transaction to lose its tag
             // so we cant use the tag here.
             getParentFragmentManager().popBackStackImmediate();
-            Intent intent = new Intent(context, JavaGUILauncherActivity.class);
-            FabricUtils.addAutoInstallArgs(intent, downloadedFile, mSelectedGameVersion, mSelectedLoaderVersion, mSelectedSnapshot, true);
-            context.startActivity(intent);
         });
     }
 
@@ -164,30 +153,130 @@ public class FabricInstallFragment extends Fragment implements AdapterView.OnIte
         });
     }
 
+    private void cancelFutureChecked(Future<?> future) {
+        if(future != null && !future.isCancelled()) future.cancel(true);
+    }
+
+    private void startLoading() {
+        mProgressBar.setVisibility(View.VISIBLE);
+        mStartButton.setEnabled(false);
+    }
+
+    private void stopLoading() {
+        mProgressBar.setVisibility(View.GONE);
+        // The "visibility on" is managed by the spinners
+    }
+
+    private ArrayAdapter<FabricVersion> createAdapter(FabricVersion[] fabricVersions, boolean onlyStable) {
+        ArrayList<FabricVersion> filteredVersions = new ArrayList<>(fabricVersions.length);
+        for(FabricVersion fabricVersion : fabricVersions) {
+            if(!onlyStable || fabricVersion.stable) filteredVersions.add(fabricVersion);
+        }
+        filteredVersions.trimToSize();
+        return new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_dropdown_item, filteredVersions);
+    }
+
+    private void onException(Future<?> myFuture, Exception e) {
+        Tools.runOnUiThread(()->{
+            if(myFuture.isCancelled()) return;
+            stopLoading();
+            Tools.showError(requireContext(), e);
+            mRetryView.setVisibility(View.VISIBLE);
+        });
+    }
+
     @Override
-    public void run() {
-        try {
-            List<String> mLoaderVersions = FabricUtils.downloadLoaderVersionList(false);
-            if (mLoaderVersions != null) {
-                Tools.runOnUiThread(()->{
-                    Context context = getContext();
-                    if(context == null) return;
-                    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(context, R.layout.support_simple_spinner_dropdown_item, mLoaderVersions);
-                    mLoaderVersionSpinner.setAdapter(arrayAdapter);
-                    mProgressBar.setVisibility(View.GONE);
-                });
-            }else{
-                Tools.runOnUiThread(()-> {
-                    mRetryView.setVisibility(View.VISIBLE);
-                    mProgressBar.setVisibility(View.GONE);
-                });
+    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+        updateGameSpinner();
+        updateLoaderSpinner();
+    }
+
+    class LoaderVersionSelectedListener implements AdapterView.OnItemSelectedListener {
+
+        @Override
+        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+            mSelectedLoaderVersion = ((FabricVersion) adapterView.getAdapter().getItem(i)).version;
+            mStartButton.setEnabled(mSelectedGameVersion != null);
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> adapterView) {
+            mSelectedLoaderVersion = null;
+            mStartButton.setEnabled(false);
+        }
+    }
+
+    class LoadLoaderVersionsTask implements SelfReferencingFuture.FutureInterface {
+        @Override
+        public void run(Future<?> myFuture) {
+            Log.i("LoadLoaderVersions", "Starting...");
+            try {
+                mLoaderVersionArray = FabricUtils.downloadLoaderVersions(mSelectedGameVersion);
+                onFinished(myFuture);
+            }catch (IOException e) {
+                onException(myFuture, e);
             }
-        }catch (IOException e) {
-            Tools.runOnUiThread(()-> {
-                if(getContext() != null) Tools.showError(getContext(), e);
-                mRetryView.setVisibility(View.VISIBLE);
-                mProgressBar.setVisibility(View.GONE);
+        }
+        private void onFinished(Future<?> myFuture) {
+            Tools.runOnUiThread(()->{
+                if(myFuture.isCancelled()) return;
+                stopLoading();
+                updateLoaderSpinner();
             });
         }
+    }
+
+    private void updateLoaderVersions() {
+        startLoading();
+        mLoaderVersionFuture = new SelfReferencingFuture(new LoadLoaderVersionsTask()).startOnExecutor(PojavApplication.sExecutorService);
+    }
+
+    private void updateLoaderSpinner() {
+        mLoaderVersionSpinner.setAdapter(createAdapter(mLoaderVersionArray, mOnlyStableCheckbox.isChecked()));
+    }
+
+    class GameVersionSelectedListener implements AdapterView.OnItemSelectedListener {
+        @Override
+        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+            mSelectedGameVersion = ((FabricVersion) adapterView.getAdapter().getItem(i)).version;
+            cancelFutureChecked(mLoaderVersionFuture);
+            updateLoaderVersions();
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> adapterView) {
+            mSelectedGameVersion = null;
+            if(mLoaderVersionFuture != null) mLoaderVersionFuture.cancel(true);
+            adapterView.setAdapter(null);
+        }
+
+    }
+
+    class LoadGameVersionsTask implements SelfReferencingFuture.FutureInterface {
+        @Override
+        public void run(Future<?> myFuture) {
+            try {
+                mGameVersionArray = FabricUtils.downloadGameVersions();
+                onFinished(myFuture);
+            }catch (IOException e) {
+                onException(myFuture, e);
+            }
+        }
+        private void onFinished(Future<?> myFuture) {
+            Tools.runOnUiThread(()->{
+                if(myFuture.isCancelled()) return;
+                stopLoading();
+                updateGameSpinner();
+            });
+        }
+    }
+
+    private void updateGameVersions() {
+        startLoading();
+        mGameVersionFuture = new SelfReferencingFuture(new LoadGameVersionsTask()).startOnExecutor(PojavApplication.sExecutorService);
+    }
+
+    private void updateGameSpinner() {
+        mGameVersionSpinner.setAdapter(createAdapter(mGameVersionArray, mOnlyStableCheckbox.isChecked()));
     }
 }
