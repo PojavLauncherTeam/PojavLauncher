@@ -93,14 +93,25 @@
         app:layout_constraintEnd_toEndOf="@+id/fabric_installer_loader_ver_spinner"
         app:layout_constraintTop_toTopOf="@+id/fabric_installer_loader_ver_spinner" />
 
+
+    <TextView
+        android:id="@+id/fabric_installer_label_options"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="@string/mcl_options"
+        app:layout_constraintBottom_toTopOf="@+id/fabric_installer_only_stable_checkbox"
+        app:layout_constraintStart_toStartOf="@+id/fabric_installer_only_stable_checkbox" />
     <CheckBox
         android:id="@+id/fabric_installer_only_stable_checkbox"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/fabric_dl_only_stable"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/fabric_installer_retry_layout"/>
+        android:layout_marginTop="@dimen/padding_extra_large"
+        android:minHeight="@dimen/_30sdp"
+        android:checked="true"
+        app:layout_constraintStart_toStartOf="@+id/fabric_installer_loader_ver_spinner"
+        app:layout_constraintTop_toBottomOf="@+id/fabric_installer_loader_ver_spinner" />
 
     <LinearLayout
         android:id="@+id/fabric_installer_retry_layout"
