@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public class LauncherProfiles {
@@ -60,6 +61,25 @@ public class LauncherProfiles {
     }
 
     /**
+     * Insert a new profile into the profile map
+     * @param minecraftProfile the profile to insert
+     */
+    public static void insertMinecraftProfile(MinecraftProfile minecraftProfile) {
+        mainProfileJson.profiles.put(getFreeProfileKey(), minecraftProfile);
+    }
+
+    /**
+     * Pick an unused normalized key to store a new profile with
+     * @return an unused key
+     */
+    public static String getFreeProfileKey() {
+        Map<String, MinecraftProfile> profileMap = mainProfileJson.profiles;
+        String freeKey = UUID.randomUUID().toString();
+        while(profileMap.get(freeKey) != null) freeKey = UUID.randomUUID().toString();
+        return freeKey;
+    }
+
+    /**
      * For all keys to be UUIDs, effectively isolating profile created by installers
      * This avoids certain profiles to be erased by the installer
      * @return Whether some profiles have been normalized
@@ -79,13 +99,9 @@ public class LauncherProfiles {
         }
 
         // Swap the new keys
-        for(String profileKey: keys){
-            String uuid = UUID.randomUUID().toString();
-            while(launcherProfiles.profiles.containsKey(uuid)) {
-                uuid = UUID.randomUUID().toString();
-            }
-
-            launcherProfiles.profiles.put(uuid, launcherProfiles.profiles.get(profileKey));
+        for(String profileKey : keys){
+            MinecraftProfile currentProfile = launcherProfiles.profiles.get(profileKey);
+            insertMinecraftProfile(currentProfile);
             launcherProfiles.profiles.remove(profileKey);
             hasNormalized = true;
         }

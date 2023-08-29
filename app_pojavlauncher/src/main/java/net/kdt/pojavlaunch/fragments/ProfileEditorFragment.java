@@ -31,7 +31,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.UUID;
 
 public class ProfileEditorFragment extends Fragment {
     public static final String TAG = "ProfileEditorFragment";
@@ -163,11 +162,7 @@ public class ProfileEditorFragment extends Fragment {
             mProfileKey = profile;
         }else{
             minecraftProfile = MinecraftProfile.createTemplate();
-            String uuid = UUID.randomUUID().toString();
-            while(LauncherProfiles.mainProfileJson.profiles.containsKey(uuid)) {
-                uuid = UUID.randomUUID().toString();
-            }
-            mProfileKey = uuid;
+            mProfileKey = LauncherProfiles.getFreeProfileKey();
         }
         return minecraftProfile;
     }
