@@ -14,8 +14,6 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Map;
-import java.util.UUID;
 
 public class FabricDownloadTask implements Runnable, Tools.DownloaderFeedback{
     private final ModloaderDownloadListener mModloaderDownloadListener;
@@ -61,10 +59,7 @@ public class FabricDownloadTask implements Runnable, Tools.DownloaderFeedback{
             MinecraftProfile fabricProfile = new MinecraftProfile();
             fabricProfile.lastVersionId = versionId;
             fabricProfile.name = "Minecraft " + mGameVersion + " with Fabric " + mLoaderVersion;
-            Map<String, MinecraftProfile> profiles = LauncherProfiles.mainProfileJson.profiles;
-            String uuid = UUID.randomUUID().toString();
-            while (profiles.get(uuid) != null) uuid = UUID.randomUUID().toString();
-            profiles.put(uuid, fabricProfile);
+            LauncherProfiles.insertMinecraftProfile(fabricProfile);
             LauncherProfiles.write();
         }
         return true;
