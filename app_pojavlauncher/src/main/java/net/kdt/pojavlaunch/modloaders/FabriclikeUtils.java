@@ -1,7 +1,5 @@
 package net.kdt.pojavlaunch.modloaders;
 
-import android.content.Intent;
-
 import com.google.gson.JsonSyntaxException;
 
 import net.kdt.pojavlaunch.Tools;
@@ -11,31 +9,44 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
-public class FabricUtils {
-    private static final String FABRIC_LOADER_METADATA_URL = "https://meta.fabricmc.net/v2/versions/loader/%s";
-    private static final String FABRIC_GAME_METADATA_URL = "https://meta.fabricmc.net/v2/versions/game";
+public class FabriclikeUtils {
 
-    private static final String FABRIC_JSON_DOWNLOAD_URL = "https://meta.fabricmc.net/v2/versions/loader/%s/%s/profile/json";
+    public static final FabriclikeUtils FABRIC_UTILS = new FabriclikeUtils("https://meta.fabricmc.net/v2", "fabric", "Fabric");
+    public static final FabriclikeUtils QUILT_UTILS = new FabriclikeUtils("https://meta.quiltmc.org/v3", "quilt", "Quilt");
 
-    public static FabricVersion[] downloadGameVersions() throws IOException{
+    private static final String LOADER_METADATA_URL = "%s/versions/loader/%s";
+    private static final String GAME_METADATA_URL = "%s/versions/game";
+
+    private static final String JSON_DOWNLOAD_URL = "%s/versions/loader/%s/%s/profile/json";
+
+    private final String mApiUrl;
+    private final String mCachePrefix;
+    private final String mName;
+
+    private FabriclikeUtils(String mApiUrl, String cachePrefix, String mName) {
+        this.mApiUrl = mApiUrl;
+        this.mCachePrefix = cachePrefix;
+        this.mName = mName;
+    }
+
+    public FabricVersion[] downloadGameVersions() throws IOException{
         try {
-            return DownloadUtils.downloadStringCached(FABRIC_GAME_METADATA_URL, "fabric_game_versions",
-                    FabricUtils::deserializeRawVersions
+            return DownloadUtils.downloadStringCached(String.format(GAME_METADATA_URL, mApiUrl), mCachePrefix+"_game_versions",
+                    FabriclikeUtils::deserializeRawVersions
             );
         }catch (DownloadUtils.ParseException ignored) {}
         return null;
     }
 
-    public static FabricVersion[] downloadLoaderVersions(String gameVersion) throws IOException{
+    public FabricVersion[] downloadLoaderVersions(String gameVersion) throws IOException{
         try {
             String urlEncodedGameVersion = URLEncoder.encode(gameVersion, "UTF-8");
-            return DownloadUtils.downloadStringCached(String.format(FABRIC_LOADER_METADATA_URL, urlEncodedGameVersion),
-                    "fabric_loader_versions."+urlEncodedGameVersion,
+            return DownloadUtils.downloadStringCached(String.format(LOADER_METADATA_URL, mApiUrl, urlEncodedGameVersion),
+                    mCachePrefix+"_loader_versions."+urlEncodedGameVersion,
                     (input)->{ try {
                         return deserializeLoaderVersions(input);
                     }catch (JSONException e) {
@@ -48,14 +59,18 @@ public class FabricUtils {
         return null;
     }
 
-    public static String createJsonDownloadUrl(String gameVersion, String loaderVersion) {
+    public String createJsonDownloadUrl(String gameVersion, String loaderVersion) {
         try {
             gameVersion = URLEncoder.encode(gameVersion, "UTF-8");
             loaderVersion = URLEncoder.encode(loaderVersion, "UTF-8");
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
-        return String.format(FABRIC_JSON_DOWNLOAD_URL, gameVersion, loaderVersion);
+        return String.format(JSON_DOWNLOAD_URL, mApiUrl, gameVersion, loaderVersion);
+    }
+
+    public String getName() {
+        return mName;
     }
 
     private static FabricVersion[] deserializeLoaderVersions(String input) throws JSONException {
@@ -65,7 +80,12 @@ public class FabricUtils {
             JSONObject jsonObject = jsonArray.getJSONObject(i).getJSONObject("loader");
             FabricVersion fabricVersion = new FabricVersion();
             fabricVersion.version = jsonObject.getString("version");
-            fabricVersion.stable = jsonObject.getBoolean("stable");
+            //Quilt has a skill issue and does not say which versions are stable or not
+            if(jsonObject.has("stable")) {
+                fabricVersion.stable = jsonObject.getBoolean("stable");
+            } else {
+                fabricVersion.stable = !fabricVersion.version.contains("beta");
+            }
             fabricVersions[i] = fabricVersion;
         }
         return fabricVersions;
@@ -78,16 +98,5 @@ public class FabricUtils {
             e.printStackTrace();
             throw new DownloadUtils.ParseException(null);
         }
-    }
-
-    public static void addAutoInstallArgs(Intent intent, File modInstalllerJar,
-                                          String gameVersion, String loaderVersion,
-                                          boolean isSnapshot, boolean createProfile) {
-        intent.putExtra("javaArgs", "-jar " + modInstalllerJar.getAbsolutePath() + " client -dir "+ Tools.DIR_GAME_NEW
-        + " -mcversion "+gameVersion +" -loader "+loaderVersion +
-                (isSnapshot ? " -snapshot" : "") +
-                (createProfile ? "" : " -noprofile"));
-        intent.putExtra("openLogOutput", true);
-
     }
 }
