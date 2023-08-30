@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 
 import net.kdt.pojavlaunch.JavaGUILauncherActivity;
-import net.kdt.pojavlaunch.modloaders.FabricDownloadTask;
-import net.kdt.pojavlaunch.modloaders.FabricUtils;
+import net.kdt.pojavlaunch.modloaders.FabriclikeDownloadTask;
+import net.kdt.pojavlaunch.modloaders.FabriclikeUtils;
 import net.kdt.pojavlaunch.modloaders.ForgeDownloadTask;
 import net.kdt.pojavlaunch.modloaders.ForgeUtils;
 import net.kdt.pojavlaunch.modloaders.ModloaderDownloadListener;
@@ -37,7 +37,7 @@ public class ModLoader {
             case MOD_LOADER_FABRIC:
                 return "fabric-loader-"+modLoaderVersion+"-"+minecraftVersion;
             case MOD_LOADER_QUILT:
-                throw new RuntimeException("Quilt is not supported");
+                return "quilt-loader-"+modLoaderVersion+"-"+minecraftVersion;
             default:
                 return null;
         }
@@ -54,9 +54,9 @@ public class ModLoader {
             case MOD_LOADER_FORGE:
                 return new ForgeDownloadTask(listener, minecraftVersion, modLoaderVersion);
             case MOD_LOADER_FABRIC:
-                return new FabricDownloadTask(listener, minecraftVersion, modLoaderVersion, false);
+                return createFabriclikeTask(listener, FabriclikeUtils.FABRIC_UTILS);
             case MOD_LOADER_QUILT:
-                throw new RuntimeException("Quilt is not supported");
+                return createFabriclikeTask(listener, FabriclikeUtils.QUILT_UTILS);
             default:
                 return null;
         }
@@ -98,5 +98,9 @@ public class ModLoader {
             default:
                 return false;
         }
+    }
+
+    private FabriclikeDownloadTask createFabriclikeTask(ModloaderDownloadListener modloaderDownloadListener, FabriclikeUtils utils) {
+        return new FabriclikeDownloadTask(modloaderDownloadListener, utils, minecraftVersion, modLoaderVersion, false);
     }
 }

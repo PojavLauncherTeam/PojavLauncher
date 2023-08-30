@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.kdt.DefocusableScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.kdt.DefocusableScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_app"
-    >
+    android:background="@color/background_app">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -88,9 +85,15 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/padding_large"
             android:layout_marginTop="@dimen/padding_large"
-            android:text="@string/modloader_dl_install_fabric"
-            app:layout_constraintTop_toBottomOf="@+id/view_modded"
-            tools:layout_editor_absoluteX="50dp" />
+            android:text="@string/modloader_dl_install_fabric" />
+
+        <com.kdt.mcgui.MineButton
+            android:id="@+id/modded_profile_quilt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/padding_large"
+            android:layout_marginTop="@dimen/padding_large"
+            android:text="@string/modloader_dl_install_quilt" />
 
         <com.kdt.mcgui.MineButton
             android:id="@+id/modded_profile_forge"
@@ -98,10 +101,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/padding_large"
             android:layout_marginTop="@dimen/padding_large"
-
-            android:text="@string/modloader_dl_install_forge"
-
-            app:layout_constraintTop_toBottomOf="@+id/modded_profile_fabric" />
+            android:text="@string/modloader_dl_install_forge" />
 
         <com.kdt.mcgui.MineButton
             android:id="@+id/modded_profile_modpack"

@@ -15,13 +15,15 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.IOException;
 
-public class FabricDownloadTask implements Runnable, Tools.DownloaderFeedback{
+public class FabriclikeDownloadTask implements Runnable, Tools.DownloaderFeedback{
     private final ModloaderDownloadListener mModloaderDownloadListener;
+    private final FabriclikeUtils mUtils;
     private final String mGameVersion;
     private final String mLoaderVersion;
     private final boolean mCreateProfile;
-    public FabricDownloadTask(ModloaderDownloadListener modloaderDownloadListener, String mGameVersion, String mLoaderVersion, boolean mCreateProfile) {
+    public FabriclikeDownloadTask(ModloaderDownloadListener modloaderDownloadListener, FabriclikeUtils utils, String mGameVersion, String mLoaderVersion, boolean mCreateProfile) {
         this.mModloaderDownloadListener = modloaderDownloadListener;
+        this.mUtils = utils;
         this.mGameVersion = mGameVersion;
         this.mLoaderVersion = mLoaderVersion;
         this.mCreateProfile = mCreateProfile;
@@ -40,7 +42,7 @@ public class FabricDownloadTask implements Runnable, Tools.DownloaderFeedback{
     }
 
     private boolean runCatching() throws IOException{
-        String fabricJson = DownloadUtils.downloadString(FabricUtils.createJsonDownloadUrl(mGameVersion, mLoaderVersion));
+        String fabricJson = DownloadUtils.downloadString(mUtils.createJsonDownloadUrl(mGameVersion, mLoaderVersion));
         String versionId;
         try {
             JSONObject fabricJsonObject = new JSONObject(fabricJson);
@@ -58,7 +60,7 @@ public class FabricDownloadTask implements Runnable, Tools.DownloaderFeedback{
             LauncherProfiles.load();
             MinecraftProfile fabricProfile = new MinecraftProfile();
             fabricProfile.lastVersionId = versionId;
-            fabricProfile.name = "Minecraft " + mGameVersion + " with Fabric " + mLoaderVersion;
+            fabricProfile.name = "Minecraft " + mGameVersion + " with " + mUtils.getName()+ " " + mLoaderVersion;
             LauncherProfiles.insertMinecraftProfile(fabricProfile);
             LauncherProfiles.write();
         }
@@ -68,6 +70,6 @@ public class FabricDownloadTask implements Runnable, Tools.DownloaderFeedback{
     @Override
     public void updateProgress(int curr, int max) {
         int progress100 = (int)(((float)curr / (float)max)*100f);
-        ProgressKeeper.submitProgress(ProgressLayout.INSTALL_MODPACK, progress100, R.string.fabric_dl_progress);
+        ProgressKeeper.submitProgress(ProgressLayout.INSTALL_MODPACK, progress100, R.string.fabric_dl_progress, mUtils.getName());
     }
 }
