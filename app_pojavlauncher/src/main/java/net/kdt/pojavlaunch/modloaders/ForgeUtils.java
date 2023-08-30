@@ -29,36 +29,14 @@ public class ForgeUtils {
     private static final String NEOFORGE_METADATA_URL = "https://maven.neoforged.net/api/maven/versions/releases/net/neoforged/forge";
     private static final String NEOFORGE_INSTALLER_URL = "https://maven.neoforged.net/net/neoforged/forge/%1$s/forge-%1$s-installer.jar";
     public static List<String> downloadForgeVersions() throws IOException {
-        SAXParser saxParser;
-        try {
-            SAXParserFactory parserFactory = SAXParserFactory.newInstance();
-            saxParser = parserFactory.newSAXParser();
-        }catch (SAXException | ParserConfigurationException e) {
-            e.printStackTrace();
-            // if we cant make a parser we might as well not even try to parse anything
-            return null;
-        }
-        try {
-            //of_test();
-            return DownloadUtils.downloadStringCached(FORGE_METADATA_URL, "forge_versions", input -> {
-                try {
-                    ForgeVersionListHandler handler = new ForgeVersionListHandler(ForgeForks.FORGE);
-                    saxParser.parse(new InputSource(new StringReader(input)), handler);
-                    return handler.getVersions();
-                    // IOException is present here StringReader throws it only if the parser called close()
-                    // sooner than needed, which is a parser issue and not an I/O one
-                }catch (SAXException | IOException e) {
-                    throw new DownloadUtils.ParseException(e);
-                }
-            });
-        }catch (DownloadUtils.ParseException e) {
-            e.printStackTrace();
-            return null;
-        }
-
+        return downloadForgeVersions(ForgeForks.FORGE, FORGE_METADATA_URL, "forge_versions");
     }
 
     public static List<String> downloadNeoForgeVersions() throws IOException {
+        return downloadForgeVersions(ForgeForks.NEOFORGE, NEOFORGE_METADATA_URL, "neoforge_versions");
+    }
+
+    public static List<String> downloadForgeVersions(ForgeForks fork, String metadataUrl, String cache_name) {
         SAXParser saxParser;
         try {
             SAXParserFactory parserFactory = SAXParserFactory.newInstance();
@@ -70,11 +48,18 @@ public class ForgeUtils {
         }
         try {
             //of_test();
-            return DownloadUtils.downloadStringCached(NEOFORGE_METADATA_URL, "neoforge_versions", input -> {
-                try {
+            return DownloadUtils.downloadStringCached(metadataUrl, cache_name, input -> {
+                String xml;
+                if(fork == ForgeForks.NEOFORGE) {
+                    // NeoForge maven uses JSON format, we convert back to XML
                     input = input.replace("versions", "version");
-                    String xml = U.jsonToXml(input);
-                    ForgeVersionListHandler handler = new ForgeVersionListHandler(ForgeForks.NEOFORGE);
+                    xml = U.jsonToXml(input);
+                } else {
+                    // Forge maven already uses XML
+                    xml = input;
+                }
+                try {
+                    ForgeVersionListHandler handler = new ForgeVersionListHandler(fork);
                     saxParser.parse(new InputSource(new StringReader(xml)), handler);
                     return handler.getVersions();
                     // IOException is present here StringReader throws it only if the parser called close()
@@ -83,11 +68,10 @@ public class ForgeUtils {
                     throw new DownloadUtils.ParseException(e);
                 }
             });
-        }catch (DownloadUtils.ParseException e) {
+        } catch (DownloadUtils.ParseException | IOException e) {
             e.printStackTrace();
             return null;
         }
-
     }
 
     public static List<String> downloadAllForgeVersions() throws IOException {
