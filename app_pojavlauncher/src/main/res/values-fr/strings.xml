@@ -11,7 +11,7 @@
     <string name="login_online_password_hint">Mot de passe</string>
     <string name="login_online_check_keeplogin">Rester connecté</string>
     <string name="login_online_login_label">Se connecter</string>
-    <string name="login_error_invalid_username">Nom d\'utilisateur invalide. Le nom d\'utilisateur doit être compris entre 3 et 16 caractères, ne doit contenir que A-Z, a-z, 0-9 et underscore.</string>
+    <string name="login_error_invalid_username">Nom d\'utilisateur invalide. Le nom d\'utilisateur doit comprendre entre 3 et 16 caractères et ne devrait contenir que A-Z, a-z, 0-9 et underscore.</string>
     <string name="login_error_exist_username">Ce nom d\'utilisateur est déjà pris</string>
     <string name="login_microsoft">Connexion Microsoft</string>
     <string name="login_select_account">Choisir un compte</string>
@@ -178,6 +178,7 @@
     <string name="customctrl_keycombine_shift">Maj</string>
     <string name="customctrl_addbutton">Ajouter un bouton</string>
     <string name="customctrl_addbutton_drawer">Ajouter un tiroir à boutons</string>
+    <string name="customctrl_addbutton_joystick">Ajouter un joystick</string>
     <string name="customctrl_addsubbutton">Ajouter un sous-bouton</string>
     <string name="customctrl_add_subbutton_message">Le sous-bouton n°%d a été ajouté !</string>
     <string name="customctrl_selectdefault">Choisir json contrôle par défaut</string>
@@ -209,6 +210,7 @@
     <string name="mcl_setting_subtitle_mousespeed">Change la vitesse de la souris logicielle</string>
     <string name="customctrl_passthru">Souris pass-thru</string>
     <string name="customctrl_swipeable">Balayable</string>
+    <string name="customctrl_forward_lock">Verrouillage vers l\'avant</string>
     <string name="customctrl_rounded">Arrondi</string>
     <string name="memory_warning_msg">La quantité actuelle de RAM libre (%d) est inférieure à la RAM allouée (%d), ce qui peut entraîner des plantages. Changez l\'allocation si le jeu plante.</string>
     <string name="mcl_memory_allocation">Allocation de mémoire</string>
@@ -268,6 +270,7 @@
     <string name="preference_gyro_invert_x_axis_description">Inverser l\'axe horizontal</string>
     <string name="preference_gyro_invert_y_axis_description">Inverser l\'axe vertical</string>
     <string name="preference_gyro_smoothing_title">Activer le lissage du gyroscope</string>
+    <string name="preference_gyro_smoothing_description">Réduire le tremblement en échange de latence.</string>
     <string name="preference_back_title">Retour au dernier écran</string>
     <string name="gles_hack_none">Ne pas rétrécir les textures</string>
     <string name="gles_hack_always">Divise toutes les textures par 2</string>
@@ -340,6 +343,7 @@
     <string name="preference_force_big_core_desc">Force le thread de rendu Minecraft à s\'exécuter sur le cœur avec la fréquence max la plus élevée</string>
     <string name="version_select_hint">Sélectionnez une version</string>
     <string name="forge_dl_progress">Téléchargement de l\'installateur de %s</string>
+    <string name="forge_dl_searching">Recherche du numéro de version Forge</string>
     <string name="modloader_dl_failed_to_load_list">Échec du chargement de la liste des versions !</string>
     <string name="forge_dl_no_installer">Désolé, mais cette version de Forge n\'a pas d\'installateur, qui n\'est pas encore supportée.</string>
     <string name="forge_dl_select_version">Sélectionner une version de Forge</string>
@@ -358,5 +362,24 @@
     <string name="of_dl_failed_to_scrape">Échec de la collecte des données pour l\'installation d\'OptiFine</string>
     <string name="of_dl_progress">Téléchargement de %s</string>
     <string name="create_profile_optifine">Créer un profil OptiFine</string>
+    <string name="preference_gyro_damper_window_title">Temps de lissage</string>
+    <string name="preference_gyro_damper_window_description">Réduire le tremblement en échange de latence. 0 pour le désactiver</string>
+    <string name="hint_search_modpack">Rechercher des modpacks</string>
     <string name="generic_install">Installer</string>
+    <string name="generic_apply">Appliquer</string>
+    <string name="search_modpack_no_result">Aucun modpack trouvé</string>
+    <string name="search_modpack_error">Échec de la recherche des modpacks</string>
+    <string name="search_modpack_download_error">Échec du téléchargement des métadonnées du modpack</string>
+    <string name="modpack_download_downloading_metadata">Téléchargement des métadonnées du modpack (%.2f Mo / %.2f Mo)</string>
+    <string name="modpack_download_downloading_mods">Téléchargement des mods (%.2f MB / %.2f MB)</string>
+    <string name="modpack_download_downloading_mods_fc">Téléchargement des mods (Fichier %d sur %d)</string>
+    <string name="modpack_download_applying_overrides">Application des remplacements (%d/%d)</string>
+    <string name="modpack_install_notification_title">Installeur Pojav de Modpack</string>
+    <string name="modpack_install_notification_success">Cliquez ici pour terminer l\'installation du modpack</string>
+    <string name="modpack_install_notification_data_not_available">Échec du téléchargement de l\'information du chargeur de mod</string>
+    <string name="modpack_install_modloader_download_failed">Impossible de télécharger les fichiers du chargeur de mod</string>
+    <string name="modpack_install_download_failed">Échec du téléchargement des fichiers de modpack</string>
+    <string name="modpack_install_button">Créer un profil de modpack</string>
+    <string name="notif_error_occured">Une erreur est survenue</string>
+    <string name="notif_error_occured_desc">Cliquez ici pour obtenir plus de détails</string>
 </resources>
