@@ -78,7 +78,6 @@ public class ModLoader {
                 ForgeUtils.addAutoInstallArgs(baseIntent, modInstallerJar, getVersionId());
                 return baseIntent;
             case MOD_LOADER_QUILT:
-                throw new RuntimeException("Quilt is not supported");
             case MOD_LOADER_FABRIC:
             default:
                 return null;
