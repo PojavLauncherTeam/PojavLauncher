@@ -2,6 +2,9 @@ package net.kdt.pojavlaunch.modloaders;
 
 import androidx.annotation.NonNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ForgeVersion {
     String versionString;
     ForgeForks fork;

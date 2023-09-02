@@ -12,17 +12,18 @@ import java.util.List;
 
 public class ForgeVersionListAdapter extends BaseExpandableListAdapter implements ExpandableListAdapter {
     private final List<String> mGameVersions;
-    private final List<List<String>> mForgeVersions;
+    private final List<List<ForgeVersion>> mForgeVersions;
     private final LayoutInflater mLayoutInflater;
 
-    public ForgeVersionListAdapter(List<String> forgeVersions, LayoutInflater layoutInflater) {
+    public ForgeVersionListAdapter(List<ForgeVersion> forgeVersions, LayoutInflater layoutInflater) {
         this.mLayoutInflater = layoutInflater;
         mGameVersions = new ArrayList<>();
         mForgeVersions = new ArrayList<>();
-        for(String version : forgeVersions) {
+        for(ForgeVersion forgeVersion : forgeVersions) {
+            String version = forgeVersion.toString();
             int dashIndex = version.indexOf("-");
             String gameVersion = version.substring(0, dashIndex);
-            List<String> versionList;
+            List<ForgeVersion> versionList;
             int gameVersionIndex = mGameVersions.indexOf(gameVersion);
             if(gameVersionIndex != -1) versionList = mForgeVersions.get(gameVersionIndex);
             else {
@@ -30,7 +31,7 @@ public class ForgeVersionListAdapter extends BaseExpandableListAdapter implement
                 mGameVersions.add(gameVersion);
                 mForgeVersions.add(versionList);
             }
-            versionList.add(version);
+            versionList.add(forgeVersion);
         }
     }
 
@@ -83,7 +84,7 @@ public class ForgeVersionListAdapter extends BaseExpandableListAdapter implement
     public View getChildView(int i, int i1, boolean b, View convertView, ViewGroup viewGroup) {
         if(convertView == null)
             convertView = mLayoutInflater.inflate(android.R.layout.simple_expandable_list_item_1, viewGroup, false);
-        ((TextView) convertView).setText(getForgeVersion(i, i1));
+        ((TextView) convertView).setText(getForgeVersion(i, i1).toString());
         return convertView;
     }
 
@@ -91,7 +92,7 @@ public class ForgeVersionListAdapter extends BaseExpandableListAdapter implement
         return mGameVersions.get(i);
     }
 
-    private String getForgeVersion(int i, int i1){
+    private ForgeVersion getForgeVersion(int i, int i1){
         return mForgeVersions.get(i).get(i1);
     }
 
