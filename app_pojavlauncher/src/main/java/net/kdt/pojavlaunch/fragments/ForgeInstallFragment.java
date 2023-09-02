@@ -12,6 +12,7 @@ import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.modloaders.ForgeDownloadTask;
 import net.kdt.pojavlaunch.modloaders.ForgeUtils;
+import net.kdt.pojavlaunch.modloaders.ForgeVersion;
 import net.kdt.pojavlaunch.modloaders.ForgeVersionListAdapter;
 import net.kdt.pojavlaunch.modloaders.ModloaderListenerProxy;
 
@@ -49,7 +50,7 @@ public class ForgeInstallFragment extends ModVersionListFragment<List<String>> {
 
     @Override
     public List<String> loadVersionList() throws IOException {
-        return ForgeUtils.downloadAllForgeVersions();
+        return ForgeUtils.downloadAllForgeVersionsAsStrings();
     }
 
     @Override

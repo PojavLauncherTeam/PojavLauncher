@@ -15,7 +15,9 @@ import com.github.underscore.U;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -28,15 +30,15 @@ public class ForgeUtils {
     private static final String FORGE_INSTALLER_URL = "https://maven.minecraftforge.net/net/minecraftforge/forge/%1$s/forge-%1$s-installer.jar";
     private static final String NEOFORGE_METADATA_URL = "https://maven.neoforged.net/api/maven/versions/releases/net/neoforged/forge";
     private static final String NEOFORGE_INSTALLER_URL = "https://maven.neoforged.net/net/neoforged/forge/%1$s/forge-%1$s-installer.jar";
-    public static List<String> downloadForgeVersions() throws IOException {
+    public static List<ForgeVersion> downloadForgeVersions() throws IOException {
         return downloadForgeVersions(ForgeForks.FORGE, FORGE_METADATA_URL, "forge_versions");
     }
 
-    public static List<String> downloadNeoForgeVersions() throws IOException {
+    public static List<ForgeVersion> downloadNeoForgeVersions() throws IOException {
         return downloadForgeVersions(ForgeForks.NEOFORGE, NEOFORGE_METADATA_URL, "neoforge_versions");
     }
 
-    public static List<String> downloadForgeVersions(ForgeForks fork, String metadataUrl, String cache_name) {
+    public static List<ForgeVersion> downloadForgeVersions(ForgeForks fork, String metadataUrl, String cache_name) {
         SAXParser saxParser;
         try {
             SAXParserFactory parserFactory = SAXParserFactory.newInstance();
@@ -74,11 +76,20 @@ public class ForgeUtils {
         }
     }
 
-    public static List<String> downloadAllForgeVersions() throws IOException {
-        List<String> forgeVersionList = downloadForgeVersions();
-        List<String> neoforgeVersionList = downloadNeoForgeVersions();
+    public static List<ForgeVersion> downloadAllForgeVersions() throws IOException {
+        List<ForgeVersion> forgeVersionList = downloadForgeVersions();
+        List<ForgeVersion> neoforgeVersionList = downloadNeoForgeVersions();
         if (forgeVersionList != null && neoforgeVersionList != null) forgeVersionList.addAll(neoforgeVersionList);
         return forgeVersionList;
+    }
+
+    public static List<String> downloadAllForgeVersionsAsStrings() throws IOException {
+        List<ForgeVersion> list = downloadAllForgeVersions();
+        List<String> versionList = new ArrayList<>();
+        for (ForgeVersion version : list) {
+            versionList.add(version.toString());
+        }
+        return versionList;
     }
 
     public static String getInstallerUrl(String version) {

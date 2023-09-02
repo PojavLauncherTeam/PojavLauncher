@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ForgeVersionListHandler extends DefaultHandler {
-    private List<String> mForgeVersions;
+    private List<ForgeVersion> mForgeVersions;
     private StringBuilder mCurrentVersion = null;
     private final ForgeForks mForgeFork;
 
@@ -40,11 +40,11 @@ public class ForgeVersionListHandler extends DefaultHandler {
     public void endElement(String uri, String localName, String qName) throws SAXException {
         if (qName.equals("version")) {
             String version = mCurrentVersion.toString();
-            mForgeVersions.add(mForgeFork == ForgeForks.NEOFORGE ? version + " (NeoForge)" : version);
+            mForgeVersions.add(new ForgeVersion(version, mForgeFork));
             mCurrentVersion = null;
         }
     }
-    public List<String> getVersions() {
+    public List<ForgeVersion> getVersions() {
         return mForgeVersions;
     }
 }

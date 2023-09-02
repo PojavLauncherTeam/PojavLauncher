@@ -74,7 +74,7 @@ public class ForgeDownloadTask implements Runnable, Tools.DownloaderFeedback {
     }
 
     public boolean findVersion() throws IOException {
-        List<String> forgeVersions = ForgeUtils.downloadAllForgeVersions();
+        List<String> forgeVersions = ForgeUtils.downloadAllForgeVersionsAsStrings();
         if(forgeVersions == null) return false;
         String versionStart = mGameVersion+"-"+mLoaderVersion;
         for(String versionName : forgeVersions) {
