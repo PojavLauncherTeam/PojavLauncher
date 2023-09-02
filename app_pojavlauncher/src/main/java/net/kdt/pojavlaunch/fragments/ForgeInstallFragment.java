@@ -11,6 +11,7 @@ import net.kdt.pojavlaunch.JavaGUILauncherActivity;
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.modloaders.ForgeDownloadTask;
 import net.kdt.pojavlaunch.modloaders.ForgeUtils;
+import net.kdt.pojavlaunch.modloaders.ForgeVersion;
 import net.kdt.pojavlaunch.modloaders.ForgeVersionListAdapter;
 import net.kdt.pojavlaunch.modloaders.ModloaderListenerProxy;
 
@@ -58,7 +59,7 @@ public class ForgeInstallFragment extends ModVersionListFragment<List<String>> {
 
     @Override
     public Runnable createDownloadTask(Object selectedVersion, ModloaderListenerProxy listenerProxy) {
-        return new ForgeDownloadTask(listenerProxy, (String) selectedVersion);
+        return new ForgeDownloadTask(listenerProxy, (ForgeVersion) selectedVersion);
     }
 
     @Override

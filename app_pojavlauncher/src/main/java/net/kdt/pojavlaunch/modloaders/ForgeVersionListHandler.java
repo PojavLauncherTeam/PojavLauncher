@@ -3,6 +3,7 @@ package net.kdt.pojavlaunch.modloaders;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
+import net.kdt.pojavlaunch.modloaders.ForgeVersion.ForgeForks;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,12 +13,7 @@ public class ForgeVersionListHandler extends DefaultHandler {
     private StringBuilder mCurrentVersion = null;
     private final ForgeForks mForgeFork;
 
-    enum ForgeForks {
-        FORGE,
-        NEOFORGE
-    }
-
-    public ForgeVersionListHandler(ForgeForks fork) {
+    public ForgeVersionListHandler(ForgeVersion.ForgeForks fork) {
         mForgeFork = fork;
     }
 

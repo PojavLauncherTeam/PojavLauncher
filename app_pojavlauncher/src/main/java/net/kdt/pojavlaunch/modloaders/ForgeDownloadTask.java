@@ -18,10 +18,10 @@ public class ForgeDownloadTask implements Runnable, Tools.DownloaderFeedback {
     private String mLoaderVersion;
     private String mGameVersion;
     private final ModloaderDownloadListener mListener;
-    public ForgeDownloadTask(ModloaderDownloadListener listener, String forgeVersion) {
+    public ForgeDownloadTask(ModloaderDownloadListener listener, ForgeVersion forgeVersion) {
         this.mListener = listener;
         this.mDownloadUrl = ForgeUtils.getInstallerUrl(forgeVersion);
-        this.mFullVersion = forgeVersion;
+        this.mFullVersion = forgeVersion.versionString;
     }
 
     public ForgeDownloadTask(ModloaderDownloadListener listener, String gameVersion, String loaderVersion) {
@@ -73,13 +73,15 @@ public class ForgeDownloadTask implements Runnable, Tools.DownloaderFeedback {
     }
 
     public boolean findVersion() throws IOException {
-        List<String> forgeVersions = ForgeUtils.downloadAllForgeVersionsAsStrings();
+        List<ForgeVersion> forgeVersions = ForgeUtils.downloadAllForgeVersions();
         if(forgeVersions == null) return false;
         String versionStart = mGameVersion+"-"+mLoaderVersion;
-        for(String versionName : forgeVersions) {
+        String versionName;
+        for(ForgeVersion version : forgeVersions) {
+            versionName = version.versionString;
             if(!versionName.startsWith(versionStart)) continue;
             mFullVersion = versionName;
-            mDownloadUrl = ForgeUtils.getInstallerUrl(mFullVersion);
+            mDownloadUrl = ForgeUtils.getInstallerUrl(version);
             return true;
         }
         return false;

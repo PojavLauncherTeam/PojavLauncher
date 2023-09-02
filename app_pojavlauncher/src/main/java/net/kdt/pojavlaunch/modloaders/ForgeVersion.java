@@ -4,9 +4,17 @@ import androidx.annotation.NonNull;
 
 public class ForgeVersion {
     String versionString;
-    ForgeVersionListHandler.ForgeForks fork;
+    ForgeForks fork;
 
-    public ForgeVersion(String versionString, ForgeVersionListHandler.ForgeForks fork) {
+    enum ForgeForks {
+        FORGE(""),
+        NEOFORGE("NeoForged");
+        public final String name;
+        ForgeForks(String forkName) {
+            this.name = forkName;
+        }
+    }
+    public ForgeVersion(String versionString, ForgeForks fork) {
         this.versionString = versionString;
         this.fork = fork;
     }
@@ -14,6 +22,6 @@ public class ForgeVersion {
     @NonNull
     @Override
     public String toString() {
-        return versionString + (fork == ForgeVersionListHandler.ForgeForks.NEOFORGE ? " (NeoForge)" : "");
+        return String.format("%s %s", versionString, fork.name);
     }
 }
