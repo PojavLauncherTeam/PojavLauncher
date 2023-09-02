@@ -4,7 +4,6 @@ import com.kdt.mcgui.ProgressLayout;
 
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
-import net.kdt.pojavlaunch.fragments.ForgeInstallFragment;
 import net.kdt.pojavlaunch.progresskeeper.ProgressKeeper;
 import net.kdt.pojavlaunch.utils.DownloadUtils;
 

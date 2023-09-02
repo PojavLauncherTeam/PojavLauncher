@@ -2,28 +2,24 @@ package net.kdt.pojavlaunch.modloaders;
 
 import android.content.Intent;
 
+import com.github.underscore.U;
+
 import net.kdt.pojavlaunch.Tools;
+import net.kdt.pojavlaunch.modloaders.ForgeVersionListHandler.ForgeForks;
 import net.kdt.pojavlaunch.utils.DownloadUtils;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
-
-import com.github.underscore.U;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
-
-import net.kdt.pojavlaunch.modloaders.ForgeVersionListHandler.ForgeForks;
 
 public class ForgeUtils {
     private static final String FORGE_METADATA_URL = "https://maven.minecraftforge.net/net/minecraftforge/forge/maven-metadata.xml";
