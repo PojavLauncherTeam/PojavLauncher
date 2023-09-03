@@ -325,11 +325,8 @@
     <string name="modloader_dl_failed_to_load_list">Oh no, ¡Ocurrió un error cargando la lista de versiones!</string>
     <string name="forge_dl_no_installer">Lo siento, pero esta versión de Forge no tiene un instalador, lo cúal aún no esta soportado por Pojav.</string>
     <string name="forge_dl_select_version">Elige la versión de Forge</string>
-    <string name="fabric_dl_progress">Descargando el instalador de Fabric</string>
-    <string name="fabric_dl_loader_version">Versión de cargador de Fabric</string>
     <string name="fabric_dl_game_version">Versión de Minecraft</string>
     <string name="fabric_dl_install">Instalar</string>
-    <string name="fabric_dl_cant_read_meta">Ocurrió un error leyendo la metadata de Fabric. Porfa intentalo más tarde.</string>
     <string name="modloader_dl_install_fabric">Crear instancia de Fabric</string>
     <string name="modloader_dl_install_forge">Crear instancia de Forge</string>
     <string name="create_profile_vanilla">Crear instancia de Minecraft Vanilla</string>
