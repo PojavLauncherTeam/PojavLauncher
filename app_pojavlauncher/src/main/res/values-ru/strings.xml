@@ -348,12 +348,13 @@
     <string name="modloader_dl_failed_to_load_list">Не удалось загрузить список версий.</string>
     <string name="forge_dl_no_installer">К сожалению, у этой версии Forge отсутствует поддерживаемый установщик.</string>
     <string name="forge_dl_select_version">Выбор версии Forge</string>
-    <string name="fabric_dl_progress">Загрузка установщика Fabric</string>
-    <string name="fabric_dl_loader_version">Версия загрузчика</string>
+    <string name="fabric_dl_progress">Загрузка метаданных %s</string>
+    <string name="fabric_dl_loader_version">Версия загрузчика %s</string>
     <string name="fabric_dl_game_version">Версия игры</string>
     <string name="fabric_dl_install">Установить</string>
-    <string name="fabric_dl_cant_read_meta">Не удалось прочитать метаданные Fabric. Повторите попытку позже.</string>
+    <string name="fabric_dl_cant_read_meta">Не удалось прочитать метаданные %s. Повторите попытку позже.</string>
     <string name="modloader_dl_install_fabric">Версия с Fabric</string>
+    <string name="modloader_dl_install_quilt">Версия с Quilt</string>
     <string name="modloader_dl_install_forge">Версия с Forge</string>
     <string name="create_profile_vanilla">Немодифицированная версия</string>
     <string name="create_profile_vanilla_like_versions">Стандартные версии</string>
@@ -383,4 +384,5 @@
     <string name="modpack_install_button">Сборка</string>
     <string name="notif_error_occured">Возникла ошибка</string>
     <string name="notif_error_occured_desc">Нажмите для получения дополнительных сведений</string>
+    <string name="fabric_dl_only_stable">Только стабильные версии</string>
 </resources>
