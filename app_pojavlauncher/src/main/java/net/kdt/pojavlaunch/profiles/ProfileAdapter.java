@@ -33,8 +33,7 @@ public class ProfileAdapter extends BaseAdapter {
     private List<String> mProfileList;
     private ProfileAdapterExtra[] mExtraEntires;
 
-    public ProfileAdapter(Context context, ProfileAdapterExtra[] extraEntries) {
-        ProfileIconCache.initDefault(context);
+    public ProfileAdapter(ProfileAdapterExtra[] extraEntries) {
         reloadProfiles(extraEntries);
     }
     /*
@@ -96,11 +95,7 @@ public class ProfileAdapter extends BaseAdapter {
 
         MinecraftProfile minecraftProfile = mProfiles.get(nm);
         if(minecraftProfile == null) minecraftProfile = dummy;
-        Drawable cachedIcon = ProfileIconCache.getCachedIcon(nm);
-
-        if(cachedIcon == null) {
-            cachedIcon = ProfileIconCache.tryResolveIcon(v.getResources(), nm, minecraftProfile.icon);
-        }
+        Drawable cachedIcon = ProfileIconCache.fetchIcon(v.getResources(), nm, minecraftProfile.icon);
         extendedTextView.setCompoundDrawablesRelative(cachedIcon, null, extendedTextView.getCompoundsDrawables()[2], null);
 
         if(Tools.isValidString(minecraftProfile.name))

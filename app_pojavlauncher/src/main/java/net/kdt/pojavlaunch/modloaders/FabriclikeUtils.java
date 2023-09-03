@@ -15,8 +15,8 @@ import java.net.URLEncoder;
 
 public class FabriclikeUtils {
 
-    public static final FabriclikeUtils FABRIC_UTILS = new FabriclikeUtils("https://meta.fabricmc.net/v2", "fabric", "Fabric");
-    public static final FabriclikeUtils QUILT_UTILS = new FabriclikeUtils("https://meta.quiltmc.org/v3", "quilt", "Quilt");
+    public static final FabriclikeUtils FABRIC_UTILS = new FabriclikeUtils("https://meta.fabricmc.net/v2", "fabric", "Fabric", "fabric");
+    public static final FabriclikeUtils QUILT_UTILS = new FabriclikeUtils("https://meta.quiltmc.org/v3", "quilt", "Quilt", "quilt");
 
     private static final String LOADER_METADATA_URL = "%s/versions/loader/%s";
     private static final String GAME_METADATA_URL = "%s/versions/game";
@@ -26,10 +26,12 @@ public class FabriclikeUtils {
     private final String mApiUrl;
     private final String mCachePrefix;
     private final String mName;
+    private final String mIconName;
 
-    private FabriclikeUtils(String mApiUrl, String cachePrefix, String mName) {
+    private FabriclikeUtils(String mApiUrl, String cachePrefix, String mName, String iconName) {
         this.mApiUrl = mApiUrl;
         this.mCachePrefix = cachePrefix;
+        this.mIconName = iconName;
         this.mName = mName;
     }
 
@@ -71,6 +73,9 @@ public class FabriclikeUtils {
 
     public String getName() {
         return mName;
+    }
+    public String getIconName() {
+        return mIconName;
     }
 
     private static FabricVersion[] deserializeLoaderVersions(String input) throws JSONException {

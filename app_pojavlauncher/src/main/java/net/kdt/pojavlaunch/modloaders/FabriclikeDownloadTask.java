@@ -61,6 +61,7 @@ public class FabriclikeDownloadTask implements Runnable, Tools.DownloaderFeedbac
             MinecraftProfile fabricProfile = new MinecraftProfile();
             fabricProfile.lastVersionId = versionId;
             fabricProfile.name = mUtils.getName();
+            fabricProfile.icon = mUtils.getIconName();
             LauncherProfiles.insertMinecraftProfile(fabricProfile);
             LauncherProfiles.write();
         }

@@ -56,7 +56,7 @@ public class mcVersionSpinner extends ExtendedTextView {
     private ListView mListView = null;
     private PopupWindow mPopupWindow = null;
     private Object mPopupAnimation;
-    private final ProfileAdapter mProfileAdapter = new ProfileAdapter(getContext(), new ProfileAdapterExtra[]{
+    private final ProfileAdapter mProfileAdapter = new ProfileAdapter(new ProfileAdapterExtra[]{
             new ProfileAdapterExtra(VERSION_SPINNER_PROFILE_CREATE,
                     R.string.create_profile,
                     ResourcesCompat.getDrawable(getResources(), R.drawable.ic_add, null)),
