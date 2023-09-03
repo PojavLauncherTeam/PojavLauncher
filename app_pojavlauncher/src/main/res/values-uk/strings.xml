@@ -344,11 +344,8 @@
     <string name="modloader_dl_failed_to_load_list">Не вдалося завантажити список версій!</string>
     <string name="forge_dl_no_installer">Вибачте, але ця версія Forge ще не має інсталятора, що підтримується.</string>
     <string name="forge_dl_select_version">Обрати версію Forge</string>
-    <string name="fabric_dl_progress">Завантаження встановлювача Fabric</string>
-    <string name="fabric_dl_loader_version">Версія завантажувача Fabric</string>
     <string name="fabric_dl_game_version">Версія Minecraft</string>
     <string name="fabric_dl_install">Встановити</string>
-    <string name="fabric_dl_cant_read_meta">Не вдалося прочитати метадані Fabric. Будь ласка, спробуйте пізніше.</string>
     <string name="modloader_dl_install_fabric">Створити профіль з Fabric</string>
     <string name="modloader_dl_install_forge">Створити профіль з Forge</string>
     <string name="create_profile_vanilla">Створити профіль з Ванілою</string>
