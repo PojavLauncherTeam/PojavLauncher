@@ -343,11 +343,8 @@
     <string name="modloader_dl_failed_to_load_list">Tải xuống thất bại!</string>
     <string name="forge_dl_no_installer">Xin lỗi, nhưng phiên bản Forge này không có trình cài đặt tệp .jar, chưa hỗ trợ.</string>
     <string name="forge_dl_select_version">Chọn phiên bản Forge</string>
-    <string name="fabric_dl_progress">Đang tải xuống trình cài đặt Fabric</string>
-    <string name="fabric_dl_loader_version">Phiên bản Fabric Loader</string>
     <string name="fabric_dl_game_version">Phiên bản Minecraft</string>
     <string name="fabric_dl_install">Cài đặt</string>
-    <string name="fabric_dl_cant_read_meta">Không đọc được Fabric metadata. Vui lòng thử lại sau.</string>
     <string name="modloader_dl_install_fabric">Tạo hồ sơ Fabric mới</string>
     <string name="modloader_dl_install_forge">Tạo hồ sơ Forge mới</string>
     <string name="create_profile_vanilla">Tạo hồ sơ Vanilla mới</string>
