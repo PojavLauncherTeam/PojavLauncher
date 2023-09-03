@@ -347,11 +347,8 @@
     <string name="modloader_dl_failed_to_load_list">Gagal memuat daftar versi!</string>
     <string name="forge_dl_no_installer">Maaf, versi forge ini tidak memiliki installer, yang berarti tidak didukung sama sekali.</string>
     <string name="forge_dl_select_version">Pilih versi Forge</string>
-    <string name="fabric_dl_progress">Mengunduh installer Fabric</string>
-    <string name="fabric_dl_loader_version">Versi pemuat Fabric</string>
     <string name="fabric_dl_game_version">Versi Minecraft</string>
     <string name="fabric_dl_install">Pasang</string>
-    <string name="fabric_dl_cant_read_meta">Gagal membaca metadata Fabric. Coba lagi nanti.</string>
     <string name="modloader_dl_install_fabric">Buat profil Fabric</string>
     <string name="modloader_dl_install_forge">Buat profil Forge</string>
     <string name="create_profile_vanilla">Buat profil Vanilla</string>
