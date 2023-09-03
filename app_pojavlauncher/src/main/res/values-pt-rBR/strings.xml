@@ -347,10 +347,8 @@
     <string name="modloader_dl_failed_to_load_list">Falha ao carregar a lista de versão!</string>
     <string name="forge_dl_no_installer">Desculpe, mas essa versão do Forge não tem um instalador compatível.</string>
     <string name="forge_dl_select_version">Selecione a versão do Forge</string>
-    <string name="fabric_dl_progress">Baixando instalador do Fabric</string>
     <string name="fabric_dl_game_version">Versão do Minecraft</string>
     <string name="fabric_dl_install">Instalar</string>
-    <string name="fabric_dl_cant_read_meta">Falha ao ler metadados do Fabric. Por favor, tente novamente mais tarde.</string>
     <string name="modloader_dl_install_fabric">Criar perfil Fabric</string>
     <string name="modloader_dl_install_forge">Criar perfil Forge</string>
     <string name="create_profile_vanilla">Criar perfil vanilla</string>
