@@ -348,11 +348,8 @@
     <string name="modloader_dl_failed_to_load_list">Sürüm listesi yüklenemedi!</string>
     <string name="forge_dl_no_installer">Özür dileriz, bu Forge sürümünün yükleyicisi olmadığından, desteklenmemektedir.</string>
     <string name="forge_dl_select_version">Forge sürümünü seç</string>
-    <string name="fabric_dl_progress">Fabric yükleyicisi indiriliyor</string>
-    <string name="fabric_dl_loader_version">Fabric yükleyici sürümü</string>
     <string name="fabric_dl_game_version">Minecraft sürümü</string>
     <string name="fabric_dl_install">Yükle</string>
-    <string name="fabric_dl_cant_read_meta">Fabric bilgisi okunumadı. Lütfen sonra yeniden deneyiniz.</string>
     <string name="modloader_dl_install_fabric">Fabric profili oluştur</string>
     <string name="modloader_dl_install_forge">Forge profili oluştur</string>
     <string name="create_profile_vanilla">Vanilla profil oluştur</string>
