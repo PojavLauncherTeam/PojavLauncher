@@ -350,11 +350,8 @@ https://cosmetica.cc 를 방문해주세요.
     <string name="modloader_dl_failed_to_load_list">버전 리스트 로드 실패</string>
     <string name="forge_dl_no_installer">죄송합니다. 이 버전의 Forge는 아직 지원되는 인스톨러를 가지고 있지 않습니다.</string>
     <string name="forge_dl_select_version">Forge 버전 선택</string>
-    <string name="fabric_dl_progress">Fabric 인스톨러 다운로드중</string>
-    <string name="fabric_dl_loader_version">Fabric 로더 버전</string>
     <string name="fabric_dl_game_version">Minecraft 버전</string>
     <string name="fabric_dl_install">설치</string>
-    <string name="fabric_dl_cant_read_meta">Fabric 메타데이터 읽기 실패. 나중에 다시 사도해 주세요.</string>
     <string name="modloader_dl_install_fabric">Fabric 프로필 생성</string>
     <string name="modloader_dl_install_forge">Forge 프로필 생성</string>
     <string name="create_profile_vanilla">Vanilla 프로필 생성</string>
