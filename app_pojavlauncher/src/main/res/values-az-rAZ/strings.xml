@@ -343,11 +343,8 @@
     <string name="modloader_dl_failed_to_load_list">Versiya siyahısını yükləmək alınmadı!</string>
     <string name="forge_dl_no_installer">Üzr istəyirik, lakin Forge-un bu versiyasında hələ dəstəklənməyən quraşdırıcı yoxdur.</string>
     <string name="forge_dl_select_version">Forge versiyasını seçin</string>
-    <string name="fabric_dl_progress">Fabric quraşdırıcısı endirilir</string>
-    <string name="fabric_dl_loader_version">Parça yükləyici versiyası</string>
     <string name="fabric_dl_game_version">Minecraft versiyası</string>
     <string name="fabric_dl_install">Quraşdır</string>
-    <string name="fabric_dl_cant_read_meta">Fabric metadatasını oxumaq alınmadı. Zəhmət olmasa bir az sonra yenə cəhd edin.</string>
     <string name="modloader_dl_install_fabric">Fabric profili yaradın</string>
     <string name="modloader_dl_install_forge">Forge profili yaradın</string>
     <string name="create_profile_vanilla">Vanilla profili yaradın</string>
