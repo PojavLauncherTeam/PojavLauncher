@@ -347,11 +347,8 @@ Accedi almeno una volta su https://minecraft.net/ e riprova.</string>
     <string name="modloader_dl_failed_to_load_list">Impossibile caricare la lista delle versioni!</string>
     <string name="forge_dl_no_installer">Ci scusiamo per il disagio, ma questa versione di Forge non ha un installer, non è ancora supportato.</string>
     <string name="forge_dl_select_version">Seleziona versione Forge</string>
-    <string name="fabric_dl_progress">Download installer Fabric</string>
-    <string name="fabric_dl_loader_version">Versione Fabric loader</string>
     <string name="fabric_dl_game_version">Versione Minecraft</string>
     <string name="fabric_dl_install">Installa</string>
-    <string name="fabric_dl_cant_read_meta">Impoossibile leggere metadata Fabric. Riprovare per favore.</string>
     <string name="modloader_dl_install_fabric">Crea profilo Fabric</string>
     <string name="modloader_dl_install_forge">Crea profilo Forge</string>
     <string name="create_profile_vanilla">Crea profilo Vanilla</string>
