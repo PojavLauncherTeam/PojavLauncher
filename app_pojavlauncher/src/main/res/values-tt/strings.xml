@@ -220,8 +220,7 @@
     <string name="global_yes">Әйе</string>
     <string name="global_no">Юк</string>
     <string name="forge_dl_select_version">Forge версиясе сайлау</string>
-    <string name="fabric_dl_progress">Fabric йөкләүчесе йөкләнү</string>
-    <string name="fabric_dl_loader_version">Fabric йөкләүчесенең версиясе</string>
+    <string name="fabric_dl_loader_version">%s йөкләүчесенең версиясе</string>
     <string name="fabric_dl_game_version">Minecraft версиясе</string>
     <string name="fabric_dl_install">Утырту</string>
     <string name="of_dl_progress">%s йөкләтүе</string>
