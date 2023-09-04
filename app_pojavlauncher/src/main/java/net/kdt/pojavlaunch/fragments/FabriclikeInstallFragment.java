@@ -82,14 +82,14 @@ public abstract class FabriclikeInstallFragment extends Fragment implements Modl
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
+    public void onStop() {
         cancelFutureChecked(mGameVersionFuture);
         cancelFutureChecked(mLoaderVersionFuture);
         ModloaderListenerProxy proxy = getListenerProxy();
         if(proxy != null) {
             proxy.detachListener();
         }
+        super.onStop();
     }
 
     private void onClickStart(View v) {

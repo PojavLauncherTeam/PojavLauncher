@@ -58,10 +58,10 @@ public abstract class ModVersionListFragment<T> extends Fragment implements Runn
     }
 
     @Override
-    public void onDestroyView() {
+    public void onStop() {
         ModloaderListenerProxy taskProxy = getTaskProxy();
         if(taskProxy != null) taskProxy.detachListener();
-        super.onDestroyView();
+        super.onStop();
     }
 
     @Override
