@@ -88,39 +88,4 @@ public class ProfileIconCache {
         if(!dataEncoding.equals("base64")) return null;
         return Base64.decode(inputString.substring(commaAfterSemicolon+1), 0);
     }
-
-
-    /*public static void initDefault(Context context) {
-        if(sDefaultIcon != null) return;
-        sDefaultIcon = ResourcesCompat.getDrawable(context.getResources(), R.mipmap.ic_launcher_foreground, null);
-        if(sDefaultIcon != null) sDefaultIcon.setBounds(0, 0, 10, 10);
-    }
-
-    public static Drawable getCachedIcon(String key) {
-        return sIconCache.get(key);
-    }
-
-    public static Drawable submitIcon(Resources resources, String key, String base64) {
-        byte[] pngBytes = Base64.decode(base64, Base64.DEFAULT);
-        Drawable drawable = new BitmapDrawable(resources, BitmapFactory.decodeByteArray(pngBytes, 0, pngBytes.length));
-        sIconCache.put(key, drawable);
-        return drawable;
-    }
-
-    public static Drawable tryResolveIcon(Resources resources, String profileName, String b64Icon) {
-        Drawable icon;
-        if (b64Icon != null && b64Icon.startsWith(BASE64_PNG_HEADER)) {
-            icon = ProfileIconCache.submitIcon(resources, profileName, b64Icon.substring(BASE64_PNG_HEADER.length()));
-        }else{
-            Log.i("IconParser","Unsupported icon: "+b64Icon);
-            icon = ProfileIconCache.pushDefaultIcon(profileName);
-        }
-        return icon;
-    }
-
-    public static Drawable pushDefaultIcon(String key) {
-        sIconCache.put(key, sDefaultIcon);
-
-        return sDefaultIcon;
-    }*/
 }
