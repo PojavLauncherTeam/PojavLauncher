@@ -6,14 +6,16 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.Base64;
-import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
 
 import net.kdt.pojavlaunch.R;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class ProfileIconCache {
     // Data header format: data:<mime>;<encoding>,<data>
@@ -22,22 +24,28 @@ public class ProfileIconCache {
     private static final Map<String, Drawable> sIconCache = new HashMap<>();
     private static final Map<String, Drawable> sStaticIconCache = new HashMap<>();
 
-
-    public static Drawable fetchIcon(Resources resources, String key, String icon) {
+    /**
+     * Fetch an icon from the cache, or load it if it's not cached.
+     * @param resources the Resources object, used for creating drawables
+     * @param key the profile key
+     * @param icon the profile icon data (stored in the icon field of MinecraftProfile)
+     * @return an icon drawable
+     */
+    public static @NonNull Drawable fetchIcon(Resources resources, @NonNull String key, @Nullable String icon) {
         Drawable cachedIcon = sIconCache.get(key);
         if(cachedIcon != null) return cachedIcon;
         if(icon != null && icon.startsWith(DATA_HEADER)) return fetchDataIcon(resources, key, icon);
         else return fetchStaticIcon(resources, key, icon);
     }
 
-    private static Drawable fetchDataIcon(Resources resources, String key, String icon) {
+    private static Drawable fetchDataIcon(Resources resources, String key, @NonNull String icon) {
         Drawable dataIcon = readDataIcon(resources, icon);
         if(dataIcon == null) dataIcon = fetchFallbackIcon(resources);
         sIconCache.put(key, dataIcon);
         return dataIcon;
     }
 
-    private static Drawable fetchStaticIcon(Resources resources, String key, String icon) {
+    private static Drawable fetchStaticIcon(Resources resources, String key, @Nullable String icon) {
         Drawable staticIcon = sStaticIconCache.get(icon);
         if(staticIcon == null) {
             if(icon != null) staticIcon = getStaticIcon(resources, icon);
@@ -48,16 +56,16 @@ public class ProfileIconCache {
         return staticIcon;
     }
 
-    private static Drawable fetchFallbackIcon(Resources resources) {
+    private static @NonNull Drawable fetchFallbackIcon(Resources resources) {
         Drawable fallbackIcon = sStaticIconCache.get(FALLBACK_ICON_NAME);
         if(fallbackIcon == null) {
-            fallbackIcon = getStaticIcon(resources, FALLBACK_ICON_NAME);
+            fallbackIcon = Objects.requireNonNull(getStaticIcon(resources, FALLBACK_ICON_NAME));
             sStaticIconCache.put(FALLBACK_ICON_NAME, fallbackIcon);
         }
         return fallbackIcon;
     }
 
-    private static Drawable getStaticIcon(Resources resources, String icon) {
+    private static Drawable getStaticIcon(Resources resources, @NonNull String icon) {
         int staticIconResource = getStaticIconResource(icon);
         if(staticIconResource == -1) return null;
         return ResourcesCompat.getDrawable(resources, staticIconResource, null);
