@@ -210,6 +210,7 @@
     <string name="mcl_setting_subtitle_mousespeed">소프트웨어 마우스 속도 변경</string>
     <string name="customctrl_passthru">마우스 패스스루</string>
     <string name="customctrl_swipeable">끌어당기기</string>
+    <string name="customctrl_forward_lock">전면 잠금</string>
     <string name="customctrl_rounded">둥글게</string>
     <string name="memory_warning_msg">현재 사용 가능한 RAM 크기(%d) 가 할당된 RAM 크기(%d) 보다 낮습니다. 게임이 충돌할 경우 할당량을 변경하세요.</string>
     <string name="mcl_memory_allocation">메모리 할당</string>
