@@ -52,6 +52,7 @@
     <string name="mcl_option_customcontrol">Anpassade kontroller</string>
     <string name="mcl_option_settings">Inställningar</string>
     <string name="mcl_option_about">Om</string>
+    <string name="mcl_setting_title_use_surface_view">Använd alternera ytrendering</string>
     <string name="mcl_setting_title_uninstalljre">Avinstallera Java Runtime</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Launcher omstart krävs] Detta låter dig ominstallera Java Runtime</string>
     <string name="mcl_setting_title_freeform">Starta Minecraft i Freeform läge</string>
@@ -66,6 +67,7 @@
     <string name="mcl_setting_subtitle_backtorightmouse">Vissa enheter behandlar extern höger mus som bakåtknapp. Om du använder extern mus bör du aktivera detta.</string>
     <string name="mcl_setting_title_flat_button_style">Använd knappstil</string>
     <string name="mcl_setting_subtitle_flat_button_style">Aktivera detta för att ändra kontrollknappens stil till platt.</string>
+    <string name="mcl_setting_category_general">Allmänna inställningar</string>
     <!-- Global strings -->
     <string name="global_warinng">Varning</string>
     <!-- MainActivity: strings -->
