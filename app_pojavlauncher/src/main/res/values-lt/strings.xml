@@ -205,10 +205,12 @@
     <string name="mcl_disable_gestures">Išjungti gestus</string>
     <string name="mcl_disable_gestures_subtitle">Išjungti gestus, kaip prilaikyti, kad griautum bloką, ir paspausti, kad pastatytum bloką.</string>
     <string name="mcl_disable_swap_hand">Išjungti dukart bakstelėjimą kad apsikeisti rankomis</string>
+    <string name="mcl_disable_swap_hand_subtitle">Išjungia galimybę du kartus paspaudžiant hotbar\'o daiktą jį perkelti į kitą ranką</string>
     <string name="mcl_setting_title_mousespeed">Pelės Greitis</string>
     <string name="mcl_setting_subtitle_mousespeed">Pakeičia virtualios pelės greitį</string>
     <string name="customctrl_passthru">Pelės praileidimas</string>
     <string name="customctrl_swipeable">Perbraukiamas</string>
+    <string name="customctrl_forward_lock">Ėjimo į priekį fiksavimas</string>
     <string name="customctrl_rounded">Suapvalinta</string>
     <string name="memory_warning_msg">Dabartinis kiekis laisvo RAM (%d) yra mažesnis negu paskirtas RAM (%d), kas gali baigtis išsijungimais. Pakeiskite paskirtą kiekį jeigu išsijungia žaidimas.</string>
     <string name="mcl_memory_allocation">Atminties skirtstymas</string>
@@ -226,6 +228,7 @@
     <string name="multirt_config_removeerror_last">Jūs privalote turėti bent vieną Java Modulį įdiegtą</string>
     <string name="multirt_nocompartiblert">Nerasta tinkamos Java Runtine. Šiai versijai reikalinga Java %d arba naujesnė.</string>
     <string name="multirt_nojava8rt">Nerasta Java 8. Kad naudotumėte šią funkciją, naudokite Java 8.</string>
+    <string name="multirt_delete_runtime">Ištrinti runtime</string>
     <string name="compat_117_message">Minecraft 21w10+ reikalauja OpenGL 3.2 branduolio profilio. Gaila, GL4ES wrapperis dabar pilnai nepalaiko jo, bet yra dar pridėtinių resursų kuriuos galima įdiegti, kad būtų galima paleisti šias versijas. Paspauskite Gerai, kad patvirtintumėte įdiegimą, paspauskite Atšaukti, kad sustabdytumėte įdiegimą.</string>
     <string name="compat_11x_playanyway">Žaisti vistiek</string>
     <string name="pvc_gameDirectory">Žaidimo failų vieta</string>
@@ -241,6 +244,7 @@
     <string name="preference_control_offset_title">Controlių šoninis offset\'as</string>
     <string name="preference_control_offset_description">Nustatytį offset\'ą kiekvienai ekrano pusei pasirinktinai</string>
     <string name="preference_mouse_start_title">Pradėti su virtualia įjungta</string>
+    <string name="preference_mouse_start_description">Virtuali pelė pasirodo iškarto kai žaidimas įsijungia</string>
     <string name="preference_video_title">Vaizdas</string>
     <string name="preference_video_description">Rezoliucija, skalių tipas ir vaizdavimas</string>
     <string name="preference_control_title">Kontrolių redagavimas</string>
@@ -256,7 +260,15 @@
     <string name="preference_force_vsync_title">Priversti įjungti vSync</string>
     <string name="preference_force_vsync_description">Apriboti terminį limitą limituojant didžiausią našumą</string>
     <string name="preference_force_english_title">Priversti Anglų kalbą</string>
+    <string name="preference_force_english_description">Leidžia matyti originalų tekstą, kaip numatyta kūrejų. Reikalingas paleidimas iš naujo</string>
+    <string name="preference_edit_controls_title">Redaguoti kontroliavimą</string>
+    <string name="preference_edit_controls_summary">Redaguokite savo kontroles pagal jūsų reikalavimus</string>
     <string name="preference_category_gyro_controls">Gyro kontrolės</string>
+    <string name="preference_gyro_invert_x_axis">Invertuoti X ašį</string>
+    <string name="preference_gyro_invert_y_axis">Invertuoti Y ašį</string>
+    <string name="preference_gyro_invert_x_axis_description">Invertuoti horizontaliąją ašį</string>
+    <string name="preference_gyro_invert_y_axis_description">Invertuoti vertikaliąją ašį</string>
+    <string name="preference_gyro_smoothing_title">Įjungti giroskopą</string>
     <string name="preference_back_title">Atgal į paskutinį ekraną</string>
     <string name="gles_hack_none">Nemažinti tekstūrų</string>
     <string name="gles_hack_always">Dalinti visas tekstūras per pusę.</string>
