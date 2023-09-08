@@ -346,9 +346,13 @@
     <string name="modloader_dl_failed_to_load_list">Fehler beim Laden der Versionsliste!</string>
     <string name="forge_dl_no_installer">Entschuldigung, aber diese Version von Forge hat keinen Installer, der noch nicht unterstützt wird.</string>
     <string name="forge_dl_select_version">Forge-Version auswählen</string>
+    <string name="fabric_dl_progress">Lade %s-Loader Metadaten herunter</string>
+    <string name="fabric_dl_loader_version">%s-Loader-Version</string>
     <string name="fabric_dl_game_version">Minecraft-Version</string>
     <string name="fabric_dl_install">Installieren</string>
+    <string name="fabric_dl_cant_read_meta">Fehler beim Lesen der %s-Loader Metadaten. Bitte versuche es später erneut.</string>
     <string name="modloader_dl_install_fabric">Fabric-Profil erstellen</string>
+    <string name="modloader_dl_install_quilt">Quilt-Profil erstellen</string>
     <string name="modloader_dl_install_forge">Forge-Profil erstellen</string>
     <string name="create_profile_vanilla">Vanilla-Profil erstellen</string>
     <string name="create_profile_vanilla_like_versions">Vanilla-ähnliche Versionen</string>
@@ -378,4 +382,5 @@
     <string name="modpack_install_button">Modpack-Profil erstellen</string>
     <string name="notif_error_occured">Es ist ein Fehler aufgetreten</string>
     <string name="notif_error_occured_desc">Klicke um mehr Details zu sehen</string>
+    <string name="fabric_dl_only_stable">Nur stabile Versionen anzeigen</string>
 </resources>
