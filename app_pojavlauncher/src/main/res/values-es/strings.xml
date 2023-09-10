@@ -340,4 +340,5 @@
     <string name="preference_gyro_damper_window_title">Tiempo de suavizado</string>
     <string name="preference_gyro_damper_window_description">Reduce el jitter a cambio de latencia. 0 para desactivarlo</string>
     <string name="generic_install">Instalar</string>
+    <string name="fabric_dl_only_stable">Mostrar solo versiones estables</string>
 </resources>
