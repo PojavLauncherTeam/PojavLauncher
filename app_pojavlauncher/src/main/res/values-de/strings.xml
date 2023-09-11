@@ -210,6 +210,7 @@
     <string name="mcl_setting_subtitle_mousespeed">Ändert die Geschwindigkeit der Software-Maus</string>
     <string name="customctrl_passthru">Maus ignoriert Schaltflächen</string>
     <string name="customctrl_swipeable">Wischbar</string>
+    <string name="customctrl_forward_lock">Weiterleitungssperre</string>
     <string name="customctrl_rounded">Abgerundet</string>
     <string name="memory_warning_msg">Die aktuelle Menge an freiem RAM (%d) ist niedriger als zugewiesener RAM (%d), was zu Abstürzen führen kann. Ändere die Zuordnung, wenn das Spiel abstürzt.</string>
     <string name="mcl_memory_allocation">Zugewiesener RAM</string>
