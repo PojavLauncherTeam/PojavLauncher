@@ -31,7 +31,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.UUID;
 
 public class ProfileEditorFragment extends Fragment {
     public static final String TAG = "ProfileEditorFragment";
@@ -75,7 +74,7 @@ public class ProfileEditorFragment extends Fragment {
         List<String> renderList = new ArrayList<>(5);
         Collections.addAll(renderList, getResources().getStringArray(R.array.renderer));
         renderList.add("Default");
-        mDefaultRenderer.setAdapter(new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, renderList));
+        mDefaultRenderer.setAdapter(new ArrayAdapter<>(getContext(), R.layout.item_simple_list_1, renderList));
 
         // Set up behaviors
         mSaveButton.setOnClickListener(v -> {
@@ -84,9 +83,12 @@ public class ProfileEditorFragment extends Fragment {
         });
 
         mDeleteButton.setOnClickListener(v -> {
-            LauncherProfiles.mainProfileJson.profiles.remove(mProfileKey);
-            LauncherProfiles.update();
-            ExtraCore.setValue(ExtraConstants.REFRESH_VERSION_SPINNER, DELETED_PROFILE);
+            if(LauncherProfiles.mainProfileJson.profiles.size() > 1){
+                LauncherProfiles.mainProfileJson.profiles.remove(mProfileKey);
+                LauncherProfiles.write();
+                ExtraCore.setValue(ExtraConstants.REFRESH_VERSION_SPINNER, DELETED_PROFILE);
+            }
+
             Tools.removeCurrentFragment(requireActivity());
         });
 
@@ -160,11 +162,7 @@ public class ProfileEditorFragment extends Fragment {
             mProfileKey = profile;
         }else{
             minecraftProfile = MinecraftProfile.createTemplate();
-            String uuid = UUID.randomUUID().toString();
-            while(LauncherProfiles.mainProfileJson.profiles.containsKey(uuid)) {
-                uuid = UUID.randomUUID().toString();
-            }
-            mProfileKey = uuid;
+            mProfileKey = LauncherProfiles.getFreeProfileKey();
         }
         return minecraftProfile;
     }
@@ -208,7 +206,7 @@ public class ProfileEditorFragment extends Fragment {
 
 
         LauncherProfiles.mainProfileJson.profiles.put(mProfileKey, mTempProfile);
-        LauncherProfiles.update();
+        LauncherProfiles.write();
         ExtraCore.setValue(ExtraConstants.REFRESH_VERSION_SPINNER, mProfileKey);
     }
 }

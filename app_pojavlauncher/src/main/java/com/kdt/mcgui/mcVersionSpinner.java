@@ -56,7 +56,7 @@ public class mcVersionSpinner extends ExtendedTextView {
     private ListView mListView = null;
     private PopupWindow mPopupWindow = null;
     private Object mPopupAnimation;
-    private final ProfileAdapter mProfileAdapter = new ProfileAdapter(getContext(), new ProfileAdapterExtra[]{
+    private final ProfileAdapter mProfileAdapter = new ProfileAdapter(new ProfileAdapterExtra[]{
             new ProfileAdapterExtra(VERSION_SPINNER_PROFILE_CREATE,
                     R.string.create_profile,
                     ResourcesCompat.getDrawable(getResources(), R.drawable.ic_add, null)),
@@ -75,6 +75,11 @@ public class mcVersionSpinner extends ExtendedTextView {
     public void setSelection(int position){
         if(mListView != null) mListView.setSelection(position);
         mProfileAdapter.setViewProfile(this, (String) mProfileAdapter.getItem(position), false);
+    }
+
+    /** Reload profiles from the file, forcing the spinner to consider the new data */
+    public void reloadProfiles(){
+        mProfileAdapter.reloadProfiles();
     }
 
     /** Initialize various behaviors */

@@ -285,6 +285,9 @@ public class JREUtils {
         purgeArg(userArgs,"-d32");
         purgeArg(userArgs,"-d64");
         purgeArg(userArgs, "-Xint");
+        purgeArg(userArgs, "-XX:+UseTransparentHugePages");
+        purgeArg(userArgs, "-XX:+UseLargePagesInMetaspace");
+        purgeArg(userArgs, "-XX:+UseLargePages");
         purgeArg(userArgs, "-Dorg.lwjgl.opengl.libname");
 
         //Add automatically generated args
@@ -332,6 +335,7 @@ public class JREUtils {
         ArrayList<String> overridableArguments = new ArrayList<>(Arrays.asList(
                 "-Djava.home=" + runtimeHome,
                 "-Djava.io.tmpdir=" + Tools.DIR_CACHE.getAbsolutePath(),
+                "-Djna.boot.library.path=" + NATIVE_LIB_DIR,
                 "-Duser.home=" + Tools.DIR_GAME_HOME,
                 "-Duser.language=" + System.getProperty("user.language"),
                 "-Dos.name=Linux",
@@ -340,11 +344,11 @@ public class JREUtils {
                 "-Dpojav.path.private.account=" + Tools.DIR_ACCOUNT_NEW,
                 "-Duser.timezone=" + TimeZone.getDefault().getID(),
 
+                "-Dorg.lwjgl.vulkan.libname=libvulkan.so",
                 //LWJGL 3 DEBUG FLAGS
                 //"-Dorg.lwjgl.util.Debug=true",
                 //"-Dorg.lwjgl.util.DebugFunctions=true",
                 //"-Dorg.lwjgl.util.DebugLoader=true",
-                "-Dorg.lwjgl.util.NoChecks=true",
                 // GLFW Stub width height
                 "-Dglfwstub.windowWidth=" + Tools.getDisplayFriendlyRes(currentDisplayMetrics.widthPixels, LauncherPreferences.PREF_SCALE_FACTOR/100F),
                 "-Dglfwstub.windowHeight=" + Tools.getDisplayFriendlyRes(currentDisplayMetrics.heightPixels, LauncherPreferences.PREF_SCALE_FACTOR/100F),

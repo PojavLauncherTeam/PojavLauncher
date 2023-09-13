@@ -322,24 +322,24 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         }
         MinecraftAccount minecraftAccount = PojavProfile.getCurrentProfileContent(this, null);
         Logger.appendToLog("--------- beginning with launcher debug");
-        printLauncherInfo(versionId);
+        printLauncherInfo(versionId, Tools.isValidString(minecraftProfile.javaArgs) ? minecraftProfile.javaArgs : LauncherPreferences.PREF_CUSTOM_JAVA_ARGS);
         if (Tools.LOCAL_RENDERER.equals("vulkan_zink")) {
             checkVulkanZinkIsSupported();
         }
         JREUtils.redirectAndPrintJRELog();
-        LauncherProfiles.update();
+        LauncherProfiles.load();
         int requiredJavaVersion = 8;
         if(version.javaVersion != null) requiredJavaVersion = version.javaVersion.majorVersion;
         Tools.launchMinecraft(this, minecraftAccount, minecraftProfile, versionId, requiredJavaVersion);
     }
 
-    private void printLauncherInfo(String gameVersion) {
+    private void printLauncherInfo(String gameVersion, String javaArguments) {
         Logger.appendToLog("Info: Launcher version: " + BuildConfig.VERSION_NAME);
         Logger.appendToLog("Info: Architecture: " + Architecture.archAsString(Tools.DEVICE_ARCHITECTURE));
         Logger.appendToLog("Info: Device model: " + Build.MANUFACTURER + " " +Build.MODEL);
         Logger.appendToLog("Info: API version: " + Build.VERSION.SDK_INT);
         Logger.appendToLog("Info: Selected Minecraft version: " + gameVersion);
-        Logger.appendToLog("Info: Custom Java arguments: \"" + LauncherPreferences.PREF_CUSTOM_JAVA_ARGS + "\"");
+        Logger.appendToLog("Info: Custom Java arguments: \"" + javaArguments + "\"");
     }
 
     private void checkVulkanZinkIsSupported() {
@@ -430,12 +430,12 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         sb.setMax(275);
         tmpMouseSpeed = (int) ((LauncherPreferences.PREF_MOUSESPEED*100));
         sb.setProgress(tmpMouseSpeed-25);
-        tv.setText(getString(R.string.percent_format, tmpGyroSensitivity));
+        tv.setText(getString(R.string.percent_format, tmpMouseSpeed));
         sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 tmpMouseSpeed = i+25;
-                tv.setText(getString(R.string.percent_format, tmpGyroSensitivity));
+                tv.setText(getString(R.string.percent_format, tmpMouseSpeed));
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {}

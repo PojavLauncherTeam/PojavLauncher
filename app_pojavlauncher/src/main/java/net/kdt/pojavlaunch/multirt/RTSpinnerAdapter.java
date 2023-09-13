@@ -56,7 +56,7 @@ public class RTSpinnerAdapter implements SpinnerAdapter {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View view = convertView != null?
                 convertView:
-                LayoutInflater.from(mContext).inflate(android.R.layout.simple_list_item_1, parent,false);
+                LayoutInflater.from(mContext).inflate(R.layout.item_simple_list_1, parent,false);
 
         Runtime runtime = mRuntimes.get(position);
         if(position == mRuntimes.size() - 1 ){

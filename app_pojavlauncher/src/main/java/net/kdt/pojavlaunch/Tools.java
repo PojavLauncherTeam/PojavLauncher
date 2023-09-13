@@ -33,6 +33,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.webkit.MimeTypeMap;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -45,6 +46,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import net.kdt.pojavlaunch.contextexecutor.ContextExecutor;
 import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.multirt.Runtime;
 import net.kdt.pojavlaunch.plugins.FFmpegPlugin;
@@ -55,6 +57,7 @@ import net.kdt.pojavlaunch.utils.JSONUtils;
 import net.kdt.pojavlaunch.utils.OldVersionsUtils;
 import net.kdt.pojavlaunch.value.DependentLibrary;
 import net.kdt.pojavlaunch.value.MinecraftAccount;
+import net.kdt.pojavlaunch.value.MinecraftLibraryArtifact;
 import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
 import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 
@@ -79,6 +82,7 @@ import java.util.Map;
 
 @SuppressWarnings("IOStreamConstructor")
 public final class Tools {
+    public  static final float BYTE_TO_MB = 1024 * 1024;
     public static final Handler MAIN_HANDLER = new Handler(Looper.getMainLooper());
     public static String APP_NAME = "null";
 
@@ -173,7 +177,7 @@ public final class Tools {
         }
         Runtime runtime = MultiRTUtils.forceReread(Tools.pickRuntime(minecraftProfile, versionJavaRequirement));
         JMinecraftVersionList.Version versionInfo = Tools.getVersionInfo(versionId);
-        LauncherProfiles.update();
+        LauncherProfiles.load();
         File gamedir = Tools.getGameDirPath(minecraftProfile);
 
 
@@ -592,6 +596,23 @@ public final class Tools {
         }
     }
 
+    public static void showErrorRemote(Throwable e) {
+        showErrorRemote(null, e);
+    }
+    public static void showErrorRemote(Context context, int rolledMessage, Throwable e) {
+        showErrorRemote(context.getString(rolledMessage), e);
+    }
+    public static void showErrorRemote(String rolledMessage, Throwable e) {
+        // I WILL embrace layer violations because Android's concept of layers is STUPID
+        // We live in the same process anyway, why make it any more harder with this needless
+        // abstraction?
+
+        // Add your Context-related rage here
+        ContextExecutor.execute(new ShowErrorActivity.RemoteErrorTask(e, rolledMessage));
+    }
+
+
+
     public static void dialogOnUiThread(final Activity activity, final CharSequence title, final CharSequence message) {
         activity.runOnUiThread(()->dialog(activity, title, message));
     }
@@ -618,6 +639,53 @@ public final class Tools {
         }
         return true; // allow if none match
     }
+
+    private static void preProcessLibraries(DependentLibrary[] libraries) {
+        for (int i = 0; i < libraries.length; i++) {
+            DependentLibrary libItem = libraries[i];
+            String[] version = libItem.name.split(":")[2].split("\\.");
+            if (libItem.name.startsWith("net.java.dev.jna:jna:")) {
+                // Special handling for LabyMod 1.8.9, Forge 1.12.2(?) and oshi
+                // we have libjnidispatch 5.13.0 in jniLibs directory
+                if (Integer.parseInt(version[0]) >= 5 && Integer.parseInt(version[1]) >= 13) continue;
+                Log.d(APP_NAME, "Library " + libItem.name + " has been changed to version 5.13.0");
+                createLibraryInfo(libItem);
+                libItem.name = "net.java.dev.jna:jna:5.13.0";
+                libItem.downloads.artifact.path = "net/java/dev/jna/jna/5.13.0/jna-5.13.0.jar";
+                libItem.downloads.artifact.sha1 = "1200e7ebeedbe0d10062093f32925a912020e747";
+                libItem.downloads.artifact.url = "https://repo1.maven.org/maven2/net/java/dev/jna/jna/5.13.0/jna-5.13.0.jar";
+            } else if (libItem.name.startsWith("com.github.oshi:oshi-core:")) {
+                //if (Integer.parseInt(version[0]) >= 6 && Integer.parseInt(version[1]) >= 3) return;
+                // FIXME: ensure compatibility
+
+                if (Integer.parseInt(version[0]) != 6 || Integer.parseInt(version[1]) != 2) continue;
+                Log.d(APP_NAME, "Library " + libItem.name + " has been changed to version 6.3.0");
+                createLibraryInfo(libItem);
+                libItem.name = "com.github.oshi:oshi-core:6.3.0";
+                libItem.downloads.artifact.path = "com/github/oshi/oshi-core/6.3.0/oshi-core-6.3.0.jar";
+                libItem.downloads.artifact.sha1 = "9e98cf55be371cafdb9c70c35d04ec2a8c2b42ac";
+                libItem.downloads.artifact.url = "https://repo1.maven.org/maven2/com/github/oshi/oshi-core/6.3.0/oshi-core-6.3.0.jar";
+            } else if (libItem.name.startsWith("org.ow2.asm:asm-all:")) {
+                // Early versions of the ASM library get repalced with 5.0.4 because Pojav's LWJGL is compiled for
+                // Java 8, which is not supported by old ASM versions. Mod loaders like Forge, which depend on this
+                // library, often include lwjgl in their class transformations, which causes errors with old ASM versions.
+                if(Integer.parseInt(version[0]) >= 5) continue;
+                Log.d(APP_NAME, "Library " + libItem.name + " has been changed to version 5.0.4");
+                createLibraryInfo(libItem);
+                libItem.name = "org.ow2.asm:asm-all:5.0.4";
+                libItem.url = null;
+                libItem.downloads.artifact.path = "org/ow2/asm/asm-all/5.0.4/asm-all-5.0.4.jar";
+                libItem.downloads.artifact.sha1 = "e6244859997b3d4237a552669279780876228909";
+                libItem.downloads.artifact.url = "https://repo1.maven.org/maven2/org/ow2/asm/asm-all/5.0.4/asm-all-5.0.4.jar";
+            }
+        }
+    }
+
+    private static void createLibraryInfo(DependentLibrary library) {
+        if(library.downloads == null || library.downloads.artifact == null)
+            library.downloads = new DependentLibrary.LibraryDownloads(new MinecraftLibraryArtifact());
+    }
+
     public static String[] generateLibClasspath(JMinecraftVersionList.Version info) {
         List<String> libDir = new ArrayList<>();
         for (DependentLibrary libItem: info.libraries) {
@@ -636,7 +704,7 @@ public final class Tools {
         try {
             JMinecraftVersionList.Version customVer = Tools.GLOBAL_GSON.fromJson(read(DIR_HOME_VERSION + "/" + versionName + "/" + versionName + ".json"), JMinecraftVersionList.Version.class);
             if (skipInheriting || customVer.inheritsFrom == null || customVer.inheritsFrom.equals(customVer.id)) {
-                return customVer;
+                preProcessLibraries(customVer.libraries);
             } else {
                 JMinecraftVersionList.Version inheritsVer;
                 //If it won't download, just search for it
@@ -674,6 +742,7 @@ public final class Tools {
                     }
                 } finally {
                     inheritsVer.libraries = libList.toArray(new DependentLibrary[0]);
+                    preProcessLibraries(inheritsVer.libraries);
                 }
 
                 // Inheriting Minecraft 1.13+ with append custom args
@@ -711,8 +780,14 @@ public final class Tools {
                     inheritsVer.arguments.game = totalArgList.toArray(new Object[0]);
                 }
 
-                return inheritsVer;
+                customVer = inheritsVer;
             }
+
+            // LabyMod 4 sets version instead of majorVersion
+            if (customVer.javaVersion != null && customVer.javaVersion.majorVersion == 0) {
+                customVer.javaVersion.majorVersion = customVer.javaVersion.version;
+            }
+            return customVer;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -810,7 +885,7 @@ public final class Tools {
 
     public static int getDisplayFriendlyRes(int displaySideRes, float scaling){
         displaySideRes *= scaling;
-        if(displaySideRes % 2 != 0) displaySideRes ++;
+        if(displaySideRes % 2 != 0) displaySideRes --;
         return displaySideRes;
     }
 
@@ -992,5 +1067,13 @@ public final class Tools {
 
         Intent sendIntent = Intent.createChooser(shareIntent, "latestlog.txt");
         context.startActivity(sendIntent);
+    }
+
+    /** Mesure the textview height, given its current parameters */
+    public static int mesureTextviewHeight(TextView t) {
+        int widthMeasureSpec = View.MeasureSpec.makeMeasureSpec(t.getWidth(), View.MeasureSpec.AT_MOST);
+        int heightMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+        t.measure(widthMeasureSpec, heightMeasureSpec);
+        return t.getMeasuredHeight();
     }
 }

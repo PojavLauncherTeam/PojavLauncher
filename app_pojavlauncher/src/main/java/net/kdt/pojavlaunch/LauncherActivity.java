@@ -24,6 +24,7 @@ import androidx.fragment.app.FragmentManager;
 import com.kdt.mcgui.ProgressLayout;
 import com.kdt.mcgui.mcAccountSpinner;
 
+import net.kdt.pojavlaunch.contextexecutor.ContextExecutor;
 import net.kdt.pojavlaunch.fragments.MainMenuFragment;
 import net.kdt.pojavlaunch.fragments.MicrosoftLoginFragment;
 import net.kdt.pojavlaunch.extra.ExtraConstants;
@@ -31,6 +32,8 @@ import net.kdt.pojavlaunch.extra.ExtraCore;
 import net.kdt.pojavlaunch.extra.ExtraListener;
 
 import net.kdt.pojavlaunch.fragments.SelectAuthFragment;
+import net.kdt.pojavlaunch.modloaders.modpacks.ModloaderInstallTracker;
+import net.kdt.pojavlaunch.modloaders.modpacks.imagecache.IconCacheJanitor;
 import net.kdt.pojavlaunch.multirt.MultiRTConfigDialog;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.prefs.screens.LauncherPreferenceFragment;
@@ -53,6 +56,7 @@ public class LauncherActivity extends BaseActivity {
     private ImageButton mSettingsButton, mDeleteAccountButton;
     private ProgressLayout mProgressLayout;
     private ProgressServiceKeeper mProgressServiceKeeper;
+    private ModloaderInstallTracker mInstallTracker;
 
     /* Allows to switch from one button "type" to another */
     private final FragmentManager.FragmentLifecycleCallbacks mFragmentCallbackListener = new FragmentManager.FragmentLifecycleCallbacks() {
@@ -152,6 +156,7 @@ public class LauncherActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pojav_launcher);
+        IconCacheJanitor.runJanitor();
         getWindow().setBackgroundDrawable(null);
         bindViews();
         ProgressKeeper.addTaskCountListener((mProgressServiceKeeper = new ProgressServiceKeeper(this)));
@@ -167,11 +172,27 @@ public class LauncherActivity extends BaseActivity {
 
         new AsyncVersionList().getVersionList(versions -> ExtraCore.setValue(ExtraConstants.RELEASE_TABLE, versions), false);
 
+        mInstallTracker = new ModloaderInstallTracker(this);
+
         mProgressLayout.observe(ProgressLayout.DOWNLOAD_MINECRAFT);
         mProgressLayout.observe(ProgressLayout.UNPACK_RUNTIME);
         mProgressLayout.observe(ProgressLayout.INSTALL_MODPACK);
         mProgressLayout.observe(ProgressLayout.AUTHENTICATE_MICROSOFT);
         mProgressLayout.observe(ProgressLayout.DOWNLOAD_VERSION_LIST);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ContextExecutor.setActivity(this);
+        mInstallTracker.attach();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        ContextExecutor.clearActivity();
+        mInstallTracker.detach();
     }
 
     @Override

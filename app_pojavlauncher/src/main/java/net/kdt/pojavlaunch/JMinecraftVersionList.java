@@ -39,6 +39,7 @@ public class JMinecraftVersionList {
     public static class JavaVersionInfo {
         public String component;
         public int majorVersion;
+        public int version; // parameter used by LabyMod 4
     }
     @Keep
     public static class LoggingConfig {

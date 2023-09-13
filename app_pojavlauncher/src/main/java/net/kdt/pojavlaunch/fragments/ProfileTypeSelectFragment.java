@@ -31,5 +31,9 @@ public class ProfileTypeSelectFragment extends Fragment {
                 Tools.swapFragment(requireActivity(), FabricInstallFragment.class, FabricInstallFragment.TAG, false, null));
         view.findViewById(R.id.modded_profile_forge).setOnClickListener((v)->
                 Tools.swapFragment(requireActivity(), ForgeInstallFragment.class, ForgeInstallFragment.TAG, false, null));
+        view.findViewById(R.id.modded_profile_modpack).setOnClickListener((v)->
+                Tools.swapFragment(requireActivity(), SearchModFragment.class, SearchModFragment.TAG, false, null));
+        view.findViewById(R.id.modded_profile_quilt).setOnClickListener((v)->
+                Tools.swapFragment(requireActivity(), QuiltInstallFragment.class, QuiltInstallFragment.TAG, false, null));
     }
 }

@@ -15,6 +15,7 @@ jobs:
     runs-on: ubuntu-22.04
     env:
       GPLAY_KEYSTORE_PASSWORD: ${{ secrets.GPLAY_KEYSTORE_PASSWORD }}
+      CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3

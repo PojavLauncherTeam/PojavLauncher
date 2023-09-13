@@ -1,7 +1,10 @@
 package net.kdt.pojavlaunch.customcontrols;
 
 import static android.content.Context.INPUT_METHOD_SERVICE;
+import static net.kdt.pojavlaunch.MainActivity.mControlLayout;
 import static net.kdt.pojavlaunch.Tools.currentDisplayMetrics;
+
+import static org.lwjgl.glfw.CallbackBridge.isGrabbing;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -27,6 +30,7 @@ import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.customcontrols.buttons.ControlButton;
 import net.kdt.pojavlaunch.customcontrols.buttons.ControlDrawer;
 import net.kdt.pojavlaunch.customcontrols.buttons.ControlInterface;
+import net.kdt.pojavlaunch.customcontrols.buttons.ControlJoystick;
 import net.kdt.pojavlaunch.customcontrols.buttons.ControlSubButton;
 import net.kdt.pojavlaunch.customcontrols.handleview.ActionRow;
 import net.kdt.pojavlaunch.customcontrols.handleview.ControlHandleView;
@@ -107,6 +111,12 @@ public class ControlLayout extends FrameLayout {
 			if(mModifiable) drawer.areButtonsVisible = true;
 		}
 
+		// Joystick(s)
+		for(ControlJoystickData joystick : mLayout.mJoystickDataList){
+			addJoystickView(joystick);
+		}
+
+
 		mLayout.scaledAt = LauncherPreferences.PREF_BUTTONSIZE;
 
 		setModified(false);
@@ -177,13 +187,24 @@ public class ControlLayout extends FrameLayout {
 			view.setFocusable(false);
 			view.setFocusableInTouchMode(false);
 		}else{
-			view.setVisible(drawer.areButtonsVisible);
+			view.setVisible(true);
 		}
 
-		drawer.addButton(view);
 		addView(view);
+		drawer.addButton(view);
+
 
 		setModified(true);
+	}
+
+	// JOYSTICK BUTTON
+	public void addJoystickButton(ControlJoystickData data){
+		mLayout.mJoystickDataList.add(data);
+		addJoystickView(data);
+	}
+
+	private void addJoystickView(ControlJoystickData data){
+		addView(new ControlJoystick(this, data));
 	}
 
 
@@ -220,7 +241,7 @@ public class ControlLayout extends FrameLayout {
 
 		mControlVisible = isVisible;
 		for(ControlInterface button : getButtonChildren()){
-			button.setVisible(isVisible);
+			button.setVisible(((button.getProperties().displayInGame && isGrabbing()) || (button.getProperties().displayInMenu && !isGrabbing())) && isVisible);
 		}
 	}
 
@@ -229,6 +250,12 @@ public class ControlLayout extends FrameLayout {
 			removeEditWindow();
 		}
 		mModifiable = isModifiable;
+		if(isModifiable){
+			// In edit mode, all controls have to be shown
+			for(ControlInterface button : getButtonChildren()){
+				button.setVisible(true);
+			}
+		}
 	}
 
 	public boolean getModifiable(){
@@ -555,5 +582,9 @@ public class ControlLayout extends FrameLayout {
 		builder.setPositiveButton(R.string.global_yes, (d,w)->exitListener.exitEditor());
 		builder.setNegativeButton(R.string.global_no, (d,w)->{});
 		builder.show();
+	}
+
+	public boolean areControlVisible(){
+		return mControlVisible;
 	}
 }

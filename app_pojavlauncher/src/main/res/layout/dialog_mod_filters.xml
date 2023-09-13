@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingHorizontal="@dimen/padding_heavy"
+    android:paddingBottom="@dimen/padding_large"
+    android:paddingTop="@dimen/padding_heavy"
+    >
+
+    <!-- Version filter -->
+    <TextView
+        android:id="@+id/search_mod_mc_version_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/profiles_profile_version"
+        app:layout_constraintTop_toTopOf="parent"
+
+        app:layout_constraintStart_toStartOf="@+id/search_mod_selected_mc_version_textview" />
+
+    <TextView
+        android:id="@+id/search_mod_selected_mc_version_textview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:layout_marginEnd="@dimen/padding_medium"
+
+        android:background="@drawable/background_line"
+        android:hint="@string/version_select_hint"
+        android:paddingHorizontal="@dimen/padding_heavy"
+        android:textSize="@dimen/_13ssp"
+
+        app:layout_constraintEnd_toStartOf="@+id/search_mod_mc_version_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_mod_mc_version_textview" />
+
+    <Button
+        android:id="@+id/search_mod_mc_version_button"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:paddingHorizontal="@dimen/padding_large"
+
+        android:text="@string/global_select"
+
+        app:layout_constraintBottom_toBottomOf="@+id/search_mod_selected_mc_version_textview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/search_mod_selected_mc_version_textview" />
+
+    <!-- Apply -->
+    <com.kdt.mcgui.MineButton
+        android:id="@+id/search_mod_apply_filters"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/generic_apply"
+        android:layout_marginVertical="@dimen/padding_large"
+
+        app:layout_constraintTop_toBottomOf="@id/search_mod_selected_mc_version_textview"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

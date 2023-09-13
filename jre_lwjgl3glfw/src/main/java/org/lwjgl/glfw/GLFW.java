@@ -371,6 +371,15 @@ public class GLFW
     GLFW_COCOA_CHDIR_RESOURCES = 0x51001,
     GLFW_COCOA_MENUBAR         = 0x51002;
 
+    /** Hint value for {@link #GLFW_PLATFORM PLATFORM} that enables automatic platform selection. */
+    public static final int
+        GLFW_ANY_PLATFORM     = 0x60000,
+        GLFW_PLATFORM_WIN32   = 0x60001,
+        GLFW_PLATFORM_COCOA   = 0x60002,
+        GLFW_PLATFORM_WAYLAND = 0x60003,
+        GLFW_PLATFORM_X11     = 0x60004,
+        GLFW_PLATFORM_NULL    = 0x60005;
+
     /** Don't care value. */
     public static final int GLFW_DONT_CARE = -1;
 
@@ -614,6 +623,7 @@ public class GLFW
         //DetachOnCurrentThread = apiGetFunctionAddress(GLFW, "pojavDetachOnCurrentThread"),
         MakeContextCurrent = apiGetFunctionAddress(GLFW, "pojavMakeCurrent"),
         Terminate = apiGetFunctionAddress(GLFW, "pojavTerminate"),
+        SetWindowHint = apiGetFunctionAddress(GLFW, "pojavSetWindowHint"),
         SwapBuffers = apiGetFunctionAddress(GLFW, "pojavSwapBuffers"),
         SwapInterval = apiGetFunctionAddress(GLFW, "pojavSwapInterval"),
         PumpEvents = apiGetFunctionAddress(GLFW, "pojavPumpEvents"),
@@ -822,6 +832,10 @@ public class GLFW
 
     public static void glfwInitHint(int hint, int value) { }
 
+    public static int glfwGetPlatform() {
+        return GLFW_PLATFORM_X11;
+    }
+
     @NativeType("GLFWwindow *")
     public static long glfwGetCurrentContext() {
         long __functionAddress = Functions.GetCurrentContext;
@@ -977,7 +991,6 @@ public class GLFW
         return invokePP(share, Functions.CreateContext);
     }
     public static long glfwCreateWindow(int width, int height, CharSequence title, long monitor, long share) {
-        EventLoop.OffScreen.check();
         // Create an ACTUAL EGL context
         long ptr = nglfwCreateContext(share);
         //nativeEglMakeCurrent(ptr);
@@ -1032,7 +1045,12 @@ public class GLFW
     public static void glfwShowWindow(long window) {
         nglfwSetShowingWindow(window);
     }
-    public static void glfwWindowHint(int hint, int value) {}
+
+    public static void glfwWindowHint(int hint, int value) {
+        long __functionAddress = Functions.SetWindowHint;
+        invokeV(hint, value, __functionAddress);
+    }
+
     public static void glfwWindowHintString(int hint, @NativeType("const char *") ByteBuffer value) {}
     public static void glfwWindowHintString(int hint, @NativeType("const char *") CharSequence value) {}
 

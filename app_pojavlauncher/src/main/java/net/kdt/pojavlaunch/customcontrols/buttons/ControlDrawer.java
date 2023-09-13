@@ -2,7 +2,9 @@ package net.kdt.pojavlaunch.customcontrols.buttons;
 
 import android.annotation.SuppressLint;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.customcontrols.ControlData;
@@ -40,18 +42,19 @@ public class ControlDrawer extends ControlButton {
 
     public void addButton(ControlSubButton button){
         buttons.add(button);
-        setControlButtonVisibility(button, areButtonsVisible);
         syncButtons();
+        setControlButtonVisibility(button, areButtonsVisible);
     }
 
     private void setControlButtonVisibility(ControlButton button, boolean isVisible){
-        button.setVisible(isVisible);
+        button.getControlView().setVisibility(isVisible ? VISIBLE : GONE);
     }
 
     private void switchButtonVisibility(){
         areButtonsVisible = !areButtonsVisible;
+        int visibility = areButtonsVisible ? VISIBLE : GONE;
         for(ControlButton button : buttons){
-            button.setVisible(areButtonsVisible);
+            button.getControlView().setVisibility(visibility);
         }
     }
 
@@ -88,7 +91,7 @@ public class ControlDrawer extends ControlButton {
 
 
     private void resizeButtons(){
-        if (buttons == null) return;
+        if (buttons == null || drawerData.orientation == ControlDrawerData.Orientation.FREE) return;
         for(ControlSubButton subButton : buttons){
             subButton.mProperties.setWidth(mProperties.getWidth());
             subButton.mProperties.setHeight(mProperties.getHeight());
@@ -124,8 +127,13 @@ public class ControlDrawer extends ControlButton {
 
     @Override
     public void setVisible(boolean isVisible) {
-        //TODO replicate changes to his children ?
-        setVisibility(isVisible ? VISIBLE : GONE);
+        int visibility = isVisible ? VISIBLE : GONE;
+        setVisibility(visibility);
+        if(visibility == GONE || areButtonsVisible) {
+            for(ControlSubButton button : buttons){
+                button.getControlView().setVisibility(isVisible ? VISIBLE : (!mProperties.isHideable && getVisibility() == GONE) ? VISIBLE : View.GONE);
+            }
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")

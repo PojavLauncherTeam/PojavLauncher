@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.kdt.DefocusableScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.kdt.DefocusableScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="@dimen/_280sdp"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/background_app"
-    android:layout_marginVertical="@dimen/_14sdp"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="@dimen/padding_heavy"
+    android:background="@drawable/background_control_editor"
+    android:layout_gravity="center_vertical"
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/edit_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="@dimen/_5sdp"
-        android:paddingVertical="@dimen/_5sdp"
+        android:paddingHorizontal="@dimen/padding_moderate"
+        android:paddingVertical="@dimen/padding_moderate"
         app:layout_optimizationLevel="standard|dimensions|chains">
 
 
@@ -58,7 +58,7 @@
 
         <EditText
             android:id="@+id/editSize_editTextX"
-            android:layout_width="@dimen/_138sdp"
+            android:layout_width="@dimen/_134sdp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:imeOptions="flagNoExtractUi"
@@ -81,6 +81,7 @@
             app:layout_constraintTop_toTopOf="@+id/editSize_editTextX" />
 
         <TextView
+            android:id="@+id/editSize_x_textView"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:gravity="center"
@@ -103,21 +104,89 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editSize_editTextX" />
 
+        <!--
+            Spinners are hidden to handle to workaround the horizontal offset.
+            The horizontal offset was needed to display the spinner list at the same place.
+            Sadly it is broken since Android Jelly Bean and never scheduled to be fixed
+        -->
         <Spinner
             android:id="@+id/editMapping_spinner_1"
             android:layout_width="0dp"
             android:layout_height="30dp"
-            android:background="@android:color/transparent"
+            android:dropDownWidth="match_parent"
+            android:dropDownVerticalOffset="30dp"
             android:gravity="center"
+            android:visibility="invisible"
+            android:background="@android:color/transparent"
 
-            app:layout_constraintBottom_toTopOf="@id/editMapping_spinner_3"
-            app:layout_constraintEnd_toStartOf="@id/editMapping_spinner_2"
-
-            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editMapping_textView"
-            app:layout_constraintVertical_chainStyle="spread" />
+            app:layout_constraintTop_toBottomOf="@+id/editMapping_textView" />
 
+
+        <Spinner
+            android:id="@+id/editMapping_spinner_2"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:dropDownWidth="match_parent"
+            android:dropDownHorizontalOffset="30dp"
+            android:dropDownVerticalOffset="30dp"
+            android:gravity="center"
+            android:visibility="invisible"
+            android:background="@android:color/transparent"
+
+            app:layout_constraintTop_toBottomOf="@+id/editMapping_textView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Spinner
+            android:id="@+id/editMapping_spinner_3"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:dropDownWidth="match_parent"
+            android:dropDownVerticalOffset="30dp"
+            android:gravity="center"
+            android:visibility="invisible"
+            android:background="@android:color/transparent"
+
+            app:layout_constraintTop_toTopOf="@+id/mapping_3_textview"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <Spinner
+            android:id="@+id/editMapping_spinner_4"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:dropDownWidth="match_parent"
+            android:dropDownVerticalOffset="30dp"
+            android:visibility="invisible"
+            android:background="@android:color/transparent"
+
+            app:layout_constraintTop_toTopOf="@+id/mapping_3_textview"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <!-- Clickable textview linked to the spinners
+            Spinners are hidden at the same place because the dropdown offset doesn't work
+            Do those textview acts as the spinner idle state
+        -->
+
+        <TextView
+            android:id="@+id/mapping_1_textview"
+            style="?android:attr/spinnerItemStyle"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_30sdp"
+            android:ellipsize="marquee"
+            android:gravity="center"
+            android:singleLine="true"
+            android:textAlignment="inherit"
+
+            app:layout_constraintEnd_toStartOf="@id/mapping_2_textview"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/editMapping_textView"
+
+            tools:text="HELLO" />
 
         <TextView
             android:id="@+id/editMapping_plus_1"
@@ -126,47 +195,42 @@
             android:gravity="center"
             android:text="+"
 
-            app:layout_constraintBottom_toBottomOf="@+id/editMapping_spinner_1"
-            app:layout_constraintEnd_toEndOf="@+id/editMapping_spinner_1"
-            app:layout_constraintTop_toTopOf="@+id/editMapping_spinner_1" />
-
-
-        <Spinner
-            android:id="@+id/editMapping_spinner_2"
-            android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:background="@android:color/transparent"
-            android:gravity="center"
-
-            app:layout_constraintBottom_toBottomOf="@+id/editMapping_spinner_1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/editMapping_spinner_1"
-            app:layout_constraintTop_toTopOf="@+id/editMapping_spinner_1" />
+            app:layout_constraintBottom_toBottomOf="@+id/mapping_1_textview"
+            app:layout_constraintEnd_toEndOf="@+id/mapping_1_textview"
+            app:layout_constraintStart_toEndOf="@id/mapping_1_textview"
+            app:layout_constraintTop_toTopOf="@+id/mapping_1_textview" />
 
         <TextView
-            android:id="@+id/editMapping_plus_2"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:gravity="center"
-            android:text="+"
-
-            app:layout_constraintBottom_toBottomOf="@id/editMapping_textView"
-            app:layout_constraintEnd_toEndOf="@id/editMapping_textView"
-            app:layout_constraintTop_toTopOf="@id/editMapping_spinner_3"
-
-            />
-
-        <Spinner
-            android:id="@+id/editMapping_spinner_3"
+            android:id="@+id/mapping_2_textview"
+            style="?android:attr/spinnerItemStyle"
             android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:background="@android:color/transparent"
+            android:layout_height="@dimen/_30sdp"
+            android:ellipsize="marquee"
             android:gravity="center"
+            android:singleLine="true"
+            android:textAlignment="inherit"
 
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/mapping_1_textview"
 
-            app:layout_constraintEnd_toStartOf="@id/editMapping_spinner_4"
+            app:layout_constraintTop_toTopOf="@+id/mapping_1_textview"
+            tools:text="HELLO" />
+
+        <TextView
+            android:id="@+id/mapping_3_textview"
+            style="?android:attr/spinnerItemStyle"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_30sdp"
+            android:ellipsize="marquee"
+            android:gravity="center"
+            android:singleLine="true"
+            android:textAlignment="inherit"
+
+            app:layout_constraintEnd_toStartOf="@id/mapping_4_textview"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/editMapping_spinner_1" />
+            app:layout_constraintTop_toBottomOf="@id/mapping_1_textview"
+
+            tools:text="HELLO" />
 
         <TextView
             android:id="@+id/editMapping_plus_3"
@@ -176,21 +240,26 @@
             android:text="+"
 
 
-            app:layout_constraintBottom_toBottomOf="@+id/editMapping_spinner_3"
-            app:layout_constraintEnd_toEndOf="@+id/editMapping_spinner_3"
-            app:layout_constraintTop_toBottomOf="@+id/editMapping_spinner_1" />
+            app:layout_constraintBottom_toBottomOf="@+id/mapping_3_textview"
+            app:layout_constraintEnd_toEndOf="@+id/mapping_3_textview"
+            app:layout_constraintStart_toEndOf="@id/mapping_3_textview"
+            app:layout_constraintTop_toBottomOf="@+id/mapping_1_textview" />
 
-        <Spinner
-            android:id="@+id/editMapping_spinner_4"
+        <TextView
+            android:id="@+id/mapping_4_textview"
+            style="?android:attr/spinnerItemStyle"
             android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:background="@android:color/transparent"
+            android:layout_height="@dimen/_30sdp"
+            android:ellipsize="marquee"
             android:gravity="center"
-
+            android:singleLine="true"
+            android:textAlignment="inherit"
 
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/editMapping_spinner_3"
-            app:layout_constraintTop_toBottomOf="@id/editMapping_spinner_2" />
+            app:layout_constraintStart_toEndOf="@id/mapping_3_textview"
+            app:layout_constraintTop_toTopOf="@id/mapping_3_textview"
+
+            tools:text="HELLO" />
 
 
         <!-- ORIENTATION SECTION -->
@@ -198,17 +267,18 @@
             android:id="@+id/editOrientation_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_2sdp"
             android:gravity="center"
             android:paddingEnd="5dp"
             android:text="@string/customctrl_orientation"
 
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editMapping_spinner_3" />
+            app:layout_constraintTop_toBottomOf="@+id/mapping_3_textview" />
 
         <Spinner
             android:id="@+id/editOrientation_spinner"
             android:layout_width="0dp"
-            android:layout_height="30dp"
+            android:layout_height="@dimen/_30sdp"
             android:background="@android:color/transparent"
 
 
@@ -220,7 +290,7 @@
         <Switch
             android:id="@+id/checkboxToggle"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="@dimen/_36sdp"
             android:text="@string/customctrl_toggle"
 
             app:layout_constraintStart_toStartOf="parent"
@@ -231,7 +301,7 @@
         <Switch
             android:id="@+id/checkboxPassThrough"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="@dimen/_36sdp"
             android:text="@string/customctrl_passthru"
 
             app:layout_constraintStart_toStartOf="parent"
@@ -242,31 +312,41 @@
         <Switch
             android:id="@+id/checkboxSwipeable"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="@dimen/_36sdp"
             android:text="@string/customctrl_swipeable"
 
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/checkboxPassThrough"
             tools:ignore="UseSwitchCompatOrMaterialXml" />
 
+        <!-- FORWARD LOCK SECTION -->
+        <Switch
+            android:id="@+id/checkboxForwardLock"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_36sdp"
+            android:text="@string/customctrl_forward_lock"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/checkboxSwipeable"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+
         <!-- BACKGROUND COLOR SECTION -->
         <fr.spse.extended_view.ExtendedTextView
             android:id="@+id/editBackgroundColor_textView"
-            android:background="?attr/selectableItemBackground"
             android:layout_width="0dp"
-            android:layout_height="35dp"
+            android:layout_height="@dimen/_35sdp"
+            android:background="?attr/selectableItemBackground"
+            android:drawableEnd="@drawable/spinner_arrow_right"
             android:gravity="center_vertical"
             android:paddingEnd="5dp"
             android:text="@string/customctrl_background_color"
-            android:drawableEnd="@drawable/spinner_arrow_right"
-            app:drawableEndSize="20dp"
             app:drawableEndIntegerScaling="true"
+            app:drawableEndSize="20dp"
 
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/checkboxSwipeable" />
-
+            app:layout_constraintTop_toBottomOf="@id/checkboxForwardLock" />
 
 
         <!-- STROKE WIDTH -->
@@ -274,6 +354,7 @@
             android:id="@+id/editStrokeWidth_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
             android:gravity="center"
             android:paddingEnd="5dp"
             android:text="@string/customctrl_stroke_width"
@@ -285,7 +366,7 @@
         <SeekBar
             android:id="@+id/editStrokeWidth_seekbar"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/_36sdp"
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.538"
@@ -307,7 +388,7 @@
         <fr.spse.extended_view.ExtendedTextView
             android:id="@+id/editStrokeColor_textView"
             android:layout_width="0dp"
-            android:layout_height="35dp"
+            android:layout_height="@dimen/_35sdp"
             android:background="?attr/selectableItemBackground"
             android:drawableEnd="@drawable/spinner_arrow_right"
             android:gravity="center_vertical"
@@ -337,7 +418,7 @@
         <SeekBar
             android:id="@+id/editCornerRadius_seekbar"
             android:layout_width="0dp"
-            android:layout_height="30dp"
+            android:layout_height="@dimen/_36sdp"
 
 
             app:layout_constraintEnd_toEndOf="parent"
@@ -371,9 +452,7 @@
         <SeekBar
             android:id="@+id/editButtonOpacity_seekbar"
             android:layout_width="0dp"
-            android:layout_height="30dp"
-
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_height="@dimen/_36sdp"
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -389,6 +468,29 @@
             app:layout_constraintBottom_toBottomOf="@id/editButtonOpacity_textView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/editButtonOpacity_textView" />
+
+        <!-- Button visibility -->
+        <TextView
+            android:id="@+id/visibility_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Visibility"
+            app:layout_constraintTop_toBottomOf="@+id/editButtonOpacity_seekbar"
+            tools:layout_editor_absoluteX="6dp" />
+
+        <CheckBox
+            android:id="@+id/visibility_game_checkbox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="In game"
+            app:layout_constraintTop_toBottomOf="@+id/visibility_textview" />
+
+        <CheckBox
+            android:id="@+id/visibility_menu_checkbox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="In Menu"
+            app:layout_constraintTop_toBottomOf="@+id/visibility_game_checkbox" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

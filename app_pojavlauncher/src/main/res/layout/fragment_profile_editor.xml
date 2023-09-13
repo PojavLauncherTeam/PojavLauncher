@@ -63,8 +63,11 @@
 
         <Button
             android:id="@+id/vprof_editor_version_button"
-            android:layout_width="@dimen/_72sdp"
+            android:layout_width="wrap_content"
             android:layout_height="0dp"
+            android:paddingHorizontal="@dimen/padding_large"
+            android:paddingVertical="0px"
+
 
             android:text="@string/global_select"
 
@@ -99,9 +102,9 @@
 
         <Button
             android:id="@+id/vprof_editor_ctrl_button"
-            android:layout_width="@dimen/_72sdp"
+            android:layout_width="wrap_content"
             android:layout_height="0dp"
-
+            android:paddingHorizontal="@dimen/padding_large"
             android:text="@string/global_select"
 
 
@@ -161,8 +164,9 @@
 
         <Button
             android:id="@+id/vprof_editor_path_button"
-            android:layout_width="@dimen/_72sdp"
+            android:layout_width="wrap_content"
             android:layout_height="0dp"
+            android:paddingHorizontal="@dimen/padding_large"
             android:text="@string/global_select"
 
             app:layout_constraintBottom_toBottomOf="@id/vprof_editor_path"
@@ -184,11 +188,11 @@
             android:layout_marginTop="32dp"
             android:background="@drawable/background_line"
             android:paddingVertical="0px"
-            android:textSize="@dimen/_13ssp"
+
 
             app:layout_constraintTop_toBottomOf="@+id/vprof_editor_path"
 
-            tools:paddingVertical="@dimen/_16sdp" />
+            tools:paddingVertical="@dimen/_12sdp" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -221,7 +225,7 @@
 
 
             app:layout_constraintTop_toBottomOf="@+id/vprof_editor_spinner_runtime"
-            tools:paddingVertical="@dimen/_16sdp" />
+            tools:paddingVertical="@dimen/_12sdp" />
 
         <ImageView
             android:layout_width="wrap_content"

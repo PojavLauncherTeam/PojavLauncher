@@ -5,15 +5,20 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    
+
     <!-- Padding -->
     <dimen name="padding_tiny">@dimen/_1sdp</dimen>
     <dimen name="padding_small">@dimen/_2sdp</dimen>
     <dimen name="padding_medium">@dimen/_4sdp</dimen>
+    <dimen name="padding_moderate">@dimen/_6sdp</dimen>
     <dimen name="padding_heavy">@dimen/_12sdp</dimen>
     <dimen name="padding_large">@dimen/_16sdp</dimen>
     <dimen name="padding_extra_large">@dimen/_24sdp</dimen>
     <dimen name="padding_extra_extra_large">@dimen/_32sdp</dimen>
+
+    <!-- Input text padding -->
+    <dimen name="padding_input_bottom">@dimen/padding_heavy</dimen>
+    <dimen name="padding_input_top">@dimen/_11sdp</dimen>
 
     <!-- Main Activity components -->
     <dimen name="empty_icon_width">60dp</dimen>
