@@ -15,17 +15,17 @@
     <string name="login_online_check_keeplogin">Keep me logged in</string>
     <string name="login_online_login_label">Login</string>
 
-    <string name="login_error_invalid_username">Invalid username. Username must be in range of 3-16 characters, should only contains A-Z, a-z, 0-9 and underscore.</string>
+    <string name="login_error_invalid_username">Username must be in range of 3-16 characters, should only contains A-Z, a-z, 0-9 and underscore.</string>
     <string name="login_error_exist_username">This username already exist</string>
 
     <string name="login_microsoft">Microsoft login</string>
 
     <string name="login_select_account">Select account</string>
-    <string name="login_title_no_saved_account">No account found !</string>
-    <string name="login_dialog_no_saved_account">You don\'t have any saved account.\nUse the option <b>\"Keep me logged in\"</b> to save an account upon first login.</string>
+    <string name="login_title_no_saved_account">No account found!</string>
+    <string name="login_dialog_no_saved_account">You don\'t have any saved account.\nUse the <b>\"Keep me logged in\"</b> option to save the account at the first login.</string>
 
     <!-- Hint -->
-    <string name="hint_control_mapping">"Tap the top center cog icon to open the context menu ⚙\nTap a button to customize: edit, resize, delete, or customize it's keybind."</string>
+    <string name="hint_control_mapping">"Tap the top center cog icon to open the context menu"</string>
 
     <!-- Warnings -->
     <string name="warning_remove_account">This account will be removed!</string>
@@ -41,9 +41,9 @@
     <string name="error_show_less">Show less</string>
 
     <!-- Toast messages -->
-    <string name="toast_permission_denied">The read/write to storage permission is required!</string>
-    <string name="toast_optifine_success">Install successful</string>
-    <string name="toast_uninstalljre_done">Done uninstall Java Runtime</string>
+    <string name="toast_permission_denied">The storage permission is required!</string>
+    <string name="toast_optifine_success">Successfully installed</string>
+    <string name="toast_uninstalljre_done">Uninstalling Java Runtime completed</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
@@ -93,8 +93,8 @@
     <string name="mcl_setting_subtitle_flat_button_style">Enable this to change control button style to flat.</string>
     <string name="mcl_setting_title_buttonscale">Control buttons scaling</string>
     <string name="mcl_setting_subtitle_buttonscale">Upscale them if buttons are too small.</string>
-    <string name="mcl_setting_title_mousescale">Mouse scaling</string>
-    <string name="mcl_setting_subtitle_mousescale">Change size of virtual mouse.</string>
+    <string name="mcl_setting_title_mousescale">Pointer scaling</string>
+    <string name="mcl_setting_subtitle_mousescale">Change the pointer's size.</string>
     <string name="mcl_setting_title_javaargs">JVM Launch arguments</string>
     <string name="mcl_setting_subtitle_javaargs">Be careful, this may make game crash if modified without knowledge.</string>
     <string name="mcl_setting_category_general">General settings</string>
@@ -142,8 +142,8 @@
     <string name="control_keyboard">Keyboard</string>
     <string name="control_chat">Chat</string>
     <string name="control_debug">Debug</string>
-    <string name="control_primary">Pri</string>
-    <string name="control_secondary">Sec</string>
+    <string name="control_primary">LMB</string>
+    <string name="control_secondary">RMB</string>
     <string name="control_shift">◇</string>
     <string name="control_inventory">Inv</string>
     <string name="control_up">▲</string>
@@ -151,11 +151,11 @@
     <string name="control_right">▶</string>
     <string name="control_down">▼</string>
     <string name="control_jump">⬛</string>
-    <string name="control_thirdperson">3rd</string>
+    <string name="control_thirdperson">F5</string>
     <string name="control_listplayers">Tab</string>
-    <string name="control_mouse">Mouse</string>
-    <string name="control_mouseoff">Mouse: off</string>
-    <string name="control_mouseon">Mouse: on </string>
+    <string name="control_mouse">Pointer</string>
+    <string name="control_mouseoff">Pointer: off</string>
+    <string name="control_mouseon">Pointer: on </string>
 
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">Force close</string>
@@ -235,9 +235,9 @@
     <string name="mcl_disable_gestures_subtitle">Disables gestures, such as hold to break block, and tap to place a block.</string>
     <string name="mcl_disable_swap_hand">Disable double tap to swap hands</string>
     <string name="mcl_disable_swap_hand_subtitle">Disables double tap on an hotbar item to swap it in the second hand</string>
-    <string name="mcl_setting_title_mousespeed">Mouse Speed</string>
-    <string name="mcl_setting_subtitle_mousespeed">Changes the speed of the software mouse</string>
-    <string name="customctrl_passthru">Mouse pass-thru</string>
+    <string name="mcl_setting_title_mousespeed">Pointer Speed</string>
+    <string name="mcl_setting_subtitle_mousespeed">Changes the pointer's speed</string>
+    <string name="customctrl_passthru">Pointer pass-thru</string>
     <string name="customctrl_swipeable">Swipeable</string>
     <string name="customctrl_forward_lock">Forward lock</string>
     <string name="customctrl_rounded">Rounded</string>
@@ -276,8 +276,8 @@
 
     <string name="preference_control_offset_title">Control side offsets</string>
     <string name="preference_control_offset_description">Set a custom offset to each side of the screen</string>
-    <string name="preference_mouse_start_title">Start with virtual mouse on</string>
-    <string name="preference_mouse_start_description">Virtual Mouse appears at startup when this option is on</string>
+    <string name="preference_mouse_start_title">Start with pointer on</string>
+    <string name="preference_mouse_start_description">Pointer appears at startup when this option is on</string>
     <string name="preference_video_title">Video and renderer</string>
     <string name="preference_video_description">Resolution, scaling type, and renderer</string>
     <string name="preference_control_title">Control customization</string>
@@ -298,7 +298,7 @@
     <string name="preference_edit_controls_summary">Tweak the control scheme to fit your needs</string>
 
     <string name="preference_category_gyro_controls">Gyro controls</string>
-    <string name="preference_category_virtual_mouse">Virtual mouse</string>
+    <string name="preference_category_virtual_mouse">Pointer</string>
 
     <string name="preference_gyro_invert_x_axis">Invert X axis</string>
     <string name="preference_gyro_invert_y_axis">Invert Y axis</string>
