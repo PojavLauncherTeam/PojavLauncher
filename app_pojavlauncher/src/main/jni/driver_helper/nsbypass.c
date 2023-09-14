@@ -38,11 +38,12 @@ typedef struct android_namespace_t* (*ld_android_create_namespace_t)(
         const char* name, const char* ld_library_path, const char* default_library_path, uint64_t type,
         const char* permitted_when_isolated_path, struct android_namespace_t* parent, const void* caller_addr);
 
-typedef struct android_namespace_t* (*ld_android_get_exported_namespace_t)(const char* name, const void* caller_addr);
+typedef void* (*ld_android_link_namespaces_t)(struct android_namespace_t* namespace_from,
+                                              struct android_namespace_t* namespace_to,
+                                              const char* shared_libs_sonames);
 
 static ld_android_create_namespace_t android_create_namespace;
-static ld_android_get_exported_namespace_t android_get_exported_namespace;
-static struct android_namespace_t* namespace;
+static struct android_namespace_t* driver_namespace;
 
 struct android_namespace_t* local_android_create_namespace(
         const char* name, const char* ld_library_path, const char* default_library_path, uint64_t type,
@@ -51,58 +52,78 @@ struct android_namespace_t* local_android_create_namespace(
     return android_create_namespace(name, ld_library_path, default_library_path, type, permitted_when_isolated_path, parent, caller);
 }
 
-struct android_namespace_t* ns_android_get_exported_namespace(
-        const char* name) {
-    void* caller = __builtin_return_address(0);
-    return android_get_exported_namespace(name, caller);
+// Find the first "branch to label" function in the function provided in func_start
+static void* find_branch_label(void* func_start) {
+    // round down the pointer to get the start of the function's page
+    void* func_page_start = (void*)(((uintptr_t)func_start) & ~(PAGE_SIZE-1));
+    // remap to r-x to bypass "execute only" protections on MIUI
+    mprotect(func_page_start, PAGE_SIZE, PROT_READ | PROT_EXEC);
+    uint32_t* bl_addr = func_start;
+    // search for the "branch to label" opcode
+    while((*bl_addr & OP_MS) != BL_OP) {
+        bl_addr++; // walk through memory until we find it or die
+    }
+    // offset the address to find where the "branch to label" instrunction
+    // points to.
+    return ((char*)bl_addr) + (*bl_addr & BL_IM) * 4;
 }
-
 
 bool linker_ns_load(const char* lib_search_path) {
 #ifndef ADRENO_POSSIBLE
     return false;
-#endif
-    uint32_t *dlext_bl_addr = (uint32_t*)&dlopen;
-    while((*dlext_bl_addr & OP_MS) !=
-          BL_OP) dlext_bl_addr++; //walk through the function until we find the label that we need to go to
-    __android_log_print(ANDROID_LOG_INFO, "nsbypass", "found branch label: %u", *dlext_bl_addr);
-    loader_dlopen_t loader_dlopen;
-    loader_dlopen = (loader_dlopen_t)(((char *) dlext_bl_addr) + (*dlext_bl_addr & BL_IM)*4);
-    mprotect(loader_dlopen, PAGE_SIZE, PROT_WRITE | PROT_READ | PROT_EXEC); // reprotecting the function removes protection from indirect jumps
+#else
+    loader_dlopen_t loader_dlopen = find_branch_label(&dlopen);
+    // reprotecting the functions removes protection from indirect jumps
+    mprotect(loader_dlopen, PAGE_SIZE, PROT_WRITE | PROT_READ | PROT_EXEC);
     void* ld_android_handle = loader_dlopen("ld-android.so", RTLD_LAZY, &dlopen);
-    __android_log_print(ANDROID_LOG_INFO, "nsbypass", "ld-android.so handle: %p", ld_android_handle);
-    if(ld_android_handle == NULL) return false;
+    if(ld_android_handle == NULL) {
+        return false;
+    }
+    // load the two functions we need
     android_create_namespace = dlsym(ld_android_handle, "__loader_android_create_namespace");
-    android_get_exported_namespace = dlsym(ld_android_handle, "__loader_android_get_exported_namespace");
-    if(android_create_namespace == NULL || android_get_exported_namespace == NULL) {
+    ld_android_link_namespaces_t android_link_namespaces = dlsym(ld_android_handle, "__loader_android_link_namespaces");
+    __android_log_print(ANDROID_LOG_INFO, "nsbypass", "found functions at %p %p", android_create_namespace, android_link_namespaces);
+    if(android_create_namespace == NULL || android_link_namespaces == NULL) {
         dlclose(ld_android_handle);
         return false;
     }
+    // assemble the full path search path
     char full_path[strlen(SEARCH_PATH) + strlen(lib_search_path) + 2 + 1];
     sprintf(full_path, "%s:%s", SEARCH_PATH, lib_search_path);
-    namespace = local_android_create_namespace("pojav-driver",
-                                               full_path,
-                                               full_path,
-                                               3 /* TYPE_SHAFED | TYPE_ISOLATED */,
-                                               "/system/:/data/:/vendor/:/apex/", NULL);
-    //dlclose(ld_android_handle);
+    driver_namespace = local_android_create_namespace("pojav-driver",
+                                                      full_path,
+                                                      full_path,
+                                                      3 /* TYPE_SHAFED | TYPE_ISOLATED */,
+                                                      "/system/:/data/:/vendor/:/apex/", NULL);
+    // THIS IS VERY IMPORTANT and how I trolled FoldCraft:
+    // You need to link the new driver_namespace with NULL and and add ld-android.so
+    // in the link list, to pass through the driver_namespace correctly.
+    // Not doing this fucks up internal __loader symbol lookup
+    // inside the new driver_namespace, thus breaking it on
+    // a lot of android versions
+    // FoldCraft got trolled because they copied the
+    // old broken code verbatim and didn't even test it thoroughly
+    android_link_namespaces(driver_namespace, NULL, "ld-android.so");
+    dlclose(ld_android_handle);
     return true;
+#endif
 }
 
 void* linker_ns_dlopen(const char* name, int flag) {
 #ifndef ADRENO_POSSIBLE
     return NULL;
-#endif
+#else
     android_dlextinfo dlextinfo;
     dlextinfo.flags = ANDROID_DLEXT_USE_NAMESPACE;
-    dlextinfo.library_namespace = namespace;
+    dlextinfo.library_namespace = driver_namespace;
     return android_dlopen_ext(name, flag, &dlextinfo);
+#endif
 }
 
 bool patch_elf_soname(int patchfd, int realfd, uint16_t patchid) {
     struct stat realstat;
     if(fstat(realfd, &realstat)) return false;
-    if(ftruncate(patchfd, realstat.st_size) == -1) return false;
+    if(ftruncate64(patchfd, realstat.st_size) == -1) return false;
     char* target = mmap(NULL, realstat.st_size, PROT_READ | PROT_WRITE, MAP_SHARED, patchfd, 0);
     if(!target) return false;
     if(read(realfd, target, realstat.st_size) != realstat.st_size) {
@@ -118,6 +139,7 @@ bool patch_elf_soname(int patchfd, int realfd, uint16_t patchid) {
         ELF_SHDR *hdr = &shdr[i];
         if(hdr->sh_type == SHT_DYNAMIC) {
             char* strtab = target + shdr[hdr->sh_link].sh_offset;
+            // If there's a warning below, it's bogus, ignore it
             ELF_DYN *dynEntries = (ELF_DYN*)(target + hdr->sh_offset);
             for(ELF_XWORD k = 0; k < (hdr->sh_size / hdr->sh_entsize);k++) {
                 ELF_DYN* dynEntry = &dynEntries[k];
@@ -138,7 +160,7 @@ bool patch_elf_soname(int patchfd, int realfd, uint16_t patchid) {
 void* linker_ns_dlopen_unique(const char* tmpdir, const char* name, int flags) {
 #ifndef ADRENO_POSSIBLE
     return NULL;
-#endif
+#else
     char pathbuf[PATH_MAX];
     static uint16_t patch_id;
     int patch_fd, real_fd;
@@ -159,7 +181,8 @@ void* linker_ns_dlopen_unique(const char* tmpdir, const char* name, int flags) {
     android_dlextinfo extinfo;
     extinfo.flags = ANDROID_DLEXT_USE_NAMESPACE | ANDROID_DLEXT_USE_LIBRARY_FD;
     extinfo.library_fd = patch_fd;
-    extinfo.library_namespace = namespace;
+    extinfo.library_namespace = driver_namespace;
     snprintf(pathbuf, PATH_MAX, "/proc/self/fd/%d", patch_fd);
     return android_dlopen_ext(pathbuf, flags, &extinfo);
+#endif
 }
