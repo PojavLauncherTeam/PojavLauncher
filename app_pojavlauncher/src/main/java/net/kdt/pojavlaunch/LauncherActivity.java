@@ -1,5 +1,6 @@
 package net.kdt.pojavlaunch;
 
+import static android.Manifest.permission.POST_NOTIFICATIONS;
 import static net.kdt.pojavlaunch.MainActivity.INTENT_MINECRAFT_VERSION;
 
 import android.Manifest;
@@ -179,6 +180,8 @@ public class LauncherActivity extends BaseActivity {
         mProgressLayout.observe(ProgressLayout.INSTALL_MODPACK);
         mProgressLayout.observe(ProgressLayout.AUTHENTICATE_MICROSOFT);
         mProgressLayout.observe(ProgressLayout.DOWNLOAD_VERSION_LIST);
+
+        if(Build.VERSION.SDK_INT >= 33 && ContextCompat.checkSelfPermission(this, POST_NOTIFICATIONS) == PackageManager.PERMISSION_DENIED) ActivityCompat.requestPermissions(this, new String[]{POST_NOTIFICATIONS}, 1);
     }
 
     @Override
