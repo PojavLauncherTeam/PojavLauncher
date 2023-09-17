@@ -164,13 +164,21 @@ void* load_turnip_vulkan() {
         dlclose(linkerhook);
         return NULL;
     }
-    void (*linkerhook_set_data)(void*) = dlsym(linkerhook, "app__pojav_linkerhook_pass_handle");
-    if(linkerhook_set_data == NULL) {
+    void* dl_android = linker_ns_dlopen("libdl_android.so", RTLD_LOCAL | RTLD_LAZY);
+    if(dl_android == NULL) {
         dlclose(linkerhook);
         dlclose(turnip_driver_handle);
         return NULL;
     }
-    linkerhook_set_data(turnip_driver_handle);
+    void* android_get_exported_namespace = dlsym(dl_android, "android_get_exported_namespace");
+    void (*linkerhook_pass_handles)(void*, void*, void*) = dlsym(linkerhook, "app__pojav_linkerhook_pass_handles");
+    if(linkerhook_pass_handles == NULL || android_get_exported_namespace == NULL) {
+        dlclose(dl_android);
+        dlclose(linkerhook);
+        dlclose(turnip_driver_handle);
+        return NULL;
+    }
+    linkerhook_pass_handles(turnip_driver_handle, android_dlopen_ext, android_get_exported_namespace);
     void* libvulkan = linker_ns_dlopen_unique(cache_dir, "libvulkan.so", RTLD_LOCAL | RTLD_NOW);
     return libvulkan;
 }
@@ -327,6 +335,16 @@ EXTERNAL_API void* pojavCreateContext(void* contextSrc) {
     }
     printf("Unknown config_renderer value: %i\n", pojav_environ->config_renderer);
     abort();
+}
+
+EXTERNAL_API JNIEXPORT jlong JNICALL
+Java_org_lwjgl_vulkan_VK_getVulkanDriverHandle(ABI_COMPAT JNIEnv *env, ABI_COMPAT jclass thiz) {
+    printf("EGLBridge: LWJGL-side Vulkan loader requested the Vulkan handle\n");
+    // The code below still uses the env var because
+    // 1. it's easier to do that
+    // 2. it won't break if something will try to load vulkan and osmesa simultaneously
+    if(getenv("VULKAN_PTR") == NULL) load_vulkan();
+    return strtoul(getenv("VULKAN_PTR"), NULL, 0x10);
 }
 
 EXTERNAL_API JNIEXPORT jlong JNICALL
