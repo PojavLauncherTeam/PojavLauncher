@@ -116,7 +116,7 @@
     <string name="mcn_exit_call">Выйти</string>
     <string name="mcn_exit_confirm">Вы уверены, что хотите принудительно завершить игру?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 не установлен!</string>
-    <string name="mcn_check_fail_vulkan_support">Визуализатор Vulkan Zink не поддерживается на этом устройстве!</string>
+    <string name="mcn_check_fail_vulkan_support">Визуализатор Vulkan Zink не поддерживается на этом устройстве.</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Клавиатура</string>
@@ -303,7 +303,7 @@
     <string name="folder_fragment_select">Выбрать</string>
     <string name="main_login_done">Вход выполнен</string>
     <string name="main_add_account">Добавить учётную запись</string>
-    <string name="tasks_ongoing">Уже в процессе, подождите…</string>
+    <string name="tasks_ongoing">Производится подготовка, подождите…</string>
     <string name="no_saved_accounts">Нет сохранённых учётных записей</string>
     <string name="downloading_versions">Загрузка списка версий…</string>
     <string name="mc_download_failed">Не удалось загрузить Minecraft! Это может возникать из-за медленного интернет-соединения или ошибок в размещении файлов.</string>
