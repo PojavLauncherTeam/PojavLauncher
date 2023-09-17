@@ -29,7 +29,6 @@ import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class ProfileEditorFragment extends Fragment {
@@ -67,13 +66,13 @@ public class ProfileEditorFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        mRenderNames = Arrays.asList(getResources().getStringArray(R.array.renderer_values));
         bindViews(view);
 
-        // Renderer spinner
-        List<String> renderList = new ArrayList<>(5);
-        Collections.addAll(renderList, getResources().getStringArray(R.array.renderer));
-        renderList.add("Default");
+        Tools.RenderersList renderersList = Tools.getCompatibleRenderers(view.getContext());
+        mRenderNames = renderersList.rendererIds;
+        List<String> renderList = new ArrayList<>(renderersList.rendererDisplayNames.length + 1);
+        renderList.addAll(Arrays.asList(renderersList.rendererDisplayNames));
+        renderList.add(view.getContext().getString(R.string.global_default));
         mDefaultRenderer.setAdapter(new ArrayAdapter<>(getContext(), R.layout.item_simple_list_1, renderList));
 
         // Set up behaviors

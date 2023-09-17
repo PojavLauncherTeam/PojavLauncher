@@ -6,10 +6,12 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.preference.ListPreference;
 import androidx.preference.SwitchPreference;
 import androidx.preference.SwitchPreferenceCompat;
 
 import net.kdt.pojavlaunch.R;
+import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.prefs.CustomSeekBarPreference;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 
@@ -36,6 +38,12 @@ public class LauncherPreferenceVideoFragment extends LauncherPreferenceFragment 
         // Sustained performance is only available since Nougat
         SwitchPreference sustainedPerfSwitch = findPreference("sustainedPerformance");
         sustainedPerfSwitch.setVisible(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N);
+
+        ListPreference rendererListPreference = findPreference("renderer");
+        Tools.RenderersList renderersList = Tools.getCompatibleRenderers(getContext());
+        rendererListPreference.setEntries(renderersList.rendererDisplayNames);
+        rendererListPreference.setEntryValues(renderersList.rendererIds.toArray(new String[0]));
+
         computeVisibility();
     }
 

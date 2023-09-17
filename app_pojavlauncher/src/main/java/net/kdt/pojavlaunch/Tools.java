@@ -16,7 +16,9 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
@@ -39,6 +41,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.res.TypedArrayUtils;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
@@ -116,6 +119,7 @@ public final class Tools {
     public static String CTRLMAP_PATH;
     public static String CTRLDEF_FILE;
     public static final int RUN_MOD_INSTALLER = 2050;
+    private static RenderersList sCompatibleRenderers;
 
 
     private static File getPojavStorageRoot(Context ctx) {
@@ -1075,5 +1079,57 @@ public final class Tools {
         int heightMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
         t.measure(widthMeasureSpec, heightMeasureSpec);
         return t.getMeasuredHeight();
+    }
+
+    public static class RenderersList {
+        public final List<String> rendererIds;
+        public final String[] rendererDisplayNames;
+
+        public RenderersList(List<String> rendererIds, String[] rendererDisplayNames) {
+            this.rendererIds = rendererIds;
+            this.rendererDisplayNames = rendererDisplayNames;
+        }
+    }
+
+    /** Return the renderers that are compatible with this device */
+    public static RenderersList getCompatibleRenderers(Context context) {
+        if(sCompatibleRenderers != null) return sCompatibleRenderers;
+        Resources resources = context.getResources();
+        String[] defaultRenderers = resources.getStringArray(R.array.renderer_values);
+        String[] defaultRendererNames = resources.getStringArray(R.array.renderer);
+        PackageManager packageManager = context.getPackageManager();
+        boolean deviceHasVulkan;
+        if (SDK_INT >= Build.VERSION_CODES.N) {
+            deviceHasVulkan = packageManager.hasSystemFeature(PackageManager.FEATURE_VULKAN_HARDWARE_LEVEL) &&
+                    packageManager.hasSystemFeature(PackageManager.FEATURE_VULKAN_HARDWARE_VERSION);
+        }else{
+            deviceHasVulkan = false;
+        }
+        // Currently, only 32-bit x86 does not have the Zink binary
+        boolean deviceHasZinkBinary = !(Architecture.is32BitsDevice() && Architecture.isx86Device());
+        List<String> rendererIds = new ArrayList<>(defaultRenderers.length);
+        List<String> rendererNames = new ArrayList<>(defaultRendererNames.length);
+        for(int i = 0; i < defaultRenderers.length; i++) {
+            String rendererId = defaultRenderers[i];
+            if(rendererId.contains("vulkan") && !deviceHasVulkan) continue;
+            if(rendererId.contains("zink") && !deviceHasZinkBinary) continue;
+            rendererIds.add(rendererId);
+            rendererNames.add(defaultRendererNames[i]);
+        }
+        sCompatibleRenderers = new RenderersList(rendererIds,
+                rendererNames.toArray(new String[0]));
+
+        return sCompatibleRenderers;
+    }
+
+    /** Checks if the renderer Id is compatible with the current device */
+    public static boolean checkRendererCompatible(Context context, String rendererName) {
+         return getCompatibleRenderers(context).rendererIds.contains(rendererName);
+    }
+
+    /** Releases the cache of compatible renderers. */
+    public static void releaseRenderersCache() {
+        sCompatibleRenderers = null;
+        System.gc();
     }
 }
