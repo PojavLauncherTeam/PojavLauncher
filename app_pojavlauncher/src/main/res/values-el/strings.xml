@@ -84,9 +84,6 @@
     <string name="mcl_setting_category_scaling">Ρυθμίσεις κλιμάκωσης</string>
     <string name="mcl_setting_category_renderer">Απόδοση</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (όλες οι εκδόσεις, γρήγορα)</string>
-    <string name="mcl_setting_renderer_virgl">virglrenderer - (έκδοση 1.7+, αργή)</string>
-    <string name="mcl_setting_renderer_vgpu">vgpu - (έως 1.16.5, γρήγορα)</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink - (παλιά_βήτα b1.8+, αργή)</string>
     <string name="mcl_setting_renderer_angle">ΓΩΝΙΑ - (απελευθέρωση 1.17+, μέση)</string>
     <string name="mcl_setting_category_veroption">Ο τύπος έκδοσης θα είναι στη λίστα εκδόσεων</string>
     <string name="mcl_setting_veroption_release">Κυκλοφορία</string>
@@ -111,12 +108,12 @@
     <string name="global_waiting">Περιμένετε</string>
     <string name="global_select">Επιλέξτε</string>
     <string name="global_retry">Δοκιμάστε ξανά</string>
+    <string name="global_default">Προεπιλογή</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Η εφαρμογή/παιχνίδι τερμάτισε με τον κωδικό %d, ελέγξτε το latestlog.txt για περισσότερες λεπτομέρειες.</string>
     <string name="mcn_exit_call">Έξοδος</string>
     <string name="mcn_exit_confirm">Είστε βέβαιοι ότι θέλετε να αναγκάσετε το κλείσιμο;</string>
     <string name="mcn_check_fail_lwjgl">Το LWJGL3 δεν έχει εγκατασταθεί!</string>
-    <string name="mcn_check_fail_vulkan_support">Το Vulkan Zink renderer δεν υποστηρίζεται σε αυτήν τη συσκευή!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Πληκτρολόγιο</string>
