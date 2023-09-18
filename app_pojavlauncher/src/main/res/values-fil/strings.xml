@@ -84,9 +84,6 @@
     <string name="mcl_setting_category_scaling">Mga setting ng pag-scale</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
     <string name="mcl_setting_renderer_gles2_4">Holy Gl4ES - (lahat ng bersyon, mabilis)</string>
-    <string name="mcl_setting_renderer_virgl">virglrenderer - (bersyong 1.7+, mabagal)</string>
-    <string name="mcl_setting_renderer_vgpu">vgpu - (hangang 1.16.5, mabilis)</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink - (old_beta b1.8+, mabagal)</string>
     <string name="mcl_setting_renderer_angle">ANGLE - (bersyong 1.17+, medyo ang bilis)</string>
     <string name="mcl_setting_category_veroption">Ang uri ng bersyon ay nasa listahan ng bersyon</string>
     <string name="mcl_setting_veroption_release">Release</string>
@@ -110,12 +107,12 @@
     <string name="global_error_field_empty">Hindi maaaring walang laman ang field na ito</string>
     <string name="global_waiting">Maghintay</string>
     <string name="global_select">Iselekta</string>
+    <string name="global_default">Default</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Lumabas ang application/Laro na may code na %d, tingnan ang latestlog.txt para sa higit pang mga detalye.</string>
     <string name="mcn_exit_call">Umalis</string>
     <string name="mcn_exit_confirm">Sigurado ka bang gusto mong pilitin na isara?</string>
     <string name="mcn_check_fail_lwjgl">Ang LWJGL3 ay hindi na-install!</string>
-    <string name="mcn_check_fail_vulkan_support">Hindi sinusuportahan ang Vulkan Zink renderer sa device na ito!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Keyboard</string>
