@@ -84,9 +84,6 @@
     <string name="mcl_setting_category_scaling">Didinimo nustatymai</string>
     <string name="mcl_setting_category_renderer">Vaizdo generatorius</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (visos versijos, greičiausias)</string>
-    <string name="mcl_setting_renderer_virgl">virglrenderer - (versija, skirta 1.7+, lėčiausias)</string>
-    <string name="mcl_setting_renderer_vgpu">vgpu - (tinka iki 1.16.5, greičiausias)</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink - (senoji_beta b1.8+, lėčiausias)</string>
     <string name="mcl_setting_renderer_angle">ANGLE - (versija 1.17+, vidutinio greitumo)</string>
     <string name="mcl_setting_category_veroption">Versijų tipai bus versijų sąraše</string>
     <string name="mcl_setting_veroption_release">Leidimai</string>
@@ -111,12 +108,12 @@
     <string name="global_waiting">Palaukite</string>
     <string name="global_select">Pasirinkti</string>
     <string name="global_retry">Hd</string>
+    <string name="global_default">Numatytasis</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Applikacija išsijungė su kodu %d, patikrinkite latestlog.txt kad gautumėte detalių.</string>
     <string name="mcn_exit_call">Išeiti</string>
     <string name="mcn_exit_confirm">Ar jūs tikrai norite priverstinai išjungti?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 nebuvo instaliuota!</string>
-    <string name="mcn_check_fail_vulkan_support">Vulkan Zink atvaizduotojas nėra palaikomas ant šio įrenginio!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Klaviatūra</string>
