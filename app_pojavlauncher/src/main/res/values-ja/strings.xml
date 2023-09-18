@@ -84,9 +84,6 @@
     <string name="mcl_setting_category_scaling">スケーリングの設定</string>
     <string name="mcl_setting_category_renderer">レンダラー</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (全バージョン対応、動作が軽い)</string>
-    <string name="mcl_setting_renderer_virgl">virglenderer - (リリース 1.7+、遅い)</string>
-    <string name="mcl_setting_renderer_vgpu">vgpu - （最大1.16.5、高速）</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink - (old_b1.8+, 遅い)</string>
     <string name="mcl_setting_renderer_angle">ANGLE - (リリース 1.17以上, 中)</string>
     <string name="mcl_setting_category_veroption">バージョンリストに表示する種類</string>
     <string name="mcl_setting_veroption_release">正式</string>
@@ -111,12 +108,12 @@
     <string name="global_waiting">お待ちください</string>
     <string name="global_select">選択...</string>
     <string name="global_retry">再試行</string>
+    <string name="global_default">デフォルト</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">アプリケーション/ゲームはコード %dで終了しました。詳細についてはlatestlog.txtをご確認ください</string>
     <string name="mcn_exit_call">閉じる</string>
     <string name="mcn_exit_confirm">強制終了しますか？</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 がインストールされていません！</string>
-    <string name="mcn_check_fail_vulkan_support">Vulkan Zink レンダラーはこのデバイスでサポートされていません!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">UI</string>
     <string name="control_keyboard">キーボード</string>
@@ -333,4 +330,6 @@
     <string name="preference_deadzone_scale_title">ジョイスティックの無反応範囲</string>
     <string name="version_select_hint">バージョン選択</string>
     <string name="of_dl_progress">%s をダウンロード中</string>
+    <string name="preference_vulkan_driver_system_title">システム標準のVulkanドライバーを使用する</string>
+    <string name="preference_vulkan_driver_system_description">ランチャーにAdreno GPUでTurnipの代わりにVulkanドライバを使用するよう強制します。Vulkanを使用するZinkとModにのみ影響します。</string>
 </resources>
