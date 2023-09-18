@@ -104,12 +104,12 @@
     <string name="global_waiting">Подождите</string>
     <string name="global_select">Сдѣлать выборъ</string>
     <string name="global_retry">Повторить</string>
+    <string name="global_default">По умолчанію</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Произошла оказія съ приложеніемъ/игрой съ кодомъ %d. Осмотрите latestlog.txt, дабы получить болѣе подробную информацію.</string>
     <string name="mcn_exit_call">Выйти</string>
     <string name="mcn_exit_confirm">Вы увѣрены, что хотите принудительно закрыть оный?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 не установленъ!</string>
-    <string name="mcn_check_fail_vulkan_support">Визуализаторъ Vulkan Zink не ​котируется на семъ аппаратѣ!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">Интерфейсъ</string>
     <string name="control_keyboard">Клавіатура</string>
