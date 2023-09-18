@@ -84,9 +84,6 @@
     <string name="mcl_setting_category_scaling">Setări de scalare</string>
     <string name="mcl_setting_category_renderer">Randator</string>
     <string name="mcl_setting_renderer_gles2_4">Sfântul GL4ES - (toate versiunile, rapid)</string>
-    <string name="mcl_setting_renderer_virgl">virglrenderer - (release 1.7+, lent)</string>
-    <string name="mcl_setting_renderer_vgpu">vgpu - (până la 1,16,5 , rapid)</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink - (old_beta b1.8+, lent)</string>
     <string name="mcl_setting_renderer_angle">ANGLE - (versiunea 1.17+, mid)</string>
     <string name="mcl_setting_category_veroption">Tipul de versiune va fi în lista de versiuni</string>
     <string name="mcl_setting_veroption_release">Lansat oficial</string>
@@ -110,12 +107,12 @@
     <string name="global_error_field_empty">Acest câmp nu poate fi gol</string>
     <string name="global_waiting">Așteptați</string>
     <string name="global_select">Selectați</string>
+    <string name="global_default">Prestabilit</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Aplicația/Jocul a fost închis cu codul %d, vezi latestlog.txt pentru mai multe detalii.</string>
     <string name="mcn_exit_call">Ieșire</string>
     <string name="mcn_exit_confirm">Ești sigur că vrei să oprești forțat?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 nu a fost instalat!</string>
-    <string name="mcn_check_fail_vulkan_support">Vulkan Zink renderer nu este suportat pe acest dispozitiv!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Tastatură</string>
