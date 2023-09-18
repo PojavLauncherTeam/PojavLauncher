@@ -102,12 +102,12 @@ Dá-te uma experiência de tela cheia melhorada.</string>
     <string name="global_unpacking">A descompactar %s</string>
     <string name="global_error_field_empty">Este campo não pode estar vazio</string>
     <string name="global_waiting">Aguarda</string>
+    <string name="global_default">Padrão</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Aplicação/Jogo saiu com código %d, verifique latestlog.txt para mais detalhes.</string>
     <string name="mcn_exit_call">Sair</string>
     <string name="mcn_exit_confirm">Tu tens a certeza que queres forçar o encerramento do jogo?</string>
     <string name="mcn_check_fail_lwjgl">O LWJGL3 não foi instalado!</string>
-    <string name="mcn_check_fail_vulkan_support">O renderizador Vulkan Zink não é suportado neste dispositivo!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">Interface</string>
     <string name="control_keyboard">Teclado</string>
