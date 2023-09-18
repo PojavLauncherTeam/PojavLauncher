@@ -84,9 +84,6 @@
     <string name="mcl_setting_category_scaling">Cài đặt độ rộng</string>
     <string name="mcl_setting_category_renderer">Trình kết xuất</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (tất cả phiên bản, nhanh)</string>
-    <string name="mcl_setting_renderer_virgl">virglrenderer - (phiên bản 1.7+, chậm)</string>
-    <string name="mcl_setting_renderer_vgpu">vgpu - (đến 1.16.5, nhanh)</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink - (beta_cũ b1.8+, chậm)</string>
     <string name="mcl_setting_renderer_angle">ANGLE - (phiên bản 1.17+, trung bình)</string>
     <string name="mcl_setting_category_veroption">Kiểu phiên bản sẽ được hiện ở trong danh sách phiên bản</string>
     <string name="mcl_setting_veroption_release">Bản phát hành</string>
@@ -111,12 +108,12 @@
     <string name="global_waiting">Vui lòng đợi</string>
     <string name="global_select">Chọn</string>
     <string name="global_retry">Thử lại</string>
+    <string name="global_default">Mặc định</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Ứng dụng/Trò chơi đã thoát với mã %d, kiểm tra nhật kí trình khởi chạy (latestlog.txt) để biết thêm chi tiết.</string>
     <string name="mcn_exit_call">Thoát</string>
     <string name="mcn_exit_confirm">Bạn có chắc muốn bắt buộc thoát chương trình?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 chưa được cài đặt!</string>
-    <string name="mcn_check_fail_vulkan_support">Trình kết xuất Vulkan Zink không được hỗ trợ trên thiết bị này!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">Giao diện</string>
     <string name="control_keyboard">Bàn Phím</string>
