@@ -50,9 +50,6 @@
     <string name="mcl_setting_title_mousescale">Kursori suurus</string>
     <string name="mcl_setting_category_renderer">Renderdaja</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (kõik versioonid, kiire)</string>
-    <string name="mcl_setting_renderer_virgl">virglrenderer - (väljalase 1.7+, aeglane)</string>
-    <string name="mcl_setting_renderer_vgpu">vgpu - (kuni 1.16.5, kiire)</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink - (vana beeta b1.8+, aeglane)</string>
     <string name="mcl_setting_renderer_angle">ANGLE - (väljalase 1.17+, keskm.)</string>
     <string name="mcl_setting_veroption_release">Väljalase</string>
     <string name="mcl_setting_veroption_snapshot">Katsetus</string>
@@ -72,9 +69,9 @@
     <string name="global_unpacking">%s lahtipakkimine</string>
     <string name="global_error_field_empty">See väli ei tohi olla tühi</string>
     <string name="global_waiting">Ootamine</string>
+    <string name="global_default">Vaikimisi</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_call">Välju</string>
-    <string name="mcn_check_fail_vulkan_support">Vulkan Zink renderdaja ei ole selles seadmes toetatud!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">NUPUD</string>
     <string name="control_keyboard">Klaviat.</string>
