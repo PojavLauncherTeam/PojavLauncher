@@ -99,12 +99,12 @@
     <string name="global_unpacking">מחלץ את %s</string>
     <string name="global_error_field_empty">שדה זה אינו יכול להיות ריק</string>
     <string name="global_waiting">המתן</string>
+    <string name="global_default">ברירת מחדל</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">היישומון / המשחק קרס, עם קוד שגיאה %d, בדוק את latestlog.txt למידע נוסף.</string>
     <string name="mcn_exit_call">צא</string>
     <string name="mcn_exit_confirm">האם אתה בטוח שאתה רוצה לכפות כיבוי?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 לא הותקן!</string>
-    <string name="mcn_check_fail_vulkan_support">מרנדר Vulkan Zink לא נתמך במכשיר זה!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">ממשק משתמש(GUI)</string>
     <string name="control_keyboard">מקלדת</string>
