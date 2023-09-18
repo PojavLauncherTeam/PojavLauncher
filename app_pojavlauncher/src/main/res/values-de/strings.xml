@@ -84,9 +84,6 @@
     <string name="mcl_setting_category_scaling">Einstellungen für die Größe der Benutzeroberfläche</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (alle Versionen, schnell)</string>
-    <string name="mcl_setting_renderer_virgl">virglrenderer - (Release 1.7+, langsam)</string>
-    <string name="mcl_setting_renderer_vgpu">vgpu - (bis 1.16.5, schnell)</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink - (old_beta b1.8+, langsam)</string>
     <string name="mcl_setting_renderer_angle">ANGLE - (Vollversion 1.17+, mittel schnell)</string>
     <string name="mcl_setting_category_veroption">Versionsarten, welche in der Versionsliste sind:</string>
     <string name="mcl_setting_veroption_release">Vollversionen</string>
@@ -111,6 +108,7 @@
     <string name="global_waiting">Bitte warte einen kleinen Moment</string>
     <string name="global_select">Auswählen</string>
     <string name="global_retry">Erneut versuchen</string>
+    <string name="global_default">Standard</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Anwendung/Spiel mit dem Code %d beendet, für weitere Details, latestlog.txt lesen.</string>
     <string name="mcn_exit_call">Beenden</string>
@@ -366,6 +364,8 @@
     <string name="preference_gyro_damper_window_title">Glättungsdauer</string>
     <string name="preference_gyro_damper_window_description">Reduziert Jitter im Austausch gegen Latenz. 0 zum Deaktivieren</string>
     <string name="hint_search_modpack">Suche nach Modpacks</string>
+    <string name="preference_vulkan_driver_system_title">System-Vulkan-Treiber verwenden</string>
+    <string name="preference_vulkan_driver_system_description">Zwinge den Launcher auf Adreno GPUs den Vulkantreiber anstelle von Turnip zu verwendet. Betrifft nur Zink und Mods, die Vulkan verwenden.</string>
     <string name="generic_install">Installieren</string>
     <string name="generic_apply">Anwenden</string>
     <string name="search_modpack_no_result">Keine Modpacks gefunden</string>
