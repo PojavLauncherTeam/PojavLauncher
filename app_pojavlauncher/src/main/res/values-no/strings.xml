@@ -95,11 +95,11 @@
     <string name="global_unpacking">Pakker ut %s</string>
     <string name="global_error_field_empty">Feltet kan ikke stå tomt</string>
     <string name="global_waiting">Vent</string>
+    <string name="global_default">Standard</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_call">Avslutt</string>
     <string name="mcn_exit_confirm">Er du sikker på at du vil tvinge avslutte?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 ble ikke installert!</string>
-    <string name="mcn_check_fail_vulkan_support">Vulkan Zink gjengir støttes ikke på denne enheten!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Tastatur</string>
