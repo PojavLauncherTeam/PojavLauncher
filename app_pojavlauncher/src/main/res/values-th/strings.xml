@@ -83,9 +83,6 @@
     <string name="mcl_setting_category_scaling">การตั้งค่าการปรับขนาด</string>
     <string name="mcl_setting_category_renderer">การแสดงผล</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (รองรับทุกเวอร์ชั่น, เร็ว)</string>
-    <string name="mcl_setting_renderer_virgl">virglrenderer - (1.7+, ช้า)</string>
-    <string name="mcl_setting_renderer_vgpu">vgpu - (1.16.5, เร็ว)</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink - ( b1.8+, ช้า)</string>
     <string name="mcl_setting_renderer_angle">ANGLE - (1.17+, กลาง)</string>
     <string name="mcl_setting_category_veroption">ประเภทเวอร์ชันจะอยู่ในรายการเวอร์ชัน</string>
     <string name="mcl_setting_veroption_snapshot">ภาพรวม</string>
@@ -108,12 +105,12 @@
     <string name="global_error_field_empty">สนามนี้ไม่สามารถว่าง</string>
     <string name="global_waiting">รอ</string>
     <string name="global_select">เลือก</string>
+    <string name="global_default">ค่าเรื่มต้น</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">ออกจากแอปพลิเคชัน/เกมเด้งด้วยรหัส %d โปรดตรวจสอบที่ latestlog.txt สำหรับรายละเอียดเพิ่มเติม</string>
     <string name="mcn_exit_call">ออก</string>
     <string name="mcn_exit_confirm">คุณแน่ใจหรือไม่ว่าต้องการบังคับปิด?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 ไม่ได้ถูกติดตั้ง!</string>
-    <string name="mcn_check_fail_vulkan_support">อุปกรณ์นี้ไม่รองรับตัวเรนเดอร์ Vulkan Zink</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">ซ่อน</string>
     <string name="control_keyboard">แป้นพิมพ์</string>
