@@ -84,9 +84,6 @@
     <string name="mcl_setting_category_scaling">Ajustes de escala</string>
     <string name="mcl_setting_category_renderer">Renderizador</string>
     <string name="mcl_setting_renderer_gles2_4">Divinas, GL4ES - (ay versión, fase)</string>
-    <string name="mcl_setting_renderer_virgl">virglrenderer - (release 1.7+, slow)</string>
-    <string name="mcl_setting_renderer_vgpu">vgpu - (up to 1.16.5, fast)</string>
-    <string name="mcl_setting_renderer_vulkan_zink">Zinc - (antiguo b1.8+, lento)</string>
     <string name="mcl_setting_renderer_angle">Java edieditio</string>
     <string name="mcl_setting_category_veroption">El tipo de versión aparecerá en la lista de versiones</string>
     <string name="mcl_setting_veroption_release">Lanzamientos</string>
@@ -111,12 +108,12 @@
     <string name="global_waiting">Espere</string>
     <string name="global_select">Seleccionar</string>
     <string name="global_retry">Reintentar</string>
+    <string name="global_default">Predeterminado</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">La aplicación/juego ha finalizado con el código %d, mira el archivo latestlog.txt para más detalles.</string>
     <string name="mcn_exit_call">Salir</string>
     <string name="mcn_exit_confirm">¿Estás seguro de que quieres forzar el cierre?</string>
     <string name="mcn_check_fail_lwjgl">¡LWJGL3 no ha sido instalado!</string>
-    <string name="mcn_check_fail_vulkan_support">El renderizador de Vulkan Zink no es compatible en este dispositivo!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">Interfaz</string>
     <string name="control_keyboard">Teclado</string>
