@@ -84,9 +84,7 @@
     <string name="mcl_setting_category_scaling">缩放设置</string>
     <string name="mcl_setting_category_renderer">渲染器</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES -（全版本可用，速度较快）</string>
-    <string name="mcl_setting_renderer_virgl">virglrenderer -（1.7 及以上版本可用，速度较慢）</string>
-    <string name="mcl_setting_renderer_vgpu">vgpu - (1.16.5 及以下版本可用，速度较快)</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink - (beta 版 b1.8 及以上可用，速度较慢)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">Zink（Vulkan）-（所有版本、中低端设备编译）</string>
     <string name="mcl_setting_renderer_angle">ANGLE -（1.17 及以上版本可用，速度一般）</string>
     <string name="mcl_setting_category_veroption">将在版本列表中显示的版本类型</string>
     <string name="mcl_setting_veroption_release">正式版</string>
@@ -111,12 +109,13 @@
     <string name="global_waiting">请稍等</string>
     <string name="global_select">选择</string>
     <string name="global_retry">重试</string>
+    <string name="global_default">默认</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">应用程序/游戏以代码 %d退出，请查看 latestlog.txt 了解更多详情。</string>
     <string name="mcn_exit_call">退出</string>
     <string name="mcn_exit_confirm">确定强制关闭？</string>
     <string name="mcn_check_fail_lwjgl">未安装 LWJGL3！</string>
-    <string name="mcn_check_fail_vulkan_support">此设备不支持 Vulkan Zink 渲染器！</string>
+    <string name="mcn_check_fail_vulkan_support">此设备不支持 Zink（Vulkan）渲染器！</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">界面</string>
     <string name="control_keyboard">键盘</string>
@@ -366,6 +365,8 @@
     <string name="preference_gyro_damper_window_title">平滑时间</string>
     <string name="preference_gyro_damper_window_description">减少抖动以换取延迟。输入 0 以禁用</string>
     <string name="hint_search_modpack">搜索整合包</string>
+    <string name="preference_vulkan_driver_system_title">使用系统 Vulkan 驱动</string>
+    <string name="preference_vulkan_driver_system_description">强制启动器在 Adreno GPU 上使用系统 Vulkan 驱动而非 Turnip。仅影响使用 Vulkan 的 Zink 和模组。</string>
     <string name="generic_install">安装</string>
     <string name="generic_apply">应用</string>
     <string name="search_modpack_no_result">未找到整合包</string>
