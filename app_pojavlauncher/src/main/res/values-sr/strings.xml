@@ -106,7 +106,6 @@
     <string name="mcn_exit_call">Изађи</string>
     <string name="mcn_exit_confirm">Да ли желите да форсе-изаћете?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 није инсталиран!</string>
-    <string name="mcn_check_fail_vulkan_support">Vulkan Zink рендерер није подржан ма овом уређају!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Тастатура</string>
