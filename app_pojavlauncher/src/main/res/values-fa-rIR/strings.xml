@@ -83,9 +83,6 @@
     <string name="mcl_setting_category_scaling">تنظیمات مقیاس</string>
     <string name="mcl_setting_category_renderer">رندر کننده</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (همه ی نسخه ها، سریع)</string>
-    <string name="mcl_setting_renderer_virgl">virglrenderer - (نسخه 1.7 به بالا، کُند)</string>
-    <string name="mcl_setting_renderer_vgpu">vgpu - (تا نسخه 1.16.5 سریع)</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink - (old_beta b1.8 به بعد، آهسته)</string>
     <string name="mcl_setting_renderer_angle">ANGLE - (ورژن 1.17 به بالا، متوسط)</string>
     <string name="mcl_setting_category_veroption">نوع ورژن برای نمایش در لیست ورژن‌ها</string>
     <string name="mcl_setting_veroption_release">ریلیز</string>
@@ -109,12 +106,12 @@
     <string name="global_error_field_empty">این فیلد نمی‌تواند خالی باشد</string>
     <string name="global_waiting">صبر کنید</string>
     <string name="global_select">انتخاب</string>
+    <string name="global_default">پیش‌فرض</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">برنامه یا بازی با کد مرجوعی %d خارج شد. برای جزئیات بیشتر به lastlog.text مراجعت کنید.</string>
     <string name="mcn_exit_call">خروج</string>
     <string name="mcn_exit_confirm">آیا از خروج اجباری اطمینان دارید؟</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 نصب نشده است!</string>
-    <string name="mcn_check_fail_vulkan_support">رندر کننده Vulkan Zink در این دستگاه پشتیبانی نمی‌شود!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">کیبورد</string>
