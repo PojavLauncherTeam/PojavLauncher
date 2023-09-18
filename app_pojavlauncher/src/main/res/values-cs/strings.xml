@@ -84,9 +84,6 @@
     <string name="mcl_setting_category_scaling">Nastavení měřítka</string>
     <string name="mcl_setting_category_renderer">Vykreslovač</string>
     <string name="mcl_setting_renderer_gles2_4">Svatá GL4ES - (všechny verze, rychlá)</string>
-    <string name="mcl_setting_renderer_virgl">virglrenderer - (verze 1.7+, pomalý)</string>
-    <string name="mcl_setting_renderer_vgpu">vgpu - (do verze 1.16.5, rychlá)</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink - (stará beta b1.8+, pomalý)</string>
     <string name="mcl_setting_renderer_angle">ANGLE - (verze 1.17+, středně rychlý)</string>
     <string name="mcl_setting_category_veroption">Jaké typy verzí budou v seznamu verzí</string>
     <string name="mcl_setting_veroption_release">Vydání</string>
@@ -111,12 +108,12 @@
     <string name="global_waiting">Čekejte</string>
     <string name="global_select">Vybrat</string>
     <string name="global_retry">Zkusit znovu</string>
+    <string name="global_default">Výchozí</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Aplikace/Hra spadla s kódem %d, zkontroluj latestlog.txt pro více informací.</string>
     <string name="mcn_exit_call">Odejít</string>
     <string name="mcn_exit_confirm">Opravdu chcete vynutit ukončení?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 nebyla nainstalována!</string>
-    <string name="mcn_check_fail_vulkan_support">Vykreslovač Vulkánu Zink není v tomto zařízení podporován!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Klávesnice</string>
