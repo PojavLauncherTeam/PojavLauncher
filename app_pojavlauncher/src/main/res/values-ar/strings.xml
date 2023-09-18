@@ -85,9 +85,6 @@
     <string name="mcl_setting_category_scaling">إعدادات الحجم</string>
     <string name="mcl_setting_category_renderer">العارض</string>
     <string name="mcl_setting_renderer_gles2_4">GL4ES المقدس - (جميع الإصدارات بسرعة)</string>
-    <string name="mcl_setting_renderer_virgl">virglrenderer - (release 1.7+, slow)</string>
-    <string name="mcl_setting_renderer_vgpu">محاكة معالج الرسوميات - (تصل إلى 1.16.5، أسرع)</string>
-    <string name="mcl_setting_renderer_vulkan_zink">زينك - (قديم_تجريبي ت1.8+, بطيء)</string>
     <string name="mcl_setting_renderer_angle">إنجيل - (نشر 1.17+, متوسط)</string>
     <string name="mcl_setting_category_veroption">نوع الإصدار سيكون في قائمة الإصدارات</string>
     <string name="mcl_setting_veroption_release">إصدار نهائي</string>
@@ -112,12 +109,12 @@
     <string name="global_waiting">انتظر</string>
     <string name="global_select">اختر</string>
     <string name="global_retry">أعد المحاولة</string>
+    <string name="global_default">مستخدم دائما</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">تم الخروج من التطبيق/اللعبة بخلل %d، تحقق من latestlog.txt لمزيد من التفاصيل.</string>
     <string name="mcn_exit_call">خروج</string>
     <string name="mcn_exit_confirm">هل أنت متأكد من أنك تريد الإغلاق؟</string>
     <string name="mcn_check_fail_lwjgl">لم يتم تثبيت LWJGL3!</string>
-    <string name="mcn_check_fail_vulkan_support">رندر فولكان زينك غير مدعوم على هذا الجهاز!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">واجهة المستخدم الرسومية</string>
     <string name="control_keyboard">لوحة المفاتيح</string>
