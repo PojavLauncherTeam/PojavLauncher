@@ -92,7 +92,6 @@
     <string name="mcn_exit_call">Exit</string>
     <string name="mcn_exit_confirm">Are you sure want to force close?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 no s\'ha instal·lat!</string>
-    <string name="mcn_check_fail_vulkan_support">El renderitzador VULKAN Zink no esta suportat en aquest dispositiu!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Keyboard</string>
