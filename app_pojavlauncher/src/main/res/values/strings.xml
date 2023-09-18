@@ -101,9 +101,7 @@
     <string name="mcl_setting_category_scaling">Scaling settings</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (all versions, fast)</string>
-    <string name="mcl_setting_renderer_virgl">virglrenderer - (release 1.7+, slow)</string>
-    <string name="mcl_setting_renderer_vgpu">vgpu - (up to 1.16.5, fast)</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink - (old_beta b1.8+, slow)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - (all versions, mid, low device compat)</string>
     <string name="mcl_setting_renderer_angle">ANGLE - (release 1.17+, mid)</string>
     <string name="mcl_setting_category_veroption">Version type will be in version list</string>
     <string name="mcl_setting_veroption_release">Release</string>
@@ -129,13 +127,14 @@
     <string name="global_waiting">Wait</string>
     <string name="global_select">Select</string>
     <string name="global_retry">Retry</string>
+    <string name="global_default">Default</string>
 
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Application/Game exited with code %d, check latestlog.txt for more details.</string>
     <string name="mcn_exit_call">Exit</string>
     <string name="mcn_exit_confirm">Are you sure want to force close?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 was not installed!</string>
-    <string name="mcn_check_fail_vulkan_support">Vulkan Zink renderer is not supported on this device!</string>
+    <string name="mcn_check_fail_vulkan_support">Zink (Vulkan) renderer is not supported on this device!</string>
 
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
@@ -410,6 +409,9 @@
     <string name="preference_gyro_damper_window_description">Reduce jitter in exchange of latency. 0 to disable it</string>
     <string name="hint_search_modpack">Search for modpacks</string>
 
+    <string name="preference_vulkan_driver_system_title">Use system Vulkan driver</string>
+    <string name="preference_vulkan_driver_system_description">Force the launcher to use the system Vulkan driver instead of Turnip on Adreno GPUs. Only affects Zink and mods that use Vulkan.</string>
+
     <string name="generic_install">Install</string>
     <string name="generic_apply">Apply</string>
 
@@ -431,4 +433,5 @@
     <string name="notif_error_occured">An error has occurred</string>
     <string name="notif_error_occured_desc">Click to see more details</string>
     <string name="fabric_dl_only_stable">Show only stable versions</string>
+>>>>>>> v3_openjdk
 </resources>

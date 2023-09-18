@@ -7,6 +7,7 @@ import static net.kdt.pojavlaunch.Tools.NATIVE_LIB_DIR;
 import static net.kdt.pojavlaunch.Tools.currentDisplayMetrics;
 import static net.kdt.pojavlaunch.Tools.shareLog;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_DUMP_SHADERS;
+import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_ZINK_PREFER_SYSTEM_DRIVER;
 
 import android.app.*;
 import android.content.*;
@@ -184,6 +185,8 @@ public class JREUtils {
 
         if(PREF_DUMP_SHADERS)
             envMap.put("LIBGL_VGPU_DUMP", "1");
+        if(PREF_ZINK_PREFER_SYSTEM_DRIVER)
+            envMap.put("POJAV_ZINK_PREFER_SYSTEM_DRIVER", "1");
 
 
         // The OPEN GL version is changed according
@@ -448,8 +451,7 @@ public class JREUtils {
             case "opengles2_5":
             case "opengles3":
                 renderLibrary = "libgl4es_114.so"; break;
-            case "opengles3_virgl":
-            case "vulkan_zink": renderLibrary = "libOSMesa_8.so"; break;
+            case "vulkan_zink": renderLibrary = "libOSMesa.so"; break;
             case "opengles3_desktopgl_angle_vulkan" : renderLibrary = "libtinywrapper.so"; break;
             default:
                 Log.w("RENDER_LIBRARY", "No renderer selected, defaulting to opengles2");

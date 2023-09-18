@@ -320,12 +320,16 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         if(Tools.LOCAL_RENDERER == null) {
             Tools.LOCAL_RENDERER = LauncherPreferences.PREF_RENDERER;
         }
+        if(!Tools.checkRendererCompatible(this, Tools.LOCAL_RENDERER)) {
+            Tools.RenderersList renderersList = Tools.getCompatibleRenderers(this);
+            String firstCompatibleRenderer = renderersList.rendererIds.get(0);
+            Log.w("runCraft","Incompatible renderer "+Tools.LOCAL_RENDERER+ " will be replaced with "+firstCompatibleRenderer);
+            Tools.LOCAL_RENDERER = firstCompatibleRenderer;
+            Tools.releaseRenderersCache();
+        }
         MinecraftAccount minecraftAccount = PojavProfile.getCurrentProfileContent(this, null);
         Logger.appendToLog("--------- beginning with launcher debug");
         printLauncherInfo(versionId, Tools.isValidString(minecraftProfile.javaArgs) ? minecraftProfile.javaArgs : LauncherPreferences.PREF_CUSTOM_JAVA_ARGS);
-        if (Tools.LOCAL_RENDERER.equals("vulkan_zink")) {
-            checkVulkanZinkIsSupported();
-        }
         JREUtils.redirectAndPrintJRELog();
         LauncherProfiles.load();
         int requiredJavaVersion = 8;
