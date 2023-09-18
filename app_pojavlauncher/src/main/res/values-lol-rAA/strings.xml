@@ -100,12 +100,12 @@
     <string name="global_unpacking">Unpacking %s</string>
     <string name="global_error_field_empty">Dis field can\'t bees empty</string>
     <string name="global_waiting">Wait</string>
+    <string name="global_default">My favritz</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Applicashun/game exitd wif code %d, chek lastestlog.txt 4 moar details.</string>
     <string name="mcn_exit_call">Exit</string>
     <string name="mcn_exit_confirm">R u suer u wantz 2 forec cloes?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 wuz not installd!</string>
-    <string name="mcn_check_fail_vulkan_support">Catz mobile cant’ handel Vulkan Zink renderer!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Keyboard</string>
