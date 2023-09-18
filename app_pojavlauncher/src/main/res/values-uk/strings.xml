@@ -84,9 +84,6 @@
     <string name="mcl_setting_category_scaling">Налаштування масштабування</string>
     <string name="mcl_setting_category_renderer">Візуалізатор</string>
     <string name="mcl_setting_renderer_gles2_4">Божий GL4ES - (всі версії, швидкі)</string>
-    <string name="mcl_setting_renderer_virgl">virglrenderer - (реліз 1.7+, повільний)</string>
-    <string name="mcl_setting_renderer_vgpu">vgpu - (до 1.16.5, швидкий)</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink - (old_beta b1.8+, повільний)</string>
     <string name="mcl_setting_renderer_angle">ANGLE - (реліз 1.17+, середній)</string>
     <string name="mcl_setting_category_veroption">Типи версій, які будуть відображатися в списку версій</string>
     <string name="mcl_setting_veroption_release">Релізи</string>
@@ -111,12 +108,12 @@
     <string name="global_waiting">Зачекайте</string>
     <string name="global_select">Обрати</string>
     <string name="global_retry">Повторити</string>
+    <string name="global_default">За замовчуванням</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Програма/Гра завершилась з кодом %d, глянь в latestlog.txt для більш детальної інформації.</string>
     <string name="mcn_exit_call">Вийти</string>
     <string name="mcn_exit_confirm">Ви впевнені, що хочете примусово закрити його?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 не встановлено!</string>
-    <string name="mcn_check_fail_vulkan_support">Vulkan Zink візуалізатор не підтримується на цьому пристрої!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Клавіатура</string>
@@ -178,6 +175,7 @@
     <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Додати кнопку</string>
     <string name="customctrl_addbutton_drawer">Додати розгортаєму кнопку</string>
+    <string name="customctrl_addbutton_joystick">Додати джойстик</string>
     <string name="customctrl_addsubbutton">Додати під-кнопку</string>
     <string name="customctrl_add_subbutton_message">Підлегла кнопка n°%d була додана!</string>
     <string name="customctrl_selectdefault">Вибрати керування за замовчуванням</string>
@@ -209,6 +207,7 @@
     <string name="mcl_setting_subtitle_mousespeed">Змінює чутливість віртуальної миші</string>
     <string name="customctrl_passthru">Курсор миші</string>
     <string name="customctrl_swipeable">Перегортаємий</string>
+    <string name="customctrl_forward_lock">Заблокувати йти вперед</string>
     <string name="customctrl_rounded">Округлені</string>
     <string name="memory_warning_msg">Поточна кількість вільної оперативної пам\'яті (%d) менша, ніж виділена оперативна пам\'ять (%d), що може призвести до збоїв. Змініть кількість вільної оперативної пам\'яті, якщо гра вилетить.</string>
     <string name="mcl_memory_allocation">Виділення пам\'яті</string>
@@ -341,12 +340,17 @@
     <string name="preference_force_big_core_desc">Змушує потік рендерингу працювати на ядрі з найвищою максимальною частотою</string>
     <string name="version_select_hint">Обрати версію</string>
     <string name="forge_dl_progress">Завантаження встановлювача для %s</string>
+    <string name="forge_dl_searching">Пошук номер версії Forge</string>
     <string name="modloader_dl_failed_to_load_list">Не вдалося завантажити список версій!</string>
     <string name="forge_dl_no_installer">Вибачте, але ця версія Forge ще не має інсталятора, що підтримується.</string>
     <string name="forge_dl_select_version">Обрати версію Forge</string>
+    <string name="fabric_dl_progress">Завантаження %s установника метаданів</string>
+    <string name="fabric_dl_loader_version">%s версія установника</string>
     <string name="fabric_dl_game_version">Версія Minecraft</string>
     <string name="fabric_dl_install">Встановити</string>
+    <string name="fabric_dl_cant_read_meta">Не вдалось прочитати %s установника метаданів. Будь ласка, спробуйте пізніше.</string>
     <string name="modloader_dl_install_fabric">Створити профіль з Fabric</string>
+    <string name="modloader_dl_install_quilt">Створити профіль з Quilt</string>
     <string name="modloader_dl_install_forge">Створити профіль з Forge</string>
     <string name="create_profile_vanilla">Створити профіль з Ванілою</string>
     <string name="create_profile_vanilla_like_versions">Ванільно-подібні версії</string>
@@ -358,5 +362,15 @@
     <string name="create_profile_optifine">Створити профіль з OptiFine</string>
     <string name="preference_gyro_damper_window_title">Затримка згладжування</string>
     <string name="preference_gyro_damper_window_description">Збільшує плавність руху камери в обмін на невелику затримку відклику з миші. Установіть значення 0 щоб відключити цю функцію</string>
+    <string name="hint_search_modpack">Пошук мод паків</string>
+    <string name="preference_vulkan_driver_system_title">Використовувати систему драйверів Vulkan</string>
+    <string name="preference_vulkan_driver_system_description">Примусово запускати драйвер Vulkan замість Turnip на Adreno GPU. Впливає лише на Zink і моди, які використовують Vulkan.</string>
     <string name="generic_install">Встановити</string>
+    <string name="generic_apply">Застосовувати</string>
+    <string name="search_modpack_no_result">Мод паків не знайдено</string>
+    <string name="search_modpack_error">Не вдалося знайти мод паки</string>
+    <string name="search_modpack_download_error">Не вдалося завантажити метадані мод пака/ів</string>
+    <string name="modpack_download_downloading_metadata">Завантаження метадані модпака/Ів (%.2f МБ / %.2f МБ)</string>
+    <string name="modpack_download_downloading_mods">Завантаження модів (%.2f МБ / %.2f МБ)</string>
+    <string name="modpack_download_downloading_mods_fc">Завантаження модів (Файлів %d з %d)</string>
 </resources>
