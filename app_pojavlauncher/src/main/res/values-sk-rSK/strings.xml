@@ -84,9 +84,6 @@
     <string name="mcl_setting_category_scaling">Nastavenia veľkosti</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (všetky verzie, rýchly)</string>
-    <string name="mcl_setting_renderer_virgl">virglrenderer - (release 1.7+, pomalý)</string>
-    <string name="mcl_setting_renderer_vgpu">vgpu - (do 1.16.5, rýchly)</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink - (old_beta b1.8+, pomalý)</string>
     <string name="mcl_setting_renderer_angle">ANGLE - (release 1.17+, priemerný)</string>
     <string name="mcl_setting_category_veroption">Aké typy verzií budú v zozname verzií</string>
     <string name="mcl_setting_veroption_release">Vydanie</string>
@@ -110,12 +107,12 @@
     <string name="global_error_field_empty">Toto pole nesmie byť prázdne</string>
     <string name="global_waiting">Čakajte</string>
     <string name="global_select">Vyber</string>
+    <string name="global_default">Predvolené</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Hra spadla. Skontroluj latestlog.txt pre viac podrobností.</string>
     <string name="mcn_exit_call">Skončiť</string>
     <string name="mcn_exit_confirm">Ste si istí, že chcete ukončiť hru?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL 3 nebol nainštalovaný!</string>
-    <string name="mcn_check_fail_vulkan_support">Zink renderer nie je podporovaný na tomto zariadení!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Klávesnica</string>
