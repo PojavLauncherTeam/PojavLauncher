@@ -84,9 +84,6 @@
     <string name="mcl_setting_category_scaling">Impostazioni dimensioni</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (Tutte le versioni, veloce)</string>
-    <string name="mcl_setting_renderer_virgl">virglrenderer - (versione 1.7+, lento)</string>
-    <string name="mcl_setting_renderer_vgpu">vgpu - (fino alla 1.16.5, veloce)</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink - (old_beta b1.8+, lento)</string>
     <string name="mcl_setting_renderer_angle">ANGLE - (versione 1.17+, mediamente veloce)</string>
     <string name="mcl_setting_category_veroption">Tipo di versioni che saranno nell\'elenco delle versioni</string>
     <string name="mcl_setting_veroption_release">Finale</string>
@@ -111,12 +108,12 @@
     <string name="global_waiting">Attendere</string>
     <string name="global_select">Seleziona</string>
     <string name="global_retry">Riprova</string>
+    <string name="global_default">Predefinito</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">L\'applicazione/gioco si è chiuso con il codice %d, controlla il lastlog.txt per più dettagli.</string>
     <string name="mcn_exit_call">Esci</string>
     <string name="mcn_exit_confirm">Sei sicuro di voler eseguire una chiusura forzata?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 non installato!</string>
-    <string name="mcn_check_fail_vulkan_support">Il renderer Vulkan Zink non è supportato su questo dispositivo!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Tastiera</string>
