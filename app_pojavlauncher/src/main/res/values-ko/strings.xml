@@ -84,9 +84,6 @@
     <string name="mcl_setting_category_scaling">크기 설정</string>
     <string name="mcl_setting_category_renderer">렌더러</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (모든 버전 호환, 빠릅니다)</string>
-    <string name="mcl_setting_renderer_virgl">virglrenderer - (1.7 이후 버전 호환, 느립니다)</string>
-    <string name="mcl_setting_renderer_vgpu">vgpu - (1.16.5 이후 버전 호환, 빠릅니다)</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink - (old_beta b1.8 이후 버전 호환, 느립니다)</string>
     <string name="mcl_setting_renderer_angle">ANGLE - (1.17 이후 버전 호환, 보통입니다)</string>
     <string name="mcl_setting_category_veroption">버전 타입 리스트</string>
     <string name="mcl_setting_veroption_release">릴리즈</string>
@@ -111,12 +108,12 @@
     <string name="global_waiting">기다려주세요</string>
     <string name="global_select">선택</string>
     <string name="global_retry">다시시도</string>
+    <string name="global_default">기본값</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">애플리케이션/게임이 코드 %d와 함께 종료되었습니다, lastestlog.txt를 확인하여 추가 정보를 확인하세요.</string>
     <string name="mcn_exit_call">나가기</string>
     <string name="mcn_exit_confirm">강제로 종료하시겠습니까?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 이 설치되지 않았습니다!</string>
-    <string name="mcn_check_fail_vulkan_support">Vulkan Zink 렌더러는 해당 기기를 지원하지 않습니다!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">키보드</string>
