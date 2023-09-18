@@ -68,9 +68,6 @@
     <string name="mcl_setting_category_scaling">Масштаб көйләүләр</string>
     <string name="mcl_setting_category_renderer">Күрсәткеч</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (барлык версияләр өчен, тиз)</string>
-    <string name="mcl_setting_renderer_virgl">virglrenderer - (соңгы 1.7 һәм югарырак версияләр өчен, акрын)</string>
-    <string name="mcl_setting_renderer_vgpu">vgpu (1.16.5 һәм түбәнрәк версияләр өчен, тиз)</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink - (иске бета b1.8 һәм югарырак версияләр өчен, акрын)</string>
     <string name="mcl_setting_renderer_angle">ANGLE - (соңгы 1.17 һәм югарырак версияләр өчен, уртача)</string>
     <string name="mcl_setting_category_veroption">Версия исемлегендә күрсәтелгән версия төре</string>
     <string name="mcl_setting_veroption_release">Чыгарылыш</string>
@@ -92,6 +89,7 @@
     <string name="global_error_field_empty">Бу кыр буш булап алмады</string>
     <string name="global_waiting">Көтегез</string>
     <string name="global_select">Сайлау</string>
+    <string name="global_default">Гадәттәге</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_call">Чыгу</string>
     <string name="mcn_exit_confirm">Сез мәҗбүри ябырга телисезме?</string>
