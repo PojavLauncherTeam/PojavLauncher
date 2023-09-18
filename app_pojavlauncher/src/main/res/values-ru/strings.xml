@@ -84,9 +84,6 @@
     <string name="mcl_setting_category_scaling">Настройки масштабирования</string>
     <string name="mcl_setting_category_renderer">Визуализатор</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES (все версии, быстрый)</string>
-    <string name="mcl_setting_renderer_virgl">virglrenderer (1.7 и выше, медленный)</string>
-    <string name="mcl_setting_renderer_vgpu">vgpu (до 1.16.5, быстрый)</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink (старые бета b1.8 и выше, медленный)</string>
     <string name="mcl_setting_renderer_angle">ANGLE (1.17 и выше, средний)</string>
     <string name="mcl_setting_category_veroption">Типы версий, которые будут отображаться в списке</string>
     <string name="mcl_setting_veroption_release">Релизы</string>
@@ -111,12 +108,12 @@
     <string name="global_waiting">Подождите</string>
     <string name="global_select">Выбрать</string>
     <string name="global_retry">Обновить</string>
+    <string name="global_default">По умолчанию</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Произошёл собой приложения/игры с кодом %d. Проверьте latestlog.txt, чтобы получить больше информации.</string>
     <string name="mcn_exit_call">Выйти</string>
     <string name="mcn_exit_confirm">Вы уверены, что хотите принудительно завершить игру?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 не установлен!</string>
-    <string name="mcn_check_fail_vulkan_support">Визуализатор Vulkan Zink не поддерживается на этом устройстве.</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Клавиатура</string>
@@ -367,6 +364,8 @@
     <string name="preference_gyro_damper_window_title">Задержка для сглаживания</string>
     <string name="preference_gyro_damper_window_description">Время для сглаживания рывков движения устройства. Для отключения установите значение \"0\".</string>
     <string name="hint_search_modpack">Поиск сборок</string>
+    <string name="preference_vulkan_driver_system_title">Использовать систему драйверов Vulkan</string>
+    <string name="preference_vulkan_driver_system_description">Принудительно использовать драйвер системы Vulkan вместо Turnip на GPU Adreno. Повлияет только на Zink и модов, использующих Vulkan.</string>
     <string name="generic_install">Установить</string>
     <string name="generic_apply">Применить</string>
     <string name="search_modpack_no_result">Сборок не найдено</string>
