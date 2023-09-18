@@ -84,9 +84,6 @@
     <string name="mcl_setting_category_scaling">縮放設定</string>
     <string name="mcl_setting_category_renderer">渲染器</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (全版本, 快)</string>
-    <string name="mcl_setting_renderer_virgl">virglrenderer - (正式版 1.7+, 慢)</string>
-    <string name="mcl_setting_renderer_vgpu">vgpu - (正式版 1.16.5以下&lt;但Mali gpu可以執行1.17+&gt;, 快)</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink - (old_beta b1.8+, 慢)</string>
     <string name="mcl_setting_renderer_angle">ANGLE - (正式版 1.17+, 中)</string>
     <string name="mcl_setting_category_veroption">將在版本列表中顯示的版本型別</string>
     <string name="mcl_setting_veroption_release">正式版</string>
@@ -110,12 +107,12 @@
     <string name="global_error_field_empty">此欄位為必填</string>
     <string name="global_waiting">等待中</string>
     <string name="global_select">選擇</string>
+    <string name="global_default">預設</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">程式/遊戲以代碼 %d 退出，詳情請查看latestlog.txt。</string>
     <string name="mcn_exit_call">退出</string>
     <string name="mcn_exit_confirm">確定強制關閉？</string>
     <string name="mcn_check_fail_lwjgl">未安裝LWJGL3！</string>
-    <string name="mcn_check_fail_vulkan_support">該設備不支援 Vulkan Zink 渲染器！</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">鍵盤</string>
