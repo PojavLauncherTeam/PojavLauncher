@@ -84,9 +84,6 @@
     <string name="mcl_setting_category_scaling">Boyutlandırma Seçenekleri</string>
     <string name="mcl_setting_category_renderer">İşleyici</string>
     <string name="mcl_setting_renderer_gles2_4">Kutsal GL4ES - (bütün sürümler için, hızlı)</string>
-    <string name="mcl_setting_renderer_virgl">virglrenderer - (sürüm 1.7+, yavaş)</string>
-    <string name="mcl_setting_renderer_vgpu">vgpu - (1.16.5\'e kadar, hızlı)</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink - (eski_beta b1.8+, yavaş)</string>
     <string name="mcl_setting_renderer_angle">ANGLE - (sürüm 1.17+, ortalama)</string>
     <string name="mcl_setting_category_veroption">Sürüm tipi sürüm listesinde olacaktır</string>
     <string name="mcl_setting_veroption_release">Sürümler</string>
@@ -111,12 +108,12 @@
     <string name="global_waiting">Bekleyin</string>
     <string name="global_select">Seç</string>
     <string name="global_retry">Tekrar Dene</string>
+    <string name="global_default">Varsayılan</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Uygulama/Oyundan %d koduyla çıkıldı, daha fazla bilgi için latestlog.txt\'ye bakın.</string>
     <string name="mcn_exit_call">Çıkış</string>
     <string name="mcn_exit_confirm">Zorla kapatmak istediğinize emin misiniz?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 yüklenmemiş!</string>
-    <string name="mcn_check_fail_vulkan_support">Vulkan Zink işleyicisi bu cihazda desteklenmiyor!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Klavye</string>
