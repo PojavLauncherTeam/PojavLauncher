@@ -83,9 +83,7 @@
     <string name="mcl_setting_category_scaling">Ölçmə parametrləri</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (bütün versiyalar, sürətli)</string>
-    <string name="mcl_setting_renderer_virgl">virglrenderer - (buraxılış 1.7+, yavaş)</string>
-    <string name="mcl_setting_renderer_vgpu">vgpu - (1.16.5-ə qədər, sürətli)</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink - (old_beta b1.8+, yavaş)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - (bütün versiyalar, orta, aşağı cihaz uyğunluğu)</string>
     <string name="mcl_setting_renderer_angle">ANGLE - (buraxılış 1.17+, orta)</string>
     <string name="mcl_setting_category_veroption">Versiya növü versiya siyahısında olacaq</string>
     <string name="mcl_setting_veroption_release">Buraxın</string>
@@ -110,12 +108,13 @@
     <string name="global_waiting">Gözləyin</string>
     <string name="global_select">Seç</string>
     <string name="global_retry">Yenidən cəhd et</string>
+    <string name="global_default">Defolt</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Proqram/Oyun %d kodu ilə çıxdı, ətraflı məlumat üçün latestlog.txt-ə baxın.</string>
     <string name="mcn_exit_call">Çıxış</string>
     <string name="mcn_exit_confirm">Zorla bağlamaq istədiyinizə əminsiniz?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 quraşdırılmayıb!</string>
-    <string name="mcn_check_fail_vulkan_support">Vulkan Zink rendereri bu cihazda dəstəklənmir!</string>
+    <string name="mcn_check_fail_vulkan_support">Zink (Vulkan) rendereri bu cihazda dəstəklənmir!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Klaviatura</string>
@@ -362,6 +361,8 @@
     <string name="preference_gyro_damper_window_title">Hamarlama vaxtı</string>
     <string name="preference_gyro_damper_window_description">Gecikmə qarşılığında titrəməni azaldın. onu söndürmək üçün 0</string>
     <string name="hint_search_modpack">Mod paketləri axtarın</string>
+    <string name="preference_vulkan_driver_system_title">Sistem vulkan sürücüsündən istifadə edin</string>
+    <string name="preference_vulkan_driver_system_description">Başladıcını Adreno GPU-larda Turnip əvəzinə sistem Vulkan sürücüsündən istifadə etməyə məcbur edin. Yalnız Zink və Vulkandan istifadə edən modlara təsir edir.</string>
     <string name="generic_install">Quraşdır</string>
     <string name="generic_apply">Tətbiq et</string>
     <string name="search_modpack_no_result">Heç bir modpaket tapılmadı</string>
