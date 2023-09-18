@@ -84,9 +84,6 @@
     <string name="mcl_setting_category_scaling">Pengaturan penskalaan</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (semua versi, cepat)</string>
-    <string name="mcl_setting_renderer_virgl">virglrenderer - (rilis 1.7+, lambat)</string>
-    <string name="mcl_setting_renderer_vgpu">vgpu - (bisa sampai 1.16.5, cepat)</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink - (old_beta b1.8+, lambat)</string>
     <string name="mcl_setting_renderer_angle">ANGLE - (rilis 1.17+, pertengahan)</string>
     <string name="mcl_setting_category_veroption">Jenis versi akan ada dalam daftar versi</string>
     <string name="mcl_setting_veroption_release">Rilis</string>
@@ -111,12 +108,12 @@
     <string name="global_waiting">Tunggu</string>
     <string name="global_select">Pilih</string>
     <string name="global_retry">Coba lagi</string>
+    <string name="global_default">Default</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Aplikasi/permainan keluar dengan kode %d, cek latestlog.txt untuk detail lebih lanjut.</string>
     <string name="mcn_exit_call">Keluar</string>
     <string name="mcn_exit_confirm">Apa anda yakin mau tutup secara paksa?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 tidak dipasang!</string>
-    <string name="mcn_check_fail_vulkan_support">Renderer Vulkan Zink tidak didukung di perangkat ini!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Keyboard</string>
