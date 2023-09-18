@@ -84,9 +84,6 @@
     <string name="mcl_setting_category_scaling">Ustawienia skalowania</string>
     <string name="mcl_setting_category_renderer">Silnik renderujący</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (wszystkie wersje, szybki)</string>
-    <string name="mcl_setting_renderer_virgl">virglrenderer - (wersja 1.7+, wolny)</string>
-    <string name="mcl_setting_renderer_vgpu">vgpu - (do wersji 1.16.5, szybki)</string>
-    <string name="mcl_setting_renderer_vulkan_zink">zink - (old_beta b1.8+, wolny)</string>
     <string name="mcl_setting_renderer_angle">ANGLE - (wersja 1.17+, zrównoważony)</string>
     <string name="mcl_setting_category_veroption">Opcje widoczne na liście wersji</string>
     <string name="mcl_setting_veroption_release">Oficjalne wydanie</string>
@@ -111,12 +108,12 @@
     <string name="global_waiting">Czekaj</string>
     <string name="global_select">Wybierz</string>
     <string name="global_retry">Ponów próbę</string>
+    <string name="global_default">Domyślny</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Aplikacja/gra zakończyła się błędem o kodzie %d, sprawdź latestlog.txt, aby uzyskać więcej informacji.</string>
     <string name="mcn_exit_call">Wyjdź</string>
     <string name="mcn_exit_confirm">Czy na pewno chcesz wymusić zamknięcie?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 nie został zainstalowany!</string>
-    <string name="mcn_check_fail_vulkan_support">Renderer Vulkan Zink nie jest obsługiwany na tym urządzeniu!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Klawiatura</string>
