@@ -84,6 +84,7 @@
     <string name="mcl_setting_category_scaling">Einstellungen für die Größe der Benutzeroberfläche</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (alle Versionen, schnell)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - (alle Versionen; mittel &amp; niedrige Gerätekompatibilität)</string>
     <string name="mcl_setting_renderer_angle">ANGLE - (Vollversion 1.17+, mittel schnell)</string>
     <string name="mcl_setting_category_veroption">Versionsarten, welche in der Versionsliste sind:</string>
     <string name="mcl_setting_veroption_release">Vollversionen</string>
