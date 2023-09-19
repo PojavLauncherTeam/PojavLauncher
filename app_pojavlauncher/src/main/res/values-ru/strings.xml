@@ -84,6 +84,7 @@
     <string name="mcl_setting_category_scaling">Настройки масштабирования</string>
     <string name="mcl_setting_category_renderer">Визуализатор</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES (все версии, быстрый)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan; все версии, средний, ограниченная поддержка устройств)</string>
     <string name="mcl_setting_renderer_angle">ANGLE (1.17 и выше, средний)</string>
     <string name="mcl_setting_category_veroption">Типы версий, которые будут отображаться в списке</string>
     <string name="mcl_setting_veroption_release">Релизы</string>
@@ -114,6 +115,7 @@
     <string name="mcn_exit_call">Выйти</string>
     <string name="mcn_exit_confirm">Вы уверены, что хотите принудительно завершить игру?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 не установлен!</string>
+    <string name="mcn_check_fail_vulkan_support">Визуализатор Zink (Vulkan) не поддерживается на вашем устройстве.</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Клавиатура</string>
@@ -243,7 +245,7 @@
     <string name="preference_control_offset_description">Устанавливает пользовательское смещение для каждой стороны экрана</string>
     <string name="preference_mouse_start_title">Запуск с виртуальной мышью</string>
     <string name="preference_mouse_start_description">При запуске игры виртуальная мышь будет включена по умолчанию.</string>
-    <string name="preference_video_title">Видео и визуализатор</string>
+    <string name="preference_video_title">Графика и визуализатор</string>
     <string name="preference_video_description">Разрешение, тип масштабирования и визуализатор</string>
     <string name="preference_control_title">Настройка управления</string>
     <string name="preference_control_description">Типы жестов, нажатия и размеры</string>
@@ -268,7 +270,7 @@
     <string name="preference_gyro_invert_x_axis_description">Инвертирует горизонтальную ось</string>
     <string name="preference_gyro_invert_y_axis_description">Инвертирует вертикальную ось</string>
     <string name="preference_gyro_smoothing_title">Сглаживание движения</string>
-    <string name="preference_gyro_smoothing_description">Значительно повышает плавность движения камеры за счёт небольшой задержки отклика.</string>
+    <string name="preference_gyro_smoothing_description">Значительно повышает плавность движения камеры за счёт небольшой задержки ввода.</string>
     <string name="preference_back_title">Вернуться назад</string>
     <string name="gles_hack_none">Не сжимать текстуры</string>
     <string name="gles_hack_always">Сжимать все текстуры в 2 раза</string>
