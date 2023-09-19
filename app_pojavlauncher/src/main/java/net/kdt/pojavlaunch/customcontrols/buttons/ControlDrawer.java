@@ -14,17 +14,13 @@ import net.kdt.pojavlaunch.customcontrols.handleview.EditControlPopup;
 
 import java.util.ArrayList;
 
-
-
 @SuppressLint("ViewConstructor")
 public class ControlDrawer extends ControlButton {
-
 
     public final ArrayList<ControlSubButton> buttons;
     public final ControlDrawerData drawerData;
     public final ControlLayout parentLayout;
     public boolean areButtonsVisible;
-
 
     public ControlDrawer(ControlLayout layout, ControlDrawerData drawerData) {
         super(layout, drawerData.properties);
@@ -35,53 +31,52 @@ public class ControlDrawer extends ControlButton {
         areButtonsVisible = layout.getModifiable();
     }
 
-
-    public void addButton(ControlData properties){
+    public void addButton(ControlData properties) {
         addButton(new ControlSubButton(parentLayout, properties, this));
     }
 
-    public void addButton(ControlSubButton button){
+    public void addButton(ControlSubButton button) {
         buttons.add(button);
         syncButtons();
         setControlButtonVisibility(button, areButtonsVisible);
     }
 
-    private void setControlButtonVisibility(ControlButton button, boolean isVisible){
+    private void setControlButtonVisibility(ControlButton button, boolean isVisible) {
         button.getControlView().setVisibility(isVisible ? VISIBLE : GONE);
     }
 
-    private void switchButtonVisibility(){
+    private void switchButtonVisibility() {
         areButtonsVisible = !areButtonsVisible;
         int visibility = areButtonsVisible ? VISIBLE : GONE;
-        for(ControlButton button : buttons){
+        for (ControlButton button : buttons) {
             button.getControlView().setVisibility(visibility);
         }
     }
 
-    //Syncing stuff
-    private void alignButtons(){
-        if(buttons == null) return;
-        if(drawerData.orientation == ControlDrawerData.Orientation.FREE) return;
+    // Syncing stuff
+    private void alignButtons() {
+        if (buttons == null) return;
+        if (drawerData.orientation == ControlDrawerData.Orientation.FREE) return;
 
-        for(int i = 0; i < buttons.size(); ++i){
-            switch (drawerData.orientation){
+        for (int i = 0; i < buttons.size(); ++i) {
+            switch (drawerData.orientation) {
                 case RIGHT:
-                    buttons.get(i).setDynamicX(generateDynamicX(getX() + (drawerData.properties.getWidth() + Tools.dpToPx(2))*(i+1) ));
+                    buttons.get(i).setDynamicX(generateDynamicX(getX() + (drawerData.properties.getWidth() + Tools.dpToPx(2)) * (i + 1)));
                     buttons.get(i).setDynamicY(generateDynamicY(getY()));
                     break;
 
                 case LEFT:
-                    buttons.get(i).setDynamicX(generateDynamicX(getX() - (drawerData.properties.getWidth() + Tools.dpToPx(2))*(i+1)));
+                    buttons.get(i).setDynamicX(generateDynamicX(getX() - (drawerData.properties.getWidth() + Tools.dpToPx(2)) * (i + 1)));
                     buttons.get(i).setDynamicY(generateDynamicY(getY()));
                     break;
 
                 case UP:
-                    buttons.get(i).setDynamicY(generateDynamicY(getY() - (drawerData.properties.getHeight() + Tools.dpToPx(2))*(i+1)));
+                    buttons.get(i).setDynamicY(generateDynamicY(getY() - (drawerData.properties.getHeight() + Tools.dpToPx(2)) * (i + 1)));
                     buttons.get(i).setDynamicX(generateDynamicX(getX()));
                     break;
 
                 case DOWN:
-                    buttons.get(i).setDynamicY(generateDynamicY(getY() + (drawerData.properties.getHeight() + Tools.dpToPx(2))*(i+1)));
+                    buttons.get(i).setDynamicY(generateDynamicY(getY() + (drawerData.properties.getHeight() + Tools.dpToPx(2)) * (i + 1)));
                     buttons.get(i).setDynamicX(generateDynamicX(getX()));
                     break;
             }
@@ -89,10 +84,9 @@ public class ControlDrawer extends ControlButton {
         }
     }
 
-
-    private void resizeButtons(){
+    private void resizeButtons() {
         if (buttons == null || drawerData.orientation == ControlDrawerData.Orientation.FREE) return;
-        for(ControlSubButton subButton : buttons){
+        for (ControlSubButton subButton : buttons) {
             subButton.mProperties.setWidth(mProperties.getWidth());
             subButton.mProperties.setHeight(mProperties.getHeight());
 
@@ -100,7 +94,7 @@ public class ControlDrawer extends ControlButton {
         }
     }
 
-    public void syncButtons(){
+    public void syncButtons() {
         alignButtons();
         resizeButtons();
     }

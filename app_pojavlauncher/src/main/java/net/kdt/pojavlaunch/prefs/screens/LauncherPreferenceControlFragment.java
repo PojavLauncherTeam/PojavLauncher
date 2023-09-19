@@ -14,6 +14,7 @@ import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 
 public class LauncherPreferenceControlFragment extends LauncherPreferenceFragment {
     private boolean mGyroAvailable = false;
+
     @Override
     public void onCreatePreferences(Bundle b, String str) {
         // Get values
@@ -25,51 +26,54 @@ public class LauncherPreferenceControlFragment extends LauncherPreferenceFragmen
         float gyroSpeed = LauncherPreferences.PREF_GYRO_SENSITIVITY;
         float joystickDeadzone = LauncherPreferences.PREF_DEADZONE_SCALE;
 
-
-        //Triggers a write for some reason which resets the value
+        // Add preferences from resource
         addPreferencesFromResource(R.xml.pref_control);
 
+        // Find preferences
         CustomSeekBarPreference seek2 = findPreference("timeLongPressTrigger");
+        CustomSeekBarPreference seek3 = findPreference("buttonscale");
+        CustomSeekBarPreference seek4 = findPreference("mousescale");
+        CustomSeekBarPreference seek6 = findPreference("mousespeed");
+        CustomSeekBarPreference deadzoneSeek = findPreference("gamepad_deadzone_scale");
+        PreferenceCategory gyroCategory = findPreference("gyroCategory");
+        CustomSeekBarPreference gyroSensitivitySeek = findPreference("gyroSensitivity");
+        CustomSeekBarPreference gyroSampleRateSeek = findPreference("gyroSampleRate");
+
+        // Set preferences
         seek2.setRange(100, 1000);
         seek2.setValue(longPressTrigger);
         seek2.setSuffix(" ms");
 
-        CustomSeekBarPreference seek3 = findPreference("buttonscale");
         seek3.setRange(80, 250);
         seek3.setValue(prefButtonSize);
         seek3.setSuffix(" %");
 
-        CustomSeekBarPreference seek4 = findPreference("mousescale");
         seek4.setRange(25, 300);
         seek4.setValue(mouseScale);
         seek4.setSuffix(" %");
 
-        CustomSeekBarPreference seek6 = findPreference("mousespeed");
         seek6.setRange(25, 300);
-        seek6.setValue((int)(mouseSpeed *100f));
+        seek6.setValue((int) (mouseSpeed * 100f));
         seek6.setSuffix(" %");
 
-        CustomSeekBarPreference deadzoneSeek = findPreference("gamepad_deadzone_scale");
         deadzoneSeek.setRange(50, 200);
         deadzoneSeek.setValue((int) joystickDeadzone * 100);
         deadzoneSeek.setSuffix(" %");
 
-
+        // Check if gyro is available
         Context context = getContext();
-        if(context != null) {
-            mGyroAvailable = ((SensorManager)context.getSystemService(Context.SENSOR_SERVICE)).getDefaultSensor(Sensor.TYPE_GYROSCOPE) != null;
+        if (context != null) {
+            mGyroAvailable = ((SensorManager) context.getSystemService(Context.SENSOR_SERVICE)).getDefaultSensor(Sensor.TYPE_GYROSCOPE) != null;
         }
-        PreferenceCategory gyroCategory =  (PreferenceCategory) findPreference("gyroCategory");
+
+        // Set visibility of gyro category
         gyroCategory.setVisible(mGyroAvailable);
 
-        CustomSeekBarPreference gyroSensitivitySeek = findPreference("gyroSensitivity");
-        gyroSensitivitySeek.setRange(25, 300);
-        gyroSensitivitySeek.setValue((int) (gyroSpeed*100f));
-        gyroSensitivitySeek.setSuffix(" %");
-        CustomSeekBarPreference gyroSampleRateSeek = findPreference("gyroSampleRate");
-        gyroSampleRateSeek.setRange(5, 50);
-        gyroSampleRateSeek.setValue(gyroSampleRate);
-        gyroSampleRateSeek.setSuffix(" ms");
+        // Set visibility of gyro preferences
+        gyroSensitivitySeek.setVisible(LauncherPreferences.PREF_ENABLE_GYRO);
+        gyroSampleRateSeek.setVisible(LauncherPreferences.PREF_ENABLE_GYRO);
+
+        // Compute visibility
         computeVisibility();
     }
 
@@ -79,13 +83,7 @@ public class LauncherPreferenceControlFragment extends LauncherPreferenceFragmen
         computeVisibility();
     }
 
-    private void computeVisibility(){
+    private void computeVisibility() {
         findPreference("timeLongPressTrigger").setVisible(!LauncherPreferences.PREF_DISABLE_GESTURES);
-        findPreference("gyroSensitivity").setVisible(LauncherPreferences.PREF_ENABLE_GYRO);
-        findPreference("gyroSampleRate").setVisible(LauncherPreferences.PREF_ENABLE_GYRO);
-        findPreference("gyroInvertX").setVisible(LauncherPreferences.PREF_ENABLE_GYRO);
-        findPreference("gyroInvertY").setVisible(LauncherPreferences.PREF_ENABLE_GYRO);
-        findPreference("gyroSmoothing").setVisible(LauncherPreferences.PREF_ENABLE_GYRO);
     }
-
 }
