@@ -93,7 +93,7 @@ public class Touchpad extends FrameLayout implements GrabListener{
             case MotionEvent.ACTION_MOVE: // 2
                 //Scrolling feature
                 if (!LauncherPreferences.PREF_DISABLE_GESTURES && !CallbackBridge.isGrabbing() && event.getPointerCount() >= 2) {
-                    int hScroll =  ((int) (event.getX() - mScrollLastInitialX)) / FINGER_SCROLL_THRESHOLD;
+                    int hScroll = ((int) (event.getX() - mScrollLastInitialX)) / FINGER_SCROLL_THRESHOLD;
                     int vScroll = ((int) (event.getY() - mScrollLastInitialY)) / FINGER_SCROLL_THRESHOLD;
 
                     if(vScroll != 0 || hScroll != 0){
@@ -103,26 +103,6 @@ public class Touchpad extends FrameLayout implements GrabListener{
                     }
                     break;
                 }
-
-                // Mouse movement
-                if(mCurrentPointerID == event.getPointerId(0)) {
-                    mouseX = Math.max(0, Math.min(currentDisplayMetrics.widthPixels, mouseX + (x - mPrevX) * LauncherPreferences.PREF_MOUSESPEED));
-                    mouseY = Math.max(0, Math.min(currentDisplayMetrics.heightPixels, mouseY + (y - mPrevY) * LauncherPreferences.PREF_MOUSESPEED));
-
-                    placeMouseAt(mouseX, mouseY);
-                    CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
-                }else mCurrentPointerID = event.getPointerId(0);
-
-                mPrevX = x;
-                mPrevY = y;
-                break;
-
-            case MotionEvent.ACTION_UP:
-                mPrevX = x;
-                mPrevY = y;
-                mCurrentPointerID = -1000;
-                break;
-        }
 
         return true;
     }
