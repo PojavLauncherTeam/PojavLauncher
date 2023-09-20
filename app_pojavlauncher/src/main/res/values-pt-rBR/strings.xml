@@ -84,8 +84,8 @@
     <string name="mcl_setting_category_scaling">Configurações de escala</string>
     <string name="mcl_setting_category_renderer">Renderizador</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (todas as versões, rápido)</string>
-    <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - (todas as versões, compatibilidade com dispositivos médios e baixos)</string>
-    <string name="mcl_setting_renderer_angle">ANGLE - (versão 1.17+, meio)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - (todas as versões, medio, compatibilidade com dispositivos lentos)</string>
+    <string name="mcl_setting_renderer_angle">ANGLE - (versão 1.17+, médio)</string>
     <string name="mcl_setting_category_veroption">Tipos de versões que serão mostradas na lista de versões</string>
     <string name="mcl_setting_veroption_release">Versões finais</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
