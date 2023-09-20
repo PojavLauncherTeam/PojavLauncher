@@ -84,6 +84,7 @@
     <string name="mcl_setting_category_scaling">Nastavení měřítka</string>
     <string name="mcl_setting_category_renderer">Vykreslovač</string>
     <string name="mcl_setting_renderer_gles2_4">Svatá GL4ES - (všechny verze, rychlá)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - (všechny verze, kompatibilní na středních i slabých zařízeních)</string>
     <string name="mcl_setting_renderer_angle">ANGLE - (verze 1.17+, středně rychlý)</string>
     <string name="mcl_setting_category_veroption">Jaké typy verzí budou v seznamu verzí</string>
     <string name="mcl_setting_veroption_release">Vydání</string>
@@ -114,6 +115,7 @@
     <string name="mcn_exit_call">Odejít</string>
     <string name="mcn_exit_confirm">Opravdu chcete vynutit ukončení?</string>
     <string name="mcn_check_fail_lwjgl">LWJGL3 nebyla nainstalována!</string>
+    <string name="mcn_check_fail_vulkan_support">Vykreslovač Zink (Vulkan) není v tomto zařízení podporován!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_toggle">GUI</string>
     <string name="control_keyboard">Klávesnice</string>
@@ -363,6 +365,8 @@
     <string name="preference_gyro_damper_window_title">Čas vyhlazování</string>
     <string name="preference_gyro_damper_window_description">Sníží třesení výměnou za latenci. K vypnutí 0</string>
     <string name="hint_search_modpack">Hledání modpacků</string>
+    <string name="preference_vulkan_driver_system_title">Použít systémový ovladač Vulkan</string>
+    <string name="preference_vulkan_driver_system_description">Nutit launcher používat systémový ovladač Vulkan namísto Turnip na Adreno GPU. Má vliv pouze na Zink a mody, které používají Vulkan.</string>
     <string name="generic_install">Instalovat</string>
     <string name="generic_apply">Provést Změny</string>
     <string name="search_modpack_no_result">Nebyly nalezeny žádné modpacky</string>
