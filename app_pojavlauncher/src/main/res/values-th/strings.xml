@@ -3,26 +3,16 @@
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition for Android)</string>
     <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">ขออภัย Forge เวอร์ชันนี้ไม่มีตัวติดตั้งซึ่งยังไม่รองรับ</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
     <string name="login_online_username_hint">อีเมลหรือชื่อผู้ใช้</string>
-    <string name="login_online_password_hint">รหัสผ่าน</string>
-    <string name="login_online_check_keeplogin">คงฉันไว้ในระบบ</string>
     <string name="login_online_login_label">เข้าสู่ระบบ</string>
-    <string name="login_error_invalid_username">ชื่อผู้ใช้ที่ไม่ถูกต้อง ชื่อผู้ใช้ต้องอยู่ในช่วง 3-16 ตัวอักษร ควรประกอบด้วย A-Z, a-z, 0-9 และขีดล่างเท่านั้น</string>
-    <string name="login_error_exist_username">ชื่อผู้ใช้นี้มีอยู่แล้ว</string>
-    <string name="login_microsoft">เข้าสู่ระบบ Microsoft</string>
-    <string name="login_select_account">เลือกบัญชี</string>
-    <string name="login_title_no_saved_account">ไม่พบบัญชี !</string>
-    <string name="login_dialog_no_saved_account">คุณไม่มีบัญชีที่บันทึกไว้\nใช้ตัวเลือก <b>\"ให้ฉันอยู่ในระบบต่อไป\"</b> เพื่อบันทึกบัญชีเมื่อเข้าสู่ระบบครั้งแรก</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"กดปุ่มด้านบนกลางรูปฟันเพืองเพื่อเปิดหน้าต่าง ⚙\nเเตะปุ่มเพื่อปรับเเต่ง: เเก้ไข, ปรับขนาด, ลบ, หรือ ปรับเเต่งตัวคียลัด"</string>
     <!-- Warnings -->
     <string name="warning_remove_account">บัญชีนี้จะถูกลบ!</string>
     <!-- AlertDialog title -->
-    <string name="alerttitle_install_jre">ติดตั้ง Java Runtime %s (.tar.xz)</string>
     <string name="alerttitle_installmod">เลือกตัวติดตั้งม็อด</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher ได้ขัดข้องโดยไม่คาดคิด</string>
@@ -32,72 +22,45 @@
     <!-- Toast messages -->
     <string name="toast_permission_denied">ต้องได้รับอนุญาตในการอ่าน/เขียนไปยังที่เก็บข้อมูล!</string>
     <string name="toast_optifine_success">ติดตั้งสำเร็จแล้ว</string>
-    <string name="toast_uninstalljre_done">ถอนการติดตั่ง Java Runtime สำเร็จ</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_wiki">วิกิ</string>
-    <string name="mcl_tab_console">คอนโซลผู้พัฒนา</string>
-    <string name="mcl_tab_crash">บันทึกข้อขัดข้อง</string>
     <!-- MCLauncherActivity: Account status -->
-    <string name="mcl_account_connected">เชื่อมต่อแล้ว</string>
-    <string name="mcl_account_local">ท้องถิ่น</string>
     <!-- MCLauncherActivity: Strings -->
-    <string name="mcl_version_msg">พร้อมที่จะเล่น Minecraft %s</string>
     <string name="mcl_launch_cleancache">กำลังล้างแฟ้มแคช</string>
     <string name="mcl_launch_downloading">กำลังดาวน์โหลด %s</string>
     <string name="mcl_launch_downloading_progress">"กำลังดาวน์โหลด %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">กำลังเตรียมดาวน์โหลดทรัพยากร</string>
-    <string name="mcl_launch_error_localmode">ไม่สามารถติดตั้ง Minecraft อย่างถูกกฎหมายเมื่อเข้าสู่ระบบด้วยบัญชี Local โปรดเปลี่ยนเป็นบัญชีออนไลน์เพื่อดำเนินการต่อ</string>
     <string name="mcl_options">ตัวเลือก</string>
-    <string name="mcl_option_modinstall">เปิดตัวติดตั้ง mod (Forge, LabyMod, Fabric, etc..)</string>
-    <string name="mcl_option_modinstallwitharg">เปิดตัวติดตั้ง mod (ด้วยอาร์กิวเมนต์ที่กำหนดเอง)</string>
     <string name="mcl_option_customcontrol">การควบคุมกำหนดเอง</string>
-    <string name="mcl_option_settings">การตั้งค่า</string>
-    <string name="mcl_option_about">เกี่ยวกับ</string>
     <string name="mcl_setting_title_use_surface_view">ใช้การเรนเดอร์พื้นผิวแบบอื่น</string>
     <string name="mcl_setting_subtitle_use_surface_view">อาจช่วยประสิทธิภาพในสถานการณ์ที่ผูกกับ GPU</string>
-    <string name="mcl_setting_title_uninstalljre">ถอนการติดตั้ง Java Runtime</string>
-    <string name="mcl_setting_subtitle_uninstalljre">[ต้องรีสตาร์ท Launcher] ซึ่งจะช่วยให้คุณติดตั้ง Java Runtime ใหม่ได้</string>
-    <string name="mcl_setting_title_freeform">เปิด Minecraft ในโหมดรูปแบบอิสระ</string>
-    <string name="mcl_setting_subtitle_freeform">เปิด Minecraft ในหน้าต่างลอย. ต้องใช้ Android 7.0+</string>
-    <string name="mcl_setting_title_hide_sidebar">ซ่อนแถบด้านข้าง</string>
-    <string name="mcl_setting_subtitle_hide_sidebar">ผู้ที่คิดถึงอดีตที่ชอบ v1 UI แบบเก่าอาจชอบสิ่งนี้ ให้ประสบการณ์เต็มหน้าจอมากขึ้น</string>
     <string name="mcl_setting_title_ignore_notch">เต็มจอ</string>
     <string name="mcl_setting_subtitle_ignore_notch">ซ่อนรอยบากและขยายหน้าจอข้างใต้\nให้ประสบการณ์ที่สมจริงยิ่งขึ้น</string>
     <string name="mcl_setting_title_resolution_scaler">มาตราส่วนความละเอียด</string>
     <string name="mcl_setting_subtitle_resolution_scaler">อนุญาตให้คุณลดความละเอียดเกมลง. 100% คือความละเอียดสูงสุด</string>
     <string name="mcl_setting_title_longpresstrigger">กดค้างยาวเเค่ไหนถึงจะตอบสนอง</string>
     <string name="mcl_setting_subtitle_longpresstrigger">เปลี่ยนระยะเวลาในการกดค้างเพื่อทำลายบล็อกเเละทิ้งของ</string>
-    <string name="mcl_setting_title_backtorightmouse">เเปลงปุ่มกลับเป็นเมาส์ข้างขวา</string>
-    <string name="mcl_setting_title_flat_button_style">สไตล์ปุ่มแบน</string>
-    <string name="mcl_setting_subtitle_flat_button_style">เปิดใช้งานตัวเลือกนี้เพื่อเปลี่ยนรูปแบบปุ่มควบคุมเป็นแบบแบน</string>
     <string name="mcl_setting_title_buttonscale">ปรับขนาดปุ่มควบคุม</string>
     <string name="mcl_setting_subtitle_buttonscale">เพิ่มขนาดหากปุ่มมีขนาดเล็กเกินไป</string>
     <string name="mcl_setting_title_mousescale">การปรับขนาดเมาส์</string>
     <string name="mcl_setting_subtitle_mousescale">เปลี่ยนขนาดของเมาส์เสมือน.</string>
     <string name="mcl_setting_title_javaargs">อาร์กิวเมนต์เปิดใช้ JVM</string>
     <string name="mcl_setting_subtitle_javaargs">ระวัง อาจทำให้เกมพังได้หากแก้ไขโดยขาดความรู้</string>
-    <string name="mcl_setting_category_general">การตั้งค่าทั่วไป</string>
-    <string name="mcl_setting_category_scaling">การตั้งค่าการปรับขนาด</string>
     <string name="mcl_setting_category_renderer">การแสดงผล</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (รองรับทุกเวอร์ชั่น, เร็ว)</string>
     <string name="mcl_setting_renderer_angle">ANGLE - (1.17+, กลาง)</string>
-    <string name="mcl_setting_category_veroption">ประเภทเวอร์ชันจะอยู่ในรายการเวอร์ชัน</string>
     <string name="mcl_setting_veroption_snapshot">ภาพรวม</string>
     <string name="mcl_setting_veroption_oldalpha">alpha เก่า</string>
     <string name="mcl_setting_veroption_oldbeta">เบต้าเก่า</string>
     <string name="mcl_setting_java_sandbox">ตัวลง .jar เเบบปลอดภัย</string>
     <string name="mcl_setting_java_sandbox_subtitle">ควบคุมความสามารถในการปรับเเต่งความปลอดภัยเมื่อเปิด ตัวติดตั้ง .jar</string>
-    <string name="mcl_version_clone">คัดลอก</string>
     <!-- Global strings -->
-    <string name="global_edit">แก้ไข</string>
     <string name="global_error">ผิดพลาด</string>
-    <string name="global_warinng">คำเตือน</string>
     <string name="global_load">โหลด</string>
     <string name="global_name">ชื่อ</string>
-    <string name="global_remove">ถอดออก</string>
     <string name="global_clone">คัดลอก</string>
     <string name="global_restart">เริ่มใหม่</string>
     <string name="global_save">บันทึก</string>
@@ -108,12 +71,8 @@
     <string name="global_default">ค่าเรื่มต้น</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">ออกจากแอปพลิเคชัน/เกมเด้งด้วยรหัส %d โปรดตรวจสอบที่ latestlog.txt สำหรับรายละเอียดเพิ่มเติม</string>
-    <string name="mcn_exit_call">ออก</string>
     <string name="mcn_exit_confirm">คุณแน่ใจหรือไม่ว่าต้องการบังคับปิด?</string>
-    <string name="mcn_check_fail_lwjgl">LWJGL3 ไม่ได้ถูกติดตั้ง!</string>
     <!-- MainActivity: Control buttons -->
-    <string name="control_toggle">ซ่อน</string>
-    <string name="control_keyboard">แป้นพิมพ์</string>
     <string name="control_chat">แชต</string>
     <string name="control_debug">ดีบั๊ก</string>
     <string name="control_listplayers">Tab</string>
@@ -124,8 +83,6 @@
     <string name="control_forceclose">บังคับปิด</string>
     <string name="control_viewout">ประวัติที่บันทึกไว้</string>
     <string name="control_adebug">การดีบักอินพุต</string>
-    <string name="control_scaleup">เพิ่มขึ้น</string>
-    <string name="control_scaledown">ลดขนาดลง</string>
     <!-- ImportControlActivity Strings -->
     <string name="import_control_label">นำเข้า ควบคุม</string>
     <string name="import_control_invalid_file">ไฟล์ไม่ถูกต้องหรือเสียหาย</string>
@@ -137,43 +94,23 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
-    <string name="customctrl_edit">การแก้ไข %s</string>
-    <string name="customctrl_remove">ลบ %s?</string>
     <string name="customctrl_toggle">ค้างไว้</string>
     <string name="customctrl_size">ขนาด</string>
-    <string name="customctrl_size_width">ความกว้าง</string>
-    <string name="customctrl_size_height">ความสูง</string>
     <string name="customctrl_mapping">ปุ่มที่ให้กด</string>
     <string name="customctrl_orientation">ทิคทางการหัน</string>
     <string name="customctrl_background_color">สีพื้นหลัง</string>
     <string name="customctrl_corner_radius">ระยะของมุม</string>
     <string name="customctrl_stroke_width">ความกว้างของเส้นขึด</string>
     <string name="customctrl_stroke_color">สีของเส้นขึด</string>
-    <string name="customctrl_dynamicpos">ตำแหน่งพลวัต</string>
-    <string name="customctrl_dynamicpos_x">พลวัต X</string>
-    <string name="customctrl_dynamicpos_y">พลวัต Y</string>
-    <string name="customctrl_transparency_bg">ความโปร่งใสพื้นหลัง</string>
     <string name="customctrl_button_opacity">ความเข้มของปุ่มทั้งหมด</string>
-    <string name="customctrl_keycombine">การรวมคีย์</string>
     <string name="customctrl_addbutton">เพิ่มปุ่ม</string>
     <string name="customctrl_addbutton_drawer">เพื่มปุ่มรวมควบคุม</string>
     <string name="customctrl_addsubbutton">เพื่มปุ่มรอง</string>
-    <string name="customctrl_add_subbutton_message">ปุ๋มรอง n°%d ได้เพิ่มเเล้ว!</string>
     <string name="customctrl_selectdefault">เลือกแบบการควบคุมเรื่มต้น</string>
     <string name="customctrl_export">ส่งออกควบคุม</string>
     <string name="main_share_logs">แชร์ข้อมูลเเอป</string>
     <string name="main_install_jar_file">ติดตั้ง .jar</string>
-    <string name="main_options">ตัวเลือก</string>
     <string name="main_play">เล่น</string>
-    <string name="main_welcome">ยินดีต้อนรับ, %s</string>
-    <string name="main_infodev">ข้อมูล (DEV)</string>
-    <string name="main_switchuser">สลับผู้ใช้</string>
-    <string name="main_version">เวอร์ชัน:</string>
-    <string name="main_nocrash">ไม่พบข้อผิดผลาด</string>
-    <string name="main_nolog">ไม่มีประวัติบันทึกไว้</string>
-    <string name="main_no_news_feed">ไม่สามารถเอาข้อมูลข่าวสารได้!</string>
-    <string name="auto_ram_subtitle">เปิดใช้งานตัวปรับ RAM อัตโนมัติ</string>
-    <string name="auto_ram_title">RAM อัตโนมัติ</string>
     <string name="autoram_info_msg">ตั้งหน่วยความจำเป็น %d MB</string>
     <string name="mcl_setting_check_libraries">ตรวจสอบไฟล์หลังจากดาวโหลด</string>
     <string name="mcl_setting_check_libraries_subtitle">ออฟชั่นนี้บังคับให้รันเชอร์ตรวจสอบไฟล์เเฮสถ้ามี. ป้องกันการดาวน์โหลดพัง</string>
@@ -188,7 +125,6 @@
     <string name="mcl_setting_subtitle_mousespeed">ปรับความเร็วของเมาส์ชอฟแวร์</string>
     <string name="customctrl_passthru">เมาส์ผ่านได้</string>
     <string name="customctrl_swipeable">ลากได้</string>
-    <string name="customctrl_rounded">โค้งมน</string>
     <string name="memory_warning_msg">ขณะนี้เเรมที่เหลือในเครืองของคุณ (%d) น้อยกว่าเเรมที่ตั้งไว้ (%d) อาจะทำให้เด้งได้ ปรับค่าเเรมที่ต้องการเมื่อเกมเด้ง</string>
     <string name="mcl_memory_allocation">การจัดสรรหน่วยความจำ</string>
     <string name="mcl_memory_allocation_subtitle">ควบคุมเเรมที่จะให้กับเกมมายคราฟ</string>
@@ -196,7 +132,6 @@
     <string name="multirt_runtime_incompatiblearch">ไม่รองรับสถานปัตกรรมนี้: %s</string>
     <string name="multirt_config_title">จาวาวิเอ็ม</string>
     <string name="multirt_config_add">เพื่มใหม่</string>
-    <string name="multirt_config_add_subtitle">นำเข้าตัวจาวาใหม่</string>
     <string name="multirt_title">ตัวควบคุมรันไทม์</string>
     <string name="multirt_subtitle">จัดการจาวาที่ติดตั้งเเล้ว</string>
     <string name="multirt_progress_caching">กำลังเเคชชิง...</string>
@@ -205,20 +140,7 @@
     <string name="multirt_config_removeerror_last">อย่างน้อยต้องมีจาวาที่ติดตั้งเเล้วก่อน</string>
     <string name="multirt_nocompartiblert">ไม่สามารถหาตัวจาวาที่รองรับ เวอร์ชั่นนี้ตองการจาวา %d หรือใหม่กว่า</string>
     <string name="multirt_nojava8rt">ไม่สามารถหาจาวา 8 ในการใช้ออฟชั่นนี้คุณต้องติดตั้งจาวา 8</string>
-    <string name="compat_117_message">มายคราฟ 21w10a+ ต้องการ OpenGL 3.2 โปรไฟล์ น่าเศร้าที่ชิปกราฟิกของคุณไม่รองรับ OpenGL ES 3.0 หรือสูงกว่า แต่มีแหล่งข้อมูลเพิ่มเติมที่คุณสามารถติดตั้งเพื่อเรียกใช้เวอร์ชันเหล่านี้ได้ กด ตกลง เพื่อยืนยันการติดตั้ง และกด ยกเลิก เพื่อยกเลิกการเรียกใช้</string>
-    <string name="compat_11x_playanyway">เล่นโดยไม่สนใจ</string>
-    <string name="pvc_gameDirectory">ตำเเหน่งโฟรเดอร์เกม</string>
     <string name="pvc_jvmArgs">ตัวคำสั่ง เจวิเอ็ม</string>
-    <string name="pvc_title">ตั้งค่าเเต่ละเวอร์ชั่น</string>
-    <string name="storage_warning_title">ตำแหน่งที่จัดเก็บได้ถูกเปลี่ยน</string>
-    <string name="storage_warning_text"><![CDATA[เนื่องจากระบบใหม่ของ Google scoped storage enforcement ได้เพื่มลงใน android 10 ขึ้นไป เราขอเเนะนำย้ายไฟล์ลงใน app-private folder.<br /> ตำแหน่งที่จัดเก็บใหม่อยู่ใน <b>Android/datal%s/files/</b> (เข้าได้ผ่าน storage provider ในตัวจัดการไฟล์ในเครื่องคุณ).<br /> ถ้าต้องก็อปปี้ทุกอย่างจากของเดิมอยู่ที่ <b>games/Pojavlauncher</b> ตัวตัวเอง]]></string>
-    <string name="control_offset_title">ปรับค่าควบคุม</string>
-    <string name="control_top_offset">ค่าควบคุมบนสุด: </string>
-    <string name="control_right_offset">ค่าควบคุมขวา: </string>
-    <string name="control_bottom_offset">ค่าควบคุมต้านใต้: </string>
-    <string name="control_left_offset">ค่าควบคุมช้าย: </string>
-    <string name="preference_control_offset_title">ปรับค่าควบคุมในเเต่ละด้าน</string>
-    <string name="preference_control_offset_description">ปรับค่าควบคุมในเเต่ละด้านของจอ</string>
     <string name="preference_mouse_start_title">เปิดเกมด้วยเมาส์จำลอง</string>
     <string name="preference_mouse_start_description">เมาส์จำลองจะมาตอนเปิดเกมถ้าเปิดออฟชั่นนี้</string>
     <string name="preference_video_title">ภาพเเละการเร็นเดอร์</string>
@@ -245,13 +167,9 @@
     <string name="preference_gyro_invert_x_axis_description">กลับเเกนตรง</string>
     <string name="preference_gyro_invert_y_axis_description">กลับเเกนเเนวนอน</string>
     <string name="preference_back_title">กลับไปหน้าที่เเล้ว</string>
-    <string name="gles_hack_none">อย่าย่อขนาดพื้นผิว</string>
-    <string name="gles_hack_always">หารขนาดโดย 2</string>
-    <string name="gles_hack_sometimes">หารขนาดพื้นผิวใหญ่ โดย /2 หรือ /4</string>
     <string name="unnamed">ไม่มีชื่อ</string>
     <string name="profiles_latest_snapshot">ตัวทดลองล่าสุด</string>
     <string name="profiles_latest_release">เนื้อหาใหม่ล่าสุด</string>
-    <string name="profiles_editing">แก้ไขโปรไฟล์</string>
     <string name="profiles_profile_name">ชื่อ</string>
     <string name="profiles_profile_version">เวอร์ชัน</string>
     <string name="global_delete">ลบ</string>
@@ -259,10 +177,8 @@
     <string name="pedit_renderer">การแสดงผล</string>
     <string name="arc_capes_title">ผ้าคลุมที่มีภาพ</string>
     <string name="arc_capes_desc">เปิดผ้าคลุมจาก cosmetica (เเต่ก่อนเป็น arc) ข้อมูลเพิ่มเติมที่ https://cosmetica.cc ต้องมี optfine</string>
-    <string name="migrated_profile_str">%s กำหนดค่าเวอร์ชั่น</string>
     <string name="notif_channel_name">ทั่วไป</string>
     <string name="lazy_service_default_title">เรียกใช้บริการpojavที่ใช้งานอยู่</string>
-    <string name="lazy_service_default_description">เชอร์วิสนี้ใช้ในการทำงานยาวๆ</string>
     <string name="mcl_setting_veroption_installed">ติดตั้งแล้ว</string>
     <string name="use_global_default">(ใช้การตั้งค่าหลัก)</string>
     <string name="default_control">การควบคุมเดิม</string>
@@ -276,7 +192,6 @@
     <string name="main_add_account">เพิ่มบัญชี</string>
     <string name="tasks_ongoing">งานกำลังดำเนิน, โปรดรอสักครู่</string>
     <string name="no_saved_accounts">ไม่มีบัญชีที่เชฟไว้</string>
-    <string name="downloading_versions">กำลังดาวโหลดข้อมูลเวอร์ชั่นทั้งหมดที่มี</string>
     <string name="mc_download_failed">ไม่สามารถดาวน์โหลดมายคราฟ อาจะมีหลากหลายสาเหตุ เช่น เน็ดอาจหลุด/เน็ตเเย่, วางตำแหน่งไฟล์ผิด เเละอีกหลายปัจจัย</string>
     <string name="xerr_unknown">ข้อผิดพลาดของเอ็กซ์บอกเอพิไอ %d</string>
     <string name="xerr_no_account">เหมือนคุณยังไม่มีบัญชีเอ็กบอก โปรดล็อกอินบน https://minecraft.net/ เเล้วลองอีกครั้ง</string>
