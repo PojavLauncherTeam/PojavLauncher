@@ -3,17 +3,11 @@
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Android өсөн Minecraft: Java Edition)</string>
     <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">Minecraft: Java Edition үҙегеҙҙең яйланмала ебәрегеҙ!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
     <string name="login_online_username_hint">Email йәки ҡулланыусы исеме</string>
-    <string name="login_online_password_hint">Серһүҙ</string>
-    <string name="login_online_check_keeplogin">Хәтерҙә ҡалдырырға</string>
     <string name="login_online_login_label">Керергә</string>
-    <string name="login_error_exist_username">Был ҡулланыусы исеме инде бар</string>
-    <string name="login_microsoft">Microsoft менән керергә</string>
-    <string name="login_select_account">Хисап яҙмалар</string>
     <!-- Hint -->
     <!-- Warnings -->
     <string name="warning_remove_account">Был хисап яҙма юйыла!</string>
@@ -32,26 +26,19 @@
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_launch_downloading">Йөкләү %s</string>
     <string name="mcl_options">Опциялар</string>
-    <string name="mcl_option_settings">Көйләүҙәр</string>
-    <string name="mcl_option_about">Лаунчер тураһында</string>
     <string name="mcl_setting_category_renderer">Рендерер</string>
     <string name="mcl_setting_veroption_release">Релиздар</string>
     <string name="mcl_setting_veroption_snapshot">Снапшотттар</string>
     <string name="mcl_setting_veroption_oldalpha">Иҫке альфалар</string>
     <string name="mcl_setting_veroption_oldbeta">Иҫке беталар</string>
     <!-- Global strings -->
-    <string name="global_edit">Үҙгәртергә</string>
     <string name="global_error">Хата</string>
-    <string name="global_warinng">Иҫкәртеү</string>
     <string name="global_load">Йөкләү</string>
     <string name="global_name">Исем</string>
-    <string name="global_remove">Юйырға</string>
     <string name="global_save">Һаҡларға</string>
     <string name="global_waiting">Көтөп тороғоҙ</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_call">Сығырға</string>
     <!-- MainActivity: Control buttons -->
-    <string name="control_toggle">GUI</string>
     <string name="control_chat">Сүбхәт</string>
     <string name="control_primary">ҺСТ</string>
     <string name="control_secondary">УСТ</string>
@@ -73,15 +60,8 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
-    <string name="customctrl_edit">«%s» үҙгәртеү</string>
-    <string name="customctrl_remove">«%s» юйырғамы?</string>
     <string name="customctrl_addbutton">Төймәне булдырырға</string>
-    <string name="main_options">Опциялар</string>
     <string name="main_play">Уйнарға</string>
-    <string name="main_welcome">%s, рәхим итегеҙ</string>
-    <string name="main_infodev">Инфо (Эшк.)</string>
-    <string name="main_switchuser">Ҡулланыусыны алмаштырырға</string>
-    <string name="main_version">Версия:</string>
     <string name="profiles_profile_name">Исем</string>
     <string name="pedit_renderer">Рендерер</string>
     <string name="of_dl_progress">Йөкләү %s</string>
