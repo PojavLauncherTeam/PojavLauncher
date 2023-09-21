@@ -3,26 +3,16 @@
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition su Android)</string>
     <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">Avvia Minecraft: Java Edition sul tuo dispositivo!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
     <string name="login_online_username_hint">Indirizzo email o nome utente</string>
-    <string name="login_online_password_hint">Password</string>
-    <string name="login_online_check_keeplogin">Resta collegato</string>
     <string name="login_online_login_label">Accedi</string>
-    <string name="login_error_invalid_username">Nome utente non valido. Il nome utente deve essere lungo tra i 3-16 caratteri, dovrebbe contenere solamente valori compresi tra A-Z, a-z, 0-9 e trattini bassi.</string>
-    <string name="login_error_exist_username">Nome utente già esistente</string>
-    <string name="login_microsoft">Accedi con Microsoft</string>
-    <string name="login_select_account">Seleziona account</string>
-    <string name="login_title_no_saved_account">Nessun account trovato!</string>
-    <string name="login_dialog_no_saved_account">Non hai account salvati.\nUsa l\'opzione <b>\"ricordami\"</b> per salvare un account al primo login.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Tocca l'icona dell'ingranaggio in alto al centro per aprire il menu contestuale ⚙\nTocca un pulsante da personalizzare: modifica, ridimensiona, eliminare o cambia l'assegnazione di tasti."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">L\'account sarà cancellato!</string>
     <!-- AlertDialog title -->
-    <string name="alerttitle_install_jre">Installa Runtime Java %s (.tar.xz)</string>
     <string name="alerttitle_installmod">Seleziona un installer mod</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher è crashato inaspettatamente</string>
@@ -32,74 +22,46 @@
     <!-- Toast messages -->
     <string name="toast_permission_denied">Permesso di scrittura/lettura sulla memoria necessario!</string>
     <string name="toast_optifine_success">Installato con successo</string>
-    <string name="toast_uninstalljre_done">Disinstallazione Runtime Java completato</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_wiki">Wiki</string>
-    <string name="mcl_tab_console">Console sviluppatore</string>
-    <string name="mcl_tab_crash">Crash log</string>
     <!-- MCLauncherActivity: Account status -->
-    <string name="mcl_account_connected">Connesso</string>
-    <string name="mcl_account_local">Locale</string>
     <!-- MCLauncherActivity: Strings -->
-    <string name="mcl_version_msg">Minecraft %s pronto</string>
     <string name="mcl_launch_cleancache">Pulizia dei file di cache in corso</string>
     <string name="mcl_launch_downloading">Scaricando %s</string>
     <string name="mcl_launch_downloading_progress">"Scaricando %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Preparazione per il download delle risorse</string>
-    <string name="mcl_launch_error_localmode">Minecraft non può essere legalmente installato quando accedi con un account locale. Passa a un account online per continuare.</string>
     <string name="mcl_options">Impostazioni</string>
-    <string name="mcl_option_modinstall">Avvia un mod installer (Forge, LabyMod, Fabric, ecc...)</string>
-    <string name="mcl_option_modinstallwitharg">Avvia un mod installer (personalizzato)</string>
     <string name="mcl_option_customcontrol">Controlli personalizzati</string>
-    <string name="mcl_option_settings">Impostazioni</string>
-    <string name="mcl_option_about">Informazioni</string>
     <string name="mcl_setting_title_use_surface_view">Usa alternate surface rendering</string>
     <string name="mcl_setting_subtitle_use_surface_view">Può migliorare le prestazioni in caso di uso della gpu</string>
-    <string name="mcl_setting_title_uninstalljre">Disinstalla Java Runtime</string>
-    <string name="mcl_setting_subtitle_uninstalljre">[Riavvio del launcher necessario] Questo ti lascerà reinstallare il Runtime Java</string>
-    <string name="mcl_setting_title_freeform">Avvia Minecraft in modalità finestra</string>
-    <string name="mcl_setting_subtitle_freeform">Avvia Minecraft in finestra fluttuante. Necessario Android 7.0+</string>
-    <string name="mcl_setting_title_hide_sidebar">Nascondi barra laterale</string>
-    <string name="mcl_setting_subtitle_hide_sidebar">Potrebbe piacere alle persone che preferiscono la vecchia interfaccia utente v1. Offre un\'esperienza migliore a schermo intero.</string>
     <string name="mcl_setting_title_ignore_notch">Ignora notch</string>
     <string name="mcl_setting_subtitle_ignore_notch">Estende lo schermo al di sotto del notch.\nOffre un\'esperienza più immersiva.</string>
     <string name="mcl_setting_title_resolution_scaler">Scala Risoluzione</string>
     <string name="mcl_setting_subtitle_resolution_scaler">Ti permette di diminuire la risoluzione del gioco. 100% è la risoluzione massima</string>
     <string name="mcl_setting_title_longpresstrigger">Per quanto tempo rimarrà attivo dopo una pressione prolungata</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Cambia il tempo di attivazione per una pressione prolungata nel rompimento di un blocco e il drop di un item.</string>
-    <string name="mcl_setting_title_backtorightmouse">Usa il pulsante indietro come destro mouse</string>
-    <string name="mcl_setting_subtitle_backtorightmouse">Alcuni dispositivi utilizzano come pulsante indietro il tasto destro del mouse. Se stai usando un mouse esterno, dovresti abilitarlo.</string>
-    <string name="mcl_setting_title_flat_button_style">Stile pulsante piatto</string>
-    <string name="mcl_setting_subtitle_flat_button_style">Abilita l\'opzione per impostare lo stile piatto dei pulsanti di controllo.</string>
     <string name="mcl_setting_title_buttonscale">Dimensione controlli</string>
     <string name="mcl_setting_subtitle_buttonscale">Aumenta le dimensioni se i pulsanti sono troppo piccoli.</string>
     <string name="mcl_setting_title_mousescale">Dimensioni mouse</string>
     <string name="mcl_setting_subtitle_mousescale">Cambia dimensioni mouse virtuale.</string>
     <string name="mcl_setting_title_javaargs">Argomenti di avvio della JVM</string>
     <string name="mcl_setting_subtitle_javaargs">Attenzione, il gioco potrebbe crashare se effettui modifiche senza sapere quello che fai.</string>
-    <string name="mcl_setting_category_general">Impostazioni generali</string>
-    <string name="mcl_setting_category_scaling">Impostazioni dimensioni</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (Tutte le versioni, veloce)</string>
     <string name="mcl_setting_renderer_angle">ANGLE - (versione 1.17+, mediamente veloce)</string>
-    <string name="mcl_setting_category_veroption">Tipo di versioni che saranno nell\'elenco delle versioni</string>
     <string name="mcl_setting_veroption_release">Finale</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Vecchie-alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Vecchie-beta</string>
     <string name="mcl_setting_java_sandbox">Programma installazione sandbox .jar</string>
     <string name="mcl_setting_java_sandbox_subtitle">Controlla la disponibilità del gestore della sicurezza sandbox all\'avvio del programma di installazione .jar.</string>
-    <string name="mcl_version_clone">Clona</string>
     <!-- Global strings -->
-    <string name="global_edit">Modifica</string>
     <string name="global_error">Errore</string>
-    <string name="global_warinng">Avviso</string>
     <string name="global_load">Carica</string>
     <string name="global_name">Nome</string>
-    <string name="global_remove">Rimuovi</string>
     <string name="global_clone">Clona</string>
     <string name="global_restart">Riavvia</string>
     <string name="global_save">Salva</string>
@@ -111,12 +73,8 @@
     <string name="global_default">Predefinito</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">L\'applicazione/gioco si è chiuso con il codice %d, controlla il lastlog.txt per più dettagli.</string>
-    <string name="mcn_exit_call">Esci</string>
     <string name="mcn_exit_confirm">Sei sicuro di voler eseguire una chiusura forzata?</string>
-    <string name="mcn_check_fail_lwjgl">LWJGL3 non installato!</string>
     <!-- MainActivity: Control buttons -->
-    <string name="control_toggle">GUI</string>
-    <string name="control_keyboard">Tastiera</string>
     <string name="control_chat">Chat</string>
     <string name="control_debug">Debug</string>
     <string name="control_primary">Pri</string>
@@ -138,8 +96,6 @@
     <string name="control_viewout">Registro log</string>
     <string name="control_adebug">Debug input</string>
     <string name="control_customkey">Invia keycode personalizzato</string>
-    <string name="control_scaleup">Aumenta</string>
-    <string name="control_scaledown">Diminuisci</string>
     <!-- ImportControlActivity Strings -->
     <string name="import_control_label">Importa controlli</string>
     <string name="import_control_invalid_file">File corrotto o non valido</string>
@@ -151,48 +107,24 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
-    <string name="customctrl_edit">Modificando %s</string>
-    <string name="customctrl_remove">Rimuovere %s?</string>
-    <string name="customctrl_keyname">Keycode</string>
     <string name="customctrl_toggle">Attivabile</string>
     <string name="customctrl_size">Dimensione</string>
-    <string name="customctrl_size_width">Larghezza</string>
-    <string name="customctrl_size_height">Altezza</string>
     <string name="customctrl_mapping">Mapping</string>
     <string name="customctrl_orientation">Orientamento</string>
     <string name="customctrl_background_color">Colore di sfondo</string>
     <string name="customctrl_corner_radius">Raggio dell\'angolo</string>
     <string name="customctrl_stroke_width">Spessore tratto</string>
     <string name="customctrl_stroke_color">Colore tratto</string>
-    <string name="customctrl_dynamicpos">Posizione dinamica</string>
-    <string name="customctrl_dynamicpos_x">Altezza dinamica</string>
-    <string name="customctrl_dynamicpos_y">Larghezza dinamica</string>
-    <string name="customctrl_transparency_bg">Trasparenza sfondo</string>
     <string name="customctrl_button_opacity">Opacità pulsante</string>
-    <string name="customctrl_keycombine">Combinazione di tasti</string>
-    <string name="customctrl_keycombine_alt">Alt</string>
-    <string name="customctrl_keycombine_control">Ctrl</string>
-    <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Aggiungi pulsante</string>
     <string name="customctrl_addbutton_drawer">Aggiungi drawer pulsanti</string>
     <string name="customctrl_addbutton_joystick">Aggiungi joystick</string>
     <string name="customctrl_addsubbutton">Aggiungi sotto-pulsante</string>
-    <string name="customctrl_add_subbutton_message">Il sotto-pulsante n°%d è stato aggiunto!</string>
     <string name="customctrl_selectdefault">Seleziona Controllo di default json</string>
     <string name="customctrl_export">Esporta controlli</string>
     <string name="main_share_logs">Condividi file di log</string>
     <string name="main_install_jar_file">Installa .jar</string>
-    <string name="main_options">Impostazioni</string>
     <string name="main_play">Gioca</string>
-    <string name="main_welcome">Benvenuto/a, %s</string>
-    <string name="main_infodev">Info (DEV)</string>
-    <string name="main_switchuser">Cambia utente</string>
-    <string name="main_version">Versione:</string>
-    <string name="main_nocrash">Nessun crash rilevato</string>
-    <string name="main_nolog">Nessun log.</string>
-    <string name="main_no_news_feed">Scaricamento ultime novità fallito!</string>
-    <string name="auto_ram_subtitle">Attiva regolatore RAM automatico</string>
-    <string name="auto_ram_title">RAM automatica</string>
     <string name="autoram_info_msg">RAM impostata a %dMB</string>
     <string name="mcl_setting_check_libraries">Controlla le librerie dopo il download</string>
     <string name="mcl_setting_check_libraries_subtitle">Questa opzione forza il launcher a controllare l\'integrità della libreria se è possibile. Previene i download corrotti.</string>
@@ -208,7 +140,6 @@
     <string name="customctrl_passthru">Bypassa mouse</string>
     <string name="customctrl_swipeable">Swipeabile</string>
     <string name="customctrl_forward_lock">Forward lock</string>
-    <string name="customctrl_rounded">Arrotondato</string>
     <string name="memory_warning_msg">L\'attuale quantità di RAM libera (%d) è minore di quella allocata (%d), la quale potrebbe portare a crash inaspettati. Modifica la quantità di RAM allocata in caso di crash.</string>
     <string name="mcl_memory_allocation">Memoria allocata</string>
     <string name="mcl_memory_allocation_subtitle">Controlla quanta memoria dedicare a Minecraft</string>
@@ -216,7 +147,6 @@
     <string name="multirt_runtime_incompatiblearch">Architettura non compatibile: %s</string>
     <string name="multirt_config_title">Java VM</string>
     <string name="multirt_config_add">Aggiungi</string>
-    <string name="multirt_config_add_subtitle">Importa nuova Java VM</string>
     <string name="multirt_title">Runtime Manager</string>
     <string name="multirt_subtitle">Gestisci Java VM installate</string>
     <string name="multirt_progress_caching">Memorizzando nella cache...</string>
@@ -226,20 +156,7 @@
     <string name="multirt_nocompartiblert">Impossibile trovare Java Runtime compatibili. Questa versione richiede almeno Java %d o successiva.</string>
     <string name="multirt_nojava8rt">Impossibile trovare Java 8. Per usare questa opzione, è necessario installare Java 8.</string>
     <string name="multirt_delete_runtime">Cancella runtime</string>
-    <string name="compat_117_message">Minecraft 12w10a+ richiede il profilo OpenGL 3.2 core. Sfortunatamente, la tua GPU non supporta versioni di OpenGL ES 3.0 o successive, ma ci sono alcune risorse aggiuntive che puoi installare per usare queste versioni. Premi OK per confermare l\'installazione, oppure Cancel per annullare.</string>
-    <string name="compat_11x_playanyway">Gioca comunque</string>
-    <string name="pvc_gameDirectory">Cartella gioco</string>
     <string name="pvc_jvmArgs">Argomenti JVM</string>
-    <string name="pvc_title">Impostazioni per versione</string>
-    <string name="storage_warning_title">Modifiche archiviazione</string>
-    <string name="storage_warning_text"><![CDATA[A causa delle nuove applicazioni di archiviazione di Google aggiunte in Android 10 e superiore, siamo tenuti a spostare la directory di gioco in una cartella privata.<br /> La nuova cartella per i file Pojav è <b>Android/data/%s/files/</b> (anche accessibile tramite un provider di archiviazione nel tuo file explorer).<br /> Se hai bisogno di copiare i file di gioco, copia tutto dalla cartella originale a <b>giochi/PojavLauncher</b> manualmente.]]></string>
-    <string name="control_offset_title">Offset controlli</string>
-    <string name="control_top_offset">Offset superiore: </string>
-    <string name="control_right_offset">Offset destro: </string>
-    <string name="control_bottom_offset">Offset inferiore: </string>
-    <string name="control_left_offset">Offset sinistro: </string>
-    <string name="preference_control_offset_title">Controllo offset laterali</string>
-    <string name="preference_control_offset_description">Imposta un offset personalizzato ad ogni lato dello schermo</string>
     <string name="preference_mouse_start_title">Inizia con il mouse virtuale attivo</string>
     <string name="preference_mouse_start_description">Il mouse virtuale appare all\'avvio quando questa opzione è attiva</string>
     <string name="preference_video_title">Video e renderer</string>
@@ -269,13 +186,9 @@
     <string name="preference_gyro_smoothing_title">Abilità lo smoothing giroscopico</string>
     <string name="preference_gyro_smoothing_description">Riduci il jitter a discapito della latenza.</string>
     <string name="preference_back_title">Ritorna alla schermata precedente</string>
-    <string name="gles_hack_none">Non rimpicciolire le textures</string>
-    <string name="gles_hack_always">Dividi tutte le texture di 2</string>
-    <string name="gles_hack_sometimes">Dividi le texture più grandi di /2 o /4</string>
     <string name="unnamed">Senza nome</string>
     <string name="profiles_latest_snapshot">Ultimo Snapshot</string>
     <string name="profiles_latest_release">Ultima Release</string>
-    <string name="profiles_editing">Modifica profilo</string>
     <string name="profiles_profile_name">Nome</string>
     <string name="profiles_profile_version">Versione</string>
     <string name="global_delete">Elimina</string>
@@ -283,10 +196,8 @@
     <string name="pedit_renderer">Renderer</string>
     <string name="arc_capes_title">Mantelli Cosmetica</string>
     <string name="arc_capes_desc">Abilità i mantelli di Cosmetica (precedentemente Arc). Per ulteriori informazioni visita https://cosmetica.cc. Necessita OptiFine.</string>
-    <string name="migrated_profile_str">Configurazione versione %s</string>
     <string name="notif_channel_name">Generale</string>
     <string name="lazy_service_default_title">Servizio di Foreground Pojav</string>
-    <string name="lazy_service_default_description">Il servizio viene utilizzato per eseguire delle operazioni di lunga durata</string>
     <string name="mcl_setting_veroption_installed">Installato</string>
     <string name="use_global_default">(Utilizza il predefinito globale)</string>
     <string name="default_control">Controlli predefiniti</string>
@@ -301,7 +212,6 @@
     <string name="main_add_account">Aggiungi un account</string>
     <string name="tasks_ongoing">Operazioni in corso, attendi</string>
     <string name="no_saved_accounts">Nessun account salvato</string>
-    <string name="downloading_versions">Download lista versioni…</string>
     <string name="mc_download_failed">Impossibile scaricare Minecraft! Questo può essere dovuto a una scarsa connessione a internet, file posizionati in modo errato, ecc..</string>
     <string name="xerr_unknown">Errore sconosciuto di Xbox Live API %d</string>
     <string name="xerr_no_account">Sembra che tu non abbia un account Xbox Live.
@@ -361,8 +271,6 @@ Accedi almeno una volta su https://minecraft.net/ e riprova.</string>
     <string name="of_dl_failed_to_scrape">Fallito il caricamento dei dati per l\'installazione Optifine</string>
     <string name="of_dl_progress">Scaricando %s</string>
     <string name="create_profile_optifine">Crea profilo Optifine</string>
-    <string name="preference_gyro_damper_window_title">Durata smoothing</string>
-    <string name="preference_gyro_damper_window_description">Riduce il jitter a discapito della latenza. Mettere 0 per disabilitare</string>
     <string name="hint_search_modpack">Cerca modpack</string>
     <string name="generic_install">Installa</string>
     <string name="generic_apply">Applica</string>
