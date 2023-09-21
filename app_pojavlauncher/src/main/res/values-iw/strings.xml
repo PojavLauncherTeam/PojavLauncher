@@ -3,25 +3,15 @@
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition for Android)</string>
     <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">פתח את Minecraft: Java edition במכשירך!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
     <string name="login_online_username_hint">דוא\"ל או שם משתמש</string>
-    <string name="login_online_password_hint">סיסמה</string>
-    <string name="login_online_check_keeplogin">השאר אותי מחובר</string>
     <string name="login_online_login_label">התחבר</string>
-    <string name="login_error_invalid_username">שם המשתמש לא תקין. שם המשתמש צריך להיות בטווח של 3-16 תווים, לכלול רק A-Z, a-z, 0-9 וקו תחתון.</string>
-    <string name="login_error_exist_username">שם המשתמש כבר קיים</string>
-    <string name="login_microsoft">התחברות Microsoft</string>
-    <string name="login_select_account">בחר חשבון</string>
-    <string name="login_title_no_saved_account">לא נמצאו חשבונות!</string>
-    <string name="login_dialog_no_saved_account">אין לך אף חשבון שמור.\nהשתמש באפשרות <b>\"השאר אותי מחובר\"</b> כדי לשמור חשבון בכניסה הראשונה.</string>
     <!-- Hint -->
     <!-- Warnings -->
     <string name="warning_remove_account">החשבון יוסר!</string>
     <!-- AlertDialog title -->
-    <string name="alerttitle_install_jre">התקן Java Runtime %s (.tar.xz)</string>
     <string name="alerttitle_installmod">בחר מתקין mod</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher קרס באופן בלתי צפוי</string>
@@ -31,68 +21,40 @@
     <!-- Toast messages -->
     <string name="toast_permission_denied">הרשאה לקריאה/כתיבה לאחסון נדרשת!</string>
     <string name="toast_optifine_success">ההתקנה הסתיימה בהצלחה</string>
-    <string name="toast_uninstalljre_done">הסרת ההתקנה של Java Runtime בוצעה</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_console">מסוף מפתחים</string>
-    <string name="mcl_tab_crash">רשומת קריסה</string>
     <!-- MCLauncherActivity: Account status -->
-    <string name="mcl_account_connected">מחובר</string>
-    <string name="mcl_account_local">מקומי</string>
     <!-- MCLauncherActivity: Strings -->
-    <string name="mcl_version_msg">מוכן להפעיל Minecraft %s</string>
     <string name="mcl_launch_cleancache">מנקה קבצי מטמון</string>
     <string name="mcl_launch_downloading">מוריד %s</string>
     <string name="mcl_launch_downloading_progress">"מתקין %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">מתכונן להורדת משאבים</string>
-    <string name="mcl_launch_error_localmode">לא ניתן להתקין מיינקראפט כאשר מתחברים לחשבון מקומי. הנכם מתבקשים להתחבר לחשבונכם על מנת להמשיך בהתקנה.</string>
     <string name="mcl_options">אפשרויות</string>
-    <string name="mcl_option_modinstall">הפעל אשף התקנה ל-mod (למשל: Forge, LabyMod, Fabric, וכדומה)</string>
-    <string name="mcl_option_modinstallwitharg">הפעל אשף התקנה ל-mod (עם פרמטרים מותאמים אישית)</string>
     <string name="mcl_option_customcontrol">פקדים מותאמים אישית</string>
-    <string name="mcl_option_settings">הגדרות</string>
-    <string name="mcl_option_about">על אודות</string>
     <string name="mcl_setting_subtitle_use_surface_view">עשוי להועיל בביצועי ה-GPU בתנאים מסוימים</string>
-    <string name="mcl_setting_title_uninstalljre">הסר התקנת Java Runtime</string>
-    <string name="mcl_setting_subtitle_uninstalljre">[אתחול נדרש] זה ייאפשר להתקין מחדש את Java Runtime</string>
-    <string name="mcl_setting_title_freeform">פתח Minecraft במצב Freeform</string>
-    <string name="mcl_setting_subtitle_freeform">פתח Minecraft בחלון מרחף. Android 7.0 ומעלה נדרש</string>
-    <string name="mcl_setting_title_hide_sidebar">הסתר את סרגל הצד</string>
-    <string name="mcl_setting_subtitle_hide_sidebar">אנשים נוסטלגיים שמעדיפים את ממשק המשתמש v1 הישן עשויים לחבב זאת. נותן לך חוויה במסך מלא יותר.</string>
     <string name="mcl_setting_title_ignore_notch">התעלם מהחתך</string>
     <string name="mcl_setting_subtitle_ignore_notch">מתעלם מהחתך ומאריך את המסך מתחתיו.\nמעניק חוויה יותר סוחפת.</string>
     <string name="mcl_setting_title_resolution_scaler">קנה מידה של רזולוציה</string>
     <string name="mcl_setting_subtitle_resolution_scaler">מאפשר לשנות את רזולוציית המשחק. 100% הינה רזולוציה מלאה</string>
     <string name="mcl_setting_title_longpresstrigger">אחרי כמה זמן יופעל הטריגר לאחר לחיצה ארוכה</string>
     <string name="mcl_setting_subtitle_longpresstrigger">שנה את הזמן ללחיצה ארוכה בעת שבירת בלוקים וזריקת חפצים.</string>
-    <string name="mcl_setting_title_backtorightmouse">התייחס ל\"אחורה\" ככפתור ימני בעכבר</string>
-    <string name="mcl_setting_subtitle_backtorightmouse">מספר מכשירים מתייחסים לכפתור הימני בעכבר חיצוני ככפתור \"אחורה\". אם את/ה משתמש/ת בעכבר חיצוני, עליך להפעיל זאת.</string>
-    <string name="mcl_setting_title_flat_button_style">סגנון כפתור שטוח</string>
-    <string name="mcl_setting_subtitle_flat_button_style">הפעל זאת כדי לשנות את סגנון כפתורי השליטה לשטוחים.</string>
     <string name="mcl_setting_title_buttonscale">קנה המידה של כפתורי השליטה</string>
     <string name="mcl_setting_subtitle_buttonscale">הגדל את הכפתורים אם הם קטנים מדי.</string>
     <string name="mcl_setting_title_mousescale">קנה המידה של העכבר</string>
     <string name="mcl_setting_subtitle_mousescale">שנה את גודלו של העכבר הוירטואלי.</string>
     <string name="mcl_setting_title_javaargs">פרמטרים להפעלת JVM</string>
     <string name="mcl_setting_subtitle_javaargs">זהירות! שינוי ערכים אלה ללא ידע מתאים עלול לגרום למשחק לקרוס.</string>
-    <string name="mcl_setting_category_general">הגדרות כלליות</string>
-    <string name="mcl_setting_category_scaling">הגדרות קנה מידה</string>
     <string name="mcl_setting_category_renderer">רינדור</string>
-    <string name="mcl_setting_category_veroption">סוג הגרסה שיופיע ברשימת הגרסאות</string>
     <string name="mcl_setting_veroption_release">הפצה</string>
     <string name="mcl_setting_veroption_snapshot">סנאפשוט</string>
     <string name="mcl_setting_veroption_oldalpha">אלפא: גרסה ישנה</string>
     <string name="mcl_setting_veroption_oldbeta">בטא: גרסה ישנה</string>
-    <string name="mcl_version_clone">שכפול</string>
     <!-- Global strings -->
-    <string name="global_edit">ערוך</string>
     <string name="global_error">שגיאה</string>
-    <string name="global_warinng">אזהרה</string>
     <string name="global_load">טען</string>
     <string name="global_name">שם</string>
-    <string name="global_remove">הסר</string>
     <string name="global_clone">שכפול</string>
     <string name="global_restart">אתחול</string>
     <string name="global_save">שמור</string>
@@ -102,12 +64,8 @@
     <string name="global_default">ברירת מחדל</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">היישומון / המשחק קרס, עם קוד שגיאה %d, בדוק את latestlog.txt למידע נוסף.</string>
-    <string name="mcn_exit_call">צא</string>
     <string name="mcn_exit_confirm">האם אתה בטוח שאתה רוצה לכפות כיבוי?</string>
-    <string name="mcn_check_fail_lwjgl">LWJGL3 לא הותקן!</string>
     <!-- MainActivity: Control buttons -->
-    <string name="control_toggle">ממשק משתמש(GUI)</string>
-    <string name="control_keyboard">מקלדת</string>
     <string name="control_chat">צ\'אט</string>
     <string name="control_debug">נפה באגים</string>
     <string name="control_primary">Pri</string>
@@ -123,8 +81,6 @@
     <string name="control_viewout">לוג פלט</string>
     <string name="control_adebug">ניפוי שגיאות קלט</string>
     <string name="control_customkey">שלח קוד מקש מותאם אישית</string>
-    <string name="control_scaleup">הגדל</string>
-    <string name="control_scaledown">הקטן</string>
     <!-- ImportControlActivity Strings -->
     <string name="import_control_label">ייבוא פקדים</string>
     <string name="import_control_invalid_file">קובץ שגוי או פגום</string>
@@ -136,44 +92,21 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
-    <string name="customctrl_edit">עורך %s</string>
-    <string name="customctrl_remove">למחוק %s?</string>
-    <string name="customctrl_keyname">קוד מקש</string>
     <string name="customctrl_toggle">מתג</string>
     <string name="customctrl_size">גודל</string>
-    <string name="customctrl_size_width">רוחב</string>
-    <string name="customctrl_size_height">גובה</string>
     <string name="customctrl_mapping">מיפוי</string>
     <string name="customctrl_orientation">כיוון</string>
     <string name="customctrl_background_color">צבע הרקע</string>
     <string name="customctrl_corner_radius">רדיוס פינה</string>
     <string name="customctrl_stroke_width">עובי קו המתאר</string>
     <string name="customctrl_stroke_color">צבע קו המתאר</string>
-    <string name="customctrl_dynamicpos">מיקום דינמי</string>
-    <string name="customctrl_dynamicpos_x">X דינמי</string>
-    <string name="customctrl_dynamicpos_y">Y דינמי</string>
-    <string name="customctrl_transparency_bg">שקיפות רקע</string>
     <string name="customctrl_button_opacity">שקיפות הכפתור</string>
-    <string name="customctrl_keycombine">צירוף מקשים</string>
-    <string name="customctrl_keycombine_alt">Alt</string>
-    <string name="customctrl_keycombine_control">Ctrl</string>
-    <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">הוסף כפתור</string>
     <string name="customctrl_addbutton_drawer">הוסף צייר של כפתור</string>
     <string name="customctrl_addsubbutton">הוסף תת-כפתור</string>
     <string name="customctrl_selectdefault">בחר קובץ שליטה כברירת מחדל</string>
     <string name="main_install_jar_file">התקנת .jar</string>
-    <string name="main_options">אפשרויות</string>
     <string name="main_play">הפעל</string>
-    <string name="main_welcome">ברוך הבא, %s</string>
-    <string name="main_infodev">מידע (מפתח)</string>
-    <string name="main_switchuser">החלף משתמש</string>
-    <string name="main_version">גרסה:</string>
-    <string name="main_nocrash">לא זוהתה קריסה</string>
-    <string name="main_nolog">אין רשומה.</string>
-    <string name="main_no_news_feed">לא הצלחנו לקבל את עדכוני חדשות המשגר!</string>
-    <string name="auto_ram_subtitle">מפעיל התאמת RAM אוטומטית</string>
-    <string name="auto_ram_title">זיכרון אוטומטי</string>
     <string name="autoram_info_msg">זיכרון הוגדר ל %d MB</string>
     <string name="mcl_setting_check_libraries">בדוק ספריות לאחר ההורדה</string>
     <string name="mcl_setting_check_libraries_subtitle">אפשרות זו מכריחה בדיקה של מהימנות הספריות. מונע הורדות פגומות.</string>
@@ -186,16 +119,13 @@
     <string name="mcl_setting_subtitle_mousespeed">משנה את המהירות של העכבר הווירטואלי</string>
     <string name="customctrl_passthru">עכבר עובר דרך</string>
     <string name="customctrl_swipeable">ניתן להחלקה</string>
-    <string name="customctrl_rounded">מעוגל</string>
     <string name="memory_warning_msg">הכמות הנוכחית של RAM פנוי (%d) נמוכה מכמות ה-RAM שהוקצתה (%d), מה שעלול לגרום למשחק לקרוס. הנך מתבקש לשנות את ההקצאה במידה והמשחק קורס.</string>
     <string name="mcl_memory_allocation">הקצאת זיכרון</string>
     <string name="mcl_memory_allocation_subtitle">שולט בכמות הזיכרון הניתנת ל- Minecraft</string>
-    <string name="multirt_java_ver">%s (Java %d)</string>
     <string name="multirt_runtime_corrupt">Java Runtime פגומה</string>
     <string name="multirt_runtime_incompatiblearch">ארכיטקטורה לא נתמכת: %s</string>
     <string name="multirt_config_title">Java VMs</string>
     <string name="multirt_config_add">הוסף חדש</string>
-    <string name="multirt_config_add_subtitle">ייבוא Java VM חדשה</string>
     <string name="multirt_title">מנהל Runtime</string>
     <string name="multirt_subtitle">ניהול Java VMs מותקנות</string>
     <string name="multirt_progress_caching">שומר במטמון...</string>
@@ -204,12 +134,7 @@
     <string name="multirt_config_removeerror_last">נדרש שיהיה לך לפחות Java Runtime אחת מותקנת</string>
     <string name="multirt_nocompartiblert">לא ניתן למצוא Java Runtime נתמכת. גרסת Java %d ומעלה נדרשת.</string>
     <string name="multirt_nojava8rt">לא מצאתי את Java 8. על מנת להשתמש באפשרות זו, עליך להתקין Java 8.</string>
-    <string name="compat_11x_playanyway">הפעל בכל זאת</string>
-    <string name="pvc_gameDirectory">תיקיית המשחק</string>
     <string name="pvc_jvmArgs">פרמטרים של JVM</string>
-    <string name="pvc_title">הגדרות לפי גירסה</string>
-    <string name="storage_warning_title">שינויי אחסון</string>
-    <string name="storage_warning_text"><![CDATA[בשל אכיפות האחסון החדשות של Google שנוספו ב- Android 10 ואילך, עלינו להעביר את ספריית המשחק לתיקייה פרטית לאפליקציות.<br /> התיקיה החדשה לקובצי Pojav היא <b>Android/data/%s/files/</b> (נגיש גם באמצעות ספק אחסון בסייר הקבצים שלך).<br /> אם אתה צריך להעתיק את קבצי המשחק שלך, העתק הכל מהתיקיה המקורית ב <b>games/PojavLauncher</b> באופן ידני.]]></string>
     <string name="preference_mouse_start_title">התחל עם עכבר וירטואלי מופעל</string>
     <string name="preference_video_title">וידאו ועיבוד</string>
     <string name="preference_video_description">רזולוציה, סוג קנה מידה, ומעבד (וידאו)</string>
@@ -224,18 +149,13 @@
     <string name="preference_sustained_performance_description">מגביל התחממות טרמית (של המכשיר) ע\"י הפחתת ביצועים</string>
     <string name="preference_force_vsync_description">מגביל התחממות טרמית (של המכשיר) ע\"י הפחתת ביצועים</string>
     <string name="preference_back_title">חזרה אל המסך האחרון</string>
-    <string name="gles_hack_none">אל תכווץ טקסטורות</string>
-    <string name="gles_hack_always">חלק את כל הטקסטורות ב2</string>
-    <string name="gles_hack_sometimes">חלק טקסטורות גדולות ב-2 או 4</string>
     <string name="unnamed">ללא שם</string>
     <string name="profiles_latest_snapshot">הסנאפשוט העדכני</string>
     <string name="profiles_latest_release">מהדורה עדכנית</string>
-    <string name="profiles_editing">עריכת פרופיל</string>
     <string name="profiles_profile_name">שם</string>
     <string name="profiles_profile_version">גרסא</string>
     <string name="global_delete">מחיקה</string>
     <string name="pedit_java_runtime">Java Runtime</string>
     <string name="pedit_renderer">רינדור</string>
-    <string name="migrated_profile_str">%s גרסת תצורה</string>
     <string name="of_dl_progress">מוריד %s</string>
 </resources>
