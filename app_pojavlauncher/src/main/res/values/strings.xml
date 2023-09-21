@@ -3,7 +3,7 @@
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition for Android)</string>
     <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">Launch Minecraft: Java Edition in your device!</string>
+    <string name="app_motd">Launch Minecraft: Java Edition on your device!</string>
 
     <!-- Action bar part -->
 
@@ -16,12 +16,12 @@
     <string name="login_online_login_label">Login</string>
 
     <string name="login_error_invalid_username">Invalid username. Username must be in range of 3-16 characters, should only contains A-Z, a-z, 0-9 and underscore.</string>
-    <string name="login_error_exist_username">This username already exist</string>
+    <string name="login_error_exist_username">This username already exists</string>
 
     <string name="login_microsoft">Microsoft login</string>
 
     <string name="login_select_account">Select account</string>
-    <string name="login_title_no_saved_account">No account found !</string>
+    <string name="login_title_no_saved_account">No account found!</string>
     <string name="login_dialog_no_saved_account">You don\'t have any saved account.\nUse the option <b>\"Keep me logged in\"</b> to save an account upon first login.</string>
 
     <!-- Hint -->
@@ -43,7 +43,7 @@
     <!-- Toast messages -->
     <string name="toast_permission_denied">The read/write to storage permission is required!</string>
     <string name="toast_optifine_success">Install successful</string>
-    <string name="toast_uninstalljre_done">Done uninstall Java Runtime</string>
+    <string name="toast_uninstalljre_done">Done uninstalling Java Runtime</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
@@ -74,34 +74,34 @@
 
 
     <string name="mcl_setting_title_use_surface_view">Use alternate surface rendering</string>
-    <string name="mcl_setting_subtitle_use_surface_view">May help performance in gpu bound scenarios</string>
+    <string name="mcl_setting_subtitle_use_surface_view">May help performance in GPU bound scenarios</string>
     <string name="mcl_setting_title_uninstalljre">Uninstall Java Runtime</string>
     <string name="mcl_setting_subtitle_uninstalljre">[Launcher restart required] This let you re-install Java Runtime</string>
     <string name="mcl_setting_title_freeform">Launch Minecraft in Freeform mode</string>
-    <string name="mcl_setting_subtitle_freeform">Launch Minecraft in floating window. Requires Android 7.0+</string>
+    <string name="mcl_setting_subtitle_freeform">Launch Minecraft in a floating window. Requires Android 7.0+</string>
     <string name="mcl_setting_title_hide_sidebar">Hide Sidebar</string>
     <string name="mcl_setting_subtitle_hide_sidebar">Nostalgic folks preferring the old v1 UI might like this. Gives you a more fullscreen experience.</string>
     <string name="mcl_setting_title_ignore_notch">Ignore notch</string>
-    <string name="mcl_setting_subtitle_ignore_notch">Ignore the notch and extends the screen under it.\nGives you a more immersive experience.</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Ignores the notch and extends the screen under it.\nGives you a more immersive experience.</string>
     <string name="mcl_setting_title_resolution_scaler">Resolution Scaler</string>
     <string name="mcl_setting_subtitle_resolution_scaler">Allows you to decrease the game resolution. 100% is full resolution</string>
     <string name="mcl_setting_title_longpresstrigger">How long will trigger after long press</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Change trigger time for long press in destroy block and drop item.</string>
     <string name="mcl_setting_title_backtorightmouse">Treat back button as right mouse</string>
-    <string name="mcl_setting_subtitle_backtorightmouse">Some devices treats external right mouse as back button. If you are using external mouse, you should enable this.</string>
+    <string name="mcl_setting_subtitle_backtorightmouse">Some devices treat external right mouse as back button. If you are using an external mouse, you should enable this.</string>
     <string name="mcl_setting_title_flat_button_style">Flat button style</string>
-    <string name="mcl_setting_subtitle_flat_button_style">Enable this to change control button style to flat.</string>
+    <string name="mcl_setting_subtitle_flat_button_style">Enable this to change the control button style to flat.</string>
     <string name="mcl_setting_title_buttonscale">Control buttons scaling</string>
     <string name="mcl_setting_subtitle_buttonscale">Upscale them if buttons are too small.</string>
     <string name="mcl_setting_title_mousescale">Mouse scaling</string>
-    <string name="mcl_setting_subtitle_mousescale">Change size of virtual mouse.</string>
+    <string name="mcl_setting_subtitle_mousescale">Change size of the virtual mouse.</string>
     <string name="mcl_setting_title_javaargs">JVM Launch arguments</string>
-    <string name="mcl_setting_subtitle_javaargs">Be careful, this may make game crash if modified without knowledge.</string>
+    <string name="mcl_setting_subtitle_javaargs">Be careful, this may make the game crash if modified without knowledge.</string>
     <string name="mcl_setting_category_general">General settings</string>
     <string name="mcl_setting_category_scaling">Scaling settings</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (all versions, fast)</string>
-    <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - (all versions, mid, low device compat)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - (all versions, mid)</string>
     <string name="mcl_setting_renderer_angle">ANGLE - (release 1.17+, mid)</string>
     <string name="mcl_setting_category_veroption">Version type will be in version list</string>
     <string name="mcl_setting_veroption_release">Release</string>
@@ -109,7 +109,7 @@
     <string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Old-beta</string>
     <string name="mcl_setting_java_sandbox">Sandbox .jar installer</string>
-    <string name="mcl_setting_java_sandbox_subtitle">Control the availability of sandbox security manager when launching .jar installer.</string>
+    <string name="mcl_setting_java_sandbox_subtitle">Control the availability of the sandbox security manager when execute .jar.</string>
     <string name="mcl_version_clone">Clone</string>
 
     <!-- Global strings -->
@@ -206,13 +206,13 @@
     <string name="customctrl_addbutton_drawer">Add button drawer</string>
     <string name="customctrl_addbutton_joystick">Add joystick</string>
     <string name="customctrl_addsubbutton">Add sub-button</string>
-    <string name="customctrl_add_subbutton_message">Sub-button n°%d has been added !</string>
+    <string name="customctrl_add_subbutton_message">Sub-button n°%d has been added!</string>
 
     <string name="customctrl_selectdefault">Select default Control json</string>
     <string name="customctrl_export">Export control</string>
 
     <string name="main_share_logs">Share log file</string>
-    <string name="main_install_jar_file">Install .jar</string>
+    <string name="main_install_jar_file">Execute .jar</string>
     <string name="main_options">Options</string>
     <string name="main_play">Play</string>
     <string name="main_welcome">Welcome, %s</string>
@@ -221,7 +221,7 @@
     <string name="main_version">Version:</string>
     <string name="main_nocrash">No crash detected</string>
     <string name="main_nolog">No log.</string>
-    <string name="main_no_news_feed">Failed to fetch the news feed !</string>
+    <string name="main_no_news_feed">Failed to fetch the news feed!</string>
     <string name="auto_ram_subtitle">Enables automatic RAM adjuster</string>
     <string name="auto_ram_title">Auto RAM</string>
     <string name="autoram_info_msg">Memory set to %d MB</string>
@@ -235,7 +235,7 @@
     <string name="mcl_disable_swap_hand">Disable double tap to swap hands</string>
     <string name="mcl_disable_swap_hand_subtitle">Disables double tap on an hotbar item to swap it in the second hand</string>
     <string name="mcl_setting_title_mousespeed">Mouse Speed</string>
-    <string name="mcl_setting_subtitle_mousespeed">Changes the speed of the software mouse</string>
+    <string name="mcl_setting_subtitle_mousespeed">Changes the speed of the virtual mouse</string>
     <string name="customctrl_passthru">Mouse pass-thru</string>
     <string name="customctrl_swipeable">Swipeable</string>
     <string name="customctrl_forward_lock">Forward lock</string>
@@ -269,14 +269,14 @@
 
     <string name="control_offset_title">Control offset</string>
     <string name="control_top_offset">Top offset: </string>
-    <string name="control_right_offset">right offset: </string>
-    <string name="control_bottom_offset">bottom offset: </string>
-    <string name="control_left_offset">left offset: </string>
+    <string name="control_right_offset">Right offset: </string>
+    <string name="control_bottom_offset">Bottom offset: </string>
+    <string name="control_left_offset">Left offset: </string>
 
     <string name="preference_control_offset_title">Control side offsets</string>
     <string name="preference_control_offset_description">Set a custom offset to each side of the screen</string>
     <string name="preference_mouse_start_title">Start with virtual mouse on</string>
-    <string name="preference_mouse_start_description">Virtual Mouse appears at startup when this option is on</string>
+    <string name="preference_mouse_start_description">Virtual mouse appears at startup when this option is on</string>
     <string name="preference_video_title">Video and renderer</string>
     <string name="preference_video_description">Resolution, scaling type, and renderer</string>
     <string name="preference_control_title">Control customization</string>
@@ -284,26 +284,26 @@
     <string name="preference_java_title">Java Tweaks</string>
     <string name="preference_java_description">Java versions, JVM Arguments, RAM amount and sandbox</string>
     <string name="preference_misc_title">Miscellaneous settings</string>
-    <string name="preference_misc_description">Version list, and libs checks</string>
+    <string name="preference_misc_description">Version list, and libraries checks</string>
     <string name="preference_experimental_title">Experimental Stuff</string>
     <string name="preference_experimental_description">Use things there with consideration, no support.</string>
     <string name="preference_sustained_performance_title">Enable sustained performance mode</string>
     <string name="preference_sustained_performance_description">Limit thermal throttling by limiting peak performance</string>
-    <string name="preference_force_vsync_title">Force enable vsync</string>
+    <string name="preference_force_vsync_title">Force enable VSync</string>
     <string name="preference_force_vsync_description">Limit thermal throttling by limiting peak performance</string>
-    <string name="preference_force_english_title">Force language to english</string>
+    <string name="preference_force_english_title">Force language to English</string>
     <string name="preference_force_english_description">Allows you to see original strings, as intended by developers. Requires a restart</string>
     <string name="preference_edit_controls_title">Edit custom controls</string>
     <string name="preference_edit_controls_summary">Tweak the control scheme to fit your needs</string>
 
-    <string name="preference_category_gyro_controls">Gyro controls</string>
+    <string name="preference_category_gyro_controls">Gyroscope controls</string>
     <string name="preference_category_virtual_mouse">Virtual mouse</string>
 
     <string name="preference_gyro_invert_x_axis">Invert X axis</string>
     <string name="preference_gyro_invert_y_axis">Invert Y axis</string>
     <string name="preference_gyro_invert_x_axis_description">Invert the horizontal axis</string>
     <string name="preference_gyro_invert_y_axis_description">Invert the vertical axis</string>
-    <string name="preference_gyro_smoothing_title">Enable gyro smoothing</string>
+    <string name="preference_gyro_smoothing_title">Enable gyroscope smoothing</string>
     <string name="preference_gyro_smoothing_description">Reduce jitter in exchange of latency.</string>
 
     <string name="preference_back_title">Back to the last screen</string>
@@ -353,7 +353,7 @@
     <string name="preference_enable_gyro_description">Enabling this will allow you to turn in game by turning your phone</string>
     <string name="preference_gyro_sensitivity_title">Gyroscope controls sensitivity</string>
     <string name="preference_gyro_sensitivity_description">Adjust the sensitivity of gyroscope controls</string>
-    <string name="toast_turn_on_gyro">Enable gyro controls first to use this!</string>
+    <string name="toast_turn_on_gyro">Enable gyroscope controls first to use this!</string>
     <string name="preference_gyro_sample_rate_title">Gyroscope sampling rate</string>
     <string name="preference_gyro_sample_rate_description">If you have performance issues with the gyroscope controls, increase this</string>
     <string name="microsoft_login_retry_later">Too many requests, please try again later.</string>
