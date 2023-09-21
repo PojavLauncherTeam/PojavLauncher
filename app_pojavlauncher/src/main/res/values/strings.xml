@@ -73,11 +73,13 @@
     <string name="mcl_setting_veroption_oldbeta">Old-beta</string>
     <string name="mcl_setting_java_sandbox">Sandbox .jar execution</string>
     <string name="mcl_setting_java_sandbox_subtitle">Control the availability of the sandbox security manager when executing a .jar file.</string>
+    <string name="mcl_version_clone">Clone</string>
 
     <!-- Global strings -->
     <string name="global_error">Error</string>
     <string name="global_load">Load</string>
     <string name="global_name">Name</string>
+    <string name="global_remove">Remove</string>
     <string name="global_clone">Clone</string>
     <string name="global_restart">Restart</string>
     <string name="global_save">Save</string>
@@ -183,7 +185,7 @@
     <string name="multirt_nocompartiblert">Can\'t find any compartible Java Runtime. This version requires Java %d or newer.</string>
     <string name="multirt_nojava8rt">Can\'t find Java 8. In order to use this option, you need to install Java 8.</string>
     <string name="multirt_delete_runtime">Delete runtime</string>
-
+    <string name="pvc_gameDirectory">Game directory</string>
     <string name="pvc_jvmArgs">JVM arguments</string>
 
     <string name="preference_mouse_start_title">Start with virtual mouse on</string>
