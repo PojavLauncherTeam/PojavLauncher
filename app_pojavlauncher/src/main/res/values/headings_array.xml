@@ -9,6 +9,7 @@
     <string-array name="menu_customcontrol">
         <item name="0">@string/customctrl_addbutton</item>
         <item name="1">@string/customctrl_addbutton_drawer</item>
+        <item name="2">@string/customctrl_addbutton_joystick</item>
         <item name="2">@string/global_load</item>
         <item name="3">@string/global_save</item>
         <item name="4">@string/customctrl_selectdefault</item>
