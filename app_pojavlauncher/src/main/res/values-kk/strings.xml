@@ -3,24 +3,15 @@
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Android-ке арналған Minecraft: Java Edition)</string>
     <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">Minecraft: Java Edition-ді өз құрылғыңызда қосыңыз!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
     <string name="login_online_username_hint">Emailнемесеқолданушы аты</string>
-    <string name="login_online_password_hint">Құпиясөз</string>
-    <string name="login_online_check_keeplogin">Мені кірген күйде қалдыру</string>
     <string name="login_online_login_label">Кіру</string>
-    <string name="login_error_exist_username">Бұл ат бос емес</string>
-    <string name="login_microsoft">Microsoft-пен кіру</string>
-    <string name="login_select_account">Тіркелгі таңдау</string>
-    <string name="login_title_no_saved_account">Тіркелгі табылмады!</string>
-    <string name="login_dialog_no_saved_account">Сақталған тіркелгіңіз жоқ.\n<b>\"Мені кірген күйде қалдыру\"</b> функциясын қолданып, кірген күйде қала беріңіз.</string>
     <!-- Hint -->
     <!-- Warnings -->
     <string name="warning_remove_account">Бұл тіркелгі жойылады!</string>
     <!-- AlertDialog title -->
-    <string name="alerttitle_install_jre">Java Runtime-ді орнату %s (.tar.xz)</string>
     <string name="alerttitle_installmod">Мод орнатқыш таңдау</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher кенет іркілді</string>
@@ -30,63 +21,39 @@
     <!-- Toast messages -->
     <string name="toast_permission_denied">Қоймадан оқу/жазу рұқсаты керек!</string>
     <string name="toast_optifine_success">Орнату сәтті өтті</string>
-    <string name="toast_uninstalljre_done">Java Runtime жойылды</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_console">Әзірлеу консолі</string>
-    <string name="mcl_tab_crash">Іркіліс жорналы</string>
     <!-- MCLauncherActivity: Account status -->
-    <string name="mcl_account_connected">Желіде</string>
     <!-- MCLauncherActivity: Strings -->
-    <string name="mcl_version_msg">Minecraft %s қосылуға дайын</string>
     <string name="mcl_launch_cleancache">Кәш файлдары жойылуда</string>
     <string name="mcl_launch_downloading">%s жүктелуде</string>
     <string name="mcl_launch_downloading_progress">"%s жүктелуде (%.2f МБ / %.2f МБ)"</string>
     <string name="mcl_launch_download_assets">Ресурс жүктеуге дайындалуда</string>
     <string name="mcl_options">Баптау</string>
-    <string name="mcl_option_modinstall">Мод орнатқышты қосу (Forge, LabyMod, Fabric, т. б.)</string>
-    <string name="mcl_option_modinstallwitharg">Мод орнатқышты қосу (өңделген аргументпен)</string>
     <string name="mcl_option_customcontrol">Өңделген басқару</string>
-    <string name="mcl_option_settings">Баптау</string>
-    <string name="mcl_option_about">Лаунчер жайлы</string>
-    <string name="mcl_setting_title_uninstalljre">Java Runtime-ды жойып тастау</string>
-    <string name="mcl_setting_subtitle_uninstalljre">[Лаунчерді жаңадан жүктеу керек] Бұл әрекет Java Runtime-ді жаңадан орнатуға мүмкіндік береді</string>
-    <string name="mcl_setting_title_freeform">Minecraft\'ті терезе режімінде қосу</string>
-    <string name="mcl_setting_subtitle_freeform">Minecraft\'ті терезе режімінде қосу. Android 7.0+ керек</string>
-    <string name="mcl_setting_title_hide_sidebar">Бүйір пәнелін жасыру</string>
-    <string name="mcl_setting_subtitle_hide_sidebar">Ностальгиялы адамдарға бұл ескі v1 интерфейсі ұнауы керек. Көбірек толық экран тәжірибесін береді.</string>
     <string name="mcl_setting_title_ignore_notch">Камера ойығын елемеу</string>
     <string name="mcl_setting_subtitle_ignore_notch">Камера ойығын елемей, экранды астына шығарып кеңейтеді.\nКүштірек тәжірибе береді.</string>
     <string name="mcl_setting_title_resolution_scaler">Өлшем масштабтау</string>
     <string name="mcl_setting_subtitle_resolution_scaler">Ойын өлшемін азайтуға мүмкіндік береді. 100% деген толық өлшем</string>
     <string name="mcl_setting_title_longpresstrigger">Басып ұстау ұзақтығы</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Блок сындыру мен зат лақтыру үшін басып ұстау ұзықтығын өзгерту.</string>
-    <string name="mcl_setting_title_flat_button_style">Тегіс батырма стилі</string>
-    <string name="mcl_setting_subtitle_flat_button_style">Батырма стилін тегіс стильге өзгерту үшін мұны қосыңыз.</string>
     <string name="mcl_setting_title_buttonscale">Батырма масштабы</string>
     <string name="mcl_setting_subtitle_buttonscale">Батырма тым кішкентай болса, үлкейтіңіз.</string>
     <string name="mcl_setting_title_mousescale">Меңзер масштабы</string>
     <string name="mcl_setting_subtitle_mousescale">Меңзер көлемін өзгертеді.</string>
     <string name="mcl_setting_title_javaargs">JVM қосу аргументі</string>
     <string name="mcl_setting_subtitle_javaargs">Абайлаңыз, мұны түсінбей баптасаңыз, ойын іркілуі мүмкін.</string>
-    <string name="mcl_setting_category_general">Негізгі баптамалар</string>
-    <string name="mcl_setting_category_scaling">Масштаб</string>
     <string name="mcl_setting_category_renderer">Рендерер</string>
-    <string name="mcl_setting_category_veroption">Нұсқа тізімінде көрсетілетін нұсқа түрлері</string>
     <string name="mcl_setting_veroption_release">Релиз</string>
     <string name="mcl_setting_veroption_snapshot">Снапшот</string>
     <string name="mcl_setting_veroption_oldalpha">Ескі альфа</string>
     <string name="mcl_setting_veroption_oldbeta">Ескі бета</string>
-    <string name="mcl_version_clone">Клондау</string>
     <!-- Global strings -->
-    <string name="global_edit">Өңдеу</string>
     <string name="global_error">Қате</string>
-    <string name="global_warinng">Назар аударыңыз</string>
     <string name="global_load">Жүктеу</string>
     <string name="global_name">Атауы</string>
-    <string name="global_remove">Алып тастау</string>
     <string name="global_clone">Клондау</string>
     <string name="global_restart">Қайта жүктеу</string>
     <string name="global_save">Сақтау</string>
@@ -94,12 +61,8 @@
     <string name="global_error_field_empty">Бұл өріс бос бола алмайды</string>
     <string name="global_waiting">Күте тұрыңыз</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_call">Шығу</string>
     <string name="mcn_exit_confirm">Мәжбүрлеп жапқыңыз келе ме?</string>
-    <string name="mcn_check_fail_lwjgl">LWJGL3 орнатылмаған!</string>
     <!-- MainActivity: Control buttons -->
-    <string name="control_toggle">GUI</string>
-    <string name="control_keyboard">Пернетақта</string>
     <string name="control_chat">Чат</string>
     <string name="control_debug">Оңдау</string>
     <string name="control_primary">Pri</string>
@@ -121,41 +84,16 @@
     <string name="control_viewout">Жорнал шығысы</string>
     <string name="control_adebug">Кіріс оңдау</string>
     <string name="control_customkey">Өзгертілген жайманы жіберу</string>
-    <string name="control_scaleup">Үлкейту</string>
-    <string name="control_scaledown">Кішірейту</string>
     <!-- ImportControlActivity Strings -->
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
-    <string name="customctrl_edit">%s өңделуде</string>
-    <string name="customctrl_remove">%s алып тастайсыз ба?</string>
-    <string name="customctrl_keyname">Перне коды</string>
     <string name="customctrl_toggle">Ауысқыш</string>
     <string name="customctrl_size">Көлемі</string>
-    <string name="customctrl_size_width">Ені</string>
-    <string name="customctrl_size_height">Биіктігі</string>
-    <string name="customctrl_dynamicpos">Динамикалық позиция</string>
-    <string name="customctrl_dynamicpos_x">Динамикалық X</string>
-    <string name="customctrl_dynamicpos_y">Динамикалық Y</string>
-    <string name="customctrl_transparency_bg">Фон мөлдірлігі</string>
-    <string name="customctrl_keycombine">Перне комбинациясы</string>
-    <string name="customctrl_keycombine_alt">Alt</string>
-    <string name="customctrl_keycombine_control">Ctrl</string>
-    <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Батырма қосу</string>
     <string name="customctrl_selectdefault">Әдепкі басқару json-ын таңдау</string>
-    <string name="main_options">Баптау</string>
     <string name="main_play">Ойнау</string>
-    <string name="main_welcome">Сәлем, %s</string>
-    <string name="main_infodev">Ақпар (Әзірлеуші)</string>
-    <string name="main_switchuser">Пайдаланушы ауыстыру</string>
-    <string name="main_version">Нұсқасы:</string>
-    <string name="main_nocrash">Іркіліс табылмады</string>
-    <string name="main_nolog">Лог жоқ.</string>
-    <string name="main_no_news_feed">Жаңалық легін алу мүмкін емес!</string>
-    <string name="auto_ram_subtitle">Автоматты түрде ОЕСҚ-ны басқарады</string>
-    <string name="auto_ram_title">Авто ОЕСҚ</string>
     <string name="autoram_info_msg">%d МБ жад берілді</string>
     <string name="mcl_setting_check_libraries">Жүктегеннен кейін кітапханаларды тексереді</string>
     <string name="dl_library_sha_pass">%s кітапханасы жақсы және қолдануға жарамды</string>
