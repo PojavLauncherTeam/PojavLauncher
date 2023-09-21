@@ -8,6 +8,7 @@
 #include <fcntl.h>
 #include <string.h>
 #include <errno.h>
+#include <stdlib.h>
 
 //
 // Created by maks on 17.02.21.
@@ -24,6 +25,8 @@ static pthread_t logger;
 static jmethodID logger_onEventLogged;
 static volatile jobject logListener = NULL;
 static int latestlog_fd = -1;
+static int exit_code;
+
 
 static bool recordBuffer(char* buf, ssize_t len) {
     if(strstr(buf, "Session ID is")) return false;
@@ -66,7 +69,6 @@ static void *logger_thread() {
 }
 JNIEXPORT void JNICALL
 Java_net_kdt_pojavlaunch_Logger_begin(JNIEnv *env, __attribute((unused)) jclass clazz, jstring logPath) {
-    // TODO: implement logToActivity()
     if(latestlog_fd != -1) {
         int localfd = latestlog_fd;
         latestlog_fd = -1;
@@ -102,18 +104,21 @@ Java_net_kdt_pojavlaunch_Logger_begin(JNIEnv *env, __attribute((unused)) jclass 
     pthread_detach(logger);
 }
 
-
-void (*old_exit)(int code);
-void custom_exit(int code) {
-    if(code != 0) {
+static void atexit_handler() {
+    if(exit_code != 0) {
         JNIEnv *env;
         (*exitTrap_jvm)->AttachCurrentThread(exitTrap_jvm, &env, NULL);
         (*env)->CallStaticVoidMethod(env, exitTrap_exitClass, exitTrap_staticMethod, exitTrap_ctx,
-                                     code);
+                                     exit_code);
         (*env)->DeleteGlobalRef(env, exitTrap_ctx);
         (*env)->DeleteGlobalRef(env, exitTrap_exitClass);
         (*exitTrap_jvm)->DetachCurrentThread(exitTrap_jvm);
     }
+}
+
+static void (*old_exit)(int code);
+static void custom_exit(int code) {
+    exit_code = code;
     old_exit(code);
 }
 JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_utils_JREUtils_setupExitTrap(JNIEnv *env, __attribute((unused)) jclass clazz, jobject context) {
@@ -124,6 +129,9 @@ JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_utils_JREUtils_setupExitTrap(JNI
     xhook_enable_debug(0);
     xhook_register(".*\\.so$", "exit", custom_exit, (void **) &old_exit);
     xhook_refresh(1);
+    // Instead of relying purely on the hook, send off the code in atexit()
+    // to avoid crashes due to attaching DVM in an unexpected state
+    atexit(&atexit_handler);
 }
 
 JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_Logger_appendToLog(JNIEnv *env, __attribute((unused)) jclass clazz, jstring text) {
