@@ -3,25 +3,15 @@
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition за Андроид)</string>
     <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">Покрените Minecraft: Java Edition на вашем уређају!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
     <string name="login_online_username_hint">Е-пошта или ваше Минецрафт име</string>
-    <string name="login_online_password_hint">Шифра</string>
-    <string name="login_online_check_keeplogin">Остави ме пријављеног</string>
     <string name="login_online_login_label">Пријава</string>
-    <string name="login_error_invalid_username">Инвалид корисничко име. Корисничко име мора да буде у кругу од 3-16 карактера, и да садржи А-Z, a-z, 0-9 и доњу црту.</string>
-    <string name="login_error_exist_username">Ово корицничко име већ постоји</string>
-    <string name="login_microsoft">Microsoft Пријава</string>
-    <string name="login_select_account">Изаберите налог</string>
-    <string name="login_title_no_saved_account">Налог није пронађен !</string>
-    <string name="login_dialog_no_saved_account">Ви немате сачувани налог.\nКористите опцију <b>\"Сачувај налог\"</b>да сачувате налог прије него што се пријавите.</string>
     <!-- Hint -->
     <!-- Warnings -->
     <string name="warning_remove_account">Овај налог ће бити уклоњен!</string>
     <!-- AlertDialog title -->
-    <string name="alerttitle_install_jre">Инсталирајте Java Runtime %s (.tar.xz)</string>
     <string name="alerttitle_installmod">Селектујте мод инсталер</string>
     <!-- Error messages -->
     <string name="error_fatal">ПојавЛаунчер је неочекивано угасио</string>
@@ -31,37 +21,20 @@
     <!-- Toast messages -->
     <string name="toast_permission_denied">ПојавЛаунчер треба пиши/читај дозволу!</string>
     <string name="toast_optifine_success">Инсталирање успјешно</string>
-    <string name="toast_uninstalljre_done">Завршено уклањавање Java Runtime</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_console">Програмерска конзола</string>
-    <string name="mcl_tab_crash">Лог Грешака</string>
     <!-- MCLauncherActivity: Account status -->
-    <string name="mcl_account_connected">Повезано</string>
-    <string name="mcl_account_local">Локал</string>
     <!-- MCLauncherActivity: Strings -->
-    <string name="mcl_version_msg">Спремно играти Минецрафт %s</string>
     <string name="mcl_launch_cleancache">Чишћење кеш фајлова</string>
     <string name="mcl_launch_downloading">Преузимање %s</string>
     <string name="mcl_launch_downloading_progress">"Преузимање %s (%.2f МБ / %.2f МБ)"</string>
     <string name="mcl_launch_download_assets">Спремање да се преузимају ресурси</string>
-    <string name="mcl_launch_error_localmode">Минецрафт не може бити легално инсталиран када сте пријављени са локалним налогом. Молим вас да се пребаците на онлајн налог да би сте наставили.</string>
     <string name="mcl_options">Опције</string>
-    <string name="mcl_option_modinstall">Покрени мод инсталер (Форге, Лабумод, Фабрик, итд...)</string>
-    <string name="mcl_option_modinstallwitharg">Покрени мод инсталер (са прилагоћеним аргументима)</string>
     <string name="mcl_option_customcontrol">Прилагођене контроле</string>
-    <string name="mcl_option_settings">Подешавања</string>
-    <string name="mcl_option_about">О Pojavu</string>
     <string name="mcl_setting_title_use_surface_view">Користите алтернате сурфаце рендеринг</string>
     <string name="mcl_setting_subtitle_use_surface_view">Мође помоћи перформансама у гпу боунд сценаријима</string>
-    <string name="mcl_setting_title_uninstalljre">Деисталирајте Java Runtime</string>
-    <string name="mcl_setting_subtitle_uninstalljre">[Лаунчер рестарт потребан] Ово ће вам дозволити да ре-инсталирајте Java Runtime</string>
-    <string name="mcl_setting_title_freeform">Покрените Minecraft у моду прозора</string>
-    <string name="mcl_setting_subtitle_freeform">Покрените Minecraft на прозору. Потребно Андроид 7.0+</string>
-    <string name="mcl_setting_title_hide_sidebar">Сакриј бочну траку</string>
-    <string name="mcl_setting_subtitle_hide_sidebar">Сакривање бочне траке прави лаунчер да изгледа као верзија 1.</string>
     <string name="mcl_setting_title_ignore_notch">Игнориши ноч екрана</string>
     <string name="mcl_setting_subtitle_ignore_notch">Игнороше ноч и продужи игру испод.\nДаје већу величину игри.</string>
     <string name="mcl_setting_title_resolution_scaler">Резолуција</string>
@@ -69,32 +42,21 @@
 резолуција</string>
     <string name="mcl_setting_title_longpresstrigger">Колико дуго ће се активирати након дугог притиска</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Промените време за дуготрајни притисак за уништавање блока и испуштању предмета.</string>
-    <string name="mcl_setting_title_backtorightmouse">Дугме назад је леви клик</string>
-    <string name="mcl_setting_subtitle_backtorightmouse">Неки уређаји третирају леви клик од миша као дугме назад, ако користите миш, требали би ово укључити.</string>
-    <string name="mcl_setting_title_flat_button_style">Изаберите стил дугмета</string>
-    <string name="mcl_setting_subtitle_flat_button_style">Промени стил контрола на стил флат.</string>
     <string name="mcl_setting_title_buttonscale">Величина дугма (контрола)</string>
     <string name="mcl_setting_subtitle_buttonscale">Повећајте ако су премали.</string>
     <string name="mcl_setting_title_mousescale">Величина Миша</string>
     <string name="mcl_setting_subtitle_mousescale">Промените величину виртуалног миша.</string>
     <string name="mcl_setting_title_javaargs">ЈВМ Покретање аргументи</string>
     <string name="mcl_setting_subtitle_javaargs">Будите пажљиви, ваша игра се може покварити ако незнате ово користити.</string>
-    <string name="mcl_setting_category_general">Општа подешавања</string>
-    <string name="mcl_setting_category_scaling">Подешавања величине</string>
     <string name="mcl_setting_category_renderer">Рендерер</string>
-    <string name="mcl_setting_category_veroption">Верзије које ће бити у листи верзија</string>
     <string name="mcl_setting_veroption_release">Стабилно</string>
     <string name="mcl_setting_veroption_snapshot">Снепшот</string>
     <string name="mcl_setting_veroption_oldalpha">Стари-Аlpha</string>
     <string name="mcl_setting_veroption_oldbeta">Стари-Бета</string>
-    <string name="mcl_version_clone">Клонирај</string>
     <!-- Global strings -->
-    <string name="global_edit">Измени</string>
     <string name="global_error">Грешка</string>
-    <string name="global_warinng">Упозорење</string>
     <string name="global_load">Учитај</string>
     <string name="global_name">Име</string>
-    <string name="global_remove">Уклони</string>
     <string name="global_clone">Клонирај</string>
     <string name="global_restart">Рестарт</string>
     <string name="global_save">Сачувај</string>
@@ -103,12 +65,8 @@
     <string name="global_waiting">Чекај</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Апликација/Игра изашла је са кодом %d, провјерите latestlog.txt за више детаља.</string>
-    <string name="mcn_exit_call">Изађи</string>
     <string name="mcn_exit_confirm">Да ли желите да форсе-изаћете?</string>
-    <string name="mcn_check_fail_lwjgl">LWJGL3 није инсталиран!</string>
     <!-- MainActivity: Control buttons -->
-    <string name="control_toggle">GUI</string>
-    <string name="control_keyboard">Тастатура</string>
     <string name="control_chat">Чет</string>
     <string name="control_debug">Дебаг</string>
     <string name="control_primary">При</string>
@@ -124,8 +82,6 @@
     <string name="control_viewout">Лог Избацивано</string>
     <string name="control_adebug">Инпут дебаг</string>
     <string name="control_customkey">Пошаљи прилагоћени типка-код</string>
-    <string name="control_scaleup">Зумирање</string>
-    <string name="control_scaledown">Смањивање</string>
     <!-- ImportControlActivity Strings -->
     <string name="import_control_label">Убаците контроле</string>
     <string name="import_control_invalid_file">Инвалид или коруптирани фајл</string>
@@ -137,44 +93,21 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
-    <string name="customctrl_edit">уређивање %s</string>
-    <string name="customctrl_remove">Уклони %s?</string>
-    <string name="customctrl_keyname">Код тастера</string>
     <string name="customctrl_toggle">Тогелабле</string>
     <string name="customctrl_size">Величина</string>
-    <string name="customctrl_size_width">Ширина</string>
-    <string name="customctrl_size_height">Висина</string>
     <string name="customctrl_mapping">Мапирање</string>
     <string name="customctrl_orientation">Оријентација</string>
     <string name="customctrl_background_color">Боја позадине</string>
     <string name="customctrl_corner_radius">радијус угла</string>
     <string name="customctrl_stroke_width">Ширина потеза</string>
     <string name="customctrl_stroke_color">Боја потеза</string>
-    <string name="customctrl_dynamicpos">Динамична позиција</string>
-    <string name="customctrl_dynamicpos_x">Динамични Х</string>
-    <string name="customctrl_dynamicpos_y">Динамични У</string>
-    <string name="customctrl_transparency_bg">Провидна позадина</string>
     <string name="customctrl_button_opacity">Непрозирност дугмади</string>
-    <string name="customctrl_keycombine">Комбинација типка</string>
-    <string name="customctrl_keycombine_alt">Алт</string>
-    <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Додај дугме</string>
     <string name="customctrl_addbutton_drawer">Додај ладицу дугмета</string>
     <string name="customctrl_addsubbutton">Додај суб-дугме</string>
-    <string name="customctrl_add_subbutton_message">Суб-дугме н°%d је додано !</string>
     <string name="customctrl_selectdefault">Селектујте опћенити Control json</string>
     <string name="main_install_jar_file">Инсталирај .jar</string>
-    <string name="main_options">Опције</string>
     <string name="main_play">Играј</string>
-    <string name="main_welcome">Добродошли, %s</string>
-    <string name="main_infodev">Информације (ДЕВ)</string>
-    <string name="main_switchuser">Промени корисника</string>
-    <string name="main_version">Верзија:</string>
-    <string name="main_nocrash">Није пронаћена грешка</string>
-    <string name="main_nolog">Нема лог.</string>
-    <string name="main_no_news_feed">Нису се могле добити вести!</string>
-    <string name="auto_ram_subtitle">Укључије аутомстски подешавање RAM-а</string>
-    <string name="auto_ram_title">Аутпматски RAM</string>
     <string name="autoram_info_msg">Меморија подешена на %d МБ</string>
     <string name="mcl_setting_check_libraries">Провери библиотеке послије скидања</string>
     <string name="mcl_setting_check_libraries_subtitle">Ова опција форсира лаунчер да провери библиотекин хеш ако је доступна. Штити од покварених скидања.</string>
@@ -186,7 +119,6 @@
     <string name="mcl_setting_title_mousespeed">Брзина миша</string>
     <string name="mcl_setting_subtitle_mousespeed">Промјени брзину софтверског миша</string>
     <string name="customctrl_passthru">Миш прпћи-кроз</string>
-    <string name="customctrl_rounded">Заобљени</string>
     <string name="memory_warning_msg">Слободна меморија (%d) је нижа од подешене меморије (%d), то можда заустави функцију игре. Промените подешену меморију ако се то деси.</string>
     <string name="mcl_memory_allocation">Подешена меморија</string>
     <string name="mcl_memory_allocation_subtitle">Колико меморије може да корости Minecraft</string>
