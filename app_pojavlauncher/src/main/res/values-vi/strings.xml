@@ -3,26 +3,16 @@
     <!-- App name part -->
     <string name="app_name">PojavLauncher</string>
     <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">Khởi chạy Minecraft: Java Edition trên thiết bị của bạn! </string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
     <string name="login_online_username_hint">Email hoặc tên người dùng </string>
-    <string name="login_online_password_hint">Mật khẩu </string>
-    <string name="login_online_check_keeplogin">Giữ trang thái đăng nhập </string>
     <string name="login_online_login_label">Đăng nhập</string>
-    <string name="login_error_invalid_username">Tên người dùng không hợp lệ. Nó phải có từ 3-16 kí tự, và chỉ bao gồm các kí tự A-Z, a-z, 0-9 và dấu gạch dưới.</string>
-    <string name="login_error_exist_username">Tên người dùng này đã tồn tại</string>
-    <string name="login_microsoft">Đăng nhập Microsoft</string>
-    <string name="login_select_account">Chọn tài khoản</string>
-    <string name="login_title_no_saved_account">Không tìm thấy tài khoản !</string>
-    <string name="login_dialog_no_saved_account">Bạn không có tài khoản nào được lưu.\nDùng cài đặt <b>\"Giữ trạng thái đăng nhập\"</b> để giữ tài khoản lúc đầu đăng nhập.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Chạm phím bánh răng ở cạnh trên màn hình để mở menu ⚙\nChạm vào các phím để tùy chỉnh chúng: thay đổi tên, kích thước, liên kết phím, hoặc xoá phím."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Tài khoản này sẽ bị loại bỏ!</string>
     <!-- AlertDialog title -->
-    <string name="alerttitle_install_jre">Cài đặt Java Runtime %s (.tar.xz)</string>
     <string name="alerttitle_installmod">Chọn một trình cài đặt mod</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher đã bất ngờ bị rớt</string>
@@ -32,74 +22,47 @@
     <!-- Toast messages -->
     <string name="toast_permission_denied">Yêu cầu quyền đọc/ghi bộ nhớ!</string>
     <string name="toast_optifine_success">Cài đặt thành công</string>
-    <string name="toast_uninstalljre_done">Đã gỡ Java Runtime</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_wiki">Wiki</string>
-    <string name="mcl_tab_console">Bảng điều khiển phát triển</string>
-    <string name="mcl_tab_crash">Nhật ký sự cố</string>
     <!-- MCLauncherActivity: Account status -->
-    <string name="mcl_account_connected">Đã kết nối</string>
-    <string name="mcl_account_local">Nội bộ</string>
     <!-- MCLauncherActivity: Strings -->
-    <string name="mcl_version_msg">Sẵn sàng để chơi Minecraft %s</string>
     <string name="mcl_launch_cleancache">Đang làm sạch bộ nhớ đệm</string>
     <string name="mcl_launch_downloading">Đang tải xuống %s</string>
     <string name="mcl_launch_downloading_progress">"Đang tải %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Chuẩn bị để tải xuống gói tài nguyên</string>
-    <string name="mcl_launch_error_localmode">Minecraft không thể được cài đặt một cách hợp pháp khi đăng nhập với một tài khoản nội bộ. Chuyển qua một tài khoản đã kết nối để tiếp tục.</string>
     <string name="mcl_options">Tùy chọn</string>
-    <string name="mcl_option_modinstall">Chạy một trình cài đặt mod (Forge, LabyMod, Fabric,...)</string>
-    <string name="mcl_option_modinstallwitharg">Chạy một trình cài đặt mod (với chỉ số tùy chỉnh)</string>
     <string name="mcl_option_customcontrol">Tùy chỉnh điều khiển</string>
-    <string name="mcl_option_settings">Thiết lập</string>
-    <string name="mcl_option_about">Giới thiệu</string>
     <string name="mcl_setting_title_use_surface_view">Dùng cách kết xuất thay thế</string>
     <string name="mcl_setting_subtitle_use_surface_view">Có thể cải thiện hiệu năng nếu GPU bị nghẽn cổ chai</string>
-    <string name="mcl_setting_title_uninstalljre">Gỡ Java Runtime</string>
-    <string name="mcl_setting_subtitle_uninstalljre">[Đề nghị khởi động lại trình khởi chạy] Điều này cho phép bạn cài đặt lại Java Runtime</string>
-    <string name="mcl_setting_title_freeform">Chạy Minecraft trong chế độ tự do</string>
-    <string name="mcl_setting_subtitle_freeform">Chạy Minecraft trong cửa sổ nổi. Yêu cầu Android 7.0 trở lên</string>
-    <string name="mcl_setting_title_hide_sidebar">Ẩn thanh bên</string>
-    <string name="mcl_setting_subtitle_hide_sidebar">Người dùng quen thuộc với giao diện ở phiên bản v1 có thể thích tuỳ chọn này. Mang lại trải nghiệm toàn màn hình tốt hơn.</string>
     <string name="mcl_setting_title_ignore_notch">Bỏ qua phần khuyết màn hình</string>
     <string name="mcl_setting_subtitle_ignore_notch">Bỏ qua phần khuyết màn hình và mở rộng màn hình bên dưới.\nMang đến cho bạn trải nghiệm phong phú hơn.</string>
     <string name="mcl_setting_title_resolution_scaler">Độ phân giải</string>
     <string name="mcl_setting_subtitle_resolution_scaler">Cho phép bạn giảm độ phân giải của game. 100% là độ phân giải tối đa</string>
     <string name="mcl_setting_title_longpresstrigger">Khoảng thời gian nhấn giữ để kích hoạt</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Thay đổi thời gian nhấn giữ để kích hoạt khi phá huỷ khối và thả vật phẩm.</string>
-    <string name="mcl_setting_title_backtorightmouse">Coi nút trở về như chuột phải</string>
-    <string name="mcl_setting_subtitle_backtorightmouse">Một số thiết bị coi chuột phải bên ngoài là nút quay lại. Nếu bạn đang sử dụng chuột ngoài, bạn nên bật tuỳ chọn này.</string>
-    <string name="mcl_setting_title_flat_button_style">Kiểu nút phẳng</string>
-    <string name="mcl_setting_subtitle_flat_button_style">Bật tuỳ chọn này để đổi sang kiểu nút phẳng.</string>
     <string name="mcl_setting_title_buttonscale">Độ rộng nút điều khiển</string>
     <string name="mcl_setting_subtitle_buttonscale">Tăng độ rộng nếu nút quá nhỏ.</string>
     <string name="mcl_setting_title_mousescale">Độ lớn của chuột</string>
     <string name="mcl_setting_subtitle_mousescale">Đổi kích thước chuột ảo.</string>
     <string name="mcl_setting_title_javaargs">Các chỉ số chạy JVM</string>
     <string name="mcl_setting_subtitle_javaargs">Cẩn thận, việc này sẽ làm trò chơi gặp sự cố nếu sửa đổi mà không có nhiều kiến thức.</string>
-    <string name="mcl_setting_category_general">Thiết lập chung</string>
-    <string name="mcl_setting_category_scaling">Cài đặt độ rộng</string>
     <string name="mcl_setting_category_renderer">Trình kết xuất</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (tất cả phiên bản, nhanh)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - tất cả phiên bản, hiệu năng trung bình, tương thích thiết bị kém</string>
     <string name="mcl_setting_renderer_angle">ANGLE - (phiên bản 1.17+, trung bình)</string>
-    <string name="mcl_setting_category_veroption">Kiểu phiên bản sẽ được hiện ở trong danh sách phiên bản</string>
     <string name="mcl_setting_veroption_release">Bản phát hành</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Bản Alpha cũ</string>
     <string name="mcl_setting_veroption_oldbeta">Bản Beta cũ</string>
     <string name="mcl_setting_java_sandbox">Chế độ hộp cát của trình cài đặt .jar</string>
     <string name="mcl_setting_java_sandbox_subtitle">Bật hoặc tắt trình quản lí an ninh (trong Java) khi khởi động trình cài đặt .jar.</string>
-    <string name="mcl_version_clone">Nhân bản</string>
     <!-- Global strings -->
-    <string name="global_edit">Chỉnh sửa</string>
     <string name="global_error">Lỗi</string>
-    <string name="global_warinng">Cảnh báo</string>
     <string name="global_load">Tải</string>
     <string name="global_name">Tên</string>
-    <string name="global_remove">Loại bỏ</string>
     <string name="global_clone">Nhân bản</string>
     <string name="global_restart">Khởi động lại</string>
     <string name="global_save">Lưu</string>
@@ -111,12 +74,9 @@
     <string name="global_default">Mặc định</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Ứng dụng/Trò chơi đã thoát với mã %d, kiểm tra nhật kí trình khởi chạy (latestlog.txt) để biết thêm chi tiết.</string>
-    <string name="mcn_exit_call">Thoát</string>
     <string name="mcn_exit_confirm">Bạn có chắc muốn bắt buộc thoát chương trình?</string>
-    <string name="mcn_check_fail_lwjgl">LWJGL3 chưa được cài đặt!</string>
+    <string name="mcn_check_fail_vulkan_support">Trình kết xuất Zink (Vulkan) không được hỗ trợ trên thiết bị này!</string>
     <!-- MainActivity: Control buttons -->
-    <string name="control_toggle">Giao diện</string>
-    <string name="control_keyboard">Bàn Phím</string>
     <string name="control_chat">Trò chuyện</string>
     <string name="control_debug">Gỡ lỗi</string>
     <string name="control_primary">Pri</string>
@@ -138,8 +98,6 @@
     <string name="control_viewout">Nhật ký ra </string>
     <string name="control_adebug">Gỡ lỗi đầu vào</string>
     <string name="control_customkey">Gửi phím tùy chọn</string>
-    <string name="control_scaleup">Phóng to</string>
-    <string name="control_scaledown">Thu nhỏ</string>
     <!-- ImportControlActivity Strings -->
     <string name="import_control_label">Nhập vào bộ điều khiển</string>
     <string name="import_control_invalid_file">Tệp không hợp lệ hoặc đã bị xung đột</string>
@@ -151,47 +109,24 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
-    <string name="customctrl_edit">Đang chỉnh sửa %s</string>
-    <string name="customctrl_remove">Xóa %s?</string>
-    <string name="customctrl_keyname">Mã phím</string>
     <string name="customctrl_toggle">Chuyển đổi</string>
     <string name="customctrl_size">Kích thước</string>
-    <string name="customctrl_size_width">Chiều rộng</string>
-    <string name="customctrl_size_height">Độ cao</string>
     <string name="customctrl_mapping">Sơ đồ phím</string>
     <string name="customctrl_orientation">Hướng</string>
     <string name="customctrl_background_color">Màu nền</string>
     <string name="customctrl_corner_radius">Bán kính góc tròn</string>
     <string name="customctrl_stroke_width">Độ rộng viền phím</string>
     <string name="customctrl_stroke_color">Màu viền phím</string>
-    <string name="customctrl_dynamicpos">Điểm động tùy chỉnh</string>
-    <string name="customctrl_dynamicpos_x">Vị trí động theo chiều X</string>
-    <string name="customctrl_dynamicpos_y">Vị trí động theo chiều Y</string>
-    <string name="customctrl_transparency_bg">Độ trong suốt của hình nền</string>
     <string name="customctrl_button_opacity">Độ trong suốt của phím</string>
-    <string name="customctrl_keycombine">Tổ hợp phím</string>
-    <string name="customctrl_keycombine_alt">Alt</string>
-    <string name="customctrl_keycombine_control">Ctrl</string>
-    <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Thêm nút</string>
     <string name="customctrl_addbutton_drawer">Thêm bộ phím</string>
+    <string name="customctrl_addbutton_joystick">Thêm cần điều khiển</string>
     <string name="customctrl_addsubbutton">Thêm phím phụ</string>
-    <string name="customctrl_add_subbutton_message">Phím phụ %d đã được thêm!</string>
     <string name="customctrl_selectdefault">Chọn bộ điều khiển json mặc định</string>
     <string name="customctrl_export">Xuất điều khiển</string>
     <string name="main_share_logs">Chia sẻ tệp nhật ký</string>
     <string name="main_install_jar_file">Cài đặt tệp .jar</string>
-    <string name="main_options">Tùy chọn</string>
     <string name="main_play">Chơi</string>
-    <string name="main_welcome">Chào mừng, %s</string>
-    <string name="main_infodev">Thông tin (phát triển)</string>
-    <string name="main_switchuser">Đổi người dùng</string>
-    <string name="main_version">Phiên bản:</string>
-    <string name="main_nocrash">Không phát hiện sự cố</string>
-    <string name="main_nolog">Không có bản ghi.</string>
-    <string name="main_no_news_feed">Lỗi tải bài đăng mới !</string>
-    <string name="auto_ram_subtitle">Bật tự động điều chỉnh RAM</string>
-    <string name="auto_ram_title">RAM tự động</string>
     <string name="autoram_info_msg">Bộ nhớ được đặt thành %d MB</string>
     <string name="mcl_setting_check_libraries">Kiểm tra các thư viện sau khi tải</string>
     <string name="mcl_setting_check_libraries_subtitle">Cài đặt này buộc trình khởi chạy kiểm tra hàm băm của thư viện nếu nó có sẵn. Ngăn chặn tải xuống bị hỏng.</string>
@@ -206,7 +141,7 @@
     <string name="mcl_setting_subtitle_mousespeed">Chỉnh tốc độ của phầm mềm chuột</string>
     <string name="customctrl_passthru">Di chuyển chuột</string>
     <string name="customctrl_swipeable">Có thể vuốt</string>
-    <string name="customctrl_rounded">Làm tròn</string>
+    <string name="customctrl_forward_lock">Khoá di chuyển lên</string>
     <string name="memory_warning_msg">Số lượng RAM trống hiện tại (%d) thấp hơn số lượng RAM được phân bổ (%d), có thể dẫn đến sự cố. Thay đổi số lượng phân bổ nếu trò chơi bị sập.</string>
     <string name="mcl_memory_allocation">Phân bổ bộ nhớ</string>
     <string name="mcl_memory_allocation_subtitle">Điều chỉnh số lượng bộ nhớ được cung cấp cho Minecraft</string>
@@ -214,7 +149,6 @@
     <string name="multirt_runtime_incompatiblearch">Kiến trúc không tương thích: %s</string>
     <string name="multirt_config_title">Các phiên bản Java</string>
     <string name="multirt_config_add">Thêm mới</string>
-    <string name="multirt_config_add_subtitle">Thêm vào Java VM mới</string>
     <string name="multirt_title">Quản lí Java Runtime</string>
     <string name="multirt_subtitle">Quản lí các phiên bản Java VM đã cài đặt</string>
     <string name="multirt_progress_caching">Đang lưu vào bộ nhớ đệm...</string>
@@ -224,20 +158,7 @@
     <string name="multirt_nocompartiblert">Không thể tìm thấy phiên bản Java tương thích. Phiên bản Minecraft này yêu cầu Java %d trở lên.</string>
     <string name="multirt_nojava8rt">Không thể tìm thấy Java 8. Để sử dụng tùy chọn này, bạn cần cài đặt Java 8.</string>
     <string name="multirt_delete_runtime">Xóa runtime</string>
-    <string name="compat_117_message">Minecraft phiên bản 21w10a trở đi yêu cầu OpenGL lõi phiên bản 3.2 trở lên. Mặc dù bộ xử lí đồ hoạ của bạn không hỗ trợ OpenGL ES 3.0 hoặc hơn, bạn có thể cài đặt một số phần tài nguyên bổ sung để khởi chạy những phiên bản này. Chọn OK để bắt đầu cài đặt, hoặc Huỷ để huỷ khởi chạy.</string>
-    <string name="compat_11x_playanyway">Vẫn chơi</string>
-    <string name="pvc_gameDirectory">Đường dẫn thư mục của trò chơi</string>
     <string name="pvc_jvmArgs">Các chỉ số JVM</string>
-    <string name="pvc_title">Cài đặt theo từng phiên bản</string>
-    <string name="storage_warning_title">Thay đổi về lưu trữ</string>
-    <string name="storage_warning_text"><![CDATA[Vì Google đã bắt buộc sử dụng lưu trữ nội bộ, một tính năng được thêm vào Android 10 trở lên, chúng tôi cần phải chuyển thư mục của trò chơi tới một thư mục riêng tư của ứng dụng.<br /> Thư mục mới của PojavLauncher là <b>Android/data/%s/files/</b> (cũng có thể truy cập được bằng cách sử dụng dịch vụ cung cấp lưu trữ trong trình quản lí tệp của bạn).<br /> Nếu bạn muốn sao chép các tệp trò chơi của bạn, hãy sao chép tất cả từ thư mục <b>games/PojavLauncher</b> một cách thủ công.]]></string>
-    <string name="control_offset_title">Khoảng bù trừ của bộ điều khiển</string>
-    <string name="control_top_offset">Khoảng bù trừ trên: </string>
-    <string name="control_right_offset">Khoảng bù trừ phải: </string>
-    <string name="control_bottom_offset">Khoảng bù trừ dưới: </string>
-    <string name="control_left_offset">Khoảng bù trừ trái: </string>
-    <string name="preference_control_offset_title">Khoảng bù trừ theo cạnh của bộ điều khiển</string>
-    <string name="preference_control_offset_description">Đặt khoảng bù trừ tuỳ chỉnh cho mỗi cạnh của màn hình</string>
     <string name="preference_mouse_start_title">Khởi động với chuột ảo bật</string>
     <string name="preference_mouse_start_description">Chuột ảo xuất hiện khi khởi động khi tùy chọn này được bật</string>
     <string name="preference_video_title">Hình ảnh và trình kết xuất</string>
@@ -267,13 +188,9 @@
     <string name="preference_gyro_smoothing_title">Bật tính năng làm mịn con lăn hồi chuyển</string>
     <string name="preference_gyro_smoothing_description">Reduce jitter in exchange of latency.</string>
     <string name="preference_back_title">Quay về màn hình trước đó</string>
-    <string name="gles_hack_none">Không thu nhỏ kết cấu</string>
-    <string name="gles_hack_always">Chia tất cả các kết cấu cho 2</string>
-    <string name="gles_hack_sometimes">Chia những kết cấu lớn cho 2 hoặc 4</string>
     <string name="unnamed">Chưa đặt tên</string>
     <string name="profiles_latest_snapshot">Bản thử nghiệm mới nhất</string>
     <string name="profiles_latest_release">Phiên bản mới nhất</string>
-    <string name="profiles_editing">Chỉnh sửa hồ sơ</string>
     <string name="profiles_profile_name">Tên</string>
     <string name="profiles_profile_version">Phiên bản</string>
     <string name="global_delete">Xóa</string>
@@ -281,10 +198,8 @@
     <string name="pedit_renderer">Trình kết xuất</string>
     <string name="arc_capes_title">Áo choàng Cosmetica</string>
     <string name="arc_capes_desc">Sử dụng áo choàng từ dịch vụ Cosmetica (trước đây là Arc). Để biết thêm thông tin, truy cập https://cosmetica.cc. Yêu cầu có OptiFine.</string>
-    <string name="migrated_profile_str">cấu hình phiên bản %s</string>
     <string name="notif_channel_name">Chung</string>
     <string name="lazy_service_default_title">Dịch vụ tiền cảnh Pojav</string>
-    <string name="lazy_service_default_description">Dịch vụ này dùng để thực hiện tác vụ lâu dài</string>
     <string name="mcl_setting_veroption_installed">Đã cài đặt</string>
     <string name="use_global_default">(Sử dụng mặc định chung)</string>
     <string name="default_control">Điểu khiển mặc định</string>
@@ -299,7 +214,6 @@
     <string name="main_add_account">Thêm tài khoản</string>
     <string name="tasks_ongoing">Các tác vụ đang chạy, vui lòng chờ</string>
     <string name="no_saved_accounts">Không có tài khoản nào được lưu</string>
-    <string name="downloading_versions">Đang tải xuống danh sách phiên bản…</string>
     <string name="mc_download_failed">Không thể tải Minecraft! Điều này có thể do kết nối mạng kém, tệp được đặt sai vị trí, ...</string>
     <string name="xerr_unknown">Lỗi API Xbox Live chưa rõ, mã %d</string>
     <string name="xerr_no_account">Có vẻ như bạn chưa có một tài khoản Xbox Live. Đăng nhập vào https://minecraft.net/ một lần và thử lại.</string>
@@ -332,17 +246,23 @@
     <string name="preference_category_controller_settings">Cài đặt điều khiển</string>
     <string name="preference_wipe_controller_title">Thiết đặt lại cấu hình điều khiển</string>
     <string name="preference_wipe_controller_description">Cho phép bạn thay đổi cấu hình điều khiển</string>
+    <string name="preference_deadzone_scale_title">Độ rộng vùng chết cần điều khiển</string>
     <string name="preference_deadzone_scale_description">Tăng nếu cần điều khiển drift</string>
     <string name="preference_force_big_core_title">Buộc trình kết xuất chạy trên nhân lớn</string>
     <string name="preference_force_big_core_desc">Buộc luồng trình kết xuất Minecraft chạy trên nhân có tần số cao nhất</string>
     <string name="version_select_hint">Chọn phiên bản</string>
     <string name="forge_dl_progress">Đang tải xuống %s</string>
+    <string name="forge_dl_searching">Đang tìm số phiên bản của Forge</string>
     <string name="modloader_dl_failed_to_load_list">Tải xuống thất bại!</string>
     <string name="forge_dl_no_installer">Xin lỗi, nhưng phiên bản Forge này không có trình cài đặt tệp .jar, chưa hỗ trợ.</string>
     <string name="forge_dl_select_version">Chọn phiên bản Forge</string>
+    <string name="fabric_dl_progress">Đang tải siêu dữ liệu cho trình %s</string>
+    <string name="fabric_dl_loader_version">Phiên bản trình %s</string>
     <string name="fabric_dl_game_version">Phiên bản Minecraft</string>
     <string name="fabric_dl_install">Cài đặt</string>
+    <string name="fabric_dl_cant_read_meta">Không đọc được siêu dữ liệu trình %s. Vui lòng thử lại sau.</string>
     <string name="modloader_dl_install_fabric">Tạo hồ sơ Fabric mới</string>
+    <string name="modloader_dl_install_quilt">Tạo hồ sơ Quilt</string>
     <string name="modloader_dl_install_forge">Tạo hồ sơ Forge mới</string>
     <string name="create_profile_vanilla">Tạo hồ sơ Vanilla mới</string>
     <string name="create_profile_vanilla_like_versions">Phiên bản giống Vanilla</string>
@@ -352,6 +272,25 @@
     <string name="of_dl_failed_to_scrape">Không thể thu thập dữ liệu để cài đặt OptiFine</string>
     <string name="of_dl_progress">Đang tải xuống %s</string>
     <string name="create_profile_optifine">Tạo hồ sơ OptiFine</string>
-    <string name="preference_gyro_damper_window_title">Thời gian làm mịn</string>
+    <string name="hint_search_modpack">Tìm kiếm modpack</string>
+    <string name="preference_vulkan_driver_system_title">Sử dụng trình điều khiển hệ thống cho Vulkan</string>
+    <string name="preference_vulkan_driver_system_description">Buộc sử dụng trình đồ hoạ Vulkan hệ thống thay vì Turnip trên vi xử lí đồ hoạ Qualcomm Adreno. Chỉ ảnh hưởng tới Zink và mod sử dụng Vulkan.</string>
     <string name="generic_install">Cài đặt</string>
+    <string name="generic_apply">Áp dụng</string>
+    <string name="search_modpack_no_result">Không có modpack được tìm thấy</string>
+    <string name="search_modpack_error">Không thể tìm modpack</string>
+    <string name="search_modpack_download_error">Không thể tải dữ liệu modpack</string>
+    <string name="modpack_download_downloading_metadata">Đang tải dữ liệu modpack (%.2f MB / %.2f MB)</string>
+    <string name="modpack_download_downloading_mods">Đang tải mod (%.2f MB / %.2f MB)</string>
+    <string name="modpack_download_downloading_mods_fc">Đang tải mod (Tệp %d trên %d)</string>
+    <string name="modpack_download_applying_overrides">Áp dụng các thay đổi (%d/%d)</string>
+    <string name="modpack_install_notification_title">Trình cài đặt modpack</string>
+    <string name="modpack_install_notification_success">Nhấn để hoàn thành cài đặt modpack</string>
+    <string name="modpack_install_notification_data_not_available">Không thể tải thông tin trình cài đặt mod</string>
+    <string name="modpack_install_modloader_download_failed">Không thể tải các tệp của trình cài đặt mod</string>
+    <string name="modpack_install_download_failed">Không thể tải các tệp của modpack</string>
+    <string name="modpack_install_button">Tạo hồ sơ modpack</string>
+    <string name="notif_error_occured">Đã xảy ra lỗi</string>
+    <string name="notif_error_occured_desc">Nhấn để xem chi tiết</string>
+    <string name="fabric_dl_only_stable">Chỉ hiện phiên bản ổn dịnh</string>
 </resources>
