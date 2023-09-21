@@ -76,6 +76,7 @@
     <string name="mcl_version_clone">Clone</string>
 
     <!-- Global strings -->
+    <string name="global_edit">Edit</string>
     <string name="global_error">Error</string>
     <string name="global_load">Load</string>
     <string name="global_name">Name</string>
