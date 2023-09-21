@@ -3,24 +3,15 @@
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Android өчен Minecraft: Java Edition)</string>
     <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">Minecraft: Java Edition үзегезнең җайланма кушыгыз!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
     <string name="login_online_username_hint">Электрон почтасы яки кулланучының исеме</string>
-    <string name="login_online_password_hint">Серсүз</string>
-    <string name="login_online_check_keeplogin">Хәтердә калдырырга</string>
     <string name="login_online_login_label">Керергә</string>
-    <string name="login_error_exist_username">Бу кулланучы исеме бар инде</string>
-    <string name="login_microsoft">Microsoft аша керергә</string>
-    <string name="login_select_account">Аккаунтлар</string>
-    <string name="login_title_no_saved_account">Аккаунт табылмады!</string>
-    <string name="login_dialog_no_saved_account">Сакланган аккаунтлар юк.\nАккаунтны беренче керү вакытында саклап өчен <b>«Хәтердә калдырырга»</b> опциясен кулланыгыз.</string>
     <!-- Hint -->
     <!-- Warnings -->
     <string name="warning_remove_account">Бу аккаунт бетереләчәк!</string>
     <!-- AlertDialog title -->
-    <string name="alerttitle_install_jre">Java Runtime уртыртуы %s (.tar.xz)</string>
     <string name="alerttitle_installmod">Мод утырткычын сайлагыз</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher сафтан көтелмичә чыкты</string>
@@ -30,58 +21,34 @@
     <!-- Toast messages -->
     <string name="toast_permission_denied">Саклау урыныннан уку/ясу рөхсәте кирәк!</string>
     <string name="toast_optifine_success">Утыртылды</string>
-    <string name="toast_uninstalljre_done">Java Runtime бетерелде</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_wiki">Вики</string>
-    <string name="mcl_tab_console">Эшкәртүче консоле</string>
-    <string name="mcl_tab_crash">Сафтан чыгарулар журналы</string>
     <!-- MCLauncherActivity: Account status -->
-    <string name="mcl_account_connected">Тоташкан</string>
-    <string name="mcl_account_local">Локаль</string>
     <!-- MCLauncherActivity: Strings -->
-    <string name="mcl_version_msg">Minecraft %s кушылуга әзер</string>
     <string name="mcl_launch_cleancache">Кеш-файллар бетерүе</string>
     <string name="mcl_launch_downloading">%s йөкләтүе</string>
     <string name="mcl_launch_downloading_progress">"%s йөкләтү (%.2f МБ / %.2f МБ)"</string>
     <string name="mcl_launch_download_assets">Ресурс йөкләүгә әзерләнү</string>
     <string name="mcl_options">Көйләүләр</string>
-    <string name="mcl_option_modinstall">Мод утырткычын кушу (Forge, LabyMod, Fabric, h. б.)</string>
-    <string name="mcl_option_modinstallwitharg">Мод утырткычын кушу (көйләнелгән аргументлар белән)</string>
     <string name="mcl_option_customcontrol">Көйләнелгән идарә</string>
-    <string name="mcl_option_settings">Көйләүләр</string>
-    <string name="mcl_option_about">Лаунчер турында</string>
-    <string name="mcl_setting_title_uninstalljre">Java Runtime-ны бетерергә</string>
-    <string name="mcl_setting_subtitle_uninstalljre">[Лаунчерны яңадан кушу кирәк] Ул Java Runtime-ны яңадан утыртырга рөхсәт ителә</string>
-    <string name="mcl_setting_title_freeform">Йөзүче тәрәзәдә Minecraft ачу</string>
-    <string name="mcl_setting_subtitle_freeform">Minecraft-ны йөзмә тәрәзәдә ача. Android 7.0+ кирәк</string>
-    <string name="mcl_setting_title_hide_sidebar">Кырый панелен яшерү</string>
-    <string name="mcl_setting_subtitle_hide_sidebar">Ностальгиялы кешеләргә бу иске v1 интерфейсы ошауы кирәк. Күбрәк тулы экран тәҗрибәсен бирелде.</string>
-    <string name="mcl_setting_title_flat_button_style">Тигез төймә стиле</string>
     <string name="mcl_setting_title_buttonscale">Төймәләр масштабы</string>
     <string name="mcl_setting_title_mousescale">Курсор масштабы</string>
     <string name="mcl_setting_subtitle_mousescale">Тычкан курсор зурлыгын үзгәртә.</string>
     <string name="mcl_setting_title_javaargs">JVM кушу аргументлары</string>
-    <string name="mcl_setting_category_general">Төп көйләүләр</string>
-    <string name="mcl_setting_category_scaling">Масштаб көйләүләр</string>
     <string name="mcl_setting_category_renderer">Күрсәткеч</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (барлык версияләр өчен, тиз)</string>
     <string name="mcl_setting_renderer_angle">ANGLE - (соңгы 1.17 һәм югарырак версияләр өчен, уртача)</string>
-    <string name="mcl_setting_category_veroption">Версия исемлегендә күрсәтелгән версия төре</string>
     <string name="mcl_setting_veroption_release">Чыгарылыш</string>
     <string name="mcl_setting_veroption_snapshot">Снапшотлар</string>
     <string name="mcl_setting_veroption_oldalpha">Иске альфа</string>
     <string name="mcl_setting_veroption_oldbeta">Иске бета</string>
-    <string name="mcl_version_clone">Клонларга</string>
     <!-- Global strings -->
-    <string name="global_edit">Үзгәртү</string>
     <string name="global_error">Хата</string>
-    <string name="global_warinng">Кисәтү</string>
     <string name="global_load">Йөкләү</string>
     <string name="global_name">Исем</string>
-    <string name="global_remove">Бетерү</string>
     <string name="global_clone">Клонларга</string>
     <string name="global_restart">Яңадан кушу</string>
     <string name="global_save">Сакларга</string>
@@ -91,12 +58,8 @@
     <string name="global_select">Сайлау</string>
     <string name="global_default">Гадәттәге</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_call">Чыгу</string>
     <string name="mcn_exit_confirm">Сез мәҗбүри ябырга телисезме?</string>
-    <string name="mcn_check_fail_lwjgl">LWJGL3 утыртылмады!</string>
     <!-- MainActivity: Control buttons -->
-    <string name="control_toggle">GUI</string>
-    <string name="control_keyboard">Төймәсар</string>
     <string name="control_chat">Чат</string>
     <string name="control_debug">Төзәтү</string>
     <string name="control_primary">Pri</string>
@@ -117,8 +80,6 @@
     <string name="control_forceclose">Мәҗбүри ябу</string>
     <string name="control_viewout">Журнал</string>
     <string name="control_adebug">Кертү төзәтүе</string>
-    <string name="control_scaleup">Зурайту</string>
-    <string name="control_scaledown">Кечерәйтү</string>
     <!-- ImportControlActivity Strings -->
     <string name="import_control_invalid_file">Хаталы яки бозылган файл</string>
     <string name="import_control_done">Импортлау тәмамланды</string>
@@ -126,38 +87,17 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
-    <string name="customctrl_edit">«%s» үзгәртү</string>
-    <string name="customctrl_remove">«%s» бетерергәме?</string>
-    <string name="customctrl_keyname">Төймә коды</string>
     <string name="customctrl_size">Зурлык</string>
-    <string name="customctrl_size_width">Киңлек</string>
-    <string name="customctrl_size_height">Биеклек</string>
     <string name="customctrl_mapping">Төймәләр</string>
     <string name="customctrl_background_color">Фон төсе</string>
     <string name="customctrl_stroke_width">Кыршау юанлыгы</string>
     <string name="customctrl_stroke_color">Кыршау төсе</string>
-    <string name="customctrl_dynamicpos">Динамик позициясе</string>
-    <string name="customctrl_transparency_bg">Артның тоныклыгы</string>
     <string name="customctrl_button_opacity">Төймә тоныксызлыгы</string>
-    <string name="customctrl_keycombine">Төймә комбинациясы</string>
-    <string name="customctrl_keycombine_alt">Alt</string>
-    <string name="customctrl_keycombine_control">Ctrl</string>
-    <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Төймәне булдырырга</string>
     <string name="customctrl_addsubbutton">Төймәчәне өстәү</string>
-    <string name="customctrl_add_subbutton_message">Төймәчә №%d өстәлде!</string>
     <string name="main_share_logs">Журнал файлын уртаклашу</string>
     <string name="main_install_jar_file">.jar-файлны урнату</string>
-    <string name="main_options">Көйләүләр</string>
     <string name="main_play">Уйнарга</string>
-    <string name="main_welcome">%s, рәхим итегез</string>
-    <string name="main_infodev">Мәгълүмат (Эшкәрт.)</string>
-    <string name="main_switchuser">Кулланучыны алыштырырга</string>
-    <string name="main_version">Версия:</string>
-    <string name="main_nocrash">Сафтан чыгару табылмады</string>
-    <string name="main_nolog">Журнал буш</string>
-    <string name="main_no_news_feed">Яңалыклар тасмасын алып булмады!</string>
-    <string name="auto_ram_title">Автоматик тиз хәтер билгеләү</string>
     <string name="mcl_setting_check_libraries">Йөкләтүдән соң китапханәләрне тикшерергә</string>
     <string name="dl_library_sha_fail">%s китапханәсе ватылган һәм яңадан йөкләтәчәк</string>
     <string name="dl_library_sha_unknown">%s китапханәсе тикшереп булмады; аның белән барысы да яхшы дип уйларга туры килә</string>
@@ -165,21 +105,16 @@
     <string name="mcl_disable_gestures">Ишарә сүндерергә</string>
     <string name="mcl_setting_title_mousespeed">Тычкан сизгерлеге</string>
     <string name="customctrl_passthru">Тычкан күрсәткече</string>
-    <string name="customctrl_rounded">Түгәрәкләнгән</string>
     <string name="mcl_memory_allocation">Хәтер билгеләү</string>
     <string name="multirt_runtime_corrupt">Java Runtime зарарланган</string>
     <string name="multirt_runtime_incompatiblearch">Яраксыз архитектура: %s</string>
     <string name="multirt_config_title">Java виртуаль машиналар</string>
     <string name="multirt_config_add">Яңаны өстәргә</string>
-    <string name="multirt_config_add_subtitle">Яңа Java VM импортлау</string>
     <string name="multirt_title">Runtime менеджер</string>
     <string name="multirt_progress_caching">Кэшлау...</string>
     <string name="multirt_config_setdefault">Әүвәлге</string>
     <string name="multirt_config_setdefault_already">Гадәттәге</string>
-    <string name="compat_11x_playanyway">Барыбер уйнарга</string>
-    <string name="pvc_gameDirectory">Уен папкасы</string>
     <string name="pvc_jvmArgs">JVM аргументлары</string>
-    <string name="pvc_title">Версиягә-версия көйләүләр</string>
     <string name="preference_video_title">Видео һәм күрсәткеч</string>
     <string name="preference_video_description">Ачыклык, масштаблау төре һәм күрсәткеч</string>
     <string name="preference_control_title">Идарә элементлары</string>
@@ -192,14 +127,12 @@
     <string name="unnamed">Исемсез</string>
     <string name="profiles_latest_snapshot">Соңгы ярдәмче версия</string>
     <string name="profiles_latest_release">Соңгы версия</string>
-    <string name="profiles_editing">Профиль үзгәртү</string>
     <string name="profiles_profile_name">Исем</string>
     <string name="profiles_profile_version">Версия</string>
     <string name="global_delete">Бетерү</string>
     <string name="pedit_java_runtime">Java Runtime</string>
     <string name="pedit_renderer">Күрсәткеч</string>
     <string name="arc_capes_title">Cosmetica япмалары</string>
-    <string name="migrated_profile_str">%s версиясе көйләү</string>
     <string name="notif_channel_name">Гомуми</string>
     <string name="mcl_setting_veroption_installed">Утыртылган</string>
     <string name="notification_terminate">Тәмамлау</string>
@@ -210,7 +143,6 @@
     <string name="main_login_done">Керү үтәлде</string>
     <string name="main_add_account">Аккаунт өстәү</string>
     <string name="no_saved_accounts">Сакланган аккаунтлар юк</string>
-    <string name="downloading_versions">Версияләр исемлеге йөкләү…</string>
     <string name="mc_download_failed">Minecraft йөкләнеп булмады! Бу акрын тоташу яки файл урнашуда хаталар аркасында туа ала торган.</string>
     <string name="percent_format">%d%%</string>
     <string name="customctrl_editor_exit_title">Чыгумы?</string>
