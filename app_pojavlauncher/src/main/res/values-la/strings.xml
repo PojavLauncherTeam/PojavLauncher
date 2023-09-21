@@ -3,16 +3,11 @@
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition quia Android)</string>
     <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">Lorem Minecraft: Java Edition in vestra fabrica!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
     <string name="login_online_username_hint">Email uel vos</string>
-    <string name="login_online_password_hint">Signum</string>
-    <string name="login_online_check_keeplogin">Custodi me apud log</string>
     <string name="login_online_login_label">Login</string>
-    <string name="login_error_exist_username">Hoc nomen iam exi</string>
-    <string name="login_select_account">Ob selectos</string>
     <!-- Hint -->
     <!-- Warnings -->
     <string name="warning_remove_account">Et ob hoc remotus!</string>
@@ -27,9 +22,7 @@
     <!-- MCLauncherActivity: Account status -->
     <!-- MCLauncherActivity: Strings -->
     <!-- Global strings -->
-    <string name="global_warinng">Monitum</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_call">Exitus</string>
     <!-- MainActivity: Control buttons -->
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_viewout">Log output</string>
