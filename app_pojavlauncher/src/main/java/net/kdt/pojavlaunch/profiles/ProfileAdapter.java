@@ -1,6 +1,5 @@
 package net.kdt.pojavlaunch.profiles;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
@@ -84,9 +83,7 @@ public class ProfileAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = convertView;
         if (v == null) v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_version_profile_layout,parent,false);
-        Object profileObject = getItem(position);
-        if(profileObject instanceof String) setViewProfile(v, (String) profileObject, true);
-        else if(profileObject instanceof ProfileAdapterExtra) setViewExtra(v, (ProfileAdapterExtra) profileObject);
+        setView(v, getItem(position), true);
         return v;
     }
 
@@ -126,6 +123,14 @@ public class ProfileAdapter extends BaseAdapter {
         extendedTextView.setCompoundDrawablesRelative(extra.icon, null, extendedTextView.getCompoundsDrawables()[2], null);
         extendedTextView.setText(extra.name);
         extendedTextView.setBackgroundColor(Color.TRANSPARENT);
+    }
+
+    public void setView(View v, Object object, boolean displaySelection) {
+        if(object instanceof String) {
+            setViewProfile(v, (String) object, displaySelection);
+        }else if(object instanceof ProfileAdapterExtra) {
+            setViewExtra(v, (ProfileAdapterExtra) object);
+        }
     }
 
     /** Reload profiles from the file */
