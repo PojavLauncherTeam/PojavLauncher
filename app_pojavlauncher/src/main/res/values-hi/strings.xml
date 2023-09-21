@@ -3,26 +3,16 @@
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition Android के लिए)</string>
     <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">Launch Minecraft: Java Edition in your device!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
     <string name="login_online_username_hint">ईमेल या उपयोगकर्ता का नाम</string>
-    <string name="login_online_password_hint">पासवर्ड/कुंजिका</string>
-    <string name="login_online_check_keeplogin">मुझे लोग्ड इन रखें</string>
     <string name="login_online_login_label">लॉगिन</string>
-    <string name="login_error_invalid_username">लॉगिन समस्या अवैध वापरकर्ता नाम</string>
-    <string name="login_error_exist_username">यह उपयोगकर्तानाम/username पहले से मौजूद है।</string>
-    <string name="login_microsoft">लॉगिन माइक्रोसॉफ्ट</string>
-    <string name="login_select_account">एकाउंट का चयन करें </string>
-    <string name="login_title_no_saved_account">खाता नहीं मिला</string>
-    <string name="login_dialog_no_saved_account">Aap bahut acche app banae Ho</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Vdmgucg ugh TV FH hdbsotc I'll h cc ubuu"</string>
     <!-- Warnings -->
     <string name="warning_remove_account">यह खाता हटा दिया जाएगा!</string>
     <!-- AlertDialog title -->
-    <string name="alerttitle_install_jre">%s%s%s%s%s%s</string>
     <string name="alerttitle_installmod">lasers-addon-1.0-1.12.2</string>
     <!-- Error messages -->
     <string name="error_fatal">पोजावलांचर अप्रत्याशित क्रैश हो गया है</string>
@@ -36,18 +26,12 @@
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_console">विकास कंसोल</string>
-    <string name="mcl_tab_crash">क्रैश लॉग</string>
     <!-- MCLauncherActivity: Account status -->
     <!-- MCLauncherActivity: Strings -->
-    <string name="mcl_version_msg">Minecraft  खेलने के लिए तैयार %s</string>
     <string name="mcl_launch_cleancache">कैशे फ़ाइलों की सफाई</string>
     <string name="mcl_launch_downloading">%s डाउनलोड हो रहा है</string>
-    <string name="mcl_setting_title_backtorightmouse">बैक बटन को दाये माउस बटन की तरह इस्तेमाल करे</string>
     <!-- Global strings -->
-    <string name="global_warinng">चेतावनी</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_call">बाहर जाएं</string>
     <!-- MainActivity: Control buttons -->
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_viewout">लॉग आउटपुट</string>
