@@ -2,26 +2,16 @@
 <resources>
     <!-- App name part -->
     <string name="app_name">Pojav Эхлүүлэгч (Minecraft: Java Edition-ийг Гар утсан дээр)</string>
-    <string name="app_motd">Гар утсан дээрэ Minecraft: Java Edition-ийг Тогло!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
     <string name="login_online_username_hint">И-Майл Эсвэл Нэр</string>
-    <string name="login_online_password_hint">Нэвтрэх нууц үг</string>
-    <string name="login_online_check_keeplogin">Данс хадаглах</string>
     <string name="login_online_login_label">Нэвтрэх</string>
-    <string name="login_error_invalid_username">Буруу нэр, Таний нэр 3-16 тэмдэгтийн хязгаарт байх ёстой бөгөөд, Зөвхөн A-Z, a-z, 0-9 болон доогуур зураасыг агуулсан байх ёстой, Монгол нэр болохгүй.</string>
-    <string name="login_error_exist_username">Энэ нэр аль хэдийн хадгалагдсан байна</string>
-    <string name="login_microsoft">Microsoft-р Нэвтрэх</string>
-    <string name="login_select_account">Данс сонгох</string>
-    <string name="login_title_no_saved_account">Данс олдсонгүй!</string>
-    <string name="login_dialog_no_saved_account">Танд ямарч хадгалсан данс алга.\n&lt;b&gt;Данс хадгалах&lt;b&gt; гэсэн хэсэгийг бөглөж дансаа хадаглана уу.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Тохиргоо хэсгийг нээхийн тулд дээр байгаа арааны дүрс ⚙ дээр дарана уу\nӨөрчлөхийн тулд товчлуур дээр дарна уу: товчлуурын key-ийг засах, хэмжээг өөрчлөх, устгах эсвэл өөрчлөх."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Энэ данс устах болон!</string>
     <!-- AlertDialog title -->
-    <string name="alerttitle_install_jre">Java Runtime-ийг татах %s (.tat.xz)</string>
     <string name="alerttitle_installmod">Татах гэж буй client, mod-ийнхаа .jar file-ийг сонгоно уу.</string>
     <!-- Error messages -->
     <string name="error_fatal">Pojav эхлүүлэгчэд гэнэт алдаа гарлаа</string>
@@ -31,38 +21,21 @@
     <!-- Toast messages -->
     <string name="toast_permission_denied">Унших/бичих зөвшөөрөл хэрэгтэй!</string>
     <string name="toast_optifine_success">Амжилттай татсан!</string>
-    <string name="toast_uninstalljre_done">Амжилттай Java Runtime-ийг устагла.</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_wiki">Вики</string>
-    <string name="mcl_tab_console">Хөгжүүлэлтийн консол</string>
-    <string name="mcl_tab_crash">Алдааны бүртгэл</string>
     <!-- MCLauncherActivity: Account status -->
-    <string name="mcl_account_connected">Premium</string>
-    <string name="mcl_account_local">Cracked</string>
     <!-- MCLauncherActivity: Strings -->
-    <string name="mcl_version_msg">Minecraft %s-ийг тоглоход бэлэн</string>
     <string name="mcl_launch_cleancache">Завсарийн санах ойн файлуудийг цэвэрлэж байна</string>
     <string name="mcl_launch_downloading">Татаж байна %s</string>
     <string name="mcl_launch_downloading_progress">"Татаж байна %s (%.2f МБ / %.2f МБ)"</string>
     <string name="mcl_launch_download_assets">Татаж авхад бэлдэж байна</string>
-    <string name="mcl_launch_error_localmode">Minecraft-н Үнэгүй тоглоом биш учир, Та Minecraft-ийн тоголхийн тулд Premium Данстай Байх Ёстой.</string>
     <string name="mcl_options">Тохиргоо</string>
-    <string name="mcl_option_modinstall">Mod Татах (Forge, LabyMod, Fabric, бусад...)</string>
-    <string name="mcl_option_modinstallwitharg">Mod татах (өөрөөрө)</string>
     <string name="mcl_option_customcontrol">Control солих</string>
-    <string name="mcl_option_settings">Тохиргоо</string>
-    <string name="mcl_option_about">Бидний тухай</string>
     <string name="mcl_setting_title_use_surface_view">Alternate surface rendering-ийг ашиглах</string>
     <string name="mcl_setting_subtitle_use_surface_view">Gpu-тай холбоотой хувилбаруудын явцад туслах болно</string>
-    <string name="mcl_setting_title_uninstalljre">Java Runtime-ийг устгах</string>
-    <string name="mcl_setting_subtitle_uninstalljre">[Эхлүүлэгчээ дахин эхлүүлэх шаардлагатай]</string>
-    <string name="mcl_setting_title_freeform">Minecraft-ыг Freeform горимд эхлүүлэх</string>
-    <string name="mcl_setting_subtitle_freeform">Minecraft-ийг цонхонд нээх. Android 7.0 Болон Дээш</string>
-    <string name="mcl_setting_title_hide_sidebar">Хажуу самбар нуух</string>
-    <string name="mcl_setting_subtitle_hide_sidebar">Хуучний UI Тохиргоо нь, Танд бүтэн дэлгэц өгөх болно.</string>
     <string name="mcl_setting_title_ignore_notch">Булангийн хүрээг орихох</string>
     <string name="mcl_setting_subtitle_ignore_notch">Булангийн хүрээг орхисоноор\nилүү том дэлгэцийн хүрээ аваарай.</string>
     <!-- Global strings -->
@@ -89,8 +62,6 @@
     <string name="control_viewout">Явц харах</string>
     <string name="control_adebug">Дэбаг хийх</string>
     <string name="control_customkey">Өөрийн key явуулах</string>
-    <string name="control_scaleup">Томруулах</string>
-    <string name="control_scaledown">Жижгэрүүлэх</string>
     <!-- ImportControlActivity Strings -->
     <string name="import_control_label">Control оруулах</string>
     <string name="import_control_invalid_file">Буруу эсвэл алдаатай файл</string>
@@ -102,42 +73,19 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
-    <string name="customctrl_edit">Янзалж буй %s</string>
-    <string name="customctrl_remove">Устгах %s?</string>
-    <string name="customctrl_keyname">Keycode</string>
     <string name="customctrl_toggle">Асааж болох</string>
     <string name="customctrl_size">Хэмжээ</string>
-    <string name="customctrl_size_width">Өргөн</string>
-    <string name="customctrl_size_height">Урт</string>
     <string name="customctrl_mapping">Сонгон</string>
     <string name="customctrl_orientation">Баримтлал</string>
     <string name="customctrl_background_color">Ар талын өнгө</string>
     <string name="customctrl_corner_radius">Булангийн хэмжээ</string>
     <string name="customctrl_stroke_width">Хэмжээ</string>
     <string name="customctrl_stroke_color">өнгө</string>
-    <string name="customctrl_dynamicpos">Динамик байрлал</string>
-    <string name="customctrl_dynamicpos_x">Динамик Х</string>
-    <string name="customctrl_dynamicpos_y">Динамик Ү</string>
-    <string name="customctrl_transparency_bg">Ар талийн харагдац</string>
     <string name="customctrl_button_opacity">Харагдац</string>
-    <string name="customctrl_keycombine">Холих</string>
     <string name="customctrl_addbutton">Товч нэм</string>
     <string name="customctrl_addbutton_drawer">Товч нэмэх(шургуулаг)</string>
     <string name="customctrl_addbutton_joystick">Joystick нэмэх</string>
-    <string name="main_options">Тохиргоо</string>
-    <string name="compat_11x_playanyway">Ямартайч тоглох</string>
-    <string name="pvc_gameDirectory">Тоглоомын байрлал </string>
     <string name="pvc_jvmArgs">JVM-үүд</string>
-    <string name="pvc_title">Хувилбаруудийн тохиргоо</string>
-    <string name="storage_warning_title">Файл Байрлал өөрчлөгдсөн</string>
-    <string name="storage_warning_text"><![CDATA[Android 10 болон түүнээс дээш хувилбарт Google-ийн шинэ багтаамжтай хадгалах сангуудын хэрэгжилтийн улмаас бид тоглоомын лавлахыг програмын хувийн хавтас руу зөөх шаардлагатай болсон.<br /> Pojav файлуудын шинэ хавтас нь <b>Android/data/ %s/files/</b> (мөн файл хайгчдаа хадгалах үйлчилгээ үзүүлэгч ашиглан хандах боломжтой).<br /> Хэрэв та тоглоомын файлуудаа хуулах шаардлагатай бол <b>games/PojavLauncher< дээрх эх хавтаснаас бүгдийг хуулна уу. </b> гараар.]]></string>
-    <string name="control_offset_title">Control</string>
-    <string name="control_top_offset">Top offset: </string>
-    <string name="control_right_offset">Right offset: </string>
-    <string name="control_bottom_offset">Bottom offset: </string>
-    <string name="control_left_offset">Left offset: </string>
-    <string name="preference_control_offset_title">Control side offsets</string>
-    <string name="preference_control_offset_description">Set a custom offset to each side of the screen</string>
     <string name="preference_mouse_start_title">Хулгантай эхлүүлэх</string>
     <string name="preference_mouse_start_description">Хулгантай эхлэх болон</string>
     <string name="preference_video_title">Видёо болон уншуулагч</string>
