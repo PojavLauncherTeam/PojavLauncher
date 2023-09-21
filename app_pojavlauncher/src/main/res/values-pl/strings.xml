@@ -3,26 +3,16 @@
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition dla Androida)</string>
     <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">Uruchom Minecraft: Java Edition na swoim urządzeniu!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
     <string name="login_online_username_hint">E-mail lub nazwa użytkownika</string>
-    <string name="login_online_password_hint">Hasło</string>
-    <string name="login_online_check_keeplogin">Zapamiętaj dane logowania</string>
     <string name="login_online_login_label">Zaloguj się</string>
-    <string name="login_error_invalid_username">Nieprawidłowa nazwa użytkownika. Nazwa użytkownika musi zawierać od 3 do 16 znaków oraz składać się tylko z: A-Z, a-z, 0-9 oraz znaku podkreślenia.</string>
-    <string name="login_error_exist_username">Ta nazwa użytkownika już istnieje</string>
-    <string name="login_microsoft">Logowanie Microsoft</string>
-    <string name="login_select_account">Wybierz konto</string>
-    <string name="login_title_no_saved_account">Nie znaleziono żadnego konta!</string>
-    <string name="login_dialog_no_saved_account">Nie masz zapisanego żadnego konta.\nZaznacz opcję <b>\"Zapamiętaj dane logowania\"</b>, aby zapisać konto po pierwszym zalogowaniu.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Naciśnij na ikonę koła zębatego, aby otworzyć menu kontekstowe ⚙\nNaciśnij na przycisk, aby dostosować: edytuj, zmień rozmiar, usuń lub zmień przypisanie klawiszy."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">To konto zostanie usunięte!</string>
     <!-- AlertDialog title -->
-    <string name="alerttitle_install_jre">Zainstaluj środowisko wykonawcze Java %s (.tar.xz)</string>
     <string name="alerttitle_installmod">Wybierz instalator modyfikacji</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher uległ nieoczekiwanej awarii</string>
@@ -32,74 +22,46 @@
     <!-- Toast messages -->
     <string name="toast_permission_denied">Należy zezwolić aplikacji na dostęp do pamięci wewnętrznej!</string>
     <string name="toast_optifine_success">Instalacja powiodła się</string>
-    <string name="toast_uninstalljre_done">Odinstalowano środowisko wykonawcze Java</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_wiki">Instrukcja Obsługi</string>
-    <string name="mcl_tab_console">Konsola</string>
-    <string name="mcl_tab_crash">Rejestr awarii</string>
     <!-- MCLauncherActivity: Account status -->
-    <string name="mcl_account_connected">Połączono</string>
-    <string name="mcl_account_local">Lokalne</string>
     <!-- MCLauncherActivity: Strings -->
-    <string name="mcl_version_msg">Minecraft %s jest gotowy do uruchomienia</string>
     <string name="mcl_launch_cleancache">Czyszczenie plików pamięci podręcznej</string>
     <string name="mcl_launch_downloading">Pobieranie %s</string>
     <string name="mcl_launch_downloading_progress">"Pobieranie %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Przygotowywanie do pobrania zasobów</string>
-    <string name="mcl_launch_error_localmode">Nie można legalnie zainstalować Minecraft, gdy używane jest konto lokalne. Przełącz na konto online, aby kontynuować.</string>
     <string name="mcl_options">Opcje</string>
-    <string name="mcl_option_modinstall">Zainstaluj modyfikację (Forge, LabyMod, Fabric itp.)</string>
-    <string name="mcl_option_modinstallwitharg">Zainstaluj modyfikację (z niestandardowymi argumentami)</string>
     <string name="mcl_option_customcontrol">Sterowanie</string>
-    <string name="mcl_option_settings">Ustawienia</string>
-    <string name="mcl_option_about">Informacje</string>
     <string name="mcl_setting_title_use_surface_view">Użyj alternatywnego renderowania powierzchni</string>
     <string name="mcl_setting_subtitle_use_surface_view">Ta opcja może okazać się pomocna w przypadku problemów z wydajnością</string>
-    <string name="mcl_setting_title_uninstalljre">Odinstaluj środowisko wykonawcze Java</string>
-    <string name="mcl_setting_subtitle_uninstalljre">[Wymagane ponowne uruchomienie launchera] Umożliwi to ponowną instalację środowiska wykonawczego Java</string>
-    <string name="mcl_setting_title_freeform">Funkcja \"Obraz w obrazie\"</string>
-    <string name="mcl_setting_subtitle_freeform">Uruchom Minecraft w pływającym oknie. Wymagany Android 7.0 lub nowszy</string>
-    <string name="mcl_setting_title_hide_sidebar">Ukryj pasek boczny</string>
-    <string name="mcl_setting_subtitle_hide_sidebar">Może to przypaść do gustu osobom preferującym starszy interfejs v1. Uzyskasz lepsze doświadczenie pełnoekranowe.</string>
     <string name="mcl_setting_title_ignore_notch">Ignoruj wcięcie</string>
     <string name="mcl_setting_subtitle_ignore_notch">Ignoruje wcięcie i rozszerza ekran pod nim.\nUzyskasz głębsze doświadczenie.</string>
     <string name="mcl_setting_title_resolution_scaler">Skalowanie rozdzielczości</string>
     <string name="mcl_setting_subtitle_resolution_scaler">Umożliwia zmniejszenie rozdzielczości gry. 100% odpowiada natywnej rozdzielczości</string>
     <string name="mcl_setting_title_longpresstrigger">Czas wywołania akcji po długim naciśnięciu</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Zmień czas wywołania akcji długiego naciśnięcia dla niszczenia bloków i wyrzucania przedmiotów.</string>
-    <string name="mcl_setting_title_backtorightmouse">Poprawka prawego przycisku myszy</string>
-    <string name="mcl_setting_subtitle_backtorightmouse">Prawy przycisk niektórych myszy jest traktowany jako przycisk Wstecz. Włącz tę opcję, jeśli używasz zewnętrznej myszy.</string>
-    <string name="mcl_setting_title_flat_button_style">Płaskie przyciski</string>
-    <string name="mcl_setting_subtitle_flat_button_style">Jeśli włączone, przyciski sterujące wyświetlą się jako płaskie.</string>
     <string name="mcl_setting_title_buttonscale">Skalowanie przycisków sterujących</string>
     <string name="mcl_setting_subtitle_buttonscale">Zwiększ wartość, jeśli przyciski są zbyt małe.</string>
     <string name="mcl_setting_title_mousescale">Skalowanie myszy</string>
     <string name="mcl_setting_subtitle_mousescale">Zmienia rozmiar wirtualnej myszy.</string>
     <string name="mcl_setting_title_javaargs">Argumenty uruchomienia JVM</string>
     <string name="mcl_setting_subtitle_javaargs">Zachowaj ostrożność, ponieważ wprowadzenie zmian bez odpowiedniej wiedzy może doprowadzić do awarii.</string>
-    <string name="mcl_setting_category_general">Ustawienia ogólne</string>
-    <string name="mcl_setting_category_scaling">Ustawienia skalowania</string>
     <string name="mcl_setting_category_renderer">Silnik renderujący</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (wszystkie wersje, szybki)</string>
     <string name="mcl_setting_renderer_angle">ANGLE - (wersja 1.17+, zrównoważony)</string>
-    <string name="mcl_setting_category_veroption">Opcje widoczne na liście wersji</string>
     <string name="mcl_setting_veroption_release">Oficjalne wydanie</string>
     <string name="mcl_setting_veroption_snapshot">Wersja deweloperska</string>
     <string name="mcl_setting_veroption_oldalpha">Dawna Alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Dawna Beta</string>
     <string name="mcl_setting_java_sandbox">Izolacja instalatora .jar</string>
     <string name="mcl_setting_java_sandbox_subtitle">Kontrola dostępności menedżera zabezpieczeń sandbox podczas uruchamiania instalatora .jar.</string>
-    <string name="mcl_version_clone">Klonuj</string>
     <!-- Global strings -->
-    <string name="global_edit">Edytuj</string>
     <string name="global_error">Błąd</string>
-    <string name="global_warinng">Ostrzeżenie</string>
     <string name="global_load">Wczytaj</string>
     <string name="global_name">Nazwa</string>
-    <string name="global_remove">Usuń</string>
     <string name="global_clone">Klonuj</string>
     <string name="global_restart">Uruchom ponownie</string>
     <string name="global_save">Zapisz</string>
@@ -111,12 +73,8 @@
     <string name="global_default">Domyślny</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Aplikacja/gra zakończyła się błędem o kodzie %d, sprawdź latestlog.txt, aby uzyskać więcej informacji.</string>
-    <string name="mcn_exit_call">Wyjdź</string>
     <string name="mcn_exit_confirm">Czy na pewno chcesz wymusić zamknięcie?</string>
-    <string name="mcn_check_fail_lwjgl">LWJGL3 nie został zainstalowany!</string>
     <!-- MainActivity: Control buttons -->
-    <string name="control_toggle">GUI</string>
-    <string name="control_keyboard">Klawiatura</string>
     <string name="control_chat">Czat</string>
     <string name="control_debug">Debug</string>
     <string name="control_primary">LPM</string>
@@ -138,8 +96,6 @@
     <string name="control_viewout">Wyjście danych</string>
     <string name="control_adebug">Wejście debugowania</string>
     <string name="control_customkey">Wyślij własny klawisz</string>
-    <string name="control_scaleup">Powiększ</string>
-    <string name="control_scaledown">Zmniejsz</string>
     <!-- ImportControlActivity Strings -->
     <string name="import_control_label">Importuj sterowanie</string>
     <string name="import_control_invalid_file">Nieprawidłowy lub uszkodzony plik</string>
@@ -151,47 +107,23 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
-    <string name="customctrl_edit">Edytowanie %s</string>
-    <string name="customctrl_remove">Usunąć %s?</string>
-    <string name="customctrl_keyname">Klawisz</string>
     <string name="customctrl_toggle">Aktywowane</string>
     <string name="customctrl_size">Rozmiar</string>
-    <string name="customctrl_size_width">Szerokość</string>
-    <string name="customctrl_size_height">Wysokość</string>
     <string name="customctrl_mapping">Mapowanie</string>
     <string name="customctrl_orientation">Orientacja</string>
     <string name="customctrl_background_color">Kolor tła</string>
     <string name="customctrl_corner_radius">Zaokrąglenie narożników</string>
     <string name="customctrl_stroke_width">Szerokość obrysu</string>
     <string name="customctrl_stroke_color">Kolor obrysu</string>
-    <string name="customctrl_dynamicpos">Dynamiczna pozycja</string>
-    <string name="customctrl_dynamicpos_x">Dynamiczne X</string>
-    <string name="customctrl_dynamicpos_y">Dynamiczne Y</string>
-    <string name="customctrl_transparency_bg">Przezroczystość tła</string>
     <string name="customctrl_button_opacity">Przezroczystość przycisku</string>
-    <string name="customctrl_keycombine">Kombinacja klawiszy</string>
-    <string name="customctrl_keycombine_alt">Alt</string>
-    <string name="customctrl_keycombine_control">Ctrl</string>
-    <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Dodaj przycisk</string>
     <string name="customctrl_addbutton_drawer">Dodaj panel przycisków</string>
     <string name="customctrl_addsubbutton">Dodaj przycisk podrzędny</string>
-    <string name="customctrl_add_subbutton_message">Dodano przycisk podrzędny n°%d !</string>
     <string name="customctrl_selectdefault">Wybierz domyślny plik json dla sterowania</string>
     <string name="customctrl_export">Eksportuj ustawienia sterowania</string>
     <string name="main_share_logs">Udostępnij plik dziennika</string>
     <string name="main_install_jar_file">Zainstaluj .jar</string>
-    <string name="main_options">Opcje</string>
     <string name="main_play">Graj</string>
-    <string name="main_welcome">Witaj, %s</string>
-    <string name="main_infodev">Info (DEV)</string>
-    <string name="main_switchuser">Konta</string>
-    <string name="main_version">Wersja:</string>
-    <string name="main_nocrash">Nie wykryto awarii</string>
-    <string name="main_nolog">Brak rejestru.</string>
-    <string name="main_no_news_feed">Błąd pobierania aktualności !</string>
-    <string name="auto_ram_subtitle">Włącza automatyczny przydział pamięci RAM</string>
-    <string name="auto_ram_title">Automatyczny RAM</string>
     <string name="autoram_info_msg">Przydzielono %d MB pamięci</string>
     <string name="mcl_setting_check_libraries">Sprawdź biblioteki po pobraniu</string>
     <string name="mcl_setting_check_libraries_subtitle">Ta opcja wymusza na launcherze sprawdzanie sumy kontrolnej biblioteki, jeśli jest dostępna. Umożliwia to wykrycie uszkodzonych pobrań.</string>
@@ -206,16 +138,13 @@
     <string name="mcl_setting_subtitle_mousespeed">Zmienia prędkość wirtualnej myszy</string>
     <string name="customctrl_passthru">Przekaz sygnału myszy</string>
     <string name="customctrl_swipeable">Przesuwalny</string>
-    <string name="customctrl_rounded">Zaokrąglony</string>
     <string name="memory_warning_msg">Bieżąca ilość wolnej pamięci RAM (%d) jest mniejsza od przydzielonej pamięci RAM (%d), co może prowadzić do awarii. Zmień ilość, jeśli gra ulegnie awarii.</string>
     <string name="mcl_memory_allocation">Przydział pamięci</string>
     <string name="mcl_memory_allocation_subtitle">Kontroluje ilość pamięci przydzielonej Minecraft</string>
-    <string name="multirt_java_ver">%s (Java %d)</string>
     <string name="multirt_runtime_corrupt">Uszkodzone środowisko wykonawcze Java</string>
     <string name="multirt_runtime_incompatiblearch">Niezgodna architektura: %s</string>
     <string name="multirt_config_title">Maszyny wirtualne Java</string>
     <string name="multirt_config_add">Dodaj nową</string>
-    <string name="multirt_config_add_subtitle">Importuj nową maszynę wirtualną Java</string>
     <string name="multirt_title">Menedżer środowiska wykonawczego</string>
     <string name="multirt_subtitle">Zarządzaj zainstalowanymi maszynami wirtualnymi Java</string>
     <string name="multirt_progress_caching">Buforowanie...</string>
@@ -225,20 +154,7 @@
     <string name="multirt_nocompartiblert">Nie można znaleźć żadnej zgodnej wersji środowiska Java. Ta wersja wymaga Java %d lub nowszych.</string>
     <string name="multirt_nojava8rt">Nie można znaleźć Java 8. Aby korzystać z tej opcji, należy zainstalować Java 8.</string>
     <string name="multirt_delete_runtime">Usuń środowisko wykonawcze</string>
-    <string name="compat_117_message">Minecraft 21w10a+ wymaga OpenGL 3.2. Niestety twoja karta graficzna nie obsługuje OpenGL ES 3.0 lub wyższych, ale możesz zainstalować dodatkowe zasoby, dzięki którym możesz uruchomić te wersje. Naciśnij OK, aby potwierdzić instalacje lub Anuluj, aby ją przerwać.</string>
-    <string name="compat_11x_playanyway">Uruchom mimo to</string>
-    <string name="pvc_gameDirectory">Katalog gry</string>
     <string name="pvc_jvmArgs">Argumenty JVM</string>
-    <string name="pvc_title">Ustawienia dla wersji</string>
-    <string name="storage_warning_title">Zmiany w przechowywaniu</string>
-    <string name="storage_warning_text"><![CDATA[Ze względu na nowe wymagania Google dotyczące pamięci dodane w systemie Android 10 i nowszych, konieczne jest przeniesienie katalogu gry do prywatnego folderu aplikacji.<br /> Nowy folder Pojav to <b>Android/data/%s/files/</b> (do którego możesz uzyskać dostęp poprzez przeglądarkę plików).<br /> Jeśli potrzebujesz kopii swoich plików gry, skopiuj wszystko ręcznie z oryginalnego folderu <b>games/PojavLauncher</b>.]]></string>
-    <string name="control_offset_title">Przesunięcie sterowania</string>
-    <string name="control_top_offset">Górne przesunięcie: </string>
-    <string name="control_right_offset">prawe przesunięcie: </string>
-    <string name="control_bottom_offset">dolne przesunięcie: </string>
-    <string name="control_left_offset">lewe przesunięcie: </string>
-    <string name="preference_control_offset_title">Przesunięcia boczne sterowania</string>
-    <string name="preference_control_offset_description">Ustaw niestandardowe przesunięcie na każdą stronę ekranu</string>
     <string name="preference_mouse_start_title">Uruchom z włączoną myszą wirtualną</string>
     <string name="preference_mouse_start_description">Wirtualna mysz pojawia się podczas uruchamiania, gdy ta opcja jest włączona</string>
     <string name="preference_video_title">Grafika i silnik renderujący</string>
@@ -268,13 +184,9 @@
     <string name="preference_gyro_smoothing_title">Włącz wygładzanie żyroskopu</string>
     <string name="preference_gyro_smoothing_description">Zmniejsz jitter w zamian za opóźnienie.</string>
     <string name="preference_back_title">Powrót do ostatniego ekranu</string>
-    <string name="gles_hack_none">Nie zmniejszaj tekstur</string>
-    <string name="gles_hack_always">Dzieli wszystkie tekstury przez 2</string>
-    <string name="gles_hack_sometimes">Dzieli wszystkie tekstury przez /2 lub /4</string>
     <string name="unnamed">Bez nazwy</string>
     <string name="profiles_latest_snapshot">Najnowsza wersja deweloperska</string>
     <string name="profiles_latest_release">Najnowsze wydanie</string>
-    <string name="profiles_editing">Edytowanie profilu</string>
     <string name="profiles_profile_name">Nazwa</string>
     <string name="profiles_profile_version">Wersja</string>
     <string name="global_delete">Usuń</string>
@@ -282,10 +194,8 @@
     <string name="pedit_renderer">Silnik renderujący</string>
     <string name="arc_capes_title">Peleryny Cosmetica</string>
     <string name="arc_capes_desc">Aktywuje peleryny z Cosmetica (wcześniej Arc). Aby dowiedzieć się więcej, odwiedź https://cosmetica.cc. Wymaga OptiFine.</string>
-    <string name="migrated_profile_str">%s konfiguracja wersji</string>
     <string name="notif_channel_name">Ogólne</string>
     <string name="lazy_service_default_title">Usługa Pojav Foreground</string>
-    <string name="lazy_service_default_description">Ta usługa jest używana do wykonywania długich operacji</string>
     <string name="mcl_setting_veroption_installed">Zainstalowane</string>
     <string name="use_global_default">(Użyj ustawień domyślnych)</string>
     <string name="default_control">Domyślne sterowanie</string>
@@ -300,7 +210,6 @@
     <string name="main_add_account">Dodaj konto</string>
     <string name="tasks_ongoing">Zadania są w toku, proszę czekać</string>
     <string name="no_saved_accounts">Brak zapisanych kont</string>
-    <string name="downloading_versions">Pobieranie listy wersji…</string>
     <string name="mc_download_failed">Nie udało się pobrać Minecraft! Może to być spowodowane złym połączeniem z siecią, niepoprawnie umieszczonymi plikami, itp..</string>
     <string name="xerr_unknown">Nieznany błąd API Xbox Live %d</string>
     <string name="xerr_no_account">Wygląda na to, że nie masz konta Xbox Live. Zaloguj się raz na https://minecraft.net/ i spróbuj ponownie.</string>
@@ -354,7 +263,5 @@
     <string name="of_dl_failed_to_scrape">Nie udało się zebrać danych dla instalacji OptiFine</string>
     <string name="of_dl_progress">Pobieranie %s</string>
     <string name="create_profile_optifine">Stwórz profil OptiFine</string>
-    <string name="preference_gyro_damper_window_title">Czas wygładzania</string>
-    <string name="preference_gyro_damper_window_description">Zmniejsz jitter w zamian za opóźnienie. 0, aby wyłączyć</string>
     <string name="generic_install">Instaluj</string>
 </resources>
