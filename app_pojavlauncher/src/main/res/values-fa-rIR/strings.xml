@@ -3,26 +3,16 @@
     <!-- App name part -->
     <string name="app_name">پوجاو لانچر (ماینکرفت: جاوا ادیشن برای اندروید)</string>
     <string name="app_short_name">پوجاو لانچر</string>
-    <string name="app_motd">ماینکرفت: جاوا ادیشن را روی دستگاه خود اجرا کنید!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
     <string name="login_online_username_hint">ایمیل یا یوزرنیم</string>
-    <string name="login_online_password_hint">رمز عبور</string>
-    <string name="login_online_check_keeplogin">مرا وارد شده نگه دار</string>
     <string name="login_online_login_label">ورود</string>
-    <string name="login_error_invalid_username">نام کاربری نامعتبر است. نام کاربری باید در محدوده 3 تا 16 کاراکتر باشد، فقط باید شامل A-Z، a-z، 0-9 و زیر خط (_) باشد.</string>
-    <string name="login_error_exist_username">این یوزرنیم قبلا استفاده شده</string>
-    <string name="login_microsoft">ورود با مایکروسافت</string>
-    <string name="login_select_account">انتخاب اکانت</string>
-    <string name="login_title_no_saved_account">هیچ حساب کاربری پیدا نشد!</string>
-    <string name="login_dialog_no_saved_account">شما هیچ حساب ذخیره‌شده‌ای ندارید.\nاز گزینه <b>\"من را وارد سیستم نگه دارید\"</b> برای ذخیره یک حساب در اولین ورود به سیستم استفاده کنید.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"روی نماد چرخ دنده بالا ضربه بزنید تا منو باز شود ⚙\nبرای سفارشی کردن روی دکمه ضربه بزنید: ویرایش، تغییر اندازه، حذف یا سفارشی کردن keybind آن."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">این اکانت حذف خواهد شد!</string>
     <!-- AlertDialog title -->
-    <string name="alerttitle_install_jre">نصب Java Runtime %s (tar.xz.)</string>
     <string name="alerttitle_installmod">یک نصب کننده ماد را انتخاب کنید</string>
     <!-- Error messages -->
     <string name="error_fatal">پوجاو لانچر بصورت غیرمنتظره کرش خورد</string>
@@ -32,73 +22,45 @@
     <!-- Toast messages -->
     <string name="toast_permission_denied">دسترسی خواندن/نوشتن حافظه مورد نیاز است!</string>
     <string name="toast_optifine_success">نصب موفقیت آمیز بود</string>
-    <string name="toast_uninstalljre_done">حذف نصب جاوا ران تایم کامل شد</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_console">کنسول توسعه</string>
-    <string name="mcl_tab_crash">گزارش (لاگ) کرش</string>
     <!-- MCLauncherActivity: Account status -->
-    <string name="mcl_account_connected">متصل</string>
-    <string name="mcl_account_local">محلی</string>
     <!-- MCLauncherActivity: Strings -->
-    <string name="mcl_version_msg">آماده برای اجرای ماینکرفت %s</string>
     <string name="mcl_launch_cleancache">پاکسازی فایل‌های کَش</string>
     <string name="mcl_launch_downloading">در حال دانلود %s</string>
     <string name="mcl_launch_downloading_progress">"درحال دانلود %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">آماده‌سازی برای دانلود منابع</string>
-    <string name="mcl_launch_error_localmode">وقتی با یک حساب محلی وارد سیستم شوید، ماینکرفت به طور قانونی قابل نصب نیست. لطفاً برای ادامه به یک حساب آنلاین بروید.</string>
     <string name="mcl_options">گزینه‌ها</string>
-    <string name="mcl_option_modinstall">نصب کننده مد (فورج، لبی‌ماد، فبریک، و غیره) را راه‌اندازی کنید</string>
-    <string name="mcl_option_modinstallwitharg">نصب کننده ماد را راه اندازی کنید (با آرگومان های سفارشی)</string>
     <string name="mcl_option_customcontrol">کنترل‌های شخصی</string>
-    <string name="mcl_option_settings">تنظیمات</string>
-    <string name="mcl_option_about">درباره</string>
     <string name="mcl_setting_title_use_surface_view">از رندر گیر سطوح جایگزین استفاده کنید</string>
     <string name="mcl_setting_subtitle_use_surface_view">ممکن است به عملکرد در سناریوهای محدود به پردازنده گرافیکی کمک کند</string>
-    <string name="mcl_setting_title_uninstalljre">جاوا Runtime را حذف نصب کنید</string>
-    <string name="mcl_setting_subtitle_uninstalljre">[راه‌اندازی مجدد لازم است] این به شما امکان می‌دهد جاوا Runtime را دوباره نصب کنید</string>
-    <string name="mcl_setting_title_freeform">بازکردن ماینکرفت در حالت Freeform</string>
-    <string name="mcl_setting_subtitle_freeform">بازکردن ماینکرفت در پنجره شناور. نیازمند اندروید 7.0 به بالا</string>
-    <string name="mcl_setting_title_hide_sidebar">پنهان کردن نوار کناری</string>
-    <string name="mcl_setting_subtitle_hide_sidebar">افراد قدیمی که رابط کاربری قدیمی v1 را ترجیح می دهند ممکن است این را دوست داشته باشند. تجربه تمام صفحه بیشتری را به شما می دهد.</string>
     <string name="mcl_setting_title_ignore_notch">حفره دوربین را نادیده بگیر</string>
     <string name="mcl_setting_subtitle_ignore_notch">حفره دوربین را نادیده می‌گیرد و صفحه زیر آن را گسترش می‌دهد.\nتجربه ای فراگیرتر به شما می دهد.</string>
     <string name="mcl_setting_title_resolution_scaler">تغییر مقیاس وضوح (رزولوشن)</string>
     <string name="mcl_setting_subtitle_resolution_scaler">به شما امکان می دهد وضوح بازی را کاهش دهید. 100% وضوح کامل است</string>
     <string name="mcl_setting_title_longpresstrigger">زمان مورد نیاز برای فعال کردن فشردن طولانی</string>
     <string name="mcl_setting_subtitle_longpresstrigger">تغییر زمان برای فعال شدن فشردن طولانی جهت کَندَن بلاک و دراپ کردن آیتم.</string>
-    <string name="mcl_setting_title_backtorightmouse">دکمه برگشت به عنوان راست کلیک ماوس</string>
-    <string name="mcl_setting_subtitle_backtorightmouse">بعضی دستگاه‌ها راست کلیک خارجی را به عنوان دکمه برگشت در نظر می‌گیرند. اگر شما نیز از ماوس خارجی استفاده می‌کنید، باید این را فعال کنید.</string>
-    <string name="mcl_setting_title_flat_button_style">سبک دکمه صاف</string>
-    <string name="mcl_setting_subtitle_flat_button_style">برای تغییر سبک دکمه کنترل به صاف، این را فعال کنید.</string>
     <string name="mcl_setting_title_buttonscale">تغییر مقیاس دکمه های کنترل</string>
     <string name="mcl_setting_subtitle_buttonscale">اگر دکمه ها خیلی کوچک هستند، آنها را بزرگتر کنید.</string>
     <string name="mcl_setting_title_mousescale">تغییر مقیاس موس</string>
     <string name="mcl_setting_subtitle_mousescale">تغییر اندازه ماوس مجازی.</string>
     <string name="mcl_setting_title_javaargs">آرگومان‌های جاوا در هنگام اجرا</string>
     <string name="mcl_setting_subtitle_javaargs">مراقب باشید، این ممکن است باعث از کار افتادن بازی در صورت اصلاح بدون اطلاع شود.</string>
-    <string name="mcl_setting_category_general">تنظیمات عمومی</string>
-    <string name="mcl_setting_category_scaling">تنظیمات مقیاس</string>
     <string name="mcl_setting_category_renderer">رندر کننده</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (همه ی نسخه ها، سریع)</string>
     <string name="mcl_setting_renderer_angle">ANGLE - (ورژن 1.17 به بالا، متوسط)</string>
-    <string name="mcl_setting_category_veroption">نوع ورژن برای نمایش در لیست ورژن‌ها</string>
     <string name="mcl_setting_veroption_release">ریلیز</string>
     <string name="mcl_setting_veroption_snapshot">اسنپ‌شات</string>
     <string name="mcl_setting_veroption_oldalpha">آلفای-قدیمی</string>
     <string name="mcl_setting_veroption_oldbeta">بتای-قدیمی</string>
     <string name="mcl_setting_java_sandbox">نصب کننده ی .jar در محیط امن</string>
     <string name="mcl_setting_java_sandbox_subtitle">هنگام راه‌اندازی فایل jar، در دسترس بودن sandbox security manager را کنترل کنید.</string>
-    <string name="mcl_version_clone">شبیه‌سازی</string>
     <!-- Global strings -->
-    <string name="global_edit">ویرایش</string>
     <string name="global_error">خطا</string>
-    <string name="global_warinng">هشدار</string>
     <string name="global_load">بارگذاری</string>
     <string name="global_name">نام</string>
-    <string name="global_remove">حذف</string>
     <string name="global_clone">شبیه‌سازی</string>
     <string name="global_restart">راه‌اندازی مجدد</string>
     <string name="global_save">ذخیره</string>
@@ -109,12 +71,8 @@
     <string name="global_default">پیش‌فرض</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">برنامه یا بازی با کد مرجوعی %d خارج شد. برای جزئیات بیشتر به lastlog.text مراجعت کنید.</string>
-    <string name="mcn_exit_call">خروج</string>
     <string name="mcn_exit_confirm">آیا از خروج اجباری اطمینان دارید؟</string>
-    <string name="mcn_check_fail_lwjgl">LWJGL3 نصب نشده است!</string>
     <!-- MainActivity: Control buttons -->
-    <string name="control_toggle">GUI</string>
-    <string name="control_keyboard">کیبورد</string>
     <string name="control_chat">چت</string>
     <string name="control_debug">دیباگ</string>
     <string name="control_primary">LMB</string>
@@ -130,8 +88,6 @@
     <string name="control_viewout">خروجی گزارش (لاگ)</string>
     <string name="control_adebug">ورودی دیباگ</string>
     <string name="control_customkey">ارسال keycode شخصی</string>
-    <string name="control_scaleup">بزرگنمایی</string>
-    <string name="control_scaledown">کوچک نمایی</string>
     <!-- ImportControlActivity Strings -->
     <string name="import_control_label">کننترلر ها را وارد کنید</string>
     <string name="import_control_invalid_file">فایل نامعتبر یا آسیب دیده هست</string>
@@ -143,44 +99,23 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
-    <string name="customctrl_edit">ویرایش %s</string>
-    <string name="customctrl_remove">حذف %s?</string>
-    <string name="customctrl_keyname">Keycode</string>
     <string name="customctrl_toggle">حالت فعال/غیرفعال</string>
     <string name="customctrl_size">اندازه</string>
-    <string name="customctrl_size_width">طول</string>
-    <string name="customctrl_size_height">ارتفاع</string>
     <string name="customctrl_mapping">نقشه‌برداری</string>
     <string name="customctrl_orientation">جهت</string>
     <string name="customctrl_background_color">رنگ پس‌زمینه</string>
     <string name="customctrl_corner_radius">شعاع گوشه</string>
     <string name="customctrl_stroke_width">ضخامت حاشیه</string>
     <string name="customctrl_stroke_color">رنگ حاشیه</string>
-    <string name="customctrl_dynamicpos">موقعیت متحرک دستی</string>
-    <string name="customctrl_dynamicpos_x">X متحرک</string>
-    <string name="customctrl_dynamicpos_y">Y متحرک</string>
-    <string name="customctrl_transparency_bg">شفافیت پس‌زمینه</string>
     <string name="customctrl_button_opacity">شفافیت دکمه</string>
-    <string name="customctrl_keycombine">ترکیب کلید</string>
     <string name="customctrl_addbutton">اضافه کردن دکمه</string>
     <string name="customctrl_addbutton_drawer">افزودن دکمه کشویی</string>
     <string name="customctrl_addsubbutton">افزودن زیر-دکمه</string>
-    <string name="customctrl_add_subbutton_message">زیر دکمه‌ی %d اضافه شد!</string>
     <string name="customctrl_selectdefault">انتخاب json کنترل پیش‌فرض</string>
     <string name="customctrl_export">استخراج کنترلر</string>
     <string name="main_share_logs">اشتراک گذاری فایل log</string>
     <string name="main_install_jar_file">نصب .jar</string>
-    <string name="main_options">گزینه‌ها</string>
     <string name="main_play">شروع بازی</string>
-    <string name="main_welcome">خوش آمدید، %s</string>
-    <string name="main_infodev">اطلاعات (DEV)</string>
-    <string name="main_switchuser">تغییر کاربر</string>
-    <string name="main_version">ورژن:</string>
-    <string name="main_nocrash">هیچ کرشی شناسایی نشد</string>
-    <string name="main_nolog">بدون لاگ.</string>
-    <string name="main_no_news_feed">خطا در دریافت اخبار!</string>
-    <string name="auto_ram_subtitle">تنظیم‌کننده اتوماتیک رم را فعال می‌کند</string>
-    <string name="auto_ram_title">رم اتوماتیک</string>
     <string name="autoram_info_msg">مموری تنظیم شد روی %d مگابایت</string>
     <string name="mcl_setting_check_libraries">بررسی کتابخانه‌ها پس از دانلود</string>
     <string name="mcl_setting_check_libraries_subtitle">این گزینه لانچر را برای بررسی هَش کتابخانه مجبور می‌کند. از دانلود های نیمه‌کاره جلوگیری می‌کند.</string>
@@ -193,7 +128,6 @@
     <string name="mcl_setting_subtitle_mousespeed">سرعت ماوس نرم‌افزاری را تغییر می‌دهد</string>
     <string name="customctrl_passthru">ماوس از آن رد شود</string>
     <string name="customctrl_swipeable">قابل سوایپ</string>
-    <string name="customctrl_rounded">گرد شده</string>
     <string name="memory_warning_msg">میزان رم آزاد فعلی (%d) از میزان رم اختصاص یافته (%d) کمتر است، که ممکن است باعث کرش شود. رم اختصاص یافته را تغییر دهید اگر بازی کرش خورد.</string>
     <string name="mcl_memory_allocation">میزان رم اختصاص یافته</string>
     <string name="mcl_memory_allocation_subtitle">میزان مموری اختصاص یافته به ماینکرفت را کنترل می‌کند</string>
@@ -201,7 +135,6 @@
     <string name="multirt_runtime_incompatiblearch">معماری ناسازگار: %s</string>
     <string name="multirt_config_title">VM های جاوا</string>
     <string name="multirt_config_add">افزودن جدید</string>
-    <string name="multirt_config_add_subtitle">وارد کردن VM جاوا جدید</string>
     <string name="multirt_title">مدیریت ران تایم</string>
     <string name="multirt_subtitle">مدیریت VM های نصب‌شده جاوا</string>
     <string name="multirt_progress_caching">در حال اعمال کَش...</string>
@@ -210,20 +143,7 @@
     <string name="multirt_config_removeerror_last">شما باید حداقل یک جاوا ران تایم را نصب داشته باشید</string>
     <string name="multirt_nocompartiblert">هیچ جاوا سازگاری پیدا نمی شود. این نسخه به جاوای %d یا جدیدتر نیاز دارد.</string>
     <string name="multirt_nojava8rt">جاوا 8 را نمی توان پیدا کرد. برای استفاده از این قابلیت باید جاوا 8 را نصب کنید.</string>
-    <string name="compat_117_message">ماینکرفت 21w10a به بالا، به OpenGL 3.2 نیاز دارد. متأسفانه، تراشه گرافیکی شما از OpenGL ES 3.0 یا بالاتر پشتیبانی نمی کند، اما برخی منابع وجود دارد که می توانید برای اجرای این نسخه ها نصب کنید. برای تأیید نصب، OK را فشار دهید و برای لغو راه‌اندازی، Cancel را فشار دهید.</string>
-    <string name="compat_11x_playanyway">در هر صورت باز کن</string>
-    <string name="pvc_gameDirectory">پوشه بازی</string>
     <string name="pvc_jvmArgs">آرگومان‌های JVM</string>
-    <string name="pvc_title">تنظیمات مختص هر ورژن</string>
-    <string name="storage_warning_title">تغییرات محل ذخیره‌سازی</string>
-    <string name="storage_warning_text"><![CDATA[به دلیل تغییرات در محل ذخیره‌سازی توسط گوگل در اندروید 10 و بالاتر، ما مجبور به تغییر پوشه بازی به یک پوشه شخصی هستیم.<br /> پوشه جدید برای فایل‌های پوجاو لانچر این است: <b>Android/data/%s/files/</b> (اجازه دسترسی به مرورگر فایل خود، می‌توانید به این فایل‌ها دسترسی پیدا کنید).<br /> اگر می‌خواهید فایل‌های بازی را کپی کنید، باید فایل‌های پوشه <b>games/PojavLauncher</b> را به صورت دستی کپی کنید.]]></string>
-    <string name="control_offset_title">حاشیه کنترلر</string>
-    <string name="control_top_offset">حاشیه بالا: </string>
-    <string name="control_right_offset">حاشیه راست: </string>
-    <string name="control_bottom_offset">حاشیه پایین: </string>
-    <string name="control_left_offset">حاشیه چپ: </string>
-    <string name="preference_control_offset_title">حاشیه کناره های کنترلر</string>
-    <string name="preference_control_offset_description">برای هر سمت صفحه یک مقدار حاشیه‌ی سفارشی تنظیم کنید</string>
     <string name="preference_mouse_start_title">شروع با موسِ مجازیِ روشن</string>
     <string name="preference_video_title">ویدئو و رندر کننده</string>
     <string name="preference_video_description">وضوح(رزولوشن)، نوع بزرگنمایی، و رندر کننده</string>
@@ -244,13 +164,9 @@
     <string name="preference_edit_controls_summary">طرح کنترل را متناسب با نیازهای خود تغییر دهید</string>
     <string name="preference_category_virtual_mouse">ماوس مجازی</string>
     <string name="preference_back_title">بازگشت به صفحه آخر</string>
-    <string name="gles_hack_none">تکسچر ها را کوچک نکن</string>
-    <string name="gles_hack_always">نصف کردن تکسچر ها</string>
-    <string name="gles_hack_sometimes">تقسیم تکسچر های بزرگ در 2 یا 4 قسمت</string>
     <string name="unnamed">بی نام</string>
     <string name="profiles_latest_snapshot">جدیدترین اسنپ شات</string>
     <string name="profiles_latest_release">جدیدترین نسخه</string>
-    <string name="profiles_editing">ویرایش مشخصات کاربری</string>
     <string name="profiles_profile_name">نام</string>
     <string name="profiles_profile_version">نسخه</string>
     <string name="global_delete">حذف</string>
@@ -258,10 +174,8 @@
     <string name="pedit_renderer">رندر کننده</string>
     <string name="arc_capes_title">شنل های Cosmetica</string>
     <string name="arc_capes_desc">شنل های Cosmetica (قبلاً Arc) را فعال می کند. برای اطلاعات بیشتر لطفاً به https://cosmetica.cc مراجعه کنید. به OptiFine نیاز دارد.</string>
-    <string name="migrated_profile_str">کانفیگ نسخه %s</string>
     <string name="notif_channel_name">عمومی</string>
     <string name="lazy_service_default_title">سرویس پیش‌زمینه Pojav</string>
-    <string name="lazy_service_default_description">این سرویس برای انجام عملیات طولانی مدت استفاده می شود</string>
     <string name="mcl_setting_veroption_installed">نصب شد</string>
     <string name="use_global_default">(از پیش‌فرض استفاده کنید)</string>
     <string name="default_control">کنترلر پیش فرض</string>
@@ -274,7 +188,6 @@
     <string name="main_add_account">اضافه کردن حساب کاربری</string>
     <string name="tasks_ongoing">وظایف درحال انجام است، لطفا صبر کنید</string>
     <string name="no_saved_accounts">هیچ حساب ذخیره شده ای وجود ندارد</string>
-    <string name="downloading_versions">در حال دانلود لیست نسخه‌ها…</string>
     <string name="mc_download_failed">دانلود Minecraft انجام نشد! این می تواند به دلیل عدم اتصال به اینترنت، فایل های خراب دانلود شده و غیره باشد</string>
     <string name="xerr_unknown">خطای ناشناخته API ایکس باکس لایو %d</string>
     <string name="xerr_no_account">به نظر می رسد که شما حساب Xbox Live ندارید. لطفا در https://minecraft.net/ وارد شوید و دوباره امتحان کنید.</string>
