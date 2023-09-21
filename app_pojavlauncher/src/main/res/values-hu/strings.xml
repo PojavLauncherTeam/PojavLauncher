@@ -7,20 +7,11 @@
     <!-- Languages list part -->
     <!-- Login strings -->
     <string name="login_online_username_hint">Email vagy felhasználónév</string>
-    <string name="login_online_password_hint">Jelszó</string>
-    <string name="login_online_check_keeplogin">Maradjak bejelentkezve</string>
     <string name="login_online_login_label">Bejelentkezés</string>
-    <string name="login_error_invalid_username">Érvénytelen felhasználónév. A felhasználónévnek 3 és 16 karakter között kell lennie, és csak A-Z, a-z, 0-9 és aláhúzást tartalmazhat.</string>
-    <string name="login_error_exist_username">Ez a felhasználónév már létezik</string>
-    <string name="login_microsoft">Bejelentkezés Microsoft-al</string>
-    <string name="login_select_account">Fiók kiválasztása</string>
-    <string name="login_title_no_saved_account">Nem található fiók!</string>
-    <string name="login_dialog_no_saved_account">Nincs egy elmentet fiókod se.\nHasználd a <b>\"Maradjak bejelentkezve\"</b> opciót hogy elments egy fiókot az első bejelentkezésel.</string>
     <!-- Hint -->
     <!-- Warnings -->
     <string name="warning_remove_account">Ez a fiók törölve lesz!</string>
     <!-- AlertDialog title -->
-    <string name="alerttitle_install_jre">A %s (.tar.xz) Java Runtime telepítése</string>
     <!-- Error messages -->
     <!-- Toast messages -->
     <!--
