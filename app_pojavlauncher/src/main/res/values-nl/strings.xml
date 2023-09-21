@@ -3,24 +3,15 @@
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition voor Android)</string>
     <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">Start Minecraft: Java editie op je apparaat!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
     <string name="login_online_username_hint">E-mail of gebruikersnaam</string>
-    <string name="login_online_password_hint">Wachtwoord</string>
-    <string name="login_online_check_keeplogin">Ingelogd blijven</string>
     <string name="login_online_login_label">Aanmelden</string>
-    <string name="login_error_exist_username">Deze gebruikersnaam bestaat al</string>
-    <string name="login_microsoft">Microsoft-login</string>
-    <string name="login_select_account">Selecteer account</string>
-    <string name="login_title_no_saved_account">Geen account gevonden!</string>
-    <string name="login_dialog_no_saved_account">U hebt geen opgeslagen account.\nGebruik de optie <b>\"Ingelogd blijven\"</b> om een account op te slaan bij de eerste aanmelding.</string>
     <!-- Hint -->
     <!-- Warnings -->
     <string name="warning_remove_account">Dit account wordt verwijderd!</string>
     <!-- AlertDialog title -->
-    <string name="alerttitle_install_jre">Installeer Java Runtime %s (.tar.xz)</string>
     <string name="alerttitle_installmod">Selecteer een mod installatie</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher is onverwacht gecrasht</string>
@@ -30,65 +21,39 @@
     <!-- Toast messages -->
     <string name="toast_permission_denied">De rechten om te lezen/schrijven naar opslag zijn vereist!</string>
     <string name="toast_optifine_success">Installatie geslaagd</string>
-    <string name="toast_uninstalljre_done">Java Runtime verwijderen voltooid</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_console">Ontwikkelings console</string>
-    <string name="mcl_tab_crash">Crash-logbestand</string>
     <!-- MCLauncherActivity: Account status -->
-    <string name="mcl_account_connected">Verbonden</string>
     <!-- MCLauncherActivity: Strings -->
-    <string name="mcl_version_msg">Klaar om Minecraft %s te spelen</string>
     <string name="mcl_launch_cleancache">Cache bestanden opschonen</string>
     <string name="mcl_launch_downloading">Downloaden %s</string>
     <string name="mcl_launch_downloading_progress">"%s downloaden (%.2fMB / %.2fMB)"</string>
     <string name="mcl_launch_download_assets">Voorbereiden om bronnen te downloaden</string>
     <string name="mcl_options">Opties</string>
-    <string name="mcl_option_modinstall">Start een mod installatie (Forge, LabyMod, Fabric, etc...)</string>
-    <string name="mcl_option_modinstallwitharg">Start een mod installatie (met aangepaste argumenten)</string>
     <string name="mcl_option_customcontrol">Aangepaste controles</string>
-    <string name="mcl_option_settings">Instellingen</string>
-    <string name="mcl_option_about">Over deze app</string>
-    <string name="mcl_setting_title_uninstalljre">Java Runtime verwijderen voltooid</string>
-    <string name="mcl_setting_subtitle_uninstalljre">[Launcher herstart vereist] Hiermee kunt u Java Runtime opnieuw installeren</string>
-    <string name="mcl_setting_title_freeform">Start Minecraft in Freeform modus</string>
-    <string name="mcl_setting_subtitle_freeform">Start Minecraft in zwevend venster. Vereist Android 7.0+</string>
-    <string name="mcl_setting_title_hide_sidebar">Zijbalk verbergen</string>
-    <string name="mcl_setting_subtitle_hide_sidebar">Mensen die liever de v1-interface gebruiken vinden dit wellicht leuk. Dit geeft je het volledig scherm-gevoel.</string>
     <string name="mcl_setting_title_ignore_notch">Negeer notch</string>
     <string name="mcl_setting_subtitle_ignore_notch">Negeer de notch en verbreed het scherm.\ngeeft je een meer meeslepende ervaring.</string>
     <string name="mcl_setting_title_resolution_scaler">Resolutie Schaaler</string>
     <string name="mcl_setting_subtitle_resolution_scaler">sta toe om de resolutie van het spel te verlagen. 100% is de volledige resolutie</string>
     <string name="mcl_setting_title_longpresstrigger">Hoe lang zal starten na lange indrukken</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Verander de triggertijd voor lang indrukken van vernietig blok en laten vallen.</string>
-    <string name="mcl_setting_title_backtorightmouse">Behandel de terugknop als rechter muis</string>
-    <string name="mcl_setting_subtitle_backtorightmouse">Sommige apparaten behandelen externe rechtermuis als terugknop. Als u een externe muis gebruikt, moet u dit activeren.</string>
-    <string name="mcl_setting_title_flat_button_style">Verander knopstijl</string>
-    <string name="mcl_setting_subtitle_flat_button_style">Schakel dit in om de control-knop stijl te veranderen naar plat.</string>
     <string name="mcl_setting_title_buttonscale">Controle knoppen schalen</string>
     <string name="mcl_setting_subtitle_buttonscale">Vergroot ze als knoppen te klein zijn.</string>
     <string name="mcl_setting_title_mousescale">Muis schaling</string>
     <string name="mcl_setting_subtitle_mousescale">Wijzig de grootte van de virtuele muis.</string>
     <string name="mcl_setting_title_javaargs">JVM Launch argumenten</string>
     <string name="mcl_setting_subtitle_javaargs">Wees voorzichtig, dit kan een spelcrash maken als het is aangepast zonder kennis.</string>
-    <string name="mcl_setting_category_general">Algemene instellingen</string>
-    <string name="mcl_setting_category_scaling">Schaalinstellingen</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
-    <string name="mcl_setting_category_veroption">Versietype zal in de versielijst staan</string>
     <string name="mcl_setting_veroption_release">Release</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Old-beta</string>
-    <string name="mcl_version_clone">Dupliceren</string>
     <!-- Global strings -->
-    <string name="global_edit">Bewerken</string>
     <string name="global_error">Foutmelding</string>
-    <string name="global_warinng">Waarschuwing</string>
     <string name="global_load">Lading</string>
     <string name="global_name">Naam</string>
-    <string name="global_remove">Verwijderen</string>
     <string name="global_clone">Dupliceren</string>
     <string name="global_restart">Opnieuw starten</string>
     <string name="global_save">Opslaan</string>
@@ -96,12 +61,8 @@
     <string name="global_error_field_empty">Dit veld mag niet leeg zijn</string>
     <string name="global_waiting">Wacht</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_call">Afsluiten</string>
     <string name="mcn_exit_confirm">Weet je zeker dat je sluiting wilt forceren?</string>
-    <string name="mcn_check_fail_lwjgl">LWJGL3 is niet geïnstalleerd!</string>
     <!-- MainActivity: Control buttons -->
-    <string name="control_toggle">GUI</string>
-    <string name="control_keyboard">Toetsenbord</string>
     <string name="control_chat">Chat</string>
     <string name="control_debug">Foutoplossing</string>
     <string name="control_primary">Pri</string>
@@ -128,34 +89,11 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
-    <string name="customctrl_edit">Bewerken %s</string>
-    <string name="customctrl_remove">Verwijderen %s?</string>
-    <string name="customctrl_keyname">Sleutelcode</string>
     <string name="customctrl_toggle">Omschakelbaar</string>
     <string name="customctrl_size">Grootte</string>
-    <string name="customctrl_size_width">Breedte</string>
-    <string name="customctrl_size_height">Hoogte</string>
-    <string name="customctrl_dynamicpos">Dynamische positie</string>
-    <string name="customctrl_dynamicpos_x">Dynamisch X</string>
-    <string name="customctrl_dynamicpos_y">Dynamisch Y</string>
-    <string name="customctrl_transparency_bg">Achtergrondtransparantie</string>
-    <string name="customctrl_keycombine">Toetsencombinatie</string>
-    <string name="customctrl_keycombine_alt">Alt</string>
-    <string name="customctrl_keycombine_control">Ctrl</string>
-    <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Knop toevoegen</string>
     <string name="customctrl_selectdefault">Selecteer standaard control json</string>
-    <string name="main_options">Opties</string>
     <string name="main_play">Speel</string>
-    <string name="main_welcome">Welkom, %s</string>
-    <string name="main_infodev">Informatie (DEV)</string>
-    <string name="main_switchuser">Gebruiker wijzigen</string>
-    <string name="main_version">Versie:</string>
-    <string name="main_nocrash">Geen crash gedetecteerd</string>
-    <string name="main_nolog">Geen log.</string>
-    <string name="main_no_news_feed">Kon nieuwsfeed niet ophalen!</string>
-    <string name="auto_ram_subtitle">Schakel in de automatische RAM aanpasser in</string>
-    <string name="auto_ram_title">Automatische RAM</string>
     <string name="autoram_info_msg">Geheugen ingesteld op %d MB</string>
     <string name="mcl_setting_check_libraries">Bibliotheken controleren na het downloaden</string>
     <string name="mcl_setting_check_libraries_subtitle">Deze optie zorgt ervoor dat launcher de bibliotheek hash controleert als deze beschikbaar is. Voorkomt defecte downloads.</string>
@@ -167,7 +105,6 @@
     <string name="mcl_setting_title_mousespeed">Muis Snelheid</string>
     <string name="mcl_setting_subtitle_mousespeed">Veranderd de snelheid van de virtuele muis</string>
     <string name="customctrl_passthru">Muis pass-thru</string>
-    <string name="customctrl_rounded">Afgerond</string>
     <string name="profiles_profile_name">Naam</string>
     <string name="pedit_renderer">Renderer</string>
     <string name="of_dl_progress">Downloaden %s</string>
