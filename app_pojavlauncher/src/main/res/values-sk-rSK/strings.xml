@@ -3,26 +3,16 @@
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition pre Android)</string>
     <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">Spustite Minecraft: Java Edition na vašom zariadení!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
     <string name="login_online_username_hint">E-mail alebo užívateľské meno</string>
-    <string name="login_online_password_hint">Heslo</string>
-    <string name="login_online_check_keeplogin">Ostať prihlásený</string>
     <string name="login_online_login_label">Prihlásiť</string>
-    <string name="login_error_invalid_username">Neplatné užívateľské meno. Užívateľské meno musí mať rozsah 3 až 16 znakov. Musí obsahovať len znaky A-Z, a-z, (bez diakritiky) 0-9 a podčiarkovník.</string>
-    <string name="login_error_exist_username">Toto užívateľské meno už existuje</string>
-    <string name="login_microsoft">Prihlásenie cez Microsoft účet</string>
-    <string name="login_select_account">Vybrať účet</string>
-    <string name="login_title_no_saved_account">Žiadny účet sa nenašiel!</string>
-    <string name="login_dialog_no_saved_account">Nemáte žiaden uložený účet. \nPoužite možnosť <b>\"Ostať prihlásený\"</b> pre uloženie účtu pri prvom prihlásení.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Ťuknutím na ikonu ozubeného kolieska v strede hornej časti obrazovky otvorte ponuku ⚙\nTlačidlo môžete prispôsobiť: upraviť, zmeniť jeho veľkosť, odstrániť alebo prispôsobiť jeho bind."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Tento účet bude odstránený!</string>
     <!-- AlertDialog title -->
-    <string name="alerttitle_install_jre">Nainštalovať Java Runtime %s (.tar.xz)</string>
     <string name="alerttitle_installmod">Vybrať installer módu</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher neočakávane spadol</string>
@@ -32,74 +22,46 @@
     <!-- Toast messages -->
     <string name="toast_permission_denied">Je vyžadované oprávnenie pre čítanie/zápis do úložiska!</string>
     <string name="toast_optifine_success">Inštalácia bola úspešná</string>
-    <string name="toast_uninstalljre_done">Odinštalovanie Java Runtime dokončené</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_wiki">Wiki</string>
-    <string name="mcl_tab_console">Vývojárska konzola</string>
-    <string name="mcl_tab_crash">Crash log</string>
     <!-- MCLauncherActivity: Account status -->
-    <string name="mcl_account_connected">Prihlásený</string>
-    <string name="mcl_account_local">Lokálny</string>
     <!-- MCLauncherActivity: Strings -->
-    <string name="mcl_version_msg">Pripravený na spustenie Minecraftu %s</string>
     <string name="mcl_launch_cleancache">Čistenie cache</string>
     <string name="mcl_launch_downloading">Sťahuje sa %s</string>
     <string name="mcl_launch_downloading_progress">"Sťahovanie %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Príprava na stiahnutie resources</string>
-    <string name="mcl_launch_error_localmode">Minecraft nemôže byť legálne nainštalovaný keď ste prihlásený len cez lokálny účet. Pre pokračovanie prejdite na online účet.</string>
     <string name="mcl_options">Možnosti</string>
-    <string name="mcl_option_modinstall">Spustite inštalátor módov (Forge, LabyMod, Fabric atď...)</string>
-    <string name="mcl_option_modinstallwitharg">Spustiť inštalátor módov (s vlastnými argumentmi)</string>
     <string name="mcl_option_customcontrol">Vlastné ovládacie prvky</string>
-    <string name="mcl_option_settings">Nastavenia</string>
-    <string name="mcl_option_about">O aplikácii</string>
     <string name="mcl_setting_title_use_surface_view">Použiť alternatívne vykresľovanie (SurfaceView)</string>
     <string name="mcl_setting_subtitle_use_surface_view">Môže pomôcť s FPS v situáciách, kde je nedostatok grafického výkonu</string>
-    <string name="mcl_setting_title_uninstalljre">Odinštalovať Java Runtime</string>
-    <string name="mcl_setting_subtitle_uninstalljre">Toto vám umožní reinštalovať Javu. Vyžaduje sa reštart.</string>
-    <string name="mcl_setting_title_freeform">Spustiť Minecraft v režime plávajúceho okna</string>
-    <string name="mcl_setting_subtitle_freeform">Spustiť Minecraft v plávajúcom okne. Vyžaduje Android 7.0+</string>
-    <string name="mcl_setting_title_hide_sidebar">Skryť bočný panel</string>
-    <string name="mcl_setting_subtitle_hide_sidebar">Zmení užívateľské rozhranie na staré (PojavLauncher v1). Neuvidíte bočný panel na ľavej strane obrazovky.</string>
     <string name="mcl_setting_title_ignore_notch">Ignorovať výrez pre fotoaparát</string>
     <string name="mcl_setting_subtitle_ignore_notch">Ignoruje notch a rozšíri Minecraft pod ním.</string>
     <string name="mcl_setting_title_resolution_scaler">Rozlíšenie obrazovky</string>
     <string name="mcl_setting_subtitle_resolution_scaler">Umožňuje znížiť rozlíšenie hry. Maximum je 100%</string>
     <string name="mcl_setting_title_longpresstrigger">Ako dlho bude trvať dlhé stlačenie</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Zmeňte čas pre rozbitie bloku a vyhodenie itemu.</string>
-    <string name="mcl_setting_title_backtorightmouse">Považovať tlačidlo späť za pravé tlačidlo myši</string>
-    <string name="mcl_setting_subtitle_backtorightmouse">Niektoré zariadenia pristupujú k externému pravému tlačidlu ako k tlačidlu späť. Ak používate externú myš, mali by ste toto povoliť.</string>
-    <string name="mcl_setting_title_flat_button_style">Plochý štýl tlačidiel</string>
-    <string name="mcl_setting_subtitle_flat_button_style">Povoľte pre zmenu štýlu ovládacieho tlačidla na ploché.</string>
     <string name="mcl_setting_title_buttonscale">Veľkosť ovládacích prvkov</string>
     <string name="mcl_setting_subtitle_buttonscale">Môžete zväčšiť tlačidlá, ak sú príliš malé.</string>
     <string name="mcl_setting_title_mousescale">Veľkosť kurzora</string>
     <string name="mcl_setting_subtitle_mousescale">Zmeniť veľkosť virtuálnej myši.</string>
     <string name="mcl_setting_title_javaargs">Spúštacie argumenty pre JVM</string>
     <string name="mcl_setting_subtitle_javaargs">Pozor! Zmena JVM argumentov môže spôsobiť pád hry ak neviete, čo robíte.</string>
-    <string name="mcl_setting_category_general">Všeobecné nastavenia</string>
-    <string name="mcl_setting_category_scaling">Nastavenia veľkosti</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (všetky verzie, rýchly)</string>
     <string name="mcl_setting_renderer_angle">ANGLE - (release 1.17+, priemerný)</string>
-    <string name="mcl_setting_category_veroption">Aké typy verzií budú v zozname verzií</string>
     <string name="mcl_setting_veroption_release">Vydanie</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Stará alfa</string>
     <string name="mcl_setting_veroption_oldbeta">Stará beta</string>
     <string name="mcl_setting_java_sandbox">Sandboxni .jar installer</string>
     <string name="mcl_setting_java_sandbox_subtitle">Možnosť zmeniť prítomnosť zabezpečenia v sandboxe pri spustení .jar installeru.</string>
-    <string name="mcl_version_clone">Duplikovať</string>
     <!-- Global strings -->
-    <string name="global_edit">Upraviť</string>
     <string name="global_error">Chyba</string>
-    <string name="global_warinng">Varovanie</string>
     <string name="global_load">Otvoriť</string>
     <string name="global_name">Názov</string>
-    <string name="global_remove">Odstrániť</string>
     <string name="global_clone">Duplikovať</string>
     <string name="global_restart">Reštartovať</string>
     <string name="global_save">Uložiť</string>
@@ -110,12 +72,8 @@
     <string name="global_default">Predvolené</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Hra spadla. Skontroluj latestlog.txt pre viac podrobností.</string>
-    <string name="mcn_exit_call">Skončiť</string>
     <string name="mcn_exit_confirm">Ste si istí, že chcete ukončiť hru?</string>
-    <string name="mcn_check_fail_lwjgl">LWJGL 3 nebol nainštalovaný!</string>
     <!-- MainActivity: Control buttons -->
-    <string name="control_toggle">GUI</string>
-    <string name="control_keyboard">Klávesnica</string>
     <string name="control_chat">Čet</string>
     <string name="control_debug">Debug</string>
     <string name="control_primary">Pri</string>
@@ -137,8 +95,6 @@
     <string name="control_viewout">Záznam logu</string>
     <string name="control_adebug">Debug vstupov</string>
     <string name="control_customkey">Poslať vlastný kláves</string>
-    <string name="control_scaleup">Zväčšiť</string>
-    <string name="control_scaledown">Zmenšiť</string>
     <!-- ImportControlActivity Strings -->
     <string name="import_control_label">Importovať ovládacie prvky</string>
     <string name="import_control_invalid_file">Neplatný alebo poškodený súbor</string>
@@ -150,44 +106,23 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
-    <string name="customctrl_edit">Editácia %s</string>
-    <string name="customctrl_remove">Odstrániť %s?</string>
-    <string name="customctrl_keyname">Kód písmena</string>
     <string name="customctrl_toggle">Prepínateľné (toggle)</string>
     <string name="customctrl_size">Veľkosť</string>
-    <string name="customctrl_size_width">Šírka</string>
-    <string name="customctrl_size_height">Výška</string>
     <string name="customctrl_mapping">Bindy</string>
     <string name="customctrl_orientation">Orientácia</string>
     <string name="customctrl_background_color">Farba pozadia tlačidla</string>
     <string name="customctrl_corner_radius">Zaoblenie rohu tlačidla</string>
     <string name="customctrl_stroke_width">Šírka obrysu tlačidla</string>
     <string name="customctrl_stroke_color">Farba obrysu tlačidla</string>
-    <string name="customctrl_dynamicpos">Manuálna dynamická pozícia</string>
-    <string name="customctrl_dynamicpos_x">Dynamická pozícia na osi X</string>
-    <string name="customctrl_dynamicpos_y">Dynamická pozícia na osi Y</string>
-    <string name="customctrl_transparency_bg">Priehľadnosť pozadia</string>
     <string name="customctrl_button_opacity">Priehľadnosť tlačidla</string>
-    <string name="customctrl_keycombine">Kombinácia kláves</string>
     <string name="customctrl_addbutton">Pridať tlačidlo</string>
     <string name="customctrl_addbutton_drawer">Pridať priečinok tlačidiel</string>
     <string name="customctrl_addsubbutton">Pridať podtlačidlo</string>
-    <string name="customctrl_add_subbutton_message">Podtlačidlo %d bolo pridané !</string>
     <string name="customctrl_selectdefault">Vybrať predvolené ovládacie prvky</string>
     <string name="customctrl_export">Exportovať ovládacie prvky</string>
     <string name="main_share_logs">Zdieľať log</string>
     <string name="main_install_jar_file">Inštalovať .jar</string>
-    <string name="main_options">Možnosti</string>
     <string name="main_play">Hrať</string>
-    <string name="main_welcome">Vitaj, %s</string>
-    <string name="main_infodev">Informácie</string>
-    <string name="main_switchuser">Prepnúť účet</string>
-    <string name="main_version">Verzia:</string>
-    <string name="main_nocrash">Žiadny crash.</string>
-    <string name="main_nolog">Žiadny log.</string>
-    <string name="main_no_news_feed">Nepodarilo sa načítať novinky!</string>
-    <string name="auto_ram_subtitle">Automaticky bude meniť alokovanú RAM</string>
-    <string name="auto_ram_title">Auto RAM</string>
     <string name="autoram_info_msg">RAM bola nastavená na %d MB</string>
     <string name="mcl_setting_check_libraries">Skontrolovať knižnice po stiahnutí</string>
     <string name="mcl_setting_check_libraries_subtitle">Táto možnosť donúti launcher skontrolovať hash knižnice, ak je k dispozícii. Predchádza poškodeným stiahnutiam.</string>
@@ -202,7 +137,6 @@
     <string name="mcl_setting_subtitle_mousespeed">Zmeniť rýchlosť virtuálnej myši</string>
     <string name="customctrl_passthru">Mierenie tlačidlom</string>
     <string name="customctrl_swipeable">Posunovateľné</string>
-    <string name="customctrl_rounded">Zaoblené</string>
     <string name="memory_warning_msg">Aktuálne množstvo voľnej RAM (%d) je nižšia ako pridelená RAM (%d), čo môže viesť k pádu. Zmeňte alokáciu, ak hra spadne.</string>
     <string name="mcl_memory_allocation">Pridelenie pamäte</string>
     <string name="mcl_memory_allocation_subtitle">Určite, koľko pamäti bude mať Minecraft</string>
@@ -210,7 +144,6 @@
     <string name="multirt_runtime_incompatiblearch">Nekompatibilná architektúra: %s</string>
     <string name="multirt_config_title">Java VMy</string>
     <string name="multirt_config_add">Pridať nový</string>
-    <string name="multirt_config_add_subtitle">Naimportovať novú Java VM</string>
     <string name="multirt_title">Runtime Manažer</string>
     <string name="multirt_subtitle">Spravovať nainštalované Java VMy</string>
     <string name="multirt_progress_caching">Caching...</string>
@@ -220,20 +153,7 @@
     <string name="multirt_nocompartiblert">Nebolo možné nájsť kompatibilnú verziu Java Runtime. Táto verzia vyžaduje Javu %d alebo novšiu.</string>
     <string name="multirt_nojava8rt">Nebolo možné nájsť Javu 8. Ak chceš používať túto možnosť, musíš nainštalovať Javu 8.</string>
     <string name="multirt_delete_runtime">Vymaž runtime</string>
-    <string name="compat_117_message">Minecraft 21w10a+ vyžaduje OpenGL 3.2 Core Profile. Bohužiaľ, tvoj grafický čip nepodporuje OpenGL ES 3.0 alebo novší, ale existujú ďalšie možnosti ktoré môžeš použiť pre spustenie týchto verzií. Stlačením tlačidla OK potvrdíš spúšťanie a stlačením tlačidla Zrušiť ukončíš spúšťanie.</string>
-    <string name="compat_11x_playanyway">Napriek tomu hrať</string>
-    <string name="pvc_gameDirectory">Zložka hry</string>
     <string name="pvc_jvmArgs">JVM argumenty</string>
-    <string name="pvc_title">Nastavenia po verzii</string>
-    <string name="storage_warning_title">Zmeny úložiska</string>
-    <string name="storage_warning_text"><![CDATA[Kvôli novo Vynucovanie rozsahovo úložisku od Googlu pridanému v Androide 10 a vyšším sme prinútení presunúť zložku hry do privátnej priečinka programu. <br/> Nový priečinok pre súbory pojal je <b>Android/data/%s/files/</b> (tiež prístupná pomocou poskytovateľa úložiska v Prieskumníkovi súborov).<br/> Ak potrebujete skopírovať svoje herné súbory, prosím skopírujte všetko z pôvodnej zložky na <b>games/PojavLauncher</b> ručne.]]></string>
-    <string name="control_offset_title">Odsadenie ovládania</string>
-    <string name="control_top_offset">Horné odsadenie: </string>
-    <string name="control_right_offset">pravé odsadenie: </string>
-    <string name="control_bottom_offset">spodné odsadenie: </string>
-    <string name="control_left_offset">ľavé odsadenie: </string>
-    <string name="preference_control_offset_title">Strana odsadenie ovládania</string>
-    <string name="preference_control_offset_description">Nastaviť vlastné odsadenie pre každú stranu obrazovky</string>
     <string name="preference_mouse_start_title">Spustiť so zapnutou virtuálnou myškou</string>
     <string name="preference_mouse_start_description">Virtuálna myš sa objaví pri štarte hry</string>
     <string name="preference_video_title">Video a renderer</string>
@@ -260,13 +180,9 @@
     <string name="preference_gyro_invert_x_axis_description">Invertovať vodorovnú os</string>
     <string name="preference_gyro_invert_y_axis_description">Invertovať vertikálnu os</string>
     <string name="preference_back_title">Späť na poslednú stránku</string>
-    <string name="gles_hack_none">Nezmenšiť textúry</string>
-    <string name="gles_hack_always">Vydeliť všetky textúry dvoma</string>
-    <string name="gles_hack_sometimes">Vydeliť veľké textúry dvoma alebo štyrmi</string>
     <string name="unnamed">Nepomenované</string>
     <string name="profiles_latest_snapshot">Najnovší snapshot</string>
     <string name="profiles_latest_release">Najnovšie vydanie (release)</string>
-    <string name="profiles_editing">Nastavenia profilu</string>
     <string name="profiles_profile_name">Názov</string>
     <string name="profiles_profile_version">Verzia</string>
     <string name="global_delete">Vymazať</string>
@@ -274,10 +190,8 @@
     <string name="pedit_renderer">Renderer</string>
     <string name="arc_capes_title">Cosmetica Capeky</string>
     <string name="arc_capes_desc">Aktivuje capeky (plášte) Cosmetica. Pre info navštívte https://cosmetica.cc. Pre ich funkčnosť je potrebný OptiFine.</string>
-    <string name="migrated_profile_str">%s konfigurácia verzií</string>
     <string name="notif_channel_name">Všeobecné nastavenia notifikácií</string>
     <string name="lazy_service_default_title">Pojav Foreground Service</string>
-    <string name="lazy_service_default_description">Táto služba sa využíva na vykonávanie dlhotrvajúcich operácií</string>
     <string name="use_global_default">(Použiť predvolené nastavenie)</string>
     <string name="default_control">Predvolené ovládacie prvky</string>
     <string name="progresslayout_tasks_in_progress">Počet prebiehajúcich operácií: %d</string>
@@ -289,7 +203,6 @@
     <string name="main_add_account">Pridať účet</string>
     <string name="tasks_ongoing">Operácie stále prebiehajú, prosím počkajte</string>
     <string name="no_saved_accounts">Žiadne prihlásené účty</string>
-    <string name="downloading_versions">Sťahovanie zoznamu verzií…</string>
     <string name="mc_download_failed">Nepodarilo sa stiahnuť Minecraft. Pre viac informácií klikni \"Zobraziť viac\".</string>
     <string name="xerr_unknown">Xbox Live API Error %d</string>
     <string name="xerr_no_account">Zdá sa, že nemáš Xbox Live účet. Prosím, prihlás sa do https://minecraft.net/ a skús to znova.</string>
