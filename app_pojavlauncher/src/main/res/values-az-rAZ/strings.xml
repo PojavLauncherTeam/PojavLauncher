@@ -2,26 +2,16 @@
 <resources>
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition Android üçün)</string>
-    <string name="app_motd">Cihazınızda Minecraft: Java Edition-ı işə salın!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
     <string name="login_online_username_hint">E-poçt və ya istifadəçi adı</string>
-    <string name="login_online_password_hint">Şifrə</string>
-    <string name="login_online_check_keeplogin">Keep me logged in</string>
     <string name="login_online_login_label">Daxil ol</string>
-    <string name="login_error_invalid_username">Etibarsız istifadəçi adı. İstifadəçi adı 3-16 simvol diapazonunda olmalıdır, yalnız A-Z, a-z, 0-9 və alt xəttdən ibarət olmalıdır.</string>
-    <string name="login_error_exist_username">Bu istifadəçi adı artıq mövcuddur</string>
-    <string name="login_microsoft">Microsoft login</string>
-    <string name="login_select_account">Hesab seçin</string>
-    <string name="login_title_no_saved_account">Hesab tapılmadı !</string>
-    <string name="login_dialog_no_saved_account">Yadda saxlanmış hesabınız yoxdur.\nİlk giriş zamanı hesabı yadda saxlamaq üçün <b>\"Hesabımı yadda saxla\"</b> seçimindən istifadə edin.</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"Kontekst menyusunu açmaq üçün yuxarı orta dişli ikonaya toxunun ⚙\nFərdiləşdirmə üçün düyməyə toxunun: onun klaviaturasını redaktə edin, ölçüsünü dəyişin, silin və ya fərdiləşdirin."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Bu hesab silinəcək!</string>
     <!-- AlertDialog title -->
-    <string name="alerttitle_install_jre">Java Runtime quraşdırılır %s (.tar.xz)</string>
     <string name="alerttitle_installmod">Mod quraşdırıcısını seçin</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher gözlənilmədən çökdü</string>
@@ -31,75 +21,47 @@
     <!-- Toast messages -->
     <string name="toast_permission_denied">Yaddaşı oxumaq/yazmaq icazəsi tələb olunur!</string>
     <string name="toast_optifine_success">Uğurlu quraşdırma</string>
-    <string name="toast_uninstalljre_done">Java Runtime proqramının silinməsi tamamlandı</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
     <string name="mcl_tab_wiki">Viki</string>
-    <string name="mcl_tab_console">İnkişaf konsolu</string>
-    <string name="mcl_tab_crash">Çökmə qeydi</string>
     <!-- MCLauncherActivity: Account status -->
-    <string name="mcl_account_connected">Qoşulub</string>
-    <string name="mcl_account_local">Yerli</string>
     <!-- MCLauncherActivity: Strings -->
-    <string name="mcl_version_msg">Minecraft %s oynamağa hazırdır</string>
     <string name="mcl_launch_cleancache">Keş faylları təmizlənir</string>
     <string name="mcl_launch_downloading">Endirilir %s</string>
     <string name="mcl_launch_downloading_progress">"Endirilir %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Resursları endirməyə hazırlanır</string>
-    <string name="mcl_launch_error_localmode">Yerli hesabla daxil olduqda Minecraft qanuni olaraq quraşdırıla bilməz. Davam etmək üçün onlayn hesaba keçin.</string>
     <string name="mcl_options">Seçimlər</string>
-    <string name="mcl_option_modinstall">Mod quraşdırıcısını işə salın (Forge, LabyMod, Fabric və s...)</string>
-    <string name="mcl_option_modinstallwitharg">Mod quraşdırıcısını işə salın (xüsusi arqumentlərlə)</string>
     <string name="mcl_option_customcontrol">Fərdi idarəetmələr</string>
-    <string name="mcl_option_settings">Parametrlər</string>
-    <string name="mcl_option_about">Haqqında</string>
     <string name="mcl_setting_title_use_surface_view">Alternativ səth renderindən istifadə edin</string>
     <string name="mcl_setting_subtitle_use_surface_view">Gpu ilə əlaqəli ssenarilərdə performansa kömək edə bilər</string>
-    <string name="mcl_setting_title_uninstalljre">Java Runtime proqramını sil</string>
-    <string name="mcl_setting_subtitle_uninstalljre">[Başladıcının yenidən işə salınması tələb olunur] Bu, Java Runtime-ı yenidən quraşdırmağınıza imkan verir</string>
-    <string name="mcl_setting_title_freeform">Minecraft-ı sərbəst forma rejimində işə salın</string>
-    <string name="mcl_setting_subtitle_freeform">Üzən pəncərədə Minecraft-ı işə salın. Android 7.0+ tələb edir</string>
-    <string name="mcl_setting_title_hide_sidebar">Yan menyunu Gizlət</string>
-    <string name="mcl_setting_subtitle_hide_sidebar">Köhnə v1 UI-yə üstünlük verən nostalji insanlar bunu bəyənə bilər. Sizə daha çox tam ekran təcrübəsi təqdim edir.</string>
     <string name="mcl_setting_title_ignore_notch">Çərçivəyə məhəl qoyma</string>
     <string name="mcl_setting_subtitle_ignore_notch">Çərçivəyə məhəl qoymayın və onun altındakı ekranı genişləndirin.\nSizə daha təsirli təcrübə təqdim edir.</string>
     <string name="mcl_setting_title_resolution_scaler">Rezulyasiya Şkalası</string>
     <string name="mcl_setting_subtitle_resolution_scaler">Oyunun rezulyasiyasını azaltmağa imkan verir. 100% tam rezulyasiyadır</string>
     <string name="mcl_setting_title_longpresstrigger">Uzun basdıqdan sonra nə qədər müddət ərzində işə salınacaq</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Bloku qırmaq və əşyaları atmaq üçün nə qədər müddət basılı tutmaq lazım olduğunu dəyişdir.</string>
-    <string name="mcl_setting_title_backtorightmouse">Geri düyməsini siçanın sağ düyməsi kimi qəbul edin</string>
-    <string name="mcl_setting_subtitle_backtorightmouse">Bəzi qurğular siçanın sağ düyməsini geri düymə kimi qəbul edir. Xarici siçan istifadə edirsinizsə, bunu aktivləşdirməlisiniz.</string>
-    <string name="mcl_setting_title_flat_button_style">Düz düymə tərzi</string>
-    <string name="mcl_setting_subtitle_flat_button_style">İdarəetmə düyməsinin üslubunu düzə dəyişdirmək üçün bunu aktiv edin.</string>
     <string name="mcl_setting_title_buttonscale">Nəzarət düymələrinin miqyası</string>
     <string name="mcl_setting_subtitle_buttonscale">Düymələr çox kiçikdirsə, onları böyüdün.</string>
     <string name="mcl_setting_title_mousescale">Siçan miqyası</string>
     <string name="mcl_setting_subtitle_mousescale">Virtual siçanın ölçüsünü dəyişdirin.</string>
     <string name="mcl_setting_title_javaargs">JVM Launch arqumentləri</string>
     <string name="mcl_setting_subtitle_javaargs">Ehtiyatlı olun, məlumat olmadan dəyişdirilərsə, bu, oyunun çökməsinə səbəb ola bilər.</string>
-    <string name="mcl_setting_category_general">Ümumi parametrlər</string>
-    <string name="mcl_setting_category_scaling">Ölçmə parametrləri</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (bütün versiyalar, sürətli)</string>
     <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - (bütün versiyalar, orta, aşağı cihaz uyğunluğu)</string>
     <string name="mcl_setting_renderer_angle">ANGLE - (buraxılış 1.17+, orta)</string>
-    <string name="mcl_setting_category_veroption">Versiya növü versiya siyahısında olacaq</string>
     <string name="mcl_setting_veroption_release">Buraxın</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Köhnə-alfa</string>
     <string name="mcl_setting_veroption_oldbeta">Köhnə-beta</string>
     <string name="mcl_setting_java_sandbox">Sandbox .jar quraşdırıcısı</string>
     <string name="mcl_setting_java_sandbox_subtitle">.jar quraşdırıcısını işə salarkən sandbox təhlükəsizlik menecerinin mövcudluğuna nəzarət edin.</string>
-    <string name="mcl_version_clone">Klon</string>
     <!-- Global strings -->
-    <string name="global_edit">Düzəliş et</string>
     <string name="global_error">Xəta</string>
-    <string name="global_warinng">Xәbәrdarlıq</string>
     <string name="global_load">Yüklə</string>
     <string name="global_name">Ad</string>
-    <string name="global_remove">Sil</string>
     <string name="global_clone">Klon</string>
     <string name="global_restart">Yenidən başlat</string>
     <string name="global_save">Saxla</string>
@@ -111,13 +73,9 @@
     <string name="global_default">Defolt</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Proqram/Oyun %d kodu ilə çıxdı, ətraflı məlumat üçün latestlog.txt-ə baxın.</string>
-    <string name="mcn_exit_call">Çıxış</string>
     <string name="mcn_exit_confirm">Zorla bağlamaq istədiyinizə əminsiniz?</string>
-    <string name="mcn_check_fail_lwjgl">LWJGL3 quraşdırılmayıb!</string>
     <string name="mcn_check_fail_vulkan_support">Zink (Vulkan) rendereri bu cihazda dəstəklənmir!</string>
     <!-- MainActivity: Control buttons -->
-    <string name="control_toggle">GUI</string>
-    <string name="control_keyboard">Klaviatura</string>
     <string name="control_chat">Söhbət</string>
     <string name="control_debug">Sazlama</string>
     <string name="control_primary">Pri</string>
@@ -139,8 +97,6 @@
     <string name="control_viewout">Log çıxışı</string>
     <string name="control_adebug">Sazlama daxil et</string>
     <string name="control_customkey">Fərdi açar kodunu göndərin</string>
-    <string name="control_scaleup">Ölçünü böyüt</string>
-    <string name="control_scaledown">Ölçünü kiçilt</string>
     <!-- ImportControlActivity Strings -->
     <string name="import_control_label">Kontrolları idxal et</string>
     <string name="import_control_invalid_file">Keçərsiz və ya zədələnmiş fayl</string>
@@ -152,45 +108,24 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
-    <string name="customctrl_edit">Düzəliş edilir %s</string>
-    <string name="customctrl_remove">%s Silinsin?</string>
-    <string name="customctrl_keyname">Açar kodu</string>
     <string name="customctrl_toggle">Dəyişdirilə bilən</string>
     <string name="customctrl_size">Ölçü</string>
-    <string name="customctrl_size_width">Genişlik</string>
-    <string name="customctrl_size_height">Hündürlük</string>
     <string name="customctrl_mapping">Mapping</string>
     <string name="customctrl_orientation">Oriyentasiya</string>
     <string name="customctrl_background_color">Arxafon rəngi</string>
     <string name="customctrl_corner_radius">Künc radiusu</string>
     <string name="customctrl_stroke_width">Ştrix eni</string>
     <string name="customctrl_stroke_color">Ştrix rəngi</string>
-    <string name="customctrl_dynamicpos">Manual Dinamik mövqe</string>
-    <string name="customctrl_dynamicpos_x">Dinamik X</string>
-    <string name="customctrl_dynamicpos_y">Dinamik Y</string>
-    <string name="customctrl_transparency_bg">Arxafon şəffaflığı</string>
     <string name="customctrl_button_opacity">Düymənin qeyri-şəffaflığı</string>
-    <string name="customctrl_keycombine">Açar kombinasiyası</string>
     <string name="customctrl_addbutton">Düymə əlavə et</string>
     <string name="customctrl_addbutton_drawer">Düymə çəkməcəsi əlavə edin</string>
     <string name="customctrl_addbutton_joystick">Joystik əlavə edin</string>
     <string name="customctrl_addsubbutton">Alt düymə əlavə et</string>
-    <string name="customctrl_add_subbutton_message">n°%d alt düymə əlavə edildi!</string>
     <string name="customctrl_selectdefault">Defolt Control json seçin</string>
     <string name="customctrl_export">İdarəediciləri idxal et</string>
     <string name="main_share_logs">Log faylını paylaşın</string>
     <string name="main_install_jar_file">.jar quraşdırın</string>
-    <string name="main_options">Seçimlər</string>
     <string name="main_play">Oyna</string>
-    <string name="main_welcome">Xoş Gəlmişsiniz, %s</string>
-    <string name="main_infodev">Məlumat (TƏRTİBATCI)</string>
-    <string name="main_switchuser">İstifadəçi dıyişdir</string>
-    <string name="main_version">Versiya:</string>
-    <string name="main_nocrash">Heç bir nasazlıq aşkar edilmədi</string>
-    <string name="main_nolog">Log yoxdur.</string>
-    <string name="main_no_news_feed">Xəbər əldə etmək alınmadı!</string>
-    <string name="auto_ram_subtitle">Avtomatik RAM tənzimləyicisini işə salır</string>
-    <string name="auto_ram_title">Auto RAM</string>
     <string name="autoram_info_msg">Yaddaş %d MB olaraq təyin edildi</string>
     <string name="mcl_setting_check_libraries">Yüklədikdən sonra kitabxanaları yoxlayın</string>
     <string name="mcl_setting_check_libraries_subtitle">Bu seçim başlatma qurğusunu kitabxana hashının mövcud olub-olmadığını yoxlamağa məcbur edir. Qırılmış endirmələrin qarşısını alır.</string>
@@ -206,7 +141,6 @@
     <string name="customctrl_passthru">Siçan keçidi</string>
     <string name="customctrl_swipeable">Sürüşdürülə bilər</string>
     <string name="customctrl_forward_lock">İrəli kilid</string>
-    <string name="customctrl_rounded">Dairəvi</string>
     <string name="memory_warning_msg">Boş RAM-ın cari miqdarı (%d) ayrılmış RAM-dan (%d) azdır və bu, çökmələrə səbəb ola bilər. Oyun qəzaya uğrayarsa, yeri dəyişdirin.</string>
     <string name="mcl_memory_allocation">Yaddaşın ayrılması</string>
     <string name="mcl_memory_allocation_subtitle">Minecraft-a nə qədər yaddaş verildiyinə nəzarət edir</string>
@@ -214,7 +148,6 @@
     <string name="multirt_runtime_incompatiblearch">Uyğun olmayan arxitektura: %s</string>
     <string name="multirt_config_title">Java VMs</string>
     <string name="multirt_config_add">Yeni əlavə et</string>
-    <string name="multirt_config_add_subtitle">Yeni Java VM-ni idxal et</string>
     <string name="multirt_title">Runtime Meneceri</string>
     <string name="multirt_subtitle">Quraşdırılmış Java VM-lərini idarə edin</string>
     <string name="multirt_progress_caching">Keşləmə...</string>
@@ -224,20 +157,7 @@
     <string name="multirt_nocompartiblert">Heç bir uyğun gələn Java Runtime tapılmadı. Bu versiya Java %d və ya daha yenisini tələb edir.</string>
     <string name="multirt_nojava8rt">Java 8-i tapmaq mümkün deyil. Bu seçimdən istifadə etmək üçün Java 8-i quraşdırmalısınız.</string>
     <string name="multirt_delete_runtime">Runtime-ı silin</string>
-    <string name="compat_117_message">Minecraft 21w10a+ OpenGL 3.2 əsas profilini tələb edir. Təəssüf ki, qrafik çipiniz OpenGL ES 3.0 və ya daha yüksək versiyaları dəstəkləmir, lakin bu versiyaları işə salmaq üçün quraşdıra biləcəyiniz bəzi əlavə resurslar var. Quraşdırmanı təsdiqləmək üçün OK düyməsini basın və işə başlamağı dayandırmaq üçün Ləğv et düyməsini basın.</string>
-    <string name="compat_11x_playanyway">Hər halda oynayın</string>
-    <string name="pvc_gameDirectory">Oyun kataloqu</string>
     <string name="pvc_jvmArgs">JVM arqumentləri</string>
-    <string name="pvc_title">Per-version parametrləri</string>
-    <string name="storage_warning_title">Yaddaş dəyişiklikləri</string>
-    <string name="storage_warning_text"><![CDATA[Google'un Android 10 və daha yüksək versiyalarda əlavə edilmiş yeni əhatəli yaddaş tətbiqləri səbəbindən bizdən oyun kataloqunu tətbiq üçün şəxsi qovluğa köçürməyimiz tələb olunur.<br /> Pojav faylları üçün yeni qovluq <b>Android/data/%s/files/</b>-dir (həmçinin fayl tədqiqatçınızda yaddaş provayderindən istifadə etməklə əldə edilə bilər).<br /> Oyun fayllarınızı kopyalamağınız lazımdırsa, lütfən, hər şeyi əl ilə buradakı orijinal qovluqdan köçürün <b>oyunlar/PojavLauncher</b>.]]></string>
-    <string name="control_offset_title">Kontrol ofseti</string>
-    <string name="control_top_offset">Top offset: </string>
-    <string name="control_right_offset">sağ offset: </string>
-    <string name="control_bottom_offset">alt offset: </string>
-    <string name="control_left_offset">sol offset: </string>
-    <string name="preference_control_offset_title">Yan offsetlərə idarə et</string>
-    <string name="preference_control_offset_description">Ekranın hər tərəfinə xüsusi offset təyin edin</string>
     <string name="preference_mouse_start_title">Virtual siçan ilə başlayın</string>
     <string name="preference_mouse_start_description">Bu seçim aktiv olduqda virtual siçan başlanğıcda görünür</string>
     <string name="preference_video_title">Video və renderer</string>
@@ -267,13 +187,9 @@
     <string name="preference_gyro_smoothing_title">Gyro hamarlamağı aktivləşdirin</string>
     <string name="preference_gyro_smoothing_description">Gecikmə qarşılığında titrəməni azaldın.</string>
     <string name="preference_back_title">Son ekrana qayıdın</string>
-    <string name="gles_hack_none">Teksturaları daraltmayın</string>
-    <string name="gles_hack_always">Bütün teksturaları 2-yə bölür</string>
-    <string name="gles_hack_sometimes">Böyük teksturaları /2 və ya /4-ə bölür</string>
     <string name="unnamed">Adsız</string>
     <string name="profiles_latest_snapshot">Ən son snapshot</string>
     <string name="profiles_latest_release">Ən son buraxılış</string>
-    <string name="profiles_editing">Profilə düzəliş et</string>
     <string name="profiles_profile_name">Ad</string>
     <string name="profiles_profile_version">Versiya</string>
     <string name="global_delete">Sil</string>
@@ -281,10 +197,8 @@
     <string name="pedit_renderer">Renderer</string>
     <string name="arc_capes_title">Cosmetica Capes</string>
     <string name="arc_capes_desc">Cosmetica-dan (əvvəllər Arc) qapaqları işə salır. Əlavə məlumat üçün https://cosmetica.cc saytına daxil olun. OptiFine tələb edir.</string>
-    <string name="migrated_profile_str">%s versiya konfiqurasiyası</string>
     <string name="notif_channel_name">Ümumi</string>
     <string name="lazy_service_default_title">Pojav Önplan Xidməti</string>
-    <string name="lazy_service_default_description">Xidmət uzunmüddətli əməliyyatları yerinə yetirmək üçün istifadə olunur</string>
     <string name="mcl_setting_veroption_installed">Quraşdırıldı</string>
     <string name="use_global_default">(Qlobal defoltdan istifadə edin)</string>
     <string name="default_control">Defolt kontrollar</string>
@@ -299,7 +213,6 @@
     <string name="main_add_account">Hesab əlavə edin</string>
     <string name="tasks_ongoing">Tapşırıqlar icra olunur, lütfən gözləyin</string>
     <string name="no_saved_accounts">Saxlanmış hesab yoxdur</string>
-    <string name="downloading_versions">Versiya siyahısı endirilir…</string>
     <string name="mc_download_failed">Minecraftı yükləmək alınmadı! Buna, pis şəbəkə bağlantısı, səhv yerləşdirilmiş fayllar və s. səbəb ola bilər..</string>
     <string name="xerr_unknown">Naməlum Xbox Live API xətası %d</string>
     <string name="xerr_no_account">Görünür, sizin Xbox Live hesabınız yoxdur. Lütfən, https://minecraft.net/ saytında bir dəfə daxil olun və yenidən cəhd edin.</string>
@@ -358,8 +271,6 @@
     <string name="of_dl_failed_to_scrape">OptiFine quraşdırılması üçün məlumat toplamaq alınmadı</string>
     <string name="of_dl_progress">Endirilir %s</string>
     <string name="create_profile_optifine">OptiFine profili yaradın</string>
-    <string name="preference_gyro_damper_window_title">Hamarlama vaxtı</string>
-    <string name="preference_gyro_damper_window_description">Gecikmə qarşılığında titrəməni azaldın. onu söndürmək üçün 0</string>
     <string name="hint_search_modpack">Mod paketləri axtarın</string>
     <string name="preference_vulkan_driver_system_title">Sistem vulkan sürücüsündən istifadə edin</string>
     <string name="preference_vulkan_driver_system_description">Başladıcını Adreno GPU-larda Turnip əvəzinə sistem Vulkan sürücüsündən istifadə etməyə məcbur edin. Yalnız Zink və Vulkandan istifadə edən modlara təsir edir.</string>
