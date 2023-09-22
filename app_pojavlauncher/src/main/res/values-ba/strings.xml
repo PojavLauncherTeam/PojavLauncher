@@ -32,9 +32,11 @@
     <string name="mcl_setting_veroption_oldalpha">Иҫке альфалар</string>
     <string name="mcl_setting_veroption_oldbeta">Иҫке беталар</string>
     <!-- Global strings -->
+    <string name="global_edit">Үҙгәртергә</string>
     <string name="global_error">Хата</string>
     <string name="global_load">Йөкләү</string>
     <string name="global_name">Исем</string>
+    <string name="global_remove">Юйырға</string>
     <string name="global_save">Һаҡларға</string>
     <string name="global_waiting">Көтөп тороғоҙ</string>
     <!-- MainActivity: strings -->
