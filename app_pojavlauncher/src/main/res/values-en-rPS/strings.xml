@@ -32,7 +32,6 @@
     <string name="mcl_launch_download_assets">Gettin\' th\' treasure ready</string>
     <string name="mcl_option_customcontrol">custom trigger</string>
     <string name="mcl_setting_title_ignore_notch">Don\'t see notch</string>
-    <string name="mcl_setting_subtitle_ignore_notch">Don\'t see notch and extend th\' screen under it.\nGives you more treasure.</string>
     <string name="mcl_setting_title_resolution_scaler">Map size scaler</string>
     <string name="mcl_setting_veroption_release">Release</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
@@ -55,7 +54,6 @@
     <string name="control_more4"></string>
 -->
     <string name="customctrl_addbutton">Add buttn</string>
-    <string name="customctrl_selectdefault">Choose normal Control json</string>
     <string name="main_play">Sail</string>
     <string name="profiles_latest_snapshot">Latest prototype</string>
     <string name="profiles_latest_release">Latest ship</string>
