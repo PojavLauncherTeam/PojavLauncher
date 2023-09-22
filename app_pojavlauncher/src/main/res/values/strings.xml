@@ -259,7 +259,7 @@
     <string name="preference_enable_gyro_title">Enable gyroscope controls</string>
     <string name="preference_enable_gyro_description">Enabling this will allow you to turn in-game by turning your phone.</string>
     <string name="preference_gyro_sensitivity_title">Gyroscope controls sensitivity</string>
-    <string name="preference_gyro_sensitivity_description">Adjust the sensitivity of the gyroscope controls.</string>
+    <string name="preference_gyro_sensitivity_description">Adjust the sensitivity of gyroscope controls.</string>
     <string name="toast_turn_on_gyro">Enable gyroscope controls first to use this!</string>
     <string name="preference_gyro_sample_rate_title">Gyroscope sampling rate</string>
     <string name="preference_gyro_sample_rate_description">If you have performance issues with gyroscope controls, increase this.</string>
