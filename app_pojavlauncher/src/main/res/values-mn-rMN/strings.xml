@@ -35,9 +35,7 @@
     <string name="mcl_options">Тохиргоо</string>
     <string name="mcl_option_customcontrol">Control солих</string>
     <string name="mcl_setting_title_use_surface_view">Alternate surface rendering-ийг ашиглах</string>
-    <string name="mcl_setting_subtitle_use_surface_view">Gpu-тай холбоотой хувилбаруудын явцад туслах болно</string>
     <string name="mcl_setting_title_ignore_notch">Булангийн хүрээг орихох</string>
-    <string name="mcl_setting_subtitle_ignore_notch">Булангийн хүрээг орхисоноор\nилүү том дэлгэцийн хүрээ аваарай.</string>
     <!-- Global strings -->
     <!-- MainActivity: strings -->
     <!-- MainActivity: Control buttons -->
@@ -85,9 +83,9 @@
     <string name="customctrl_addbutton">Товч нэм</string>
     <string name="customctrl_addbutton_drawer">Товч нэмэх(шургуулаг)</string>
     <string name="customctrl_addbutton_joystick">Joystick нэмэх</string>
+    <string name="pvc_gameDirectory">Тоглоомын байрлал </string>
     <string name="pvc_jvmArgs">JVM-үүд</string>
     <string name="preference_mouse_start_title">Хулгантай эхлүүлэх</string>
-    <string name="preference_mouse_start_description">Хулгантай эхлэх болон</string>
     <string name="preference_video_title">Видёо болон уншуулагч</string>
     <string name="of_dl_progress">Татаж байна %s</string>
 </resources>
