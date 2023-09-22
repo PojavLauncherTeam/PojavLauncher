@@ -34,22 +34,21 @@
     <string name="mcl_options">Options</string>
     <string name="mcl_option_customcontrol">Custom controls</string>
     <string name="mcl_setting_title_use_surface_view">Utilitza la renderització de superfície alternativa</string>
-    <string name="mcl_setting_subtitle_use_surface_view">Pots ajudar al rendiment en escenaris lligats al GPU</string>
     <string name="mcl_setting_title_ignore_notch">Ignorar notch</string>
     <string name="mcl_setting_title_resolution_scaler">Escalador de resolució</string>
-    <string name="mcl_setting_subtitle_resolution_scaler">Permet reduir la resolució del joc. 100% és resolució completa</string>
-    <string name="mcl_setting_title_longpresstrigger">How long will trigger after long press</string>
-    <string name="mcl_setting_subtitle_longpresstrigger">Change trigger time for long press in destroy block and drop item.</string>
     <string name="mcl_setting_subtitle_javaargs">Vés amb compte, això podria provocar un bloqueig del joc si es modifica sense coneixement.</string>
     <string name="mcl_setting_category_renderer">Renderitzador</string>
     <string name="mcl_setting_veroption_release">Release</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Old-beta</string>
+    <string name="mcl_version_clone">Clone</string>
     <!-- Global strings -->
+    <string name="global_edit">Edit</string>
     <string name="global_error">Error</string>
     <string name="global_load">Load</string>
     <string name="global_name">Name</string>
+    <string name="global_remove">Remove</string>
     <string name="global_clone">Clone</string>
     <string name="global_restart">Restart</string>
     <string name="global_save">Save</string>
@@ -87,7 +86,6 @@
 -->
     <string name="customctrl_size">Mida</string>
     <string name="customctrl_addbutton">Add button</string>
-    <string name="customctrl_selectdefault">Select default Control json</string>
     <string name="main_play">Play</string>
     <string name="profiles_profile_name">Name</string>
     <string name="pedit_renderer">Renderitzador</string>
