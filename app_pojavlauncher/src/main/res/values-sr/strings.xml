@@ -34,18 +34,10 @@
     <string name="mcl_options">Опције</string>
     <string name="mcl_option_customcontrol">Прилагођене контроле</string>
     <string name="mcl_setting_title_use_surface_view">Користите алтернате сурфаце рендеринг</string>
-    <string name="mcl_setting_subtitle_use_surface_view">Мође помоћи перформансама у гпу боунд сценаријима</string>
     <string name="mcl_setting_title_ignore_notch">Игнориши ноч екрана</string>
-    <string name="mcl_setting_subtitle_ignore_notch">Игнороше ноч и продужи игру испод.\nДаје већу величину игри.</string>
     <string name="mcl_setting_title_resolution_scaler">Резолуција</string>
-    <string name="mcl_setting_subtitle_resolution_scaler">Промени резолуцију игре. 100% је пуна
-резолуција</string>
-    <string name="mcl_setting_title_longpresstrigger">Колико дуго ће се активирати након дугог притиска</string>
-    <string name="mcl_setting_subtitle_longpresstrigger">Промените време за дуготрајни притисак за уништавање блока и испуштању предмета.</string>
     <string name="mcl_setting_title_buttonscale">Величина дугма (контрола)</string>
-    <string name="mcl_setting_subtitle_buttonscale">Повећајте ако су премали.</string>
     <string name="mcl_setting_title_mousescale">Величина Миша</string>
-    <string name="mcl_setting_subtitle_mousescale">Промените величину виртуалног миша.</string>
     <string name="mcl_setting_title_javaargs">ЈВМ Покретање аргументи</string>
     <string name="mcl_setting_subtitle_javaargs">Будите пажљиви, ваша игра се може покварити ако незнате ово користити.</string>
     <string name="mcl_setting_category_renderer">Рендерер</string>
@@ -53,10 +45,13 @@
     <string name="mcl_setting_veroption_snapshot">Снепшот</string>
     <string name="mcl_setting_veroption_oldalpha">Стари-Аlpha</string>
     <string name="mcl_setting_veroption_oldbeta">Стари-Бета</string>
+    <string name="mcl_version_clone">Клонирај</string>
     <!-- Global strings -->
+    <string name="global_edit">Измени</string>
     <string name="global_error">Грешка</string>
     <string name="global_load">Учитај</string>
     <string name="global_name">Име</string>
+    <string name="global_remove">Уклони</string>
     <string name="global_clone">Клонирај</string>
     <string name="global_restart">Рестарт</string>
     <string name="global_save">Сачувај</string>
@@ -105,23 +100,18 @@
     <string name="customctrl_addbutton">Додај дугме</string>
     <string name="customctrl_addbutton_drawer">Додај ладицу дугмета</string>
     <string name="customctrl_addsubbutton">Додај суб-дугме</string>
-    <string name="customctrl_selectdefault">Селектујте опћенити Control json</string>
-    <string name="main_install_jar_file">Инсталирај .jar</string>
     <string name="main_play">Играј</string>
     <string name="autoram_info_msg">Меморија подешена на %d МБ</string>
     <string name="mcl_setting_check_libraries">Провери библиотеке послије скидања</string>
-    <string name="mcl_setting_check_libraries_subtitle">Ова опција форсира лаунчер да провери библиотекин хеш ако је доступна. Штити од покварених скидања.</string>
     <string name="dl_library_sha_fail">Библиотека %s је оштећена и опет ће се скидати</string>
     <string name="dl_library_sha_unknown">Библиотека %s се не може проверити, надамо се да је добро</string>
     <string name="dl_library_sha_pass">Библиотека %s је добро и може се користити</string>
     <string name="mcl_disable_gestures">Искључи покрете</string>
     <string name="mcl_disable_gestures_subtitle">Искључи покрете, као држи да се уништи блок, и притисни да се стави блок.</string>
     <string name="mcl_setting_title_mousespeed">Брзина миша</string>
-    <string name="mcl_setting_subtitle_mousespeed">Промјени брзину софтверског миша</string>
     <string name="customctrl_passthru">Миш прпћи-кроз</string>
     <string name="memory_warning_msg">Слободна меморија (%d) је нижа од подешене меморије (%d), то можда заустави функцију игре. Промените подешену меморију ако се то деси.</string>
     <string name="mcl_memory_allocation">Подешена меморија</string>
-    <string name="mcl_memory_allocation_subtitle">Колико меморије може да корости Minecraft</string>
     <string name="profiles_profile_name">Име</string>
     <string name="pedit_renderer">Рендерер</string>
     <string name="of_dl_progress">Преузимање %s</string>
