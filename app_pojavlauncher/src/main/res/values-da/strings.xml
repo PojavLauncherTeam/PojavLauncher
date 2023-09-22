@@ -19,9 +19,7 @@
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_launch_downloading_progress">"Henter %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_setting_title_use_surface_view">Brug alternativ overflade rendering</string>
-    <string name="mcl_setting_subtitle_use_surface_view">Kan hjælpe ydeevne i gpu bundne scenarier</string>
     <string name="mcl_setting_title_ignore_notch">Ignorer kamerahak</string>
-    <string name="mcl_setting_subtitle_ignore_notch">Ignorer kamerahakket og udvider skærmen under det.\nGiver dig en mere fordybende oplevelse.</string>
     <!-- Global strings -->
     <!-- MainActivity: strings -->
     <!-- MainActivity: Control buttons -->
