@@ -35,9 +35,7 @@
     <string name="mcl_option_customcontrol">Anpassade kontroller</string>
     <string name="mcl_setting_title_use_surface_view">Använd alternera ytrendering</string>
     <string name="mcl_setting_title_ignore_notch">Ignorera visningsflärp</string>
-    <string name="mcl_setting_subtitle_ignore_notch">Ignorera notch och förlänger skärmen under den.\nGer dig en mer uppslukande upplevelse.</string>
     <string name="mcl_setting_title_resolution_scaler">Upplösningsskalare</string>
-    <string name="mcl_setting_subtitle_resolution_scaler">Gör att du kan minska spelupplösningen. 100% är full upplösning</string>
     <!-- Global strings -->
     <string name="global_default">Standard</string>
     <!-- MainActivity: strings -->
@@ -60,27 +58,22 @@
     <string name="control_more4"></string>
 -->
     <string name="customctrl_addbutton">Lägg till knapp</string>
-    <string name="customctrl_selectdefault">Välj standard Control json</string>
     <string name="main_play">Spela</string>
     <string name="dl_library_sha_pass">Biblioteket %s är bra och användbart</string>
     <string name="mcl_disable_gestures">Inaktivera gester</string>
     <string name="mcl_disable_gestures_subtitle">Inaktiverar gester, såsom håll för att bryta block, och tryck för att placera ett block.</string>
     <string name="mcl_setting_title_mousespeed">Mus hastighet</string>
-    <string name="mcl_setting_subtitle_mousespeed">Ändrar hastigheten på mjukvarumusen</string>
     <string name="customctrl_passthru">Mus pass-thru</string>
     <string name="customctrl_swipeable">Svepbar</string>
     <string name="memory_warning_msg">Det aktuella beloppet av gratis RAM (%d) är lägre än allokerat RAM (%d), vilket kan leda till krascher. Ändra tilldelningen om spelet kraschar.</string>
     <string name="mcl_memory_allocation">Minne tilldelat</string>
-    <string name="mcl_memory_allocation_subtitle">Kontrollerar hur mycket minne som ges till Minecraft</string>
     <string name="multirt_runtime_corrupt">Skadad Java körtid</string>
-    <string name="multirt_config_title">Java VMs</string>
     <string name="multirt_config_add">Lägg till ny</string>
     <string name="multirt_title">Chef för körtid</string>
-    <string name="multirt_subtitle">Hantera installerade Java VMs</string>
     <string name="multirt_progress_caching">Cachning...</string>
     <string name="multirt_config_setdefault">Ange standard</string>
     <string name="multirt_config_setdefault_already">Standard</string>
-    <string name="multirt_config_removeerror_last">Du måste ha minst en Java Runtime installerad</string>
+    <string name="pvc_gameDirectory">Spelkatalog</string>
     <string name="pvc_jvmArgs">JVM argument</string>
     <string name="of_dl_progress">Laddar ned %s</string>
 </resources>
