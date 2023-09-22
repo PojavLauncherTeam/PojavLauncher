@@ -34,15 +34,9 @@
     <string name="mcl_options">Баптау</string>
     <string name="mcl_option_customcontrol">Өңделген басқару</string>
     <string name="mcl_setting_title_ignore_notch">Камера ойығын елемеу</string>
-    <string name="mcl_setting_subtitle_ignore_notch">Камера ойығын елемей, экранды астына шығарып кеңейтеді.\nКүштірек тәжірибе береді.</string>
     <string name="mcl_setting_title_resolution_scaler">Өлшем масштабтау</string>
-    <string name="mcl_setting_subtitle_resolution_scaler">Ойын өлшемін азайтуға мүмкіндік береді. 100% деген толық өлшем</string>
-    <string name="mcl_setting_title_longpresstrigger">Басып ұстау ұзақтығы</string>
-    <string name="mcl_setting_subtitle_longpresstrigger">Блок сындыру мен зат лақтыру үшін басып ұстау ұзықтығын өзгерту.</string>
     <string name="mcl_setting_title_buttonscale">Батырма масштабы</string>
-    <string name="mcl_setting_subtitle_buttonscale">Батырма тым кішкентай болса, үлкейтіңіз.</string>
     <string name="mcl_setting_title_mousescale">Меңзер масштабы</string>
-    <string name="mcl_setting_subtitle_mousescale">Меңзер көлемін өзгертеді.</string>
     <string name="mcl_setting_title_javaargs">JVM қосу аргументі</string>
     <string name="mcl_setting_subtitle_javaargs">Абайлаңыз, мұны түсінбей баптасаңыз, ойын іркілуі мүмкін.</string>
     <string name="mcl_setting_category_renderer">Рендерер</string>
@@ -50,10 +44,13 @@
     <string name="mcl_setting_veroption_snapshot">Снапшот</string>
     <string name="mcl_setting_veroption_oldalpha">Ескі альфа</string>
     <string name="mcl_setting_veroption_oldbeta">Ескі бета</string>
+    <string name="mcl_version_clone">Клондау</string>
     <!-- Global strings -->
+    <string name="global_edit">Өңдеу</string>
     <string name="global_error">Қате</string>
     <string name="global_load">Жүктеу</string>
     <string name="global_name">Атауы</string>
+    <string name="global_remove">Алып тастау</string>
     <string name="global_clone">Клондау</string>
     <string name="global_restart">Қайта жүктеу</string>
     <string name="global_save">Сақтау</string>
@@ -92,7 +89,6 @@
     <string name="customctrl_toggle">Ауысқыш</string>
     <string name="customctrl_size">Көлемі</string>
     <string name="customctrl_addbutton">Батырма қосу</string>
-    <string name="customctrl_selectdefault">Әдепкі басқару json-ын таңдау</string>
     <string name="main_play">Ойнау</string>
     <string name="autoram_info_msg">%d МБ жад берілді</string>
     <string name="mcl_setting_check_libraries">Жүктегеннен кейін кітапханаларды тексереді</string>
