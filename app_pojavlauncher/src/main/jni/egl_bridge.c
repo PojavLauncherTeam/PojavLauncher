@@ -228,7 +228,7 @@ int pojavInitOpenGL() {
 
     // NOTE: Override for now.
     const char *renderer = getenv("POJAV_RENDERER");
-    if (strcmp("opengles2_vgpu", renderer, 14) == 0) {
+    if (strncmp("opengles2_vgpu", renderer, 14) == 0) {
         pojav_environ->config_renderer = RENDERER_VGPU;
     }
     if (strncmp("opengles", renderer, 8) == 0) {
