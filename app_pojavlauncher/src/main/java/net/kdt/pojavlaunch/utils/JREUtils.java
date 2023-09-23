@@ -447,6 +447,8 @@ public class JREUtils {
         if(LOCAL_RENDERER == null) return null;
         String renderLibrary;
         switch (LOCAL_RENDERER){
+            case "opengles2_vgpu":
+                renderLibrary = "libvgpu.so"; break;
             case "opengles2":
             case "opengles2_5":
             case "opengles3":

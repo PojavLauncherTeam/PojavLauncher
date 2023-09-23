@@ -56,12 +56,14 @@ struct PotatoBridge potatoBridge;
 
 #define RENDERER_GL4ES 1
 #define RENDERER_VK_ZINK 2
+#define RENDERER_VGPU 3
 #define RENDERER_VULKAN 4
 
 EXTERNAL_API void pojavTerminate() {
     printf("EGLBridge: Terminating\n");
 
     switch (pojav_environ->config_renderer) {
+        case RENDERER_VGPU:
         case RENDERER_GL4ES: {
             eglMakeCurrent_p(potatoBridge.eglDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
             eglDestroySurface_p(potatoBridge.eglDisplay, potatoBridge.eglSurface);
@@ -83,7 +85,7 @@ EXTERNAL_API void pojavTerminate() {
 
 JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_utils_JREUtils_setupBridgeWindow(JNIEnv* env, ABI_COMPAT jclass clazz, jobject surface) {
     pojav_environ->pojavWindow = ANativeWindow_fromSurface(env, surface);
-    if(pojav_environ->config_renderer == RENDERER_GL4ES) {
+    if(pojav_environ->config_renderer == RENDERER_GL4ES||pojav_environ->config_renderer == RENDERER_VGPU) {
         gl_setup_window();
     }
 }
@@ -96,6 +98,7 @@ Java_net_kdt_pojavlaunch_utils_JREUtils_releaseBridgeWindow(ABI_COMPAT JNIEnv *e
 
 EXTERNAL_API void* pojavGetCurrentContext() {
     switch (pojav_environ->config_renderer) {
+        case RENDERER_VGPU:
         case RENDERER_GL4ES:
             return (void *)eglGetCurrentContext_p();
         case RENDERER_VK_ZINK:
@@ -110,6 +113,7 @@ void loadSymbols() {
         case RENDERER_VK_ZINK:
             dlsym_OSMesa();
             break;
+        case RENDERER_VGPU:
         case RENDERER_GL4ES:
             //inside glbridge
             break;
@@ -224,6 +228,9 @@ int pojavInitOpenGL() {
 
     // NOTE: Override for now.
     const char *renderer = getenv("POJAV_RENDERER");
+    if (strcmp("opengles2_vgpu", renderer, 14) == 0) {
+        pojav_environ->config_renderer = RENDERER_VGPU;
+    }
     if (strncmp("opengles", renderer, 8) == 0) {
         pojav_environ->config_renderer = RENDERER_GL4ES;
         // Symbols are loaded inside gl_bridge
@@ -233,7 +240,7 @@ int pojavInitOpenGL() {
         setenv("GALLIUM_DRIVER","zink",1);
         loadSymbols();
     }
-    if(pojav_environ->config_renderer == RENDERER_GL4ES) {
+    if(pojav_environ->config_renderer == RENDERER_GL4ES||pojav_environ->config_renderer == RENDERER_VGPU) {
         if(gl_init()) {
             gl_setup_window();
             return 1;
@@ -276,6 +283,7 @@ void pojavSwapBuffers() {
         return;
     }
     switch (pojav_environ->config_renderer) {
+        case RENDERER_VGPU:
         case RENDERER_GL4ES: {
             gl_swap_buffers();
         } break;
@@ -296,7 +304,7 @@ void pojavSwapBuffers() {
 
 
 EXTERNAL_API void pojavMakeCurrent(void* window) {
-    if(pojav_environ->config_renderer == RENDERER_GL4ES) {
+    if(pojav_environ->config_renderer == RENDERER_GL4ES||pojav_environ->config_renderer == RENDERER_VGPU) {
         gl_make_current((render_window_t*)window);
     }
     if (pojav_environ->config_renderer == RENDERER_VK_ZINK) {
@@ -323,7 +331,7 @@ EXTERNAL_API void* pojavCreateContext(void* contextSrc) {
 
     pojavInitOpenGL();
 
-    if (pojav_environ->config_renderer == RENDERER_GL4ES) {
+    if (pojav_environ->config_renderer == RENDERER_GL4ES||pojav_environ->config_renderer == RENDERER_VGPU) {
         return gl_init_context(contextSrc);
     }
 
@@ -360,6 +368,7 @@ Java_org_lwjgl_opengl_GL_getNativeWidthHeight(JNIEnv *env, ABI_COMPAT jobject th
 }
 EXTERNAL_API void pojavSwapInterval(int interval) {
     switch (pojav_environ->config_renderer) {
+        case RENDERER_VGPU:
         case RENDERER_GL4ES: {
             gl_swap_interval(interval);
         } break;
