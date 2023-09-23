@@ -1,39 +1,39 @@
-name: Android CI
+姓名:Android CI
 
-on:
-  pull_request:
-    branches-ignore:
-      - 'l10n_v3_openjdk2'
-    types: [ opened, reopened ]
-  push:
-    branches-ignore:
-      - 'l10n_v3_openjdk2'
-  workflow_dispatch:
+在……之上:
+pull_request:
+分支忽略:
+-'l10n_v3_openjdk2'
+类型:[已打开,重新打开]
+推:
+分支忽略:
+-'l10n_v3_openjdk2'
+workflow_dispatch:
 
-jobs:
-  build:
-    runs-on: ubuntu-22.04
-    env:
-      GPLAY_KEYSTORE_PASSWORD: ${{ secrets.GPLAY_KEYSTORE_PASSWORD }}
-      CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+工作:
+建立:
+run-on:ubuntu-22.04
+env:
+GPlay_KEYSTORE_PASSWORD:${{secrets.GPLAY_KEYSTORE_PASSWORD}}
+CurseForge_API_KEY:${{secrets.CURSEFORGE_API_KEY}}
+步骤:
+-姓名:结帐
+uses:操作/签出@v3
 
-      - name: Set up JDK 8
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin'
-          java-version: '8'
+-姓名:设置JDK8
+uses:操作/设置-java@v3
+和……一起:
+分布:'temurin'
+java版:'8'
 
-      - name: Get JRE 8
-        uses: dawidd6/action-download-artifact@v2
-        with:
-          workflow: build.yml
-          path: app_pojavlauncher/src/main/assets/components/jre
-          workflow_conclusion: success
-          repo: PojavLauncherTeam/android-openjdk-build-multiarch
-          branch: buildjre8
+-姓名:获取JRE8
+uses:dawidd6/action-download-artifact@v2
+和……一起:
+工作流程:build.yml
+路径:app_pojavlauncher/src/main/assets/components/jre
+workflow_consultation:成功
+回购:PojavLauncher团队/android-openjdk-build-multiarch
+分支:buildjre8
           name: jre8-pojav
 
       - name: Get JRE17
