@@ -31,7 +31,7 @@
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_launch_cleancache">正在清理缓存</string>
     <string name="mcl_launch_downloading">正在下载 %s</string>
-    <string name="mcl_launch_downloading_progress">"正在下载 %s (%.2f MB / %.2f MB)"</string>
+    <string name="mcl_launch_downloading_progress">"正在下载 %s（%.2fMB / %.2fMB）"</string>
     <string name="mcl_launch_download_assets">正在准备下载资源</string>
     <string name="mcl_options">选项</string>
     <string name="mcl_option_customcontrol">自定义控制键</string>
@@ -201,7 +201,7 @@
     <string name="pedit_java_runtime">Java 运行时</string>
     <string name="pedit_renderer">渲染器</string>
     <string name="arc_capes_title">Cosmetica 披风</string>
-    <string name="arc_capes_desc">启用来自 Cosmetica（原 Arc ）的披风。欲了解更多信息，请访问 https://arcapes.com。需要 OptiFine。</string>
+    <string name="arc_capes_desc">启用来自 Cosmetica（原 Arc）的披风。欲了解更多信息，请访问 https://arcapes.com。需要 OptiFine。</string>
     <string name="notif_channel_name">常规</string>
     <string name="lazy_service_default_title">Pojav 前台服务</string>
     <string name="mcl_setting_veroption_installed">已安装</string>
@@ -220,7 +220,7 @@
     <string name="no_saved_accounts">没有已保存的账户</string>
     <string name="mc_download_failed">下载 Minecraft 失败！这可能是由于网络连接不良、文件放置错误等。</string>
     <string name="xerr_unknown">未知的 Xbox Live API 错误 %d</string>
-    <string name="xerr_no_account">您似乎没有 Xbox Live 账户。请在 https://minecraft.net/上登录一次，然后重试。</string>
+    <string name="xerr_no_account">您似乎没有 Xbox Live 账户。请在 https://minecraft.net/ 上登录一次，然后重试。</string>
     <string name="xerr_adult_verification">需要成人验证您的账户。</string>
     <string name="xerr_child">您的账户是儿童账户，需要添加到家庭中方能登录。</string>
     <string name="minecraft_not_owned">这个账户似乎没有 Minecraft 配置文件。如果您有 Xbox Game Pass，请登录 https://minecraft.net/ 并进行设置。</string>
