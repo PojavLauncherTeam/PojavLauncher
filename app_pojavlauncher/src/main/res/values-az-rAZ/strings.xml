@@ -35,10 +35,17 @@
     <string name="mcl_options">Seçimlər</string>
     <string name="mcl_option_customcontrol">Fərdi idarəetmələr</string>
     <string name="mcl_setting_title_use_surface_view">Alternativ səth renderindən istifadə edin</string>
+    <string name="mcl_setting_subtitle_use_surface_view">GPU ilə əlaqəli ssenarilərdə performansa kömək edə bilər.</string>
     <string name="mcl_setting_title_ignore_notch">Çərçivəyə məhəl qoyma</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Çərçivəyə məhəl qoymur və onun altındakı ekranı genişləndirir.\nSizə daha təsirli təcrübə təqdim edir.</string>
     <string name="mcl_setting_title_resolution_scaler">Rezulyasiya Şkalası</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">Oyunun rezulyasiyasını azaltmağa imkan verir. 100% tam rezulyasiyadır.</string>
+    <string name="mcl_setting_title_longpresstrigger">Uzun basma gecikməsini işə salın</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Blokları qırmaq və elementləri atmaq üçün uzun basma gecikməsini dəyişdirin.</string>
     <string name="mcl_setting_title_buttonscale">Nəzarət düymələrinin miqyası</string>
+    <string name="mcl_setting_subtitle_buttonscale">Düymələr çox kiçikdirsə, onları böyüdün.</string>
     <string name="mcl_setting_title_mousescale">Siçan miqyası</string>
+    <string name="mcl_setting_subtitle_mousescale">Virtual siçanın ölçüsünü dəyişdirin.</string>
     <string name="mcl_setting_title_javaargs">JVM Launch arqumentləri</string>
     <string name="mcl_setting_subtitle_javaargs">Ehtiyatlı olun, məlumat olmadan dəyişdirilərsə, bu, oyunun çökməsinə səbəb ola bilər.</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
