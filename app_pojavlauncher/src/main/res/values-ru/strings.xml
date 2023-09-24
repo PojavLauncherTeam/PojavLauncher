@@ -104,7 +104,7 @@
     <!-- ImportControlActivity Strings -->
     <string name="import_control_label">Импортирование управления</string>
     <string name="import_control_invalid_file">Недопустимый или повреждённый файл</string>
-    <string name="import_control_import_button">импортировать управление</string>
+    <string name="import_control_import_button">импортировать раскладку</string>
     <string name="import_control_verifying_file">Идёт проверка файла. Подождите и попробуйте еще раз.</string>
     <string name="import_control_invalid_name">Недопустимое имя файла или файл с таким именем уже существует</string>
     <string name="import_control_done">Импортирование завершено</string>
