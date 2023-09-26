@@ -30,7 +30,7 @@
 #define ELF_XWORD Elf64_Xword
 #define ELF_DYN Elf64_Dyn
 
-#define ADRENO_POSSIBLE
+//#define ADRENO_POSSIBLE
 
 typedef void* (*loader_dlopen_t)(const char* filename, int flags, const void* caller_addr);
 
