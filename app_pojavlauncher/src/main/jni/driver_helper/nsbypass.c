@@ -30,7 +30,7 @@
 #define ELF_XWORD Elf64_Xword
 #define ELF_DYN Elf64_Dyn
 
-//#define ADRENO_POSSIBLE
+#define ADRENO_POSSIBLE
 
 typedef void* (*loader_dlopen_t)(const char* filename, int flags, const void* caller_addr);
 
@@ -104,6 +104,12 @@ bool linker_ns_load(const char* lib_search_path) {
     // FoldCraft got trolled because they copied the
     // old broken code verbatim and didn't even test it thoroughly
     android_link_namespaces(driver_namespace, NULL, "ld-android.so");
+    // Also establish links to use the libnativeloader(_lazy).so libraries
+    // from the global namespace. This is a workaround for an EMUI issue where
+    // the newly loaded libnativeloader_lazy for some unknown reason links
+    // to itself and causes a deadlock when loading the vulkan driver.
+    android_link_namespaces(driver_namespace, NULL, "libnativeloader.so");
+    android_link_namespaces(driver_namespace, NULL, "libnativeloader_lazy.so");
     dlclose(ld_android_handle);
     return true;
 #endif
