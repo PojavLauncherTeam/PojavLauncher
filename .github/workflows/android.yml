@@ -96,7 +96,7 @@ jobs:
       - name: Upload onto the Google Play testing track
         continue-on-error: true
         if: github.repository_owner == 'PojavLauncherTeam' && github.ref_name == 'v3_openjdk'
-        uses: r0adkll/upload-google-play@v1.1.1
+        uses: r0adkll/upload-google-play@v1.1.2
         with:
           serviceAccountJsonPlainText: ${{ secrets.GPLAY_SERVICE_JSON }}
           packageName: net.kdt.pojavlaunch
