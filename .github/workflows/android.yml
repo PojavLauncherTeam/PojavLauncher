@@ -103,7 +103,6 @@ jobs:
           releaseFiles: out/app-gplay.aab
           track: internal
           inAppUpdatePriority: 5
-          changesNotSentForReview: true
 
       - name: Upload APK (without runtime)
         uses: actions/upload-artifact@v3
