@@ -99,6 +99,12 @@ public class ControlLayout extends FrameLayout {
 		if (controlLayout == null) return;
 
 		mLayout = controlLayout;
+		
+
+		// Joystick(s) first, to workaround the touch dispatch
+		for(ControlJoystickData joystick : mLayout.mJoystickDataList){
+			addJoystickView(joystick);
+		}
 
 		//CONTROL BUTTON
 		for (ControlData button : controlLayout.mControlDataList) {
@@ -110,12 +116,6 @@ public class ControlLayout extends FrameLayout {
 			ControlDrawer drawer = addDrawerView(drawerData);
 			if(mModifiable) drawer.areButtonsVisible = true;
 		}
-
-		// Joystick(s)
-		for(ControlJoystickData joystick : mLayout.mJoystickDataList){
-			addJoystickView(joystick);
-		}
-
 
 		mLayout.scaledAt = LauncherPreferences.PREF_BUTTONSIZE;
 
