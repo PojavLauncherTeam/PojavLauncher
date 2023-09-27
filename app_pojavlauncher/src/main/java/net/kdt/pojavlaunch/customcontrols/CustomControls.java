@@ -13,16 +13,18 @@ public class CustomControls {
     public float scaledAt;
 	public List<ControlData> mControlDataList;
 	public List<ControlDrawerData> mDrawerDataList;
+	public List<ControlJoystickData> mJoystickDataList;
 	public CustomControls() {
-		this(new ArrayList<>(), new ArrayList<>());
+		this(new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
 	}
 
 
 
-	public CustomControls(List<ControlData> mControlDataList, List<ControlDrawerData> mDrawerDataList) {
+	public CustomControls(List<ControlData> mControlDataList, List<ControlDrawerData> mDrawerDataList, List<ControlJoystickData> mJoystickDataList) {
 		this.mControlDataList = mControlDataList;
 		this.mDrawerDataList = mDrawerDataList;
-        this.scaledAt = 100f;
+		this.mJoystickDataList = mJoystickDataList;
+		this.scaledAt = 100f;
 	}
 	
 	// Generate default control
@@ -47,18 +49,18 @@ public class CustomControls {
 		this.mControlDataList.add(new ControlData(ctx, R.string.control_inventory, new int[]{LwjglGlfwKeycode.GLFW_KEY_E}, "${margin} * 3 + ${width} * 2", "${bottom} - ${margin}", true));
         
         ControlData shiftData = new ControlData(ctx, R.string.control_shift, new int[]{LwjglGlfwKeycode.GLFW_KEY_LEFT_SHIFT}, "${margin} * 2 + ${width}", "${screen_height} - ${margin} * 2 - ${height} * 2", true);
-        shiftData.isToggle = true;
+		shiftData.isToggle = true;
 		this.mControlDataList.add(shiftData);
 		this.mControlDataList.add(new ControlData(ctx, R.string.control_jump, new int[]{LwjglGlfwKeycode.GLFW_KEY_SPACE}, "${right} - ${margin} * 2 - ${width}", "${bottom} - ${margin} * 2 - ${height}", true));
 
-		//The default controls are conform to the V2
-		version = 4;
+		//The default controls are conform to the V3
+		version = 6;
 	}
 
 	
 	public void save(String path) throws IOException {
-		//Current version is the V2.5 so the version as to be marked as 4 !
-		version = 4;
+		//Current version is the V3.0 so the version as to be marked as 6 !
+		version = 6;
 
 		Tools.write(path, Tools.GLOBAL_GSON.toJson(this));
 	}

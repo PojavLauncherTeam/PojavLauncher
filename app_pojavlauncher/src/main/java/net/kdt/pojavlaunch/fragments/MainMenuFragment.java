@@ -1,9 +1,9 @@
 package net.kdt.pojavlaunch.fragments;
 
+import static net.kdt.pojavlaunch.Tools.shareLog;
+
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.DocumentsContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.kdt.mcgui.mcVersionSpinner;
 
 import net.kdt.pojavlaunch.CustomControlsActivity;
 import net.kdt.pojavlaunch.R;
@@ -20,11 +21,12 @@ import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.extra.ExtraConstants;
 import net.kdt.pojavlaunch.extra.ExtraCore;
 import net.kdt.pojavlaunch.progresskeeper.ProgressKeeper;
-
-import java.io.File;
+import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
 
 public class MainMenuFragment extends Fragment {
     public static final String TAG = "MainMenuFragment";
+
+    private mcVersionSpinner mVersionSpinner;
 
     public MainMenuFragment(){
         super(R.layout.fragment_launcher);
@@ -39,6 +41,7 @@ public class MainMenuFragment extends Fragment {
 
         ImageButton mEditProfileButton = view.findViewById(R.id.edit_profile_button);
         Button mPlayButton = view.findViewById(R.id.play_button);
+        mVersionSpinner = view.findViewById(R.id.mc_version_spinner);
 
         mNewsButton.setOnClickListener(v -> Tools.openURL(requireActivity(), Tools.URL_HOME));
         mCustomControlButton.setOnClickListener(v -> startActivity(new Intent(requireContext(), CustomControlsActivity.class)));
@@ -47,24 +50,24 @@ public class MainMenuFragment extends Fragment {
             runInstallerWithConfirmation(true);
             return true;
         });
-        mEditProfileButton.setOnClickListener(v -> Tools.swapFragment(requireActivity(), ProfileEditorFragment.class, ProfileEditorFragment.TAG, true, null));
+        mEditProfileButton.setOnClickListener(v -> mVersionSpinner.openProfileEditor(requireActivity()));
 
         mPlayButton.setOnClickListener(v -> ExtraCore.setValue(ExtraConstants.LAUNCH_GAME, true));
 
-        mShareLogsButton.setOnClickListener((v) -> {
-            Uri contentUri = DocumentsContract.buildDocumentUri(getString(R.string.storageProviderAuthorities), Tools.DIR_GAME_HOME + "/latestlog.txt");
+        mShareLogsButton.setOnClickListener((v) -> shareLog(requireContext()));
 
-            Intent shareIntent = new Intent();
-            shareIntent.setAction(Intent.ACTION_SEND);
-            shareIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
-            shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            shareIntent.setType("text/plain");
-
-            Intent sendIntent = Intent.createChooser(shareIntent, "latestlog.txt");
-            startActivity(sendIntent);
+        mNewsButton.setOnLongClickListener((v)->{
+            Tools.swapFragment(requireActivity(), SearchModFragment.class, SearchModFragment.TAG, true, null);
+            return true;
         });
-
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mVersionSpinner.reloadProfiles();
+    }
+
     private void runInstallerWithConfirmation(boolean isCustomArgs) {
         if (ProgressKeeper.getTaskCount() == 0)
             Tools.installMod(requireActivity(), isCustomArgs);

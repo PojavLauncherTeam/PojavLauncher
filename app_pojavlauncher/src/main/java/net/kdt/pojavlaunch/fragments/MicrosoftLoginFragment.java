@@ -1,5 +1,6 @@
 package net.kdt.pojavlaunch.fragments;
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -27,7 +28,12 @@ public class MicrosoftLoginFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mWebview = (WebView) inflater.inflate(R.layout.fragment_microsoft_login, container, false);
-        CookieManager.getInstance().removeAllCookie();  // The non deprecated method is not async
+        CookieManager.getInstance().removeAllCookies(this::onCookiesRemoved);
+        return mWebview;
+    }
+
+    @SuppressLint("SetJavaScriptEnabled") // required for Microsoft log-in
+    public void onCookiesRemoved(Boolean b) {
         WebSettings settings = mWebview.getSettings();
 
         settings.setJavaScriptEnabled(true);
@@ -42,8 +48,6 @@ public class MicrosoftLoginFragment extends Fragment {
                 "&response_type=code" +
                 "&scope=service%3A%3Auser.auth.xboxlive.com%3A%3AMBI_SSL" +
                 "&redirect_url=https%3A%2F%2Flogin.live.com%2Foauth20_desktop.srf");
-
-        return mWebview;
     }
 
     /* Expose webview actions to others */

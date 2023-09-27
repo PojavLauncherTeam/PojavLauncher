@@ -86,12 +86,39 @@
 			app:layout_constraintTop_toBottomOf="@+id/installmod_btn3" />
 
 		<Button
+			android:id="@+id/button"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
+			android:layout_marginStart="2dp"
 			android:layout_marginTop="2dp"
 			android:background="@drawable/control_button"
+			android:onClick="toggleKeyboard"
 			android:text="Keyboard"
-			android:onClick="toggleKeyboard"/>
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent" />
+
+		<Button
+			android:id="@+id/button3"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="2dp"
+			android:layout_marginTop="2dp"
+			android:background="@drawable/control_button"
+			android:onClick="performCopy"
+			android:text="Copy"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/button" />
+
+		<Button
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="2dp"
+			android:layout_marginTop="2dp"
+			android:background="@drawable/control_button"
+			android:onClick="performPaste"
+			android:text="Paste"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/button3" />
 
 		<Button
 			android:id="@+id/installmod_mouse_pri"

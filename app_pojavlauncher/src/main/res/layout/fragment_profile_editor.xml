@@ -12,7 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="@dimen/_22sdp">
+        android:paddingHorizontal="@dimen/fragment_padding_medium">
 
         <TextView
             android:id="@+id/vprof_editor_profile_name_sub"
@@ -27,14 +27,14 @@
             android:id="@+id/vprof_editor_profile_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_24sdp"
+            android:layout_marginTop="@dimen/padding_extra_large"
             android:background="@drawable/background_line"
             android:textSize="@dimen/_13ssp"
 
             android:ems="10"
             android:hint="@string/unnamed"
             android:inputType="textPersonName"
-            android:paddingHorizontal="@dimen/_12sdp"
+            android:paddingHorizontal="@dimen/padding_heavy"
             app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -51,10 +51,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:layout_marginEnd="@dimen/_4sdp"
+            android:layout_marginEnd="@dimen/padding_medium"
             android:background="@drawable/background_line"
-            android:hint="Select a version"
-            android:paddingHorizontal="@dimen/_12sdp"
+            android:hint="@string/version_select_hint"
+            android:paddingHorizontal="@dimen/padding_heavy"
             android:textSize="@dimen/_13ssp"
 
             app:layout_constraintEnd_toStartOf="@+id/vprof_editor_version_button"
@@ -63,8 +63,11 @@
 
         <Button
             android:id="@+id/vprof_editor_version_button"
-            android:layout_width="@dimen/_72sdp"
+            android:layout_width="wrap_content"
             android:layout_height="0dp"
+            android:paddingHorizontal="@dimen/padding_large"
+            android:paddingVertical="0px"
+
 
             android:text="@string/global_select"
 
@@ -86,11 +89,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:layout_marginEnd="@dimen/_4sdp"
+            android:layout_marginEnd="@dimen/padding_medium"
 
             android:background="@drawable/background_line"
             android:hint="@string/use_global_default"
-            android:paddingHorizontal="@dimen/_12sdp"
+            android:paddingHorizontal="@dimen/padding_heavy"
             android:textSize="@dimen/_13ssp"
 
             app:layout_constraintEnd_toStartOf="@id/vprof_editor_ctrl_button"
@@ -99,9 +102,9 @@
 
         <Button
             android:id="@+id/vprof_editor_ctrl_button"
-            android:layout_width="@dimen/_72sdp"
+            android:layout_width="wrap_content"
             android:layout_height="0dp"
-
+            android:paddingHorizontal="@dimen/padding_large"
             android:text="@string/global_select"
 
 
@@ -127,7 +130,7 @@
             android:ems="10"
             android:hint="@string/use_global_default"
             android:inputType="text"
-            android:paddingHorizontal="@dimen/_12sdp"
+            android:paddingHorizontal="@dimen/padding_heavy"
             android:textSize="@dimen/_13ssp"
 
             app:layout_constraintTop_toBottomOf="@+id/vprof_editor_ctrl_spinner" />
@@ -147,12 +150,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:layout_marginEnd="@dimen/_4sdp"
+            android:layout_marginEnd="@dimen/padding_medium"
             android:background="@drawable/background_line"
             android:ems="10"
 
             android:hint=".minecraft"
-            android:paddingHorizontal="@dimen/_12sdp"
+            android:paddingHorizontal="@dimen/padding_heavy"
             android:textSize="@dimen/_13ssp"
 
             app:layout_constraintEnd_toStartOf="@id/vprof_editor_path_button"
@@ -161,8 +164,9 @@
 
         <Button
             android:id="@+id/vprof_editor_path_button"
-            android:layout_width="@dimen/_72sdp"
+            android:layout_width="wrap_content"
             android:layout_height="0dp"
+            android:paddingHorizontal="@dimen/padding_large"
             android:text="@string/global_select"
 
             app:layout_constraintBottom_toBottomOf="@id/vprof_editor_path"
@@ -184,11 +188,11 @@
             android:layout_marginTop="32dp"
             android:background="@drawable/background_line"
             android:paddingVertical="0px"
-            android:textSize="@dimen/_13ssp"
+
 
             app:layout_constraintTop_toBottomOf="@+id/vprof_editor_path"
 
-            tools:paddingVertical="@dimen/_16sdp" />
+            tools:paddingVertical="@dimen/_12sdp" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -221,7 +225,7 @@
 
 
             app:layout_constraintTop_toBottomOf="@+id/vprof_editor_spinner_runtime"
-            tools:paddingVertical="@dimen/_16sdp" />
+            tools:paddingVertical="@dimen/_12sdp" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -240,24 +244,25 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="26dp"
             android:text="@string/global_save"
+            android:layout_marginEnd="@dimen/padding_medium"
             app:layout_constraintEnd_toStartOf="@+id/vprof_editor_delete_button"
 
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/vprof_editor_profile_renderer"
-            app:layout_constraintWidth_percent="0.45" />
+             />
 
         <com.kdt.mcgui.MineButton
             android:id="@+id/vprof_editor_delete_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-
+            android:layout_marginStart="@dimen/padding_medium"
             android:text="@string/global_delete"
             app:layout_constraintEnd_toEndOf="parent"
 
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/vprof_editor_save_button"
             app:layout_constraintTop_toTopOf="@+id/vprof_editor_save_button"
-            app:layout_constraintWidth_percent="0.45" />
+             />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

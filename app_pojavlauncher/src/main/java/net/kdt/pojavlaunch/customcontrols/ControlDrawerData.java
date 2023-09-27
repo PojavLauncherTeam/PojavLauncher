@@ -10,13 +10,11 @@ import static net.kdt.pojavlaunch.customcontrols.ControlDrawerData.Orientation.R
 import static net.kdt.pojavlaunch.customcontrols.ControlDrawerData.Orientation.UP;
 import static net.kdt.pojavlaunch.customcontrols.ControlDrawerData.Orientation.FREE;
 
-import androidx.annotation.Keep;
-
 @androidx.annotation.Keep
 public class ControlDrawerData {
 
-    public ArrayList<ControlData> buttonProperties;
-    public ControlData properties;
+    public final ArrayList<ControlData> buttonProperties;
+    public final ControlData properties;
     public Orientation orientation;
 
     @androidx.annotation.Keep
@@ -59,7 +57,7 @@ public class ControlDrawerData {
     }
 
     public ControlDrawerData(ArrayList<ControlData> buttonProperties){
-        this(buttonProperties, new ControlData("Drawer", new int[] {}, Tools.currentDisplayMetrics.widthPixels/2, Tools.currentDisplayMetrics.heightPixels/2));
+        this(buttonProperties, new ControlData("Drawer", new int[] {}, Tools.currentDisplayMetrics.widthPixels/2f, Tools.currentDisplayMetrics.heightPixels/2f));
     }
 
     public ControlDrawerData(ArrayList<ControlData> buttonProperties, ControlData properties){

@@ -7,10 +7,6 @@
 
             <corners android:radius="@dimen/_2sdp" />
 
-            <padding
-                android:bottom="@dimen/_12sdp"
-                android:top="@dimen/_11sdp" />
-
             <stroke
                 android:width="@dimen/_2sdp"
                 android:color="@color/minebutton_color"/>

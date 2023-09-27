@@ -1,7 +1,6 @@
 package net.kdt.pojavlaunch.extra;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 /**
  * Listener class for the ExtraCore
@@ -15,6 +14,7 @@ public interface ExtraListener<T> {
      * @param value The new value as a string
      * @return Whether you consume the Listener (stop listening)
      */
+    @SuppressWarnings("SameReturnValue")
     boolean onValueSet(String key, @NonNull T value);
 
 }

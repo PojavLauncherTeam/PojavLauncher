@@ -6,7 +6,6 @@ import static net.kdt.pojavlaunch.prefs.LauncherPreferences.DEFAULT_PREF;
 
 import android.content.Context;
 import android.os.Build;
-import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -52,6 +51,7 @@ public class Touchpad extends FrameLayout implements GrabListener{
         init();
     }
 
+    @SuppressWarnings("accessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         // MotionEvent reports input details from the touch screen
@@ -130,7 +130,7 @@ public class Touchpad extends FrameLayout implements GrabListener{
     /** Enable the touchpad */
     public void enable(){
         setVisibility(VISIBLE);
-        placeMouseAt(currentDisplayMetrics.widthPixels / 2, currentDisplayMetrics.heightPixels / 2);
+        placeMouseAt(currentDisplayMetrics.widthPixels / 2f, currentDisplayMetrics.heightPixels / 2f);
     }
 
     /** Disable the touchpad and hides the mouse */

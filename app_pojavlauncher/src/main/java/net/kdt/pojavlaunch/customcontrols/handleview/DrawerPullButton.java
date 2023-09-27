@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.drawable.VectorDrawable;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -31,9 +30,9 @@ public class DrawerPullButton extends View {
         canvas.drawArc(0,-getHeight(),getWidth(), getHeight(), 0, 180, true, mPaint);
 
         mPaint.setColor(Color.WHITE);
-        mDrawable.setBounds(0, 0, canvas.getHeight(), canvas.getHeight());
+        mDrawable.setBounds(0, 0, getHeight(), getHeight());
         canvas.save();
-        canvas.translate((canvas.getWidth()-canvas.getHeight())/2, 0);
+        canvas.translate((getWidth()-getHeight())/2f, 0);
         mDrawable.draw(canvas);
         canvas.restore();
     }

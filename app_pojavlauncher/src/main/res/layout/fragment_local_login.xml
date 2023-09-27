@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_app"
+    android:paddingHorizontal="@dimen/fragment_padding_medium"
     >
 
     <View
@@ -13,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_200sdp"
 
-        android:background="@drawable/menu_background"
+        android:background="@drawable/background_card"
         android:translationZ="-1dp"
 
         app:layout_constraintBottom_toBottomOf="parent"
@@ -32,15 +33,15 @@
     <com.kdt.mcgui.MineEditText
         android:id="@+id/login_edit_email"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_37sdp"
 
         android:layout_marginHorizontal="@dimen/_25sdp"
 
-        android:layout_marginTop="@dimen/_35sdp"
+        android:layout_marginTop="@dimen/_60sdp"
         android:imeOptions="flagNoExtractUi"
         android:inputType="textEmailAddress"
         android:textSize="@dimen/_16ssp"
-        app:layout_constraintBottom_toBottomOf="@+id/login_menu"
+
         app:layout_constraintEnd_toEndOf="@+id/login_menu"
         app:layout_constraintStart_toStartOf="@+id/login_menu"
         app:layout_constraintTop_toTopOf="@+id/login_menu"
@@ -51,7 +52,7 @@
         android:layout_width="0dp"
         android:layout_height="@dimen/_42sdp"
         android:layout_marginHorizontal="@dimen/_25sdp"
-        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/padding_heavy"
         android:onClick="loginMC"
         android:text="@string/login_online_login_label"
 

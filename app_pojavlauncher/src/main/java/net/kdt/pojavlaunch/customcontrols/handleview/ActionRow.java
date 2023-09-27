@@ -7,14 +7,12 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.widget.Button;
 import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 import androidx.core.math.MathUtils;
 
 import net.kdt.pojavlaunch.R;
-import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.customcontrols.buttons.ControlInterface;
 
 /**
@@ -22,11 +20,11 @@ import net.kdt.pojavlaunch.customcontrols.buttons.ControlInterface;
  */
 public class ActionRow extends LinearLayout {
 
-    public static int SIDE_LEFT = 0x0;
-    public static int SIDE_TOP = 0x1;
-    public static int SIDE_RIGHT = 0x2;
-    public static int SIDE_BOTTOM = 0x3;
-    public static int SIDE_AUTO = 0x4;
+    public static final int SIDE_LEFT = 0x0;
+    public static final int SIDE_TOP = 0x1;
+    public static final int SIDE_RIGHT = 0x2;
+    public static final int SIDE_BOTTOM = 0x3;
+    public static final int SIDE_AUTO = 0x4;
 
     public ActionRow(Context context) {
         super(context); init();
@@ -49,7 +47,7 @@ public class ActionRow extends LinearLayout {
     };
     private final ActionButtonInterface[] actionButtons = new ActionButtonInterface[3];
     private View mFollowedView = null;
-    private int mSide = SIDE_TOP;
+    private final int mSide = SIDE_TOP;
 
     /** Add action buttons and configure them */
     private void init(){
@@ -130,9 +128,9 @@ public class ActionRow extends LinearLayout {
                 : SIDE_RIGHT;
 
         float futurePos = getYPosition(side);
-        if(futurePos + getHeight() > (parent.getHeight() + getHeight()/2)){
+        if(futurePos + getHeight() > (parent.getHeight() + getHeight()/2f)){
             side = SIDE_TOP;
-        }else if (futurePos < -getHeight()/2){
+        }else if (futurePos < -getHeight()/2f){
             side = SIDE_BOTTOM;
         }
 

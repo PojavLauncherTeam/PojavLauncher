@@ -24,13 +24,14 @@ package net.kdt.pojavlaunch;
      * or visit www.oracle.com if you need additional information or have any
      * questions.
      */
+@SuppressWarnings("unused")
 public class AWTInputEvent {
 // InputEvent
     /**
      * This flag indicates that the Shift key was down when the event
      * occurred.
      */
-    public static final int SHIFT_MASK          = 1 << 0;
+    public static final int SHIFT_MASK          = 1; //first bit
 
     /**
      * This flag indicates that the Control key was down when the event
@@ -590,7 +591,7 @@ public class AWTInputEvent {
     /**
      * Constant for the Microsoft Windows "Windows" key.
      * It is used for both the left and right version of the key.
-     * @see #getKeyLocation()
+     * see getKeyLocation
      * @since 1.5
      */
     public static final int VK_WINDOWS                  = 0x020C;
@@ -887,25 +888,25 @@ public class AWTInputEvent {
     public static final int MOUSE_WHEEL = 7 + MOUSE_FIRST;
 
     /**
-     * Indicates no mouse buttons; used by {@link #getButton}.
+     * Indicates no mouse buttons; used by getButton.
      * @since 1.4
      */
     public static final int NOBUTTON = 0;
 
     /**
-     * Indicates mouse button #1; used by {@link #getButton}.
+     * Indicates mouse button #1; used by getButton.
      * @since 1.4
      */
     public static final int BUTTON1 = 1;
 
     /**
-     * Indicates mouse button #2; used by {@link #getButton}.
+     * Indicates mouse button #2; used by getButton.
      * @since 1.4
      */
     public static final int BUTTON2 = 2;
 
     /**
-     * Indicates mouse button #3; used by {@link #getButton}.
+     * Indicates mouse button #3; used by getButton.
      * @since 1.4
      */
     public static final int BUTTON3 = 3;

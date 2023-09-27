@@ -2,7 +2,7 @@ package net.kdt.pojavlaunch.multirt;
 
 import static net.kdt.pojavlaunch.PojavApplication.sExecutorService;
 
-import android.app.ProgressDialog;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -26,10 +27,7 @@ import java.util.List;
 
 public class RTRecyclerViewAdapter extends RecyclerView.Adapter<RTRecyclerViewAdapter.RTViewHolder> {
 
-    MultiRTConfigDialog mConfigDialog;
-    public RTRecyclerViewAdapter(MultiRTConfigDialog dialog) {
-        this.mConfigDialog = dialog;
-    }
+    private boolean mIsDeleting = false;
 
     @NonNull
     @Override
@@ -53,18 +51,30 @@ public class RTRecyclerViewAdapter extends RecyclerView.Adapter<RTRecyclerViewAd
         return LauncherPreferences.PREF_DEFAULT_RUNTIME.equals(rt.name);
     }
 
+    @SuppressLint("NotifyDataSetChanged") //not a problem, given the typical size of the list
     public void setDefault(Runtime rt){
         LauncherPreferences.PREF_DEFAULT_RUNTIME = rt.name;
         LauncherPreferences.DEFAULT_PREF.edit().putString("defaultRuntime",LauncherPreferences.PREF_DEFAULT_RUNTIME).apply();
         notifyDataSetChanged();
     }
 
+    @SuppressLint("NotifyDataSetChanged") //not a problem, given the typical size of the list
+    public void setIsEditing(boolean isEditing) {
+        mIsDeleting = isEditing;
+        notifyDataSetChanged();
+    }
 
-    public class RTViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public boolean getIsEditing(){
+        return mIsDeleting;
+    }
+
+
+    public class RTViewHolder extends RecyclerView.ViewHolder {
         final TextView mJavaVersionTextView;
         final TextView mFullJavaVersionTextView;
         final ColorStateList mDefaultColors;
         final Button mSetDefaultButton;
+        final ImageButton mDeleteButton;
         final Context mContext;
         Runtime mCurrentRuntime;
         int mCurrentPosition;
@@ -74,40 +84,49 @@ public class RTRecyclerViewAdapter extends RecyclerView.Adapter<RTRecyclerViewAd
             mJavaVersionTextView = itemView.findViewById(R.id.multirt_view_java_version);
             mFullJavaVersionTextView = itemView.findViewById(R.id.multirt_view_java_version_full);
             mSetDefaultButton = itemView.findViewById(R.id.multirt_view_setdefaultbtn);
-            mSetDefaultButton.setOnClickListener(this);
+            mDeleteButton = itemView.findViewById(R.id.multirt_view_removebtn);
+
             mDefaultColors =  mFullJavaVersionTextView.getTextColors();
             mContext = itemView.getContext();
-            itemView.findViewById(R.id.multirt_view_removebtn).setOnClickListener(this);
+
+            setupOnClickListeners();
         }
 
-        @Override
-        public void onClick(View view) {
-            if(view.getId() == R.id.multirt_view_removebtn) {
+        @SuppressLint("NotifyDataSetChanged") // same as all the other ones
+        private void setupOnClickListeners(){
+            mSetDefaultButton.setOnClickListener(v -> {
+                if(mCurrentRuntime != null) {
+                    setDefault(mCurrentRuntime);
+                    RTRecyclerViewAdapter.this.notifyDataSetChanged();
+                }
+            });
+
+            mDeleteButton.setOnClickListener(v -> {
                 if (mCurrentRuntime == null) return;
 
-                if(MultiRTUtils.getRuntimes().size() < 2 && mSetDefaultButton.isShown()) {
-                    AlertDialog.Builder bldr = new AlertDialog.Builder(mContext);
-                    bldr.setTitle(R.string.global_error);
-                    bldr.setMessage(R.string.multirt_config_removeerror_last);
-                    bldr.setPositiveButton(android.R.string.ok,(adapter, which)->adapter.dismiss());
-                    bldr.show();
+                if(MultiRTUtils.getRuntimes().size() < 2) {
+                    new AlertDialog.Builder(mContext)
+                            .setTitle(R.string.global_error)
+                            .setMessage(R.string.multirt_config_removeerror_last)
+                            .setPositiveButton(android.R.string.ok,(adapter, which)->adapter.dismiss())
+                            .show();
                     return;
                 }
 
                 sExecutorService.execute(() -> {
                     try {
                         MultiRTUtils.removeRuntimeNamed(mCurrentRuntime.name);
+                        mDeleteButton.post(() -> {
+                            if(getBindingAdapter() != null)
+                                getBindingAdapter().notifyDataSetChanged();
+                        });
+
                     } catch (IOException e) {
                         Tools.showError(itemView.getContext(), e);
                     }
                 });
 
-            }else if(view.getId() == R.id.multirt_view_setdefaultbtn) {
-                if(mCurrentRuntime != null) {
-                    setDefault(mCurrentRuntime);
-                    RTRecyclerViewAdapter.this.notifyDataSetChanged();
-                }
-            }
+            });
         }
 
         public void bindRuntime(Runtime runtime, int pos) {
@@ -119,14 +138,17 @@ public class RTRecyclerViewAdapter extends RecyclerView.Adapter<RTRecyclerViewAd
                         .replace("-", " "));
                 mFullJavaVersionTextView.setText(runtime.versionString);
                 mFullJavaVersionTextView.setTextColor(mDefaultColors);
-                mSetDefaultButton.setVisibility(View.VISIBLE);
+
+                updateButtonsVisibility();
+
                 boolean defaultRuntime = isDefaultRuntime(runtime);
                 mSetDefaultButton.setEnabled(!defaultRuntime);
                 mSetDefaultButton.setText(defaultRuntime ? R.string.multirt_config_setdefault_already:R.string.multirt_config_setdefault);
                 return;
             }
 
-            // Problematic runtime moment
+            // Problematic runtime moment, force propose deletion
+            mDeleteButton.setVisibility(View.VISIBLE);
             if(runtime.versionString == null){
                 mFullJavaVersionTextView.setText(R.string.multirt_runtime_corrupt);
             }else{
@@ -135,6 +157,11 @@ public class RTRecyclerViewAdapter extends RecyclerView.Adapter<RTRecyclerViewAd
             mJavaVersionTextView.setText(runtime.name);
             mFullJavaVersionTextView.setTextColor(Color.RED);
             mSetDefaultButton.setVisibility(View.GONE);
+        }
+
+        private void updateButtonsVisibility(){
+            mSetDefaultButton.setVisibility(mIsDeleting ? View.GONE : View.VISIBLE);
+            mDeleteButton.setVisibility(mIsDeleting ? View.VISIBLE : View.GONE);
         }
     }
 }

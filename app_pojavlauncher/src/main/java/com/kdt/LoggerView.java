@@ -60,7 +60,13 @@ public class LoggerView extends ConstraintLayout {
         mToggleButton.setOnCheckedChangeListener(
                 (compoundButton, isChecked) -> {
                     mLogTextView.setVisibility(isChecked ? VISIBLE : GONE);
-                    if(!isChecked) mLogTextView.setText("");
+                    if(isChecked) {
+                        Logger.setLogListener(mLogListener);
+                    }else{
+                        mLogTextView.setText("");
+                        Logger.setLogListener(null); // Makes the JNI code be able to skip expensive logger callbacks
+                        // NOTE: was tested by rapidly smashing the log on/off button, no sync issues found :)
+                    }
                 });
         mToggleButton.setChecked(false);
 
@@ -80,7 +86,6 @@ public class LoggerView extends ConstraintLayout {
             });
 
         };
-        Logger.getInstance().setLogListener(mLogListener);
     }
 
 }

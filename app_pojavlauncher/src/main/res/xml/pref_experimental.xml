@@ -4,13 +4,16 @@
     <net.kdt.pojavlaunch.prefs.BackButtonPreference/>
     <PreferenceCategory android:title="Experimental fuckury">
 
-        <androidx.preference.ListPreference
-            android:title="@string/gles_hack_title"
-            android:key="gl4es_shrink_hack"
-            android:defaultValue="0"
-            android:entryValues="@array/hack_gles_shrink_values"
-            android:entries="@array/hack_gles_shrink"
-            app2:useSimpleSummaryProvider="true"/>
+        <SwitchPreferenceCompat
+            android:key="dump_shaders"
+            android:title="@string/preference_shader_dump_title"
+            android:summary="@string/preference_shader_dump_description"
+            />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="bigCoreAffinity"
+            android:title="@string/preference_force_big_core_title"
+            android:summary="@string/preference_force_big_core_desc" />
 
     </PreferenceCategory>
 </PreferenceScreen>

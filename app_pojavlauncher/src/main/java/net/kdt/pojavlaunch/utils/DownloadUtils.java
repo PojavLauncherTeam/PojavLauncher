@@ -1,6 +1,6 @@
 package net.kdt.pojavlaunch.utils;
 
-import android.util.*;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -10,9 +10,9 @@ import java.nio.charset.*;
 import net.kdt.pojavlaunch.*;
 import org.apache.commons.io.*;
 
+@SuppressWarnings("IOStreamConstructor")
 public class DownloadUtils {
     public static final String USER_AGENT = Tools.APP_NAME;
-    public static final Charset utf8 = Charset.forName("UTF-8");
 
     public static void download(String url, OutputStream os) throws IOException {
         download(new URL(url), os);
@@ -34,7 +34,7 @@ public class DownloadUtils {
             is = conn.getInputStream();
             IOUtils.copy(is, os);
         } catch (IOException e) {
-            throw new IOException("Unable to download from " + url.toString(), e);
+            throw new IOException("Unable to download from " + url, e);
         } finally {
             if (is != null) {
                 try {
@@ -50,7 +50,7 @@ public class DownloadUtils {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         download(url, bos);
         bos.close();
-        return new String(bos.toByteArray(), utf8);
+        return new String(bos.toByteArray(), StandardCharsets.UTF_8);
     }
 
     public static void downloadFile(String url, File out) throws IOException {
@@ -117,6 +117,46 @@ public class DownloadUtils {
         conn.disconnect();
     }
 
+    public static <T> T downloadStringCached(String url, String cacheName, ParseCallback<T> parseCallback) throws IOException, ParseException{
+        File cacheDestination = new File(Tools.DIR_CACHE, "string_cache/"+cacheName);
+        File cacheDestinationDir = cacheDestination.getParentFile();
+        if(cacheDestinationDir != null &&
+            !cacheDestinationDir.exists() &&
+            !cacheDestinationDir.mkdirs()) throw new IOException("Failed to create the cache directory");
+        if(cacheDestination.isFile() &&
+                cacheDestination.canRead() &&
+                System.currentTimeMillis() < (cacheDestination.lastModified() + 86400000)) {
+            try {
+                String cachedString = Tools.read(new FileInputStream(cacheDestination));
+                return parseCallback.process(cachedString);
+            }catch(IOException e) {
+                Log.i("DownloadUtils", "Failed to read the cached file", e);
+            }catch (ParseException e) {
+                Log.i("DownloadUtils", "Failed to parse the cached file", e);
+            }
+        }
+        String urlContent = DownloadUtils.downloadString(url);
+        // if we download the file and fail parsing it, we will yeet outta there
+        // and not cache the unparseable sting. We will return this after trying to save the downloaded
+        // string into cache
+        T parseResult = parseCallback.process(urlContent);
+
+        boolean tryWriteCache = false;
+        if(cacheDestination.exists()) {
+            tryWriteCache = cacheDestination.canWrite();
+        } else {
+            // if it is null, then cacheDestination is the file system root. Very bad.
+            // but let's shield ourselves and just never try to cache the file if that happens
+            if(cacheDestinationDir != null && !cacheDestinationDir.isFile()) tryWriteCache = cacheDestinationDir.canWrite();
+        }
+        if(tryWriteCache) try {
+            Tools.write(cacheDestination.getAbsolutePath(), urlContent);
+        }catch(IOException e) {
+            Log.i("DownloadUtils", "Failed to cache the string", e);
+        }
+        return parseResult;
+    }
+
     public static void downloadFileMonitoredWithHeaders(String urlInput,File outputFile, @Nullable byte[] buffer,
                                                         Tools.DownloaderFeedback monitor, String userAgent, String cookies) throws IOException {
         if (!outputFile.exists()) {
@@ -143,5 +183,13 @@ public class DownloadUtils {
         conn.disconnect();
     }
 
+    public interface ParseCallback<T> {
+        T process(String input) throws ParseException;
+    }
+    public static class ParseException extends Exception {
+        public ParseException(Exception e) {
+            super(e);
+        }
+    }
 }
 

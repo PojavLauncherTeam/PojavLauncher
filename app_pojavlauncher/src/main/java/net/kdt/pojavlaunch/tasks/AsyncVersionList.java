@@ -7,28 +7,24 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.stream.JsonReader;
-import com.kdt.mcgui.ProgressLayout;
 
 import net.kdt.pojavlaunch.JMinecraftVersionList;
-import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
-import net.kdt.pojavlaunch.progresskeeper.ProgressKeeper;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.Collections;
 
 /** Class getting the version list, and that's all really */
 public class AsyncVersionList {
 
-    public void getVersionList(@Nullable VersionDoneListener listener){
+    public void getVersionList(@Nullable VersionDoneListener listener, boolean secondPass){
         sExecutorService.execute(() -> {
             File versionFile = new File(Tools.DIR_DATA + "/version_list.json");
             JMinecraftVersionList versionList = null;
@@ -47,6 +43,11 @@ public class AsyncVersionList {
                     versionList = Tools.GLOBAL_GSON.fromJson(new JsonReader(new FileReader(versionFile)), JMinecraftVersionList.class);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
+                } catch (JsonIOException | JsonSyntaxException e) {
+                    e.printStackTrace();
+                    versionFile.delete();
+                    if(!secondPass)
+                        getVersionList(listener, true);
                 }
             }
 
@@ -56,6 +57,7 @@ public class AsyncVersionList {
     }
 
 
+    @SuppressWarnings("SameParameterValue")
     private JMinecraftVersionList downloadVersionList(String mirror){
         JMinecraftVersionList list = null;
         try{

@@ -1,16 +1,13 @@
 package net.kdt.pojavlaunch;
 
 import static net.kdt.pojavlaunch.Architecture.archAsString;
-import static net.kdt.pojavlaunch.Tools.NATIVE_LIB_DIR;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.res.AssetManager;
 import android.util.Log;
 
 import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.multirt.Runtime;
-import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
 import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 
@@ -58,15 +55,15 @@ public class JRE17Util {
         if (versionInfo.javaVersion == null || versionInfo.javaVersion.component.equalsIgnoreCase("jre-legacy"))
             return true;
 
-        LauncherProfiles.update();
-        MinecraftProfile minecraftProfile = LauncherProfiles.mainProfileJson.profiles.get(LauncherPreferences.DEFAULT_PREF.getString(LauncherPreferences.PREF_KEY_CURRENT_PROFILE, ""));
+        LauncherProfiles.load();
+        MinecraftProfile minecraftProfile = LauncherProfiles.getCurrentProfile();
 
-        String selectedRuntime = null;
-        if (minecraftProfile.javaDir != null && minecraftProfile.javaDir.startsWith(Tools.LAUNCHERPROFILES_RTPREFIX))
-            selectedRuntime = minecraftProfile.javaDir.substring(Tools.LAUNCHERPROFILES_RTPREFIX.length());
+        String selectedRuntime = Tools.getSelectedRuntime(minecraftProfile);
 
-        Runtime runtime = selectedRuntime != null ? MultiRTUtils.read(selectedRuntime) : MultiRTUtils.read(LauncherPreferences.PREF_DEFAULT_RUNTIME);
-        if (runtime.javaVersion >= versionInfo.javaVersion.majorVersion) return true;
+        Runtime runtime = MultiRTUtils.read(selectedRuntime);
+        if (runtime.javaVersion >= versionInfo.javaVersion.majorVersion) {
+            return true;
+        }
 
         String appropriateRuntime = MultiRTUtils.getNearestJreName(versionInfo.javaVersion.majorVersion);
         if (appropriateRuntime != null) {
@@ -74,7 +71,7 @@ public class JRE17Util {
                 JRE17Util.checkInternalNewJre(activity.getAssets());
             }
             minecraftProfile.javaDir = Tools.LAUNCHERPROFILES_RTPREFIX + appropriateRuntime;
-            LauncherProfiles.update();
+            LauncherProfiles.load();
         } else {
             if (versionInfo.javaVersion.majorVersion <= 17) { // there's a chance we have an internal one for this case
                 if (!JRE17Util.checkInternalNewJre(activity.getAssets())){
@@ -82,7 +79,7 @@ public class JRE17Util {
                     return false;
                 } else {
                     minecraftProfile.javaDir = Tools.LAUNCHERPROFILES_RTPREFIX + JRE17Util.NEW_JRE_NAME;
-                    LauncherProfiles.update();
+                    LauncherProfiles.load();
                 }
             } else {
                 showRuntimeFail(activity, versionInfo);

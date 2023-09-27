@@ -12,7 +12,7 @@ public class DependentLibrary {
 
     @Keep
 	public static class LibraryDownloads {
-		public MinecraftLibraryArtifact artifact;
+		public final MinecraftLibraryArtifact artifact;
 		public LibraryDownloads(MinecraftLibraryArtifact artifact) {
 			this.artifact = artifact;
 		}

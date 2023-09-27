@@ -9,6 +9,9 @@
 #include <stdatomic.h>
 #include <jni.h>
 
+/* How many events can be handled at the same time */
+#define EVENT_WINDOW_SIZE 8000
+
 typedef struct {
     int type;
     int i1;
@@ -32,8 +35,12 @@ struct pojav_environ_s {
     render_window_t* mainWindowBundle;
     int config_renderer;
     bool force_vsync;
-    atomic_size_t eventCounter;
-    GLFWInputEvent events[8000];
+    atomic_size_t eventCounter; // Count the number of events to be pumped out
+    GLFWInputEvent events[EVENT_WINDOW_SIZE];
+    size_t outEventIndex; // Point to the current event that has yet to be pumped out to MC
+    size_t outTargetIndex; // Point to the newt index to stop by
+    size_t inEventIndex; // Point to the next event that has to be filled
+    size_t inEventCount; // Count registered right before pumping OUT events. Used as a cache.
     double cursorX, cursorY, cLastX, cLastY;
     jmethodID method_accessAndroidClipboard;
     jmethodID method_onGrabStateChanged;
@@ -49,7 +56,7 @@ struct pojav_environ_s {
     JavaVM* dalvikJavaVMPtr;
     JNIEnv* dalvikJNIEnvPtr_ANDROID;
     long showingWindow;
-    bool isInputReady, isCursorEntered, isUseStackQueueCall;
+    bool isInputReady, isCursorEntered, isUseStackQueueCall, isPumpingEvents;
     int savedWidth, savedHeight;
 #define ADD_CALLBACK_WWIN(NAME) \
     GLFW_invoke_##NAME##_func* GLFW_invoke_##NAME;

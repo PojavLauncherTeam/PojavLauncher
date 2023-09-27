@@ -2,17 +2,15 @@ package net.kdt.pojavlaunch;
 
 import android.os.Build;
 
-import java.util.Locale;
-
 /**
  * This class aims at providing a simple and easy way to deal with the device architecture.
  */
 public class Architecture {
-	public static int UNSUPPORTED_ARCH = -1;
-	public static int ARCH_ARM64 = 0x1;
-	public static int ARCH_ARM = 0x2;
-	public static int ARCH_X86 = 0x4;
-	public static int ARCH_X86_64 = 0x8;
+	public static final int UNSUPPORTED_ARCH = -1;
+	public static final int ARCH_ARM64 = 0x1;
+	public static final int ARCH_ARM = 0x2;
+	public static final int ARCH_X86 = 0x4;
+	public static final int ARCH_X86_64 = 0x8;
 
 	/**
 	 * Tell us if the device supports 64 bits architecture
@@ -60,14 +58,6 @@ public class Architecture {
 		return false;
 	}
 
-	/**
-	 * Tell is the device is based on an arm processor.
-	 * It doesn't tell if the device is 64 or 32 bits.
-	 * @return Whether or not the device is arm based.
-	 */
-	public static boolean isArmDevice(){
-		return !isx86Device();
-	}
 
 
 	/**

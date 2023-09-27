@@ -1,25 +1,16 @@
 package net.kdt.pojavlaunch;
-import android.app.Activity;
+
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.google.gson.JsonSyntaxException;
-import java.io.File;
-import java.io.IOException;
-
 import net.kdt.pojavlaunch.value.MinecraftAccount;
-import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
-import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 
 public class PojavProfile {
 	private static final String PROFILE_PREF = "pojav_profile";
 	private static final String PROFILE_PREF_FILE = "file";
-	public static String PROFILE_PREF_TEMP_CONTENT = "tempContent";
 
 	public static SharedPreferences getPrefs(Context ctx) {
 		return ctx.getSharedPreferences(PROFILE_PREF, Context.MODE_PRIVATE);
@@ -27,34 +18,6 @@ public class PojavProfile {
 
     public static MinecraftAccount getCurrentProfileContent(@NonNull Context ctx, @Nullable String profileName) {
         return MinecraftAccount.load(profileName == null ? getCurrentProfileName(ctx) : profileName);
-    }
-
-    public static MinecraftAccount getTempProfileContent() {
-	    try {
-            MinecraftAccount account = MinecraftAccount.parse(Tools.read(Tools.DIR_DATA+"/cache/tempacc.json"));
-            if (account.accessToken == null) {
-                account.accessToken = "0";
-            }
-            if (account.clientToken == null) {
-                account.clientToken = "0";
-            }
-            if (account.profileId == null) {
-                account.profileId = "00000000-0000-0000-0000-000000000000";
-            }
-            if (account.username == null) {
-                account.username = "0";
-            }
-            if (account.selectedVersion == null) {
-                account.selectedVersion = "1.7.10";
-            }
-            if (account.msaRefreshToken == null) {
-                account.msaRefreshToken = "0";
-            }
-            return account;
-        }catch (IOException e) {
-            Log.e(MinecraftAccount.class.getName(), "Caught an exception while loading the temporary profile",e);
-            return null;
-        }
     }
 
     public static String getCurrentProfileName(Context ctx) {
@@ -67,7 +30,7 @@ public class PojavProfile {
         return name;
     }
 	
-	public static boolean setCurrentProfile(@NonNull Context ctx, @Nullable  Object obj) {
+	public static void setCurrentProfile(@NonNull Context ctx, @Nullable  Object obj) {
 		SharedPreferences.Editor pref = getPrefs(ctx).edit();
 		
 		try { if (obj instanceof String) {
@@ -80,12 +43,7 @@ public class PojavProfile {
 				throw new IllegalArgumentException("Profile must be String.class or null");
 			}
 		} finally {
-			return pref.commit();
+			pref.apply();
 		}
 	}
-	
-	public static boolean isFileType(Context ctx) {
-		return new File(Tools.DIR_ACCOUNT_NEW + "/" + PojavProfile.getCurrentProfileName(ctx) + ".json").exists();
-	}
-
 }

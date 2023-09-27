@@ -1,20 +1,19 @@
 package net.kdt.pojavlaunch.customcontrols.buttons;
 
 import android.annotation.SuppressLint;
-import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
-import net.kdt.pojavlaunch.SingleTapConfirm;
 import net.kdt.pojavlaunch.customcontrols.ControlData;
 import net.kdt.pojavlaunch.customcontrols.ControlDrawerData;
 import net.kdt.pojavlaunch.customcontrols.ControlLayout;
+import net.kdt.pojavlaunch.customcontrols.handleview.EditControlPopup;
 
 @SuppressLint("ViewConstructor")
 public class ControlSubButton extends ControlButton {
 
-    public ControlDrawer parentDrawer;
+    public final ControlDrawer parentDrawer;
 
     public ControlSubButton(ControlLayout layout, ControlData properties, ControlDrawer parentDrawer) {
         super(layout, properties);
@@ -23,8 +22,10 @@ public class ControlSubButton extends ControlButton {
     }
 
     private void filterProperties(){
-        mProperties.setHeight(parentDrawer.getProperties().getHeight());
-        mProperties.setWidth(parentDrawer.getProperties().getWidth());
+        if (parentDrawer != null && parentDrawer.drawerData.orientation != ControlDrawerData.Orientation.FREE) {
+            mProperties.setHeight(parentDrawer.getProperties().getHeight());
+            mProperties.setWidth(parentDrawer.getProperties().getWidth());
+        }
         mProperties.isDynamicBtn = false;
 
         setProperties(mProperties, false);
@@ -32,18 +33,25 @@ public class ControlSubButton extends ControlButton {
 
     @Override
     public void setVisible(boolean isVisible) {
-        setVisibility(isVisible ? (parentDrawer.areButtonsVisible ? VISIBLE : GONE) : (!mProperties.isHideable && parentDrawer.getVisibility() == GONE) ? VISIBLE : View.GONE);
+        // STUB, visibility handled by the ControlDrawer
+        //setVisibility(isVisible ? VISIBLE : (!mProperties.isHideable && parentDrawer.getVisibility() == GONE) ? VISIBLE : View.GONE);
+    }
+
+    @Override
+    public void onGrabState(boolean isGrabbing) {
+        // STUB, visibility lifecycle handled by the ControlDrawer
     }
 
     @Override
     public void setLayoutParams(ViewGroup.LayoutParams params) {
-        if(parentDrawer != null){
+        if(parentDrawer != null && parentDrawer.drawerData.orientation != ControlDrawerData.Orientation.FREE){
             params.width = (int)parentDrawer.mProperties.getWidth();
             params.height = (int)parentDrawer.mProperties.getHeight();
         }
         super.setLayoutParams(params);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if(!getControlLayoutParent().getModifiable() || parentDrawer.drawerData.orientation == ControlDrawerData.Orientation.FREE){
@@ -81,5 +89,10 @@ public class ControlSubButton extends ControlButton {
         if(parentDrawer.drawerData.orientation == ControlDrawerData.Orientation.FREE)
             super.snapAndAlign(x, y);
         // Else the button is forced into place
+    }
+
+    @Override
+    public void loadEditValues(EditControlPopup editControlPopup) {
+        editControlPopup.loadSubButtonValues(getProperties(), parentDrawer.drawerData.orientation);
     }
 }

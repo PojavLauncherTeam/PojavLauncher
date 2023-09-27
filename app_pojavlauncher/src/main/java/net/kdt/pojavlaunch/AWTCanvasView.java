@@ -12,13 +12,10 @@ import net.kdt.pojavlaunch.utils.*;
 public class AWTCanvasView extends TextureView implements TextureView.SurfaceTextureListener, Runnable {
     public static final int AWT_CANVAS_WIDTH = 720;
     public static final int AWT_CANVAS_HEIGHT = 600;
-    private final int MAX_SIZE = 100;
-    private final double NANOS = 1000000000.0;
-
-    private int mWidth, mHeight;
+    private static final int MAX_SIZE = 100;
+    private static final double NANOS = 1000000000.0;
     private boolean mIsDestroyed = false;
     private final TextPaint mFpsPaint;
-    private boolean mDrawing;
 
     // Temporary count fps https://stackoverflow.com/a/13729241
     private final LinkedList<Long> mTimes = new LinkedList<Long>(){{add(System.nanoTime());}};
@@ -43,9 +40,6 @@ public class AWTCanvasView extends TextureView implements TextureView.SurfaceTex
     @Override
     public void onSurfaceTextureAvailable(SurfaceTexture texture, int w, int h) {
         getSurfaceTexture().setDefaultBufferSize(AWT_CANVAS_WIDTH, AWT_CANVAS_HEIGHT);
-        mWidth = w;
-        mHeight = h;
-
         mIsDestroyed = false;
         new Thread(this, "AndroidAWTRenderer").start();
     }
@@ -59,8 +53,6 @@ public class AWTCanvasView extends TextureView implements TextureView.SurfaceTex
     @Override
     public void onSurfaceTextureSizeChanged(SurfaceTexture texture, int w, int h) {
         getSurfaceTexture().setDefaultBufferSize(AWT_CANVAS_WIDTH, AWT_CANVAS_HEIGHT);
-        mWidth = w;
-        mHeight = h;
     }
 
     @Override
@@ -72,17 +64,18 @@ public class AWTCanvasView extends TextureView implements TextureView.SurfaceTex
     public void run() {
         Canvas canvas;
         Surface surface = new Surface(getSurfaceTexture());
-
+        Bitmap rgbArrayBitmap = Bitmap.createBitmap(AWT_CANVAS_WIDTH, AWT_CANVAS_HEIGHT, Bitmap.Config.ARGB_8888);
+        Paint paint = new Paint();
         try {
             while (!mIsDestroyed && surface.isValid()) {
                 canvas = surface.lockCanvas(null);
                 canvas.drawRGB(0, 0, 0);
-
                 int[] rgbArray = JREUtils.renderAWTScreenFrame(/* canvas, mWidth, mHeight */);
-                mDrawing = rgbArray != null;
+                boolean mDrawing = rgbArray != null;
                 if (rgbArray != null) {
                     canvas.save();
-                    canvas.drawBitmap(rgbArray, 0, AWT_CANVAS_WIDTH, 0, 0, AWT_CANVAS_WIDTH, AWT_CANVAS_HEIGHT, true, null);
+                    rgbArrayBitmap.setPixels(rgbArray, 0, AWT_CANVAS_WIDTH, 0, 0, AWT_CANVAS_WIDTH, AWT_CANVAS_HEIGHT);
+                    canvas.drawBitmap(rgbArrayBitmap, 0, 0, paint);
                     canvas.restore();
                 }
                 canvas.drawText("FPS: " + (Math.round(fps() * 10) / 10) + ", drawing=" + mDrawing, 0, 20, mFpsPaint);
@@ -91,6 +84,7 @@ public class AWTCanvasView extends TextureView implements TextureView.SurfaceTex
         } catch (Throwable throwable) {
             Tools.showError(getContext(), throwable);
         }
+        rgbArrayBitmap.recycle();
         surface.release();
     }
 

@@ -1,6 +1,6 @@
 // Keycodes from https://github.com/glfw/glfw/blob/master/include/GLFW/glfw3.h
 
-/*************************************************************************
+/*-************************************************************************
  * GLFW 3.4 - www.glfw.org
  * A library for OpenGL, window and input
  *------------------------------------------------------------------------
@@ -30,6 +30,7 @@
 
 package net.kdt.pojavlaunch;
 
+@SuppressWarnings("unused")
 public class LwjglGlfwKeycode {
     /** The unknown key. */
     public static final short GLFW_KEY_UNKNOWN = 0; // should be -1
@@ -173,10 +174,10 @@ public class LwjglGlfwKeycode {
     /** If this bit is set one or more Super keys were held down. */
     public static final int GLFW_MOD_SUPER = 0x8;
 
-    /** If this bit is set the Caps Lock key is enabled and the {@link #GLFW_LOCK_KEY_MODS LOCK_KEY_MODS} input mode is set. */
+    /** If this bit is set the Caps Lock key is enabled and the LOCK_KEY_MODS input mode is set. */
     public static final int GLFW_MOD_CAPS_LOCK = 0x10;
 
-    /** If this bit is set the Num Lock key is enabled and the {@link #GLFW_LOCK_KEY_MODS LOCK_KEY_MODS} input mode is set. */
+    /** If this bit is set the Num Lock key is enabled and the LOCK_KEY_MODS input mode is set. */
     public static final int GLFW_MOD_NUM_LOCK = 0x20;
 
 

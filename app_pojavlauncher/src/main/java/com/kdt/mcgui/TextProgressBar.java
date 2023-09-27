@@ -16,6 +16,8 @@ import androidx.core.content.res.ResourcesCompat;
 import net.kdt.pojavlaunch.R;
 
 public class TextProgressBar extends ProgressBar {
+
+    private int mTextPadding = 0;
     public TextProgressBar(Context context) {super(context, null, android.R.attr.progressBarStyleHorizontal); init();}
 
     public TextProgressBar(Context context, AttributeSet attrs) {super(context, attrs, android.R.attr.progressBarStyleHorizontal); init();}
@@ -44,7 +46,7 @@ public class TextProgressBar extends ProgressBar {
     protected synchronized void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         mTextPaint.setTextSize((float) ((getHeight()- getPaddingBottom() - getPaddingTop()) * 0.55));
-        int xPos = (int) Math.min(getProgress() * getWidth() / getMax(), getWidth() - mTextPaint.measureText(mText));
+        int xPos = (int) Math.max(Math.min((getProgress() * getWidth() / getMax()) + mTextPadding, getWidth() - mTextPaint.measureText(mText) - mTextPadding) , mTextPadding);
         int yPos = (int) ((getHeight() / 2) - ((mTextPaint.descent() + mTextPaint.ascent()) / 2)) ;
 
         canvas.drawText(mText, xPos, yPos, mTextPaint);
@@ -58,5 +60,9 @@ public class TextProgressBar extends ProgressBar {
     public final void setText(String text){
         mText = text;
         invalidate();
+    }
+
+    public final void setTextPadding(int padding){
+        mTextPadding = padding;
     }
 }

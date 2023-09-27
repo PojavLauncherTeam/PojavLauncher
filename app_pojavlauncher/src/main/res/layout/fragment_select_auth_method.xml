@@ -1,33 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:layout_gravity="center"
-    android:gravity="center"
     android:background="@color/background_app"
-    android:paddingHorizontal="@dimen/_16sdp"
-    >
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/fragment_padding_medium">
+
+    <View
+        android:id="@+id/login_menu"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_200sdp"
+
+        android:background="@drawable/background_card"
+        android:translationZ="-1dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <com.kdt.mcgui.MineButton
         android:id="@+id/button_microsoft_authentication"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/_12ssp"
         android:text="Microsoft Account"
+        android:textSize="@dimen/_12ssp"
+        android:layout_marginHorizontal="@dimen/_25sdp"
+        android:layout_marginBottom="@dimen/_20sdp"
+        app:layout_constraintBottom_toTopOf="@+id/button_local_authentication"
+        app:layout_constraintEnd_toEndOf="@+id/login_menu"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/login_menu"
+        app:layout_constraintTop_toTopOf="@id/login_menu"
+        app:layout_constraintVertical_chainStyle="packed"
         />
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_5sdp"/>
 
     <com.kdt.mcgui.MineButton
         android:id="@+id/button_local_authentication"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/_12ssp"
         android:text="Local account"
-        />
+        android:textSize="@dimen/_12ssp"
+        android:layout_marginHorizontal="@dimen/_25sdp"
+        app:layout_constraintBottom_toBottomOf="@id/login_menu"
+        app:layout_constraintEnd_toEndOf="@+id/login_menu"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/login_menu"
+        app:layout_constraintTop_toBottomOf="@+id/button_microsoft_authentication" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

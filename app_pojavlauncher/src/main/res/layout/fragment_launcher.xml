@@ -63,7 +63,7 @@
 		android:background="@android:color/transparent"
 		android:drawableEnd="@drawable/spinner_arrow"
 
-		app:drawableEndSize="@dimen/_12sdp"
+		app:drawableEndSize="@dimen/padding_heavy"
 		app:drawableStartIntegerScaling="true"
 		app:drawableStartSize="@dimen/_36sdp"
 		app:drawableEndPadding="@dimen/_1sdp"

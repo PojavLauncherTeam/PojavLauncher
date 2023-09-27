@@ -1,6 +1,7 @@
 package net.kdt.pojavlaunch.tasks;
 
 import static net.kdt.pojavlaunch.PojavApplication.sExecutorService;
+import static net.kdt.pojavlaunch.Tools.BYTE_TO_MB;
 import static net.kdt.pojavlaunch.utils.DownloadUtils.downloadFileMonitored;
 
 import android.app.Activity;
@@ -40,13 +41,13 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class AsyncMinecraftDownloader {
-    private static final float BYTE_TO_MB = 1024 * 1024;
+
     public static final String MINECRAFT_RES = "https://resources.download.minecraft.net/";
 
     /* Allows each downloading thread to have its own RECYCLED buffer */
     private final ConcurrentHashMap<Thread, byte[]> mThreadBuffers = new ConcurrentHashMap<>(5);
 
-    public AsyncMinecraftDownloader(@NonNull Activity activity, JMinecraftVersionList.Version version, String realVersion,
+    public AsyncMinecraftDownloader(Activity activity, JMinecraftVersionList.Version version, String realVersion,
                                     @NonNull DoneListener listener){ // this was there for a reason
         sExecutorService.execute(() -> {
             try {
@@ -58,7 +59,7 @@ public class AsyncMinecraftDownloader {
         });
     }
     /* we do the throws DownloaderException thing to avoid blanket-catching Exception as a form of anti-lazy-developer protection */
-    private void downloadGame(@NonNull Activity activity, JMinecraftVersionList.Version verInfo, String versionName) throws DownloaderException {
+    private void downloadGame(Activity activity, JMinecraftVersionList.Version verInfo, String versionName) throws DownloaderException {
         final String downVName = "/" + versionName + "/" + versionName;
 
         //Downloading libraries
@@ -70,7 +71,7 @@ public class AsyncMinecraftDownloader {
                 downloadVersionJson(versionName, verJsonDir, verInfo);
             }
             JMinecraftVersionList.Version originalVersion = Tools.getVersionInfo(versionName, true);
-            if(originalVersion.inheritsFrom != null && !originalVersion.inheritsFrom.isEmpty()) {
+            if(Tools.isValidString(originalVersion.inheritsFrom)) {
                 Log.i("Downloader", "probe: inheritsFrom="+originalVersion.inheritsFrom);
                 String version = originalVersion.inheritsFrom;
                 String downName = Tools.DIR_HOME_VERSION+"/"+version+"/"+version+".json";
@@ -88,7 +89,7 @@ public class AsyncMinecraftDownloader {
             verInfo = Tools.getVersionInfo(versionName);
 
             // THIS one function need the activity in the case of an error
-            if(!JRE17Util.installNewJreIfNeeded(activity, verInfo)){
+            if(activity != null && !JRE17Util.installNewJreIfNeeded(activity, verInfo)){
                 ProgressKeeper.submitProgress(ProgressLayout.DOWNLOAD_MINECRAFT, -1, -1);
                 throw new DownloaderException();
             }
@@ -141,7 +142,7 @@ public class AsyncMinecraftDownloader {
                     continue;
                 }
 
-                String libArtifact = Tools.artifactToPath(libItem.name);
+                String libArtifact = Tools.artifactToPath(libItem);
                 outLib = new File(Tools.DIR_HOME_LIBRARY + "/" + libArtifact);
                 outLib.getParentFile().mkdirs();
 
@@ -183,6 +184,8 @@ public class AsyncMinecraftDownloader {
                     os.close();
                 }
             }
+        } catch (DownloaderException e) {
+            throw e;
         } catch (Throwable e) {
             Log.e("AsyncMcDownloader", e.toString(),e );
             ProgressKeeper.submitProgress(ProgressLayout.DOWNLOAD_MINECRAFT, -1, -1);
@@ -218,7 +221,7 @@ public class AsyncMinecraftDownloader {
                         (int) Math.max((float)curr/max*100,0), R.string.mcl_launch_downloading_progress, destination.getName(), curr/BYTE_TO_MB, max/BYTE_TO_MB));
     }
 
-    public void downloadAssets(final JAssets assets, String assetsVersion, final File outputDir) throws IOException {
+    public void downloadAssets(final JAssets assets, String assetsVersion, final File outputDir) {
         LinkedBlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<>();
         final ThreadPoolExecutor executor = new ThreadPoolExecutor(5, 5, 500, TimeUnit.MILLISECONDS, workQueue);
 

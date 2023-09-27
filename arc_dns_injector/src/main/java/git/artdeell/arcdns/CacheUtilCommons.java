@@ -3,8 +3,6 @@ package git.artdeell.arcdns;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-import git.artdeell.arcdns.other.JavaVersion;
-
 public class CacheUtilCommons {
     public static final long NEVER_EXPIRATION = Long.MAX_VALUE;
     static InetAddress[] toInetAddressArray(String host, String[] ips) throws UnknownHostException {
@@ -294,9 +292,6 @@ public class CacheUtilCommons {
         }
         return false;
     }
-    public static boolean isJavaVersionAtMost8() {
-        return JAVA_SPECIFICATION_VERSION_AS_ENUM.atMost(JavaVersion.JAVA_1_8);
-    }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //
     // Below source code is copied from commons-lang-3.12.0:
@@ -304,10 +299,6 @@ public class CacheUtilCommons {
     // https://github.com/apache/commons-lang/blob/rel/commons-lang-3.12.0/src/main/java/org/apache/commons/lang3/SystemUtils.java
     //
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-    private static final String JAVA_SPECIFICATION_VERSION = getSystemProperty("java.specification.version");
-    private static final JavaVersion JAVA_SPECIFICATION_VERSION_AS_ENUM = JavaVersion.get(JAVA_SPECIFICATION_VERSION);
 
     @SuppressWarnings({"CommentedOutCode", "SameParameterValue"})
     private static String getSystemProperty(final String property) {

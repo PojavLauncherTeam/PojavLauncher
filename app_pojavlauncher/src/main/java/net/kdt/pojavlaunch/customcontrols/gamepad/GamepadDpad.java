@@ -1,17 +1,16 @@
 package net.kdt.pojavlaunch.customcontrols.gamepad;
 
-import android.view.InputDevice;
-import android.view.KeyEvent;
-import android.view.MotionEvent;
-
 import static android.view.InputDevice.KEYBOARD_TYPE_ALPHABETIC;
-import static android.view.InputDevice.KEYBOARD_TYPE_NON_ALPHABETIC;
 import static android.view.InputDevice.SOURCE_GAMEPAD;
 import static android.view.KeyEvent.KEYCODE_DPAD_CENTER;
 import static android.view.KeyEvent.KEYCODE_DPAD_DOWN;
 import static android.view.KeyEvent.KEYCODE_DPAD_LEFT;
 import static android.view.KeyEvent.KEYCODE_DPAD_RIGHT;
 import static android.view.KeyEvent.KEYCODE_DPAD_UP;
+
+import android.view.InputDevice;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 
 
 public class GamepadDpad {
@@ -50,7 +49,7 @@ public class GamepadDpad {
 
     }
 
-    public static boolean isDpadEvent(MotionEvent event) {
+    @SuppressWarnings("unused") public static boolean isDpadEvent(MotionEvent event) {
         // Check that input comes from a device with directional pads.
         // And... also the joystick since it declares sometimes as a joystick.
         return (event.getSource() & InputDevice.SOURCE_JOYSTICK) == InputDevice.SOURCE_JOYSTICK;

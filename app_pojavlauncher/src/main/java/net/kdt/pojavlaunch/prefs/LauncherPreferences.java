@@ -33,7 +33,7 @@ public class LauncherPreferences {
 	public static String PREF_DEFAULTCTRL_PATH = Tools.CTRLDEF_FILE;
 	public static String PREF_CUSTOM_JAVA_ARGS;
     public static boolean PREF_FORCE_ENGLISH = false;
-    public static String PREF_VERSION_REPOS = "https://piston-meta.mojang.com/mc/game/version_manifest_v2.json";
+    public static final String PREF_VERSION_REPOS = "https://piston-meta.mojang.com/mc/game/version_manifest_v2.json";
     public static boolean PREF_CHECK_LIBRARY_SHA = true;
     public static boolean PREF_DISABLE_GESTURES = false;
     public static boolean PREF_DISABLE_SWAP_HAND = false;
@@ -49,6 +49,7 @@ public class LauncherPreferences {
     public static boolean PREF_ENABLE_GYRO = false;
     public static float PREF_GYRO_SENSITIVITY = 1f;
     public static int PREF_GYRO_SAMPLE_RATE = 16;
+    public static boolean PREF_GYRO_SMOOTHING = true;
 
     public static boolean PREF_GYRO_INVERT_X = false;
 
@@ -56,6 +57,11 @@ public class LauncherPreferences {
     public static boolean PREF_FORCE_VSYNC = false;
 
     public static boolean PREF_BUTTON_ALL_CAPS = true;
+    public static boolean PREF_DUMP_SHADERS = false;
+    public static float PREF_DEADZONE_SCALE = 1f;
+    public static boolean PREF_BIG_CORE_AFFINITY = false;
+    public static boolean PREF_ZINK_PREFER_SYSTEM_DRIVER = false;
+
 
 
     public static void loadPreferences(Context ctx) {
@@ -90,45 +96,22 @@ public class LauncherPreferences {
         PREF_ENABLE_GYRO = DEFAULT_PREF.getBoolean("enableGyro", false);
         PREF_GYRO_SENSITIVITY = ((float)DEFAULT_PREF.getInt("gyroSensitivity", 100))/100f;
         PREF_GYRO_SAMPLE_RATE = DEFAULT_PREF.getInt("gyroSampleRate", 16);
+        PREF_GYRO_SMOOTHING = DEFAULT_PREF.getBoolean("gyroSmoothing", true);
         PREF_GYRO_INVERT_X = DEFAULT_PREF.getBoolean("gyroInvertX", false);
         PREF_GYRO_INVERT_Y = DEFAULT_PREF.getBoolean("gyroInvertY", false);
         PREF_FORCE_VSYNC = DEFAULT_PREF.getBoolean("force_vsync", false);
         PREF_BUTTON_ALL_CAPS = DEFAULT_PREF.getBoolean("buttonAllCaps", true);
-
-/*
-        if (PREF_CUSTOM_JAVA_ARGS.isEmpty()) {
-            String DEFAULT_JAVA_ARGS = "";
-                "-Xms" + (androidHeap > 800 ? 800 : androidHeap) + "m " +
-                // (32bit) More than 800mb may make JVM not allocateable and crash
-                "-Xmx" + (doubleAndroidHeap > 800 ? 800 : doubleAndroidHeap) + "m" +
-                "-XX:+UseG1GC " +
-                "-XX:+ParallelRefProcEnabled " +
-                "-XX:MaxGCPauseMillis=200 " +
-                "-XX:+UnlockExperimentalVMOptions " +
-                "-XX:+AlwaysPreTouch " +
-		"-XX:G1NewSizePercent=30 " +
-		"-XX:G1MaxNewSizePercent=40 " +
-		"-XX:G1HeapRegionSize=8M " +
-		"-XX:G1ReservePercent=20 " +
-		"-XX:G1HeapWastePercent=5 " +
-	        "-XX:G1MixedGCCountTarget=4 " +
-		"-XX:InitiatingHeapOccupancyPercent=15 " +
-		"-XX:G1MixedGCLiveThresholdPercent=90 " +
-		"-XX:G1RSetUpdatingPauseTimePercent=5 " +
-		"-XX:SurvivorRatio=32 " +
-		"-XX:+PerfDisableSharedMem " +
-                "-XX:MaxTenuringThreshold=1";
-            PREF_CUSTOM_JAVA_ARGS = DEFAULT_JAVA_ARGS;
-            DEFAULT_PREF.edit().putString("javaArgs", DEFAULT_JAVA_ARGS).commit();
-        }
-*/
+        PREF_DUMP_SHADERS = DEFAULT_PREF.getBoolean("dump_shaders", false);
+        PREF_DEADZONE_SCALE = DEFAULT_PREF.getInt("gamepad_deadzone_scale", 100)/100f;
+        PREF_BIG_CORE_AFFINITY = DEFAULT_PREF.getBoolean("bigCoreAffinity", false);
+        PREF_ZINK_PREFER_SYSTEM_DRIVER = DEFAULT_PREF.getBoolean("zinkPreferSystemDriver", false);
 
         String argLwjglLibname = "-Dorg.lwjgl.opengl.libname=";
         for (String arg : JREUtils.parseJavaArguments(PREF_CUSTOM_JAVA_ARGS)) {
             if (arg.startsWith(argLwjglLibname)) {
                 // purge arg
                 DEFAULT_PREF.edit().putString("javaArgs",
-                    PREF_CUSTOM_JAVA_ARGS.replace(arg, "")).commit();
+                    PREF_CUSTOM_JAVA_ARGS.replace(arg, "")).apply();
             }
         }
         if(DEFAULT_PREF.contains("defaultRuntime")) {

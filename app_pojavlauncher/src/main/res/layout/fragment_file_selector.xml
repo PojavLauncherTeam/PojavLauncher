@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_app">
+    android:background="@color/background_app"
+    android:paddingHorizontal="@dimen/fragment_padding_medium">
 
     <com.kdt.pickafile.FileListView
         android:id="@+id/file_selector"
@@ -20,28 +21,31 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/_16sdp"
-        android:text="Select Folder"
+        android:layout_marginStart="@dimen/padding_medium"
+        android:text="@string/folder_fragment_select"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/file_selector_create_folder"
-        app:layout_constraintWidth_percent="0.45" />
+         />
 
     <com.kdt.mcgui.MineButton
         android:id="@+id/file_selector_create_folder"
-        android:layout_width="185dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/_16sdp"
+        android:layout_marginEnd="@dimen/padding_medium"
 
-
-        android:text="Create folder"
+        android:text="@string/folder_fragment_create"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/file_selector_select_folder"
         app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintWidth_percent="0.45" />
+         />
 
     <TextView
         android:id="@+id/file_selector_current_path"

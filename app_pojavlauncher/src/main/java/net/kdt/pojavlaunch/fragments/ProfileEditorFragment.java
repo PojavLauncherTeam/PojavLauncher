@@ -1,8 +1,5 @@
 package net.kdt.pojavlaunch.fragments;
 
-import static net.kdt.pojavlaunch.extra.ExtraCore.getValue;
-import static net.kdt.pojavlaunch.profiles.ProfileAdapter.CREATE_PROFILE_MAGIC;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,17 +8,13 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ExpandableListAdapter;
-import android.widget.ExpandableListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
-import net.kdt.pojavlaunch.JMinecraftVersionList;
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.extra.ExtraConstants;
@@ -30,15 +23,13 @@ import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.multirt.RTSpinnerAdapter;
 import net.kdt.pojavlaunch.multirt.Runtime;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
-import net.kdt.pojavlaunch.profiles.VersionListAdapter;
+import net.kdt.pojavlaunch.profiles.VersionSelectorDialog;
 import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
 import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.UUID;
 
 public class ProfileEditorFragment extends Fragment {
     public static final String TAG = "ProfileEditorFragment";
@@ -75,14 +66,14 @@ public class ProfileEditorFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        mRenderNames = Arrays.asList(getResources().getStringArray(R.array.renderer_values));
         bindViews(view);
 
-        // Renderer spinner
-        List<String> renderList = new ArrayList<>(5);
-        Collections.addAll(renderList, getResources().getStringArray(R.array.renderer));
-        renderList.add("Default");
-        mDefaultRenderer.setAdapter(new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, renderList));
+        Tools.RenderersList renderersList = Tools.getCompatibleRenderers(view.getContext());
+        mRenderNames = renderersList.rendererIds;
+        List<String> renderList = new ArrayList<>(renderersList.rendererDisplayNames.length + 1);
+        renderList.addAll(Arrays.asList(renderersList.rendererDisplayNames));
+        renderList.add(view.getContext().getString(R.string.global_default));
+        mDefaultRenderer.setAdapter(new ArrayAdapter<>(getContext(), R.layout.item_simple_list_1, renderList));
 
         // Set up behaviors
         mSaveButton.setOnClickListener(v -> {
@@ -91,9 +82,12 @@ public class ProfileEditorFragment extends Fragment {
         });
 
         mDeleteButton.setOnClickListener(v -> {
-            LauncherProfiles.mainProfileJson.profiles.remove(mProfileKey);
-            LauncherProfiles.update();
-            ExtraCore.setValue(ExtraConstants.REFRESH_VERSION_SPINNER, DELETED_PROFILE);
+            if(LauncherProfiles.mainProfileJson.profiles.size() > 1){
+                LauncherProfiles.mainProfileJson.profiles.remove(mProfileKey);
+                LauncherProfiles.write();
+                ExtraCore.setValue(ExtraConstants.REFRESH_VERSION_SPINNER, DELETED_PROFILE);
+            }
+
             Tools.removeCurrentFragment(requireActivity());
         });
 
@@ -117,37 +111,18 @@ public class ProfileEditorFragment extends Fragment {
         });
 
         // Setup the expendable list behavior
-        mVersionSelectButton.setOnClickListener(v -> {
-            AlertDialog.Builder builder = new AlertDialog.Builder(mDefaultVersion.getContext());
-            ExpandableListView expandableListView = (ExpandableListView) LayoutInflater.from(mDefaultVersion.getContext())
-                    .inflate(R.layout.dialog_expendable_list_view , null);
-            JMinecraftVersionList jMinecraftVersionList = (JMinecraftVersionList) getValue(ExtraConstants.RELEASE_TABLE);
-            JMinecraftVersionList.Version[] versionArray;
-            if(jMinecraftVersionList == null || jMinecraftVersionList.versions == null) versionArray = new JMinecraftVersionList.Version[0];
-            else versionArray = jMinecraftVersionList.versions;
-            ExpandableListAdapter adapter = new VersionListAdapter(versionArray, mDefaultVersion.getContext());
-
-            expandableListView.setAdapter(adapter);
-            builder.setView(expandableListView);
-            AlertDialog dialog = builder.show();
-
-            expandableListView.setOnChildClickListener((parent, v1, groupPosition, childPosition, id) -> {
-                String version = ((String) adapter.getChild(groupPosition, childPosition));
-                mTempProfile.lastVersionId = version;
-                mDefaultVersion.setText(version);
-                dialog.dismiss();
-                return true;
-            });
-        });
+        mVersionSelectButton.setOnClickListener(v -> VersionSelectorDialog.open(v.getContext(), false, (id, snapshot)->{
+            mTempProfile.lastVersionId = id;
+            mDefaultVersion.setText(id);
+        }));
 
 
 
-        loadValues(LauncherPreferences.DEFAULT_PREF.getString(LauncherPreferences.PREF_KEY_CURRENT_PROFILE, ""));
+        loadValues(LauncherPreferences.DEFAULT_PREF.getString(LauncherPreferences.PREF_KEY_CURRENT_PROFILE, ""), view.getContext());
     }
 
 
-    private void loadValues(@NonNull String profile){
-        Context context = getContext();
+    private void loadValues(@NonNull String profile, @NonNull Context context){
         if(mTempProfile == null){
             mTempProfile = getProfile(profile);
         }
@@ -181,16 +156,12 @@ public class ProfileEditorFragment extends Fragment {
 
     private MinecraftProfile getProfile(@NonNull String profile){
         MinecraftProfile minecraftProfile;
-        if(getArguments() == null && !profile.equals(CREATE_PROFILE_MAGIC)) {
+        if(getArguments() == null) {
             minecraftProfile = new MinecraftProfile(LauncherProfiles.mainProfileJson.profiles.get(profile));
             mProfileKey = profile;
         }else{
             minecraftProfile = MinecraftProfile.createTemplate();
-            String uuid = UUID.randomUUID().toString();
-            while(LauncherProfiles.mainProfileJson.profiles.containsKey(uuid)) {
-                uuid = UUID.randomUUID().toString();
-            }
-            mProfileKey = uuid;
+            mProfileKey = LauncherProfiles.getFreeProfileKey();
         }
         return minecraftProfile;
     }
@@ -234,13 +205,7 @@ public class ProfileEditorFragment extends Fragment {
 
 
         LauncherProfiles.mainProfileJson.profiles.put(mProfileKey, mTempProfile);
-        LauncherProfiles.update();
+        LauncherProfiles.write();
         ExtraCore.setValue(ExtraConstants.REFRESH_VERSION_SPINNER, mProfileKey);
     }
-
-    /** Called on the UI thread, the profile is already saved in the files */
-    public interface ProfileEditorDone {
-        void onProfileSaved(MinecraftProfile profile);
-    }
-
 }

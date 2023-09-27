@@ -14,32 +14,32 @@ public class GamepadMap {
     Be warned, you should define ALL keys if you want to avoid a non defined exception
    */
 
-    public GamepadButton BUTTON_A = new GamepadButton();
-    public GamepadButton BUTTON_B = new GamepadButton();
-    public GamepadButton BUTTON_X = new GamepadButton();
-    public GamepadButton BUTTON_Y = new GamepadButton();
+    public final GamepadButton BUTTON_A = new GamepadButton();
+    public final GamepadButton BUTTON_B = new GamepadButton();
+    public final GamepadButton BUTTON_X = new GamepadButton();
+    public final GamepadButton BUTTON_Y = new GamepadButton();
     
-    public GamepadButton BUTTON_START = new GamepadButton();
-    public GamepadButton BUTTON_SELECT = new GamepadButton();
+    public final GamepadButton BUTTON_START = new GamepadButton();
+    public final GamepadButton BUTTON_SELECT = new GamepadButton();
 
-    public GamepadButton TRIGGER_RIGHT = new GamepadButton();         //R2
-    public GamepadButton TRIGGER_LEFT = new GamepadButton();          //L2
+    public final GamepadButton TRIGGER_RIGHT = new GamepadButton();         //R2
+    public final GamepadButton TRIGGER_LEFT = new GamepadButton();          //L2
     
-    public GamepadButton SHOULDER_RIGHT = new GamepadButton();        //R1
-    public GamepadButton SHOULDER_LEFT = new GamepadButton();         //L1
+    public final GamepadButton SHOULDER_RIGHT = new GamepadButton();        //R1
+    public final GamepadButton SHOULDER_LEFT = new GamepadButton();         //L1
     
     public int[] DIRECTION_FORWARD;
     public int[] DIRECTION_BACKWARD;
     public int[] DIRECTION_RIGHT;
     public int[] DIRECTION_LEFT;
     
-    public GamepadButton THUMBSTICK_RIGHT = new GamepadButton();      //R3
-    public GamepadButton THUMBSTICK_LEFT = new GamepadButton();       //L3
+    public final GamepadButton THUMBSTICK_RIGHT = new GamepadButton();      //R3
+    public final GamepadButton THUMBSTICK_LEFT = new GamepadButton();       //L3
     
-    public GamepadButton DPAD_UP = new GamepadButton();
-    public GamepadButton DPAD_RIGHT = new GamepadButton();
-    public GamepadButton DPAD_DOWN = new GamepadButton();
-    public GamepadButton DPAD_LEFT = new GamepadButton();
+    public final GamepadButton DPAD_UP = new GamepadButton();
+    public final GamepadButton DPAD_RIGHT = new GamepadButton();
+    public final GamepadButton DPAD_DOWN = new GamepadButton();
+    public final GamepadButton DPAD_LEFT = new GamepadButton();
 
 
     /*
@@ -158,7 +158,7 @@ public class GamepadMap {
     /*
      * Returns an pre-initialized GamepadMap with only empty keycodes
      */
-    public static GamepadMap getEmptyMap(){
+    @SuppressWarnings("unused") public static GamepadMap getEmptyMap(){
         GamepadMap emptyMap = new GamepadMap();
         for(GamepadButton button : emptyMap.getButtons())
             button.keycodes = new int[]{};

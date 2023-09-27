@@ -28,6 +28,13 @@ public class MinecraftProfile {
 		return TEMPLATE;
 	}
 
+	public static MinecraftProfile getDefaultProfile(){
+		MinecraftProfile defaultProfile = new MinecraftProfile();
+		defaultProfile.name = "Default";
+		defaultProfile.lastVersionId = "1.7.10";
+		return defaultProfile;
+	}
+
 	public MinecraftProfile(){}
 
 	public MinecraftProfile(MinecraftProfile profile){

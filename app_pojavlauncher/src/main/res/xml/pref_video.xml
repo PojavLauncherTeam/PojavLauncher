@@ -9,8 +9,6 @@
             android:title="@string/mcl_setting_category_renderer"
             android:key="renderer"
             android:defaultValue="opengles2"
-            android:entries="@array/renderer"
-            android:entryValues="@array/renderer_values"
             android:icon="@drawable/ic_setting_engine"
             app2:useSimpleSummaryProvider="true"/>
 

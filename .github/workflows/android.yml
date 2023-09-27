@@ -4,7 +4,7 @@ on:
   pull_request:
     branches-ignore:
       - 'l10n_v3_openjdk2'
-    types: [opened, reopened]
+    types: [ opened, reopened ]
   push:
     branches-ignore:
       - 'l10n_v3_openjdk2'
@@ -12,129 +12,101 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     env:
       GPLAY_KEYSTORE_PASSWORD: ${{ secrets.GPLAY_KEYSTORE_PASSWORD }}
+      CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
     steps:
-    - uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
+      - name: Checkout
+        uses: actions/checkout@v3
 
-    - name: set up JDK 1.8
-      uses: actions/setup-java@v1
-      with:
-        java-version: 1.8
+      - name: Set up JDK 8
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '8'
 
-    - name: Get gl4es latest commit hash
-      id: gl4es-sha
-      run: echo "::set-output name=sha::$(echo $(git ls-remote https://github.com/PojavLauncherTeam/gl4es-114-extra refs/heads/master | grep -io '^\S*'))"
-      shell: bash
-      
-    - name: Cache gl4es
-      uses: actions/cache@v2
-      id: gl4es-cache
-      with:
-        path: gl4es/libs
-        key: gl4es-holy-android-shared-${{ steps.gl4es-sha.outputs.sha }}
-
-    - name: Get gl4es
-      if: steps.gl4es-cache.outputs.cache-hit != 'true'
-      uses: actions/checkout@v2
-      with:
-        repository: 'PojavLauncherTeam/gl4es-114-extra'
-        path: 'gl4es'
-
-    - name: Build gl4es
-      if: steps.gl4es-cache.outputs.cache-hit != 'true'
-      continue-on-error: true
-      run: |
-        cd gl4es
-        git config --global user.email "github-actions@users.noreply.github.com"
-        git config --global user.name "github-actions"
-        $ANDROID_NDK_HOME/ndk-build NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=./Android.mk
-        cp -R libs/* ../app_pojavlauncher/src/main/jniLibs/
-    
-    - name: Push gl4es
-      if: github.event != 'pull_request' && steps.gl4es-cache.outputs.cache-hit != 'true'
-      continue-on-error: true
-      run: |
-        git add .
-        git commit -am "CI: Update gl4es"
-        git push
-    
-    - name: Get JRE8
-      uses: dawidd6/action-download-artifact@v2
-      with:
-          github_token: ${{secrets.GITHUB_TOKEN}}
+      - name: Get JRE 8
+        uses: dawidd6/action-download-artifact@v2
+        with:
           workflow: build.yml
           path: app_pojavlauncher/src/main/assets/components/jre
           workflow_conclusion: success
           repo: PojavLauncherTeam/android-openjdk-build-multiarch
           branch: buildjre8
           name: jre8-pojav
-    
-    - name: Get JRE17
-      uses: dawidd6/action-download-artifact@v2
-      with:
-          github_token: ${{secrets.GITHUB_TOKEN}}
+
+      - name: Get JRE17
+        uses: dawidd6/action-download-artifact@v2
+        with:
           workflow: build.yml
           path: app_pojavlauncher/src/main/assets/components/jre-new
           workflow_conclusion: success
           repo: PojavLauncherTeam/android-openjdk-build-multiarch
           branch: buildjre17
           name: jre17-pojav
-    
-    - name: Build JRE JAR files
-      run: |
-        cp -R gl4es/libs/* app_pojavlauncher/src/main/jniLibs/
-        chmod +x scripts/languagelist_updater.sh
-        bash scripts/languagelist_updater.sh
-      
-        mkdir -p out
-        chmod +x gradlew
-        ./gradlew clean
-        # Build JRE JAR files (security manager, etc...)
-        ./gradlew :jre_lwjgl3glfw:build
-        
-    - name: Build Google Play .aab
-      if: github.repository_owner == 'PojavLauncherTeam' && github.ref_name == 'v3_openjdk'
-      run: |
-        ./gradlew :app_pojavlauncher:bundleGplay
-        mv app_pojavlauncher/build/outputs/bundle/gplay/app_pojavlauncher-gplay.aab out/app-gplay.aab
-    
-    - name: Build Debug .apk
-      run: |
-        # Build the launcher
-        ./gradlew :app_pojavlauncher:assembleDebug
-        mv app_pojavlauncher/build/outputs/apk/debug/app_pojavlauncher-debug.apk out/app-debug.apk
-        
-    - name: Build APK without runtime
-      run: | 
-        rm -r app_pojavlauncher/src/main/assets/components/jre
-        rm -r app_pojavlauncher/src/main/assets/components/jre-new
-        ./gradlew assembleDebug
-        mv app_pojavlauncher/build/outputs/apk/debug/app_pojavlauncher-debug.apk out/app-debug-noruntime.apk
-        
-    - name: Upload APK
-      uses: actions/upload-artifact@v2
-      with:
-          name: app-debug
-          path: out/app-debug.apk
+
+      - uses: gradle/gradle-build-action@v2
+        with:
+          gradle-version: 7.6.1
+
+      - name: Build JRE JAR files
+        run: |
+          ./scripts/languagelist_updater.sh
+
+          mkdir out
+          # Build JRE JAR files (security manager, etc...)
+          gradle :jre_lwjgl3glfw:build --no-daemon
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Build Google Play .aab
+        if: github.repository_owner == 'PojavLauncherTeam' && github.ref_name == 'v3_openjdk'
+        run: |
+          gradle :app_pojavlauncher:bundleGplay
+          mv app_pojavlauncher/build/outputs/bundle/gplay/app_pojavlauncher-gplay.aab out/app-gplay.aab
+
+      - name: Build Debug .apk
+        run: |
+          # Build the launcher
+          gradle :app_pojavlauncher:assembleDebug
+          mv app_pojavlauncher/build/outputs/apk/debug/app_pojavlauncher-debug.apk out/app-debug.apk
+
+      - name: Build APK without runtime
+        run: |
+          rm -r app_pojavlauncher/src/main/assets/components/jre
+          rm -r app_pojavlauncher/src/main/assets/components/jre-new
+          gradle assembleDebug
+          mv app_pojavlauncher/build/outputs/apk/debug/app_pojavlauncher-debug.apk out/app-debug-noruntime.apk
+      - name: Gen md5sums
+        run: |
+          md5sum out/app-debug.apk > out/app-debug.md5
+          md5sum out/app-debug-noruntime.apk > out/app-debug-noruntime.md5
           
-    - name: Upload onto the Google Play testing track
-      continue-on-error: true
-      if: github.repository_owner == 'PojavLauncherTeam' && github.ref_name == 'v3_openjdk'
-      uses: r0adkll/upload-google-play@v1.0.17
-      with:
-        serviceAccountJsonPlainText: ${{ secrets.GPLAY_SERVICE_JSON }}
-        packageName: net.kdt.pojavlaunch
-        releaseFiles: out/app-gplay.aab
-        track: internal
-        inAppUpdatePriority: 5
-        changesNotSentForReview: true
-        
-    - name: Upload APK (without runtime)
-      uses: actions/upload-artifact@v2
-      with:
+      - name: Upload APK
+        uses: actions/upload-artifact@v3
+        with:
+          name: app-debug
+          path: out/app-debug.*
+
+      - name: Upload onto the Google Play testing track
+        continue-on-error: true
+        if: github.repository_owner == 'PojavLauncherTeam' && github.ref_name == 'v3_openjdk'
+        uses: r0adkll/upload-google-play@v1.1.2
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.GPLAY_SERVICE_JSON }}
+          packageName: net.kdt.pojavlaunch
+          releaseFiles: out/app-gplay.aab
+          track: internal
+          inAppUpdatePriority: 5
+
+      - name: Upload APK (without runtime)
+        uses: actions/upload-artifact@v3
+        with:
           name: app-debug-noruntime
-          path: out/app-debug-noruntime.apk
+          path: out/app-debug-noruntime.*
+

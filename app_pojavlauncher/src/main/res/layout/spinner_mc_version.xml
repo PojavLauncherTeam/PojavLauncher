@@ -8,6 +8,6 @@
     android:fadeScrollbars="false"
     android:scrollbarThumbVertical="@color/minebutton_color"
     android:paddingVertical="@dimen/_14sdp"
-    android:scrollbarSize="@dimen/_4sdp"
+    android:scrollbarSize="@dimen/padding_medium"
     android:background="@color/background_bottom_bar"
     android:divider="@null" />
