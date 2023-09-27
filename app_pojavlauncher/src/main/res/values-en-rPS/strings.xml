@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App name part -->
+    <string name="app_name">PojavLauncher (Minecraft: Java Edition fer Android)</string>
+    <string name="app_short_name">PojavLauncher</string>
+    <!-- Action bar part -->
+    <!-- Languages list part -->
+    <!-- Login strings -->
+    <string name="login_online_username_hint">Email or passport</string>
+    <string name="login_online_login_label">Get Aboard</string>
+    <!-- Hint -->
+    <!-- Warnings -->
+    <string name="warning_remove_account">This buccaneer will be Marooned!</string>
+    <!-- AlertDialog title -->
+    <string name="alerttitle_installmod">Be selectin\' a mod settler</string>
+    <!-- Error messages -->
+    <string name="error_fatal">PojavLauncher has unfortunately sunk</string>
+    <string name="error_no_version">No Date o\' creation!</string>
+    <string name="error_show_more">Keep th\' knowledge out on table</string>
+    <string name="error_show_less">Keep th\' knowledge inside th\' table</string>
+    <!-- Toast messages -->
+    <string name="toast_permission_denied">The read/write t\' hold permission be required!</string>
+    <string name="toast_optifine_success">Success in th\' ship</string>
+    <!--
+    <string name="toast_3">Exit</string>
+    -->
+    <!-- MCLauncherActivity: Tabs -->
+    <!-- MCLauncherActivity: Account status -->
+    <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_launch_downloading">Downloadin %s</string>
+    <string name="mcl_launch_downloading_progress">"Building ship %s (%.2f MB / %.2f MB)"</string>
+    <string name="mcl_launch_download_assets">Gettin\' th\' treasure ready</string>
+    <string name="mcl_option_customcontrol">custom trigger</string>
+    <string name="mcl_setting_title_ignore_notch">Don\'t see notch</string>
+    <string name="mcl_setting_title_resolution_scaler">Map size scaler</string>
+    <string name="mcl_setting_veroption_release">Release</string>
+    <string name="mcl_setting_veroption_snapshot">Snapshot</string>
+    <string name="mcl_setting_veroption_oldalpha">Ol\'-alpha</string>
+    <string name="mcl_setting_veroption_oldbeta">Ol\'-beta</string>
+    <!-- Global strings -->
+    <string name="global_name">Title on yer forhead</string>
+    <string name="global_restart">Yar ship needs a lookover</string>
+    <string name="global_unpacking">Unpackin\' %s</string>
+    <string name="global_waiting">Stay Here</string>
+    <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">Your boat drown with number %d, check debris for more detail (lastestlog.txt).</string>
+    <!-- MainActivity: Control buttons -->
+    <string name="control_chat">Chat</string>
+    <!-- MainActivity: Menu advanced controls -->
+    <string name="control_viewout">Crow\'s Nest</string>
+    <!-- ImportControlActivity Strings -->
+    <!--
+    <string name="control_more3"></string>
+    <string name="control_more4"></string>
+-->
+    <string name="customctrl_addbutton">Add buttn</string>
+    <string name="main_play">Sail</string>
+    <string name="profiles_latest_snapshot">Latest prototype</string>
+    <string name="profiles_latest_release">Latest ship</string>
+    <string name="profiles_profile_name">Title on yer forhead</string>
+    <string name="profiles_profile_version">Dock</string>
+    <string name="global_delete">Keelhaul</string>
+    <string name="arc_capes_title">Cosmetica Mantles</string>
+    <string name="arc_capes_desc">Enables mantles from Cosmetica (previously Arc). Fer mor\' information be visitin\' https://cosmetica.cc. Requires OptiFine.</string>
+    <string name="of_dl_progress">Downloadin %s</string>
+</resources>

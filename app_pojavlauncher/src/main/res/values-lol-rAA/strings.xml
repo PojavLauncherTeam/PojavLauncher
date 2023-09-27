@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App name part -->
+    <string name="app_name">pajaw launcher (Mc4Android)</string>
+    <string name="app_short_name">PojawLunchr</string>
+    <!-- Action bar part -->
+    <!-- Languages list part -->
+    <!-- Login strings -->
+    <string name="login_online_username_hint">Emol or osornoim</string>
+    <string name="login_online_login_label">logout</string>
+    <!-- Hint -->
+    <!-- Warnings -->
+    <string name="warning_remove_account">Dis akownt wil be removed!</string>
+    <!-- AlertDialog title -->
+    <string name="alerttitle_installmod">Chooz mod installr</string>
+    <!-- Error messages -->
+    <string name="error_fatal">Pojaw Launcher haz unexpectadly crashd</string>
+    <string name="error_no_version">No vershun!</string>
+    <string name="error_show_more">Show mor</string>
+    <string name="error_show_less">Show les</string>
+    <!-- Toast messages -->
+    <string name="toast_permission_denied">Teh riid/rite 2 storage permishun iz requird!</string>
+    <string name="toast_optifine_success">Instal succesful</string>
+    <!--
+    <string name="toast_3">Exit</string>
+    -->
+    <!-- MCLauncherActivity: Tabs -->
+    <!-- MCLauncherActivity: Account status -->
+    <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_launch_cleancache">Cleanin cache filez</string>
+    <string name="mcl_launch_downloading">Downloadin %s</string>
+    <string name="mcl_launch_downloading_progress">"Downloadin %s (%.2f MB / %.2f MB)"</string>
+    <string name="mcl_launch_download_assets">Preparin 2 download resourcez</string>
+    <string name="mcl_options">Opshuns</string>
+    <string name="mcl_option_customcontrol">Custom controls</string>
+    <string name="mcl_setting_title_use_surface_view">USE ALTERNATE SURFACE RENDERIN</string>
+    <string name="mcl_setting_title_ignore_notch">Ignoer notch</string>
+    <string name="mcl_setting_title_resolution_scaler">Resolushun Scalah</string>
+    <string name="mcl_setting_title_buttonscale">Control buttons scalin</string>
+    <string name="mcl_setting_title_mousescale">Mouse scalin</string>
+    <string name="mcl_setting_title_javaargs">CCz’UM L’unch argumentz</string>
+    <string name="mcl_setting_subtitle_javaargs">Bees careful, dis can mak teh game crash if modified witout knowledge.</string>
+    <string name="mcl_setting_category_renderer">Renderer</string>
+    <string name="mcl_setting_veroption_release">RELEASD</string>
+    <string name="mcl_setting_veroption_snapshot">Snapshot</string>
+    <string name="mcl_setting_veroption_oldalpha">Old-alaf</string>
+    <string name="mcl_setting_veroption_oldbeta">Old-beat</string>
+    <string name="mcl_version_clone">Cloen</string>
+    <!-- Global strings -->
+    <string name="global_edit">Edit</string>
+    <string name="global_error">Eror</string>
+    <string name="global_load">Load</string>
+    <string name="global_name">Naym</string>
+    <string name="global_remove">Remoev</string>
+    <string name="global_clone">Cloen</string>
+    <string name="global_restart">Re-start</string>
+    <string name="global_save">Saev</string>
+    <string name="global_unpacking">Unpacking %s</string>
+    <string name="global_error_field_empty">Dis field can\'t bees empty</string>
+    <string name="global_waiting">Wait</string>
+    <string name="global_default">My favritz</string>
+    <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">Applicashun/game exitd wif code %d, chek lastestlog.txt 4 moar details.</string>
+    <string name="mcn_exit_confirm">R u suer u wantz 2 forec cloes?</string>
+    <!-- MainActivity: Control buttons -->
+    <string name="control_chat">Chat</string>
+    <string name="control_debug">Debug</string>
+    <string name="control_primary">Pri</string>
+    <string name="control_secondary">Sec</string>
+    <string name="control_inventory">Inv</string>
+    <string name="control_thirdperson">3rd</string>
+    <string name="control_listplayers">Tab</string>
+    <string name="control_mouse">Mouse</string>
+    <string name="control_mouseoff">Mouse: off</string>
+    <string name="control_mouseon">Mouse: on </string>
+    <!-- MainActivity: Menu advanced controls -->
+    <string name="control_forceclose">Force close</string>
+    <string name="control_viewout">tree input</string>
+    <string name="control_adebug">Input Debug</string>
+    <string name="control_customkey">Send custom keycoed</string>
+    <!-- ImportControlActivity Strings -->
+    <string name="import_control_label">Import controls</string>
+    <string name="import_control_invalid_file">Invalid or coruptd file</string>
+    <string name="import_control_import_button">import controls</string>
+    <string name="import_control_verifying_file">File iz bean verifid plz wait an try again…</string>
+    <string name="import_control_invalid_name">Invalid naym ir file alerdy exists</string>
+    <string name="import_control_done">Importatshun dun</string>
+    <!--
+    <string name="control_more3"></string>
+    <string name="control_more4"></string>
+-->
+    <string name="customctrl_toggle">Toggleabel</string>
+    <string name="customctrl_size">Siez</string>
+    <string name="customctrl_mapping">Mappin’</string>
+    <string name="customctrl_orientation">Direksion</string>
+    <string name="customctrl_background_color">Bakground colour</string>
+    <string name="customctrl_corner_radius">Cornur round saiz</string>
+    <string name="customctrl_stroke_width">Strok witz</string>
+    <string name="customctrl_stroke_color">Strok colour</string>
+    <string name="customctrl_button_opacity">Buton Owpacity</string>
+    <string name="customctrl_addbutton">Add button</string>
+    <string name="customctrl_addbutton_drawer">Add buton drawr’</string>
+    <string name="customctrl_addsubbutton">Add b’low-buton</string>
+    <string name="main_play">Pulay</string>
+    <string name="autoram_info_msg">Memori setd 2 %d MB</string>
+    <string name="mcl_setting_check_libraries">Check libraries aftr downloadin</string>
+    <string name="dl_library_sha_fail">Library %s iz breakd and wil’ be redownloaded</string>
+    <string name="dl_library_sha_unknown">Library %s cant’ be checkd, haz 2 assuem iz’ gud</string>
+    <string name="dl_library_sha_pass">Library %s iz prfekt an usabel</string>
+    <string name="mcl_disable_gestures">Disabel gesturez</string>
+    <string name="mcl_disable_gestures_subtitle">Disablez gesturez, laik hold 2 break block, an tap 2 plaec block.</string>
+    <string name="mcl_setting_title_mousespeed">Mice speed</string>
+    <string name="customctrl_passthru">Mouses pas-thur</string>
+    <string name="customctrl_swipeable">Scratchable</string>
+    <string name="memory_warning_msg">WURNING: Catz iz becomin’ une of teh Memory Muncherz, wich may leid tu game crash! (Free %d, munch’d %d MB) Change teh allocasion if teh game crashez.</string>
+    <string name="mcl_memory_allocation">RAM allocasion</string>
+    <string name="multirt_runtime_corrupt">Derti Coffee Cup</string>
+    <string name="multirt_runtime_incompatiblearch">Incompatible architecchur: %s</string>
+    <string name="multirt_config_add">Add new</string>
+    <string name="multirt_title">Coffee Cupz klecsion</string>
+    <string name="multirt_progress_caching">Storin’ tu cache memori...</string>
+    <string name="multirt_config_setdefault">Set favoritz</string>
+    <string name="multirt_config_setdefault_already">My favritz</string>
+    <string name="multirt_nocompartiblert">Ken´t find any compatibl Java Runtime. Dis vershun reqirez Java %d or newr.</string>
+    <string name="multirt_nojava8rt">Ken´t find Java 8. In ordr 2 use dis opshun, u ned 2 install Java 8.</string>
+    <string name="pvc_gameDirectory">Gamez’ direktory</string>
+    <string name="pvc_jvmArgs">CCz’UM argumentz</string>
+    <string name="preference_java_title">Java Tweakz</string>
+    <string name="preference_misc_title">Miscellaneous settings</string>
+    <string name="preference_experimental_title">Experimental Stuff</string>
+    <string name="preference_sustained_performance_title">Enable sustaind performance mode</string>
+    <string name="preference_back_title">Bak 2 teh last screen</string>
+    <string name="unnamed">No named</string>
+    <string name="profiles_latest_snapshot">last snap shot</string>
+    <string name="profiles_latest_release">latest releez</string>
+    <string name="profiles_profile_name">Naym</string>
+    <string name="profiles_profile_version">Type of cat</string>
+    <string name="global_delete">Delete</string>
+    <string name="pedit_java_runtime">Java runtime</string>
+    <string name="pedit_renderer">Renderer</string>
+    <string name="of_dl_progress">Downloadin %s</string>
+</resources>

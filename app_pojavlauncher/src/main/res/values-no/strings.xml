@@ -3,24 +3,15 @@
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition for Android)</string>
     <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">Start Minecraft: Java Edition på enheten din!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
     <string name="login_online_username_hint">E-post eller brukernavn</string>
-    <string name="login_online_password_hint">Passord</string>
-    <string name="login_online_check_keeplogin">Hold meg pålogget</string>
     <string name="login_online_login_label">Logg inn</string>
-    <string name="login_error_exist_username">Dette brukernavn er allerede i bruk</string>
-    <string name="login_microsoft">Logg inn med Microsoft</string>
-    <string name="login_select_account">Velg konto</string>
-    <string name="login_title_no_saved_account">Ingen konto funnet!</string>
-    <string name="login_dialog_no_saved_account">Du har ingen lagrede konto.\nBruk alternativet <b>\"Hold meg logget inn\" </b> for å lagre en konto ved første innlogging.</string>
     <!-- Hint -->
     <!-- Warnings -->
     <string name="warning_remove_account">Denne kontoen blir fjernet!</string>
     <!-- AlertDialog title -->
-    <string name="alerttitle_install_jre">Installer Java Runtime %s (.tar.xz)</string>
     <string name="alerttitle_installmod">Velg en mod installasjonprogram</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher har uventet krasjet</string>
@@ -30,53 +21,25 @@
     <!-- Toast messages -->
     <string name="toast_permission_denied">Trenger tillatelse til å lese/skrive data!</string>
     <string name="toast_optifine_success">Installasjonen var vellykket</string>
-    <string name="toast_uninstalljre_done">Ferdig med å avinstallere Java Runtime</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_console">Utviklerkonsoll</string>
-    <string name="mcl_tab_crash">Krasj logg</string>
     <!-- MCLauncherActivity: Account status -->
-    <string name="mcl_account_connected">Tilkoblet</string>
     <!-- MCLauncherActivity: Strings -->
-    <string name="mcl_version_msg">Klar til å spille Minecraft %s</string>
     <string name="mcl_launch_cleancache">Tømmer cache-filer</string>
     <string name="mcl_launch_downloading">Laster ned %s</string>
     <string name="mcl_launch_downloading_progress">"Laster ned %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Forbereder å laste ned ressurser</string>
     <string name="mcl_options">Innstillinger</string>
-    <string name="mcl_option_modinstall">Start en modinstallasjonprogram (Forge, Labymod, Fabric...)</string>
-    <string name="mcl_option_modinstallwitharg">Start en modinstallasjonprogram (med tilpassede argumenter)</string>
     <string name="mcl_option_customcontrol">Tilpassede kontroller</string>
-    <string name="mcl_option_settings">Innstillinger</string>
-    <string name="mcl_option_about">Om</string>
-    <string name="mcl_setting_title_uninstalljre">Avinstaller Java Runtime</string>
-    <string name="mcl_setting_subtitle_uninstalljre">[Omstart kreves] Dette lar deg installer Java Runtime på nytt</string>
-    <string name="mcl_setting_title_freeform">Start Minecraft i Freeform-modus</string>
-    <string name="mcl_setting_subtitle_freeform">Start Minecraft i flytender vindu. Krever Android 7.0+</string>
-    <string name="mcl_setting_title_hide_sidebar">Skjul sidestolpe</string>
-    <string name="mcl_setting_subtitle_hide_sidebar">Nostalge folks å foretrekke de gamle v1 brukergrensesnittet kanskje slik som dette. Gir deg en mer fullskjerm-opplevelse.</string>
     <string name="mcl_setting_title_ignore_notch">Ignorer \"notch\"</string>
-    <string name="mcl_setting_subtitle_ignore_notch">Ignorer \"notch\" og utvider skjermen under det.\nGir deg en mer fullskjermende opplevelse.</string>
     <string name="mcl_setting_title_resolution_scaler">Oppløsnings Skaler</string>
-    <string name="mcl_setting_subtitle_resolution_scaler">Lar deg redusere spillets oppløsning. 100% er full oppløsning</string>
-    <string name="mcl_setting_title_longpresstrigger">Hvor lenge vil utløse etter langt trykk</string>
-    <string name="mcl_setting_subtitle_longpresstrigger">Endre utløsertid for langt trykk i ødelegge blokk og slipp-gjenstand.</string>
-    <string name="mcl_setting_title_backtorightmouse">Behadle tilbake-knappen som RMB</string>
-    <string name="mcl_setting_subtitle_backtorightmouse">Noen enheter behandler ytre høyre mus som tilbakeknapp. Hvis du bruker en ekstern mus, bør du aktivere dette.</string>
-    <string name="mcl_setting_title_flat_button_style">Flat knapp-stil</string>
-    <string name="mcl_setting_subtitle_flat_button_style">Aktiver dette for å endre kontroll-stilen till flat.</string>
     <string name="mcl_setting_title_buttonscale">Krontrollknapper skalering</string>
-    <string name="mcl_setting_subtitle_buttonscale">Oppskalere dem hvis knappene er for små.</string>
     <string name="mcl_setting_title_mousescale">Mus skalering</string>
-    <string name="mcl_setting_subtitle_mousescale">Endre størrelsen på virtuell mus.</string>
     <string name="mcl_setting_title_javaargs">JVM Launch Arguments</string>
     <string name="mcl_setting_subtitle_javaargs">Vær forsiktig, dette kan gjøre spillet krasj dersom det endres uten kunnskap.</string>
-    <string name="mcl_setting_category_general">Generelle innstillinger</string>
-    <string name="mcl_setting_category_scaling">Innstillinger for skalering</string>
     <string name="mcl_setting_category_renderer">Gjengir</string>
-    <string name="mcl_setting_category_veroption">Versjonstype vil være i versjonslisten</string>
     <string name="mcl_setting_veroption_release">Release</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
@@ -85,7 +48,6 @@
     <!-- Global strings -->
     <string name="global_edit">Rediger</string>
     <string name="global_error">Feil</string>
-    <string name="global_warinng">Advarsel</string>
     <string name="global_load">Last inn</string>
     <string name="global_name">Navn</string>
     <string name="global_remove">Slett</string>
@@ -95,14 +57,10 @@
     <string name="global_unpacking">Pakker ut %s</string>
     <string name="global_error_field_empty">Feltet kan ikke stå tomt</string>
     <string name="global_waiting">Vent</string>
+    <string name="global_default">Standard</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_call">Avslutt</string>
     <string name="mcn_exit_confirm">Er du sikker på at du vil tvinge avslutte?</string>
-    <string name="mcn_check_fail_lwjgl">LWJGL3 ble ikke installert!</string>
-    <string name="mcn_check_fail_vulkan_support">Vulkan Zink gjengir støttes ikke på denne enheten!</string>
     <!-- MainActivity: Control buttons -->
-    <string name="control_toggle">GUI</string>
-    <string name="control_keyboard">Tastatur</string>
     <string name="control_chat">Chat</string>
     <string name="control_debug">Avlusing</string>
     <string name="control_primary">LMB</string>
@@ -118,62 +76,33 @@
     <string name="control_viewout">Logg utdata</string>
     <string name="control_adebug">Input Debug</string>
     <string name="control_customkey">Send tilpasset kode</string>
-    <string name="control_scaleup">Skaler opp</string>
-    <string name="control_scaledown">Skalere ned</string>
     <!-- ImportControlActivity Strings -->
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
-    <string name="customctrl_edit">Rediger %s</string>
-    <string name="customctrl_remove">Slett %s?</string>
-    <string name="customctrl_keyname">Kode</string>
     <string name="customctrl_toggle">Byttbar</string>
     <string name="customctrl_size">Størrelse</string>
-    <string name="customctrl_size_width">Bredde</string>
-    <string name="customctrl_size_height">Høyde</string>
-    <string name="customctrl_dynamicpos">Dynamisk posisjon</string>
-    <string name="customctrl_dynamicpos_x">Dynamisk X</string>
-    <string name="customctrl_dynamicpos_y">Dynamisk Y</string>
-    <string name="customctrl_transparency_bg">Gjennomsiktighet på bakgrunn</string>
-    <string name="customctrl_keycombine">Knapp kombinasjon</string>
     <string name="customctrl_addbutton">Legg til knapp</string>
-    <string name="customctrl_selectdefault">Velg standard krontroll json</string>
-    <string name="main_options">Innstillinger</string>
     <string name="main_play">Spill</string>
-    <string name="main_welcome">Velkommen, %s</string>
-    <string name="main_infodev">Info (DEV)</string>
-    <string name="main_switchuser">Bytt bruker</string>
-    <string name="main_version">Versjon:</string>
-    <string name="main_nocrash">Ingen krasj oppdaget</string>
-    <string name="main_nolog">Ingen logg.</string>
-    <string name="main_no_news_feed">Kunne ikke hente nyhetsmatingen!</string>
-    <string name="auto_ram_subtitle">Aktiverer automatisk RAM-justering</string>
-    <string name="auto_ram_title">Auto RAM</string>
     <string name="autoram_info_msg">Minne satt til %d MB</string>
     <string name="mcl_setting_check_libraries">Sjekk libaryer etter nedlasting</string>
-    <string name="mcl_setting_check_libraries_subtitle">Dette valget fremtvinger launcheren for å sjekke bibliotek hash hvis den er tilgjengelig. Hindrer ødelagte nedlastinger.</string>
     <string name="dl_library_sha_fail">Library %s er skadet og vil bli lastet på nytt</string>
     <string name="dl_library_sha_unknown">Library %s kan ikke skjekkes, må anta det er bra</string>
     <string name="dl_library_sha_pass">Library %s er bra og kan brukes</string>
     <string name="mcl_disable_gestures">Deaktiver gester</string>
     <string name="mcl_disable_gestures_subtitle">Deaktiverer gester, som for å knuse blokker og trykk for å plassere en blokk.</string>
     <string name="mcl_setting_title_mousespeed">Mus Hastighet</string>
-    <string name="mcl_setting_subtitle_mousespeed">Endrer hastigheten på programvare-musen</string>
     <string name="customctrl_passthru">Mus passe-thru</string>
-    <string name="customctrl_rounded">Avrundet</string>
     <string name="memory_warning_msg">Den nåværende mengden ledig RAM (%d) er lavere enn allokert RAM (%d), noe som kan føre til krasj. Endre allokeringen hvis spillet krasjer.</string>
     <string name="mcl_memory_allocation">Minne tildeling</string>
-    <string name="mcl_memory_allocation_subtitle">Kontrollerer hvor mye minne som blir gitt til Minecraft</string>
     <string name="multirt_runtime_corrupt">Korrupt Java Runtime</string>
-    <string name="multirt_config_title">Java VMs</string>
     <string name="multirt_config_add">Legg til ny</string>
-    <string name="multirt_config_add_subtitle">Importer ny Java VM</string>
     <string name="multirt_title">Runtime Manager</string>
-    <string name="multirt_subtitle">Administrere installerte Java VMs</string>
     <string name="multirt_progress_caching">Bufrer...</string>
     <string name="multirt_config_setdefault">Sett som standard</string>
     <string name="multirt_config_setdefault_already">Standard</string>
     <string name="profiles_profile_name">Navn</string>
     <string name="pedit_renderer">Gjengir</string>
+    <string name="of_dl_progress">Laster ned %s</string>
 </resources>

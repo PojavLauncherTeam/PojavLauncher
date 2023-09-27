@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App name part -->
+    <string name="app_name">Pojav Эхлүүлэгч (Minecraft: Java Edition-ийг Гар утсан дээр)</string>
+    <!-- Action bar part -->
+    <!-- Languages list part -->
+    <!-- Login strings -->
+    <string name="login_online_username_hint">И-Майл Эсвэл Нэр</string>
+    <string name="login_online_login_label">Нэвтрэх</string>
+    <!-- Hint -->
+    <string name="hint_control_mapping">"Тохиргоо хэсгийг нээхийн тулд дээр байгаа арааны дүрс ⚙ дээр дарана уу\nӨөрчлөхийн тулд товчлуур дээр дарна уу: товчлуурын key-ийг засах, хэмжээг өөрчлөх, устгах эсвэл өөрчлөх."</string>
+    <!-- Warnings -->
+    <string name="warning_remove_account">Энэ данс устах болон!</string>
+    <!-- AlertDialog title -->
+    <string name="alerttitle_installmod">Татах гэж буй client, mod-ийнхаа .jar file-ийг сонгоно уу.</string>
+    <!-- Error messages -->
+    <string name="error_fatal">Pojav эхлүүлэгчэд гэнэт алдаа гарлаа</string>
+    <string name="error_no_version">Хувилбар сонгоогүй</string>
+    <string name="error_show_more">Бүгдийн харуулах</string>
+    <string name="error_show_less">Бүгдийн нуух</string>
+    <!-- Toast messages -->
+    <string name="toast_permission_denied">Унших/бичих зөвшөөрөл хэрэгтэй!</string>
+    <string name="toast_optifine_success">Амжилттай татсан!</string>
+    <!--
+    <string name="toast_3">Exit</string>
+    -->
+    <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_wiki">Вики</string>
+    <!-- MCLauncherActivity: Account status -->
+    <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_launch_cleancache">Завсарийн санах ойн файлуудийг цэвэрлэж байна</string>
+    <string name="mcl_launch_downloading">Татаж байна %s</string>
+    <string name="mcl_launch_downloading_progress">"Татаж байна %s (%.2f МБ / %.2f МБ)"</string>
+    <string name="mcl_launch_download_assets">Татаж авхад бэлдэж байна</string>
+    <string name="mcl_options">Тохиргоо</string>
+    <string name="mcl_option_customcontrol">Control солих</string>
+    <string name="mcl_setting_title_use_surface_view">Alternate surface rendering-ийг ашиглах</string>
+    <string name="mcl_setting_title_ignore_notch">Булангийн хүрээг орихох</string>
+    <!-- Global strings -->
+    <!-- MainActivity: strings -->
+    <!-- MainActivity: Control buttons -->
+    <string name="control_chat">Чат</string>
+    <string name="control_debug">Дэбаг</string>
+    <string name="control_primary">Зүүн дар</string>
+    <string name="control_secondary">Баруун дар</string>
+    <string name="control_shift">◇</string>
+    <string name="control_inventory">Цүнх</string>
+    <string name="control_up">▲</string>
+    <string name="control_left">◀</string>
+    <string name="control_right">▶</string>
+    <string name="control_down">▼</string>
+    <string name="control_jump">⬛</string>
+    <string name="control_thirdperson">Өнцөг сонгох</string>
+    <string name="control_listplayers">Таб</string>
+    <string name="control_mouse">Хулган</string>
+    <string name="control_mouseoff">Хулган: унтарсан</string>
+    <string name="control_mouseon">Хулган: ассан </string>
+    <!-- MainActivity: Menu advanced controls -->
+    <string name="control_forceclose">Хүчээр гарах</string>
+    <string name="control_viewout">Явц харах</string>
+    <string name="control_adebug">Дэбаг хийх</string>
+    <string name="control_customkey">Өөрийн key явуулах</string>
+    <!-- ImportControlActivity Strings -->
+    <string name="import_control_label">Control оруулах</string>
+    <string name="import_control_invalid_file">Буруу эсвэл алдаатай файл</string>
+    <string name="import_control_import_button">Control оруулах</string>
+    <string name="import_control_verifying_file">Түр хүлээ…</string>
+    <string name="import_control_invalid_name">Буруу эсвэл аль хэдийн байна</string>
+    <string name="import_control_done">Оруулж дууссан</string>
+    <!--
+    <string name="control_more3"></string>
+    <string name="control_more4"></string>
+-->
+    <string name="customctrl_toggle">Асааж болох</string>
+    <string name="customctrl_size">Хэмжээ</string>
+    <string name="customctrl_mapping">Сонгон</string>
+    <string name="customctrl_orientation">Баримтлал</string>
+    <string name="customctrl_background_color">Ар талын өнгө</string>
+    <string name="customctrl_corner_radius">Булангийн хэмжээ</string>
+    <string name="customctrl_stroke_width">Хэмжээ</string>
+    <string name="customctrl_stroke_color">өнгө</string>
+    <string name="customctrl_button_opacity">Харагдац</string>
+    <string name="customctrl_addbutton">Товч нэм</string>
+    <string name="customctrl_addbutton_drawer">Товч нэмэх(шургуулаг)</string>
+    <string name="customctrl_addbutton_joystick">Joystick нэмэх</string>
+    <string name="pvc_gameDirectory">Тоглоомын байрлал </string>
+    <string name="pvc_jvmArgs">JVM-үүд</string>
+    <string name="preference_mouse_start_title">Хулгантай эхлүүлэх</string>
+    <string name="preference_video_title">Видёо болон уншуулагч</string>
+    <string name="of_dl_progress">Татаж байна %s</string>
+</resources>

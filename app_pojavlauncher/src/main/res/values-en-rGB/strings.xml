@@ -3,24 +3,16 @@
     <!-- App name part -->
     <string name="app_name">PojavLauncher(Minecraft: Java Edition for Android)</string>
     <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">Launch Minecraft: Java Edition in your device!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
     <string name="login_online_username_hint">Email or username</string>
-    <string name="login_online_password_hint">Password</string>
-    <string name="login_online_check_keeplogin">Keep me logged in</string>
     <string name="login_online_login_label">Login</string>
-    <string name="login_error_exist_username">This username already exist</string>
-    <string name="login_microsoft">Microsoft login</string>
-    <string name="login_select_account">Select account</string>
-    <string name="login_title_no_saved_account">No account found !</string>
-    <string name="login_dialog_no_saved_account">You don\'t have any saved account.\nUse the option <b>\"Keep me logged in\"</b> to save an account upon first login.</string>
     <!-- Hint -->
+    <string name="hint_control_mapping">"Tap the top center cog icon to open the context menu ⚙\nTap a button to customize: edit, resize, delete, or customize it's keybind."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">This account will be removed!</string>
     <!-- AlertDialog title -->
-    <string name="alerttitle_install_jre">Install Java Runtime %s (.tar.xz)</string>
     <string name="alerttitle_installmod">Select a mod installer</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher has unexpectedly crashed</string>
@@ -30,53 +22,28 @@
     <!-- Toast messages -->
     <string name="toast_permission_denied">The read/write to storage permission is required!</string>
     <string name="toast_optifine_success">Install successful</string>
-    <string name="toast_uninstalljre_done">Done uninstall Java Runtime</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_console">Development console</string>
-    <string name="mcl_tab_crash">Crash log</string>
+    <string name="mcl_tab_wiki">Wiki</string>
     <!-- MCLauncherActivity: Account status -->
-    <string name="mcl_account_connected">Connected</string>
     <!-- MCLauncherActivity: Strings -->
-    <string name="mcl_version_msg">Ready to play Minecraft %s</string>
     <string name="mcl_launch_cleancache">Cleaning cache files</string>
     <string name="mcl_launch_downloading">Downloading %s</string>
     <string name="mcl_launch_downloading_progress">"Downloading %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Preparing to download resources</string>
     <string name="mcl_options">Options</string>
-    <string name="mcl_option_modinstall">Launch a mod installer (Forge, LabyMod, Fabric, etc...)</string>
-    <string name="mcl_option_modinstallwitharg">Launch a mod installer (with custom arguments)</string>
     <string name="mcl_option_customcontrol">Custom controls</string>
-    <string name="mcl_option_settings">Settings</string>
-    <string name="mcl_option_about">About</string>
-    <string name="mcl_setting_title_uninstalljre">Uninstall Java Runtime</string>
-    <string name="mcl_setting_subtitle_uninstalljre">[Launcher restart required] This let you re-install Java Runtime</string>
-    <string name="mcl_setting_title_freeform">Launch Minecraft in Freeform mode</string>
-    <string name="mcl_setting_subtitle_freeform">Launch Minecraft in floating window. Requires Android 7.0+</string>
-    <string name="mcl_setting_title_hide_sidebar">Hide Sidebar</string>
-    <string name="mcl_setting_subtitle_hide_sidebar">Nostalgic folks preferring the old v1 UI might like this. Gives you a more fullscreen experience.</string>
+    <string name="mcl_setting_title_use_surface_view">P</string>
     <string name="mcl_setting_title_ignore_notch">Ignore notch</string>
-    <string name="mcl_setting_subtitle_ignore_notch">Ignore the notch and extends the screen under it.\nGives you a more immersive experience.</string>
     <string name="mcl_setting_title_resolution_scaler">Resolution Scaler</string>
-    <string name="mcl_setting_subtitle_resolution_scaler">Allows you to decrease the game resolution. 100% is full resolution</string>
-    <string name="mcl_setting_title_longpresstrigger">How long will trigger after long press</string>
-    <string name="mcl_setting_subtitle_longpresstrigger">Change trigger time for long press in destroy block and drop item.</string>
-    <string name="mcl_setting_title_backtorightmouse">Treat back button as right mouse</string>
-    <string name="mcl_setting_subtitle_backtorightmouse">Some devices treats external right mouse as back button. If you are using external mouse, you should enable this.</string>
-    <string name="mcl_setting_title_flat_button_style">Flat button style</string>
-    <string name="mcl_setting_subtitle_flat_button_style">Enable this to change control button style to flat.</string>
     <string name="mcl_setting_title_buttonscale">Control buttons scaling</string>
-    <string name="mcl_setting_subtitle_buttonscale">Upscale them if buttons are too small.</string>
     <string name="mcl_setting_title_mousescale">Mouse scaling</string>
-    <string name="mcl_setting_subtitle_mousescale">Change size of virtual mouse.</string>
     <string name="mcl_setting_title_javaargs">JVM Launch arguments</string>
     <string name="mcl_setting_subtitle_javaargs">Be careful, this may make game crash if modified without knowledge.</string>
-    <string name="mcl_setting_category_general">General settings</string>
-    <string name="mcl_setting_category_scaling">Scaling settings</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
-    <string name="mcl_setting_category_veroption">Version type will be in version list</string>
+    <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (all versions, fast)</string>
     <string name="mcl_setting_veroption_release">Release</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
@@ -85,7 +52,6 @@
     <!-- Global strings -->
     <string name="global_edit">Edit</string>
     <string name="global_error">Error</string>
-    <string name="global_warinng">Warning</string>
     <string name="global_load">Load</string>
     <string name="global_name">Name</string>
     <string name="global_remove">Remove</string>
@@ -95,14 +61,11 @@
     <string name="global_unpacking">Unpacking %s</string>
     <string name="global_error_field_empty">This field can\'t be empty</string>
     <string name="global_waiting">Wait</string>
+    <string name="global_select">Select</string>
+    <string name="global_default">Default</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_call">Exit</string>
     <string name="mcn_exit_confirm">Are you sure want to force close?</string>
-    <string name="mcn_check_fail_lwjgl">LWJGL3 was not installed!</string>
-    <string name="mcn_check_fail_vulkan_support">Vulkan Zink renderer is not supported on this device!</string>
     <!-- MainActivity: Control buttons -->
-    <string name="control_toggle">GUI</string>
-    <string name="control_keyboard">Keyboard</string>
     <string name="control_chat">Chat</string>
     <string name="control_debug">Debug</string>
     <string name="control_primary">Pri</string>
@@ -124,65 +87,33 @@
     <string name="control_viewout">Log output</string>
     <string name="control_adebug">Input Debug</string>
     <string name="control_customkey">Send custom keycode</string>
-    <string name="control_scaleup">Scale up</string>
-    <string name="control_scaledown">Scale down</string>
     <!-- ImportControlActivity Strings -->
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
-    <string name="customctrl_edit">Editing %s</string>
-    <string name="customctrl_remove">Remove %s?</string>
-    <string name="customctrl_keyname">Keycode</string>
     <string name="customctrl_toggle">Toggleable</string>
     <string name="customctrl_size">Size</string>
-    <string name="customctrl_size_width">Width</string>
-    <string name="customctrl_size_height">Height</string>
-    <string name="customctrl_dynamicpos">Manual Dynamic position</string>
-    <string name="customctrl_dynamicpos_x">Dynamic X-axis</string>
-    <string name="customctrl_dynamicpos_y">Dynamic Y-axis</string>
-    <string name="customctrl_transparency_bg">Background transparency</string>
-    <string name="customctrl_keycombine">Key combination</string>
-    <string name="customctrl_keycombine_alt">Alt</string>
-    <string name="customctrl_keycombine_control">Ctrl</string>
-    <string name="customctrl_keycombine_shift">Shift</string>
     <string name="customctrl_addbutton">Add button</string>
-    <string name="customctrl_selectdefault">Select default control (.json)</string>
-    <string name="main_options">Options</string>
     <string name="main_play">Play</string>
-    <string name="main_welcome">Welcome, %s</string>
-    <string name="main_infodev">Info (DEV)</string>
-    <string name="main_switchuser">Switch user</string>
-    <string name="main_version">Version:</string>
-    <string name="main_nocrash">No crash detected</string>
-    <string name="main_nolog">No log.</string>
-    <string name="main_no_news_feed">Failed to fetch the news feed !</string>
-    <string name="auto_ram_subtitle">Enables automatic RAM adjuster</string>
-    <string name="auto_ram_title">Auto RAM</string>
     <string name="autoram_info_msg">Memory set to %d MB</string>
     <string name="mcl_setting_check_libraries">Check libraries after downloading</string>
-    <string name="mcl_setting_check_libraries_subtitle">This option forces launcher to check the library hash if it\'s available. Prevents broken downloads.</string>
     <string name="dl_library_sha_fail">Library %s is damaged and will be redownloaded</string>
     <string name="dl_library_sha_unknown">Library %s can\'t be checked, have to assume it\'s good</string>
     <string name="dl_library_sha_pass">Library %s is fine and usable</string>
     <string name="mcl_disable_gestures">Disable gestures</string>
     <string name="mcl_disable_gestures_subtitle">Disables gestures, such as hold to break block, and tap to place a block.</string>
     <string name="mcl_setting_title_mousespeed">Mouse Speed</string>
-    <string name="mcl_setting_subtitle_mousespeed">Changes the speed of the software mouse</string>
     <string name="customctrl_passthru">Mouse pass-thru</string>
-    <string name="customctrl_rounded">Rounded</string>
     <string name="memory_warning_msg">The current amount of free RAM (%d) is lower than allocated RAM (%d), which may lead to crashes. Change the allocation if the game crashes.</string>
     <string name="mcl_memory_allocation">Memory allocation</string>
-    <string name="mcl_memory_allocation_subtitle">Controls how much memory is given to Minecraft</string>
     <string name="multirt_runtime_corrupt">Corrupted Java Runtime</string>
-    <string name="multirt_config_title">Java VMs</string>
     <string name="multirt_config_add">Add new</string>
-    <string name="multirt_config_add_subtitle">Import new Java VM</string>
     <string name="multirt_title">Runtime Manager</string>
-    <string name="multirt_subtitle">Manage installed Java VMs</string>
     <string name="multirt_progress_caching">Caching...</string>
     <string name="multirt_config_setdefault">Set default</string>
     <string name="multirt_config_setdefault_already">Default</string>
     <string name="profiles_profile_name">Name</string>
     <string name="pedit_renderer">Renderer</string>
+    <string name="of_dl_progress">Downloading %s</string>
 </resources>

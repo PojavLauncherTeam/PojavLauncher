@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
+    <string name="app_name">PojavLauncher (Minecraft: Java Edition Android-hoz)</string>
+    <string name="app_short_name">PojavLauncher</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_online_username_hint">Email vagy felhasználónév</string>
+    <string name="login_online_login_label">Bejelentkezés</string>
     <!-- Hint -->
+    <string name="hint_control_mapping">""</string>
     <!-- Warnings -->
+    <string name="warning_remove_account">Ez a fiók törölve lesz!</string>
     <!-- AlertDialog title -->
+    <string name="alerttitle_installmod">Select a mod installer</string>
     <!-- Error messages -->
     <!-- Toast messages -->
     <!--

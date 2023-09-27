@@ -3,25 +3,16 @@
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition para Android)</string>
     <string name="app_short_name">PojavLauncher</string>
-    <string name="app_motd">Joga o Minecraft: Java Edition no teu dispositivo!</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
     <string name="login_online_username_hint">E-mail ou nome de utilizador</string>
-    <string name="login_online_password_hint">Palavra-passe</string>
-    <string name="login_online_check_keeplogin">Manter a sessão iniciada</string>
     <string name="login_online_login_label">Iniciar sessão</string>
-    <string name="login_error_invalid_username">Nome de utilizador inválido. Um nome de utilizador deve ser entre 3 e 16 caracteres, deve conter apenas A-Z, a-z, 0-9 e underscore.</string>
-    <string name="login_error_exist_username">Esse nome já existe</string>
-    <string name="login_microsoft">Iniciar sessão pela Microsoft</string>
-    <string name="login_select_account">Seleciona a conta</string>
-    <string name="login_title_no_saved_account">Nenhuma conta encontrada!</string>
-    <string name="login_dialog_no_saved_account">Tu não tens nenhuma conta guardada.\nUsa a opção <b>\"Manter a sessão iniciada\" </b>para guardar uma conta depois do primeiro início de sessão.</string>
     <!-- Hint -->
+    <string name="hint_control_mapping">"Toque no ícone de engrenagem central superior para abrir o menu de contexto ⚙\nToque num botão para personalizar: edite, redimensione, exclua ou personalize o seu atalho de teclado."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Esta conta será removida!</string>
     <!-- AlertDialog title -->
-    <string name="alerttitle_install_jre">Instalar Runtime do Java %s (.tar.xz)</string>
     <string name="alerttitle_installmod">Seleciona um Instalador de mods</string>
     <!-- Error messages -->
     <string name="error_fatal">O PojavLauncher falhou inesperadamente</string>
@@ -31,58 +22,28 @@
     <!-- Toast messages -->
     <string name="toast_permission_denied">A permissão de leitura/escrita no armazenamento é necessária!</string>
     <string name="toast_optifine_success">Instalação completa com sucesso</string>
-    <string name="toast_uninstalljre_done">Desinstalação da Runtime do Java concluída</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_console">Consola de Desenvolvedor</string>
-    <string name="mcl_tab_crash">Registro de falhas</string>
+    <string name="mcl_tab_wiki">Wiki</string>
     <!-- MCLauncherActivity: Account status -->
-    <string name="mcl_account_connected">Conectado</string>
-    <string name="mcl_account_local">Local</string>
     <!-- MCLauncherActivity: Strings -->
-    <string name="mcl_version_msg">Pronto para jogar Minecraft %s</string>
     <string name="mcl_launch_cleancache">A limpar os ficheiros em cache</string>
     <string name="mcl_launch_downloading">A transferir %s</string>
     <string name="mcl_launch_downloading_progress">"A transferir %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">A preparar para transferir os recursos</string>
-    <string name="mcl_launch_error_localmode">Minecraft não pode ser instalado legalmente quando conectado numa conta local. Por favor, mude para uma conta original para continuar.</string>
     <string name="mcl_options">Opções</string>
-    <string name="mcl_option_modinstall">Executa um instalador de mods (Forge, LabyMod, Fabric, etc...)</string>
-    <string name="mcl_option_modinstallwitharg">Executa um instalador de mods (com argumentos personalizados)</string>
     <string name="mcl_option_customcontrol">Controlos personalizados</string>
-    <string name="mcl_option_settings">Definições</string>
-    <string name="mcl_option_about">Acerca</string>
     <string name="mcl_setting_title_use_surface_view">Usar renderização de superfície alternada</string>
-    <string name="mcl_setting_subtitle_use_surface_view">Pode ajudar no desempenho em cenários de vínculo da GPU</string>
-    <string name="mcl_setting_title_uninstalljre">Desinstalar Runtime do Java</string>
-    <string name="mcl_setting_subtitle_uninstalljre">[Reinicio do lançador requirido] Isto te permite reinstalar a Runtime do Java</string>
-    <string name="mcl_setting_title_freeform">Executar o Minecraft no modo Freeform</string>
-    <string name="mcl_setting_subtitle_freeform">Executar o Minecraft numa janela flutuante. Requere Android 7.0+</string>
-    <string name="mcl_setting_title_hide_sidebar">Esconder a barra lateral</string>
-    <string name="mcl_setting_subtitle_hide_sidebar">Pessoas nostálgicas preferem a interface antiga da v1 parecida com isto.
-Dá-te uma experiência de tela cheia melhorada.</string>
     <string name="mcl_setting_title_ignore_notch">Ignorar o entalhe</string>
-    <string name="mcl_setting_subtitle_ignore_notch">Ignorar o entalhe e estender a tela até lá. \nDá-te uma experiência mais imersiva.</string>
     <string name="mcl_setting_title_resolution_scaler">Escala da Resolução</string>
-    <string name="mcl_setting_subtitle_resolution_scaler">Permite-te reduzir a resolução do jogo. 100% é a resolução total</string>
-    <string name="mcl_setting_title_longpresstrigger">Quanto tempo será acionado depois de pressionar e segurar</string>
-    <string name="mcl_setting_subtitle_longpresstrigger">Alterar o tempo de ativação de um toque longo entre destruir um bloco e soltar itens.</string>
-    <string name="mcl_setting_title_backtorightmouse">Tratar o botão voltar como o botão direito do rato</string>
-    <string name="mcl_setting_subtitle_backtorightmouse">Alguns dispositivos tratam o botão direito externo como o botão voltar. Se tu estás a usar um rato externo, tu deves ativar isto.</string>
-    <string name="mcl_setting_title_flat_button_style">Estilo de botão plano</string>
-    <string name="mcl_setting_subtitle_flat_button_style">Ativa isto para trocar o estilo do botão para plano.</string>
     <string name="mcl_setting_title_buttonscale">Escala dos botões</string>
-    <string name="mcl_setting_subtitle_buttonscale">Aumenta o tamanho dos botões caso estejam muito pequenos.</string>
     <string name="mcl_setting_title_mousescale">Escala do rato</string>
-    <string name="mcl_setting_subtitle_mousescale">Alterar o tamanho do rato virtual.</string>
     <string name="mcl_setting_title_javaargs">Argumentos JVM</string>
     <string name="mcl_setting_subtitle_javaargs">Tem cuidado, isto pode fazer o jogo falhar se modificado sem conhecimento.</string>
-    <string name="mcl_setting_category_general">Definições gerais</string>
-    <string name="mcl_setting_category_scaling">Definições de escala</string>
     <string name="mcl_setting_category_renderer">Renderizador</string>
-    <string name="mcl_setting_category_veroption">O tipo de versões que estarão na lista de versões</string>
+    <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (todas as versões, rápido)</string>
     <string name="mcl_setting_veroption_release">Oficial</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Alpha antiga</string>
@@ -91,7 +52,6 @@ Dá-te uma experiência de tela cheia melhorada.</string>
     <!-- Global strings -->
     <string name="global_edit">Editar</string>
     <string name="global_error">Erro</string>
-    <string name="global_warinng">Aviso</string>
     <string name="global_load">Carregar</string>
     <string name="global_name">Nome</string>
     <string name="global_remove">Remover</string>
@@ -101,15 +61,14 @@ Dá-te uma experiência de tela cheia melhorada.</string>
     <string name="global_unpacking">A descompactar %s</string>
     <string name="global_error_field_empty">Este campo não pode estar vazio</string>
     <string name="global_waiting">Aguarda</string>
+    <string name="global_select">Selecionar</string>
+    <string name="global_retry">Tentar outra vez</string>
+    <string name="global_default">Padrão</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Aplicação/Jogo saiu com código %d, verifique latestlog.txt para mais detalhes.</string>
-    <string name="mcn_exit_call">Sair</string>
     <string name="mcn_exit_confirm">Tu tens a certeza que queres forçar o encerramento do jogo?</string>
-    <string name="mcn_check_fail_lwjgl">O LWJGL3 não foi instalado!</string>
-    <string name="mcn_check_fail_vulkan_support">O renderizador Vulkan Zink não é suportado neste dispositivo!</string>
+    <string name="mcn_check_fail_vulkan_support">O renderizador Zink(Vulkan) não é suportado neste dispositivo!</string>
     <!-- MainActivity: Control buttons -->
-    <string name="control_toggle">Interface</string>
-    <string name="control_keyboard">Teclado</string>
     <string name="control_chat">Chat</string>
     <string name="control_debug">Depuração</string>
     <string name="control_primary">Pri</string>
@@ -125,8 +84,6 @@ Dá-te uma experiência de tela cheia melhorada.</string>
     <string name="control_viewout">Registro de saída</string>
     <string name="control_adebug">Inserir Depuração</string>
     <string name="control_customkey">Enviar tecla personalizada</string>
-    <string name="control_scaleup">Ampliar</string>
-    <string name="control_scaledown">Diminuir</string>
     <!-- ImportControlActivity Strings -->
     <string name="import_control_label">Importar Controlos</string>
     <string name="import_control_invalid_file">Ficheiro inválido ou corrompido</string>
@@ -138,106 +95,61 @@ Dá-te uma experiência de tela cheia melhorada.</string>
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
-    <string name="customctrl_edit">A editar %s</string>
-    <string name="customctrl_remove">Remover %s?</string>
-    <string name="customctrl_keyname">Tecla</string>
     <string name="customctrl_toggle">Alternável</string>
     <string name="customctrl_size">Tamanho</string>
-    <string name="customctrl_size_width">Largura</string>
-    <string name="customctrl_size_height">Altura</string>
     <string name="customctrl_mapping">Mapeamento</string>
     <string name="customctrl_orientation">Orientação</string>
     <string name="customctrl_background_color">Cor do fundo</string>
     <string name="customctrl_corner_radius">Raio dos cantos</string>
     <string name="customctrl_stroke_width">Espessura do traçado</string>
     <string name="customctrl_stroke_color">Cor do traçado</string>
-    <string name="customctrl_dynamicpos">Posição Dinâmica manual</string>
-    <string name="customctrl_dynamicpos_x">X Dinâmico</string>
-    <string name="customctrl_dynamicpos_y">Y Dinâmico</string>
-    <string name="customctrl_transparency_bg">Transparência do fundo</string>
     <string name="customctrl_button_opacity">Opacidade do botão</string>
-    <string name="customctrl_keycombine">Combinação de teclas</string>
     <string name="customctrl_addbutton">Adicionar botão</string>
     <string name="customctrl_addbutton_drawer">Adicionar desenhador de botão</string>
+    <string name="customctrl_addbutton_joystick">Adicionar joystick</string>
     <string name="customctrl_addsubbutton">Adicionar sub-botão</string>
-    <string name="customctrl_add_subbutton_message">Sub-botão n°%d foi adicionado!</string>
-    <string name="customctrl_selectdefault">Selecionar o json de controlo padrão</string>
-    <string name="main_install_jar_file">Instalar .jar</string>
-    <string name="main_options">Opções</string>
+    <string name="main_share_logs">Partilhar log</string>
     <string name="main_play">Jogar</string>
-    <string name="main_welcome">Bem-vindo(a), %s</string>
-    <string name="main_infodev">Informação (DEV)</string>
-    <string name="main_switchuser">Trocar de utilizador</string>
-    <string name="main_version">Versão:</string>
-    <string name="main_nocrash">Nenhuma falha detetada</string>
-    <string name="main_nolog">Sem registros.</string>
-    <string name="main_no_news_feed">Não foi possível obter o feed de notícias!</string>
-    <string name="auto_ram_subtitle">Ativa o ajuste automático de RAM</string>
-    <string name="auto_ram_title">RAM automática</string>
     <string name="autoram_info_msg">Memória definida para %d MB</string>
     <string name="mcl_setting_check_libraries">Verificar as bibliotecas depois de transferir</string>
-    <string name="mcl_setting_check_libraries_subtitle">Esta opção força o lançador a verificar o banco de bibliotecas se este estiver disponível. Previne transferências com problemas.</string>
     <string name="dl_library_sha_fail">A biblioteca %s está danificada e irá ser transferida novamente</string>
     <string name="dl_library_sha_unknown">A biblioteca %s não pôde ser verificada, vamos assumir que está utilizável</string>
     <string name="dl_library_sha_pass">Biblioteca %s está bem e utilizável</string>
     <string name="mcl_disable_gestures">Desativar gestos</string>
     <string name="mcl_disable_gestures_subtitle">Desativa gestos, como segurar para quebrar blocos e tocar para colocar um bloco.</string>
+    <string name="mcl_disable_swap_hand">Desativar toque duplo para trocar de mãos</string>
     <string name="mcl_setting_title_mousespeed">Velocidade do rato</string>
-    <string name="mcl_setting_subtitle_mousespeed">Altera a velocidade do rato do software</string>
     <string name="customctrl_passthru">Rato pode passar através</string>
     <string name="customctrl_swipeable">Deslizável</string>
-    <string name="customctrl_rounded">Arredondado</string>
+    <string name="customctrl_forward_lock">Bloqueio da Frente</string>
     <string name="memory_warning_msg">A quantidade atual de memória RAM livre (%d) é menor do que a memória RAM alocada (%d), o que pode levar a falhas. Altera a alocação se o jogo falhar.</string>
     <string name="mcl_memory_allocation">Alocação de memória</string>
-    <string name="mcl_memory_allocation_subtitle">Controla quanta memória é dada ao Minecraft</string>
     <string name="multirt_runtime_corrupt">Runtime do Java corrompida</string>
     <string name="multirt_runtime_incompatiblearch">Arquitetura incompatível: %s</string>
-    <string name="multirt_config_title">VMs do Java</string>
     <string name="multirt_config_add">Adicionar nova</string>
-    <string name="multirt_config_add_subtitle">Importar uma nova VM do Java</string>
     <string name="multirt_title">Gestor de Runtimes</string>
-    <string name="multirt_subtitle">Gerir as VMs do Java instaladas</string>
     <string name="multirt_progress_caching">A colocar em cache...</string>
     <string name="multirt_config_setdefault">Definir como padrão</string>
     <string name="multirt_config_setdefault_already">Padrão</string>
-    <string name="multirt_config_removeerror_last">Tu deves ter pelo menos uma Runtime do Java instalada</string>
     <string name="multirt_nocompartiblert">Não foi possível encontrar uma Runtime do Java compatível. Esta versão requere Java %d ou superior.</string>
     <string name="multirt_nojava8rt">Não foi possível encontrar o Java 8. Para usar esta opção, tu precisas de instalar o Java 8.</string>
-    <string name="compat_117_message">O Minecraft 21w10a+ requer o perfil essencial OpenGL 3.2. Infelizmente, o seu processador de vídeo não suporta o OpenGL ES 3. ou superior, mas há alguns recursos adicionais que você pode instalar para executar essas versões. Pressione OK para confirmar a instalação e pressione Cancelar para abortar a execução.</string>
-    <string name="compat_11x_playanyway">Jogar mesmo assim</string>
+    <string name="multirt_delete_runtime">Eliminar runtime</string>
     <string name="pvc_gameDirectory">Diretório do jogo</string>
     <string name="pvc_jvmArgs">Argumentos JVM</string>
-    <string name="pvc_title">Definições da versão</string>
-    <string name="storage_warning_title">Alterações de armazenamento</string>
-    <string name="storage_warning_text"><![CDATA[Devido aos novos reforços ao armazenamento adicionados no Android 10 e superiores, nós fomos obrigados a mover o diretório do jogo para uma pasta privada. <br /> A nova pasta para os ficheiros do Pojav é <b>Android/data/%s/files/</b> (também acessível usando um explorador de ficheiros).<br /> Se tu precisares de copiar os ficheiros do teu jogo, por favor copia tudo da página original em <b>games/PojavLauncher</b> manualmente.]]></string>
-    <string name="control_offset_title">Deslocamento dos controles</string>
-    <string name="control_top_offset">Deslocar superior: </string>
-    <string name="control_right_offset">Deslocar para direita: </string>
-    <string name="control_bottom_offset">deslocamento inferior: </string>
-    <string name="control_left_offset">Descolar para esquerda: </string>
-    <string name="preference_control_offset_title">Deslocamento lateral dos controles</string>
-    <string name="preference_control_offset_description">Definir um deslocamento personalizado para cada lado da tela</string>
     <string name="preference_mouse_start_title">Iniciar com o rato virtual ligado</string>
     <string name="preference_video_title">Vídeo e renderizador</string>
-    <string name="preference_video_description">Resolução, tipo de escala, e renderizador</string>
     <string name="preference_control_title">Customização dos controlos</string>
-    <string name="preference_control_description">Tipos de Gestos, triggers e escala</string>
     <string name="preference_java_title">Ajustes do Java</string>
     <string name="preference_misc_title">Definições diversas</string>
-    <string name="preference_misc_description">Lista de versões, e verificações das bibliotecas</string>
     <string name="preference_experimental_title">Coisas experimentais</string>
-    <string name="preference_experimental_description">Use estas coisas com consideração, sem suporte.</string>
     <string name="preference_sustained_performance_title">Habilitar modo de desempenho constante</string>
-    <string name="preference_sustained_performance_description">Limitar a Redução Térmica limitando o pico do desempenho</string>
-    <string name="preference_force_vsync_description">Limitar a Redução Térmica limitando o pico do desempenho</string>
+    <string name="preference_edit_controls_title">Editar controlos personalizados</string>
+    <string name="preference_gyro_invert_x_axis">Inverter eixo X</string>
+    <string name="preference_gyro_invert_y_axis">Inverter eixo Y</string>
     <string name="preference_back_title">Voltar à tela anterior</string>
-    <string name="gles_hack_none">Não diminuir texturas</string>
-    <string name="gles_hack_always">Divide todas as texturas por 2</string>
-    <string name="gles_hack_sometimes">Divide texturas grandes por 2 ou por 4</string>
     <string name="unnamed">Sem Nome</string>
     <string name="profiles_latest_snapshot">Snapshot mais recente</string>
     <string name="profiles_latest_release">Versão mais recente</string>
-    <string name="profiles_editing">Edição Do Perfil</string>
     <string name="profiles_profile_name">Nome</string>
     <string name="profiles_profile_version">Versão</string>
     <string name="global_delete">Eliminar</string>
@@ -245,5 +157,5 @@ Dá-te uma experiência de tela cheia melhorada.</string>
     <string name="pedit_renderer">Renderizador</string>
     <string name="arc_capes_title">Capas da \'Comestica\'</string>
     <string name="arc_capes_desc">Habilitar capas da Cosmetica(antigamente Arc). Para mais informações por favor visite https://cosmetica.cc. Isto Requer OptiFine.</string>
-    <string name="migrated_profile_str">%s definições da versão</string>
+    <string name="of_dl_progress">A transferir %s</string>
 </resources>
