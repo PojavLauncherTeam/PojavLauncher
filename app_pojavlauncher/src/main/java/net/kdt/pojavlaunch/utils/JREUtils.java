@@ -360,7 +360,8 @@ public class JREUtils {
                 "-Dlog4j2.formatMsgNoLookups=true", //Log4j RCE mitigation
 
                 "-Dnet.minecraft.clientmodname=" + Tools.APP_NAME,
-                "-Dfml.earlyprogresswindow=false" //Forge 1.14+ workaround
+                "-Dfml.earlyprogresswindow=false", //Forge 1.14+ workaround
+                "-Dloader.disable_forked_guis=true"
         ));
         if(LauncherPreferences.PREF_ARC_CAPES) {
             overridableArguments.add("-javaagent:"+new File(Tools.DIR_DATA,"arc_dns_injector/arc_dns_injector.jar").getAbsolutePath()+"=23.95.137.176");
