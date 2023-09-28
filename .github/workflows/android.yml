@@ -92,6 +92,12 @@ jobs:
         with:
           name: app-debug
           path: out/app-debug.*
+      
+      - name: Upload AAB
+        uses: actions/upload-artifact@v3
+        with:
+          name: app-release-aab
+          path: out/app-gplay.aab
 
       - name: Upload onto the Google Play testing track
         continue-on-error: true
