@@ -45,10 +45,10 @@
     <string name="mcl_setting_subtitle_longpresstrigger">Длительность удерживания для разрушения блоков и выбрасывания предметов.</string>
     <string name="mcl_setting_title_buttonscale">Размер кнопок</string>
     <string name="mcl_setting_subtitle_buttonscale">Увеличьте, если они слишком малы.</string>
-    <string name="mcl_setting_title_mousescale">Размер курсора</string>
+    <string name="mcl_setting_title_mousescale">Размер указателя</string>
     <string name="mcl_setting_subtitle_mousescale">Изменить размер указателя виртуальной мыши.</string>
     <string name="mcl_setting_title_javaargs">Аргументы запуска JVM</string>
-    <string name="mcl_setting_subtitle_javaargs">Будьте осторожны, это может привести к сбою игры, если изменить их без особых знаний.</string>
+    <string name="mcl_setting_subtitle_javaargs">Осторожно, необдуманное изменение может привести к сбою игры.</string>
     <string name="mcl_setting_category_renderer">Визуализатор</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES (все версии, быстрый)</string>
     <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan; все версии, средний)</string>
@@ -59,14 +59,14 @@
     <string name="mcl_setting_veroption_oldbeta">Старые бета</string>
     <string name="mcl_setting_java_sandbox">Безопасное выполнение .jar</string>
     <string name="mcl_setting_java_sandbox_subtitle">Управляет доступностью менеджера безопасной среды Java при выполнении .jar-файла.</string>
-    <string name="mcl_version_clone">Копия</string>
+    <string name="mcl_version_clone">Копировать</string>
     <!-- Global strings -->
     <string name="global_edit">Редактировать</string>
     <string name="global_error">Ошибка</string>
     <string name="global_load">Загрузить</string>
     <string name="global_name">Имя</string>
-    <string name="global_remove">Удалить</string>
-    <string name="global_clone">Копия</string>
+    <string name="global_remove">  Удалить  </string>
+    <string name="global_clone">Копировать</string>
     <string name="global_restart">Перезапуск</string>
     <string name="global_save">Сохранить</string>
     <string name="global_unpacking">Распаковка %s</string>
@@ -125,7 +125,7 @@
     <string name="customctrl_addbutton_drawer">Добавить группу кнопок</string>
     <string name="customctrl_addbutton_joystick">Добавить джойстик</string>
     <string name="customctrl_addsubbutton">Добавить</string>
-    <string name="customctrl_selectdefault">Задать общую раскладку</string>
+    <string name="customctrl_selectdefault">Сделать основной</string>
     <string name="customctrl_export">Поделиться раскладкой</string>
     <string name="main_share_logs">Поделиться журналом</string>
     <string name="main_install_jar_file">Запустить .jar</string>
@@ -140,7 +140,7 @@
     <string name="mcl_disable_gestures_subtitle">Переключение жестов размещения/разрушения блока при касании/удерживании экрана.</string>
     <string name="mcl_disable_swap_hand">Отключить смену руки по двойному касанию</string>
     <string name="mcl_disable_swap_hand_subtitle">Отключает перемещение предмета во вторую руку при двойном касании по нему в панели инструментов.</string>
-    <string name="mcl_setting_title_mousespeed">Чувствительность курсора</string>
+    <string name="mcl_setting_title_mousespeed">Скорость указателя</string>
     <string name="mcl_setting_subtitle_mousespeed">Изменить скорость указателя виртуальный мыши.</string>
     <string name="customctrl_passthru">Пропускать касание</string>
     <string name="customctrl_swipeable">Пролистываемый</string>
@@ -207,7 +207,7 @@
     <string name="mcl_setting_veroption_installed">Установленные</string>
     <string name="use_global_default">(Как везде)</string>
     <string name="default_control">Раскладка управления</string>
-    <string name="progresslayout_tasks_in_progress">Задач в процессе выполнения: %d</string>
+    <string name="progresslayout_tasks_in_progress">Выполняется задач: %d</string>
     <string name="notification_terminate">Завершить</string>
     <string name="notification_game_runs">Игра запущена!</string>
     <string name="folder_dialog_create">Создать</string>
@@ -248,13 +248,13 @@
     <string name="global_no">Нет</string>
     <string name="preference_controller_map_wiped">Настройки контроллера сброшены.</string>
     <string name="preference_category_controller_settings">Настройки контроллера</string>
-    <string name="preference_wipe_controller_title">Сбросить раскладку контроллера</string>
+    <string name="preference_wipe_controller_title">Сбросить управление контроллером</string>
     <string name="preference_wipe_controller_description">Позволяет переназначить кнопки контроллера.</string>
     <string name="preference_deadzone_scale_title">Компенсация износа джойстика</string>
     <string name="preference_deadzone_scale_description">Увеличьте, если стики самопроизвольно срабатывают.</string>
     <string name="preference_force_big_core_title">Запускать визуализатор на мощном ядре</string>
     <string name="preference_force_big_core_desc">Принудительно запускать поток графического движка на ядре ЦП с наибольшей тактовой частотой.</string>
-    <string name="version_select_hint">Укажите версию</string>
+    <string name="version_select_hint">Выберите версию</string>
     <string name="forge_dl_progress">Загрузка установщика %s</string>
     <string name="forge_dl_searching">Поиск номера версии Forge</string>
     <string name="modloader_dl_failed_to_load_list">Не удалось загрузить список версий.</string>
