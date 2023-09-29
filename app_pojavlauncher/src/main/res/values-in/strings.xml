@@ -36,10 +36,12 @@
     <string name="mcl_options">Opsi</string>
     <string name="mcl_option_customcontrol">Kontrol kustom</string>
     <string name="mcl_setting_title_use_surface_view">Gunakan alternatif rendering surface</string>
+    <string name="mcl_setting_subtitle_use_surface_view">Mungkin membantu perfoma dalam skenario-skenario GPU bound.</string>
     <string name="mcl_setting_title_ignore_notch">Abaikan notch</string>
     <string name="mcl_setting_subtitle_ignore_notch">Mengabaikan notch dan memperluas layar ke bawahnya.\nMemberikanmu pengalaman yang lebih luas.</string>
     <string name="mcl_setting_title_resolution_scaler">Pengskala resolusi</string>
     <string name="mcl_setting_subtitle_resolution_scaler">Membolehkanmu menurunkan resolusi permainan. 100% berarti resolusi penuh(mempengaruhi performa).</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Ubah delay tekan lama untuk menghancurkan block dan menjatuhkan item.</string>
     <string name="mcl_setting_title_buttonscale">Penskalaan tombol kontrol</string>
     <string name="mcl_setting_subtitle_buttonscale">Tingkatkan ukuran tombol jika tombol tombol itu terlalu kecil.</string>
     <string name="mcl_setting_title_mousescale">Penskalaan mouse</string>
@@ -54,6 +56,8 @@
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Alpha-lama</string>
     <string name="mcl_setting_veroption_oldbeta">Beta-lama</string>
+    <string name="mcl_setting_java_sandbox">Sandbox eksekusi .jar</string>
+    <string name="mcl_setting_java_sandbox_subtitle">Kendalikan ketersedian pengelola keamanan sandbox saat meluncurkan berkas .jar.</string>
     <string name="mcl_version_clone">Klon</string>
     <!-- Global strings -->
     <string name="global_edit">Edit</string>
