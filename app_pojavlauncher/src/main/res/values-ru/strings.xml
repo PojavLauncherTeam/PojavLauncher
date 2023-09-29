@@ -112,9 +112,9 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
-    <string name="customctrl_toggle">Переключаемый</string>
+    <string name="customctrl_toggle">Переключать касанием</string>
     <string name="customctrl_size">Размер</string>
-    <string name="customctrl_mapping">Кнопки</string>
+    <string name="customctrl_mapping">Клавиши</string>
     <string name="customctrl_orientation">Сторона разворота</string>
     <string name="customctrl_background_color">Цвет фона</string>
     <string name="customctrl_corner_radius">Радиус скругления</string>
@@ -142,8 +142,8 @@
     <string name="mcl_disable_swap_hand_subtitle">Отключает перемещение предмета во вторую руку при двойном касании по нему в панели инструментов.</string>
     <string name="mcl_setting_title_mousespeed">Скорость указателя</string>
     <string name="mcl_setting_subtitle_mousespeed">Изменить скорость указателя виртуальный мыши.</string>
-    <string name="customctrl_passthru">Пропускать касание</string>
-    <string name="customctrl_swipeable">Пролистываемый</string>
+    <string name="customctrl_passthru">Пропускать касание в игру</string>
+    <string name="customctrl_swipeable">Активация движением пальца</string>
     <string name="customctrl_forward_lock">Фиксатор движения</string>
     <string name="memory_warning_msg">Текущий объем свободной оперативной памяти (%d) меньше, чем выделенная (%d), что может привести к сбоям. Измените количество выделенной памяти при сбое игры.</string>
     <string name="mcl_memory_allocation">Выделение памяти</string>
