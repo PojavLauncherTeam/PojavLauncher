@@ -17,16 +17,16 @@
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher 意外崩溃</string>
     <string name="error_no_version">无版本！</string>
-    <string name="error_show_more">显示细节</string>
-    <string name="error_show_less">隐藏细节</string>
+    <string name="error_show_more">显示更多</string>
+    <string name="error_show_less">隐藏内容</string>
     <!-- Toast messages -->
     <string name="toast_permission_denied">需要存储读写权限！</string>
-    <string name="toast_optifine_success">安装成功</string>
+    <string name="toast_optifine_success">安装成功！</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_wiki">百科</string>
+    <string name="mcl_tab_wiki">维基百科</string>
     <!-- MCLauncherActivity: Account status -->
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_launch_cleancache">正在清理缓存</string>
@@ -34,9 +34,9 @@
     <string name="mcl_launch_downloading_progress">"正在下载 %s（%.2fMB / %.2fMB）"</string>
     <string name="mcl_launch_download_assets">正在准备下载资源</string>
     <string name="mcl_options">选项</string>
-    <string name="mcl_option_customcontrol">自定义控制键</string>
+    <string name="mcl_option_customcontrol">自定义控制键位</string>
     <string name="mcl_setting_title_use_surface_view">使用备用表面渲染（Surface Rendering）</string>
-    <string name="mcl_setting_subtitle_use_surface_view">可能有助于提升受 GPU 机能限制的性能。</string>
+    <string name="mcl_setting_subtitle_use_surface_view">此项设置可能有助于提升受 GPU 机能限制的性能。</string>
     <string name="mcl_setting_title_ignore_notch">忽略刘海屏</string>
     <string name="mcl_setting_subtitle_ignore_notch">忽略刘海屏并将屏幕内容扩展至其下方。\n给您以更完整的沉浸感。</string>
     <string name="mcl_setting_title_resolution_scaler">分辨率缩放</string>
@@ -48,11 +48,11 @@
     <string name="mcl_setting_title_mousescale">鼠标缩放</string>
     <string name="mcl_setting_subtitle_mousescale">修改虚拟鼠标的大小。</string>
     <string name="mcl_setting_title_javaargs">JVM 启动参数</string>
-    <string name="mcl_setting_subtitle_javaargs">注意，非专业人士修改此值可能导致游戏崩溃。</string>
+    <string name="mcl_setting_subtitle_javaargs">注意，非专业人士修改此值可能导致游戏崩溃！</string>
     <string name="mcl_setting_category_renderer">渲染器</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES -（全版本可用，速度较快）</string>
-    <string name="mcl_setting_renderer_vulkan_zink">Zink（Vulkan）-（所有版本、中）</string>
-    <string name="mcl_setting_renderer_angle">ANGLE（Vulkan）-（仅 1.17 以上、中）</string>
+    <string name="mcl_setting_renderer_vulkan_zink">Zink（Vulkan）-（全版本支持，速度中等）</string>
+    <string name="mcl_setting_renderer_angle">ANGLE（Vulkan）-（仅支持1.17 以上的版本，速度中等）</string>
     <string name="mcl_setting_veroption_release">正式版</string>
     <string name="mcl_setting_veroption_snapshot">快照</string>
     <string name="mcl_setting_veroption_oldalpha">远古 alpha 版</string>
@@ -104,7 +104,7 @@
     <!-- ImportControlActivity Strings -->
     <string name="import_control_label">导入控制键</string>
     <string name="import_control_invalid_file">文件无效或已损坏</string>
-    <string name="import_control_import_button">导入控制键</string>
+    <string name="import_control_import_button">导入控制键位文件</string>
     <string name="import_control_verifying_file">文件正在校检中，请稍后重试…</string>
     <string name="import_control_invalid_name">名称无效或文件已存在</string>
     <string name="import_control_done">导入完成</string>
@@ -126,12 +126,12 @@
     <string name="customctrl_addbutton_joystick">添加摇杆</string>
     <string name="customctrl_addsubbutton">添加子按钮</string>
     <string name="customctrl_selectdefault">选择默认控制键位</string>
-    <string name="customctrl_export">导出控制键位</string>
+    <string name="customctrl_export">导出控制键位文件</string>
     <string name="main_share_logs">共享日志文件</string>
     <string name="main_install_jar_file">执行 .jar</string>
     <string name="main_play">启动游戏</string>
     <string name="autoram_info_msg">内存已设为 %d MB</string>
-    <string name="mcl_setting_check_libraries">在下载后检查依赖库</string>
+    <string name="mcl_setting_check_libraries">在下载完成后检查依赖库</string>
     <string name="mcl_setting_check_libraries_subtitle">此选项强制启动器在哈希值可用时检查运行库，防止下载错误。</string>
     <string name="dl_library_sha_fail">依赖 %s 已损坏，此依赖将被重新下载</string>
     <string name="dl_library_sha_unknown">无法检查运行库 %s ，希望它正常</string>
@@ -140,38 +140,38 @@
     <string name="mcl_disable_gestures_subtitle">禁用手势，例如长按破坏方块和点击放置方块。</string>
     <string name="mcl_disable_swap_hand">禁用双击交换手中物品</string>
     <string name="mcl_disable_swap_hand_subtitle">禁用双击快捷栏上的物品来将其同副手交换。</string>
-    <string name="mcl_setting_title_mousespeed">鼠标速度</string>
+    <string name="mcl_setting_title_mousespeed">鼠标移动速度</string>
     <string name="mcl_setting_subtitle_mousespeed">修改虚拟鼠标的移动速度。</string>
     <string name="customctrl_passthru">鼠标穿透</string>
     <string name="customctrl_swipeable">可滑动</string>
-    <string name="customctrl_forward_lock">前向锁（Forward lock）</string>
+    <string name="customctrl_forward_lock">前进锁定</string>
     <string name="memory_warning_msg">当前可用内存（%d）低于所分配的内存（%d），这可能会导致游戏崩溃。如果游戏崩溃请更改配置。</string>
     <string name="mcl_memory_allocation">内存分配</string>
     <string name="mcl_memory_allocation_subtitle">控制给 Minecraft 分配多少内存。</string>
     <string name="multirt_runtime_corrupt">Java 运行时损坏</string>
     <string name="multirt_runtime_incompatiblearch">不兼容的架构：%s</string>
-    <string name="multirt_config_title">Java 运行时</string>
+    <string name="multirt_config_title">Java 运行环境</string>
     <string name="multirt_config_add">新建</string>
-    <string name="multirt_title">运行时管理器</string>
-    <string name="multirt_subtitle">管理已安装的 Java 运行时。</string>
+    <string name="multirt_title">Java环境管理器</string>
+    <string name="multirt_subtitle">管理已安装的 Java 运行环境。</string>
     <string name="multirt_progress_caching">正在缓存……</string>
     <string name="multirt_config_setdefault">设为默认</string>
     <string name="multirt_config_setdefault_already">默认</string>
-    <string name="multirt_config_removeerror_last">您必须至少安装一个 Java 运行时。</string>
+    <string name="multirt_config_removeerror_last">您必须至少安装一个 Java 运行环境。</string>
     <string name="multirt_nocompartiblert">找不到合适的 Java 运行时。此版本需要 Java %d 或更高版本。</string>
     <string name="multirt_nojava8rt">无法找到 Java 8。要使用此选项，您需要安装 Java 8。</string>
-    <string name="multirt_delete_runtime">删除运行时</string>
+    <string name="multirt_delete_runtime">删除运行环境</string>
     <string name="pvc_gameDirectory">游戏目录</string>
     <string name="pvc_jvmArgs">JVM 参数</string>
     <string name="preference_mouse_start_title">启动游戏时默认打开虚拟鼠标</string>
     <string name="preference_mouse_start_description">此选项打开时，虚拟鼠标会在启动时显示。</string>
     <string name="preference_video_title">视频和渲染器</string>
     <string name="preference_video_description">分辨率、渲染器与性能</string>
-    <string name="preference_control_title">自定义控制键</string>
+    <string name="preference_control_title">自定义控制键位</string>
     <string name="preference_control_description">手势、按钮与缩放</string>
     <string name="preference_java_title">Java 调整</string>
     <string name="preference_java_description">Java 运行时、JVM 参数、内存量与沙盒</string>
-    <string name="preference_misc_title">其他设置</string>
+    <string name="preference_misc_title">其它设置</string>
     <string name="preference_misc_description">版本列表和依赖库检查</string>
     <string name="preference_experimental_title">实验性的补丁</string>
     <string name="preference_experimental_description">此处内容不受支持，请考虑后使用。</string>
@@ -198,7 +198,7 @@
     <string name="profiles_profile_name">名称</string>
     <string name="profiles_profile_version">版本</string>
     <string name="global_delete">删除</string>
-    <string name="pedit_java_runtime">Java 运行时</string>
+    <string name="pedit_java_runtime">Java 运行环境</string>
     <string name="pedit_renderer">渲染器</string>
     <string name="arc_capes_title">Cosmetica 披风</string>
     <string name="arc_capes_desc">启用来自 Cosmetica（原 Arc）的披风。欲了解更多信息，请访问 https://arcapes.com。需要 OptiFine。</string>
