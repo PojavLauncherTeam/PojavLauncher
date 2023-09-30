@@ -9,16 +9,16 @@
     <string name="login_online_username_hint">电子邮箱或用户名</string>
     <string name="login_online_login_label">登录</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"点击顶部中央齿轮图标打开背景菜单⚙\n点击一个按钮进行自定义：编辑、缩放、删除或自定义其键绑定。"</string>
+    <string name="hint_control_mapping">"点击顶部中央齿轮图标打开背景菜单⚙\n点击一个按钮进行自定义：编辑、调整大小、删除或自定义其键绑定（映射）。"</string>
     <!-- Warnings -->
     <string name="warning_remove_account">此账户将被移除！</string>
     <!-- AlertDialog title -->
     <string name="alerttitle_installmod">选择模组安装器</string>
     <!-- Error messages -->
-    <string name="error_fatal">PojavLauncher 意外崩溃</string>
-    <string name="error_no_version">无版本！</string>
-    <string name="error_show_more">显示更多</string>
-    <string name="error_show_less">隐藏内容</string>
+    <string name="error_fatal">PojavLauncher 意外崩溃！</string>
+    <string name="error_no_version">无版本！（请选择一个版本）</string>
+    <string name="error_show_more">展开</string>
+    <string name="error_show_less">收起</string>
     <!-- Toast messages -->
     <string name="toast_permission_denied">需要存储读写权限！</string>
     <string name="toast_optifine_success">安装成功！</string>
@@ -29,32 +29,32 @@
     <string name="mcl_tab_wiki">维基百科</string>
     <!-- MCLauncherActivity: Account status -->
     <!-- MCLauncherActivity: Strings -->
-    <string name="mcl_launch_cleancache">正在清理缓存</string>
+    <string name="mcl_launch_cleancache">正在清理缓存……</string>
     <string name="mcl_launch_downloading">正在下载 %s</string>
     <string name="mcl_launch_downloading_progress">"正在下载 %s（%.2fMB / %.2fMB）"</string>
     <string name="mcl_launch_download_assets">正在准备下载资源</string>
     <string name="mcl_options">选项</string>
     <string name="mcl_option_customcontrol">自定义控制键位</string>
-    <string name="mcl_setting_title_use_surface_view">使用备用表面渲染（Surface Rendering）</string>
-    <string name="mcl_setting_subtitle_use_surface_view">此项设置可能有助于提升受 GPU 机能限制的性能。</string>
+    <string name="mcl_setting_title_use_surface_view">使用备用表面渲染</string>
+    <string name="mcl_setting_subtitle_use_surface_view">此项设置可能有助于提升受 GPU 机能限制的性能。（请以实际情况为准）</string>
     <string name="mcl_setting_title_ignore_notch">忽略刘海屏</string>
     <string name="mcl_setting_subtitle_ignore_notch">忽略刘海屏并将屏幕内容扩展至其下方。\n给您以更完整的沉浸感。</string>
     <string name="mcl_setting_title_resolution_scaler">分辨率缩放</string>
-    <string name="mcl_setting_subtitle_resolution_scaler">允许降低游戏画面分辨率。原生分辨率为 100%。</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">允许降低游戏画面分辨率，原生分辨率为 100%。</string>
     <string name="mcl_setting_title_longpresstrigger">触发长按延迟</string>
     <string name="mcl_setting_subtitle_longpresstrigger">更改长按（摧毁方块、丢弃物品）的触发延迟。</string>
     <string name="mcl_setting_title_buttonscale">控制键缩放</string>
-    <string name="mcl_setting_subtitle_buttonscale">如果按键太小，可以将其放大。</string>
+    <string name="mcl_setting_subtitle_buttonscale">如果按键太小，可以将其调大。</string>
     <string name="mcl_setting_title_mousescale">鼠标缩放</string>
     <string name="mcl_setting_subtitle_mousescale">修改虚拟鼠标的大小。</string>
     <string name="mcl_setting_title_javaargs">JVM 启动参数</string>
     <string name="mcl_setting_subtitle_javaargs">注意，非专业人士修改此值可能导致游戏崩溃！</string>
     <string name="mcl_setting_category_renderer">渲染器</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES -（全版本可用，速度较快）</string>
-    <string name="mcl_setting_renderer_vulkan_zink">Zink（Vulkan）-（全版本支持，速度中等）</string>
+    <string name="mcl_setting_renderer_vulkan_zink">Zink（Vulkan）-（全版本可用，速度中等）</string>
     <string name="mcl_setting_renderer_angle">ANGLE（Vulkan）-（仅支持1.17 以上的版本，速度中等）</string>
     <string name="mcl_setting_veroption_release">正式版</string>
-    <string name="mcl_setting_veroption_snapshot">快照</string>
+    <string name="mcl_setting_veroption_snapshot">快照版</string>
     <string name="mcl_setting_veroption_oldalpha">远古 alpha 版</string>
     <string name="mcl_setting_veroption_oldbeta">远古 beta 版</string>
     <string name="mcl_setting_java_sandbox">沙盒 .jar 可执行文件</string>
@@ -77,8 +77,8 @@
     <string name="global_default">默认</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">应用程序/游戏以代码 %d退出，请查看 latestlog.txt 了解更多详情。</string>
-    <string name="mcn_exit_confirm">确定强制关闭？</string>
-    <string name="mcn_check_fail_vulkan_support">此设备不支持 Zink（Vulkan）渲染器！</string>
+    <string name="mcn_exit_confirm">您确定要强制关闭？</string>
+    <string name="mcn_check_fail_vulkan_support">抱歉，您的设备不支持 Zink 渲染器！</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_chat">聊天</string>
     <string name="control_debug">调试</string>
@@ -102,12 +102,12 @@
     <string name="control_adebug">输入调试</string>
     <string name="control_customkey">发送自定义键码</string>
     <!-- ImportControlActivity Strings -->
-    <string name="import_control_label">导入控制键</string>
+    <string name="import_control_label">导出控制键位文件</string>
     <string name="import_control_invalid_file">文件无效或已损坏</string>
     <string name="import_control_import_button">导入控制键位文件</string>
     <string name="import_control_verifying_file">文件正在校检中，请稍后重试…</string>
     <string name="import_control_invalid_name">名称无效或文件已存在</string>
-    <string name="import_control_done">导入完成</string>
+    <string name="import_control_done">导入完成！</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
@@ -127,10 +127,10 @@
     <string name="customctrl_addsubbutton">添加子按钮</string>
     <string name="customctrl_selectdefault">选择默认控制键位</string>
     <string name="customctrl_export">导出控制键位文件</string>
-    <string name="main_share_logs">共享日志文件</string>
+    <string name="main_share_logs">分享日志文件</string>
     <string name="main_install_jar_file">执行 .jar</string>
     <string name="main_play">启动游戏</string>
-    <string name="autoram_info_msg">内存已设为 %d MB</string>
+    <string name="autoram_info_msg">内存已设为 %d MB！</string>
     <string name="mcl_setting_check_libraries">在下载完成后检查依赖库</string>
     <string name="mcl_setting_check_libraries_subtitle">此选项强制启动器在哈希值可用时检查运行库，防止下载错误。</string>
     <string name="dl_library_sha_fail">依赖 %s 已损坏，此依赖将被重新下载</string>
@@ -142,35 +142,35 @@
     <string name="mcl_disable_swap_hand_subtitle">禁用双击快捷栏上的物品来将其同副手交换。</string>
     <string name="mcl_setting_title_mousespeed">鼠标移动速度</string>
     <string name="mcl_setting_subtitle_mousespeed">修改虚拟鼠标的移动速度。</string>
-    <string name="customctrl_passthru">鼠标穿透</string>
+    <string name="customctrl_passthru">鼠标穿透点击</string>
     <string name="customctrl_swipeable">可滑动</string>
-    <string name="customctrl_forward_lock">前进锁定</string>
-    <string name="memory_warning_msg">当前可用内存（%d）低于所分配的内存（%d），这可能会导致游戏崩溃。如果游戏崩溃请更改配置。</string>
+    <string name="customctrl_forward_lock">前向/疾跑锁（Forward lock）</string>
+    <string name="memory_warning_msg">当前可用内存（%d）低于所分配的内存（%d），这可能会导致游戏崩溃，如果游戏崩溃请更改配置。</string>
     <string name="mcl_memory_allocation">内存分配</string>
-    <string name="mcl_memory_allocation_subtitle">控制给 Minecraft 分配多少内存。</string>
-    <string name="multirt_runtime_corrupt">Java 运行时损坏</string>
+    <string name="mcl_memory_allocation_subtitle">控制给 应用程序/游戏 分配多少内存。</string>
+    <string name="multirt_runtime_corrupt">Java 运行环境损坏</string>
     <string name="multirt_runtime_incompatiblearch">不兼容的架构：%s</string>
     <string name="multirt_config_title">Java 运行环境</string>
     <string name="multirt_config_add">新建</string>
-    <string name="multirt_title">Java环境管理器</string>
+    <string name="multirt_title">Java运行环境管理器</string>
     <string name="multirt_subtitle">管理已安装的 Java 运行环境。</string>
     <string name="multirt_progress_caching">正在缓存……</string>
-    <string name="multirt_config_setdefault">设为默认</string>
+    <string name="multirt_config_setdefault">设为默认（只对执行.jar生效）</string>
     <string name="multirt_config_setdefault_already">默认</string>
     <string name="multirt_config_removeerror_last">您必须至少安装一个 Java 运行环境。</string>
     <string name="multirt_nocompartiblert">找不到合适的 Java 运行时。此版本需要 Java %d 或更高版本。</string>
     <string name="multirt_nojava8rt">无法找到 Java 8。要使用此选项，您需要安装 Java 8。</string>
-    <string name="multirt_delete_runtime">删除运行环境</string>
+    <string name="multirt_delete_runtime">删除Java运行环境</string>
     <string name="pvc_gameDirectory">游戏目录</string>
     <string name="pvc_jvmArgs">JVM 参数</string>
     <string name="preference_mouse_start_title">启动游戏时默认打开虚拟鼠标</string>
     <string name="preference_mouse_start_description">此选项打开时，虚拟鼠标会在启动时显示。</string>
-    <string name="preference_video_title">视频和渲染器</string>
+    <string name="preference_video_title">画面和渲染器</string>
     <string name="preference_video_description">分辨率、渲染器与性能</string>
     <string name="preference_control_title">自定义控制键位</string>
     <string name="preference_control_description">手势、按钮与缩放</string>
     <string name="preference_java_title">Java 调整</string>
-    <string name="preference_java_description">Java 运行时、JVM 参数、内存量与沙盒</string>
+    <string name="preference_java_description">Java 运行环境、JVM 参数、内存量与沙盒</string>
     <string name="preference_misc_title">其它设置</string>
     <string name="preference_misc_description">版本列表和依赖库检查</string>
     <string name="preference_experimental_title">实验性的补丁</string>
@@ -181,7 +181,7 @@
     <string name="preference_force_vsync_description">通过限制峰值性能来限制过热降频。</string>
     <string name="preference_force_english_title">强制使用英文</string>
     <string name="preference_force_english_description">允许您按开发者的原意看到原始字符串，此操作需要重启。</string>
-    <string name="preference_edit_controls_title">编辑自定义控制键</string>
+    <string name="preference_edit_controls_title">编辑自定义控制键位</string>
     <string name="preference_edit_controls_summary">调整控制方案以适应您的需求。</string>
     <string name="preference_category_gyro_controls">陀螺仪控制</string>
     <string name="preference_category_virtual_mouse">虚拟鼠标</string>
@@ -191,9 +191,9 @@
     <string name="preference_gyro_invert_y_axis_description">反转垂直轴。</string>
     <string name="preference_gyro_smoothing_title">启用陀螺仪平滑</string>
     <string name="preference_gyro_smoothing_description">减少抖动以换取延迟。</string>
-    <string name="preference_back_title">返回到上一个屏幕</string>
+    <string name="preference_back_title">返回上一个页面</string>
     <string name="unnamed">未命名</string>
-    <string name="profiles_latest_snapshot">最新快照</string>
+    <string name="profiles_latest_snapshot">最新快照版</string>
     <string name="profiles_latest_release">最新正式版</string>
     <string name="profiles_profile_name">名称</string>
     <string name="profiles_profile_version">版本</string>
@@ -205,7 +205,7 @@
     <string name="notif_channel_name">常规</string>
     <string name="lazy_service_default_title">Pojav 前台服务</string>
     <string name="mcl_setting_veroption_installed">已安装</string>
-    <string name="use_global_default">（使用全局默认值）</string>
+    <string name="use_global_default">（使用全局默认设置）</string>
     <string name="default_control">默认控制键位</string>
     <string name="progresslayout_tasks_in_progress">%d 项任务正在进行中</string>
     <string name="notification_terminate">终止</string>
@@ -214,9 +214,9 @@
     <string name="folder_dialog_insert_name">插入文件夹名称</string>
     <string name="folder_fragment_create">创建文件夹</string>
     <string name="folder_fragment_select">选择文件夹</string>
-    <string name="main_login_done">登录完成</string>
+    <string name="main_login_done">登录完成！</string>
     <string name="main_add_account">添加账户</string>
-    <string name="tasks_ongoing">任务正在执行中，请稍候</string>
+    <string name="tasks_ongoing">任务正在执行中……请稍候</string>
     <string name="no_saved_accounts">没有已保存的账户</string>
     <string name="mc_download_failed">下载 Minecraft 失败！这可能是由于网络连接不良、文件放置错误等。</string>
     <string name="xerr_unknown">未知的 Xbox Live API 错误 %d</string>
@@ -240,13 +240,13 @@
     <string name="preference_shader_dump_title">启用着色器输出</string>
     <string name="preference_shader_dump_description">记录转换的着色器到日志文件。</string>
     <string name="percent_format">%d%%</string>
-    <string name="customctrl_editor_exit_title">是否离开？</string>
+    <string name="customctrl_editor_exit_title">您确定要离开？</string>
     <string name="customctrl_editor_exit_msg">您是否确认退出？</string>
-    <string name="customctrl_editor_exit">退出编辑器</string>
+    <string name="customctrl_editor_exit">退出编辑（不保存）</string>
     <string name="global_save_and_exit">保存并退出</string>
-    <string name="global_yes">是</string>
-    <string name="global_no">否</string>
-    <string name="preference_controller_map_wiped">手柄配置已被清除。</string>
+    <string name="global_yes">确定</string>
+    <string name="global_no">取消</string>
+    <string name="preference_controller_map_wiped">手柄配置已被清除！</string>
     <string name="preference_category_controller_settings">手柄设置</string>
     <string name="preference_wipe_controller_title">重置手柄映射</string>
     <string name="preference_wipe_controller_description">允许您重新映射手柄按键。</string>
@@ -277,10 +277,10 @@
     <string name="of_dl_progress">正在下载 %s</string>
     <string name="create_profile_optifine">创建 OptiFine 配置</string>
     <string name="hint_search_modpack">搜索整合包</string>
-    <string name="preference_vulkan_driver_system_title">使用系统 Vulkan 驱动</string>
+    <string name="preference_vulkan_driver_system_title">使用系统 Vulkan 驱动(禁用Turnip驱动)</string>
     <string name="preference_vulkan_driver_system_description">强制启动器在 Adreno GPU 上使用系统 Vulkan 驱动而非 Turnip。仅影响使用 Vulkan 的 Zink 和模组。</string>
     <string name="generic_install">安装</string>
-    <string name="generic_apply">应用</string>
+    <string name="generic_apply">应用设置</string>
     <string name="search_modpack_no_result">未找到整合包</string>
     <string name="search_modpack_error">寻找整合包失败</string>
     <string name="search_modpack_download_error">整合包元数据下载失败</string>
@@ -290,10 +290,10 @@
     <string name="modpack_download_applying_overrides">正在应用覆盖（%d/%d）</string>
     <string name="modpack_install_notification_title">Pojav 整合包安装器</string>
     <string name="modpack_install_notification_success">点击此处完成整合包安装</string>
-    <string name="modpack_install_notification_data_not_available">模组加载器信息下载失败</string>
-    <string name="modpack_install_modloader_download_failed">模组加载器文件下载失败</string>
-    <string name="modpack_install_download_failed">整合包文件下载失败</string>
-    <string name="modpack_install_button">创建整合包配置文件</string>
+    <string name="modpack_install_notification_data_not_available">模组加载器信息下载失败!</string>
+    <string name="modpack_install_modloader_download_failed">模组加载器文件下载失败!</string>
+    <string name="modpack_install_download_failed">整合包文件下载失败!</string>
+    <string name="modpack_install_button">创建整合包配置</string>
     <string name="notif_error_occured">发生错误</string>
     <string name="notif_error_occured_desc">点击查看详细信息</string>
     <string name="fabric_dl_only_stable">仅显示稳定版本</string>
