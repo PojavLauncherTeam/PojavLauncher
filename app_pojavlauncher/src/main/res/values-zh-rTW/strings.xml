@@ -36,18 +36,29 @@
     <string name="mcl_options">選項</string>
     <string name="mcl_option_customcontrol">自訂控制鍵</string>
     <string name="mcl_setting_title_use_surface_view">使用SurfaceView渲染</string>
+    <string name="mcl_setting_subtitle_use_surface_view">此項設置可能有助於提升受GPU機能限製的性能</string>
     <string name="mcl_setting_title_ignore_notch">忽略瀏海螢幕</string>
+    <string name="mcl_setting_subtitle_ignore_notch">忽略劉海屏並將屏幕內容擴展至其下方。\n給您以更完整的沉浸感。</string>
     <string name="mcl_setting_title_resolution_scaler">解析度縮放</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">允許降低遊戲畫面分辨率。原生分辨率為 100%</string>
+    <string name="mcl_setting_title_longpresstrigger">觸發長按延遲</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">觸發破壞方塊及釋出物件的按壓時間。</string>
     <string name="mcl_setting_title_buttonscale">控制鍵縮放</string>
+    <string name="mcl_setting_subtitle_buttonscale">若按鍵太小，可以將其放大。</string>
     <string name="mcl_setting_title_mousescale">滑鼠縮放</string>
+    <string name="mcl_setting_subtitle_mousescale">改變虛擬鼠標的大小.</string>
     <string name="mcl_setting_title_javaargs">JVM 啟動引數</string>
     <string name="mcl_setting_subtitle_javaargs">注意，非專業人士修改此值可能導致遊戲崩潰。</string>
     <string name="mcl_setting_category_renderer">渲染器</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (全版本, 快)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - (全版本支持, 速度中等)</string>
+    <string name="mcl_setting_renderer_angle">ANGLE (Vulkan) - (僅1.17以上的版本可用, 速度中等)</string>
     <string name="mcl_setting_veroption_release">正式版</string>
     <string name="mcl_setting_veroption_snapshot">快照</string>
     <string name="mcl_setting_veroption_oldalpha">遠古alpha版</string>
     <string name="mcl_setting_veroption_oldbeta">遠古beta版</string>
+    <string name="mcl_setting_java_sandbox">沙盒.jar可執行文件</string>
+    <string name="mcl_setting_java_sandbox_subtitle">安裝.jar時開啟安全模式並限制其可以訪問的資料夾</string>
     <string name="mcl_version_clone">複製</string>
     <!-- Global strings -->
     <string name="global_edit">修改</string>
@@ -62,16 +73,24 @@
     <string name="global_error_field_empty">此欄位為必填</string>
     <string name="global_waiting">等待中</string>
     <string name="global_select">選擇</string>
+    <string name="global_retry">重試</string>
     <string name="global_default">預設</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">程式/遊戲以代碼 %d 退出，詳情請查看latestlog.txt。</string>
     <string name="mcn_exit_confirm">確定強制關閉？</string>
+    <string name="mcn_check_fail_vulkan_support">該設備不支持 Zink 渲染器！</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_chat">聊天</string>
     <string name="control_debug">除錯</string>
     <string name="control_primary">左</string>
     <string name="control_secondary">右</string>
+    <string name="control_shift">◇</string>
     <string name="control_inventory">背包</string>
+    <string name="control_up">▲</string>
+    <string name="control_left">◀</string>
+    <string name="control_right">▶</string>
+    <string name="control_down">▼</string>
+    <string name="control_jump">⬛</string>
     <string name="control_thirdperson">視角</string>
     <string name="control_listplayers">Tab</string>
     <string name="control_mouse">滑鼠</string>
@@ -104,6 +123,7 @@
     <string name="customctrl_button_opacity">按鍵不透明度</string>
     <string name="customctrl_addbutton">添加按鈕</string>
     <string name="customctrl_addbutton_drawer">添加組合框</string>
+    <string name="customctrl_addbutton_joystick">添加搖桿</string>
     <string name="customctrl_addsubbutton">添加子按鈕</string>
     <string name="main_share_logs">分享log</string>
     <string name="main_play">啟動遊戲</string>
