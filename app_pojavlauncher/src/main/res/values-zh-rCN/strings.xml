@@ -29,10 +29,10 @@
     <string name="mcl_tab_wiki">维基百科</string>
     <!-- MCLauncherActivity: Account status -->
     <!-- MCLauncherActivity: Strings -->
-    <string name="mcl_launch_cleancache">正在清理缓存……</string>
+    <string name="mcl_launch_cleancache">正在清理缓存文件……</string>
     <string name="mcl_launch_downloading">正在下载 %s</string>
     <string name="mcl_launch_downloading_progress">"正在下载 %s（%.2fMB / %.2fMB）"</string>
-    <string name="mcl_launch_download_assets">正在准备下载资源</string>
+    <string name="mcl_launch_download_assets">正在准备下载资源...</string>
     <string name="mcl_options">选项</string>
     <string name="mcl_option_customcontrol">自定义控制键位</string>
     <string name="mcl_setting_title_use_surface_view">使用备用表面渲染</string>
@@ -44,7 +44,7 @@
     <string name="mcl_setting_title_longpresstrigger">触发长按延迟</string>
     <string name="mcl_setting_subtitle_longpresstrigger">更改长按（摧毁方块、丢弃物品）的触发延迟。</string>
     <string name="mcl_setting_title_buttonscale">控制键缩放</string>
-    <string name="mcl_setting_subtitle_buttonscale">如果按键太小，可以将其调大。</string>
+    <string name="mcl_setting_subtitle_buttonscale">如果按键太小，可以将此设置调大</string>
     <string name="mcl_setting_title_mousescale">鼠标缩放</string>
     <string name="mcl_setting_subtitle_mousescale">修改虚拟鼠标的大小。</string>
     <string name="mcl_setting_title_javaargs">JVM 启动参数</string>
@@ -105,8 +105,8 @@
     <string name="import_control_label">导出控制键位文件</string>
     <string name="import_control_invalid_file">文件无效或已损坏</string>
     <string name="import_control_import_button">导入控制键位文件</string>
-    <string name="import_control_verifying_file">文件正在校检中，请稍后重试…</string>
-    <string name="import_control_invalid_name">名称无效或文件已存在</string>
+    <string name="import_control_verifying_file">文件正在校检中…请稍后重试!</string>
+    <string name="import_control_invalid_name">名称无效或文件已存在!</string>
     <string name="import_control_done">导入完成！</string>
     <!--
     <string name="control_more3"></string>
@@ -144,10 +144,10 @@
     <string name="mcl_setting_subtitle_mousespeed">修改虚拟鼠标的移动速度。</string>
     <string name="customctrl_passthru">鼠标穿透点击</string>
     <string name="customctrl_swipeable">可滑动</string>
-    <string name="customctrl_forward_lock">前向/疾跑锁（Forward lock）</string>
-    <string name="memory_warning_msg">当前可用内存（%d）低于所分配的内存（%d），这可能会导致游戏崩溃，如果游戏崩溃请更改配置。</string>
+    <string name="customctrl_forward_lock">前进/疾跑锁</string>
+    <string name="memory_warning_msg">当前可用内存（%d）低于所分配的内存（%d），这可能会导致游戏崩溃!如果游戏崩溃请更改内存分配设置。</string>
     <string name="mcl_memory_allocation">内存分配</string>
-    <string name="mcl_memory_allocation_subtitle">控制给 应用程序/游戏 分配多少内存。</string>
+    <string name="mcl_memory_allocation_subtitle">控制给 应用程序/游戏 分配多少内存(建议设置为手机总内存的 20% - 40% 之间)</string>
     <string name="multirt_runtime_corrupt">Java 运行环境损坏</string>
     <string name="multirt_runtime_incompatiblearch">不兼容的架构：%s</string>
     <string name="multirt_config_title">Java 运行环境</string>
@@ -158,7 +158,7 @@
     <string name="multirt_config_setdefault">设为默认（只对执行.jar生效）</string>
     <string name="multirt_config_setdefault_already">默认</string>
     <string name="multirt_config_removeerror_last">您必须至少安装一个 Java 运行环境。</string>
-    <string name="multirt_nocompartiblert">找不到合适的 Java 运行时。此版本需要 Java %d 或更高版本。</string>
+    <string name="multirt_nocompartiblert">找不到合适的 Java 运行环境。此版本需要 Java %d 或更高版本。</string>
     <string name="multirt_nojava8rt">无法找到 Java 8。要使用此选项，您需要安装 Java 8。</string>
     <string name="multirt_delete_runtime">删除Java运行环境</string>
     <string name="pvc_gameDirectory">游戏目录</string>
@@ -201,7 +201,7 @@
     <string name="pedit_java_runtime">Java 运行环境</string>
     <string name="pedit_renderer">渲染器</string>
     <string name="arc_capes_title">Cosmetica 披风</string>
-    <string name="arc_capes_desc">启用来自 Cosmetica（原 Arc）的披风。欲了解更多信息，请访问 https://arcapes.com。需要 OptiFine。</string>
+    <string name="arc_capes_desc">启用来自 Cosmetica（原 Arc）的披风，欲了解更多信息，请访问 https://arcapes.com，需要 OptiFine。</string>
     <string name="notif_channel_name">常规</string>
     <string name="lazy_service_default_title">Pojav 前台服务</string>
     <string name="mcl_setting_veroption_installed">已安装</string>
@@ -212,11 +212,11 @@
     <string name="notification_game_runs">游戏正在进行！</string>
     <string name="folder_dialog_create">新建</string>
     <string name="folder_dialog_insert_name">插入文件夹名称</string>
-    <string name="folder_fragment_create">创建文件夹</string>
+    <string name="folder_fragment_create">新建文件夹</string>
     <string name="folder_fragment_select">选择文件夹</string>
     <string name="main_login_done">登录完成！</string>
     <string name="main_add_account">添加账户</string>
-    <string name="tasks_ongoing">任务正在执行中……请稍候</string>
+    <string name="tasks_ongoing">任务正在执行中，请稍候……</string>
     <string name="no_saved_accounts">没有已保存的账户</string>
     <string name="mc_download_failed">下载 Minecraft 失败！这可能是由于网络连接不良、文件放置错误等。</string>
     <string name="xerr_unknown">未知的 Xbox Live API 错误 %d</string>
@@ -232,10 +232,10 @@
     <string name="toast_turn_on_gyro">需要先启用陀螺仪控制才能使用！</string>
     <string name="preference_gyro_sample_rate_title">陀螺仪采样率</string>
     <string name="preference_gyro_sample_rate_description">如果您在陀螺仪控制上遇到性能问题，请增加此值。</string>
-    <string name="microsoft_login_retry_later">您的操作过于频繁，请稍后再试</string>
-    <string name="storage_required">PojavLauncher 需要连接外部存储。请重新连接并重启应用。</string>
+    <string name="microsoft_login_retry_later">您的操作过于频繁，请稍后再试!</string>
+    <string name="storage_required">PojavLauncher 需要连接外部存储，请重新连接并重启应用。</string>
     <string name="mcl_setting_title_buttonallcaps">在按钮标签中仅使用大写字母</string>
-    <string name="mcl_setting_subtitle_buttonallcaps">如果您想在控制键中使用小写字母，请禁用此功能。</string>
+    <string name="mcl_setting_subtitle_buttonallcaps">如果您想在控制键中使用并显示小写字母，请关闭此设置。</string>
     <string name="create_profile">创建新配置</string>
     <string name="preference_shader_dump_title">启用着色器输出</string>
     <string name="preference_shader_dump_description">记录转换的着色器到日志文件。</string>
@@ -250,7 +250,7 @@
     <string name="preference_category_controller_settings">手柄设置</string>
     <string name="preference_wipe_controller_title">重置手柄映射</string>
     <string name="preference_wipe_controller_description">允许您重新映射手柄按键。</string>
-    <string name="preference_deadzone_scale_title">摇杆死区（deadzone）缩放</string>
+    <string name="preference_deadzone_scale_title">摇杆死区比例</string>
     <string name="preference_deadzone_scale_description">若摇杆偏移，请调高此选项。</string>
     <string name="preference_force_big_core_title">强制渲染器在大核上运行</string>
     <string name="preference_force_big_core_desc">强制 Minecraft 渲染线程在最高频率的核心运行。</string>
@@ -278,12 +278,12 @@
     <string name="create_profile_optifine">创建 OptiFine 配置</string>
     <string name="hint_search_modpack">搜索整合包</string>
     <string name="preference_vulkan_driver_system_title">使用系统 Vulkan 驱动(禁用Turnip驱动)</string>
-    <string name="preference_vulkan_driver_system_description">强制启动器在 Adreno GPU 上使用系统 Vulkan 驱动而非 Turnip。仅影响使用 Vulkan 的 Zink 和模组。</string>
+    <string name="preference_vulkan_driver_system_description">强制启动器在骁龙 Adreno GPU 上使用系统 Vulkan 驱动而非 Turnip驱动。仅影响调用 Vulkan 的 Zink 和模组(非骁龙GPU的手机请打开此设置，反之亦然)。</string>
     <string name="generic_install">安装</string>
     <string name="generic_apply">应用设置</string>
-    <string name="search_modpack_no_result">未找到整合包</string>
-    <string name="search_modpack_error">寻找整合包失败</string>
-    <string name="search_modpack_download_error">整合包元数据下载失败</string>
+    <string name="search_modpack_no_result">未找到整合包(请检查是否输错整合包名称)</string>
+    <string name="search_modpack_error">寻找整合包失败(请检查网络连接是否良好)</string>
+    <string name="search_modpack_download_error">整合包元数据下载失败(请检查网络连接是否良好)</string>
     <string name="modpack_download_downloading_metadata">正在下载整合包元数据（%.2fMB / %.2fMB）</string>
     <string name="modpack_download_downloading_mods">正在下载模组（%.2fMB / %.2fMB）</string>
     <string name="modpack_download_downloading_mods_fc">正在下载模组（文件 %d 中的 %d）</string>
