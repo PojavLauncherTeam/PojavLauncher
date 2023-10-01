@@ -204,7 +204,7 @@ public class AsyncMinecraftDownloader {
 
         try {
             if(assets != null)
-                downloadAssets(assets, verInfo.assets, assets.mapToResources ? new File(Tools.OBSOLETE_RESOURCES_PATH) : new File(Tools.ASSETS_PATH));
+                downloadAssets(assets, assets.mapToResources ? new File(Tools.OBSOLETE_RESOURCES_PATH) : new File(Tools.ASSETS_PATH));
         } catch (Exception e) {
             Log.e("AsyncMcDownloader", e.toString(), e);
             ProgressKeeper.submitProgress(ProgressLayout.DOWNLOAD_MINECRAFT, -1, -1);
@@ -221,7 +221,7 @@ public class AsyncMinecraftDownloader {
                         (int) Math.max((float)curr/max*100,0), R.string.mcl_launch_downloading_progress, destination.getName(), curr/BYTE_TO_MB, max/BYTE_TO_MB));
     }
 
-    public void downloadAssets(final JAssets assets, String assetsVersion, final File outputDir) {
+    public void downloadAssets(final JAssets assets, final File outputDir) {
         LinkedBlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<>();
         final ThreadPoolExecutor executor = new ThreadPoolExecutor(5, 5, 500, TimeUnit.MILLISECONDS, workQueue);
 

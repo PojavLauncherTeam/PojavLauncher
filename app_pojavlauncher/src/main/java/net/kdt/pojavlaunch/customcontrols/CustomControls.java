@@ -28,6 +28,9 @@ public class CustomControls {
 	}
 	
 	// Generate default control
+	// Here for historical reasons
+	// Just admire it idk
+	@SuppressWarnings("unused")
 	public CustomControls(Context ctx) {
 		this();
 		this.mControlDataList.add(new ControlData(ControlData.getSpecialButtons()[0])); // Keyboard

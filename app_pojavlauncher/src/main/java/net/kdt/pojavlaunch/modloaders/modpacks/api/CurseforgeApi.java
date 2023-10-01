@@ -1,6 +1,5 @@
 package net.kdt.pojavlaunch.modloaders.modpacks.api;
 
-import android.content.Context;
 import android.util.Log;
 
 import com.google.gson.JsonArray;
@@ -232,11 +231,10 @@ public class CurseforgeApi implements ModpackApi{
         if(manifest.minecraft == null) return false;
         if(manifest.minecraft.version == null) return false;
         if(manifest.minecraft.modLoaders == null) return false;
-        if(manifest.minecraft.modLoaders.length < 1) return false;
-        return true;
+        return manifest.minecraft.modLoaders.length >= 1;
     }
 
-    class CurseforgeSearchResult extends SearchResult {
+    static class CurseforgeSearchResult extends SearchResult {
         int previousOffset;
     }
 }
