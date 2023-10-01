@@ -12,8 +12,8 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -25,16 +25,15 @@ import com.kdt.mcgui.ProgressLayout;
 import com.kdt.mcgui.mcAccountSpinner;
 
 import net.kdt.pojavlaunch.contextexecutor.ContextExecutor;
-import net.kdt.pojavlaunch.fragments.MainMenuFragment;
-import net.kdt.pojavlaunch.fragments.MicrosoftLoginFragment;
+import net.kdt.pojavlaunch.contracts.OpenDocumentWithExtension;
 import net.kdt.pojavlaunch.extra.ExtraConstants;
 import net.kdt.pojavlaunch.extra.ExtraCore;
 import net.kdt.pojavlaunch.extra.ExtraListener;
-
+import net.kdt.pojavlaunch.fragments.MainMenuFragment;
+import net.kdt.pojavlaunch.fragments.MicrosoftLoginFragment;
 import net.kdt.pojavlaunch.fragments.SelectAuthFragment;
 import net.kdt.pojavlaunch.modloaders.modpacks.ModloaderInstallTracker;
 import net.kdt.pojavlaunch.modloaders.modpacks.imagecache.IconCacheJanitor;
-import net.kdt.pojavlaunch.multirt.MultiRTConfigDialog;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.prefs.screens.LauncherPreferenceFragment;
 import net.kdt.pojavlaunch.progresskeeper.ProgressKeeper;
@@ -46,6 +45,11 @@ import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 
 public class LauncherActivity extends BaseActivity {
     public static final String SETTING_FRAGMENT_TAG = "SETTINGS_FRAGMENT";
+
+    public final ActivityResultLauncher<Object> modInstallerLauncher =
+            registerForActivityResult(new OpenDocumentWithExtension("jar"), (data)->{
+                if(data != null) Tools.launchModInstaller(this, data);
+            });
 
     private final int REQUEST_STORAGE_REQUEST_CODE = 1;
     private final Object mLockStoragePerm = new Object();
@@ -217,19 +221,6 @@ public class LauncherActivity extends BaseActivity {
         ExtraCore.removeExtraListenerFromValue(ExtraConstants.LAUNCH_GAME, mLaunchGameListener);
 
         getSupportFragmentManager().unregisterFragmentLifecycleCallbacks(mFragmentCallbackListener);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode != RESULT_OK) return;
-        if(requestCode == Tools.RUN_MOD_INSTALLER && data != null){
-            Tools.launchModInstaller(this, data);
-            return;
-        }
-        if(requestCode == MultiRTConfigDialog.MULTIRT_PICK_RUNTIME && data != null){
-            Tools.installRuntimeFromUri(this, data.getData());
-        }
     }
 
     /** Custom implementation to feel more natural when a backstack isn't present */
