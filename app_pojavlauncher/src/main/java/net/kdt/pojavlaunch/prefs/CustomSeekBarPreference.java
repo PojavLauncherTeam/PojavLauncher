@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.preference.PreferenceViewHolder;
 import androidx.preference.SeekBarPreference;
 
@@ -54,7 +55,7 @@ public class CustomSeekBarPreference extends SeekBarPreference {
 
 
     @Override
-    public void onBindViewHolder(PreferenceViewHolder view) {
+    public void onBindViewHolder(@NonNull PreferenceViewHolder view) {
         super.onBindViewHolder(view);
         TextView titleTextView = (TextView) view.findViewById(android.R.id.title);
         titleTextView.setTextColor(Color.WHITE);

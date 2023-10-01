@@ -69,9 +69,8 @@ public class LauncherPreferences {
         Tools.initContextConstants(ctx);
 
         PREF_RENDERER = DEFAULT_PREF.getString("renderer", "opengles2");
-
-		PREF_BUTTONSIZE = DEFAULT_PREF.getInt("buttonscale", 100);
-		PREF_MOUSESCALE = DEFAULT_PREF.getInt("mousescale", 100);
+        PREF_BUTTONSIZE = DEFAULT_PREF.getInt("buttonscale", 100);
+        PREF_MOUSESCALE = DEFAULT_PREF.getInt("mousescale", 100);
 		PREF_MOUSESPEED = ((float)DEFAULT_PREF.getInt("mousespeed",100))/100f;
 		PREF_HIDE_SIDEBAR = DEFAULT_PREF.getBoolean("hideSidebar", false);
 		PREF_IGNORE_NOTCH = DEFAULT_PREF.getBoolean("ignoreNotch", false);
