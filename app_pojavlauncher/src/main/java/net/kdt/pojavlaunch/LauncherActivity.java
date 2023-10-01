@@ -2,12 +2,8 @@ package net.kdt.pojavlaunch;
 
 import static net.kdt.pojavlaunch.MainActivity.INTENT_MINECRAFT_VERSION;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -15,7 +11,6 @@ import android.widget.Toast;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentContainerView;
@@ -50,10 +45,6 @@ public class LauncherActivity extends BaseActivity {
             registerForActivityResult(new OpenDocumentWithExtension("jar"), (data)->{
                 if(data != null) Tools.launchModInstaller(this, data);
             });
-
-    private final int REQUEST_STORAGE_REQUEST_CODE = 1;
-    private final Object mLockStoragePerm = new Object();
-
 
     private mcAccountSpinner mAccountSpinner;
     private FragmentContainerView mFragmentView;
@@ -164,7 +155,6 @@ public class LauncherActivity extends BaseActivity {
         getWindow().setBackgroundDrawable(null);
         bindViews();
         ProgressKeeper.addTaskCountListener((mProgressServiceKeeper = new ProgressServiceKeeper(this)));
-        askForStoragePermission(); // Will wait here
 
         mSettingsButton.setOnClickListener(mSettingButtonListener);
         mDeleteAccountButton.setOnClickListener(mAccountDeleteButtonListener);
@@ -260,51 +250,6 @@ public class LauncherActivity extends BaseActivity {
         return null;
     }
 
-    private void askForStoragePermission(){
-        int revokeCount = 0;
-        while (Build.VERSION.SDK_INT >= 23 && Build.VERSION.SDK_INT < 29 && !isStorageAllowed()) { //Do not ask for storage at all on Android 10+
-            try {
-                revokeCount++;
-                if (revokeCount >= 3) {
-                    Toast.makeText(this, R.string.toast_permission_denied, Toast.LENGTH_LONG).show();
-                    finish();
-                }
-                requestStoragePermission();
-
-                synchronized (mLockStoragePerm) {
-                    mLockStoragePerm.wait();
-                }
-            } catch (InterruptedException e) {
-                Log.e("LauncherActivity", e.toString());
-            }
-        }
-    }
-
-    private boolean isStorageAllowed() {
-        //Getting the permission status
-        int result1 = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        int result2 = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
-
-
-        //If permission is granted returning true
-        return result1 == PackageManager.PERMISSION_GRANTED &&
-                result2 == PackageManager.PERMISSION_GRANTED;
-    }
-
-    private void requestStoragePermission() {
-        ActivityCompat.requestPermissions(this, new String[]{
-                Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_STORAGE_REQUEST_CODE);
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == REQUEST_STORAGE_REQUEST_CODE){
-            synchronized (mLockStoragePerm) {
-                mLockStoragePerm.notifyAll();
-            }
-        }
-    }
-
     /** Stuff all the view boilerplate here */
     private void bindViews(){
         mFragmentView = findViewById(R.id.container_fragment);
@@ -313,8 +258,4 @@ public class LauncherActivity extends BaseActivity {
         mAccountSpinner = findViewById(R.id.account_spinner);
         mProgressLayout = findViewById(R.id.progress_layout);
     }
-
-
-
-
 }
