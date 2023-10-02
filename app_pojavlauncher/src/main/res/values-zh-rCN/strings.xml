@@ -17,8 +17,8 @@
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher 意外崩溃！</string>
     <string name="error_no_version">无版本！（请选择一个版本）</string>
-    <string name="error_show_more">展开</string>
-    <string name="error_show_less">收起</string>
+    <string name="error_show_more">显示详情</string>
+    <string name="error_show_less">隐藏</string>
     <!-- Toast messages -->
     <string name="toast_permission_denied">需要存储读写权限！</string>
     <string name="toast_optifine_success">安装成功！</string>
@@ -38,7 +38,7 @@
     <string name="mcl_setting_title_use_surface_view">使用备用表面渲染</string>
     <string name="mcl_setting_subtitle_use_surface_view">此项设置可能有助于提升受 GPU 机能限制的性能。（请以实际情况为准）</string>
     <string name="mcl_setting_title_ignore_notch">忽略刘海屏</string>
-    <string name="mcl_setting_subtitle_ignore_notch">忽略刘海屏并将屏幕内容扩展至其下方。\n给您以更完整的沉浸感。</string>
+    <string name="mcl_setting_subtitle_ignore_notch">忽略刘海屏并将屏幕内容扩展至其下方，\n给您以更完整的沉浸感。</string>
     <string name="mcl_setting_title_resolution_scaler">分辨率缩放</string>
     <string name="mcl_setting_subtitle_resolution_scaler">允许降低游戏画面分辨率，原生分辨率为 100%。</string>
     <string name="mcl_setting_title_longpresstrigger">触发长按延迟</string>
@@ -132,7 +132,7 @@
     <string name="main_play">启动游戏</string>
     <string name="autoram_info_msg">内存已设为 %d MB！</string>
     <string name="mcl_setting_check_libraries">在下载完成后检查依赖库</string>
-    <string name="mcl_setting_check_libraries_subtitle">此选项强制启动器在哈希值可用时检查运行库，防止下载错误。</string>
+    <string name="mcl_setting_check_libraries_subtitle">此选项强制启动器检查运行库的hash是否可用，防止下载错误。</string>
     <string name="dl_library_sha_fail">依赖 %s 已损坏，此依赖将被重新下载</string>
     <string name="dl_library_sha_unknown">无法检查运行库 %s ，希望它正常</string>
     <string name="dl_library_sha_pass">依赖库 %s 正常</string>
