@@ -17,8 +17,8 @@
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher 意外崩溃！</string>
     <string name="error_no_version">无版本！（请选择一个版本）</string>
-    <string name="error_show_more">显示详情</string>
-    <string name="error_show_less">隐藏</string>
+    <string name="error_show_more">显示细节</string>
+    <string name="error_show_less">隐藏细节</string>
     <!-- Toast messages -->
     <string name="toast_permission_denied">需要存储读写权限！</string>
     <string name="toast_optifine_success">安装成功！</string>
@@ -52,7 +52,7 @@
     <string name="mcl_setting_category_renderer">渲染器</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES -（全版本可用，速度较快）</string>
     <string name="mcl_setting_renderer_vulkan_zink">Zink（Vulkan）-（全版本可用，速度中等）</string>
-    <string name="mcl_setting_renderer_angle">ANGLE（Vulkan）-（仅支持1.17 以上的版本，速度中等）</string>
+    <string name="mcl_setting_renderer_angle">ANGLE（Vulkan）-（仅支持 1.17 以上的版本，速度中等）</string>
     <string name="mcl_setting_veroption_release">正式版</string>
     <string name="mcl_setting_veroption_snapshot">快照版</string>
     <string name="mcl_setting_veroption_oldalpha">远古 alpha 版</string>
@@ -132,7 +132,7 @@
     <string name="main_play">启动游戏</string>
     <string name="autoram_info_msg">内存已设为 %d MB！</string>
     <string name="mcl_setting_check_libraries">在下载完成后检查依赖库</string>
-    <string name="mcl_setting_check_libraries_subtitle">此选项强制启动器检查运行库的hash是否可用，防止下载错误。</string>
+    <string name="mcl_setting_check_libraries_subtitle">此选项强制启动器在哈希值可用时检查运行库，防止下载错误。</string>
     <string name="dl_library_sha_fail">依赖 %s 已损坏，此依赖将被重新下载</string>
     <string name="dl_library_sha_unknown">无法检查运行库 %s ，希望它正常</string>
     <string name="dl_library_sha_pass">依赖库 %s 正常</string>
@@ -147,20 +147,20 @@
     <string name="customctrl_forward_lock">前进/疾跑锁</string>
     <string name="memory_warning_msg">当前可用内存（%d）低于所分配的内存（%d），这可能会导致游戏崩溃!如果游戏崩溃请更改内存分配设置。</string>
     <string name="mcl_memory_allocation">内存分配</string>
-    <string name="mcl_memory_allocation_subtitle">控制给 应用程序/游戏 分配多少内存(建议设置为手机总内存的 20% - 40% 之间)</string>
+    <string name="mcl_memory_allocation_subtitle">控制给应用程序/游戏分配多少内存（建议设置为手机总内存的 20%～40%）</string>
     <string name="multirt_runtime_corrupt">Java 运行环境损坏</string>
     <string name="multirt_runtime_incompatiblearch">不兼容的架构：%s</string>
     <string name="multirt_config_title">Java 运行环境</string>
     <string name="multirt_config_add">新建</string>
-    <string name="multirt_title">Java运行环境管理器</string>
+    <string name="multirt_title">Java 运行环境管理器</string>
     <string name="multirt_subtitle">管理已安装的 Java 运行环境。</string>
     <string name="multirt_progress_caching">正在缓存……</string>
-    <string name="multirt_config_setdefault">设为默认（只对执行.jar生效）</string>
+    <string name="multirt_config_setdefault">设为默认（只对执行 .jar 生效）</string>
     <string name="multirt_config_setdefault_already">默认</string>
     <string name="multirt_config_removeerror_last">您必须至少安装一个 Java 运行环境。</string>
     <string name="multirt_nocompartiblert">找不到合适的 Java 运行环境。此版本需要 Java %d 或更高版本。</string>
     <string name="multirt_nojava8rt">无法找到 Java 8。要使用此选项，您需要安装 Java 8。</string>
-    <string name="multirt_delete_runtime">删除Java运行环境</string>
+    <string name="multirt_delete_runtime">删除 Java 运行环境</string>
     <string name="pvc_gameDirectory">游戏目录</string>
     <string name="pvc_jvmArgs">JVM 参数</string>
     <string name="preference_mouse_start_title">启动游戏时默认打开虚拟鼠标</string>
@@ -277,13 +277,13 @@
     <string name="of_dl_progress">正在下载 %s</string>
     <string name="create_profile_optifine">创建 OptiFine 配置</string>
     <string name="hint_search_modpack">搜索整合包</string>
-    <string name="preference_vulkan_driver_system_title">使用系统 Vulkan 驱动(禁用Turnip驱动)</string>
-    <string name="preference_vulkan_driver_system_description">强制启动器在骁龙 Adreno GPU 上使用系统 Vulkan 驱动而非 Turnip驱动。仅影响调用 Vulkan 的 Zink 和模组(非骁龙GPU的手机请打开此设置，反之亦然)。</string>
+    <string name="preference_vulkan_driver_system_title">使用系统 Vulkan 驱动（禁用 Turnip 驱动）</string>
+    <string name="preference_vulkan_driver_system_description">强制启动器在骁龙 Adreno GPU 上使用系统 Vulkan 驱动而非 Turnip 驱动。仅影响调用 Vulkan 的 Zink 和模组（非骁龙GPU的手机请打开此设置，反之亦然）。</string>
     <string name="generic_install">安装</string>
     <string name="generic_apply">应用设置</string>
-    <string name="search_modpack_no_result">未找到整合包(请检查是否输错整合包名称)</string>
-    <string name="search_modpack_error">寻找整合包失败(请检查网络连接是否良好)</string>
-    <string name="search_modpack_download_error">整合包元数据下载失败(请检查网络连接是否良好)</string>
+    <string name="search_modpack_no_result">未找到整合包（请检查输入的整合包名称）</string>
+    <string name="search_modpack_error">寻找整合包失败（请检查网络连接是否良好）</string>
+    <string name="search_modpack_download_error">整合包元数据下载失败（请检查网络连接是否良好）</string>
     <string name="modpack_download_downloading_metadata">正在下载整合包元数据（%.2fMB / %.2fMB）</string>
     <string name="modpack_download_downloading_mods">正在下载模组（%.2fMB / %.2fMB）</string>
     <string name="modpack_download_downloading_mods_fc">正在下载模组（文件 %d 中的 %d）</string>
