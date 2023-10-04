@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
+import net.kdt.pojavlaunch.mirrors.DownloadMirror;
 import net.kdt.pojavlaunch.modloaders.ModloaderDownloadListener;
 import net.kdt.pojavlaunch.modloaders.ModloaderListenerProxy;
 import net.kdt.pojavlaunch.progresskeeper.ProgressKeeper;
@@ -143,6 +144,7 @@ public abstract class ModVersionListFragment<T> extends Fragment implements Runn
             getTaskProxy().detachListener();
             setTaskProxy(null);
             mExpandableListView.setEnabled(true);
+            if(DownloadMirror.checkForTamperedException(context, e)) return;
             Tools.showError(context, e);
         });
     }

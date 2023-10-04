@@ -338,4 +338,16 @@
     <string name="notif_error_occured">An error has occurred</string>
     <string name="notif_error_occured_desc">Click to see more details</string>
     <string name="fabric_dl_only_stable">Show only stable versions</string>
+    <string name="dl_tampered_manifest_title">File verification warning</string>
+    <string name="dl_tampered_manifest"><![CDATA[The game version manifest on the mirror does not match the official Mojang version manifest, which means it may have been tampered with.<br/>
+        <b>This is not safe. Your personal information may be at risk if you continue.</b><br/>
+        If you still want to use the mirror, press \"Turn off manifest checks\" and start the download again.<br/>
+        If you want to use the official download source, press \"Switch to official site\" and start the download again.<br/>]]>
+    </string>
+    <string name="dl_turn_off_manifest_checks">Turn off manifest checks</string>
+    <string name="dl_switch_to_official_site">Switch to official site</string>
+    <string name="preference_download_source_title">Game download source</string>
+    <string name="preference_download_source_description">Select a download mirror instead of using the official download server</string>
+    <string name="preference_verify_manifest_title">Verify game version manifest</string>
+    <string name="preference_verify_manifest_description">When enabled, the launcher will check the game version manifest along with the libraries.</string>
 </resources>

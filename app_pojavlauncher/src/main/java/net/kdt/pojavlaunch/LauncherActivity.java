@@ -27,6 +27,7 @@ import net.kdt.pojavlaunch.extra.ExtraListener;
 import net.kdt.pojavlaunch.fragments.MainMenuFragment;
 import net.kdt.pojavlaunch.fragments.MicrosoftLoginFragment;
 import net.kdt.pojavlaunch.fragments.SelectAuthFragment;
+import net.kdt.pojavlaunch.mirrors.DownloadMirror;
 import net.kdt.pojavlaunch.modloaders.modpacks.ModloaderInstallTracker;
 import net.kdt.pojavlaunch.modloaders.modpacks.imagecache.IconCacheJanitor;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
@@ -141,6 +142,7 @@ public class LauncherActivity extends BaseActivity {
 
             @Override
             public void onDownloadFailed(Throwable th) {
+                if(DownloadMirror.checkForTamperedException(LauncherActivity.this, th)) return;
                 if(th != null) Tools.showError(LauncherActivity.this, R.string.mc_download_failed, th);
             }
         });
