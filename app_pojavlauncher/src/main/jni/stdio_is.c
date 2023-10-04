@@ -142,6 +142,8 @@ JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_Logger_appendToLog(JNIEnv *env, 
    newChars[appendStringLength] = '\n';
    newChars[appendStringLength+1] = 0;
    if(recordBuffer(newChars, appendStringLength+1) && logListener != NULL) {
+       (*env)->CallVoidMethod(env, logListener, logger_onEventLogged, text);
+   }
 }
 
 JNIEXPORT void JNICALL
