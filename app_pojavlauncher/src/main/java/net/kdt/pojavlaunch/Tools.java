@@ -548,7 +548,9 @@ public final class Tools {
     public static void showError(final Context ctx, final String rolledMessage, final Throwable e) {
         showError(ctx, R.string.global_error, rolledMessage, e, false, false);
     }
-
+    public static void showError(final Context ctx, final String rolledMessage, final Throwable e, boolean exitIfOk) {
+        showError(ctx, R.string.global_error, rolledMessage, e, exitIfOk, false);
+    }
     public static void showError(final Context ctx, final int titleId, final Throwable e, final boolean exitIfOk) {
         showError(ctx, titleId, null, e, exitIfOk, false);
     }

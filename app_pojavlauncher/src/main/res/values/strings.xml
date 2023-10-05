@@ -350,4 +350,6 @@
     <string name="preference_download_source_description">Select a download mirror instead of using the official download server</string>
     <string name="preference_verify_manifest_title">Verify game version manifest</string>
     <string name="preference_verify_manifest_description">When enabled, the launcher will check the game version manifest along with the libraries.</string>
+    <string name="notif_download_finished">The game is ready to launch</string>
+    <string name="notif_download_finished_desc">Click here to start it!</string>
 </resources>

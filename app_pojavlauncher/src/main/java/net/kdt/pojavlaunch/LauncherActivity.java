@@ -1,8 +1,7 @@
 package net.kdt.pojavlaunch;
 
-import static net.kdt.pojavlaunch.MainActivity.INTENT_MINECRAFT_VERSION;
-
-import android.content.Intent;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -27,15 +26,17 @@ import net.kdt.pojavlaunch.extra.ExtraListener;
 import net.kdt.pojavlaunch.fragments.MainMenuFragment;
 import net.kdt.pojavlaunch.fragments.MicrosoftLoginFragment;
 import net.kdt.pojavlaunch.fragments.SelectAuthFragment;
-import net.kdt.pojavlaunch.mirrors.DownloadMirror;
 import net.kdt.pojavlaunch.modloaders.modpacks.ModloaderInstallTracker;
 import net.kdt.pojavlaunch.modloaders.modpacks.imagecache.IconCacheJanitor;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.prefs.screens.LauncherPreferenceFragment;
 import net.kdt.pojavlaunch.progresskeeper.ProgressKeeper;
+import net.kdt.pojavlaunch.progresskeeper.TaskCountListener;
 import net.kdt.pojavlaunch.services.ProgressServiceKeeper;
 import net.kdt.pojavlaunch.tasks.AsyncMinecraftDownloader;
 import net.kdt.pojavlaunch.tasks.AsyncVersionList;
+import net.kdt.pojavlaunch.tasks.ContextAwareDoneListener;
+import net.kdt.pojavlaunch.utils.NotificationUtils;
 import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
 import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 
@@ -53,6 +54,7 @@ public class LauncherActivity extends BaseActivity {
     private ProgressLayout mProgressLayout;
     private ProgressServiceKeeper mProgressServiceKeeper;
     private ModloaderInstallTracker mInstallTracker;
+    private NotificationManager mNotificationManager;
 
     /* Allows to switch from one button "type" to another */
     private final FragmentManager.FragmentLifecycleCallbacks mFragmentCallbackListener = new FragmentManager.FragmentLifecycleCallbacks() {
@@ -123,30 +125,22 @@ public class LauncherActivity extends BaseActivity {
         }
         String normalizedVersionId = AsyncMinecraftDownloader.normalizeVersionId(prof.lastVersionId);
         JMinecraftVersionList.Version mcVersion = AsyncMinecraftDownloader.getListedVersion(normalizedVersionId);
-        new AsyncMinecraftDownloader(this, mcVersion, normalizedVersionId, new AsyncMinecraftDownloader.DoneListener() {
-            @Override
-            public void onDownloadDone() {
-                ProgressKeeper.waitUntilDone(()-> runOnUiThread(() -> {
-                    try {
-                        Intent mainIntent = new Intent(getBaseContext(), MainActivity.class);
-                        mainIntent.putExtra(INTENT_MINECRAFT_VERSION, normalizedVersionId);
-                        mainIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                        startActivity(mainIntent);
-                        finish();
-                        android.os.Process.killProcess(android.os.Process.myPid()); //You should kill yourself, NOW!
-                    } catch (Throwable e) {
-                        Tools.showError(getBaseContext(), e);
-                    }
-                }));
-            }
-
-            @Override
-            public void onDownloadFailed(Throwable th) {
-                if(DownloadMirror.checkForTamperedException(LauncherActivity.this, th)) return;
-                if(th != null) Tools.showError(LauncherActivity.this, R.string.mc_download_failed, th);
-            }
-        });
+        new AsyncMinecraftDownloader(this,
+                mcVersion,
+                normalizedVersionId,
+                new ContextAwareDoneListener(this, normalizedVersionId)
+        );
         return false;
+    };
+
+    private final TaskCountListener mDoubleLaunchPreventionListener = (tc)->{
+        // Hide the notification that starts the game if there are tasks executing.
+        // Prevents the user from trying to launch the game with tasks ongoing.
+        if(tc > 0) {
+            Tools.runOnUiThread(() ->
+                    mNotificationManager.cancel(NotificationUtils.NOTIFICATION_ID_GAME_START)
+            );
+        }
     };
 
     @Override
@@ -156,6 +150,8 @@ public class LauncherActivity extends BaseActivity {
         IconCacheJanitor.runJanitor();
         getWindow().setBackgroundDrawable(null);
         bindViews();
+        mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        ProgressKeeper.addTaskCountListener(mDoubleLaunchPreventionListener);
         ProgressKeeper.addTaskCountListener((mProgressServiceKeeper = new ProgressServiceKeeper(this)));
 
         mSettingsButton.setOnClickListener(mSettingButtonListener);

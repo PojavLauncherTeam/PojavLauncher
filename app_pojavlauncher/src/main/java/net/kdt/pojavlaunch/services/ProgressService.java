@@ -19,7 +19,7 @@ import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.progresskeeper.ProgressKeeper;
 import net.kdt.pojavlaunch.progresskeeper.TaskCountListener;
-import net.kdt.pojavlaunch.value.NotificationConstants;
+import net.kdt.pojavlaunch.utils.NotificationUtils;
 
 /**
  * Lazy service which allows the process not to get killed.
@@ -43,7 +43,7 @@ public class ProgressService extends Service implements TaskCountListener {
         notificationManagerCompat = NotificationManagerCompat.from(getApplicationContext());
         Intent killIntent = new Intent(getApplicationContext(), ProgressService.class);
         killIntent.putExtra("kill", true);
-        PendingIntent pendingKillIntent = PendingIntent.getService(this, NotificationConstants.PENDINGINTENT_CODE_KILL_PROGRESS_SERVICE
+        PendingIntent pendingKillIntent = PendingIntent.getService(this, NotificationUtils.PENDINGINTENT_CODE_KILL_PROGRESS_SERVICE
                 , killIntent, Build.VERSION.SDK_INT >=23 ? PendingIntent.FLAG_IMMUTABLE : 0);
         mNotificationBuilder = new NotificationCompat.Builder(this, "channel_id")
                 .setContentTitle(getString(R.string.lazy_service_default_title))
@@ -64,7 +64,7 @@ public class ProgressService extends Service implements TaskCountListener {
         }
         Log.d("ProgressService", "Started!");
         mNotificationBuilder.setContentText(getString(R.string.progresslayout_tasks_in_progress, ProgressKeeper.getTaskCount()));
-        startForeground(NotificationConstants.NOTIFICATION_ID_PROGRESS_SERVICE, mNotificationBuilder.build());
+        startForeground(NotificationUtils.NOTIFICATION_ID_PROGRESS_SERVICE, mNotificationBuilder.build());
         if(ProgressKeeper.getTaskCount() < 1) stopSelf();
         else ProgressKeeper.addTaskCountListener(this, false);
 
