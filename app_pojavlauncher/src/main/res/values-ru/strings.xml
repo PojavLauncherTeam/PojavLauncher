@@ -125,7 +125,7 @@
     <string name="customctrl_addbutton_drawer">Добавить группу кнопок</string>
     <string name="customctrl_addbutton_joystick">Добавить джойстик</string>
     <string name="customctrl_addsubbutton">Добавить</string>
-    <string name="customctrl_selectdefault">Сделать основной</string>
+    <string name="customctrl_selectdefault">Выбрать основную</string>
     <string name="customctrl_export">Поделиться раскладкой</string>
     <string name="main_share_logs">Поделиться журналом</string>
     <string name="main_install_jar_file">Запустить .jar</string>
