@@ -164,10 +164,10 @@
     <string name="pedit_renderer">Візуалізатор</string>
     <string name="arc_capes_title">Плащі Cosmetica</string>
     <string name="arc_capes_desc">Включає плащі від Cosmetica (раніше Arc). Для більш детальної інформації, будь ласка, відвідайте https://cosmetica.cc. Потребує OptiFine.</string>
-    <string name="notif_channel_name">Основне</string>
-    <string name="lazy_service_default_title">Служба переднього плану Pojav</string>
+    <string name="notif_channel_name">Загальне</string>
+    <string name="lazy_service_default_title">Активна служба Pojav</string>
     <string name="mcl_setting_veroption_installed">Встановлено</string>
-    <string name="use_global_default">(Використовувати все за стандартом)</string>
+    <string name="use_global_default">(Використовувати за стандартом)</string>
     <string name="progresslayout_tasks_in_progress">Виконується %d завдань</string>
     <string name="notification_terminate">Припинити</string>
     <string name="notification_game_runs">Гра запущена!</string>
@@ -234,4 +234,9 @@
     <string name="modpack_download_downloading_metadata">Завантаження метадані модпака/Ів (%.2f МБ / %.2f МБ)</string>
     <string name="modpack_download_downloading_mods">Завантаження модів (%.2f МБ / %.2f МБ)</string>
     <string name="modpack_download_downloading_mods_fc">Завантаження модів (Файлів %d з %d)</string>
+    <string name="modpack_install_notification_title">Інсталятор модпаку Pojav</string>
+    <string name="modpack_install_button">Створити профіль модпаку</string>
+    <string name="notif_error_occured">Сталася помилка</string>
+    <string name="notif_error_occured_desc">Натисніть, щоб побачити подробиці</string>
+    <string name="fabric_dl_only_stable">Показувати лише стабільні версії</string>
 </resources>
