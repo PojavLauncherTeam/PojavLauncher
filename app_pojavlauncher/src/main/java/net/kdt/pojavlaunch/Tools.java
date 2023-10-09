@@ -48,6 +48,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import net.kdt.pojavlaunch.contextexecutor.ContextExecutor;
+import net.kdt.pojavlaunch.contextexecutor.ContextExecutorTask;
 import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.multirt.Runtime;
 import net.kdt.pojavlaunch.plugins.FFmpegPlugin;
@@ -556,6 +557,9 @@ public final class Tools {
     }
 
     private static void showError(final Context ctx, final int titleId, final String rolledMessage, final Throwable e, final boolean exitIfOk, final boolean showMore) {
+        if(e instanceof ContextExecutorTask) {
+            ContextExecutor.execute((ContextExecutorTask) e);
+        }
         e.printStackTrace();
 
         Runnable runnable = () -> {
@@ -599,6 +603,14 @@ public final class Tools {
         }
     }
 
+    /**
+     * Show the error remotely in a context-aware fashion. Has generally the same behaviour as
+     * Tools.showError when in an activity, but when not in one, sends a notification that opens an
+     * activity and calls Tools.showError().
+     * NOTE: If the Throwable is a ContextExecutorTask and when not in an activity,
+     * its executeWithApplication() method will never be called.
+     * @param e the error (throwable)
+     */
     public static void showErrorRemote(Throwable e) {
         showErrorRemote(null, e);
     }

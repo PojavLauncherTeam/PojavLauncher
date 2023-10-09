@@ -37,8 +37,7 @@ public class ContextAwareDoneListener implements AsyncMinecraftDownloader.DoneLi
 
     @Override
     public void onDownloadFailed(Throwable throwable) {
-        if(throwable != null)
-            Tools.showErrorRemote(mErrorString, throwable);
+        Tools.showErrorRemote(mErrorString, throwable);
     }
 
     @Override

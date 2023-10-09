@@ -144,7 +144,6 @@ public abstract class ModVersionListFragment<T> extends Fragment implements Runn
             getTaskProxy().detachListener();
             setTaskProxy(null);
             mExpandableListView.setEnabled(true);
-            if(DownloadMirror.checkForTamperedException(context, e)) return;
             Tools.showError(context, e);
         });
     }

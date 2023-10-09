@@ -399,10 +399,10 @@ public class AsyncMinecraftDownloader {
     }
 
     private boolean verifyManifest(File verJsonDir, JMinecraftVersionList.Version verInfo) {
-        return verJsonDir.exists()
+        return /*verJsonDir.exists()
                 && (!LauncherPreferences.PREF_CHECK_LIBRARY_SHA
                 || verInfo.sha1 == null
-                || Tools.compareSHA1(verJsonDir, verInfo.sha1));
+                || Tools.compareSHA1(verJsonDir, verInfo.sha1));*/false;
     }
 
     public static String normalizeVersionId(String versionString) {

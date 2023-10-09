@@ -1,13 +1,9 @@
 package net.kdt.pojavlaunch.mirrors;
 
-import android.app.AlertDialog;
-import android.content.Context;
-import android.text.Html;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
 
-import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.utils.DownloadUtils;
@@ -59,33 +55,6 @@ public class DownloadMirror {
 
     public static boolean isMirrored() {
         return !LauncherPreferences.PREF_DOWNLOAD_SOURCE.equals("default");
-    }
-
-    public static boolean checkForTamperedException(Context context, Throwable e) {
-        if(e instanceof MirrorTamperedException){
-            showMirrorTamperedDialog(context);
-            return true;
-        }
-        return false;
-    }
-
-    private static void showMirrorTamperedDialog(Context ctx) {
-        Tools.runOnUiThread(()->{
-            AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
-            builder.setTitle(R.string.dl_tampered_manifest_title);
-            builder.setMessage(Html.fromHtml(ctx.getString(R.string.dl_tampered_manifest)));
-            builder.setPositiveButton(R.string.dl_switch_to_official_site,(d,w)->{
-                LauncherPreferences.DEFAULT_PREF.edit().putString("downloadSource", "default").apply();
-                LauncherPreferences.PREF_DOWNLOAD_SOURCE = "default";
-
-            });
-            builder.setNegativeButton(R.string.dl_turn_off_manifest_checks,(d,w)->{
-                LauncherPreferences.DEFAULT_PREF.edit().putBoolean("verifyManifest", false).apply();
-                LauncherPreferences.PREF_VERIFY_MANIFEST = false;
-            });
-            builder.setNeutralButton(android.R.string.cancel, (d,w)->{});
-            builder.show();
-        });
     }
 
     private static String[] getMirrorSettings() {
