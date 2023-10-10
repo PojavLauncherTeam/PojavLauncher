@@ -278,7 +278,7 @@
     <string name="create_profile_optifine">创建 OptiFine 配置</string>
     <string name="hint_search_modpack">搜索整合包</string>
     <string name="preference_vulkan_driver_system_title">使用系统 Vulkan 驱动（禁用 Turnip 驱动）</string>
-    <string name="preference_vulkan_driver_system_description">强制启动器在骁龙 Adreno GPU 上使用系统 Vulkan 驱动而非 Turnip 驱动。仅影响调用 Vulkan 的 Zink 和模组（非骁龙GPU的手机请打开此设置，反之亦然）。</string>
+    <string name="preference_vulkan_driver_system_description">强制启动器在骁龙 Adreno GPU 上使用系统 Vulkan 驱动而非 Turnip 驱动。仅影响调用 Vulkan 的 Zink 和模组（非骁龙GPU的手机请打开此设置，反之则开启）。</string>
     <string name="generic_install">安装</string>
     <string name="generic_apply">应用设置</string>
     <string name="search_modpack_no_result">未找到整合包（请检查输入的整合包名称）</string>
