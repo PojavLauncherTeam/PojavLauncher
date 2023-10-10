@@ -2,7 +2,7 @@
 <resources>
     <!-- App name part -->
     <string name="app_name">2009Scape</string>
-    <string name="app_short_name">20009Scape</string>
+    <string name="app_short_name">2009Scape</string>
     <string name="app_motd">Launch 2009Scape on your device!</string>
 
     <!-- Action bar part -->
