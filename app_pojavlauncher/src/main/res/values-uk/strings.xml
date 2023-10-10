@@ -44,6 +44,8 @@
     <string name="mcl_setting_subtitle_javaargs">Будьте обережні, це може призвести до збоїв у грі, якщо це замінити без знань.</string>
     <string name="mcl_setting_category_renderer">Візуалізатор</string>
     <string name="mcl_setting_renderer_gles2_4">Божий GL4ES - (всі версії, швидкі)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - (всі версії, середнє)</string>
+    <string name="mcl_setting_renderer_angle">ANGLE (Vulkan) - (Тільки 1.17+, середнє)</string>
     <string name="mcl_setting_veroption_release">Релізи</string>
     <string name="mcl_setting_veroption_snapshot">Снапшоти</string>
     <string name="mcl_setting_veroption_oldalpha">Старі альфа</string>
@@ -67,6 +69,7 @@
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Програма/Гра завершилась з кодом %d, глянь в latestlog.txt для більш детальної інформації.</string>
     <string name="mcn_exit_confirm">Ви впевнені, що хочете примусово закрити його?</string>
+    <string name="mcn_check_fail_vulkan_support">Рендер Zink (Vulkan) не підтримується на цьому пристрої!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_chat">Чат</string>
     <string name="control_debug">Налагодження</string>
@@ -148,6 +151,7 @@
     <string name="preference_misc_title">Інші параметри</string>
     <string name="preference_experimental_title">Експериментальні штуки</string>
     <string name="preference_sustained_performance_title">Увімкнути режим постійної продуктивности</string>
+    <string name="preference_force_vsync_title">Примусова вертикальна синхронізація</string>
     <string name="preference_edit_controls_title">Редагувати елементи керування</string>
     <string name="preference_category_virtual_mouse">Віртуальна миша</string>
     <string name="preference_gyro_invert_x_axis">Обернути вісь X</string>
@@ -174,6 +178,7 @@
     <string name="folder_dialog_create">Створити</string>
     <string name="folder_dialog_insert_name">Нова папка</string>
     <string name="folder_fragment_create">Створити теку</string>
+    <string name="folder_fragment_select">Вибрати папку</string>
     <string name="main_login_done">Вхід виконано</string>
     <string name="main_add_account">Додати обл. запис</string>
     <string name="tasks_ongoing">Завдання виконуються, зачекайте</string>
@@ -235,6 +240,9 @@
     <string name="modpack_download_downloading_mods">Завантаження модів (%.2f МБ / %.2f МБ)</string>
     <string name="modpack_download_downloading_mods_fc">Завантаження модів (Файлів %d з %d)</string>
     <string name="modpack_install_notification_title">Інсталятор модпаку Pojav</string>
+    <string name="modpack_install_notification_success">Натисніть тут, щоб завершити встановлення збірки</string>
+    <string name="modpack_install_modloader_download_failed">Не вдалося завантажити файли модлоадера</string>
+    <string name="modpack_install_download_failed">Не вдалося завантажити файли збірки</string>
     <string name="modpack_install_button">Створити профіль модпаку</string>
     <string name="notif_error_occured">Сталася помилка</string>
     <string name="notif_error_occured_desc">Натисніть, щоб побачити подробиці</string>
