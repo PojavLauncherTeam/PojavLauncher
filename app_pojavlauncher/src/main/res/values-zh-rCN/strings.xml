@@ -51,7 +51,7 @@
     <string name="mcl_setting_subtitle_javaargs">注意，非专业人士修改此值可能导致游戏崩溃！</string>
     <string name="mcl_setting_category_renderer">渲染器</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES -（全版本可用，速度较快）</string>
-    <string name="mcl_setting_renderer_vulkan_zink">Zink（Vulkan）-（全版本可用，速度中等）</string>
+    <string name="mcl_setting_renderer_vulkan_zink">Zink（Vulkan）-（全版本可用，速度中等，设备兼容性差）</string>
     <string name="mcl_setting_renderer_angle">ANGLE（Vulkan）-（仅支持 1.17 以上的版本，速度中等）</string>
     <string name="mcl_setting_veroption_release">正式版</string>
     <string name="mcl_setting_veroption_snapshot">快照版</string>
@@ -73,7 +73,7 @@
     <string name="global_error_field_empty">此处表单不能为空</string>
     <string name="global_waiting">请稍等</string>
     <string name="global_select">选择</string>
-    <string name="global_retry">重试</string>
+    <string name="global_retry">请重试</string>
     <string name="global_default">默认</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">应用程序/游戏以代码 %d退出，请查看 latestlog.txt 了解更多详情。</string>
@@ -114,7 +114,7 @@
 -->
     <string name="customctrl_toggle">可切换</string>
     <string name="customctrl_size">大小</string>
-    <string name="customctrl_mapping">映射</string>
+    <string name="customctrl_mapping">按键映射</string>
     <string name="customctrl_orientation">方向</string>
     <string name="customctrl_background_color">背景颜色</string>
     <string name="customctrl_corner_radius">圆角半径</string>
