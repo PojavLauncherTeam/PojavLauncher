@@ -51,7 +51,7 @@ public class LauncherPreferenceControlFragment extends LauncherPreferenceFragmen
 
         CustomSeekBarPreference deadzoneSeek = findPreference("gamepad_deadzone_scale");
         deadzoneSeek.setRange(50, 200);
-        deadzoneSeek.setValue((int) joystickDeadzone * 100);
+        deadzoneSeek.setValue((int) (joystickDeadzone * 100f));
         deadzoneSeek.setSuffix(" %");
 
 
@@ -66,6 +66,7 @@ public class LauncherPreferenceControlFragment extends LauncherPreferenceFragmen
         gyroSensitivitySeek.setRange(25, 300);
         gyroSensitivitySeek.setValue((int) (gyroSpeed*100f));
         gyroSensitivitySeek.setSuffix(" %");
+
         CustomSeekBarPreference gyroSampleRateSeek = findPreference("gyroSampleRate");
         gyroSampleRateSeek.setRange(5, 50);
         gyroSampleRateSeek.setValue(gyroSampleRate);

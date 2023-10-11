@@ -102,7 +102,7 @@ public class LauncherPreferences {
         PREF_FORCE_VSYNC = DEFAULT_PREF.getBoolean("force_vsync", false);
         PREF_BUTTON_ALL_CAPS = DEFAULT_PREF.getBoolean("buttonAllCaps", true);
         PREF_DUMP_SHADERS = DEFAULT_PREF.getBoolean("dump_shaders", false);
-        PREF_DEADZONE_SCALE = DEFAULT_PREF.getInt("gamepad_deadzone_scale", 100)/100f;
+        PREF_DEADZONE_SCALE = ((float) DEFAULT_PREF.getInt("gamepad_deadzone_scale", 100))/100f;
         PREF_BIG_CORE_AFFINITY = DEFAULT_PREF.getBoolean("bigCoreAffinity", false);
         PREF_ZINK_PREFER_SYSTEM_DRIVER = DEFAULT_PREF.getBoolean("zinkPreferSystemDriver", false);
 
