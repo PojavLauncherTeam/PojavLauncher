@@ -214,7 +214,7 @@
     <string name="folder_dialog_insert_name">插入文件夹名称</string>
     <string name="folder_fragment_create">新建文件夹</string>
     <string name="folder_fragment_select">选择文件夹</string>
-    <string name="main_login_done">登录完成！</string>
+    <string name="main_login_done">登录成功！</string>
     <string name="main_add_account">添加账户</string>
     <string name="tasks_ongoing">任务正在执行中，请稍候……</string>
     <string name="no_saved_accounts">没有已保存的账户</string>
