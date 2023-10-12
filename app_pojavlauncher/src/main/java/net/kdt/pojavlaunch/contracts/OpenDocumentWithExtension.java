@@ -14,6 +14,13 @@ import androidx.annotation.Nullable;
 // you to specify practically anything. So i made this instead.
 public class OpenDocumentWithExtension extends ActivityResultContract<Object, Uri> {
     private final String mimeType;
+
+    /**
+     * Create a new OpenDocumentWithExtension contract.
+     * If the extension provided to the constructor is not available in the device's MIME
+     * type database, the filter will default to "all types"
+     * @param extension the extension to filter by
+     */
     public OpenDocumentWithExtension(String extension) {
         String extensionMimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
         if(extensionMimeType == null) extensionMimeType = "*/*";

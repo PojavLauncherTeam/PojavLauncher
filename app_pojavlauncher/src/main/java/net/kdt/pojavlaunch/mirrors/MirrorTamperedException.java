@@ -18,6 +18,12 @@ public class MirrorTamperedException extends Exception implements ContextExecuto
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(R.string.dl_tampered_manifest_title);
         builder.setMessage(Html.fromHtml(activity.getString(R.string.dl_tampered_manifest)));
+        addButtons(builder);
+        ShowErrorActivity.installRemoteDialogHandling(activity, builder);
+        builder.show();
+    }
+
+    private void addButtons(AlertDialog.Builder builder) {
         builder.setPositiveButton(R.string.dl_switch_to_official_site,(d,w)->{
             LauncherPreferences.DEFAULT_PREF.edit().putString("downloadSource", "default").apply();
             LauncherPreferences.PREF_DOWNLOAD_SOURCE = "default";
@@ -28,8 +34,6 @@ public class MirrorTamperedException extends Exception implements ContextExecuto
             LauncherPreferences.PREF_VERIFY_MANIFEST = false;
         });
         builder.setNeutralButton(android.R.string.cancel, (d,w)->{});
-        ShowErrorActivity.installRemoteDialogHandling(activity, builder);
-        builder.show();
     }
 
     @Override

@@ -26,29 +26,37 @@ public class NotificationDownloadListener implements ModloaderDownloadListener {
         if(mModLoader.requiresGuiInstallation()) {
             ModloaderInstallTracker.saveModLoader(mContext, mModLoader, downloadedFile);
             Intent mainActivityIntent = new Intent(mContext, LauncherActivity.class);
-            Tools.runOnUiThread(() -> NotificationUtils.sendBasicNotification(mContext,
-                    R.string.modpack_install_notification_title,
-                    R.string.modpack_install_notification_success,
-                    mainActivityIntent,
-                    NotificationUtils.PENDINGINTENT_CODE_DOWNLOAD_SERVICE,
-                    NotificationUtils.NOTIFICATION_ID_DOWNLOAD_LISTENER
-            ));
+            sendIntentNotification(mainActivityIntent, R.string.modpack_install_notification_success);
         }
     }
 
     @Override
     public void onDataNotAvailable() {
-        Tools.runOnUiThread(()->NotificationUtils.sendBasicNotification(mContext,
-                R.string.modpack_install_notification_title,
-                R.string.modpack_install_notification_success,
-                null,
-                NotificationUtils.PENDINGINTENT_CODE_DOWNLOAD_SERVICE,
-                NotificationUtils.NOTIFICATION_ID_DOWNLOAD_LISTENER
-        ));
+        sendEmptyNotification(R.string.modpack_install_notification_data_not_available);
     }
 
     @Override
     public void onDownloadError(Exception e) {
         Tools.showErrorRemote(mContext, R.string.modpack_install_modloader_download_failed, e);
+    }
+
+    private void sendIntentNotification(Intent intent, int localeString) {
+        Tools.runOnUiThread(() -> NotificationUtils.sendBasicNotification(mContext,
+                R.string.modpack_install_notification_title,
+                localeString,
+                intent,
+                NotificationUtils.PENDINGINTENT_CODE_DOWNLOAD_SERVICE,
+                NotificationUtils.NOTIFICATION_ID_DOWNLOAD_LISTENER
+        ));
+    }
+
+    private void sendEmptyNotification(int localeString) {
+        Tools.runOnUiThread(()->NotificationUtils.sendBasicNotification(mContext,
+                R.string.modpack_install_notification_title,
+                localeString,
+                null,
+                NotificationUtils.PENDINGINTENT_CODE_DOWNLOAD_SERVICE,
+                NotificationUtils.NOTIFICATION_ID_DOWNLOAD_LISTENER
+        ));
     }
 }

@@ -53,6 +53,10 @@ public class DownloadMirror {
         DownloadUtils.downloadFileMonitored(urlInput, outputFile, buffer, monitor);
     }
 
+    /**
+     * Check if the current download source is a mirror and not an official source.
+     * @return true if the source is a mirror, false otherwise
+     */
     public static boolean isMirrored() {
         return !LauncherPreferences.PREF_DOWNLOAD_SOURCE.equals("default");
     }
@@ -88,8 +92,14 @@ public class DownloadMirror {
 
     private static int getBaseUrlTail(String wholeUrl) throws MalformedURLException{
         int protocolNameEnd = wholeUrl.indexOf("://");
-        if(protocolNameEnd == -1) throw new MalformedURLException("No protocol");
+        if(protocolNameEnd == -1)
+            throw new MalformedURLException("No protocol, or non path-based URL");
         protocolNameEnd += 3;
-        return wholeUrl.indexOf('/', protocolNameEnd);
+        int hostnameEnd = wholeUrl.indexOf('/', protocolNameEnd);
+        if(protocolNameEnd >= wholeUrl.length() || hostnameEnd == protocolNameEnd)
+            throw new MalformedURLException("No hostname");
+        if(hostnameEnd == -1) hostnameEnd = wholeUrl.length();
+        System.out.println(protocolNameEnd +" "+ hostnameEnd);
+        return hostnameEnd;
     }
 }

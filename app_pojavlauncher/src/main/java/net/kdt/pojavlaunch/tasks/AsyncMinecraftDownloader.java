@@ -48,8 +48,9 @@ public class AsyncMinecraftDownloader {
     /* Allows each downloading thread to have its own RECYCLED buffer */
     private final ConcurrentHashMap<Thread, byte[]> mThreadBuffers = new ConcurrentHashMap<>(5);
 
-    public AsyncMinecraftDownloader(Activity activity, JMinecraftVersionList.Version version, String realVersion,
-                                    @NonNull DoneListener listener){ // this was there for a reason
+    public void start(Activity activity, JMinecraftVersionList.Version version,
+                      String realVersion, // this was there for a reason
+                      @NonNull DoneListener listener) {
         sExecutorService.execute(() -> {
             try {
                 downloadGame(activity, version, realVersion);
@@ -399,10 +400,10 @@ public class AsyncMinecraftDownloader {
     }
 
     private boolean verifyManifest(File verJsonDir, JMinecraftVersionList.Version verInfo) {
-        return /*verJsonDir.exists()
+        return verJsonDir.exists()
                 && (!LauncherPreferences.PREF_CHECK_LIBRARY_SHA
                 || verInfo.sha1 == null
-                || Tools.compareSHA1(verJsonDir, verInfo.sha1));*/false;
+                || Tools.compareSHA1(verJsonDir, verInfo.sha1));
     }
 
     public static String normalizeVersionId(String versionString) {

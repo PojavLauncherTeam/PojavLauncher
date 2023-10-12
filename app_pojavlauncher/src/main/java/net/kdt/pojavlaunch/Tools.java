@@ -559,6 +559,7 @@ public final class Tools {
     private static void showError(final Context ctx, final int titleId, final String rolledMessage, final Throwable e, final boolean exitIfOk, final boolean showMore) {
         if(e instanceof ContextExecutorTask) {
             ContextExecutor.execute((ContextExecutorTask) e);
+            return;
         }
         e.printStackTrace();
 
