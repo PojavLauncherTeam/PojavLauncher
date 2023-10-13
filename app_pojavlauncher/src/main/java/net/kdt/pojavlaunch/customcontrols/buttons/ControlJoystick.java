@@ -102,8 +102,8 @@ public class ControlJoystick extends JoystickView implements ControlInterface {
 
     @Override
     public void cloneButton() {
-        ControlData data = new ControlJoystickData(getProperties());
-        getControlLayoutParent().addJoystickButton((ControlJoystickData) data);
+        ControlJoystickData data = new ControlJoystickData(mControlData);
+        getControlLayoutParent().addJoystickButton(data);
     }
 
 
