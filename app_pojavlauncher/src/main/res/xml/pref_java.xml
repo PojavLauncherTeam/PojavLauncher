@@ -4,7 +4,7 @@
 
     <net.kdt.pojavlaunch.prefs.BackButtonPreference/>
 
-    <PreferenceCategory android:title="Java Tweaks">
+    <PreferenceCategory android:title="@string/preference_category_java_tweaks">
         <net.kdt.pojavlaunch.prefs.RuntimeManagerPreference
             android:summary="@string/multirt_subtitle"
             android:title="@string/multirt_title"/>
