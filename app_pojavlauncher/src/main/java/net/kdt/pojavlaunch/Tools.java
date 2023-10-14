@@ -33,7 +33,6 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.webkit.MimeTypeMap;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,6 +48,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import net.kdt.pojavlaunch.contextexecutor.ContextExecutor;
+import net.kdt.pojavlaunch.contextexecutor.ContextExecutorTask;
 import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.multirt.Runtime;
 import net.kdt.pojavlaunch.plugins.FFmpegPlugin;
@@ -117,7 +117,6 @@ public final class Tools {
     public static String OBSOLETE_RESOURCES_PATH;
     public static String CTRLMAP_PATH;
     public static String CTRLDEF_FILE;
-    public static final int RUN_MOD_INSTALLER = 2050;
     private static RenderersList sCompatibleRenderers;
 
 
@@ -550,12 +549,18 @@ public final class Tools {
     public static void showError(final Context ctx, final String rolledMessage, final Throwable e) {
         showError(ctx, R.string.global_error, rolledMessage, e, false, false);
     }
-
+    public static void showError(final Context ctx, final String rolledMessage, final Throwable e, boolean exitIfOk) {
+        showError(ctx, R.string.global_error, rolledMessage, e, exitIfOk, false);
+    }
     public static void showError(final Context ctx, final int titleId, final Throwable e, final boolean exitIfOk) {
         showError(ctx, titleId, null, e, exitIfOk, false);
     }
 
     private static void showError(final Context ctx, final int titleId, final String rolledMessage, final Throwable e, final boolean exitIfOk, final boolean showMore) {
+        if(e instanceof ContextExecutorTask) {
+            ContextExecutor.execute((ContextExecutorTask) e);
+            return;
+        }
         e.printStackTrace();
 
         Runnable runnable = () -> {
@@ -599,6 +604,14 @@ public final class Tools {
         }
     }
 
+    /**
+     * Show the error remotely in a context-aware fashion. Has generally the same behaviour as
+     * Tools.showError when in an activity, but when not in one, sends a notification that opens an
+     * activity and calls Tools.showError().
+     * NOTE: If the Throwable is a ContextExecutorTask and when not in an activity,
+     * its executeWithApplication() method will never be called.
+     * @param e the error (throwable)
+     */
     public static void showErrorRemote(Throwable e) {
         showErrorRemote(null, e);
     }
@@ -928,12 +941,10 @@ public final class Tools {
         }
 
         if(!customJavaArgs){ // Launch the intent to get the jar file
-            Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-            intent.addCategory(Intent.CATEGORY_OPENABLE);
-            String mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension("jar");
-            if(mimeType == null) mimeType = "*/*";
-            intent.setType(mimeType);
-            activity.startActivityForResult(intent, RUN_MOD_INSTALLER);
+            if(!(activity instanceof LauncherActivity))
+                throw new IllegalStateException("Cannot start Mod Installer without LauncherActivity");
+            LauncherActivity launcherActivity = (LauncherActivity)activity;
+            launcherActivity.modInstallerLauncher.launch(null);
             return;
         }
 
@@ -967,10 +978,9 @@ public final class Tools {
     }
 
     /** Copy the mod file, and launch the mod installer activity */
-    public static void launchModInstaller(Activity activity, @NonNull Intent data){
+    public static void launchModInstaller(Activity activity, @NonNull Uri uri){
         final ProgressDialog alertDialog = getWaitingDialog(activity);
 
-        final Uri uri = data.getData();
         alertDialog.setMessage(activity.getString(R.string.multirt_progress_caching));
         sExecutorService.execute(() -> {
             try {
@@ -994,18 +1004,18 @@ public final class Tools {
     }
 
 
-    public static void installRuntimeFromUri(Activity activity, Uri uri){
+    public static void installRuntimeFromUri(Context context, Uri uri){
         sExecutorService.execute(() -> {
             try {
-                String name = getFileName(activity, uri);
+                String name = getFileName(context, uri);
                 MultiRTUtils.installRuntimeNamed(
                         NATIVE_LIB_DIR,
-                        activity.getContentResolver().openInputStream(uri),
+                        context.getContentResolver().openInputStream(uri),
                         name);
 
                 MultiRTUtils.postPrepare(name);
             } catch (IOException e) {
-                Tools.showError(activity, e);
+                Tools.showError(context, e);
             }
         });
     }

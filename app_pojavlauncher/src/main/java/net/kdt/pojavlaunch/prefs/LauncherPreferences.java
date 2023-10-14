@@ -61,6 +61,9 @@ public class LauncherPreferences {
     public static float PREF_DEADZONE_SCALE = 1f;
     public static boolean PREF_BIG_CORE_AFFINITY = false;
     public static boolean PREF_ZINK_PREFER_SYSTEM_DRIVER = false;
+    
+    public static boolean PREF_VERIFY_MANIFEST = true;
+    public static String PREF_DOWNLOAD_SOURCE = "default";
 
 
 
@@ -69,9 +72,8 @@ public class LauncherPreferences {
         Tools.initContextConstants(ctx);
 
         PREF_RENDERER = DEFAULT_PREF.getString("renderer", "opengles2");
-
-		PREF_BUTTONSIZE = DEFAULT_PREF.getInt("buttonscale", 100);
-		PREF_MOUSESCALE = DEFAULT_PREF.getInt("mousescale", 100);
+        PREF_BUTTONSIZE = DEFAULT_PREF.getInt("buttonscale", 100);
+        PREF_MOUSESCALE = DEFAULT_PREF.getInt("mousescale", 100);
 		PREF_MOUSESPEED = ((float)DEFAULT_PREF.getInt("mousespeed",100))/100f;
 		PREF_HIDE_SIDEBAR = DEFAULT_PREF.getBoolean("hideSidebar", false);
 		PREF_IGNORE_NOTCH = DEFAULT_PREF.getBoolean("ignoreNotch", false);
@@ -105,6 +107,8 @@ public class LauncherPreferences {
         PREF_DEADZONE_SCALE = ((float) DEFAULT_PREF.getInt("gamepad_deadzone_scale", 100))/100f;
         PREF_BIG_CORE_AFFINITY = DEFAULT_PREF.getBoolean("bigCoreAffinity", false);
         PREF_ZINK_PREFER_SYSTEM_DRIVER = DEFAULT_PREF.getBoolean("zinkPreferSystemDriver", false);
+        PREF_DOWNLOAD_SOURCE = DEFAULT_PREF.getString("downloadSource", "default");
+        PREF_VERIFY_MANIFEST = DEFAULT_PREF.getBoolean("verifyManifest", true);
 
         String argLwjglLibname = "-Dorg.lwjgl.opengl.libname=";
         for (String arg : JREUtils.parseJavaArguments(PREF_CUSTOM_JAVA_ARGS)) {

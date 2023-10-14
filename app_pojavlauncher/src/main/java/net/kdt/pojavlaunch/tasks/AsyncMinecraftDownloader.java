@@ -2,7 +2,7 @@ package net.kdt.pojavlaunch.tasks;
 
 import static net.kdt.pojavlaunch.PojavApplication.sExecutorService;
 import static net.kdt.pojavlaunch.Tools.BYTE_TO_MB;
-import static net.kdt.pojavlaunch.utils.DownloadUtils.downloadFileMonitored;
+import static net.kdt.pojavlaunch.mirrors.DownloadMirror.downloadFileMirrored;
 
 import android.app.Activity;
 import android.util.Log;
@@ -19,9 +19,10 @@ import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.extra.ExtraConstants;
 import net.kdt.pojavlaunch.extra.ExtraCore;
+import net.kdt.pojavlaunch.mirrors.DownloadMirror;
+import net.kdt.pojavlaunch.mirrors.MirrorTamperedException;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.progresskeeper.ProgressKeeper;
-import net.kdt.pojavlaunch.utils.DownloadUtils;
 import net.kdt.pojavlaunch.value.DependentLibrary;
 import net.kdt.pojavlaunch.value.MinecraftClientInfo;
 import net.kdt.pojavlaunch.value.MinecraftLibraryArtifact;
@@ -47,8 +48,9 @@ public class AsyncMinecraftDownloader {
     /* Allows each downloading thread to have its own RECYCLED buffer */
     private final ConcurrentHashMap<Thread, byte[]> mThreadBuffers = new ConcurrentHashMap<>(5);
 
-    public AsyncMinecraftDownloader(Activity activity, JMinecraftVersionList.Version version, String realVersion,
-                                    @NonNull DoneListener listener){ // this was there for a reason
+    public void start(Activity activity, JMinecraftVersionList.Version version,
+                      String realVersion, // this was there for a reason
+                      @NonNull DoneListener listener) {
         sExecutorService.execute(() -> {
             try {
                 downloadGame(activity, version, realVersion);
@@ -90,7 +92,7 @@ public class AsyncMinecraftDownloader {
 
             // THIS one function need the activity in the case of an error
             if(activity != null && !JRE17Util.installNewJreIfNeeded(activity, verInfo)){
-                ProgressKeeper.submitProgress(ProgressLayout.DOWNLOAD_MINECRAFT, -1, -1);
+                ProgressLayout.clearProgress(ProgressLayout.DOWNLOAD_MINECRAFT);
                 throw new DownloaderException();
             }
 
@@ -127,7 +129,8 @@ public class AsyncMinecraftDownloader {
                 if (!outLib.exists()) {
                     ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT, 0, R.string.mcl_launch_downloading, verInfo.logging.client.file.id);
                     JMinecraftVersionList.Version finalVerInfo = verInfo;
-                    downloadFileMonitored(
+                    downloadFileMirrored(
+                            DownloadMirror.DOWNLOAD_CLASS_METADATA,
                             verInfo.logging.client.file.url, outLib, getByteBuffer(),
                             (curr, max) -> ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT,
                                     (int) Math.max((float)curr/max*100,0), R.string.mcl_launch_downloading_progress, finalVerInfo.logging.client.file.id, curr/BYTE_TO_MB, max/BYTE_TO_MB)
@@ -185,10 +188,11 @@ public class AsyncMinecraftDownloader {
                 }
             }
         } catch (DownloaderException e) {
+            ProgressLayout.clearProgress(ProgressLayout.DOWNLOAD_MINECRAFT);
             throw e;
         } catch (Throwable e) {
             Log.e("AsyncMcDownloader", e.toString(),e );
-            ProgressKeeper.submitProgress(ProgressLayout.DOWNLOAD_MINECRAFT, -1, -1);
+            ProgressLayout.clearProgress(ProgressLayout.DOWNLOAD_MINECRAFT);
             throw new DownloaderException(e);
         }
 
@@ -204,24 +208,24 @@ public class AsyncMinecraftDownloader {
 
         try {
             if(assets != null)
-                downloadAssets(assets, verInfo.assets, assets.mapToResources ? new File(Tools.OBSOLETE_RESOURCES_PATH) : new File(Tools.ASSETS_PATH));
+                downloadAssets(assets, assets.mapToResources ? new File(Tools.OBSOLETE_RESOURCES_PATH) : new File(Tools.ASSETS_PATH));
         } catch (Exception e) {
             Log.e("AsyncMcDownloader", e.toString(), e);
-            ProgressKeeper.submitProgress(ProgressLayout.DOWNLOAD_MINECRAFT, -1, -1);
+            ProgressLayout.clearProgress(ProgressLayout.DOWNLOAD_MINECRAFT);
             throw new DownloaderException(e);
         }
-        ProgressKeeper.submitProgress(ProgressLayout.DOWNLOAD_MINECRAFT, -1, -1);
+        ProgressLayout.clearProgress(ProgressLayout.DOWNLOAD_MINECRAFT);
     }
 
     public void verifyAndDownloadMainJar(String url, String sha1, File destination) throws Exception{
-        while(!destination.exists() || (destination.exists() && !Tools.compareSHA1(destination, sha1))) downloadFileMonitored(
+        while(!destination.exists() || (destination.exists() && !Tools.compareSHA1(destination, sha1))) downloadFileMirrored(DownloadMirror.DOWNLOAD_CLASS_LIBRARIES,
                 url,
                 destination, getByteBuffer(),
                 (curr, max) -> ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT,
                         (int) Math.max((float)curr/max*100,0), R.string.mcl_launch_downloading_progress, destination.getName(), curr/BYTE_TO_MB, max/BYTE_TO_MB));
     }
 
-    public void downloadAssets(final JAssets assets, String assetsVersion, final File outputDir) {
+    public void downloadAssets(final JAssets assets, final File outputDir) {
         LinkedBlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<>();
         final ThreadPoolExecutor executor = new ThreadPoolExecutor(5, 5, 500, TimeUnit.MILLISECONDS, workQueue);
 
@@ -285,19 +289,19 @@ public class AsyncMinecraftDownloader {
     }
 
 
+
     public void downloadAssetFile(File outFile, String assetPath, AtomicInteger downloadCounter) throws IOException {
-        downloadFileMonitored(MINECRAFT_RES + assetPath, outFile, getByteBuffer(),
-                new Tools.DownloaderFeedback() {
-                    int prevCurr;
-
-                    @Override
-                    public void updateProgress(int curr, int max) {
-                        downloadCounter.addAndGet(curr - prevCurr);
-                        prevCurr = curr;
-                    }
-                });
+        downloadFileMirrored(DownloadMirror.DOWNLOAD_CLASS_ASSETS, MINECRAFT_RES + assetPath, outFile, getByteBuffer(),
+            new Tools.DownloaderFeedback() {
+                int prevCurr;
+                @Override
+                public void updateProgress(int curr, int max) {
+                    downloadCounter.addAndGet(curr - prevCurr);
+                    prevCurr = curr;
+                }
+            }
+        );
     }
-
 
     protected void downloadLibrary(DependentLibrary libItem, String libArtifact, File outLib) throws Throwable{
         String libPathURL;
@@ -321,7 +325,7 @@ public class AsyncMinecraftDownloader {
                 timesChecked++;
                 if(timesChecked > 5) throw new RuntimeException("Library download failed after 5 retries");
 
-                downloadFileMonitored(libPathURL, outLib, getByteBuffer(),
+                downloadFileMirrored(DownloadMirror.DOWNLOAD_CLASS_LIBRARIES, libPathURL, outLib, getByteBuffer(),
                         (curr, max) -> ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT,
                                 (int) Math.max((float)curr/max*100,0), R.string.mcl_launch_downloading_progress, outLib.getName(), curr/BYTE_TO_MB, max/BYTE_TO_MB)
                 );
@@ -347,30 +351,44 @@ public class AsyncMinecraftDownloader {
     public JAssets downloadIndex(JMinecraftVersionList.Version version, File output) throws IOException {
         if (!output.exists()) {
             output.getParentFile().mkdirs();
-            DownloadUtils.downloadFile(version.assetIndex != null
+            downloadFileMirrored(DownloadMirror.DOWNLOAD_CLASS_METADATA, version.assetIndex != null
                     ? version.assetIndex.url
-                    : "https://s3.amazonaws.com/Minecraft.Download/indexes/" + version.assets + ".json", output);
+                    : "https://s3.amazonaws.com/Minecraft.Download/indexes/" + version.assets + ".json", output, null,
+                    (curr, max) -> ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT,
+                            (int) Math.max((float)curr/max*100,0), R.string.mcl_launch_downloading_progress, output.getName(), curr/BYTE_TO_MB, max/BYTE_TO_MB)
+            );
         }
 
         return Tools.GLOBAL_GSON.fromJson(Tools.read(output.getAbsolutePath()), JAssets.class);
     }
 
-    public void downloadVersionJson(String versionName, File verJsonDir, JMinecraftVersionList.Version verInfo) throws IOException {
+    public void downloadVersionJson(String versionName, File verJsonDir, JMinecraftVersionList.Version verInfo) throws IOException, DownloaderException {
         if(!LauncherPreferences.PREF_CHECK_LIBRARY_SHA)  Log.w("Chk","Checker is off");
 
-        boolean isManifestGood = verJsonDir.exists()
-                && (!LauncherPreferences.PREF_CHECK_LIBRARY_SHA
-                || verInfo.sha1 == null
-                || Tools.compareSHA1(verJsonDir, verInfo.sha1));
-
-        if(!isManifestGood) {
+        boolean isManifestGood = verifyManifest(verJsonDir, verInfo);
+        byte retryCount = 0;
+        while(!isManifestGood && retryCount < 5) {
             ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT, 0, R.string.mcl_launch_downloading, versionName + ".json");
-            verJsonDir.delete();
-            downloadFileMonitored(verInfo.url, verJsonDir, getByteBuffer(),
+            downloadFileMirrored(DownloadMirror.DOWNLOAD_CLASS_METADATA, verInfo.url, verJsonDir, getByteBuffer(),
                     (curr, max) -> ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT,
                             (int) Math.max((float)curr/max*100,0), R.string.mcl_launch_downloading_progress, versionName + ".json", curr/BYTE_TO_MB, max/BYTE_TO_MB)
             );
+            isManifestGood = verifyManifest(verJsonDir, verInfo);
+            retryCount++;
+            // Always do the first verification. But skip all the errors from further ones.
+            if(!LauncherPreferences.PREF_VERIFY_MANIFEST) return;
         }
+        if(!isManifestGood) {
+            if(DownloadMirror.isMirrored()) throw new DownloaderException(new MirrorTamperedException());
+            else throw new DownloaderException(new IOException("Manifest check failed after 5 tries"));
+        }
+    }
+
+    private boolean verifyManifest(File verJsonDir, JMinecraftVersionList.Version verInfo) {
+        return verJsonDir.exists()
+                && (!LauncherPreferences.PREF_CHECK_LIBRARY_SHA
+                || verInfo.sha1 == null
+                || Tools.compareSHA1(verJsonDir, verInfo.sha1));
     }
 
     public static String normalizeVersionId(String versionString) {
@@ -417,5 +435,4 @@ public class AsyncMinecraftDownloader {
             super(e);
         }
     }
-
 }

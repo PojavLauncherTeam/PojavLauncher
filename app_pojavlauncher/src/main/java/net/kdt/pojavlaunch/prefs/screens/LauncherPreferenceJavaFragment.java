@@ -3,41 +3,71 @@ package net.kdt.pojavlaunch.prefs.screens;
 import static net.kdt.pojavlaunch.Architecture.is32BitsDevice;
 import static net.kdt.pojavlaunch.Tools.getTotalDeviceMemory;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.annotation.NonNull;
 import androidx.preference.EditTextPreference;
+import androidx.preference.Preference;
 
 import net.kdt.pojavlaunch.R;
+import net.kdt.pojavlaunch.Tools;
+import net.kdt.pojavlaunch.contracts.OpenDocumentWithExtension;
+import net.kdt.pojavlaunch.multirt.MultiRTConfigDialog;
 import net.kdt.pojavlaunch.prefs.CustomSeekBarPreference;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 
 public class LauncherPreferenceJavaFragment extends LauncherPreferenceFragment {
+    private MultiRTConfigDialog mDialogScreen;
+    private Preference mMultiRTPreference;
+    private final ActivityResultLauncher<Object> mVmInstallLauncher =
+            registerForActivityResult(new OpenDocumentWithExtension("xz"), (data)->{
+                if(data != null) Tools.installRuntimeFromUri(getContext(), data);
+            });
+
     @Override
     public void onCreatePreferences(Bundle b, String str) {
         int ramAllocation = LauncherPreferences.PREF_RAM_ALLOCATION;
-
         // Triggers a write for some reason
         addPreferencesFromResource(R.xml.pref_java);
 
-        int maxRAM;
-        int deviceRam = getTotalDeviceMemory(getContext());
+        CustomSeekBarPreference seek7 = requirePreference("allocation",
+                CustomSeekBarPreference.class);
 
-        CustomSeekBarPreference seek7 = findPreference("allocation");
-        seek7.setMin(256);
+        int maxRAM;
+        int deviceRam = getTotalDeviceMemory(seek7.getContext());
 
         if(is32BitsDevice() || deviceRam < 2048) maxRAM = Math.min(1000, deviceRam);
         else maxRAM = deviceRam - (deviceRam < 3064 ? 800 : 1024); //To have a minimum for the device to breathe
 
+        seek7.setMin(256);
         seek7.setMax(maxRAM);
         seek7.setValue(ramAllocation);
         seek7.setSuffix(" MB");
-
 
         EditTextPreference editJVMArgs = findPreference("javaArgs");
         if (editJVMArgs != null) {
             editJVMArgs.setOnBindEditTextListener(TextView::setSingleLine);
         }
 
+        mMultiRTPreference = findPreference("install_jre");
+    }
+
+    @Override
+    public boolean onPreferenceTreeClick(@NonNull Preference preference) {
+        if(preference.equals(mMultiRTPreference)) {
+            openMultiRTDialog();
+        }
+        return super.onPreferenceTreeClick(preference);
+    }
+
+    private void openMultiRTDialog() {
+        if (mDialogScreen == null) {
+            mDialogScreen = new MultiRTConfigDialog();
+            mDialogScreen.prepare(getContext(), mVmInstallLauncher);
+        }
+        mDialogScreen.show();
     }
 }
