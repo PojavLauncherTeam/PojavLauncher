@@ -297,4 +297,11 @@
     <string name="notif_error_occured">Ocorreu um erro</string>
     <string name="notif_error_occured_desc">Clique para mais detalhes</string>
     <string name="fabric_dl_only_stable">Mostrar apenas versões estáveis</string>
+    <string name="dl_tampered_manifest_title">Alerta de verificação de arquivo</string>
+    <string name="dl_turn_off_manifest_checks">Desativar verificação de manifesto</string>
+    <string name="dl_switch_to_official_site">Mudar para servidor oficial</string>
+    <string name="preference_download_source_title">Fonte de download do jogo</string>
+    <string name="preference_verify_manifest_title">Verificar manifesto da versão do jogo</string>
+    <string name="preference_category_java_tweaks">Ajustes do Java</string>
+    <string name="preference_category_miscellaneous">Configurações diversas</string>
 </resources>
