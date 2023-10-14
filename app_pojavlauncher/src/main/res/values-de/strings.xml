@@ -294,4 +294,17 @@
     <string name="notif_error_occured">Es ist ein Fehler aufgetreten</string>
     <string name="notif_error_occured_desc">Klicke um mehr Details zu sehen</string>
     <string name="fabric_dl_only_stable">Nur stabile Versionen anzeigen</string>
+    <string name="dl_tampered_manifest_title">Datei-Verifikations-Warnung</string>
+    <string name="dl_turn_off_manifest_checks">Manifest-Verifikation ausschalten</string>
+    <string name="dl_switch_to_official_site">Zur offiziellen Seite wechseln</string>
+    <string name="preference_download_source_title">Spiele-Download-Quelle</string>
+    <string name="notif_download_finished">Das Spiel ist bereit zum Starten</string>
+    <string name="notif_download_finished_desc">Hier klicken, um zu starten!</string>
+    <string name="preference_category_gestures">Gesten</string>
+    <string name="preference_category_buttons">Schaltflächen</string>
+    <string name="preference_category_experimental_settings">Experimentell</string>
+    <string name="preference_category_java_tweaks">Java-Optimierungen</string>
+    <string name="preference_category_main_categories">Kategorien</string>
+    <string name="preference_category_miscellaneous">Sonstige Einstellungen</string>
+    <string name="preference_category_video">Grafik-Einstellungen</string>
 </resources>
