@@ -217,4 +217,6 @@
     <string name="notif_error_occured">エラーが発生しました</string>
     <string name="notif_error_occured_desc">タップして詳細を表示</string>
     <string name="fabric_dl_only_stable">安定したバージョンのみ表示</string>
+    <string name="preference_category_java_tweaks">Java の調整</string>
+    <string name="preference_category_miscellaneous">その他の設定</string>
 </resources>
