@@ -245,4 +245,6 @@
     <string name="notif_error_occured">Đã xảy ra lỗi</string>
     <string name="notif_error_occured_desc">Nhấn để xem chi tiết</string>
     <string name="fabric_dl_only_stable">Chỉ hiện phiên bản ổn dịnh</string>
+    <string name="preference_category_java_tweaks">Điều chỉnh Java</string>
+    <string name="preference_category_miscellaneous">Các cài đặt khác</string>
 </resources>
