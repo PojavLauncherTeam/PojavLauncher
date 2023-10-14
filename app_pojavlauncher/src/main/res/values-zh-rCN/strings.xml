@@ -297,4 +297,10 @@
     <string name="notif_error_occured">发生错误</string>
     <string name="notif_error_occured_desc">点击查看详细信息</string>
     <string name="fabric_dl_only_stable">仅显示稳定版本</string>
+    <string name="preference_category_gestures">手势操作</string>
+    <string name="preference_category_buttons">按钮操作</string>
+    <string name="preference_category_java_tweaks">Java 调整</string>
+    <string name="preference_category_main_categories">类别</string>
+    <string name="preference_category_miscellaneous">其它设置</string>
+    <string name="preference_category_video">视频设置</string>
 </resources>
