@@ -297,4 +297,11 @@
     <string name="notif_error_occured">Возникла ошибка</string>
     <string name="notif_error_occured_desc">Нажмите для получения дополнительных сведений</string>
     <string name="fabric_dl_only_stable">Только стабильные версии</string>
+    <string name="preference_category_gestures">Жесты</string>
+    <string name="preference_category_buttons">Кнопки</string>
+    <string name="preference_category_experimental_settings">Экспериментальная хрень</string>
+    <string name="preference_category_java_tweaks">Настройки Java</string>
+    <string name="preference_category_main_categories">Разделы</string>
+    <string name="preference_category_miscellaneous">Другие настройки</string>
+    <string name="preference_category_video">Настойки графики</string>
 </resources>
