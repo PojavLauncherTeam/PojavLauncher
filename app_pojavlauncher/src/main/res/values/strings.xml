@@ -352,4 +352,11 @@
     <string name="preference_verify_manifest_description">When enabled, the launcher will check the game version manifest along with the libraries.</string>
     <string name="notif_download_finished">The game is ready to launch</string>
     <string name="notif_download_finished_desc">Click here to start it!</string>
+    <string name="preference_category_gestures">Gestures</string>
+    <string name="preference_category_buttons">Buttons</string>
+    <string name="preference_category_experimental_settings">Experimental fuckury</string>
+    <string name="preference_category_java_tweaks">Java Tweaks</string>
+    <string name="preference_category_main_categories">Categories</string>
+    <string name="preference_category_miscellaneous">Miscellaneous settings</string>
+    <string name="preference_category_video">Video settings</string>
 </resources>

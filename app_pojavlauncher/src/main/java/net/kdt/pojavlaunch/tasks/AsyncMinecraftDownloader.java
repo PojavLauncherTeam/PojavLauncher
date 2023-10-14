@@ -245,7 +245,7 @@ public class AsyncMinecraftDownloader {
             JAssetInfo asset = assetsObjects.get(assetKey);
             assetsSizeBytes += asset.size;
             String assetPath = asset.hash.substring(0, 2) + "/" + asset.hash;
-            File outFile = assets.mapToResources ? new File(outputDir,"/"+assetKey) : new File(objectsDir, assetPath);
+            File outFile = (assets.mapToResources || assets.virtual) ? new File(outputDir,"/"+assetKey) : new File(objectsDir , assetPath);
             boolean skip = outFile.exists();// skip if the file exists
 
             if(LauncherPreferences.PREF_CHECK_LIBRARY_SHA && skip)
@@ -261,8 +261,7 @@ public class AsyncMinecraftDownloader {
 
             executor.execute(()->{
                 try {
-                    if (!assets.mapToResources) downloadAsset(asset, objectsDir, downloadedSize);
-                    else downloadAssetMapped(asset, assetKey, outputDir, downloadedSize);
+                    downloadAssetFile(outFile, assetPath, downloadedSize);
                 }catch (IOException e) {
                     Log.e("AsyncMcManager", e.toString());
                     localInterrupt.set(true);
@@ -290,32 +289,18 @@ public class AsyncMinecraftDownloader {
     }
 
 
-    public void downloadAsset(JAssetInfo asset, File objectsDir, AtomicInteger downloadCounter) throws IOException {
-        String assetPath = asset.hash.substring(0, 2) + "/" + asset.hash;
-        File outFile = new File(objectsDir, assetPath);
-        downloadFileMirrored(DownloadMirror.DOWNLOAD_CLASS_ASSETS, MINECRAFT_RES + assetPath, outFile, getByteBuffer(),
-                new Tools.DownloaderFeedback() {
-                    int prevCurr;
-                    @Override
-                    public void updateProgress(int curr, int max) {
-                        downloadCounter.addAndGet(curr - prevCurr);
-                        prevCurr = curr;
-                    }
-                });
-    }
 
-    public void downloadAssetMapped(JAssetInfo asset, String assetName, File resDir, AtomicInteger downloadCounter) throws IOException {
-        String assetPath = asset.hash.substring(0, 2) + "/" + asset.hash;
-        File outFile = new File(resDir,"/"+assetName);
+    public void downloadAssetFile(File outFile, String assetPath, AtomicInteger downloadCounter) throws IOException {
         downloadFileMirrored(DownloadMirror.DOWNLOAD_CLASS_ASSETS, MINECRAFT_RES + assetPath, outFile, getByteBuffer(),
-                new Tools.DownloaderFeedback() {
-                    int prevCurr;
-                    @Override
-                    public void updateProgress(int curr, int max) {
-                        downloadCounter.addAndGet(curr - prevCurr);
-                        prevCurr = curr;
-                    }
-                });
+            new Tools.DownloaderFeedback() {
+                int prevCurr;
+                @Override
+                public void updateProgress(int curr, int max) {
+                    downloadCounter.addAndGet(curr - prevCurr);
+                    prevCurr = curr;
+                }
+            }
+        );
     }
 
     protected void downloadLibrary(DependentLibrary libItem, String libArtifact, File outLib) throws Throwable{

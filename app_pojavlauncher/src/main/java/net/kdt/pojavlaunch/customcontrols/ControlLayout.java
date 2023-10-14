@@ -204,7 +204,15 @@ public class ControlLayout extends FrameLayout {
 	}
 
 	private void addJoystickView(ControlJoystickData data){
-		addView(new ControlJoystick(this, data));
+		ControlJoystick view = new ControlJoystick(this, data);
+
+		if (!mModifiable) {
+			view.setAlpha(view.getProperties().opacity);
+			view.setFocusable(false);
+			view.setFocusableInTouchMode(false);
+		}
+		addView(view);
+
 	}
 
 

@@ -10,7 +10,7 @@
     <net.kdt.pojavlaunch.prefs.BackButtonPreference/>
 
     <PreferenceCategory
-        android:title="Categories"
+        android:title="@string/preference_category_main_categories"
         >
 
         <Preference
