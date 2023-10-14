@@ -28,11 +28,6 @@ public class LauncherPreferenceJavaFragment extends LauncherPreferenceFragment {
             });
 
     @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-    }
-
-    @Override
     public void onCreatePreferences(Bundle b, String str) {
         int ramAllocation = LauncherPreferences.PREF_RAM_ALLOCATION;
         // Triggers a write for some reason

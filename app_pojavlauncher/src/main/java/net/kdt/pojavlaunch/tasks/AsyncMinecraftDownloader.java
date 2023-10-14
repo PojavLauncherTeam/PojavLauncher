@@ -92,7 +92,7 @@ public class AsyncMinecraftDownloader {
 
             // THIS one function need the activity in the case of an error
             if(activity != null && !JRE17Util.installNewJreIfNeeded(activity, verInfo)){
-                ProgressKeeper.submitProgress(ProgressLayout.DOWNLOAD_MINECRAFT, -1, -1);
+                ProgressLayout.clearProgress(ProgressLayout.DOWNLOAD_MINECRAFT);
                 throw new DownloaderException();
             }
 
@@ -188,11 +188,11 @@ public class AsyncMinecraftDownloader {
                 }
             }
         } catch (DownloaderException e) {
-            ProgressKeeper.submitProgress(ProgressLayout.DOWNLOAD_MINECRAFT, -1, -1);
+            ProgressLayout.clearProgress(ProgressLayout.DOWNLOAD_MINECRAFT);
             throw e;
         } catch (Throwable e) {
             Log.e("AsyncMcDownloader", e.toString(),e );
-            ProgressKeeper.submitProgress(ProgressLayout.DOWNLOAD_MINECRAFT, -1, -1);
+            ProgressLayout.clearProgress(ProgressLayout.DOWNLOAD_MINECRAFT);
             throw new DownloaderException(e);
         }
 
@@ -211,10 +211,10 @@ public class AsyncMinecraftDownloader {
                 downloadAssets(assets, assets.mapToResources ? new File(Tools.OBSOLETE_RESOURCES_PATH) : new File(Tools.ASSETS_PATH));
         } catch (Exception e) {
             Log.e("AsyncMcDownloader", e.toString(), e);
-            ProgressKeeper.submitProgress(ProgressLayout.DOWNLOAD_MINECRAFT, -1, -1);
+            ProgressLayout.clearProgress(ProgressLayout.DOWNLOAD_MINECRAFT);
             throw new DownloaderException(e);
         }
-        ProgressKeeper.submitProgress(ProgressLayout.DOWNLOAD_MINECRAFT, -1, -1);
+        ProgressLayout.clearProgress(ProgressLayout.DOWNLOAD_MINECRAFT);
     }
 
     public void verifyAndDownloadMainJar(String url, String sha1, File destination) throws Exception{

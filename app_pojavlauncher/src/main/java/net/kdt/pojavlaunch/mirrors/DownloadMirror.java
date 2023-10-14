@@ -18,12 +18,12 @@ public class DownloadMirror {
     public static final int DOWNLOAD_CLASS_METADATA = 1;
     public static final int DOWNLOAD_CLASS_ASSETS = 2;
 
+    private static final String URL_PROTOCOL_TAIL = "://";
     private static final String[] MIRROR_BMCLAPI = {
             "https://bmclapi2.bangbang93.com/maven",
             "https://bmclapi2.bangbang93.com",
             "https://bmclapi2.bangbang93.com/assets"
     };
-
     private static final String[] MIRROR_MCBBS = {
             "https://download.mcbbs.net/maven",
             "https://download.mcbbs.net",
@@ -91,15 +91,14 @@ public class DownloadMirror {
     }
 
     private static int getBaseUrlTail(String wholeUrl) throws MalformedURLException{
-        int protocolNameEnd = wholeUrl.indexOf("://");
+        int protocolNameEnd = wholeUrl.indexOf(URL_PROTOCOL_TAIL);
         if(protocolNameEnd == -1)
             throw new MalformedURLException("No protocol, or non path-based URL");
-        protocolNameEnd += 3;
+        protocolNameEnd += URL_PROTOCOL_TAIL.length();
         int hostnameEnd = wholeUrl.indexOf('/', protocolNameEnd);
         if(protocolNameEnd >= wholeUrl.length() || hostnameEnd == protocolNameEnd)
             throw new MalformedURLException("No hostname");
         if(hostnameEnd == -1) hostnameEnd = wholeUrl.length();
-        System.out.println(protocolNameEnd +" "+ hostnameEnd);
         return hostnameEnd;
     }
 }
