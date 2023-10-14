@@ -252,14 +252,19 @@
     <string name="preference_wipe_controller_description">Kontrol düğmelerini yeniden eşleştirmesine izin verir.</string>
     <string name="preference_deadzone_scale_title">Joystick deadzone ölçeği</string>
     <string name="preference_deadzone_scale_description">Joystick kayarsa artırın.</string>
+    <string name="preference_force_big_core_title">İşleyiciyi ana işlemcide çalışmasına zorla</string>
+    <string name="preference_force_big_core_desc">Minecraft\'ın en yüksek frekansta çalışan işlemcide çalışmasına zorlar.</string>
     <string name="version_select_hint">Bir Sürüm Seçin</string>
     <string name="forge_dl_progress">%s için yükleyici indiriliyor</string>
     <string name="forge_dl_searching">Forge sürüm numarası aranıyor</string>
     <string name="modloader_dl_failed_to_load_list">Sürüm listesi yüklenemedi!</string>
     <string name="forge_dl_no_installer">Özür dileriz, bu Forge sürümünün yükleyicisi olmadığından, desteklenmemektedir.</string>
     <string name="forge_dl_select_version">Forge sürümünü seç</string>
+    <string name="fabric_dl_progress">%s yükleyici meta verileri indiriliyor</string>
+    <string name="fabric_dl_loader_version">%s Yükleyici sürümü</string>
     <string name="fabric_dl_game_version">Minecraft sürümü</string>
     <string name="fabric_dl_install">Yükle</string>
+    <string name="fabric_dl_cant_read_meta">%s yükleyici meta verileri okunamadı. Lütfen daha sonra tekrar deneyin.</string>
     <string name="modloader_dl_install_fabric">Fabric profili oluştur</string>
     <string name="modloader_dl_install_quilt">Quilt profili oluştur</string>
     <string name="modloader_dl_install_forge">Forge profili oluştur</string>
@@ -272,6 +277,8 @@
     <string name="of_dl_progress">%s indiriliyor</string>
     <string name="create_profile_optifine">OptiFine profili oluştur</string>
     <string name="hint_search_modpack">Modpack\'leri arayın</string>
+    <string name="preference_vulkan_driver_system_title">Sistem vulkan sürücüsünü kullan</string>
+    <string name="preference_vulkan_driver_system_description">Başlatıcıyı Adreno GPU\'larda Turnip yerine sistem Vulkan sürücüsünü kullanmaya zorlayın. Sadece Zink ve Vulkan kullanan modları etkiler.</string>
     <string name="generic_install">Yükle</string>
     <string name="generic_apply">Uygula</string>
     <string name="search_modpack_no_result">Mod paketi bulunmadı</string>
@@ -290,4 +297,11 @@
     <string name="notif_error_occured">bir hata oluştu</string>
     <string name="notif_error_occured_desc">Daha fazla ayrıntı görmek için tıklayın</string>
     <string name="fabric_dl_only_stable">Sadece kararlı sürümleri göster</string>
+    <string name="preference_category_gestures">Hareketler</string>
+    <string name="preference_category_buttons">Butonlar</string>
+    <string name="preference_category_experimental_settings">Deneysel fuckury</string>
+    <string name="preference_category_java_tweaks">Java Ayarlamaları</string>
+    <string name="preference_category_main_categories">Kategoriler</string>
+    <string name="preference_category_miscellaneous">Çeşitli ayarlar</string>
+    <string name="preference_category_video">Video ayarları</string>
 </resources>
