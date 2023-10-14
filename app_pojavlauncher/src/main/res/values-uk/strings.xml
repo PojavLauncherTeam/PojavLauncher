@@ -297,4 +297,11 @@
     <string name="notif_error_occured">Сталася помилка</string>
     <string name="notif_error_occured_desc">Натисніть, щоб побачити подробиці</string>
     <string name="fabric_dl_only_stable">Показувати лише стабільні версії</string>
+    <string name="preference_category_gestures">Жести</string>
+    <string name="preference_category_buttons">Кнопки</string>
+    <string name="preference_category_experimental_settings">Експериментальні налаштування</string>
+    <string name="preference_category_java_tweaks">Оптимізація Java</string>
+    <string name="preference_category_main_categories">Категорії</string>
+    <string name="preference_category_miscellaneous">Інші параметри</string>
+    <string name="preference_category_video">Налаштування відео</string>
 </resources>
