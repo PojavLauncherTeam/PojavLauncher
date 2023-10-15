@@ -34,7 +34,7 @@
     <string name="mcl_launch_downloading_progress">"Загрузка %s (%.2f Мбайт / %.2f Мбайт)"</string>
     <string name="mcl_launch_download_assets">Подготовка к загрузке ресурсов</string>
     <string name="mcl_options">Опции</string>
-    <string name="mcl_option_customcontrol">Пользовательское управление</string>
+    <string name="mcl_option_customcontrol">Раскладка управления</string>
     <string name="mcl_setting_title_use_surface_view">Альтернативный визуализатор</string>
     <string name="mcl_setting_subtitle_use_surface_view">Может помочь в случаях, когда производительность ограничена медленным ГП.</string>
     <string name="mcl_setting_title_ignore_notch">Полноэкранный режим</string>
@@ -297,6 +297,19 @@
     <string name="notif_error_occured">Возникла ошибка</string>
     <string name="notif_error_occured_desc">Нажмите для получения дополнительных сведений</string>
     <string name="fabric_dl_only_stable">Только стабильные версии</string>
+    <string name="dl_tampered_manifest_title">Предупреждение проверки файла</string>
+    <string name="dl_tampered_manifest"><![CDATA[Манифест версии игры с зеркала не совпадает с манифестом официальной версии от Mojang, что сигнализирует о возможной подделке данных.<br/>
+        <b>Это небезопасно. Если продолжить, ваши персональные данные могут оказаться под угрозой.</b><br/>
+        Если вы всё же хотите продолжить загрузку с зеркала, нажмите «Отключить проверку манифеста» и попробуйте снова.<br/>
+        Если вы хотите использовать загрузку с официального источника, нажмите «Перейти на официальный источник» и попробуйте снова.<br/>]]></string>
+    <string name="dl_turn_off_manifest_checks">Отключить проверку манифеста</string>
+    <string name="dl_switch_to_official_site">Перейти на официальный источник</string>
+    <string name="preference_download_source_title">Источник загрузки файлов игры</string>
+    <string name="preference_download_source_description">Загружать файлы с зеркала вместо загрузки с официального репозитория.</string>
+    <string name="preference_verify_manifest_title">Проверка метаданных версии</string>
+    <string name="preference_verify_manifest_description">Проверять манифест версии игры совместно с библиотеками.</string>
+    <string name="notif_download_finished">Игра готова к запуску</string>
+    <string name="notif_download_finished_desc">Нажмите, чтобы запустить</string>
     <string name="preference_category_gestures">Жесты</string>
     <string name="preference_category_buttons">Кнопки</string>
     <string name="preference_category_experimental_settings">Экспериментальная хрень</string>
