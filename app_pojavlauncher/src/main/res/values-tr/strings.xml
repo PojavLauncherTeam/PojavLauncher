@@ -297,6 +297,19 @@
     <string name="notif_error_occured">bir hata oluştu</string>
     <string name="notif_error_occured_desc">Daha fazla ayrıntı görmek için tıklayın</string>
     <string name="fabric_dl_only_stable">Sadece kararlı sürümleri göster</string>
+    <string name="dl_tampered_manifest_title">Dosya doğrulama hatası</string>
+    <string name="dl_tampered_manifest"><![CDATA[Aynadaki oyun sürümü bildirimi resmi Mojang sürüm bildirimi ile eşleşmiyor, bu da üzerinde oynanmış olabileceği anlamına geliyor.<br/>
+        <b>Bu güvenli değil. Devam ederseniz kişisel bilgileriniz risk altında olabilir.</b><br/>
+        Aynayı kullanmaya devam etmek istiyorsanız, \"Bildirim kontrollerini kapat\" düğmesine basın ve indirmeyi yeniden başlatın.<br/>
+        Resmi indirme kaynağını kullanmak istiyorsanız, \"Resmi siteye geç\" düğmesine basın ve indirmeyi yeniden başlatın.<br/>]]></string>
+    <string name="dl_turn_off_manifest_checks">Bildirim kontrollerini kapatın</string>
+    <string name="dl_switch_to_official_site">Resmi siteye geçiş yapın</string>
+    <string name="preference_download_source_title">Oyun indirme kaynağı</string>
+    <string name="preference_download_source_description">Resmi indirme sunucusunu kullanmak yerine bir indirme yansıtıcısı seçin</string>
+    <string name="preference_verify_manifest_title">Oyun sürüm bildirimini doğrulayın</string>
+    <string name="preference_verify_manifest_description">Etkinleştirildiğinde, başlatıcı kütüphanelerle birlikte oyun sürümü bildirimini kontrol edecektir.</string>
+    <string name="notif_download_finished">Oyun başlatılmaya hazır</string>
+    <string name="notif_download_finished_desc">Başlamak için buraya tıklayın!</string>
     <string name="preference_category_gestures">Hareketler</string>
     <string name="preference_category_buttons">Butonlar</string>
     <string name="preference_category_experimental_settings">Deneysel fuckury</string>
