@@ -297,6 +297,19 @@
     <string name="notif_error_occured">Ha ocurrido un error</string>
     <string name="notif_error_occured_desc">Da clic para ver más detalles</string>
     <string name="fabric_dl_only_stable">Mostrar solo versiones estables</string>
+    <string name="dl_tampered_manifest_title">Advertencia de verificación del archivo</string>
+    <string name="dl_tampered_manifest"><![CDATA[La versión del juego en el mirror no coincide con el manifest de versiones de Mojang, podría significar que fue alterada.<br/>
+        <b>Esto no es seguro, tu información podría estar en peligro si continúas.</b><br/>
+        Si aún quieres usar el mirror, presiona  \"Desactivar comprobaciones del manifest\" y reinicia la descarga.<br/>
+        Si quieres usar la fuente oficial, presiona \"Cambiar al sitio original\" y reinicia la descarga.<br/>]]></string>
+    <string name="dl_turn_off_manifest_checks">Desactivar comprobaciones del manifest</string>
+    <string name="dl_switch_to_official_site">Cambiar al sitio original</string>
+    <string name="preference_download_source_title">Fuente de descarga del juego</string>
+    <string name="preference_download_source_description">Seleccione un mirror de descarga en lugar de usar el servidor de descargas oficial</string>
+    <string name="preference_verify_manifest_title">Verificar manifiest de la versión del juego</string>
+    <string name="preference_verify_manifest_description">Cuando esté activado, el launcher comprobará el manifiest de la versión del juego junto con las bibliotecas.</string>
+    <string name="notif_download_finished">El juego está listo para lanzar</string>
+    <string name="notif_download_finished_desc">¡Haz clic aquí para empezar!</string>
     <string name="preference_category_gestures">Gestos</string>
     <string name="preference_category_buttons">Botones</string>
     <string name="preference_category_experimental_settings">Basura experimental</string>
