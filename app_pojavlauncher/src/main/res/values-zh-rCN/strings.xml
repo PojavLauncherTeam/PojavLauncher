@@ -297,8 +297,22 @@
     <string name="notif_error_occured">发生错误</string>
     <string name="notif_error_occured_desc">点击查看详细信息</string>
     <string name="fabric_dl_only_stable">仅显示稳定版本</string>
+    <string name="dl_tampered_manifest_title">文件校验警告</string>
+    <string name="dl_tampered_manifest"><![CDATA[镜像上的游戏版本清单不符合 Mojang 的官方版本清单，它可能已被篡改。<br/>
+        <b>此行为并不安全。如果您继续，您的个人信息可能有风险。</b><br/>
+        如果您仍想使用镜像，请按 \"关闭版本清单检查\" 并重新开始下载。<br/>
+        如果您想要使用官方下载源。请按 \"切换到官方网站\" 并重新开始下载。<br/>]]></string>
+    <string name="dl_turn_off_manifest_checks">关闭版本清单检查</string>
+    <string name="dl_switch_to_official_site">切换到官方网站</string>
+    <string name="preference_download_source_title">游戏下载源</string>
+    <string name="preference_download_source_description">选择一个代替官方下载服务器的下载镜像</string>
+    <string name="preference_verify_manifest_title">验证游戏版本清单</string>
+    <string name="preference_verify_manifest_description">启用后，启动器会把游戏版本清单连同库一并检查。</string>
+    <string name="notif_download_finished">游戏已就绪</string>
+    <string name="notif_download_finished_desc">点此开始！</string>
     <string name="preference_category_gestures">手势操作</string>
     <string name="preference_category_buttons">按钮操作</string>
+    <string name="preference_category_experimental_settings">实验性补丁</string>
     <string name="preference_category_java_tweaks">Java 调整</string>
     <string name="preference_category_main_categories">类别</string>
     <string name="preference_category_miscellaneous">其它设置</string>
