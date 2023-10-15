@@ -297,6 +297,19 @@
     <string name="notif_error_occured">Сталася помилка</string>
     <string name="notif_error_occured_desc">Натисніть, щоб побачити подробиці</string>
     <string name="fabric_dl_only_stable">Показувати лише стабільні версії</string>
+    <string name="dl_tampered_manifest_title">Попередження щодо перевірки файлу</string>
+    <string name="dl_tampered_manifest"><![CDATA[Версія маніфесту гри у дзеркалі не збігається з офіціальною версією від Mojang, можливо, воно підроблене.<br/>
+        <b>Це небезпечно. Якщо Ви продовжите, Ваші персональні дані можуть бути під загрозою.</b><br/>
+        Якщо Ви все ще хочете використати дзеркальне посилання, натисніть \"Вимкнути перевірки маніфесту\", і знову почніть завантаження.<br/>
+        Якщо хочете використати офіціальне джерело, натисніть \"Перейти на офіційний сайт\", і знову почніть завантаження.<br/>]]></string>
+    <string name="dl_turn_off_manifest_checks">Вимкнути перевірки маніфесту</string>
+    <string name="dl_switch_to_official_site">Перейти на офіційний сайт</string>
+    <string name="preference_download_source_title">Джерело завантаження гри</string>
+    <string name="preference_download_source_description">Оберіть дзеркало завантаження замість офіційного сервера завантаження</string>
+    <string name="preference_verify_manifest_title">Перевірити маніфест версії гри</string>
+    <string name="preference_verify_manifest_description">Коли увімкнено, лаунчер перевірятиме маніфест гри разом з бібліотеками.</string>
+    <string name="notif_download_finished">Гра готова до запуску</string>
+    <string name="notif_download_finished_desc">Натисніть, щоб розпочати!</string>
     <string name="preference_category_gestures">Жести</string>
     <string name="preference_category_buttons">Кнопки</string>
     <string name="preference_category_experimental_settings">Експериментальні налаштування</string>
