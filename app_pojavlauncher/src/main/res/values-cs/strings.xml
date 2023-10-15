@@ -297,8 +297,22 @@
     <string name="notif_error_occured">Došlo k chybě</string>
     <string name="notif_error_occured_desc">Klikněte pro zobrazení podrobností</string>
     <string name="fabric_dl_only_stable">Zobraziti jen stabilní verze</string>
+    <string name="dl_tampered_manifest_title">Varování ověření souborů</string>
+    <string name="dl_tampered_manifest"><![CDATA[Manifest verze hry v zrcadlovém serveru nesouhlasí s oficiálním manifestem Mojangu, čili může býti zmanipulován.<br/>
+        <b>Toto jest nebezpečné. Budete-li pokračovati, vaše osobní informace mohou býti ohroženy.</b><br/>
+        Chcete-li stále užíti ten zrcadlový server, stiskněte \„Vypnouti manifestové ověřování\” a skuste znovu.<br/>
+        Chcete-li užívati oficiální zdroj stahování, stiskněte \„Přepnouti na oficiální stránku\” a skuste znovu.<br/>]]></string>
+    <string name="dl_turn_off_manifest_checks">Vypnouti manifestové ověřování</string>
+    <string name="dl_switch_to_official_site">Přepnouti na oficiální stránku</string>
+    <string name="preference_download_source_title">Zdroj stahování her</string>
+    <string name="preference_download_source_description">Veberte zrcadlový server ke stažení namísto oficiálního serveru</string>
+    <string name="preference_verify_manifest_title">Ověřit manifest verze hry</string>
+    <string name="preference_verify_manifest_description">Je-li zapnuto, spouštěč ověří manifest verze hry spolu s knihovnami.</string>
+    <string name="notif_download_finished">Hra připravena ke spuštění</string>
+    <string name="notif_download_finished_desc">Klikněte zde pro spuštění!</string>
     <string name="preference_category_gestures">Gesta</string>
     <string name="preference_category_buttons">Tlačítka</string>
+    <string name="preference_category_experimental_settings">Experimentální hokusy pokusy</string>
     <string name="preference_category_java_tweaks">Vyladění Javy</string>
     <string name="preference_category_main_categories">Kategorie</string>
     <string name="preference_category_miscellaneous">Jiná nastavení</string>
