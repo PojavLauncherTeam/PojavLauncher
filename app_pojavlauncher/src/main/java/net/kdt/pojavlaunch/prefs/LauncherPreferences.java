@@ -38,6 +38,7 @@ public class LauncherPreferences {
     public static boolean PREF_DISABLE_GESTURES = false;
     public static boolean PREF_DISABLE_SWAP_HAND = false;
     public static float PREF_MOUSESPEED = 1f;
+    public static float PREF_INSET_X = 0f;
     public static int PREF_RAM_ALLOCATION;
     public static String PREF_DEFAULT_RUNTIME;
     public static boolean PREF_SUSTAINED_PERFORMANCE = false;
@@ -72,6 +73,7 @@ public class LauncherPreferences {
         PREF_BUTTONSIZE = DEFAULT_PREF.getInt("buttonscale", 100);
         PREF_MOUSESCALE = DEFAULT_PREF.getInt("mousescale", 100);
         PREF_MOUSESPEED = ((float)DEFAULT_PREF.getInt("mousespeed",100))/100f;
+        PREF_INSET_X = DEFAULT_PREF.getInt("xinset", 0);
         PREF_HIDE_SIDEBAR = DEFAULT_PREF.getBoolean("hideSidebar", false);
         PREF_IGNORE_NOTCH = DEFAULT_PREF.getBoolean("ignoreNotch", false);
         PREF_VERTYPE_RELEASE = DEFAULT_PREF.getBoolean("vertype_release", true);

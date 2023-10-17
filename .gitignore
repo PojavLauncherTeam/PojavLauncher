@@ -4,5 +4,6 @@
 app_pojavlauncher/src/main/assets/components/jre
 local.properties
 .idea/
+.DS_Store
 app_pojavlauncher/.cxx/
 .vs/

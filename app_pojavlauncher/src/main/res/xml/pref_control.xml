@@ -43,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:icon="@drawable/ic_setting_gesture_time"
-            android:key="timeLongPressTrigger"
+            android:key="xinset"
             android:summary="&quot;Hello&quot;"
             android:title="&quot;Example&quot;"
             app2:seekBarIncrement="10"

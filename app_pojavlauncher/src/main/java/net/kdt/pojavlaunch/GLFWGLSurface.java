@@ -1,6 +1,7 @@
 package net.kdt.pojavlaunch;
 
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_DISABLE_SWAP_HAND;
+import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_INSET_X;
 import static net.kdt.pojavlaunch.utils.MCOptionUtils.getMcScale;
 import static org.lwjgl.glfw.CallbackBridge.sendKeyPress;
 import static org.lwjgl.glfw.CallbackBridge.sendMouseButton;
@@ -156,6 +157,7 @@ public class GLFWGLSurface extends View implements GrabListener {
     /** Initialize the view and all its settings */
     @SuppressLint("ClickableViewAccessibility")
     public void start(){
+        System.out.println("Hello.. I can see the inset it: "+PREF_INSET_X);
         scaleGestureDetector = new ScaleGestureDetector(this.getContext(), new ScaleListener());
         if(LauncherPreferences.PREF_USE_ALTERNATE_SURFACE){
             SurfaceView surfaceView = new SurfaceView(getContext());
