@@ -38,6 +38,17 @@
             app2:seekBarIncrement="10"
             android:icon="@drawable/ic_setting_gesture_time"
             />
+        <net.kdt.pojavlaunch.prefs.CustomSeekBarPreference
+            android:id="@+id/customSeekBarPreference"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/ic_setting_gesture_time"
+            android:key="timeLongPressTrigger"
+            android:summary="&quot;Hello&quot;"
+            android:title="&quot;Example&quot;"
+            app2:seekBarIncrement="10"
+            app2:selectable="false"
+            app2:showSeekBarValue="true" />
 
     </PreferenceCategory>
 

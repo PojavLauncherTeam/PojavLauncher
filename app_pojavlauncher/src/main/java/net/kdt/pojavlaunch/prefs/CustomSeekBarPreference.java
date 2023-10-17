@@ -89,6 +89,7 @@ public class CustomSeekBarPreference extends SeekBarPreference {
 
                 setValue(progress + mMin);
                 updateTextViewWithSuffix();
+                System.out.println("Hello from CustomSeekBar: "+progress);
             }
         });
 

@@ -57,13 +57,15 @@ public class AWTCanvasView extends TextureView implements TextureView.SurfaceTex
         Surface surface = new Surface(getSurfaceTexture());
         Bitmap rgbArrayBitmap = Bitmap.createBitmap(AWT_CANVAS_WIDTH, AWT_CANVAS_HEIGHT, Bitmap.Config.ARGB_8888);
         Paint paint = new Paint();
+        paint.setAntiAlias(false);
+        paint.setDither(false);
+        paint.setFilterBitmap(false);
         long frameEndNanos;
         long frameStartNanos;
         long sleepTime;
         long sleepMillis;
         int sleepNanos;
         int[] rgbArray;
-
         // define the frame rate limit
         final long frameTimeNanos = (long)(NANOS / 60); // Targeting 60 FPS
         long frameDuration;
@@ -107,6 +109,9 @@ public class AWTCanvasView extends TextureView implements TextureView.SurfaceTex
     private void refreshSize(){
         ViewGroup.LayoutParams layoutParams = getLayoutParams();
 
+
+        /** Note: In the future this is a good way to stretch the aspect ratio too. Like for
+         * 16:9 widescreen in SD mode like mudkip osrs videos */
         if(getHeight() < getWidth()){
             layoutParams.width = AWT_CANVAS_WIDTH * getHeight() / AWT_CANVAS_HEIGHT;
         }else{
