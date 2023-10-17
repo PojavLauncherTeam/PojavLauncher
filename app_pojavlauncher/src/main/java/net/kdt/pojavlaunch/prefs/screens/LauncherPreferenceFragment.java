@@ -1,6 +1,7 @@
 package net.kdt.pojavlaunch.prefs.screens;
 
 
+import android.app.Activity;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
+import net.kdt.pojavlaunch.LauncherActivity;
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 
@@ -19,6 +21,8 @@ import net.kdt.pojavlaunch.prefs.LauncherPreferences;
  * overriding only onCreatePreferences
  */
 public class LauncherPreferenceFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
+
+    private Preference mRequestNotificationPermissionPreference;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -29,6 +33,12 @@ public class LauncherPreferenceFragment extends PreferenceFragmentCompat impleme
     @Override
     public void onCreatePreferences(Bundle b, String str) {
         addPreferencesFromResource(R.xml.pref_main);
+        mRequestNotificationPermissionPreference = requirePreference("notification_permission_request");
+        Activity activity = getActivity();
+        mRequestNotificationPermissionPreference.setVisible(
+                activity instanceof LauncherActivity &&
+                !((LauncherActivity) activity).checkForNotificationPermission()
+        );
     }
 
     @Override
@@ -48,6 +58,18 @@ public class LauncherPreferenceFragment extends PreferenceFragmentCompat impleme
     @Override
     public void onSharedPreferenceChanged(SharedPreferences p, String s) {
         LauncherPreferences.loadPreferences(getContext());
+    }
+
+    @Override
+    public boolean onPreferenceTreeClick(@NonNull Preference preference) {
+        Activity activity = getActivity();
+        if(preference.equals(mRequestNotificationPermissionPreference) &&
+                activity instanceof LauncherActivity) {
+            ((LauncherActivity)activity).askForNotificationPermission(()->
+                    mRequestNotificationPermissionPreference.setVisible(false)
+            );
+        }
+        return super.onPreferenceTreeClick(preference);
     }
 
     protected Preference requirePreference(CharSequence key) {

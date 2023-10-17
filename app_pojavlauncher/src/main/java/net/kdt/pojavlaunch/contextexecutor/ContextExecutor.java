@@ -22,12 +22,12 @@ public class ContextExecutor {
     }
 
     private static void executeOnUiThread(ContextExecutorTask contextExecutorTask) {
-        Activity activity = getWeakReference(sActivity);
+        Activity activity = Tools.getWeakReference(sActivity);
         if(activity != null) {
             contextExecutorTask.executeWithActivity(activity);
             return;
         }
-        Application application = getWeakReference(sApplication);
+        Application application = Tools.getWeakReference(sApplication);
         if(application != null) {
             contextExecutorTask.executeWithApplication(application);
         }else {
@@ -68,8 +68,5 @@ public class ContextExecutor {
             sApplication.clear();
     }
 
-     private static <T> T getWeakReference(WeakReference<T> weakReference) {
-        if(weakReference == null) return null;
-        return weakReference.get();
-    }
+
 }

@@ -75,6 +75,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.lang.ref.WeakReference;
 import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -1106,6 +1107,11 @@ public final class Tools {
                     packageManager.hasSystemFeature(PackageManager.FEATURE_VULKAN_HARDWARE_VERSION);
         }
         return false;
+    }
+
+    public static <T> T getWeakReference(WeakReference<T> weakReference) {
+        if(weakReference == null) return null;
+        return weakReference.get();
     }
 
     /** Return the renderers that are compatible with this device */
