@@ -276,8 +276,12 @@ public class GLFWGLSurface extends View implements GrabListener {
         //Getting scaled position from the event
         /* Tells if a double tap happened [MOUSE GRAB ONLY]. Doesn't tell where though. */
         if(!CallbackBridge.isGrabbing()) {
-            CallbackBridge.mouseX =  (e.getX() * mScaleFactor);
-            CallbackBridge.mouseY =  (e.getY() * mScaleFactor);
+            float scaledInsetX = PREF_INSET_X * mScaleFactor;
+            float scaledInsetY = PREF_INSET_X * mScaleFactor;  // Assuming you have a Y inset as well
+
+            CallbackBridge.mouseX = (e.getX() * mScaleFactor) - scaledInsetX;
+            CallbackBridge.mouseY = (e.getY() * mScaleFactor) - scaledInsetY;
+
             //One android click = one MC click
             if(mSingleTapDetector.onTouchEvent(e)){ //
                 //longPressDetector.onTouchEvent(e);// Touch Mode
@@ -506,8 +510,11 @@ public class GLFWGLSurface extends View implements GrabListener {
     @RequiresApi(26)
     @Override
     public boolean dispatchCapturedPointerEvent(MotionEvent e) {
-        CallbackBridge.mouseX += (e.getX()* mScaleFactor);
-        CallbackBridge.mouseY += (e.getY()* mScaleFactor);
+        float scaledInsetX = PREF_INSET_X * mScaleFactor;
+        float scaledInsetY = PREF_INSET_X * mScaleFactor;  // Assuming you have a Y inset as well
+
+        CallbackBridge.mouseX = (e.getX() * mScaleFactor) - scaledInsetX;
+        CallbackBridge.mouseY = (e.getY() * mScaleFactor) - scaledInsetY;
 
         switch (e.getActionMasked()) {
             case MotionEvent.ACTION_MOVE:

@@ -1,6 +1,7 @@
 package net.kdt.pojavlaunch;
 
 import static net.kdt.pojavlaunch.Tools.currentDisplayMetrics;
+import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_INSET_X;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_SUSTAINED_PERFORMANCE;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_USE_ALTERNATE_SURFACE;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_VIRTUAL_MOUSE_START;
@@ -70,6 +71,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
     private DrawerLayout drawerLayout;
     private ListView navDrawer;
     private View mDrawerPullButton;
+    private View contentFrame;
     private GyroControl mGyroControl = null;
     public static ControlLayout mControlLayout;
 
@@ -206,6 +208,9 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         mControlLayout = findViewById(R.id.main_control_layout);
         touchCharInput = findViewById(R.id.mainTouchCharInput);
         mDrawerPullButton = findViewById(R.id.drawer_button);
+        contentFrame = findViewById(R.id.content_frame);
+        int inset = (int) PREF_INSET_X*2;
+        contentFrame.setPadding(inset,inset,inset,inset);
     }
 
     @Override

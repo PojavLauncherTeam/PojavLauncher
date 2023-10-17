@@ -44,8 +44,8 @@
             android:layout_height="wrap_content"
             android:icon="@drawable/ic_setting_gesture_time"
             android:key="xinset"
-            android:summary="&quot;Hello&quot;"
-            android:title="&quot;Example&quot;"
+            android:summary="Custom Insets"
+            android:title="Inset the gameframe"
             app2:seekBarIncrement="10"
             app2:selectable="false"
             app2:showSeekBarValue="true" />
