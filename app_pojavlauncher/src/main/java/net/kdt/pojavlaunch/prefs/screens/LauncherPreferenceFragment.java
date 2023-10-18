@@ -22,8 +22,6 @@ import net.kdt.pojavlaunch.prefs.LauncherPreferences;
  */
 public class LauncherPreferenceFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
 
-    private Preference mRequestNotificationPermissionPreference;
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         view.setBackgroundColor(Color.parseColor("#232323"));
@@ -33,12 +31,22 @@ public class LauncherPreferenceFragment extends PreferenceFragmentCompat impleme
     @Override
     public void onCreatePreferences(Bundle b, String str) {
         addPreferencesFromResource(R.xml.pref_main);
-        mRequestNotificationPermissionPreference = requirePreference("notification_permission_request");
+        setupNotificationRequestPreference();
+    }
+
+    private void setupNotificationRequestPreference() {
+        Preference mRequestNotificationPermissionPreference = requirePreference("notification_permission_request");
         Activity activity = getActivity();
-        mRequestNotificationPermissionPreference.setVisible(
-                activity instanceof LauncherActivity &&
-                !((LauncherActivity) activity).checkForNotificationPermission()
-        );
+        if(activity instanceof LauncherActivity) {
+            LauncherActivity launcherActivity = (LauncherActivity)activity;
+            mRequestNotificationPermissionPreference.setVisible(!launcherActivity.checkForNotificationPermission());
+            mRequestNotificationPermissionPreference.setOnPreferenceClickListener(preference -> {
+                launcherActivity.askForNotificationPermission(()->mRequestNotificationPermissionPreference.setVisible(false));
+                return true;
+            });
+        }else{
+            mRequestNotificationPermissionPreference.setVisible(false);
+        }
     }
 
     @Override
@@ -58,18 +66,6 @@ public class LauncherPreferenceFragment extends PreferenceFragmentCompat impleme
     @Override
     public void onSharedPreferenceChanged(SharedPreferences p, String s) {
         LauncherPreferences.loadPreferences(getContext());
-    }
-
-    @Override
-    public boolean onPreferenceTreeClick(@NonNull Preference preference) {
-        Activity activity = getActivity();
-        if(preference.equals(mRequestNotificationPermissionPreference) &&
-                activity instanceof LauncherActivity) {
-            ((LauncherActivity)activity).askForNotificationPermission(()->
-                    mRequestNotificationPermissionPreference.setVisible(false)
-            );
-        }
-        return super.onPreferenceTreeClick(preference);
     }
 
     protected Preference requirePreference(CharSequence key) {
