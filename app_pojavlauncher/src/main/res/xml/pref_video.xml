@@ -32,6 +32,17 @@
             android:icon="@drawable/ic_setting_screen_resolution"
             />
 
+        <net.kdt.pojavlaunch.prefs.CustomSeekBarPreference
+            android:id="@+id/customSeekBarPreference"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/ic_setting_gesture_time"
+            android:key="xinset"
+            android:summary="Add padding/insets around the HD Client to help with reachability"
+            android:title="Canvas Padding"
+            app2:seekBarIncrement="10"
+            app2:selectable="false"
+            app2:showSeekBarValue="true" />
         <SwitchPreference
             android:title="@string/preference_sustained_performance_title"
             android:summary="@string/preference_sustained_performance_description"

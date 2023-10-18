@@ -1,5 +1,5 @@
 plugins {
-    id 'com.android.application' version '7.4.2'
+    id 'com.android.application' version '8.1.2'
 }
 
 static def getDate() { return new Date().format('yyyyMMdd') }
@@ -81,9 +81,6 @@ android {
 
     compileSdk = 33
 
-    lintOptions {
-        abortOnError false
-    }
 
     signingConfigs {
         customDebug {
@@ -168,6 +165,9 @@ android {
     }
 
     buildToolsVersion = '33.0.2'
+    lint {
+        abortOnError false
+    }
 }
 
 dependencies {

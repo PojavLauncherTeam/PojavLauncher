@@ -48,41 +48,95 @@
 
 		</LinearLayout>
 
-		<Button
-			android:id="@+id/keyboard"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:background="@drawable/control_button"
-			android:text="K"
-			app:layout_constraintBottom_toBottomOf="parent"
-			app:layout_constraintStart_toStartOf="parent" />
+		<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			xmlns:app="http://schemas.android.com/apk/res-auto"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent">
 
-		<Button
-			android:id="@+id/mb2"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:background="@drawable/control_button"
-			android:text="MB2"
-			app:layout_constraintBottom_toBottomOf="parent"
-			app:layout_constraintStart_toEndOf="@+id/keyboard" />
+			<FrameLayout
+				android:id="@+id/keyboardFrame"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintStart_toStartOf="parent">
+				<ImageView
+					android:layout_width="20dp"
+					android:layout_height="20dp"
+					android:layout_gravity="center"
+					android:scaleType="fitCenter"
+					android:src="@drawable/ic_keyboard" />
+				<Button
+					android:id="@+id/keyboard"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:background="@drawable/control_button" />
 
-		<Button
-			android:id="@+id/mouseMode"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:background="@drawable/control_button"
-			android:text="M"
-			app:layout_constraintBottom_toTopOf="@+id/keyboard"
-			app:layout_constraintStart_toStartOf="@+id/keyboard" />
+			</FrameLayout>
 
-		<Button
-			android:id="@+id/camera"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:background="@drawable/control_button"
-			android:text="C"
-			app:layout_constraintBottom_toTopOf="@+id/mb2"
-			app:layout_constraintStart_toStartOf="@+id/mb2" />
+			<FrameLayout
+				android:id="@+id/mb2Frame"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintStart_toEndOf="@id/keyboardFrame">
+				<ImageView
+					android:layout_width="20dp"
+					android:layout_height="20dp"
+					android:layout_gravity="center"
+					android:scaleType="fitCenter"
+					android:src="@drawable/ic_mouse2" />
+				<Button
+					android:id="@+id/mb2"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:background="@drawable/control_button" />
+			</FrameLayout>
+
+			<FrameLayout
+				android:id="@+id/mouseModeFrame"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				app:layout_constraintBottom_toTopOf="@id/keyboardFrame"
+				app:layout_constraintStart_toStartOf="@id/keyboardFrame">
+
+				<ImageView
+					android:id="@+id/mouseModeIco"
+					android:layout_width="20dp"
+					android:layout_height="20dp"
+					android:layout_gravity="center"
+					android:scaleType="fitCenter"
+					android:src="@drawable/touch" />
+
+				<Button
+					android:id="@+id/mouseMode"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:background="@drawable/control_button" />
+			</FrameLayout>
+
+			<FrameLayout
+				android:id="@+id/cameraFrame"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				app:layout_constraintBottom_toTopOf="@id/mb2Frame"
+				app:layout_constraintStart_toStartOf="@id/mb2Frame">
+
+				<ImageView
+					android:layout_width="20dp"
+					android:layout_height="20dp"
+					android:layout_gravity="center"
+					android:scaleType="fitCenter"
+					android:src="@drawable/ic_camera" />
+
+				<Button
+					android:id="@+id/camera"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:background="@drawable/control_button" />
+			</FrameLayout>
+
+
+		</androidx.constraintlayout.widget.ConstraintLayout>
 
 
 	</androidx.constraintlayout.widget.ConstraintLayout>

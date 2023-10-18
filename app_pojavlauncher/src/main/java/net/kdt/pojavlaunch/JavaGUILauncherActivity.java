@@ -4,6 +4,7 @@ import static net.kdt.pojavlaunch.MainActivity.fullyExit;
 
 import android.annotation.SuppressLint;
 import android.content.ClipboardManager;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -111,6 +112,9 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
                 if (mGestureDetector.onTouchEvent(event)) {
                     sendScaledMousePosition(mouseX,mouseY);
                     AWTInputBridge.sendMousePress(AWTInputEvent.BUTTON1_DOWN_MASK);
+                    if(rcState) {
+                        clearRC();
+                    }
                 } else {
                     if (action == MotionEvent.ACTION_MOVE) { // 2
                         mouseX = Math.max(0, Math.min(CallbackBridge.physicalWidth, mouseX + x - prevX));
@@ -143,6 +147,9 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
             if (mGestureDetector.onTouchEvent(event)) {
                 sendScaledMousePosition(x + mTextureView.getX(), y);
                 AWTInputBridge.sendMousePress(AWTInputEvent.BUTTON1_DOWN_MASK);
+                if(rcState) {
+                    clearRC();
+                }
                 return true;
             }
 
@@ -253,9 +260,11 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
                         Log.i("downthecrop", "Hello from the camrea Button");
                         AWTInputBridge.sendKey((char) AWTInputEvent.VK_F9, AWTInputEvent.VK_F9); // Send F9
                         cameraMode = true;
+                        findViewById(R.id.camera).setBackground(getResources().getDrawable( R.drawable.control_button_pressed ));
                     } else { // Camera Mode off
                         AWTInputBridge.sendKey((char) AWTInputEvent.VK_F8, AWTInputEvent.VK_F8);
                         cameraMode = false;
+                        findViewById(R.id.camera).setBackground(getResources().getDrawable( R.drawable.control_button_normal ));
                     }
                     break;
                 case R.id.mouseMode:
@@ -281,11 +290,13 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
 
     private void clearRC(){
         rcState = false;
+        findViewById(R.id.mb2).setBackground(getResources().getDrawable( R.drawable.control_button_normal ));
         AWTInputBridge.sendKey((char)AWTInputEvent.VK_F10,AWTInputEvent.VK_F10);
     }
 
     private void activateRC(){
         rcState = true;
+        findViewById(R.id.mb2).setBackground(getResources().getDrawable( R.drawable.control_button_pressed ));
         AWTInputBridge.sendKey((char)AWTInputEvent.VK_F11,AWTInputEvent.VK_F11);
     }
 
@@ -307,6 +318,12 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
 
     public void toggleVirtualMouse(View v) {
         mIsVirtualMouseEnabled = !mIsVirtualMouseEnabled;
+        ImageView view = findViewById(R.id.mouseModeIco);
+        if(!mIsVirtualMouseEnabled){
+            view.setImageResource(R.drawable.touch);
+        } else{
+            view.setImageResource(R.drawable.ic_mouse3);
+        }
         mTouchPad.setVisibility(mIsVirtualMouseEnabled ? View.VISIBLE : View.GONE);
         Toast.makeText(this,
                 mIsVirtualMouseEnabled ? R.string.control_mouseon : R.string.control_mouseoff,
