@@ -1,6 +1,7 @@
 package net.kdt.pojavlaunch.prefs.screens;
 
 
+import android.app.Activity;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
+import net.kdt.pojavlaunch.LauncherActivity;
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 
@@ -29,6 +31,22 @@ public class LauncherPreferenceFragment extends PreferenceFragmentCompat impleme
     @Override
     public void onCreatePreferences(Bundle b, String str) {
         addPreferencesFromResource(R.xml.pref_main);
+        setupNotificationRequestPreference();
+    }
+
+    private void setupNotificationRequestPreference() {
+        Preference mRequestNotificationPermissionPreference = requirePreference("notification_permission_request");
+        Activity activity = getActivity();
+        if(activity instanceof LauncherActivity) {
+            LauncherActivity launcherActivity = (LauncherActivity)activity;
+            mRequestNotificationPermissionPreference.setVisible(!launcherActivity.checkForNotificationPermission());
+            mRequestNotificationPermissionPreference.setOnPreferenceClickListener(preference -> {
+                launcherActivity.askForNotificationPermission(()->mRequestNotificationPermissionPreference.setVisible(false));
+                return true;
+            });
+        }else{
+            mRequestNotificationPermissionPreference.setVisible(false);
+        }
     }
 
     @Override

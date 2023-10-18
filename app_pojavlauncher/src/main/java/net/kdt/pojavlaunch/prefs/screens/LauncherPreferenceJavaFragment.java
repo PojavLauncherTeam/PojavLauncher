@@ -3,14 +3,11 @@ package net.kdt.pojavlaunch.prefs.screens;
 import static net.kdt.pojavlaunch.Architecture.is32BitsDevice;
 import static net.kdt.pojavlaunch.Tools.getTotalDeviceMemory;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.widget.TextView;
 
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.annotation.NonNull;
 import androidx.preference.EditTextPreference;
-import androidx.preference.Preference;
 
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
@@ -21,7 +18,6 @@ import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 
 public class LauncherPreferenceJavaFragment extends LauncherPreferenceFragment {
     private MultiRTConfigDialog mDialogScreen;
-    private Preference mMultiRTPreference;
     private final ActivityResultLauncher<Object> mVmInstallLauncher =
             registerForActivityResult(new OpenDocumentWithExtension("xz"), (data)->{
                 if(data != null) Tools.installRuntimeFromUri(getContext(), data);
@@ -52,15 +48,10 @@ public class LauncherPreferenceJavaFragment extends LauncherPreferenceFragment {
             editJVMArgs.setOnBindEditTextListener(TextView::setSingleLine);
         }
 
-        mMultiRTPreference = findPreference("install_jre");
-    }
-
-    @Override
-    public boolean onPreferenceTreeClick(@NonNull Preference preference) {
-        if(preference.equals(mMultiRTPreference)) {
+        requirePreference("install_jre").setOnPreferenceClickListener(preference->{
             openMultiRTDialog();
-        }
-        return super.onPreferenceTreeClick(preference);
+            return true;
+        });
     }
 
     private void openMultiRTDialog() {
