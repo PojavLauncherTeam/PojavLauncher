@@ -276,12 +276,8 @@ public class GLFWGLSurface extends View implements GrabListener {
         //Getting scaled position from the event
         /* Tells if a double tap happened [MOUSE GRAB ONLY]. Doesn't tell where though. */
         if(!CallbackBridge.isGrabbing()) {
-            float scaledInsetX = PREF_INSET_X * mScaleFactor;
-            float scaledInsetY = PREF_INSET_X * mScaleFactor;  // Assuming you have a Y inset as well
-
-            CallbackBridge.mouseX = (e.getX() * mScaleFactor) - scaledInsetX;
-            CallbackBridge.mouseY = (e.getY() * mScaleFactor) - scaledInsetY;
-
+            CallbackBridge.mouseX = (e.getX() * mScaleFactor);
+            CallbackBridge.mouseY = (e.getY() * mScaleFactor);
             //One android click = one MC click
             if(mSingleTapDetector.onTouchEvent(e)){ //
                 //longPressDetector.onTouchEvent(e);// Touch Mode
@@ -486,7 +482,6 @@ public class GLFWGLSurface extends View implements GrabListener {
 
         // Make sure we grabbed the mouse if necessary
         updateGrabState(CallbackBridge.isGrabbing());
-
         switch(event.getActionMasked()) {
             case MotionEvent.ACTION_HOVER_MOVE:
                 CallbackBridge.mouseX = (event.getX(mouseCursorIndex) * mScaleFactor);
@@ -510,11 +505,8 @@ public class GLFWGLSurface extends View implements GrabListener {
     @RequiresApi(26)
     @Override
     public boolean dispatchCapturedPointerEvent(MotionEvent e) {
-        float scaledInsetX = PREF_INSET_X * mScaleFactor;
-        float scaledInsetY = PREF_INSET_X * mScaleFactor;  // Assuming you have a Y inset as well
-
-        CallbackBridge.mouseX = (e.getX() * mScaleFactor) - scaledInsetX;
-        CallbackBridge.mouseY = (e.getY() * mScaleFactor) - scaledInsetY;
+        CallbackBridge.mouseX = (e.getX() * mScaleFactor);
+        CallbackBridge.mouseY = (e.getY() * mScaleFactor);
 
         switch (e.getActionMasked()) {
             case MotionEvent.ACTION_MOVE:
@@ -653,8 +645,8 @@ public class GLFWGLSurface extends View implements GrabListener {
 
     /** Called when the size need to be set at any point during the surface lifecycle **/
     public void refreshSize(){
-        windowWidth = Tools.getDisplayFriendlyRes(Tools.currentDisplayMetrics.widthPixels, mScaleFactor);
-        windowHeight = Tools.getDisplayFriendlyRes(Tools.currentDisplayMetrics.heightPixels, mScaleFactor);
+        windowWidth = Tools.getDisplayFriendlyRes((int) (Tools.currentDisplayMetrics.widthPixels - (PREF_INSET_X*2)), mScaleFactor);
+        windowHeight = Tools.getDisplayFriendlyRes((int) (Tools.currentDisplayMetrics.heightPixels - (PREF_INSET_X*2)), mScaleFactor);
         if(mSurface == null){
             Log.w("MGLSurface", "Attempt to refresh size on null surface");
             return;
