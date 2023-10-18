@@ -8,52 +8,65 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:background="@color/background_app"
-    >
+    android:background="@color/background_app">
 
-    <com.kdt.mcgui.LauncherMenuButton
-        android:id="@+id/news_button"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_66sdp"
-        android:background="?android:attr/selectableItemBackground"
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/mc_version_spinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        android:text="@string/mcl_tab_wiki"
-        android:drawableStart="@drawable/ic_menu_news"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <com.kdt.mcgui.LauncherMenuButton
-        android:id="@+id/custom_control_button"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_66sdp"
-        android:background="?android:attr/selectableItemBackground"
-        android:drawableStart="@drawable/ic_menu_custom_controls"
-        android:text="@string/mcl_option_customcontrol"
-        app:layout_constraintTop_toBottomOf="@id/news_button"
+            <com.kdt.mcgui.LauncherMenuButton
+                android:id="@+id/news_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:drawableStart="@drawable/ic_menu_news"
+                android:text="@string/mcl_tab_wiki" />
 
-        />
+            <com.kdt.mcgui.LauncherMenuButton
+                android:id="@+id/custom_control_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:drawableStart="@drawable/ic_menu_custom_controls"
+                android:text="@string/mcl_option_customcontrol" />
 
-    <com.kdt.mcgui.LauncherMenuButton
-        android:id="@+id/install_jar_button"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_66sdp"
-        android:background="?android:attr/selectableItemBackground"
-        android:drawableStart="@drawable/ic_menu_install_jar"
-        android:text="@string/main_install_jar_file"
+            <com.kdt.mcgui.LauncherMenuButton
+                android:id="@+id/install_jar_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:drawableStart="@drawable/ic_menu_install_jar"
+                android:text="@string/main_install_jar_file" />
 
-        app:layout_constraintTop_toBottomOf="@id/custom_control_button"
-        />
+            <com.kdt.mcgui.LauncherMenuButton
+                android:id="@+id/share_logs_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:drawableStart="@android:drawable/ic_menu_share"
+                android:text="@string/main_share_logs" />
+        </LinearLayout>
+    </ScrollView>
 
-    <com.kdt.mcgui.LauncherMenuButton
-        android:id="@+id/share_logs_button"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_66sdp"
-        android:background="?android:attr/selectableItemBackground"
-        android:drawableStart="@android:drawable/ic_menu_share"
-        android:text="@string/main_share_logs"
 
-        app:layout_constraintTop_toBottomOf="@id/install_jar_button"
-        />
 
 
     <com.kdt.mcgui.mcVersionSpinner
