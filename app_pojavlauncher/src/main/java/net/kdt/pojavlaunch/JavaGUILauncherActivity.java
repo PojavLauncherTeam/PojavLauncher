@@ -128,7 +128,8 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
                             // Right-click event when a second finger touches the screen
                             // Simulating right-click by sending GLFW_MOUSE_BUTTON_RIGHT event
                             Log.i("downthecrop","Hi from a rightclick event!");
-                            activateRC();
+                            //activateRC();
+                            AWTInputBridge.sendKey((char)AWTInputEvent.VK_F11,AWTInputEvent.VK_F11);
                             AWTInputBridge.sendMousePress(AWTInputEvent.BUTTON1_DOWN_MASK);
                         }
                     }
@@ -341,6 +342,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
             Tools.getCacioJavaArgs(javaArgList,runtime.javaVersion == 8);
             javaArgList.add("-DconfigFile="+Tools.DIR_DATA + "/config.json");
             javaArgList.add("-DpluginDir="+ Tools.DIR_DATA + "/plugins/");
+            javaArgList.add("-DclientHomeOverride="+gamedir);
             javaArgList.add("-jar");
             javaArgList.add(Tools.DIR_DATA+"/rt4.jar");
 

@@ -162,10 +162,11 @@ public final class Tools {
 
         getCacioJavaArgs(javaArgList, runtime.javaVersion == 8);
 
+        javaArgList.add("-DconfigFile="+Tools.DIR_DATA + "/config.json");
         javaArgList.add("-DpluginDir="+ Tools.DIR_DATA + "/plugins/");
+        javaArgList.add("-DclientHomeOverride="+gamedir);
         javaArgList.add("-DglfwWidth="+CallbackBridge.windowWidth);
         javaArgList.add("-DglfwHeight="+CallbackBridge.windowHeight);
-        javaArgList.add("-DconfigFile="+Tools.DIR_DATA + "/config.json");
         javaArgList.add("-cp");
         javaArgList.add(getLWJGL3ClassPath()+":"+Tools.DIR_DATA+"/rt4.jar");
         javaArgList.add(RT4_MAIN_CLASS);
