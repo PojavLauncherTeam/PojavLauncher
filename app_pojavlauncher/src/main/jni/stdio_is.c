@@ -135,14 +135,14 @@ JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_utils_JREUtils_setupExitTrap(JNI
 }
 
 JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_Logger_appendToLog(JNIEnv *env, __attribute((unused)) jclass clazz, jstring text) {
-   jsize appendStringLength = (*env)->GetStringUTFLength(env, text);
-   char newChars[appendStringLength+2];
-   (*env)->GetStringUTFRegion(env, text, 0, (*env)->GetStringLength(env, text), newChars);
-   newChars[appendStringLength] = '\n';
-   newChars[appendStringLength+1] = 0;
-   if(recordBuffer(newChars, appendStringLength+1) && logListener != NULL) {
-       (*env)->CallVoidMethod(env, logListener, logger_onEventLogged, text);
-   }
+    jsize appendStringLength = (*env)->GetStringUTFLength(env, text);
+    char newChars[appendStringLength+2];
+    (*env)->GetStringUTFRegion(env, text, 0, (*env)->GetStringLength(env, text), newChars);
+    newChars[appendStringLength] = '\n';
+    newChars[appendStringLength+1] = 0;
+    if(recordBuffer(newChars, appendStringLength+1) && logListener != NULL) {
+        (*env)->CallVoidMethod(env, logListener, logger_onEventLogged, text);
+    }
 }
 
 JNIEXPORT void JNICALL
