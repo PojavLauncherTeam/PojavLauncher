@@ -307,4 +307,9 @@
     <string name="preference_category_main_categories">Kategorien</string>
     <string name="preference_category_miscellaneous">Sonstige Einstellungen</string>
     <string name="preference_category_video">Grafik-Einstellungen</string>
+    <string name="notification_permission_dialog_title">Berechtigungsanfrage</string>
+    <string name="notification_permission_dialog_text">PojavLauncher benötigt eine Berechtigung, um Benachrichtigungen anzuzeigen, damit Spiel-/Modpack-Downloads nicht abgebrochen werden, wenn die App verlassen wird. Ohne diese Berechtigung könnte Android Downloads stoppen, wenn PojavLauncher nicht mehr im Vordergrund ist.</string>
+    <string name="notification_permission_toast">Dies kann jederzeit in den Einstellungen geändert werden</string>
+    <string name="preference_ask_for_notification_title">Benachrichtigungen erlauben</string>
+    <string name="preference_ask_for_notification_description">Klicken, um die Benachrichtigungs-Berechtigung erneut anzufragen, damit Spiel-/Modpack-Downloads im Hintergrund richtig funktionieren.</string>
 </resources>
