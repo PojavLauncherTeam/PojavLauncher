@@ -109,10 +109,10 @@ public class ControlData {
     }
 
     public ControlData(String name, int[] keycodes, String dynamicX, String dynamicY, float width, float height, boolean isToggle) {
-        this(name, keycodes, dynamicX, dynamicY, width, height, isToggle, 1, 0x4D000000, 0xFFFFFFFF, 0, 0, true, true);
+        this(name, keycodes, dynamicX, dynamicY, width, height, isToggle, 1, 0x4D000000, 0xFFFFFFFF, 0, 0, true, true, false, false);
     }
 
-    public ControlData(String name, int[] keycodes, String dynamicX, String dynamicY, float width, float height, boolean isToggle, float opacity, int bgColor, int strokeColor, float strokeWidth, float cornerRadius, boolean displayInGame, boolean displayInMenu) {
+    public ControlData(String name, int[] keycodes, String dynamicX, String dynamicY, float width, float height, boolean isToggle, float opacity, int bgColor, int strokeColor, float strokeWidth, float cornerRadius, boolean displayInGame, boolean displayInMenu, boolean isSwipable, boolean mousePassthrough) {
         this.name = name;
         this.keycodes = inflateKeycodeArray(keycodes);
         this.dynamicX = dynamicX;
@@ -128,6 +128,8 @@ public class ControlData {
         this.cornerRadius = cornerRadius;
         this.displayInGame = displayInGame;
         this.displayInMenu = displayInMenu;
+        this.isSwipeable = isSwipable;
+        this.passThruEnabled = mousePassthrough;
     }
 
     //Deep copy constructor
@@ -146,7 +148,9 @@ public class ControlData {
                 controlData.strokeWidth,
                 controlData.cornerRadius,
                 controlData.displayInGame,
-                controlData.displayInMenu
+                controlData.displayInMenu,
+                controlData.isSwipeable,
+                controlData.passThruEnabled
         );
     }
 

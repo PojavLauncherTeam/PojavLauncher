@@ -1,22 +1,17 @@
 package net.kdt.pojavlaunch.multirt;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.view.View;
-import android.webkit.MimeTypeMap;
+import android.content.Context;
 import android.widget.Button;
 
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 
 import net.kdt.pojavlaunch.R;
 
 public class MultiRTConfigDialog {
-    public static final int MULTIRT_PICK_RUNTIME = 2048;
     private AlertDialog mDialog;
     private RecyclerView mDialogView;
 
@@ -33,7 +28,7 @@ public class MultiRTConfigDialog {
     }
 
     /** Build the dialog behavior and style */
-    public void prepare(Activity activity) {
+    public void prepare(Context activity, ActivityResultLauncher<Object> installJvmLauncher) {
         mDialogView = new RecyclerView(activity);
         mDialogView.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
         RTRecyclerViewAdapter adapter = new RTRecyclerViewAdapter();
@@ -42,7 +37,7 @@ public class MultiRTConfigDialog {
         mDialog = new AlertDialog.Builder(activity)
                 .setTitle(R.string.multirt_config_title)
                 .setView(mDialogView)
-                .setPositiveButton(R.string.multirt_config_add, (dialog, which) -> openRuntimeSelector(activity,MULTIRT_PICK_RUNTIME))
+                .setPositiveButton(R.string.multirt_config_add, (dialog, which) -> installJvmLauncher.launch(null))
                 .setNeutralButton(R.string.multirt_delete_runtime, null)
                 .create();
 
@@ -55,14 +50,5 @@ public class MultiRTConfigDialog {
                 button.setText(isEditing ? R.string.multirt_config_setdefault : R.string.multirt_delete_runtime);
             });
         });
-    }
-
-    public static void openRuntimeSelector(Activity activity, int code) {
-        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
-        String mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension("xz");
-        if (mimeType == null) mimeType = "*/*";
-        intent.setType(mimeType);
-        activity.startActivityForResult(intent, code);
     }
 }

@@ -27,6 +27,7 @@ import androidx.core.math.MathUtils;
 import net.kdt.pojavlaunch.GrabListener;
 import net.kdt.pojavlaunch.LwjglGlfwKeycode;
 import net.kdt.pojavlaunch.R;
+import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.utils.MCOptionUtils;
 
@@ -43,11 +44,13 @@ import static net.kdt.pojavlaunch.customcontrols.gamepad.GamepadJoystick.DIRECTI
 import static net.kdt.pojavlaunch.customcontrols.gamepad.GamepadJoystick.DIRECTION_SOUTH_WEST;
 import static net.kdt.pojavlaunch.customcontrols.gamepad.GamepadJoystick.DIRECTION_WEST;
 import static net.kdt.pojavlaunch.customcontrols.gamepad.GamepadJoystick.isJoystickEvent;
+import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_DEADZONE_SCALE;
 import static net.kdt.pojavlaunch.utils.MCOptionUtils.getMcScale;
 import static org.lwjgl.glfw.CallbackBridge.sendKeyPress;
 import static org.lwjgl.glfw.CallbackBridge.sendMouseButton;
 
 import fr.spse.gamepad_remapper.GamepadHandler;
+import fr.spse.gamepad_remapper.Settings;
 
 public class Gamepad implements GrabListener, GamepadHandler {
 
@@ -89,6 +92,8 @@ public class Gamepad implements GrabListener, GamepadHandler {
     private final MCOptionUtils.MCOptionListener mGuiScaleListener = () -> notifyGUISizeChange(getMcScale());
 
     public Gamepad(View contextView, InputDevice inputDevice){
+        Settings.setDeadzoneScale(PREF_DEADZONE_SCALE);
+
         mScreenChoreographer = Choreographer.getInstance();
         Choreographer.FrameCallback frameCallback = new Choreographer.FrameCallback() {
             @Override
@@ -185,10 +190,8 @@ public class Gamepad implements GrabListener, GamepadHandler {
         //update mouse position
         long newFrameTime = System.nanoTime();
         if(mLastHorizontalValue != 0 || mLastVerticalValue != 0){
-            GamepadJoystick currentJoystick = isGrabbing ? mLeftJoystick : mRightJoystick;
 
-            double acceleration = (mMouseMagnitude - currentJoystick.getDeadzone()) / (1 - currentJoystick.getDeadzone());
-            acceleration = Math.pow(acceleration, MOUSE_MAX_ACCELERATION);
+            double acceleration = Math.pow(mMouseMagnitude, MOUSE_MAX_ACCELERATION);
             if(acceleration > 1) acceleration = 1;
 
             // Compute delta since last tick time

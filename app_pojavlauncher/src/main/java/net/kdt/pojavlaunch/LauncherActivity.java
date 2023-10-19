@@ -1,19 +1,18 @@
 package net.kdt.pojavlaunch;
 
-import static net.kdt.pojavlaunch.MainActivity.INTENT_MINECRAFT_VERSION;
-
 import android.Manifest;
-import android.content.Intent;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -25,31 +24,36 @@ import com.kdt.mcgui.ProgressLayout;
 import com.kdt.mcgui.mcAccountSpinner;
 
 import net.kdt.pojavlaunch.contextexecutor.ContextExecutor;
-import net.kdt.pojavlaunch.fragments.MainMenuFragment;
-import net.kdt.pojavlaunch.fragments.MicrosoftLoginFragment;
+import net.kdt.pojavlaunch.contracts.OpenDocumentWithExtension;
 import net.kdt.pojavlaunch.extra.ExtraConstants;
 import net.kdt.pojavlaunch.extra.ExtraCore;
 import net.kdt.pojavlaunch.extra.ExtraListener;
-
+import net.kdt.pojavlaunch.fragments.MainMenuFragment;
+import net.kdt.pojavlaunch.fragments.MicrosoftLoginFragment;
 import net.kdt.pojavlaunch.fragments.SelectAuthFragment;
 import net.kdt.pojavlaunch.modloaders.modpacks.ModloaderInstallTracker;
 import net.kdt.pojavlaunch.modloaders.modpacks.imagecache.IconCacheJanitor;
-import net.kdt.pojavlaunch.multirt.MultiRTConfigDialog;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.prefs.screens.LauncherPreferenceFragment;
 import net.kdt.pojavlaunch.progresskeeper.ProgressKeeper;
+import net.kdt.pojavlaunch.progresskeeper.TaskCountListener;
 import net.kdt.pojavlaunch.services.ProgressServiceKeeper;
 import net.kdt.pojavlaunch.tasks.AsyncMinecraftDownloader;
 import net.kdt.pojavlaunch.tasks.AsyncVersionList;
+import net.kdt.pojavlaunch.tasks.ContextAwareDoneListener;
+import net.kdt.pojavlaunch.utils.NotificationUtils;
 import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
 import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
+
+import java.lang.ref.WeakReference;
 
 public class LauncherActivity extends BaseActivity {
     public static final String SETTING_FRAGMENT_TAG = "SETTINGS_FRAGMENT";
 
-    private final int REQUEST_STORAGE_REQUEST_CODE = 1;
-    private final Object mLockStoragePerm = new Object();
-
+    public final ActivityResultLauncher<Object> modInstallerLauncher =
+            registerForActivityResult(new OpenDocumentWithExtension("jar"), (data)->{
+                if(data != null) Tools.launchModInstaller(this, data);
+            });
 
     private mcAccountSpinner mAccountSpinner;
     private FragmentContainerView mFragmentView;
@@ -57,6 +61,7 @@ public class LauncherActivity extends BaseActivity {
     private ProgressLayout mProgressLayout;
     private ProgressServiceKeeper mProgressServiceKeeper;
     private ModloaderInstallTracker mInstallTracker;
+    private NotificationManager mNotificationManager;
 
     /* Allows to switch from one button "type" to another */
     private final FragmentManager.FragmentLifecycleCallbacks mFragmentCallbackListener = new FragmentManager.FragmentLifecycleCallbacks() {
@@ -127,40 +132,49 @@ public class LauncherActivity extends BaseActivity {
         }
         String normalizedVersionId = AsyncMinecraftDownloader.normalizeVersionId(prof.lastVersionId);
         JMinecraftVersionList.Version mcVersion = AsyncMinecraftDownloader.getListedVersion(normalizedVersionId);
-        new AsyncMinecraftDownloader(this, mcVersion, normalizedVersionId, new AsyncMinecraftDownloader.DoneListener() {
-            @Override
-            public void onDownloadDone() {
-                ProgressKeeper.waitUntilDone(()-> runOnUiThread(() -> {
-                    try {
-                        Intent mainIntent = new Intent(getBaseContext(), MainActivity.class);
-                        mainIntent.putExtra(INTENT_MINECRAFT_VERSION, normalizedVersionId);
-                        mainIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                        startActivity(mainIntent);
-                        finish();
-                        android.os.Process.killProcess(android.os.Process.myPid()); //You should kill yourself, NOW!
-                    } catch (Throwable e) {
-                        Tools.showError(getBaseContext(), e);
-                    }
-                }));
-            }
-
-            @Override
-            public void onDownloadFailed(Throwable th) {
-                if(th != null) Tools.showError(LauncherActivity.this, R.string.mc_download_failed, th);
-            }
-        });
+        new AsyncMinecraftDownloader().start(
+                this,
+                mcVersion,
+                normalizedVersionId,
+                new ContextAwareDoneListener(this, normalizedVersionId)
+        );
         return false;
     };
+
+    private final TaskCountListener mDoubleLaunchPreventionListener = taskCount -> {
+        // Hide the notification that starts the game if there are tasks executing.
+        // Prevents the user from trying to launch the game with tasks ongoing.
+        if(taskCount > 0) {
+            Tools.runOnUiThread(() ->
+                    mNotificationManager.cancel(NotificationUtils.NOTIFICATION_ID_GAME_START)
+            );
+        }
+    };
+
+    private ActivityResultLauncher<String> mRequestNotificationPermissionLauncher;
+    private WeakReference<Runnable> mRequestNotificationPermissionRunnable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pojav_launcher);
         IconCacheJanitor.runJanitor();
+        mRequestNotificationPermissionLauncher = registerForActivityResult(
+                new ActivityResultContracts.RequestPermission(),
+                isAllowed -> {
+                    if(!isAllowed) handleNoNotificationPermission();
+                    else {
+                        Runnable runnable = Tools.getWeakReference(mRequestNotificationPermissionRunnable);
+                        if(runnable != null) runnable.run();
+                    }
+                }
+        );
         getWindow().setBackgroundDrawable(null);
         bindViews();
+        checkNotificationPermission();
+        mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        ProgressKeeper.addTaskCountListener(mDoubleLaunchPreventionListener);
         ProgressKeeper.addTaskCountListener((mProgressServiceKeeper = new ProgressServiceKeeper(this)));
-        askForStoragePermission(); // Will wait here
 
         mSettingsButton.setOnClickListener(mSettingButtonListener);
         mDeleteAccountButton.setOnClickListener(mAccountDeleteButtonListener);
@@ -219,19 +233,6 @@ public class LauncherActivity extends BaseActivity {
         getSupportFragmentManager().unregisterFragmentLifecycleCallbacks(mFragmentCallbackListener);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode != RESULT_OK) return;
-        if(requestCode == Tools.RUN_MOD_INSTALLER && data != null){
-            Tools.launchModInstaller(this, data);
-            return;
-        }
-        if(requestCode == MultiRTConfigDialog.MULTIRT_PICK_RUNTIME && data != null){
-            Tools.installRuntimeFromUri(this, data.getData());
-        }
-    }
-
     /** Custom implementation to feel more natural when a backstack isn't present */
     @Override
     public void onBackPressed() {
@@ -269,49 +270,50 @@ public class LauncherActivity extends BaseActivity {
         return null;
     }
 
-    private void askForStoragePermission(){
-        int revokeCount = 0;
-        while (Build.VERSION.SDK_INT >= 23 && Build.VERSION.SDK_INT < 29 && !isStorageAllowed()) { //Do not ask for storage at all on Android 10+
-            try {
-                revokeCount++;
-                if (revokeCount >= 3) {
-                    Toast.makeText(this, R.string.toast_permission_denied, Toast.LENGTH_LONG).show();
-                    finish();
-                }
-                requestStoragePermission();
-
-                synchronized (mLockStoragePerm) {
-                    mLockStoragePerm.wait();
-                }
-            } catch (InterruptedException e) {
-                Log.e("LauncherActivity", e.toString());
-            }
+    private void checkNotificationPermission() {
+        if(LauncherPreferences.PREF_SKIP_NOTIFICATION_PERMISSION_CHECK ||
+            checkForNotificationPermission()) {
+            return;
         }
-    }
 
-    private boolean isStorageAllowed() {
-        //Getting the permission status
-        int result1 = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        int result2 = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
-
-
-        //If permission is granted returning true
-        return result1 == PackageManager.PERMISSION_GRANTED &&
-                result2 == PackageManager.PERMISSION_GRANTED;
-    }
-
-    private void requestStoragePermission() {
-        ActivityCompat.requestPermissions(this, new String[]{
-                Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_STORAGE_REQUEST_CODE);
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == REQUEST_STORAGE_REQUEST_CODE){
-            synchronized (mLockStoragePerm) {
-                mLockStoragePerm.notifyAll();
-            }
+        if(ActivityCompat.shouldShowRequestPermissionRationale(
+                this,
+                Manifest.permission.POST_NOTIFICATIONS)) {
+            showNotificationPermissionReasoning();
+            return;
         }
+        askForNotificationPermission(null);
+    }
+
+    private void showNotificationPermissionReasoning() {
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.notification_permission_dialog_title)
+                .setMessage(R.string.notification_permission_dialog_text)
+                .setPositiveButton(android.R.string.ok, (d, w) -> askForNotificationPermission(null))
+                .setNegativeButton(android.R.string.cancel, (d, w)-> handleNoNotificationPermission())
+                .show();
+    }
+
+    private void handleNoNotificationPermission() {
+        LauncherPreferences.PREF_SKIP_NOTIFICATION_PERMISSION_CHECK = true;
+        LauncherPreferences.DEFAULT_PREF.edit()
+                .putBoolean(LauncherPreferences.PREF_KEY_SKIP_NOTIFICATION_CHECK, true)
+                .apply();
+        Toast.makeText(this, R.string.notification_permission_toast, Toast.LENGTH_LONG).show();
+    }
+
+    public boolean checkForNotificationPermission() {
+        return Build.VERSION.SDK_INT < 33 || ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_DENIED;
+    }
+
+    public void askForNotificationPermission(Runnable onSuccessRunnable) {
+        if(Build.VERSION.SDK_INT < 33) return;
+        if(onSuccessRunnable != null) {
+            mRequestNotificationPermissionRunnable = new WeakReference<>(onSuccessRunnable);
+        }
+        mRequestNotificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS);
     }
 
     /** Stuff all the view boilerplate here */
@@ -322,8 +324,4 @@ public class LauncherActivity extends BaseActivity {
         mAccountSpinner = findViewById(R.id.account_spinner);
         mProgressLayout = findViewById(R.id.progress_layout);
     }
-
-
-
-
 }

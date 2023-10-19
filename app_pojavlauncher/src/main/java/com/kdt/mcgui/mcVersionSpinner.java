@@ -39,7 +39,6 @@ import fr.spse.extended_view.ExtendedTextView;
  */
 public class mcVersionSpinner extends ExtendedTextView {
     private static final int VERSION_SPINNER_PROFILE_CREATE = 0;
-    private static final int VERSION_SPINNER_PROFILE_CREATE_MODDED = 1;
     public mcVersionSpinner(@NonNull Context context) {
         super(context);
         init();
@@ -133,11 +132,10 @@ public class mcVersionSpinner extends ExtendedTextView {
     }
 
     private void performExtraAction(ProfileAdapterExtra extra) {
-        switch (extra.id) {
-            case VERSION_SPINNER_PROFILE_CREATE:
-                Tools.swapFragment((FragmentActivity) getContext(), ProfileTypeSelectFragment.class,
-                        ProfileTypeSelectFragment.TAG, true, null);
-                break;
+        //Replace with switch-case if you want to add more extra actions
+        if (extra.id == VERSION_SPINNER_PROFILE_CREATE) {
+            Tools.swapFragment((FragmentActivity) getContext(), ProfileTypeSelectFragment.class,
+                    ProfileTypeSelectFragment.TAG, true, null);
         }
     }
 

@@ -307,7 +307,7 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
             if(view != null){
                 Bitmap bitmap = mSelectecAccount.getSkinFace();
                 if(bitmap != null) {
-                    mHeadDrawable = new BitmapDrawable(bitmap);
+                    mHeadDrawable = new BitmapDrawable(getResources(), bitmap);
                     mHeadDrawable.setBounds(0, 0, bitmap.getWidth(), bitmap.getHeight());
 
                     view.setCompoundDrawables(mHeadDrawable, null, null, null);

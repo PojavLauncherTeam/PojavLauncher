@@ -4,7 +4,7 @@
 
     <net.kdt.pojavlaunch.prefs.BackButtonPreference/>
 
-    <PreferenceCategory android:title="Miscellaneous settings">
+    <PreferenceCategory android:title="@string/preference_category_miscellaneous">
         <SwitchPreference
             android:defaultValue="true"
             android:icon="@drawable/ic_setting_hash_verification"
@@ -16,6 +16,20 @@
             android:key="arc_capes"
             android:summary="@string/arc_capes_desc"
             android:title="@string/arc_capes_title" />
+        <androidx.preference.ListPreference
+            android:defaultValue="default"
+            android:key="downloadSource"
+            android:entries="@array/download_source_names"
+            android:entryValues="@array/download_source_values"
+            android:title="@string/preference_download_source_title"
+            android:summary="@string/preference_download_source_description"
+            app2:useSimpleSummaryProvider="true"/>
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="verifyManifest"
+            android:title="@string/preference_verify_manifest_title"
+            android:summary="@string/preference_verify_manifest_description"/>
+
         <SwitchPreference
             android:defaultValue="false"
             android:key="zinkPreferSystemDriver"

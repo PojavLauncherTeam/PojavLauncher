@@ -47,7 +47,7 @@ public class ActionRow extends LinearLayout {
     };
     private final ActionButtonInterface[] actionButtons = new ActionButtonInterface[3];
     private View mFollowedView = null;
-    private final int mSide = SIDE_TOP;
+    private final int mSide = SIDE_AUTO;
 
     /** Add action buttons and configure them */
     private void init(){
@@ -123,10 +123,7 @@ public class ActionRow extends LinearLayout {
         ViewGroup parent = ((ViewGroup) mFollowedView.getParent());
         if(parent == null) return mSide;//Value should not matter
 
-        int side = mFollowedView.getX() + getWidth()/2f > parent.getWidth()/2f
-                ? SIDE_LEFT
-                : SIDE_RIGHT;
-
+        int side = SIDE_TOP;
         float futurePos = getYPosition(side);
         if(futurePos + getHeight() > (parent.getHeight() + getHeight()/2f)){
             side = SIDE_TOP;
