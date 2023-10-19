@@ -116,7 +116,7 @@
     <string name="customctrl_size">Boyut</string>
     <string name="customctrl_mapping">Atama</string>
     <string name="customctrl_orientation">Yön</string>
-    <string name="customctrl_background_color">Arkaplan rengi</string>
+    <string name="customctrl_background_color">Arka plan rengi</string>
     <string name="customctrl_corner_radius">Köşe alanı</string>
     <string name="customctrl_stroke_width">Vurgu genişliği</string>
     <string name="customctrl_stroke_color">Vurgu rengi</string>
@@ -159,7 +159,7 @@
     <string name="multirt_config_setdefault_already">Varsayılan</string>
     <string name="multirt_config_removeerror_last">En az bir Java Runtime\'ın kurulu olması gerekmektedir.</string>
     <string name="multirt_nocompartiblert">Hiç uyumlu Java Runtime bulunamadı. Bu sürüm Java %d ya da daha yenisini gerektiriyor.</string>
-    <string name="multirt_nojava8rt">Java 8 bulunamıyor. Bu seçeneği kullanabilmeniz için Java 8 kurmanız gerekiyor.</string>
+    <string name="multirt_nojava8rt">Java 8 bulunamadı. Bu seçeneği kullanabilmeniz için Java 8 kurmanız gerekiyor.</string>
     <string name="multirt_delete_runtime">Runtime\'ı sil</string>
     <string name="pvc_gameDirectory">Oyun dizini</string>
     <string name="pvc_jvmArgs">JVM değişkenleri</string>
@@ -209,7 +209,7 @@
     <string name="default_control">Varsayılan kontroller</string>
     <string name="progresslayout_tasks_in_progress">%d tane görev devam etmekte</string>
     <string name="notification_terminate">Sonlandır</string>
-    <string name="notification_game_runs">Oyun şuanda çalışıyor!</string>
+    <string name="notification_game_runs">Oyun şu anda çalışıyor!</string>
     <string name="folder_dialog_create">Oluştur</string>
     <string name="folder_dialog_insert_name">Dosya ismini girin</string>
     <string name="folder_fragment_create">Klasör Oluştur</string>
@@ -317,4 +317,9 @@
     <string name="preference_category_main_categories">Kategoriler</string>
     <string name="preference_category_miscellaneous">Çeşitli ayarlar</string>
     <string name="preference_category_video">Video ayarları</string>
+    <string name="notification_permission_dialog_title">İzin isteği</string>
+    <string name="notification_permission_dialog_text">PojavLauncher, uygulamadan ayrıldığınızda oyun/modpack indirmelerinin durmasını önlemek için bildirim gönderme izni gerektirir. Bu izin olmadan, Android PojavLauncher\'ı arka plan moduna aldığınızda indirmelerinizi kapatabilir.</string>
+    <string name="notification_permission_toast">Fikrinizi daha sonra Ayarlar\'a girerek her zaman değiştirebilirsiniz</string>
+    <string name="preference_ask_for_notification_title">Bildirimlere izin ver</string>
+    <string name="preference_ask_for_notification_description">Oyun/modpack arka plan indirmelerinin düzgün çalışması için gerekli olan bildirim iznini yeniden istemek için tıklayın.</string>
 </resources>
