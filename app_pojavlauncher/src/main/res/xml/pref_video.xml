@@ -23,14 +23,14 @@
             />
 
         <net.kdt.pojavlaunch.prefs.CustomSeekBarPreference
-            android:icon="@drawable/ic_setting_screen_resolution"
             android:key="resolutionRatio"
             android:summary="@string/mcl_setting_subtitle_resolution_scaler"
             android:title="@string/mcl_setting_title_resolution_scaler"
-            app2:defaultValue="60"
-            app2:seekBarIncrement="5"
+            app2:showSeekBarValue="true"
             app2:selectable="false"
-            app2:showSeekBarValue="true" />
+            app2:seekBarIncrement="5"
+            android:icon="@drawable/ic_setting_screen_resolution"
+            />
 
         <net.kdt.pojavlaunch.prefs.CustomSeekBarPreference
             android:id="@+id/customSeekBarPreference"
