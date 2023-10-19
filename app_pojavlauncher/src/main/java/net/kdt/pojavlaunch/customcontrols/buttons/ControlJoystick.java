@@ -109,7 +109,7 @@ public class ControlJoystick extends JoystickView implements ControlInterface {
 
     @Override
     public void setBackground() {
-        setBorderWidth((int) Tools.dpToPx(getProperties().strokeWidth));
+        setBorderWidth((int) Tools.dpToPx(getProperties().strokeWidth * (getControlLayoutParent().getLayoutScale()/100f)));
         setBorderColor(getProperties().strokeColor);
         setBackgroundColor(getProperties().bgColor);
     }
