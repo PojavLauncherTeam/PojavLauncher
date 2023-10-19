@@ -289,9 +289,9 @@
     <string name="modpack_download_downloading_mods">تحميل المودات (%.2f MB / %.2f MB)</string>
     <string name="modpack_download_downloading_mods_fc">تحميل المودات (الملف %d من %d)</string>
     <string name="modpack_download_applying_overrides">تطبيق التجاوزات (%d/%d)</string>
-    <string name="modpack_install_notification_title">محمل المودباك لPojav</string>
-    <string name="modpack_install_notification_success">انقر هنا لإنهاء تثبيت المودباك</string>
-    <string name="modpack_install_notification_data_not_available">فشل تنزيل معلومات محمل المودات</string>
+    <string name="modpack_install_notification_title">Pojav Modpack Installerⁿ</string>
+    <string name="modpack_install_notification_success">انقر هنا لإنهاء تثبيت modpack</string>
+    <string name="modpack_install_notification_data_not_available">Не удалось загрузить информацию о загрузчике модов</string>
     <string name="modpack_install_modloader_download_failed">فشل تنزيل ملفات محمل المودات</string>
     <string name="modpack_install_download_failed">فشل تنزيل ملفات المودباك</string>
     <string name="modpack_install_button">إنشاء ملف شخصي جديد لModpack</string>
@@ -315,4 +315,9 @@
     <string name="preference_category_main_categories">الفئات</string>
     <string name="preference_category_miscellaneous">أعدادات متنوعة</string>
     <string name="preference_category_video">إعدادات الفيديو</string>
+    <string name="notification_permission_dialog_title">طلب السماح</string>
+    <string name="notification_permission_dialog_text">PojavLauncher requires a permission to post notifications to prevent game/modpack downloads from stopping when you leave the app. Without this permission, Android may shut down your downloads when you put PojavLauncher in background mode.</string>
+    <string name="notification_permission_toast">O</string>
+    <string name="preference_ask_for_notification_title">السماح بالإشعارات</string>
+    <string name="preference_ask_for_notification_description">.</string>
 </resources>
