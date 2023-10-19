@@ -97,10 +97,10 @@
     <string name="control_mouseoff">Мышь: Выкл</string>
     <string name="control_mouseon">Мышь: Вкл </string>
     <!-- MainActivity: Menu advanced controls -->
-    <string name="control_forceclose">Принудительное закрытие</string>
+    <string name="control_forceclose">Завершить процесс</string>
     <string name="control_viewout">Журнал</string>
     <string name="control_adebug">Отладка ввода</string>
-    <string name="control_customkey">Отправить пользовательский код клавиши</string>
+    <string name="control_customkey">Нажать клавишу</string>
     <!-- ImportControlActivity Strings -->
     <string name="import_control_label">Импортирование управления</string>
     <string name="import_control_invalid_file">Недопустимый или повреждённый файл</string>
@@ -209,7 +209,7 @@
     <string name="default_control">Раскладка управления</string>
     <string name="progresslayout_tasks_in_progress">Выполняется задач: %d</string>
     <string name="notification_terminate">Завершить</string>
-    <string name="notification_game_runs">Игра запущена!</string>
+    <string name="notification_game_runs">Игра запущена</string>
     <string name="folder_dialog_create">Создать</string>
     <string name="folder_dialog_insert_name">Введите название папки</string>
     <string name="folder_fragment_create">Создать папку</string>
@@ -293,7 +293,7 @@
     <string name="modpack_install_notification_data_not_available">Не удалось загрузить информацию о загрузчике модов</string>
     <string name="modpack_install_modloader_download_failed">Не удалось загрузить файлы загрузчика модов</string>
     <string name="modpack_install_download_failed">Не удалось загрузить файлы сборки</string>
-    <string name="modpack_install_button">Сборка</string>
+    <string name="modpack_install_button">Сборка модов</string>
     <string name="notif_error_occured">Возникла ошибка</string>
     <string name="notif_error_occured_desc">Нажмите для получения дополнительных сведений</string>
     <string name="fabric_dl_only_stable">Только стабильные версии</string>
@@ -317,4 +317,9 @@
     <string name="preference_category_main_categories">Разделы</string>
     <string name="preference_category_miscellaneous">Другие настройки</string>
     <string name="preference_category_video">Настойки графики</string>
+    <string name="notification_permission_dialog_title">Запрос разрешения</string>
+    <string name="notification_permission_dialog_text">Лаунчеру требуется разрешение на отправку уведомлений, чтобы предотвратить остановку игры/загрузки её данных при сворачивании приложения. Без этого разрешения Android может принудительно завершить работу PojavLauncher при переходе в фоновый режим.</string>
+    <string name="notification_permission_toast">Выбор можно изменить позже, перейдя в настройки.</string>
+    <string name="preference_ask_for_notification_title">Разрешить уведомления</string>
+    <string name="preference_ask_for_notification_description">Нажмите, чтобы ещё раз запросить разрешение на вывод уведомлений. Они нужны для правильной загрузки игры и сборок модов в фоне.</string>
 </resources>
