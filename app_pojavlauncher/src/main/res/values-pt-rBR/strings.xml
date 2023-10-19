@@ -26,7 +26,7 @@
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_wiki">Documentação</string>
+    <string name="mcl_tab_wiki">Wiki</string>
     <!-- MCLauncherActivity: Account status -->
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_launch_cleancache">Limpando arquivos em cache</string>
@@ -317,4 +317,6 @@
     <string name="preference_category_main_categories">Categorias</string>
     <string name="preference_category_miscellaneous">Configurações diversas</string>
     <string name="preference_category_video">Configurações de vídeo</string>
+    <string name="notification_permission_dialog_title">Solicitação de permissão</string>
+    <string name="preference_ask_for_notification_title">Permitir notificações</string>
 </resources>
