@@ -317,4 +317,9 @@
     <string name="preference_category_main_categories">Categorías</string>
     <string name="preference_category_miscellaneous">Ajustes varios</string>
     <string name="preference_category_video">Ajustes de video</string>
+    <string name="notification_permission_dialog_title">Permiso requerido</string>
+    <string name="notification_permission_dialog_text">PojavLauncher necesita un permiso para enviar notificaciones para evitar que las descargas del juego o modpacks se detengan cuando minimizes la aplicación. Sin este permiso, Android puede cancelar tus descargas cuando PojavLauncher esté en segundo plano.</string>
+    <string name="notification_permission_toast">Siempre puedes cambiar de opinión más tarde yendo a Ajustes</string>
+    <string name="preference_ask_for_notification_title">Permitir notificaciones</string>
+    <string name="preference_ask_for_notification_description">Haz clic para volver a solicitar el permiso de notificaciones, necesario para qué las descargas en segundo plano del juego/modpack funcionen correctamente.</string>
 </resources>
