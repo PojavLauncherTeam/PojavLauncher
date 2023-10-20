@@ -191,7 +191,7 @@
     <string name="preference_gyro_invert_y_axis_description">Поменять направление наклона по вертикали.</string>
     <string name="preference_gyro_smoothing_title">Сглаживание движения</string>
     <string name="preference_gyro_smoothing_description">Значительно повышает плавность движения камеры за счёт небольшой задержки ввода.</string>
-    <string name="preference_back_title">Вернуться назад</string>
+    <string name="preference_back_title">Назад</string>
     <string name="unnamed">Безымянный</string>
     <string name="profiles_latest_snapshot">Последний снапшот</string>
     <string name="profiles_latest_release">Последний релиз</string>
