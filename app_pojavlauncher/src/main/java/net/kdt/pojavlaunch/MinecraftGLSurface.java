@@ -55,7 +55,6 @@ public class MinecraftGLSurface extends View implements GrabListener {
             .remapX(true)
             .remapY(true)
 
-            .remapDpad(true)
             .remapLeftJoystick(true)
             .remapRightJoystick(true)
             .remapStart(true)
