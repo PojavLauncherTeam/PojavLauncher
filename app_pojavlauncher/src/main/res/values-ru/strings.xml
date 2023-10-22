@@ -120,7 +120,7 @@
     <string name="customctrl_corner_radius">Радиус скругления</string>
     <string name="customctrl_stroke_width">Ширина контура</string>
     <string name="customctrl_stroke_color">Цвет контура</string>
-    <string name="customctrl_button_opacity">Непрозрачность кнопки</string>
+    <string name="customctrl_button_opacity">Видимость кнопки</string>
     <string name="customctrl_addbutton">Добавить кнопку</string>
     <string name="customctrl_addbutton_drawer">Добавить группу кнопок</string>
     <string name="customctrl_addbutton_joystick">Добавить джойстик</string>
