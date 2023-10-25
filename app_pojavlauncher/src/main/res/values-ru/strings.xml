@@ -269,7 +269,7 @@
     <string name="modloader_dl_install_quilt">Версия с Quilt</string>
     <string name="modloader_dl_install_forge">Версия с Forge</string>
     <string name="create_profile_vanilla">Немодифицированная версия</string>
-    <string name="create_profile_vanilla_like_versions">Стандартные версии</string>
+    <string name="create_profile_vanilla_like_versions">Ванильные версии</string>
     <string name="create_profile_modded_versions">Загрузчики модов</string>
     <string name="fabric_dl_loader_title">Выбор версий</string>
     <string name="of_dl_select_version">Выбор версии OptiFine</string>
