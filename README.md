@@ -4,7 +4,7 @@
   <a href="https://github.com/downthecrop/2009Scape-mobile/releases"><img src="https://i.imgur.com/7wtvknj.png" alt="2009scape Mobile Logo"/></a>
   <a href="https://github.com/downthecrop/2009Scape-mobile/releases"><img src="https://i.imgur.com/o8OwASv.png" alt="2009scape Mobile splash"/></a>
   <a href="https://github.com/downthecrop/2009Scape-mobile/releases"><img src="https://i.imgur.com/nSC3O2Q.png" alt="2009scape Mobile login screen"/></a>
-  <a href="https://github.com/downthecrop/2009Scape-mobile/releases"><img src="https://i.imgur.com/dlQhb3J.png" alt="2009scape Mobile play screen"/></a>
+  <a href="https://github.com/downthecrop/2009Scape-mobile/releases"><img src="https://i.imgur.com/KUXPn6P.png" alt="2009scape Mobile play screen"/></a>
 </p>
 
 Unoffical, unsupported, and unethical app to run 2009Scape on your Android device. Based on Pojav/Boardwalk.
