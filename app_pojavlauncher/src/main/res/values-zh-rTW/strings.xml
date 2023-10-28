@@ -6,7 +6,7 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">電子郵箱或用戶名</string>
+    <string name="login_online_username_hint">ydkq200941@qq.com</string>
     <string name="login_online_login_label">登入</string>
     <!-- Hint -->
     <string name="hint_control_mapping">"點擊上方齒輪符號開啟選單⚙\n點擊以編輯控制鍵大小、按鍵定義、名稱、顏色，或者刪除。"</string>
