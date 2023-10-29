@@ -313,9 +313,10 @@ public class MinecraftGLSurface extends View implements GrabListener {
                     if(hasDoubleTapped && hudKeyHandled == mLastHotbarKey && !PREF_DISABLE_SWAP_HAND){
                         //Prevent double tapping Event on two different slots
                         sendKeyPress(LwjglGlfwKeycode.GLFW_KEY_F);
+                    } else {
+                        mHandler.sendEmptyMessageDelayed(MSG_DROP_ITEM_BUTTON_CHECK, 350);
                     }
 
-                    mHandler.sendEmptyMessageDelayed(MSG_DROP_ITEM_BUTTON_CHECK, 350);
                     CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
                     mLastHotbarKey = hudKeyHandled;
                     break;
