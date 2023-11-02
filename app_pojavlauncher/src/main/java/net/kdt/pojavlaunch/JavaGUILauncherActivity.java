@@ -1,6 +1,7 @@
 package net.kdt.pojavlaunch;
 
 import static net.kdt.pojavlaunch.MainActivity.fullyExit;
+import static net.kdt.pojavlaunch.Tools.currentDisplayMetrics;
 
 import android.annotation.SuppressLint;
 import android.content.ClipboardManager;
@@ -101,11 +102,13 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
                 // interested in events where the touch position changed.
                 // int index = event.getActionIndex();
                 int action = event.getActionMasked();
+                float mouseSpeed = LauncherPreferences.PREF_MOUSESPEED;
 
                 float x = event.getX();
                 float y = event.getY();
                 float mouseX, mouseY;
 
+                // Scale the mouse speed
                 mouseX = mMousePointerImageView.getX();
                 mouseY = mMousePointerImageView.getY();
 
@@ -117,8 +120,8 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
                     }
                 } else {
                     if (action == MotionEvent.ACTION_MOVE) { // 2
-                        mouseX = Math.max(0, Math.min(CallbackBridge.physicalWidth, mouseX + x - prevX));
-                        mouseY = Math.max(0, Math.min(CallbackBridge.physicalHeight, mouseY + y - prevY));
+                        mouseX = Math.max(0, Math.min(currentDisplayMetrics.widthPixels, mouseX + (x - prevX) * LauncherPreferences.PREF_MOUSESPEED));
+                        mouseY = Math.max(0, Math.min(currentDisplayMetrics.heightPixels, mouseY + (y - prevY) * LauncherPreferences.PREF_MOUSESPEED));
                         placeMouseAt(mouseX, mouseY);
                         sendScaledMousePosition(mouseX, mouseY);
                     }
