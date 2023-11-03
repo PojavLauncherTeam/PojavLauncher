@@ -13,8 +13,10 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Color;
@@ -22,6 +24,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.provider.DocumentsContract;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -36,10 +39,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.kdt.LoggerView;
 
+import net.kdt.pojavlaunch.contextexecutor.ContextExecutor;
 import net.kdt.pojavlaunch.customcontrols.ControlButtonMenuListener;
 import net.kdt.pojavlaunch.customcontrols.ControlData;
 import net.kdt.pojavlaunch.customcontrols.ControlDrawerData;
@@ -62,7 +67,7 @@ import org.lwjgl.glfw.CallbackBridge;
 import java.io.File;
 import java.io.IOException;
 
-public class MainActivity extends BaseActivity implements ControlButtonMenuListener, EditorExitable {
+public class MainActivity extends BaseActivity implements ControlButtonMenuListener, EditorExitable, ServiceConnection {
     public static volatile ClipboardManager GLOBAL_CLIPBOARD;
     public static final String INTENT_MINECRAFT_VERSION = "intent_version";
 
@@ -84,13 +89,17 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
     private AdapterView.OnItemClickListener gameActionClickListener;
     public ArrayAdapter<String> ingameControlsEditorArrayAdapter;
     public AdapterView.OnItemClickListener ingameControlsEditorListener;
+    private GameService.LocalBinder mServiceBinder;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         minecraftProfile = LauncherProfiles.getCurrentProfile();
         MCOptionUtils.load(Tools.getGameDirPath(minecraftProfile).getAbsolutePath());
-        GameService.startService(this);
+
+        Intent gameServiceIntent = new Intent(this, GameService.class);
+        // Start the service a bit early
+        ContextCompat.startForegroundService(this, gameServiceIntent);
         initLayout(R.layout.activity_basemain);
         CallbackBridge.addGrabListener(touchpad);
         CallbackBridge.addGrabListener(minecraftGLView);
@@ -122,6 +131,10 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         MCOptionUtils.MCOptionListener optionListener = MCOptionUtils::getMcScale;
         MCOptionUtils.addMCOptionListener(optionListener);
         mControlLayout.setModifiable(false);
+
+        //Now, attach to the service. The game will only stoart when this happens, to make sure that we know the right state.
+        bindService(gameServiceIntent, this, 0);
+        ContextExecutor.setActivity(this);
     }
 
     protected void initLayout(int resId) {
@@ -191,11 +204,9 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
 
                     runCraft(finalVersion, mVersionInfo);
                 }catch (Throwable e){
-                    Tools.showError(getApplicationContext(), e, true);
+                    mServiceBinder.notifyThrowable(e);
                 }
             });
-
-            minecraftGLView.start();
         } catch (Throwable e) {
             Tools.showError(this, e, true);
         }
@@ -275,6 +286,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         super.onDestroy();
         CallbackBridge.removeGrabListener(touchpad);
         CallbackBridge.removeGrabListener(minecraftGLView);
+        ContextExecutor.clearActivity();
     }
 
     @Override
@@ -608,5 +620,21 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         navDrawer.setAdapter(gameActionArrayAdapter);
         navDrawer.setOnItemClickListener(gameActionClickListener);
         isInEditor = false;
+    }
+
+    @Override
+    public void onServiceConnected(ComponentName name, IBinder service) {
+        GameService.LocalBinder localBinder = (GameService.LocalBinder) service;
+        mServiceBinder = localBinder;
+        localBinder.attachGameActivity(this);
+        minecraftGLView.start(localBinder.isActive);
+        if(!localBinder.isActive) {
+            localBinder.isActive = true;
+        }
+    }
+
+    @Override
+    public void onServiceDisconnected(ComponentName name) {
+
     }
 }

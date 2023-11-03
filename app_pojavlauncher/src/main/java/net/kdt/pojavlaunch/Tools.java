@@ -167,6 +167,7 @@ public final class Tools {
         int freeDeviceMemory = getFreeDeviceMemory(activity);
         if(LauncherPreferences.PREF_RAM_ALLOCATION > freeDeviceMemory) {
             Object memoryErrorLock = new Object();
+            
             activity.runOnUiThread(() -> {
                 androidx.appcompat.app.AlertDialog.Builder b = new androidx.appcompat.app.AlertDialog.Builder(activity)
                         .setMessage(activity.getString(R.string.memory_warning_msg, freeDeviceMemory ,LauncherPreferences.PREF_RAM_ALLOCATION))
