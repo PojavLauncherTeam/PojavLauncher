@@ -1,4 +1,4 @@
-package net.kdt.pojavlaunch.contextexecutor;
+package net.kdt.pojavlaunch.lifecycle;
 
 import android.app.Activity;
 import android.content.Context;

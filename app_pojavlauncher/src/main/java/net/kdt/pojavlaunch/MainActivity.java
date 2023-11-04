@@ -44,7 +44,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.kdt.LoggerView;
 
-import net.kdt.pojavlaunch.contextexecutor.ContextExecutor;
+import net.kdt.pojavlaunch.lifecycle.ContextExecutor;
 import net.kdt.pojavlaunch.customcontrols.ControlButtonMenuListener;
 import net.kdt.pojavlaunch.customcontrols.ControlData;
 import net.kdt.pojavlaunch.customcontrols.ControlDrawerData;
@@ -132,9 +132,11 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         MCOptionUtils.addMCOptionListener(optionListener);
         mControlLayout.setModifiable(false);
 
-        //Now, attach to the service. The game will only stoart when this happens, to make sure that we know the right state.
-        bindService(gameServiceIntent, this, 0);
+        // Set the activity for the executor. Must do this here, or else Tools.showErrorRemote() may not
+        // execute the correct method
         ContextExecutor.setActivity(this);
+        //Now, attach to the service. The game will only start when this happens, to make sure that we know the right state.
+        bindService(gameServiceIntent, this, 0);
     }
 
     protected void initLayout(int resId) {
@@ -204,7 +206,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
 
                     runCraft(finalVersion, mVersionInfo);
                 }catch (Throwable e){
-                    mServiceBinder.notifyThrowable(e);
+                    Tools.showErrorRemote(e);
                 }
             });
         } catch (Throwable e) {
@@ -348,6 +350,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         int requiredJavaVersion = 8;
         if(version.javaVersion != null) requiredJavaVersion = version.javaVersion.majorVersion;
         Tools.launchMinecraft(this, minecraftAccount, minecraftProfile, versionId, requiredJavaVersion);
+        Tools.runOnUiThread(()-> mServiceBinder.isActive = false);
     }
 
     private void printLauncherInfo(String gameVersion, String javaArguments) {
@@ -626,7 +629,6 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
     public void onServiceConnected(ComponentName name, IBinder service) {
         GameService.LocalBinder localBinder = (GameService.LocalBinder) service;
         mServiceBinder = localBinder;
-        localBinder.attachGameActivity(this);
         minecraftGLView.start(localBinder.isActive);
         if(!localBinder.isActive) {
             localBinder.isActive = true;

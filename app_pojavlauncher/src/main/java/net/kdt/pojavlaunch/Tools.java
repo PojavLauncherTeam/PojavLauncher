@@ -8,13 +8,14 @@ import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_NOTCH_SIZE;
 
 import android.app.Activity;
 import android.app.ActivityManager;
-import android.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -39,6 +40,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -47,8 +49,9 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import net.kdt.pojavlaunch.contextexecutor.ContextExecutor;
-import net.kdt.pojavlaunch.contextexecutor.ContextExecutorTask;
+import net.kdt.pojavlaunch.lifecycle.ContextExecutor;
+import net.kdt.pojavlaunch.lifecycle.ContextExecutorTask;
+import net.kdt.pojavlaunch.lifecycle.LifecycleAwareAlertDialog;
 import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.multirt.Runtime;
 import net.kdt.pojavlaunch.plugins.FFmpegPlugin;
@@ -82,6 +85,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 @SuppressWarnings("IOStreamConstructor")
 public final class Tools {
@@ -161,23 +165,35 @@ public final class Tools {
         NATIVE_LIB_DIR = ctx.getApplicationInfo().nativeLibraryDir;
     }
 
-
-    public static void launchMinecraft(final Activity activity, MinecraftAccount minecraftAccount,
+    public static void launchMinecraft(final AppCompatActivity activity, MinecraftAccount minecraftAccount,
                                        MinecraftProfile minecraftProfile, String versionId, int versionJavaRequirement) throws Throwable {
         int freeDeviceMemory = getFreeDeviceMemory(activity);
         if(LauncherPreferences.PREF_RAM_ALLOCATION > freeDeviceMemory) {
             Object memoryErrorLock = new Object();
-            
+            AtomicBoolean hasLifecycleEnded = new AtomicBoolean(false);
             activity.runOnUiThread(() -> {
-                androidx.appcompat.app.AlertDialog.Builder b = new androidx.appcompat.app.AlertDialog.Builder(activity)
-                        .setMessage(activity.getString(R.string.memory_warning_msg, freeDeviceMemory ,LauncherPreferences.PREF_RAM_ALLOCATION))
-                        .setPositiveButton(android.R.string.ok, (dialogInterface, i) -> {synchronized(memoryErrorLock){memoryErrorLock.notifyAll();}})
-                        .setOnCancelListener((i) -> {synchronized(memoryErrorLock){memoryErrorLock.notifyAll();}});
-                b.show();
+                LifecycleAwareAlertDialog memoryDialog = new LifecycleAwareAlertDialog() {
+                    @Override
+                    protected void createDialog(AlertDialog.Builder b) {
+                        b.setMessage(activity.getString(R.string.memory_warning_msg, freeDeviceMemory, LauncherPreferences.PREF_RAM_ALLOCATION))
+                                .setPositiveButton(android.R.string.ok, (d, w)->{});
+                    }
+
+                    @Override
+                    protected void dialogHidden(boolean lifecycleEnded) {
+                        Log.i("Dialog", "Dialog was hidden! Due to lifecycle event: "+lifecycleEnded);
+                        hasLifecycleEnded.set(lifecycleEnded);
+                        synchronized(memoryErrorLock){memoryErrorLock.notifyAll();}
+                    }
+                };
+                memoryDialog.show(activity.getLifecycle(), activity);
             });
             synchronized (memoryErrorLock) {
                 memoryErrorLock.wait();
             }
+            if(hasLifecycleEnded.get())
+                return; // Fall through without actually launching MC and become inactive,
+                        // we will retry on the next Activity creation/service binding
         }
         Runtime runtime = MultiRTUtils.forceReread(Tools.pickRuntime(minecraftProfile, versionJavaRequirement));
         JMinecraftVersionList.Version versionInfo = Tools.getVersionInfo(versionId);
@@ -217,6 +233,8 @@ public final class Tools {
         if(Tools.isValidString(minecraftProfile.javaArgs)) args = minecraftProfile.javaArgs;
         FFmpegPlugin.discover(activity);
         JREUtils.launchJavaVM(activity, runtime, gamedir, javaArgList, args);
+        // If we returned, this means that the JVM exit dialog has been shown and we don't need to be active anymore.
+        // We never return otherwise. The process will be killed anyway, and thus we will become inactive
     }
 
     public static File getGameDirPath(@NonNull MinecraftProfile minecraftProfile){

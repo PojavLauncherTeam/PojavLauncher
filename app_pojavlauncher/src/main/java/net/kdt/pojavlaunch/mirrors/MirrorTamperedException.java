@@ -7,7 +7,7 @@ import android.text.Html;
 
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.ShowErrorActivity;
-import net.kdt.pojavlaunch.contextexecutor.ContextExecutorTask;
+import net.kdt.pojavlaunch.lifecycle.ContextExecutorTask;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 
 public class MirrorTamperedException extends Exception implements ContextExecutorTask {
