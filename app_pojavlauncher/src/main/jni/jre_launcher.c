@@ -175,7 +175,7 @@ JNIEXPORT jint JNICALL Java_com_oracle_dalvik_VMLauncher_launchJVM(JNIEnv *env, 
     char **argv = convert_to_char_array(env, argsArray);
 
     LOGD("Done processing args");
-    adrsp_test();
+
     res = launchJVM(argc, argv);
 
     LOGD("Going to free args");

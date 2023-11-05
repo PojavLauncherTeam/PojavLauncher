@@ -44,8 +44,9 @@ void osm_set_no_render_buffer(ANativeWindow_Buffer* buffer) {
 }
 
 void osm_swap_surfaces(osm_render_window_t* bundle) {
-    if(bundle->nativeSurface != NULL) {
+    if(bundle->nativeSurface != NULL && bundle->newNativeSurface != bundle->nativeSurface) {
         if(!bundle->disable_rendering) {
+            __android_log_print(ANDROID_LOG_INFO, g_LogTag, "Unlocking for cleanup...");
             ANativeWindow_unlockAndPost(bundle->nativeSurface);
         }
         ANativeWindow_release(bundle->nativeSurface);
@@ -56,52 +57,40 @@ void osm_swap_surfaces(osm_render_window_t* bundle) {
         bundle->newNativeSurface = NULL;
         ANativeWindow_acquire(bundle->nativeSurface);
         ANativeWindow_setBuffersGeometry(bundle->nativeSurface, 0, 0, WINDOW_FORMAT_RGBX_8888);
-        if(ANativeWindow_lock(bundle->nativeSurface,&bundle->buffer,NULL) == 0) {
-            __android_log_print(ANDROID_LOG_ERROR, g_LogTag, "Failed to lock the initial buffer, disabling...");
-            bundle->disable_rendering = false;
-            return;
-        }
-        ANativeWindow_release(bundle->nativeSurface);
+        bundle->disable_rendering = false;
+        return;
+    }else {
+        __android_log_print(ANDROID_LOG_ERROR, g_LogTag,
+                            "No new native surface, switching to dummy framebuffer");
+        bundle->nativeSurface = NULL;
+        osm_set_no_render_buffer(&bundle->buffer);
+        bundle->disable_rendering = true;
     }
-    __android_log_print(ANDROID_LOG_ERROR, g_LogTag, "No new native surface, switching to dummy framebuffer");
-    bundle->nativeSurface = NULL;
-    osm_set_no_render_buffer(&bundle->buffer);
-    bundle->disable_rendering = true;
 
 }
 
+void osm_release_window() {
+    currentBundle->newNativeSurface = NULL;
+    osm_swap_surfaces(currentBundle);
+}
 
 void osm_apply_current_ll() {
     ANativeWindow_Buffer* buffer = &currentBundle->buffer;
-    OSMesaMakeCurrent_p(currentBundle->context,buffer->bits,GL_UNSIGNED_BYTE,buffer->width,buffer->height);
-    if(buffer->stride != currentBundle->last_stride) OSMesaPixelStore_p(OSMESA_ROW_LENGTH,buffer->stride);
+    OSMesaMakeCurrent_p(currentBundle->context, buffer->bits, GL_UNSIGNED_BYTE, buffer->width, buffer->height);
+    if(buffer->stride != currentBundle->last_stride)
+        OSMesaPixelStore_p(OSMESA_ROW_LENGTH, buffer->stride);
     currentBundle->last_stride = buffer->stride;
-}
-
-bool osm_initial_setup() {
-    // the buffer is already prepared and renderable into
-    osm_apply_current_ll();
-    OSMesaPixelStore_p(OSMESA_Y_UP,0);
-    printf("OSMDroid: vendor: %s\n",glGetString_p(GL_VENDOR));
-    printf("OSMDroid: renderer: %s\n",glGetString_p(GL_RENDERER));
-    glClearColor_p(0.4f, 0.4f, 0.4f, 1.0f);
-    glClear_p(GL_COLOR_BUFFER_BIT);
-    glFinish_p();
-
-    // if the rendering was not disabled by osm_swap_surfaces, we can now unlock and render the first frame
-    // but if the first frame has not rendered successfully, we need to clean up by returning false
-
-    return currentBundle->disable_rendering || ANativeWindow_unlockAndPost(currentBundle->nativeSurface) == 0;
 }
 
 void osm_make_current(osm_render_window_t* bundle) {
     if(bundle == NULL) {
         //technically this does nothing as its not possible to unbind a context in OSMesa
-        OSMesaMakeCurrent(NULL, NULL, 0, 0, 0);
+        OSMesaMakeCurrent_p(NULL, NULL, 0, 0, 0);
         currentBundle = NULL;
         return;
     }
     bool hasSetMainWindow = false;
+    currentBundle = bundle;
     if(pojav_environ->mainWindowBundle == NULL) {
         pojav_environ->mainWindowBundle = (basic_render_window_t*) bundle;
         __android_log_print(ANDROID_LOG_INFO, g_LogTag, "Main window bundle is now %p", pojav_environ->mainWindowBundle);
@@ -111,40 +100,29 @@ void osm_make_current(osm_render_window_t* bundle) {
     if(bundle->nativeSurface == NULL) {
         //prepare the buffer for our first render!
         osm_swap_surfaces(bundle);
+        if(hasSetMainWindow) pojav_environ->mainWindowBundle->state = STATE_RENDERER_ALIVE;
     }
-    if(osm_initial_setup()) {
-        // the first frame has rendered successfully, so continue on
-        currentBundle = bundle;
-    }else {
-        // the first frame has not rendered successfully...
-        if(hasSetMainWindow) {
-            pojav_environ->mainWindowBundle->newNativeSurface = NULL;
-            osm_swap_surfaces((osm_render_window_t*)pojav_environ->mainWindowBundle);
-            pojav_environ->mainWindowBundle = NULL;
-        }
-    }
+    osm_set_no_render_buffer(&bundle->buffer);
+    osm_apply_current_ll();
+    OSMesaPixelStore_p(OSMESA_Y_UP,0);
 }
 
 void osm_swap_buffers() {
     if(currentBundle->state == STATE_RENDERER_NEW_WINDOW) {
         osm_swap_surfaces(currentBundle);
-        currentBundle->state == STATE_RENDERER_ALIVE;
+        currentBundle->state = STATE_RENDERER_ALIVE;
     }
-    if(currentBundle->nativeSurface != NULL && !currentBundle->disable_rendering) {
-        if(ANativeWindow_lock(currentBundle->nativeSurface, &currentBundle->buffer, NULL) != 0) {
-            currentBundle->newNativeSurface = NULL;
-            osm_swap_surfaces(currentBundle);
-        }
-    }
+
+    if(currentBundle->nativeSurface != NULL && !currentBundle->disable_rendering)
+        if(ANativeWindow_lock(currentBundle->nativeSurface, &currentBundle->buffer, NULL) != 0)
+            osm_release_window();
+
     osm_apply_current_ll();
     glFinish_p(); // this will force osmesa to write the last rendered image into the buffer
 
-    if(currentBundle->nativeSurface != NULL && !currentBundle->disable_rendering) {
-        if(ANativeWindow_unlockAndPost(currentBundle->nativeSurface) != 0) {
-            currentBundle->newNativeSurface = NULL;
-            osm_swap_surfaces(currentBundle);
-        }
-    }
+    if(currentBundle->nativeSurface != NULL && !currentBundle->disable_rendering)
+        if(ANativeWindow_unlockAndPost(currentBundle->nativeSurface) != 0)
+            osm_release_window();
 }
 
 void osm_setup_window() {
