@@ -9,7 +9,7 @@ body:
     label: Describe the bug
     description: >-
       A clear and concise description of what the bug is.
-    placeholder: 'Example: Application exited with code 1'
+    placeholder: 'Example: I have to press CTRL for keyboard keys to work on my Keychron K2 keyboard when connected via Bluetooth'
   validations:
     required: true
 
@@ -17,17 +17,17 @@ body:
   attributes:
     label: The log file and images/videos
     description: |
-      The log file called `latestlog.txt` is located under `Android/data/net.kdt.pojavlaunch/files`, `games/PojavLauncher/` or `games/PojavLauncher/.minecraft`. You may need to activate an option in your file explorer to see hidden files and folders. |
+      The log file called `latestlog.txt` is located under `/storage/emulated/0/Android/data/net.kdt.pojavlaunch/files` (on Android 10 and higher) or `/storage/emulated/0/games/PojavLauncher/` (on Android 9 and lower). You may have to activate an option in your file explorer to see hidden files and folders. Recommended file managers are ZArchiver and MiXplorer. |
       You can also upload here screenshots or videos of the buggy behavior, if possible.
       
-      Tip: You can attach files by clicking this area to highlight it and then dragging files in or select them on 🖼 option at the toolbar.
+      Tip: You can attach files by clicking this area to highlight it and then dragging files in or select them on 🖼 option at the toolbar. Do not click anything before the file successfully uploads, otherwise the upload is going to stop and the file won't attach.
   validations:
     required: true
 
 - type: textarea
   attributes:
     label: Steps To Reproduce
-    description: Steps to reproduce the behavior.
+    description: Steps to reproduce the issue.
     placeholder: |
       1. Start PojavLauncher
       ... *(your set of actions to reproduce the bug)*
@@ -39,7 +39,7 @@ body:
   attributes:
     label: Expected Behavior
     description: A concise description of what you expected to happen.
-    placeholder: 'Example: I expect the game to launches'
+    placeholder: 'Example: I expect my keyboard to work correctly without having to hold CTRL.'
   validations:
     required: true
 
@@ -48,10 +48,10 @@ body:
     label: Platform
     description: |
       Examples:
-        - **Device model**: Mi 8 Pro 8/128G
-        - **CPU architecture**: aarch64
+        - **Device model**: Huawei P30 Pro 8/512G
+        - **CPU architecture**: arm64 (can be arm64, arm, x86_64 or x86 depending on the device)
         - **Android version**: 10
-        - **PojavLauncher version**: [Latest Release || version 3.3.1.1_rel_20210206 ]
+        - **PojavLauncher version**: (can be found in Android Apps settings, for example `dahlia-20230813-5e8842b-v3_openjdk`)
     value: |
         - Device model: 
         - CPU architecture: 
