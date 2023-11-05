@@ -189,14 +189,6 @@ void load_vulkan() {
     set_vulkan_ptr(vulkan_ptr);
 }
 
-EXTERNAL_API int pojavInit() {
-    ANativeWindow_acquire(pojav_environ->pojavWindow);
-    pojav_environ->savedWidth = ANativeWindow_getWidth(pojav_environ->pojavWindow);
-    pojav_environ->savedHeight = ANativeWindow_getHeight(pojav_environ->pojavWindow);
-    ANativeWindow_setBuffersGeometry(pojav_environ->pojavWindow,pojav_environ->savedWidth,pojav_environ->savedHeight,AHARDWAREBUFFER_FORMAT_R8G8B8X8_UNORM);
-    return 1;
-}
-
 int pojavInitOpenGL() {
     // Only affects GL4ES as of now
     const char *forceVsync = getenv("FORCE_VSYNC");
@@ -218,6 +210,15 @@ int pojavInitOpenGL() {
         br_setup_window();
     }
     return 0;
+}
+
+EXTERNAL_API int pojavInit() {
+    ANativeWindow_acquire(pojav_environ->pojavWindow);
+    pojav_environ->savedWidth = ANativeWindow_getWidth(pojav_environ->pojavWindow);
+    pojav_environ->savedHeight = ANativeWindow_getHeight(pojav_environ->pojavWindow);
+    ANativeWindow_setBuffersGeometry(pojav_environ->pojavWindow,pojav_environ->savedWidth,pojav_environ->savedHeight,AHARDWAREBUFFER_FORMAT_R8G8B8X8_UNORM);
+    pojavInitOpenGL();
+    return 1;
 }
 
 EXTERNAL_API void pojavSetWindowHint(int hint, int value) {
@@ -245,18 +246,12 @@ EXTERNAL_API void pojavSwapBuffers() {
 
 EXTERNAL_API void pojavMakeCurrent(void* window) {
     br_make_current((basic_render_window_t*)window);
-    if(pojav_environ->config_renderer == RENDERER_GL4ES) {
-        gl_make_current((gl_render_window_t*)window);
-    }
 }
 
 EXTERNAL_API void* pojavCreateContext(void* contextSrc) {
     if (pojav_environ->config_renderer == RENDERER_VULKAN) {
-        return (void *)pojav_environ->pojavWindow;
+        return (void *) pojav_environ->pojavWindow;
     }
-
-    pojavInitOpenGL();
-
     return br_init_context((basic_render_window_t*)contextSrc);
 }
 
@@ -270,18 +265,6 @@ Java_org_lwjgl_vulkan_VK_getVulkanDriverHandle(ABI_COMPAT JNIEnv *env, ABI_COMPA
     return strtoul(getenv("VULKAN_PTR"), NULL, 0x10);
 }
 
-EXTERNAL_API JNIEXPORT jlong JNICALL
-Java_org_lwjgl_opengl_GL_getGraphicsBufferAddr(ABI_COMPAT JNIEnv *env, ABI_COMPAT jobject thiz) {
-    return (jlong) osm_get_current()->buffer.bits;
-}
-EXTERNAL_API JNIEXPORT jintArray JNICALL
-Java_org_lwjgl_opengl_GL_getNativeWidthHeight(JNIEnv *env, ABI_COMPAT jobject thiz) {
-    jintArray ret = (*env)->NewIntArray(env,2);
-    ANativeWindow_Buffer buffer = osm_get_current()->buffer;
-    jint arr[] = {buffer.width, buffer.height};
-    (*env)->SetIntArrayRegion(env,ret,0,2,arr);
-    return ret;
-}
 EXTERNAL_API void pojavSwapInterval(int interval) {
     br_swap_interval(interval);
 }
