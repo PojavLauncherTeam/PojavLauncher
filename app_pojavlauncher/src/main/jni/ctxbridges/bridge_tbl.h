@@ -36,6 +36,7 @@ void set_gl_bridge_tbl() {
     br_init = gl_init;
     br_init_context = (br_init_context_t) gl_init_context;
     br_make_current = (br_make_current_t) gl_make_current;
+    br_get_current = (br_get_current_t) gl_get_current;
     br_swap_buffers = gl_swap_buffers;
     br_setup_window = gl_setup_window;
     br_swap_interval = gl_swap_interval;
