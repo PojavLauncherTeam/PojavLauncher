@@ -46,6 +46,7 @@ LOCAL_SRC_FILES := \
     bigcoreaffinity.c \
     egl_bridge.c \
     ctxbridges/gl_bridge.c \
+    ctxbridges/osm_bridge.c \
     ctxbridges/egl_loader.c \
     ctxbridges/osmesa_loader.c \
     environ/environ.c \
@@ -53,6 +54,7 @@ LOCAL_SRC_FILES := \
     jre_launcher.c \
     utils.c \
     driver_helper/nsbypass.c
+
 ifeq ($(TARGET_ARCH_ABI),arm64-v8a)
 LOCAL_CFLAGS += -DADRENO_POSSIBLE
 LOCAL_LDLIBS += -lEGL -lGLESv2
