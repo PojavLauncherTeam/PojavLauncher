@@ -173,7 +173,7 @@
     <string name="preference_java_description">Java 运行环境、JVM 参数、内存量与沙盒</string>
     <string name="preference_misc_title">其它设置</string>
     <string name="preference_misc_description">版本列表和依赖库检查</string>
-    <string name="preference_experimental_title">实验性的补丁</string>
+    <string name="preference_experimental_title">实验性补丁</string>
     <string name="preference_experimental_description">此处内容不受支持，请考虑后使用。</string>
     <string name="preference_sustained_performance_title">启用持续性能模式</string>
     <string name="preference_sustained_performance_description">通过限制峰值性能来限制过热降频。</string>
