@@ -275,7 +275,7 @@ public class JREUtils {
         // return ldLibraryPath;
     }
 
-    public static int launchJavaVM(final AppCompatActivity activity, final Runtime runtime, File gameDirectory, final List<String> JVMArgs, final String userArgsString) throws Throwable {
+    public static void launchJavaVM(final AppCompatActivity activity, final Runtime runtime, File gameDirectory, final List<String> JVMArgs, final String userArgsString) throws Throwable {
         String runtimeHome = MultiRTUtils.getRuntimeHome(runtime.name).getAbsolutePath();
 
         JREUtils.relocateLibPath(runtime, runtimeHome);
@@ -313,26 +313,13 @@ public class JREUtils {
         final int exitCode = VMLauncher.launchJVM(userArgs.toArray(new String[0]));
         Logger.appendToLog("Java Exit code: " + exitCode);
         if (exitCode != 0) {
-            activity.runOnUiThread(() -> {
-                LifecycleAwareAlertDialog awareAlertDialog = new LifecycleAwareAlertDialog() {
+            LifecycleAwareAlertDialog.DialogCreator dialogCreator = (dialog, builder)->
+                    builder.setMessage(activity.getString(R.string.mcn_exit_title, exitCode))
+                    .setPositiveButton(R.string.main_share_logs, (dialogInterface, which)-> shareLog(activity));
 
-                    @Override
-                    protected void createDialog(androidx.appcompat.app.AlertDialog.Builder dialogBuilder) {
-                        dialogBuilder.setMessage(activity.getString(R.string.mcn_exit_title, exitCode));
-                        dialogBuilder.setPositiveButton(R.string.main_share_logs, (dialog, which)->{
-                            shareLog(activity);
-                        });
-                    }
-
-                    @Override
-                    protected void dialogHidden(boolean lifecycleEnded) {
-                        MainActivity.fullyExit();
-                    }
-                };
-                awareAlertDialog.show(activity.getLifecycle(), activity);
-            });
+            LifecycleAwareAlertDialog.haltOnDialog(activity.getLifecycle(), activity, dialogCreator);
         }
-        return exitCode;
+        MainActivity.fullyExit();
     }
 
     /**

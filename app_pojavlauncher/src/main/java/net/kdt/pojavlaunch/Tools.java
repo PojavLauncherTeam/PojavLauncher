@@ -8,14 +8,12 @@ import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_NOTCH_SIZE;
 
 import android.app.Activity;
 import android.app.ActivityManager;
-import androidx.appcompat.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -40,6 +38,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
@@ -85,7 +84,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 @SuppressWarnings("IOStreamConstructor")
 public final class Tools {
@@ -169,31 +167,15 @@ public final class Tools {
                                        MinecraftProfile minecraftProfile, String versionId, int versionJavaRequirement) throws Throwable {
         int freeDeviceMemory = getFreeDeviceMemory(activity);
         if(LauncherPreferences.PREF_RAM_ALLOCATION > freeDeviceMemory) {
-            Object memoryErrorLock = new Object();
-            AtomicBoolean hasLifecycleEnded = new AtomicBoolean(false);
-            activity.runOnUiThread(() -> {
-                LifecycleAwareAlertDialog memoryDialog = new LifecycleAwareAlertDialog() {
-                    @Override
-                    protected void createDialog(AlertDialog.Builder b) {
-                        b.setMessage(activity.getString(R.string.memory_warning_msg, freeDeviceMemory, LauncherPreferences.PREF_RAM_ALLOCATION))
-                                .setPositiveButton(android.R.string.ok, (d, w)->{});
-                    }
+            LifecycleAwareAlertDialog.DialogCreator dialogCreator = (dialog, builder) ->
+                builder.setMessage(activity.getString(R.string.memory_warning_msg, freeDeviceMemory, LauncherPreferences.PREF_RAM_ALLOCATION))
+                        .setPositiveButton(android.R.string.ok, (d, w)->{});
 
-                    @Override
-                    protected void dialogHidden(boolean lifecycleEnded) {
-                        Log.i("Dialog", "Dialog was hidden! Due to lifecycle event: "+lifecycleEnded);
-                        hasLifecycleEnded.set(lifecycleEnded);
-                        synchronized(memoryErrorLock){memoryErrorLock.notifyAll();}
-                    }
-                };
-                memoryDialog.show(activity.getLifecycle(), activity);
-            });
-            synchronized (memoryErrorLock) {
-                memoryErrorLock.wait();
+            if(LifecycleAwareAlertDialog.haltOnDialog(activity.getLifecycle(), activity, dialogCreator)) {
+                return; // If the dialog's lifecycle has ended, return without
+                // actually launching the game, thus giving us the opportunity
+                // to start after the activity is shown again
             }
-            if(hasLifecycleEnded.get())
-                return; // Fall through without actually launching MC and become inactive,
-                        // we will retry on the next Activity creation/service binding
         }
         Runtime runtime = MultiRTUtils.forceReread(Tools.pickRuntime(minecraftProfile, versionJavaRequirement));
         JMinecraftVersionList.Version versionInfo = Tools.getVersionInfo(versionId);
