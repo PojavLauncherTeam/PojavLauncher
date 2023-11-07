@@ -1,4 +1,4 @@
-package net.kdt.pojavlaunch.tasks;
+package net.kdt.pojavlaunch.lifecycle;
 
 import static net.kdt.pojavlaunch.MainActivity.INTENT_MINECRAFT_VERSION;
 
@@ -9,9 +9,10 @@ import android.content.Intent;
 import net.kdt.pojavlaunch.MainActivity;
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
-import net.kdt.pojavlaunch.contextexecutor.ContextExecutor;
-import net.kdt.pojavlaunch.contextexecutor.ContextExecutorTask;
+import net.kdt.pojavlaunch.lifecycle.ContextExecutor;
+import net.kdt.pojavlaunch.lifecycle.ContextExecutorTask;
 import net.kdt.pojavlaunch.progresskeeper.ProgressKeeper;
+import net.kdt.pojavlaunch.tasks.AsyncMinecraftDownloader;
 import net.kdt.pojavlaunch.utils.NotificationUtils;
 
 public class ContextAwareDoneListener implements AsyncMinecraftDownloader.DoneListener, ContextExecutorTask {

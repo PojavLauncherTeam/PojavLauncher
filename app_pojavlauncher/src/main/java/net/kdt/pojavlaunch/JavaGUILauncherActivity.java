@@ -1,7 +1,5 @@
 package net.kdt.pojavlaunch;
 
-import static net.kdt.pojavlaunch.MainActivity.fullyExit;
-
 import android.annotation.SuppressLint;
 import android.content.ClipboardManager;
 import android.os.Bundle;
@@ -173,14 +171,10 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
             openLogOutput(null);
             new Thread(() -> {
                 try {
-                    final int exit = doCustomInstall(runtime, modFile, javaArgs);
-                    Logger.appendToLog(getString(R.string.toast_optifine_success));
-                    if (exit != 0) return;
-                    runOnUiThread(() -> {
-                        Toast.makeText(JavaGUILauncherActivity.this, R.string.toast_optifine_success, Toast.LENGTH_SHORT).show();
-                        fullyExit();
-                    });
-
+                    // Due to time, the code here became, like, actually useless
+                    // So it was removed
+                    // Tbh this whole class needs a refactor...
+                    doCustomInstall(runtime, modFile, javaArgs);
                 } catch (Throwable e) {
                     Logger.appendToLog("Install failed:");
                     Logger.appendToLog(Log.getStackTraceString(e));
@@ -287,7 +281,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
                 Toast.LENGTH_SHORT).show();
     }
 
-    public int launchJavaRuntime(Runtime runtime, File modFile, String javaArgs) {
+    public void launchJavaRuntime(Runtime runtime, File modFile, String javaArgs) {
         JREUtils.redirectAndPrintJRELog();
         try {
             List<String> javaArgList = new ArrayList<>();
@@ -313,18 +307,17 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
 
             Logger.appendToLog("Info: Java arguments: " + Arrays.toString(javaArgList.toArray(new String[0])));
 
-            return JREUtils.launchJavaVM(this, runtime,null,javaArgList, LauncherPreferences.PREF_CUSTOM_JAVA_ARGS);
+            JREUtils.launchJavaVM(this, runtime,null,javaArgList, LauncherPreferences.PREF_CUSTOM_JAVA_ARGS);
         } catch (Throwable th) {
             Tools.showError(this, th, true);
-            return -1;
         }
     }
 
 
 
-    private int doCustomInstall(Runtime runtime, File modFile, String javaArgs) {
+    private void doCustomInstall(Runtime runtime, File modFile, String javaArgs) {
         mSkipDetectMod = true;
-        return launchJavaRuntime(runtime, modFile, javaArgs);
+        launchJavaRuntime(runtime, modFile, javaArgs);
     }
 
     public void toggleKeyboard(View view) {

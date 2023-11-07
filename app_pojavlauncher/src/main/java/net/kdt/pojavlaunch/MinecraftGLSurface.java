@@ -144,14 +144,17 @@ public class MinecraftGLSurface extends View implements GrabListener {
         MCOptionUtils.addMCOptionListener(mGuiScaleListener);
     }
 
-    /** Initialize the view and all its settings */
-    public void start(){
+    /** Initialize the view and all its settings
+     * @param isAlreadyRunning set to true to tell the view that the game is already running
+     *                         (only updates the window without calling the start listener)
+     */
+    public void start(boolean isAlreadyRunning){
         if(LauncherPreferences.PREF_USE_ALTERNATE_SURFACE){
             SurfaceView surfaceView = new SurfaceView(getContext());
             mSurface = surfaceView;
 
             surfaceView.getHolder().addCallback(new SurfaceHolder.Callback() {
-                private boolean isCalled = false;
+                private boolean isCalled = isAlreadyRunning;
                 @Override
                 public void surfaceCreated(@NonNull SurfaceHolder holder) {
                     if(isCalled) {
@@ -180,7 +183,7 @@ public class MinecraftGLSurface extends View implements GrabListener {
             mSurface = textureView;
 
             textureView.setSurfaceTextureListener(new TextureView.SurfaceTextureListener() {
-                private boolean isCalled = false;
+                private boolean isCalled = isAlreadyRunning;
                 @Override
                 public void onSurfaceTextureAvailable(@NonNull SurfaceTexture surface, int width, int height) {
                     Surface tSurface = new Surface(surface);
