@@ -322,4 +322,5 @@
     <string name="notification_permission_toast">Později si můžete změnit svůj názor v nastavení</string>
     <string name="preference_ask_for_notification_title">Povolit oznámení</string>
     <string name="preference_ask_for_notification_description">Kliknutím znovu požádáte o oprávnění pro posílání oznámení, které je vyžadováno pro správné fungování stahování hry/modpacku na pozadí.</string>
+    <string name="exception_failed_to_unpack_jre17">Instalace JRE 17 selhala</string>
 </resources>
