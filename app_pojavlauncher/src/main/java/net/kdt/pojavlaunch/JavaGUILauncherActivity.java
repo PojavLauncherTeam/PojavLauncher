@@ -91,6 +91,8 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
             ViewGroup.LayoutParams params = mMousePointerImageView.getLayoutParams();
             params.width = (int) (36 / 100f * LauncherPreferences.PREF_MOUSESCALE);
             params.height = (int) (54 / 100f * LauncherPreferences.PREF_MOUSESCALE);
+            if(LauncherPreferences.PREF_VIRTUAL_MOUSE_START)
+                toggleVirtualMouse();
         });
 
         mTouchPad.setOnTouchListener(new View.OnTouchListener() {
@@ -120,8 +122,8 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
                     }
                 } else {
                     if (action == MotionEvent.ACTION_MOVE) { // 2
-                        mouseX = Math.max(0, Math.min(currentDisplayMetrics.widthPixels, mouseX + (x - prevX) * LauncherPreferences.PREF_MOUSESPEED));
-                        mouseY = Math.max(0, Math.min(currentDisplayMetrics.heightPixels, mouseY + (y - prevY) * LauncherPreferences.PREF_MOUSESPEED));
+                        mouseX = Math.max(0, Math.min(currentDisplayMetrics.widthPixels, mouseX + (x - prevX) * mouseSpeed));
+                        mouseY = Math.max(0, Math.min(currentDisplayMetrics.heightPixels, mouseY + (y - prevY) * mouseSpeed));
                         placeMouseAt(mouseX, mouseY);
                         sendScaledMousePosition(mouseX, mouseY);
                     }
@@ -130,8 +132,6 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
                         if (event.getPointerCount() == 2) {
                             // Right-click event when a second finger touches the screen
                             // Simulating right-click by sending GLFW_MOUSE_BUTTON_RIGHT event
-                            Log.i("downthecrop","Hi from a rightclick event!");
-                            //activateRC();
                             AWTInputBridge.sendKey((char)AWTInputEvent.VK_F11,AWTInputEvent.VK_F11);
                             AWTInputBridge.sendMousePress(AWTInputEvent.BUTTON1_DOWN_MASK);
                         }
@@ -203,14 +203,6 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
         } catch (Throwable th) {
             Tools.showError(this, th, true);
         }
-
-
-        getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
-            @Override
-            public void handleOnBackPressed() {
-                MainActivity.dialogForceClose(JavaGUILauncherActivity.this);
-            }
-        });
     }
 
     @Override
@@ -261,7 +253,6 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
                     break;
                 case R.id.camera:
                     if (!cameraMode) { // Camera Mode On
-                        Log.i("downthecrop", "Hello from the camrea Button");
                         AWTInputBridge.sendKey((char) AWTInputEvent.VK_F9, AWTInputEvent.VK_F9); // Send F9
                         cameraMode = true;
                         findViewById(R.id.camera).setBackground(getResources().getDrawable( R.drawable.control_button_pressed ));
@@ -272,7 +263,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
                     }
                     break;
                 case R.id.mouseMode:
-                    toggleVirtualMouse(this.getCurrentFocus());
+                    toggleVirtualMouse();
             }
             lastPress = time;
         }
@@ -320,7 +311,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
         mLoggerView.setVisibility(View.VISIBLE);
     }
 
-    public void toggleVirtualMouse(View v) {
+    public void toggleVirtualMouse() {
         mIsVirtualMouseEnabled = !mIsVirtualMouseEnabled;
         ImageView view = findViewById(R.id.mouseModeIco);
         if(!mIsVirtualMouseEnabled){
