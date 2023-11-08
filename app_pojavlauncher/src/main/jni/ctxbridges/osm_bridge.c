@@ -12,6 +12,9 @@ static __thread osm_render_window_t* currentBundle;
 // a tiny buffer for rendering when there's nowhere t render
 static char no_render_buffer[4];
 
+// Its not in a .h file because it is not supposed to be used outsife of this file.
+void setNativeWindowSwapInterval(struct ANativeWindow* nativeWindow, int swapInterval);
+
 bool osm_init() {
     dlsym_OSMesa();
     return true; // no more specific initialization required
@@ -134,5 +137,7 @@ void osm_setup_window() {
 }
 
 void osm_swap_interval(int swapInterval) {
-    // nothing, as you can only set the swap interval with internal system APIs
+    if(pojav_environ->mainWindowBundle != NULL && pojav_environ->mainWindowBundle->nativeSurface != NULL) {
+        setNativeWindowSwapInterval(pojav_environ->mainWindowBundle->nativeSurface, swapInterval);
+    }
 }

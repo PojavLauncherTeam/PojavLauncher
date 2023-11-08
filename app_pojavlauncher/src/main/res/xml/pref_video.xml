@@ -43,12 +43,17 @@
             android:summary="@string/mcl_setting_subtitle_use_surface_view"
             android:title="@string/mcl_setting_title_use_surface_view"
             />
-
         <androidx.preference.SwitchPreferenceCompat
             android:defaultValue="false"
             android:key="force_vsync"
             android:summary="@string/preference_force_vsync_description"
             android:title="@string/preference_force_vsync_title"
+            />
+        <androidx.preference.SwitchPreferenceCompat
+            android:defaultValue="true"
+            android:key="vsync_in_zink"
+            android:summary="@string/preference_vsync_in_zink_description"
+            android:title="@string/preference_vsync_in_zink_title"
             />
     </PreferenceCategory>
 </PreferenceScreen>
