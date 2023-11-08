@@ -364,4 +364,5 @@
     <string name="notification_permission_toast">You can always change your mind later by going into Settings</string>
     <string name="preference_ask_for_notification_title">Allow notifications</string>
     <string name="preference_ask_for_notification_description">Click to re-request the notification permission, required for game/modpack background downloads to work properly.</string>
+    <string name="exception_failed_to_unpack_jre17">Failed to install JRE 17</string>
 </resources>
