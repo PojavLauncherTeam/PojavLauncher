@@ -320,4 +320,5 @@
     <string name="notification_permission_toast">Toto povolenie môžete kedykoľvek zmeniť v nastaveniach</string>
     <string name="preference_ask_for_notification_title">Povoliť upozornenia</string>
     <string name="preference_ask_for_notification_description">Kliknutím znova požiadate o povolenie upozornení, ktoré je potrebné na správne fungovanie sťahovania hier/modpackov na pozadí.</string>
+    <string name="exception_failed_to_unpack_jre17">Nepodarilo sa nainštalovať Javu 17</string>
 </resources>
