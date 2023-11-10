@@ -49,6 +49,7 @@ LOCAL_SRC_FILES := \
     ctxbridges/osm_bridge.c \
     ctxbridges/egl_loader.c \
     ctxbridges/osmesa_loader.c \
+    ctxbridges/swap_interval_no_egl.c \
     environ/environ.c \
     input_bridge_v3.c \
     jre_launcher.c \
