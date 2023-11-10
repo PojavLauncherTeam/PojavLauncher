@@ -93,7 +93,7 @@ public class AsyncMinecraftDownloader {
             // THIS one function need the activity in the case of an error
             if(activity != null && !JRE17Util.installNewJreIfNeeded(activity, verInfo)){
                 ProgressLayout.clearProgress(ProgressLayout.DOWNLOAD_MINECRAFT);
-                throw new DownloaderException();
+                throw new DownloaderException(new Exception(activity.getString(R.string.exception_failed_to_unpack_jre17)));
             }
 
             try {
