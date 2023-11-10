@@ -41,6 +41,7 @@
     <string name="mcl_setting_subtitle_ignore_notch">Ignoriert die Einbuchtung im Bildschirm und erweitert das Bild unter ihr.\nErgibt eine immersivere Erfahrung.</string>
     <string name="mcl_setting_title_resolution_scaler">Auflösungsskallierung</string>
     <string name="mcl_setting_subtitle_resolution_scaler">Ermöglicht das Verringern der Spielauflösung. 100% entspricht der vollen Auflösung.</string>
+    <string name="mcl_setting_title_longpresstrigger">Verzögerung nach langem Drücken des Triggers</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Verzögerung für langes drücken des Triggers für das Zerstören von Blöcken oder fallen lassen von Gegenständen ändern.</string>
     <string name="mcl_setting_title_buttonscale">Größe der Steuerelemente</string>
     <string name="mcl_setting_subtitle_buttonscale">Tasten vergrößern, wenn sie zu klein sind.</string>
@@ -175,7 +176,9 @@
     <string name="preference_experimental_title">Experimentell</string>
     <string name="preference_experimental_description">Benutze diese Optionen mit Bedacht, es wird keine Unterstützung geben</string>
     <string name="preference_sustained_performance_title">Dauerhaften Leistungsmodus aktivieren</string>
+    <string name="preference_sustained_performance_description">Durch Begrenzung der Höchst-Performance die Leistungsverringerung bei hoher CPU-Temperatur vermindern.</string>
     <string name="preference_force_vsync_title">V-Sync erzwingen</string>
+    <string name="preference_force_vsync_description">Durch Begrenzung der Höchst-Performance die Leistungsverringerung bei hoher CPU-Temperatur vermindern.</string>
     <string name="preference_force_english_title">Englische Sprache erzwingen</string>
     <string name="preference_force_english_description">Verwendet die originalen Beschriftungen, wie von Entwicklern vorgesehen. Benötigt einen Neustart.</string>
     <string name="preference_edit_controls_title">Benutzerdefinierte Steuerung bearbeiten</string>
@@ -295,6 +298,10 @@
     <string name="notif_error_occured_desc">Klicke um mehr Details zu sehen</string>
     <string name="fabric_dl_only_stable">Nur stabile Versionen anzeigen</string>
     <string name="dl_tampered_manifest_title">Datei-Verifikations-Warnung</string>
+    <string name="dl_tampered_manifest"><![CDATA[Das Spielversions-Manifest auf dem Spiegelserver gleicht nicht dem offiziellen von Mojang, was bedeutet, dass es manipuliert sein könnte.<br/>
+<b> Fortzufahren ist nicht sicher und persönliche Daten könnten gestohlen werden.</b><br/>
+Sollen die Spiegelserver trotzdem verwendet werden, drücke \"Manifest-Überprüfungen deaktivieren\" und starte den Download erneut.<br/>
+Um die offizielle Download-Quelle zu verwenden, drücke \"Auf offizielle Seite umschalten\" und starte den Download erneut.<br/>]]></string>
     <string name="dl_turn_off_manifest_checks">Manifest-Verifikation ausschalten</string>
     <string name="dl_switch_to_official_site">Zur offiziellen Seite wechseln</string>
     <string name="preference_download_source_title">Spiele-Download-Quelle</string>
