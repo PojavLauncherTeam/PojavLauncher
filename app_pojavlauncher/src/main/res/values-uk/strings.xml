@@ -322,4 +322,5 @@
     <string name="notification_permission_toast">Ви завжди можете змінити пізніше, перейшовши до налаштувань</string>
     <string name="preference_ask_for_notification_title">Дозволити сповіщення</string>
     <string name="preference_ask_for_notification_description">Натисніть, щоб повторно запитати дозвіл на сповіщення, необхідний для коректної роботи фонових завантажень гри/модпаку.</string>
+    <string name="exception_failed_to_unpack_jre17">Не вдалося установити JRE 17</string>
 </resources>
