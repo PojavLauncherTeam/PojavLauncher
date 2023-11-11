@@ -322,5 +322,6 @@
     <string name="notification_permission_toast">Выбор можно изменить позже, перейдя в настройки.</string>
     <string name="preference_ask_for_notification_title">Разрешить уведомления</string>
     <string name="preference_ask_for_notification_description">Нажмите, чтобы ещё раз запросить разрешение на вывод уведомлений. Они нужны для правильной загрузки игры и сборок модов в фоне.</string>
+    <string name="preference_vsync_in_zink_title">Вертикальная синхронизация с Zink</string>
     <string name="exception_failed_to_unpack_jre17">Не удалось установить JRE 17</string>
 </resources>
