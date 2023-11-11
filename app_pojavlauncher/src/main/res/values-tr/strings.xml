@@ -322,4 +322,7 @@
     <string name="notification_permission_toast">Fikrinizi daha sonra Ayarlar\'a girerek her zaman değiştirebilirsiniz</string>
     <string name="preference_ask_for_notification_title">Bildirimlere izin ver</string>
     <string name="preference_ask_for_notification_description">Oyun/mod paketi arka plan indirmelerinin düzgün çalışması için gerekli olan bildirim iznini yeniden istemek için tıklayın.</string>
+    <string name="preference_vsync_in_zink_title">Zink ile V-Sync\'ye izin ver</string>
+    <string name="preference_vsync_in_zink_description">Başlatıcının Zink için V-Sync\'i etkinleştirmek üzere dahili sistem API\'lerini kullanmasına izin verir. Bir sistem güncellemesinden sonra başlatıcınız Zink ile aniden çökerse bunu kapatın.</string>
+    <string name="exception_failed_to_unpack_jre17">JRE 17 yüklenemedi</string>
 </resources>
