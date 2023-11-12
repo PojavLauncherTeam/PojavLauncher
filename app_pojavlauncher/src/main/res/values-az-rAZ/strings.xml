@@ -316,4 +316,12 @@
     <string name="preference_category_main_categories">Kateqoriyalar</string>
     <string name="preference_category_miscellaneous">Müxtəlif parametrlər</string>
     <string name="preference_category_video">Video parametrləri</string>
+    <string name="notification_permission_dialog_title">İcazə sorğusu</string>
+    <string name="notification_permission_dialog_text">PojavLauncher, proqramı tərk etdiyiniz zaman oyun/mod paketi yükləmələrinin dayandırılmasının qarşısını almaq məqsədilə bildirişlər göndərmək üçün icazə tələb edir. Bu icazə olmadan PojavLauncher-i fon rejiminə keçirdiyiniz zaman Android, yükləmələrinizi bağlaya bilər.</string>
+    <string name="notification_permission_toast">Daha sonra Parametrlərə daxil olaraq fikrinizi dəyişə bilərsiniz</string>
+    <string name="preference_ask_for_notification_title">Bildirişlərə icazə verin</string>
+    <string name="preference_ask_for_notification_description">Oyun/modpack fon yükləmələrinin düzgün işləməsi üçün tələb olunan bildiriş icazəsini yenidən tələb etmək üçün klikləyin.</string>
+    <string name="preference_vsync_in_zink_title">Zink ilə V-Sync-ə icazə verin</string>
+    <string name="preference_vsync_in_zink_description">Başladıcıya Zink üçün V-Sync-i aktivləşdirmək məqsədilə daxili sistem API-lərindən istifadə etməyə icazə verir. Başladıcınız sistem yeniləməsindən sonra qəfil Zink ilə çökərsə, bunu söndürün.</string>
+    <string name="exception_failed_to_unpack_jre17">JRE 17 quraşdırmaq alınmadı</string>
 </resources>
