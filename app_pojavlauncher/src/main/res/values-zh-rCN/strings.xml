@@ -322,5 +322,7 @@
     <string name="notification_permission_toast">您随时可以进入设置来更改您的意愿</string>
     <string name="preference_ask_for_notification_title">允许通知</string>
     <string name="preference_ask_for_notification_description">请点击重新请求通知权限，以确保游戏或模组包的后台下载正常工作。</string>
+    <string name="preference_vsync_in_zink_title">允许在使用 Zink 时启用垂直同步</string>
+    <string name="preference_vsync_in_zink_description">允许启动器使用内部系统 API 为 Zink 启用垂直同步，如果您的启动器在系统更新后突然在使用 Zink 时崩溃，请关闭此选项。</string>
     <string name="exception_failed_to_unpack_jre17">无法安装 JRE 17</string>
 </resources>
