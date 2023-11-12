@@ -9,7 +9,7 @@
     <string name="login_online_username_hint">이메일 또는 사용자명</string>
     <string name="login_online_login_label">로그인</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"컨텍스트 메뉴를 열려면 가운데 아이콘을 누르세요⚙\n단축키를 수정, 크기 조정, 삭제하려면 버튼을 누르세요"</string>
+    <string name="hint_control_mapping">"상단 중앙 톱니바퀴 아이콘을 탭하여 상황에 맞는 메뉴를 엽니다. ⚙\n버튼을 탭하여 사용자 설정을 수정합니다 키 편집, 크기 조정, 삭제 키맵 조정"</string>
     <!-- Warnings -->
     <string name="warning_remove_account">이 계정이 제거될 거예요!</string>
     <!-- AlertDialog title -->
@@ -20,8 +20,8 @@
     <string name="error_show_more">더 보기</string>
     <string name="error_show_less">간략히 보기</string>
     <!-- Toast messages -->
-    <string name="toast_permission_denied">저장소 읽고 쓰기 권한이 필요합니다!</string>
-    <string name="toast_optifine_success">설치 성공</string>
+    <string name="toast_permission_denied">저장소에 대한 읽고 쓰기 권한이 필요합니다!</string>
+    <string name="toast_optifine_success">설치 완료</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
@@ -54,9 +54,9 @@
     <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - (모든 버전, 살짝 렉이 걸릴 수 있습니다.)</string>
     <string name="mcl_setting_renderer_angle">ANGLE (Vulkan) - (1.17버전 이상, 살짝 렉이 걸릴 수 있습니다.)</string>
     <string name="mcl_setting_veroption_release">릴리즈</string>
-    <string name="mcl_setting_veroption_snapshot">스냅숏</string>
-    <string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
-    <string name="mcl_setting_veroption_oldbeta">Old-beta</string>
+    <string name="mcl_setting_veroption_snapshot">스냅샷</string>
+    <string name="mcl_setting_veroption_oldalpha">구-알파버전</string>
+    <string name="mcl_setting_veroption_oldbeta">구-베타버전</string>
     <string name="mcl_setting_java_sandbox">외부 .jar 실행</string>
     <string name="mcl_setting_java_sandbox_subtitle">.jar 파일을 실행할 때 샌드박스 보안 관리자의 사용 가능 여부를 제어합니다.</string>
     <string name="mcl_version_clone">복제</string>
@@ -80,7 +80,7 @@
     <string name="mcn_exit_confirm">강제로 종료하시겠습니까?</string>
     <string name="mcn_check_fail_vulkan_support">Zink (Vulkan) 렌더러는 이 기기를 지원하지 않습니다!</string>
     <!-- MainActivity: Control buttons -->
-    <string name="control_chat">챗</string>
+    <string name="control_chat">채팅</string>
     <string name="control_debug">디버그</string>
     <string name="control_primary">LMB</string>
     <string name="control_secondary">RMB</string>
@@ -98,9 +98,9 @@
     <string name="control_mouseon">마우스: 켬 </string>
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">강제 종료</string>
-    <string name="control_viewout">로그 확인</string>
-    <string name="control_adebug">디버그 표시</string>
-    <string name="control_customkey">사용자 지정 키 보내기</string>
+    <string name="control_viewout">로그 산출</string>
+    <string name="control_adebug">디버그 입력</string>
+    <string name="control_customkey">사용자 지정 키 내보내기</string>
     <!-- ImportControlActivity Strings -->
     <string name="import_control_label">컨트롤 가져오기</string>
     <string name="import_control_invalid_file">잘못되거나 손상된 파일입니다</string>
@@ -129,7 +129,7 @@
     <string name="customctrl_export">조작 설정 불러오기</string>
     <string name="main_share_logs">기록 파일 공유</string>
     <string name="main_install_jar_file">.jar 파일 실행</string>
-    <string name="main_play">시작하기</string>
+    <string name="main_play">플레이</string>
     <string name="autoram_info_msg">메모리가 %dMB 할당되었습니다.</string>
     <string name="mcl_setting_check_libraries">다운로드 후 라이브러리 확인</string>
     <string name="mcl_setting_check_libraries_subtitle">이 설정은 라이브러리 해시를 강제로 확인합니다. 잘못된 다운로드를 막을 수 있습니다.</string>
@@ -137,29 +137,29 @@
     <string name="dl_library_sha_unknown">%s 라이브러리를 확인할 수 없습니다.</string>
     <string name="dl_library_sha_pass">%s 라이브러리를 이용할 수 있습니다.</string>
     <string name="mcl_disable_gestures">제스쳐 비활성화</string>
-    <string name="mcl_disable_gestures_subtitle">탭하여 블록 설치, 길게 눌러 블록 파괴와 같은 제스쳐를 비활성화 합니다</string>
+    <string name="mcl_disable_gestures_subtitle">탭하여 블록 설치, 길게 눌러 블록 파괴와 같은 제스쳐를 비활성화 합니다.</string>
     <string name="mcl_disable_swap_hand">더블탭 해 손 바꾸기 비활성화</string>
     <string name="mcl_disable_swap_hand_subtitle">핫바 아이템을 왼손으로 교체하는 데에 더블 탭 기능을 비활성화 합니다.</string>
     <string name="mcl_setting_title_mousespeed">마우스 속도</string>
     <string name="mcl_setting_subtitle_mousespeed">가상 마우스 속도 변경</string>
-    <string name="customctrl_passthru">마우스 패스스루</string>
+    <string name="customctrl_passthru">마우스 통과</string>
     <string name="customctrl_swipeable">끌어당기기</string>
     <string name="customctrl_forward_lock">전면 잠금</string>
-    <string name="memory_warning_msg">현재 사용 가능한 RAM 크기(%d) 가 할당된 RAM 크기(%d) 보다 낮습니다. 게임이 충돌할 경우 할당량을 변경하세요.</string>
+    <string name="memory_warning_msg">현재 사용 가능한 RAM 크기(%d) 가 할당된 RAM 크기(%d) 보다 낮습니다. 게임이 충돌할 경우 RAM 할당량을 변경하세요.</string>
     <string name="mcl_memory_allocation">메모리 할당</string>
     <string name="mcl_memory_allocation_subtitle">마인크래프트 메모리 할당 조절</string>
-    <string name="multirt_runtime_corrupt">사용 불가능한 Java 런타임</string>
+    <string name="multirt_runtime_corrupt">사용 불가능한 쟈바 런타임</string>
     <string name="multirt_runtime_incompatiblearch">호환되지 않는 아키텍쳐: %s</string>
     <string name="multirt_config_title">자바 런타임</string>
     <string name="multirt_config_add">새로 추가</string>
     <string name="multirt_title">런타임 관리자</string>
     <string name="multirt_subtitle">설치된 자바 런타임 관리</string>
-    <string name="multirt_progress_caching">캐시 중...</string>
+    <string name="multirt_progress_caching">캐싱 중...</string>
     <string name="multirt_config_setdefault">기본으로 설정</string>
     <string name="multirt_config_setdefault_already">기본값</string>
     <string name="multirt_config_removeerror_last">하나 이상의 자바 런타임이 필요합니다.</string>
-    <string name="multirt_nocompartiblert">호환되는 Java 런타임을 찾지 못했습니다. 이 버전은 Java %d 이상이 필요합니다.</string>
-    <string name="multirt_nojava8rt">Java 8을 찾지 못했습니다. 이 옵션을 사용하려면, Java 8을 설치해야 합니다.</string>
+    <string name="multirt_nocompartiblert">호환되는 자바 런타임을 찾지 못했습니다. 이 버전은 자바 %d 이상이 필요합니다.</string>
+    <string name="multirt_nojava8rt">자바 8을 찾지 못했습니다. 이 옵션을 사용하려면, 자바 8을 설치해야 합니다.</string>
     <string name="multirt_delete_runtime">런타임 제거</string>
     <string name="pvc_gameDirectory">게임 디렉토리</string>
     <string name="pvc_jvmArgs">JVM 실행 설정</string>
@@ -241,8 +241,8 @@ https://cosmetica.cc 를 방문해주세요.
     <string name="mcl_setting_title_buttonallcaps">컨트롤 버튼 문자에 대문자만 사용</string>
     <string name="mcl_setting_subtitle_buttonallcaps">컨트롤 버튼 문자에 소문자를 사용하려면 이것을 비활성화 하세요.</string>
     <string name="create_profile">새 프로필 생성</string>
-    <string name="preference_shader_dump_title">셰이더 덤핑 활성화</string>
-    <string name="preference_shader_dump_description">셰이더 변환 결과를 로그 파일로 저장.</string>
+    <string name="preference_shader_dump_title">쉐이더 덤핑 활성화</string>
+    <string name="preference_shader_dump_description">쉐이더 변환 결과를 로그 파일로 저장.</string>
     <string name="percent_format">%d%%</string>
     <string name="customctrl_editor_exit_title">나가시겠습니까?</string>
     <string name="customctrl_editor_exit_msg">정말로 나가시겠습니까?</string>
@@ -257,29 +257,29 @@ https://cosmetica.cc 를 방문해주세요.
     <string name="preference_deadzone_scale_title">조이스틱 데드존 크기</string>
     <string name="preference_deadzone_scale_description">조이스틱이 드리프트 하는 경우 이 값을 높이세요</string>
     <string name="preference_force_big_core_title">렌더러를 강제로 큰 코어로 실행</string>
-    <string name="preference_force_big_core_desc">마인크래프트의 렌더 쓰레드를 최대 주파수를 갖는 코어에서 실행하도록 강제합니다</string>
+    <string name="preference_force_big_core_desc">마인크래프트의 렌더 스레드를 최대 주파수를 갖는 코어에서 실행하도록 강제합니다</string>
     <string name="version_select_hint">버전 선택</string>
     <string name="forge_dl_progress">%s 인스톨러 다운로드중</string>
     <string name="forge_dl_searching">Forge 버전 숫자를 찾는중</string>
     <string name="modloader_dl_failed_to_load_list">버전 리스트 로드 실패</string>
-    <string name="forge_dl_no_installer">죄송합니다. 이 버전의 Forge는 아직 지원되는 인스톨러를 가지고 있지 않습니다.</string>
-    <string name="forge_dl_select_version">Forge 버전 선택</string>
+    <string name="forge_dl_no_installer">죄송합니다. 이 버전의 포지는 아직 지원되는 인스톨러를 가지고 있지 않습니다.</string>
+    <string name="forge_dl_select_version">포지 버전 선택</string>
     <string name="fabric_dl_progress">%s 로더 메타데이터 다운로드중</string>
     <string name="fabric_dl_loader_version">%s 로더 버전</string>
-    <string name="fabric_dl_game_version">Minecraft 버전</string>
+    <string name="fabric_dl_game_version">마인크래프트 버전</string>
     <string name="fabric_dl_install">설치</string>
     <string name="fabric_dl_cant_read_meta">%s 메타데이터 읽기 실패. 나중에 다시 시도하십시오.</string>
-    <string name="modloader_dl_install_fabric">Fabric 프로필 생성</string>
+    <string name="modloader_dl_install_fabric">패브릭 프로필 생성</string>
     <string name="modloader_dl_install_quilt">퀼트 프로필 생성</string>
-    <string name="modloader_dl_install_forge">Forge 프로필 생성</string>
-    <string name="create_profile_vanilla">Vanilla 프로필 생성</string>
-    <string name="create_profile_vanilla_like_versions">Vanilla와 비슷한 버전</string>
+    <string name="modloader_dl_install_forge">포지 프로필 생성</string>
+    <string name="create_profile_vanilla">바닐라 프로필 생성</string>
+    <string name="create_profile_vanilla_like_versions">바닐라와 비슷한 버전</string>
     <string name="create_profile_modded_versions">수정된 버전</string>
     <string name="fabric_dl_loader_title">버전 선택</string>
-    <string name="of_dl_select_version">OptiFine 버전 선택</string>
-    <string name="of_dl_failed_to_scrape">OptiFine 설치 정보 수집 실패</string>
+    <string name="of_dl_select_version">옵티파인 버전 선택</string>
+    <string name="of_dl_failed_to_scrape">옵티파인 설치 정보 수집 실패</string>
     <string name="of_dl_progress">%s 다운로드 중</string>
-    <string name="create_profile_optifine">OptiFine 프로필 생성</string>
+    <string name="create_profile_optifine">옵티파인 프로필 생성</string>
     <string name="hint_search_modpack">모드팩 검색</string>
     <string name="preference_vulkan_driver_system_title">시스템 Vulkan 드라이버 사용</string>
     <string name="preference_vulkan_driver_system_description">런처가 Adreno GPU에서 Turnip 대신 시스템 Vulkan 드라이버를 사용하도록 강제합니다. Vulkan을 사용하는 Zink 및 모드에서만 영향을 미칩니다.</string>
@@ -311,6 +311,22 @@ https://cosmetica.cc 를 방문해주세요.
     <string name="preference_download_source_title">게임 다운로드 소스</string>
     <string name="preference_download_source_description">정식 다운로드 서버를 사용하지 않고 다운로드 미러를 선택합니다</string>
     <string name="preference_verify_manifest_title">게임 버전 매니페스트 확인</string>
+    <string name="preference_verify_manifest_description">활성화하면 런처가 라이브러리와 함께 게임 버전 매니페스트를 확인합니다.</string>
+    <string name="notif_download_finished">게임 실행 준비완료</string>
+    <string name="notif_download_finished_desc">여기를 클릭하여 시작하세요!</string>
+    <string name="preference_category_gestures">제스쳐</string>
+    <string name="preference_category_buttons">버튼</string>
+    <string name="preference_category_experimental_settings">실험적인 쓰레기</string>
     <string name="preference_category_java_tweaks">Java 기능</string>
+    <string name="preference_category_main_categories">카테고리</string>
     <string name="preference_category_miscellaneous">기타 설정</string>
+    <string name="preference_category_video">비디오 설정</string>
+    <string name="notification_permission_dialog_title">권한 요청</string>
+    <string name="notification_permission_dialog_text">포자브런처는 앱을 종료할 때 게임/모드팩 다운로드가 중지되는 것을 방지하기 위해 알림을 게시할 수 있는 권한이 필요합니다.  이 권한이 없으면 포자브런처를 백그라운드 모드로 전환할 때 안드로이드에서 다운로드를 종료할 수 있습니다.</string>
+    <string name="notification_permission_toast">추후에 설정에서 언제든지 변경 가능합니다</string>
+    <string name="preference_ask_for_notification_title">알람 허용</string>
+    <string name="preference_ask_for_notification_description">게임/모드팩 백그라운드 다운로드가 제대로 작동하는 데 필요한 알림 권한을 다시 요청하려면 클릭하세요.</string>
+    <string name="preference_vsync_in_zink_title">Zink와 함께 V-Sync 허용</string>
+    <string name="preference_vsync_in_zink_description">런처가 내부 시스템 API를 사용하여 Zink용 V-Sync를 활성화할 수 있도록 허용합니다. 시스템 업데이트 후 런처가 갑자기 Zink와 충돌하는 경우 이 기능을 끄십시오.</string>
+    <string name="exception_failed_to_unpack_jre17">JRE 17 다운로드에 실패하였습니다</string>
 </resources>
