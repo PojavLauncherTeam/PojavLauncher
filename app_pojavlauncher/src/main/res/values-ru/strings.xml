@@ -269,7 +269,7 @@
     <string name="modloader_dl_install_quilt">Версия с Quilt</string>
     <string name="modloader_dl_install_forge">Версия с Forge</string>
     <string name="create_profile_vanilla">Немодифицированная версия</string>
-    <string name="create_profile_vanilla_like_versions">Ванильные версии</string>
+    <string name="create_profile_vanilla_like_versions">Стандартные версии</string>
     <string name="create_profile_modded_versions">Загрузчики модов</string>
     <string name="fabric_dl_loader_title">Выбор версий</string>
     <string name="of_dl_select_version">Выбор версии OptiFine</string>
@@ -323,5 +323,6 @@
     <string name="preference_ask_for_notification_title">Разрешить уведомления</string>
     <string name="preference_ask_for_notification_description">Нажмите, чтобы ещё раз запросить разрешение на вывод уведомлений. Они нужны для правильной загрузки игры и сборок модов в фоне.</string>
     <string name="preference_vsync_in_zink_title">Вертикальная синхронизация с Zink</string>
+    <string name="preference_vsync_in_zink_description">Позволяет использовать внутренние системные API для активации вертикальной синхронизации при работе с Zink. Отключите, если игра начнёт вылетать после обновления системы.</string>
     <string name="exception_failed_to_unpack_jre17">Не удалось установить JRE 17</string>
 </resources>
