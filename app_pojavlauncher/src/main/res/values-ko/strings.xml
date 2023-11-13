@@ -221,10 +221,10 @@ https://cosmetica.cc 를 방문해주세요.
     <string name="main_add_account">계정 추가</string>
     <string name="tasks_ongoing">작업이 진행 중이에요. 기다려 주세요</string>
     <string name="no_saved_accounts">저장된 계정 없음</string>
-    <string name="mc_download_failed">Minecraft 다운로드에 실패했습니다! 이것은 잘못된 네트워크 연결, 잘못 배치된 파일 등으로 인한 것일 수 있습니다.</string>
+    <string name="mc_download_failed">마인크래프트 다운로드에 실패했습니다! 이것은 안좋은 네트워크 연결, 잘못 배치된 파일 등으로 인한 것일 수 있습니다.</string>
     <string name="xerr_unknown">알수없는 Xbox Live API 오류 %d</string>
     <string name="xerr_no_account">Xbox Live 계정이 없는 것 같습니다. https://minecraft.net/에서 한 번 로그인하고 다시 시도해주세요.</string>
-    <string name="xerr_adult_verification">당신의 계정을 인증하기위해 어른의 도움이 필요합니다.</string>
+    <string name="xerr_adult_verification">당신의 계정을 인증하기 위해 성인의 도움이 필요합니다.</string>
     <string name="xerr_child">당신의 계정이 어린이의 계정입니다. 가족 구성원으로 추가되어야 로그인할 수 있습니다.</string>
     <string name="minecraft_not_owned">이 계정은 마인크래프트를 소유하고있지 않은거 같습니다.
 만약 Xbox Game Pass를 소유하고 있다면 https://minecraft.net/ 여기에 로그인해 설정하세요.</string>
@@ -260,7 +260,7 @@ https://cosmetica.cc 를 방문해주세요.
     <string name="preference_force_big_core_desc">마인크래프트의 렌더 스레드를 최대 주파수를 갖는 코어에서 실행하도록 강제합니다</string>
     <string name="version_select_hint">버전 선택</string>
     <string name="forge_dl_progress">%s 인스톨러 다운로드중</string>
-    <string name="forge_dl_searching">Forge 버전 숫자를 찾는중</string>
+    <string name="forge_dl_searching">포지 버전 숫자를 찾는중</string>
     <string name="modloader_dl_failed_to_load_list">버전 리스트 로드 실패</string>
     <string name="forge_dl_no_installer">죄송합니다. 이 버전의 포지는 아직 지원되는 인스톨러를 가지고 있지 않습니다.</string>
     <string name="forge_dl_select_version">포지 버전 선택</string>
