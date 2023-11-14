@@ -28,12 +28,12 @@ public class LauncherPreferenceVideoFragment extends LauncherPreferenceFragment 
 
         CustomSeekBarPreference seek5 = requirePreference("resolutionRatio",
                 CustomSeekBarPreference.class);
-        seek5.setMin(5);
+        seek5.setMin(1);
         seek5.setSuffix(" %");
 
         // #724 bug fix
-        if (seek5.getValue() < 5) {
-            seek5.setValue(100);
+        if (seek5.getValue() < 0) {
+            seek5.setValue(200);
         }
 
         // Sustained performance is only available since Nougat
