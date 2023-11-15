@@ -26,7 +26,7 @@
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_wiki">维基百科</string>
+    <string name="mcl_tab_wiki">百科</string>
     <!-- MCLauncherActivity: Account status -->
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_launch_cleancache">正在清理缓存文件……</string>
@@ -35,7 +35,7 @@
     <string name="mcl_launch_download_assets">正在准备下载资源...</string>
     <string name="mcl_options">选项</string>
     <string name="mcl_option_customcontrol">自定义控制键位</string>
-    <string name="mcl_setting_title_use_surface_view">使用备用表面渲染</string>
+    <string name="mcl_setting_title_use_surface_view">使用备用表层渲染</string>
     <string name="mcl_setting_subtitle_use_surface_view">此项设置可能有助于提升受 GPU 机能限制的性能。（请以实际情况为准）</string>
     <string name="mcl_setting_title_ignore_notch">忽略刘海屏</string>
     <string name="mcl_setting_subtitle_ignore_notch">忽略刘海屏并将屏幕内容扩展至其下方，\n给您以更完整的沉浸感。</string>
@@ -105,8 +105,8 @@
     <string name="import_control_label">导出控制键位文件</string>
     <string name="import_control_invalid_file">文件无效或已损坏</string>
     <string name="import_control_import_button">导入控制键位文件</string>
-    <string name="import_control_verifying_file">文件正在校检中…请稍后重试!</string>
-    <string name="import_control_invalid_name">名称无效或文件已存在!</string>
+    <string name="import_control_verifying_file">文件正在校检中…请稍后重试 !</string>
+    <string name="import_control_invalid_name">名称无效或文件已存在 !</string>
     <string name="import_control_done">导入完成！</string>
     <!--
     <string name="control_more3"></string>
@@ -143,9 +143,9 @@
     <string name="mcl_setting_title_mousespeed">鼠标移动速度</string>
     <string name="mcl_setting_subtitle_mousespeed">修改虚拟鼠标的移动速度。</string>
     <string name="customctrl_passthru">鼠标穿透点击</string>
-    <string name="customctrl_swipeable">可滑动</string>
+    <string name="customctrl_swipeable">可滑动点击</string>
     <string name="customctrl_forward_lock">前进/疾跑锁</string>
-    <string name="memory_warning_msg">当前可用内存（%d）低于所分配的内存（%d），这可能会导致游戏崩溃!如果游戏崩溃请更改内存分配设置。</string>
+    <string name="memory_warning_msg">当前可用内存（%d）低于所分配的内存（%d），这可能会导致游戏崩溃 ! 如果游戏崩溃请更改内存分配设置。</string>
     <string name="mcl_memory_allocation">内存分配</string>
     <string name="mcl_memory_allocation_subtitle">控制给应用程序/游戏分配多少内存（建议设置为手机总内存的 20%～40%）</string>
     <string name="multirt_runtime_corrupt">Java 运行环境损坏</string>
@@ -159,12 +159,12 @@
     <string name="multirt_config_setdefault_already">默认</string>
     <string name="multirt_config_removeerror_last">您必须至少安装一个 Java 运行环境。</string>
     <string name="multirt_nocompartiblert">找不到合适的 Java 运行环境。此版本需要 Java %d 或更高版本。</string>
-    <string name="multirt_nojava8rt">无法找到 Java 8。要使用此选项，您需要安装 Java 8。</string>
+    <string name="multirt_nojava8rt">无法找到 Java 8，如要使用此选项，您需要安装 Java 8。</string>
     <string name="multirt_delete_runtime">删除 Java 运行环境</string>
     <string name="pvc_gameDirectory">游戏目录</string>
     <string name="pvc_jvmArgs">JVM 参数</string>
     <string name="preference_mouse_start_title">启动游戏时默认打开虚拟鼠标</string>
-    <string name="preference_mouse_start_description">此选项打开时，虚拟鼠标会在启动时显示。</string>
+    <string name="preference_mouse_start_description">此选项打开时，虚拟鼠标会在启动时出现。</string>
     <string name="preference_video_title">画面和渲染器</string>
     <string name="preference_video_description">分辨率、渲染器与性能</string>
     <string name="preference_control_title">自定义控制键位</string>
