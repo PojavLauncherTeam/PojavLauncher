@@ -128,7 +128,7 @@
     <string name="customctrl_selectdefault">Обрати стандартну</string>
     <string name="customctrl_export">Експортувати розкладку</string>
     <string name="main_share_logs">Поділитися журналом</string>
-    <string name="main_install_jar_file">Запустити .jar</string>
+    <string name="main_install_jar_file">Виконати .jar</string>
     <string name="main_play">Грати</string>
     <string name="autoram_info_msg">Виділено %d МБ ОЗП</string>
     <string name="mcl_setting_check_libraries">Перевірити бібліотеки після завантаження</string>
