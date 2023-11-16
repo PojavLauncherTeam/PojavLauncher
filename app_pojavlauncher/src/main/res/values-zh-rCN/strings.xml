@@ -281,9 +281,9 @@
     <string name="preference_vulkan_driver_system_description">强制启动器在骁龙 Adreno GPU 上使用系统 Vulkan 驱动而非 Turnip 驱动。仅影响调用 Vulkan 的 Zink 和模组（非骁龙GPU的手机请打开此设置，反之则开启）。</string>
     <string name="generic_install">安装</string>
     <string name="generic_apply">应用设置</string>
-    <string name="search_modpack_no_result">未找到整合包（请检查输入的整合包名称）</string>
-    <string name="search_modpack_error">寻找整合包失败（请检查网络连接是否良好）</string>
-    <string name="search_modpack_download_error">整合包元数据下载失败（请检查网络连接是否良好）</string>
+    <string name="search_modpack_no_result">未找到整合包</string>
+    <string name="search_modpack_error">寻找整合包失败</string>
+    <string name="search_modpack_download_error">整合包元数据下载失败</string>
     <string name="modpack_download_downloading_metadata">正在下载整合包元数据（%.2fMB / %.2fMB）</string>
     <string name="modpack_download_downloading_mods">正在下载模组（%.2fMB / %.2fMB）</string>
     <string name="modpack_download_downloading_mods_fc">正在下载模组（文件 %d 中的 %d）</string>
