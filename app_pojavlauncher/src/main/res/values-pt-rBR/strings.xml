@@ -322,5 +322,6 @@
     <string name="notification_permission_toast">Você sempre pode mudar de ideia mais tarde entrando em Configurações</string>
     <string name="preference_ask_for_notification_title">Permitir notificações</string>
     <string name="preference_ask_for_notification_description">Clique para solicitar novamente a permissão de notificação necessária para que os downloads em segundo plano de jogo/modpack funcionem corretamente.</string>
+    <string name="preference_vsync_in_zink_title">Permitir sincronização vertical com Zink</string>
     <string name="exception_failed_to_unpack_jre17">Falha ao instalar o JRE 17</string>
 </resources>
