@@ -469,8 +469,7 @@ public class MinecraftGLSurface extends View implements GrabListener {
 
     /** The event for keyboard/ gamepad button inputs */
     public boolean processKeyEvent(KeyEvent event) {
-        //Toast.makeText(this, event.toString(),Toast.LENGTH_SHORT).show();
-        //Toast.makeText(this, event.getDevice().toString(), Toast.LENGTH_SHORT).show();
+        //Log.i("KeyEvent", event.toString());
 
         //Filtering useless events by order of probability
         int eventKeycode = event.getKeyCode();
@@ -478,7 +477,12 @@ public class MinecraftGLSurface extends View implements GrabListener {
         if(eventKeycode == KeyEvent.KEYCODE_VOLUME_DOWN) return false;
         if(eventKeycode == KeyEvent.KEYCODE_VOLUME_UP) return false;
         if(event.getRepeatCount() != 0) return true;
-        if(event.getAction() == KeyEvent.ACTION_MULTIPLE) return true;
+        int action = event.getAction();
+        if(action == KeyEvent.ACTION_MULTIPLE) return true;
+        // Ignore the cancelled up events. They occur when the user switches layouts.
+        // In accordance with https://developer.android.com/reference/android/view/KeyEvent#FLAG_CANCELED
+        if(action == KeyEvent.ACTION_UP &&
+                (event.getFlags() & KeyEvent.FLAG_CANCELED) != 0) return true;
 
         //Sometimes, key events comes from SOME keys of the software keyboard
         //Even weirder, is is unknown why a key or another is selected to trigger a keyEvent
