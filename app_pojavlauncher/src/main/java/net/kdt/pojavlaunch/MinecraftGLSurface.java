@@ -624,7 +624,8 @@ public class MinecraftGLSurface extends View implements GrabListener {
         if(isGrabbing){
             if(!hasPointerCapture) {
                 requestFocus();
-                requestPointerCapture();
+                if(hasWindowFocus()) requestPointerCapture();
+                // Otherwise, onWindowFocusChanged() would get called.
             }
             return;
         }
@@ -633,6 +634,13 @@ public class MinecraftGLSurface extends View implements GrabListener {
             releasePointerCapture();
             clearFocus();
         }
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasWindowFocus) {
+        super.onWindowFocusChanged(hasWindowFocus);
+        if(hasWindowFocus && CallbackBridge.isGrabbing() &&
+                MainActivity.isAndroid8OrHigher()) requestPointerCapture();
     }
 
     /** A small interface called when the listener is ready for the first time */
