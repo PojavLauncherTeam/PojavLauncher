@@ -19,9 +19,11 @@ void (*glClear_p) (GLbitfield mask);
 void (*glReadPixels_p) (GLint x, GLint y, GLsizei width, GLsizei height, GLenum format, GLenum type, void * data);
 
 void dlsym_OSMesa() {
+    char* main_osm_libname = getenv("POJAVEXEC_OSMESA");
+    if(main_osm_libname == NULL) main_osm_libname = "libOSMesa.so";
     char* main_path = NULL;
     char* alt_path = NULL;
-    if(asprintf(&main_path, "%s/libOSMesa.so", getenv("POJAV_NATIVEDIR")) == -1 ||
+    if(asprintf(&main_path, "%s/%s", getenv("POJAV_NATIVEDIR"), main_osm_libname) == -1 ||
             asprintf(&alt_path, "%s/libOSMesa.so.8", getenv("POJAV_NATIVEDIR")) == -1) {
         abort();
     }
@@ -29,6 +31,8 @@ void dlsym_OSMesa() {
     dl_handle = dlopen(alt_path, RTLD_GLOBAL);
     if(dl_handle == NULL) dl_handle = dlopen(main_path, RTLD_GLOBAL);
     if(dl_handle == NULL) abort();
+    free(main_path);
+    free(alt_path);
     OSMesaMakeCurrent_p = dlsym(dl_handle, "OSMesaMakeCurrent");
     OSMesaGetCurrentContext_p = dlsym(dl_handle,"OSMesaGetCurrentContext");
     OSMesaCreateContext_p = dlsym(dl_handle, "OSMesaCreateContext");
