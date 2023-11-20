@@ -5,6 +5,7 @@
         <item name="2">@string/mcl_setting_renderer_vulkan_zink</item>
         <item name="3">@string/mcl_setting_renderer_angle</item>
         <item name="4">@string/mcl_setting_renderer_panfrost</item>
+        <item name="5">@string/mcl_setting_renderer_freedreno</item>
     </string-array>
 
     <string-array name="menu_customcontrol">

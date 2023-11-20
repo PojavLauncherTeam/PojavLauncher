@@ -225,6 +225,9 @@ public class JREUtils {
             if(LOCAL_RENDERER.equals("malihw_panfrost")) {
                 envMap.put("POJAVEXEC_OSMESA", "libOSMesa_pan.so");
             }
+            if(LOCAL_RENDERER.equals("adrhw_freedreno")) {
+                envMap.put("POJAVEXEC_OSMESA", "libOSMesa_fd.so");
+            }
         }
         if(LauncherPreferences.PREF_BIG_CORE_AFFINITY) envMap.put("POJAV_BIG_CORE_AFFINITY", "1");
         envMap.put("AWTSTUB_WIDTH", Integer.toString(CallbackBridge.windowWidth > 0 ? CallbackBridge.windowWidth : CallbackBridge.physicalWidth));
@@ -454,6 +457,7 @@ public class JREUtils {
                 renderLibrary = "libgl4es_114.so"; break;
             case "vulkan_zink": renderLibrary = "libOSMesa.so"; break;
             case "malihw_panfrost": renderLibrary = "libOSMesa_pan.so"; break;
+            case "adrhw_freedreno": renderLibrary = "libOSMesa_fd.so"; break;
             case "opengles3_desktopgl_angle_vulkan" : renderLibrary = "libtinywrapper.so"; break;
             default:
                 Log.w("RENDER_LIBRARY", "No renderer selected, defaulting to opengles2");

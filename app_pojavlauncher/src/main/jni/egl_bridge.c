@@ -210,6 +210,10 @@ int pojavInitOpenGL() {
         setenv("GALLIUM_DRIVER", "panfrost", 1);
         setenv("PAN_DEBUG","gofaster",1);
         set_osm_bridge_tbl();
+    } else if (strcmp(renderer, "adrhw_freedreno") == 0) {
+        pojav_environ->config_renderer = RENDERER_VK_ZINK;
+        setenv("GALLIUM_DRIVER", "freedreno", 1);
+        set_osm_bridge_tbl();
     }
     if(br_init()) {
         br_setup_window();
