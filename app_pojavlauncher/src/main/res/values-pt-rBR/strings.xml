@@ -277,8 +277,8 @@
     <string name="of_dl_progress">Baixando %s</string>
     <string name="create_profile_optifine">Criar perfil OptiFine</string>
     <string name="hint_search_modpack">Procurar por modpacks</string>
-    <string name="preference_vulkan_driver_system_title">Use o driver Vulkan do sistema</string>
-    <string name="preference_vulkan_driver_system_description">Force o inicializador a usar o driver Vulkan do sistema em vez do Turnip nas GPUs Adreno. Afeta apenas Zink e mods que usam Vulkan.</string>
+    <string name="preference_vulkan_driver_system_title">Usar driver Vulkan do sistema</string>
+    <string name="preference_vulkan_driver_system_description">Forçar o launcher a usar o driver Vulkan do sistema em vez do Turnip em GPUs Adreno. Afeta apenas Zink e mods que utilizam Vulkan.</string>
     <string name="generic_install">Instalar</string>
     <string name="generic_apply">Aplicar</string>
     <string name="search_modpack_no_result">Nenhum modpacks encontrado</string>
@@ -323,5 +323,6 @@
     <string name="preference_ask_for_notification_title">Permitir notificações</string>
     <string name="preference_ask_for_notification_description">Clique para solicitar novamente a permissão de notificação necessária para que os downloads em segundo plano de jogo/modpack funcionem corretamente.</string>
     <string name="preference_vsync_in_zink_title">Permitir sincronização vertical com Zink</string>
+    <string name="preference_vsync_in_zink_description">Permite o launcher usar as APIs de sistema interno para ativar V-Sync para o Zink. Desabilite isto caso seu launcher tiver problemas com o Zink depois de uma atualização de sistema.</string>
     <string name="exception_failed_to_unpack_jre17">Falha ao instalar o JRE 17</string>
 </resources>
