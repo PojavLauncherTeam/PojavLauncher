@@ -42,6 +42,7 @@
         <item>vulkan_zink</item> <!-- virglrenderer with OpenGL ES 3 -->
         <item>opengles3_desktopgl_angle_vulkan</item>
         <item>malihw_panfrost</item>
+        <item>adrhw_freedreno</item>
     </string-array>
     <string-array name="download_source_names">
         <item>@string/global_default</item>
