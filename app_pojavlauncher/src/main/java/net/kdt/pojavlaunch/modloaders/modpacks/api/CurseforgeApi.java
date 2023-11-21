@@ -2,6 +2,8 @@ package net.kdt.pojavlaunch.modloaders.modpacks.api;
 
 import android.util.Log;
 
+import androidx.annotation.Nullable;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -181,7 +183,7 @@ public class CurseforgeApi implements ModpackApi{
                     if(url == null && curseFile.required)
                         throw new IOException("Failed to obtain download URL for "+curseFile.projectID+" "+curseFile.fileID);
                     else if(url == null) return null;
-                    return new ModDownloader.FileInfo(url, FileUtils.getFileName(url));
+                    return new ModDownloader.FileInfo(url, FileUtils.getFileName(url), getDownloadSha1(curseFile.projectID, curseFile.fileID));
                 });
             }
             modDownloader.awaitFinish((c,m)->
@@ -237,6 +239,23 @@ public class CurseforgeApi implements ModpackApi{
             return String.format("https://edge.forgecdn.net/files/%s/%s/%s", id/1000, id % 1000, modData.get("fileName").getAsString());
         }
 
+        return null;
+    }
+
+    private @Nullable String getDownloadSha1(long projectID, long fileID) {
+        // Try the api endpoint, die in the other case
+        JsonObject response = mApiHandler.get("mods/"+projectID+"/files/"+fileID, JsonObject.class);
+        if (response == null || response.get("data").isJsonNull()) return null;
+        
+        JsonArray hashes = response.get("data").getAsJsonObject().getAsJsonArray("hashes");
+        for (JsonElement jsonElement : hashes) {
+            // The sha1 = 1; md5 = 2;
+            if(jsonElement.getAsJsonObject().get("algo").getAsInt() == ALGO_SHA_1){
+                return jsonElement.getAsJsonObject().get("value").getAsString();
+            }
+        }
+
+        // No hashes available
         return null;
     }
 
