@@ -28,6 +28,7 @@ import java.util.zip.ZipFile;
 
 public class CurseforgeApi implements ModpackApi{
     private static final Pattern sMcVersionPattern = Pattern.compile("([0-9]+)\\.([0-9]+)\\.?([0-9]+)?");
+    private static final int ALGO_SHA_1 = 1;
     // Stolen from
     // https://github.com/AnzhiZhang/CurseForgeModpackDownloader/blob/6cb3f428459f0cc8f444d16e54aea4cd1186fd7b/utils/requester.py#L93
     private static final int CURSEFORGE_MINECRAFT_GAME_ID = 432;
@@ -103,11 +104,14 @@ public class CurseforgeApi implements ModpackApi{
         String[] versionNames = new String[length];
         String[] mcVersionNames = new String[length];
         String[] versionUrls = new String[length];
+        String[] hashes = new String[length];
         for(int i = 0; i < allModDetails.size(); i++) {
             JsonObject modDetail = allModDetails.get(i);
             versionNames[i] = modDetail.get("displayName").getAsString();
+
             JsonElement downloadUrl = modDetail.get("downloadUrl");
             versionUrls[i] = downloadUrl.getAsString();
+
             JsonArray gameVersions = modDetail.getAsJsonArray("gameVersions");
             for(JsonElement jsonElement : gameVersions) {
                 String gameVersion = jsonElement.getAsString();
@@ -117,8 +121,18 @@ public class CurseforgeApi implements ModpackApi{
                 mcVersionNames[i] = gameVersion;
                 break;
             }
+
+            JsonArray downloadHashes = modDetail.getAsJsonArray("hashes");
+            hashes[i] = null;
+            for (JsonElement jsonElement : downloadHashes) {
+                // The sha1 = 1; md5 = 2;
+                if(jsonElement.getAsJsonObject().get("algo").getAsInt() == ALGO_SHA_1){
+                    hashes[i] = jsonElement.getAsJsonObject().get("value").getAsString();
+                    break;
+                }
+            }
         }
-        return new ModDetail(item, versionNames, mcVersionNames, versionUrls);
+        return new ModDetail(item, versionNames, mcVersionNames, versionUrls, hashes);
     }
 
     @Override
@@ -137,6 +151,7 @@ public class CurseforgeApi implements ModpackApi{
         if(response == null) return CURSEFORGE_PAGINATION_ERROR;
         JsonArray data = response.getAsJsonArray("data");
         if(data == null) return CURSEFORGE_PAGINATION_ERROR;
+
         for(int i = 0; i < data.size(); i++) {
             JsonObject fileInfo = data.get(i).getAsJsonObject();
             if(fileInfo.get("isServerPack").getAsBoolean()) continue;
