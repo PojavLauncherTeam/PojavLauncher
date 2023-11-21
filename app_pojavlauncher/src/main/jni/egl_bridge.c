@@ -213,6 +213,7 @@ int pojavInitOpenGL() {
     } else if (strcmp(renderer, "adrhw_freedreno") == 0) {
         pojav_environ->config_renderer = RENDERER_VK_ZINK;
         setenv("GALLIUM_DRIVER", "freedreno", 1);
+        setenv("MESA_LOADER_DRIVER_OVERRIDE", "kgsl", 1);
         set_osm_bridge_tbl();
     }
     if(br_init()) {
