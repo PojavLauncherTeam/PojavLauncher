@@ -125,7 +125,7 @@ public class ModrinthApi implements ModpackApi{
             
             ModDownloader modDownloader = new ModDownloader(instanceDestination);
             for(ModrinthIndex.ModrinthIndexFile indexFile : modrinthIndex.files) {
-                modDownloader.submitDownload(indexFile.fileSize, indexFile.path, indexFile.downloads);
+                modDownloader.submitDownload(indexFile.fileSize, indexFile.path, indexFile.hashes.sha1, indexFile.downloads);
             }
             modDownloader.awaitFinish(new DownloaderProgressWrapper(R.string.modpack_download_downloading_mods, ProgressLayout.INSTALL_MODPACK));
             ProgressLayout.setProgress(ProgressLayout.INSTALL_MODPACK, 0, R.string.modpack_download_applying_overrides, 1, 2);
