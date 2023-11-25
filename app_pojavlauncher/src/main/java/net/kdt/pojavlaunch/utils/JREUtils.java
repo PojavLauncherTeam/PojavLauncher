@@ -224,6 +224,8 @@ public class JREUtils {
             }
             if(LOCAL_RENDERER.equals("malihw_panfrost")) {
                 envMap.put("POJAVEXEC_OSMESA", "libOSMesa_pan.so");
+                envMap.put("MESA_DISK_CACHE_SINGLE_FILE", "1");
+                envMap.put("MESA_DISK_CACHE_SINGLE_FILE", "true");
             }
         }
         if(LauncherPreferences.PREF_BIG_CORE_AFFINITY) envMap.put("POJAV_BIG_CORE_AFFINITY", "1");
