@@ -20,6 +20,7 @@ public class ModpackInstaller {
 
     public static ModLoader installModpack(ModDetail modDetail, int selectedVersion, InstallFunction installFunction) throws IOException{
         String versionUrl = modDetail.versionUrls[selectedVersion];
+        String versionHash = modDetail.versionHashes[selectedVersion];
         String modpackName = modDetail.title.toLowerCase(Locale.ROOT).trim().replace(" ", "_" );
 
         // Build a new minecraft instance, folder first
@@ -29,9 +30,14 @@ public class ModpackInstaller {
         ModLoader modLoaderInfo;
         try {
             byte[] downloadBuffer = new byte[8192];
-            DownloadUtils.downloadFileMonitored(versionUrl, modpackFile, downloadBuffer,
-                    new DownloaderProgressWrapper(R.string.modpack_download_downloading_metadata,
-                            ProgressLayout.INSTALL_MODPACK));
+            int attempt = 0;
+            while (attempt < 3 && (!modpackFile.exists() || !Tools.compareSHA1(modpackFile, versionHash))){
+                attempt++;
+                DownloadUtils.downloadFileMonitored(versionUrl, modpackFile, downloadBuffer,
+                        new DownloaderProgressWrapper(R.string.modpack_download_downloading_metadata,
+                                ProgressLayout.INSTALL_MODPACK));
+            }
+
             // Install the modpack
             modLoaderInfo = installFunction.installModpack(modpackFile, new File(Tools.DIR_GAME_HOME, "custom_instances/"+modpackName));
 
