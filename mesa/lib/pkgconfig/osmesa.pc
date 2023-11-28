@@ -1,0 +1,10 @@
+prefix=/tmp/fd
+libdir=${prefix}/lib
+includedir=${prefix}/include
+
+Name: osmesa
+Description: Mesa Off-screen Rendering Library
+Version: 8.0.0
+Libs: -L${libdir} -lOSMesa
+Libs.private: -lpthread -pthread -lm
+Cflags: -I${includedir}

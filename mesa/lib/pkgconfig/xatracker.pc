@@ -1,0 +1,9 @@
+prefix=/tmp/fd
+libdir=${prefix}/lib
+includedir=${prefix}/include
+
+Name: xatracker
+Description: Xorg gallium3D acceleration library
+Version: 2.5.0
+Libs: -L${libdir} -lxatracker
+Cflags: -I${includedir}
