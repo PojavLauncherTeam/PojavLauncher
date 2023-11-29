@@ -15,6 +15,7 @@ import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 import java.io.File;
 import java.io.IOException;
 import java.util.Locale;
+import java.util.concurrent.Callable;
 
 public class ModpackInstaller {
 
@@ -30,13 +31,12 @@ public class ModpackInstaller {
         ModLoader modLoaderInfo;
         try {
             byte[] downloadBuffer = new byte[8192];
-            int attempt = 0;
-            while (attempt < 3 && (!modpackFile.exists() || !Tools.compareSHA1(modpackFile, versionHash))){
-                attempt++;
+            DownloadUtils.downloadFileEnsureSha1(modpackFile, versionHash, (Callable<Void>) () -> {
                 DownloadUtils.downloadFileMonitored(versionUrl, modpackFile, downloadBuffer,
                         new DownloaderProgressWrapper(R.string.modpack_download_downloading_metadata,
                                 ProgressLayout.INSTALL_MODPACK));
-            }
+                return null;
+            });
 
             // Install the modpack
             modLoaderInfo = installFunction.installModpack(modpackFile, new File(Tools.DIR_GAME_HOME, "custom_instances/"+modpackName));

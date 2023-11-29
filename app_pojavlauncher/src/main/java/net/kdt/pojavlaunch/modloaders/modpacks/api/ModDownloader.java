@@ -8,6 +8,7 @@ import net.kdt.pojavlaunch.utils.DownloadUtils;
 import java.io.File;
 import java.io.IOException;
 import java.io.InterruptedIOException;
+import java.util.concurrent.Callable;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -117,32 +118,21 @@ public class ModDownloader {
 
         @Override
         public void run() {
-            IOException exception = null;
             for(String sourceUrl : mDownloadUrls) {
                 try {
-                    int i=0;
-                    while (i < 5){
-                        exception = tryDownload(sourceUrl);
-                        if(exception == null) {
-                            if(mSha1 != null && !Tools.compareSHA1(mDestination, mSha1)){
-                                // Remove the target file and retry
-                                i++;
-                                mDestination.delete();
-                                continue;
-                            }
-                            // No Sha or it matched
-                            break;
-                        }
-                        // If there is an exception, try another source
-                        break;
-                    }
+                    DownloadUtils.downloadFileEnsureSha1(mDestination, mSha1, (Callable<Void>) () -> {
+                        IOException exception = tryDownload(sourceUrl);
 
-                }catch (InterruptedException e) {
+                        if(exception != null) {
+                            downloadFailed(exception);
+                        }
+
+                        return null;
+                    });
+
+                }catch (IOException e) {
                     return;
                 }
-            }
-            if(exception != null) {
-                downloadFailed(exception);
             }
         }
 
