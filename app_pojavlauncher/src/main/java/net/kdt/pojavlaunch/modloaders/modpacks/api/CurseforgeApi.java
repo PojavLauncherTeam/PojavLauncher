@@ -2,6 +2,7 @@ package net.kdt.pojavlaunch.modloaders.modpacks.api;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.gson.JsonArray;
@@ -124,15 +125,7 @@ public class CurseforgeApi implements ModpackApi{
                 break;
             }
 
-            JsonArray downloadHashes = modDetail.getAsJsonArray("hashes");
-            hashes[i] = null;
-            for (JsonElement jsonElement : downloadHashes) {
-                // The sha1 = 1; md5 = 2;
-                if(jsonElement.getAsJsonObject().get("algo").getAsInt() == ALGO_SHA_1){
-                    hashes[i] = jsonElement.getAsJsonObject().get("value").getAsString();
-                    break;
-                }
-            }
+            hashes[i] = getSha1FromResponse(modDetail);
         }
         return new ModDetail(item, versionNames, mcVersionNames, versionUrls, hashes);
     }
@@ -247,15 +240,18 @@ public class CurseforgeApi implements ModpackApi{
         JsonObject response = mApiHandler.get("mods/"+projectID+"/files/"+fileID, JsonObject.class);
         if (response == null || response.get("data").isJsonNull()) return null;
         
-        JsonArray hashes = response.get("data").getAsJsonObject().getAsJsonArray("hashes");
+        return getSha1FromResponse(response);
+    }
+
+    private String getSha1FromResponse(@NonNull JsonElement element) {
+        JsonArray hashes = element.getAsJsonObject().get("data").getAsJsonObject().getAsJsonArray("hashes");
         for (JsonElement jsonElement : hashes) {
             // The sha1 = 1; md5 = 2;
-            if(jsonElement.getAsJsonObject().get("algo").getAsInt() == ALGO_SHA_1){
+            JsonElement algo = jsonElement.getAsJsonObject().get("algo");
+            if(algo != null && algo.getAsInt() == ALGO_SHA_1){
                 return jsonElement.getAsJsonObject().get("value").getAsString();
             }
         }
-
-        // No hashes available
         return null;
     }
 
