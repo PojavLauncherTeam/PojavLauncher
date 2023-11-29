@@ -7,6 +7,8 @@ import androidx.annotation.Nullable;
 import java.io.*;
 import java.net.*;
 import java.nio.charset.*;
+import java.util.concurrent.Callable;
+
 import net.kdt.pojavlaunch.*;
 import org.apache.commons.io.*;
 
@@ -181,6 +183,35 @@ public class DownloadUtils {
         }
         fos.close();
         conn.disconnect();
+    }
+
+    public static <T> T downloadFileEnsureSha1(File outputFile, @Nullable String sha1, Callable<T> downloadFunction) throws IOException {
+        // Skip if needed
+        if(sha1 == null){
+            try {
+                return downloadFunction.call();
+            } catch (IOException e){
+                throw e;
+            }
+            catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        int attempts = 0;
+        T result = null;
+        while (attempts < 5 && (!outputFile.exists() || Tools.compareSHA1(outputFile, sha1))){
+            attempts++;
+            try {
+                result = downloadFunction.call();
+            } catch (IOException e){
+                throw e;
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return result;
+
     }
 
     public interface ParseCallback<T> {
