@@ -119,7 +119,7 @@ public class LayoutConverter {
                 n_button.dynamicY = ratio + " * ${screen_height}";
             }
             n_button.name = button.getString("name");
-            n_button.opacity = ((float) ((button.getInt("transparency") - 100) * -1)) / 100f;
+            n_button.opacity = 0.2f;
             n_button.passThruEnabled = button.getBoolean("passThruEnabled");
             n_button.isToggle = button.getBoolean("isToggle");
             n_button.setHeight(button.getInt("height"));
