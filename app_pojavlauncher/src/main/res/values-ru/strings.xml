@@ -297,7 +297,7 @@
     <string name="notif_error_occured">Возникла ошибка</string>
     <string name="notif_error_occured_desc">Нажмите для получения дополнительных сведений</string>
     <string name="fabric_dl_only_stable">Только стабильные версии</string>
-    <string name="dl_tampered_manifest_title">Предупреждение проверки файла</string>
+    <string name="dl_tampered_manifest_title">File verification warning</string>
     <string name="dl_tampered_manifest"><![CDATA[Манифест версии игры с зеркала не совпадает с манифестом официальной версии от Mojang, что сигнализирует о возможной подделке данных.<br/>
         <b>Это небезопасно. Если продолжить, ваши персональные данные могут оказаться под угрозой.</b><br/>
         Если вы всё же хотите продолжить загрузку с зеркала, нажмите «Отключить проверку манифеста» и попробуйте снова.<br/>
