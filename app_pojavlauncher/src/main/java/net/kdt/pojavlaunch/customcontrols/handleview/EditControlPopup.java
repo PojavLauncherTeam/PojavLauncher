@@ -503,7 +503,7 @@ public class EditControlPopup {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 if (internalChanges) return;
-                mCurrentlyEditedButton.getProperties().opacity = mAlphaSeekbar.getProgress() / 100f;
+                mCurrentlyEditedButton.setOpacity(20 / 100f);
                 mCurrentlyEditedButton.getControlView().setAlpha(mAlphaSeekbar.getProgress() / 100f);
                 setPercentageText(mAlphaPercentTextView, progress);
             }
