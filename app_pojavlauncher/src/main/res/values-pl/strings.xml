@@ -124,6 +124,8 @@
     <string name="customctrl_addbutton_drawer">Dodaj panel przycisków</string>
     <string name="customctrl_addbutton_joystick">Dodaj joysticka</string>
     <string name="customctrl_addsubbutton">Dodaj przycisk podrzędny</string>
+    <string name="customctrl_selectdefault">Wybierz domyślny plik json dla sterowania</string>
+    <string name="customctrl_export">Eksportuj ustawienia sterowania</string>
     <string name="main_share_logs">Udostępnij plik dziennika</string>
     <string name="main_install_jar_file">Wykonaj plik .jar</string>
     <string name="main_play">Graj</string>
@@ -147,9 +149,11 @@
     <string name="multirt_runtime_incompatiblearch">Niezgodna architektura: %s</string>
     <string name="multirt_config_add">Dodaj nową</string>
     <string name="multirt_title">Menedżer środowiska wykonawczego</string>
+    <string name="multirt_subtitle">Zarządzaj zainstalowanymi maszynami wirtualnymi Java.</string>
     <string name="multirt_progress_caching">Buforowanie...</string>
     <string name="multirt_config_setdefault">Ustaw jako domyślny</string>
     <string name="multirt_config_setdefault_already">Domyślny</string>
+    <string name="multirt_config_removeerror_last">Należy mieć zainstalowane co najmniej jedno środowisko wykonawcze Java.</string>
     <string name="multirt_nocompartiblert">Nie można znaleźć żadnej zgodnej wersji środowiska Java. Ta wersja wymaga Java %d lub nowszych.</string>
     <string name="multirt_nojava8rt">Nie można znaleźć Java 8. Aby korzystać z tej opcji, należy zainstalować Java 8.</string>
     <string name="multirt_delete_runtime">Usuń środowisko wykonawcze</string>
@@ -165,6 +169,7 @@
     <string name="preference_misc_title">Pozostałe ustawienia</string>
     <string name="preference_experimental_title">Eksperymentalne</string>
     <string name="preference_sustained_performance_title">Włącz tryb zrównoważonej wydajności</string>
+    <string name="preference_force_vsync_title">Wymuś włączenie VSync</string>
     <string name="preference_force_english_title">Wymuś język angielski</string>
     <string name="preference_edit_controls_title">Edycja sterowania</string>
     <string name="preference_edit_controls_summary">Dostosuj schemat sterowania do swoich potrzeb.</string>
@@ -172,6 +177,8 @@
     <string name="preference_category_virtual_mouse">Wirtualna mysz</string>
     <string name="preference_gyro_invert_x_axis">Odwróć oś X</string>
     <string name="preference_gyro_invert_y_axis">Odwróć oś Y</string>
+    <string name="preference_gyro_invert_x_axis_description">Odwróć oś poziomą.</string>
+    <string name="preference_gyro_smoothing_title">Włącz wygładzanie żyroskopu</string>
     <string name="preference_gyro_smoothing_description">Zmniejsz jitter w zamian za opóźnienie.</string>
     <string name="preference_back_title">Powrót do ostatniego ekranu</string>
     <string name="unnamed">Bez nazwy</string>
@@ -228,8 +235,10 @@
     <string name="preference_category_controller_settings">Ustawienia kontrolera</string>
     <string name="preference_wipe_controller_title">Zresetuj mapowanie kontrolera</string>
     <string name="preference_deadzone_scale_title">Skala strefy martwej joysticka</string>
+    <string name="preference_deadzone_scale_description">Zwiększ ją, jeśli joystick dryfuje.</string>
     <string name="version_select_hint">Wybierz wersję</string>
     <string name="forge_dl_progress">Pobieranie instalatora dla %s</string>
+    <string name="forge_dl_searching">Wyszukiwanie numeru wersji Forge</string>
     <string name="modloader_dl_failed_to_load_list">Nie udało się załadować listy wersji!</string>
     <string name="forge_dl_no_installer">Przepraszamy, ale ta wersja Forge nie posiada instalatora, który nie jest jeszcze obsługiwany.</string>
     <string name="forge_dl_select_version">Wybierz wersję Forge</string>
@@ -245,7 +254,11 @@
     <string name="of_dl_failed_to_scrape">Nie udało się zebrać danych dla instalacji OptiFine</string>
     <string name="of_dl_progress">Pobieranie %s</string>
     <string name="create_profile_optifine">Stwórz profil OptiFine</string>
+    <string name="hint_search_modpack">Szukaj paczek modów</string>
+    <string name="preference_vulkan_driver_system_title">Użyj systemowego sterownika Vulkan</string>
     <string name="generic_install">Instaluj</string>
+    <string name="generic_apply">Zastosuj</string>
+    <string name="search_modpack_no_result">Nie znaleziono paczek modów</string>
     <string name="modpack_install_download_failed">Nie udało się pobrać plików paczki modów</string>
     <string name="modpack_install_button">Stwórz profil paczki modów</string>
     <string name="notif_error_occured">Wystąpił błąd</string>
