@@ -339,6 +339,9 @@ public final class Tools {
         }
 
         String userType = "mojang";
+        if (LauncherPreferences.PREF_FORCE_USER_TYPE_MSA) {
+            userType = "msa";
+        }
 
         Map<String, String> varArgMap = new ArrayMap<>();
         varArgMap.put("auth_session", profile.accessToken); // For legacy versions of MC

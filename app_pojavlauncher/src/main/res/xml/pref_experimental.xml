@@ -14,6 +14,11 @@
             android:key="bigCoreAffinity"
             android:title="@string/preference_force_big_core_title"
             android:summary="@string/preference_force_big_core_desc" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="forceUserTypeMSA"
+            android:title="@string/preference_force_user_type_msa_title"
+            android:summary="@string/preference_force_user_type_msa_desc" />
 
     </PreferenceCategory>
 </PreferenceScreen>
