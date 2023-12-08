@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
-    <string name="app_name">PojavLauncher（适用于 Android 的《Minecraft：Java版》）</string>
+    <string name="app_name">PojavLauncher（适用于 Android 的 Java 版本的 Minecraft）</string>
     <string name="app_short_name">PojavLauncher</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
@@ -21,7 +21,7 @@
     <string name="error_show_less">隐藏细节</string>
     <!-- Toast messages -->
     <string name="toast_permission_denied">需要存储读写权限！</string>
-    <string name="toast_optifine_success">安装成功！</string>
+    <string name="toast_optifine_success">安装成功 ！</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
@@ -35,7 +35,7 @@
     <string name="mcl_launch_download_assets">正在准备下载资源...</string>
     <string name="mcl_options">选项</string>
     <string name="mcl_option_customcontrol">自定义控制键位</string>
-    <string name="mcl_setting_title_use_surface_view">使用备用表层渲染</string>
+    <string name="mcl_setting_title_use_surface_view">启用备用表层渲染</string>
     <string name="mcl_setting_subtitle_use_surface_view">此项设置可能有助于提升受 GPU 机能限制的性能。（请以实际情况为准）</string>
     <string name="mcl_setting_title_ignore_notch">忽略刘海屏</string>
     <string name="mcl_setting_subtitle_ignore_notch">忽略刘海屏并将屏幕内容扩展至其下方，\n给您以更完整的沉浸感。</string>
@@ -70,7 +70,7 @@
     <string name="global_restart">重启</string>
     <string name="global_save">保存</string>
     <string name="global_unpacking">正在解压 %s</string>
-    <string name="global_error_field_empty">此处表单不能为空</string>
+    <string name="global_error_field_empty">此段不能留空 !</string>
     <string name="global_waiting">请稍等</string>
     <string name="global_select">选择</string>
     <string name="global_retry">请重试</string>
@@ -78,7 +78,7 @@
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">应用程序/游戏以代码 %d退出，请查看 latestlog.txt 了解更多详情。</string>
     <string name="mcn_exit_confirm">您确定要强制关闭？</string>
-    <string name="mcn_check_fail_vulkan_support">抱歉，您的设备不支持 Zink 渲染器！</string>
+    <string name="mcn_check_fail_vulkan_support">抱歉，您的设备不支持 Zink 渲染器 ！</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_chat">聊天</string>
     <string name="control_debug">调试</string>
