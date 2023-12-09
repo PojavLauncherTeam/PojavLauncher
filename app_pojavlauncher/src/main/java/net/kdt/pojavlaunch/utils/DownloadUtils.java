@@ -185,7 +185,7 @@ public class DownloadUtils {
         conn.disconnect();
     }
 
-    public static <T> T downloadFileEnsureSha1(File outputFile, @Nullable String sha1, Callable<T> downloadFunction) throws IOException {
+    public static <T> T ensureSha1(File outputFile, @Nullable String sha1, Callable<T> downloadFunction) throws IOException {
         // Skip if needed
         if(sha1 == null){
             try {
