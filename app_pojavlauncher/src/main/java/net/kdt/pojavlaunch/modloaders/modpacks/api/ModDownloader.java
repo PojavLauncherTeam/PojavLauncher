@@ -120,7 +120,7 @@ public class ModDownloader {
         public void run() {
             for(String sourceUrl : mDownloadUrls) {
                 try {
-                    DownloadUtils.downloadFileEnsureSha1(mDestination, mSha1, (Callable<Void>) () -> {
+                    DownloadUtils.ensureSha1(mDestination, mSha1, (Callable<Void>) () -> {
                         IOException exception = tryDownload(sourceUrl);
 
                         if(exception != null) {
