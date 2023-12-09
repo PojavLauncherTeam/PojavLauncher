@@ -86,8 +86,15 @@ public class ModrinthApi implements ModpackApi{
             names[i] = version.get("name").getAsString();
             mcNames[i] = version.get("game_versions").getAsJsonArray().get(0).getAsString();
             urls[i] = version.get("files").getAsJsonArray().get(0).getAsJsonObject().get("url").getAsString();
-            hashes[i] = version.getAsJsonArray("files").get(0).getAsJsonObject()
-                    .get("hashes").getAsJsonObject().get("sha1").getAsString();
+            // Assume there may not be hashes, in case the API changes
+            JsonObject hashesMap = version.getAsJsonArray("files").get(0).getAsJsonObject()
+                    .get("hashes").getAsJsonObject();
+            if(hashesMap == null || hashesMap.get("sha1") == null){
+                hashes[i] = null;
+                continue;
+            }
+
+            hashes[i] = hashesMap.get("sha1").getAsString();
         }
 
         return new ModDetail(item, names, mcNames, urls, hashes);
