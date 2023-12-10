@@ -99,9 +99,15 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
 
     private final ErrorListener mErrorListener = errorMessage -> {
         mLoginBarPaint.setColor(Color.RED);
+        Context context = getContext();
         if(errorMessage instanceof PresentedException) {
             PresentedException exception = (PresentedException) errorMessage;
-            Tools.showError(getContext(), exception.toString(getContext()), exception.getCause());
+            Throwable cause = exception.getCause();
+            if(cause == null) {
+                Tools.dialog(context, context.getString(R.string.global_error), exception.toString(context));
+            }else {
+                Tools.showError(context, exception.toString(context), exception.getCause());
+            }
         }else {
             Tools.showError(getContext(), errorMessage);
         }

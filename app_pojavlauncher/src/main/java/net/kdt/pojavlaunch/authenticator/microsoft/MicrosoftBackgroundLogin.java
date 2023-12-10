@@ -104,7 +104,7 @@ public class MicrosoftBackgroundLogin {
                 }
 
             }catch (Exception e){
-                Log.e("MicroAuth", e.toString());
+                Log.e("MicroAuth", "Exception thrown during authentication", e);
                 if(errorListener != null)
                     Tools.runOnUiThread(() -> errorListener.onLoginError(e));
             }
