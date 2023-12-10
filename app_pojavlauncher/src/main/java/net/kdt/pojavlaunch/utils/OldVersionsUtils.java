@@ -9,7 +9,6 @@ import net.kdt.pojavlaunch.extra.ExtraCore;
 
 import java.text.ParseException;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 /** Class here to help with various stuff to help run lower versions smoothly */
 public class OldVersionsUtils {
