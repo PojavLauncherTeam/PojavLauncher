@@ -1,7 +1,5 @@
 package net.kdt.pojavlaunch.utils;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 
 import net.kdt.pojavlaunch.JMinecraftVersionList;
@@ -38,11 +36,7 @@ public class DateUtils {
      * @return true if the Date is before year, month, dayOfMonth, false otherwise
      */
     public static boolean dateBefore(@NonNull Date date, int year, int month, int dayOfMonth) {
-        Date comparsionDate = new Date(new GregorianCalendar(year, month, dayOfMonth).getTimeInMillis());
-        Log.i("DateUtils", "date:"+date);
-        Log.i("DateUtils", "comparsionDate:"+comparsionDate);
-        Log.i("DateUtils","isBefore:"+date.before(comparsionDate));
-        return date.before(comparsionDate);
+        return date.before(new Date(new GregorianCalendar(year, month, dayOfMonth).getTimeInMillis()));
     }
 
     /**
