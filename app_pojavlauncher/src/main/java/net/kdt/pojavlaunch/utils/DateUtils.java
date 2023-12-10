@@ -4,6 +4,9 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import net.kdt.pojavlaunch.JMinecraftVersionList;
+import net.kdt.pojavlaunch.Tools;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -40,5 +43,22 @@ public class DateUtils {
         Log.i("DateUtils", "comparsionDate:"+comparsionDate);
         Log.i("DateUtils","isBefore:"+date.before(comparsionDate));
         return date.before(comparsionDate);
+    }
+
+    /**
+     * Extracts the original release date of a game version, ignoring any mods (if present)
+     * @param gameVersion the JMinecraftVersionList.Version object
+     * @return the game's original release date
+     */
+    public static Date getOriginalReleaseDate(JMinecraftVersionList.Version gameVersion) throws ParseException {
+        if(Tools.isValidString(gameVersion.inheritsFrom)) {
+            gameVersion = Tools.getVersionInfo(gameVersion.inheritsFrom, true);
+        }else {
+            // The launcher's inheritor mutilates the version object, causing it to have the original
+            // version's ID but modded version's dates. Work around it by re-reading the version without
+            // inheriting.
+            gameVersion = Tools.getVersionInfo(gameVersion.id, true);
+        }
+        return parseReleaseDate(gameVersion.releaseTime);
     }
 }
