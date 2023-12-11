@@ -145,6 +145,7 @@
     <string name="customctrl_passthru">Převést dotyk</string>
     <string name="customctrl_swipeable">Povolit přejíždění</string>
     <string name="customctrl_forward_lock">Uzamknout chození vpřed</string>
+    <string name="customctrl_absolute_tracking">Absolutní následování prstu</string>
     <string name="memory_warning_msg">Aktuální množství volné RAM (%d) je nižší než přidělená RAM (%d), což může vést k pádu. Spadne-li hra, změňte alokaci.</string>
     <string name="mcl_memory_allocation">Přidělení paměti</string>
     <string name="mcl_memory_allocation_subtitle">Určuje množství paměti přidělené Minecraftu.</string>
