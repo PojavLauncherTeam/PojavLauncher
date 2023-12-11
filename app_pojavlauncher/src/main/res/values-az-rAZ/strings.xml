@@ -144,6 +144,7 @@
     <string name="customctrl_passthru">Siçan keçidi</string>
     <string name="customctrl_swipeable">Sürüşdürülə bilər</string>
     <string name="customctrl_forward_lock">İrəli kilid</string>
+    <string name="customctrl_absolute_tracking">Mütləq barmaq izləmə</string>
     <string name="memory_warning_msg">Boş RAM-ın cari miqdarı (%d) ayrılmış RAM-dan (%d) azdır və bu, çökmələrə səbəb ola bilər. Oyun qəzaya uğrayarsa, yeri dəyişdirin.</string>
     <string name="mcl_memory_allocation">Yaddaşın ayrılması</string>
     <string name="mcl_memory_allocation_subtitle">Minecraft-a nə qədər yaddaş verildiyinə nəzarət edir.</string>
