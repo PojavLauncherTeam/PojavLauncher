@@ -980,7 +980,6 @@ public final class Tools {
                 .setView(editText)
                 .setPositiveButton(android.R.string.ok, (di, i) -> {
                     Intent intent = new Intent(activity, JavaGUILauncherActivity.class);
-                    intent.putExtra("skipDetectMod", true);
                     intent.putExtra("javaArgs", editText.getText().toString());
                     activity.startActivity(intent);
                 });
@@ -988,9 +987,9 @@ public final class Tools {
     }
 
     /** Display and return a progress dialog, instructing to wait */
-    private static ProgressDialog getWaitingDialog(Context ctx){
+    public static ProgressDialog getWaitingDialog(Context ctx, int message){
         final ProgressDialog barrier = new ProgressDialog(ctx);
-        barrier.setMessage(ctx.getString(R.string.global_waiting));
+        barrier.setMessage(ctx.getString(message));
         barrier.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         barrier.setCancelable(false);
         barrier.show();
@@ -998,30 +997,13 @@ public final class Tools {
         return barrier;
     }
 
-    /** Copy the mod file, and launch the mod installer activity */
+    /** Launch the mod installer activity. The Uri must be from our own content provider or
+     * from ACTION_OPEN_DOCUMENT
+     */
     public static void launchModInstaller(Activity activity, @NonNull Uri uri){
-        final ProgressDialog alertDialog = getWaitingDialog(activity);
-
-        alertDialog.setMessage(activity.getString(R.string.multirt_progress_caching));
-        sExecutorService.execute(() -> {
-            try {
-                final String name = getFileName(activity, uri);
-                final File modInstallerFile = new File(Tools.DIR_CACHE, name);
-                FileOutputStream fos = new FileOutputStream(modInstallerFile);
-                InputStream input = activity.getContentResolver().openInputStream(uri);
-                IOUtils.copy(input, fos);
-                input.close();
-                fos.close();
-                activity.runOnUiThread(() -> {
-                    alertDialog.dismiss();
-                    Intent intent = new Intent(activity, JavaGUILauncherActivity.class);
-                    intent.putExtra("modFile", modInstallerFile);
-                    activity.startActivity(intent);
-                });
-            }catch(IOException e) {
-                Tools.showError(activity, e);
-            }
-        });
+        Intent intent = new Intent(activity, JavaGUILauncherActivity.class);
+        intent.putExtra("modUri", uri);
+        activity.startActivity(intent);
     }
 
 
