@@ -57,12 +57,10 @@ public class ForgeUtils {
         intent.putExtra("javaArgs", "-javaagent:"+ Tools.DIR_DATA+"/forge_installer/forge_installer.jar"
                 + (createProfile ? "=NPS" : "") + // No Profile Suppression
                 " -jar "+modInstallerJar.getAbsolutePath());
-        intent.putExtra("skipDetectMod", true);
     }
     public static void addAutoInstallArgs(Intent intent, File modInstallerJar, String modpackFixupId) {
         intent.putExtra("javaArgs", "-javaagent:"+ Tools.DIR_DATA+"/forge_installer/forge_installer.jar"
                 + "=\"" + modpackFixupId +"\"" +
                 " -jar "+modInstallerJar.getAbsolutePath());
-        intent.putExtra("skipDetectMod", true);
     }
 }
