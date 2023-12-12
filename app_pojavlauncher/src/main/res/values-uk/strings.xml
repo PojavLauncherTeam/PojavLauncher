@@ -145,6 +145,7 @@
     <string name="customctrl_passthru">Курсор миші</string>
     <string name="customctrl_swipeable">Перегортаємий</string>
     <string name="customctrl_forward_lock">Заблокувати йти вперед</string>
+    <string name="customctrl_absolute_tracking">Абсолютне відстеження пальців</string>
     <string name="memory_warning_msg">Поточна кількість вільної оперативної пам\'яті (%d) менша, ніж виділена оперативна пам\'ять (%d), що може призвести до збоїв. Змініть кількість вільної оперативної пам\'яті, якщо гра вилетить.</string>
     <string name="mcl_memory_allocation">Виділення пам\'яті</string>
     <string name="mcl_memory_allocation_subtitle">Контролює, скільки пам’яті надається Minecraft.</string>
