@@ -21,6 +21,7 @@ import java.util.concurrent.TimeUnit;
 import net.kdt.pojavlaunch.lifecycle.ContextExecutor;
 import net.kdt.pojavlaunch.tasks.AsyncAssetManager;
 import net.kdt.pojavlaunch.utils.*;
+import net.kdt.pojavlaunch.utils.FileUtils;
 
 public class PojavApplication extends Application {
 	public static final String CRASH_REPORT_TAG = "PojavCrashReport";
@@ -35,10 +36,7 @@ public class PojavApplication extends Application {
 			File crashFile = new File(storagePermAllowed ? Tools.DIR_GAME_HOME : Tools.DIR_DATA, "latestcrash.txt");
 			try {
 				// Write to file, since some devices may not able to show error
-				File crashHome = crashFile.getParentFile();
-				if(crashHome != null && !crashHome.exists() && !crashHome.mkdirs()) {
-					throw new IOException("Failed to create crash log home");
-				}
+				FileUtils.ensureParentDirectory(crashFile);
 				PrintStream crashStream = new PrintStream(crashFile);
 				crashStream.append("PojavLauncher crash report\n");
 				crashStream.append(" - Time: ").append(DateFormat.getDateTimeInstance().format(new Date())).append("\n");
