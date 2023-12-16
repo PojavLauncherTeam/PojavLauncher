@@ -20,6 +20,7 @@ import net.kdt.pojavlaunch.modloaders.modpacks.models.SearchFilters;
 import net.kdt.pojavlaunch.modloaders.modpacks.models.SearchResult;
 import net.kdt.pojavlaunch.progresskeeper.ProgressKeeper;
 import net.kdt.pojavlaunch.utils.FileUtils;
+import net.kdt.pojavlaunch.utils.GsonJsonUtils;
 import net.kdt.pojavlaunch.utils.ZipUtils;
 
 import java.io.File;
@@ -125,7 +126,7 @@ public class CurseforgeApi implements ModpackApi{
                 break;
             }
 
-            hashes[i] = getSha1FromResponse(modDetail);
+            hashes[i] = getSha1FromModData(modDetail);
         }
         return new ModDetail(item, versionNames, mcVersionNames, versionUrls, hashes);
     }
@@ -143,8 +144,7 @@ public class CurseforgeApi implements ModpackApi{
         params.put("pageSize", CURSEFORGE_PAGINATION_SIZE);
 
         JsonObject response = mApiHandler.get("mods/"+modId+"/files", params, JsonObject.class);
-        if(response == null) return CURSEFORGE_PAGINATION_ERROR;
-        JsonArray data = response.getAsJsonArray("data");
+        JsonArray data = GsonJsonUtils.getJsonArraySafe(response, "data");
         if(data == null) return CURSEFORGE_PAGINATION_ERROR;
 
         for(int i = 0; i < data.size(); i++) {
@@ -238,18 +238,22 @@ public class CurseforgeApi implements ModpackApi{
     private @Nullable String getDownloadSha1(long projectID, long fileID) {
         // Try the api endpoint, die in the other case
         JsonObject response = mApiHandler.get("mods/"+projectID+"/files/"+fileID, JsonObject.class);
-        if (response == null || response.get("data").isJsonNull()) return null;
-        
-        return getSha1FromResponse(response);
+        JsonObject data = GsonJsonUtils.getJsonObjectSafe(response, "data");
+        if(data == null) return null;
+        return getSha1FromModData(data);
     }
 
-    private String getSha1FromResponse(@NonNull JsonElement element) {
-        JsonArray hashes = element.getAsJsonObject().get("data").getAsJsonObject().getAsJsonArray("hashes");
+    private String getSha1FromModData(@NonNull JsonObject object) {
+        JsonArray hashes = GsonJsonUtils.getJsonArraySafe(object, "hashes");
+        if(hashes == null) return null;
         for (JsonElement jsonElement : hashes) {
             // The sha1 = 1; md5 = 2;
-            JsonElement algo = jsonElement.getAsJsonObject().get("algo");
-            if(algo != null && algo.getAsInt() == ALGO_SHA_1){
-                return jsonElement.getAsJsonObject().get("value").getAsString();
+            JsonObject jsonObject = GsonJsonUtils.getJsonObjectSafe(jsonElement);
+            if(GsonJsonUtils.getIntSafe(
+                    jsonObject,
+                    "algo",
+                    -1) == ALGO_SHA_1) {
+                return GsonJsonUtils.getStringSafe(jsonObject, "value");
             }
         }
         return null;
