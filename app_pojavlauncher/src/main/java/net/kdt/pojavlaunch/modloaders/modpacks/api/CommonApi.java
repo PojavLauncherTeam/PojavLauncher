@@ -1,5 +1,7 @@
 package net.kdt.pojavlaunch.modloaders.modpacks.api;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import net.kdt.pojavlaunch.PojavApplication;
@@ -11,7 +13,6 @@ import net.kdt.pojavlaunch.modloaders.modpacks.models.SearchResult;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
@@ -39,7 +40,6 @@ public class CommonApi implements ModpackApi {
                 new SearchResult[mModpackApis.length] : commonApiSearchResult.searchResults;
 
         int totalSize = 0;
-        int totalTotalSize = 0;
 
         Future<?>[] futures = new Future<?>[mModpackApis.length];
         for(int i = 0; i < mModpackApis.length; i++) {
@@ -67,8 +67,7 @@ public class CommonApi implements ModpackApi {
                 SearchResult searchResult = results[i] = (SearchResult) future.get();
                 if(searchResult != null) hasSuccessful = true;
                 else continue;
-                totalSize += searchResult.results.length;
-                totalTotalSize += searchResult.totalResultCount;
+                totalSize += searchResult.totalResultCount;
             }catch (Exception e) {
                 cancelAllFutures(futures);
                 e.printStackTrace();
@@ -97,13 +96,14 @@ public class CommonApi implements ModpackApi {
         // Recycle or create new search result
         if(commonApiSearchResult == null) commonApiSearchResult = new CommonApiSearchResult();
         commonApiSearchResult.searchResults = results;
-        commonApiSearchResult.totalResultCount = totalTotalSize;
+        commonApiSearchResult.totalResultCount = totalSize;
         commonApiSearchResult.results = concatenatedItems;
         return commonApiSearchResult;
     }
 
     @Override
     public ModDetail getModDetails(ModItem item) {
+        Log.i("CommonApi", "Invoking getModDetails on item.apiSource="+item.apiSource +" item.title="+item.title);
         return getModpackApi(item.apiSource).getModDetails(item);
     }
 

@@ -200,7 +200,7 @@ public class DownloadUtils {
 
         int attempts = 0;
         T result = null;
-        while (attempts < 5 && (!outputFile.exists() || Tools.compareSHA1(outputFile, sha1))){
+        while (attempts < 5 && (!outputFile.exists() || !Tools.compareSHA1(outputFile, sha1))){
             attempts++;
             try {
                 result = downloadFunction.call();
