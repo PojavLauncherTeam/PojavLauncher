@@ -45,12 +45,9 @@ public class ZipUtils {
             String entryName = zipEntry.getName();
             if(!entryName.startsWith(dirName) || zipEntry.isDirectory()) continue;
             File zipDestination = new File(destination, entryName.substring(dirNameLen));
-            File parent = zipDestination.getParentFile();
-            if(parent != null && !parent.exists())
-                if(!parent.mkdirs()) throw new IOException("Failed to create "+parent.getAbsolutePath());
+            FileUtils.ensureParentDirectory(zipDestination);
             try (InputStream inputStream = zipFile.getInputStream(zipEntry);
-                 OutputStream outputStream =
-                         new FileOutputStream(zipDestination)) {
+                 OutputStream outputStream = new FileOutputStream(zipDestination)) {
                 IOUtils.copy(inputStream, outputStream);
             }
         }

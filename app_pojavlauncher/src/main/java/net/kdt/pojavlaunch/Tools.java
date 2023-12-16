@@ -57,6 +57,7 @@ import net.kdt.pojavlaunch.plugins.FFmpegPlugin;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.utils.DateUtils;
 import net.kdt.pojavlaunch.utils.DownloadUtils;
+import net.kdt.pojavlaunch.utils.FileUtils;
 import net.kdt.pojavlaunch.utils.JREUtils;
 import net.kdt.pojavlaunch.utils.JSONUtils;
 import net.kdt.pojavlaunch.utils.OldVersionsUtils;
@@ -242,7 +243,7 @@ public final class Tools {
     }
     public static void disableSplash(File dir) {
         File configDir = new File(dir, "config");
-        if(configDir.exists() || configDir.mkdirs()) {
+        if(FileUtils.ensureDirectorySilently(configDir)) {
             File forgeSplashFile = new File(dir, "config/splash.properties");
             String forgeSplashContent = "enabled=true";
             try {
@@ -536,9 +537,7 @@ public final class Tools {
 
     public static void copyAssetFile(Context ctx, String fileName, String output, String outputName, boolean overwrite) throws IOException {
         File parentFolder = new File(output);
-        if(!parentFolder.exists() && !parentFolder.mkdirs()) {
-            throw new IOException("Failed to create parent directory");
-        }
+        FileUtils.ensureDirectory(parentFolder);
         File destinationFile = new File(output, outputName);
         if(!destinationFile.exists() || overwrite){
             try(InputStream inputStream = ctx.getAssets().open(fileName)) {
@@ -859,10 +858,7 @@ public final class Tools {
 
     public static void write(String path, String content) throws IOException {
         File file = new File(path);
-        File parent = file.getParentFile();
-        if(parent != null && !parent.exists()) {
-            if(!parent.mkdirs()) throw new IOException("Failed to create parent directory");
-        }
+        FileUtils.ensureParentDirectory(file);
         try(FileOutputStream outStream = new FileOutputStream(file)) {
             IOUtils.write(content, outStream);
         }
