@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App name part -->
-    <string name="app_name">PojavLauncher（适用于 Android 的 Java 版本的 Minecraft）</string>
+    <string name="app_name">PojavLauncher（适用于 Android 的《Minecraft：Java版》）</string>
     <string name="app_short_name">PojavLauncher</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
@@ -21,7 +21,7 @@
     <string name="error_show_less">隐藏细节</string>
     <!-- Toast messages -->
     <string name="toast_permission_denied">需要存储读写权限！</string>
-    <string name="toast_optifine_success">安装成功 ！</string>
+    <string name="toast_optifine_success">安装成功！</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
@@ -70,7 +70,7 @@
     <string name="global_restart">重启</string>
     <string name="global_save">保存</string>
     <string name="global_unpacking">正在解压 %s</string>
-    <string name="global_error_field_empty">此段不能留空 !</string>
+    <string name="global_error_field_empty">此段不能留空</string>
     <string name="global_waiting">请稍等</string>
     <string name="global_select">选择</string>
     <string name="global_retry">请重试</string>
@@ -78,7 +78,7 @@
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">应用程序/游戏以代码 %d退出，请查看 latestlog.txt 了解更多详情。</string>
     <string name="mcn_exit_confirm">您确定要强制关闭？</string>
-    <string name="mcn_check_fail_vulkan_support">抱歉，您的设备不支持 Zink 渲染器 ！</string>
+    <string name="mcn_check_fail_vulkan_support">抱歉，此设备不支持 Zink（Vulkan）渲染器！</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_chat">聊天</string>
     <string name="control_debug">调试</string>
@@ -143,8 +143,9 @@
     <string name="mcl_setting_title_mousespeed">鼠标移动速度</string>
     <string name="mcl_setting_subtitle_mousespeed">修改虚拟鼠标的移动速度。</string>
     <string name="customctrl_passthru">鼠标穿透点击</string>
-    <string name="customctrl_swipeable">滑动点击</string>
-    <string name="customctrl_forward_lock">前进/疾跑 锁</string>
+    <string name="customctrl_swipeable">可滑动按钮</string>
+    <string name="customctrl_forward_lock">前进（疾跑）锁</string>
+    <string name="customctrl_absolute_tracking">绝对手指跟踪</string>
     <string name="memory_warning_msg">当前可用内存（%d）低于所分配的内存（%d），这可能会导致游戏崩溃 ! 如果游戏崩溃请更改内存分配设置。</string>
     <string name="mcl_memory_allocation">内存分配</string>
     <string name="mcl_memory_allocation_subtitle">控制给应用程序/游戏分配多少内存（建议设置为手机总内存的 20%～40%）</string>
@@ -201,7 +202,7 @@
     <string name="pedit_java_runtime">Java 运行环境</string>
     <string name="pedit_renderer">渲染器</string>
     <string name="arc_capes_title">Cosmetica 披风</string>
-    <string name="arc_capes_desc">启用来自 Cosmetica（原 Arc）的披风，需要OptiFine，如要了解更多信息，请访问 https://arcapes.com。</string>
+    <string name="arc_capes_desc">启用来自 Cosmetica（原 Arc）的披风，需要 OptiFine，欲知详情，请访问 https://arcapes.com。</string>
     <string name="notif_channel_name">常规</string>
     <string name="lazy_service_default_title">Pojav 前台服务</string>
     <string name="mcl_setting_veroption_installed">已安装</string>
@@ -214,11 +215,11 @@
     <string name="folder_dialog_insert_name">文件夹名称</string>
     <string name="folder_fragment_create">新建文件夹</string>
     <string name="folder_fragment_select">选择文件夹</string>
-    <string name="main_login_done">登录成功 ！</string>
+    <string name="main_login_done">登录成功！</string>
     <string name="main_add_account">添加账户</string>
     <string name="tasks_ongoing">任务正在执行中，请稍候……</string>
     <string name="no_saved_accounts">没有已保存的账户</string>
-    <string name="mc_download_failed">下载 Minecraft 失败！这可能是由于网络连接不良、文件放置错误等…</string>
+    <string name="mc_download_failed">下载 Minecraft 失败！这可能是由于网络连接不良、文件放置错误等。</string>
     <string name="xerr_unknown">未知的 Xbox Live API 错误 %d</string>
     <string name="xerr_no_account">您似乎没有 Xbox Live 账户，请在 https://minecraft.net/ 上登录一次，然后重试。</string>
     <string name="xerr_adult_verification">需要成人验证您的账户。</string>
@@ -229,16 +230,16 @@
     <string name="preference_enable_gyro_description">启用此功能将允许您通过转动手机来在游戏中转动视角。</string>
     <string name="preference_gyro_sensitivity_title">陀螺仪控制灵敏度</string>
     <string name="preference_gyro_sensitivity_description">调整陀螺仪控制的灵敏度。</string>
-    <string name="toast_turn_on_gyro">需要先启用陀螺仪控制才能调整 ！</string>
+    <string name="toast_turn_on_gyro">需要先启用陀螺仪控制才能使用！</string>
     <string name="preference_gyro_sample_rate_title">陀螺仪采样率</string>
     <string name="preference_gyro_sample_rate_description">如果您在陀螺仪控制上遇到性能问题，请增加此值。</string>
-    <string name="microsoft_login_retry_later">您的操作过于频繁，请稍后再试 !</string>
+    <string name="microsoft_login_retry_later">您的操作过于频繁，请稍后再试。</string>
     <string name="storage_required">PojavLauncher 需要连接外部存储，请重新连接并重启应用。</string>
     <string name="mcl_setting_title_buttonallcaps">在按钮标签中仅使用大写字母</string>
     <string name="mcl_setting_subtitle_buttonallcaps">如果您想在控制键中使用并显示小写字母，请关闭此设置。</string>
     <string name="create_profile">创建新配置</string>
-    <string name="preference_shader_dump_title">启用 着色器/光影 输出</string>
-    <string name="preference_shader_dump_description">记录切换的 着色器/光影 到日志文件。</string>
+    <string name="preference_shader_dump_title">启用着色器（光影）输出</string>
+    <string name="preference_shader_dump_description">记录转换的着色器（光影）到日志文件。</string>
     <string name="percent_format">%d%%</string>
     <string name="customctrl_editor_exit_title">您确定要离开？</string>
     <string name="customctrl_editor_exit_msg">您是否确认退出？</string>
