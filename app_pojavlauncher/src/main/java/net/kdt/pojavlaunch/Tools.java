@@ -420,7 +420,7 @@ public final class Tools {
         return libInfos[0].replaceAll("\\.", "/") + "/" + libInfos[1] + "/" + libInfos[2] + "/" + libInfos[1] + "-" + libInfos[2] + ".jar";
     }
 
-    public static String getPatchedFile(String version) {
+    public static String getClientClasspath(String version) {
         return DIR_HOME_VERSION + "/" + version + "/" + version + ".jar";
     }
 
@@ -441,26 +441,26 @@ public final class Tools {
     }
 
     private final static boolean isClientFirst = false;
-    public static String generateLaunchClassPath(JMinecraftVersionList.Version info,String actualname) {
-        StringBuilder libStr = new StringBuilder(); //versnDir + "/" + version + "/" + version + ".jar:";
+    public static String generateLaunchClassPath(JMinecraftVersionList.Version info, String actualname) {
+        StringBuilder finalClasspath = new StringBuilder(); //versnDir + "/" + version + "/" + version + ".jar:";
 
         String[] classpath = generateLibClasspath(info);
 
         if (isClientFirst) {
-            libStr.append(getPatchedFile(actualname));
+            finalClasspath.append(getClientClasspath(actualname));
         }
-        for (String perJar : classpath) {
-            if (!new File(perJar).exists()) {
-                Log.d(APP_NAME, "Ignored non-exists file: " + perJar);
+        for (String jarFile : classpath) {
+            if (!FileUtils.exists(jarFile)) {
+                Log.d(APP_NAME, "Ignored non-exists file: " + jarFile);
                 continue;
             }
-            libStr.append((isClientFirst ? ":" : "")).append(perJar).append(!isClientFirst ? ":" : "");
+            finalClasspath.append((isClientFirst ? ":" : "")).append(jarFile).append(!isClientFirst ? ":" : "");
         }
         if (!isClientFirst) {
-            libStr.append(getPatchedFile(actualname));
+            finalClasspath.append(getClientClasspath(actualname));
         }
 
-        return libStr.toString();
+        return finalClasspath.toString();
     }
 
 
