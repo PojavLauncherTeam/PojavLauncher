@@ -161,7 +161,7 @@ public final class Tools {
         DIR_HOME_LIBRARY = DIR_GAME_NEW + "/libraries";
         DIR_HOME_CRASH = DIR_GAME_NEW + "/crash-reports";
         ASSETS_PATH = DIR_GAME_NEW + "/assets";
-        OBSOLETE_RESOURCES_PATH= DIR_GAME_NEW + "/resources";
+        OBSOLETE_RESOURCES_PATH = DIR_GAME_NEW + "/resources";
         CTRLMAP_PATH = DIR_GAME_HOME + "/controlmap";
         CTRLDEF_FILE = DIR_GAME_HOME + "/controlmap/default.json";
         NATIVE_LIB_DIR = ctx.getApplicationInfo().nativeLibraryDir;
@@ -676,7 +676,7 @@ public final class Tools {
         return true; // allow if none match
     }
 
-    private static void preProcessLibraries(DependentLibrary[] libraries) {
+    public static void preProcessLibraries(DependentLibrary[] libraries) {
         for (int i = 0; i < libraries.length; i++) {
             DependentLibrary libItem = libraries[i];
             String[] version = libItem.name.split(":")[2].split("\\.");
@@ -853,6 +853,10 @@ public final class Tools {
     }
 
     public static String read(String path) throws IOException {
+        return read(new FileInputStream(path));
+    }
+
+    public static String read(File path) throws IOException {
         return read(new FileInputStream(path));
     }
 
