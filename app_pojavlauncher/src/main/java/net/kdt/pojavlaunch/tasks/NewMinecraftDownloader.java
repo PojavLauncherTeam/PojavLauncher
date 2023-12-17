@@ -3,6 +3,7 @@ package net.kdt.pojavlaunch.tasks;
 import static net.kdt.pojavlaunch.PojavApplication.sExecutorService;
 
 import android.app.Activity;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -229,15 +230,25 @@ public class NewMinecraftDownloader {
         Tools.preProcessLibraries(dependentLibraries);
         growDownloadList(dependentLibraries.length);
         for(DependentLibrary dependentLibrary : dependentLibraries) {
+            // Don't download lwjgl, we have our own bundled in.
+            if(dependentLibrary.name.startsWith("org.lwjgl")) continue;
+
             String libArtifactPath = Tools.artifactToPath(dependentLibrary);
             String sha1 = null, url = null;
             long size = 0;
             boolean skipIfFailed = false;
-            if(dependentLibrary.downloads != null && dependentLibrary.downloads.artifact != null) {
-                MinecraftLibraryArtifact artifact = dependentLibrary.downloads.artifact;
-                sha1 = artifact.sha1;
-                url = artifact.url;
-                size = artifact.size;
+            if(dependentLibrary.downloads != null) {
+                if(dependentLibrary.downloads.artifact != null) {
+                    MinecraftLibraryArtifact artifact = dependentLibrary.downloads.artifact;
+                    sha1 = artifact.sha1;
+                    url = artifact.url;
+                    size = artifact.size;
+                } else {
+                    // If the library has a downloads section but doesn't have an artifact in
+                    // it, it is likely natives-only, which means it can be skipped.
+                    Log.i("NewMCDownloader", "Skipped library " + dependentLibrary.name + " due to lack of artifact");
+                    continue;
+                }
             }
             if(url == null) {
                 url = (dependentLibrary.url == null
