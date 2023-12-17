@@ -36,7 +36,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class NewMinecraftDownloader {
+public class MinecraftDownloader {
     public static final String MINECRAFT_RES = "https://resources.download.minecraft.net/";
     private AtomicReference<Exception> mDownloaderThreadException;
     private ArrayList<DownloaderTask> mScheduledDownloadTasks;
@@ -231,14 +231,15 @@ public class NewMinecraftDownloader {
     }
 
     private void scheduleDownload(File targetFile, int downloadClass, String url, String sha1,
-                                  long size, boolean skipIfFailed) {
+                                  long size, boolean skipIfFailed) throws IOException {
+        FileUtils.ensureParentDirectory(targetFile);
         mDownloadFileCount++;
         mScheduledDownloadTasks.add(
                 new DownloaderTask(targetFile, downloadClass, url, sha1, size, skipIfFailed)
         );
     }
 
-    private void scheduleLibraryDownloads(DependentLibrary[] dependentLibraries) {
+    private void scheduleLibraryDownloads(DependentLibrary[] dependentLibraries) throws IOException {
         Tools.preProcessLibraries(dependentLibraries);
         growDownloadList(dependentLibraries.length);
         for(DependentLibrary dependentLibrary : dependentLibraries) {
@@ -276,7 +277,7 @@ public class NewMinecraftDownloader {
         }
     }
     
-    private void scheduleAssetDownloads(JAssets assets) {
+    private void scheduleAssetDownloads(JAssets assets) throws IOException {
         Map<String, JAssetInfo> assetObjects = assets.objects;
         if(assetObjects == null) return;
         Set<String> assetNames = assetObjects.keySet();
@@ -286,10 +287,11 @@ public class NewMinecraftDownloader {
             if(assetInfo == null) continue;
             File targetFile;
             String hashedPath = assetInfo.hash.substring(0, 2) + File.separator + assetInfo.hash;
+            String basePath = assets.mapToResources ? Tools.OBSOLETE_RESOURCES_PATH : Tools.ASSETS_PATH;
             if(assets.virtual || assets.mapToResources) {
-                targetFile = new File(Tools.OBSOLETE_RESOURCES_PATH, asset);
+                targetFile = new File(basePath, asset);
             } else {
-                targetFile = new File(Tools.ASSETS_PATH, "objects" + File.separator + hashedPath);
+                targetFile = new File(basePath, "objects" + File.separator + hashedPath);
             }
             String sha1 = LauncherPreferences.PREF_CHECK_LIBRARY_SHA ? assetInfo.hash : null;
             scheduleDownload(targetFile,
@@ -301,7 +303,7 @@ public class NewMinecraftDownloader {
         }
     }
 
-    private void scheduleLoggingAssetDownloadIfNeeded(JMinecraftVersionList.LoggingConfig loggingConfig) {
+    private void scheduleLoggingAssetDownloadIfNeeded(JMinecraftVersionList.LoggingConfig loggingConfig) throws IOException {
         if(loggingConfig.client == null || loggingConfig.client.file == null) return;
         JMinecraftVersionList.FileProperties loggingFileProperties = loggingConfig.client.file;
         File internalLoggingConfig = new File(Tools.DIR_DATA + File.separator + "security",
@@ -316,7 +318,7 @@ public class NewMinecraftDownloader {
                 false);
     }
 
-    private void scheduleGameJarDownload(MinecraftClientInfo minecraftClientInfo, String versionName) {
+    private void scheduleGameJarDownload(MinecraftClientInfo minecraftClientInfo, String versionName) throws IOException {
         File clientJar = createGameJarPath(versionName);
         String clientSha1 = LauncherPreferences.PREF_CHECK_LIBRARY_SHA ?
                 minecraftClientInfo.sha1 : null;
@@ -335,12 +337,12 @@ public class NewMinecraftDownloader {
     private static byte[] getLocalBuffer() {
         byte[] tlb = sThreadLocalDownloadBuffer.get();
         if(tlb != null) return tlb;
-        tlb = new byte[65535];
+        tlb = new byte[32768];
         sThreadLocalDownloadBuffer.set(tlb);
         return tlb;
     }
 
-    class DownloaderTask implements Runnable, Tools.DownloaderFeedback {
+    private final class DownloaderTask implements Runnable, Tools.DownloaderFeedback {
         private final File mTargetPath;
         private final String mTargetUrl;
         private String mTargetSha1;
@@ -369,7 +371,6 @@ public class NewMinecraftDownloader {
         }
 
         private void runCatching() throws Exception {
-            FileUtils.ensureParentDirectory(mTargetPath);
             if(Tools.isValidString(mTargetSha1)) {
                 verifyFileSha1();
             }else {
