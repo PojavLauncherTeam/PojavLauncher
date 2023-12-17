@@ -16,6 +16,7 @@ import net.kdt.pojavlaunch.JRE17Util;
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.mirrors.DownloadMirror;
+import net.kdt.pojavlaunch.mirrors.MirrorTamperedException;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.utils.DownloadUtils;
 import net.kdt.pojavlaunch.utils.FileUtils;
@@ -34,7 +35,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
 
-// TODO: implement mirror tamper checking.
 public class NewMinecraftDownloader {
     public static final String MINECRAFT_RES = "https://resources.download.minecraft.net/";
     private AtomicReference<Exception> mThrownDownloaderException;
@@ -123,17 +123,22 @@ public class NewMinecraftDownloader {
         return new File(Tools.DIR_HOME_VERSION, versionId + File.separator + versionId + ".jar");
     }
 
-    private File downloadGameJson(JMinecraftVersionList.Version verInfo) throws IOException {
+    private File downloadGameJson(JMinecraftVersionList.Version verInfo) throws IOException, MirrorTamperedException {
         File targetFile = createGameJsonPath(verInfo.id);
         if(verInfo.sha1 == null && targetFile.canRead() && targetFile.isFile())
             return targetFile;
         FileUtils.ensureParentDirectory(targetFile);
-        DownloadUtils.ensureSha1(targetFile, LauncherPreferences.PREF_VERIFY_MANIFEST ? verInfo.sha1 : null, ()-> {
-            ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT, 0,
-                    R.string.newdl_downloading_metadata, targetFile.getName());
-            DownloadMirror.downloadFileMirrored(DownloadMirror.DOWNLOAD_CLASS_METADATA, verInfo.url, targetFile);
-            return null;
-        });
+        try {
+            DownloadUtils.ensureSha1(targetFile, LauncherPreferences.PREF_VERIFY_MANIFEST ? verInfo.sha1 : null, () -> {
+                ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT, 0,
+                        R.string.newdl_downloading_metadata, targetFile.getName());
+                DownloadMirror.downloadFileMirrored(DownloadMirror.DOWNLOAD_CLASS_METADATA, verInfo.url, targetFile);
+                return null;
+            });
+        }catch (DownloadUtils.SHA1VerificationException e) {
+            if(DownloadMirror.isMirrored()) throw new MirrorTamperedException();
+            else throw e;
+        }
         return targetFile;
     }
 
@@ -166,7 +171,7 @@ public class NewMinecraftDownloader {
      * @return false if JRE17 installation failed, true otherwise
      * @throws IOException if the download of any of the metadata files fails
      */
-    private boolean downloadAndProcessMetadata(Activity activity, JMinecraftVersionList.Version verInfo, String versionName) throws IOException {
+    private boolean downloadAndProcessMetadata(Activity activity, JMinecraftVersionList.Version verInfo, String versionName) throws IOException, MirrorTamperedException {
         File versionJsonFile;
         if(verInfo != null) versionJsonFile = downloadGameJson(verInfo);
         else versionJsonFile = createGameJsonPath(versionName);

@@ -18,7 +18,7 @@ import java.util.concurrent.Callable;
 
 public class ModpackInstaller {
 
-    public static ModLoader installModpack(ModDetail modDetail, int selectedVersion, InstallFunction installFunction) throws IOException{
+    public static ModLoader installModpack(ModDetail modDetail, int selectedVersion, InstallFunction installFunction) throws IOException {
         String versionUrl = modDetail.versionUrls[selectedVersion];
         String versionHash = modDetail.versionHashes[selectedVersion];
         String modpackName = modDetail.title.toLowerCase(Locale.ROOT).trim().replace(" ", "_" );

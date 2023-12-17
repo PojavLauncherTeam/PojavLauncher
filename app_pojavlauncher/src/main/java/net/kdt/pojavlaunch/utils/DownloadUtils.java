@@ -120,33 +120,35 @@ public class DownloadUtils {
         return parseResult;
     }
 
+    private static <T> T downloadFile(Callable<T> downloadFunction) throws IOException{
+        try {
+            return downloadFunction.call();
+        } catch (IOException e){
+            throw e;
+        }
+        catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static boolean verifyFile(File file, String sha1) {
+        return file.exists() && Tools.compareSHA1(file, sha1);
+    }
+
     public static <T> T ensureSha1(File outputFile, @Nullable String sha1, Callable<T> downloadFunction) throws IOException {
         // Skip if needed
-        if(sha1 == null){
-            try {
-                return downloadFunction.call();
-            } catch (IOException e){
-                throw e;
-            }
-            catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        }
+        if(sha1 == null) return downloadFile(downloadFunction);
 
         int attempts = 0;
+        boolean fileOkay = verifyFile(outputFile, sha1);
         T result = null;
-        while (attempts < 5 && (!outputFile.exists() || !Tools.compareSHA1(outputFile, sha1))){
+        while (attempts < 5 && !fileOkay){
             attempts++;
-            try {
-                result = downloadFunction.call();
-            } catch (IOException e){
-                throw e;
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
+            downloadFile(downloadFunction);
+            fileOkay = verifyFile(outputFile, sha1);
         }
+        if(!fileOkay) throw new SHA1VerificationException("SHA1 verifcation failed after 5 download attempts");
         return result;
-
     }
 
     public interface ParseCallback<T> {
@@ -155,6 +157,12 @@ public class DownloadUtils {
     public static class ParseException extends Exception {
         public ParseException(Exception e) {
             super(e);
+        }
+    }
+
+    public static class SHA1VerificationException extends IOException {
+        public SHA1VerificationException(String message) {
+            super(message);
         }
     }
 }
