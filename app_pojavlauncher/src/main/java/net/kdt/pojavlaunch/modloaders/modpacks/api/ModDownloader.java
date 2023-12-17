@@ -122,16 +122,14 @@ public class ModDownloader {
                 try {
                     DownloadUtils.ensureSha1(mDestination, mSha1, (Callable<Void>) () -> {
                         IOException exception = tryDownload(sourceUrl);
-
                         if(exception != null) {
-                            downloadFailed(exception);
+                            throw exception;
                         }
-
                         return null;
                     });
 
                 }catch (IOException e) {
-                    return;
+                    downloadFailed(e);
                 }
             }
         }
