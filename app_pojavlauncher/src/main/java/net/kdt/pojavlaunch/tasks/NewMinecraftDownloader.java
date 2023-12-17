@@ -38,11 +38,13 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class NewMinecraftDownloader {
     public static final String MINECRAFT_RES = "https://resources.download.minecraft.net/";
-    private AtomicReference<Exception> mThrownDownloaderException;
+    private AtomicReference<Exception> mDownloaderThreadException;
     private ArrayList<DownloaderTask> mScheduledDownloadTasks;
     private AtomicLong mDownloadFileCounter;
     private AtomicLong mDownloadSizeCounter;
     private long mDownloadFileCount;
+    private File mSourceJarFile; // The source client JAR picked during the inheritance process
+    private File mTargetJarFile; // The destination client JAR to which the source will be copied to.
 
     private static final ThreadLocal<byte[]> sThreadLocalDownloadBuffer = new ThreadLocal<>();
 
@@ -79,10 +81,11 @@ public class NewMinecraftDownloader {
         // work to keep the launcher alive. We will replace this line when we will start downloading stuff.
         ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT, 0, R.string.newdl_starting);
 
+        mTargetJarFile = createGameJarPath(versionName);
         mScheduledDownloadTasks = new ArrayList<>();
         mDownloadFileCounter = new AtomicLong(0);
         mDownloadSizeCounter = new AtomicLong(0);
-        mThrownDownloaderException = new AtomicReference<>(null);
+        mDownloaderThreadException = new AtomicReference<>(null);
 
         if(!downloadAndProcessMetadata(activity, verInfo, versionName)) {
             throw new RuntimeException(activity.getString(R.string.exception_failed_to_unpack_jre17));
@@ -99,7 +102,7 @@ public class NewMinecraftDownloader {
         downloaderPool.shutdown();
 
         try {
-            while (mThrownDownloaderException.get() == null &&
+            while (mDownloaderThreadException.get() == null &&
                     !downloaderPool.awaitTermination(33, TimeUnit.MILLISECONDS)) {
                 long dlFileCounter = mDownloadFileCounter.get();
                 int progress = (int)((dlFileCounter * 100L) / mDownloadFileCount);
@@ -107,8 +110,12 @@ public class NewMinecraftDownloader {
                         R.string.newdl_downloading_game_files, dlFileCounter,
                         mDownloadFileCount, (double)mDownloadSizeCounter.get() / (1024d * 1024d));
             }
-            Exception thrownException = mThrownDownloaderException.get();
-            if(thrownException != null) throw thrownException;
+            Exception thrownException = mDownloaderThreadException.get();
+            if(thrownException != null) {
+                throw thrownException;
+            } else {
+                ensureJarFileCopy();
+            }
         }catch (InterruptedException e) {
             // Interrupted while waiting, which means that the download was cancelled.
             // Kill all downloading threads immediately, and ignore any exceptions thrown by them
@@ -122,6 +129,20 @@ public class NewMinecraftDownloader {
 
     private File createGameJarPath(String versionId) {
         return new File(Tools.DIR_HOME_VERSION, versionId + File.separator + versionId + ".jar");
+    }
+
+    /**
+     * Ensure that there is a copy of the client JAR file in the version folder, if a copy is
+     * needed.
+     * @throws IOException if the copy fails
+     */
+    private void ensureJarFileCopy() throws IOException {
+        if(mSourceJarFile == null) return;
+        if(mSourceJarFile.equals(mTargetJarFile)) return;
+        if(mTargetJarFile.exists()) return;
+        FileUtils.ensureParentDirectory(mTargetJarFile);
+        Log.i("NewMCDownloader", "Copying " + mSourceJarFile.getName() + " to "+mTargetJarFile.getAbsolutePath());
+        org.apache.commons.io.FileUtils.copyFile(mSourceJarFile, mTargetJarFile, false);
     }
 
     private File downloadGameJson(JMinecraftVersionList.Version verInfo) throws IOException, MirrorTamperedException {
@@ -179,7 +200,7 @@ public class NewMinecraftDownloader {
         if(versionJsonFile.canRead())  {
             verInfo = Tools.GLOBAL_GSON.fromJson(Tools.read(versionJsonFile), JMinecraftVersionList.Version.class);
         } else {
-            throw new IOException("Unable to read Version JSON for version "+versionName);
+            throw new IOException("Unable to read Version JSON for version " + versionName);
         }
 
         if(activity != null && !JRE17Util.installNewJreIfNeeded(activity, verInfo)){
@@ -191,16 +212,7 @@ public class NewMinecraftDownloader {
 
 
         MinecraftClientInfo minecraftClientInfo = getClientInfo(verInfo);
-        if(minecraftClientInfo != null) {
-            growDownloadList(1);
-            scheduleDownload(createGameJarPath(verInfo.id),
-                    DownloadMirror.DOWNLOAD_CLASS_LIBRARIES,
-                    minecraftClientInfo.url,
-                    minecraftClientInfo.sha1,
-                    minecraftClientInfo.size,
-                    false
-            );
-        }
+        if(minecraftClientInfo != null) scheduleGameJarDownload(minecraftClientInfo, versionName);
 
         if(verInfo.libraries != null) scheduleLibraryDownloads(verInfo.libraries);
 
@@ -304,6 +316,22 @@ public class NewMinecraftDownloader {
                 false);
     }
 
+    private void scheduleGameJarDownload(MinecraftClientInfo minecraftClientInfo, String versionName) {
+        File clientJar = createGameJarPath(versionName);
+        String clientSha1 = LauncherPreferences.PREF_CHECK_LIBRARY_SHA ?
+                minecraftClientInfo.sha1 : null;
+        growDownloadList(1);
+        scheduleDownload(clientJar,
+                DownloadMirror.DOWNLOAD_CLASS_LIBRARIES,
+                minecraftClientInfo.url,
+                clientSha1,
+                minecraftClientInfo.size,
+                false
+        );
+        // Store the path of the JAR to copy it into our new version folder later.
+        mSourceJarFile = clientJar;
+    }
+
     private static byte[] getLocalBuffer() {
         byte[] tlb = sThreadLocalDownloadBuffer.get();
         if(tlb != null) return tlb;
@@ -336,7 +364,7 @@ public class NewMinecraftDownloader {
             try {
                 runCatching();
             }catch (Exception e) {
-                mThrownDownloaderException.set(e);
+                mDownloaderThreadException.set(e);
             }
         }
 
