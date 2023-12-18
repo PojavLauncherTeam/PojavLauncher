@@ -9,7 +9,7 @@
     <string name="login_online_username_hint">E-Mail oder Benutzername</string>
     <string name="login_online_login_label">Anmelden</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Tippe auf das Zahnradsymbol mittig oben, um das Kontextmenü zu öffnen ⚙\nTippe auf eine Schaltfläche, um sie anzupassen: Bearbeiten, Vergrößern, Löschen oder ihre Tastenzuordnung anpassen."</string>
+    <string name="hint_control_mapping">"Tippe auf das Zahnradsymbol oben in der Mitte, um das Kontextmenü zu öffnen ⚙\nTippe auf eine Schaltfläche, um sie anzupassen: Bearbeiten, Vergrößern, Löschen oder die Tastenzuordnung anpassen."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Dieses Konto wird entfernt!</string>
     <!-- AlertDialog title -->
@@ -145,6 +145,7 @@
     <string name="customctrl_passthru">Maus ignoriert Schaltflächen</string>
     <string name="customctrl_swipeable">Wischbar</string>
     <string name="customctrl_forward_lock">Weiterleitungssperre</string>
+    <string name="customctrl_absolute_tracking">Absolutes Finger-Tracking</string>
     <string name="memory_warning_msg">Die aktuelle Menge an freiem RAM (%d) ist niedriger als zugewiesener RAM (%d), was zu Abstürzen führen kann. Ändere die Zuordnung, wenn das Spiel abstürzt.</string>
     <string name="mcl_memory_allocation">Zugewiesener RAM</string>
     <string name="mcl_memory_allocation_subtitle">Steuert, wie viel Arbeitsspeicher Minecraft zur Verfügung hat.</string>
@@ -305,6 +306,9 @@ Um die offizielle Download-Quelle zu verwenden, drücke \"Auf offizielle Seite u
     <string name="dl_turn_off_manifest_checks">Manifest-Verifikation ausschalten</string>
     <string name="dl_switch_to_official_site">Zur offiziellen Seite wechseln</string>
     <string name="preference_download_source_title">Spiele-Download-Quelle</string>
+    <string name="preference_download_source_description">Einen Download-Spiegelserver anstelle des offiziellen Servers wählen</string>
+    <string name="preference_verify_manifest_title">Spielversions-Manifest verifizieren</string>
+    <string name="preference_verify_manifest_description">Wenn aktiviert, wird der Launcher das Spielversions-Manifest zusammen mit den Bibliotheken prüfen.</string>
     <string name="notif_download_finished">Das Spiel ist bereit zum Starten</string>
     <string name="notif_download_finished_desc">Hier klicken, um zu starten!</string>
     <string name="preference_category_gestures">Gesten</string>
@@ -319,4 +323,7 @@ Um die offizielle Download-Quelle zu verwenden, drücke \"Auf offizielle Seite u
     <string name="notification_permission_toast">Dies kann jederzeit in den Einstellungen geändert werden</string>
     <string name="preference_ask_for_notification_title">Benachrichtigungen erlauben</string>
     <string name="preference_ask_for_notification_description">Klicken, um die Benachrichtigungs-Berechtigung erneut anzufragen, damit Spiel-/Modpack-Downloads im Hintergrund richtig funktionieren.</string>
+    <string name="preference_vsync_in_zink_title">V-Sync mit Zink erlauben</string>
+    <string name="preference_vsync_in_zink_description">Ermöglicht dem Launcher, interne System-APIs zu verwenden, um V-Sync für Zink zu aktivieren. Sollte deaktiviert werden, wenn der Launcher nach einer Systemaktualisierung plötzlich mit Zink abstürzt.</string>
+    <string name="exception_failed_to_unpack_jre17">Konnte JRE 17 nicht installieren</string>
 </resources>
