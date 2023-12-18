@@ -36,7 +36,7 @@
     <string name="mcl_options">Opções</string>
     <string name="mcl_option_customcontrol">Controles personalizados</string>
     <string name="mcl_setting_title_use_surface_view">Usar renderização de superfície alternativa</string>
-    <string name="mcl_setting_subtitle_use_surface_view">Pode ajudar no desempenho em cenários de GPU limitada.</string>
+    <string name="mcl_setting_subtitle_use_surface_view">Pode ajudar no desempenho em caso de limitações na GPU.</string>
     <string name="mcl_setting_title_ignore_notch">Ignorar entalhe</string>
     <string name="mcl_setting_subtitle_ignore_notch">Ignora o entalhe e estende a tela por baixo.\nGarante uma experiência mais envolvente.</string>
     <string name="mcl_setting_title_resolution_scaler">Escala de resolução</string>
@@ -145,6 +145,7 @@
     <string name="customctrl_passthru">Mouse pode atravessar</string>
     <string name="customctrl_swipeable">Deslizável</string>
     <string name="customctrl_forward_lock">Trava para correr</string>
+    <string name="customctrl_absolute_tracking">Movimento absoluto</string>
     <string name="memory_warning_msg">A quantidade atual de RAM livre (%d) é menor que a RAM alocada (%d), no qual pode causar falhas. Altere a quantidade se o jogo apresentar alguma falha.</string>
     <string name="mcl_memory_allocation">Alocação de memória</string>
     <string name="mcl_memory_allocation_subtitle">Controla o quanto de RAM será usado pelo Minecraft.</string>
@@ -278,7 +279,7 @@
     <string name="create_profile_optifine">Criar perfil OptiFine</string>
     <string name="hint_search_modpack">Procurar por modpacks</string>
     <string name="preference_vulkan_driver_system_title">Usar driver Vulkan do sistema</string>
-    <string name="preference_vulkan_driver_system_description">Forçar o launcher a usar o driver Vulkan do sistema em vez do Turnip em GPUs Adreno. Afeta apenas Zink e mods que utilizam Vulkan.</string>
+    <string name="preference_vulkan_driver_system_description">Forçar o launcher à usar o driver Vulkan do sistema em vez do Turnip em GPUs Adreno. Afeta apenas Zink e mods que utilizam Vulkan.</string>
     <string name="generic_install">Instalar</string>
     <string name="generic_apply">Aplicar</string>
     <string name="search_modpack_no_result">Nenhum modpacks encontrado</string>
@@ -322,7 +323,7 @@
     <string name="notification_permission_toast">Você sempre pode mudar de ideia mais tarde entrando em Configurações</string>
     <string name="preference_ask_for_notification_title">Permitir notificações</string>
     <string name="preference_ask_for_notification_description">Clique para solicitar novamente a permissão de notificação necessária para que os downloads em segundo plano de jogo/modpack funcionem corretamente.</string>
-    <string name="preference_vsync_in_zink_title">Permitir sincronização vertical com Zink</string>
+    <string name="preference_vsync_in_zink_title">Permitir V-Sync com Zink</string>
     <string name="preference_vsync_in_zink_description">Permite o launcher usar as APIs de sistema interno para ativar V-Sync para o Zink. Desabilite isto caso seu launcher tiver problemas com o Zink depois de uma atualização de sistema.</string>
     <string name="exception_failed_to_unpack_jre17">Falha ao instalar o JRE 17</string>
 </resources>
