@@ -326,4 +326,7 @@
     <string name="preference_vsync_in_zink_title">Вертикальная синхронизация с Zink</string>
     <string name="preference_vsync_in_zink_description">Позволяет использовать внутренние системные API для активации вертикальной синхронизации при работе с Zink. Отключите, если игра начнёт вылетать после обновления системы.</string>
     <string name="exception_failed_to_unpack_jre17">Не удалось установить JRE 17</string>
+    <string name="newdl_starting">Чтение метаданных игры…</string>
+    <string name="newdl_downloading_metadata">Загрузка метаданных игры (%s)</string>
+    <string name="newdl_downloading_game_files">Загрузка файлов… (%d/%d, %.2f МБ)</string>
 </resources>
