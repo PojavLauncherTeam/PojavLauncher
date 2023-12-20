@@ -325,4 +325,7 @@
     <string name="preference_vsync_in_zink_title">Zink ilə V-Sync-ə icazə verin</string>
     <string name="preference_vsync_in_zink_description">Başladıcıya Zink üçün V-Sync-i aktivləşdirmək məqsədilə daxili sistem API-lərindən istifadə etməyə icazə verir. Başladıcınız sistem yeniləməsindən sonra qəfil Zink ilə çökərsə, bunu söndürün.</string>
     <string name="exception_failed_to_unpack_jre17">JRE 17 quraşdırmaq alınmadı</string>
+    <string name="newdl_starting">Oyun metadatası oxunur…</string>
+    <string name="newdl_downloading_metadata">Oyun metadatası endirilir (%s)</string>
+    <string name="newdl_downloading_game_files">Oyun faylları endirilir... (%d/%d, %.2f MB)</string>
 </resources>
