@@ -123,7 +123,7 @@
     <string name="customctrl_button_opacity">Opacidad del botón</string>
     <string name="customctrl_addbutton">Añadir botón</string>
     <string name="customctrl_addbutton_drawer">Añadir cajón de botones</string>
-    <string name="customctrl_addbutton_joystick">Agregar joystick</string>
+    <string name="customctrl_addbutton_joystick">Añadir joystick</string>
     <string name="customctrl_addsubbutton">Añadir sub-botón</string>
     <string name="customctrl_selectdefault">Seleccionar controles por defecto</string>
     <string name="customctrl_export">Exportar controles</string>
@@ -322,4 +322,9 @@
     <string name="notification_permission_toast">Siempre puedes cambiar de opinión más tarde yendo a Ajustes</string>
     <string name="preference_ask_for_notification_title">Permitir notificaciones</string>
     <string name="preference_ask_for_notification_description">Haz clic para volver a solicitar el permiso de notificaciones, necesario para qué las descargas en segundo plano del juego/modpack funcionen correctamente.</string>
+    <string name="preference_vsync_in_zink_title">Permitir V-Sync con Zink</string>
+    <string name="exception_failed_to_unpack_jre17">Error al instalar JRE 17</string>
+    <string name="newdl_starting">Leyendo metadatos…</string>
+    <string name="newdl_downloading_metadata">Descargando metadatos del juego (%s)</string>
+    <string name="newdl_downloading_game_files">Descargando archivos del juego... (%d/%d, %.2f MB)</string>
 </resources>
