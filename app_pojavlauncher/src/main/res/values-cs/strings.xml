@@ -326,4 +326,7 @@
     <string name="preference_vsync_in_zink_title">Povolit V-Sync se Zink</string>
     <string name="preference_vsync_in_zink_description">Umožňuje spouštěči používat interní systémová API pro povolení V-Sync pro Zink. Vypněte tuto možnost, pokud váš spouštěč náhle po aktualizaci systému spadne se Zink.</string>
     <string name="exception_failed_to_unpack_jre17">Instalace JRE 17 selhala</string>
+    <string name="newdl_starting">Čtení metadat hry…</string>
+    <string name="newdl_downloading_metadata">Stahování metadat hry (%s)</string>
+    <string name="newdl_downloading_game_files">Stahování souborů hry… (%d/%d, %.2f MB)</string>
 </resources>
