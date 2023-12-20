@@ -326,4 +326,7 @@ Um die offizielle Download-Quelle zu verwenden, drücke \"Auf offizielle Seite u
     <string name="preference_vsync_in_zink_title">V-Sync mit Zink erlauben</string>
     <string name="preference_vsync_in_zink_description">Ermöglicht dem Launcher, interne System-APIs zu verwenden, um V-Sync für Zink zu aktivieren. Sollte deaktiviert werden, wenn der Launcher nach einer Systemaktualisierung plötzlich mit Zink abstürzt.</string>
     <string name="exception_failed_to_unpack_jre17">Konnte JRE 17 nicht installieren</string>
+    <string name="newdl_starting">Lese Spiel-Metadaten…</string>
+    <string name="newdl_downloading_metadata">Lade Spiel-Metadaten herunter (%s)</string>
+    <string name="newdl_downloading_game_files">Lade Spieldateien herunter… (%d/%d, %.2f MB)</string>
 </resources>
