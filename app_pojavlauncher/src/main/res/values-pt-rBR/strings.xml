@@ -326,4 +326,7 @@
     <string name="preference_vsync_in_zink_title">Permitir V-Sync com Zink</string>
     <string name="preference_vsync_in_zink_description">Permite o launcher usar as APIs de sistema interno para ativar V-Sync para o Zink. Desabilite isto caso seu launcher tiver problemas com o Zink depois de uma atualização de sistema.</string>
     <string name="exception_failed_to_unpack_jre17">Falha ao instalar o JRE 17</string>
+    <string name="newdl_starting">Lendo metadados do jogo…</string>
+    <string name="newdl_downloading_metadata">Baixando metadados do jogo (%s)</string>
+    <string name="newdl_downloading_game_files">Baixando arquivos do jogo… (%d/%d, %.2f MB)</string>
 </resources>
