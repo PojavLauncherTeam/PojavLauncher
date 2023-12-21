@@ -133,15 +133,16 @@ _Noreturn static void nominal_exit(int code) {
     // A hat trick, if you will
     // Call the Android System.exit() to perform Android's shutdown hooks and do a
     // fully clean exit.
-    jclass systemClass = (*env)->FindClass(env,"java/lang/System");
-    jmethodID exitMethod = (*env)->GetStaticMethodID(env, systemClass, "exit", "(I)V");
-    (*env)->CallStaticVoidMethod(env, systemClass, exitMethod, 0);
-
-    // Hang. Either of these will happen:
+    // After doing this, either of these will happen:
     // 1. Runtime calls exit() for real and it will be handled by ByteHook's recurse handler
     // and redirected back to the OS
     // 2. Zygote sends SIGTERM (no handling necessary, the process perishes)
     // 3. A different thread calls exit() and the hook will go through the exit_tripped path
+    jclass systemClass = (*env)->FindClass(env,"java/lang/System");
+    jmethodID exitMethod = (*env)->GetStaticMethodID(env, systemClass, "exit", "(I)V");
+    (*env)->CallStaticVoidMethod(env, systemClass, exitMethod, 0);
+    // System.exit() should not ever return, but the compiler doesn't know about that
+    // so put a while loop here
     while(1) {}
 }
 
