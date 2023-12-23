@@ -38,6 +38,15 @@ public class ProfileIconCache {
         else return fetchStaticIcon(resources, key, icon);
     }
 
+    /**
+     * Drop an icon from the icon cache. When dropped, it's Drawable will be re-read from the
+     * data string (or re-fetched from the static cache)
+     * @param key the profile key
+     */
+    public static void dropIcon(@NonNull String key) {
+        sIconCache.remove(key);
+    }
+
     private static Drawable fetchDataIcon(Resources resources, String key, @NonNull String icon) {
         Drawable dataIcon = readDataIcon(resources, icon);
         if(dataIcon == null) dataIcon = fetchFallbackIcon(resources);
