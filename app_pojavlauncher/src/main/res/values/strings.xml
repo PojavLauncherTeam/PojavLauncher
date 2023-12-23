@@ -372,4 +372,7 @@
     <string name="newdl_downloading_metadata">Downloading game metadata (%s)</string>
     <string name="newdl_downloading_game_files">Downloading game files… (%d/%d, %.2f MB)</string>
     <string name="cropper_title">Select image region</string>
+    <string name="cropper_lock_vertical">V. lock</string>
+    <string name="cropper_lock_horizontal">H. lock</string>
+    <string name="cropper_reset">Reset</string>
 </resources>

@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
@@ -18,17 +19,23 @@ import net.kdt.pojavlaunch.Tools;
 import top.defaults.checkerboarddrawable.CheckerboardDrawable;
 
 public class ImageCropperView extends AppCompatImageView {
-    private final Matrix mZoomMatrix = new Matrix();
-    private final Matrix mTranslateMatrix = new Matrix();
+
     private final Matrix mTranslateInverse = new Matrix();
+    private final Matrix mTranslateMatrix = new Matrix();
+    private final Matrix mPrescaleMatrix = new Matrix();
     private final Matrix mImageMatrix = new Matrix();
+    private final Matrix mZoomMatrix = new Matrix();
+    private final RectF mSelectionHighlight = new RectF();
+    private final Rect mSelectionRect = new Rect();
+    public boolean horizontalLock, verticalLock;
     private float mLastTouchX, mLastTouchY;
+    private float mHighlightThickness;
     private float mLastDistance = -1f;
     private int mLastTrackedPointer;
-    private final Rect mSelectionFrameRect = new Rect();
-    private Paint mSelectionPaint;
     private float mSelectionPadding;
     private Bitmap mOriginalBitmap;
+    private Paint mSelectionPaint;
+
     public ImageCropperView(Context context) {
         super(context);
         init();
@@ -48,9 +55,13 @@ public class ImageCropperView extends AppCompatImageView {
         setBackground(new CheckerboardDrawable.Builder().build());
         setScaleType(ScaleType.MATRIX);
         mSelectionPadding = Tools.dpToPx(24);
+        mHighlightThickness = Tools.dpToPx(1);
         mSelectionPaint = new Paint();
         mSelectionPaint.setColor(Color.RED);
-        mSelectionPaint.setStrokeWidth(Tools.dpToPx(1));
+        mSelectionPaint.setStrokeWidth(mHighlightThickness);
+        // Divide the thickness by 2 since we will be needing only half of it for
+        // rect highlight correction.
+        mHighlightThickness /= 2;
         mSelectionPaint.setStyle(Paint.Style.STROKE);
     }
 
@@ -123,7 +134,7 @@ public class ImageCropperView extends AppCompatImageView {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.drawRect(mSelectionFrameRect, mSelectionPaint);
+        canvas.drawRect(mSelectionHighlight, mSelectionPaint);
     }
 
     private int findPointerIndex(MotionEvent event, int id)  {
@@ -134,6 +145,8 @@ public class ImageCropperView extends AppCompatImageView {
     }
 
     private void pan(int panX, int panY) {
+        if(horizontalLock) panX = 0;
+        if(verticalLock) panY = 0;
         mTranslateMatrix.postTranslate(panX, panY);
         computeImageMatrix();
     }
@@ -151,9 +164,9 @@ public class ImageCropperView extends AppCompatImageView {
     }
 
     private void computeImageMatrix() {
-        mImageMatrix.reset();
-        mImageMatrix.preConcat(mTranslateMatrix);
-        mImageMatrix.preConcat(mZoomMatrix);
+        mImageMatrix.set(mPrescaleMatrix);
+        mImageMatrix.postConcat(mZoomMatrix);
+        mImageMatrix.postConcat(mTranslateMatrix);
         setImageMatrix(mImageMatrix);
     }
 
@@ -169,10 +182,10 @@ public class ImageCropperView extends AppCompatImageView {
         // By inverting the matrix we will effectively "divide" our rectangle by it, thus getting
         // its two points on the bitmap's surface. Math be cool indeed.
         float[] src = new float[] {
-                mSelectionFrameRect.left,
-                mSelectionFrameRect.top,
-                mSelectionFrameRect.right,
-                mSelectionFrameRect.bottom
+                mSelectionRect.left,
+                mSelectionRect.top,
+                mSelectionRect.right,
+                mSelectionRect.bottom
         };
         float[] dst = new float[4];
         imageInverse.mapPoints(dst, 0, src, 0, 2);
@@ -215,18 +228,54 @@ public class ImageCropperView extends AppCompatImageView {
         // Calculate the corners of the new selection frame. It should always appear at the center of the view.
         int centerShiftX = (w - lesserDimension) / 2;
         int centerShiftY = (h - lesserDimension) / 2;
-        mSelectionFrameRect.left = centerShiftX;
-        mSelectionFrameRect.top = centerShiftY;
-        mSelectionFrameRect.right = centerShiftX + lesserDimension;
-        mSelectionFrameRect.bottom = centerShiftY + lesserDimension;
+        mSelectionRect.left = centerShiftX;
+        mSelectionRect.top = centerShiftY;
+        mSelectionRect.right = centerShiftX + lesserDimension;
+        mSelectionRect.bottom = centerShiftY + lesserDimension;
+        // Adjust the selection highlight rectnagle to be bigger than the selection area
+        // by the highlight thickness, to make sure that the entire inside of the selection highlight
+        // will fit into the image
+        mSelectionHighlight.left = mSelectionRect.left - mHighlightThickness;
+        mSelectionHighlight.top = mSelectionRect.top + mHighlightThickness;
+        mSelectionHighlight.right = mSelectionRect.right + mHighlightThickness;
+        mSelectionHighlight.bottom = mSelectionRect.bottom - mHighlightThickness;
+        computePrescaleMatrix();
     }
 
-    private void reset() {
+    /**
+     * Computes a prescale matrix.
+     * This matrix basically centers the source image in the selection rect.
+     * Mainly intended for convenience of implementing a "Reset" button sometime in the future
+     */
+    private void computePrescaleMatrix() {
+        if(mOriginalBitmap == null) return;
+        int selectionRectWidth = mSelectionRect.width();
+        int selectionRectHeight = mSelectionRect.height();
+        int imageWidth = mOriginalBitmap.getWidth();
+        int imageHeight = mOriginalBitmap.getHeight();
+        float hRatio =  (float)selectionRectWidth / imageWidth ;
+        float vRatio =  (float)selectionRectHeight / imageHeight;
+        float ratio  = Math.min (hRatio, vRatio);
+        float centerShift_x = (selectionRectWidth - imageWidth*ratio) / 2;
+        float centerShift_y = (selectionRectWidth - imageHeight*ratio) / 2;
+        centerShift_x += mSelectionRect.left;
+        centerShift_y += mSelectionRect.top;
+        mPrescaleMatrix.reset();
+        mPrescaleMatrix.postScale(ratio, ratio);
+        mPrescaleMatrix.postTranslate(centerShift_x, centerShift_y);
+        computeImageMatrix();
+    }
+
+    public void resetTransforms() {
         mTranslateMatrix.reset();
         mZoomMatrix.reset();
         mTranslateInverse.reset();
-        mImageMatrix.reset();
-        setImageMatrix(mImageMatrix);
+        computeImageMatrix();
+    }
+
+    private void reset() {
+        computePrescaleMatrix();
+        resetTransforms();
         mLastDistance = -1f;
     }
 

@@ -201,7 +201,6 @@ dependencies {
     implementation 'com.github.Mathias-Boulay:android_gamepad_remapper:a0fe7e72f2'
     implementation 'com.github.Mathias-Boulay:virtual-joystick-android:2e7aa25e50'
 
-
     // implementation 'com.intuit.sdp:sdp-android:1.0.5'
     // implementation 'com.intuit.ssp:ssp-android:1.0.5'
 
