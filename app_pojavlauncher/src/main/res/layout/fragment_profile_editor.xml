@@ -14,6 +14,22 @@
         android:layout_height="wrap_content"
         android:paddingHorizontal="@dimen/fragment_padding_medium">
 
+        <ImageView
+            android:layout_marginTop="@dimen/padding_extra_large"
+            android:id="@+id/vprof_editor_profile_icon"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            tools:src="@tools:sample/avatars"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PROFILE ICON"
+            app:layout_constraintBottom_toTopOf="@id/vprof_editor_profile_icon"
+            app:layout_constraintStart_toStartOf="@id/vprof_editor_profile_icon"/>
+
         <TextView
             android:id="@+id/vprof_editor_profile_name_sub"
             android:layout_width="wrap_content"
@@ -35,7 +51,7 @@
             android:hint="@string/unnamed"
             android:inputType="textPersonName"
             android:paddingHorizontal="@dimen/padding_heavy"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/vprof_editor_profile_icon" />
 
 
         <TextView
