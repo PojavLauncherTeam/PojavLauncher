@@ -4,7 +4,8 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.util.TypedValue;
+import android.view.View;
+import android.widget.ToggleButton;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -31,14 +32,14 @@ public class CropperUtils {
         AlertDialog.Builder builder = new AlertDialog.Builder(context)
                 .setTitle(R.string.cropper_title);
         builder.setView(R.layout.dialog_cropper);
-        // The default cropper options
-        //cropImageView.setPadding(padding, padding, padding, 0);
         builder.setPositiveButton(android.R.string.ok, null);
         builder.setNegativeButton(android.R.string.cancel, null);
         AlertDialog dialog = builder.show();
         ImageCropperView cropImageView = dialog.findViewById(R.id.crop_dialog_view);
+        assert cropImageView != null;
         try (InputStream inputStream = context.getContentResolver().openInputStream(selectedUri)){
             cropImageView.loadBitmap(BitmapFactory.decodeStream(inputStream));
+            bindViews(dialog, cropImageView);
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v->{
                 dialog.dismiss();
                 cropperListener.onCropped(cropImageView.crop(256));
@@ -49,17 +50,22 @@ public class CropperUtils {
         }
     }
 
-
-    private static int getDialogPadding(Context context) {
-        TypedValue typedPadding = new TypedValue();
-        if(context.getTheme().resolveAttribute(R.attr.dialogPreferredPadding, typedPadding, true)) {
-            return TypedValue.complexToDimensionPixelSize(
-                    typedPadding.data,
-                    context.getResources().getDisplayMetrics()
-            );
-        }else {
-            return 0;
-        }
+    private static void bindViews(AlertDialog alertDialog, ImageCropperView imageCropperView) {
+        ToggleButton horizontalLock = alertDialog.findViewById(R.id.crop_dialog_hlock);
+        ToggleButton verticalLock = alertDialog.findViewById(R.id.crop_dialog_vlock);
+        View reset = alertDialog.findViewById(R.id.crop_dialog_reset);
+        assert horizontalLock != null;
+        assert verticalLock != null;
+        assert reset != null;
+        horizontalLock.setOnClickListener(v->
+                imageCropperView.horizontalLock = horizontalLock.isChecked()
+        );
+        verticalLock.setOnClickListener(v->
+                imageCropperView.verticalLock = verticalLock.isChecked()
+        );
+        reset.setOnClickListener(v->
+            imageCropperView.resetTransforms()
+        );
     }
 
     @SuppressWarnings("unchecked")

@@ -1,10 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
+
     <net.kdt.pojavlaunch.imgcropper.ImageCropperView
         android:id="@+id/crop_dialog_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-</FrameLayout>
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/crop_dialog_view"
+        app:layout_constraintStart_toStartOf="@+id/crop_dialog_view"
+        app:layout_constraintEnd_toEndOf="@+id/crop_dialog_view">
+        <ToggleButton
+            android:id="@+id/crop_dialog_hlock"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:textOn="@string/cropper_lock_horizontal"
+            android:textOff="@string/cropper_lock_horizontal"/>
+        <ToggleButton
+            android:id="@+id/crop_dialog_vlock"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:textOn="@string/cropper_lock_vertical"
+            android:textOff="@string/cropper_lock_vertical"/>
+        <Button
+            android:id="@+id/crop_dialog_reset"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="@string/cropper_reset"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
