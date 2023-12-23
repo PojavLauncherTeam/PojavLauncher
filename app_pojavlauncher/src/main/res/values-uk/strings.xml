@@ -326,7 +326,7 @@
     <string name="preference_vsync_in_zink_title">Вертикальна синхронізація із Zink</string>
     <string name="preference_vsync_in_zink_description">Дозволяє лаунчеру використовувати внутрішні системні API для увімкнення вертикальної синхронізації для Zink. Вимкніть, якщо після оновлення системи лаунчер вилітає разом із Zink.</string>
     <string name="exception_failed_to_unpack_jre17">Не вдалося установити JRE 17</string>
-    <string name="newdl_starting">Читаємо метадані гри…</string>
-    <string name="newdl_downloading_metadata">Завантажуємо метадані гри (%s)</string>
-    <string name="newdl_downloading_game_files">Завантажуємо файли гри… (%d/%d, %.2f МБ)</string>
+    <string name="newdl_starting">Зчитування метаданих гри…</string>
+    <string name="newdl_downloading_metadata">Завантаження метаданих гри (%s)</string>
+    <string name="newdl_downloading_game_files">Завантаження файлів гри… (%d/%d, %.2f Мб)</string>
 </resources>
