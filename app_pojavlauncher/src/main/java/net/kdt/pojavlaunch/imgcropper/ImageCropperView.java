@@ -27,6 +27,7 @@ public class ImageCropperView extends AppCompatImageView {
     private final Matrix mZoomMatrix = new Matrix();
     private final RectF mSelectionHighlight = new RectF();
     private final Rect mSelectionRect = new Rect();
+    private boolean mTranslateInverseOutdated = true;
     public boolean horizontalLock, verticalLock;
     private float mLastTouchX, mLastTouchY;
     private float mHighlightThickness;
@@ -55,9 +56,9 @@ public class ImageCropperView extends AppCompatImageView {
         setBackground(new CheckerboardDrawable.Builder().build());
         setScaleType(ScaleType.MATRIX);
         mSelectionPadding = Tools.dpToPx(24);
-        mHighlightThickness = Tools.dpToPx(1);
+        mHighlightThickness = Tools.dpToPx(3);
         mSelectionPaint = new Paint();
-        mSelectionPaint.setColor(Color.RED);
+        mSelectionPaint.setColor(Color.DKGRAY);
         mSelectionPaint.setStrokeWidth(mHighlightThickness);
         // Divide the thickness by 2 since we will be needing only half of it for
         // rect highlight correction.
@@ -114,7 +115,7 @@ public class ImageCropperView extends AppCompatImageView {
                 }
                 if(trackedIndex != -1) {
                     // If we still track out current pointer, pan the image by the movement delta
-                    pan((int)(x1 - mLastTouchX), (int)(y1 - mLastTouchY));
+                    pan(x1 - mLastTouchX, y1 - mLastTouchY);
                 } else {
                     // Otherwise, mark the new tracked pointer without panning.
                     mLastTrackedPointer = event.getPointerId(0);
@@ -144,15 +145,23 @@ public class ImageCropperView extends AppCompatImageView {
         return -1;
     }
 
-    private void pan(int panX, int panY) {
+    private void pan(float panX, float panY) {
         if(horizontalLock) panX = 0;
         if(verticalLock) panY = 0;
         mTranslateMatrix.postTranslate(panX, panY);
+        if(panX != 0 || panY != 0) {
+            // Only mark the matrix as outdated if any amount of panning has occured
+            mTranslateInverseOutdated = true;
+        }
         computeImageMatrix();
     }
 
     private void zoom(float zoomLevel, float midpointX, float midpointY) {
-        inverse(mTranslateMatrix, mTranslateInverse);
+        // Do this to avoid constantly inverting the same matrix on each touch event.
+        if(mTranslateInverseOutdated) {
+            inverse(mTranslateMatrix, mTranslateInverse);
+            mTranslateInverseOutdated = false;
+        }
         float[] zoomCenter = new float[] {
                 midpointX,
                 midpointY
@@ -232,7 +241,7 @@ public class ImageCropperView extends AppCompatImageView {
         mSelectionRect.top = centerShiftY;
         mSelectionRect.right = centerShiftX + lesserDimension;
         mSelectionRect.bottom = centerShiftY + lesserDimension;
-        // Adjust the selection highlight rectnagle to be bigger than the selection area
+        // Adjust the selection highlight rectangle to be bigger than the selection area
         // by the highlight thickness, to make sure that the entire inside of the selection highlight
         // will fit into the image
         mSelectionHighlight.left = mSelectionRect.left - mHighlightThickness;
@@ -245,7 +254,7 @@ public class ImageCropperView extends AppCompatImageView {
     /**
      * Computes a prescale matrix.
      * This matrix basically centers the source image in the selection rect.
-     * Mainly intended for convenience of implementing a "Reset" button sometime in the future
+     * Mainly intended for convenience of implementing a "Reset" button.
      */
     private void computePrescaleMatrix() {
         if(mOriginalBitmap == null) return;
@@ -253,6 +262,8 @@ public class ImageCropperView extends AppCompatImageView {
         int selectionRectHeight = mSelectionRect.height();
         int imageWidth = mOriginalBitmap.getWidth();
         int imageHeight = mOriginalBitmap.getHeight();
+        // A basic "scale to fit while preserving aspect ratio" I have taken from
+        // https://stackoverflow.com/a/23105310
         float hRatio =  (float)selectionRectWidth / imageWidth ;
         float vRatio =  (float)selectionRectHeight / imageHeight;
         float ratio  = Math.min (hRatio, vRatio);
@@ -260,16 +271,20 @@ public class ImageCropperView extends AppCompatImageView {
         float centerShift_y = (selectionRectWidth - imageHeight*ratio) / 2;
         centerShift_x += mSelectionRect.left;
         centerShift_y += mSelectionRect.top;
-        mPrescaleMatrix.reset();
-        mPrescaleMatrix.postScale(ratio, ratio);
+        // By doing setScale() we don't have to reset() the matrix beforehand saving us a
+        // JNI transition
+        mPrescaleMatrix.setScale(ratio, ratio);
         mPrescaleMatrix.postTranslate(centerShift_x, centerShift_y);
         computeImageMatrix();
     }
 
     public void resetTransforms() {
+        // Don't set the mTranslateInverseOutdated flag to true here as
+        // the inverse of an identity matrix (aka the matrix we're setting ours to on reset())
+        // is an identity matrix, which technically means that mTranslateInverse gets up-to-date there
         mTranslateMatrix.reset();
-        mZoomMatrix.reset();
         mTranslateInverse.reset();
+        mZoomMatrix.reset();
         computeImageMatrix();
     }
 
@@ -318,15 +333,14 @@ public class ImageCropperView extends AppCompatImageView {
      */
     private void inverse(Matrix source, Matrix destination) {
         if(source.invert(destination)) return;
-        float[] matrixSource = new float[9];
-        float[] matrixDest = new float[9];
-        source.getValues(matrixSource);
-        inverseMatrix(matrixSource, matrixDest);
-        destination.setValues(matrixDest);
+        float[] matrix = new float[9];
+        source.getValues(matrix);
+        inverseMatrix(matrix);
+        destination.setValues(matrix);
     }
 
     // This was made by ChatGPT and i have no clue what's happening here, but it works so eh
-    public static void inverseMatrix(float[] matrix, float[] inverse) {
+    public static void inverseMatrix(float[] matrix) {
         float determinant = matrix[0] * (matrix[4] * matrix[8] - matrix[5] * matrix[7])
                 - matrix[1] * (matrix[3] * matrix[8] - matrix[5] * matrix[6])
                 + matrix[2] * (matrix[3] * matrix[7] - matrix[4] * matrix[6]);
@@ -337,14 +351,23 @@ public class ImageCropperView extends AppCompatImageView {
 
         float invDet = 1 / determinant;
 
-        inverse[0] = (matrix[4] * matrix[8] - matrix[5] * matrix[7]) * invDet;
-        inverse[1] = (matrix[2] * matrix[7] - matrix[1] * matrix[8]) * invDet;
-        inverse[2] = (matrix[1] * matrix[5] - matrix[2] * matrix[4]) * invDet;
-        inverse[3] = (matrix[5] * matrix[6] - matrix[3] * matrix[8]) * invDet;
-        inverse[4] = (matrix[0] * matrix[8] - matrix[2] * matrix[6]) * invDet;
-        inverse[5] = (matrix[2] * matrix[3] - matrix[0] * matrix[5]) * invDet;
-        inverse[6] = (matrix[3] * matrix[7] - matrix[4] * matrix[6]) * invDet;
-        inverse[7] = (matrix[1] * matrix[6] - matrix[0] * matrix[7]) * invDet;
-        inverse[8] = (matrix[0] * matrix[4] - matrix[1] * matrix[3]) * invDet;
+        float temp0 = (matrix[4] * matrix[8] - matrix[5] * matrix[7]);
+        float temp1 = (matrix[2] * matrix[7] - matrix[1] * matrix[8]);
+        float temp2 = (matrix[1] * matrix[5] - matrix[2] * matrix[4]);
+        float temp3 = (matrix[5] * matrix[6] - matrix[3] * matrix[8]);
+        float temp4 = (matrix[0] * matrix[8] - matrix[2] * matrix[6]);
+        float temp5 = (matrix[2] * matrix[3] - matrix[0] * matrix[5]);
+        float temp6 = (matrix[3] * matrix[7] - matrix[4] * matrix[6]);
+        float temp7 = (matrix[1] * matrix[6] - matrix[0] * matrix[7]);
+        float temp8 = (matrix[0] * matrix[4] - matrix[1] * matrix[3]);
+        matrix[0] = temp0 * invDet;
+        matrix[1] = temp1 * invDet;
+        matrix[2] = temp2 * invDet;
+        matrix[3] = temp3 * invDet;
+        matrix[4] = temp4 * invDet;
+        matrix[5] = temp5 * invDet;
+        matrix[6] = temp6 * invDet;
+        matrix[7] = temp7 * invDet;
+        matrix[8] = temp8 * invDet;
     }
 }
