@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <net.kdt.pojavlaunch.imgcropper.ImageCropperView
+    <net.kdt.pojavlaunch.imgcropper.CropperView
         android:id="@+id/crop_dialog_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

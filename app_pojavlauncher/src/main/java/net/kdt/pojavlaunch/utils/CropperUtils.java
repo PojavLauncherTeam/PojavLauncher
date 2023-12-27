@@ -2,7 +2,7 @@ package net.kdt.pojavlaunch.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.graphics.BitmapRegionDecoder;
 import android.net.Uri;
 import android.view.View;
 import android.widget.ToggleButton;
@@ -13,7 +13,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import net.kdt.pojavlaunch.R;
-import net.kdt.pojavlaunch.imgcropper.ImageCropperView;
+import net.kdt.pojavlaunch.imgcropper.CropperView;
+import net.kdt.pojavlaunch.imgcropper.RegionDecoderCropBehaviour;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -35,10 +36,16 @@ public class CropperUtils {
         builder.setPositiveButton(android.R.string.ok, null);
         builder.setNegativeButton(android.R.string.cancel, null);
         AlertDialog dialog = builder.show();
-        ImageCropperView cropImageView = dialog.findViewById(R.id.crop_dialog_view);
+        CropperView cropImageView = dialog.findViewById(R.id.crop_dialog_view);
         assert cropImageView != null;
         try (InputStream inputStream = context.getContentResolver().openInputStream(selectedUri)){
-            cropImageView.loadBitmap(BitmapFactory.decodeStream(inputStream));
+            //BitmapCropBehaviour bitmapCropBehaviour = new BitmapCropBehaviour(cropImageView);
+            //bitmapCropBehaviour.loadBitmap(BitmapFactory.decodeStream(inputStream));
+            //cropImageView.cropperBehaviour = bitmapCropBehaviour;
+            RegionDecoderCropBehaviour cropBehaviour = new RegionDecoderCropBehaviour(cropImageView);
+            cropBehaviour.loadRegionDecoder(BitmapRegionDecoder.newInstance(inputStream, false));
+            cropImageView.cropperBehaviour = cropBehaviour;
+            cropImageView.requestLayout();
             bindViews(dialog, cropImageView);
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v->{
                 dialog.dismiss();
@@ -50,7 +57,7 @@ public class CropperUtils {
         }
     }
 
-    private static void bindViews(AlertDialog alertDialog, ImageCropperView imageCropperView) {
+    private static void bindViews(AlertDialog alertDialog, CropperView imageCropperView) {
         ToggleButton horizontalLock = alertDialog.findViewById(R.id.crop_dialog_hlock);
         ToggleButton verticalLock = alertDialog.findViewById(R.id.crop_dialog_vlock);
         View reset = alertDialog.findViewById(R.id.crop_dialog_reset);
@@ -64,7 +71,7 @@ public class CropperUtils {
                 imageCropperView.verticalLock = verticalLock.isChecked()
         );
         reset.setOnClickListener(v->
-            imageCropperView.resetTransforms()
+            imageCropperView.cropperBehaviour.resetTransforms()
         );
     }
 
