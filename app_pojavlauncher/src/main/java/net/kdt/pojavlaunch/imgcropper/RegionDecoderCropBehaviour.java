@@ -13,14 +13,46 @@ public class RegionDecoderCropBehaviour extends BitmapCropBehaviour {
     private Bitmap mOverlayBitmap;
     private final Rect mOverlayDst = new Rect(0, 0, 0, 0);
     private boolean mRequiresOverlayBitmap;
+    private boolean mRenderLowResBackground;
     private final Matrix mDecoderPrescaleMatrix = new Matrix();
     private final Handler mHiresLoadHandler = new Handler();
     private final Runnable mHiresLoadRunnable = ()->{
         Rect subsectionRect = new Rect(0,0, mHostView.getWidth(), mHostView.getHeight());
         Rect decoderRect = new Rect(0, 0, mBitmapDecoder.getWidth(), mBitmapDecoder.getHeight());
-        transformRectToDecoderCoords(subsectionRect);
-        if(!decoderRect.contains(subsectionRect)) return;
-        mOverlayBitmap = mBitmapDecoder.decodeRegion(subsectionRect, null);
+        Rect subsectionIntersection = new Rect();
+        Matrix matrix = createDecoderImageMatrix();
+        Matrix inverse = new Matrix();
+        inverse(matrix, inverse);
+        transformRect(subsectionRect, inverse);
+        // If our current sub-section is bigger than the decoder rect, skip.
+        // We do this to avoid unnecerssarily loading the image at full resolution.
+        if(subsectionRect.width() > decoderRect.width()
+                || subsectionRect.height() > decoderRect.height()) return;
+        // If our current sub-section doesn't even intersect the decoder rect, we won't even
+        // be able to create an overlay. So, skip.
+        if(!subsectionIntersection.setIntersect(decoderRect, subsectionRect)) return;
+        // In my testing, decoding a region smaller than that breaks the current region decoder instance.
+        // So, if it is smaller, skip.
+        if(subsectionIntersection.width() < 16 || subsectionRect.width() < 16) return;
+        mOverlayBitmap = mBitmapDecoder.decodeRegion(subsectionIntersection, null);
+        if(decoderRect.contains(subsectionRect)) {
+            // Doing the matrix approach when the subsection is fully contained within the
+            // decoder rect causes weird issues with width/height, so just force the full View
+            // width/height there
+            mOverlayDst.top = mOverlayDst.left = 0;
+            mOverlayDst.right = mHostView.getWidth();
+            mOverlayDst.bottom = mHostView.getHeight();
+            // DIsable the low-res rendering as the overlay completely fills the view.
+            mRenderLowResBackground = false;
+        } else {
+            // When not fully containing the image we still need a hi-res version, so transform the
+            // intersection back into View coordinate space to use as the destination.
+            // Sadly this causes weird issues with the resolution. Have no idea how to resolve yet.
+            transformRect(subsectionIntersection, matrix);
+            mOverlayDst.set(subsectionIntersection);
+            // Render the low-res original image in the background to avoid the messy corners.
+            mRenderLowResBackground = true;
+        }
         mHostView.invalidate();
     };
 
@@ -41,13 +73,8 @@ public class RegionDecoderCropBehaviour extends BitmapCropBehaviour {
 
     @Override
     public void drawPreHighlight(Canvas canvas) {
-        if(mOverlayBitmap != null) {
-            mOverlayDst.right = mHostView.getWidth();
-            mOverlayDst.bottom = mHostView.getHeight();
-            canvas.drawBitmap(mOverlayBitmap, null, mOverlayDst, null);
-        }else {
-            super.drawPreHighlight(canvas);
-        }
+        if(mOverlayBitmap == null || mRenderLowResBackground) super.drawPreHighlight(canvas);
+        if(mOverlayBitmap != null) canvas.drawBitmap(mOverlayBitmap, null, mOverlayDst, null);
     }
 
     @Override
@@ -117,26 +144,22 @@ public class RegionDecoderCropBehaviour extends BitmapCropBehaviour {
     }
 
     /**
-     * Create a Matrix that can be used to transform points from the View coordinate space to the
-     * BitmapRegionDecoder coordinate space based on current pan and zoom transforms.
-     * @return the newly allocated Matrix for these operations
+     * Create a Matrix that can be used to transform points from the bitmap coordinate space into the
+     * View coordinate space.
      */
-    private Matrix createDecoderImageInverse() {
+    private Matrix createDecoderImageMatrix() {
         Matrix decoderImageMatrix = new Matrix(mDecoderPrescaleMatrix);
         decoderImageMatrix.postConcat(mZoomMatrix);
         decoderImageMatrix.postConcat(mTranslateMatrix);
-        inverse(decoderImageMatrix, decoderImageMatrix);
         return decoderImageMatrix;
     }
 
     /**
-     * Transform the coordinates of the Rect into the coordinate space of RegionImageDecoder
-     * based on currently applied pan/zoom transforms, and write them back into the current
-     * Rect.
+     * Transform the coordinates of the Rect using the supplied Matrix.
      * @param rect the input/ouput Rect for this operation
+     * @param regionImageInverse the Matrix for transforming the Rect.
      */
-    private void transformRectToDecoderCoords(Rect rect) {
-        Matrix regionImageInverse = createDecoderImageInverse();
+    private void transformRect(Rect rect, Matrix regionImageInverse) {
         float[] inOutDecodeRect = new float[8];
         inOutDecodeRect[0] = rect.left;
         inOutDecodeRect[1] = rect.top;
