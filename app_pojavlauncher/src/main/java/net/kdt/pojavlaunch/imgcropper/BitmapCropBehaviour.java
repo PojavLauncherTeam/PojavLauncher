@@ -99,8 +99,8 @@ public class BitmapCropBehaviour implements CropperBehaviour{
         // Pick the best dimensions for the crop result, shrinking the target if necessary.
         int targetWidth, targetHeight;
         int targetMinDimension = Math.min(originalBitmapRect.width(), originalBitmapRect.height());
-        if(targetMinDimension > targetMaxSide) {
-            float ratio = (float) targetMinDimension / targetMaxSide;
+        if(targetMaxSide < targetMinDimension) {
+            float ratio = (float) targetMaxSide / targetMinDimension;
             targetWidth = (int) (originalBitmapRect.width() * ratio);
             targetHeight = (int) (originalBitmapRect.height() * ratio);
         }else {
