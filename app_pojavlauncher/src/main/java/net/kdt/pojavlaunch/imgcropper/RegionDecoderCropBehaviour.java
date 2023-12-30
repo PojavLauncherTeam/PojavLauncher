@@ -6,55 +6,62 @@ import android.graphics.BitmapRegionDecoder;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.os.Handler;
 
 public class RegionDecoderCropBehaviour extends BitmapCropBehaviour {
     private BitmapRegionDecoder mBitmapDecoder;
     private Bitmap mOverlayBitmap;
-    private final Rect mOverlayDst = new Rect(0, 0, 0, 0);
+    private final RectF mOverlayDst = new RectF(0, 0, 0, 0);
     private boolean mRequiresOverlayBitmap;
-    private boolean mRenderLowResBackground;
     private final Matrix mDecoderPrescaleMatrix = new Matrix();
     private final Handler mHiresLoadHandler = new Handler();
     private final Runnable mHiresLoadRunnable = ()->{
-        Rect subsectionRect = new Rect(0,0, mHostView.getWidth(), mHostView.getHeight());
-        Rect decoderRect = new Rect(0, 0, mBitmapDecoder.getWidth(), mBitmapDecoder.getHeight());
-        Rect subsectionIntersection = new Rect();
+        RectF subsectionRect = new RectF(0,0, mHostView.getWidth(), mHostView.getHeight());
+        mOverlayBitmap = decodeRegionBitmap(mOverlayDst, subsectionRect);
+        mHostView.invalidate();
+    };
+
+    /**
+     * Decoade a region from this Bitmap based on a subsection in the View coordinate space.
+     * @param targetDrawRect an output Rect. This Rect is the position at which the region must
+     *                       be rendered within subsectionRect.
+     * @param subsectionRect the subsection in View coordinate space. Note that this Rect is modified
+     *                       by this function and shouldn't be re-used.
+     * @return null if the resulting region is bigger than the original image
+     *         null if the resulting region is completely out of the original image bounds
+     *         null if the resulting region is smaller than 16x16 pixels
+     *         null if a region decoding error has occured
+     *         the resulting Bitmap region otherwise.
+     */
+    private Bitmap decodeRegionBitmap(RectF targetDrawRect, RectF subsectionRect) {
+        RectF decoderRect = new RectF(0, 0, mBitmapDecoder.getWidth(), mBitmapDecoder.getHeight());
         Matrix matrix = createDecoderImageMatrix();
         Matrix inverse = new Matrix();
         inverse(matrix, inverse);
         transformRect(subsectionRect, inverse);
         // If our current sub-section is bigger than the decoder rect, skip.
-        // We do this to avoid unnecerssarily loading the image at full resolution.
+        // We do this to avoid unnecessarily loading the image at full resolution.
         if(subsectionRect.width() > decoderRect.width()
-                || subsectionRect.height() > decoderRect.height()) return;
+                || subsectionRect.height() > decoderRect.height()) return null;
         // If our current sub-section doesn't even intersect the decoder rect, we won't even
         // be able to create an overlay. So, skip.
-        if(!subsectionIntersection.setIntersect(decoderRect, subsectionRect)) return;
+        if(!subsectionRect.setIntersect(decoderRect, subsectionRect)) return null;
         // In my testing, decoding a region smaller than that breaks the current region decoder instance.
         // So, if it is smaller, skip.
-        if(subsectionIntersection.width() < 16 || subsectionRect.width() < 16) return;
-        mOverlayBitmap = mBitmapDecoder.decodeRegion(subsectionIntersection, null);
-        if(decoderRect.contains(subsectionRect)) {
-            // Doing the matrix approach when the subsection is fully contained within the
-            // decoder rect causes weird issues with width/height, so just force the full View
-            // width/height there
-            mOverlayDst.top = mOverlayDst.left = 0;
-            mOverlayDst.right = mHostView.getWidth();
-            mOverlayDst.bottom = mHostView.getHeight();
-            // DIsable the low-res rendering as the overlay completely fills the view.
-            mRenderLowResBackground = false;
-        } else {
-            // When not fully containing the image we still need a hi-res version, so transform the
-            // intersection back into View coordinate space to use as the destination.
-            // Sadly this causes weird issues with the resolution. Have no idea how to resolve yet.
-            transformRect(subsectionIntersection, matrix);
-            mOverlayDst.set(subsectionIntersection);
-            // Render the low-res original image in the background to avoid the messy corners.
-            mRenderLowResBackground = true;
-        }
-        mHostView.invalidate();
-    };
+        if(subsectionRect.width() < 16 || subsectionRect.height() < 16) return null;
+        // We can't really create a floating-point subsection from a bitmap, so convert the intersected
+        // rectangle that we want to get from the decoder into an integer Rect.
+        Rect bitmapRegionRect = new Rect(
+                (int) subsectionRect.left,
+                (int) subsectionRect.top,
+                (int) subsectionRect.right,
+                (int) subsectionRect.bottom
+        );
+        transformRect(subsectionRect, matrix);
+        targetDrawRect.set(subsectionRect);
+        return mBitmapDecoder.decodeRegion(bitmapRegionRect, null);
+    }
 
     public RegionDecoderCropBehaviour(CropperView hostView) {
         super(hostView);
@@ -73,8 +80,11 @@ public class RegionDecoderCropBehaviour extends BitmapCropBehaviour {
 
     @Override
     public void drawPreHighlight(Canvas canvas) {
-        if(mOverlayBitmap == null || mRenderLowResBackground) super.drawPreHighlight(canvas);
-        if(mOverlayBitmap != null) canvas.drawBitmap(mOverlayBitmap, null, mOverlayDst, null);
+        if (mOverlayBitmap != null) {
+            canvas.drawBitmap(mOverlayBitmap, null, mOverlayDst, null);
+        } else {
+            super.drawPreHighlight(canvas);
+        }
     }
 
     @Override
@@ -159,21 +169,46 @@ public class RegionDecoderCropBehaviour extends BitmapCropBehaviour {
      * @param rect the input/ouput Rect for this operation
      * @param regionImageInverse the Matrix for transforming the Rect.
      */
-    private void transformRect(Rect rect, Matrix regionImageInverse) {
+    private void transformRect(RectF rect, Matrix regionImageInverse) {
+        if(regionImageInverse.isIdentity()) return;
         float[] inOutDecodeRect = new float[8];
         inOutDecodeRect[0] = rect.left;
         inOutDecodeRect[1] = rect.top;
         inOutDecodeRect[2] = rect.right;
         inOutDecodeRect[3] = rect.bottom;
         regionImageInverse.mapPoints(inOutDecodeRect, 4, inOutDecodeRect, 0, 2);
-        rect.left = (int)inOutDecodeRect[4];
-        rect.top = (int)inOutDecodeRect[5];
-        rect.right = (int)inOutDecodeRect[6];
-        rect.bottom = (int)inOutDecodeRect[7];
+        rect.left = inOutDecodeRect[4];
+        rect.top = inOutDecodeRect[5];
+        rect.right = inOutDecodeRect[6];
+        rect.bottom = inOutDecodeRect[7];
     }
 
     @Override
     public Bitmap crop(int targetMaxSide) {
-        return null;
+        RectF drawRect = new RectF();
+        Bitmap regionBitmap = decodeRegionBitmap(drawRect, new RectF(mHostView.mSelectionRect));
+        if(regionBitmap == null) {
+            // If we can't decode a hi-res region, just crop out of the low-res preview. Yes, this will in fact
+            // cause the image to be low res, but we can't really avoid that in this case.
+            return super.crop(targetMaxSide);
+        }
+
+        int targetDimension = targetMaxSide;
+        // Use Math.max here as the region bitmap may not always be a square, and we need to make it one without
+        // losing detail.
+        int regionBitmapSide = Math.max(regionBitmap.getWidth(), regionBitmap.getHeight());
+        if(regionBitmapSide < targetDimension) targetDimension = regionBitmapSide;
+        // The drawRect will be a subsection of the selectionRect, so we will need to scale it
+        // down in order to fit it into the targetDimension x targetDimension bitmap
+        // that we will return.
+        float scaleRatio = (float)targetDimension / mHostView.mSelectionRect.width();
+        Matrix drawRectScaleMatrix = new Matrix();
+        drawRectScaleMatrix.setScale(scaleRatio, scaleRatio);
+        transformRect(drawRect, drawRectScaleMatrix);
+
+        Bitmap returnBitmap = Bitmap.createBitmap(targetDimension, targetDimension, regionBitmap.getConfig());
+        Canvas canvas = new Canvas(returnBitmap);
+        canvas.drawBitmap(regionBitmap, null, drawRect, null);
+        return returnBitmap;
     }
 }
