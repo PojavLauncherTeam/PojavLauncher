@@ -9,6 +9,11 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.os.Handler;
 
+import net.kdt.pojavlaunch.PojavApplication;
+import net.kdt.pojavlaunch.modloaders.modpacks.SelfReferencingFuture;
+
+import java.util.concurrent.Future;
+
 public class RegionDecoderCropBehaviour extends BitmapCropBehaviour {
     private BitmapRegionDecoder mBitmapDecoder;
     private Bitmap mOverlayBitmap;
@@ -16,10 +21,20 @@ public class RegionDecoderCropBehaviour extends BitmapCropBehaviour {
     private boolean mRequiresOverlayBitmap;
     private final Matrix mDecoderPrescaleMatrix = new Matrix();
     private final Handler mHiresLoadHandler = new Handler();
+    private Future<?> mDecodeFuture;
     private final Runnable mHiresLoadRunnable = ()->{
         RectF subsectionRect = new RectF(0,0, mHostView.getWidth(), mHostView.getHeight());
-        mOverlayBitmap = decodeRegionBitmap(mOverlayDst, subsectionRect);
-        mHostView.invalidate();
+        RectF overlayDst = new RectF();
+        discardDecodeFuture();
+        mDecodeFuture = new SelfReferencingFuture(myFuture -> {
+            Bitmap overlayBitmap = decodeRegionBitmap(overlayDst, subsectionRect);
+            mHiresLoadHandler.post(()->{
+                if(myFuture.isCancelled()) return;
+                mOverlayBitmap = overlayBitmap;
+                mOverlayDst.set(overlayDst);
+                mHostView.invalidate();
+            });
+        }).startOnExecutor(PojavApplication.sExecutorService);
     };
 
     /**
@@ -63,6 +78,13 @@ public class RegionDecoderCropBehaviour extends BitmapCropBehaviour {
         return mBitmapDecoder.decodeRegion(bitmapRegionRect, null);
     }
 
+    private void discardDecodeFuture() {
+        if(mDecodeFuture != null) {
+            // Putting false here as I don't know how BitmapRegionDecoder will behave when interrupted
+            mDecodeFuture.cancel(false);
+        }
+    }
+
     public RegionDecoderCropBehaviour(CropperView hostView) {
         super(hostView);
     }
@@ -94,6 +116,7 @@ public class RegionDecoderCropBehaviour extends BitmapCropBehaviour {
             mOverlayBitmap = null;
         }
         mHiresLoadHandler.removeCallbacks(mHiresLoadRunnable);
+        discardDecodeFuture();
         if(mRequiresOverlayBitmap) {
             mHiresLoadHandler.postDelayed(mHiresLoadRunnable, 200);
         }
