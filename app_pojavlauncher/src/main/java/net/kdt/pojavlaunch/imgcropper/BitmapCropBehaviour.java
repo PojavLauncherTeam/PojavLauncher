@@ -21,12 +21,12 @@ public class BitmapCropBehaviour implements CropperBehaviour{
     public void pan(float panX, float panY) {
         if(mHostView.horizontalLock) panX = 0;
         if(mHostView.verticalLock) panY = 0;
-        mTranslateMatrix.postTranslate(panX, panY);
         if(panX != 0 || panY != 0) {
-            // Only mark the matrix as outdated if any amount of panning has occured
+            // Actually translate and refresh only if either of the pan deltas are nonzero
+            mTranslateMatrix.postTranslate(panX, panY);
             mTranslateInverseOutdated = true;
+            refresh();
         }
-        refresh();
     }
 
     public void zoom(float zoomLevel, float midpointX, float midpointY) {
@@ -83,7 +83,7 @@ public class BitmapCropBehaviour implements CropperBehaviour{
         Matrix imageInverse = new Matrix();
         inverse(mImageMatrix, imageInverse);
         // By inverting the matrix we will effectively "divide" our rectangle by it, thus getting
-        // its two points on the bitmap's surface. Math be cool indeed.
+        // its two points on the surface of the bitmap. Math be cool indeed.
         float[] src = new float[] {
                 mHostView.mSelectionRect.left,
                 mHostView.mSelectionRect.top,
