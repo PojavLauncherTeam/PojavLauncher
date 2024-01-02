@@ -38,7 +38,7 @@ public class RegionDecoderCropBehaviour extends BitmapCropBehaviour {
     };
 
     /**
-     * Decoade a region from this Bitmap based on a subsection in the View coordinate space.
+     * Decode a region from this Bitmap based on a subsection in the View coordinate space.
      * @param targetDrawRect an output Rect. This Rect is the position at which the region must
      *                       be rendered within subsectionRect.
      * @param subsectionRect the subsection in View coordinate space. Note that this Rect is modified
@@ -46,7 +46,7 @@ public class RegionDecoderCropBehaviour extends BitmapCropBehaviour {
      * @return null if the resulting region is bigger than the original image
      *         null if the resulting region is completely out of the original image bounds
      *         null if the resulting region is smaller than 16x16 pixels
-     *         null if a region decoding error has occured
+     *         null if a region decoding error has occurred
      *         the resulting Bitmap region otherwise.
      */
     private Bitmap decodeRegionBitmap(RectF targetDrawRect, RectF subsectionRect) {
@@ -189,7 +189,7 @@ public class RegionDecoderCropBehaviour extends BitmapCropBehaviour {
 
     /**
      * Transform the coordinates of the Rect using the supplied Matrix.
-     * @param rect the input/ouput Rect for this operation
+     * @param rect the input/output Rect for this operation
      * @param regionImageInverse the Matrix for transforming the Rect.
      */
     private void transformRect(RectF rect, Matrix regionImageInverse) {
