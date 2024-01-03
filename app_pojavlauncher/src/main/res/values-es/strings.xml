@@ -50,13 +50,13 @@
     <string name="mcl_setting_title_javaargs">JRE Argumentos de lanzamiento</string>
     <string name="mcl_setting_subtitle_javaargs">Ten cuidado, esto puede hacer que el juego se cuelgue si se modifica sin saber.</string>
     <string name="mcl_setting_category_renderer">Renderizador</string>
-    <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (Todas las versiones, rápido)</string>
+    <string name="mcl_setting_renderer_gles2_4">GL4ES - (Todas las versiones, rápido)</string>
     <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - (todas las versiones, medio)</string>
     <string name="mcl_setting_renderer_angle">ANGLE (Vulkan) - (Solamente 1.17+, medio)</string>
     <string name="mcl_setting_veroption_release">Lanzamientos</string>
     <string name="mcl_setting_veroption_snapshot">Snapshots</string>
     <string name="mcl_setting_veroption_oldalpha">Alphas</string>
-    <string name="mcl_setting_veroption_oldbeta">Betas</string>
+    <string name="mcl_setting_veroption_oldbeta">Beta</string>
     <string name="mcl_setting_java_sandbox">Ejecutar .jar en un Sandbox</string>
     <string name="mcl_setting_java_sandbox_subtitle">Controla la disponibilidad del gestor de seguridad del sandbox al ejecutar un archivo jar.</string>
     <string name="mcl_version_clone">Clonar</string>
@@ -114,7 +114,7 @@
 -->
     <string name="customctrl_toggle">Activable</string>
     <string name="customctrl_size">Tamaño</string>
-    <string name="customctrl_mapping">Mapeado</string>
+    <string name="customctrl_mapping">Mapeo</string>
     <string name="customctrl_orientation">Orientación</string>
     <string name="customctrl_background_color">Color de fondo</string>
     <string name="customctrl_corner_radius">Radio de las esquinas</string>
@@ -128,7 +128,7 @@
     <string name="customctrl_selectdefault">Seleccionar controles por defecto</string>
     <string name="customctrl_export">Exportar controles</string>
     <string name="main_share_logs">Compartir archivo de registro</string>
-    <string name="main_install_jar_file">Ejecuta un .jar</string>
+    <string name="main_install_jar_file">Ejecutar un .jar</string>
     <string name="main_play">Jugar</string>
     <string name="autoram_info_msg">Memoria establecida a %d MB</string>
     <string name="mcl_setting_check_libraries">Comprobar las librerías después de descargar</string>
@@ -173,17 +173,17 @@
     <string name="preference_java_description">Versiones de Java, Argumentos JVM, Cantidad de RAM y sandbox</string>
     <string name="preference_misc_title">Ajustes varios</string>
     <string name="preference_misc_description">Lista de versiones, y comprobación de librerías</string>
-    <string name="preference_experimental_title">Cosas experimentales</string>
+    <string name="preference_experimental_title">Cosas Experimentales</string>
     <string name="preference_experimental_description">Usa las cosas de aquí con consideración, no habrá soporte</string>
     <string name="preference_sustained_performance_title">Activar el modo de rendimiento sostenido</string>
     <string name="preference_sustained_performance_description">Limita la regulación térmica limitando el rendimiento máximo.</string>
     <string name="preference_force_vsync_title">Fuerza el VSync</string>
     <string name="preference_force_vsync_description">Limita la regulación térmica limitando el rendimiento máximo.</string>
     <string name="preference_force_english_title">Forzar idioma al Inglés</string>
-    <string name="preference_force_english_description">Te permite ver los textos originales, como los desarrolladores lo pensaron. Requiere un reinicio.</string>
-    <string name="preference_edit_controls_title">Editar controles personalizado</string>
+    <string name="preference_force_english_description">Le permite ver las cadenas originales, según lo previsto por los desarrolladores. Requiere un reinicio.</string>
+    <string name="preference_edit_controls_title">Editar controles personalizados</string>
     <string name="preference_edit_controls_summary">Ajusta la configuración de controles para ajustarla a tus necesidades.</string>
-    <string name="preference_category_gyro_controls">Controles de giroscopio</string>
+    <string name="preference_category_gyro_controls">Controles del Giroscopio</string>
     <string name="preference_category_virtual_mouse">Ratón virtual</string>
     <string name="preference_gyro_invert_x_axis">Invertir eje X</string>
     <string name="preference_gyro_invert_y_axis">Invertir eje Y</string>
@@ -241,7 +241,7 @@
     <string name="preference_shader_dump_description">Registra shaders compilados (sic).</string>
     <string name="percent_format">%d%%</string>
     <string name="customctrl_editor_exit_title">¿Vas a salir?</string>
-    <string name="customctrl_editor_exit_msg">¿Seguro que quieres salir?</string>
+    <string name="customctrl_editor_exit_msg">¿Estás seguro de que quieres salir?</string>
     <string name="customctrl_editor_exit">Salir del editor</string>
     <string name="global_save_and_exit">Guardar y salir</string>
     <string name="global_yes">Si</string>
@@ -323,6 +323,7 @@
     <string name="preference_ask_for_notification_title">Permitir notificaciones</string>
     <string name="preference_ask_for_notification_description">Haz clic para volver a solicitar el permiso de notificaciones, necesario para qué las descargas en segundo plano del juego/modpack funcionen correctamente.</string>
     <string name="preference_vsync_in_zink_title">Permitir V-Sync con Zink</string>
+    <string name="preference_vsync_in_zink_description">Permite al lanzador usar APIs internas del sistema para habilitar V-Sync para Zink. Apague esto si su lanzador se bloquea repentinamente con Zink después de una actualización del sistema.</string>
     <string name="exception_failed_to_unpack_jre17">Error al instalar JRE 17</string>
     <string name="newdl_starting">Leyendo metadatos…</string>
     <string name="newdl_downloading_metadata">Descargando metadatos del juego (%s)</string>
