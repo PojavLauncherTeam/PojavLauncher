@@ -35,7 +35,7 @@
     <string name="mcl_launch_download_assets">다운로드 준비 중..</string>
     <string name="mcl_options">설정</string>
     <string name="mcl_option_customcontrol">사용자 지정 조작</string>
-    <string name="mcl_setting_title_use_surface_view">대체 표면 렌더링을 사용합니다</string>
+    <string name="mcl_setting_title_use_surface_view">대체 표면 렌더링 사용</string>
     <string name="mcl_setting_subtitle_use_surface_view">GPU 바운드 상황에서 성능에 도움이 될 수 있습니다.</string>
     <string name="mcl_setting_title_ignore_notch">노치 무시하기</string>
     <string name="mcl_setting_subtitle_ignore_notch">노치를 무시하고 더욱 넓은 화면으로 플레이가 가능합니다.\n</string>
@@ -61,11 +61,11 @@
     <string name="mcl_setting_java_sandbox_subtitle">.jar 파일을 실행할 때 샌드박스 보안 관리자의 사용 가능 여부를 제어합니다.</string>
     <string name="mcl_version_clone">복제</string>
     <!-- Global strings -->
-    <string name="global_edit">수정</string>
+    <string name="global_edit">편집</string>
     <string name="global_error">오류</string>
     <string name="global_load">불러오기</string>
     <string name="global_name">이름</string>
-    <string name="global_remove">제거</string>
+    <string name="global_remove">삭제</string>
     <string name="global_clone">복제</string>
     <string name="global_restart">재시작</string>
     <string name="global_save">저장</string>
@@ -145,6 +145,7 @@
     <string name="customctrl_passthru">마우스 통과</string>
     <string name="customctrl_swipeable">끌어당기기</string>
     <string name="customctrl_forward_lock">전면 잠금</string>
+    <string name="customctrl_absolute_tracking">Absolute finger tracking</string>
     <string name="memory_warning_msg">현재 사용 가능한 RAM 크기(%d) 가 할당된 RAM 크기(%d) 보다 낮습니다. 게임이 충돌할 경우 RAM 할당량을 변경하세요.</string>
     <string name="mcl_memory_allocation">메모리 할당</string>
     <string name="mcl_memory_allocation_subtitle">마인크래프트 메모리 할당 조절</string>
@@ -207,12 +208,12 @@ https://cosmetica.cc 를 방문해주세요.
 옵티파인 모드가 필요합니다.</string>
     <string name="notif_channel_name">일반</string>
     <string name="lazy_service_default_title">Pojav 포그라운드 서비스</string>
-    <string name="mcl_setting_veroption_installed">설치되어 있는 버전</string>
+    <string name="mcl_setting_veroption_installed">이미 설치되어 있는 버전입니다.</string>
     <string name="use_global_default">(글로벌 기본값 사용)</string>
     <string name="default_control">기본 조작맵</string>
     <string name="progresslayout_tasks_in_progress">작업 %d개 진행 중</string>
     <string name="notification_terminate">종료</string>
-    <string name="notification_game_runs">게임이 실행 중이에요!</string>
+    <string name="notification_game_runs">현재 게임이 실행 중이에요!</string>
     <string name="folder_dialog_create">생성</string>
     <string name="folder_dialog_insert_name">폴더 이름 입력</string>
     <string name="folder_fragment_create">폴더 생성</string>
@@ -329,4 +330,7 @@ https://cosmetica.cc 를 방문해주세요.
     <string name="preference_vsync_in_zink_title">Zink와 함께 V-Sync 허용</string>
     <string name="preference_vsync_in_zink_description">런처가 내부 시스템 API를 사용하여 Zink용 V-Sync를 활성화할 수 있도록 허용합니다. 시스템 업데이트 후 런처가 갑자기 Zink와 충돌하는 경우 이 기능을 끄십시오.</string>
     <string name="exception_failed_to_unpack_jre17">JRE 17 다운로드에 실패하였습니다</string>
+    <string name="newdl_starting">Reading game metadata…</string>
+    <string name="newdl_downloading_metadata">Downloading game metadata (%s)</string>
+    <string name="newdl_downloading_game_files">Downloading game files… (%d/%d, %.2f MB)</string>
 </resources>
