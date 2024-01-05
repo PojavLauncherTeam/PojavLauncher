@@ -13,7 +13,7 @@
     <!-- Warnings -->
     <string name="warning_remove_account">¡Esta cuenta será borrada!</string>
     <!-- AlertDialog title -->
-    <string name="alerttitle_installmod">Selecciona un instalador de mods</string>
+    <string name="alerttitle_installmod">Seleccione un instalador de mods</string>
     <!-- Error messages -->
     <string name="error_fatal">PojavLauncher se ha detenido inesperadamente</string>
     <string name="error_no_version">¡No hay versiones!</string>
@@ -48,9 +48,9 @@
     <string name="mcl_setting_title_mousescale">Escala del ratón</string>
     <string name="mcl_setting_subtitle_mousescale">Cambia el tamaño del ratón virtual.</string>
     <string name="mcl_setting_title_javaargs">JRE Argumentos de lanzamiento</string>
-    <string name="mcl_setting_subtitle_javaargs">Ten cuidado, esto puede hacer que el juego se cuelgue si se modifica sin saber.</string>
+    <string name="mcl_setting_subtitle_javaargs">Ten cuidado, esto puede hacer que el juego crashee si es modificado sin ningún conocimiento previo.</string>
     <string name="mcl_setting_category_renderer">Renderizador</string>
-    <string name="mcl_setting_renderer_gles2_4">GL4ES - (Todas las versiones, rápido)</string>
+    <string name="mcl_setting_renderer_gles2_4">Santo GL4ES - (Todas las versiones, rápido)</string>
     <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - (todas las versiones, medio)</string>
     <string name="mcl_setting_renderer_angle">ANGLE (Vulkan) - (Solamente 1.17+, medio)</string>
     <string name="mcl_setting_veroption_release">Lanzamientos</string>
@@ -145,6 +145,7 @@
     <string name="customctrl_passthru">Passthrough del ratón</string>
     <string name="customctrl_swipeable">Deslizable</string>
     <string name="customctrl_forward_lock">Bloqueo hacia adelante</string>
+    <string name="customctrl_absolute_tracking">Seguimiento absoluto del dedo</string>
     <string name="memory_warning_msg">La cantidad actual de memoria RAM libre (%d) es menor que la memoria RAM asignada (%d), lo que puede provocar cierres forzados. Cambia la asignación si el juego se cierra.</string>
     <string name="mcl_memory_allocation">Asignación de memoria</string>
     <string name="mcl_memory_allocation_subtitle">Controla cuánta memoria se le da a Minecraft.</string>
@@ -305,11 +306,11 @@
     <string name="dl_turn_off_manifest_checks">Desactivar comprobaciones del manifest</string>
     <string name="dl_switch_to_official_site">Cambiar al sitio original</string>
     <string name="preference_download_source_title">Fuente de descarga del juego</string>
-    <string name="preference_download_source_description">Seleccione un mirror de descarga en lugar de usar el servidor de descargas oficial</string>
-    <string name="preference_verify_manifest_title">Verificar manifiest de la versión del juego</string>
-    <string name="preference_verify_manifest_description">Cuando esté activado, el launcher comprobará el manifiest de la versión del juego junto con las bibliotecas.</string>
-    <string name="notif_download_finished">El juego está listo para lanzar</string>
-    <string name="notif_download_finished_desc">¡Haz clic aquí para empezar!</string>
+    <string name="preference_download_source_description">Selecciona una réplica de descarga en lugar de usar el servidor de descargas oficial</string>
+    <string name="preference_verify_manifest_title">Verificar manifiesto de la versión del juego</string>
+    <string name="preference_verify_manifest_description">Cuando esté activado, el launcher comprobará el manifiesto de la versión del juego junto con las bibliotecas.</string>
+    <string name="notif_download_finished">El juego está listo para iniciar</string>
+    <string name="notif_download_finished_desc">¡Haga clic aquí para empezar!</string>
     <string name="preference_category_gestures">Gestos</string>
     <string name="preference_category_buttons">Botones</string>
     <string name="preference_category_experimental_settings">Basura experimental</string>
