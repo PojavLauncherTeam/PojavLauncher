@@ -28,7 +28,7 @@ public class CropperUtils {
     public static ActivityResultLauncher<?> registerCropper(Fragment fragment, final CropperListener cropperListener) {
         return fragment.registerForActivityResult(new ActivityResultContracts.OpenDocument(), (result)->{
             Context context = fragment.getContext();
-            if (context == null) return;
+            if (context == null || result == null) return;
             openCropperDialog(context, result, cropperListener);
         });
     }

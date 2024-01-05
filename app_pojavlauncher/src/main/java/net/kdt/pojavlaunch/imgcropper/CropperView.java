@@ -126,6 +126,7 @@ public class CropperView extends View {
         canvas.drawRect(mSelectionHighlight, mSelectionPaint);
     }
 
+    @SuppressWarnings("ClickableViewAccessibility") // the view is not clickable
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         return dispatchGenericMotionEvent(event);
