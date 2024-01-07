@@ -21,25 +21,25 @@
             android:paddingHorizontal="@dimen/fragment_padding_medium">
 
             <ImageView
-                android:layout_marginTop="@dimen/padding_extra_large"
-                android:layout_width="@dimen/_36sdp"
-                android:layout_height="@dimen/_36sdp"
-                android:paddingVertical="@dimen/profile_editor_image_padding"
-                android:paddingHorizontal="@dimen/profile_editor_image_padding"
-                android:background="@drawable/background_profile_icon_selector"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:id="@+id/vprof_editor_profile_icon"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_marginTop="@dimen/padding_heavy"
+                android:paddingHorizontal="@dimen/profile_editor_image_padding"
+
+                android:paddingVertical="@dimen/profile_editor_image_padding"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:src="@tools:sample/avatars" />
+
             <ImageView
-                android:layout_width="16dp"
-                android:layout_height="16dp"
+                android:layout_width="@dimen/_14sdp"
+                android:layout_height="@dimen/_14sdp"
                 android:src="@drawable/ic_edit_profile"
-                android:layout_marginStart="-5dp"
-                android:layout_marginTop="-5dp"
-                app:layout_constraintStart_toEndOf="@id/vprof_editor_profile_icon"
-                app:layout_constraintTop_toBottomOf="@id/vprof_editor_profile_icon"/>
+                android:background="@drawable/background_icon_edit"
+                app:layout_constraintBottom_toBottomOf="@+id/vprof_editor_profile_icon"
+                app:layout_constraintEnd_toEndOf="@+id/vprof_editor_profile_icon"/>
 
             <TextView
                 android:id="@+id/vprof_editor_profile_name_sub"
@@ -53,7 +53,7 @@
                 android:id="@+id/vprof_editor_profile_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/padding_extra_large"
+                android:layout_marginTop="@dimen/padding_large"
                 android:background="@drawable/background_line"
                 android:textSize="@dimen/_13ssp"
 
