@@ -145,6 +145,7 @@
     <string name="customctrl_passthru">滑鼠透傳</string>
     <string name="customctrl_swipeable">可滑動</string>
     <string name="customctrl_forward_lock">前進/疾跑鎖</string>
+    <string name="customctrl_absolute_tracking">絕對手指追蹤</string>
     <string name="memory_warning_msg">目前可用記憶體 (%d) 低於分配的記憶體 (%d)，遊戲可能會崩潰。 如果遊戲崩潰請增加記憶體的分配量。</string>
     <string name="mcl_memory_allocation">分配記憶體</string>
     <string name="mcl_memory_allocation_subtitle">控制給應用程序/遊戲分配多少記憶體</string>
@@ -297,6 +298,34 @@
     <string name="notif_error_occured">出現了一個錯誤</string>
     <string name="notif_error_occured_desc">點擊查看更多資訊。</string>
     <string name="fabric_dl_only_stable">僅顯示穩定版本</string>
+    <string name="dl_tampered_manifest_title">文件校驗警告</string>
+    <string name="dl_tampered_manifest"><![CDATA[鏡像上的遊戲版本清單不符合 Mojang 的官方版本清單，它可能已被篡改。  <br/>
+         <b>此行為並不安全。 如果您繼續，您的個人資訊可能有風險。  </b><br/>
+         如果您仍想使用鏡像，請按 \"關閉版本清單檢查\" 並重新開始下載。  <br/>
+         如果您想要使用官方下載來源。 請按 \"切換到官方網站\" 並重新開始下載。  <br/>]]></string>
+    <string name="dl_turn_off_manifest_checks">關閉版本清單檢查</string>
+    <string name="dl_switch_to_official_site">切換到官方網站</string>
+    <string name="preference_download_source_title">遊戲下載來源</string>
+    <string name="preference_download_source_description">選擇下載鏡像而不是使用官方下載伺服器</string>
+    <string name="preference_verify_manifest_title">驗證遊戲版本清單</string>
+    <string name="preference_verify_manifest_description">啟用後，啟動器將會檢查遊戲版本清單以及庫。</string>
+    <string name="notif_download_finished">遊戲已準備好啟動</string>
+    <string name="notif_download_finished_desc">點此開始!</string>
+    <string name="preference_category_gestures">手勢操作</string>
+    <string name="preference_category_buttons">按鈕</string>
+    <string name="preference_category_experimental_settings">實驗性補丁</string>
     <string name="preference_category_java_tweaks">Java 選項</string>
+    <string name="preference_category_main_categories">類別</string>
     <string name="preference_category_miscellaneous">其他設定</string>
+    <string name="preference_category_video">影片設定</string>
+    <string name="notification_permission_dialog_title">權限要求</string>
+    <string name="notification_permission_dialog_text">PojavLauncher 需要獲得發送通知的權限，以防止遊戲/模組包下載在您離開應用程式時停止。 如果沒有此權限，當您將 PojavLauncher 置於背景模式時，Android 可能會關閉您的下載。</string>
+    <string name="notification_permission_toast">您以後隨時可以透過進入「設定」來改變意願</string>
+    <string name="preference_ask_for_notification_title">允許通知</string>
+    <string name="preference_ask_for_notification_description">點擊重新要求通知權限，以確保遊戲/模組包後台下載正常工作。</string>
+    <string name="preference_vsync_in_zink_title">允許在使用 Zink 時啟用垂直同步</string>
+    <string name="preference_vsync_in_zink_description">允許啟動器使用內部系統 API 來啟用 Zink 的垂直同步。 如果您的啟動器在系統更新後突然在使用 Zink 時崩潰，請關閉此功能。</string>
+    <string name="exception_failed_to_unpack_jre17">無法安裝 JRE 17</string>
+    <string name="newdl_starting">正在讀取遊戲元數據…</string>
+    <string name="newdl_downloading_metadata">正在下載遊戲元數據（%s）</string>
 </resources>
