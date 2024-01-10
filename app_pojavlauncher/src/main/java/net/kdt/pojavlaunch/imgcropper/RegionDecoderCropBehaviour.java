@@ -11,6 +11,7 @@ import android.os.Handler;
 
 import net.kdt.pojavlaunch.PojavApplication;
 import net.kdt.pojavlaunch.modloaders.modpacks.SelfReferencingFuture;
+import net.kdt.pojavlaunch.utils.MatrixUtils;
 
 import java.util.concurrent.Future;
 
@@ -38,7 +39,7 @@ public class RegionDecoderCropBehaviour extends BitmapCropBehaviour {
     };
 
     /**
-     * Decode a region from this Bitmap based on a subsection in the View coordinate space.
+     * Decoade a region from this Bitmap based on a subsection in the View coordinate space.
      * @param targetDrawRect an output Rect. This Rect is the position at which the region must
      *                       be rendered within subsectionRect.
      * @param subsectionRect the subsection in View coordinate space. Note that this Rect is modified
@@ -46,15 +47,15 @@ public class RegionDecoderCropBehaviour extends BitmapCropBehaviour {
      * @return null if the resulting region is bigger than the original image
      *         null if the resulting region is completely out of the original image bounds
      *         null if the resulting region is smaller than 16x16 pixels
-     *         null if a region decoding error has occurred
+     *         null if a region decoding error has occured
      *         the resulting Bitmap region otherwise.
      */
     private Bitmap decodeRegionBitmap(RectF targetDrawRect, RectF subsectionRect) {
         RectF decoderRect = new RectF(0, 0, mBitmapDecoder.getWidth(), mBitmapDecoder.getHeight());
         Matrix matrix = createDecoderImageMatrix();
         Matrix inverse = new Matrix();
-        inverse(matrix, inverse);
-        transformRect(subsectionRect, inverse);
+        MatrixUtils.inverse(matrix, inverse);
+        MatrixUtils.transformRect(subsectionRect, inverse);
         // If our current sub-section is bigger than the decoder rect, skip.
         // We do this to avoid unnecessarily loading the image at full resolution.
         if(subsectionRect.width() > decoderRect.width()
@@ -187,25 +188,6 @@ public class RegionDecoderCropBehaviour extends BitmapCropBehaviour {
         return decoderImageMatrix;
     }
 
-    /**
-     * Transform the coordinates of the Rect using the supplied Matrix.
-     * @param rect the input/output Rect for this operation
-     * @param regionImageInverse the Matrix for transforming the Rect.
-     */
-    private void transformRect(RectF rect, Matrix regionImageInverse) {
-        if(regionImageInverse.isIdentity()) return;
-        float[] inOutDecodeRect = new float[8];
-        inOutDecodeRect[0] = rect.left;
-        inOutDecodeRect[1] = rect.top;
-        inOutDecodeRect[2] = rect.right;
-        inOutDecodeRect[3] = rect.bottom;
-        regionImageInverse.mapPoints(inOutDecodeRect, 4, inOutDecodeRect, 0, 2);
-        rect.left = inOutDecodeRect[4];
-        rect.top = inOutDecodeRect[5];
-        rect.right = inOutDecodeRect[6];
-        rect.bottom = inOutDecodeRect[7];
-    }
-
     @Override
     public Bitmap crop(int targetMaxSide) {
         RectF drawRect = new RectF();
@@ -227,7 +209,7 @@ public class RegionDecoderCropBehaviour extends BitmapCropBehaviour {
         float scaleRatio = (float)targetDimension / mHostView.mSelectionRect.width();
         Matrix drawRectScaleMatrix = new Matrix();
         drawRectScaleMatrix.setScale(scaleRatio, scaleRatio);
-        transformRect(drawRect, drawRectScaleMatrix);
+        MatrixUtils.transformRect(drawRect, drawRectScaleMatrix);
 
         Bitmap returnBitmap = Bitmap.createBitmap(targetDimension, targetDimension, regionBitmap.getConfig());
         Canvas canvas = new Canvas(returnBitmap);
