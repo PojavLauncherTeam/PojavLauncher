@@ -5,6 +5,8 @@ import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Rect;
 
+import net.kdt.pojavlaunch.utils.MatrixUtils;
+
 public class BitmapCropBehaviour implements CropperBehaviour{
     private final Matrix mTranslateInverse = new Matrix();
     protected final Matrix mTranslateMatrix = new Matrix();
@@ -32,7 +34,7 @@ public class BitmapCropBehaviour implements CropperBehaviour{
     public void zoom(float zoomLevel, float midpointX, float midpointY) {
         // Do this to avoid constantly inverting the same matrix on each touch event.
         if(mTranslateInverseOutdated) {
-            inverse(mTranslateMatrix, mTranslateInverse);
+            MatrixUtils.inverse(mTranslateMatrix, mTranslateInverse);
             mTranslateInverseOutdated = false;
         }
         float[] zoomCenter = new float[] {
@@ -81,42 +83,32 @@ public class BitmapCropBehaviour implements CropperBehaviour{
 
     public Bitmap crop(int targetMaxSide) {
         Matrix imageInverse = new Matrix();
-        inverse(mImageMatrix, imageInverse);
+        MatrixUtils.inverse(mImageMatrix, imageInverse);
         // By inverting the matrix we will effectively "divide" our rectangle by it, thus getting
-        // its two points on the surface of the bitmap. Math be cool indeed.
-        float[] src = new float[] {
-                mHostView.mSelectionRect.left,
-                mHostView.mSelectionRect.top,
-                mHostView.mSelectionRect.right,
-                mHostView.mSelectionRect.bottom
-        };
-        float[] dst = new float[4];
-        imageInverse.mapPoints(dst, 0, src, 0, 2);
-        Rect originalBitmapRect = new Rect(
-                (int)dst[0], (int)dst[1],
-                (int)dst[2], (int)dst[3]
-        );
+        // its two points on the bitmap's surface. Math be cool indeed.
+        Rect targetRect = new Rect();
+        MatrixUtils.transformRect(mHostView.mSelectionRect, targetRect, imageInverse);
         // Pick the best dimensions for the crop result, shrinking the target if necessary.
         int targetWidth, targetHeight;
-        int targetMinDimension = Math.min(originalBitmapRect.width(), originalBitmapRect.height());
+        int targetMinDimension = Math.min(targetRect.width(), targetRect.height());
         if(targetMaxSide < targetMinDimension) {
             float ratio = (float) targetMaxSide / targetMinDimension;
-            targetWidth = (int) (originalBitmapRect.width() * ratio);
-            targetHeight = (int) (originalBitmapRect.height() * ratio);
+            targetWidth = (int) (targetRect.width() * ratio);
+            targetHeight = (int) (targetRect.height() * ratio);
         }else {
-            targetWidth = originalBitmapRect.width();
-            targetHeight = originalBitmapRect.height();
+            targetWidth = targetRect.width();
+            targetHeight = targetRect.height();
         }
         Bitmap croppedBitmap = Bitmap.createBitmap(
                 targetWidth, targetHeight,
                 mOriginalBitmap.getConfig()
         );
         // Draw the bitmap on the target. Doing this allows us to not bother with making sure
-        // that originalBitmapRect is fully contained within image bounds.
+        // that targetRect is fully contained within image bounds.
         Canvas drawCanvas = new Canvas(croppedBitmap);
         drawCanvas.drawBitmap(
                 mOriginalBitmap,
-                originalBitmapRect,
+                targetRect,
                 new Rect(0, 0, targetWidth, targetHeight),
                 null
         );
@@ -165,51 +157,5 @@ public class BitmapCropBehaviour implements CropperBehaviour{
         mTranslateInverse.reset();
         mZoomMatrix.reset();
         refresh();
-    }
-
-    /**
-     * Android's conditions for matrix inversion are wacky, and sometimes it just stops working out
-     * of the blue. So, when Android's accelerated matrix inverse dies, just invert by hand.
-     * @param source Source matrix
-     * @param destination The inverse of the source matrix
-     */
-    protected void inverse(Matrix source, Matrix destination) {
-        if(source.invert(destination)) return;
-        float[] matrix = new float[9];
-        source.getValues(matrix);
-        inverseMatrix(matrix);
-        destination.setValues(matrix);
-    }
-
-    // This was made by ChatGPT and i have no clue what's happening here, but it works so eh
-    private static void inverseMatrix(float[] matrix) {
-        float determinant = matrix[0] * (matrix[4] * matrix[8] - matrix[5] * matrix[7])
-                - matrix[1] * (matrix[3] * matrix[8] - matrix[5] * matrix[6])
-                + matrix[2] * (matrix[3] * matrix[7] - matrix[4] * matrix[6]);
-
-        if (determinant == 0) {
-            throw new IllegalArgumentException("Matrix is not invertible");
-        }
-
-        float invDet = 1 / determinant;
-
-        float temp0 = (matrix[4] * matrix[8] - matrix[5] * matrix[7]);
-        float temp1 = (matrix[2] * matrix[7] - matrix[1] * matrix[8]);
-        float temp2 = (matrix[1] * matrix[5] - matrix[2] * matrix[4]);
-        float temp3 = (matrix[5] * matrix[6] - matrix[3] * matrix[8]);
-        float temp4 = (matrix[0] * matrix[8] - matrix[2] * matrix[6]);
-        float temp5 = (matrix[2] * matrix[3] - matrix[0] * matrix[5]);
-        float temp6 = (matrix[3] * matrix[7] - matrix[4] * matrix[6]);
-        float temp7 = (matrix[1] * matrix[6] - matrix[0] * matrix[7]);
-        float temp8 = (matrix[0] * matrix[4] - matrix[1] * matrix[3]);
-        matrix[0] = temp0 * invDet;
-        matrix[1] = temp1 * invDet;
-        matrix[2] = temp2 * invDet;
-        matrix[3] = temp3 * invDet;
-        matrix[4] = temp4 * invDet;
-        matrix[5] = temp5 * invDet;
-        matrix[6] = temp6 * invDet;
-        matrix[7] = temp7 * invDet;
-        matrix[8] = temp8 * invDet;
     }
 }
