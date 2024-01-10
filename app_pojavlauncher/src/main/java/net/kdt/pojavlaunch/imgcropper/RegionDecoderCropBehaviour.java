@@ -74,7 +74,7 @@ public class RegionDecoderCropBehaviour extends BitmapCropBehaviour {
                 (int) subsectionRect.right,
                 (int) subsectionRect.bottom
         );
-        transformRect(subsectionRect, matrix);
+        MatrixUtils.transformRect(subsectionRect, matrix);
         targetDrawRect.set(subsectionRect);
         return mBitmapDecoder.decodeRegion(bitmapRegionRect, null);
     }
