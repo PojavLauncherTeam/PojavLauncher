@@ -85,7 +85,7 @@ public class BitmapCropBehaviour implements CropperBehaviour{
         Matrix imageInverse = new Matrix();
         MatrixUtils.inverse(mImageMatrix, imageInverse);
         // By inverting the matrix we will effectively "divide" our rectangle by it, thus getting
-        // its two points on the bitmap's surface. Math be cool indeed.
+        // its two points on the surface of the bitmap. Math be cool indeed.
         Rect targetRect = new Rect();
         MatrixUtils.transformRect(mHostView.mSelectionRect, targetRect, imageInverse);
         // Pick the best dimensions for the crop result, shrinking the target if necessary.
