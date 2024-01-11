@@ -79,15 +79,25 @@ public class ModrinthApi implements ModpackApi{
         String[] names = new String[response.size()];
         String[] mcNames = new String[response.size()];
         String[] urls = new String[response.size()];
+        String[] hashes = new String[response.size()];
 
         for (int i=0; i<response.size(); ++i) {
             JsonObject version = response.get(i).getAsJsonObject();
             names[i] = version.get("name").getAsString();
             mcNames[i] = version.get("game_versions").getAsJsonArray().get(0).getAsString();
             urls[i] = version.get("files").getAsJsonArray().get(0).getAsJsonObject().get("url").getAsString();
+            // Assume there may not be hashes, in case the API changes
+            JsonObject hashesMap = version.getAsJsonArray("files").get(0).getAsJsonObject()
+                    .get("hashes").getAsJsonObject();
+            if(hashesMap == null || hashesMap.get("sha1") == null){
+                hashes[i] = null;
+                continue;
+            }
+
+            hashes[i] = hashesMap.get("sha1").getAsString();
         }
 
-        return new ModDetail(item, names, mcNames, urls);
+        return new ModDetail(item, names, mcNames, urls, hashes);
     }
 
     @Override
@@ -122,7 +132,7 @@ public class ModrinthApi implements ModpackApi{
             
             ModDownloader modDownloader = new ModDownloader(instanceDestination);
             for(ModrinthIndex.ModrinthIndexFile indexFile : modrinthIndex.files) {
-                modDownloader.submitDownload(indexFile.fileSize, indexFile.path, indexFile.downloads);
+                modDownloader.submitDownload(indexFile.fileSize, indexFile.path, indexFile.hashes.sha1, indexFile.downloads);
             }
             modDownloader.awaitFinish(new DownloaderProgressWrapper(R.string.modpack_download_downloading_mods, ProgressLayout.INSTALL_MODPACK));
             ProgressLayout.setProgress(ProgressLayout.INSTALL_MODPACK, 0, R.string.modpack_download_applying_overrides, 1, 2);

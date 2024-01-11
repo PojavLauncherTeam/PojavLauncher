@@ -55,7 +55,6 @@ public class MinecraftGLSurface extends View implements GrabListener {
             .remapX(true)
             .remapY(true)
 
-            .remapDpad(true)
             .remapLeftJoystick(true)
             .remapRightJoystick(true)
             .remapStart(true)
@@ -145,14 +144,17 @@ public class MinecraftGLSurface extends View implements GrabListener {
         MCOptionUtils.addMCOptionListener(mGuiScaleListener);
     }
 
-    /** Initialize the view and all its settings */
-    public void start(){
+    /** Initialize the view and all its settings
+     * @param isAlreadyRunning set to true to tell the view that the game is already running
+     *                         (only updates the window without calling the start listener)
+     */
+    public void start(boolean isAlreadyRunning){
         if(LauncherPreferences.PREF_USE_ALTERNATE_SURFACE){
             SurfaceView surfaceView = new SurfaceView(getContext());
             mSurface = surfaceView;
 
             surfaceView.getHolder().addCallback(new SurfaceHolder.Callback() {
-                private boolean isCalled = false;
+                private boolean isCalled = isAlreadyRunning;
                 @Override
                 public void surfaceCreated(@NonNull SurfaceHolder holder) {
                     if(isCalled) {
@@ -181,7 +183,7 @@ public class MinecraftGLSurface extends View implements GrabListener {
             mSurface = textureView;
 
             textureView.setSurfaceTextureListener(new TextureView.SurfaceTextureListener() {
-                private boolean isCalled = false;
+                private boolean isCalled = isAlreadyRunning;
                 @Override
                 public void onSurfaceTextureAvailable(@NonNull SurfaceTexture surface, int width, int height) {
                     Surface tSurface = new Surface(surface);
@@ -314,9 +316,10 @@ public class MinecraftGLSurface extends View implements GrabListener {
                     if(hasDoubleTapped && hudKeyHandled == mLastHotbarKey && !PREF_DISABLE_SWAP_HAND){
                         //Prevent double tapping Event on two different slots
                         sendKeyPress(LwjglGlfwKeycode.GLFW_KEY_F);
+                    } else {
+                        mHandler.sendEmptyMessageDelayed(MSG_DROP_ITEM_BUTTON_CHECK, 350);
                     }
 
-                    mHandler.sendEmptyMessageDelayed(MSG_DROP_ITEM_BUTTON_CHECK, 350);
                     CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
                     mLastHotbarKey = hudKeyHandled;
                     break;
@@ -466,8 +469,7 @@ public class MinecraftGLSurface extends View implements GrabListener {
 
     /** The event for keyboard/ gamepad button inputs */
     public boolean processKeyEvent(KeyEvent event) {
-        //Toast.makeText(this, event.toString(),Toast.LENGTH_SHORT).show();
-        //Toast.makeText(this, event.getDevice().toString(), Toast.LENGTH_SHORT).show();
+        //Log.i("KeyEvent", event.toString());
 
         //Filtering useless events by order of probability
         int eventKeycode = event.getKeyCode();
@@ -475,7 +477,12 @@ public class MinecraftGLSurface extends View implements GrabListener {
         if(eventKeycode == KeyEvent.KEYCODE_VOLUME_DOWN) return false;
         if(eventKeycode == KeyEvent.KEYCODE_VOLUME_UP) return false;
         if(event.getRepeatCount() != 0) return true;
-        if(event.getAction() == KeyEvent.ACTION_MULTIPLE) return true;
+        int action = event.getAction();
+        if(action == KeyEvent.ACTION_MULTIPLE) return true;
+        // Ignore the cancelled up events. They occur when the user switches layouts.
+        // In accordance with https://developer.android.com/reference/android/view/KeyEvent#FLAG_CANCELED
+        if(action == KeyEvent.ACTION_UP &&
+                (event.getFlags() & KeyEvent.FLAG_CANCELED) != 0) return true;
 
         //Sometimes, key events comes from SOME keys of the software keyboard
         //Even weirder, is is unknown why a key or another is selected to trigger a keyEvent
@@ -621,7 +628,8 @@ public class MinecraftGLSurface extends View implements GrabListener {
         if(isGrabbing){
             if(!hasPointerCapture) {
                 requestFocus();
-                requestPointerCapture();
+                if(hasWindowFocus()) requestPointerCapture();
+                // Otherwise, onWindowFocusChanged() would get called.
             }
             return;
         }
@@ -630,6 +638,13 @@ public class MinecraftGLSurface extends View implements GrabListener {
             releasePointerCapture();
             clearFocus();
         }
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasWindowFocus) {
+        super.onWindowFocusChanged(hasWindowFocus);
+        if(hasWindowFocus && CallbackBridge.isGrabbing() &&
+                MainActivity.isAndroid8OrHigher()) requestPointerCapture();
     }
 
     /** A small interface called when the listener is ready for the first time */

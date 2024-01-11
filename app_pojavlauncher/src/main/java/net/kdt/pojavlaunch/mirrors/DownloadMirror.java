@@ -54,6 +54,26 @@ public class DownloadMirror {
     }
 
     /**
+     * Download a file with the current mirror. If the file is missing on the mirror,
+     * fall back to the official source.
+     * @param downloadClass Class of the download. Can either be DOWNLOAD_CLASS_LIBRARIES,
+     *                      DOWNLOAD_CLASS_METADATA or DOWNLOAD_CLASS_ASSETS
+     * @param urlInput The original (Mojang) URL for the download
+     * @param outputFile The output file for the download
+     */
+    public static void downloadFileMirrored(int downloadClass, String urlInput, File outputFile) throws IOException {
+        try {
+            DownloadUtils.downloadFile(getMirrorMapping(downloadClass, urlInput),
+                    outputFile);
+            return;
+        }catch (FileNotFoundException e) {
+            Log.w("DownloadMirror", "Cannot find the file on the mirror", e);
+            Log.i("DownloadMirror", "Failling back to default source");
+        }
+        DownloadUtils.downloadFile(urlInput, outputFile);
+    }
+
+    /**
      * Check if the current download source is a mirror and not an official source.
      * @return true if the source is a mirror, false otherwise
      */

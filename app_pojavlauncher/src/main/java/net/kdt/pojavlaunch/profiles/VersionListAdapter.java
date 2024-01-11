@@ -38,6 +38,9 @@ public class VersionListAdapter extends BaseExpandableListAdapter implements Exp
 
         // Query installed versions
         mInstalledVersions = new File(Tools.DIR_GAME_NEW + "/versions").list();
+        if(mInstalledVersions != null)
+            Arrays.sort(mInstalledVersions);
+
         if(!areInstalledVersionsAvailable()){
             mGroups = new String[]{
                     ctx.getString(R.string.mcl_setting_veroption_release),

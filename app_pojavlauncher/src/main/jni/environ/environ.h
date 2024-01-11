@@ -5,7 +5,7 @@
 #ifndef POJAVLAUNCHER_ENVIRON_H
 #define POJAVLAUNCHER_ENVIRON_H
 
-#include <ctxbridges/gl_bridge.h>
+#include <ctxbridges/common.h>
 #include <stdatomic.h>
 #include <jni.h>
 
@@ -32,7 +32,7 @@ typedef void GLFW_invoke_WindowSize_func(void* window, int width, int height);
 
 struct pojav_environ_s {
     struct ANativeWindow* pojavWindow;
-    render_window_t* mainWindowBundle;
+    basic_render_window_t* mainWindowBundle;
     int config_renderer;
     bool force_vsync;
     atomic_size_t eventCounter; // Count the number of events to be pumped out

@@ -177,6 +177,11 @@ android {
         jniLibs {
             useLegacyPackaging = true
         }
+        pickFirst '**/libbytehook.so'
+    }
+
+    buildFeatures {
+        prefab true
     }
 
     buildToolsVersion = '33.0.2'
@@ -198,7 +203,7 @@ dependencies {
     implementation 'com.github.PojavLauncherTeam:portrait-sdp:ed33e89cbc'
     implementation 'com.github.PojavLauncherTeam:portrait-ssp:6c02fd739b'
     implementation 'com.github.Mathias-Boulay:ExtendedView:1.0.0'
-    implementation 'com.github.Mathias-Boulay:android_gamepad_remapper:67b4fd4448'
+    implementation 'com.github.Mathias-Boulay:android_gamepad_remapper:a0fe7e72f2'
     implementation 'com.github.Mathias-Boulay:virtual-joystick-android:2e7aa25e50'
 
 
@@ -208,6 +213,7 @@ dependencies {
     implementation 'org.tukaani:xz:1.8'
     implementation 'com.github.PojavLauncherTeam:exp4j:60eaec6f78'
     implementation 'net.sourceforge.htmlcleaner:htmlcleaner:2.6.1'
+    implementation 'com.bytedance:bytehook:1.0.9'
 
     // implementation 'net.sourceforge.streamsupport:streamsupport-cfuture:1.7.0'
 

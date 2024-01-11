@@ -15,10 +15,8 @@
 // Created by maks on 17.09.2022.
 //
 
-#define STATE_RENDERER_ALIVE 0
-#define STATE_RENDERER_NEW_WINDOW 1
 static const char* g_LogTag = "GLBridge";
-static __thread render_window_t* currentBundle;
+static __thread gl_render_window_t* currentBundle;
 static EGLDisplay g_EglDisplay;
 
 bool gl_init() {
@@ -37,9 +35,13 @@ bool gl_init() {
     return true;
 }
 
-render_window_t* gl_init_context(render_window_t *share) {
-    render_window_t* bundle = malloc(sizeof(render_window_t));
-    memset(bundle, 0, sizeof(render_window_t));
+gl_render_window_t* gl_get_current() {
+    return currentBundle;
+}
+
+gl_render_window_t* gl_init_context(gl_render_window_t *share) {
+    gl_render_window_t* bundle = malloc(sizeof(gl_render_window_t));
+    memset(bundle, 0, sizeof(gl_render_window_t));
     EGLint egl_attributes[] = { EGL_BLUE_SIZE, 8, EGL_GREEN_SIZE, 8, EGL_RED_SIZE, 8, EGL_ALPHA_SIZE, 8, EGL_DEPTH_SIZE, 24, EGL_SURFACE_TYPE, EGL_WINDOW_BIT|EGL_PBUFFER_BIT, EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT, EGL_NONE };
     EGLint num_configs = 0;
 
@@ -86,7 +88,7 @@ render_window_t* gl_init_context(render_window_t *share) {
     return bundle;
 }
 
-void gl_swap_surface(render_window_t* bundle) {
+void gl_swap_surface(gl_render_window_t* bundle) {
     if(bundle->nativeSurface != NULL) {
         ANativeWindow_release(bundle->nativeSurface);
     }
@@ -107,7 +109,7 @@ void gl_swap_surface(render_window_t* bundle) {
     //eglMakeCurrent_p(g_EglDisplay, bundle->surface, bundle->surface, bundle->context);
 }
 
-void gl_make_current(render_window_t* bundle) {
+void gl_make_current(gl_render_window_t* bundle) {
     if(bundle == NULL) {
         if(eglMakeCurrent_p(g_EglDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT)) {
             currentBundle = NULL;
@@ -116,7 +118,7 @@ void gl_make_current(render_window_t* bundle) {
     }
     bool hasSetMainWindow = false;
     if(pojav_environ->mainWindowBundle == NULL) {
-        pojav_environ->mainWindowBundle = bundle;
+        pojav_environ->mainWindowBundle = (basic_render_window_t*)bundle;
         __android_log_print(ANDROID_LOG_INFO, g_LogTag, "Main window bundle is now %p", pojav_environ->mainWindowBundle);
         pojav_environ->mainWindowBundle->newNativeSurface = pojav_environ->pojavWindow;
         hasSetMainWindow = true;
@@ -130,7 +132,7 @@ void gl_make_current(render_window_t* bundle) {
     }else {
         if(hasSetMainWindow) {
             pojav_environ->mainWindowBundle->newNativeSurface = NULL;
-            gl_swap_surface(pojav_environ->mainWindowBundle);
+            gl_swap_surface((gl_render_window_t*)pojav_environ->mainWindowBundle);
             pojav_environ->mainWindowBundle = NULL;
         }
         __android_log_print(ANDROID_LOG_ERROR, g_LogTag, "eglMakeCurrent returned with error: %04x", eglGetError_p());

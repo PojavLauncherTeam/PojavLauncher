@@ -127,6 +127,8 @@ public class mcVersionSpinner extends ExtendedTextView {
                     return;
                 }
                 mPopupWindow.showAsDropDown(mcVersionSpinner.this, 0, offset);
+                // Post() is required for the layout inflation phase
+                post(() -> mListView.setSelection(mSelectedIndex));
             }
         });
     }

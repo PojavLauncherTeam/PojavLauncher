@@ -8,10 +8,7 @@ import net.kdt.pojavlaunch.extra.ExtraConstants;
 import net.kdt.pojavlaunch.extra.ExtraCore;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Locale;
 
 /** Class here to help with various stuff to help run lower versions smoothly */
 public class OldVersionsUtils {
@@ -20,23 +17,20 @@ public class OldVersionsUtils {
      */
     public static void selectOpenGlVersion(JMinecraftVersionList.Version version){
         // 1309989600 is 2011-07-07  2011-07-07T22:00:00+00:00
-        String creationDate = version.time;
-        if(!Tools.isValidString(creationDate)){
+        String creationTime = version.time;
+        if(!Tools.isValidString(creationTime)){
             ExtraCore.setValue(ExtraConstants.OPEN_GL_VERSION, "2");
             return;
         }
 
         try {
-            int tIndexOf = creationDate.indexOf('T');
-            if(tIndexOf != -1) creationDate = creationDate.substring(0, tIndexOf);
-            Date creationDateObj = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(creationDate);
-            if(creationDateObj == null) {
+           Date creationDate = DateUtils.parseReleaseDate(creationTime);
+            if(creationDate == null) {
                 Log.e("GL_SELECT", "Failed to parse version date");
                 ExtraCore.setValue(ExtraConstants.OPEN_GL_VERSION, "2");
                 return;
             }
-
-            String openGlVersion =  creationDateObj.before(new Date(new GregorianCalendar(2011, 6, 8).getTimeInMillis())) ? "1" : "2";
+            String openGlVersion =  DateUtils.dateBefore(creationDate, 2011, 6, 8) ? "1" : "2";
             Log.i("GL_SELECT", openGlVersion);
             ExtraCore.setValue(ExtraConstants.OPEN_GL_VERSION, openGlVersion);
         }catch (ParseException exception){

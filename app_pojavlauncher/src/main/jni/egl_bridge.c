@@ -25,7 +25,8 @@
 #include <environ/environ.h>
 #include <android/dlext.h>
 #include "utils.h"
-#include "ctxbridges/gl_bridge.h"
+#include "ctxbridges/bridge_tbl.h"
+#include "ctxbridges/osm_bridge.h"
 
 #define GLFW_CLIENT_API 0x22001
 /* Consider GLFW_NO_API as Vulkan API */
@@ -83,9 +84,7 @@ EXTERNAL_API void pojavTerminate() {
 
 JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_utils_JREUtils_setupBridgeWindow(JNIEnv* env, ABI_COMPAT jclass clazz, jobject surface) {
     pojav_environ->pojavWindow = ANativeWindow_fromSurface(env, surface);
-    if(pojav_environ->config_renderer == RENDERER_GL4ES) {
-        gl_setup_window();
-    }
+    if(br_setup_window != NULL) br_setup_window();
 }
 
 
@@ -95,25 +94,7 @@ Java_net_kdt_pojavlaunch_utils_JREUtils_releaseBridgeWindow(ABI_COMPAT JNIEnv *e
 }
 
 EXTERNAL_API void* pojavGetCurrentContext() {
-    switch (pojav_environ->config_renderer) {
-        case RENDERER_GL4ES:
-            return (void *)eglGetCurrentContext_p();
-        case RENDERER_VK_ZINK:
-            return (void *)OSMesaGetCurrentContext_p();
-
-        default: return NULL;
-    }
-}
-
-void loadSymbols() {
-    switch (pojav_environ->config_renderer) {
-        case RENDERER_VK_ZINK:
-            dlsym_OSMesa();
-            break;
-        case RENDERER_GL4ES:
-            //inside glbridge
-            break;
-    }
+    return br_get_current();
 }
 
 //#define ADRENO_POSSIBLE
@@ -208,14 +189,6 @@ void load_vulkan() {
     set_vulkan_ptr(vulkan_ptr);
 }
 
-EXTERNAL_API int pojavInit() {
-    ANativeWindow_acquire(pojav_environ->pojavWindow);
-    pojav_environ->savedWidth = ANativeWindow_getWidth(pojav_environ->pojavWindow);
-    pojav_environ->savedHeight = ANativeWindow_getHeight(pojav_environ->pojavWindow);
-    ANativeWindow_setBuffersGeometry(pojav_environ->pojavWindow,pojav_environ->savedWidth,pojav_environ->savedHeight,AHARDWAREBUFFER_FORMAT_R8G8B8X8_UNORM);
-    return 1;
-}
-
 int pojavInitOpenGL() {
     // Only affects GL4ES as of now
     const char *forceVsync = getenv("FORCE_VSYNC");
@@ -226,28 +199,26 @@ int pojavInitOpenGL() {
     const char *renderer = getenv("POJAV_RENDERER");
     if (strncmp("opengles", renderer, 8) == 0) {
         pojav_environ->config_renderer = RENDERER_GL4ES;
-        // Symbols are loaded inside gl_bridge
+        set_gl_bridge_tbl();
     } else if (strcmp(renderer, "vulkan_zink") == 0) {
         pojav_environ->config_renderer = RENDERER_VK_ZINK;
         load_vulkan();
         setenv("GALLIUM_DRIVER","zink",1);
-        loadSymbols();
+        set_osm_bridge_tbl();
     }
-    if(pojav_environ->config_renderer == RENDERER_GL4ES) {
-        if(gl_init()) {
-            gl_setup_window();
-            return 1;
-        }
-        return 0;
+    if(br_init()) {
+        br_setup_window();
     }
-    if (pojav_environ->config_renderer == RENDERER_VK_ZINK) {
-        if(OSMesaCreateContext_p == NULL) {
-            printf("OSMDroid: %s\n",dlerror());
-            return 0;
-        }
-    }
-
     return 0;
+}
+
+EXTERNAL_API int pojavInit() {
+    ANativeWindow_acquire(pojav_environ->pojavWindow);
+    pojav_environ->savedWidth = ANativeWindow_getWidth(pojav_environ->pojavWindow);
+    pojav_environ->savedHeight = ANativeWindow_getHeight(pojav_environ->pojavWindow);
+    ANativeWindow_setBuffersGeometry(pojav_environ->pojavWindow,pojav_environ->savedWidth,pojav_environ->savedHeight,AHARDWAREBUFFER_FORMAT_R8G8B8X8_UNORM);
+    pojavInitOpenGL();
+    return 1;
 }
 
 EXTERNAL_API void pojavSetWindowHint(int hint, int value) {
@@ -268,73 +239,20 @@ EXTERNAL_API void pojavSetWindowHint(int hint, int value) {
     }
 }
 
-ANativeWindow_Buffer buf;
-int32_t stride;
-bool stopSwapBuffers;
-void pojavSwapBuffers() {
-    if (stopSwapBuffers) {
-        return;
-    }
-    switch (pojav_environ->config_renderer) {
-        case RENDERER_GL4ES: {
-            gl_swap_buffers();
-        } break;
-
-        case RENDERER_VK_ZINK: {
-            OSMesaContext ctx = OSMesaGetCurrentContext_p();
-            if(ctx == NULL) {
-                printf("Zink: attempted to swap buffers without context!");
-                break;
-            }
-            OSMesaMakeCurrent_p(ctx,buf.bits,GL_UNSIGNED_BYTE,pojav_environ->savedWidth, pojav_environ->savedHeight);
-            glFinish_p();
-            ANativeWindow_unlockAndPost(pojav_environ->pojavWindow);
-            ANativeWindow_lock(pojav_environ->pojavWindow,&buf,NULL);
-        } break;
-    }
+EXTERNAL_API void pojavSwapBuffers() {
+    br_swap_buffers();
 }
 
 
 EXTERNAL_API void pojavMakeCurrent(void* window) {
-    if(pojav_environ->config_renderer == RENDERER_GL4ES) {
-        gl_make_current((render_window_t*)window);
-    }
-    if (pojav_environ->config_renderer == RENDERER_VK_ZINK) {
-        printf("OSMDroid: making current %p\n", pojav_environ->pojavWindow);
-        ANativeWindow_lock(pojav_environ->pojavWindow,&buf,NULL);
-        OSMesaMakeCurrent_p((OSMesaContext)window,buf.bits,GL_UNSIGNED_BYTE,pojav_environ->savedWidth,pojav_environ->savedHeight);
-        OSMesaPixelStore_p(OSMESA_ROW_LENGTH,buf.stride);
-        OSMesaPixelStore_p(OSMESA_Y_UP,0);
-
-
-        printf("OSMDroid: vendor: %s\n",glGetString_p(GL_VENDOR));
-        printf("OSMDroid: renderer: %s\n",glGetString_p(GL_RENDERER));
-        glClearColor_p(0.4f, 0.4f, 0.4f, 1.0f);
-        glClear_p(GL_COLOR_BUFFER_BIT);
-
-        pojavSwapBuffers();
-    }
+    br_make_current((basic_render_window_t*)window);
 }
 
 EXTERNAL_API void* pojavCreateContext(void* contextSrc) {
     if (pojav_environ->config_renderer == RENDERER_VULKAN) {
-        return (void *)pojav_environ->pojavWindow;
+        return (void *) pojav_environ->pojavWindow;
     }
-
-    pojavInitOpenGL();
-
-    if (pojav_environ->config_renderer == RENDERER_GL4ES) {
-        return gl_init_context(contextSrc);
-    }
-
-    if (pojav_environ->config_renderer == RENDERER_VK_ZINK) {
-        printf("OSMDroid: generating context\n");
-        void* ctx = OSMesaCreateContext_p(OSMESA_RGBA,contextSrc);
-        printf("OSMDroid: context=%p\n",ctx);
-        return ctx;
-    }
-    printf("Unknown config_renderer value: %i\n", pojav_environ->config_renderer);
-    abort();
+    return br_init_context((basic_render_window_t*)contextSrc);
 }
 
 EXTERNAL_API JNIEXPORT jlong JNICALL
@@ -347,27 +265,7 @@ Java_org_lwjgl_vulkan_VK_getVulkanDriverHandle(ABI_COMPAT JNIEnv *env, ABI_COMPA
     return strtoul(getenv("VULKAN_PTR"), NULL, 0x10);
 }
 
-EXTERNAL_API JNIEXPORT jlong JNICALL
-Java_org_lwjgl_opengl_GL_getGraphicsBufferAddr(ABI_COMPAT JNIEnv *env, ABI_COMPAT jobject thiz) {
-    return (jlong) buf.bits;
-}
-EXTERNAL_API JNIEXPORT jintArray JNICALL
-Java_org_lwjgl_opengl_GL_getNativeWidthHeight(JNIEnv *env, ABI_COMPAT jobject thiz) {
-    jintArray ret = (*env)->NewIntArray(env,2);
-    jint arr[] = {pojav_environ->savedWidth, pojav_environ->savedHeight};
-    (*env)->SetIntArrayRegion(env,ret,0,2,arr);
-    return ret;
-}
 EXTERNAL_API void pojavSwapInterval(int interval) {
-    switch (pojav_environ->config_renderer) {
-        case RENDERER_GL4ES: {
-            gl_swap_interval(interval);
-        } break;
-
-        case RENDERER_VK_ZINK: {
-            printf("eglSwapInterval: NOT IMPLEMENTED YET!\n");
-            // Nothing to do here
-        } break;
-    }
+    br_swap_interval(interval);
 }
 

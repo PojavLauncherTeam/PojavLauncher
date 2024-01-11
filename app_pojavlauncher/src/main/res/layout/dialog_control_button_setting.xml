@@ -330,6 +330,15 @@
             app:layout_constraintTop_toBottomOf="@id/checkboxSwipeable"
             tools:ignore="UseSwitchCompatOrMaterialXml" />
 
+        <Switch
+            android:id="@+id/checkboxAbsoluteFingerTracking"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_36sdp"
+            android:text="@string/customctrl_absolute_tracking"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/checkboxForwardLock"
+            tools:ignore="UseSwitchCompatOrMaterialXml"/>
+
         <!-- BACKGROUND COLOR SECTION -->
         <fr.spse.extended_view.ExtendedTextView
             android:id="@+id/editBackgroundColor_textView"
@@ -346,7 +355,7 @@
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/checkboxForwardLock" />
+            app:layout_constraintTop_toBottomOf="@id/checkboxAbsoluteFingerTracking" />
 
 
         <!-- STROKE WIDTH -->

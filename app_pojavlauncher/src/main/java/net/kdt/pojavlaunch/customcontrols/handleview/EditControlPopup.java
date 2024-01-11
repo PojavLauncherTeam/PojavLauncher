@@ -20,7 +20,6 @@ import android.view.animation.Interpolator;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Spinner;
@@ -75,7 +74,7 @@ public class EditControlPopup {
     };
     protected EditText mNameEditText, mWidthEditText, mHeightEditText;
     @SuppressLint("UseSwitchCompatOrMaterialCode")
-    protected Switch mToggleSwitch, mPassthroughSwitch, mSwipeableSwitch, mForwardLockSwitch;
+    protected Switch mToggleSwitch, mPassthroughSwitch, mSwipeableSwitch, mForwardLockSwitch, mAbsoluteTrackingSwitch;
     protected Spinner mOrientationSpinner;
     protected TextView[] mKeycodeTextviews = new TextView[4];
     protected SeekBar mStrokeWidthSeekbar, mCornerRadiusSeekbar, mAlphaSeekbar;
@@ -274,6 +273,7 @@ public class EditControlPopup {
         mOrientationTextView.setVisibility(GONE);
         mOrientationSpinner.setVisibility(GONE);
         mForwardLockSwitch.setVisibility(GONE);
+        mAbsoluteTrackingSwitch.setVisibility(GONE);
 
         mNameEditText.setText(data.name);
         mWidthEditText.setText(String.valueOf(data.getWidth()));
@@ -351,6 +351,9 @@ public class EditControlPopup {
 
         mForwardLockSwitch.setVisibility(VISIBLE);
         mForwardLockSwitch.setChecked(data.forwardLock);
+
+        mAbsoluteTrackingSwitch.setVisibility(VISIBLE);
+        mAbsoluteTrackingSwitch.setChecked(data.absolute);
     }
 
     /**
@@ -383,6 +386,7 @@ public class EditControlPopup {
         mPassthroughSwitch = mScrollView.findViewById(R.id.checkboxPassThrough);
         mSwipeableSwitch = mScrollView.findViewById(R.id.checkboxSwipeable);
         mForwardLockSwitch = mScrollView.findViewById(R.id.checkboxForwardLock);
+        mAbsoluteTrackingSwitch = mScrollView.findViewById(R.id.checkboxAbsoluteFingerTracking);
         mKeycodeSpinners[0] = mScrollView.findViewById(R.id.editMapping_spinner_1);
         mKeycodeSpinners[1] = mScrollView.findViewById(R.id.editMapping_spinner_2);
         mKeycodeSpinners[2] = mScrollView.findViewById(R.id.editMapping_spinner_3);
@@ -496,6 +500,12 @@ public class EditControlPopup {
             if (internalChanges) return;
             if(mCurrentlyEditedButton.getProperties() instanceof ControlJoystickData){
                 ((ControlJoystickData) mCurrentlyEditedButton.getProperties()).forwardLock = isChecked;
+            }
+        });
+        mAbsoluteTrackingSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (internalChanges) return;
+            if(mCurrentlyEditedButton.getProperties() instanceof ControlJoystickData){
+                ((ControlJoystickData) mCurrentlyEditedButton.getProperties()).absolute = isChecked;
             }
         });
 

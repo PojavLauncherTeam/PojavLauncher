@@ -25,7 +25,6 @@ public class OptiFineUtils {
         intent.putExtra("javaArgs", "-javaagent:"+ Tools.DIR_DATA+"/forge_installer/forge_installer.jar"
                 + "=OFNPS" +// No Profile Suppression
                 " -jar "+modInstallerJar.getAbsolutePath());
-        intent.putExtra("skipDetectMod", true);
     }
 
     public static class OptiFineVersions {

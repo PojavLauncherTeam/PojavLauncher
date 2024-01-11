@@ -7,6 +7,7 @@ import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.progresskeeper.ProgressKeeper;
 import net.kdt.pojavlaunch.tasks.AsyncMinecraftDownloader;
+import net.kdt.pojavlaunch.tasks.MinecraftDownloader;
 import net.kdt.pojavlaunch.utils.DownloadUtils;
 
 import java.io.File;
@@ -88,7 +89,7 @@ public class OptiFineDownloadTask implements Runnable, Tools.DownloaderFeedback,
         if(minecraftJsonVersion == null) return false;
         try {
             synchronized (mMinecraftDownloadLock) {
-                new AsyncMinecraftDownloader().start(null, minecraftJsonVersion, minecraftVersion, this);
+                new MinecraftDownloader().start(null, minecraftJsonVersion, minecraftVersion, this);
                 mMinecraftDownloadLock.wait();
             }
         }catch (InterruptedException e) {

@@ -170,6 +170,7 @@
     <string name="customctrl_passthru">Mouse pass-thru</string>
     <string name="customctrl_swipeable">Swipeable</string>
     <string name="customctrl_forward_lock">Forward lock</string>
+    <string name="customctrl_absolute_tracking">Absolute finger tracking</string>
     <string name="memory_warning_msg">The current amount of free RAM (%d) is lower than allocated RAM (%d), which may lead to crashes. Change the allocation if the game crashes.</string>
     <string name="mcl_memory_allocation">Memory allocation</string>
     <string name="mcl_memory_allocation_subtitle">Controls how much memory is given to Minecraft.</string>
@@ -364,4 +365,10 @@
     <string name="notification_permission_toast">You can always change your mind later by going into Settings</string>
     <string name="preference_ask_for_notification_title">Allow notifications</string>
     <string name="preference_ask_for_notification_description">Click to re-request the notification permission, required for game/modpack background downloads to work properly.</string>
+    <string name="preference_vsync_in_zink_title">Allow V-Sync with Zink</string>
+    <string name="preference_vsync_in_zink_description">Allows the launcher to use internal system APIs to enable V-Sync for Zink. Turn this off if your launcher suddenly crashes with Zink after a system update.</string>
+    <string name="exception_failed_to_unpack_jre17">Failed to install JRE 17</string>
+    <string name="newdl_starting">Reading game metadata…</string>
+    <string name="newdl_downloading_metadata">Downloading game metadata (%s)</string>
+    <string name="newdl_downloading_game_files">Downloading game files… (%d/%d, %.2f MB)</string>
 </resources>
