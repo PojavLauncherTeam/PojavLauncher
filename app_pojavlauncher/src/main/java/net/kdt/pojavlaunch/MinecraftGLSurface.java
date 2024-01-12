@@ -1,9 +1,7 @@
 package net.kdt.pojavlaunch;
 
 import static net.kdt.pojavlaunch.MainActivity.touchCharInput;
-import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_DISABLE_SWAP_HAND;
 import static net.kdt.pojavlaunch.utils.MCOptionUtils.getMcScale;
-import static org.lwjgl.glfw.CallbackBridge.sendKeyPress;
 import static org.lwjgl.glfw.CallbackBridge.sendMouseButton;
 import static org.lwjgl.glfw.CallbackBridge.windowHeight;
 import static org.lwjgl.glfw.CallbackBridge.windowWidth;
@@ -12,9 +10,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.SurfaceTexture;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.InputDevice;
@@ -32,10 +27,12 @@ import androidx.annotation.RequiresApi;
 
 import net.kdt.pojavlaunch.customcontrols.ControlLayout;
 import net.kdt.pojavlaunch.customcontrols.gamepad.Gamepad;
+import net.kdt.pojavlaunch.customcontrols.mouse.InGUIEventProcessor;
+import net.kdt.pojavlaunch.customcontrols.mouse.IngameEventProcessor;
+import net.kdt.pojavlaunch.customcontrols.mouse.TouchEventProcessor;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.utils.JREUtils;
 import net.kdt.pojavlaunch.utils.MCOptionUtils;
-import net.kdt.pojavlaunch.utils.MathUtils;
 
 import org.lwjgl.glfw.CallbackBridge;
 
@@ -69,69 +66,18 @@ public class MinecraftGLSurface extends View implements GrabListener {
     /* Sensitivity, adjusted according to screen size */
     private final double mSensitivityFactor = (1.4 * (1080f/ Tools.getDisplayMetrics((Activity) getContext()).heightPixels));
     /* Use to detect simple and double taps */
-    private final TapDetector mSingleTapDetector = new TapDetector(1, TapDetector.DETECTION_METHOD_BOTH);
-    private final TapDetector mDoubleTapDetector = new TapDetector(2, TapDetector.DETECTION_METHOD_DOWN);
-    /* MC GUI scale, listened by MCOptionUtils */
-    private int mGuiScale;
-    @SuppressWarnings("FieldCanBeLocal") // it can't, otherwise the weak reference will disappear
-    private final MCOptionUtils.MCOptionListener mGuiScaleListener = () -> mGuiScale = getMcScale();
+    //private final TapDetector mSingleTapDetector = new TapDetector(1, TapDetector.DETECTION_METHOD_BOTH);
+    //private final TapDetector mDoubleTapDetector = new TapDetector(2, TapDetector.DETECTION_METHOD_DOWN);
+
     /* Surface ready listener, used by the activity to launch minecraft */
     SurfaceReadyListener mSurfaceReadyListener = null;
     final Object mSurfaceReadyListenerLock = new Object();
     /* View holding the surface, either a SurfaceView or a TextureView */
     View mSurface;
 
-    /* List of hotbarKeys, used when clicking on the hotbar */
-    private static final int[] HOTBAR_KEYS = {
-            LwjglGlfwKeycode.GLFW_KEY_1, LwjglGlfwKeycode.GLFW_KEY_2,   LwjglGlfwKeycode.GLFW_KEY_3,
-            LwjglGlfwKeycode.GLFW_KEY_4, LwjglGlfwKeycode.GLFW_KEY_5,   LwjglGlfwKeycode.GLFW_KEY_6,
-            LwjglGlfwKeycode.GLFW_KEY_7, LwjglGlfwKeycode.GLFW_KEY_8, LwjglGlfwKeycode.GLFW_KEY_9};
-    /* Last hotbar button (0-9) registered */
-    private int mLastHotbarKey = -1;
-    /* Events can start with only a move instead of an pointerDown due to mouse passthrough */
-    private boolean mShouldBeDown = false;
-    /* When fingers are really near to each other, it tends to either swap or remove a pointer ! */
-    private int mLastPointerCount = 0;
-    /* Previous MotionEvent position, not scale */
-    private float mPrevX, mPrevY;
-    /* PointerID used for the moving camera */
-    private int mCurrentPointerID = -1000;
-    /* Initial first pointer positions non-scaled, used to test touch sloppiness */
-    private float mInitialX, mInitialY;
-    /* Last first pointer positions non-scaled, used to scroll distance */
-    private float mScrollLastInitialX, mScrollLastInitialY;
-    /* How much distance a finger has to go for touch sloppiness to be disabled */
-    public static final int FINGER_STILL_THRESHOLD = (int) Tools.dpToPx(9);
-    /* How much distance a finger has to go to scroll */
-    public static final int FINGER_SCROLL_THRESHOLD = (int) Tools.dpToPx(6);
-    /* Whether the button was triggered, used by the handler */
-    private static boolean triggeredLeftMouseButton = false;
-    /* Handle hotbar throw button and mouse mining button */
-    public static final int MSG_LEFT_MOUSE_BUTTON_CHECK = 1028;
-    public static final int MSG_DROP_ITEM_BUTTON_CHECK = 1029;
-    private final Handler mHandler = new Handler(Looper.getMainLooper()) {
-        public void handleMessage(Message msg) {
-            if(msg.what == MSG_LEFT_MOUSE_BUTTON_CHECK) {
-                if (LauncherPreferences.PREF_DISABLE_GESTURES) return;
-                float x = CallbackBridge.mouseX;
-                float y = CallbackBridge.mouseY;
-                if (CallbackBridge.isGrabbing() &&
-                        MathUtils.dist(x, y, mInitialX, mInitialY) < FINGER_STILL_THRESHOLD) {
-                    triggeredLeftMouseButton = true;
-                    sendMouseButton(LwjglGlfwKeycode.GLFW_MOUSE_BUTTON_LEFT, true);
-                }
-                return;
-            }
-            if(msg.what == MSG_DROP_ITEM_BUTTON_CHECK) {
-                if(CallbackBridge.isGrabbing()){
-                    sendKeyPress(LwjglGlfwKeycode.GLFW_KEY_Q);
-                    mHandler.sendEmptyMessageDelayed(MSG_DROP_ITEM_BUTTON_CHECK, 600);
-                }
-            }
-        }
-    };
-
-
+    private final TouchEventProcessor mIngameProcessor = new IngameEventProcessor(mScaleFactor, mSensitivityFactor);
+    private final TouchEventProcessor mInGUIProcessor = new InGUIEventProcessor(mScaleFactor);
+    private boolean mLastGrabState = false;
 
     public MinecraftGLSurface(Context context) {
         this(context, null);
@@ -140,8 +86,6 @@ public class MinecraftGLSurface extends View implements GrabListener {
     public MinecraftGLSurface(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
         setFocusable(true);
-
-        MCOptionUtils.addMCOptionListener(mGuiScaleListener);
     }
 
     /** Initialize the view and all its settings
@@ -241,7 +185,7 @@ public class MinecraftGLSurface extends View implements GrabListener {
 
         //Getting scaled position from the event
         /* Tells if a double tap happened [MOUSE GRAB ONLY]. Doesn't tell where though. */
-        if(!CallbackBridge.isGrabbing()) {
+        /*if(!CallbackBridge.isGrabbing()) {
             CallbackBridge.mouseX =  (e.getX() * mScaleFactor);
             CallbackBridge.mouseY =  (e.getY() * mScaleFactor);
             //One android click = one MC click
@@ -393,6 +337,17 @@ public class MinecraftGLSurface extends View implements GrabListener {
         mLastPointerCount = e.getPointerCount();
 
         return true;
+       */
+        boolean isGrabbing = CallbackBridge.isGrabbing();
+        if(mLastGrabState != isGrabbing) {
+            pickEventProcessor(mLastGrabState).cancelPendingActions();
+            mLastGrabState = isGrabbing;
+        }
+        return pickEventProcessor(isGrabbing).processTouchEvent(e);
+    }
+
+    private TouchEventProcessor pickEventProcessor(boolean isGrabbing) {
+        return isGrabbing ? mIngameProcessor : mInGUIProcessor;
     }
 
     /**
@@ -545,25 +500,7 @@ public class MinecraftGLSurface extends View implements GrabListener {
 
 
 
-    /** @return the hotbar key, given the position. -1 if no key are pressed */
-    public int handleGuiBar(int x, int y) {
-        if (!CallbackBridge.isGrabbing()) return -1;
 
-        int barHeight = mcscale(20);
-        int barY = CallbackBridge.physicalHeight - barHeight;
-        if(y < barY) return -1;
-
-        int barWidth = mcscale(180);
-        int barX = (CallbackBridge.physicalWidth / 2) - (barWidth / 2);
-        if(x < barX || x >= barX + barWidth) return -1;
-
-        return HOTBAR_KEYS[(int) net.kdt.pojavlaunch.utils.MathUtils.map(x, barX, barX + barWidth, 0, 9)];
-    }
-
-    /** Return the size, given the UI scale size */
-    private int mcscale(int input) {
-        return (int)((mGuiScale * input)/ mScaleFactor);
-    }
 
     /** Called when the size need to be set at any point during the surface lifecycle **/
     public void refreshSize(){

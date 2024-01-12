@@ -1,6 +1,6 @@
 package net.kdt.pojavlaunch;
 
-import static net.kdt.pojavlaunch.MinecraftGLSurface.FINGER_SCROLL_THRESHOLD;
+import static net.kdt.pojavlaunch.customcontrols.mouse.InGUIEventProcessor.FINGER_SCROLL_THRESHOLD;
 import static net.kdt.pojavlaunch.Tools.currentDisplayMetrics;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.DEFAULT_PREF;
 
