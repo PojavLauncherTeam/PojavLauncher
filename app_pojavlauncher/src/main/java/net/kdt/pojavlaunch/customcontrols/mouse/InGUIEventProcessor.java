@@ -21,7 +21,7 @@ public class InGUIEventProcessor implements TouchEventProcessor {
         switch (motionEvent.getActionMasked()) {
             case MotionEvent.ACTION_DOWN:
                 mTracker.startTracking(motionEvent);
-                sendTouchCoords(motionEvent.getX(), motionEvent.getY());
+                sendTouchCoordinates(motionEvent.getX(), motionEvent.getY());
                 enableMouse();
                 break;
             case MotionEvent.ACTION_MOVE:
@@ -30,7 +30,7 @@ public class InGUIEventProcessor implements TouchEventProcessor {
                 float mainPointerX = motionEvent.getX(pointerIndex);
                 float mainPointerY = motionEvent.getY(pointerIndex);
                 if(pointerCount == 1 || LauncherPreferences.PREF_DISABLE_GESTURES) {
-                    sendTouchCoords(mainPointerX, mainPointerY);
+                    sendTouchCoordinates(mainPointerX, mainPointerY);
                     if(!mIsMouseDown) enableMouse();
                 }else {
                     float[] motionVector = mTracker.getMotionVector();
@@ -45,7 +45,7 @@ public class InGUIEventProcessor implements TouchEventProcessor {
         return true;
     }
 
-    private void sendTouchCoords(float x, float y) {
+    private void sendTouchCoordinates(float x, float y) {
         CallbackBridge.mouseX = x * mScaleFactor;
         CallbackBridge.mouseY = y * mScaleFactor;
         CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
