@@ -28,7 +28,7 @@ import androidx.annotation.RequiresApi;
 import net.kdt.pojavlaunch.customcontrols.ControlLayout;
 import net.kdt.pojavlaunch.customcontrols.gamepad.Gamepad;
 import net.kdt.pojavlaunch.customcontrols.mouse.InGUIEventProcessor;
-import net.kdt.pojavlaunch.customcontrols.mouse.IngameEventProcessor;
+import net.kdt.pojavlaunch.customcontrols.mouse.InGameEventProcessor;
 import net.kdt.pojavlaunch.customcontrols.mouse.TouchEventProcessor;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.utils.JREUtils;
@@ -75,7 +75,7 @@ public class MinecraftGLSurface extends View implements GrabListener {
     /* View holding the surface, either a SurfaceView or a TextureView */
     View mSurface;
 
-    private final TouchEventProcessor mIngameProcessor = new IngameEventProcessor(mScaleFactor, mSensitivityFactor);
+    private final TouchEventProcessor mIngameProcessor = new InGameEventProcessor(mScaleFactor, mSensitivityFactor);
     private final TouchEventProcessor mInGUIProcessor = new InGUIEventProcessor(mScaleFactor);
     private boolean mLastGrabState = false;
 
