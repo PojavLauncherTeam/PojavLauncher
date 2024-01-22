@@ -87,6 +87,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 @SuppressWarnings("IOStreamConstructor")
@@ -1091,6 +1092,23 @@ public final class Tools {
         int heightMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
         t.measure(widthMeasureSpec, heightMeasureSpec);
         return t.getMeasuredHeight();
+    }
+
+    /**
+     * Check if the device is one of the devices that may be affected by the hanging linker issue.
+     * The device is affected if the linker causes the process to lock up when dlopen() is called within
+     * dl_iterate_phdr().
+     * For now, the only affected firmware that I know of is Android 5.1, EMUI 3.1 on MTK-based Huawei
+     * devices.
+     * @return if the device is affected by the hanging linker issue.
+     */
+    public static boolean deviceHasHangingLinker() {
+        // Android Oreo and onwards have GSIs and most phone firmwares at that point were not modified
+        // *that* intrusively. So assume that we are not affected.
+        if(SDK_INT >= Build.VERSION_CODES.O) return false;
+        // Since the affected function in LWJGL is rarely used (and when used, it's mainly for debug prints)
+        // we can make the search scope a bit more broad and check if we are running on a Huawei device.
+        return Build.MANUFACTURER.toLowerCase(Locale.ROOT).contains("huawei");
     }
 
     public static class RenderersList {
