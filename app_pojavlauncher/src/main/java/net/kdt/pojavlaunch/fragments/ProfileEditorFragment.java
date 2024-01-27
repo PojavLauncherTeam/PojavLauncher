@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Base64OutputStream;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,7 +54,7 @@ public class ProfileEditorFragment extends Fragment implements CropperUtils.Crop
     private EditText mDefaultName, mDefaultJvmArgument;
     private TextView mDefaultPath, mDefaultVersion, mDefaultControl;
     private ImageView mProfileIcon;
-    private ActivityResultLauncher<?> mCropperLauncher = CropperUtils.registerCropper(this, this);
+    private final ActivityResultLauncher<?> mCropperLauncher = CropperUtils.registerCropper(this, this);
 
     private List<String> mRenderNames;
 
@@ -131,9 +132,7 @@ public class ProfileEditorFragment extends Fragment implements CropperUtils.Crop
         }));
 
         // Set up the icon change click listener
-        mProfileIcon.setOnClickListener(v ->{
-            CropperUtils.startCropper(mCropperLauncher, v.getContext());
-        });
+        mProfileIcon.setOnClickListener(v -> CropperUtils.startCropper(mCropperLauncher));
 
 
 
@@ -235,6 +234,7 @@ public class ProfileEditorFragment extends Fragment implements CropperUtils.Crop
     @Override
     public void onCropped(Bitmap contentBitmap) {
         mProfileIcon.setImageBitmap(contentBitmap);
+        Log.i("bitmap", "w="+contentBitmap.getWidth() +" h="+contentBitmap.getHeight());
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         try (Base64OutputStream base64OutputStream = new Base64OutputStream(byteArrayOutputStream, Base64.NO_WRAP)) {
             contentBitmap.compress(Bitmap.CompressFormat.PNG, 60, base64OutputStream);

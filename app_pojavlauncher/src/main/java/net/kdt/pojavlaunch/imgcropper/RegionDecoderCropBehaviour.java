@@ -8,6 +8,7 @@ import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.os.Handler;
+import android.os.Looper;
 
 import net.kdt.pojavlaunch.PojavApplication;
 import net.kdt.pojavlaunch.modloaders.modpacks.SelfReferencingFuture;
@@ -21,7 +22,7 @@ public class RegionDecoderCropBehaviour extends BitmapCropBehaviour {
     private final RectF mOverlayDst = new RectF(0, 0, 0, 0);
     private boolean mRequiresOverlayBitmap;
     private final Matrix mDecoderPrescaleMatrix = new Matrix();
-    private final Handler mHiresLoadHandler = new Handler();
+    private final Handler mHiresLoadHandler = new Handler(Looper.getMainLooper());
     private Future<?> mDecodeFuture;
     private final Runnable mHiresLoadRunnable = ()->{
         RectF subsectionRect = new RectF(0,0, mHostView.getWidth(), mHostView.getHeight());
