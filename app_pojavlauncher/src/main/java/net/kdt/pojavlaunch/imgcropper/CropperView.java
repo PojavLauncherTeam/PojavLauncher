@@ -28,7 +28,7 @@ public class CropperView extends View {
     private float mSelectionPadding;
     private int mLastTrackedPointer;
     private Paint mSelectionPaint;
-    public CropperBehaviour cropperBehaviour = CropperBehaviour.DUMMY;
+    private CropperBehaviour mCropperBehaviour = CropperBehaviour.DUMMY;
 
     public CropperView(Context context) {
         super(context);
@@ -74,7 +74,7 @@ public class CropperView extends View {
                 float multiplier = 0.005f;
                 float midpointX = (x1 + x2) / 2;
                 float midpointY = (y1 + y2) / 2;
-                cropperBehaviour.zoom(1 + distanceDelta * multiplier, midpointX, midpointY);
+                mCropperBehaviour.zoom(1 + distanceDelta * multiplier, midpointX, midpointY);
             }
             mLastDistance = distance;
             return true;
@@ -106,7 +106,7 @@ public class CropperView extends View {
                 }
                 if(trackedIndex != -1) {
                     // If we still track out current pointer, pan the image by the movement delta
-                    cropperBehaviour.pan(x1 - mLastTouchX, y1 - mLastTouchY);
+                    mCropperBehaviour.pan(x1 - mLastTouchX, y1 - mLastTouchY);
                 } else {
                     // Otherwise, mark the new tracked pointer without panning.
                     mLastTrackedPointer = event.getPointerId(0);
@@ -121,7 +121,7 @@ public class CropperView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         canvas.save();
-        cropperBehaviour.drawPreHighlight(canvas);
+        mCropperBehaviour.drawPreHighlight(canvas);
         canvas.restore();
         canvas.drawRect(mSelectionHighlight, mSelectionPaint);
     }
@@ -150,7 +150,7 @@ public class CropperView extends View {
         mSelectionRect.top = centerShiftY;
         mSelectionRect.right = centerShiftX + lesserDimension;
         mSelectionRect.bottom = centerShiftY + lesserDimension;
-        cropperBehaviour.onSelectionRectUpdated();
+        mCropperBehaviour.onSelectionRectUpdated();
         // Adjust the selection highlight rectangle to be bigger than the selection area
         // by the highlight thickness, to make sure that the entire inside of the selection highlight
         // will fit into the image
@@ -169,7 +169,7 @@ public class CropperView extends View {
             setMeasuredDimension(widthSize, heightSize);
             return;
         }
-        int biggestAllowedDimension = cropperBehaviour.getLargestImageSide();
+        int biggestAllowedDimension = mCropperBehaviour.getLargestImageSide();
         if(widthMode == MeasureSpec.EXACTLY) biggestAllowedDimension = widthSize;
         if(heightMode == MeasureSpec.EXACTLY) biggestAllowedDimension = heightSize;
         setMeasuredDimension(
@@ -191,12 +191,21 @@ public class CropperView extends View {
         return desired;
     }
 
+    public void setCropperBehaviour(CropperBehaviour cropperBehaviour) {
+        this.mCropperBehaviour = cropperBehaviour;
+        cropperBehaviour.onSelectionRectUpdated();
+    }
+
+    public void resetTransforms() {
+        mCropperBehaviour.resetTransforms();
+    }
+
 
     @CallSuper
     protected void reset() {
         mLastDistance = -1;
     }
     public Bitmap crop(int targetMaxSide) {
-        return cropperBehaviour.crop(targetMaxSide);
+        return mCropperBehaviour.crop(targetMaxSide);
     }
 }
