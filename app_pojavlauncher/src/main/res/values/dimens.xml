@@ -30,5 +30,5 @@
     <!-- Fragment padding -->
     <dimen name="fragment_padding_medium">@dimen/_10sdp</dimen>
     <!-- Misc paddings -->
-    <dimen name="profile_editor_image_padding">2dp</dimen>
+    <dimen name="profile_editor_image_padding">@dimen/padding_small</dimen>
 </resources>
