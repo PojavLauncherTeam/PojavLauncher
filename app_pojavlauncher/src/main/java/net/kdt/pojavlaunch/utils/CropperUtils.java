@@ -75,9 +75,7 @@ public class CropperUtils {
             if(inputStream == null) return; // The provider has crashed, there is no point in trying again.
             try {
                 BitmapRegionDecoder regionDecoder = BitmapRegionDecoder.newInstance(inputStream, false);
-                RegionDecoderCropBehaviour cropBehaviour = new RegionDecoderCropBehaviour(cropImageView);
-                cropBehaviour.loadRegionDecoder(regionDecoder);
-                finishViewSetup(cropImageView, cropBehaviour);
+                finishViewSetup(cropImageView, regionDecoder);
                 return;
             }catch (IOException e) {
                 // Catch IOE here to detect the case when BitmapRegionDecoder does not support this image format.
@@ -90,17 +88,28 @@ public class CropperUtils {
         try (InputStream inputStream = contentResolver.openInputStream(selectedUri)) {
             if(inputStream == null) return;
             Bitmap originalBitmap = BitmapFactory.decodeStream(inputStream);
-            BitmapCropBehaviour cropBehaviour = new BitmapCropBehaviour(cropImageView);
-            cropBehaviour.loadBitmap(originalBitmap);
-            finishViewSetup(cropImageView,cropBehaviour);
+            finishViewSetup(cropImageView,originalBitmap);
         }
     }
 
+    private static CropperBehaviour createCropperBehaviour(CropperView cropperView, Object imageObject) {
+        if(imageObject instanceof BitmapRegionDecoder) {
+            RegionDecoderCropBehaviour cropBehaviour = new RegionDecoderCropBehaviour(cropperView);
+            cropBehaviour.loadRegionDecoder((BitmapRegionDecoder) imageObject);
+            return cropBehaviour;
+        }
+        if(imageObject instanceof Bitmap) {
+            BitmapCropBehaviour cropBehaviour = new BitmapCropBehaviour(cropperView);
+            cropBehaviour.loadBitmap((Bitmap) imageObject);
+            return cropBehaviour;
+        }
+        throw new IllegalArgumentException("Unsupported imageObject type: "+imageObject.getClass().getName());
+    }
 
-    private static void finishViewSetup(CropperView cropImageView, CropperBehaviour cropBehaviour) {
+    private static void finishViewSetup(CropperView cropImageView, Object imageObject) {
         Tools.runOnUiThread(()->{
-            cropImageView.setCropperBehaviour(cropBehaviour);
-            cropImageView.requestLayout();
+            cropImageView.setCropperBehaviour(createCropperBehaviour(cropImageView, imageObject));
+            cropImageView.post(cropImageView::requestLayout);
         });
     }
 
