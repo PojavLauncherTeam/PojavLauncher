@@ -2,6 +2,7 @@ package net.kdt.pojavlaunch.fragments;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Base64OutputStream;
@@ -237,7 +238,18 @@ public class ProfileEditorFragment extends Fragment implements CropperUtils.Crop
         Log.i("bitmap", "w="+contentBitmap.getWidth() +" h="+contentBitmap.getHeight());
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         try (Base64OutputStream base64OutputStream = new Base64OutputStream(byteArrayOutputStream, Base64.NO_WRAP)) {
-            contentBitmap.compress(Bitmap.CompressFormat.PNG, 60, base64OutputStream);
+            contentBitmap.compress(
+                Build.VERSION.SDK_INT < Build.VERSION_CODES.R ?
+                    // On Android < 30, there was no distinction between "lossy" and "lossless",
+                    // and the type is picked by the quality parameter. We set the quality to 60.
+                    // so it should be lossy,
+                    Bitmap.CompressFormat.WEBP:
+                    // On Android >= 30, we can explicitly specify that we want lossy compression
+                    // with the visual quality of 60.
+                    Bitmap.CompressFormat.WEBP_LOSSY,
+                60,
+                base64OutputStream
+            );
             base64OutputStream.flush();
             byteArrayOutputStream.flush();
         }catch (IOException e) {
@@ -245,7 +257,7 @@ public class ProfileEditorFragment extends Fragment implements CropperUtils.Crop
             return;
         }
         String iconLine = new String(byteArrayOutputStream.toByteArray(), StandardCharsets.UTF_8);
-        mTempProfile.icon = "data:image/png;base64," + iconLine;
+        mTempProfile.icon = "data:image/webp;base64," + iconLine;
     }
 
     @Override
