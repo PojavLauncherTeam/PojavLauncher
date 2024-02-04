@@ -91,9 +91,8 @@ public class RegionDecoderCropBehaviour extends BitmapCropBehaviour {
         super(hostView);
     }
 
-    public void loadRegionDecoder(BitmapRegionDecoder bitmapRegionDecoder) {
+    public void setRegionDecoder(BitmapRegionDecoder bitmapRegionDecoder) {
         mBitmapDecoder = bitmapRegionDecoder;
-        reset();
     }
 
     @Override
@@ -126,10 +125,10 @@ public class RegionDecoderCropBehaviour extends BitmapCropBehaviour {
     }
 
     @Override
-    public void reset() {
+    public void applyImage() {
         createScaledSourceBitmap();
         computeDecoderPrescaleMatrix();
-        super.reset();
+        super.applyImage();
     }
 
     @Override
