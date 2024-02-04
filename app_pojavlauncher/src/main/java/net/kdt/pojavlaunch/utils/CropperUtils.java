@@ -8,6 +8,8 @@ import android.graphics.BitmapRegionDecoder;
 import android.net.Uri;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ToggleButton;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -56,27 +58,53 @@ public class CropperUtils {
             cropperListener.onCropped(cropImageView.crop((int) Tools.dpToPx(70)));
         });
         PojavApplication.sExecutorService.execute(()->{
+            CropperBehaviour cropperBehaviour = null;
             try {
-                loadBehaviour(cropImageView, contentResolver, selectedUri);
-                Tools.runOnUiThread(()->finishProgressBar.setVisibility(View.GONE));
-            }catch (Exception e){ Tools.runOnUiThread(()->{
+                 cropperBehaviour = createBehaviour(cropImageView, contentResolver, selectedUri);
+            }catch (Exception e) {
                 cropperListener.onFailed(e);
-                dialog.dismiss();
-            });}
+            }
+            CropperBehaviour finalBehaviour = cropperBehaviour;
+            Tools.runOnUiThread(()->finishSetup(dialog, finishProgressBar, cropImageView, finalBehaviour));
         });
+    }
 
+    // Fixes the chin that the dialog has on my huawei fon
+    private static void fixDialogHeight(AlertDialog dialog) {
+        Window dialogWindow = dialog.getWindow();
+        if(dialogWindow != null)
+            dialogWindow.setLayout(
+                    WindowManager.LayoutParams.MATCH_PARENT, // width
+                    WindowManager.LayoutParams.WRAP_CONTENT  // height
+            );
+    }
+
+    private static void finishSetup(AlertDialog dialog, View progressBar,
+                                    CropperView cropImageView, CropperBehaviour cropperBehaviour) {
+        if(cropperBehaviour == null) {
+            dialog.dismiss();
+            return;
+        }
+        progressBar.setVisibility(View.GONE);
+        cropImageView.setCropperBehaviour(cropperBehaviour);
+        cropperBehaviour.applyImage();
+        cropImageView.post(()->{
+            fixDialogHeight(dialog);
+            cropImageView.requestLayout();
+        });
     }
 
 
-    private static void loadBehaviour(CropperView cropImageView,
+    private static CropperBehaviour createBehaviour(CropperView cropImageView,
                                       ContentResolver contentResolver,
                                       Uri selectedUri) throws Exception {
         try (InputStream inputStream = contentResolver.openInputStream(selectedUri)) {
-            if(inputStream == null) return; // The provider has crashed, there is no point in trying again.
+            if(inputStream == null) return null;
             try {
                 BitmapRegionDecoder regionDecoder = BitmapRegionDecoder.newInstance(inputStream, false);
-                finishViewSetup(cropImageView, regionDecoder);
-                return;
+                RegionDecoderCropBehaviour cropBehaviour = new RegionDecoderCropBehaviour(cropImageView);
+                cropBehaviour.setRegionDecoder(regionDecoder);
+                return cropBehaviour;
             }catch (IOException e) {
                 // Catch IOE here to detect the case when BitmapRegionDecoder does not support this image format.
                 // If it does not, we will just have to load the bitmap in full resolution using BitmapFactory.
@@ -86,31 +114,12 @@ public class CropperUtils {
         // We can safely re-open the stream here as ACTION_OPEN_DOCUMENT grants us long-term access
         // to the file that we have picked.
         try (InputStream inputStream = contentResolver.openInputStream(selectedUri)) {
-            if(inputStream == null) return;
+            if(inputStream == null) return null;
             Bitmap originalBitmap = BitmapFactory.decodeStream(inputStream);
-            finishViewSetup(cropImageView,originalBitmap);
-        }
-    }
-
-    private static CropperBehaviour createCropperBehaviour(CropperView cropperView, Object imageObject) {
-        if(imageObject instanceof BitmapRegionDecoder) {
-            RegionDecoderCropBehaviour cropBehaviour = new RegionDecoderCropBehaviour(cropperView);
-            cropBehaviour.loadRegionDecoder((BitmapRegionDecoder) imageObject);
+            BitmapCropBehaviour cropBehaviour = new BitmapCropBehaviour(cropImageView);
+            cropBehaviour.setBitmap(originalBitmap);
             return cropBehaviour;
         }
-        if(imageObject instanceof Bitmap) {
-            BitmapCropBehaviour cropBehaviour = new BitmapCropBehaviour(cropperView);
-            cropBehaviour.loadBitmap((Bitmap) imageObject);
-            return cropBehaviour;
-        }
-        throw new IllegalArgumentException("Unsupported imageObject type: "+imageObject.getClass().getName());
-    }
-
-    private static void finishViewSetup(CropperView cropImageView, Object imageObject) {
-        Tools.runOnUiThread(()->{
-            cropImageView.setCropperBehaviour(createCropperBehaviour(cropImageView, imageObject));
-            cropImageView.post(cropImageView::requestLayout);
-        });
     }
 
     private static void bindViews(AlertDialog alertDialog, CropperView imageCropperView) {
