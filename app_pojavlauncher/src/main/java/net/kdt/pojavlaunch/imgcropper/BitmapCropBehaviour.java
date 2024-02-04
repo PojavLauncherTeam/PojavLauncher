@@ -62,16 +62,15 @@ public class BitmapCropBehaviour implements CropperBehaviour{
         computeLocalPrescaleMatrix();
     }
 
-    public void reset() {
+    public void applyImage() {
         mHostView.reset();
         computeLocalPrescaleMatrix();
         resetTransforms();
         refresh();
     }
 
-    public void loadBitmap(Bitmap bitmap) {
+    public void setBitmap(Bitmap bitmap) {
         mOriginalBitmap = bitmap;
-        reset();
     }
 
     protected void refresh() {
