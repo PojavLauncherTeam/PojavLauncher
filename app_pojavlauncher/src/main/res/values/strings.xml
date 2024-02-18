@@ -375,4 +375,5 @@
     <string name="cropper_lock_vertical">V. lock</string>
     <string name="cropper_lock_horizontal">H. lock</string>
     <string name="cropper_reset">Reset</string>
+    <string name="cropper_select_cancelled">Selection cancelled</string>
 </resources>

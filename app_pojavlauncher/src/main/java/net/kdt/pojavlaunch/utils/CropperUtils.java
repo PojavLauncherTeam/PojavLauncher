@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -32,7 +33,11 @@ public class CropperUtils {
     public static ActivityResultLauncher<?> registerCropper(Fragment fragment, final CropperListener cropperListener) {
         return fragment.registerForActivityResult(new ActivityResultContracts.OpenDocument(), (result)->{
             Context context = fragment.getContext();
-            if (context == null || result == null) return;
+            if(context == null) return;
+            if (result == null) {
+                Toast.makeText(context, R.string.cropper_select_cancelled, Toast.LENGTH_SHORT).show();
+                return;
+            }
             openCropperDialog(context, result, cropperListener);
         });
     }
@@ -40,12 +45,12 @@ public class CropperUtils {
     private static void openCropperDialog(Context context, Uri selectedUri,
                                           final CropperListener cropperListener) {
         ContentResolver contentResolver = context.getContentResolver();
-        AlertDialog.Builder builder = new AlertDialog.Builder(context)
-                .setTitle(R.string.cropper_title);
-        builder.setView(R.layout.dialog_cropper);
-        builder.setPositiveButton(android.R.string.ok, null);
-        builder.setNegativeButton(android.R.string.cancel, null);
-        AlertDialog dialog = builder.show();
+        AlertDialog dialog = new AlertDialog.Builder(context)
+                .setTitle(R.string.cropper_title)
+                .setView(R.layout.dialog_cropper)
+                .setPositiveButton(android.R.string.ok, null)
+                .setNegativeButton(android.R.string.cancel, null)
+                .show();
         CropperView cropImageView = dialog.findViewById(R.id.crop_dialog_view);
         View finishProgressBar = dialog.findViewById(R.id.crop_dialog_progressbar);
         assert cropImageView != null;
