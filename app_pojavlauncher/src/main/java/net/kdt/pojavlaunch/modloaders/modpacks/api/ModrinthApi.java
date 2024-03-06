@@ -115,6 +115,9 @@ public class ModrinthApi implements ModpackApi{
         if((modLoaderVersion = dependencies.get("forge")) != null) {
             return new ModLoader(ModLoader.MOD_LOADER_FORGE, modLoaderVersion, mcVersion);
         }
+        if((modLoaderVersion = dependencies.get("neoforge")) != null) {
+            return new ModLoader(ModLoader.MOD_LOADER_NEOFORGE, modLoaderVersion, mcVersion);
+        }
         if((modLoaderVersion = dependencies.get("fabric-loader")) != null) {
             return new ModLoader(ModLoader.MOD_LOADER_FABRIC, modLoaderVersion, mcVersion);
         }
