@@ -23,9 +23,28 @@ public class NeoForgeVersionListAdapter extends BaseExpandableListAdapter implem
         mGameVersions = new ArrayList<>();
         mNeoForgeVersions = new ArrayList<>();
         for(String version : neoforgeVersions) {
-            //For example, in the string "20.2.3-beta", only the substring "20.2" is needed.
-            int dashIndex = version.indexOf(".", 3);
-            String gameVersion = "1." + version.substring(0, dashIndex); // "1." + "20.2"
+            String gameVersion = null;
+            int dashIndex;
+            if (!version.contains("1.20.1") && !version.contains("47.1.82")) {
+                //For example, in the string "20.2.3-beta", only the substring "20.2" is needed.
+                dashIndex = version.indexOf(".", 3);
+                gameVersion = "1." + version.substring(0, dashIndex); // "1." + "20.2"
+            } else if (version.contains("1.20.1")) {
+                dashIndex = version.indexOf("-");
+                gameVersion = version.substring(0, dashIndex); // "1.20.1"
+            } else if (version.equals("47.1.82")) {
+                gameVersion = "1.20.1";
+                List<String> versionList;
+                int gameVersionIndex = mGameVersions.indexOf(gameVersion);
+                if(gameVersionIndex != -1) versionList = mNeoForgeVersions.get(gameVersionIndex);
+                else {
+                    versionList = new ArrayList<>();
+                    mGameVersions.add("47.1.82");
+                    mNeoForgeVersions.add(versionList);
+                }
+                versionList.add(version);
+                continue;
+            }
             List<String> versionList;
             int gameVersionIndex = mGameVersions.indexOf(gameVersion);
             if(gameVersionIndex != -1) versionList = mNeoForgeVersions.get(gameVersionIndex);

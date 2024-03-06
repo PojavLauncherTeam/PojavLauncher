@@ -11,6 +11,7 @@ import net.kdt.pojavlaunch.modloaders.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class NeoForgeInstallFragment extends ModVersionListFragment<List<String>> {
@@ -43,7 +44,10 @@ public class NeoForgeInstallFragment extends ModVersionListFragment<List<String>
 
     @Override
     public List<String> loadVersionList() throws IOException {
-        return NeoForgeUtils.downloadNeoForgeVersions();
+        List<String> versions = new ArrayList<>();
+        versions.addAll(NeoForgeUtils.downloadNeoForgedForgeVersions());
+        versions.addAll(NeoForgeUtils.downloadNeoForgeVersions());
+        return versions;
     }
 
     @Override

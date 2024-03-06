@@ -16,7 +16,10 @@ import java.util.List;
 public class NeoForgeUtils {
     private static final String NEOFORGE_METADATA_URL = "https://maven.neoforged.net/releases/net/neoforged/neoforge/maven-metadata.xml";
     private static final String NEOFORGE_INSTALLER_URL = "https://maven.neoforged.net/releases/net/neoforged/neoforge/%1$s/neoforge-%1$s-installer.jar";
-    public static List<String> downloadNeoForgeVersions() throws IOException {
+    private static final String NEOFORGED_FORGE_METADATA_URL = "https://maven.neoforged.net/releases/net/neoforged/forge/maven-metadata.xml";
+    private static final String NEOFORGED_FORGE_INSTALLER_URL = "https://maven.neoforged.net/releases/net/neoforged/forge/%1$s/forge-%1$s-installer.jar";
+
+    private static List<String> downloadVersions(String metaDataUrl, String name) throws IOException {
         SAXParser saxParser;
         try {
             SAXParserFactory parserFactory = SAXParserFactory.newInstance();
@@ -28,7 +31,7 @@ public class NeoForgeUtils {
         }
         try {
             //of_test();
-            return DownloadUtils.downloadStringCached(NEOFORGE_METADATA_URL, "neoforge_versions", input -> {
+            return DownloadUtils.downloadStringCached(metaDataUrl, name, input -> {
                 try {
                     ForgeVersionListHandler handler = new ForgeVersionListHandler();
                     saxParser.parse(new InputSource(new StringReader(input)), handler);
@@ -43,10 +46,22 @@ public class NeoForgeUtils {
             e.printStackTrace();
             return null;
         }
-
     }
-    public static String getInstallerUrl(String version) {
+
+    public static List<String> downloadNeoForgeVersions() throws IOException {
+        return downloadVersions(NEOFORGE_METADATA_URL, "neoforge_versions");
+    }
+
+    public static List<String> downloadNeoForgedForgeVersions() throws IOException {
+        return downloadVersions(NEOFORGED_FORGE_METADATA_URL, "neoforged_forge_versions");
+    }
+
+    public static String getNeoForgeInstallerUrl(String version) {
         return String.format(NEOFORGE_INSTALLER_URL, version);
+    }
+
+    public static String getNeoForgedForgeInstallerUrl(String version) {
+        return String.format(NEOFORGED_FORGE_INSTALLER_URL, version);
     }
 
     public static void addAutoInstallArgs(Intent intent, File modInstallerJar) {

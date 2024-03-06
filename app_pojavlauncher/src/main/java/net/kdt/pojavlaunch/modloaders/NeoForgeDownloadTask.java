@@ -19,7 +19,11 @@ public class NeoForgeDownloadTask implements Runnable, Tools.DownloaderFeedback 
     private final ModloaderDownloadListener mListener;
     public NeoForgeDownloadTask(ModloaderDownloadListener listener, String neoforgeVersion) {
         this.mListener = listener;
-        this.mDownloadUrl = NeoForgeUtils.getInstallerUrl(neoforgeVersion);
+        if (neoforgeVersion.contains("1.20.1")) {
+            this.mDownloadUrl = NeoForgeUtils.getNeoForgedForgeInstallerUrl(neoforgeVersion);
+        } else{
+            this.mDownloadUrl = NeoForgeUtils.getNeoForgeInstallerUrl(neoforgeVersion);
+        }
         this.mFullVersion = neoforgeVersion;
     }
 
@@ -28,10 +32,15 @@ public class NeoForgeDownloadTask implements Runnable, Tools.DownloaderFeedback 
         this.mLoaderVersion = loaderVersion;
         this.mGameVersion = gameVersion;
     }
+
     @Override
     public void run() {
-        if(determineDownloadUrl()) {
-            downloadNeoForge();
+        try {
+            if(this.mFullVersion.contains("1.20.1") ? determineNeoForgedForgeDownloadUrl() : determineNeoForgeDownloadUrl()) {
+                downloadNeoForge();
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
         ProgressLayout.clearProgress(ProgressLayout.INSTALL_MODPACK);
     }
@@ -56,32 +65,42 @@ public class NeoForgeDownloadTask implements Runnable, Tools.DownloaderFeedback 
         }
     }
 
-    public boolean determineDownloadUrl() {
+    private boolean determineDownloadUrl(boolean findVersion){
         if(mDownloadUrl != null && mFullVersion != null) return true;
         ProgressKeeper.submitProgress(ProgressLayout.INSTALL_MODPACK, 0, R.string.neoforge_dl_searching);
-        try {
-            if(!findVersion()) {
-                mListener.onDataNotAvailable();
-                return false;
-            }
-        }catch (IOException e) {
-            mListener.onDownloadError(e);
+        if(!findVersion) {
+            mListener.onDataNotAvailable();
             return false;
         }
         return true;
     }
 
-    public boolean findVersion() throws IOException {
-        List<String> neoforgeVersions = NeoForgeUtils.downloadNeoForgeVersions();
-        if(neoforgeVersions == null) return false;
+    public boolean determineNeoForgeDownloadUrl() throws IOException {
+        return determineDownloadUrl(findNeoForgeVersion());
+    }
+
+    public boolean determineNeoForgedForgeDownloadUrl() throws IOException {
+        return determineDownloadUrl(findNeoForgedForgeVersion());
+    }
+
+    private boolean findVersion(List<String> neoForgeUtils, String installerUrl) {
+        if(neoForgeUtils == null) return false;
         String versionStart = mGameVersion+"-"+mLoaderVersion;
-        for(String versionName : neoforgeVersions) {
+        for(String versionName : neoForgeUtils) {
             if(!versionName.startsWith(versionStart)) continue;
             mFullVersion = versionName;
-            mDownloadUrl = NeoForgeUtils.getInstallerUrl(mFullVersion);
+            mDownloadUrl = installerUrl;
             return true;
         }
         return false;
+    }
+
+    public boolean findNeoForgeVersion() throws IOException {
+        return findVersion(NeoForgeUtils.downloadNeoForgeVersions(), NeoForgeUtils.getNeoForgeInstallerUrl(mFullVersion));
+    }
+
+    public boolean findNeoForgedForgeVersion() throws IOException {
+        return findVersion(NeoForgeUtils.downloadNeoForgedForgeVersions(), NeoForgeUtils.getNeoForgedForgeInstallerUrl(mFullVersion));
     }
 
 }
