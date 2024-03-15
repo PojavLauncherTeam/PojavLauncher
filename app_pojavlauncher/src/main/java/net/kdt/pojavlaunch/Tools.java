@@ -210,16 +210,25 @@ public final class Tools {
             javaArgList.add("-Dlog4j.configurationFile=" + configFile);
         }
         javaArgList.addAll(Arrays.asList(getMinecraftJVMArgs(versionId, gamedir)));
-        javaArgList.add("-cp");
-        javaArgList.add(getLWJGL3ClassPath() + ":" + launchClassPath);
+        //javaArgList.add("-cp");
+        //javaArgList.add(getLWJGL3ClassPath() + ":" + launchClassPath);
 
-        javaArgList.add(versionInfo.mainClass);
-        javaArgList.addAll(Arrays.asList(launchArgs));
+        //javaArgList.add(versionInfo.mainClass);
+        //javaArgList.addAll(Arrays.asList(launchArgs));
         // ctx.appendlnToLog("full args: "+javaArgList.toString());
         String args = LauncherPreferences.PREF_CUSTOM_JAVA_ARGS;
         if(Tools.isValidString(minecraftProfile.javaArgs)) args = minecraftProfile.javaArgs;
         FFmpegPlugin.discover(activity);
-        JREUtils.launchJavaVM(activity, runtime, gamedir, javaArgList, args);
+        JREUtils.launchJavaVM(
+                activity,
+                runtime,
+                gamedir,
+                javaArgList,
+                getLWJGL3ClassPath() + ":" + launchClassPath,
+                versionInfo.mainClass,
+                launchArgs,
+                args
+        );
         // If we returned, this means that the JVM exit dialog has been shown and we don't need to be active anymore.
         // We never return otherwise. The process will be killed anyway, and thus we will become inactive
     }

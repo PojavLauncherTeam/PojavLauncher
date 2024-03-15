@@ -37,149 +37,232 @@
 #include "utils.h"
 #include "environ/environ.h"
 
-// Uncomment to try redirect signal handling to JVM
-// #define TRY_SIG2JVM
+typedef jint (*JNI_CreateJavaVM_t)(JavaVM**, JNIEnv**, void*);
 
-// PojavLancher: fixme: are these wrong?
-#define FULL_VERSION "1.8.0-internal"
-#define DOT_VERSION "1.8"
+typedef struct {
+    void* handle;
+    JNI_CreateJavaVM_t JNI_CreateJavaVM;
+} jvm_library_t;
 
-static const char* const_progname = "java";
-static const char* const_launcher = "openjdk";
-static const char** const_jargs = NULL;
-static const char** const_appclasspath = NULL;
-static const jboolean const_javaw = JNI_FALSE;
-static const jboolean const_cpwildcard = JNI_TRUE;
-static const jint const_ergo_class = 0; // DEFAULT_POLICY
-static struct sigaction old_sa[NSIG];
-
-void (*__old_sa)(int signal, siginfo_t *info, void *reserved);
-int (*JVM_handle_linux_signal)(int signo, siginfo_t* siginfo, void* ucontext, int abort_if_unrecognized);
-
-void android_sigaction(int signal, siginfo_t *info, void *reserved) {
-  printf("process killed with signal %d code %p addr %p\n", signal,info->si_code,info->si_addr);
-  if (JVM_handle_linux_signal == NULL) { // should not happen, but still
-      __old_sa = old_sa[signal].sa_sigaction;
-      __old_sa(signal,info,reserved);
-      exit(1);
-  } else {
-      // Based on https://github.com/PojavLauncherTeam/openjdk-multiarch-jdk8u/blob/aarch64-shenandoah-jdk8u272-b10/hotspot/src/os/linux/vm/os_linux.cpp#L4688-4693
-      int orig_errno = errno;  // Preserve errno value over signal handler.
-      JVM_handle_linux_signal(signal, info, reserved, true);
-      errno = orig_errno;
-  }
-}
-typedef jint JNI_CreateJavaVM_func(JavaVM **pvm, void **penv, void *args);
-
-typedef jint JLI_Launch_func(int argc, char ** argv, /* main argc, argc */
-        int jargc, const char** jargv,          /* java args */
-        int appclassc, const char** appclassv,  /* app classpath */
-        const char* fullversion,                /* full version defined */
-        const char* dotversion,                 /* dot version defined */
-        const char* pname,                      /* program name */
-        const char* lname,                      /* launcher name */
-        jboolean javaargs,                      /* JAVA_ARGS */
-        jboolean cpwildcard,                    /* classpath wildcard*/
-        jboolean javaw,                         /* windows-only javaw */
-        jint ergo                               /* ergonomics class policy */
-);
-
-static jint launchJVM(int margc, char** margv) {
-   void* libjli = dlopen("libjli.so", RTLD_LAZY | RTLD_GLOBAL);
-
-   // Boardwalk: silence
-   // LOGD("JLI lib = %x", (int)libjli);
-   if (NULL == libjli) {
-       LOGE("JLI lib = NULL: %s", dlerror());
-       return -1;
-   }
-   LOGD("Found JLI lib");
-
-   JLI_Launch_func *pJLI_Launch =
-          (JLI_Launch_func *)dlsym(libjli, "JLI_Launch");
-    // Boardwalk: silence
-    // LOGD("JLI_Launch = 0x%x", *(int*)&pJLI_Launch);
-
-   if (NULL == pJLI_Launch) {
-       LOGE("JLI_Launch = NULL");
-       return -1;
-   }
-
-   LOGD("Calling JLI_Launch");
-
-   return pJLI_Launch(margc, margv,
-                   0, NULL, // sizeof(const_jargs) / sizeof(char *), const_jargs,
-                   0, NULL, // sizeof(const_appclasspath) / sizeof(char *), const_appclasspath,
-                   FULL_VERSION,
-                   DOT_VERSION,
-                   *margv, // (const_progname != NULL) ? const_progname : *margv,
-                   *margv, // (const_launcher != NULL) ? const_launcher : *margv,
-                   (const_jargs != NULL) ? JNI_TRUE : JNI_FALSE,
-                   const_cpwildcard, const_javaw, const_ergo_class);
-/*
-   return pJLI_Launch(argc, argv, 
-       0, NULL, 0, NULL, FULL_VERSION,
-       DOT_VERSION, *margv, *margv, // "java", "openjdk",
-       JNI_FALSE, JNI_TRUE, JNI_FALSE, 0);
-*/
+bool load_vm_library(JNIEnv *env, jstring path, jvm_library_t* library) {
+    void* handle;
+    if(path) {
+        const char* jvm_path = (*env)->GetStringUTFChars(env, path, NULL);
+        if(jvm_path == NULL) {
+            printf("failed to get UTF contents of jvm_path\n");
+            return false;
+        }
+        handle = dlopen(jvm_path, RTLD_NOW);
+        (*env)->ReleaseStringUTFChars(env, path, jvm_path);
+    } else {
+        handle = dlopen("libjvm.so", RTLD_NOW);
+    }
+    if(!handle) {
+        printf("failed to load JVM: %s\n", dlerror());
+        return false;
+    }
+    library->JNI_CreateJavaVM = dlsym(handle, "JNI_CreateJavaVM");
+    if(!library->JNI_CreateJavaVM) {
+        printf("failed to load JVM: %s\n", dlerror());
+        dlclose(handle);
+        return false;
+    }
+    library->handle = handle;
+    return true;
 }
 
-/*
- * Class:     com_oracle_dalvik_VMLauncher
- * Method:    launchJVM
- * Signature: ([Ljava/lang/String;)I
- */
-JNIEXPORT jint JNICALL Java_com_oracle_dalvik_VMLauncher_launchJVM(JNIEnv *env, jclass clazz, jobjectArray argsArray) {
-#ifdef TRY_SIG2JVM
-  void* libjvm = dlopen("libjvm.so", RTLD_LAZY | RTLD_GLOBAL);
-  if (NULL == libjvm) {
-      LOGE("JVM lib = NULL: %s", dlerror());
-      return -1;
-  }
-  JVM_handle_linux_signal = dlsym(libjvm, "JVM_handle_linux_signal");
-#endif
+void unload_vm_library(jvm_library_t* library) {
+    dlclose(library->handle);
+}
 
-   jint res = 0;
-   // int i;
-   //Prepare the signal trapper
-   struct sigaction catcher;
-   memset(&catcher,0,sizeof(sigaction));
-   catcher.sa_sigaction = android_sigaction;
-   catcher.sa_flags = SA_SIGINFO|SA_RESTART;
-   // SA_RESETHAND;
-#define CATCHSIG(X) sigaction(X, &catcher, &old_sa[X])
-    CATCHSIG(SIGILL);
-    //CATCHSIG(SIGABRT);
-    CATCHSIG(SIGBUS);
-    CATCHSIG(SIGFPE);
-#ifdef TRY_SIG2JVM
-    CATCHSIG(SIGSEGV);
-#endif
-    CATCHSIG(SIGSTKFLT);
-    CATCHSIG(SIGPIPE);
-    CATCHSIG(SIGXFSZ);
-   //Signal trapper ready
+bool transfer_arg(JNIEnv* env, jstring argJString, const char** argStringp) {
+    jsize strlen = (*env)->GetStringUTFLength(env, argJString);
+    char* argString = malloc((strlen + 1) * sizeof(char));
+    if(argString == NULL) return false;
+    (*env)->GetStringUTFRegion(env, argJString, 0, strlen, argString);
+    // Add null terminator just in case if the implementation does not null terminate strings
+    argString[strlen] = 0;
+    *argStringp = argString;
+    return true;
+}
 
-    // Save dalvik JNIEnv pointer for JVM launch thread
-    pojav_environ->dalvikJNIEnvPtr_ANDROID = env;
+void free_vm_args(JavaVMOption* args, jsize length) {
+    for(jsize i = 0; i < length; i++) {
+        if(args[i].optionString != NULL) free((void*)args[i].optionString);
+    }
+}
 
-    if (argsArray == NULL) {
-        LOGE("Args array null, returning");
-        //handle error
-        return 0;
+static void exceptionCheck(JNIEnv *env) {
+    if(!(*env)->ExceptionCheck(env)) return;
+    (*env)->ExceptionDescribe(env);
+    (*env)->ExceptionClear(env);
+}
+
+bool initialize_vm_args(JNIEnv* env, jobjectArray vmArgs, jsize length, JavaVMOption* args) {
+    char* failureReason;
+    if(args == NULL) {
+        failureReason = "Out of memory (JavaVMOption* allocation)";
+        goto fail;
+    }
+    if((*env)->PushLocalFrame(env, length) < 0) {
+        exceptionCheck(env);
+        failureReason = "Out of memory (local frame allocation)";
+        goto fail;
     }
 
-    int argc = (*env)->GetArrayLength(env, argsArray);
-    char **argv = convert_to_char_array(env, argsArray);
+    for(jsize i = 0; i < length; i++) {
+        jstring argJString = (*env)->GetObjectArrayElement(env, vmArgs, i);
+        if(argJString == NULL) {
+            exceptionCheck(env);
+            failureReason = "One of the argument strings is NULL";
+            goto fail_frame;
+        }
+        if(!transfer_arg(env, argJString, &(args[i].optionString))) {
+            exceptionCheck(env);
+            failureReason = "Argument string transfer failed";
+            goto fail_frame;
+        }
+    }
+    (*env)->PopLocalFrame(env, NULL);
+    return true;
+    fail_frame:
+    (*env)->PopLocalFrame(env, NULL);
+    fail:
+    free_vm_args(args, length);
+    printf("%s\n",failureReason);
+    return false;
+}
 
-    LOGD("Done processing args");
+bool transfer_app_args(JNIEnv* host_env, JNIEnv* guest_env, jobjectArray hostArray, jobjectArray guestArray, jsize length) {
+    char* failureReason;
+    if((*host_env)->PushLocalFrame(host_env, length) < 0) {
+        failureReason = "Out of memory (host local frame allocation)";
+        goto fail;
+    }
+    if((*guest_env)->PushLocalFrame(guest_env, length) < 0) {
+        failureReason = "Out of memory (guest local frame allocation)";
+        goto fail1;
+    }
+    for(jsize i = 0; i < length; i++) {
+        jstring hostEntry = (*host_env)->GetObjectArrayElement(host_env, hostArray, i);
+        // All entries are initialized to null by default, so we can just skip null host entries
+        if(hostEntry == NULL) continue;
+        const char* hostEntryUTF = (*host_env)->GetStringUTFChars(host_env, hostEntry, NULL);
+        if(hostEntryUTF == NULL) {
+            failureReason = "Unable to get UTF contents of application argument string";
+            goto fail2;
+        }
+        jstring guestEntry = (*guest_env)->NewStringUTF(guest_env, hostEntryUTF);
+        if(guestEntry == NULL) {
+            failureReason = "Out of memory (guest argument string allocation)";
+            goto fail2;
+        }
+        (*guest_env)->SetObjectArrayElement(guest_env, guestArray, i, guestEntry);
+    }
+    (*guest_env)->PopLocalFrame(guest_env, NULL);
+    (*host_env)->PopLocalFrame(host_env, NULL);
+    return true;
+    fail2:
+    exceptionCheck(guest_env);
+    (*guest_env)->PopLocalFrame(guest_env, NULL);
+    fail1:
+    exceptionCheck(guest_env);
+    (*host_env)->PopLocalFrame(host_env, NULL);
+    fail:
+    exceptionCheck(guest_env);
+    printf("%s\n", failureReason);
+    return false;
+}
 
-    res = launchJVM(argc, argv);
+#define CLASSPATH_ARG "-Djava.class.path="
+#define CLASSPATH_ARG_LEN 18
 
-    LOGD("Going to free args");
-    free_char_array(env, argsArray, argv);
+void setup_classpath(JNIEnv* env, jstring jclasspath, jsize length, char* classpath) {
+    memcpy(classpath, CLASSPATH_ARG, CLASSPATH_ARG_LEN);
+    (*env)->GetStringUTFRegion(env, jclasspath, 0, length, &classpath[CLASSPATH_ARG_LEN]);
+}
 
-    LOGD("Free done");
+void vmh_exit(int result) {
+    printf("VM_EXIT %i\n", result);
+}
 
-    return res;
+#define EXIT(x) {    \
+printf("%s\n", x);   \
+goto exit;           \
+}
+
+#define EXITVM(x) {                           \
+printf("%s\n", x);                            \
+exceptionCheck(guest_env);                    \
+goto exit_destroyvm;                          \
+}
+
+JNIEXPORT void JNICALL Java_com_oracle_dalvik_VMLauncher_launchJVM(JNIEnv *env,
+                                                                   __attribute__((unused)) jclass clazz,
+                                                                   jstring vmPath,
+                                                                   jobjectArray vmArgs,
+                                                                   jstring classpath,
+                                                                   jstring mainClass,
+                                                                   jobjectArray appArgs) {
+    jvm_library_t library;
+    if(!load_vm_library(env, vmPath, &library)) return;
+
+
+
+    jsize inSize = (*env)->GetArrayLength(env, vmArgs);
+    jsize realSize = inSize + 2;
+    JavaVMOption options[realSize];
+
+    jsize classpathLength = (*env)->GetStringUTFLength(env, classpath);
+    size_t totalLength = CLASSPATH_ARG_LEN + classpathLength + 1;
+    char classpath_c[totalLength];
+    setup_classpath(env, classpath, classpathLength, classpath_c);
+    classpath_c[totalLength - 1] = 0; // Null terminate in case if setup_classpath doesn't do it.
+    options[inSize].optionString = classpath_c;
+
+    const char* cmainClass = (*env)->GetStringUTFChars(env, mainClass, NULL);
+    if(cmainClass == NULL) EXIT("Failed to get classname string")
+
+    if(!initialize_vm_args(env, vmArgs, inSize, options)) goto exit;
+
+    options[inSize+1].optionString = "exit";
+    options[inSize+1].extraInfo = vmh_exit;
+
+    JavaVMInitArgs initArgs;
+    initArgs.options = options;
+    initArgs.nOptions = realSize;
+    initArgs.ignoreUnrecognized = JNI_FALSE;
+    initArgs.version = JNI_VERSION_1_6;
+
+    for(jsize i = 0; i < initArgs.nOptions; i++) {
+        printf("%s\n", initArgs.options[i].optionString);
+    }
+
+    JavaVM *guest_jvm;
+    JNIEnv *guest_env;
+    jint res = library.JNI_CreateJavaVM(&guest_jvm, &guest_env, (void*)&initArgs);
+    free_vm_args(options, inSize);
+    if(res < 0) EXIT("Failed to initialize the Java VM")
+
+    jclass guest_main_class = (*guest_env)->FindClass(guest_env, cmainClass);
+    (*env)->ReleaseStringUTFChars(env, mainClass, cmainClass);
+    if(guest_main_class == NULL) EXITVM("Failed to locate main class")
+
+    jmethodID guest_main_method = (*guest_env)->GetStaticMethodID(guest_env, guest_main_class, "main", "([Ljava/lang/String;)V");
+    if(guest_main_method == NULL) EXITVM("Failed to locate main method")
+
+    jclass guest_string_class = (*guest_env)->FindClass(guest_env, "java/lang/String");
+    if(guest_string_class == NULL) EXITVM("Failed to locate String class")
+
+    jsize appArgsCount = (*env)->GetArrayLength(env, appArgs);
+    jobjectArray guestArgsArray = (*guest_env)->NewObjectArray(guest_env, appArgsCount, guest_string_class, NULL);
+    if(!transfer_app_args(env, guest_env, appArgs, guestArgsArray, appArgsCount)) goto exit_destroyvm;
+
+    (*guest_env)->CallStaticVoidMethod(guest_env, guest_main_class, guest_main_method, guestArgsArray);
+    exceptionCheck(guest_env);
+    exit_destroyvm:
+    (*guest_jvm)->DetachCurrentThread(guest_jvm);
+    (*guest_jvm)->DestroyJavaVM(guest_jvm);
+    exit:
+    unload_vm_library(&library);
 }

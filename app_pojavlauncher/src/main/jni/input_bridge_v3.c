@@ -32,6 +32,7 @@
 #define EVENT_TYPE_SCROLL 1007
 #define EVENT_TYPE_WINDOW_SIZE 1008
 
+
 jint (*orig_ProcessImpl_forkAndExec)(JNIEnv *env, jobject process, jint mode, jbyteArray helperpath, jbyteArray prog, jbyteArray argBlock, jint argc, jbyteArray envBlock, jint envc, jbyteArray dir, jintArray std_fds, jboolean redirectErrorStream);
 
 static void registerFunctions(JNIEnv *env);
@@ -344,9 +345,10 @@ JNIEXPORT jstring JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeClipboard(JNI
 #ifdef DEBUG
     LOGD("Debug: Clipboard access is going on\n", pojav_environ->isUseStackQueueCall);
 #endif
+#define dalvikEnv (scope.env)
+    scope_t scope;
+    scopeAttach(pojav_environ->dalvikJavaVMPtr, &scope);
 
-    JNIEnv *dalvikEnv;
-    (*pojav_environ->dalvikJavaVMPtr)->AttachCurrentThread(pojav_environ->dalvikJavaVMPtr, &dalvikEnv, NULL);
     assert(dalvikEnv != NULL);
     assert(pojav_environ->bridgeClazz != NULL);
     
@@ -365,8 +367,9 @@ JNIEXPORT jstring JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeClipboard(JNI
         (*dalvikEnv)->DeleteLocalRef(dalvikEnv, copyDst);    
         (*env)->ReleaseByteArrayElements(env, copySrc, (jbyte *)copySrcC, 0);
     }
-    (*pojav_environ->dalvikJavaVMPtr)->DetachCurrentThread(pojav_environ->dalvikJavaVMPtr);
+    scopeDetach(pojav_environ->dalvikJavaVMPtr, &scope);
     return pasteDst;
+#undef dalvikEnv
 }
 
 JNIEXPORT jboolean JNICALL JavaCritical_org_lwjgl_glfw_CallbackBridge_nativeSetInputReady(jboolean inputReady) {
@@ -383,11 +386,13 @@ JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSetInputRead
 }
 
 JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSetGrabbing(__attribute__((unused)) JNIEnv* env, __attribute__((unused)) jclass clazz, jboolean grabbing) {
-    JNIEnv *dalvikEnv;
-    (*pojav_environ->dalvikJavaVMPtr)->AttachCurrentThread(pojav_environ->dalvikJavaVMPtr, &dalvikEnv, NULL);
+#define dalvikEnv (scope.env)
+    scope_t scope;
+    scopeAttach(pojav_environ->dalvikJavaVMPtr, &scope);
     (*dalvikEnv)->CallStaticVoidMethod(dalvikEnv, pojav_environ->bridgeClazz, pojav_environ->method_onGrabStateChanged, grabbing);
-    (*pojav_environ->dalvikJavaVMPtr)->DetachCurrentThread(pojav_environ->dalvikJavaVMPtr);
+    scopeDetach(pojav_environ->dalvikJavaVMPtr, &scope);
     pojav_environ->isGrabbing = grabbing;
+#undef dalvikEnv
 }
 
 jboolean critical_send_char(jchar codepoint) {

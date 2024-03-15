@@ -273,7 +273,14 @@ public class JREUtils {
         // return ldLibraryPath;
     }
 
-    public static void launchJavaVM(final AppCompatActivity activity, final Runtime runtime, File gameDirectory, final List<String> JVMArgs, final String userArgsString) throws Throwable {
+    public static void launchJavaVM(final AppCompatActivity activity,
+                                    final Runtime runtime,
+                                    File gameDirectory,
+                                    final List<String> JVMArgs,
+                                    final String classpath,
+                                    final String mainClass,
+                                    final String[] appArgs,
+                                    final String userArgsString) throws Throwable {
         String runtimeHome = MultiRTUtils.getRuntimeHome(runtime.name).getAbsolutePath();
 
         JREUtils.relocateLibPath(runtime, runtimeHome);
@@ -306,17 +313,9 @@ public class JREUtils {
         initJavaRuntime(runtimeHome);
         setupExitTrap(activity.getApplication());
         chdir(gameDirectory == null ? Tools.DIR_GAME_NEW : gameDirectory.getAbsolutePath());
-        userArgs.add(0,"java"); //argv[0] is the program name according to C standard.
 
-        final int exitCode = VMLauncher.launchJVM(userArgs.toArray(new String[0]));
-        Logger.appendToLog("Java Exit code: " + exitCode);
-        if (exitCode != 0) {
-            LifecycleAwareAlertDialog.DialogCreator dialogCreator = (dialog, builder)->
-                    builder.setMessage(activity.getString(R.string.mcn_exit_title, exitCode))
-                    .setPositiveButton(R.string.main_share_logs, (dialogInterface, which)-> shareLog(activity));
+        VMLauncher.launchJVM(jvmLibraryPath+"/libjvm.so", userArgs.toArray(new String[0]), classpath, mainClass.replace('.', '/'), appArgs);
 
-            LifecycleAwareAlertDialog.haltOnDialog(activity.getLifecycle(), activity, dialogCreator);
-        }
         MainActivity.fullyExit();
     }
 

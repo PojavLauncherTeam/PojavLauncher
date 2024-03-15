@@ -13,6 +13,19 @@ typedef void (*android_update_LD_LIBRARY_PATH_t)(char*);
 
 long shared_awt_surface;
 
+bool scopeAttach(JavaVM* vm, scope_t *scope) {
+	jint err = (*vm)->GetEnv(vm, (void**)&scope->env, JNI_VERSION_1_6);
+	if(err == JNI_EDETACHED) {
+		err = (*vm)->AttachCurrentThread(vm, &scope->env, NULL);
+		if(err == JNI_OK) scope->detach = true;
+	}
+	return err == JNI_OK;
+}
+
+void scopeDetach(JavaVM* vm, scope_t *scope) {
+	if(scope->detach) (*vm)->DetachCurrentThread(vm);
+}
+
 char** convert_to_char_array(JNIEnv *env, jobjectArray jstringArray) {
 	int num_rows = (*env)->GetArrayLength(env, jstringArray);
 	char **cArray = (char **) malloc(num_rows * sizeof(char*));
