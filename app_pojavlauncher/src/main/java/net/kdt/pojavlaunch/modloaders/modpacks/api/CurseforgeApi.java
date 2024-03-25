@@ -208,6 +208,9 @@ public class CurseforgeApi implements ModpackApi{
             case "forge":
                 modLoaderTypeInt = ModLoader.MOD_LOADER_FORGE;
                 break;
+            case "neoforge":
+                modLoaderTypeInt = ModLoader.MOD_LOADER_NEOFORGE;
+                break;
             case "fabric":
                 modLoaderTypeInt = ModLoader.MOD_LOADER_FABRIC;
                 break;
