@@ -5,6 +5,8 @@ import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import net.kdt.pojavlaunch.*;
+import net.kdt.pojavlaunch.utils.FileUtils;
+
 import java.io.*;
 import com.google.gson.*;
 import android.graphics.Bitmap;
@@ -25,14 +27,14 @@ public class MinecraftAccount {
     public boolean isMicrosoft = false;
     public String msaRefreshToken = "0";
     public String xuid;
-    public String skinFaceBase64;
     public long expiresAt;
+    public String skinFaceBase64;
+    private Bitmap mFaceCache;
     
     void updateSkinFace(String uuid) {
         try {
-            File skinFile = File.createTempFile("skin", ".png", new File(Tools.DIR_DATA, "cache"));
+            File skinFile = getSkinFaceFile(username);
             Tools.downloadFile("https://mc-heads.net/head/" + uuid + "/100", skinFile.getAbsolutePath());
-            skinFaceBase64 = Base64.encodeToString(IOUtils.toByteArray(new FileInputStream(skinFile)), Base64.DEFAULT);
             
             Log.i("SkinLoader", "Update skin face success");
         } catch (IOException e) {
@@ -85,9 +87,6 @@ public class MinecraftAccount {
             if (acc.msaRefreshToken == null) {
                 acc.msaRefreshToken = "0";
             }
-            if (acc.skinFaceBase64 == null) {
-                // acc.updateSkinFace("MHF_Steve");
-            }
             return acc;
         } catch(IOException | JsonSyntaxException e) {
             Log.e(MinecraftAccount.class.getName(), "Caught an exception while loading the profile",e);
@@ -96,11 +95,29 @@ public class MinecraftAccount {
     }
 
     public Bitmap getSkinFace(){
-        if(skinFaceBase64 == null){
-            return null;
+        if(isLocal()) return null;
+
+        File skinFaceFile = getSkinFaceFile(username);
+        if (!skinFaceFile.exists()) {
+            // Legacy version, storing the head inside the json as base 64
+            if(skinFaceBase64 == null) return null;
+            byte[] faceIconBytes = Base64.decode(skinFaceBase64, Base64.DEFAULT);
+            return BitmapFactory.decodeByteArray(faceIconBytes, 0, faceIconBytes.length);
+        } else {
+            if(mFaceCache == null) {
+                mFaceCache = BitmapFactory.decodeFile(skinFaceFile.getAbsolutePath());
+            }
         }
-        byte[] faceIconBytes = Base64.decode(skinFaceBase64, Base64.DEFAULT);
-        return BitmapFactory.decodeByteArray(faceIconBytes, 0, faceIconBytes.length);
+
+        return mFaceCache;
+    }
+
+    public static Bitmap getSkinFace(String username) {
+        return BitmapFactory.decodeFile(getSkinFaceFile(username).getAbsolutePath());
+    }
+
+    private static File getSkinFaceFile(String username) {
+        return new File(Tools.DIR_CACHE, username + ".png");
     }
 
     private static boolean accountExists(String username){
