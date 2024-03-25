@@ -112,6 +112,10 @@ public class MinecraftAccount {
         return mFaceCache;
     }
 
+    public static Bitmap getSkinFace(String username) {
+        return BitmapFactory.decodeFile(getSkinFaceFile(username).getAbsolutePath());
+    }
+
     private static File getSkinFaceFile(String username) {
         return new File(Tools.DIR_CACHE, username + ".png");
     }
