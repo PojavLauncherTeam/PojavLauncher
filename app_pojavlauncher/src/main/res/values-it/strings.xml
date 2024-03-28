@@ -38,12 +38,16 @@
     <string name="mcl_setting_title_use_surface_view">Usa alternate surface rendering</string>
     <string name="mcl_setting_title_ignore_notch">Ignora notch</string>
     <string name="mcl_setting_title_resolution_scaler">Scala Risoluzione</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">Ti permette di diminuire la risoluzione del gioco.100% è la risoluzione  massima.</string>
     <string name="mcl_setting_title_buttonscale">Dimensione controlli</string>
     <string name="mcl_setting_title_mousescale">Dimensioni mouse</string>
+    <string name="mcl_setting_subtitle_mousescale">Cambia la dimensione del mouse virtuale.</string>
     <string name="mcl_setting_title_javaargs">Argomenti di avvio della JVM</string>
     <string name="mcl_setting_subtitle_javaargs">Attenzione, il gioco potrebbe crashare se effettui modifiche senza sapere quello che fai.</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (Tutte le versioni, veloce)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - (tutte le persone, med)</string>
+    <string name="mcl_setting_renderer_angle">ANGLE (Vulkan) - (solo 1.17+,med)</string>
     <string name="mcl_setting_veroption_release">Finale</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Vecchie-alpha</string>
@@ -243,4 +247,6 @@ Accedi almeno una volta su https://minecraft.net/ e riprova.</string>
     <string name="notif_error_occured">Si è verificato un errore</string>
     <string name="notif_error_occured_desc">Clicca per visualizzare più dettagli</string>
     <string name="fabric_dl_only_stable">Mostra solo le versioni stabili</string>
+    <string name="preference_category_java_tweaks">Tweaks Java</string>
+    <string name="preference_category_miscellaneous">Impostazioni varie</string>
 </resources>

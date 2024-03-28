@@ -20,8 +20,10 @@
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_wiki">Viki</string>
     <!-- MCLauncherActivity: Account status -->
     <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_launch_downloading">%s allalaadimine</string>
     <string name="mcl_options">Valikud</string>
     <string name="mcl_option_customcontrol">Kohandatud juhtnupud</string>
     <string name="mcl_setting_title_use_surface_view">Kasuta alternatiivset pinnarenderdust</string>
@@ -31,6 +33,8 @@
     <string name="mcl_setting_title_mousescale">Kursori suurus</string>
     <string name="mcl_setting_category_renderer">Renderdaja</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (kõik versioonid, kiire)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - (kõik versioonid, keskm.)</string>
+    <string name="mcl_setting_renderer_angle">ANGLE (Vulkan) - (ainult 1.17+, keskm.)</string>
     <string name="mcl_setting_veroption_release">Väljalase</string>
     <string name="mcl_setting_veroption_snapshot">Katsetus</string>
     <string name="mcl_setting_veroption_oldalpha">Vana alfa</string>
@@ -48,6 +52,8 @@
     <string name="global_unpacking">%s lahtipakkimine</string>
     <string name="global_error_field_empty">See väli ei tohi olla tühi</string>
     <string name="global_waiting">Ootamine</string>
+    <string name="global_select">Vali</string>
+    <string name="global_retry">Proovi uuesti</string>
     <string name="global_default">Vaikimisi</string>
     <!-- MainActivity: strings -->
     <!-- MainActivity: Control buttons -->
@@ -55,7 +61,13 @@
     <string name="control_debug">Silur</string>
     <string name="control_primary">Vasak</string>
     <string name="control_secondary">Parem</string>
+    <string name="control_shift">◇</string>
     <string name="control_inventory">Kott</string>
+    <string name="control_up">▲</string>
+    <string name="control_left">◀</string>
+    <string name="control_right">▶</string>
+    <string name="control_down">▼</string>
+    <string name="control_jump">⬛</string>
     <string name="control_thirdperson">Keskmine</string>
     <string name="control_listplayers">Mängijad</string>
     <string name="control_mouse">Hiir</string>
@@ -76,6 +88,8 @@
     <string name="customctrl_mapping">Kaardistamine</string>
     <string name="customctrl_orientation">Orientatsioon</string>
     <string name="customctrl_addbutton">Lisa nupp</string>
+    <string name="main_share_logs">Jaga logifaili</string>
+    <string name="main_install_jar_file">Käivita .jar</string>
     <string name="main_play">Mängi</string>
     <string name="autoram_info_msg">Muutmäluks seatud %d MB</string>
     <string name="mcl_setting_check_libraries">Kontrolli teeke pärast allalaadimist</string>
@@ -86,6 +100,7 @@
     <string name="customctrl_swipeable">Viibatav</string>
     <string name="memory_warning_msg">Hetkel saadaolev muutmälu (%d) on madalam kui eraldatud muutmälu (%d), mis võib krahhe põhjustada. Kui mäng jookseb kokku, muuda mälueraldust.</string>
     <string name="mcl_memory_allocation">Mälueraldus</string>
+    <string name="multirt_config_title">Java Runtime\'id</string>
     <string name="multirt_config_add">Lisa uus</string>
     <string name="multirt_title">Runtime-haldur</string>
     <string name="multirt_config_setdefault">Määra vaikimisi</string>
@@ -112,9 +127,36 @@
     <string name="notif_channel_name">Üldine</string>
     <string name="lazy_service_default_title">Pojav esiplaaniteenus</string>
     <string name="notification_terminate">Sundsulge</string>
-    <string name="notification_game_runs">Mäng on käimas!</string>
+    <string name="notification_game_runs">Mäng töötab!</string>
     <string name="folder_dialog_create">Loo</string>
+    <string name="folder_fragment_create">Loo kaust</string>
     <string name="main_login_done">Sisenemine õnnestus</string>
     <string name="main_add_account">Lisa konto</string>
     <string name="create_profile">Loo uus profiil</string>
+    <string name="percent_format">%d%%</string>
+    <string name="customctrl_editor_exit_title">Lahkud?</string>
+    <string name="customctrl_editor_exit_msg">Kas sa oled kindel, et soovid lahkuda?</string>
+    <string name="customctrl_editor_exit">Lahku redaktorist</string>
+    <string name="global_save_and_exit">Salvesta ja välju</string>
+    <string name="global_yes">Jah</string>
+    <string name="global_no">Ei</string>
+    <string name="version_select_hint">Vali versioon</string>
+    <string name="forge_dl_select_version">Vali Forge\'i versioon</string>
+    <string name="fabric_dl_game_version">Minecrafti versioon</string>
+    <string name="fabric_dl_install">Paigalda</string>
+    <string name="modloader_dl_install_fabric">Loo Fabric-profiil</string>
+    <string name="modloader_dl_install_quilt">Loo Quilt-profiil</string>
+    <string name="modloader_dl_install_forge">Loo Forge-profiil</string>
+    <string name="create_profile_vanilla">Loo vanilliprofiil</string>
+    <string name="create_profile_vanilla_like_versions">Vanilli-laadsed versioonid</string>
+    <string name="create_profile_modded_versions">Moditud versioonid</string>
+    <string name="of_dl_select_version">Vali OptiFine\'i versioon</string>
+    <string name="of_dl_progress">%s allalaadimine</string>
+    <string name="create_profile_optifine">Loo OptiFine-profiil</string>
+    <string name="generic_install">Paigalda</string>
+    <string name="generic_apply">Rakenda</string>
+    <string name="modpack_install_notification_title">Pojav modipakipaigaldaja</string>
+    <string name="modpack_install_button">Loo modipakiprofiil</string>
+    <string name="preference_category_java_tweaks">Java trikid</string>
+    <string name="preference_category_miscellaneous">Mitmesugused seaded</string>
 </resources>

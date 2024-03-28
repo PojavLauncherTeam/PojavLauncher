@@ -145,6 +145,7 @@
     <string name="customctrl_passthru">Převést dotyk</string>
     <string name="customctrl_swipeable">Povolit přejíždění</string>
     <string name="customctrl_forward_lock">Uzamknout chození vpřed</string>
+    <string name="customctrl_absolute_tracking">Absolutní následování prstu</string>
     <string name="memory_warning_msg">Aktuální množství volné RAM (%d) je nižší než přidělená RAM (%d), což může vést k pádu. Spadne-li hra, změňte alokaci.</string>
     <string name="mcl_memory_allocation">Přidělení paměti</string>
     <string name="mcl_memory_allocation_subtitle">Určuje množství paměti přidělené Minecraftu.</string>
@@ -297,4 +298,35 @@
     <string name="notif_error_occured">Došlo k chybě</string>
     <string name="notif_error_occured_desc">Klikněte pro zobrazení podrobností</string>
     <string name="fabric_dl_only_stable">Zobraziti jen stabilní verze</string>
+    <string name="dl_tampered_manifest_title">Varování ověření souborů</string>
+    <string name="dl_tampered_manifest"><![CDATA[Manifest verze hry v zrcadlovém serveru nesouhlasí s oficiálním manifestem Mojangu, čili může býti zmanipulován.<br/>
+        <b>Toto jest nebezpečné. Budete-li pokračovati, vaše osobní informace mohou býti ohroženy.</b><br/>
+        Chcete-li stále užíti ten zrcadlový server, stiskněte \„Vypnouti manifestové ověřování\” a skuste znovu.<br/>
+        Chcete-li užívati oficiální zdroj stahování, stiskněte \„Přepnouti na oficiální stránku\” a skuste znovu.<br/>]]></string>
+    <string name="dl_turn_off_manifest_checks">Vypnouti manifestové ověřování</string>
+    <string name="dl_switch_to_official_site">Přepnouti na oficiální stránku</string>
+    <string name="preference_download_source_title">Zdroj stahování her</string>
+    <string name="preference_download_source_description">Veberte zrcadlový server ke stažení namísto oficiálního serveru</string>
+    <string name="preference_verify_manifest_title">Ověřit manifest verze hry</string>
+    <string name="preference_verify_manifest_description">Je-li zapnuto, spouštěč ověří manifest verze hry spolu s knihovnami.</string>
+    <string name="notif_download_finished">Hra připravena ke spuštění</string>
+    <string name="notif_download_finished_desc">Klikněte zde pro spuštění!</string>
+    <string name="preference_category_gestures">Gesta</string>
+    <string name="preference_category_buttons">Tlačítka</string>
+    <string name="preference_category_experimental_settings">Experimentální hokusy pokusy</string>
+    <string name="preference_category_java_tweaks">Vyladění Javy</string>
+    <string name="preference_category_main_categories">Kategorie</string>
+    <string name="preference_category_miscellaneous">Jiná nastavení</string>
+    <string name="preference_category_video">Nastavení videa</string>
+    <string name="notification_permission_dialog_title">Žádost o oprávnění</string>
+    <string name="notification_permission_dialog_text">PojavLauncher vyžaduje oprávnění k odesílání oznámení, aby se zabránilo zastavení stahování hry/modpacku při opuštění aplikace. Bez tohoto oprávnění může Android přerušit vaše stahování, když přepnete PojavLauncher do režimu na pozadí.</string>
+    <string name="notification_permission_toast">Později si můžete změnit svůj názor v nastavení</string>
+    <string name="preference_ask_for_notification_title">Povolit oznámení</string>
+    <string name="preference_ask_for_notification_description">Kliknutím znovu požádáte o oprávnění pro posílání oznámení, které je vyžadováno pro správné fungování stahování hry/modpacku na pozadí.</string>
+    <string name="preference_vsync_in_zink_title">Povolit V-Sync se Zink</string>
+    <string name="preference_vsync_in_zink_description">Umožňuje spouštěči používat interní systémová API pro povolení V-Sync pro Zink. Vypněte tuto možnost, pokud váš spouštěč náhle po aktualizaci systému spadne se Zink.</string>
+    <string name="exception_failed_to_unpack_jre17">Instalace JRE 17 selhala</string>
+    <string name="newdl_starting">Čtení metadat hry…</string>
+    <string name="newdl_downloading_metadata">Stahování metadat hry (%s)</string>
+    <string name="newdl_downloading_game_files">Stahování souborů hry… (%d/%d, %.2f MB)</string>
 </resources>

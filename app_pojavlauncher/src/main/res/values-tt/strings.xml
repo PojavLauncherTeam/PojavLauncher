@@ -153,4 +153,6 @@
     <string name="fabric_dl_install">Утырту</string>
     <string name="of_dl_progress">%s йөкләтүе</string>
     <string name="generic_install">Утырту</string>
+    <string name="preference_category_java_tweaks">Java төзәтмәләре</string>
+    <string name="preference_category_miscellaneous">Башка көйләүләр</string>
 </resources>

@@ -26,7 +26,7 @@
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_wiki">Documentação</string>
+    <string name="mcl_tab_wiki">Wiki</string>
     <!-- MCLauncherActivity: Account status -->
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_launch_cleancache">Limpando arquivos em cache</string>
@@ -36,7 +36,7 @@
     <string name="mcl_options">Opções</string>
     <string name="mcl_option_customcontrol">Controles personalizados</string>
     <string name="mcl_setting_title_use_surface_view">Usar renderização de superfície alternativa</string>
-    <string name="mcl_setting_subtitle_use_surface_view">Pode ajudar no desempenho em cenários de GPU limitada.</string>
+    <string name="mcl_setting_subtitle_use_surface_view">Pode ajudar no desempenho em caso de limitações na GPU.</string>
     <string name="mcl_setting_title_ignore_notch">Ignorar entalhe</string>
     <string name="mcl_setting_subtitle_ignore_notch">Ignora o entalhe e estende a tela por baixo.\nGarante uma experiência mais envolvente.</string>
     <string name="mcl_setting_title_resolution_scaler">Escala de resolução</string>
@@ -123,10 +123,10 @@
     <string name="customctrl_button_opacity">Opacidade do botão</string>
     <string name="customctrl_addbutton">Adicionar botão</string>
     <string name="customctrl_addbutton_drawer">Adicionar botão gaveta</string>
-    <string name="customctrl_addbutton_joystick">Adicionar joystick</string>
+    <string name="customctrl_addbutton_joystick">Adicionar analógico</string>
     <string name="customctrl_addsubbutton">Adicionar sub-botão</string>
-    <string name="customctrl_selectdefault">Selecionar controlmap padrão</string>
-    <string name="customctrl_export">Exportar controlmap</string>
+    <string name="customctrl_selectdefault">Selecionar controle padrão</string>
+    <string name="customctrl_export">Exportar controles</string>
     <string name="main_share_logs">Compartilhar arquivo de registro</string>
     <string name="main_install_jar_file">Executar um arquivo .jar</string>
     <string name="main_play">Jogar</string>
@@ -141,10 +141,11 @@
     <string name="mcl_disable_swap_hand">Desativar toque duplo para trocar as mãos</string>
     <string name="mcl_disable_swap_hand_subtitle">Desativa o toque duplo em um item da hotbar para trocá-lo na segunda mão.</string>
     <string name="mcl_setting_title_mousespeed">Velocidade do mouse</string>
-    <string name="mcl_setting_subtitle_mousespeed">Alterar a velocidade do mouse virtual.</string>
+    <string name="mcl_setting_subtitle_mousespeed">Altera a velocidade do mouse virtual.</string>
     <string name="customctrl_passthru">Mouse pode atravessar</string>
     <string name="customctrl_swipeable">Deslizável</string>
-    <string name="customctrl_forward_lock">Bloqueio para frente</string>
+    <string name="customctrl_forward_lock">Trava para correr</string>
+    <string name="customctrl_absolute_tracking">Movimento absoluto</string>
     <string name="memory_warning_msg">A quantidade atual de RAM livre (%d) é menor que a RAM alocada (%d), no qual pode causar falhas. Altere a quantidade se o jogo apresentar alguma falha.</string>
     <string name="mcl_memory_allocation">Alocação de memória</string>
     <string name="mcl_memory_allocation_subtitle">Controla o quanto de RAM será usado pelo Minecraft.</string>
@@ -203,13 +204,13 @@
     <string name="arc_capes_title">Capas da Cosmetica</string>
     <string name="arc_capes_desc">Ativa capas da Cosmetica (anteriormente Arc). Para mais informações visite https://cosmetica.cc. Requer OptiFine.</string>
     <string name="notif_channel_name">Geral</string>
-    <string name="lazy_service_default_title">Serviço de primeiro plano</string>
+    <string name="lazy_service_default_title">Serviço em primeiro plano</string>
     <string name="mcl_setting_veroption_installed">Instalado</string>
-    <string name="use_global_default">Use o padrão global</string>
+    <string name="use_global_default">(Usar padrão global)</string>
     <string name="default_control">Controle padrão</string>
-    <string name="progresslayout_tasks_in_progress">Tarefa em andamento</string>
-    <string name="notification_terminate">terminar</string>
-    <string name="notification_game_runs">O jogo está sendo executado!</string>
+    <string name="progresslayout_tasks_in_progress">%d tarefas em andamento</string>
+    <string name="notification_terminate">Encerrar</string>
+    <string name="notification_game_runs">O jogo está em execução!</string>
     <string name="folder_dialog_create">Criar</string>
     <string name="folder_dialog_insert_name">Insira o novo nome da pasta</string>
     <string name="folder_fragment_create">Criar pasta</string>
@@ -227,7 +228,7 @@
     <string name="xerr_not_available">Xbox Live não está disponível em seu país</string>
     <string name="preference_enable_gyro_title">Habilitar controles do gyrocópio</string>
     <string name="preference_enable_gyro_description">Habilitar isto permitirá que você visualize o jogo girando o seu telefone.</string>
-    <string name="preference_gyro_sensitivity_title">Sensibilidade de controles do Giroscópio</string>
+    <string name="preference_gyro_sensitivity_title">Sensibilidade de controles do giroscópio</string>
     <string name="preference_gyro_sensitivity_description">Ajustar a sensibilidade dos controles do giroscópio.</string>
     <string name="toast_turn_on_gyro">Ative os controles giroscópio primeiro para usar isto!</string>
     <string name="preference_gyro_sample_rate_title">Taxa de amostragem Giroscópio</string>
@@ -237,7 +238,7 @@
     <string name="mcl_setting_title_buttonallcaps">Use apenas letras maiúsculas nos rótulos do botão</string>
     <string name="mcl_setting_subtitle_buttonallcaps">Desative isso se você quiser usar letras minúsculas em seus controles.</string>
     <string name="create_profile">Criar novo perfil</string>
-    <string name="preference_shader_dump_title">Habilitar dumping por shader</string>
+    <string name="preference_shader_dump_title">Habilitar despejo de shader</string>
     <string name="preference_shader_dump_description">Registrar shaders convertidos no arquivo de registro.</string>
     <string name="percent_format">%d%%</string>
     <string name="customctrl_editor_exit_title">Saindo?</string>
@@ -269,7 +270,7 @@
     <string name="modloader_dl_install_quilt">Criar perfil Quilt</string>
     <string name="modloader_dl_install_forge">Criar perfil Forge</string>
     <string name="create_profile_vanilla">Criar perfil vanilla</string>
-    <string name="create_profile_vanilla_like_versions">versões Vanilla-like</string>
+    <string name="create_profile_vanilla_like_versions">Versões vanilla</string>
     <string name="create_profile_modded_versions">Versões modificadas</string>
     <string name="fabric_dl_loader_title">Selecione as versões</string>
     <string name="of_dl_select_version">Selecione a versão do OptiFine</string>
@@ -277,8 +278,8 @@
     <string name="of_dl_progress">Baixando %s</string>
     <string name="create_profile_optifine">Criar perfil OptiFine</string>
     <string name="hint_search_modpack">Procurar por modpacks</string>
-    <string name="preference_vulkan_driver_system_title">Use o driver Vulkan do sistema</string>
-    <string name="preference_vulkan_driver_system_description">Force o inicializador a usar o driver Vulkan do sistema em vez do Turnip nas GPUs Adreno. Afeta apenas Zink e mods que usam Vulkan.</string>
+    <string name="preference_vulkan_driver_system_title">Usar driver Vulkan do sistema</string>
+    <string name="preference_vulkan_driver_system_description">Forçar o launcher à usar o driver Vulkan do sistema em vez do Turnip em GPUs Adreno. Afeta apenas Zink e mods que utilizam Vulkan.</string>
     <string name="generic_install">Instalar</string>
     <string name="generic_apply">Aplicar</string>
     <string name="search_modpack_no_result">Nenhum modpacks encontrado</string>
@@ -297,4 +298,35 @@
     <string name="notif_error_occured">Ocorreu um erro</string>
     <string name="notif_error_occured_desc">Clique para mais detalhes</string>
     <string name="fabric_dl_only_stable">Mostrar apenas versões estáveis</string>
+    <string name="dl_tampered_manifest_title">Alerta de verificação de arquivo</string>
+    <string name="dl_tampered_manifest"><![CDATA[O manifesto da versão do jogo da fonte alternativa não corresponde com o manifesto oficial da Mojang, o quê significa que pode ter sido modificado.<br/>
+        <b>Isto não é seguro. Suas informações pessoais podem estar em risco se você continuar.</b><br/>
+        Se você ainda quiser usar esta fonte, pressione \"Desativar verificação de manifesto\" e inicie o download novamente.<br/>
+        Se você quer usar a fonte de download oficial, pressione \"Mudar para servidor oficial\" e inicie o download novamente.<br/>]]></string>
+    <string name="dl_turn_off_manifest_checks">Desativar verificação de manifesto</string>
+    <string name="dl_switch_to_official_site">Mudar para servidor oficial</string>
+    <string name="preference_download_source_title">Fonte de download do jogo</string>
+    <string name="preference_download_source_description">Selecione uma fonte de download alternativa em vez de usar o servidor oficial de download</string>
+    <string name="preference_verify_manifest_title">Verificar manifesto da versão do jogo</string>
+    <string name="preference_verify_manifest_description">Quando ativado, o launcher verificará o manifesto da versão do jogo com as bibliotecas.</string>
+    <string name="notif_download_finished">O jogo está pronto para iniciar</string>
+    <string name="notif_download_finished_desc">Clique aqui para iniciar!</string>
+    <string name="preference_category_gestures">Gestos</string>
+    <string name="preference_category_buttons">Botões</string>
+    <string name="preference_category_experimental_settings">Opções experimentais</string>
+    <string name="preference_category_java_tweaks">Ajustes do Java</string>
+    <string name="preference_category_main_categories">Categorias</string>
+    <string name="preference_category_miscellaneous">Configurações diversas</string>
+    <string name="preference_category_video">Configurações de vídeo</string>
+    <string name="notification_permission_dialog_title">Solicitação de permissão</string>
+    <string name="notification_permission_dialog_text">O PojavLauncher requer a permissão de mandar notificações para impedir que o download do jogo/modpack pare quando você sair do aplicativo. Sem essa permissão, o Android pode cancelar seus downloads quando você colocar o PojavLauncher em segundo plano.</string>
+    <string name="notification_permission_toast">Você sempre pode mudar de ideia mais tarde entrando em Configurações</string>
+    <string name="preference_ask_for_notification_title">Permitir notificações</string>
+    <string name="preference_ask_for_notification_description">Clique para solicitar novamente a permissão de notificação necessária para que os downloads em segundo plano de jogo/modpack funcionem corretamente.</string>
+    <string name="preference_vsync_in_zink_title">Permitir V-Sync com Zink</string>
+    <string name="preference_vsync_in_zink_description">Permite o launcher usar as APIs de sistema interno para ativar V-Sync para o Zink. Desabilite isto caso seu launcher tiver problemas com o Zink depois de uma atualização de sistema.</string>
+    <string name="exception_failed_to_unpack_jre17">Falha ao instalar o JRE 17</string>
+    <string name="newdl_starting">Lendo metadados do jogo…</string>
+    <string name="newdl_downloading_metadata">Baixando metadados do jogo (%s)</string>
+    <string name="newdl_downloading_game_files">Baixando arquivos do jogo… (%d/%d, %.2f MB)</string>
 </resources>

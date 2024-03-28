@@ -70,7 +70,12 @@
     <string name="control_debug">Nyahpepijat</string>
     <string name="control_primary">Pri</string>
     <string name="control_secondary">Sec</string>
+    <string name="control_shift">◇</string>
     <string name="control_inventory">Inv</string>
+    <string name="control_up">▲</string>
+    <string name="control_left">◀</string>
+    <string name="control_right">▶</string>
+    <string name="control_down">▼</string>
     <string name="control_thirdperson">3rd</string>
     <string name="control_listplayers">Tab</string>
     <string name="control_mouse">Tetikus</string>
@@ -136,4 +141,5 @@
     <string name="progresslayout_tasks_in_progress">%d tugas sedang dijalankan</string>
     <string name="notification_terminate">Tamatkan</string>
     <string name="of_dl_progress">Memuat turun %s</string>
+    <string name="preference_category_miscellaneous">Tetapan lain-lain</string>
 </resources>

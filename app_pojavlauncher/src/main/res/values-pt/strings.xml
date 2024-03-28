@@ -36,18 +36,25 @@
     <string name="mcl_options">Opções</string>
     <string name="mcl_option_customcontrol">Controlos personalizados</string>
     <string name="mcl_setting_title_use_surface_view">Usar renderização de superfície alternada</string>
+    <string name="mcl_setting_subtitle_use_surface_view">Pode ajudar em cenários dependentes do processador gráfico.</string>
     <string name="mcl_setting_title_ignore_notch">Ignorar o entalhe</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Ignora o entalhe e estende o ecrã por baixo dele.\nDá-lhe uma experiência mais imersiva.</string>
     <string name="mcl_setting_title_resolution_scaler">Escala da Resolução</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">Permite a diminuir a fidelidade gráfica do jogo. 100% é a resolução completa.</string>
     <string name="mcl_setting_title_buttonscale">Escala dos botões</string>
     <string name="mcl_setting_title_mousescale">Escala do rato</string>
+    <string name="mcl_setting_subtitle_mousescale">Muda o tamanho do rato virtual.</string>
     <string name="mcl_setting_title_javaargs">Argumentos JVM</string>
     <string name="mcl_setting_subtitle_javaargs">Tem cuidado, isto pode fazer o jogo falhar se modificado sem conhecimento.</string>
     <string name="mcl_setting_category_renderer">Renderizador</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (todas as versões, rápido)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - (todas as versões, médio)</string>
+    <string name="mcl_setting_renderer_angle">ANGLE (Vulkan) - (Somente 1.17+, médio)</string>
     <string name="mcl_setting_veroption_release">Oficial</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Alpha antiga</string>
     <string name="mcl_setting_veroption_oldbeta">Beta antiga</string>
+    <string name="mcl_setting_java_sandbox">Execução de .jar em modo Sandbox</string>
     <string name="mcl_version_clone">Clonar</string>
     <!-- Global strings -->
     <string name="global_edit">Editar</string>
@@ -109,6 +116,7 @@
     <string name="customctrl_addbutton_joystick">Adicionar joystick</string>
     <string name="customctrl_addsubbutton">Adicionar sub-botão</string>
     <string name="main_share_logs">Partilhar log</string>
+    <string name="main_install_jar_file">Executar um .jar</string>
     <string name="main_play">Jogar</string>
     <string name="autoram_info_msg">Memória definida para %d MB</string>
     <string name="mcl_setting_check_libraries">Verificar as bibliotecas depois de transferir</string>
@@ -119,11 +127,13 @@
     <string name="mcl_disable_gestures_subtitle">Desativa gestos, como segurar para quebrar blocos e tocar para colocar um bloco.</string>
     <string name="mcl_disable_swap_hand">Desativar toque duplo para trocar de mãos</string>
     <string name="mcl_setting_title_mousespeed">Velocidade do rato</string>
+    <string name="mcl_setting_subtitle_mousespeed">Muda a velocidade do rato virtual.</string>
     <string name="customctrl_passthru">Rato pode passar através</string>
     <string name="customctrl_swipeable">Deslizável</string>
     <string name="customctrl_forward_lock">Bloqueio da Frente</string>
     <string name="memory_warning_msg">A quantidade atual de memória RAM livre (%d) é menor do que a memória RAM alocada (%d), o que pode levar a falhas. Altera a alocação se o jogo falhar.</string>
     <string name="mcl_memory_allocation">Alocação de memória</string>
+    <string name="mcl_memory_allocation_subtitle">Controla quanta memória é delegada ao Minecraft.</string>
     <string name="multirt_runtime_corrupt">Runtime do Java corrompida</string>
     <string name="multirt_runtime_incompatiblearch">Arquitetura incompatível: %s</string>
     <string name="multirt_config_add">Adicionar nova</string>
@@ -137,11 +147,17 @@
     <string name="pvc_gameDirectory">Diretório do jogo</string>
     <string name="pvc_jvmArgs">Argumentos JVM</string>
     <string name="preference_mouse_start_title">Iniciar com o rato virtual ligado</string>
+    <string name="preference_mouse_start_description">O rato virtual aparece ao início do programa, se essa opção está ligada.</string>
     <string name="preference_video_title">Vídeo e renderizador</string>
+    <string name="preference_video_description">Resolução, renderer e desempenho</string>
     <string name="preference_control_title">Customização dos controlos</string>
+    <string name="preference_control_description">Gestos, botões e escala</string>
     <string name="preference_java_title">Ajustes do Java</string>
+    <string name="preference_java_description">Versões do Java, Argumentos do JVM, Quantidade de memória operativa, e sandbox</string>
     <string name="preference_misc_title">Definições diversas</string>
+    <string name="preference_misc_description">Lista de versões, e verificações das bibliotecas</string>
     <string name="preference_experimental_title">Coisas experimentais</string>
+    <string name="preference_experimental_description">Use estas coisas com precaução, não são suportadas</string>
     <string name="preference_sustained_performance_title">Habilitar modo de desempenho constante</string>
     <string name="preference_edit_controls_title">Editar controlos personalizados</string>
     <string name="preference_gyro_invert_x_axis">Inverter eixo X</string>
@@ -158,4 +174,6 @@
     <string name="arc_capes_title">Capas da \'Comestica\'</string>
     <string name="arc_capes_desc">Habilitar capas da Cosmetica(antigamente Arc). Para mais informações por favor visite https://cosmetica.cc. Isto Requer OptiFine.</string>
     <string name="of_dl_progress">A transferir %s</string>
+    <string name="preference_category_java_tweaks">Ajustes do Java</string>
+    <string name="preference_category_miscellaneous">Definições diversas</string>
 </resources>

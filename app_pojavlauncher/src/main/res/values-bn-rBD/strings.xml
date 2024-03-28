@@ -45,6 +45,7 @@
     <!-- Global strings -->
     <!-- MainActivity: strings -->
     <!-- MainActivity: Control buttons -->
+    <string name="control_thirdperson">৩য়</string>
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_viewout">লগ আউটপুট</string>
     <!-- ImportControlActivity Strings -->

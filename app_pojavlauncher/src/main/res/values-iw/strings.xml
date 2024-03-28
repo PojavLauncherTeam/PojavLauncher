@@ -141,4 +141,6 @@
     <string name="pedit_java_runtime">Java Runtime</string>
     <string name="pedit_renderer">רינדור</string>
     <string name="of_dl_progress">מוריד %s</string>
+    <string name="preference_category_java_tweaks">התאמות ל- Java</string>
+    <string name="preference_category_miscellaneous">הגדרות שונות</string>
 </resources>
