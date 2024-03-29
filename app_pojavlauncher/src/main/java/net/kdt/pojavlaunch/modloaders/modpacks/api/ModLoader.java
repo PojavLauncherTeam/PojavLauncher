@@ -32,7 +32,7 @@ public class ModLoader {
             case MOD_LOADER_FORGE:
                 return minecraftVersion+"-forge-"+modLoaderVersion;
             case MOD_LOADER_NEOFORGE:
-                return minecraftVersion+"-neoforge-"+modLoaderVersion;
+                return "neoforge-"+modLoaderVersion;
             case MOD_LOADER_FABRIC:
                 return "fabric-loader-"+modLoaderVersion+"-"+minecraftVersion;
             case MOD_LOADER_QUILT:

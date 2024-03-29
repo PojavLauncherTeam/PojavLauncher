@@ -35,14 +35,23 @@ public class NeoForgeDownloadTask implements Runnable, Tools.DownloaderFeedback 
 
     @Override
     public void run() {
-        try {
-            if(this.mFullVersion.contains("1.20.1") ? determineNeoForgedForgeDownloadUrl() : determineNeoForgeDownloadUrl()) {
-                downloadNeoForge();
+        if (this.mFullVersion != null) {
+            try {
+                if (this.mFullVersion.contains("1.20.1") ? determineNeoForgedForgeDownloadUrl() : determineNeoForgeDownloadUrl()) {
+                    downloadNeoForge();
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        } else {
+            try {
+                if (this.mGameVersion.equals("1.20.1") ? determineNeoForgedForgeDownloadUrl() : determineNeoForgeDownloadUrl()) {
+                    downloadNeoForge();
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
-        ProgressLayout.clearProgress(ProgressLayout.INSTALL_MODPACK);
     }
 
     @Override
