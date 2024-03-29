@@ -24,11 +24,6 @@ public class DownloadMirror {
             "https://bmclapi2.bangbang93.com",
             "https://bmclapi2.bangbang93.com/assets"
     };
-    private static final String[] MIRROR_MCBBS = {
-            "https://download.mcbbs.net/maven",
-            "https://download.mcbbs.net",
-            "https://download.mcbbs.net/assets"
-    };
 
     /**
      * Download a file with the current mirror. If the file is missing on the mirror,
@@ -83,7 +78,6 @@ public class DownloadMirror {
 
     private static String[] getMirrorSettings() {
         switch (LauncherPreferences.PREF_DOWNLOAD_SOURCE) {
-            case "mcbbs": return MIRROR_MCBBS;
             case "bmclapi": return MIRROR_BMCLAPI;
             case "default":
             default:
