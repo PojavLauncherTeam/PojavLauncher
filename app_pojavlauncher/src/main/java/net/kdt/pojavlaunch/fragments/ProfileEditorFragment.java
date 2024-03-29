@@ -93,7 +93,7 @@ public class ProfileEditorFragment extends Fragment implements CropperUtils.Crop
         mSaveButton.setOnClickListener(v -> {
             ProfileIconCache.dropIcon(mProfileKey);
             save();
-            Tools.removeCurrentFragment(requireActivity());
+            Tools.backToMainMenu(requireActivity());
         });
 
         mDeleteButton.setOnClickListener(v -> {
@@ -115,7 +115,7 @@ public class ProfileEditorFragment extends Fragment implements CropperUtils.Crop
             mValueToConsume = FileSelectorFragment.BUNDLE_SELECT_FOLDER;
 
             Tools.swapFragment(requireActivity(),
-                    FileSelectorFragment.class, FileSelectorFragment.TAG, true, bundle);
+                    FileSelectorFragment.class, FileSelectorFragment.TAG, bundle);
         });
 
         mControlSelectButton.setOnClickListener(v -> {
@@ -123,7 +123,7 @@ public class ProfileEditorFragment extends Fragment implements CropperUtils.Crop
             bundle.putBoolean(FileSelectorFragment.BUNDLE_SELECT_FOLDER, false);
             bundle.putString(FileSelectorFragment.BUNDLE_ROOT_PATH, Tools.CTRLMAP_PATH);
             Tools.swapFragment(requireActivity(),
-                    FileSelectorFragment.class, FileSelectorFragment.TAG, true, bundle);
+                    FileSelectorFragment.class, FileSelectorFragment.TAG, bundle);
         });
 
         // Setup the expendable list behavior

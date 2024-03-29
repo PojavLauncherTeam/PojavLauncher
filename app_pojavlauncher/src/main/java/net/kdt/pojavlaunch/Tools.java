@@ -43,7 +43,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -94,7 +93,7 @@ import java.util.Map;
 public final class Tools {
     public  static final float BYTE_TO_MB = 1024 * 1024;
     public static final Handler MAIN_HANDLER = new Handler(Looper.getMainLooper());
-    public static String APP_NAME = "null";
+    public static String APP_NAME = "PojavLauncher";
 
     public static final Gson GLOBAL_GSON = new GsonBuilder().setPrettyPrinting().create();
 
@@ -757,30 +756,33 @@ public final class Tools {
                         "releaseTime", "time", "type"
                 );
 
-                List<DependentLibrary> libList = new ArrayList<>(Arrays.asList(inheritsVer.libraries));
-                try {
-                    loop_1:
-                    for (DependentLibrary lib : customVer.libraries) {
-                        String libName = lib.name.substring(0, lib.name.lastIndexOf(":"));
-                        for (int i = 0; i < libList.size(); i++) {
-                            DependentLibrary libAdded = libList.get(i);
-                            String libAddedName = libAdded.name.substring(0, libAdded.name.lastIndexOf(":"));
+                // Go through the libraries, remove the ones overridden by the custom version
+                List<DependentLibrary> inheritLibraryList = new ArrayList<>(Arrays.asList(inheritsVer.libraries));
+                outer_loop:
+                for(DependentLibrary library : customVer.libraries){
+                    // Clean libraries overridden by the custom version
+                    String libName = library.name.substring(0, library.name.lastIndexOf(":"));
 
-                            if (libAddedName.equals(libName)) {
-                                Log.d(APP_NAME, "Library " + libName + ": Replaced version " +
-                                        libName.substring(libName.lastIndexOf(":") + 1) + " with " +
-                                        libAddedName.substring(libAddedName.lastIndexOf(":") + 1));
-                                libList.set(i, lib);
-                                continue loop_1;
-                            }
+                    for(DependentLibrary inheritLibrary : inheritLibraryList) {
+                        String inheritLibName = inheritLibrary.name.substring(0, inheritLibrary.name.lastIndexOf(":"));
+
+                        if(libName.equals(inheritLibName)){
+                            Log.d(APP_NAME, "Library " + libName + ": Replaced version " +
+                                    libName.substring(libName.lastIndexOf(":") + 1) + " with " +
+                                    inheritLibName.substring(inheritLibName.lastIndexOf(":") + 1));
+
+                            // Remove the library , superseded by the overriding libs
+                            inheritLibraryList.remove(inheritLibrary);
+                            continue outer_loop;
                         }
-
-                        libList.add(0, lib);
                     }
-                } finally {
-                    inheritsVer.libraries = libList.toArray(new DependentLibrary[0]);
-                    preProcessLibraries(inheritsVer.libraries);
                 }
+
+                // Fuse libraries
+                inheritLibraryList.addAll(Arrays.asList(customVer.libraries));
+                inheritsVer.libraries = inheritLibraryList.toArray(new DependentLibrary[0]);
+                preProcessLibraries(inheritsVer.libraries);
+
 
                 // Inheriting Minecraft 1.13+ with append custom args
                 if (inheritsVer.arguments != null && customVer.arguments != null) {
@@ -940,20 +942,23 @@ public final class Tools {
 
     /** Swap the main fragment with another */
     public static void swapFragment(FragmentActivity fragmentActivity , Class<? extends Fragment> fragmentClass,
-                                    @Nullable String fragmentTag, boolean addCurrentToBackstack, @Nullable Bundle bundle) {
+                                    @Nullable String fragmentTag, @Nullable Bundle bundle) {
         // When people tab out, it might happen
         //TODO handle custom animations
-        FragmentTransaction transaction = fragmentActivity.getSupportFragmentManager().beginTransaction()
+        fragmentActivity.getSupportFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)
-                .replace(R.id.container_fragment, fragmentClass, bundle, fragmentTag);
-        if(addCurrentToBackstack) transaction.addToBackStack(null);
+                .addToBackStack(fragmentClass.getName())
+                .replace(R.id.container_fragment, fragmentClass, bundle, fragmentTag).commit();
+    }
 
-        transaction.commit();
+    public static void backToMainMenu(FragmentActivity fragmentActivity) {
+        fragmentActivity.getSupportFragmentManager()
+                .popBackStack("ROOT", 0);
     }
 
     /** Remove the current fragment */
     public static void removeCurrentFragment(FragmentActivity fragmentActivity){
-        fragmentActivity.getSupportFragmentManager().popBackStackImmediate();
+        fragmentActivity.getSupportFragmentManager().popBackStack();
     }
 
     public static void installMod(Activity activity, boolean customJavaArgs) {
