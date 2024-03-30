@@ -43,7 +43,6 @@
     <!-- Holding most of the dynamic content -->
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/container_fragment"
-        android:name="net.kdt.pojavlaunch.fragments.MainMenuFragment"
 
         android:layout_width="match_parent"
         android:layout_height="0dp"
