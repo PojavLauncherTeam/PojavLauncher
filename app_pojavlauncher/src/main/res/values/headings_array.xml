@@ -43,12 +43,10 @@
     <string-array name="download_source_names">
         <item>@string/global_default</item>
         <item>BMCLAPI</item>
-        <item>MCBBS</item>
     </string-array>
     <string-array name="download_source_values">
         <item>default</item>
         <item>bmclapi</item>
-        <item>mcbbs</item>
     </string-array>
 
 </resources>
