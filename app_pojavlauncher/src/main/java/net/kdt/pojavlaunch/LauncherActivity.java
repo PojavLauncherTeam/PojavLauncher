@@ -157,10 +157,13 @@ public class LauncherActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pojav_launcher);
+
+        // Manually add the first fragment to the backstack to get easily back to it
+        // There must be a better way to handle the root though...
         this.getSupportFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)
                 .addToBackStack("ROOT")
-                .replace(R.id.container_fragment, MainMenuFragment.class, null, "ROOT").commit();
+                .add(R.id.container_fragment, MainMenuFragment.class, null, "ROOT").commit();
 
         IconCacheJanitor.runJanitor();
         mRequestNotificationPermissionLauncher = registerForActivityResult(
@@ -246,6 +249,11 @@ public class LauncherActivity extends BaseActivity {
                 fragment.goBack();
                 return;
             }
+        }
+
+        // Check if we are at the root then
+        if(getVisibleFragment("ROOT") != null){
+            finish();
         }
 
         super.onBackPressed();
