@@ -4,7 +4,7 @@ import android.os.Handler;
 
 /**
  * This class implements an abstract "validator gesture", meant as a base for implementation of
- * more complex gestures with pinger position tracking and such.
+ * more complex gestures with finger position tracking and such.
  */
 public abstract class ValidatorGesture implements Runnable{
     private final Handler mHandler;
