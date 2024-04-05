@@ -14,6 +14,7 @@ import org.lwjgl.glfw.CallbackBridge;
 public class LeftClickGesture extends ValidatorGesture {
     public static final int FINGER_STILL_THRESHOLD = (int) Tools.dpToPx(9);
     private float mGestureStartX, mGestureStartY;
+    private boolean mMouseActivated;
 
     public LeftClickGesture(Handler handler) {
         super(handler, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
@@ -29,13 +30,21 @@ public class LeftClickGesture extends ValidatorGesture {
     @Override
     public boolean checkAndTrigger() {
         boolean fingerStill = LeftClickGesture.isFingerStill(mGestureStartX, mGestureStartY);
-        if(fingerStill) sendMouseButton(LwjglGlfwKeycode.GLFW_MOUSE_BUTTON_LEFT, true);
-        return fingerStill;
+        // If the finger is still, fire the gesture.
+        if(fingerStill) {
+            sendMouseButton(LwjglGlfwKeycode.GLFW_MOUSE_BUTTON_LEFT, true);
+            mMouseActivated = true;
+        }
+        // Otherwise, don't click but still keep it active
+        return true;
     }
 
     @Override
     public void onGestureCancelled(boolean isSwitching) {
-        sendMouseButton(LwjglGlfwKeycode.GLFW_MOUSE_BUTTON_LEFT, false);
+        if(mMouseActivated) {
+            sendMouseButton(LwjglGlfwKeycode.GLFW_MOUSE_BUTTON_LEFT, false);
+            mMouseActivated = false;
+        }
     }
 
     /**
