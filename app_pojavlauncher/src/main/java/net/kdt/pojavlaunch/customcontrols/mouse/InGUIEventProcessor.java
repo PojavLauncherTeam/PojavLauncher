@@ -32,7 +32,7 @@ public class InGUIEventProcessor implements TouchEventProcessor {
                 if(pointerCount == 1 || LauncherPreferences.PREF_DISABLE_GESTURES) {
                     sendTouchCoordinates(mainPointerX, mainPointerY);
                     if(!mIsMouseDown) enableMouse();
-                }else {
+                } else {
                     float[] motionVector = mTracker.getMotionVector();
                     int hScroll =  ((int) motionVector[0]) / FINGER_SCROLL_THRESHOLD;
                     int vScroll = ((int) motionVector[1]) / FINGER_SCROLL_THRESHOLD;
