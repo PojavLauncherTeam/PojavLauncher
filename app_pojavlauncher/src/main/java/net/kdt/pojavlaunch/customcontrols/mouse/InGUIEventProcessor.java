@@ -40,6 +40,7 @@ public class InGUIEventProcessor implements TouchEventProcessor {
                 }
                 break;
             case MotionEvent.ACTION_UP:
+                mTracker.cancelTracking();
                 disableMouse();
         }
         return true;
