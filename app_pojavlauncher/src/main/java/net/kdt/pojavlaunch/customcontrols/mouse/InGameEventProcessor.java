@@ -45,7 +45,7 @@ public class InGameEventProcessor implements TouchEventProcessor {
             case MotionEvent.ACTION_DOWN:
                 mTracker.startTracking(motionEvent);
                 if(LauncherPreferences.PREF_DISABLE_GESTURES) break;
-                checkGestures(handleGuiBar(motionEvent), hasDoubleTapped);
+                checkGestures(handleGuiBar(motionEvent));
                 break;
             case MotionEvent.ACTION_MOVE:
                 mTracker.trackEvent(motionEvent);
@@ -54,8 +54,12 @@ public class InGameEventProcessor implements TouchEventProcessor {
                 CallbackBridge.mouseY += motionVector[1] * mSensitivity;
                 CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
                 boolean hasGuiBarHit = handleGuiBar(motionEvent);
+                // Handle this gesture separately as it's a separate toggle in settings
+                if(hasGuiBarHit && hasDoubleTapped && !LauncherPreferences.PREF_DISABLE_SWAP_HAND) {
+                    CallbackBridge.sendKeyPress(LwjglGlfwKeycode.GLFW_KEY_F);
+                }
                 if(LauncherPreferences.PREF_DISABLE_GESTURES) break;
-                checkGestures(hasGuiBarHit, hasDoubleTapped);
+                checkGestures(hasGuiBarHit);
                 break;
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_CANCEL:
@@ -69,15 +73,12 @@ public class InGameEventProcessor implements TouchEventProcessor {
         cancelGestures(true);
     }
 
-    private void checkGestures(boolean hasGuiBarHit, boolean hasDoubleTapped) {
+    private void checkGestures(boolean hasGuiBarHit) {
         if(!hasGuiBarHit) {
             mLeftClickGesture.inputEvent();
             mRightClickGesture.inputEvent();
         }
         mDropGesture.submit(hasGuiBarHit);
-        if(hasGuiBarHit && hasDoubleTapped && !LauncherPreferences.PREF_DISABLE_SWAP_HAND) {
-            CallbackBridge.sendKeyPress(LwjglGlfwKeycode.GLFW_KEY_F);
-        }
     }
 
     private void cancelGestures(boolean isSwitching) {
