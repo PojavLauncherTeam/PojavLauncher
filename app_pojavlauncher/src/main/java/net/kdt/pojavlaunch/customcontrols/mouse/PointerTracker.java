@@ -17,6 +17,10 @@ public class PointerTracker {
         mLastY = motionEvent.getY();
     }
 
+    public void cancelTracking() {
+        mColdStart = true;
+    }
+
     public int trackEvent(MotionEvent motionEvent) {
         int trackedPointerIndex = motionEvent.findPointerIndex(mTrackedPointerId);
         int pointerCount = motionEvent.getPointerCount();
