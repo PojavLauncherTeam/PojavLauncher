@@ -92,7 +92,7 @@ public class InGameEventProcessor implements TouchEventProcessor {
     private void cancelGestures(boolean isSwitching) {
         mLeftClickGesture.cancel(isSwitching);
         mRightClickGesture.cancel(isSwitching);
-        mDropGesture.cancel(isSwitching);
+        mDropGesture.cancel();
     }
 
     private boolean handleGuiBar(MotionEvent motionEvent) {
@@ -106,6 +106,9 @@ public class InGameEventProcessor implements TouchEventProcessor {
         boolean hasGuiBarHit = hudKeyHandled != -1;
         if(hasGuiBarHit && hudKeyHandled != mLastHudKey) {
             CallbackBridge.sendKeyPress(hudKeyHandled);
+            // The GUI bar is handled before the gesture will be submitted, so this
+            // will be resubmitted again soon (with the timer restarted)
+            mDropGesture.cancel();
             mLastHudKey = hudKeyHandled;
         }
         return hasGuiBarHit;
