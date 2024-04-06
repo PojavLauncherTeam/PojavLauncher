@@ -1,5 +1,8 @@
 package net.kdt.pojavlaunch.customcontrols.mouse;
 
+import static net.kdt.pojavlaunch.utils.MCOptionUtils.getMcScale;
+
+import android.os.Handler;
 import android.view.MotionEvent;
 
 import net.kdt.pojavlaunch.LwjglGlfwKeycode;
@@ -7,10 +10,6 @@ import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.utils.MCOptionUtils;
 
 import org.lwjgl.glfw.CallbackBridge;
-
-import static net.kdt.pojavlaunch.utils.MCOptionUtils.getMcScale;
-
-import android.os.Handler;
 
 public class HotbarTracker implements MCOptionUtils.MCOptionListener {
 
@@ -35,14 +34,14 @@ public class HotbarTracker implements MCOptionUtils.MCOptionListener {
         mHudPointerId = -1;
     }
 
-    public boolean begin(MotionEvent motionEvent) {
+    public boolean begin(MotionEvent motionEvent, boolean hasDoubleTapped) {
         if(mHudPointerId != -1) return false;
         int pointer = motionEvent.getActionIndex();
         if(motionEvent.getActionMasked() == MotionEvent.ACTION_DOWN) pointer = 0;
         int x = (int)motionEvent.getX(pointer);
         if(isWithinHotbar(x, (int)motionEvent.getY(pointer))) {
             mHudPointerId = motionEvent.getPointerId(pointer);
-            hotbarClick(x);
+            hotbarClick(x, hasDoubleTapped);
             mDropGesture.submit(true);
             return true;
         }else {
@@ -60,11 +59,8 @@ public class HotbarTracker implements MCOptionUtils.MCOptionListener {
         }
         int x = (int)motionEvent.getX(index);
         if(isWithinHotbar(x, (int)motionEvent.getY(index))) {
-            hotbarClick(x);
+            hotbarClick(x, hasDoubleTapped);
             mDropGesture.submit(true);
-            if(hasDoubleTapped && !LauncherPreferences.PREF_DISABLE_SWAP_HAND) {
-                CallbackBridge.sendKeyPress(LwjglGlfwKeycode.GLFW_KEY_F);
-            }
         }else {
             mDropGesture.submit(false);
         }
@@ -84,7 +80,11 @@ public class HotbarTracker implements MCOptionUtils.MCOptionListener {
         return x >= barX && x < barX + mBarWidth;
     }
 
-    private void hotbarClick(int x) {
+    private void hotbarClick(int x, boolean hasDoubleTapped) {
+        if(hasDoubleTapped && !LauncherPreferences.PREF_DISABLE_SWAP_HAND) {
+            CallbackBridge.sendKeyPress(LwjglGlfwKeycode.GLFW_KEY_F);
+        }
+
         int barX = (CallbackBridge.physicalWidth / 2) - (mBarWidth / 2);
         if(x < barX || x >= barX + mBarWidth) return;
 
