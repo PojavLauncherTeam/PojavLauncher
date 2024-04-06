@@ -5,24 +5,33 @@ import static org.lwjgl.glfw.CallbackBridge.sendKeyPress;
 import android.os.Handler;
 
 import net.kdt.pojavlaunch.LwjglGlfwKeycode;
+import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 
-public class DropGesture extends ValidatorGesture {
+public class DropGesture implements Runnable{
+    private final Handler mHandler;
+    private boolean mActive;
+
     public DropGesture(Handler mHandler) {
-        super(mHandler, 250);
+        this.mHandler = mHandler;
     }
-    boolean mGuiBarHit;
 
     public void submit(boolean hasGuiBarHit) {
-        submit();
-        mGuiBarHit = hasGuiBarHit;
+        if(hasGuiBarHit && !mActive) {
+            mActive = true;
+            mHandler.postDelayed(this, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
+        }
+        if(!hasGuiBarHit && mActive) cancel();
+    }
+
+    public void cancel() {
+        mActive = false;
+        mHandler.removeCallbacks(this);
     }
 
     @Override
-    public boolean checkAndTrigger() {
-        if(mGuiBarHit) sendKeyPress(LwjglGlfwKeycode.GLFW_KEY_Q);
-        return true;
+    public void run() {
+        if(!mActive) return;
+        sendKeyPress(LwjglGlfwKeycode.GLFW_KEY_Q);
+        mHandler.postDelayed(this, 250);
     }
-
-    @Override
-    public void onGestureCancelled(boolean isSwitching) {}
 }
