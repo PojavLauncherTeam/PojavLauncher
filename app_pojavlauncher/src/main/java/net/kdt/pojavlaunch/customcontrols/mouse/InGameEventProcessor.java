@@ -28,13 +28,13 @@ public class InGameEventProcessor implements TouchEventProcessor {
         boolean hasDoubleTapped = mDoubleTapDetector.onTouchEvent(motionEvent);
         switch (motionEvent.getActionMasked()) {
             case MotionEvent.ACTION_DOWN:
-                if(mGuiBarTracker.begin(motionEvent)) break;
+                if(mGuiBarTracker.begin(motionEvent, hasDoubleTapped)) break;
                 mTracker.startTracking(motionEvent);
                 if(LauncherPreferences.PREF_DISABLE_GESTURES) break;
                 checkGestures();
                 break;
             case MotionEvent.ACTION_POINTER_DOWN:
-                mGuiBarTracker.begin(motionEvent);
+                mGuiBarTracker.begin(motionEvent, hasDoubleTapped);
                 break;
             case MotionEvent.ACTION_MOVE:
                 int trackedIndex = mTracker.trackEvent(motionEvent);
