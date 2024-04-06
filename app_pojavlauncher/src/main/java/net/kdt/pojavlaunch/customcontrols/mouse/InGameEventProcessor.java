@@ -41,6 +41,13 @@ public class InGameEventProcessor implements TouchEventProcessor {
     @Override
     public boolean processTouchEvent(MotionEvent motionEvent) {
         boolean hasDoubleTapped = mDoubleTapDetector.onTouchEvent(motionEvent);
+        boolean hasGuiBarHit = handleGuiBar(motionEvent);
+        // Handle this gesture separately, outside of the event masking to avoid inconsistencies
+        // with the double tap detector.
+        if(hasGuiBarHit && hasDoubleTapped && !LauncherPreferences.PREF_DISABLE_SWAP_HAND) {
+            CallbackBridge.sendKeyPress(LwjglGlfwKeycode.GLFW_KEY_F);
+        }
+        // Handle the rest of the in-game motion.
         switch (motionEvent.getActionMasked()) {
             case MotionEvent.ACTION_DOWN:
                 mTracker.startTracking(motionEvent);
@@ -49,17 +56,17 @@ public class InGameEventProcessor implements TouchEventProcessor {
                 break;
             case MotionEvent.ACTION_MOVE:
                 mTracker.trackEvent(motionEvent);
+                if(!LauncherPreferences.PREF_DISABLE_GESTURES) {
+                    checkGestures(hasGuiBarHit);
+                }
+                // Only send new mouse positions if the event hasn't hit the inventory bar.
+                // Note that the events are sent to the tracker regardless, to prevent cursor
+                // jumps when leaving the inventory bar in one single touch gesture.
+                if(hasGuiBarHit) break;
                 float[] motionVector = mTracker.getMotionVector();
                 CallbackBridge.mouseX += motionVector[0] * mSensitivity;
                 CallbackBridge.mouseY += motionVector[1] * mSensitivity;
                 CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
-                boolean hasGuiBarHit = handleGuiBar(motionEvent);
-                // Handle this gesture separately as it's a separate toggle in settings
-                if(hasGuiBarHit && hasDoubleTapped && !LauncherPreferences.PREF_DISABLE_SWAP_HAND) {
-                    CallbackBridge.sendKeyPress(LwjglGlfwKeycode.GLFW_KEY_F);
-                }
-                if(LauncherPreferences.PREF_DISABLE_GESTURES) break;
-                checkGestures(hasGuiBarHit);
                 break;
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_CANCEL:
