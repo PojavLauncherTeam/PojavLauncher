@@ -46,7 +46,7 @@ public class LocalLoginFragment extends Fragment {
         return !(text.isEmpty()
                 || text.length() < 3
                 || text.length() > 16
-                || !text.matches("\\w+")
+                || text.matches("[^a-zA-Z0-9_]")
                 || new File(Tools.DIR_ACCOUNT_NEW + "/" + text + ".json").exists()
         );
     }
