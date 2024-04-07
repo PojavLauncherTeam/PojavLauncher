@@ -51,6 +51,9 @@
 				android:layout_height="12dp"
 				android:elevation="10dp"
 				android:layout_gravity="center_horizontal"/>
+			<net.kdt.pojavlaunch.customcontrols.mouse.HotbarView
+				android:layout_width="0px"
+				android:layout_height="0px"/>
 
 		</net.kdt.pojavlaunch.customcontrols.ControlLayout>
 

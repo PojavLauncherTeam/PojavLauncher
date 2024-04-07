@@ -75,7 +75,7 @@ public class MinecraftGLSurface extends View implements GrabListener {
     /* View holding the surface, either a SurfaceView or a TextureView */
     View mSurface;
 
-    private final TouchEventProcessor mIngameProcessor = new InGameEventProcessor(mScaleFactor, mSensitivityFactor);
+    private final TouchEventProcessor mIngameProcessor = new InGameEventProcessor(mSensitivityFactor);
     private final TouchEventProcessor mInGUIProcessor = new InGUIEventProcessor(mScaleFactor);
     private boolean mLastGrabState = false;
 

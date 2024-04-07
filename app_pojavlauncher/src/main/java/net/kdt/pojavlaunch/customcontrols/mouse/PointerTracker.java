@@ -24,7 +24,7 @@ public class PointerTracker {
     public int trackEvent(MotionEvent motionEvent) {
         int trackedPointerIndex = motionEvent.findPointerIndex(mTrackedPointerId);
         int pointerCount = motionEvent.getPointerCount();
-        if(trackedPointerIndex == -1  || mPointerCount != pointerCount || mColdStart) {
+        if(trackedPointerIndex == -1 || mPointerCount != pointerCount || mColdStart) {
             startTracking(motionEvent);
             trackedPointerIndex = 0;
         }
