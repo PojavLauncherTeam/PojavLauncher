@@ -93,8 +93,8 @@ public class HotbarView extends View implements MCOptionUtils.MCOptionListener, 
 
         // Check if we need to cancel the drop event
         int actionMasked = event.getActionMasked();
-        if(isLastEventInGesture(actionMasked)) cancelDropGesture();
-        else submitDropGesture();
+        if(isLastEventInGesture(actionMasked)) mDropGesture.cancel();
+        else mDropGesture.submit();
         // Determine the hotbar slot
         float x = event.getX();
         if(x < 0 || x > mWidth) return true;
@@ -105,20 +105,10 @@ public class HotbarView extends View implements MCOptionUtils.MCOptionListener, 
         int hotbarKey = HOTBAR_KEYS[hotbarIndex];
         CallbackBridge.sendKeyPress(hotbarKey);
         // Cancel the event since we changed hotbar slots.
-        cancelDropGesture();
+       mDropGesture.cancel();
         // Only resubmit the gesture only if it isn't the last event we will receive.
-        if(!isLastEventInGesture(actionMasked)) submitDropGesture();
+        if(!isLastEventInGesture(actionMasked)) mDropGesture.submit();
         return true;
-    }
-
-    private void submitDropGesture() {
-        if(LauncherPreferences.PREF_DISABLE_GESTURES) return;
-        mDropGesture.submit();
-    }
-
-    private void cancelDropGesture() {
-        if(LauncherPreferences.PREF_DISABLE_GESTURES) return;
-        mDropGesture.cancel();
     }
 
     private boolean isLastEventInGesture(int actionMasked) {
