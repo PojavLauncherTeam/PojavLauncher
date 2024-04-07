@@ -87,9 +87,7 @@ public class HotbarView extends View implements MCOptionUtils.MCOptionListener, 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if(!CallbackBridge.isGrabbing()) return false;
-        // Check if we are double-tapping to swap hands
         boolean hasDoubleTapped = mDoubleTapDetector.onTouchEvent(event);
-        if(hasDoubleTapped && !LauncherPreferences.PREF_DISABLE_SWAP_HAND) CallbackBridge.sendKeyPress(LwjglGlfwKeycode.GLFW_KEY_F);
 
         // Check if we need to cancel the drop event
         int actionMasked = event.getActionMasked();
@@ -100,12 +98,16 @@ public class HotbarView extends View implements MCOptionUtils.MCOptionListener, 
         if(x < 0 || x > mWidth) return true;
         int hotbarIndex = (int)MathUtils.map(x, 0, mWidth, 0, HOTBAR_KEYS.length);
         // Check if the slot changed and we need to make a key press
-        if(hotbarIndex == mLastIndex) return true;
+        if(hotbarIndex == mLastIndex) {
+            // Only check for doubletapping if the slot has not changed
+            if(hasDoubleTapped && !LauncherPreferences.PREF_DISABLE_SWAP_HAND) CallbackBridge.sendKeyPress(LwjglGlfwKeycode.GLFW_KEY_F);
+            return true;
+        }
         mLastIndex = hotbarIndex;
         int hotbarKey = HOTBAR_KEYS[hotbarIndex];
         CallbackBridge.sendKeyPress(hotbarKey);
         // Cancel the event since we changed hotbar slots.
-       mDropGesture.cancel();
+        mDropGesture.cancel();
         // Only resubmit the gesture only if it isn't the last event we will receive.
         if(!isLastEventInGesture(actionMasked)) mDropGesture.submit();
         return true;

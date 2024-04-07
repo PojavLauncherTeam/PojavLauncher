@@ -12,7 +12,7 @@ public class InGUIEventProcessor implements TouchEventProcessor {
     private final PointerTracker mTracker = new PointerTracker();
     private boolean mIsMouseDown = false;
     private final float mScaleFactor;
-    public static final int FINGER_SCROLL_THRESHOLD = (int) Tools.dpToPx(6);
+    public static final float FINGER_SCROLL_THRESHOLD = Tools.dpToPx(6);
     public InGUIEventProcessor(float scaleFactor) {
         mScaleFactor = scaleFactor;
     }
@@ -34,8 +34,8 @@ public class InGUIEventProcessor implements TouchEventProcessor {
                     if(!mIsMouseDown) enableMouse();
                 } else {
                     float[] motionVector = mTracker.getMotionVector();
-                    int hScroll =  ((int) motionVector[0]) / FINGER_SCROLL_THRESHOLD;
-                    int vScroll = ((int) motionVector[1]) / FINGER_SCROLL_THRESHOLD;
+                    int hScroll =  (int)(motionVector[0] / FINGER_SCROLL_THRESHOLD);
+                    int vScroll = (int)(motionVector[1] / FINGER_SCROLL_THRESHOLD);
                     if(hScroll != 0 | vScroll != 0) CallbackBridge.sendScroll(hScroll, vScroll);
                 }
                 break;
