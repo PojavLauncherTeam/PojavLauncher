@@ -15,12 +15,11 @@ public class DropGesture implements Runnable{
         this.mHandler = mHandler;
     }
 
-    public void submit(boolean hasGuiBarHit) {
-        if(hasGuiBarHit && !mActive) {
+    public void submit() {
+        if(!mActive) {
             mActive = true;
             mHandler.postDelayed(this, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
         }
-        if(!hasGuiBarHit && mActive) cancel();
     }
 
     public void cancel() {
