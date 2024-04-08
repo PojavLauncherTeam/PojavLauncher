@@ -21,6 +21,7 @@ import org.lwjgl.glfw.CallbackBridge;
 
 public class HotbarView extends View implements MCOptionUtils.MCOptionListener, View.OnLayoutChangeListener, Runnable {
     private final TapDetector mDoubleTapDetector = new TapDetector(2, TapDetector.DETECTION_METHOD_DOWN);
+    private View mParentView;
     private static final int[] HOTBAR_KEYS = {
             LwjglGlfwKeycode.GLFW_KEY_1, LwjglGlfwKeycode.GLFW_KEY_2,   LwjglGlfwKeycode.GLFW_KEY_3,
             LwjglGlfwKeycode.GLFW_KEY_4, LwjglGlfwKeycode.GLFW_KEY_5,   LwjglGlfwKeycode.GLFW_KEY_6,
@@ -62,8 +63,8 @@ public class HotbarView extends View implements MCOptionUtils.MCOptionListener, 
         ViewParent parent = getParent();
         if(parent == null) return;
         if(parent instanceof View) {
-            View parentView = (View) parent;
-            parentView.addOnLayoutChangeListener(this);
+            mParentView = (View) parent;
+            mParentView.addOnLayoutChangeListener(this);
         }
         mGuiScale = MCOptionUtils.getMcScale();
         repositionView();
@@ -136,6 +137,6 @@ public class HotbarView extends View implements MCOptionUtils.MCOptionListener, 
 
     @Override
     public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-        repositionView();
+        if(v.equals(mParentView)) repositionView();
     }
 }

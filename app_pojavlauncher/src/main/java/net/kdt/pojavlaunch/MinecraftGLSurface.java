@@ -27,6 +27,7 @@ import androidx.annotation.RequiresApi;
 
 import net.kdt.pojavlaunch.customcontrols.ControlLayout;
 import net.kdt.pojavlaunch.customcontrols.gamepad.Gamepad;
+import net.kdt.pojavlaunch.customcontrols.mouse.AbstractTouchpad;
 import net.kdt.pojavlaunch.customcontrols.mouse.InGUIEventProcessor;
 import net.kdt.pojavlaunch.customcontrols.mouse.InGameEventProcessor;
 import net.kdt.pojavlaunch.customcontrols.mouse.TouchEventProcessor;
@@ -65,9 +66,6 @@ public class MinecraftGLSurface extends View implements GrabListener {
     private final float mScaleFactor = LauncherPreferences.PREF_SCALE_FACTOR/100f;
     /* Sensitivity, adjusted according to screen size */
     private final double mSensitivityFactor = (1.4 * (1080f/ Tools.getDisplayMetrics((Activity) getContext()).heightPixels));
-    /* Use to detect simple and double taps */
-    //private final TapDetector mSingleTapDetector = new TapDetector(1, TapDetector.DETECTION_METHOD_BOTH);
-    //private final TapDetector mDoubleTapDetector = new TapDetector(2, TapDetector.DETECTION_METHOD_DOWN);
 
     /* Surface ready listener, used by the activity to launch minecraft */
     SurfaceReadyListener mSurfaceReadyListener = null;
@@ -75,8 +73,8 @@ public class MinecraftGLSurface extends View implements GrabListener {
     /* View holding the surface, either a SurfaceView or a TextureView */
     View mSurface;
 
-    private final TouchEventProcessor mIngameProcessor = new InGameEventProcessor(mSensitivityFactor);
-    private final TouchEventProcessor mInGUIProcessor = new InGUIEventProcessor(mScaleFactor);
+    private final InGameEventProcessor mIngameProcessor = new InGameEventProcessor(mSensitivityFactor);
+    private final InGUIEventProcessor mInGUIProcessor = new InGUIEventProcessor(mScaleFactor);
     private boolean mLastGrabState = false;
 
     public MinecraftGLSurface(Context context) {
@@ -91,8 +89,11 @@ public class MinecraftGLSurface extends View implements GrabListener {
     /** Initialize the view and all its settings
      * @param isAlreadyRunning set to true to tell the view that the game is already running
      *                         (only updates the window without calling the start listener)
+     * @param touchpad the optional cursor-emulating touchpad, used for touch event processing
+     *                 when the cursor is not grabbed
      */
-    public void start(boolean isAlreadyRunning){
+    public void start(boolean isAlreadyRunning, AbstractTouchpad touchpad){
+        mInGUIProcessor.setAbstractTouchpad(touchpad);
         if(LauncherPreferences.PREF_USE_ALTERNATE_SURFACE){
             SurfaceView surfaceView = new SurfaceView(getContext());
             mSurface = surfaceView;
@@ -181,6 +182,7 @@ public class MinecraftGLSurface extends View implements GrabListener {
             return true; //mouse event handled successfully
         }
 
+        if(mIngameProcessor == null || mInGUIProcessor == null) return true;
         boolean isGrabbing = CallbackBridge.isGrabbing();
         if(mLastGrabState != isGrabbing) {
             pickEventProcessor(mLastGrabState).cancelPendingActions();
