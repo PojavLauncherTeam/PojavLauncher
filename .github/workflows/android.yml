@@ -86,8 +86,6 @@ jobs:
 
       - name: Build UnSigned APK without runtime
         run: |
-          rm -r app_pojavlauncher/src/main/assets/components/jre
-          rm -r app_pojavlauncher/src/main/assets/components/jre-new
           gradle assembleRelease
           mv app_pojavlauncher/build/outputs/apk/release/app_pojavlauncher-release-unsigned.apk out/app-release-noruntime-unsigned.apk
       - name: Gen md5sums
