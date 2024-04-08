@@ -297,4 +297,6 @@
     <string name="notif_error_occured">发生错误</string>
     <string name="notif_error_occured_desc">点击查看详细信息</string>
     <string name="fabric_dl_only_stable">仅显示稳定版本</string>
+    <string name="auto_ram_title">自动 RAM</string>
+    <string name="auto_ram_subtitle">启用 RAM 自动调节器</string>
 </resources>

@@ -217,4 +217,6 @@
     <string name="of_dl_progress">Pobieranie %s</string>
     <string name="create_profile_optifine">Stwórz profil OptiFine</string>
     <string name="generic_install">Instaluj</string>
+    <string name="auto_ram_title">Automatyczny ram</string>
+    <string name="auto_ram_subtitle">Włącza automatyczny regulator pamięci RAM</string>
 </resources>

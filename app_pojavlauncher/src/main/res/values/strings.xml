@@ -376,4 +376,8 @@
     <string name="cropper_lock_horizontal">H. lock</string>
     <string name="cropper_reset">Reset</string>
     <string name="cropper_select_cancelled">Selection cancelled</string>
+    <string name="auto_ram_title">Auto RAM</string>
+    <string name="auto_ram_subtitle">Enables automatic RAM adjuster</string>
+    <string name="login_error_invalid_username">Invalid name, the name should be between 3-16 characters, should only contain A-Z, 0-9 and underscores.</string>
+    <string name="login_microsoft">Microsoft login</string>
 </resources>

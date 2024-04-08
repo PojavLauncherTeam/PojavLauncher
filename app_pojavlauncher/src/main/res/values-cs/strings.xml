@@ -297,4 +297,6 @@
     <string name="notif_error_occured">Došlo k chybě</string>
     <string name="notif_error_occured_desc">Klikněte pro zobrazení podrobností</string>
     <string name="fabric_dl_only_stable">Zobraziti jen stabilní verze</string>
+    <string name="auto_ram_title">Auto RAM</string>
+    <string name="auto_ram_subtitle">Automaticky bude měnit množství RAM</string>
 </resources>

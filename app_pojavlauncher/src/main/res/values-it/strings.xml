@@ -243,4 +243,6 @@ Accedi almeno una volta su https://minecraft.net/ e riprova.</string>
     <string name="notif_error_occured">Si è verificato un errore</string>
     <string name="notif_error_occured_desc">Clicca per visualizzare più dettagli</string>
     <string name="fabric_dl_only_stable">Mostra solo le versioni stabili</string>
+    <string name="auto_ram_title">Auto RAM</string>
+    <string name="auto_ram_subtitle">Attiva regolatore RAM automatico</string>
 </resources>

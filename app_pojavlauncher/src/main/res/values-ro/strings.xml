@@ -192,4 +192,6 @@
     <string name="global_yes">Da</string>
     <string name="global_no">Nu</string>
     <string name="of_dl_progress">Se descarcă %s</string>
+    <string name="auto_ram_title">Auto RAM</string>
+    <string name="auto_ram_subtitle">Activează ajustarea automată RAM</string>
 </resources>

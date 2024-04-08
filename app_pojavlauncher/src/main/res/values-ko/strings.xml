@@ -228,4 +228,6 @@ https://cosmetica.cc 를 방문해주세요.
     <string name="generic_apply">적용</string>
     <string name="search_modpack_no_result">모드팩이 없습니다.</string>
     <string name="search_modpack_error">모드팩을 찾는데 실패했습니다.</string>
+    <string name="auto_ram_title">자동 램 할당</string>
+    <string name="auto_ram_subtitle">자동 램 할당 활성화하기</string>
 </resources>

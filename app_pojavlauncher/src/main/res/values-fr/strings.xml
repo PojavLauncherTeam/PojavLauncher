@@ -237,4 +237,6 @@
     <string name="modpack_install_button">Créer un profil de modpack</string>
     <string name="notif_error_occured">Une erreur est survenue</string>
     <string name="notif_error_occured_desc">Cliquez ici pour obtenir plus de détails</string>
+    <string name="auto_ram_title">Mémoire RAM automatique</string>
+    <string name="auto_ram_subtitle">Active le régulateur automatique de la mémoire RAM</string>
 </resources>
