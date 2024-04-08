@@ -13,7 +13,6 @@ import androidx.annotation.Nullable;
 
 import net.kdt.pojavlaunch.LwjglGlfwKeycode;
 import net.kdt.pojavlaunch.TapDetector;
-import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.utils.MCOptionUtils;
 import net.kdt.pojavlaunch.utils.MathUtils;
@@ -123,7 +122,7 @@ public class HotbarView extends View implements MCOptionUtils.MCOptionListener, 
 
     @Override
     public void onOptionChanged() {
-        Tools.runOnUiThread(this);
+        post(this);
     }
 
     @Override
