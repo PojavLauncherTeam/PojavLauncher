@@ -1,18 +1,17 @@
 package net.kdt.pojavlaunch;
 
-import static net.kdt.pojavlaunch.customcontrols.mouse.InGUIEventProcessor.FINGER_SCROLL_THRESHOLD;
 import static net.kdt.pojavlaunch.Tools.currentDisplayMetrics;
+import static net.kdt.pojavlaunch.customcontrols.mouse.InGUIEventProcessor.FINGER_SCROLL_THRESHOLD;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.DEFAULT_PREF;
 
 import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,11 +24,12 @@ import org.lwjgl.glfw.CallbackBridge;
 /**
  * Class dealing with the virtual mouse
  */
-public class Touchpad extends FrameLayout implements GrabListener{
+public class Touchpad extends View implements GrabListener {
     /* Whether the Touchpad should be displayed */
     private boolean mDisplayState;
     /* Mouse pointer icon used by the touchpad */
-    private final ImageView mMousePointerImageView = new ImageView(getContext());
+    private Drawable mMousePointerDrawable;
+    private float mMouseX, mMouseY;
     /* Detect a classic android Tap */
     private final GestureDetector mSingleTapDetector = new GestureDetector(getContext(), new SingleTapConfirm());
     /* Resolution scaler option, allow downsizing a window */
@@ -51,7 +51,7 @@ public class Touchpad extends FrameLayout implements GrabListener{
         init();
     }
 
-    @SuppressWarnings("accessibility")
+    @SuppressWarnings("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         // MotionEvent reports input details from the touch screen
@@ -66,15 +66,10 @@ public class Touchpad extends FrameLayout implements GrabListener{
 
         float x = event.getX();
         float y = event.getY();
-        float mouseX = mMousePointerImageView.getX();
-        float mouseY = mMousePointerImageView.getY();
 
         if (mSingleTapDetector.onTouchEvent(event)) {
-            CallbackBridge.mouseX = (mouseX * mScaleFactor);
-            CallbackBridge.mouseY = (mouseY * mScaleFactor);
-            CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
+            sendMousePosition();
             CallbackBridge.sendMouseKeycode(LwjglGlfwKeycode.GLFW_MOUSE_BUTTON_LEFT);
-
             return true;
         }
 
@@ -93,24 +88,22 @@ public class Touchpad extends FrameLayout implements GrabListener{
             case MotionEvent.ACTION_MOVE: // 2
                 //Scrolling feature
                 if (!LauncherPreferences.PREF_DISABLE_GESTURES && !CallbackBridge.isGrabbing() && event.getPointerCount() >= 2) {
-                    int hScroll =  (int) ((event.getX() - mScrollLastInitialX) / FINGER_SCROLL_THRESHOLD);
-                    int vScroll = (int) ((event.getY() - mScrollLastInitialY) / FINGER_SCROLL_THRESHOLD);
+                    int hScroll =  (int) ((x - mScrollLastInitialX) / FINGER_SCROLL_THRESHOLD);
+                    int vScroll = (int) ((y - mScrollLastInitialY) / FINGER_SCROLL_THRESHOLD);
 
                     if(vScroll != 0 || hScroll != 0){
                         CallbackBridge.sendScroll(hScroll, vScroll);
-                        mScrollLastInitialX = event.getX();
-                        mScrollLastInitialY = event.getY();
+                        mScrollLastInitialX = x;
+                        mScrollLastInitialY = y;
                     }
                     break;
                 }
 
                 // Mouse movement
                 if(mCurrentPointerID == event.getPointerId(0)) {
-                    mouseX = Math.max(0, Math.min(currentDisplayMetrics.widthPixels, mouseX + (x - mPrevX) * LauncherPreferences.PREF_MOUSESPEED));
-                    mouseY = Math.max(0, Math.min(currentDisplayMetrics.heightPixels, mouseY + (y - mPrevY) * LauncherPreferences.PREF_MOUSESPEED));
-
-                    placeMouseAt(mouseX, mouseY);
-                    CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
+                    mMouseX = Math.max(0, Math.min(currentDisplayMetrics.widthPixels, mMouseX + (x - mPrevX) * LauncherPreferences.PREF_MOUSESPEED));
+                    mMouseY = Math.max(0, Math.min(currentDisplayMetrics.heightPixels, mMouseY + (y - mPrevY) * LauncherPreferences.PREF_MOUSESPEED));
+                    updateMousePosition();
                 }else mCurrentPointerID = event.getPointerId(0);
 
                 mPrevX = x;
@@ -149,22 +142,42 @@ public class Touchpad extends FrameLayout implements GrabListener{
     }
 
     public void placeMouseAt(float x, float y) {
-        mMousePointerImageView.setX(x);
-        mMousePointerImageView.setY(y);
-        CallbackBridge.mouseX = (x * mScaleFactor);
-        CallbackBridge.mouseY = (y * mScaleFactor);
+        mMouseX = x;
+        mMouseY = y;
+        updateMousePosition();
+    }
+
+    private void sendMousePosition() {
+        CallbackBridge.mouseX = (mMouseX * mScaleFactor);
+        CallbackBridge.mouseY = (mMouseY * mScaleFactor);
         CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
+    }
+
+    private void updateMousePosition() {
+        sendMousePosition();
+        // I wanted to implement a dirty rect for this, but it is ignored since API level 21
+        // (which is our min API)
+        // Let's hope the "internally calculated area" is good enough.
+        invalidate();
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        canvas.translate(mMouseX, mMouseY);
+        mMousePointerDrawable.draw(canvas);
     }
 
     private void init(){
         // Setup mouse pointer
-        mMousePointerImageView.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_mouse_pointer, getContext().getTheme()));
-        mMousePointerImageView.post(() -> {
-            ViewGroup.LayoutParams params = mMousePointerImageView.getLayoutParams();
-            params.width = (int) (36 / 100f * LauncherPreferences.PREF_MOUSESCALE);
-            params.height = (int) (54 / 100f * LauncherPreferences.PREF_MOUSESCALE);
-        });
-        addView(mMousePointerImageView);
+        mMousePointerDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_mouse_pointer, getContext().getTheme());
+        // For some reason it's annotated as Nullable even though it doesn't seem to actually
+        // ever return null
+        assert mMousePointerDrawable != null;
+        mMousePointerDrawable.setBounds(
+                0, 0,
+                (int) (36 / 100f * LauncherPreferences.PREF_MOUSESCALE),
+                (int) (54 / 100f * LauncherPreferences.PREF_MOUSESCALE)
+        );
         setFocusable(false);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             setDefaultFocusHighlightEnabled(false);
