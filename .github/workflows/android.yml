@@ -140,5 +140,5 @@ jobs:
       - name: Upload UnSigned APK (without runtime)
         uses: actions/upload-artifact@v3
         with:
-          name: app-debug-noruntime-unsigned
+          name: app-release-noruntime-unsigned
           path: out/app-release-noruntime-unsigned.*
