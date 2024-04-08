@@ -75,6 +75,7 @@ public class MinecraftGLSurface extends View implements GrabListener {
 
     private final InGameEventProcessor mIngameProcessor = new InGameEventProcessor(mSensitivityFactor);
     private final InGUIEventProcessor mInGUIProcessor = new InGUIEventProcessor(mScaleFactor);
+    private TouchEventProcessor mCurrentTouchProcessor = mInGUIProcessor;
     private boolean mLastGrabState = false;
 
     public MinecraftGLSurface(Context context) {
@@ -181,18 +182,8 @@ public class MinecraftGLSurface extends View implements GrabListener {
             CallbackBridge.sendCursorPos(   e.getX(i) * mScaleFactor, e.getY(i) * mScaleFactor);
             return true; //mouse event handled successfully
         }
-
-        if(mIngameProcessor == null || mInGUIProcessor == null) return true;
-        boolean isGrabbing = CallbackBridge.isGrabbing();
-        if(mLastGrabState != isGrabbing) {
-            pickEventProcessor(mLastGrabState).cancelPendingActions();
-            mLastGrabState = isGrabbing;
-        }
-        return pickEventProcessor(isGrabbing).processTouchEvent(e);
-    }
-
-    private TouchEventProcessor pickEventProcessor(boolean isGrabbing) {
-        return isGrabbing ? mIngameProcessor : mInGUIProcessor;
+        if (mIngameProcessor == null || mInGUIProcessor == null) return true;
+        return mCurrentTouchProcessor.processTouchEvent(e);
     }
 
     /**
@@ -403,7 +394,16 @@ public class MinecraftGLSurface extends View implements GrabListener {
         post(()->updateGrabState(isGrabbing));
     }
 
+    private TouchEventProcessor pickEventProcessor(boolean isGrabbing) {
+        return isGrabbing ? mIngameProcessor : mInGUIProcessor;
+    }
+
     private void updateGrabState(boolean isGrabbing) {
+        if(mLastGrabState != isGrabbing) {
+            mCurrentTouchProcessor.cancelPendingActions();
+            mCurrentTouchProcessor = pickEventProcessor(isGrabbing);
+            mLastGrabState = isGrabbing;
+        }
         if(!MainActivity.isAndroid8OrHigher()) return;
 
         boolean hasPointerCapture = hasPointerCapture();
