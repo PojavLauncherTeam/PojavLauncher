@@ -76,6 +76,12 @@ jobs:
           gradle :app_pojavlauncher:assembleDebug
           mv app_pojavlauncher/build/outputs/apk/debug/app_pojavlauncher-debug.apk out/app-debug.apk
 
+      - name: Build ReleaseUnSigned .apk
+        run: |
+          # Build the launcher
+          gradle :app_pojavlauncher:assembleRelease
+          mv app_pojavlauncher/build/outputs/apk/release/app_pojavlauncher-release-unsigned.apk out/app-release-unsigned.apk
+
       - name: Build APK without runtime
         run: |
           rm -r app_pojavlauncher/src/main/assets/components/jre
@@ -86,6 +92,15 @@ jobs:
         run: |
           md5sum out/app-debug.apk > out/app-debug.md5
           md5sum out/app-debug-noruntime.apk > out/app-debug-noruntime.md5
+
+      - name: Build UnSigned APK without runtime
+        run: |
+          gradle assembleRelease
+          mv app_pojavlauncher/build/outputs/apk/release/app_pojavlauncher-release-unsigned.apk out/app-release-noruntime-unsigned.apk
+      - name: Gen md5sums
+        run: |
+          md5sum out/app-release-unsigned.apk > out/app-release-unsigned.md5
+          md5sum out/app-release-noruntime-unsigned.apk > out/app-release-noruntime-unsigned.md5
           
       - name: Upload APK
         uses: actions/upload-artifact@v3
@@ -115,3 +130,15 @@ jobs:
         with:
           name: app-debug-noruntime
           path: out/app-debug-noruntime.*
+
+      - name: Upload UnSigned APK
+        uses: actions/upload-artifact@v3
+        with:
+          name: app-release-unsigned
+          path: out/app-release-unsigned.*
+
+      - name: Upload UnSigned APK (without runtime)
+        uses: actions/upload-artifact@v3
+        with:
+          name: app-debug-noruntime-unsigned
+          path: out/app-release-noruntime-unsigned.*
