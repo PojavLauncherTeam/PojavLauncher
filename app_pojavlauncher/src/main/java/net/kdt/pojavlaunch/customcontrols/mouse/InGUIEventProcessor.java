@@ -46,6 +46,7 @@ public class InGUIEventProcessor implements TouchEventProcessor {
                     }
                 } else performScroll();
                 break;
+            case MotionEvent.ACTION_CANCEL:
             case MotionEvent.ACTION_UP:
                 resetScrollOvershoot();
                 mTracker.cancelTracking();
