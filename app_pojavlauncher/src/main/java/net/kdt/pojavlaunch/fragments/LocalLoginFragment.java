@@ -14,6 +14,8 @@ import net.kdt.pojavlaunch.extra.ExtraConstants;
 import net.kdt.pojavlaunch.extra.ExtraCore;
 
 import java.io.File;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class LocalLoginFragment extends Fragment {
     public static final String TAG = "LOCAL_LOGIN_FRAGMENT";
@@ -43,10 +45,13 @@ public class LocalLoginFragment extends Fragment {
 
         String text = mUsernameEditText.getText().toString();
 
+        Pattern pattern = Pattern.compile("[^a-zA-Z0-9_]");
+        Matcher matcher = pattern.matcher(text);
+
         return !(text.isEmpty()
                 || text.length() < 3
                 || text.length() > 16
-                || !text.matches("\\w+")
+                || matcher.find()
                 || new File(Tools.DIR_ACCOUNT_NEW + "/" + text + ".json").exists()
         );
     }
