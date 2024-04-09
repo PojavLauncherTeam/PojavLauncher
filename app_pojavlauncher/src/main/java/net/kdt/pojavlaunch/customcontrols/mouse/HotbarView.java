@@ -95,7 +95,11 @@ public class HotbarView extends View implements MCOptionUtils.MCOptionListener, 
         else mDropGesture.submit();
         // Determine the hotbar slot
         float x = event.getX();
-        if(x < 0 || x > mWidth) return true;
+        if(x < 0 || x > mWidth) {
+            // If out of bounds, cancel the hotbar gesture to avoid dropping items on last hotbar slots
+            mDropGesture.cancel();
+            return true;
+        }
         int hotbarIndex = (int)MathUtils.map(x, 0, mWidth, 0, HOTBAR_KEYS.length);
         // Check if the slot changed and we need to make a key press
         if(hotbarIndex == mLastIndex) {

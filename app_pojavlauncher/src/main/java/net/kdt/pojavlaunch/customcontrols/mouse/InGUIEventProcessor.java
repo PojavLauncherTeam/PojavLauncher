@@ -16,6 +16,7 @@ public class InGUIEventProcessor implements TouchEventProcessor {
     private AbstractTouchpad mTouchpad;
     private boolean mIsMouseDown = false;
     private final float mScaleFactor;
+    private float mScrollOvershootH, mScrollOvershootV;
     public static final float FINGER_SCROLL_THRESHOLD = Tools.dpToPx(6);
     public InGUIEventProcessor(float scaleFactor) {
         mSingleTapDetector = new GestureDetector(null, new SingleTapConfirm());
@@ -43,14 +44,10 @@ public class InGUIEventProcessor implements TouchEventProcessor {
                         sendTouchCoordinates(mainPointerX, mainPointerY);
                         if(!mIsMouseDown) enableMouse();
                     }
-                } else {
-                    float[] motionVector = mTracker.getMotionVector();
-                    int hScroll =  (int)(motionVector[0] / FINGER_SCROLL_THRESHOLD);
-                    int vScroll = (int)(motionVector[1] / FINGER_SCROLL_THRESHOLD);
-                    if(hScroll != 0 | vScroll != 0) CallbackBridge.sendScroll(hScroll, vScroll);
-                }
+                } else performScroll();
                 break;
             case MotionEvent.ACTION_UP:
+                resetScrollOvershoot();
                 mTracker.cancelTracking();
                 if(mIsMouseDown) disableMouse();
         }
@@ -66,10 +63,22 @@ public class InGUIEventProcessor implements TouchEventProcessor {
         mTouchpad = touchpad;
     }
 
+    private void performScroll() {
+        float[] motionVector = mTracker.getMotionVector();
+        float hScroll = (motionVector[0] / FINGER_SCROLL_THRESHOLD) + mScrollOvershootH;
+        float vScroll = (motionVector[1] / FINGER_SCROLL_THRESHOLD) + mScrollOvershootV;
+        int hScrollRound = (int) hScroll, vScrollRound = (int) vScroll;
+        if(hScrollRound != 0 || vScrollRound != 0) CallbackBridge.sendScroll(hScroll, vScroll);
+        mScrollOvershootH = hScroll - hScrollRound;
+        mScrollOvershootV = vScroll - vScrollRound;
+    }
+
+    private void resetScrollOvershoot() {
+        mScrollOvershootH = mScrollOvershootV = 0f;
+    }
+
     private void sendTouchCoordinates(float x, float y) {
-        CallbackBridge.mouseX = x * mScaleFactor;
-        CallbackBridge.mouseY = y * mScaleFactor;
-        CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
+        CallbackBridge.sendCursorPos( x * mScaleFactor, y * mScaleFactor);
     }
 
     private void enableMouse() {
@@ -89,6 +98,7 @@ public class InGUIEventProcessor implements TouchEventProcessor {
 
     @Override
     public void cancelPendingActions() {
+        resetScrollOvershoot();
         disableMouse();
     }
 }
