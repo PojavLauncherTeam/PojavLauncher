@@ -68,9 +68,7 @@ public class Touchpad extends View implements GrabListener, AbstractTouchpad {
     }
 
     private void sendMousePosition() {
-        CallbackBridge.mouseX = (mMouseX * mScaleFactor);
-        CallbackBridge.mouseY = (mMouseY * mScaleFactor);
-        CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
+        CallbackBridge.sendCursorPos((mMouseX * mScaleFactor), (mMouseY * mScaleFactor));
     }
 
     private void updateMousePosition() {
