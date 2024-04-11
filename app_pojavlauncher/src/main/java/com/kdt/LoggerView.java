@@ -22,9 +22,15 @@ import net.kdt.pojavlaunch.R;
  */
 public class LoggerView extends ConstraintLayout {
     private Logger.eventLogListener mLogListener;
-    private ToggleButton mToggleButton;
+    private ToggleButton mLogToggle;
     private ScrollView mScrollView;
+    /*
+     * android:descendantFocusability="blocksDescendants"
+     * This is set for the ScrollView, since under focus the TextView always autoscrolls.
+     * By not allowing focus, we are able to control its behaviour from the code that we have here.
+     */
     private TextView mLogTextView;
+    private boolean mAutoScroll = true;
 
 
     public LoggerView(@NonNull Context context) {
@@ -40,7 +46,7 @@ public class LoggerView extends ConstraintLayout {
     public void setVisibility(int visibility) {
         super.setVisibility(visibility);
         // Triggers the log view shown state by default when viewing it
-        mToggleButton.setChecked(visibility == VISIBLE);
+        mLogToggle.setChecked(visibility == VISIBLE);
     }
 
     /**
@@ -56,8 +62,8 @@ public class LoggerView extends ConstraintLayout {
         mLogTextView.setVisibility(GONE);
 
         // Toggle log visibility
-        mToggleButton = findViewById(R.id.content_log_toggle_log);
-        mToggleButton.setOnCheckedChangeListener(
+        mLogToggle = findViewById(R.id.content_log_toggle_log);
+        mLogToggle.setOnCheckedChangeListener(
                 (compoundButton, isChecked) -> {
                     mLogTextView.setVisibility(isChecked ? VISIBLE : GONE);
                     if(isChecked) {
@@ -68,7 +74,13 @@ public class LoggerView extends ConstraintLayout {
                         // NOTE: was tested by rapidly smashing the log on/off button, no sync issues found :)
                     }
                 });
-        mToggleButton.setChecked(false);
+        mLogToggle.setChecked(false);
+
+        ToggleButton autoscrollToggle = findViewById(R.id.content_log_toggle_autoscroll);
+        autoscrollToggle.setOnCheckedChangeListener(
+                (compoundButton, isChecked) -> mAutoScroll = isChecked
+        );
+        autoscrollToggle.setChecked(true);
 
         // Remove the loggerView from the user View
         ImageButton cancelButton = findViewById(R.id.log_view_cancel);
@@ -82,7 +94,7 @@ public class LoggerView extends ConstraintLayout {
             if(mLogTextView.getVisibility() != VISIBLE) return;
             post(() -> {
                 mLogTextView.append(text + '\n');
-                mScrollView.fullScroll(View.FOCUS_DOWN);
+                if(mAutoScroll) mScrollView.fullScroll(View.FOCUS_DOWN);
             });
 
         };
