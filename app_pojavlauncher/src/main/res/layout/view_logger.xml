@@ -54,13 +54,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ScrollView
+    <com.kdt.DefocusableScrollView
         android:id="@+id/content_log_scroll"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:alpha="0.8"
         android:background="#000000"
-        android:descendantFocusability="blocksDescendants"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/top_log_view">
 
@@ -70,6 +69,6 @@
             android:layout_height="wrap_content"
             android:textIsSelectable="true"/>
 
-    </ScrollView>
+    </com.kdt.DefocusableScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,7 +5,6 @@ import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -23,14 +22,8 @@ import net.kdt.pojavlaunch.R;
 public class LoggerView extends ConstraintLayout {
     private Logger.eventLogListener mLogListener;
     private ToggleButton mLogToggle;
-    private ScrollView mScrollView;
-    /*
-     * android:descendantFocusability="blocksDescendants"
-     * This is set for the ScrollView, since under focus the TextView always autoscrolls.
-     * By not allowing focus, we are able to control its behaviour from the code that we have here.
-     */
+    private DefocusableScrollView mScrollView;
     private TextView mLogTextView;
-    private boolean mAutoScroll = true;
 
 
     public LoggerView(@NonNull Context context) {
@@ -76,25 +69,30 @@ public class LoggerView extends ConstraintLayout {
                 });
         mLogToggle.setChecked(false);
 
-        ToggleButton autoscrollToggle = findViewById(R.id.content_log_toggle_autoscroll);
-        autoscrollToggle.setOnCheckedChangeListener(
-                (compoundButton, isChecked) -> mAutoScroll = isChecked
-        );
-        autoscrollToggle.setChecked(true);
-
         // Remove the loggerView from the user View
         ImageButton cancelButton = findViewById(R.id.log_view_cancel);
         cancelButton.setOnClickListener(view -> LoggerView.this.setVisibility(GONE));
 
         // Set the scroll view
         mScrollView = findViewById(R.id.content_log_scroll);
+        mScrollView.setKeepFocusing(true);
+
+        //Set up the autoscroll switch
+        ToggleButton autoscrollToggle = findViewById(R.id.content_log_toggle_autoscroll);
+        autoscrollToggle.setOnCheckedChangeListener(
+                (compoundButton, isChecked) -> {
+                    if(isChecked) mScrollView.fullScroll(View.FOCUS_DOWN);
+                    mScrollView.setKeepFocusing(isChecked);
+                }
+        );
+        autoscrollToggle.setChecked(true);
 
         // Listen to logs
         mLogListener = text -> {
             if(mLogTextView.getVisibility() != VISIBLE) return;
             post(() -> {
                 mLogTextView.append(text + '\n');
-                if(mAutoScroll) mScrollView.fullScroll(View.FOCUS_DOWN);
+                if(mScrollView.isKeepFocusing()) mScrollView.fullScroll(View.FOCUS_DOWN);
             });
 
         };
