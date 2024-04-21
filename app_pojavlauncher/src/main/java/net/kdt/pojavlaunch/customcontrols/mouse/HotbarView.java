@@ -141,6 +141,12 @@ public class HotbarView extends View implements MCOptionUtils.MCOptionListener, 
 
     @Override
     public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
-        if(v.equals(mParentView)) repositionView();
+        // We need to check whether dimensions match or not because here we are looking specifically for changes of dimensions
+        // and Android keeps calling this without dimensions actually changing for some reason.
+        if(v.equals(mParentView) && (left != oldLeft || right != oldRight || top != oldTop || bottom != oldBottom)) {
+            // Need to post this, because it is not correct to resize the view
+            // during a layout pass.
+            post(this::repositionView);
+        }
     }
 }

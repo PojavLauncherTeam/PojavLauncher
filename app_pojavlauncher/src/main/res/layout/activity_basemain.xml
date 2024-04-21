@@ -31,7 +31,7 @@
 				android:layout_width="match_parent"
 				android:orientation="vertical"
 				android:id="@+id/main_touchpad"
-				android:translationZ="1dp"
+				android:focusable="false"
 				android:visibility="gone"/>
 
 
