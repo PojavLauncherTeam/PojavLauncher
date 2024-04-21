@@ -15,18 +15,31 @@
         android:id="@+id/log_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingStart="25dp"
-        android:text="Log output:"
+        android:paddingHorizontal="25dp"
+        android:text="@string/log_view_label_log_output"
         android:textAppearance="?android:attr/textAppearanceMedium"
         app:layout_constraintBottom_toBottomOf="@+id/top_log_view"
         app:layout_constraintStart_toStartOf="@+id/top_log_view"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ToggleButton
+        android:id="@+id/content_log_toggle_autoscroll"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="10dp"
+        android:textOff="@string/log_view_button_scroll_off"
+        android:textOn="@string/log_view_button_scroll_on"
+        app:layout_constraintBottom_toBottomOf="@+id/top_log_view"
+        app:layout_constraintEnd_toStartOf="@+id/content_log_toggle_log"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ToggleButton
         android:id="@+id/content_log_toggle_log"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginHorizontal="10dp"
+        android:textOff="@string/log_view_button_output_off"
+        android:textOn="@string/log_view_button_output_on"
         app:layout_constraintBottom_toBottomOf="@+id/top_log_view"
         app:layout_constraintEnd_toStartOf="@+id/log_view_cancel"
         app:layout_constraintTop_toTopOf="parent" />
@@ -41,7 +54,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ScrollView
+    <com.kdt.DefocusableScrollView
         android:id="@+id/content_log_scroll"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -56,6 +69,6 @@
             android:layout_height="wrap_content"
             android:textIsSelectable="true"/>
 
-    </ScrollView>
+    </com.kdt.DefocusableScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

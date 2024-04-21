@@ -380,4 +380,9 @@
     <string name="auto_ram_subtitle">Enables automatic RAM adjuster</string>
     <string name="login_error_invalid_username">Invalid name, the name should be between 3-16 characters, should only contain A-Z, 0-9 and underscores.</string>
     <string name="login_microsoft">Microsoft login</string>
+    <string name="log_view_button_scroll_off">Autoscroll\nOFF</string>
+    <string name="log_view_button_scroll_on">Autoscroll\nON</string>
+    <string name="log_view_button_output_off">Output\nOFF</string>
+    <string name="log_view_button_output_on">Output\nON</string>
+    <string name="log_view_label_log_output">Log output:</string>
 </resources>
