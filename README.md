@@ -14,7 +14,7 @@
 
 * It can run almost every version of Minecraft, allowing you to use .jar only installers to install modloaders such as [Forge](https://files.minecraftforge.net/) and [Fabric](http://fabricmc.net/), mods like [OptiFine](https://optifine.net) and [LabyMod](https://www.labymod.net/en), as well as hack clients like [Wurst](https://www.wurstclient.net/), and much more!
 
-* For more details [check out our wiki](https://github.com/PojavLauncherTeam/PojavLauncher/wiki)
+* For more details [check out our wiki](https://pojavwiki.github.io)
 ## Some notes to start with
 - We do not have an official TikTok account. No one from the dev team makes TikTok videos. 
 - The official Twitter for PojavLauncher is [@PLaunchTeam](https://twitter.com/PLaunchTeam). Any others (most notably @PojavLauncher) are fake, please report them to Twitter's moderation team.
@@ -109,7 +109,7 @@ Then, run these commands ~~or build using Android Studio~~.
 - Controller mods aren't working.
 - Random crashes could happen very often on Android 5.x when loading the game or joining a world.
 - With big modpacks textures could be messed up
-- Probably more, that's why we have a bug tracker ;) 
+- Probably more, that's why we have a [bug tracker](https://github.com/PojavLauncherTeam/PojavLauncher/issues) ;)
 
 ## License
 - PojavLauncher is licensed under [GNU GPLv3](https://github.com/khanhduytran0/PojavLauncher/blob/master/LICENSE).
