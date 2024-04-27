@@ -10,6 +10,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.SurfaceTexture;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.InputDevice;
@@ -28,6 +29,7 @@ import androidx.annotation.RequiresApi;
 import net.kdt.pojavlaunch.customcontrols.ControlLayout;
 import net.kdt.pojavlaunch.customcontrols.gamepad.Gamepad;
 import net.kdt.pojavlaunch.customcontrols.mouse.AbstractTouchpad;
+import net.kdt.pojavlaunch.customcontrols.mouse.AndroidPointerCapture;
 import net.kdt.pojavlaunch.customcontrols.mouse.InGUIEventProcessor;
 import net.kdt.pojavlaunch.customcontrols.mouse.InGameEventProcessor;
 import net.kdt.pojavlaunch.customcontrols.mouse.TouchEventProcessor;
@@ -76,6 +78,7 @@ public class MinecraftGLSurface extends View implements GrabListener {
     private final InGameEventProcessor mIngameProcessor = new InGameEventProcessor(mSensitivityFactor);
     private final InGUIEventProcessor mInGUIProcessor = new InGUIEventProcessor(mScaleFactor);
     private TouchEventProcessor mCurrentTouchProcessor = mInGUIProcessor;
+    private AndroidPointerCapture mPointerCapture;
     private boolean mLastGrabState = false;
 
     public MinecraftGLSurface(Context context) {
@@ -87,6 +90,12 @@ public class MinecraftGLSurface extends View implements GrabListener {
         setFocusable(true);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void setUpPointerCapture(AbstractTouchpad touchpad) {
+        if(mPointerCapture != null) mPointerCapture.detach();
+        mPointerCapture = new AndroidPointerCapture(touchpad, this, mScaleFactor);
+    }
+
     /** Initialize the view and all its settings
      * @param isAlreadyRunning set to true to tell the view that the game is already running
      *                         (only updates the window without calling the start listener)
@@ -94,6 +103,7 @@ public class MinecraftGLSurface extends View implements GrabListener {
      *                 when the cursor is not grabbed
      */
     public void start(boolean isAlreadyRunning, AbstractTouchpad touchpad){
+        if(MainActivity.isAndroid8OrHigher()) setUpPointerCapture(touchpad);
         mInGUIProcessor.setAbstractTouchpad(touchpad);
         if(LauncherPreferences.PREF_USE_ALTERNATE_SURFACE){
             SurfaceView surfaceView = new SurfaceView(getContext());
@@ -162,7 +172,6 @@ public class MinecraftGLSurface extends View implements GrabListener {
 
     }
 
-
     /**
      * The touch event for both grabbed an non-grabbed mouse state on the touch screen
      * Does not cover the virtual mouse touchpad
@@ -175,7 +184,14 @@ public class MinecraftGLSurface extends View implements GrabListener {
 
         // Looking for a mouse to handle, won't have an effect if no mouse exists.
         for (int i = 0; i < e.getPointerCount(); i++) {
-            if(e.getToolType(i) != MotionEvent.TOOL_TYPE_MOUSE && e.getToolType(i) != MotionEvent.TOOL_TYPE_STYLUS ) continue;
+            int toolType = e.getToolType(i);
+            if(toolType == MotionEvent.TOOL_TYPE_MOUSE &&
+                    MainActivity.isAndroid8OrHigher() &&
+                    mPointerCapture != null) {
+                mPointerCapture.handleAutomaticCapture();
+                return true;
+            }
+            if(toolType != MotionEvent.TOOL_TYPE_STYLUS) continue;
 
             // Mouse found
             if(CallbackBridge.isGrabbing()) return false;
@@ -227,32 +243,6 @@ public class MinecraftGLSurface extends View implements GrabListener {
                 return sendMouseButtonUnconverted(event.getActionButton(),true);
             case MotionEvent.ACTION_BUTTON_RELEASE:
                 return sendMouseButtonUnconverted(event.getActionButton(),false);
-            default:
-                return false;
-        }
-    }
-
-    //TODO MOVE THIS SOMEWHERE ELSE
-    /** The input event for mouse with a captured pointer */
-    @RequiresApi(26)
-    @Override
-    public boolean dispatchCapturedPointerEvent(MotionEvent e) {
-        CallbackBridge.mouseX += (e.getX()* mScaleFactor);
-        CallbackBridge.mouseY += (e.getY()* mScaleFactor);
-
-        // Position is updated by many events, hence it is send regardless of the event value
-        CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
-
-        switch (e.getActionMasked()) {
-            case MotionEvent.ACTION_MOVE:
-                return true;
-            case MotionEvent.ACTION_BUTTON_PRESS:
-                return sendMouseButtonUnconverted(e.getActionButton(), true);
-            case MotionEvent.ACTION_BUTTON_RELEASE:
-                return sendMouseButtonUnconverted(e.getActionButton(), false);
-            case MotionEvent.ACTION_SCROLL:
-                CallbackBridge.sendScroll(e.getAxisValue(MotionEvent.AXIS_HSCROLL), e.getAxisValue(MotionEvent.AXIS_VSCROLL));
-                return true;
             default:
                 return false;
         }
@@ -404,29 +394,6 @@ public class MinecraftGLSurface extends View implements GrabListener {
             mCurrentTouchProcessor = pickEventProcessor(isGrabbing);
             mLastGrabState = isGrabbing;
         }
-        if(!MainActivity.isAndroid8OrHigher()) return;
-
-        boolean hasPointerCapture = hasPointerCapture();
-        if(isGrabbing){
-            if(!hasPointerCapture) {
-                requestFocus();
-                if(hasWindowFocus()) requestPointerCapture();
-                // Otherwise, onWindowFocusChanged() would get called.
-            }
-            return;
-        }
-
-        if(hasPointerCapture) {
-            releasePointerCapture();
-            clearFocus();
-        }
-    }
-
-    @Override
-    public void onWindowFocusChanged(boolean hasWindowFocus) {
-        super.onWindowFocusChanged(hasWindowFocus);
-        if(hasWindowFocus && CallbackBridge.isGrabbing() &&
-                MainActivity.isAndroid8OrHigher()) requestPointerCapture();
     }
 
     /** A small interface called when the listener is ready for the first time */
