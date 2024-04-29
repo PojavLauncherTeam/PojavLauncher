@@ -13,7 +13,9 @@ public interface AbstractTouchpad {
      * on the screen and send the new cursor position to the game.
      * @param vector the array that contains the vector
      */
-    void applyMotionVector(float[] vector);
+    default void applyMotionVector(float[] vector) {
+        applyMotionVector(vector[0], vector[1]);
+    }
 
     /**
      * Apply a motion vector to the mouse in form of the separate X/Y coordinates. This will move the mouse
