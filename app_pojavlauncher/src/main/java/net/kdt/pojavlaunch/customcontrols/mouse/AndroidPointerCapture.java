@@ -9,6 +9,7 @@ import androidx.annotation.RequiresApi;
 
 import net.kdt.pojavlaunch.MainActivity;
 import net.kdt.pojavlaunch.MinecraftGLSurface;
+import net.kdt.pojavlaunch.Tools;
 
 import org.lwjgl.glfw.CallbackBridge;
 
@@ -17,6 +18,7 @@ public class AndroidPointerCapture implements ViewTreeObserver.OnWindowFocusChan
     private final AbstractTouchpad mTouchpad;
     private final View mHostView;
     private final float mScaleFactor;
+    private final float mPointerPrescale = Tools.dpToPx(1);
 
     public AndroidPointerCapture(AbstractTouchpad touchpad, View hostView, float scaleFactor) {
         this.mScaleFactor = scaleFactor;
@@ -47,7 +49,7 @@ public class AndroidPointerCapture implements ViewTreeObserver.OnWindowFocusChan
     public boolean onCapturedPointer(View view, MotionEvent event) {
         if(!CallbackBridge.isGrabbing()) {
             enableTouchpadIfNecessary();
-            mTouchpad.applyMotionVector(event.getX(), event.getY());
+            mTouchpad.applyMotionVector(event.getX() * mPointerPrescale, event.getY() * mPointerPrescale);
         } else {
             // Position is updated by many events, hence it is send regardless of the event value
             CallbackBridge.mouseX += (event.getX() * mScaleFactor);
