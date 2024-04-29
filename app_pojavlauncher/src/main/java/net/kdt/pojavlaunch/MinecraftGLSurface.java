@@ -185,13 +185,13 @@ public class MinecraftGLSurface extends View implements GrabListener {
         // Looking for a mouse to handle, won't have an effect if no mouse exists.
         for (int i = 0; i < e.getPointerCount(); i++) {
             int toolType = e.getToolType(i);
-            if(toolType == MotionEvent.TOOL_TYPE_MOUSE &&
-                    MainActivity.isAndroid8OrHigher() &&
-                    mPointerCapture != null) {
-                mPointerCapture.handleAutomaticCapture();
-                return true;
-            }
-            if(toolType != MotionEvent.TOOL_TYPE_STYLUS) continue;
+            if(toolType == MotionEvent.TOOL_TYPE_MOUSE) {
+                if(MainActivity.isAndroid8OrHigher() &&
+                        mPointerCapture != null) {
+                    mPointerCapture.handleAutomaticCapture();
+                    return true;
+                }
+            }else if(toolType != MotionEvent.TOOL_TYPE_STYLUS) continue;
 
             // Mouse found
             if(CallbackBridge.isGrabbing()) return false;
