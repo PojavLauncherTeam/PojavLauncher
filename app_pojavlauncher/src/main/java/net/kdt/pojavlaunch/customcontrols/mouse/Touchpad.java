@@ -41,13 +41,13 @@ public class Touchpad extends View implements GrabListener, AbstractTouchpad {
     }
 
     /** Enable the touchpad */
-    private void privateEnable(){
+    private void _enable(){
         setVisibility(VISIBLE);
         placeMouseAt(currentDisplayMetrics.widthPixels / 2f, currentDisplayMetrics.heightPixels / 2f);
     }
 
     /** Disable the touchpad and hides the mouse */
-    private void privateDisable(){
+    private void _disable(){
         setVisibility(GONE);
     }
 
@@ -55,8 +55,8 @@ public class Touchpad extends View implements GrabListener, AbstractTouchpad {
     public boolean switchState(){
         mDisplayState = !mDisplayState;
         if(!CallbackBridge.isGrabbing()) {
-            if(mDisplayState) privateEnable();
-            else privateDisable();
+            if(mDisplayState) _enable();
+            else _disable();
         }
         return mDisplayState;
     }
@@ -112,21 +112,16 @@ public class Touchpad extends View implements GrabListener, AbstractTouchpad {
     }
     private void updateGrabState(boolean isGrabbing) {
         if(!isGrabbing) {
-            if(mDisplayState && getVisibility() != VISIBLE) privateEnable();
-            if(!mDisplayState && getVisibility() == VISIBLE) privateDisable();
+            if(mDisplayState && getVisibility() != VISIBLE) _enable();
+            if(!mDisplayState && getVisibility() == VISIBLE) _disable();
         }else{
-            if(getVisibility() != View.GONE) privateDisable();
+            if(getVisibility() != View.GONE) _disable();
         }
     }
 
     @Override
     public boolean getDisplayState() {
         return mDisplayState;
-    }
-
-    @Override
-    public void applyMotionVector(float[] vector) {
-        applyMotionVector(vector[0], vector[1]);
     }
 
     @Override
@@ -141,15 +136,13 @@ public class Touchpad extends View implements GrabListener, AbstractTouchpad {
         if(mDisplayState) return;
         mDisplayState = true;
         if(supposed && CallbackBridge.isGrabbing()) return;
-        privateEnable();
-
+        _enable();
     }
 
     @Override
     public void disable() {
         if(!mDisplayState) return;
         mDisplayState = false;
-        privateDisable();
-
+        _disable();
     }
 }
