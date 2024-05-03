@@ -9,7 +9,7 @@
     <!-- Languages list part -->
 
     <!-- Login strings -->
-    <string name="login_online_username_hint">Email or username</string>
+    <string name="login_online_username_hint">Username</string>
     <string name="login_online_login_label">Login</string>
 
     <!-- Hint -->
