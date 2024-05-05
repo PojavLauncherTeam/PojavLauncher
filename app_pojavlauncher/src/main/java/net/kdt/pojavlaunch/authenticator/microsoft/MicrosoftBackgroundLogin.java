@@ -40,6 +40,7 @@ public class MicrosoftBackgroundLogin {
     private static final String xstsAuthUrl = "https://xsts.auth.xboxlive.com/xsts/authorize";
     private static final String mcLoginUrl = "https://api.minecraftservices.com/authentication/login_with_xbox";
     private static final String mcProfileUrl = "https://api.minecraftservices.com/minecraft/profile";
+    private static final String mcStoreUrl = "https://api.minecraftservices.com/entitlements/mcstore";
 
     private final boolean mIsRefresh;
     private final String mAuthCode;
@@ -81,6 +82,7 @@ public class MicrosoftBackgroundLogin {
                 notifyProgress(progressListener, 4);
                 String mcToken = acquireMinecraftToken(xsts[0], xsts[1]);
                 notifyProgress(progressListener, 5);
+                fetchOwnedItems(mcToken);
                 checkMcProfile(mcToken);
 
                 MinecraftAccount acc = MinecraftAccount.load(mcName);
@@ -253,6 +255,21 @@ public class MicrosoftBackgroundLogin {
         }else{
             throw getResponseThrowable(conn);
         }
+    }
+
+    private void fetchOwnedItems(String mcAccessToken) throws IOException {
+        URL url = new URL(mcStoreUrl);
+
+        HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+        conn.setRequestProperty("Authorization", "Bearer " + mcAccessToken);
+        conn.setUseCaches(false);
+        conn.connect();
+        if(conn.getResponseCode() < 200 || conn.getResponseCode() >= 300) {
+            throw getResponseThrowable(conn);
+        }
+        // We don't need any data from this request, it just needs to happen in order for
+        // the MS servers to work properly. The data from this is practically useless
+        // as it does not indicate whether the user owns the game through Game Pass.
     }
 
     private void checkMcProfile(String mcAccessToken) throws IOException, JSONException {

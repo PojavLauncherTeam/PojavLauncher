@@ -137,7 +137,11 @@ public class DownloadUtils {
 
     public static <T> T ensureSha1(File outputFile, @Nullable String sha1, Callable<T> downloadFunction) throws IOException {
         // Skip if needed
-        if(sha1 == null) return downloadFile(downloadFunction);
+        if(sha1 == null) {
+            // If the file exists and we don't know it's SHA1, don't try to redownload it.
+            if(outputFile.exists()) return null;
+            else return downloadFile(downloadFunction);
+        }
 
         int attempts = 0;
         boolean fileOkay = verifyFile(outputFile, sha1);

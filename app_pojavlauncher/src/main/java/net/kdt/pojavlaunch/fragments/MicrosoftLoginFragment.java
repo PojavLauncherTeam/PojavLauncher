@@ -25,6 +25,8 @@ import net.kdt.pojavlaunch.extra.ExtraCore;
 public class MicrosoftLoginFragment extends Fragment {
     public static final String TAG = "MICROSOFT_LOGIN_FRAGMENT";
     private WebView mWebview;
+    // Technically the client is blank (or there is none) when the fragment is initialized
+    private boolean mBlankClient = true;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -43,6 +45,7 @@ public class MicrosoftLoginFragment extends Fragment {
         WebSettings settings = mWebview.getSettings();
         settings.setJavaScriptEnabled(true);
         mWebview.setWebViewClient(new WebViewTrackClient());
+        mBlankClient = false;
     }
 
     private void startNewSession() {
@@ -70,13 +73,24 @@ public class MicrosoftLoginFragment extends Fragment {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        // If we have switched to a blank client and haven't fully gone though the lifecycle callbacks to restore it,
+        // restore it here.
+        if(mBlankClient) mWebview.setWebViewClient(new WebViewTrackClient());
+    }
+
+    @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
-        // Since the value cannot be null, just creaqte a "blank" client. This is done to not let Android
-        // kill us if something happens after onSaveInstanceState
+        // Since the value cannot be null, just create a "blank" client. This is done to not let Android
+        // kill us if something happens after the state gets saved, when we can't do fragment transitions
         mWebview.setWebViewClient(new WebViewClient());
-        mWebview.saveState(outState);
+        // For some dumb reason state is saved even when Android won't actually destroy the activity.
+        // Let the fragment know that the client is blank so that we can restore it in onStart()
+        // (it was the earliest lifecycle call actually invoked in this case)
+        mBlankClient = true;
         super.onSaveInstanceState(outState);
-        // if something happens after this, well, too bad
+        mWebview.saveState(outState);
     }
 
     /* Expose webview actions to others */

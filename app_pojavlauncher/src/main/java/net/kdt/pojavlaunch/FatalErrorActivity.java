@@ -1,10 +1,13 @@
 package net.kdt.pojavlaunch;
 
-import android.content.*;
-import android.os.*;
-import androidx.appcompat.app.*;
-import android.util.*;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class FatalErrorActivity extends AppCompatActivity {
 
@@ -13,8 +16,13 @@ public class FatalErrorActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		
 		Bundle extras = getIntent().getExtras();
-		boolean storageAllow = extras.getBoolean("storageAllow");
-		final String stackTrace = Log.getStackTraceString((Throwable) extras.getSerializable("throwable"));
+		if(extras == null) {
+			finish();
+			return;
+		}
+		boolean storageAllow = extras.getBoolean("storageAllow", false);
+		Throwable throwable = (Throwable) extras.getSerializable("throwable");
+		final String stackTrace = throwable != null ? Tools.printToString(throwable) : "<null>";
 		String strSavePath = extras.getString("savePath");
 		String errHeader = storageAllow ?
 			"Crash stack trace saved to " + strSavePath + "." :

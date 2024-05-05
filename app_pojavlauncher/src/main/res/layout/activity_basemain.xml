@@ -26,11 +26,12 @@
 				android:layout_height="fill_parent"
 				/>
 
-			<net.kdt.pojavlaunch.Touchpad
+			<net.kdt.pojavlaunch.customcontrols.mouse.Touchpad
 				android:layout_height="match_parent"
 				android:layout_width="match_parent"
 				android:orientation="vertical"
 				android:id="@+id/main_touchpad"
+				android:focusable="false"
 				android:translationZ="1dp"
 				android:visibility="gone"/>
 
@@ -51,6 +52,9 @@
 				android:layout_height="12dp"
 				android:elevation="10dp"
 				android:layout_gravity="center_horizontal"/>
+			<net.kdt.pojavlaunch.customcontrols.mouse.HotbarView
+				android:layout_width="0px"
+				android:layout_height="0px"/>
 
 		</net.kdt.pojavlaunch.customcontrols.ControlLayout>
 
