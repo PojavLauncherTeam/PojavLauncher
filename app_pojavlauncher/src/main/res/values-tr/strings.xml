@@ -290,4 +290,6 @@
     <string name="notif_error_occured">bir hata oluştu</string>
     <string name="notif_error_occured_desc">Daha fazla ayrıntı görmek için tıklayın</string>
     <string name="fabric_dl_only_stable">Sadece kararlı sürümleri göster</string>
+    <string name="auto_ram_title">Otomatik BELLEK</string>
+    <string name="auto_ram_subtitle">Otomatik BELLEK yükselticiyi aktifleştirir</string>
 </resources>

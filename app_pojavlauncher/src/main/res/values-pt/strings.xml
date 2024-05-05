@@ -158,4 +158,6 @@
     <string name="arc_capes_title">Capas da \'Comestica\'</string>
     <string name="arc_capes_desc">Habilitar capas da Cosmetica(antigamente Arc). Para mais informações por favor visite https://cosmetica.cc. Isto Requer OptiFine.</string>
     <string name="of_dl_progress">A transferir %s</string>
+    <string name="auto_ram_title">Auto RAM</string>
+    <string name="auto_ram_subtitle">Ativar ajuste automático de RAM</string>
 </resources>

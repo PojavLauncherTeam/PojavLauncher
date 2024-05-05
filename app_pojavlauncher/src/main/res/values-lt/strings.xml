@@ -173,4 +173,6 @@
     <string name="xerr_no_account">Atrodo kad tu neturi Xbox Live accounta. Prašau prisijungti kartą į https://minecraft.net/ ir pabandyt dar kartą.</string>
     <string name="xerr_not_available">Xbox Live nėra jūsų šalyje</string>
     <string name="of_dl_progress">Atsisiunčiama %s</string>
+    <string name="auto_ram_title">Automatiškas RAM</string>
+    <string name="auto_ram_subtitle">Įjungia automatišką RAM keitėją</string>
 </resources>

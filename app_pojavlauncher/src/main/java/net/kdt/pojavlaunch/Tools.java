@@ -169,18 +169,21 @@ public final class Tools {
 
     public static void launchMinecraft(final AppCompatActivity activity, MinecraftAccount minecraftAccount,
                                        MinecraftProfile minecraftProfile, String versionId, int versionJavaRequirement) throws Throwable {
-        int freeDeviceMemory = getFreeDeviceMemory(activity);
-        if(LauncherPreferences.PREF_RAM_ALLOCATION > freeDeviceMemory) {
-            LifecycleAwareAlertDialog.DialogCreator dialogCreator = (dialog, builder) ->
-                builder.setMessage(activity.getString(R.string.memory_warning_msg, freeDeviceMemory, LauncherPreferences.PREF_RAM_ALLOCATION))
-                        .setPositiveButton(android.R.string.ok, (d, w)->{});
+        if(LauncherPreferences.DEFAULT_PREF.getBoolean("autoRam",true)) {
+            int freeDeviceMemory = getFreeDeviceMemory(activity);
+            if(LauncherPreferences.PREF_RAM_ALLOCATION > freeDeviceMemory) {
+                LifecycleAwareAlertDialog.DialogCreator dialogCreator = (dialog, builder) ->
+                        builder.setMessage(activity.getString(R.string.memory_warning_msg, freeDeviceMemory, LauncherPreferences.PREF_RAM_ALLOCATION))
+                                .setPositiveButton(android.R.string.ok, (d, w)->{});
 
-            if(LifecycleAwareAlertDialog.haltOnDialog(activity.getLifecycle(), activity, dialogCreator)) {
-                return; // If the dialog's lifecycle has ended, return without
-                // actually launching the game, thus giving us the opportunity
-                // to start after the activity is shown again
+                if(LifecycleAwareAlertDialog.haltOnDialog(activity.getLifecycle(), activity, dialogCreator)) {
+                    return; // If the dialog's lifecycle has ended, return without
+                    // actually launching the game, thus giving us the opportunity
+                    // to start after the activity is shown again
+                }
             }
         }
+
         Runtime runtime = MultiRTUtils.forceReread(Tools.pickRuntime(minecraftProfile, versionJavaRequirement));
         JMinecraftVersionList.Version versionInfo = Tools.getVersionInfo(versionId);
         LauncherProfiles.load();

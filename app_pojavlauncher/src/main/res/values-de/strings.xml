@@ -273,4 +273,6 @@
     <string name="notif_error_occured">Es ist ein Fehler aufgetreten</string>
     <string name="notif_error_occured_desc">Klicke um mehr Details zu sehen</string>
     <string name="fabric_dl_only_stable">Nur stabile Versionen anzeigen</string>
+    <string name="auto_ram_title">Auto-RAM</string>
+    <string name="auto_ram_subtitle">Aktiviert automatische RAM-Einstellungen</string>
 </resources>

@@ -65,7 +65,7 @@
     <string name="global_error">Ошибка</string>
     <string name="global_load">Загрузить</string>
     <string name="global_name">Имя</string>
-    <string name="global_remove">  Удалить  </string>
+    <string name="global_remove">"Удалить  "</string>
     <string name="global_clone">Копировать</string>
     <string name="global_restart">Перезапуск</string>
     <string name="global_save">Сохранить</string>
@@ -297,4 +297,44 @@
     <string name="notif_error_occured">Возникла ошибка</string>
     <string name="notif_error_occured_desc">Нажмите для получения дополнительных сведений</string>
     <string name="fabric_dl_only_stable">Только стабильные версии</string>
+    <string name="login_error_invalid_username">Недопустимое имя, длина имени должна составлять от 3 до 16 символов, оно должно содержать только А-Я, 0-9 и подчеркивания.</string>
+    <string name="login_microsoft">Логин Microsoft</string>
+    <string name="customctrl_absolute_tracking">Абсолютное отслеживание пальцев</string>
+    <string name="dl_tampered_manifest_title">Предупреждение о проверке файла</string>
+    <string name="dl_tampered_manifest">"<![CDATA[Манифест версии игры на зеркале не соответствует официальному манифесту версии Mojang, что означает, что он, возможно, был изменен.<br/>
+        <b>Это небезопасно. Если вы продолжите, ваша личная информация может оказаться под угрозой.</b><br/>
+        Если вы все еще хотите использовать зеркало, нажмите \"Отключить проверку манифеста\" и запустите загрузку снова.<br/>
+        Если вы хотите использовать официальный источник загрузки, нажмите \"Переключить на официальный источник\" и запустите загрузку заново.<br/>]]>
+    </string>
+    <string name="dl_turn_off_manifest_checks">Отключить проверку манифеста</string>
+    <string name="dl_switch_to_official_site">Переключить на официальный источник</string>
+    <string name="preference_download_source_title">Источник загрузки игры</string>
+    <string name="preference_download_source_description">Выберите зеркало для загрузки вместо использования официального сервера загрузки</string>
+    <string name="preference_verify_manifest_title">Проверять манифест версии игры</string>
+    <string name="preference_verify_manifest_description">Если включено, лаунчер будет проверять манифест версии игры вместе с библиотеками</string>
+    <string name="notif_download_finished">Игра готова к запуску</string>
+    <string name="notif_download_finished_desc">Нажмите здесь, чтобы запустить!</string>
+    <string name="preference_category_gestures">Жесты</string>
+    <string name="preference_category_buttons">Кнопки</string>
+    <string name="preference_category_experimental_settings">Экспериментальная хрень</string>
+    <string name="preference_category_java_tweaks">Твики Java</string>
+    <string name="preference_category_main_categories">Категории</string>
+    <string name="preference_category_miscellaneous">Прочие настройки</string>
+    <string name="preference_category_video">Настройки видео</string>
+    <string name="notification_permission_dialog_title">Запрос разрешения</string>
+    <string name="notification_permission_dialog_text">PojavLauncher требует разрешения на отправку уведомлений, чтобы предотвратить остановку загрузки игры/модпаков при выходе из приложения. Без этого разрешения Android может отключить ваши загрузки при переводе PojavLauncher в фоновый режим</string>
+    <string name="notification_permission_toast">Вы всегда можете изменить решение, зайдя в Настройки</string>
+    <string name="preference_ask_for_notification_title">Разрешить уведомления</string>
+    <string name="preference_ask_for_notification_description">Нажать для повторного запроса разрешения на уведомления, необходимых для правильной работы фоновой загрузки игры/модпаков</string>
+    <string name="preference_vsync_in_zink_title">Разрешить V-Sync с Zink</string>
+    <string name="preference_vsync_in_zink_description">Позволяет лаунчеру использовать внутренние системные API для включения VSync для Zink. Отключите это, если лаунчер вылетает с Zink после обновления системы.</string>
+    <string name="exception_failed_to_unpack_jre17">Ошибка установки JRE 17</string>
+    <string name="newdl_starting">Чтение игровых метаданных…</string>
+    <string name="newdl_downloading_metadata">Загрузка игровых метаданных (%s)</string>
+    <string name="newdl_downloading_game_files">Загрузка файлов игры... (%d/%d, %.2f MB)</string>
+    <string name="cropper_title">Выберите область отображения</string>
+    <string name="cropper_reset">Сброс</string>
+    <string name="cropper_select_cancelled">Выбор отменен</string>
+    <string name="auto_ram_title">Автоматическое выделение ОЗУ</string>
+    <string name="auto_ram_subtitle">Автоматически управляет количеством выделенного ОЗУ</string>
 </resources>
