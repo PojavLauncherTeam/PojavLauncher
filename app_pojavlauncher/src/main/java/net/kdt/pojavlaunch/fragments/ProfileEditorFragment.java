@@ -122,6 +122,8 @@ public class ProfileEditorFragment extends Fragment implements CropperUtils.Crop
             Bundle bundle = new Bundle(3);
             bundle.putBoolean(FileSelectorFragment.BUNDLE_SELECT_FOLDER, false);
             bundle.putString(FileSelectorFragment.BUNDLE_ROOT_PATH, Tools.CTRLMAP_PATH);
+            mValueToConsume = FileSelectorFragment.BUNDLE_SELECT_FILE;
+
             Tools.swapFragment(requireActivity(),
                     FileSelectorFragment.class, FileSelectorFragment.TAG, bundle);
         });
