@@ -89,7 +89,8 @@ public class SearchModFragment extends Fragment implements ModItemAdapter.Search
             mSearchProgressBar.setVisibility(View.VISIBLE);
             mSearchFilters.name = mSearchEditText.getText().toString();
             mModItemAdapter.performSearchQuery(mSearchFilters);
-            return true;
+            mSearchEditText.clearFocus();
+            return false;
         });
 
         mOverlay.post(()->{
