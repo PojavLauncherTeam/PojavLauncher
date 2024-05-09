@@ -12,5 +12,4 @@
                 android:color="@color/minebutton_color"/>
         </shape>
     </item>
-    <item android:drawable="?attr/selectableItemBackground"/>
 </layer-list>

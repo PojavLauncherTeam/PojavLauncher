@@ -25,6 +25,7 @@ import java.io.File;
 public class FileSelectorFragment extends Fragment {
     public static final String TAG = "FileSelectorFragment";
     public static final String BUNDLE_SELECT_FOLDER = "select_folder";
+    public static final String BUNDLE_SELECT_FILE = "select_file";
     public static final String BUNDLE_SHOW_FILE = "show_file";
     public static final String BUNDLE_SHOW_FOLDER = "show_folder";
     public static final String BUNDLE_ROOT_PATH = "root_path";

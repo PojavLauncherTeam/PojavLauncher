@@ -37,8 +37,9 @@
     <TextView
         android:id="@+id/mod_title_textview"
         style="@style/TextAppearance.AppCompat.Body2"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:maxLines="1"
         android:layout_marginStart="@dimen/padding_moderate"
         android:ellipsize="end"
 
