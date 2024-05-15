@@ -12,16 +12,21 @@ import org.lwjgl.glfw.CallbackBridge;
 
 public class InGUIEventProcessor implements TouchEventProcessor {
     public static final float FINGER_SCROLL_THRESHOLD = Tools.dpToPx(6);
+    public static final float FINGER_STILL_THRESHOLD = Tools.dpToPx(5);
+
     private final PointerTracker mTracker = new PointerTracker();
-    private final GestureDetector mSingleTapDetector;
+    private final TapDetector mSingleTapDetector;
     private AbstractTouchpad mTouchpad;
     private boolean mIsMouseDown = false;
+    private float mStartX, mStartY;
     private final float mScaleFactor;
     private final Scroller mScroller = new Scroller(FINGER_SCROLL_THRESHOLD);
+
     public InGUIEventProcessor(float scaleFactor) {
-        mSingleTapDetector = new GestureDetector(null, new SingleTapConfirm());
+        mSingleTapDetector = new TapDetector(1, TapDetector.DETECTION_METHOD_BOTH);
         mScaleFactor = scaleFactor;
     }
+
     @Override
     public boolean processTouchEvent(MotionEvent motionEvent) {
         switch (motionEvent.getActionMasked()) {
@@ -29,30 +34,46 @@ public class InGUIEventProcessor implements TouchEventProcessor {
                 mTracker.startTracking(motionEvent);
                 if(!touchpadDisplayed()) {
                     sendTouchCoordinates(motionEvent.getX(), motionEvent.getY());
-                    enableMouse();
+
+                    // disabled gestures means no scrolling possible, send gesture early
+                    if (LauncherPreferences.PREF_DISABLE_GESTURES)
+                        enableMouse();
+                    else {
+                        mStartX = motionEvent.getX();
+                        mStartY = motionEvent.getY();
+                    }
+
                 }
                 break;
+
             case MotionEvent.ACTION_MOVE:
                 int pointerCount = motionEvent.getPointerCount();
                 int pointerIndex = mTracker.trackEvent(motionEvent);
                 if(pointerCount == 1 || LauncherPreferences.PREF_DISABLE_GESTURES) {
                     if(touchpadDisplayed()) {
                         mTouchpad.applyMotionVector(mTracker.getMotionVector());
-                    }else {
+                    } else {
                         float mainPointerX = motionEvent.getX(pointerIndex);
                         float mainPointerY = motionEvent.getY(pointerIndex);
                         sendTouchCoordinates(mainPointerX, mainPointerY);
-                        if(!mIsMouseDown) enableMouse();
+
+
+                        if(!mIsMouseDown && !LeftClickGesture.isFingerStill(mStartX, mStartY, FINGER_STILL_THRESHOLD))
+                            enableMouse();
                     }
                 } else mScroller.performScroll(mTracker.getMotionVector());
                 break;
+
             case MotionEvent.ACTION_CANCEL:
             case MotionEvent.ACTION_UP:
                 mScroller.resetScrollOvershoot();
                 mTracker.cancelTracking();
                 if(mIsMouseDown) disableMouse();
         }
-        if(touchpadDisplayed() && mSingleTapDetector.onTouchEvent(motionEvent)) clickMouse();
+
+        if((!LauncherPreferences.PREF_DISABLE_GESTURES || touchpadDisplayed()) && mSingleTapDetector.onTouchEvent(motionEvent)) {
+            clickMouse();
+        }
         return true;
     }
 
