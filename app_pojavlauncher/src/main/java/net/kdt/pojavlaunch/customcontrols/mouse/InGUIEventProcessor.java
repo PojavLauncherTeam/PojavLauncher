@@ -36,13 +36,8 @@ public class InGUIEventProcessor implements TouchEventProcessor {
                     sendTouchCoordinates(motionEvent.getX(), motionEvent.getY());
 
                     // disabled gestures means no scrolling possible, send gesture early
-                    if (LauncherPreferences.PREF_DISABLE_GESTURES)
-                        enableMouse();
-                    else {
-                        mStartX = motionEvent.getX();
-                        mStartY = motionEvent.getY();
-                    }
-
+                    if (LauncherPreferences.PREF_DISABLE_GESTURES) enableMouse();
+                    else setGestureStart(motionEvent);
                 }
                 break;
 
@@ -57,9 +52,12 @@ public class InGUIEventProcessor implements TouchEventProcessor {
                         float mainPointerY = motionEvent.getY(pointerIndex);
                         sendTouchCoordinates(mainPointerX, mainPointerY);
 
+                        if(!mIsMouseDown) {
+                            if(!hasGestureStarted()) setGestureStart(motionEvent);
+                            if(!LeftClickGesture.isFingerStill(mStartX, mStartY, FINGER_STILL_THRESHOLD))
+                                enableMouse();
+                        }
 
-                        if(!mIsMouseDown && !LeftClickGesture.isFingerStill(mStartX, mStartY, FINGER_STILL_THRESHOLD))
-                            enableMouse();
                     }
                 } else mScroller.performScroll(mTracker.getMotionVector());
                 break;
@@ -69,6 +67,7 @@ public class InGUIEventProcessor implements TouchEventProcessor {
                 mScroller.resetScrollOvershoot();
                 mTracker.cancelTracking();
                 if(mIsMouseDown) disableMouse();
+                resetGesture();
         }
 
         if((!LauncherPreferences.PREF_DISABLE_GESTURES || touchpadDisplayed()) && mSingleTapDetector.onTouchEvent(motionEvent)) {
@@ -102,6 +101,19 @@ public class InGUIEventProcessor implements TouchEventProcessor {
     private void clickMouse() {
         CallbackBridge.sendMouseButton(LwjglGlfwKeycode.GLFW_MOUSE_BUTTON_LEFT, true);
         CallbackBridge.sendMouseButton(LwjglGlfwKeycode.GLFW_MOUSE_BUTTON_LEFT, false);
+    }
+
+    private void setGestureStart(MotionEvent event) {
+        mStartX = event.getX();
+        mStartY = event.getY();
+    }
+
+    private void resetGesture() {
+        mStartX = mStartY = -1;
+    }
+
+    private boolean hasGestureStarted() {
+        return mStartX != -1 || mStartY != -1;
     }
 
     @Override
