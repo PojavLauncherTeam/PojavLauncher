@@ -86,9 +86,7 @@ public class SearchModFragment extends Fragment implements ModItemAdapter.Search
         mRecyclerview.addOnScrollListener(mOverlayPositionListener);
 
         mSearchEditText.setOnEditorActionListener((v, actionId, event) -> {
-            mSearchProgressBar.setVisibility(View.VISIBLE);
-            mSearchFilters.name = mSearchEditText.getText().toString();
-            mModItemAdapter.performSearchQuery(mSearchFilters);
+            searchMods(mSearchEditText.getText().toString());
             mSearchEditText.clearFocus();
             return false;
         });
@@ -101,6 +99,8 @@ public class SearchModFragment extends Fragment implements ModItemAdapter.Search
                    mRecyclerview.getPaddingBottom());
         });
         mFilterButton.setOnClickListener(v -> displayFilterDialog());
+
+        searchMods(null);
     }
 
     @Override
@@ -132,6 +132,12 @@ public class SearchModFragment extends Fragment implements ModItemAdapter.Search
         }
     }
 
+    private void searchMods(String name) {
+        mSearchProgressBar.setVisibility(View.VISIBLE);
+        mSearchFilters.name = name == null ? "" : name;
+        mModItemAdapter.performSearchQuery(mSearchFilters);
+    }
+
     private void displayFilterDialog() {
         AlertDialog dialog = new AlertDialog.Builder(requireContext())
                 .setView(R.layout.dialog_mod_filters)
@@ -156,6 +162,7 @@ public class SearchModFragment extends Fragment implements ModItemAdapter.Search
             // Apply the new settings
             mApplyButton.setOnClickListener(v -> {
                 mSearchFilters.mcVersion = mSelectedVersion.getText().toString();
+                searchMods(mSearchEditText.getText().toString());
                 dialogInterface.dismiss();
             });
         });
