@@ -172,9 +172,9 @@ public final class Tools {
     public static void launchMinecraft(final AppCompatActivity activity, MinecraftAccount minecraftAccount,
                                        MinecraftProfile minecraftProfile, String versionId, int versionJavaRequirement) throws Throwable {
         int freeDeviceMemory = getFreeDeviceMemory(activity);
-        int freeAddressSpace = getMaxContinuousAddressSpaceSize();
         int localeString;
-        Log.i("MemStat", "Free RAM: "+freeDeviceMemory+" Addressable: "+freeAddressSpace);
+        int freeAddressSpace = Architecture.is32BitsDevice() ? getMaxContinuousAddressSpaceSize() : -1;
+        Log.i("MemStat", "Free RAM: " + freeDeviceMemory + " Addressable: " + freeAddressSpace);
         if(freeDeviceMemory > freeAddressSpace && freeAddressSpace != -1) {
             freeDeviceMemory = freeAddressSpace;
             localeString = R.string.address_memory_warning_msg;
