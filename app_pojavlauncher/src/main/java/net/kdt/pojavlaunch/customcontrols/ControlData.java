@@ -44,7 +44,7 @@ public class ControlData {
     }
 
     // Internal usage only
-    public boolean isHideable;
+    public transient boolean isHideable;
     /**
      * Both fields below are dynamic position data, auto updates
      * X and Y position, unlike the original one which uses fixed
