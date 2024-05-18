@@ -38,7 +38,7 @@ public class RightClickGesture extends ValidatorGesture{
     public void onGestureCancelled(boolean isSwitching) {
         mGestureEnabled = true;
         if(!mGestureValid || isSwitching) return;
-        boolean fingerStill = LeftClickGesture.isFingerStill(mGestureStartX, mGestureStartY);
+        boolean fingerStill = LeftClickGesture.isFingerStill(mGestureStartX, mGestureStartY, LeftClickGesture.FINGER_STILL_THRESHOLD);
         if(!fingerStill) return;
         CallbackBridge.sendMouseButton(LwjglGlfwKeycode.GLFW_MOUSE_BUTTON_RIGHT, true);
         CallbackBridge.sendMouseButton(LwjglGlfwKeycode.GLFW_MOUSE_BUTTON_RIGHT, false);

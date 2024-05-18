@@ -29,7 +29,7 @@ public class LeftClickGesture extends ValidatorGesture {
 
     @Override
     public boolean checkAndTrigger() {
-        boolean fingerStill = LeftClickGesture.isFingerStill(mGestureStartX, mGestureStartY);
+        boolean fingerStill = LeftClickGesture.isFingerStill(mGestureStartX, mGestureStartY, FINGER_STILL_THRESHOLD);
         // If the finger is still, fire the gesture.
         if(fingerStill) {
             sendMouseButton(LwjglGlfwKeycode.GLFW_MOUSE_BUTTON_LEFT, true);
@@ -53,12 +53,12 @@ public class LeftClickGesture extends ValidatorGesture {
      * @param startY the starting Y of the gesture
      * @return whether the finger's position counts as "still" or not
      */
-    public static boolean isFingerStill(float startX, float startY) {
+    public static boolean isFingerStill(float startX, float startY, float threshold) {
         return MathUtils.dist(
                 CallbackBridge.mouseX,
                 CallbackBridge.mouseY,
                 startX,
                 startY
-        ) <= FINGER_STILL_THRESHOLD;
+        ) <= threshold;
     }
 }
