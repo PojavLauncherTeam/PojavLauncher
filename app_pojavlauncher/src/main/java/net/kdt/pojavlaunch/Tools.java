@@ -172,7 +172,7 @@ public final class Tools {
     public static void launchMinecraft(final AppCompatActivity activity, MinecraftAccount minecraftAccount,
                                        MinecraftProfile minecraftProfile, String versionId, int versionJavaRequirement) throws Throwable {
         int freeDeviceMemory = getFreeDeviceMemory(activity);
-        int freeAddressSpace = getMaxContinousAddressSpaceSize();
+        int freeAddressSpace = getMaxContinuousAddressSpaceSize();
         int localeString;
         Log.i("MemStat", "Free RAM: "+freeDeviceMemory+" Addressable: "+freeAddressSpace);
         if(freeDeviceMemory > freeAddressSpace && freeAddressSpace != -1) {
@@ -936,7 +936,7 @@ public final class Tools {
         return (int) (memInfo.availMem / 1048576L);
     }
 
-    private static int getMaxContinuousAddressSpaceSize0() throws Exception{
+    private static int internalGetMaxContinuousAddressSpaceSize() throws Exception{
         MemoryHoleFinder memoryHoleFinder = new MemoryHoleFinder();
         new SelfMapsParser(memoryHoleFinder).run();
         long largestHole = memoryHoleFinder.getLargestHole();
@@ -944,9 +944,9 @@ public final class Tools {
         else return (int)(largestHole / 1048576L);
     }
 
-    public static int getMaxContinousAddressSpaceSize() {
+    public static int getMaxContinuousAddressSpaceSize() {
         try {
-            return getMaxContinuousAddressSpaceSize0();
+            return internalGetMaxContinuousAddressSpaceSize();
         }catch (Exception e){
             Log.w("Tools", "Failed to find the largest uninterrupted address space");
             return -1;
