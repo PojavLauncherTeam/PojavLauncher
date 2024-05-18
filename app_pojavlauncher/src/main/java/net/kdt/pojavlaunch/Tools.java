@@ -50,6 +50,8 @@ import com.google.gson.GsonBuilder;
 import net.kdt.pojavlaunch.lifecycle.ContextExecutor;
 import net.kdt.pojavlaunch.lifecycle.ContextExecutorTask;
 import net.kdt.pojavlaunch.lifecycle.LifecycleAwareAlertDialog;
+import net.kdt.pojavlaunch.memory.MemoryHoleFinder;
+import net.kdt.pojavlaunch.memory.SelfMapsParser;
 import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.multirt.Runtime;
 import net.kdt.pojavlaunch.plugins.FFmpegPlugin;
@@ -170,9 +172,20 @@ public final class Tools {
     public static void launchMinecraft(final AppCompatActivity activity, MinecraftAccount minecraftAccount,
                                        MinecraftProfile minecraftProfile, String versionId, int versionJavaRequirement) throws Throwable {
         int freeDeviceMemory = getFreeDeviceMemory(activity);
+        int freeAddressSpace = getMaxContinousAddressSpaceSize();
+        int localeString;
+        Log.i("MemStat", "Free RAM: "+freeDeviceMemory+" Addressable: "+freeAddressSpace);
+        if(freeDeviceMemory > freeAddressSpace && freeAddressSpace != -1) {
+            freeDeviceMemory = freeAddressSpace;
+            localeString = R.string.address_memory_warning_msg;
+        } else {
+            localeString = R.string.memory_warning_msg;
+        }
+
         if(LauncherPreferences.PREF_RAM_ALLOCATION > freeDeviceMemory) {
+            int finalDeviceMemory = freeDeviceMemory;
             LifecycleAwareAlertDialog.DialogCreator dialogCreator = (dialog, builder) ->
-                builder.setMessage(activity.getString(R.string.memory_warning_msg, freeDeviceMemory, LauncherPreferences.PREF_RAM_ALLOCATION))
+                builder.setMessage(activity.getString(localeString, finalDeviceMemory, LauncherPreferences.PREF_RAM_ALLOCATION))
                         .setPositiveButton(android.R.string.ok, (d, w)->{});
 
             if(LifecycleAwareAlertDialog.haltOnDialog(activity.getLifecycle(), activity, dialogCreator)) {
@@ -921,6 +934,23 @@ public final class Tools {
         ActivityManager.MemoryInfo memInfo = new ActivityManager.MemoryInfo();
         actManager.getMemoryInfo(memInfo);
         return (int) (memInfo.availMem / 1048576L);
+    }
+
+    private static int getMaxContinuousAddressSpaceSize0() throws Exception{
+        MemoryHoleFinder memoryHoleFinder = new MemoryHoleFinder();
+        new SelfMapsParser(memoryHoleFinder).run();
+        long largestHole = memoryHoleFinder.getLargestHole();
+        if(largestHole == -1) return -1;
+        else return (int)(largestHole / 1048576L);
+    }
+
+    public static int getMaxContinousAddressSpaceSize() {
+        try {
+            return getMaxContinuousAddressSpaceSize0();
+        }catch (Exception e){
+            Log.w("Tools", "Failed to find the largest uninterrupted address space");
+            return -1;
+        }
     }
 
     public static int getDisplayFriendlyRes(int displaySideRes, float scaling){
