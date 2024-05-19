@@ -371,13 +371,10 @@ public interface ControlInterface extends View.OnLongClickListener, GrabListener
                         if (Math.abs(event.getRawX() - downRawX) > 8 || Math.abs(event.getRawY() - downRawY) > 8)
                             mCanTriggerLongClick = false;
                         getControlLayoutParent().adaptPanelPosition();
-
-                        if (!getProperties().isDynamicBtn) {
-                            snapAndAlign(
-                                    MathUtils.clamp(event.getRawX() - downX, 0, CallbackBridge.physicalWidth - view.getWidth()),
-                                    MathUtils.clamp(event.getRawY() - downY, 0, CallbackBridge.physicalHeight - view.getHeight())
-                            );
-                        }
+                        snapAndAlign(
+                                MathUtils.clamp(event.getRawX() - downX, 0, CallbackBridge.physicalWidth - view.getWidth()),
+                                MathUtils.clamp(event.getRawY() - downY, 0, CallbackBridge.physicalHeight - view.getHeight())
+                        );
                         break;
                 }
 
@@ -393,13 +390,8 @@ public interface ControlInterface extends View.OnLongClickListener, GrabListener
             setBackground();
 
             // Re-calculate position
-            if (!getProperties().isDynamicBtn) {
-                getControlView().setX(getControlView().getX());
-                getControlView().setY(getControlView().getY());
-            } else {
-                getControlView().setX(getProperties().insertDynamicPos(getProperties().dynamicX));
-                getControlView().setY(getProperties().insertDynamicPos(getProperties().dynamicY));
-            }
+            getControlView().setX(getControlView().getX());
+            getControlView().setY(getControlView().getY());
         });
     }
 

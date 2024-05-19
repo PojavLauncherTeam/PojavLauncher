@@ -57,13 +57,13 @@ public class CustomControls {
 		this.mControlDataList.add(new ControlData(ctx, R.string.control_jump, new int[]{LwjglGlfwKeycode.GLFW_KEY_SPACE}, "${right} - ${margin} * 2 - ${width}", "${bottom} - ${margin} * 2 - ${height}", true));
 
 		//The default controls are conform to the V3
-		version = 6;
+		version = 7;
 	}
 
 	
 	public void save(String path) throws IOException {
-		//Current version is the V3.0 so the version as to be marked as 6 !
-		version = 6;
+		//Current version is the V3.1 so the version as to be marked as 7 !
+		version = 7;
 
 		Tools.write(path, Tools.GLOBAL_GSON.toJson(this));
 	}

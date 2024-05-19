@@ -105,7 +105,6 @@ public class LayoutConverter {
                     LwjglGlfwKeycode.GLFW_KEY_UNKNOWN,
                     LwjglGlfwKeycode.GLFW_KEY_UNKNOWN,
                     LwjglGlfwKeycode.GLFW_KEY_UNKNOWN};
-            n_button.isDynamicBtn = button.getBoolean("isDynamicBtn");
             n_button.dynamicX = button.getString("dynamicX");
             n_button.dynamicY = button.getString("dynamicY");
             if (!Tools.isValidString(n_button.dynamicX) && button.has("x")) {

@@ -26,7 +26,6 @@ public class ControlSubButton extends ControlButton {
             mProperties.setHeight(parentDrawer.getProperties().getHeight());
             mProperties.setWidth(parentDrawer.getProperties().getWidth());
         }
-        mProperties.isDynamicBtn = false;
 
         setProperties(mProperties, false);
     }
