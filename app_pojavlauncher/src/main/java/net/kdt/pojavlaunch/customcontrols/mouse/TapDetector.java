@@ -22,7 +22,7 @@ public class TapDetector {
 
     private final static int TAP_MIN_DELTA_MS = 10;
     private final static int TAP_MAX_DELTA_MS = 300;
-    private final static int TAP_SLOP_SQUARE_PX = (int) Tools.dpToPx(2000);
+    private final static int TAP_SLOP_SQUARE_PX = (int) Tools.dpToPx(2500);
 
     private final int mTapNumberToDetect;
     private int mCurrentTapNumber = 0;
