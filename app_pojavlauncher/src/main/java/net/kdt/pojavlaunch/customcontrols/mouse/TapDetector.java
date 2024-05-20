@@ -96,7 +96,6 @@ public class TapDetector {
 
         //A worthy tap happened
         mCurrentTapNumber += 1;
-        System.out.println("TapDetector: Tap detected: " + mCurrentTapNumber + " / " + mTapNumberToDetect + "; X: " +eventX + "; Y: " + eventY + "; Delta: " + (deltaX*deltaX + deltaY*deltaY) + "/"+ TAP_SLOP_SQUARE_PX );
         if(mCurrentTapNumber >= mTapNumberToDetect){
            resetTapDetectionState();
            return true;
