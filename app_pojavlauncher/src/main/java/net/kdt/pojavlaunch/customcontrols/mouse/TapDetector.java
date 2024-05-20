@@ -22,7 +22,7 @@ public class TapDetector {
 
     private final static int TAP_MIN_DELTA_MS = 10;
     private final static int TAP_MAX_DELTA_MS = 300;
-    private final static int TAP_SLOP_SQUARE_PX = (int) Math.pow(Tools.dpToPx(100), 2);
+    private final static int TAP_SLOP_SQUARE_PX = (int) Tools.dpToPx(2500);
 
     private final int mTapNumberToDetect;
     private int mCurrentTapNumber = 0;
@@ -83,8 +83,14 @@ public class TapDetector {
         if(mCurrentTapNumber > 0){
             if  ((deltaTime < TAP_MIN_DELTA_MS || deltaTime > TAP_MAX_DELTA_MS) ||
                 ((deltaX*deltaX + deltaY*deltaY) > TAP_SLOP_SQUARE_PX)) {
-                // We invalidate previous taps, not this one though
-                mCurrentTapNumber = 0;
+                if (mDetectionMethod == DETECTION_METHOD_BOTH && (eventAction == ACTION_UP || eventAction == ACTION_POINTER_UP)) {
+                    // For the both method, the user is expected to start with a down action.
+                    resetTapDetectionState();
+                    return false;
+                } else {
+                    // We invalidate previous taps, not this one though
+                    mCurrentTapNumber = 0;
+                }
             }
         }
 
