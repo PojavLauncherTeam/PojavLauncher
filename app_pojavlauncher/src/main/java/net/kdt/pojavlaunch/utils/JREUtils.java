@@ -566,7 +566,7 @@ public class JREUtils {
     static {
         System.loadLibrary("pojavexec");
         System.loadLibrary("pojavexec_awt");
-        dlopen("libxhook.so");
+        dlopen("libbytehook.so");
         System.loadLibrary("istdio");
     }
 }
