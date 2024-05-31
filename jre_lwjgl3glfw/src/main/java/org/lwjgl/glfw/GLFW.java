@@ -1030,6 +1030,9 @@ public class GLFW
         if (height != null) height.put(internalGetWindow(window).height);
     }
 
+    public static void glfwSetWindowSizeLimits(@NativeType("GLFWwindow *") long window, int minwidth, int minheight, int maxwidth, int maxheight) {
+    }
+
     public static void glfwSetWindowPos(long window, int x, int y) {
         internalGetWindow(window).x = x;
         internalGetWindow(window).y = y;
