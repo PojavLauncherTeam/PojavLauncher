@@ -3,6 +3,7 @@ package net.kdt.pojavlaunch;
 import static android.content.res.Configuration.ORIENTATION_PORTRAIT;
 import android.Manifest;
 import android.app.NotificationManager;
+import android.content.DialogInterface;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -137,7 +138,6 @@ public class LauncherActivity extends BaseActivity {
             builder.setTitle("Error");
             builder.setMessage("Minecraft can't be legally installed when logged in with a local account. Please switch to an online account to continue.");
             builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                @Override
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
                 }
