@@ -3,8 +3,6 @@ package net.kdt.pojavlaunch.modloaders;
 import com.kdt.mcgui.ProgressLayout;
 import com.kdt.mcgui.mcAccountSpinner;
 
-import android.widget.Toast;
-
 import net.kdt.pojavlaunch.JMinecraftVersionList;
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
@@ -12,8 +10,6 @@ import net.kdt.pojavlaunch.progresskeeper.ProgressKeeper;
 import net.kdt.pojavlaunch.tasks.AsyncMinecraftDownloader;
 import net.kdt.pojavlaunch.tasks.MinecraftDownloader;
 import net.kdt.pojavlaunch.utils.DownloadUtils;
-import net.kdt.pojavlaunch.extra.ExtraCore;
-import net.kdt.pojavlaunch.extra.ExtraConstants;
 
 import java.io.File;
 import java.io.IOException;
@@ -94,7 +90,6 @@ public class OptiFineDownloadTask implements Runnable, Tools.DownloaderFeedback,
         JMinecraftVersionList.Version minecraftJsonVersion = AsyncMinecraftDownloader.getListedVersion(minecraftVersion);
         if(minecraftJsonVersion == null) return false;
         if(mAccountSpinner.getSelectedAccount() == null){
-            ExtraCore.setValue(ExtraConstants.SELECT_AUTH_METHOD, true);
             return false;
         }
         try {

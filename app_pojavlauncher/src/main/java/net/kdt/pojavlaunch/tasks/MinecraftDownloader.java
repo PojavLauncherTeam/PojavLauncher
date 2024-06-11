@@ -68,7 +68,6 @@ public class MinecraftDownloader {
                       @NonNull AsyncMinecraftDownloader.DoneListener listener,
                       @NonNull mcAccountSpinner minecraftAccount) {
         this.mcAccount = minecraftAccount;
-        this.mActivity = activity;
         sExecutorService.execute(() -> {
             try {
                 downloadGame(activity, version, realVersion);
@@ -251,7 +250,7 @@ public class MinecraftDownloader {
         FileUtils.ensureParentDirectory(targetFile);
         mDownloadFileCount++;
         mScheduledDownloadTasks.add(
-                new DownloaderTask(targetFile, downloadClass, url, sha1, size, skipIfFailed, mcAccount, mActivity)
+                new DownloaderTask(targetFile, downloadClass, url, sha1, size, skipIfFailed, mcAccount)
         );
     }
 
@@ -367,11 +366,9 @@ public class MinecraftDownloader {
         private int mLastCurr;
         private final long mDownloadSize;
         private mcAccountSpinner minecraftAccount;
-        private Activity mActivity;
-        public boolean failed;
 
         DownloaderTask(File targetPath, int downloadClass, String targetUrl, String targetSha1,
-                       long downloadSize, boolean skipIfFailed, mcAccountSpinner minecraftAccount, Activity activity) {
+                       long downloadSize, boolean skipIfFailed, mcAccountSpinner minecraftAccount) {
             this.mTargetPath = targetPath;
             this.mTargetUrl = targetUrl;
             this.mTargetSha1 = targetSha1;
@@ -379,8 +376,6 @@ public class MinecraftDownloader {
             this.mDownloadSize = downloadSize;
             this.mSkipIfFailed = skipIfFailed;
             this.minecraftAccount = minecraftAccount;
-            this.mActivity = activity;
-            this.failed = false;
         }
 
         @Override
