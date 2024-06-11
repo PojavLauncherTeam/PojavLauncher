@@ -4,9 +4,13 @@ import static net.kdt.pojavlaunch.PojavApplication.sExecutorService;
 
 import android.app.Activity;
 import android.util.Log;
+import android.content.DialogInterface;
+import android.widget.Toast;
+
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 
 import com.kdt.mcgui.ProgressLayout;
 
@@ -24,6 +28,8 @@ import net.kdt.pojavlaunch.utils.FileUtils;
 import net.kdt.pojavlaunch.value.DependentLibrary;
 import net.kdt.pojavlaunch.value.MinecraftClientInfo;
 import net.kdt.pojavlaunch.value.MinecraftLibraryArtifact;
+
+import com.kdt.mcgui.mcAccountSpinner;
 
 import java.io.File;
 import java.io.IOException;
@@ -45,6 +51,8 @@ public class MinecraftDownloader {
     private long mDownloadFileCount;
     private File mSourceJarFile; // The source client JAR picked during the inheritance process
     private File mTargetJarFile; // The destination client JAR to which the source will be copied to.
+    private mcAccountSpinner mcAccount;
+    private Activity mActivity;
 
     private static final ThreadLocal<byte[]> sThreadLocalDownloadBuffer = new ThreadLocal<>();
 
@@ -57,7 +65,10 @@ public class MinecraftDownloader {
      */
     public void start(@Nullable Activity activity, @Nullable JMinecraftVersionList.Version version,
                       @NonNull String realVersion, // this was there for a reason
-                      @NonNull AsyncMinecraftDownloader.DoneListener listener) {
+                      @NonNull AsyncMinecraftDownloader.DoneListener listener,
+                      @NonNull mcAccountSpinner minecraftAccount) {
+        this.mcAccount = minecraftAccount;
+        this.mActivity = activity;
         sExecutorService.execute(() -> {
             try {
                 downloadGame(activity, version, realVersion);
@@ -98,7 +109,9 @@ public class MinecraftDownloader {
 
         // I have tried pre-filling the queue directly instead of doing this, but it didn't work.
         // What a shame.
-        for(DownloaderTask scheduledTask : mScheduledDownloadTasks) downloaderPool.execute(scheduledTask);
+        for(DownloaderTask scheduledTask : mScheduledDownloadTasks) {
+            downloaderPool.execute(scheduledTask);
+        } 
         downloaderPool.shutdown();
 
         try {
@@ -212,9 +225,12 @@ public class MinecraftDownloader {
 
 
         MinecraftClientInfo minecraftClientInfo = getClientInfo(verInfo);
-        if(minecraftClientInfo != null) scheduleGameJarDownload(minecraftClientInfo, versionName);
-
-        if(verInfo.libraries != null) scheduleLibraryDownloads(verInfo.libraries);
+        if(minecraftClientInfo != null){
+            scheduleGameJarDownload(minecraftClientInfo, versionName);
+        } 
+        if(verInfo.libraries != null) {
+            scheduleLibraryDownloads(verInfo.libraries);
+        }
 
         if(verInfo.logging != null) scheduleLoggingAssetDownloadIfNeeded(verInfo.logging);
 
@@ -235,7 +251,7 @@ public class MinecraftDownloader {
         FileUtils.ensureParentDirectory(targetFile);
         mDownloadFileCount++;
         mScheduledDownloadTasks.add(
-                new DownloaderTask(targetFile, downloadClass, url, sha1, size, skipIfFailed)
+                new DownloaderTask(targetFile, downloadClass, url, sha1, size, skipIfFailed, mcAccount, mActivity)
         );
     }
 
@@ -350,15 +366,21 @@ public class MinecraftDownloader {
         private final boolean mSkipIfFailed;
         private int mLastCurr;
         private final long mDownloadSize;
+        private mcAccountSpinner minecraftAccount;
+        private Activity mActivity;
+        public boolean failed;
 
         DownloaderTask(File targetPath, int downloadClass, String targetUrl, String targetSha1,
-                       long downloadSize, boolean skipIfFailed) {
+                       long downloadSize, boolean skipIfFailed, mcAccountSpinner minecraftAccount, Activity activity) {
             this.mTargetPath = targetPath;
             this.mTargetUrl = targetUrl;
             this.mTargetSha1 = targetSha1;
             this.mDownloadClass = downloadClass;
             this.mDownloadSize = downloadSize;
             this.mSkipIfFailed = skipIfFailed;
+            this.minecraftAccount = minecraftAccount;
+            this.mActivity = activity;
+            this.failed = false;
         }
 
         @Override
@@ -377,7 +399,9 @@ public class MinecraftDownloader {
                 mTargetSha1 = null; // Nullify SHA1 as DownloadUtils.ensureSha1 only checks for null,
                                     // not for string validity
                 if(mTargetPath.exists()) finishWithoutDownloading();
-                else downloadFile();
+                else {
+                    downloadFile();
+                }
             }
         }
         
@@ -392,6 +416,10 @@ public class MinecraftDownloader {
         }
         
         private void downloadFile() throws Exception {
+            if (minecraftAccount.getSelectedAccount().isLocal()) {
+                throw new RuntimeException("Download failed. Please make sure you own a legal copy of Minecraft, Java Edition.");
+            }
+            
             try {
                 DownloadUtils.ensureSha1(mTargetPath, mTargetSha1, () -> {
                     DownloadMirror.downloadFileMirrored(mDownloadClass, mTargetUrl, mTargetPath,
