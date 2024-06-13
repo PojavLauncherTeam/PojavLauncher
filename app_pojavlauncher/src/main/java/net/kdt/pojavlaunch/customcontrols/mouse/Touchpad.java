@@ -81,7 +81,7 @@ public class Touchpad extends View implements GrabListener, AbstractTouchpad {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.translate(mMouseX, mMouseY);
+        canvas.translate(mMouseY, mMouseX);
         mMousePointerDrawable.draw(canvas);
     }
 
