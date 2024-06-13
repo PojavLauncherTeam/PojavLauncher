@@ -454,7 +454,7 @@ void critical_send_cursor_pos(jfloat x, jfloat y) {
         }
 
         if (!pojav_environ->isUseStackQueueCall) {
-            pojav_environ->GLFW_invoke_CursorPos((void*) pojav_environ->showingWindow, (double) (x), (double) (y));
+            pojav_environ->GLFW_invoke_CursorPos((void*) pojav_environ->showingWindow, (double) (y), (double) (x));
         } else {
             pojav_environ->cursorX = y;
             pojav_environ->cursorY = x;
