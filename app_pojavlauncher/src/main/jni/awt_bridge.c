@@ -69,12 +69,21 @@ JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_AWTInputBridge_nativeSendData(JN
         method_ReceiveInput = (*runtimeJNIEnvPtr_INPUT)->GetStaticMethodID(runtimeJNIEnvPtr_INPUT, class_CTCAndroidInput, "receiveData", "(IIIII)V");
         assert(method_ReceiveInput != NULL);
     }
-    (*runtimeJNIEnvPtr_INPUT)->CallStaticVoidMethod(
-        runtimeJNIEnvPtr_INPUT,
-        class_CTCAndroidInput,
-        method_ReceiveInput,
-        type, i1, i2, i3, i4
-    );
+    if(type == 1003) {
+        (*runtimeJNIEnvPtr_INPUT)->CallStaticVoidMethod(
+            runtimeJNIEnvPtr_INPUT,
+            class_CTCAndroidInput,
+            method_ReceiveInput,
+            type, i2, i1, i3, i4
+        );
+    } else {
+        (*runtimeJNIEnvPtr_INPUT)->CallStaticVoidMethod(
+            runtimeJNIEnvPtr_INPUT,
+            class_CTCAndroidInput,
+            method_ReceiveInput,
+            type, i1, i2, i3, i4
+        );
+    }
 }
 
 // TODO: check for memory leaks
