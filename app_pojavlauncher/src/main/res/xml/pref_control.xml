@@ -93,7 +93,6 @@
             android:key="invert_xy_ingame"
             android:title="@string/preference_invert_xy_ingame_title"
             android:summary="@string/preference_invert_xy_ingame_description"
-            android:defaultValue="true"
             />
         <SwitchPreference
             android:key="invert_xy_menu"
