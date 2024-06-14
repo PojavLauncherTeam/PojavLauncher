@@ -86,7 +86,7 @@ public class Touchpad extends View implements GrabListener, AbstractTouchpad {
         if(!CallbackBridge.nativeGetInverted())
             canvas.translate(mMouseX, mMouseY);
         else
-            canvas.translate(mMouseY, mMouseX);
+            canvas.translate(currentDisplayMetrics.widthPixels - mMouseY, mMouseX);
         mMousePointerDrawable.draw(canvas);
     }
 
@@ -139,8 +139,8 @@ public class Touchpad extends View implements GrabListener, AbstractTouchpad {
             mMouseX = Math.max(0, Math.min(currentDisplayMetrics.widthPixels, mMouseX + x * LauncherPreferences.PREF_MOUSESPEED));
             mMouseY = Math.max(0, Math.min(currentDisplayMetrics.heightPixels, mMouseY + y * LauncherPreferences.PREF_MOUSESPEED));
         } else {
-            mMouseX = Math.max(0, Math.min(currentDisplayMetrics.widthPixels, mMouseX + y * LauncherPreferences.PREF_MOUSESPEED));
-            mMouseY = Math.max(0, Math.min(currentDisplayMetrics.heightPixels, mMouseY + x * LauncherPreferences.PREF_MOUSESPEED));
+            mMouseX = Math.max(0, Math.min(currentDisplayMetrics.heightPixels, mMouseX + x * LauncherPreferences.PREF_MOUSESPEED));
+            mMouseY = Math.max(0, Math.min(currentDisplayMetrics.widthPixels, mMouseY + y * LauncherPreferences.PREF_MOUSESPEED));
         }
         updateMousePosition();
     }
