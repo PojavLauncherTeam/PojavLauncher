@@ -464,7 +464,7 @@ void critical_send_cursor_pos(jfloat x, jfloat y) {
         double currentX;
         double currentY;
         if(pojav_environ->isInverted) {
-            currentX = y;
+            currentX = ((float)pojav_environ->savedWidth) - y;
             currentY = x;
         } else {
             currentX = x;

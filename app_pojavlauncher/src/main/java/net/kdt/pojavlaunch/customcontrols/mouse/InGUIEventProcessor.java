@@ -1,10 +1,8 @@
 package net.kdt.pojavlaunch.customcontrols.mouse;
 
-import android.view.GestureDetector;
 import android.view.MotionEvent;
 
 import net.kdt.pojavlaunch.LwjglGlfwKeycode;
-import net.kdt.pojavlaunch.SingleTapConfirm;
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 
@@ -46,14 +44,7 @@ public class InGUIEventProcessor implements TouchEventProcessor {
                 int pointerIndex = mTracker.trackEvent(motionEvent);
                 if(pointerCount == 1 || LauncherPreferences.PREF_DISABLE_GESTURES) {
                     if(touchpadDisplayed()) {
-                        if(!CallbackBridge.nativeGetInverted()) {
-                            mTouchpad.applyMotionVector(mTracker.getMotionVector());
-                        } else {
-                            float[] reversed = new float[2];
-                            reversed[0] = mTracker.getMotionVector()[1];
-                            reversed[1] = mTracker.getMotionVector()[0];
-                            mTouchpad.applyMotionVector(reversed);
-                        }
+                        mTouchpad.applyMotionVector(mTracker.getMotionVector());
                     } else {
                         float mainPointerX = motionEvent.getX(pointerIndex);
                         float mainPointerY = motionEvent.getY(pointerIndex);
