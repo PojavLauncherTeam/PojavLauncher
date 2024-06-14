@@ -391,6 +391,14 @@ JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSetGrabbing(__at
     pojav_environ->isGrabbing = grabbing;
 }
 
+JNIEXPORT void JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeSetInverted(JNIEnv *env, jclass clazz, jboolean inverted) {
+    pojav_environ->isInverted = inverted;
+}
+
+JNIEXPORT jboolean JNICALL Java_org_lwjgl_glfw_CallbackBridge_nativeGetInverted(JNIEnv* env, jclass clazz) {
+    return pojav_environ->isInverted;
+}
+
 jboolean critical_send_char(jchar codepoint) {
     if (pojav_environ->GLFW_invoke_Char && pojav_environ->isInputReady) {
         if (pojav_environ->isUseStackQueueCall) {
@@ -453,11 +461,21 @@ void critical_send_cursor_pos(jfloat x, jfloat y) {
             }
         }
 
-        if (!pojav_environ->isUseStackQueueCall) {
-            pojav_environ->GLFW_invoke_CursorPos((void*) pojav_environ->showingWindow, (double) (y), (double) (x));
+        double currentX;
+        double currentY;
+        if(pojav_environ->isInverted) {
+            currentX = y;
+            currentY = x;
         } else {
-            pojav_environ->cursorX = y;
-            pojav_environ->cursorY = x;
+            currentX = x;
+            currentY = y;
+        }
+
+        if (!pojav_environ->isUseStackQueueCall) {
+            pojav_environ->GLFW_invoke_CursorPos((void*) pojav_environ->showingWindow, currentX, currentY);
+        } else {
+            pojav_environ->cursorX = currentX;
+            pojav_environ->cursorY = currentY;
         }
     }
 }

@@ -46,7 +46,14 @@ public class InGUIEventProcessor implements TouchEventProcessor {
                 int pointerIndex = mTracker.trackEvent(motionEvent);
                 if(pointerCount == 1 || LauncherPreferences.PREF_DISABLE_GESTURES) {
                     if(touchpadDisplayed()) {
-                        mTouchpad.applyMotionVector(mTracker.getMotionVector());
+                        if(!CallbackBridge.nativeGetInverted()) {
+                            mTouchpad.applyMotionVector(mTracker.getMotionVector());
+                        } else {
+                            float[] reversed = new float[2];
+                            reversed[0] = mTracker.getMotionVector()[1];
+                            reversed[1] = mTracker.getMotionVector()[0];
+                            mTouchpad.applyMotionVector(reversed);
+                        }
                     } else {
                         float mainPointerX = motionEvent.getX(pointerIndex);
                         float mainPointerY = motionEvent.getY(pointerIndex);

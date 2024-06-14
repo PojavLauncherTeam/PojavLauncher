@@ -49,6 +49,7 @@ struct pojav_environ_s {
     jclass bridgeClazz;
     jclass vmGlfwClass;
     jboolean isGrabbing;
+    jboolean isInverted;
     jbyte* keyDownBuffer;
     jbyte* mouseDownBuffer;
     JavaVM* runtimeJavaVMPtr;
