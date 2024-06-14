@@ -79,6 +79,7 @@ public class MinecraftGLSurface extends View implements GrabListener {
     private final InGUIEventProcessor mInGUIProcessor = new InGUIEventProcessor(mScaleFactor);
     private TouchEventProcessor mCurrentTouchProcessor = mInGUIProcessor;
     private AndroidPointerCapture mPointerCapture;
+    private boolean mCaptureEngaged;
     private boolean mLastGrabState = false;
 
     public MinecraftGLSurface(Context context) {
@@ -406,5 +407,21 @@ public class MinecraftGLSurface extends View implements GrabListener {
             mSurfaceReadyListener = listener;
             mSurfaceReadyListenerLock.notifyAll();
         }
+    }
+
+    @Override
+    public void onPointerCaptureChange(boolean hasCapture) {
+        mCaptureEngaged = hasCapture;
+        super.onPointerCaptureChange(hasCapture);
+    }
+
+    @Override
+    public boolean dispatchTrackballEvent(MotionEvent event) {
+        // Android 14 has broke the pointer capture, which causes the OS to route the captured pointer events to trackball-related methods.
+        // Correct this by sending trackball events as captured pointer events when the pointer is captured.
+        if(mCaptureEngaged && mPointerCapture != null && MainActivity.isAndroid8OrHigher()) {
+            return mPointerCapture.onCapturedPointer(this, event);
+        }
+        return super.dispatchTrackballEvent(event);
     }
 }

@@ -27,6 +27,7 @@ import android.provider.DocumentsContract;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
@@ -627,5 +628,12 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
     @Override
     public void onServiceDisconnected(ComponentName name) {
 
+    }
+
+    @Override
+    public boolean dispatchTrackballEvent(MotionEvent ev) {
+        // Android 14: route trackball events directly to the MinecraftGLSurface
+        if(minecraftGLView != null) return minecraftGLView.dispatchTrackballEvent(ev);
+        return super.dispatchTrackballEvent(ev);
     }
 }
