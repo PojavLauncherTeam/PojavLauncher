@@ -10,6 +10,7 @@ import com.kdt.mcgui.ProgressLayout;
 
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
+import net.kdt.pojavlaunch.utils.MathUtils;
 
 import org.apache.commons.compress.archivers.tar.TarArchiveEntry;
 import org.apache.commons.compress.archivers.tar.TarArchiveInputStream;
@@ -60,19 +61,9 @@ public class MultiRTUtils {
 
     public static String getNearestJreName(int majorVersion) {
         List<Runtime> runtimes = getRuntimes();
-        int diff_factor = Integer.MAX_VALUE;
-        String result = null;
-        for(Runtime r : runtimes) {
-            if(r.javaVersion < majorVersion) continue; // lower - not useful
-
-            int currentFactor = r.javaVersion - majorVersion;
-            if(diff_factor > currentFactor) {
-                result = r.name;
-                diff_factor = currentFactor;
-            }
-        }
-
-        return result;
+        Runtime nearestRuntime = MathUtils.findNearestPositive(majorVersion, runtimes, (runtime)->runtime.javaVersion);
+        if(nearestRuntime == null) return null;
+        return nearestRuntime.name;
     }
 
     public static void installRuntimeNamed(String nativeLibDir, InputStream runtimeInputStream, String name) throws IOException {
@@ -120,11 +111,11 @@ public class MultiRTUtils {
     }
 
 
-    public static String __internal__readBinpackVersion(String name) {
-        File binpack_verfile = new File(RUNTIME_FOLDER,"/" + name + "/pojav_version");
+    public static String readInternalRuntimeVersion(String name) {
+        File versionFile = new File(RUNTIME_FOLDER,"/" + name + "/pojav_version");
         try {
-            if (binpack_verfile.exists()) {
-                return Tools.read(binpack_verfile.getAbsolutePath());
+            if (versionFile.exists()) {
+                return Tools.read(versionFile.getAbsolutePath());
             }else{
                 return null;
             }
