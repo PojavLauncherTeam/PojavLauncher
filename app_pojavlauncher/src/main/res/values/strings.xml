@@ -192,10 +192,10 @@
 
     <string name="preference_mouse_start_title">Start with virtual mouse on</string>
     <string name="preference_mouse_start_description">The virtual mouse appears at startup when this option is on.</string>
-    <string name="preference_invert_xy_ingame_title">Invert XY in-game</string>
-    <string name="preference_invert_xy_ingame_description">Inverts the X and Y axis of the virtual mouse in-game.</string>
-    <string name="preference_invert_xy_menu_title">Invert XY in menu</string>
-    <string name="preference_invert_xy_menu_description">Inverts the X and Y axis of the virtual mouse in the menu.</string>
+    <string name="preference_invert_xy_ingame_title">Swap mouse X and Y in-game</string>
+    <string name="preference_invert_xy_ingame_description">Swaps the X and Y axis of the virtual mouse in-game.</string>
+    <string name="preference_invert_xy_menu_title">Swap mouse X and Y in menu</string>
+    <string name="preference_invert_xy_menu_description">Swaps the X and Y axis of the virtual mouse in the menu.</string>
     <string name="preference_video_title">Video and renderer</string>
     <string name="preference_video_description">Resolution, renderer and performance</string>
     <string name="preference_control_title">Control customization</string>
