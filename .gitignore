@@ -2,6 +2,7 @@
 /build
 /*/build
 app_pojavlauncher/src/main/assets/components/jre
+/app_pojavlauncher/src/main/assets/components/jre-new/
 local.properties
 .idea/
 app_pojavlauncher/.cxx/
