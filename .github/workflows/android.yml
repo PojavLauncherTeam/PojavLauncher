@@ -43,8 +43,18 @@ jobs:
           path: app_pojavlauncher/src/main/assets/components/jre-new
           workflow_conclusion: success
           repo: PojavLauncherTeam/android-openjdk-build-multiarch
-          branch: buildjre17
+          branch: buildjre17-21
           name: jre17-pojav
+
+      - name: Get JRE21
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: build.yml
+          path: app_pojavlauncher/src/main/assets/components/jre-21
+          workflow_conclusion: success
+          repo: PojavLauncherTeam/android-openjdk-build-multiarch
+          branch: buildjre17-21
+          name: jre21-pojav
 
       - uses: gradle/gradle-build-action@v2
         with:
@@ -80,19 +90,20 @@ jobs:
         run: |
           rm -r app_pojavlauncher/src/main/assets/components/jre
           rm -r app_pojavlauncher/src/main/assets/components/jre-new
+          rm -r app_pojavlauncher/src/main/assets/components/jre-21
           gradle assembleDebug
           mv app_pojavlauncher/build/outputs/apk/debug/app_pojavlauncher-debug.apk out/app-debug-noruntime.apk
       - name: Gen md5sums
         run: |
           md5sum out/app-debug.apk > out/app-debug.md5
           md5sum out/app-debug-noruntime.apk > out/app-debug-noruntime.md5
-          
+
       - name: Upload APK
         uses: actions/upload-artifact@v3
         with:
           name: app-debug
           path: out/app-debug.*
-      
+
       - name: Upload AAB
         uses: actions/upload-artifact@v3
         with:
