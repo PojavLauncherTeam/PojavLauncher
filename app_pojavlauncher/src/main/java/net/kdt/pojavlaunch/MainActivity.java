@@ -25,6 +25,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.DocumentsContract;
 import android.util.Log;
+import android.view.InputDevice;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -38,6 +39,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -630,10 +632,25 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
 
     }
 
+    /*
+     * Android 14 (or some devices, at least) seems to dispatch the the captured mouse events as trackball events
+     * due to a bug(?) somewhere(????)
+     */
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private boolean checkCaptureDispatchConditions(MotionEvent event) {
+        int eventSource = event.getSource();
+        // On my device, the mouse sends events as a relative mouse device.
+        // Not comparing with == here because apparently `eventSource` is a mask that can
+        // sometimes indicate multiple sources, like in the case of InputDevice.SOURCE_TOUCHPAD
+        // (which is *also* an InputDevice.SOURCE_MOUSE when controlling a cursor)
+        return (eventSource & InputDevice.SOURCE_MOUSE_RELATIVE) != 0 ||
+                (eventSource & InputDevice.SOURCE_MOUSE) != 0;
+    }
+
     @Override
     public boolean dispatchTrackballEvent(MotionEvent ev) {
-        // Android 14: route trackball events directly to the MinecraftGLSurface
-        if(minecraftGLView != null) return minecraftGLView.dispatchTrackballEvent(ev);
-        return super.dispatchTrackballEvent(ev);
+        if(MainActivity.isAndroid8OrHigher() && checkCaptureDispatchConditions(ev))
+            return minecraftGLView.dispatchCapturedPointerEvent(ev);
+        else return super.dispatchTrackballEvent(ev);
     }
 }
