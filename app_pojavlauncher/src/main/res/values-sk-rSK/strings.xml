@@ -295,4 +295,30 @@
     <string name="notif_error_occured">Vyskytla sa chyba</string>
     <string name="notif_error_occured_desc">Ťuknutím zobrazíte detaily</string>
     <string name="fabric_dl_only_stable">Ukazovať iba stabilné verzie</string>
+    <string name="dl_tampered_manifest_title">Upozornenie na problém s overením súboru</string>
+    <string name="dl_tampered_manifest"><![CDATA[Manifest verzie hry na mirrore sa nezhoduje s oficiálnym manifestom od Mojangu, čo znamená, že mohol byť modifikovaný.<br/>
+        <b>Toto nie je bezpečné. Ak budete pokračovať, vaše osobné údaje môžu byť ohrozené..</b><br/>
+        Ak chcete tento mirror napriek tomu použiť, stlačte \"Vypnúť kontrolu manifestov\" a znova spustite sťahovanie.<br/>
+        Ak chcete použiť oficiálny zdroj sťahovania, stlačte \"Prepnúť na oficiálnu stránku\" a znova spustite sťahovanie.<br/>]]></string>
+    <string name="dl_turn_off_manifest_checks">Vypnúť kontrolu manifestov</string>
+    <string name="dl_switch_to_official_site">Prepnúť na oficiálnu stránku</string>
+    <string name="preference_download_source_title">Zdroj sťahovania hry</string>
+    <string name="preference_download_source_description">Namiesto použitia oficiálneho servera na sťahovanie vyberte mirror</string>
+    <string name="preference_verify_manifest_title">Overiť manifest verzie hry</string>
+    <string name="preference_verify_manifest_description">Keď je táto možnosť povolená, launcher skontroluje manifest verzie hry spolu s knižnicami.</string>
+    <string name="notif_download_finished">Hra je pripravená na spustenie</string>
+    <string name="notif_download_finished_desc">Kliknite sem na spustenie hry!</string>
+    <string name="preference_category_gestures">Gestá</string>
+    <string name="preference_category_buttons">Tlačidlá</string>
+    <string name="preference_category_experimental_settings">Experimentálne nastavenia</string>
+    <string name="preference_category_java_tweaks">Nastavenia Javy</string>
+    <string name="preference_category_main_categories">Kategórie</string>
+    <string name="preference_category_miscellaneous">Iné nastavenia</string>
+    <string name="preference_category_video">Video a vykresľovač</string>
+    <string name="notification_permission_dialog_title">Vyžaduje sa povolenie</string>
+    <string name="notification_permission_dialog_text">PojavLauncher vyžaduje povolenie na ukazovanie upozornení, aby sa zabránilo zastaveniu sťahovania hry/modpackov, keď opustíte aplikáciu. Bez tohto povolenia môže Android zastaviť sťahovanie, keď pošlete PojavLauncher do pozadia.</string>
+    <string name="notification_permission_toast">Toto povolenie môžete kedykoľvek zmeniť v nastaveniach</string>
+    <string name="preference_ask_for_notification_title">Povoliť upozornenia</string>
+    <string name="preference_ask_for_notification_description">Kliknutím znova požiadate o povolenie upozornení, ktoré je potrebné na správne fungovanie sťahovania hier/modpackov na pozadí.</string>
+    <string name="exception_failed_to_unpack_jre17">Nepodarilo sa nainštalovať Javu 17</string>
 </resources>

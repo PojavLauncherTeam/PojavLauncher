@@ -44,6 +44,8 @@
     <string name="mcl_setting_subtitle_javaargs">Cẩn thận, việc này sẽ làm trò chơi gặp sự cố nếu sửa đổi mà không có nhiều kiến thức.</string>
     <string name="mcl_setting_category_renderer">Trình kết xuất</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (tất cả phiên bản, nhanh)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - (tất cả phiên bản, Hiệu suất cho: trung bình)</string>
+    <string name="mcl_setting_renderer_angle">ANGLE (Vulkan) - (1.17+ Trở Lên, Hiệu suất cho: trung bình)</string>
     <string name="mcl_setting_veroption_release">Bản phát hành</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Bản Alpha cũ</string>
@@ -245,4 +247,16 @@
     <string name="notif_error_occured">Đã xảy ra lỗi</string>
     <string name="notif_error_occured_desc">Nhấn để xem chi tiết</string>
     <string name="fabric_dl_only_stable">Chỉ hiện phiên bản ổn dịnh</string>
+    <string name="notif_download_finished">Trò chơi đã sãng sàng để chạy</string>
+    <string name="notif_download_finished_desc">Nhấn vào đây để bắt đầu!</string>
+    <string name="preference_category_buttons">Phím</string>
+    <string name="preference_category_java_tweaks">Điều chỉnh Java</string>
+    <string name="preference_category_main_categories">Danh mục</string>
+    <string name="preference_category_miscellaneous">Các cài đặt khác</string>
+    <string name="preference_category_video">Cài Đặt Đồ Họa</string>
+    <string name="notification_permission_dialog_title">Yêu Cầu Quyền Truy Cập</string>
+    <string name="notification_permission_dialog_text">PojavLauncher Yêu cầu quyền để gửi thông báo để ngăn chặn trò chơi/Modpacks tải xuống mà không dừng lại khi bạn rời khỏi ứng dụng. Nếu không cấp quyền, Android có thể ngắt quá trình tải khi bạn để PojavLauncher ở chế độ nền.</string>
+    <string name="preference_ask_for_notification_title">Cho phép Gửi thông báo</string>
+    <string name="preference_vsync_in_zink_title">Cho phép V-Sync với trình kết xuất Zink</string>
+    <string name="exception_failed_to_unpack_jre17">Cài Đặt thất bại JRE 17</string>
 </resources>

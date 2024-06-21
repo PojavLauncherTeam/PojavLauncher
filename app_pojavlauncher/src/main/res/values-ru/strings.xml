@@ -34,7 +34,7 @@
     <string name="mcl_launch_downloading_progress">"Загрузка %s (%.2f Мбайт / %.2f Мбайт)"</string>
     <string name="mcl_launch_download_assets">Подготовка к загрузке ресурсов</string>
     <string name="mcl_options">Опции</string>
-    <string name="mcl_option_customcontrol">Пользовательское управление</string>
+    <string name="mcl_option_customcontrol">Раскладка управления</string>
     <string name="mcl_setting_title_use_surface_view">Альтернативный визуализатор</string>
     <string name="mcl_setting_subtitle_use_surface_view">Может помочь в случаях, когда производительность ограничена медленным ГП.</string>
     <string name="mcl_setting_title_ignore_notch">Полноэкранный режим</string>
@@ -97,10 +97,10 @@
     <string name="control_mouseoff">Мышь: Выкл</string>
     <string name="control_mouseon">Мышь: Вкл </string>
     <!-- MainActivity: Menu advanced controls -->
-    <string name="control_forceclose">Принудительное закрытие</string>
+    <string name="control_forceclose">Завершить процесс</string>
     <string name="control_viewout">Журнал</string>
     <string name="control_adebug">Отладка ввода</string>
-    <string name="control_customkey">Отправить пользовательский код клавиши</string>
+    <string name="control_customkey">Нажать клавишу</string>
     <!-- ImportControlActivity Strings -->
     <string name="import_control_label">Импортирование управления</string>
     <string name="import_control_invalid_file">Недопустимый или повреждённый файл</string>
@@ -112,20 +112,20 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
-    <string name="customctrl_toggle">Переключаемый</string>
+    <string name="customctrl_toggle">Переключать касанием</string>
     <string name="customctrl_size">Размер</string>
-    <string name="customctrl_mapping">Кнопки</string>
+    <string name="customctrl_mapping">Клавиши</string>
     <string name="customctrl_orientation">Сторона разворота</string>
     <string name="customctrl_background_color">Цвет фона</string>
     <string name="customctrl_corner_radius">Радиус скругления</string>
     <string name="customctrl_stroke_width">Ширина контура</string>
     <string name="customctrl_stroke_color">Цвет контура</string>
-    <string name="customctrl_button_opacity">Непрозрачность кнопки</string>
+    <string name="customctrl_button_opacity">Видимость кнопки</string>
     <string name="customctrl_addbutton">Добавить кнопку</string>
     <string name="customctrl_addbutton_drawer">Добавить группу кнопок</string>
     <string name="customctrl_addbutton_joystick">Добавить джойстик</string>
     <string name="customctrl_addsubbutton">Добавить</string>
-    <string name="customctrl_selectdefault">Сделать основной</string>
+    <string name="customctrl_selectdefault">Выбрать основную</string>
     <string name="customctrl_export">Поделиться раскладкой</string>
     <string name="main_share_logs">Поделиться журналом</string>
     <string name="main_install_jar_file">Запустить .jar</string>
@@ -142,9 +142,10 @@
     <string name="mcl_disable_swap_hand_subtitle">Отключает перемещение предмета во вторую руку при двойном касании по нему в панели инструментов.</string>
     <string name="mcl_setting_title_mousespeed">Скорость указателя</string>
     <string name="mcl_setting_subtitle_mousespeed">Изменить скорость указателя виртуальный мыши.</string>
-    <string name="customctrl_passthru">Пропускать касание</string>
-    <string name="customctrl_swipeable">Пролистываемый</string>
+    <string name="customctrl_passthru">Пропускать касание в игру</string>
+    <string name="customctrl_swipeable">Считывать движение пальца</string>
     <string name="customctrl_forward_lock">Фиксатор движения</string>
+    <string name="customctrl_absolute_tracking">Динамический центр</string>
     <string name="memory_warning_msg">Текущий объем свободной оперативной памяти (%d) меньше, чем выделенная (%d), что может привести к сбоям. Измените количество выделенной памяти при сбое игры.</string>
     <string name="mcl_memory_allocation">Выделение памяти</string>
     <string name="mcl_memory_allocation_subtitle">Управление объёмом выделяемой игре памяти.</string>
@@ -191,7 +192,7 @@
     <string name="preference_gyro_invert_y_axis_description">Поменять направление наклона по вертикали.</string>
     <string name="preference_gyro_smoothing_title">Сглаживание движения</string>
     <string name="preference_gyro_smoothing_description">Значительно повышает плавность движения камеры за счёт небольшой задержки ввода.</string>
-    <string name="preference_back_title">Вернуться назад</string>
+    <string name="preference_back_title">Назад</string>
     <string name="unnamed">Безымянный</string>
     <string name="profiles_latest_snapshot">Последний снапшот</string>
     <string name="profiles_latest_release">Последний релиз</string>
@@ -209,7 +210,7 @@
     <string name="default_control">Раскладка управления</string>
     <string name="progresslayout_tasks_in_progress">Выполняется задач: %d</string>
     <string name="notification_terminate">Завершить</string>
-    <string name="notification_game_runs">Игра запущена!</string>
+    <string name="notification_game_runs">Игра запущена</string>
     <string name="folder_dialog_create">Создать</string>
     <string name="folder_dialog_insert_name">Введите название папки</string>
     <string name="folder_fragment_create">Создать папку</string>
@@ -293,8 +294,39 @@
     <string name="modpack_install_notification_data_not_available">Не удалось загрузить информацию о загрузчике модов</string>
     <string name="modpack_install_modloader_download_failed">Не удалось загрузить файлы загрузчика модов</string>
     <string name="modpack_install_download_failed">Не удалось загрузить файлы сборки</string>
-    <string name="modpack_install_button">Сборка</string>
+    <string name="modpack_install_button">Сборка модов</string>
     <string name="notif_error_occured">Возникла ошибка</string>
     <string name="notif_error_occured_desc">Нажмите для получения дополнительных сведений</string>
     <string name="fabric_dl_only_stable">Только стабильные версии</string>
+    <string name="dl_tampered_manifest_title">File verification warning</string>
+    <string name="dl_tampered_manifest"><![CDATA[Манифест версии игры с зеркала не совпадает с манифестом официальной версии от Mojang, что сигнализирует о возможной подделке данных.<br/>
+        <b>Это небезопасно. Если продолжить, ваши персональные данные могут оказаться под угрозой.</b><br/>
+        Если вы всё же хотите продолжить загрузку с зеркала, нажмите «Отключить проверку манифеста» и попробуйте снова.<br/>
+        Если вы хотите использовать загрузку с официального источника, нажмите «Перейти на официальный источник» и попробуйте снова.<br/>]]></string>
+    <string name="dl_turn_off_manifest_checks">Отключить проверку манифеста</string>
+    <string name="dl_switch_to_official_site">Перейти на официальный источник</string>
+    <string name="preference_download_source_title">Источник загрузки файлов игры</string>
+    <string name="preference_download_source_description">Загружать файлы с зеркала вместо загрузки с официального репозитория.</string>
+    <string name="preference_verify_manifest_title">Проверка метаданных версии</string>
+    <string name="preference_verify_manifest_description">Проверять манифест версии игры совместно с библиотеками.</string>
+    <string name="notif_download_finished">Игра готова к запуску</string>
+    <string name="notif_download_finished_desc">Нажмите, чтобы запустить</string>
+    <string name="preference_category_gestures">Жесты</string>
+    <string name="preference_category_buttons">Кнопки</string>
+    <string name="preference_category_experimental_settings">Экспериментальная хрень</string>
+    <string name="preference_category_java_tweaks">Настройки Java</string>
+    <string name="preference_category_main_categories">Разделы</string>
+    <string name="preference_category_miscellaneous">Другие настройки</string>
+    <string name="preference_category_video">Настойки графики</string>
+    <string name="notification_permission_dialog_title">Запрос разрешения</string>
+    <string name="notification_permission_dialog_text">Лаунчеру требуется разрешение на отправку уведомлений, чтобы предотвратить остановку игры/загрузки её данных при сворачивании приложения. Без этого разрешения Android может принудительно завершить работу PojavLauncher при переходе в фоновый режим.</string>
+    <string name="notification_permission_toast">Выбор можно изменить позже, перейдя в настройки.</string>
+    <string name="preference_ask_for_notification_title">Разрешить уведомления</string>
+    <string name="preference_ask_for_notification_description">Нажмите, чтобы ещё раз запросить разрешение на вывод уведомлений. Они нужны для правильной загрузки игры и сборок модов в фоне.</string>
+    <string name="preference_vsync_in_zink_title">Вертикальная синхронизация с Zink</string>
+    <string name="preference_vsync_in_zink_description">Позволяет использовать внутренние системные API для активации вертикальной синхронизации при работе с Zink. Отключите, если игра начнёт вылетать после обновления системы.</string>
+    <string name="exception_failed_to_unpack_jre17">Не удалось установить JRE 17</string>
+    <string name="newdl_starting">Чтение метаданных игры…</string>
+    <string name="newdl_downloading_metadata">Загрузка метаданных игры (%s)</string>
+    <string name="newdl_downloading_game_files">Загрузка файлов… (%d/%d, %.2f МБ)</string>
 </resources>
