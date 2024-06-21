@@ -161,6 +161,7 @@
     <string name="multirt_nocompartiblert">Can\'t find any compatible Java Runtime. This version requires Java %d or newer.</string>
     <string name="multirt_nojava8rt">Can\'t find Java 8. In order to use this option, you need to install Java 8.</string>
     <string name="multirt_delete_runtime">Delete runtime</string>
+    <string name="pvc_gameDirectory">Game directory</string>
     <string name="pvc_jvmArgs">JVM arguments</string>
     <string name="preference_mouse_start_title">Start with virtual mouse on</string>
     <string name="preference_mouse_start_description">The virtual mouse appears at startup when this option is on.</string>
@@ -202,6 +203,7 @@
     <string name="arc_capes_desc">Enables capes from Cosmetica (previously Arc). For more information please visit https://cosmetica.cc. Requires OptiFine.</string>
     <string name="notif_channel_name">General</string>
     <string name="lazy_service_default_title">Pojav Foreground Service</string>
+    <string name="mcl_setting_veroption_installed">Installed</string>
     <string name="use_global_default">(Use global default)</string>
     <string name="default_control">Default controlmap</string>
     <string name="progresslayout_tasks_in_progress">%d tasks in progress</string>
@@ -294,4 +296,11 @@
     <string name="notif_error_occured">An error has occurred</string>
     <string name="notif_error_occured_desc">Click to see more details</string>
     <string name="fabric_dl_only_stable">Show only stable versions</string>
+    <string name="preference_category_gestures">Gestures</string>
+    <string name="preference_category_buttons">Buttons</string>
+    <string name="preference_category_java_tweaks">Java Tweaks</string>
+    <string name="preference_category_miscellaneous">Miscellaneous settings</string>
+    <string name="preference_category_video">Video Settings</string>
+    <string name="preference_ask_for_notification_title">Allow notifications</string>
+    <string name="exception_failed_to_unpack_jre17">Failed to install JRE 17</string>
 </resources>

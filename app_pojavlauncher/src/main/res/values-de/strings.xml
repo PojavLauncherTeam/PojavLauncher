@@ -9,7 +9,7 @@
     <string name="login_online_username_hint">E-Mail oder Benutzername</string>
     <string name="login_online_login_label">Anmelden</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Tippe auf das Zahnradsymbol mittig oben, um das Kontextmenü zu öffnen ⚙\nTippe auf eine Schaltfläche, um sie anzupassen: Bearbeiten, Vergrößern, Löschen oder ihre Tastenzuordnung anpassen."</string>
+    <string name="hint_control_mapping">"Tippe auf das Zahnradsymbol oben in der Mitte, um das Kontextmenü zu öffnen ⚙\nTippe auf eine Schaltfläche, um sie anzupassen: Bearbeiten, Vergrößern, Löschen oder die Tastenzuordnung anpassen."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Dieses Konto wird entfernt!</string>
     <!-- AlertDialog title -->
@@ -39,14 +39,16 @@
     <string name="mcl_setting_subtitle_use_surface_view">Kann die Leistung in GPU-gebundenen Szenarien verbessern.</string>
     <string name="mcl_setting_title_ignore_notch">Ignoriere die Kameraeinkerbung</string>
     <string name="mcl_setting_subtitle_ignore_notch">Ignoriert die Einbuchtung im Bildschirm und erweitert das Bild unter ihr.\nErgibt eine immersivere Erfahrung.</string>
-    <string name="mcl_setting_title_resolution_scaler">Auflösungsskalator</string>
-    <string name="mcl_setting_subtitle_resolution_scaler">Ermöglicht das Verringern der Spielauflösung. 100 % ist die volle Auflösung.</string>
+    <string name="mcl_setting_title_resolution_scaler">Auflösungsskallierung</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">Ermöglicht das Verringern der Spielauflösung. 100% entspricht der vollen Auflösung.</string>
+    <string name="mcl_setting_title_longpresstrigger">Verzögerung nach langem Drücken des Triggers</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Verzögerung für langes drücken des Triggers für das Zerstören von Blöcken oder fallen lassen von Gegenständen ändern.</string>
     <string name="mcl_setting_title_buttonscale">Größe der Steuerelemente</string>
-    <string name="mcl_setting_subtitle_buttonscale">Skaliere Tasten hoch, wenn Sie zu klein sind.</string>
+    <string name="mcl_setting_subtitle_buttonscale">Tasten vergrößern, wenn sie zu klein sind.</string>
     <string name="mcl_setting_title_mousescale">Größe der Maus</string>
     <string name="mcl_setting_subtitle_mousescale">Größe der virtuellen Maus ändern.</string>
     <string name="mcl_setting_title_javaargs">JVM-Start-Argumente</string>
-    <string name="mcl_setting_subtitle_javaargs">Passe auf. Sollten die Argumente ohne Fachwissen einfach verändert werden, kann dies zu Abstürzen führen.</string>
+    <string name="mcl_setting_subtitle_javaargs">Achtung! Das Verändern dieser Argumente ohne Fachwissen kann zu Abstürzen führen!</string>
     <string name="mcl_setting_category_renderer">Renderer</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (alle Versionen, schnell)</string>
     <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - (alle Versionen, mittel)</string>
@@ -55,6 +57,8 @@
     <string name="mcl_setting_veroption_snapshot">Entwicklungsversionen</string>
     <string name="mcl_setting_veroption_oldalpha">Old-Alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Old-Beta</string>
+    <string name="mcl_setting_java_sandbox">.jar in einer Sandbox ausführen</string>
+    <string name="mcl_setting_java_sandbox_subtitle">Verfügbarkeit des Sandbox-Security-Managers beim Ausführen einer .jar-Datei einstellen.</string>
     <string name="mcl_version_clone">Duplizieren</string>
     <!-- Global strings -->
     <string name="global_edit">Bearbeiten</string>
@@ -72,9 +76,9 @@
     <string name="global_retry">Erneut versuchen</string>
     <string name="global_default">Standard</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Anwendung/Spiel mit dem Code %d beendet, für weitere Details, latestlog.txt lesen.</string>
-    <string name="mcn_exit_confirm">Sind Sie sicher, dass Sie das Beenden erzwingen möchten?</string>
-    <string name="mcn_check_fail_vulkan_support">Vulkan Zink-Renderer wird auf diesem Gerät nicht unterstützt!</string>
+    <string name="mcn_exit_title">Anwendung/Spiel mit dem Code %d beendet; für weitere Details latestlog.txt lesen.</string>
+    <string name="mcn_exit_confirm">Beenden wirklich erzwingen?</string>
+    <string name="mcn_check_fail_vulkan_support">Der Zink-Renderer (Vulkan) wird auf diesem Gerät nicht unterstützt!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_chat">Chat</string>
     <string name="control_debug">Debug</string>
@@ -95,8 +99,8 @@
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">Beenden erzwingen</string>
     <string name="control_viewout">Protokoll-Ausgabe</string>
-    <string name="control_adebug">Eingabe-Debug</string>
-    <string name="control_customkey">Sende Keycode</string>
+    <string name="control_adebug">Eingabe-Debugging</string>
+    <string name="control_customkey">Keycode senden</string>
     <!-- ImportControlActivity Strings -->
     <string name="import_control_label">Steuerung importieren</string>
     <string name="import_control_invalid_file">Ungültige oder beschädigte Datei</string>
@@ -121,6 +125,8 @@
     <string name="customctrl_addbutton_drawer">Schaltflächengruppe hinzufügen</string>
     <string name="customctrl_addbutton_joystick">Joystick hinzufügen</string>
     <string name="customctrl_addsubbutton">Sub-Schaltfläche hinzufügen</string>
+    <string name="customctrl_selectdefault">Standard-Steuerung auswählen</string>
+    <string name="customctrl_export">Steuerung exportieren</string>
     <string name="main_share_logs">Protokoll-/Logdatei teilen</string>
     <string name="main_install_jar_file">.jar ausführen</string>
     <string name="main_play">Spielen</string>
@@ -139,6 +145,7 @@
     <string name="customctrl_passthru">Maus ignoriert Schaltflächen</string>
     <string name="customctrl_swipeable">Wischbar</string>
     <string name="customctrl_forward_lock">Weiterleitungssperre</string>
+    <string name="customctrl_absolute_tracking">Absolutes Finger-Tracking</string>
     <string name="memory_warning_msg">Die aktuelle Menge an freiem RAM (%d) ist niedriger als zugewiesener RAM (%d), was zu Abstürzen führen kann. Ändere die Zuordnung, wenn das Spiel abstürzt.</string>
     <string name="mcl_memory_allocation">Zugewiesener RAM</string>
     <string name="mcl_memory_allocation_subtitle">Steuert, wie viel Arbeitsspeicher Minecraft zur Verfügung hat.</string>
@@ -164,19 +171,26 @@
     <string name="preference_control_title">Steuerung anpassen</string>
     <string name="preference_control_description">Gesten, Tasten und Skalierung</string>
     <string name="preference_java_title">Java-Optimierungen</string>
+    <string name="preference_java_description">Java-Laufzeiten, JVM-Argumente, verfügbarer Arbeitsspeicher und Sandbox</string>
     <string name="preference_misc_title">Sonstige Einstellungen</string>
     <string name="preference_misc_description">Versionsliste und Bibliotheksüberprüfungen</string>
     <string name="preference_experimental_title">Experimentell</string>
+    <string name="preference_experimental_description">Benutze diese Optionen mit Bedacht, es wird keine Unterstützung geben</string>
     <string name="preference_sustained_performance_title">Dauerhaften Leistungsmodus aktivieren</string>
+    <string name="preference_sustained_performance_description">Durch Begrenzung der Höchst-Performance die Leistungsverringerung bei hoher CPU-Temperatur vermindern.</string>
     <string name="preference_force_vsync_title">V-Sync erzwingen</string>
+    <string name="preference_force_vsync_description">Durch Begrenzung der Höchst-Performance die Leistungsverringerung bei hoher CPU-Temperatur vermindern.</string>
     <string name="preference_force_english_title">Englische Sprache erzwingen</string>
+    <string name="preference_force_english_description">Verwendet die originalen Beschriftungen, wie von Entwicklern vorgesehen. Benötigt einen Neustart.</string>
     <string name="preference_edit_controls_title">Benutzerdefinierte Steuerung bearbeiten</string>
+    <string name="preference_edit_controls_summary">Die Steuerung anpassen.</string>
     <string name="preference_category_gyro_controls">Gyroskop-Steuerung</string>
     <string name="preference_category_virtual_mouse">Virtuelle Maus</string>
     <string name="preference_gyro_invert_x_axis">X-Achse invertieren</string>
     <string name="preference_gyro_invert_y_axis">Y-Achse invertieren</string>
     <string name="preference_gyro_invert_x_axis_description">Horizontale Achse invertieren.</string>
     <string name="preference_gyro_invert_y_axis_description">Vertikale Achse invertieren.</string>
+    <string name="preference_gyro_smoothing_title">Gyroscope-Glättung aktiveren</string>
     <string name="preference_gyro_smoothing_description">Reduziert Jitter im Austausch von Latenz.</string>
     <string name="preference_back_title">Zum übergeordneten Menü gehen</string>
     <string name="unnamed">Unbenannt</string>
@@ -193,6 +207,7 @@
     <string name="lazy_service_default_title">Pojav-Vordergrunddienst</string>
     <string name="mcl_setting_veroption_installed">Installiert</string>
     <string name="use_global_default">(Standardvorgaben verwenden)</string>
+    <string name="default_control">Standard-Steuerung</string>
     <string name="progresslayout_tasks_in_progress">%d Aufgaben in Bearbeitung</string>
     <string name="notification_terminate">Beenden</string>
     <string name="notification_game_runs">Das Spiel läuft!</string>
@@ -212,12 +227,19 @@
     <string name="minecraft_not_owned">Es scheint, als hätte dieses Konto kein Minecraft-Profil. Wenn du den Xbox-Game-Pass hast, logge dich bitte auf https://minecraft.net/ ein und stelle ihn ein.</string>
     <string name="xerr_not_available">Xbox-Live ist in deinem Land nicht verfügbar</string>
     <string name="preference_enable_gyro_title">Aktiviere Gyroskop-Steuerung</string>
+    <string name="preference_enable_gyro_description">Aktiviert das Umschauen im Spiel durch das Bewegen des Gerätes.</string>
     <string name="preference_gyro_sensitivity_title">Gyroskop-Steuerungs-Empfindlichkeit</string>
+    <string name="preference_gyro_sensitivity_description">Die Empfindlichkeit der Gyroscope-Steuerung anpassen.</string>
+    <string name="toast_turn_on_gyro">Gyroscope-Steuerung muss hierfür aktiviert sein!</string>
     <string name="preference_gyro_sample_rate_title">Gyroskop-Abtastrate</string>
+    <string name="preference_gyro_sample_rate_description">Erhöhen bei Leistungsproblemen mit Gyroscope-Steuerung.</string>
     <string name="microsoft_login_retry_later">Zu viele Anfragen – bitte versuche es später erneut.</string>
+    <string name="storage_required">PojavLauncher benötigt einen verbundenen externen Speicher. Bitte verbinde ihn erneut und starte dann die App neu.</string>
     <string name="mcl_setting_title_buttonallcaps">Nur Großbuchstaben in Tastenbeschriftungen verwenden</string>
+    <string name="mcl_setting_subtitle_buttonallcaps">Deaktivieren, um Kleinbuchstaben für die Steuerung zu verwenden.</string>
     <string name="create_profile">Neues Profil erstellen</string>
     <string name="preference_shader_dump_title">Shader-Dumping aktivieren</string>
+    <string name="preference_shader_dump_description">Konvertierte Shader mit in die Protokolldatei schreiben.</string>
     <string name="percent_format">%d%%</string>
     <string name="customctrl_editor_exit_title">Gehst Du?</string>
     <string name="customctrl_editor_exit_msg">Wollen Sie das Spiel wirklich beenden?</string>
@@ -225,10 +247,13 @@
     <string name="global_save_and_exit">Speichern und schließen</string>
     <string name="global_yes">Ja</string>
     <string name="global_no">Nein</string>
+    <string name="preference_controller_map_wiped">Die Controller-Konfiguration wurde entfernt.</string>
     <string name="preference_category_controller_settings">Controller Einstellungen</string>
     <string name="preference_wipe_controller_title">Standard-Controller-Belegung festlegen</string>
+    <string name="preference_wipe_controller_description">Die Controller-Knöpfe belegen.</string>
     <string name="preference_deadzone_scale_title">Joystick Deadzone Skala</string>
     <string name="preference_deadzone_scale_description">Erhöhen, falls der Joystick driftet.</string>
+    <string name="preference_force_big_core_title">Ausführung des Renderers auf dem Haupt-Core erzwingen</string>
     <string name="preference_force_big_core_desc">Zwingt den Minecraft-Renderthread auf dem Kern mit der höchsten maximalen Frequenz zu laufen.</string>
     <string name="version_select_hint">Wähle eine Version</string>
     <string name="forge_dl_progress">Installer für %s wird heruntergeladen</string>
@@ -273,4 +298,35 @@
     <string name="notif_error_occured">Es ist ein Fehler aufgetreten</string>
     <string name="notif_error_occured_desc">Klicke um mehr Details zu sehen</string>
     <string name="fabric_dl_only_stable">Nur stabile Versionen anzeigen</string>
+    <string name="dl_tampered_manifest_title">Datei-Verifikations-Warnung</string>
+    <string name="dl_tampered_manifest"><![CDATA[Das Spielversions-Manifest auf dem Spiegelserver gleicht nicht dem offiziellen von Mojang, was bedeutet, dass es manipuliert sein könnte.<br/>
+<b> Fortzufahren ist nicht sicher und persönliche Daten könnten gestohlen werden.</b><br/>
+Sollen die Spiegelserver trotzdem verwendet werden, drücke \"Manifest-Überprüfungen deaktivieren\" und starte den Download erneut.<br/>
+Um die offizielle Download-Quelle zu verwenden, drücke \"Auf offizielle Seite umschalten\" und starte den Download erneut.<br/>]]></string>
+    <string name="dl_turn_off_manifest_checks">Manifest-Verifikation ausschalten</string>
+    <string name="dl_switch_to_official_site">Zur offiziellen Seite wechseln</string>
+    <string name="preference_download_source_title">Spiele-Download-Quelle</string>
+    <string name="preference_download_source_description">Einen Download-Spiegelserver anstelle des offiziellen Servers wählen</string>
+    <string name="preference_verify_manifest_title">Spielversions-Manifest verifizieren</string>
+    <string name="preference_verify_manifest_description">Wenn aktiviert, wird der Launcher das Spielversions-Manifest zusammen mit den Bibliotheken prüfen.</string>
+    <string name="notif_download_finished">Das Spiel ist bereit zum Starten</string>
+    <string name="notif_download_finished_desc">Hier klicken, um zu starten!</string>
+    <string name="preference_category_gestures">Gesten</string>
+    <string name="preference_category_buttons">Schaltflächen</string>
+    <string name="preference_category_experimental_settings">Experimentell</string>
+    <string name="preference_category_java_tweaks">Java-Optimierungen</string>
+    <string name="preference_category_main_categories">Kategorien</string>
+    <string name="preference_category_miscellaneous">Sonstige Einstellungen</string>
+    <string name="preference_category_video">Grafik-Einstellungen</string>
+    <string name="notification_permission_dialog_title">Berechtigungsanfrage</string>
+    <string name="notification_permission_dialog_text">PojavLauncher benötigt eine Berechtigung, um Benachrichtigungen anzuzeigen, damit Spiel-/Modpack-Downloads nicht abgebrochen werden, wenn die App verlassen wird. Ohne diese Berechtigung könnte Android Downloads stoppen, wenn PojavLauncher nicht mehr im Vordergrund ist.</string>
+    <string name="notification_permission_toast">Dies kann jederzeit in den Einstellungen geändert werden</string>
+    <string name="preference_ask_for_notification_title">Benachrichtigungen erlauben</string>
+    <string name="preference_ask_for_notification_description">Klicken, um die Benachrichtigungs-Berechtigung erneut anzufragen, damit Spiel-/Modpack-Downloads im Hintergrund richtig funktionieren.</string>
+    <string name="preference_vsync_in_zink_title">V-Sync mit Zink erlauben</string>
+    <string name="preference_vsync_in_zink_description">Ermöglicht dem Launcher, interne System-APIs zu verwenden, um V-Sync für Zink zu aktivieren. Sollte deaktiviert werden, wenn der Launcher nach einer Systemaktualisierung plötzlich mit Zink abstürzt.</string>
+    <string name="exception_failed_to_unpack_jre17">Konnte JRE 17 nicht installieren</string>
+    <string name="newdl_starting">Lese Spiel-Metadaten…</string>
+    <string name="newdl_downloading_metadata">Lade Spiel-Metadaten herunter (%s)</string>
+    <string name="newdl_downloading_game_files">Lade Spieldateien herunter… (%d/%d, %.2f MB)</string>
 </resources>

@@ -144,6 +144,7 @@
     <string name="customctrl_passthru">Siçan keçidi</string>
     <string name="customctrl_swipeable">Sürüşdürülə bilər</string>
     <string name="customctrl_forward_lock">İrəli kilid</string>
+    <string name="customctrl_absolute_tracking">Mütləq barmaq izləmə</string>
     <string name="memory_warning_msg">Boş RAM-ın cari miqdarı (%d) ayrılmış RAM-dan (%d) azdır və bu, çökmələrə səbəb ola bilər. Oyun qəzaya uğrayarsa, yeri dəyişdirin.</string>
     <string name="mcl_memory_allocation">Yaddaşın ayrılması</string>
     <string name="mcl_memory_allocation_subtitle">Minecraft-a nə qədər yaddaş verildiyinə nəzarət edir.</string>
@@ -296,4 +297,35 @@
     <string name="notif_error_occured">Bir xəta baş verdi</string>
     <string name="notif_error_occured_desc">Daha çox təfərrüatları görmək üçün klikləyin</string>
     <string name="fabric_dl_only_stable">Yalnız stabil versiyaları göstərin</string>
+    <string name="dl_tampered_manifest_title">Fayl doğrulama xəbərdarlığı</string>
+    <string name="dl_tampered_manifest"><![CDATA[Güzgüdəki oyun versiyası manifesti rəsmi Mojang versiyası manifestinə uyğun gəlmir, bu o deməkdir ki, o, pozulmuş ola bilər.<br/>
+         <b>Bu təhlükəsiz deyil.  Davam etsəniz, şəxsi məlumatlarınız risk altında ola bilər.</b><br/>
+         Hələ də güzgüdən istifadə etmək istəyirsinizsə, \"Manifest yoxlamalarını söndür\" düyməsini basın və endirməyə yenidən başlayın.<br/>
+         Rəsmi yükləmə mənbəyindən istifadə etmək istəyirsinizsə, \"Rəsmi sayta keç\" düyməsini basın və endirməyə yenidən başlayın.<br/>]]></string>
+    <string name="dl_turn_off_manifest_checks">Manifest yoxlamalarını söndürün</string>
+    <string name="dl_switch_to_official_site">Rəsmi sayta keçin</string>
+    <string name="preference_download_source_title">Oyun yükləmə mənbəyi</string>
+    <string name="preference_download_source_description">Rəsmi yükləmə serverindən istifadə etmək əvəzinə yükləmə güzgüsü seçin</string>
+    <string name="preference_verify_manifest_title">Oyun versiyası manifestini yoxlayın</string>
+    <string name="preference_verify_manifest_description">Aktivləşdirildikdə, başlatma proqramı kitabxanalarla birlikdə oyun versiyasının manifestini yoxlayacaq.</string>
+    <string name="notif_download_finished">Oyun başlamağa hazırdır</string>
+    <string name="notif_download_finished_desc">Başlamaq üçün bura klikləyin!</string>
+    <string name="preference_category_gestures">Jestlər</string>
+    <string name="preference_category_buttons">Düymәlәr</string>
+    <string name="preference_category_experimental_settings">Experimental fuckury</string>
+    <string name="preference_category_java_tweaks">Java Ayarları</string>
+    <string name="preference_category_main_categories">Kateqoriyalar</string>
+    <string name="preference_category_miscellaneous">Müxtəlif parametrlər</string>
+    <string name="preference_category_video">Video parametrləri</string>
+    <string name="notification_permission_dialog_title">İcazə sorğusu</string>
+    <string name="notification_permission_dialog_text">PojavLauncher, proqramı tərk etdiyiniz zaman oyun/mod paketi yükləmələrinin dayandırılmasının qarşısını almaq məqsədilə bildirişlər göndərmək üçün icazə tələb edir. Bu icazə olmadan PojavLauncher-i fon rejiminə keçirdiyiniz zaman Android, yükləmələrinizi bağlaya bilər.</string>
+    <string name="notification_permission_toast">Daha sonra Parametrlərə daxil olaraq fikrinizi dəyişə bilərsiniz</string>
+    <string name="preference_ask_for_notification_title">Bildirişlərə icazə verin</string>
+    <string name="preference_ask_for_notification_description">Oyun/modpack fon yükləmələrinin düzgün işləməsi üçün tələb olunan bildiriş icazəsini yenidən tələb etmək üçün klikləyin.</string>
+    <string name="preference_vsync_in_zink_title">Zink ilə V-Sync-ə icazə verin</string>
+    <string name="preference_vsync_in_zink_description">Başladıcıya Zink üçün V-Sync-i aktivləşdirmək məqsədilə daxili sistem API-lərindən istifadə etməyə icazə verir. Başladıcınız sistem yeniləməsindən sonra qəfil Zink ilə çökərsə, bunu söndürün.</string>
+    <string name="exception_failed_to_unpack_jre17">JRE 17 quraşdırmaq alınmadı</string>
+    <string name="newdl_starting">Oyun metadatası oxunur…</string>
+    <string name="newdl_downloading_metadata">Oyun metadatası endirilir (%s)</string>
+    <string name="newdl_downloading_game_files">Oyun faylları endirilir... (%d/%d, %.2f MB)</string>
 </resources>

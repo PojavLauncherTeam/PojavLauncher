@@ -36,10 +36,12 @@
     <string name="mcl_options">Opsi</string>
     <string name="mcl_option_customcontrol">Kontrol kustom</string>
     <string name="mcl_setting_title_use_surface_view">Gunakan alternatif rendering surface</string>
+    <string name="mcl_setting_subtitle_use_surface_view">Mungkin membantu perfoma dalam skenario-skenario GPU bound.</string>
     <string name="mcl_setting_title_ignore_notch">Abaikan notch</string>
     <string name="mcl_setting_subtitle_ignore_notch">Mengabaikan notch dan memperluas layar ke bawahnya.\nMemberikanmu pengalaman yang lebih luas.</string>
     <string name="mcl_setting_title_resolution_scaler">Pengskala resolusi</string>
     <string name="mcl_setting_subtitle_resolution_scaler">Membolehkanmu menurunkan resolusi permainan. 100% berarti resolusi penuh(mempengaruhi performa).</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Ubah delay tekan lama untuk menghancurkan block dan menjatuhkan item.</string>
     <string name="mcl_setting_title_buttonscale">Penskalaan tombol kontrol</string>
     <string name="mcl_setting_subtitle_buttonscale">Tingkatkan ukuran tombol jika tombol tombol itu terlalu kecil.</string>
     <string name="mcl_setting_title_mousescale">Penskalaan mouse</string>
@@ -54,6 +56,8 @@
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Alpha-lama</string>
     <string name="mcl_setting_veroption_oldbeta">Beta-lama</string>
+    <string name="mcl_setting_java_sandbox">Sandbox eksekusi .jar</string>
+    <string name="mcl_setting_java_sandbox_subtitle">Kendalikan ketersedian pengelola keamanan sandbox saat meluncurkan berkas .jar.</string>
     <string name="mcl_version_clone">Klon</string>
     <!-- Global strings -->
     <string name="global_edit">Edit</string>
@@ -121,6 +125,7 @@
     <string name="customctrl_addbutton_joystick">Tambah Joystick</string>
     <string name="customctrl_addsubbutton">Tambahkan tombol</string>
     <string name="customctrl_selectdefault">Pilih kontrol default</string>
+    <string name="customctrl_export">Ekspor Penataan Kontrol</string>
     <string name="main_share_logs">Bagikan file log</string>
     <string name="main_install_jar_file">Eksekusi sebuah .jar</string>
     <string name="main_play">Main</string>
@@ -133,6 +138,7 @@
     <string name="mcl_disable_gestures">Matikan gestures</string>
     <string name="mcl_disable_gestures_subtitle">Mematikan gestures, seperti tahan lama untuk menghancurkan block, dan pencet untuk menempatkan block.</string>
     <string name="mcl_disable_swap_hand">Nonaktifkan ketuk dua kali untuk bertukar tangan</string>
+    <string name="mcl_disable_swap_hand_subtitle">Nonaktifkan gestur ketuk dua kali pada item hotbar untuk menukarkannya di tangan kedua.</string>
     <string name="mcl_setting_title_mousespeed">Kecepatan Mouse</string>
     <string name="mcl_setting_subtitle_mousespeed">Ubah kecepatan penunjuk virtual.</string>
     <string name="customctrl_passthru">Mouse pass-thru</string>
@@ -157,19 +163,30 @@
     <string name="pvc_gameDirectory">Direktori game</string>
     <string name="pvc_jvmArgs">Argumen JVM</string>
     <string name="preference_mouse_start_title">Mulai dengan mouse virtual nyala</string>
+    <string name="preference_mouse_start_description">Penunjuk virtual akan muncul ketika opsi ini aktif.</string>
     <string name="preference_video_title">Video dan renderer</string>
     <string name="preference_video_description">Resolusi, renderer dan performa</string>
     <string name="preference_control_title">Kustomisasi kontrol</string>
+    <string name="preference_control_description">Gestur, Tombol, dan Skala</string>
     <string name="preference_java_title">Tweak Java</string>
+    <string name="preference_java_description">Runtime Java, Argumen JVM, Jumlah RAM dan sandbox</string>
     <string name="preference_misc_title">Pengaturan lain-lain</string>
+    <string name="preference_misc_description">Daftar versi dan pemeriksaan lib</string>
     <string name="preference_experimental_title">Barang Eksperimental</string>
     <string name="preference_sustained_performance_title">Aktifkan mode kinerja berkelanjutan</string>
+    <string name="preference_sustained_performance_description">Limit thermal throttling dengan me-limit performa.</string>
+    <string name="preference_force_vsync_title">Paksa aktifkan VSync</string>
+    <string name="preference_force_vsync_description">Limit thermal throttling dengan me-limit performa.</string>
+    <string name="preference_force_english_title">Paksa bahasa saat ini ke bahasa Inggris</string>
+    <string name="preference_force_english_description">Memperbolehkan anda untuk melihat string asli, seperti kehendak pengembang. Membutuhkan muat ulang.</string>
     <string name="preference_edit_controls_title">Ubah kontrol kustom</string>
+    <string name="preference_category_gyro_controls">Kontrol Giro</string>
     <string name="preference_category_virtual_mouse">Mouse virtual</string>
     <string name="preference_gyro_invert_x_axis">Balikkan sumbu X</string>
     <string name="preference_gyro_invert_y_axis">Balikkan sumbu Y</string>
     <string name="preference_gyro_invert_x_axis_description">Balik sumbu horizontal.</string>
     <string name="preference_gyro_invert_y_axis_description">Balik sumbu vertikal.</string>
+    <string name="preference_gyro_smoothing_title">Aktifkan penghalus Giro</string>
     <string name="preference_gyro_smoothing_description">Mengurangi jitter sebagai ganti latensi.</string>
     <string name="preference_back_title">Kembali ke layar terakhir</string>
     <string name="unnamed">Tidak dinamai</string>
@@ -186,12 +203,14 @@
     <string name="lazy_service_default_title">Pojav Foreground Service</string>
     <string name="mcl_setting_veroption_installed">Terpasang</string>
     <string name="use_global_default">(Gunakan global bawaan)</string>
+    <string name="default_control">Kontrol bawaan</string>
     <string name="progresslayout_tasks_in_progress">%d tugas sedang berjalan</string>
     <string name="notification_terminate">Hentikan</string>
     <string name="notification_game_runs">Permainannya sedang berjalan!</string>
     <string name="folder_dialog_create">Buat</string>
     <string name="folder_dialog_insert_name">Masukkan nama folder</string>
     <string name="folder_fragment_create">Buat direktori</string>
+    <string name="folder_fragment_select">Pilih folder</string>
     <string name="main_login_done">Masuk selesai</string>
     <string name="main_add_account">Tambah akun</string>
     <string name="tasks_ongoing">Ada tugas yang sedang berjalan, mohon menunggu</string>
@@ -262,4 +281,7 @@
     <string name="notif_error_occured">Terjadi sebuah kesalahan</string>
     <string name="notif_error_occured_desc">Pencet untuk melihat detail lebih lanjut</string>
     <string name="fabric_dl_only_stable">Hanya tunjukkan versi-versi stabil</string>
+    <string name="preference_category_java_tweaks">Tweak Java</string>
+    <string name="preference_category_miscellaneous">Pengaturan lain-lain</string>
+    <string name="exception_failed_to_unpack_jre17">Gagal memasang JRE 17</string>
 </resources>
