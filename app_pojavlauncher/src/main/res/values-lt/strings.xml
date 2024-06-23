@@ -139,7 +139,7 @@
     <string name="multirt_progress_caching">Talpinama...</string>
     <string name="multirt_config_setdefault">Nustatyti numatytą</string>
     <string name="multirt_config_setdefault_already">Numatytasis</string>
-    <string name="multirt_nocompartiblert">Nerasta tinkamos Java Runtine. Šiai versijai reikalinga Java %d arba naujesnė.</string>
+    <string name="multirt_nocompatiblert">Nerasta tinkamos Java Runtine. Šiai versijai reikalinga Java %d arba naujesnė.</string>
     <string name="multirt_nojava8rt">Nerasta Java 8. Kad naudotumėte šią funkciją, naudokite Java 8.</string>
     <string name="multirt_delete_runtime">Ištrinti runtime</string>
     <string name="pvc_gameDirectory">Žaidimo failų vieta</string>

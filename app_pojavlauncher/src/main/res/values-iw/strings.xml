@@ -120,7 +120,7 @@
     <string name="multirt_progress_caching">שומר במטמון...</string>
     <string name="multirt_config_setdefault">הגדר כברירת מחדל</string>
     <string name="multirt_config_setdefault_already">ברירת מחדל</string>
-    <string name="multirt_nocompartiblert">לא ניתן למצוא Java Runtime נתמכת. גרסת Java %d ומעלה נדרשת.</string>
+    <string name="multirt_nocompatiblert">לא ניתן למצוא Java Runtime נתמכת. גרסת Java %d ומעלה נדרשת.</string>
     <string name="multirt_nojava8rt">לא מצאתי את Java 8. על מנת להשתמש באפשרות זו, עליך להתקין Java 8.</string>
     <string name="pvc_gameDirectory">תיקיית המשחק</string>
     <string name="pvc_jvmArgs">פרמטרים של JVM</string>

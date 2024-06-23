@@ -158,7 +158,7 @@
     <string name="multirt_config_setdefault">Nastaviť predvolené</string>
     <string name="multirt_config_setdefault_already">Predvolené</string>
     <string name="multirt_config_removeerror_last">Musíte mať aspoň jednu inštaláciu Javy.</string>
-    <string name="multirt_nocompartiblert">Nebolo možné nájsť kompatibilnú verziu Java Runtime. Táto verzia vyžaduje Javu %d alebo novšiu.</string>
+    <string name="multirt_nocompatiblert">Nebolo možné nájsť kompatibilnú verziu Java Runtime. Táto verzia vyžaduje Javu %d alebo novšiu.</string>
     <string name="multirt_nojava8rt">Nebolo možné nájsť Javu 8. Ak chceš používať túto možnosť, musíš nainštalovať Javu 8.</string>
     <string name="multirt_delete_runtime">Vymaž runtime</string>
     <string name="pvc_gameDirectory">Zložka hry</string>

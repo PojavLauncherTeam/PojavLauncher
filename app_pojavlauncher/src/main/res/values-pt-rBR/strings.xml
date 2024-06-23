@@ -159,7 +159,7 @@
     <string name="multirt_config_setdefault">Definir como padrão</string>
     <string name="multirt_config_setdefault_already">Padrão</string>
     <string name="multirt_config_removeerror_last">Você precisa ter pelo menos um Java Runtime instalado.</string>
-    <string name="multirt_nocompartiblert">Não foi possível encontrar um Java Runtime compatível. Esta versão requer Java %d ou mais recente.</string>
+    <string name="multirt_nocompatiblert">Não foi possível encontrar um Java Runtime compatível. Esta versão requer Java %d ou mais recente.</string>
     <string name="multirt_nojava8rt">Não foi possível encontrar o Java 8. Para usar esta opção, você precisa instalar o Java 8.</string>
     <string name="multirt_delete_runtime">Excluir runtime</string>
     <string name="pvc_gameDirectory">Diretório do jogo</string>

@@ -125,7 +125,7 @@
     <string name="multirt_progress_caching">در حال اعمال کَش...</string>
     <string name="multirt_config_setdefault">تنظیم پیش‌فرض</string>
     <string name="multirt_config_setdefault_already">پیش‌فرض</string>
-    <string name="multirt_nocompartiblert">هیچ جاوا سازگاری پیدا نمی شود. این نسخه به جاوای %d یا جدیدتر نیاز دارد.</string>
+    <string name="multirt_nocompatiblert">هیچ جاوا سازگاری پیدا نمی شود. این نسخه به جاوای %d یا جدیدتر نیاز دارد.</string>
     <string name="multirt_nojava8rt">جاوا 8 را نمی توان پیدا کرد. برای استفاده از این قابلیت باید جاوا 8 را نصب کنید.</string>
     <string name="pvc_gameDirectory">پوشه بازی</string>
     <string name="pvc_jvmArgs">آرگومان‌های JVM</string>

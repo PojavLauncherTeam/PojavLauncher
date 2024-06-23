@@ -136,7 +136,7 @@
     <string name="multirt_progress_caching">Mise en cache...</string>
     <string name="multirt_config_setdefault">Définir par défaut</string>
     <string name="multirt_config_setdefault_already">Par défaut</string>
-    <string name="multirt_nocompartiblert">Impossible de trouver une version de Java compatible. Cette version nécessite au moins Java %d.</string>
+    <string name="multirt_nocompatiblert">Impossible de trouver une version de Java compatible. Cette version nécessite au moins Java %d.</string>
     <string name="multirt_nojava8rt">Java 8 est introuvable. Pour utiliser cette option, vous devez installer Java 8.</string>
     <string name="multirt_delete_runtime">Supprimer le runtime</string>
     <string name="pvc_gameDirectory">Répertoire du jeu</string>
