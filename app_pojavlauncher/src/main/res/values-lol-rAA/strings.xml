@@ -121,7 +121,7 @@
     <string name="multirt_progress_caching">Storin’ tu cache memori...</string>
     <string name="multirt_config_setdefault">Set favoritz</string>
     <string name="multirt_config_setdefault_already">My favritz</string>
-    <string name="multirt_nocompartiblert">Ken´t find any compatibl Java Runtime. Dis vershun reqirez Java %d or newr.</string>
+    <string name="multirt_nocompatiblert">Ken´t find any compatibl Java Runtime. Dis vershun reqirez Java %d or newr.</string>
     <string name="multirt_nojava8rt">Ken´t find Java 8. In ordr 2 use dis opshun, u ned 2 install Java 8.</string>
     <string name="pvc_gameDirectory">Gamez’ direktory</string>
     <string name="pvc_jvmArgs">CCz’UM argumentz</string>

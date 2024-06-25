@@ -159,7 +159,7 @@
     <string name="multirt_config_setdefault">设为默认（只对执行 .jar 生效）</string>
     <string name="multirt_config_setdefault_already">默认</string>
     <string name="multirt_config_removeerror_last">您必须至少安装一个 Java 运行环境。</string>
-    <string name="multirt_nocompartiblert">找不到合适的 Java 运行环境。此版本需要 Java %d 或更高版本。</string>
+    <string name="multirt_nocompatiblert">找不到合适的 Java 运行环境。此版本需要 Java %d 或更高版本。</string>
     <string name="multirt_nojava8rt">无法找到 Java 8，如要使用此选项，您需要安装 Java 8。</string>
     <string name="multirt_delete_runtime">删除 Java 运行环境</string>
     <string name="pvc_gameDirectory">游戏目录</string>

@@ -159,7 +159,7 @@
     <string name="multirt_config_setdefault">Выбрать</string>
     <string name="multirt_config_setdefault_already">По умолчанию</string>
     <string name="multirt_config_removeerror_last">Должна быть установлена хотя бы одна среда выполнения Java.</string>
-    <string name="multirt_nocompartiblert">Не удалось найти подходящую среду выполнения Java. Эта версия требует Java %d или новее.</string>
+    <string name="multirt_nocompatiblert">Не удалось найти подходящую среду выполнения Java. Эта версия требует Java %d или новее.</string>
     <string name="multirt_nojava8rt">Не удалось найти Java 8. Чтобы использовать эту опцию, необходимо установить Java 8.</string>
     <string name="multirt_delete_runtime">Удалить</string>
     <string name="pvc_gameDirectory">Папка игры</string>

@@ -159,7 +159,7 @@
     <string name="multirt_config_setdefault">تعيين لإستخدام دائم</string>
     <string name="multirt_config_setdefault_already">مستخدم دائما</string>
     <string name="multirt_config_removeerror_last">يجب ان يكون هناك Java runtime واحد مثبت على الأقل.</string>
-    <string name="multirt_nocompartiblert">لا يمكن العثور على أي اصدار جافا صالح. هذا الإصدار يتطلب جافا %d أو أحدث.</string>
+    <string name="multirt_nocompatiblert">لا يمكن العثور على أي اصدار جافا صالح. هذا الإصدار يتطلب جافا %d أو أحدث.</string>
     <string name="multirt_nojava8rt">لا يمكن العثور على Java 8. لاستخدام هذا الخيار، تحتاج إلى تثبيت Java 8.</string>
     <string name="multirt_delete_runtime">حذف Runtime</string>
     <string name="pvc_gameDirectory">مكان تخزين اللعبة</string>

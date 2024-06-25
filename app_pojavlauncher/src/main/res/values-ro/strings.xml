@@ -133,7 +133,7 @@
     <string name="multirt_progress_caching">Caching...</string>
     <string name="multirt_config_setdefault">Setaţi ca prestabilit</string>
     <string name="multirt_config_setdefault_already">Prestabilit</string>
-    <string name="multirt_nocompartiblert">Nu s-a putut găsi niciun Java Runtime compatibil. Această versiune necesită Java %d sau o versiune mai nouă.</string>
+    <string name="multirt_nocompatiblert">Nu s-a putut găsi niciun Java Runtime compatibil. Această versiune necesită Java %d sau o versiune mai nouă.</string>
     <string name="multirt_nojava8rt">Nu s-a putut găsi Java 8. Pentru a folosi această opțiune, trebuie să instalezi Java 8.</string>
     <string name="pvc_gameDirectory">Dosarul jocului</string>
     <string name="pvc_jvmArgs">Argumente JVM</string>

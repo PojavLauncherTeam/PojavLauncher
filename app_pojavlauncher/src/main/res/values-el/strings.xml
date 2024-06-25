@@ -136,7 +136,7 @@
     <string name="multirt_progress_caching">Προσωρινή αποθήκευση...</string>
     <string name="multirt_config_setdefault">Ορισμός ως προεπιλογή</string>
     <string name="multirt_config_setdefault_already">Προεπιλογή</string>
-    <string name="multirt_nocompartiblert">Δεν είναι δυνατή η εύρεση οποιασδήποτε Java Runtime. Αυτή η έκδοση απαιτεί Java %d ή νεότερη.</string>
+    <string name="multirt_nocompatiblert">Δεν είναι δυνατή η εύρεση οποιασδήποτε Java Runtime. Αυτή η έκδοση απαιτεί Java %d ή νεότερη.</string>
     <string name="multirt_nojava8rt">Δεν ήταν δυνατή η εύρεση της Java 8. Για να χρησιμοποιήσετε αυτήν την επιλογή, πρέπει να εγκαταστήσετε την Java 8.</string>
     <string name="multirt_delete_runtime">Διαγραφή χρόνου εκτέλεσης</string>
     <string name="pvc_gameDirectory">Κατάλογος παιχνιδιού</string>

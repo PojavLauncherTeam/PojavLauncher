@@ -159,7 +159,7 @@
     <string name="multirt_config_setdefault">기본으로 설정</string>
     <string name="multirt_config_setdefault_already">기본값</string>
     <string name="multirt_config_removeerror_last">하나 이상의 자바 런타임이 필요합니다.</string>
-    <string name="multirt_nocompartiblert">호환되는 자바 런타임을 찾지 못했습니다. 이 버전은 자바 %d 이상이 필요합니다.</string>
+    <string name="multirt_nocompatiblert">호환되는 자바 런타임을 찾지 못했습니다. 이 버전은 자바 %d 이상이 필요합니다.</string>
     <string name="multirt_nojava8rt">자바 8을 찾지 못했습니다. 이 옵션을 사용하려면, 자바 8을 설치해야 합니다.</string>
     <string name="multirt_delete_runtime">런타임 제거</string>
     <string name="pvc_gameDirectory">게임 디렉토리</string>
