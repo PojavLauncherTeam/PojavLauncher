@@ -137,7 +137,7 @@
     <string name="multirt_progress_caching">キャッシュ中...</string>
     <string name="multirt_config_setdefault">デフォルトに設定</string>
     <string name="multirt_config_setdefault_already">デフォルト</string>
-    <string name="multirt_nocompartiblert">比較可能なJavaランタイムが見つかりません。このバージョンはJava %d 以降が必要です。</string>
+    <string name="multirt_nocompatiblert">比較可能なJavaランタイムが見つかりません。このバージョンはJava %d 以降が必要です。</string>
     <string name="multirt_nojava8rt">Java 8が見つかりません。このオプションを使用するには、Java 8をインストールする必要があります。</string>
     <string name="multirt_delete_runtime">ランタイムを削除</string>
     <string name="pvc_gameDirectory">ゲームのディレクトリ</string>

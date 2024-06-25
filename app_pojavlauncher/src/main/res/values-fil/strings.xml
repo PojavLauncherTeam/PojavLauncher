@@ -127,7 +127,7 @@
     <string name="multirt_progress_caching">Pag-cache...</string>
     <string name="multirt_config_setdefault">Itakda ang default</string>
     <string name="multirt_config_setdefault_already">Default</string>
-    <string name="multirt_nocompartiblert">Walang mahanap na anumang katugmang Java Runtime. Ang bersyon na ito ay nangangailangan ng Java %d o mas bago.</string>
+    <string name="multirt_nocompatiblert">Walang mahanap na anumang katugmang Java Runtime. Ang bersyon na ito ay nangangailangan ng Java %d o mas bago.</string>
     <string name="multirt_nojava8rt">Hindi mahanap ang Java 8. Upang magamit ang opsyong ito, kailangan mong i-install ang Java 8.</string>
     <string name="pvc_gameDirectory">Direktoryo ng laro</string>
     <string name="pvc_jvmArgs">Argumento ng JVM</string>

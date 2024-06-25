@@ -159,7 +159,7 @@
     <string name="multirt_config_setdefault">Varsayılan olarak ayarla</string>
     <string name="multirt_config_setdefault_already">Varsayılan</string>
     <string name="multirt_config_removeerror_last">En az bir Java Runtime\'ın kurulu olması gerekmektedir.</string>
-    <string name="multirt_nocompartiblert">Hiç uyumlu Java Runtime bulunamadı. Bu sürüm Java %d ya da daha yenisini gerektiriyor.</string>
+    <string name="multirt_nocompatiblert">Hiç uyumlu Java Runtime bulunamadı. Bu sürüm Java %d ya da daha yenisini gerektiriyor.</string>
     <string name="multirt_nojava8rt">Java 8 bulunamadı. Bu seçeneği kullanabilmeniz için Java 8 kurmanız gerekiyor.</string>
     <string name="multirt_delete_runtime">Runtime\'ı sil</string>
     <string name="pvc_gameDirectory">Oyun dizini</string>

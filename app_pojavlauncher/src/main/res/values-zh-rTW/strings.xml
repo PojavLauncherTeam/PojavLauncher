@@ -159,7 +159,7 @@
     <string name="multirt_config_setdefault">設為預設</string>
     <string name="multirt_config_setdefault_already">預設</string>
     <string name="multirt_config_removeerror_last">您必須至少安裝一個Java執行庫.</string>
-    <string name="multirt_nocompartiblert">沒有可用的Java執行庫。此版本需要Java %d 以上。</string>
+    <string name="multirt_nocompatiblert">沒有可用的Java執行庫。此版本需要Java %d 以上。</string>
     <string name="multirt_nojava8rt">找不到已安裝的Java 8。請安裝Java 8以使用此功能。</string>
     <string name="multirt_delete_runtime">删除 Java 运行环境</string>
     <string name="pvc_gameDirectory">遊戲資料夾</string>

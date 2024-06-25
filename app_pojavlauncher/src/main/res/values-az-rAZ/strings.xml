@@ -158,7 +158,7 @@
     <string name="multirt_config_setdefault">Defolt təyin edin</string>
     <string name="multirt_config_setdefault_already">Defolt</string>
     <string name="multirt_config_removeerror_last">Ən azı bir Java Runtime quraşdırılmış olmalıdır.</string>
-    <string name="multirt_nocompartiblert">Heç bir uyğun gələn Java Runtime tapılmadı. Bu versiya Java %d və ya daha yenisini tələb edir.</string>
+    <string name="multirt_nocompatiblert">Heç bir uyğun gələn Java Runtime tapılmadı. Bu versiya Java %d və ya daha yenisini tələb edir.</string>
     <string name="multirt_nojava8rt">Java 8-i tapmaq mümkün deyil. Bu seçimdən istifadə etmək üçün Java 8-i quraşdırmalısınız.</string>
     <string name="multirt_delete_runtime">Runtime-ı silin</string>
     <string name="pvc_gameDirectory">Oyun kataloqu</string>

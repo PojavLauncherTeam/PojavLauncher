@@ -140,7 +140,7 @@
     <string name="multirt_progress_caching">Memorizzando nella cache...</string>
     <string name="multirt_config_setdefault">Imposta predefinito</string>
     <string name="multirt_config_setdefault_already">Predefinito</string>
-    <string name="multirt_nocompartiblert">Impossibile trovare Java Runtime compatibili. Questa versione richiede almeno Java %d o successiva.</string>
+    <string name="multirt_nocompatiblert">Impossibile trovare Java Runtime compatibili. Questa versione richiede almeno Java %d o successiva.</string>
     <string name="multirt_nojava8rt">Impossibile trovare Java 8. Per usare questa opzione, è necessario installare Java 8.</string>
     <string name="multirt_delete_runtime">Cancella runtime</string>
     <string name="pvc_gameDirectory">Cartella gioco</string>
