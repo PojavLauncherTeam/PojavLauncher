@@ -1173,4 +1173,11 @@ public final class Tools {
         sCompatibleRenderers = null;
         System.gc();
     }
+    
+    public static String trimSecondsToMiniutes(double seconds) {
+        if (seconds >= 60) {
+            return (seconds / 60.0) + "min" + (seconds % 60.0) + "s";
+        }
+        return seconds + "s";
+    }
 }
