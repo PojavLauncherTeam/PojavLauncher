@@ -35,11 +35,6 @@ public class AndroidPointerCapture implements ViewTreeObserver.OnWindowFocusChan
     }
 
     public void handleAutomaticCapture() {
-        if(!CallbackBridge.isGrabbing()) return;
-        if(mHostView.hasPointerCapture()) {
-            enableTouchpadIfNecessary();
-            return;
-        }
         if(!mHostView.hasWindowFocus()) {
             mHostView.requestFocus();
         } else {
