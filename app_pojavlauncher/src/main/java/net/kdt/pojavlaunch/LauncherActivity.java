@@ -24,6 +24,7 @@ import androidx.fragment.app.FragmentManager;
 import com.kdt.mcgui.ProgressLayout;
 import com.kdt.mcgui.mcAccountSpinner;
 
+import net.kdt.pojavlaunch.accounts.LocalAccountUtils;
 import net.kdt.pojavlaunch.contracts.OpenDocumentWithExtension;
 import net.kdt.pojavlaunch.extra.ExtraConstants;
 import net.kdt.pojavlaunch.extra.ExtraCore;
@@ -130,14 +131,26 @@ public class LauncherActivity extends BaseActivity {
             ExtraCore.setValue(ExtraConstants.SELECT_AUTH_METHOD, true);
             return false;
         }
-        String normalizedVersionId = AsyncMinecraftDownloader.normalizeVersionId(prof.lastVersionId);
-        JMinecraftVersionList.Version mcVersion = AsyncMinecraftDownloader.getListedVersion(normalizedVersionId);
-        new MinecraftDownloader().start(
-                this,
-                mcVersion,
-                normalizedVersionId,
-                new ContextAwareDoneListener(this, normalizedVersionId)
-        );
+
+        LocalAccountUtils.checkUsageAllowed(new LocalAccountUtils.CheckResultListener() {
+            @Override
+            public void onUsageAllowed() {
+                String normalizedVersionId = AsyncMinecraftDownloader.normalizeVersionId(prof.lastVersionId);
+                JMinecraftVersionList.Version mcVersion = AsyncMinecraftDownloader.getListedVersion(normalizedVersionId);
+                new MinecraftDownloader().start(
+                        LauncherActivity.this,
+                        mcVersion,
+                        normalizedVersionId,
+                        new ContextAwareDoneListener(LauncherActivity.this, normalizedVersionId)
+                );
+            }
+            @Override
+            public void onUsageDenied() {
+                LocalAccountUtils.openDialog(LauncherActivity.this,
+                        getString(R.string.no_microsoft_account) + "\r\n" + getString(R.string.purchase_minecraft_account_tip));
+            }
+        });
+
         return false;
     };
 

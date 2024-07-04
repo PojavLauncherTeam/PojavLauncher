@@ -18,7 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.Toast;
 
 import androidx.annotation.Keep;
@@ -31,6 +30,7 @@ import androidx.core.content.res.ResourcesCompat;
 import net.kdt.pojavlaunch.PojavProfile;
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
+import net.kdt.pojavlaunch.accounts.AccountsManager;
 import net.kdt.pojavlaunch.authenticator.listener.DoneListener;
 import net.kdt.pojavlaunch.authenticator.listener.ErrorListener;
 import net.kdt.pojavlaunch.authenticator.listener.ProgressListener;
@@ -59,6 +59,7 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
     }
 
     private final List<String> mAccountList = new ArrayList<>(2);
+    private final AccountsManager accountsManager = new AccountsManager();
     private MinecraftAccount mSelectecAccount = null;
 
     /* Display the head of the current profile, here just to allow bitmap recycling */
@@ -101,6 +102,7 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
         invalidate();
         mAccountList.add(account.username);
         reloadAccounts(false, mAccountList.size() -1);
+        accountsManager.add(account);
     };
 
     private final ErrorListener mErrorListener = errorMessage -> {
@@ -190,11 +192,13 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
     public void removeCurrentAccount(){
         int position = getSelectedItemPosition();
         if(position == 0) return;
-        File accountFile = new File(Tools.DIR_ACCOUNT_NEW, mAccountList.get(position)+".json");
+        String userName = mAccountList.get(position);
+        File accountFile = new File(Tools.DIR_ACCOUNT_NEW, userName +".json");
         if(accountFile.exists()) accountFile.delete();
         mAccountList.remove(position);
 
         reloadAccounts(false, 0);
+        accountsManager.remove(userName);
     }
 
     @Keep
@@ -246,13 +250,11 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
     private void reloadAccounts(boolean fromFiles, int overridePosition){
         if(fromFiles){
             mAccountList.clear();
-
             mAccountList.add(getContext().getString(R.string.main_add_account));
-            File accountFolder = new File(Tools.DIR_ACCOUNT_NEW);
-            if(accountFolder.exists()){
-                for (String fileName : accountFolder.list()) {
-                    mAccountList.add(fileName.substring(0, fileName.length() - 5));
-                }
+
+            accountsManager.reload();
+            for (MinecraftAccount minecraftAccount : AccountsManager.getAllAccount()) {
+                mAccountList.add(minecraftAccount.username);
             }
         }
 

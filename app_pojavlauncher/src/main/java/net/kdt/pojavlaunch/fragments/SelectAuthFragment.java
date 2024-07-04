@@ -7,9 +7,11 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
+import net.kdt.pojavlaunch.accounts.LocalAccountUtils;
 
 public class SelectAuthFragment extends Fragment {
     public static final String TAG = "AUTH_SELECT_FRAGMENT";
@@ -23,7 +25,20 @@ public class SelectAuthFragment extends Fragment {
         Button mMicrosoftButton = view.findViewById(R.id.button_microsoft_authentication);
         Button mLocalButton = view.findViewById(R.id.button_local_authentication);
 
-        mMicrosoftButton.setOnClickListener(v -> Tools.swapFragment(requireActivity(), MicrosoftLoginFragment.class, MicrosoftLoginFragment.TAG, null));
-        mLocalButton.setOnClickListener(v -> Tools.swapFragment(requireActivity(), LocalLoginFragment.class, LocalLoginFragment.TAG, null));
+        FragmentActivity fragmentActivity = requireActivity();
+
+        mMicrosoftButton.setOnClickListener(v -> Tools.swapFragment(fragmentActivity, MicrosoftLoginFragment.class, MicrosoftLoginFragment.TAG, null));
+        mLocalButton.setOnClickListener(v -> LocalAccountUtils.checkUsageAllowed(new LocalAccountUtils.CheckResultListener() {
+            @Override
+            public void onUsageAllowed() {
+                Tools.swapFragment(fragmentActivity, LocalLoginFragment.class, LocalLoginFragment.TAG, null);
+            }
+
+            @Override
+            public void onUsageDenied() {
+                LocalAccountUtils.openDialog(fragmentActivity,
+                        getString(R.string.reject_local_account) + "\r\n" + getString(R.string.purchase_minecraft_account_tip));
+            }
+        }));
     }
 }

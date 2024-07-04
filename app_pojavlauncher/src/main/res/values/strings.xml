@@ -257,6 +257,9 @@
     <string name="xerr_child">Your account is a child account, and needs to be added into a Family in order to log in.</string>
     <string name="minecraft_not_owned">It seems like this account does not have a Minecraft profile. If you have Xbox Game Pass, please log in on https://minecraft.net/ and set it up.</string>
     <string name="xerr_not_available">Xbox Live is not available in your country</string>
+    <string name="no_microsoft_account">Please log in with at least one official Minecraft account. We do not recommend launching Minecraft without a legitimate account.</string>
+    <string name="reject_local_account">It seems you are not logged in with an official account! The local account option is intended for players who cannot connect to the internet, not for those without a legitimate account.</string>
+    <string name="purchase_minecraft_account_tip">If you do not have a Minecraft official account, please purchase one from the official Minecraft website first!</string>
     <string name="preference_enable_gyro_title">Enable gyroscope controls</string>
     <string name="preference_enable_gyro_description">Enabling this will allow you to turn in-game by turning your phone.</string>
     <string name="preference_gyro_sensitivity_title">Gyroscope controls sensitivity</string>
