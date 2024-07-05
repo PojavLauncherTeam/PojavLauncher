@@ -41,8 +41,9 @@ public class MinecraftDownloader {
     public static final String MINECRAFT_RES = "https://resources.download.minecraft.net/";
     private AtomicReference<Exception> mDownloaderThreadException;
     private ArrayList<DownloaderTask> mScheduledDownloadTasks;
+    private AtomicLong mDownloadFileCounter;
     private AtomicLong mDownloadSizeCounter;
-    private long mTotalDownloadFileSize;
+    private long mDownloadFileCount;
     private File mSourceJarFile; // The source client JAR picked during the inheritance process
     private File mTargetJarFile; // The destination client JAR to which the source will be copied to.
 
@@ -83,6 +84,7 @@ public class MinecraftDownloader {
 
         mTargetJarFile = createGameJarPath(versionName);
         mScheduledDownloadTasks = new ArrayList<>();
+        mDownloadFileCounter = new AtomicLong(0);
         mDownloadSizeCounter = new AtomicLong(0);
         mDownloaderThreadException = new AtomicReference<>(null);
 
@@ -106,20 +108,20 @@ public class MinecraftDownloader {
                     !downloaderPool.awaitTermination(33, TimeUnit.MILLISECONDS)) {
                 long elapsedTime = System.currentTimeMillis() - startTime;
                 long downloadedSize = mDownloadSizeCounter.get();
+                long fileCounter = mDownloadFileCounter.get();
                 
                 double downloadSpeed = 0.0; // bytes per second
-                double remainTime = 0.0; // seconds
                 if (elapsedTime > 0) { // Prevent divide by zero
                     downloadSpeed = downloadedSize / (elapsedTime / 1000.0);
-                    remainTime = (mTotalDownloadFileSize - downloadedSize) / (long) downloadSpeed;
                 }
                 // Some files are relatively large, but others are relatively small.
                 // Using the number of files as a basis for progress bars is inaccurate
-                int progress = (int)((downloadedSize * 100L) / mTotalDownloadFileSize);
+                int progress = (int)((fileCounter * 100L) / mDownloadFileCount);
                 ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT, progress,
                         R.string.newdl_downloading_game_files, 
-                        downloadSpeed / BYTES_TO_MB, Tools.trimSecondsToMiniutes(remainTime),
-                        (double) downloadedSize / BYTES_TO_MB, mTotalDownloadFileSize / BYTES_TO_MB);
+                        downloadSpeed / BYTES_TO_MB,
+                        fileCounter, mDownloadFileCount,
+                        (double)mDownloadSizeCounter.get() / BYTES_TO_MB);
             }
             Exception thrownException = mDownloaderThreadException.get();
             if(thrownException != null) {
@@ -244,6 +246,7 @@ public class MinecraftDownloader {
     private void scheduleDownload(File targetFile, int downloadClass, String url, String sha1,
                                   long size, boolean skipIfFailed) throws IOException {
         FileUtils.ensureParentDirectory(targetFile);
+        mDownloadFileCount++;
         mScheduledDownloadTasks.add(
                 new DownloaderTask(targetFile, downloadClass, url, sha1, size, skipIfFailed)
         );
@@ -369,8 +372,6 @@ public class MinecraftDownloader {
             this.mDownloadClass = downloadClass;
             this.mDownloadSize = downloadSize;
             this.mSkipIfFailed = skipIfFailed;
-            
-            mTotalDownloadFileSize += downloadSize;
         }
 
         @Override
@@ -413,9 +414,11 @@ public class MinecraftDownloader {
             }catch (Exception e) {
                 if(!mSkipIfFailed) throw e;
             }
+            mDownloadFileCounter.incrementAndGet();
         }
 
         private void finishWithoutDownloading() {
+            mDownloadFileCounter.incrementAndGet();
             mDownloadSizeCounter.addAndGet(mDownloadSize);
         }
 
