@@ -21,11 +21,11 @@ public class MathUtils {
      * @param targetValue the target value
      * @param objects the list of objects that the search will be performed on
      * @param valueProvider the provider for each values
-     * @return the object which has the closest value to targetValue, or null if values of all
+     * @return the RankedValue that wraps the object which has the closest value to targetValue, or null if values of all
      *         objects are less than targetValue
      * @param <T> the object type that is used for the search.
      */
-    public static <T> T findNearestPositive(int targetValue, List<T> objects, ValueProvider<T> valueProvider) {
+    public static <T> RankedValue<T> findNearestPositive(int targetValue, List<T> objects, ValueProvider<T> valueProvider) {
         int delta = Integer.MAX_VALUE;
         T selectedObject = null;
         for(T object : objects) {
@@ -33,16 +33,49 @@ public class MathUtils {
             if(objectValue < targetValue) continue;
 
             int currentDelta = objectValue - targetValue;
-            if(currentDelta == 0) return object;
+            if(currentDelta == 0) return new RankedValue<>(object, 0);
             if(currentDelta >= delta) continue;
 
             selectedObject = object;
             delta = currentDelta;
         }
-        return selectedObject;
+        if(selectedObject == null) return null;
+        return new RankedValue<>(selectedObject, delta);
     }
 
     public interface ValueProvider<T> {
         int getValue(T object);
+    }
+
+    public static final class RankedValue<T> {
+        public final T value;
+        public final int rank;
+        public RankedValue(T value, int rank) {
+            this.value = value;
+            this.rank = rank;
+        }
+    }
+
+    /**
+     * Out of two objects with different types, select one with the lowest value.
+     * @param object1 Object 1 for comparsion
+     * @param object2 Object 2 for comparsion
+     * @param valueProvider1 Value provider for object 1
+     * @param valueProvider2 Value provider for object 2
+     * @return If value of object 1 is lower than or equal to object 2, returns object 1
+     *         Otherwise, returns object 2
+     * @param <T> Type of object 1
+     * @param <Y> Type of object 2
+     */
+    public static <T,Y> Object multiTypeObjectMin(T object1, Y object2, ValueProvider<T> valueProvider1, ValueProvider<Y> valueProvider2) {
+        if(object1 == null) return object2;
+        if(object2 == null) return object1;
+        int value1 = valueProvider1.getValue(object1);
+        int value2 = valueProvider2.getValue(object2);
+        if(value1 <= value2) {
+            return object1;
+        } else {
+            return object2;
+        }
     }
 }
