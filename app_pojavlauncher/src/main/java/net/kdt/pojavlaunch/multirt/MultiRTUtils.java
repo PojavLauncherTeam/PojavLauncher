@@ -61,7 +61,9 @@ public class MultiRTUtils {
 
     public static String getNearestJreName(int majorVersion) {
         List<Runtime> runtimes = getRuntimes();
-        Runtime nearestRuntime = MathUtils.findNearestPositive(majorVersion, runtimes, (runtime)->runtime.javaVersion);
+        MathUtils.RankedValue<Runtime> nearestRankedRuntime = MathUtils.findNearestPositive(majorVersion, runtimes, (runtime)->runtime.javaVersion);
+        if(nearestRankedRuntime == null) return null;
+        Runtime nearestRuntime = nearestRankedRuntime.value;
         if(nearestRuntime == null) return null;
         return nearestRuntime.name;
     }

@@ -47,19 +47,24 @@ public class NewJREUtil {
             return false;
         }
     }
-    public static InternalRuntime getInternalRuntime(String s_runtime) {
-        Runtime runtime = MultiRTUtils.read(s_runtime);
-        if(runtime == null) return null;
+
+    private static InternalRuntime getInternalRuntime(Runtime runtime) {
         for(InternalRuntime internalRuntime : InternalRuntime.values()) {
             if(internalRuntime.name.equals(runtime.name)) return internalRuntime;
         }
         return null;
     }
 
-    private static InternalRuntime findAppropriateInternalRuntime(int targetVersion) {
+    private static MathUtils.RankedValue<Runtime> getNearestInstalledRuntime(int targetVersion) {
+        List<Runtime> runtimes = MultiRTUtils.getRuntimes();
+        return MathUtils.findNearestPositive(targetVersion, runtimes, (runtime)->runtime.javaVersion);
+    }
+
+    private static MathUtils.RankedValue<InternalRuntime> getNearestInternalRuntime(int targetVersion) {
         List<InternalRuntime> runtimeList = Arrays.asList(InternalRuntime.values());
         return MathUtils.findNearestPositive(targetVersion, runtimeList, (runtime)->runtime.majorVersion);
     }
+
 
     /** @return true if everything is good, false otherwise.  */
     public static boolean installNewJreIfNeeded(Activity activity, JMinecraftVersionList.Version versionInfo) {
@@ -67,26 +72,64 @@ public class NewJREUtil {
         if (versionInfo.javaVersion == null || versionInfo.javaVersion.component.equalsIgnoreCase("jre-legacy"))
             return true;
 
+        int gameRequiredVersion = versionInfo.javaVersion.majorVersion;
+
         LauncherProfiles.load();
+        AssetManager assetManager = activity.getAssets();
         MinecraftProfile minecraftProfile = LauncherProfiles.getCurrentProfile();
-        String selectedRuntime = Tools.getSelectedRuntime(minecraftProfile);
-        Runtime runtime = MultiRTUtils.read(selectedRuntime);
-        if (runtime.javaVersion >= versionInfo.javaVersion.majorVersion) {
+        String profileRuntime = Tools.getSelectedRuntime(minecraftProfile);
+        Runtime runtime = MultiRTUtils.read(profileRuntime);
+        // Partly trust the user with his own selection, if the game can even try to run in this case
+        if (runtime.javaVersion >= gameRequiredVersion) {
+            // Check whether the selection is an internal runtime
+            InternalRuntime internalRuntime = getInternalRuntime(runtime);
+            // If it is, check if updates are available from the APK file
+            if(internalRuntime != null) {
+                // Not calling showRuntimeFail on failure here because we did, technically, find the compatible runtime
+                return checkInternalRuntime(assetManager, internalRuntime);
+            }
             return true;
         }
 
-        String appropriateRuntime = MultiRTUtils.getNearestJreName(versionInfo.javaVersion.majorVersion);
-        boolean failOnMiss = false;
-        InternalRuntime internalRuntime;
-        if(appropriateRuntime == null) {
-            internalRuntime = NewJREUtil.findAppropriateInternalRuntime(versionInfo.javaVersion.majorVersion);
-            failOnMiss = true;
-        }else {
-            internalRuntime = NewJREUtil.getInternalRuntime(appropriateRuntime);
+        // If the runtime version selected by the user is not appropriate for this version (which means the game won't run at all)
+        // automatically pick from either an already installed runtime, or a runtime packed with the launcher
+        MathUtils.RankedValue<Runtime> nearestInstalledRuntime = getNearestInstalledRuntime(gameRequiredVersion);
+        MathUtils.RankedValue<InternalRuntime> nearestInternalRuntime = getNearestInternalRuntime(gameRequiredVersion);
+
+        MathUtils.RankedValue<?> selectedRankedRuntime = (MathUtils.RankedValue<?>) MathUtils.multiTypeObjectMin(
+                nearestInternalRuntime, nearestInstalledRuntime,
+                (v1)->v1.rank,
+                (v2)->v2.rank
+        );
+
+        // No possible selections
+        if(selectedRankedRuntime == null) {
+            showRuntimeFail(activity, versionInfo);
+            return false;
         }
 
-        if((internalRuntime == null || !NewJREUtil.checkInternalRuntime(activity.getAssets(), internalRuntime)) && failOnMiss) {
-            showRuntimeFail(activity, versionInfo);
+        Object selected = selectedRankedRuntime.value;
+        String appropriateRuntime;
+        InternalRuntime internalRuntime;
+
+        // Perform checks on the picked runtime
+        if(selected instanceof Runtime) {
+            // If it's an already installed runtime, save its name and check if
+            // it's actually an internal one (just in case)
+            Runtime selectedRuntime = (Runtime) selected;
+            appropriateRuntime = selectedRuntime.name;
+            internalRuntime = getInternalRuntime(selectedRuntime);
+        } else if (selected instanceof InternalRuntime) {
+            // If it's an internal runtime, set it's name as the appropriate one.
+            internalRuntime = (InternalRuntime) selected;
+            appropriateRuntime = internalRuntime.name;
+        } else {
+            throw new RuntimeException("Unexpected type of selected: "+selected.getClass().getName());
+        }
+
+        // If it turns out the selected runtime is actually an internal one, attempt automatic installation or update
+        if(internalRuntime != null && !checkInternalRuntime(assetManager, internalRuntime)) {
+            // Not calling showRuntimeFail here because we did, technically, find the compatible runtime
             return false;
         }
 
