@@ -93,13 +93,11 @@ public class NewJREUtil {
 
         // If the runtime version selected by the user is not appropriate for this version (which means the game won't run at all)
         // automatically pick from either an already installed runtime, or a runtime packed with the launcher
-        MathUtils.RankedValue<Runtime> nearestInstalledRuntime = getNearestInstalledRuntime(gameRequiredVersion);
-        MathUtils.RankedValue<InternalRuntime> nearestInternalRuntime = getNearestInternalRuntime(gameRequiredVersion);
+        MathUtils.RankedValue<?> nearestInstalledRuntime = getNearestInstalledRuntime(gameRequiredVersion);
+        MathUtils.RankedValue<?> nearestInternalRuntime = getNearestInternalRuntime(gameRequiredVersion);
 
-        MathUtils.RankedValue<?> selectedRankedRuntime = (MathUtils.RankedValue<?>) MathUtils.multiTypeObjectMin(
-                nearestInternalRuntime, nearestInstalledRuntime,
-                (v1)->v1.rank,
-                (v2)->v2.rank
+        MathUtils.RankedValue<?> selectedRankedRuntime = MathUtils.objectMin(
+                nearestInternalRuntime, nearestInstalledRuntime, (value)->value.rank
         );
 
         // No possible selections
