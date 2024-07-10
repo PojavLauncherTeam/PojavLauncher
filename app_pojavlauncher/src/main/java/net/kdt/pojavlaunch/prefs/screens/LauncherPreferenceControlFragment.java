@@ -24,6 +24,8 @@ public class LauncherPreferenceControlFragment extends LauncherPreferenceFragmen
         float mouseSpeed = LauncherPreferences.PREF_MOUSESPEED;
         float gyroSpeed = LauncherPreferences.PREF_GYRO_SENSITIVITY;
         float joystickDeadzone = LauncherPreferences.PREF_DEADZONE_SCALE;
+        boolean invertXYIngame = LauncherPreferences.PREF_INVERT_XY_INGAME;
+        boolean invertXYMenu = LauncherPreferences.PREF_INVERT_XY_MENU;
 
 
         //Triggers a write for some reason which resets the value
@@ -96,5 +98,4 @@ public class LauncherPreferenceControlFragment extends LauncherPreferenceFragmen
         requirePreference("gyroInvertY").setVisible(LauncherPreferences.PREF_ENABLE_GYRO);
         requirePreference("gyroSmoothing").setVisible(LauncherPreferences.PREF_ENABLE_GYRO);
     }
-
 }

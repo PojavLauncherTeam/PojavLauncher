@@ -89,6 +89,16 @@
             android:title="@string/preference_mouse_start_title"
             android:summary="@string/preference_mouse_start_description"
             />
+        <SwitchPreference
+            android:key="invert_xy_ingame"
+            android:title="@string/preference_invert_xy_ingame_title"
+            android:summary="@string/preference_invert_xy_ingame_description"
+            />
+        <SwitchPreference
+            android:key="invert_xy_menu"
+            android:title="@string/preference_invert_xy_menu_title"
+            android:summary="@string/preference_invert_xy_menu_description"
+            />
     </PreferenceCategory>
 
     <PreferenceCategory

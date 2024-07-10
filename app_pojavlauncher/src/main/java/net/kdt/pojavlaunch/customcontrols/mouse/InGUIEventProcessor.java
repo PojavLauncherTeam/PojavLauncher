@@ -1,10 +1,8 @@
 package net.kdt.pojavlaunch.customcontrols.mouse;
 
-import android.view.GestureDetector;
 import android.view.MotionEvent;
 
 import net.kdt.pojavlaunch.LwjglGlfwKeycode;
-import net.kdt.pojavlaunch.SingleTapConfirm;
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 

@@ -201,6 +201,8 @@ public class CallbackBridge {
     @CriticalNative private static native void nativeSendMouseButton(int button, int action, int mods);
     @CriticalNative private static native void nativeSendScroll(double xoffset, double yoffset);
     @CriticalNative private static native void nativeSendScreenSize(int width, int height);
+    public static native void nativeSetInverted(boolean inverted);
+    public static native boolean nativeGetInverted();
     public static native void nativeSetWindowAttrib(int attrib, int value);
     static {
         System.loadLibrary("pojavexec");
