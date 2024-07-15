@@ -114,8 +114,7 @@ public class MinecraftDownloader {
                 if (elapsedTime > 0) { // Prevent divide by zero
                     downloadSpeed = downloadedSize / (elapsedTime / 1000.0);
                 }
-                // Some files are relatively large, but others are relatively small.
-                // Using the number of files as a basis for progress bars is inaccurate
+            
                 int progress = (int)((fileCounter * 100L) / mDownloadFileCount);
                 ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT, progress,
                         R.string.newdl_downloading_game_files, 
