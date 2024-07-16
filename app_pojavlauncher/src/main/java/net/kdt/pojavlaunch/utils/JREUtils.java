@@ -293,6 +293,8 @@ public class JREUtils {
         purgeArg(userArgs, "-XX:+UseLargePagesInMetaspace");
         purgeArg(userArgs, "-XX:+UseLargePages");
         purgeArg(userArgs, "-Dorg.lwjgl.opengl.libname");
+        // Don't let the user specify a custom Freetype library (as the user is unlikely to specify a version compiled for Android)
+        purgeArg(userArgs, "-Dorg.lwjgl.freetype.libname");
 
         //Add automatically generated args
         userArgs.add("-Xms" + LauncherPreferences.PREF_RAM_ALLOCATION + "M");
