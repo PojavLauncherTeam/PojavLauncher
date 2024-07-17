@@ -210,8 +210,10 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
         }
         Runtime selectedRuntime = MultiRTUtils.forceReread(nearestRuntime);
         int selectedJavaVersion = Math.max(javaVersion, selectedRuntime.javaVersion);
+        // Don't allow versions higher than Java 17 because our caciocavallo implementation does not allow for it
         if(selectedJavaVersion > 17) {
             finalErrorDialog(getString(R.string.execute_jar_incompatible_runtime, selectedJavaVersion));
+            return null;
         }
         return selectedRuntime;
     }
@@ -233,9 +235,9 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
     private void startModInstaller(File modFile, String javaArgs) {
         new Thread(() -> {
             // Maybe replace with more advanced arg parsing logic later
-            List<String> argList = Arrays.asList(javaArgs.split(" "));
+            List<String> argList = javaArgs != null ? Arrays.asList(javaArgs.split(" ")) : null;
             File selectedMod = modFile;
-            if(selectedMod == null) {
+            if(selectedMod == null && argList != null) {
                 // If modFile is not specified directly, try to extract the -jar argument from the javaArgs
                 selectedMod = findModPath(argList);
             }
@@ -356,8 +358,9 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
 
             // Enable Caciocavallo
             Tools.getCacioJavaArgs(javaArgList,runtime.javaVersion == 8);
-
-            javaArgList.addAll(javaArgs);
+            if(javaArgs != null) {
+                javaArgList.addAll(javaArgs);
+            }
             if(modFile != null) {
                 javaArgList.add("-jar");
                 javaArgList.add(modFile.getAbsolutePath());
@@ -397,30 +400,24 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
     public int getJavaVersion(File modFile) {
         try (ZipFile zipFile = new ZipFile(modFile)){
             ZipEntry manifest = zipFile.getEntry("META-INF/MANIFEST.MF");
-            Log.i("JavaVersion", "Mf entry: "+manifest);
             if(manifest == null) return -1;
-            Log.i("JavaVersion", "Found manifest entry");
 
             String manifestString = Tools.read(zipFile.getInputStream(manifest));
             String mainClass = Tools.extractUntilCharacter(manifestString, "Main-Class:", '\n');
             if(mainClass == null) return -1;
-            Log.i("JavaVersion", "Found main class: "+mainClass);
 
             mainClass = mainClass.trim().replace('.', '/') + ".class";
             ZipEntry mainClassFile = zipFile.getEntry(mainClass);
             if(mainClassFile == null) return -1;
-            Log.i("JavaVersion", "Found main class entry: "+mainClass);
 
             InputStream classStream = zipFile.getInputStream(mainClassFile);
             byte[] bytesWeNeed = new byte[8];
             int readCount = classStream.read(bytesWeNeed);
             classStream.close();
             if(readCount < 8) return -1;
-            Log.i("JavaVersion", "File is long enough!");
 
             ByteBuffer byteBuffer = ByteBuffer.wrap(bytesWeNeed);
             if(byteBuffer.getInt() != 0xCAFEBABE) return -1;
-            Log.i("JavaVersion", "File is Java class!");
             short minorVersion = byteBuffer.getShort();
             short majorVersion = byteBuffer.getShort();
             Log.i("JavaGUILauncher", majorVersion+","+minorVersion);
