@@ -12,6 +12,7 @@
  • LWJGL: <a href="http://legacy.lwjgl.org/license.php.html">LWJGL 2's License</a>.<br><br>
  • pro-gradle: <a href="https://github.com/pro-grade/pro-grade/blob/master/LICENSE.txt">Apache License 2.0</a>.<br>
  • xHook: <a href="https://github.com/iqiyi/xHook/blob/master/LICENSE">Mixed licenses</a>.<br>
+ • pixilarticoons: <a href="https://github.com/halfmage/pixelarticons/blob/master/LICENSE">MIT License</a>.<br>
  • <a href="https://github.com/PojavLauncherTeam/PojavLauncher#credits--third-party-components-and-their-licenses">More (check at GitHub)</a>.
  • <a href="https://raw.githubusercontent.com/PojavLauncherTeam/PojavLauncher/v3_openjdk/GPLAY_PRIVACY_POLICY">Privacy policy</a>.
  • Thanks to <a href="https://mc-heads.net">MCHeads</a> for providing Minecraft avatars.

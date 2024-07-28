@@ -10,6 +10,7 @@
         android:id="@+id/account_spinner"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_42sdp"
+        android:paddingHorizontal="@dimen/_18sdp"
 
         android:dropDownWidth="wrap_content"
         android:dropDownVerticalOffset="@dimen/_42sdp"
@@ -23,6 +24,7 @@
         android:layout_height="@dimen/_42sdp"
         android:background="?attr/selectableItemBackground"
         android:src="@drawable/ic_menu_settings"
+        android:paddingVertical="@dimen/_8sdp"
         android:scaleType="fitCenter"
 
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,8 +36,8 @@
         android:layout_height="@dimen/_42sdp"
         android:background="?attr/selectableItemBackground"
         android:src="@drawable/ic_menu_delete_forever"
+        android:paddingVertical="@dimen/_8sdp"
         android:scaleType="fitCenter"
-
 
         app:layout_constraintEnd_toStartOf="@id/setting_button"
         app:layout_constraintTop_toTopOf="parent" />

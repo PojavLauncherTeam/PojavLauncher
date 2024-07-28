@@ -55,7 +55,7 @@
         android:layout_height="@dimen/_8sdp"
         android:paddingHorizontal="@dimen/_8sdp"
         android:rotation="180"
-        android:src="@drawable/spinner_arrow"
+        android:src="@drawable/ic_spinner_arrow"
         app:layout_constraintBottom_toBottomOf="@+id/fabric_installer_game_ver_spinner"
         app:layout_constraintEnd_toEndOf="@+id/fabric_installer_game_ver_spinner"
         app:layout_constraintTop_toTopOf="@+id/fabric_installer_game_ver_spinner" />
@@ -88,7 +88,7 @@
         android:layout_height="@dimen/_8sdp"
         android:paddingHorizontal="@dimen/_8sdp"
         android:rotation="180"
-        android:src="@drawable/spinner_arrow"
+        android:src="@drawable/ic_spinner_arrow"
         app:layout_constraintBottom_toBottomOf="@+id/fabric_installer_loader_ver_spinner"
         app:layout_constraintEnd_toEndOf="@+id/fabric_installer_loader_ver_spinner"
         app:layout_constraintTop_toTopOf="@+id/fabric_installer_loader_ver_spinner" />

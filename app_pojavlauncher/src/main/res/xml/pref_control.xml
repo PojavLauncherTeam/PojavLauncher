@@ -18,7 +18,6 @@
 
         <androidx.preference.SwitchPreferenceCompat
             android:defaultValue="false"
-            android:icon="@drawable/ic_setting_gesture_disable"
             android:key="disableGestures"
             android:summary="@string/mcl_disable_gestures_subtitle"
             android:title="@string/mcl_disable_gestures" />
@@ -36,7 +35,6 @@
             app2:showSeekBarValue="true"
             app2:selectable="false"
             app2:seekBarIncrement="10"
-            android:icon="@drawable/ic_setting_gesture_time"
             />
 
     </PreferenceCategory>
@@ -51,7 +49,7 @@
             app2:showSeekBarValue="true"
             app2:selectable="false"
             app2:seekBarIncrement="5"
-            android:icon="@drawable/ic_setting_control_scale"
+            android:icon="@drawable/ic_setting_scale"
             />
         <SwitchPreference
             android:key="buttonAllCaps"
@@ -73,7 +71,7 @@
             app2:selectable="false"
             app2:seekBarIncrement="5"
             app2:showSeekBarValue="true"
-            android:icon="@drawable/ic_setting_pointer_scale"
+            android:icon="@drawable/ic_setting_scale"
             />
 
         <net.kdt.pojavlaunch.prefs.CustomSeekBarPreference

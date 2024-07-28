@@ -61,7 +61,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:background="?android:attr/selectableItemBackground"
-                android:drawableStart="@android:drawable/ic_menu_share"
+                android:drawableStart="@drawable/ic_menu_share"
                 android:text="@string/main_share_logs" />
         </LinearLayout>
     </ScrollView>
@@ -77,12 +77,12 @@
         android:layout_marginBottom="8dp"
 
         android:background="@android:color/transparent"
-        android:drawableEnd="@drawable/spinner_arrow"
+        android:drawableEnd="@drawable/ic_spinner_arrow"
         app:drawableEndPadding="@dimen/_1sdp"
-        app:drawableEndSize="@dimen/_12sdp"
+        app:drawableEndSize="@dimen/padding_extra_large"
 
         app:drawableStartIntegerScaling="true"
-        app:drawableStartSize="@dimen/_36sdp"
+        app:drawableStartSize="@dimen/padding_extra_large"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/edit_profile_button"
         app:layout_constraintStart_toStartOf="parent" />

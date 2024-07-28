@@ -43,7 +43,7 @@
         app:layout_constraintBottom_toBottomOf="@id/progress_generic_progressbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/progress_generic_progressbar"
-        app:srcCompat="@drawable/spinner_arrow" />
+        app:srcCompat="@drawable/ic_spinner_arrow" />
 
     <LinearLayout
         android:id="@+id/progress_linear_layout"
