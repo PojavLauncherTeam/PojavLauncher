@@ -1121,6 +1121,16 @@ public final class Tools {
         context.startActivity(sendIntent);
     }
 
+    /** Opens a directory in the files app */
+    public static void openDirectory(Context context, String path){
+        Uri contentUri = DocumentsContract.buildDocumentUri(context.getString(R.string.storageProviderAuthorities), path);
+
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(contentUri);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
+    }
+
     /** Mesure the textview height, given its current parameters */
     public static int mesureTextviewHeight(TextView t) {
         int widthMeasureSpec = View.MeasureSpec.makeMeasureSpec(t.getWidth(), View.MeasureSpec.AT_MOST);

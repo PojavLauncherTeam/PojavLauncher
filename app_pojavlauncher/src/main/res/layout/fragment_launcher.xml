@@ -63,6 +63,16 @@
 				android:text="@string/main_share_logs"
 
 				app:layout_constraintTop_toBottomOf="@id/install_jar_button" />
+
+			<com.kdt.mcgui.LauncherMenuButton
+				android:id="@+id/open_files_button"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/_66sdp"
+				android:background="?android:attr/selectableItemBackground"
+				android:drawableStart="@drawable/ic_menu_files"
+				android:text="@string/main_open_files"
+
+				app:layout_constraintTop_toBottomOf="@id/share_logs_button" />
 		</LinearLayout>
 	</ScrollView>
 
