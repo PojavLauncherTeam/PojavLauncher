@@ -1,5 +1,7 @@
 package net.kdt.pojavlaunch.modloaders.modpacks.api;
 
+import static net.kdt.pojavlaunch.utils.DownloadUtils.USER_AGENT;
+
 import android.util.ArrayMap;
 import android.util.Log;
 
@@ -22,16 +24,15 @@ import java.util.Objects;
 @SuppressWarnings("unused")
 public class ApiHandler {
     public final String baseUrl;
-    public final Map<String, String> additionalHeaders;
+    public final Map<String, String> additionalHeaders = new ArrayMap<>();
 
     public ApiHandler(String url) {
         baseUrl = url;
-        additionalHeaders = null;
+        additionalHeaders.put("User-Agent", USER_AGENT);
     }
 
     public ApiHandler(String url, String apiKey) {
-        baseUrl = url;
-        additionalHeaders = new ArrayMap<>();
+        this(url);
         additionalHeaders.put("x-api-key", apiKey);
     }
 

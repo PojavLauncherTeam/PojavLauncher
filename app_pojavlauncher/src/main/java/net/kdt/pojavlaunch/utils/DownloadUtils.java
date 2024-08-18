@@ -14,7 +14,8 @@ import org.apache.commons.io.*;
 
 @SuppressWarnings("IOStreamConstructor")
 public class DownloadUtils {
-    public static final String USER_AGENT = Tools.APP_NAME;
+    //Standardize the User-Agent format to "Launcher Name/Launcher Version" to facilitate data collection by resource platforms.
+    public static final String USER_AGENT = Tools.APP_NAME + "/" + BuildConfig.VERSION_NAME;
 
     public static void download(String url, OutputStream os) throws IOException {
         download(new URL(url), os);
@@ -67,6 +68,7 @@ public class DownloadUtils {
         FileUtils.ensureParentDirectory(outputFile);
 
         HttpURLConnection conn = (HttpURLConnection) new URL(urlInput).openConnection();
+        conn.setRequestProperty("User-Agent", USER_AGENT);
         InputStream readStr = conn.getInputStream();
         try (FileOutputStream fos = new FileOutputStream(outputFile)) {
             int current;
