@@ -56,7 +56,7 @@ public class MainMenuFragment extends Fragment {
         mShareLogsButton.setOnClickListener((v) -> shareLog(requireContext()));
 
         mNewsButton.setOnLongClickListener((v)->{
-            Tools.swapFragment(requireActivity(), SearchModFragment.class, SearchModFragment.TAG, null);
+            Tools.swapFragment(requireActivity(), GamepadMapperFragment.class, GamepadMapperFragment.TAG, null);
             return true;
         });
     }

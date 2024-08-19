@@ -27,6 +27,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
 import net.kdt.pojavlaunch.customcontrols.ControlLayout;
+import net.kdt.pojavlaunch.customcontrols.gamepad.DefaultDataProvider;
 import net.kdt.pojavlaunch.customcontrols.gamepad.Gamepad;
 import net.kdt.pojavlaunch.customcontrols.mouse.AbstractTouchpad;
 import net.kdt.pojavlaunch.customcontrols.mouse.AndroidPointerCapture;
@@ -212,7 +213,7 @@ public class MinecraftGLSurface extends View implements GrabListener {
 
         if(Gamepad.isGamepadEvent(event)){
             if(mGamepad == null){
-                mGamepad = new Gamepad(this, event.getDevice());
+                mGamepad = new Gamepad(this, event.getDevice(), DefaultDataProvider.INSTANCE);
             }
 
             mInputManager.handleMotionEventInput(getContext(), event, mGamepad);
@@ -286,7 +287,7 @@ public class MinecraftGLSurface extends View implements GrabListener {
 
         if(Gamepad.isGamepadEvent(event)){
             if(mGamepad == null){
-                mGamepad = new Gamepad(this, event.getDevice());
+                mGamepad = new Gamepad(this, event.getDevice(), DefaultDataProvider.INSTANCE);
             }
 
             mInputManager.handleKeyEventInput(getContext(), event, mGamepad);
