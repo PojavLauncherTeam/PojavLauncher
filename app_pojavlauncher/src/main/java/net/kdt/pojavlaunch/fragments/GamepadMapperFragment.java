@@ -65,7 +65,7 @@ public class GamepadMapperFragment extends Fragment implements View.OnKeyListene
         mInputManager = new RemapperManager(view.getContext(), mRemapperViewBuilder);
         mGrabStateSpinner = view.findViewById(R.id.gamepad_remapper_mode_spinner);
         ArrayAdapter<String> mGrabStateAdapter = new ArrayAdapter<>(view.getContext(), R.layout.item_centered_textview);
-        mGrabStateAdapter.addAll("INMENU", "INGAME");
+        mGrabStateAdapter.addAll(getString(R.string.customctrl_visibility_in_menus), getString(R.string.customctrl_visibility_ingame));
         mGrabStateSpinner.setAdapter(mGrabStateAdapter);
         mGrabStateSpinner.setSelection(0);
         mGrabStateSpinner.setOnItemSelectedListener(this);

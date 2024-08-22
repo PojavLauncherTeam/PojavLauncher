@@ -64,10 +64,10 @@ public class GamepadMapperAdapter extends RecyclerView.Adapter<GamepadMapperAdap
         mSimulatedGamepadMap.TRIGGER_LEFT = mRebinderButtons[index++] = new RebinderButton(R.drawable.trigger_left, R.string.controller_button_trigger_left);
         mSimulatedGamepadMap.SHOULDER_RIGHT = mRebinderButtons[index++] = new RebinderButton(R.drawable.shoulder_right, R.string.controller_button_shoulder_right);
         mSimulatedGamepadMap.SHOULDER_LEFT = mRebinderButtons[index++] = new RebinderButton(R.drawable.shoulder_left, R.string.controller_button_shoulder_left);
-        mSimulatedGamepadMap.DIRECTION_FORWARD = mRebinderButtons[index++] = new RebinderButton(R.drawable.stick_left, R.string.controller_direction_forward);
-        mSimulatedGamepadMap.DIRECTION_RIGHT = mRebinderButtons[index++] = new RebinderButton(R.drawable.stick_left, R.string.controller_direction_right);
-        mSimulatedGamepadMap.DIRECTION_LEFT = mRebinderButtons[index++] = new RebinderButton(R.drawable.stick_left,  R.string.controller_direction_left);
-        mSimulatedGamepadMap.DIRECTION_BACKWARD = mRebinderButtons[index++] = new RebinderButton(R.drawable.stick_left,  R.string.controller_direction_backward);
+        mSimulatedGamepadMap.DIRECTION_FORWARD = mRebinderButtons[index++] = new RebinderButton(R.drawable.stick_right, R.string.controller_direction_forward);
+        mSimulatedGamepadMap.DIRECTION_RIGHT = mRebinderButtons[index++] = new RebinderButton(R.drawable.stick_right, R.string.controller_direction_right);
+        mSimulatedGamepadMap.DIRECTION_LEFT = mRebinderButtons[index++] = new RebinderButton(R.drawable.stick_right,  R.string.controller_direction_left);
+        mSimulatedGamepadMap.DIRECTION_BACKWARD = mRebinderButtons[index++] = new RebinderButton(R.drawable.stick_right,  R.string.controller_direction_backward);
         mSimulatedGamepadMap.THUMBSTICK_RIGHT = mRebinderButtons[index++] = new RebinderButton(R.drawable.stick_right_click, R.string.controller_stick_press_r);
         mSimulatedGamepadMap.THUMBSTICK_LEFT = mRebinderButtons[index++] = new RebinderButton(R.drawable.stick_left_click, R.string.controller_stick_press_l);
         mSimulatedGamepadMap.DPAD_UP = mRebinderButtons[index++] = new RebinderButton(R.drawable.dpad_up, R.string.controller_dpad_up);
@@ -125,9 +125,18 @@ public class GamepadMapperAdapter extends RecyclerView.Adapter<GamepadMapperAdap
         return mRebinderButtons.length;
     }
 
+    private void updateStickIcons() {
+        // Which stick is used for keyboard emulation depends on grab state, so we need
+        // to update the mapper UI icons accordingly
+        int stickIcon = mGrabState ? R.drawable.stick_left : R.drawable.stick_right;
+        ((RebinderButton)mSimulatedGamepadMap.DIRECTION_FORWARD).iconResourceId = stickIcon;
+        ((RebinderButton)mSimulatedGamepadMap.DIRECTION_BACKWARD).iconResourceId = stickIcon;
+        ((RebinderButton)mSimulatedGamepadMap.DIRECTION_RIGHT).iconResourceId = stickIcon;
+        ((RebinderButton)mSimulatedGamepadMap.DIRECTION_LEFT).iconResourceId = stickIcon;
+    }
 
     private class RebinderButton extends GamepadButton {
-        public final int iconResourceId;
+        public int iconResourceId;
         public final int localeResourceId;
         private GamepadMapperAdapter.ViewHolder mButtonHolder;
 
@@ -222,11 +231,7 @@ public class GamepadMapperAdapter extends RecyclerView.Adapter<GamepadMapperAdap
         private void setPressed(boolean pressed) {
             mClickIndicator.setBackgroundColor(pressed ? Color.GREEN : Color.DKGRAY);
         }
-        
-        private void computeKeycodePosition(short keyCode) {
 
-        }
-        
         private void updateKeycodeLabel() {
             StringBuilder labelBuilder = new StringBuilder();
             boolean first = true;
@@ -242,17 +247,20 @@ public class GamepadMapperAdapter extends RecyclerView.Adapter<GamepadMapperAdap
         }
 
         @Override
-        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-            /*if(mAttachedPosition == -1) return;
-            int[] keycodes = mRealButtons[mAttachedPosition].keycodes;
-            if(keycodes.length < 1) return;
-            int selectedKeycode;
-            if(i < mSpecialKeycodeCount) {
-                selectedKeycode = i - mSpecialKeycodeCount;
-            } else {
-                selectedKeycode = EfficientAndroidLWJGLKeycode.getValueByIndex(i - mSpecialKeycodeCount);
+        public void onItemSelected(AdapterView<?> adapterView, View view, int selectionIndex, long selectionId) {
+            if(mAttachedPosition == -1) return;
+            short[] keycodes = mRealButtons[mAttachedPosition].keycodes;
+            int editedKeycodeIndex = -1;
+            for(int i = 0; i < mKeySpinners.length && i < keycodes.length; i++) {
+                if(!adapterView.equals(mKeySpinners[i])) continue;
+                editedKeycodeIndex = i;
+                break;
             }
-            keycodes[0] = selectedKeycode;*/
+            if(editedKeycodeIndex == -1) return;
+            int keycode_offset = selectionIndex - mSpecialKeycodeCount;
+            if(selectionIndex <= mSpecialKeycodeCount) keycodes[editedKeycodeIndex] = (short) (keycode_offset);
+            else keycodes[editedKeycodeIndex] = EfficientAndroidLWJGLKeycode.getValueByIndex(keycode_offset);
+            updateKeycodeLabel();
         }
 
         @Override
@@ -308,6 +316,7 @@ public class GamepadMapperAdapter extends RecyclerView.Adapter<GamepadMapperAdap
         if(mGamepadGrabListener != null) mGamepadGrabListener.onGrabState(newState);
         if(mGrabState == mOldState) return;
         updateRealButtons();
+        updateStickIcons();
         notifyDataSetChanged();
         mOldState = mGrabState;
     }
