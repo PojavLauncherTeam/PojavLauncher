@@ -92,7 +92,7 @@ public class Gamepad implements GrabListener, GamepadHandler {
 
     private final GamepadDataProvider mMapProvider;
 
-    public Gamepad(View contextView, InputDevice inputDevice, GamepadDataProvider mapProvider){
+    public Gamepad(View contextView, InputDevice inputDevice, GamepadDataProvider mapProvider, boolean showCursor){
         Settings.setDeadzoneScale(PREF_DEADZONE_SCALE);
 
         mScreenChoreographer = Choreographer.getInstance();
@@ -124,10 +124,11 @@ public class Gamepad implements GrabListener, GamepadHandler {
         mMapProvider = mapProvider;
 
         CallbackBridge.sendCursorPos(CallbackBridge.windowWidth/2f, CallbackBridge.windowHeight/2f);
-        ViewParent parent = contextView.getParent();
-        if(parent instanceof FrameLayout) {
-        //    ((FrameLayout)parent).addView(mPointerImageView);
+
+        if(showCursor) {
+            ((FrameLayout)contextView.getParent()).addView(mPointerImageView);
         }
+
 
         placePointerView(CallbackBridge.physicalWidth/2, CallbackBridge.physicalHeight/2);
 
