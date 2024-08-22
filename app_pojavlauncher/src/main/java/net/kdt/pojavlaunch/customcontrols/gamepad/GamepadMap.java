@@ -49,29 +49,6 @@ public class GamepadMap {
     public GamepadButton DPAD_DOWN;
     public GamepadButton DPAD_LEFT;
 
-    public GamepadMap() {
-        BUTTON_A = new GamepadButton();
-        BUTTON_B = new GamepadButton();
-        BUTTON_X = new GamepadButton();
-        BUTTON_Y = new GamepadButton();
-        BUTTON_START = new GamepadButton();
-        BUTTON_SELECT = new GamepadButton();
-        TRIGGER_RIGHT = new GamepadButton();
-        TRIGGER_LEFT = new GamepadButton();
-        SHOULDER_RIGHT = new GamepadButton();
-        SHOULDER_LEFT = new GamepadButton();
-        DIRECTION_FORWARD = new GamepadEmulatedButton();
-        DIRECTION_BACKWARD = new GamepadEmulatedButton();
-        DIRECTION_RIGHT = new GamepadEmulatedButton();
-        DIRECTION_LEFT = new GamepadEmulatedButton();
-        THUMBSTICK_RIGHT = new GamepadButton();
-        THUMBSTICK_LEFT = new GamepadButton();
-        DPAD_UP = new GamepadButton();
-        DPAD_RIGHT = new GamepadButton();
-        DPAD_DOWN = new GamepadButton();
-        DPAD_LEFT = new GamepadButton();
-    }
-
     /*
      * Sets all buttons to a not pressed state, sending an input if needed
      */
@@ -98,6 +75,37 @@ public class GamepadMap {
         DPAD_DOWN.resetButtonState();
         DPAD_LEFT.resetButtonState();
 
+    }
+
+    private static GamepadMap createAndInitializeButtons() {
+        GamepadMap gamepadMap = new GamepadMap();
+        gamepadMap.BUTTON_A = new GamepadButton();
+        gamepadMap.BUTTON_B = new GamepadButton();
+        gamepadMap.BUTTON_X = new GamepadButton();
+        gamepadMap.BUTTON_Y = new GamepadButton();
+
+        gamepadMap.BUTTON_START = new GamepadButton();
+        gamepadMap.BUTTON_SELECT = new GamepadButton();
+
+        gamepadMap.TRIGGER_RIGHT = new GamepadButton();
+        gamepadMap.TRIGGER_LEFT = new GamepadButton();
+
+        gamepadMap.SHOULDER_RIGHT = new GamepadButton();
+        gamepadMap.SHOULDER_LEFT = new GamepadButton();
+
+        gamepadMap.DIRECTION_FORWARD = new GamepadEmulatedButton();
+        gamepadMap.DIRECTION_BACKWARD = new GamepadEmulatedButton();
+        gamepadMap.DIRECTION_RIGHT = new GamepadEmulatedButton();
+        gamepadMap.DIRECTION_LEFT = new GamepadEmulatedButton();
+
+        gamepadMap.THUMBSTICK_RIGHT = new GamepadButton();
+        gamepadMap.THUMBSTICK_LEFT = new GamepadButton();
+
+        gamepadMap.DPAD_UP = new GamepadButton();
+        gamepadMap.DPAD_RIGHT = new GamepadButton();
+        gamepadMap.DPAD_DOWN = new GamepadButton();
+        gamepadMap.DPAD_LEFT = new GamepadButton();
+        return gamepadMap;
     }
 
     /*
@@ -191,7 +199,7 @@ public class GamepadMap {
      * Returns an pre-initialized GamepadMap with only empty keycodes
      */
     @SuppressWarnings("unused") public static GamepadMap createEmptyMap(){
-        GamepadMap emptyMap = new GamepadMap();
+        GamepadMap emptyMap = createAndInitializeButtons();
         for(GamepadEmulatedButton button : emptyMap.getButtons())
             button.keycodes = new short[] {UNSPECIFIED, UNSPECIFIED, UNSPECIFIED, UNSPECIFIED};
         return emptyMap;
