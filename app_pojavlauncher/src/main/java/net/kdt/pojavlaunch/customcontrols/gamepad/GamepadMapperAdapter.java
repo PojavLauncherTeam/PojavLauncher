@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.kdt.pojavlaunch.EfficientAndroidLWJGLKeycode;
 import net.kdt.pojavlaunch.GrabListener;
 import net.kdt.pojavlaunch.R;
+import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.customcontrols.EditorExitable;
 
 import android.os.Handler;
@@ -249,18 +250,22 @@ public class GamepadMapperAdapter extends RecyclerView.Adapter<GamepadMapperAdap
         @Override
         public void onItemSelected(AdapterView<?> adapterView, View view, int selectionIndex, long selectionId) {
             if(mAttachedPosition == -1) return;
-            short[] keycodes = mRealButtons[mAttachedPosition].keycodes;
             int editedKeycodeIndex = -1;
-            for(int i = 0; i < mKeySpinners.length && i < keycodes.length; i++) {
+            for(int i = 0; i < mKeySpinners.length && i < mKeycodes.length; i++) {
                 if(!adapterView.equals(mKeySpinners[i])) continue;
                 editedKeycodeIndex = i;
                 break;
             }
             if(editedKeycodeIndex == -1) return;
             int keycode_offset = selectionIndex - mSpecialKeycodeCount;
-            if(selectionIndex <= mSpecialKeycodeCount) keycodes[editedKeycodeIndex] = (short) (keycode_offset);
-            else keycodes[editedKeycodeIndex] = EfficientAndroidLWJGLKeycode.getValueByIndex(keycode_offset);
+            if(selectionIndex <= mSpecialKeycodeCount) mKeycodes[editedKeycodeIndex] = (short) (keycode_offset);
+            else mKeycodes[editedKeycodeIndex] = EfficientAndroidLWJGLKeycode.getValueByIndex(keycode_offset);
             updateKeycodeLabel();
+            try {
+                GamepadMapStore.save();
+            }catch (Exception e) {
+                Tools.showError(adapterView.getContext(), e);
+            }
         }
 
         @Override

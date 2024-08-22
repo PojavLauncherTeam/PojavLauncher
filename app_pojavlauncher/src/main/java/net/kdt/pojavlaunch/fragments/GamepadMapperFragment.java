@@ -3,6 +3,7 @@ package net.kdt.pojavlaunch.fragments;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.InputDevice;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -21,14 +22,12 @@ import net.kdt.pojavlaunch.customcontrols.EditorExitable;
 import net.kdt.pojavlaunch.customcontrols.gamepad.Gamepad;
 import net.kdt.pojavlaunch.customcontrols.gamepad.GamepadMapperAdapter;
 
-import fr.spse.gamepad_remapper.GamepadHandler;
-import fr.spse.gamepad_remapper.Remapper;
 import fr.spse.gamepad_remapper.RemapperManager;
 import fr.spse.gamepad_remapper.RemapperView;
 
-public class GamepadMapperFragment extends Fragment implements View.OnKeyListener, View.OnGenericMotionListener, EditorExitable, AdapterView
-
-        .OnItemSelectedListener {
+public class GamepadMapperFragment extends Fragment implements
+        View.OnKeyListener, View.OnGenericMotionListener,
+        EditorExitable, AdapterView.OnItemSelectedListener {
     public static final String TAG = "GamepadMapperFragment";
     private final RemapperView.Builder mRemapperViewBuilder = new RemapperView.Builder(null)
             .remapA(true)
@@ -71,13 +70,16 @@ public class GamepadMapperFragment extends Fragment implements View.OnKeyListene
         mGrabStateSpinner.setOnItemSelectedListener(this);
     }
 
+    private void createGamepad(View mainView, InputDevice inputDevice) {
+        mGamepad = new Gamepad(mainView, inputDevice, mMapperAdapter, false);
+    }
 
     @Override
     public boolean onKey(View view, int i, KeyEvent keyEvent) {
         Log.i("onKey", keyEvent.toString());
         View mainView = getView();
         if(!Gamepad.isGamepadEvent(keyEvent) || mainView == null) return false;
-        if(mGamepad == null) mGamepad = new Gamepad(mainView, keyEvent.getDevice(), mMapperAdapter);
+        if(mGamepad == null) createGamepad(mainView, keyEvent.getDevice());
         mInputManager.handleKeyEventInput(mainView.getContext(), keyEvent, mGamepad);
         return true;
     }
@@ -87,7 +89,7 @@ public class GamepadMapperFragment extends Fragment implements View.OnKeyListene
         Log.i("onGenericMotion", motionEvent.toString());
         View mainView = getView();
         if(!Gamepad.isGamepadEvent(motionEvent) || mainView == null) return false;
-        if(mGamepad == null) mGamepad = new Gamepad(mainView, motionEvent.getDevice(), mMapperAdapter);
+        if(mGamepad == null) createGamepad(mainView, motionEvent.getDevice());
         mInputManager.handleMotionEventInput(mainView.getContext(), motionEvent, mGamepad);
         return true;
     }
