@@ -3,7 +3,7 @@ package net.kdt.pojavlaunch.customcontrols.gamepad;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
-import android.os.Looper;
+import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,9 +19,7 @@ import net.kdt.pojavlaunch.EfficientAndroidLWJGLKeycode;
 import net.kdt.pojavlaunch.GrabListener;
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
-import net.kdt.pojavlaunch.customcontrols.EditorExitable;
 
-import android.os.Handler;
 import android.widget.TextView;
 
 public class GamepadMapperAdapter extends RecyclerView.Adapter<GamepadMapperAdapter.ViewHolder> implements GamepadDataProvider {
@@ -30,22 +28,19 @@ public class GamepadMapperAdapter extends RecyclerView.Adapter<GamepadMapperAdap
     private GamepadMap mSimulatedGamepadMap;
     private RebinderButton[] mRebinderButtons;
     private GamepadEmulatedButton[] mRealButtons;
-    private final Handler mExitHandler = new Handler(Looper.getMainLooper());
-    private final Runnable mExitRunnable;
     private final ArrayAdapter<String> mKeyAdapter;
     private final int mSpecialKeycodeCount;
     private GrabListener mGamepadGrabListener;
     private boolean mGrabState = false;
     private boolean mOldState = false;
 
-    public GamepadMapperAdapter(Context context, EditorExitable exitable) {
+    public GamepadMapperAdapter(Context context) {
         GamepadMapStore.load();
-        mKeyAdapter = new ArrayAdapter<>(context, R.layout.item_centered_textview);
+        mKeyAdapter = new ArrayAdapter<>(context, R.layout.item_centered_textview_large);
         String[] specialKeycodeNames = GamepadMap.getSpecialKeycodeNames();
         mSpecialKeycodeCount = specialKeycodeNames.length;
         mKeyAdapter.addAll(specialKeycodeNames);
         mKeyAdapter.addAll(EfficientAndroidLWJGLKeycode.generateKeyName());
-        this.mExitRunnable = exitable::exitEditor;
         createRebinderMap();
         updateRealButtons();
     }
@@ -67,8 +62,8 @@ public class GamepadMapperAdapter extends RecyclerView.Adapter<GamepadMapperAdap
         mSimulatedGamepadMap.SHOULDER_LEFT = mRebinderButtons[index++] = new RebinderButton(R.drawable.shoulder_left, R.string.controller_button_shoulder_left);
         mSimulatedGamepadMap.DIRECTION_FORWARD = mRebinderButtons[index++] = new RebinderButton(R.drawable.stick_right, R.string.controller_direction_forward);
         mSimulatedGamepadMap.DIRECTION_RIGHT = mRebinderButtons[index++] = new RebinderButton(R.drawable.stick_right, R.string.controller_direction_right);
-        mSimulatedGamepadMap.DIRECTION_LEFT = mRebinderButtons[index++] = new RebinderButton(R.drawable.stick_right,  R.string.controller_direction_left);
-        mSimulatedGamepadMap.DIRECTION_BACKWARD = mRebinderButtons[index++] = new RebinderButton(R.drawable.stick_right,  R.string.controller_direction_backward);
+        mSimulatedGamepadMap.DIRECTION_LEFT = mRebinderButtons[index++] = new RebinderButton(R.drawable.stick_right, R.string.controller_direction_left);
+        mSimulatedGamepadMap.DIRECTION_BACKWARD = mRebinderButtons[index++] = new RebinderButton(R.drawable.stick_right, R.string.controller_direction_backward);
         mSimulatedGamepadMap.THUMBSTICK_RIGHT = mRebinderButtons[index++] = new RebinderButton(R.drawable.stick_right_click, R.string.controller_stick_press_r);
         mSimulatedGamepadMap.THUMBSTICK_LEFT = mRebinderButtons[index++] = new RebinderButton(R.drawable.stick_left_click, R.string.controller_stick_press_l);
         mSimulatedGamepadMap.DPAD_UP = mRebinderButtons[index++] = new RebinderButton(R.drawable.dpad_up, R.string.controller_dpad_up);
@@ -136,7 +131,7 @@ public class GamepadMapperAdapter extends RecyclerView.Adapter<GamepadMapperAdap
         ((RebinderButton)mSimulatedGamepadMap.DIRECTION_LEFT).iconResourceId = stickIcon;
     }
 
-    private class RebinderButton extends GamepadButton {
+    private static class RebinderButton extends GamepadButton {
         public int iconResourceId;
         public final int localeResourceId;
         private GamepadMapperAdapter.ViewHolder mButtonHolder;
@@ -153,21 +148,18 @@ public class GamepadMapperAdapter extends RecyclerView.Adapter<GamepadMapperAdap
         
         @Override
         protected void onDownStateChanged(boolean isDown) {
-            if(iconResourceId == R.drawable.button_select) {
-                if(isDown) mExitHandler.postDelayed(mExitRunnable, 400);
-                else mExitHandler.removeCallbacks(mExitRunnable);
-            }
             if(mButtonHolder == null) return;
             mButtonHolder.setPressed(isDown);
         }
     }
     
     public class ViewHolder extends RecyclerView.ViewHolder implements AdapterView.OnItemSelectedListener, View.OnClickListener {
+        private static final int COLOR_ACTIVE_BUTTON = 0x2000FF00;
         private final Context mContext;
+        private final ColorDrawable mBackgroundDrawable;
         private final ImageView mButtonIcon;
         private final ImageView mExpansionIndicator;
         private final Spinner[] mKeySpinners;
-        private final View mClickIndicator;
         private final View mExpandedView;
         private final TextView mKeycodeLabel;
         private int mAttachedPosition = -1;
@@ -175,9 +167,10 @@ public class GamepadMapperAdapter extends RecyclerView.Adapter<GamepadMapperAdap
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            mBackgroundDrawable = new ColorDrawable(Color.TRANSPARENT);
+            itemView.setBackground(mBackgroundDrawable);
             mContext = itemView.getContext();
             mButtonIcon = itemView.findViewById(R.id.controller_mapper_button);
-            mClickIndicator = itemView.findViewById(R.id.controller_mapper_indicator);
             mExpandedView = itemView.findViewById(R.id.controller_mapper_expanded_view);
             mExpansionIndicator = itemView.findViewById(R.id.controller_mapper_expand_button);
             mKeycodeLabel = itemView.findViewById(R.id.controller_mapper_keycode_label);
@@ -230,7 +223,7 @@ public class GamepadMapperAdapter extends RecyclerView.Adapter<GamepadMapperAdap
             mAttachedPosition = -1;
         }
         private void setPressed(boolean pressed) {
-            mClickIndicator.setBackgroundColor(pressed ? Color.GREEN : Color.DKGRAY);
+            mBackgroundDrawable.setColor(pressed ? COLOR_ACTIVE_BUTTON : Color.TRANSPARENT);
         }
 
         private void updateKeycodeLabel() {
@@ -308,10 +301,6 @@ public class GamepadMapperAdapter extends RecyclerView.Adapter<GamepadMapperAdap
     public void attachGrabListener(GrabListener grabListener) {
         mGamepadGrabListener = grabListener;
         grabListener.onGrabState(mGrabState);
-    }
-
-    @Override
-    public void reloadGamepadMaps() {
     }
 
     // Cannot do it another way

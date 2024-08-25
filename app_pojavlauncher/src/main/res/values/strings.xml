@@ -410,4 +410,5 @@
     <string name="customctrl_visibility_title">Visibility</string>
     <string name="customctrl_visibility_ingame">In-game</string>
     <string name="customctrl_visibility_in_menus">In menus</string>
+    <string name="controller_remapper_expand_entry">Expand to change keycodes</string>
 </resources>
