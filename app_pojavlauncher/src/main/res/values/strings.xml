@@ -411,4 +411,6 @@
     <string name="customctrl_visibility_ingame">In-game</string>
     <string name="customctrl_visibility_in_menus">In menus</string>
     <string name="controller_remapper_expand_entry">Expand to change keycodes</string>
+    <string name="preference_remap_controller_title">Change controller key bindings</string>
+    <string name="preference_remap_controller_description">Allows you to modify the keyboard keys bound to each controller button</string>
 </resources>
