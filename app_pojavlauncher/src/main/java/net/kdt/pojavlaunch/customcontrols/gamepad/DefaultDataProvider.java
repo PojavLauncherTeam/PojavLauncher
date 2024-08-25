@@ -7,9 +7,8 @@ import org.lwjgl.glfw.CallbackBridge;
 public class DefaultDataProvider implements GamepadDataProvider {
     public static final DefaultDataProvider INSTANCE = new DefaultDataProvider();
 
-    private DefaultDataProvider() {
-        reloadGamepadMaps();
-    }
+    // Cannot instantiate this class publicly
+    private DefaultDataProvider() {}
 
     @Override
     public GamepadMap getGameMap() {
@@ -30,10 +29,5 @@ public class DefaultDataProvider implements GamepadDataProvider {
     @Override
     public void attachGrabListener(GrabListener grabListener) {
         CallbackBridge.addGrabListener(grabListener);
-    }
-
-    @Override
-    public void reloadGamepadMaps() {
-        GamepadMapStore.load();
     }
 }

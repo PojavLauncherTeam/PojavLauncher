@@ -17,13 +17,11 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewParent;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.math.MathUtils;
-import androidx.fragment.app.Fragment;
 
 import net.kdt.pojavlaunch.GrabListener;
 import net.kdt.pojavlaunch.LwjglGlfwKeycode;
@@ -126,7 +124,7 @@ public class Gamepad implements GrabListener, GamepadHandler {
         CallbackBridge.sendCursorPos(CallbackBridge.windowWidth/2f, CallbackBridge.windowHeight/2f);
 
         if(showCursor) {
-            ((FrameLayout)contextView.getParent()).addView(mPointerImageView);
+            ((ViewGroup)contextView.getParent()).addView(mPointerImageView);
         }
 
 
@@ -140,7 +138,7 @@ public class Gamepad implements GrabListener, GamepadHandler {
     public void reloadGamepadMaps() {
         if(mGameMap != null) mGameMap.resetPressedState();
         if(mMenuMap != null) mMenuMap.resetPressedState();
-        mMapProvider.reloadGamepadMaps();
+        GamepadMapStore.load();
         mGameMap = mMapProvider.getGameMap();
         mMenuMap = mMapProvider.getMenuMap();
         mCurrentMap = mGameMap;
