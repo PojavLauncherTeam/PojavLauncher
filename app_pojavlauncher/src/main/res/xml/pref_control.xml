@@ -132,6 +132,10 @@
     <PreferenceCategory
         android:title="@string/preference_category_controller_settings"
         >
+        <Preference
+            android:title="@string/preference_remap_controller_title"
+            android:summary="@string/preference_remap_controller_description"
+            android:fragment="net.kdt.pojavlaunch.fragments.GamepadMapperFragment"/>
         <net.kdt.pojavlaunch.prefs.GamepadRemapPreference
             android:title="@string/preference_wipe_controller_title"
             android:summary="@string/preference_wipe_controller_description"
@@ -143,6 +147,7 @@
             app2:showSeekBarValue="true"
             app2:seekBarIncrement="5"
             />
+
     </PreferenceCategory>
 
 

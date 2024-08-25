@@ -3,7 +3,6 @@ package net.kdt.pojavlaunch.customcontrols.gamepad;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -156,7 +155,6 @@ public class GamepadMapperAdapter extends RecyclerView.Adapter<GamepadMapperAdap
     public class ViewHolder extends RecyclerView.ViewHolder implements AdapterView.OnItemSelectedListener, View.OnClickListener {
         private static final int COLOR_ACTIVE_BUTTON = 0x2000FF00;
         private final Context mContext;
-        private final ColorDrawable mBackgroundDrawable;
         private final ImageView mButtonIcon;
         private final ImageView mExpansionIndicator;
         private final Spinner[] mKeySpinners;
@@ -167,8 +165,6 @@ public class GamepadMapperAdapter extends RecyclerView.Adapter<GamepadMapperAdap
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            mBackgroundDrawable = new ColorDrawable(Color.TRANSPARENT);
-            itemView.setBackground(mBackgroundDrawable);
             mContext = itemView.getContext();
             mButtonIcon = itemView.findViewById(R.id.controller_mapper_button);
             mExpandedView = itemView.findViewById(R.id.controller_mapper_expanded_view);
@@ -223,7 +219,7 @@ public class GamepadMapperAdapter extends RecyclerView.Adapter<GamepadMapperAdap
             mAttachedPosition = -1;
         }
         private void setPressed(boolean pressed) {
-            mBackgroundDrawable.setColor(pressed ? COLOR_ACTIVE_BUTTON : Color.TRANSPARENT);
+            itemView.setBackgroundColor(pressed ? COLOR_ACTIVE_BUTTON : Color.TRANSPARENT);
         }
 
         private void updateKeycodeLabel() {
