@@ -22,32 +22,11 @@ public class GamepadMap {
     Be warned, you should define ALL keys if you want to avoid a non defined exception
    */
 
-    public GamepadButton BUTTON_A;
-    public GamepadButton BUTTON_B;
-    public GamepadButton BUTTON_X;
-    public GamepadButton BUTTON_Y;
-    
-    public GamepadButton BUTTON_START;
-    public GamepadButton BUTTON_SELECT;
+    public GamepadButton BUTTON_A, BUTTON_B, BUTTON_X, BUTTON_Y, BUTTON_START, BUTTON_SELECT,
+                         TRIGGER_RIGHT, TRIGGER_LEFT, SHOULDER_RIGHT, SHOULDER_LEFT, THUMBSTICK_RIGHT,
+                         THUMBSTICK_LEFT, DPAD_UP, DPAD_DOWN, DPAD_RIGHT, DPAD_LEFT;
 
-    public GamepadButton TRIGGER_RIGHT;         //R2
-    public GamepadButton TRIGGER_LEFT;          //L2
-    
-    public GamepadButton SHOULDER_RIGHT;        //R1
-    public GamepadButton SHOULDER_LEFT;         //L1
-
-    public GamepadEmulatedButton DIRECTION_FORWARD;
-    public GamepadEmulatedButton DIRECTION_BACKWARD;
-    public GamepadEmulatedButton DIRECTION_RIGHT;
-    public GamepadEmulatedButton DIRECTION_LEFT;
-    
-    public GamepadButton THUMBSTICK_RIGHT;      //R3
-    public GamepadButton THUMBSTICK_LEFT;       //L3
-    
-    public GamepadButton DPAD_UP;
-    public GamepadButton DPAD_RIGHT;
-    public GamepadButton DPAD_DOWN;
-    public GamepadButton DPAD_LEFT;
+    public GamepadEmulatedButton DIRECTION_FORWARD, DIRECTION_BACKWARD, DIRECTION_RIGHT, DIRECTION_LEFT;
 
     /*
      * Sets all buttons to a not pressed state, sending an input if needed
