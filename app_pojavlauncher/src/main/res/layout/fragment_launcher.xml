@@ -34,7 +34,17 @@
 				android:drawableStart="@drawable/ic_menu_news"
 				app:layout_constraintTop_toTopOf="parent"
 				app:layout_constraintStart_toStartOf="parent"
-				app:layout_constraintEnd_toStartOf="@id/center_guideline" />
+				app:layout_constraintEnd_toStartOf="@id/social_divider" />
+			<View
+				android:id="@+id/social_divider"
+				android:layout_width="@dimen/padding_tiny"
+				android:layout_height="0dp"
+				android:background="@color/divider"
+				android:layout_marginVertical="@dimen/padding_large"
+				app:layout_constraintTop_toTopOf="parent"
+				app:layout_constraintStart_toStartOf="@id/center_guideline"
+				app:layout_constraintEnd_toEndOf="@id/center_guideline"
+				app:layout_constraintBottom_toBottomOf="@id/news_button"/>
 			<com.kdt.mcgui.LauncherMenuButton
 				android:id="@+id/discord_button"
 				android:layout_width="0dp"
@@ -44,7 +54,7 @@
 				android:text="@string/mcl_button_discord"
 				android:drawableStart="@drawable/ic_discord"
 				app:layout_constraintTop_toTopOf="parent"
-				app:layout_constraintStart_toEndOf="@id/center_guideline"
+				app:layout_constraintStart_toEndOf="@id/social_divider"
 				app:layout_constraintEnd_toEndOf="parent"/>
 
 
