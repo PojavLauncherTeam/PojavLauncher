@@ -63,7 +63,8 @@ public class MinecraftGLSurface extends View implements GrabListener {
             .remapLeftShoulder(true)
             .remapRightShoulder(true)
             .remapLeftTrigger(true)
-            .remapRightTrigger(true));
+            .remapRightTrigger(true)
+            .remapDpad(true));
 
     /* Resolution scaler option, allow downsizing a window */
     private final float mScaleFactor = LauncherPreferences.PREF_SCALE_FACTOR/100f;
