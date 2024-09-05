@@ -40,7 +40,8 @@ public class GamepadMapperFragment extends Fragment implements
             .remapLeftShoulder(true)
             .remapRightShoulder(true)
             .remapLeftTrigger(true)
-            .remapRightTrigger(true);
+            .remapRightTrigger(true)
+            .remapDpad(true);
     private final Handler mExitHandler = new Handler(Looper.getMainLooper());
     private final Runnable mExitRunnable = () -> {
         Activity activity = getActivity();
