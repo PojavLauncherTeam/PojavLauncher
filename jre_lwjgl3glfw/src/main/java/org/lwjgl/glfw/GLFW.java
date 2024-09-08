@@ -6,7 +6,6 @@ package org.lwjgl.glfw;
 
 import android.util.*;
 
-import java.lang.annotation.Native;
 import java.lang.reflect.*;
 import java.nio.*;
 
@@ -22,8 +21,6 @@ import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import java.util.*;
-
-import sun.misc.Unsafe;
 
 public class GLFW
 {
@@ -507,6 +504,7 @@ public class GLFW
 
     private static ArrayMap<Long, GLFWWindowProperties> mGLFWWindowMap;
     public static boolean mGLFWIsInputReady;
+    private static boolean mGLFWInputPumping;
     public static final ByteBuffer keyDownBuffer = ByteBuffer.allocateDirect(317);
     public static final ByteBuffer mouseDownBuffer = ByteBuffer.allocateDirect(8);
 
@@ -627,8 +625,8 @@ public class GLFW
         SwapBuffers = apiGetFunctionAddress(GLFW, "pojavSwapBuffers"),
         SwapInterval = apiGetFunctionAddress(GLFW, "pojavSwapInterval"),
         PumpEvents = apiGetFunctionAddress(GLFW, "pojavPumpEvents"),
-        RewindEvents = apiGetFunctionAddress(GLFW, "pojavRewindEvents"),
-        SetupEvents = apiGetFunctionAddress(GLFW, "pojavComputeEventTarget");
+        StopPumping = apiGetFunctionAddress(GLFW, "pojavStopPumping"),
+        StartPumping = apiGetFunctionAddress(GLFW, "pojavStartPumping");
     }
 
     public static SharedLibrary getLibrary() {
@@ -1080,9 +1078,15 @@ public class GLFW
             mGLFWIsInputReady = true;
             CallbackBridge.nativeSetInputReady(true);
         }
-        callV(Functions.SetupEvents);
+        // During interactions with UI elements, Minecraft likes to update the screen as events related to those inputs arrive.
+        // This leads to calls to glfwPollEvents within glfwPollEvents, which is not good for our queue system.
+        // Prevent these with this code.
+        if(mGLFWInputPumping) return;
+        mGLFWInputPumping = true;
+        callV(Functions.StartPumping);
         for (Long ptr : mGLFWWindowMap.keySet()) callJV(ptr, Functions.PumpEvents);
-        callV(Functions.RewindEvents);
+        callV(Functions.StopPumping);
+        mGLFWInputPumping = false;
     }
 
     public static void internalWindowSizeChanged(long window, int w, int h) {
