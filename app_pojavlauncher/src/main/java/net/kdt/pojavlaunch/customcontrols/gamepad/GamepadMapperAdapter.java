@@ -1,6 +1,5 @@
 package net.kdt.pojavlaunch.customcontrols.gamepad;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -8,10 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.kdt.pojavlaunch.EfficientAndroidLWJGLKeycode;
@@ -152,15 +153,17 @@ public class GamepadMapperAdapter extends RecyclerView.Adapter<GamepadMapperAdap
         }
     }
     
-    public class ViewHolder extends RecyclerView.ViewHolder implements AdapterView.OnItemSelectedListener, View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder implements AdapterView.OnItemSelectedListener, View.OnClickListener, CompoundButton.OnCheckedChangeListener {
         private static final int COLOR_ACTIVE_BUTTON = 0x2000FF00;
         private final Context mContext;
         private final ImageView mButtonIcon;
         private final ImageView mExpansionIndicator;
         private final Spinner[] mKeySpinners;
         private final View mExpandedView;
+        private final SwitchCompat mToggleableSwitch;
         private final TextView mKeycodeLabel;
         private int mAttachedPosition = -1;
+        private GamepadEmulatedButton mAttachedButton;
         private short[] mKeycodes;
 
         public ViewHolder(@NonNull View itemView) {
@@ -170,6 +173,8 @@ public class GamepadMapperAdapter extends RecyclerView.Adapter<GamepadMapperAdap
             mExpandedView = itemView.findViewById(R.id.controller_mapper_expanded_view);
             mExpansionIndicator = itemView.findViewById(R.id.controller_mapper_expand_button);
             mKeycodeLabel = itemView.findViewById(R.id.controller_mapper_keycode_label);
+            mToggleableSwitch = itemView.findViewById(R.id.controller_mapper_toggleable_switch);
+            mToggleableSwitch.setOnCheckedChangeListener(this);
             View defaultView = itemView.findViewById(R.id.controller_mapper_default_view);
             defaultView.setOnClickListener(this);
             mKeySpinners = new Spinner[4];
@@ -191,6 +196,15 @@ public class GamepadMapperAdapter extends RecyclerView.Adapter<GamepadMapperAdap
             rebinderButton.changeViewHolder(this);
 
             GamepadEmulatedButton realButton = mRealButtons[index];
+
+            mAttachedButton = realButton;
+
+            if(realButton instanceof GamepadButton) {
+                mToggleableSwitch.setChecked(((GamepadButton)realButton).isToggleable);
+                mToggleableSwitch.setVisibility(View.VISIBLE);
+            }else {
+                mToggleableSwitch.setVisibility(View.GONE);
+            }
 
             mKeycodes = realButton.keycodes;
 
@@ -217,6 +231,7 @@ public class GamepadMapperAdapter extends RecyclerView.Adapter<GamepadMapperAdap
         private void detach() {
             mRebinderButtons[mAttachedPosition].changeViewHolder(null);
             mAttachedPosition = -1;
+            mAttachedButton = null;
         }
         private void setPressed(boolean pressed) {
             itemView.setBackgroundColor(pressed ? COLOR_ACTIVE_BUTTON : Color.TRANSPARENT);
@@ -276,6 +291,17 @@ public class GamepadMapperAdapter extends RecyclerView.Adapter<GamepadMapperAdap
                     mExpandedView.setVisibility(View.GONE);
             }
         }
+
+        @Override
+        public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
+            if(!(mAttachedButton instanceof GamepadButton)) return;
+            ((GamepadButton)mAttachedButton).isToggleable = checked;
+            try {
+                GamepadMapStore.save();
+            }catch (Exception e) {
+                Tools.showError(compoundButton.getContext(), e);
+            }
+        }
     }
 
     @Override
@@ -299,15 +325,13 @@ public class GamepadMapperAdapter extends RecyclerView.Adapter<GamepadMapperAdap
         grabListener.onGrabState(mGrabState);
     }
 
-    // Cannot do it another way
-    @SuppressLint("NotifyDataSetChanged")
     public void setGrabState(boolean newState) {
         mGrabState = newState;
         if(mGamepadGrabListener != null) mGamepadGrabListener.onGrabState(newState);
         if(mGrabState == mOldState) return;
         updateRealButtons();
         updateStickIcons();
-        notifyDataSetChanged();
+        notifyItemRangeChanged(0, mRebinderButtons.length);
         mOldState = mGrabState;
     }
 }
