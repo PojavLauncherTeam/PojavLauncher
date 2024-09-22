@@ -10,7 +10,8 @@ public class GamepadButton extends GamepadEmulatedButton {
 
     @Override
     protected void onDownStateChanged(boolean isDown) {
-        if(isToggleable && isDown){
+        if(isToggleable) {
+            if(!isDown) return;
             mIsToggled = !mIsToggled;
             Gamepad.sendInput(keycodes, mIsToggled);
             return;
