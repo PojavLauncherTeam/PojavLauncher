@@ -136,6 +136,18 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.5" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/controller_mapper_toggleable_switch"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:text="@string/customctrl_toggle"
+            android:layout_marginTop="@dimen/padding_moderate"
+            android:layout_marginHorizontal="@dimen/padding_moderate"
+            android:paddingHorizontal="@dimen/padding_medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/controller_mapper_key_spinner3" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
 
