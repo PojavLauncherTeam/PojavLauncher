@@ -483,7 +483,7 @@
             android:id="@+id/visibility_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Visibility"
+            android:text="@string/customctrl_visibility_title"
             app:layout_constraintTop_toBottomOf="@+id/editButtonOpacity_seekbar"
             tools:layout_editor_absoluteX="6dp" />
 
@@ -491,14 +491,14 @@
             android:id="@+id/visibility_game_checkbox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="In game"
+            android:text="@string/customctrl_visibility_ingame"
             app:layout_constraintTop_toBottomOf="@+id/visibility_textview" />
 
         <CheckBox
             android:id="@+id/visibility_menu_checkbox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="In Menu"
+            android:text="@string/customctrl_visibility_in_menus"
             app:layout_constraintTop_toBottomOf="@+id/visibility_game_checkbox" />
 
 

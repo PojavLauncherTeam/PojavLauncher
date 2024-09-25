@@ -18,6 +18,8 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE"/>
 
     <application
         android:name=".PojavApplication"
@@ -119,10 +121,13 @@
             </intent-filter>
         </provider>
 
-        <service android:name=".services.ProgressService" />
-        <service
-            android:name=".services.GameService"
-            android:process=":game" />
+        <service android:name=".services.ProgressService"
+            android:foregroundServiceType="dataSync"/>
+        <service android:name=".services.GameService" android:process=":game"
+            android:foregroundServiceType="specialUse">
+            <property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="This application is intended to run a 3rd-party piece of software which cannot be managed using the activity's saved instance state. This service is used for background persistence of this piece of software."/>
+        </service>
     </application>
     <queries>
         <package android:name="net.kdt.pojavlaunch.ffmpeg"/>

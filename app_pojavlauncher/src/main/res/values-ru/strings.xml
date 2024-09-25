@@ -329,4 +329,5 @@
     <string name="newdl_starting">Чтение метаданных игры…</string>
     <string name="newdl_downloading_metadata">Загрузка метаданных игры (%s)</string>
     <string name="newdl_downloading_game_files">Загрузка файлов… (%d/%d, %.2f МБ)</string>
+    <string name="discord_invite" translatable="false">https://discord.gg/pojavlauncher-sng-962263126647144449</string>
 </resources>

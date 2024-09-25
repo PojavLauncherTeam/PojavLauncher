@@ -1,37 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:id="@+id/fragment_menu_main"
+	android:gravity="top"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
+	android:orientation="vertical"
 	android:background="@color/background_app"
-	android:gravity="top"
-	android:orientation="vertical">
-
+	>
 	<ScrollView
-		android:layout_width="409dp"
-		android:layout_height="521dp"
-		app:layout_constraintBottom_toTopOf="@id/mc_version_spinner"
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
 		app:layout_constraintTop_toTopOf="parent"
-		app:layout_constraintVertical_bias="0.0"
-		tools:layout_editor_absoluteX="2dp">
-
-		<LinearLayout
+		app:layout_constraintBottom_toTopOf="@id/mc_version_spinner">
+		<androidx.constraintlayout.widget.ConstraintLayout
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:orientation="vertical">
-
+			android:layout_height="wrap_content">
+			<androidx.constraintlayout.widget.Guideline
+				android:id="@+id/center_guideline"
+				android:layout_width="0dp"
+				android:layout_height="0dp"
+				android:orientation="vertical"
+				app:layout_constraintGuide_percent="0.5"/>
 			<com.kdt.mcgui.LauncherMenuButton
 				android:id="@+id/news_button"
-				android:layout_width="match_parent"
+				android:layout_width="0dp"
 				android:layout_height="@dimen/_66sdp"
 				android:background="?android:attr/selectableItemBackground"
 
-				android:drawableStart="@drawable/ic_menu_news"
 				android:text="@string/mcl_tab_wiki"
+				android:drawableStart="@drawable/ic_menu_news"
+				app:layout_constraintTop_toTopOf="parent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintEnd_toStartOf="@id/social_divider" />
+			<View
+				android:id="@+id/social_divider"
+				android:layout_width="@dimen/padding_tiny"
+				android:layout_height="0dp"
+				android:background="@color/divider"
+				android:layout_marginVertical="@dimen/padding_large"
+				app:layout_constraintTop_toTopOf="parent"
+				app:layout_constraintStart_toStartOf="@id/center_guideline"
+				app:layout_constraintEnd_toEndOf="@id/center_guideline"
+				app:layout_constraintBottom_toBottomOf="@id/news_button"/>
+			<com.kdt.mcgui.LauncherMenuButton
+				android:id="@+id/discord_button"
+				android:layout_width="0dp"
+				android:layout_height="@dimen/_66sdp"
+				android:background="?android:attr/selectableItemBackground"
 
-				/>
+				android:text="@string/mcl_button_discord"
+				android:drawableStart="@drawable/ic_discord"
+				app:layout_constraintTop_toTopOf="parent"
+				app:layout_constraintStart_toEndOf="@id/social_divider"
+				app:layout_constraintEnd_toEndOf="parent"/>
+
 
 			<com.kdt.mcgui.LauncherMenuButton
 				android:id="@+id/custom_control_button"
@@ -52,46 +77,36 @@
 				android:drawableStart="@drawable/ic_menu_install_jar"
 				android:text="@string/main_install_jar_file"
 
-				app:layout_constraintTop_toBottomOf="@id/custom_control_button" />
+				app:layout_constraintTop_toBottomOf="@id/custom_control_button"
+				/>
 
 			<com.kdt.mcgui.LauncherMenuButton
 				android:id="@+id/share_logs_button"
 				android:layout_width="match_parent"
 				android:layout_height="@dimen/_66sdp"
 				android:background="?android:attr/selectableItemBackground"
-				android:drawableStart="@drawable/ic_menu_share"
+				android:drawableStart="@android:drawable/ic_menu_share"
 				android:text="@string/main_share_logs"
 
-				app:layout_constraintTop_toBottomOf="@id/install_jar_button" />
-
-			<com.kdt.mcgui.LauncherMenuButton
-				android:id="@+id/open_files_button"
-				android:layout_width="match_parent"
-				android:layout_height="@dimen/_66sdp"
-				android:background="?android:attr/selectableItemBackground"
-				android:drawableStart="@drawable/ic_menu_files"
-				android:text="@string/main_open_files"
-
-				app:layout_constraintTop_toBottomOf="@id/share_logs_button" />
-		</LinearLayout>
+				app:layout_constraintTop_toBottomOf="@id/install_jar_button"
+				/>
+		</androidx.constraintlayout.widget.ConstraintLayout>
 	</ScrollView>
 
 	<com.kdt.mcgui.mcVersionSpinner
 		android:id="@+id/mc_version_spinner"
 		android:layout_width="0dp"
 		android:layout_height="@dimen/_52sdp"
-		android:layout_marginBottom="20dp"
 		android:background="@android:color/transparent"
+		android:drawableEnd="@drawable/spinner_arrow"
 
-		android:drawableEnd="@drawable/ic_spinner_arrow"
-		app:drawableEndPadding="@dimen/_1sdp"
-		app:drawableEndSize="@dimen/padding_extra_large"
+		app:drawableEndSize="@dimen/padding_heavy"
 		app:drawableStartIntegerScaling="true"
-
 		app:drawableStartSize="@dimen/_36sdp"
+		app:drawableEndPadding="@dimen/_1sdp"
+
 		app:layout_constraintBottom_toTopOf="@id/play_button"
 		app:layout_constraintEnd_toStartOf="@+id/edit_profile_button"
-		app:layout_constraintHorizontal_bias="0.0"
 		app:layout_constraintStart_toStartOf="parent" />
 
 	<ImageButton
@@ -107,18 +122,15 @@
 
 
 	<!-- This view is for cosmetic purpose only -->
-
 	<View
 		android:id="@+id/_background_display_view"
-		android:layout_width="409dp"
-		android:layout_height="206dp"
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
 		android:background="@color/background_bottom_bar"
 		android:translationZ="-1dp"
 
 		app:layout_constraintBottom_toBottomOf="parent"
-		app:layout_constraintTop_toTopOf="@id/mc_version_spinner"
-		app:layout_constraintVertical_bias="1.0"
-		tools:layout_editor_absoluteX="2dp" />
+		app:layout_constraintTop_toTopOf="@id/mc_version_spinner" />
 
 	<com.kdt.mcgui.MineButton
 		android:id="@+id/play_button"
@@ -128,9 +140,10 @@
 		android:layout_marginHorizontal="@dimen/_17sdp"
 		android:layout_marginBottom="@dimen/_15sdp"
 
-		android:text="@string/main_play"
 		android:textAllCaps="true"
-		app:layout_constraintBottom_toBottomOf="parent" />
+		android:text="@string/main_play"
+		app:layout_constraintBottom_toBottomOf="parent"
+		/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

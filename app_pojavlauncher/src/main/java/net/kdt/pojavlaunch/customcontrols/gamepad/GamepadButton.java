@@ -1,46 +1,31 @@
 package net.kdt.pojavlaunch.customcontrols.gamepad;
 
-import android.view.KeyEvent;
-
 /**
- * Simple button able to store its state and some properties
+ *  This class corresponds to a button that does exist on the gamepad
  */
-public class GamepadButton {
-
-    public int[] keycodes;
+public class GamepadButton extends GamepadEmulatedButton {
     public boolean isToggleable = false;
-    private boolean mIsDown = false;
     private boolean mIsToggled = false;
 
-    public void update(KeyEvent event){
-        boolean isKeyDown = (event.getAction() == KeyEvent.ACTION_DOWN);
-        update(isKeyDown);
-    }
 
-    public void update(boolean isKeyDown){
-        if(isKeyDown != mIsDown){
-            mIsDown = isKeyDown;
-            if(isToggleable){
-                if(isKeyDown){
-                    mIsToggled = !mIsToggled;
-                    Gamepad.sendInput(keycodes, mIsToggled);
-                }
-                return;
-            }
-            Gamepad.sendInput(keycodes, mIsDown);
+    @Override
+    protected void onDownStateChanged(boolean isDown) {
+        if(isToggleable) {
+            if(!isDown) return;
+            mIsToggled = !mIsToggled;
+            Gamepad.sendInput(keycodes, mIsToggled);
+            return;
         }
+        super.onDownStateChanged(isDown);
     }
 
-    public void resetButtonState(){
-        if(mIsDown || mIsToggled){
+    @Override
+    public void resetButtonState() {
+        if(!mIsDown && mIsToggled) {
             Gamepad.sendInput(keycodes, false);
+            mIsToggled = false;
+        } else {
+            super.resetButtonState();
         }
-        mIsDown = false;
-        mIsToggled = false;
     }
-
-    public boolean isDown(){
-        return isToggleable ? mIsToggled : mIsDown;
-    }
-
 }

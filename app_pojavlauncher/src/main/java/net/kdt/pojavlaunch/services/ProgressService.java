@@ -1,10 +1,12 @@
 package net.kdt.pojavlaunch.services;
 
 import android.annotation.SuppressLint;
+import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ServiceInfo;
 import android.os.Build;
 import android.os.IBinder;
 import android.os.Process;
@@ -64,7 +66,12 @@ public class ProgressService extends Service implements TaskCountListener {
         }
         Log.d("ProgressService", "Started!");
         mNotificationBuilder.setContentText(getString(R.string.progresslayout_tasks_in_progress, ProgressKeeper.getTaskCount()));
-        startForeground(NotificationUtils.NOTIFICATION_ID_PROGRESS_SERVICE, mNotificationBuilder.build());
+        Notification notification = mNotificationBuilder.build();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            startForeground(NotificationUtils.NOTIFICATION_ID_PROGRESS_SERVICE, notification, ServiceInfo.FOREGROUND_SERVICE_TYPE_MANIFEST);
+        } else {
+            startForeground(NotificationUtils.NOTIFICATION_ID_PROGRESS_SERVICE, notification);
+        }
         if(ProgressKeeper.getTaskCount() < 1) stopSelf();
         else ProgressKeeper.addTaskCountListener(this, false);
 

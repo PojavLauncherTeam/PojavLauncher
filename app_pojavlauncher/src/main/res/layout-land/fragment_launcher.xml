@@ -19,20 +19,49 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
+            android:layout_height="wrap_content">
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/center_guideline"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5"/>
             <com.kdt.mcgui.LauncherMenuButton
                 android:id="@+id/news_button"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:background="?android:attr/selectableItemBackground"
                 android:drawableStart="@drawable/ic_menu_news"
-                android:text="@string/mcl_tab_wiki" />
+                android:text="@string/mcl_tab_wiki"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/social_divider"/>
+            <View
+                android:id="@+id/social_divider"
+                android:layout_width="@dimen/padding_tiny"
+                android:layout_height="0dp"
+                android:background="@color/divider"
+                android:layout_marginVertical="@dimen/padding_heavy"
+                app:layout_constraintTop_toTopOf="@id/news_button"
+                app:layout_constraintStart_toStartOf="@id/center_guideline"
+                app:layout_constraintEnd_toEndOf="@id/center_guideline"
+                app:layout_constraintBottom_toBottomOf="@id/news_button"/>
+            <com.kdt.mcgui.LauncherMenuButton
+                android:id="@+id/discord_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:drawableStart="@drawable/ic_discord"
+                android:text="@string/mcl_button_discord"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/social_divider"/>
 
             <com.kdt.mcgui.LauncherMenuButton
                 android:id="@+id/custom_control_button"
@@ -42,7 +71,8 @@
                 android:layout_marginBottom="8dp"
                 android:background="?android:attr/selectableItemBackground"
                 android:drawableStart="@drawable/ic_menu_custom_controls"
-                android:text="@string/mcl_option_customcontrol" />
+                android:text="@string/mcl_option_customcontrol"
+                app:layout_constraintTop_toBottomOf="@id/news_button"/>
 
             <com.kdt.mcgui.LauncherMenuButton
                 android:id="@+id/install_jar_button"
@@ -52,7 +82,8 @@
                 android:layout_marginBottom="8dp"
                 android:background="?android:attr/selectableItemBackground"
                 android:drawableStart="@drawable/ic_menu_install_jar"
-                android:text="@string/main_install_jar_file" />
+                android:text="@string/main_install_jar_file"
+                app:layout_constraintTop_toBottomOf="@id/custom_control_button"/>
 
             <com.kdt.mcgui.LauncherMenuButton
                 android:id="@+id/share_logs_button"
@@ -61,19 +92,10 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:background="?android:attr/selectableItemBackground"
-                android:drawableStart="@drawable/ic_menu_share"
-                android:text="@string/main_share_logs" />
-
-            <com.kdt.mcgui.LauncherMenuButton
-                android:id="@+id/open_files_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:background="?android:attr/selectableItemBackground"
-                android:drawableStart="@drawable/ic_menu_files"
-                android:text="@string/main_open_files" />
-        </LinearLayout>
+                android:drawableStart="@android:drawable/ic_menu_share"
+                android:text="@string/main_share_logs"
+                app:layout_constraintTop_toBottomOf="@id/install_jar_button"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
 
@@ -87,12 +109,12 @@
         android:layout_marginBottom="8dp"
 
         android:background="@android:color/transparent"
-        android:drawableEnd="@drawable/ic_spinner_arrow"
+        android:drawableEnd="@drawable/spinner_arrow"
         app:drawableEndPadding="@dimen/_1sdp"
-        app:drawableEndSize="@dimen/padding_extra_large"
+        app:drawableEndSize="@dimen/_12sdp"
 
         app:drawableStartIntegerScaling="true"
-        app:drawableStartSize="@dimen/padding_extra_large"
+        app:drawableStartSize="@dimen/_36sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/edit_profile_button"
         app:layout_constraintStart_toStartOf="parent" />
