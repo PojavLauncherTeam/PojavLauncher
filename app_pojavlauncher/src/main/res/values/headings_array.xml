@@ -3,7 +3,7 @@
     <string-array name="renderer">
         <item name="1">@string/mcl_setting_renderer_gles2_4</item>
         <item name="2">@string/mcl_setting_renderer_vulkan_zink</item>
-        <item name="3">@string/mcl_setting_renderer_angle</item>
+        <item name="3">@string/mcl_setting_renderer_ltw</item>
     </string-array>
 
     <string-array name="menu_customcontrol">
@@ -38,7 +38,7 @@
     <string-array name="renderer_values">
         <item>opengles2</item> <!-- gl4es_extra 1.1.4 with OpenGL ES 2/"3" -->
         <item>vulkan_zink</item> <!-- virglrenderer with OpenGL ES 3 -->
-        <item>opengles3_desktopgl_angle_vulkan</item>
+        <item>opengles3_ltw</item>
     </string-array>
     <string-array name="download_source_names">
         <item>@string/global_default</item>
