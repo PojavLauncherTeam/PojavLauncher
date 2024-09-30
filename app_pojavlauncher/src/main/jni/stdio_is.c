@@ -9,6 +9,7 @@
 #include <errno.h>
 #include <stdlib.h>
 #include <bytehook.h>
+#include <environ/environ.h>
 
 //
 // Created by maks on 17.02.21.
@@ -19,7 +20,6 @@ static volatile jclass exitTrap_exitClass;
 static volatile jmethodID exitTrap_staticMethod;
 static JavaVM *exitTrap_jvm;
 
-static JavaVM *stdiois_jvm;
 static int pfd[2];
 static pthread_t logger;
 static jmethodID logger_onEventLogged;
@@ -37,19 +37,11 @@ static bool recordBuffer(char* buf, ssize_t len) {
     return true;
 }
 
-JNIEXPORT jint JNI_OnLoad(JavaVM* vm, __attribute((unused)) void* reserved) {
-    stdiois_jvm = vm;
-    JNIEnv *env;
-    (*vm)->GetEnv(vm, (void**)&env, JNI_VERSION_1_4);
-    jclass eventLogListener = (*env)->FindClass(env, "net/kdt/pojavlaunch/Logger$eventLogListener");
-    logger_onEventLogged = (*env)->GetMethodID(env, eventLogListener, "onEventLogged", "(Ljava/lang/String;)V");
-    return JNI_VERSION_1_4;
-}
-
 static void *logger_thread() {
     JNIEnv *env;
     jstring writeString;
-    (*stdiois_jvm)->AttachCurrentThread(stdiois_jvm, &env, NULL);
+    JavaVM* dvm = pojav_environ->dalvikJavaVMPtr;
+    (*dvm)->AttachCurrentThread(dvm, &env, NULL);
     ssize_t  rsize;
     char buf[2050];
     while((rsize = read(pfd[0], buf, sizeof(buf)-1)) > 0) {
@@ -64,7 +56,7 @@ static void *logger_thread() {
             (*env)->DeleteLocalRef(env, writeString);
         }
     }
-    (*stdiois_jvm)->DetachCurrentThread(stdiois_jvm);
+    (*dvm)->DetachCurrentThread(dvm);
     return NULL;
 }
 JNIEXPORT void JNICALL
@@ -73,6 +65,10 @@ Java_net_kdt_pojavlaunch_Logger_begin(JNIEnv *env, __attribute((unused)) jclass 
         int localfd = latestlog_fd;
         latestlog_fd = -1;
         close(localfd);
+    }
+    if(logger_onEventLogged == NULL) {
+        jclass eventLogListener = (*env)->FindClass(env, "net/kdt/pojavlaunch/Logger$eventLogListener");
+        logger_onEventLogged = (*env)->GetMethodID(env, eventLogListener, "onEventLogged", "(Ljava/lang/String;)V");
     }
     jclass ioeClass = (*env)->FindClass(env, "java/io/IOException");
 
@@ -109,7 +105,7 @@ Java_net_kdt_pojavlaunch_Logger_begin(JNIEnv *env, __attribute((unused)) jclass 
 
 typedef void (*exit_func)(int);
 
-_Noreturn static void nominal_exit(int code) {
+_Noreturn void nominal_exit(int code, bool is_signal) {
     JNIEnv *env;
     jint errorCode = (*exitTrap_jvm)->GetEnv(exitTrap_jvm, (void**)&env, JNI_VERSION_1_6);
     if(errorCode == JNI_EDETACHED) {
@@ -124,7 +120,7 @@ _Noreturn static void nominal_exit(int code) {
     if(code != 0) {
         // Exit code 0 is pretty established as "eh it's fine"
         // so only open the GUI if the code is != 0
-        (*env)->CallStaticVoidMethod(env, exitTrap_exitClass, exitTrap_staticMethod, exitTrap_ctx, code);
+        (*env)->CallStaticVoidMethod(env, exitTrap_exitClass, exitTrap_staticMethod, exitTrap_ctx, code, is_signal);
     }
     // Delete the reference, not gonna need 'em later anyway
     (*env)->DeleteGlobalRef(env, exitTrap_ctx);
@@ -155,7 +151,7 @@ static void custom_exit(int code) {
     }
     exit_tripped = true;
     // Perform a nominal exit, as we expect.
-    nominal_exit(code);
+    nominal_exit(code, false);
     BYTEHOOK_POP_STACK();
 }
 
@@ -165,14 +161,14 @@ static void custom_atexit() {
         return;
     }
     exit_tripped = true;
-    nominal_exit(0);
+    nominal_exit(0, false);
 }
 
 JNIEXPORT void JNICALL Java_net_kdt_pojavlaunch_utils_JREUtils_setupExitTrap(JNIEnv *env, __attribute((unused)) jclass clazz, jobject context) {
     exitTrap_ctx = (*env)->NewGlobalRef(env,context);
     (*env)->GetJavaVM(env,&exitTrap_jvm);
     exitTrap_exitClass = (*env)->NewGlobalRef(env,(*env)->FindClass(env,"net/kdt/pojavlaunch/ExitActivity"));
-    exitTrap_staticMethod = (*env)->GetStaticMethodID(env,exitTrap_exitClass,"showExitMessage","(Landroid/content/Context;I)V");
+    exitTrap_staticMethod = (*env)->GetStaticMethodID(env,exitTrap_exitClass,"showExitMessage","(Landroid/content/Context;IZ)V");
 
     if(bytehook_init(BYTEHOOK_MODE_AUTOMATIC, false) == BYTEHOOK_STATUS_CODE_OK) {
         bytehook_hook_all(NULL,
