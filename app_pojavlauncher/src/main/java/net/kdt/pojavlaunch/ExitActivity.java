@@ -19,7 +19,8 @@ public class ExitActivity extends AppCompatActivity {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        int code = -1; boolean isSignal = false;
+        int code = -1;
+        boolean isSignal = false;
         Bundle extras = getIntent().getExtras();
         if(extras != null) {
             code = extras.getInt("code",-1);
