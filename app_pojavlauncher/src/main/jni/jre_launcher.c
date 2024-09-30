@@ -86,8 +86,8 @@ _Noreturn static void* abort_waiter_thread(void* extraArg) {
 _Noreturn static void abort_waiter_handler(int signal) {
     // Write the final signal into the pipe and block forever.
     write(abort_waiter_data.pipe[1], &signal, sizeof(int));
-    while(1) {};
-};
+    while(1) {}
+}
 
 static void abort_waiter_setup() {
     // Only abort on SIGABRT as the JVM either emits SIGABRT or SIGKILL (which we can't catch)
@@ -137,7 +137,7 @@ static jint launchJVM(int margc, char** margv) {
        sigaction(sigid, &clean_sa, NULL);
    }
    // Set up the thread that will abort the launcher with an user-facing dialog on a signal.
-    abort_waiter_setup();
+   abort_waiter_setup();
 
    // Boardwalk: silence
    // LOGD("JLI lib = %x", (int)libjli);
