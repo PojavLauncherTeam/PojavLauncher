@@ -68,47 +68,47 @@ typedef jint JLI_Launch_func(int argc, char ** argv, /* main argc, argc */
 struct {
     sigset_t tracked_sigset;
     int pipe[2];
-} abrt_waiter_data;
+} abort_waiter_data;
 
 _Noreturn extern void nominal_exit(int code, bool is_signal);
 
-_Noreturn static void* abrt_waiter_thread(void* extraArg) {
+_Noreturn static void* abort_waiter_thread(void* extraArg) {
     // Don't allow this thread to receive signals this thread is tracking.
     // We should only receive them externally.
-    pthread_sigmask(SIG_BLOCK, &abrt_waiter_data.tracked_sigset, NULL);
+    pthread_sigmask(SIG_BLOCK, &abort_waiter_data.tracked_sigset, NULL);
     int signal;
     // Block for reading the signal ID until it arrives
-    read(abrt_waiter_data.pipe[0], &signal, sizeof(int));
+    read(abort_waiter_data.pipe[0], &signal, sizeof(int));
     // Die
     nominal_exit(signal, true);
 }
 
-_Noreturn static void abrt_waiter_handler(int signal) {
+_Noreturn static void abort_waiter_handler(int signal) {
     // Write the final signal into the pipe and block forever.
-    write(abrt_waiter_data.pipe[1], &signal, sizeof(int));
+    write(abort_waiter_data.pipe[1], &signal, sizeof(int));
     while(1) {};
 };
 
-static void abrt_waiter_setup() {
+static void abort_waiter_setup() {
     // Only abort on SIGABRT as the JVM either emits SIGABRT or SIGKILL (which we can't catch)
     // when a fatal crash occurs. Still, keep expandability if we would want to add more
     // user-friendly fatal signals in the future.
     const static int tracked_signals[] = {SIGABRT};
     const static int ntracked = (sizeof(tracked_signals) / sizeof(tracked_signals[0]));
     struct sigaction sigactions[ntracked];
-    sigemptyset(&abrt_waiter_data.tracked_sigset);
+    sigemptyset(&abort_waiter_data.tracked_sigset);
     for(size_t i = 0; i < ntracked; i++) {
-        sigaddset(&abrt_waiter_data.tracked_sigset, tracked_signals[i]);
-        sigactions[i].sa_handler = abrt_waiter_handler;
+        sigaddset(&abort_waiter_data.tracked_sigset, tracked_signals[i]);
+        sigactions[i].sa_handler = abort_waiter_handler;
     }
-    if(pipe(abrt_waiter_data.pipe) != 0) {
+    if(pipe(abort_waiter_data.pipe) != 0) {
         printf("Failed to set up aborter pipe: %s\n", strerror(errno));
         return;
     }
     pthread_t waiter_thread; int result;
-    if((result = pthread_create(&waiter_thread, NULL, abrt_waiter_thread, NULL)) != 0) {
+    if((result = pthread_create(&waiter_thread, NULL, abort_waiter_thread, NULL)) != 0) {
         printf("Failed to start up waiter thread: %s", strerror(result));
-        for(int i = 0; i < 2; i++) close(abrt_waiter_data.pipe[i]);
+        for(int i = 0; i < 2; i++) close(abort_waiter_data.pipe[i]);
         return;
     }
     // Only set the sigactions *after* we have already set up the pipe and the thread.
@@ -137,7 +137,7 @@ static jint launchJVM(int margc, char** margv) {
        sigaction(sigid, &clean_sa, NULL);
    }
    // Set up the thread that will abort the launcher with an user-facing dialog on a signal.
-   abrt_waiter_setup();
+    abort_waiter_setup();
 
    // Boardwalk: silence
    // LOGD("JLI lib = %x", (int)libjli);
