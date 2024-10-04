@@ -414,5 +414,6 @@
     <string name="preference_remap_controller_title">Change controller key bindings</string>
     <string name="preference_remap_controller_description">Allows you to modify the keyboard keys bound to each controller button</string>
     <string name="mcl_button_discord">Discord</string>
+    <string name="ltw_render_distance_warning_msg">Your GPU is not capable of rendering above 7 render distance without Sodium or other similar mods. The render distance will be automatically reduced when you click "OK".</string>
     <string name="discord_invite" translatable="false">https://discord.gg/pojavlauncher-724163890803638273</string>
 </resources>
