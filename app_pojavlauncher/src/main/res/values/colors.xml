@@ -10,6 +10,6 @@
     <color name="background_status_bar">#242424</color>
     <color name="background_bottom_bar">#232323</color>
 
-    <color name="primary_text">#FFFFFF</color>
+    <color name="primary_text">#FFFFFE</color>
     <color name="secondary_text">#B2B2B2</color>
 </resources>

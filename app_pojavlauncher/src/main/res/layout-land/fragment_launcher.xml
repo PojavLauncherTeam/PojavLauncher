@@ -50,18 +50,6 @@
                 app:layout_constraintStart_toStartOf="@id/center_guideline"
                 app:layout_constraintEnd_toEndOf="@id/center_guideline"
                 app:layout_constraintBottom_toBottomOf="@id/news_button"/>
-            <com.kdt.mcgui.LauncherMenuButton
-                android:id="@+id/discord_button"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:background="?android:attr/selectableItemBackground"
-                android:drawableStart="@drawable/ic_discord"
-                android:text="@string/mcl_button_discord"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/social_divider"/>
 
             <com.kdt.mcgui.LauncherMenuButton
                 android:id="@+id/custom_control_button"
