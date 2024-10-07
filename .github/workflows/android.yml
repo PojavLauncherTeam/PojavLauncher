@@ -74,6 +74,21 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
+      - name: Check software versions
+        run: |
+          echo "Java version"
+          java -version
+          echo "Javac version"
+          javac -version
+          echo "Java path"
+          where java
+          echo "Java home"
+          echo $JAVA_HOME
+          echo "is Github Runner"
+          echo $GITHUB_ACTIONS
+          echo "Github Runner Number"
+          echo $GITHUB_RUN_NUMBER
+
       - name: Build Google Play .aab
         if: github.repository_owner == 'PojavLauncherTeam' && github.ref_name == 'v3_openjdk'
         run: |

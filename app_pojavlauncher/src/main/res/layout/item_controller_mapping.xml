@@ -37,7 +37,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/spinner_arrow" />
+            app:srcCompat="@drawable/ic_spinner_arrow" />
         <!-- Set in code -->
         <TextView
             android:id="@+id/controller_mapper_keycode_label"
