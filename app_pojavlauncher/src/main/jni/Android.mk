@@ -20,12 +20,15 @@ LOCAL_SRC_FILES := tinywrapper/main.c tinywrapper/string_utils.c
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/tinywrapper
 include $(BUILD_SHARED_LIBRARY)
 
+$(call import-module,prefab/bytehook)
+LOCAL_PATH := $(HERE_PATH)
 
 include $(CLEAR_VARS)
 # Link GLESv2 for test
 LOCAL_LDLIBS := -ldl -llog -landroid
 # -lGLESv2
 LOCAL_MODULE := pojavexec
+LOCAL_SHARED_LIBRARIES := bytehook
 # LOCAL_CFLAGS += -DDEBUG
 # -DGLES_TEST
 LOCAL_SRC_FILES := \
@@ -40,6 +43,7 @@ LOCAL_SRC_FILES := \
     input_bridge_v3.c \
     jre_launcher.c \
     utils.c \
+    stdio_is.c \
     driver_helper/nsbypass.c
 
 ifeq ($(TARGET_ARCH_ABI),arm64-v8a)
@@ -55,16 +59,6 @@ LOCAL_SRC_FILES := driver_helper/hook.c
 LOCAL_LDFLAGS := -z global
 include $(BUILD_SHARED_LIBRARY)
 #endif
-
-$(call import-module,prefab/bytehook)
-LOCAL_PATH := $(HERE_PATH)
-
-include $(CLEAR_VARS)
-LOCAL_MODULE := istdio
-LOCAL_SHARED_LIBRARIES := bytehook
-LOCAL_SRC_FILES := \
-    stdio_is.c
-include $(BUILD_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE := pojavexec_awt
