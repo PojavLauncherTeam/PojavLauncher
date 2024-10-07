@@ -8,7 +8,7 @@
     <Preference
         android:title="@string/preference_edit_controls_title"
         android:summary="@string/preference_edit_controls_summary"
-        app2:icon="@drawable/ic_menu_custom_controls"
+        app2:icon="@drawable/ic_gamepad"
         >
         <intent android:targetPackage="@string/application_package" android:targetClass="net.kdt.pojavlaunch.CustomControlsActivity" android:action=".CustomControlsActivity"/>
     </Preference>

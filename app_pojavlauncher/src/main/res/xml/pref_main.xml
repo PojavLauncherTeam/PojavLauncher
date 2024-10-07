@@ -26,7 +26,7 @@
             android:title="@string/preference_control_title"
             android:summary="@string/preference_control_description"
             android:fragment="net.kdt.pojavlaunch.prefs.screens.LauncherPreferenceControlFragment"
-            android:icon="@drawable/ic_menu_custom_controls"
+            android:icon="@drawable/ic_gamepad"
             />
 
         <Preference

@@ -99,7 +99,8 @@ public class HotbarView extends View implements MCOptionUtils.MCOptionListener, 
             mDropGesture.cancel();
             return true;
         }
-        int hotbarIndex = (int)MathUtils.map(x, 0, mWidth, 0, HOTBAR_KEYS.length);
+        // ensure that the slot does not exceed the length of HOTBAR_KEYS
+        int hotbarIndex = Math.max(0, Math.min((int)MathUtils.map(x, 0, mWidth, 0, HOTBAR_KEYS.length), HOTBAR_KEYS.length - 1));
         // Check if the slot changed and we need to make a key press
         if(hotbarIndex == mLastIndex) {
             // Only check for doubletapping if the slot has not changed
