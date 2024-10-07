@@ -81,7 +81,7 @@ jobs:
           echo "Javac version"
           javac -version
           echo "Java path"
-          where java
+          whereis java
           echo "Java home"
           echo $JAVA_HOME
           echo "is Github Runner"
