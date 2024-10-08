@@ -129,6 +129,7 @@
 		android:layout_marginBottom="@dimen/_15sdp"
 
 		android:text="@string/main_play"
+		android:textSize="@dimen/_20ssp"
 		android:textAllCaps="true"
 		app:layout_constraintBottom_toBottomOf="parent" />
 
