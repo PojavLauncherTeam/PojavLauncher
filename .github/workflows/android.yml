@@ -98,7 +98,7 @@ jobs:
       - name: Build Debug .apk
         run: |
           # Build the launcher
-          gradle :app_pojavlauncher:assembleDebug
+          gradle :app_pojavlauncher:assembleDebug --stacktrace
           mv app_pojavlauncher/build/outputs/apk/debug/app_pojavlauncher-debug.apk out/app-debug.apk
 
       - name: Build APK without runtime
