@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
-    <string name="app_name">PojavLauncher Midnight (Minecraft: Java Edition for Android)</string>
-    <string name="app_short_name">PojavLauncher Midnight</string>
+    <string name="app_name" translatable="false">PojavLauncher Midnight (RaydanOMGr\'s Fork of PojavLauncher)</string>
+    <string name="app_short_name" translatable="false">PojavLauncher Midnight</string>
 
     <!-- Action bar part -->
 
