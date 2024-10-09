@@ -88,7 +88,7 @@ configurations {
 }
 
 android {
-    namespace 'net.kdt.pojavlaunch'
+    namespace 'me.andreasmelone.midnight'
 
     compileSdk = 34
 
@@ -112,7 +112,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "net.kdt.pojavlaunch"
+        applicationId "me.andreasmelone.midnight"
         minSdkVersion 21
         targetSdkVersion 34
         versionCode getDateSeconds()
@@ -128,9 +128,9 @@ android {
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.customDebug
-            resValue 'string', 'application_package', 'net.kdt.pojavlaunch.debug'
-            resValue 'string', 'storageProviderAuthorities', 'net.kdt.pojavlaunch.scoped.gamefolder.debug'
-            resValue 'string', 'shareProviderAuthority', 'net.kdt.pojavlaunch.scoped.controlfolder.debug'
+            resValue 'string', 'application_package', 'me.andreasmelone.midnight'
+            resValue 'string', 'storageProviderAuthorities', 'me.andreasmelone.midnight.scoped.gamefolder.debug'
+            resValue 'string', 'shareProviderAuthority', 'me.andreasmelone.midnight.scoped.controlfolder.debug'
         }
         proguard {
             initWith debug
@@ -145,8 +145,8 @@ android {
             // defaultConfig already set
             // multiDexEnabled = true
             // debuggable = true
-            resValue 'string', 'storageProviderAuthorities', 'net.kdt.pojavlaunch.scoped.gamefolder'
-            resValue 'string', 'application_package', 'net.kdt.pojavlaunch'
+            resValue 'string', 'storageProviderAuthorities', 'me.andreasmelone.midnight.scoped.gamefolder'
+            resValue 'string', 'application_package', 'me.andreasmelone.midnight'
         }
         gplay {
             initWith release
