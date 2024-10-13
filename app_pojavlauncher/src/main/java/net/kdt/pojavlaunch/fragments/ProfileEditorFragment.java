@@ -181,7 +181,18 @@ public class ProfileEditorFragment extends Fragment implements CropperUtils.Crop
     private MinecraftProfile getProfile(@NonNull String profile){
         MinecraftProfile minecraftProfile;
         if(getArguments() == null) {
-            minecraftProfile = new MinecraftProfile(LauncherProfiles.mainProfileJson.profiles.get(profile));
+            // EDGE CASE: User leaves Pojav in background. Pojav gets terminated in the background.
+            // Current selected fragment and its arguments are saved.
+            // User returns to Pojav. Android restarts process and reinitializes fragment without
+            // going to the main screen. mainProfileJson and profiles left uninitialized, which
+            // results in a crash.
+            // Reload the profiles to avoid this edge case.
+            LauncherProfiles.load();
+            MinecraftProfile originalProfile = LauncherProfiles.mainProfileJson.profiles.get(profile);
+            // EDGE CASE: User edits the JSON, so the profile that was edited no longer exists.
+            // Create a brand new profile as a fallback for this case.
+            if(originalProfile != null) minecraftProfile = new MinecraftProfile(originalProfile);
+            else minecraftProfile = MinecraftProfile.createTemplate();
             mProfileKey = profile;
         }else{
             minecraftProfile = MinecraftProfile.createTemplate();
