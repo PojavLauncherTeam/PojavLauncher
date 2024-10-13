@@ -346,7 +346,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
             Tools.releaseRenderersCache();
         }
         MinecraftAccount minecraftAccount = PojavProfile.getCurrentProfileContent(this, null);
-        Logger.appendToLog("--------- beginning with launcher debug");
+        Logger.appendToLog("--------- Starting game with Launcher Debug!");
         printLauncherInfo(versionId, Tools.isValidString(minecraftProfile.javaArgs) ? minecraftProfile.javaArgs : LauncherPreferences.PREF_CUSTOM_JAVA_ARGS);
         JREUtils.redirectAndPrintJRELog();
         LauncherProfiles.load();
