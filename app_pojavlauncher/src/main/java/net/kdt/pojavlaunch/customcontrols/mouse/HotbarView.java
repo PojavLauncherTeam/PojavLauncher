@@ -94,7 +94,8 @@ public class HotbarView extends View implements MCOptionUtils.MCOptionListener, 
         else mDropGesture.submit();
         // Determine the hotbar slot
         float x = event.getX();
-        if(x < 0 || x > mWidth) {
+        // Ignore positions equal to mWidth because they would translate into an out-of-bounds hotbar index
+        if(x < 0 || x >= mWidth) {
             // If out of bounds, cancel the hotbar gesture to avoid dropping items on last hotbar slots
             mDropGesture.cancel();
             return true;
