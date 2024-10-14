@@ -14,7 +14,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@id/mc_version_spinner"
+        app:layout_constraintBottom_toTopOf="@id/_background_display_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -75,30 +75,19 @@
             <com.kdt.mcgui.LauncherMenuButton
                 android:id="@+id/share_logs_button"
                 style="@style/LauncherMenuButton.Universal"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:drawableStart="@android:drawable/ic_menu_share"
                 android:text="@string/main_share_logs"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/install_jar_button"
-                app:layout_constraintEnd_toStartOf="@id/files_divider"/>
-            <View
-                android:id="@+id/files_divider"
-                style="@style/LauncherFragment_Divider"
-                android:layout_marginVertical="@dimen/padding_heavy"
-                app:layout_constraintTop_toTopOf="@id/share_logs_button"
-                app:layout_constraintStart_toStartOf="@id/center_guideline"
-                app:layout_constraintEnd_toEndOf="@id/center_guideline"
-                app:layout_constraintBottom_toBottomOf="@id/share_logs_button"/>
+                app:layout_constraintTop_toBottomOf="@id/install_jar_button" />
 
             <com.kdt.mcgui.LauncherMenuButton
                 android:id="@+id/open_files_button"
                 style="@style/LauncherMenuButton.Universal"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:drawableStart="@drawable/ic_folder"
                 android:text="@string/mcl_button_open_directory"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/files_divider"
-                app:layout_constraintTop_toBottomOf="@id/install_jar_button" />
+
+                app:layout_constraintTop_toBottomOf="@id/share_logs_button" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
