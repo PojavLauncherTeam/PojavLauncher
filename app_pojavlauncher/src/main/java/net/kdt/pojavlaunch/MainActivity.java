@@ -510,38 +510,20 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         b.show();
     }
 
-    private static void setUri(Context context, String input, Intent intent) {
-        if(input.startsWith("file:")) {
-            int truncLength = 5;
-            if(input.startsWith("file://")) truncLength = 7;
-            input = input.substring(truncLength);
-            Log.i("MainActivity", input);
-            boolean isDirectory = new File(input).isDirectory();
-            if(isDirectory) {
-                intent.setType(DocumentsContract.Document.MIME_TYPE_DIR);
-            }else{
-                String type = null;
-                String extension = MimeTypeMap.getFileExtensionFromUrl(input);
-                if(extension != null) type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
-                if(type == null) type = "*/*";
-                intent.setType(type);
-            }
-            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-            intent.setData(DocumentsContract.buildDocumentUri(
-                    context.getString(R.string.storageProviderAuthorities), input
-            ));
-            return;
-        }
-        intent.setDataAndType(Uri.parse(input), "*/*");
-    }
-
     public static void openLink(String link) {
         Context ctx = touchpad.getContext(); // no more better way to obtain a context statically
         ((Activity)ctx).runOnUiThread(() -> {
             try {
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                setUri(ctx, link, intent);
-                ctx.startActivity(intent);
+                if(link.startsWith("file:")) {
+                    int truncLength = 5;
+                    if(link.startsWith("file://")) truncLength = 7;
+                    String path = link.substring(truncLength);
+                    Tools.openPath(ctx, new File(path), false);
+                }else {
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setDataAndType(Uri.parse(link), "*/*");
+                    ctx.startActivity(intent);
+                }
             } catch (Throwable th) {
                 Tools.showError(ctx, th);
             }
@@ -552,9 +534,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         Context ctx = touchpad.getContext(); // no more better way to obtain a context statically
         ((Activity)ctx).runOnUiThread(() -> {
             try {
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setDataAndType(DocumentsContract.buildDocumentUri(ctx.getString(R.string.storageProviderAuthorities), path), "*/*");
-                ctx.startActivity(intent);
+                Tools.openPath(ctx, new File(path), false);
             } catch (Throwable th) {
                 Tools.showError(ctx, th);
             }

@@ -415,5 +415,6 @@
     <string name="preference_remap_controller_title">Change controller key bindings</string>
     <string name="preference_remap_controller_description">Allows you to modify the keyboard keys bound to each controller button</string>
     <string name="mcl_button_discord">Discord</string>
+    <string name="mcl_button_open_directory">Open game directory</string>
     <string name="discord_invite" translatable="false">https://discord.gg/pojavlauncher-724163890803638273</string>
 </resources>
