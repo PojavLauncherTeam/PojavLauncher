@@ -37,6 +37,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class MinecraftDownloader {
+    private static final double BYTES_TO_MB = 1024d * 1024d;
     public static final String MINECRAFT_RES = "https://resources.download.minecraft.net/";
     private AtomicReference<Exception> mDownloaderThreadException;
     private ArrayList<DownloaderTask> mScheduledDownloadTasks;
@@ -102,13 +103,24 @@ public class MinecraftDownloader {
         downloaderPool.shutdown();
 
         try {
+            long startTime = System.currentTimeMillis();
             while (mDownloaderThreadException.get() == null &&
                     !downloaderPool.awaitTermination(33, TimeUnit.MILLISECONDS)) {
-                long dlFileCounter = mDownloadFileCounter.get();
-                int progress = (int)((dlFileCounter * 100L) / mDownloadFileCount);
+                long elapsedTime = System.currentTimeMillis() - startTime;
+                long downloadedSize = mDownloadSizeCounter.get();
+                long fileCounter = mDownloadFileCounter.get();
+                
+                double downloadSpeed = 0.0; // bytes per second
+                if (elapsedTime > 0) { // Prevent divide by zero
+                    downloadSpeed = downloadedSize / (elapsedTime / 1000.0);
+                }
+            
+                int progress = (int)((fileCounter * 100L) / mDownloadFileCount);
                 ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT, progress,
-                        R.string.newdl_downloading_game_files, dlFileCounter,
-                        mDownloadFileCount, (double)mDownloadSizeCounter.get() / (1024d * 1024d));
+                        R.string.newdl_downloading_game_files, 
+                        downloadSpeed / BYTES_TO_MB,
+                        fileCounter, mDownloadFileCount,
+                        (double)mDownloadSizeCounter.get() / BYTES_TO_MB);
             }
             Exception thrownException = mDownloaderThreadException.get();
             if(thrownException != null) {
