@@ -222,7 +222,7 @@ dependencies {
     implementation 'org.tukaani:xz:1.8'
     // Our version of exp4j can be built from source at
     // https://github.com/PojavLauncherTeam/exp4j
-    implementation 'net.sourceforge.htmlcleaner:htmlcleaner:2.6.1'
+    implementation 'net.sourceforge.htmlcleaner:htmlcleaner:2.29'
     implementation 'com.bytedance:bytehook:1.0.9'
 
     // implementation 'net.sourceforge.streamsupport:streamsupport-cfuture:1.7.0'
