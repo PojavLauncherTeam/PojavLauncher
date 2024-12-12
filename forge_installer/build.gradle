@@ -8,7 +8,7 @@ java {
 }
 
 dependencies {
-    implementation 'org.json:json:20230618'
+    implementation 'org.json:json:20240303'
 }
 
 jar {
