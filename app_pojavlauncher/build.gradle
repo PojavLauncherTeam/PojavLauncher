@@ -219,7 +219,7 @@ dependencies {
     // implementation 'com.intuit.sdp:sdp-android:1.0.5'
     // implementation 'com.intuit.ssp:ssp-android:1.0.5'
 
-    implementation 'org.tukaani:xz:1.8'
+    implementation 'org.tukaani:xz:1.10'
     // Our version of exp4j can be built from source at
     // https://github.com/PojavLauncherTeam/exp4j
     implementation 'net.sourceforge.htmlcleaner:htmlcleaner:2.29'
