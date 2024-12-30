@@ -69,6 +69,25 @@ public class DownloadMirror {
     }
 
     /**
+     * Getht he content length of a file on the current mirror. If the file is missing on the mirror,
+     * or the mirror does not give out the length, request the length from the original source
+     * @param downloadClass Class of the download. Can either be DOWNLOAD_CLASS_LIBRARIES,
+     *                      DOWNLOAD_CLASS_METADATA or DOWNLOAD_CLASS_ASSETS
+     * @param urlInput The original (Mojang) URL for the download
+     * @return the length of the file denoted by the URL
+     */
+    public static long getContentLengthMirrored(int downloadClass, String urlInput) throws IOException {
+        long length = DownloadUtils.getContentLength(getMirrorMapping(downloadClass, urlInput));
+        if(length < 1) {
+            Log.w("DownloadMirror", "Unable to get content length from mirror");
+            Log.i("DownloadMirror", "Failling back to default source");
+            return DownloadUtils.getContentLength(urlInput);
+        }else {
+            return length;
+        }
+    }
+
+    /**
      * Check if the current download source is a mirror and not an official source.
      * @return true if the source is a mirror, false otherwise
      */
