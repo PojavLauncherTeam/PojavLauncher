@@ -11,7 +11,7 @@ public class SpeedCalculator {
     private double mSum;
 
     public SpeedCalculator() {
-        this(4);
+        this(64);
     }
 
     public SpeedCalculator(int averageDepth) {
@@ -27,13 +27,18 @@ public class SpeedCalculator {
         return (mSum + (dLength / 2d)) / dLength;
     }
 
-    public double feed(long newBytes) {
+    /**
+     * Update the current amount of bytes downloaded.
+     * @param bytes the new amount of bytes downloaded
+     * @return the current download speed in bytes per second
+     */
+    public double feed(long bytes) {
         long millis = System.currentTimeMillis();
-        long deltaBytes = newBytes - mLastBytes;
+        long deltaBytes = bytes - mLastBytes;
         long deltaMillis = millis - mLastMillis;
-        mLastBytes = deltaBytes;
+        mLastBytes = bytes;
         mLastMillis = millis;
-        double speed = (double)deltaBytes / (double)deltaMillis;
+        double speed = (double)deltaBytes / ((double)deltaMillis / 1000d);
         return addToAverage(speed);
     }
 }

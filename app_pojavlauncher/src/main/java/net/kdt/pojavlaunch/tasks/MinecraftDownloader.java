@@ -92,7 +92,7 @@ public class MinecraftDownloader {
         mProcessedSizeCounter = new AtomicLong(0);
         mInternetUsageCounter = new AtomicLong(0);
         mDownloaderThreadException = new AtomicReference<>(null);
-        mUseFileCounter = true;
+        mUseFileCounter = false;
 
         if(!downloadAndProcessMetadata(activity, verInfo, versionName)) {
             throw new RuntimeException(activity.getString(R.string.exception_failed_to_unpack_jre17));
