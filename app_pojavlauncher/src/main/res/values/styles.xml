@@ -13,6 +13,19 @@
 
     </style>
 
+    <style name="LauncherFragment_Divider">
+        <item name="android:layout_width">@dimen/padding_tiny</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:background">@color/divider</item>
+    </style>
+
+    <style name="LauncherMenuButton" parent="Widget.AppCompat.Button">
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+    </style>
+
+    <style name="LauncherMenuButton.Universal" parent="LauncherMenuButton">
+        <item name="android:layout_height">@dimen/_66sdp</item>
+    </style>
 
     <style name="ThickDivider">
         <item name="android:layout_width">match_parent</item>
@@ -20,4 +33,10 @@
         <item name="android:background">?android:attr/listDivider</item>
     </style>
 
+    <item name="dimension_tracker" type="id" />
+    <style name="DimensionTracker">
+        <item name="android:id">@id/dimension_tracker</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
 </resources>

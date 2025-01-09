@@ -19,6 +19,8 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.Cursor;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.net.Uri;
 import android.opengl.EGL14;
 import android.opengl.EGLConfig;
@@ -30,6 +32,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.Process;
 import android.provider.DocumentsContract;
 import android.provider.OpenableColumns;
 import android.util.ArrayMap;
@@ -46,6 +49,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.core.view.WindowInsetsControllerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
@@ -78,6 +85,7 @@ import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.io.IOUtils;
 import org.lwjgl.glfw.CallbackBridge;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -88,6 +96,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Field;
+import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -614,30 +623,58 @@ public final class Tools {
     }
 
     public static void setFullscreen(Activity activity, boolean fullscreen) {
-        final View decorView = activity.getWindow().getDecorView();
-        View.OnSystemUiVisibilityChangeListener visibilityChangeListener = visibility -> {
-            if(fullscreen){
-                if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
-                    decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                            | View.SYSTEM_UI_FLAG_FULLSCREEN
-                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-                }
-            }else{
-                decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
-            }
+        WindowInsetsControllerCompat windowInsetsController =
+                WindowCompat.getInsetsController(activity.getWindow(), activity.getWindow().getDecorView());
+        if (windowInsetsController == null) {
+            Log.w(APP_NAME, "WindowInsetsController is null, cannot set fullscreen");
+            return;
+        }
 
-        };
-        decorView.setOnSystemUiVisibilityChangeListener(visibilityChangeListener);
-        visibilityChangeListener.onSystemUiVisibilityChange(decorView.getSystemUiVisibility()); //call it once since the UI state may not change after the call, so the activity wont become fullscreen
+        // Configure the behavior of the hidden system bars.
+        windowInsetsController.setSystemBarsBehavior(
+                WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+        );
+
+        ViewCompat.setOnApplyWindowInsetsListener(
+                activity.getWindow().getDecorView(),
+                (view, windowInsets) -> {
+                    boolean fullscreenImpl = fullscreen;
+                    if (SDK_INT >= Build.VERSION_CODES.N && activity.isInMultiWindowMode())
+                        fullscreenImpl = false;
+
+                    if (fullscreenImpl) {
+                        windowInsetsController.hide(WindowInsetsCompat.Type.systemBars());
+                    } else {
+                        windowInsetsController.show(WindowInsetsCompat.Type.systemBars());
+                    }
+
+                    if(SDK_INT >= Build.VERSION_CODES.R)
+                        activity.getWindow().setDecorFitsSystemWindows(!fullscreenImpl);
+
+                    return ViewCompat.onApplyWindowInsets(view, windowInsets);
+                });
+
     }
 
     public static DisplayMetrics currentDisplayMetrics;
 
     public static void updateWindowSize(Activity activity) {
         currentDisplayMetrics = getDisplayMetrics(activity);
+
+        View dimensionView = activity.findViewById(R.id.dimension_tracker);
+
+        if(dimensionView != null) {
+            int width = dimensionView.getWidth();
+            int height = dimensionView.getHeight();
+            if(width != 0 && height != 0) {
+                Log.i("Tools", "Using dimension_tracker for display dimensions; W="+width+" H="+height);
+                CallbackBridge.physicalWidth = width;
+                CallbackBridge.physicalHeight = height;
+                return;
+            }else{
+                Log.e("Tools","Dimension tracker detected but dimensions out of date. Please check usage.", new Exception());
+            }
+        }
 
         CallbackBridge.physicalWidth = currentDisplayMetrics.widthPixels;
         CallbackBridge.physicalHeight = currentDisplayMetrics.heightPixels;
@@ -713,7 +750,7 @@ public final class Tools {
                     .setPositiveButton(android.R.string.ok, (p1, p2) -> {
                         if(exitIfOk) {
                             if (ctx instanceof MainActivity) {
-                                MainActivity.fullyExit();
+                                fullyExit();
                             } else if (ctx instanceof Activity) {
                                 ((Activity) ctx).finish();
                             }
@@ -725,7 +762,7 @@ public final class Tools {
                         mgr.setPrimaryClip(ClipData.newPlainText("error", printToString(e)));
                         if(exitIfOk) {
                             if (ctx instanceof MainActivity) {
-                                MainActivity.fullyExit();
+                                fullyExit();
                             } else {
                                 ((Activity) ctx).finish();
                             }
@@ -997,6 +1034,24 @@ public final class Tools {
         File file = new File(nameOutput);
         DownloadUtils.downloadFile(urlInput, file);
     }
+
+    public static boolean isAndroid8OrHigher() {
+        return SDK_INT >= 26;
+    }
+
+    public static void fullyExit() {
+        android.os.Process.killProcess(android.os.Process.myPid());
+    }
+
+    public static void printLauncherInfo(String gameVersion, String javaArguments) {
+        Logger.appendToLog("Info: Launcher version: " + BuildConfig.VERSION_NAME);
+        Logger.appendToLog("Info: Architecture: " + Architecture.archAsString(DEVICE_ARCHITECTURE));
+        Logger.appendToLog("Info: Device model: " + Build.MANUFACTURER + " " +Build.MODEL);
+        Logger.appendToLog("Info: API version: " + SDK_INT);
+        Logger.appendToLog("Info: Selected Minecraft version: " + gameVersion);
+        Logger.appendToLog("Info: Custom Java arguments: \"" + javaArguments + "\"");
+    }
+
     public interface DownloaderFeedback {
         void updateProgress(int curr, int max);
     }
@@ -1217,17 +1272,55 @@ public final class Tools {
 
     /** Triggers the share intent chooser, with the latestlog file attached to it */
     public static void shareLog(Context context){
-        Uri contentUri = DocumentsContract.buildDocumentUri(context.getString(R.string.storageProviderAuthorities), Tools.DIR_GAME_HOME + "/latestlog.txt");
+        openPath(context, new File(Tools.DIR_GAME_HOME, "latestlog.txt"), true);
+    }
 
-        Intent shareIntent = new Intent();
-        shareIntent.setAction(Intent.ACTION_SEND);
-        shareIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
-        shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        shareIntent.setType("text/plain");
+    /**
+     * Determine the MIME type of a File.
+     * @param file The file to determine the type of
+     * @return the type, or the default value *slash* if cannot be determined
+     */
+    public static String getMimeType(File file) {
+        if(file.isDirectory()) return DocumentsContract.Document.MIME_TYPE_DIR;
+        String mimeType = null;
+        try (FileInputStream fileInputStream = new FileInputStream(file)){
+            // Theoretically we don't even need the buffer since we don't care about the
+            // contents of the file after the guess, but mark-supported streams
+            // are a requirement of URLConnection.guessContentTypeFromStream()
+            try(BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream)) {
+                mimeType = URLConnection.guessContentTypeFromStream(bufferedInputStream);
+            }
+        }catch (IOException e) {
+            Log.w("FileMimeType", "Failed to determine MIME type by stream", e);
+        }
+        if(mimeType != null) return mimeType;
+        mimeType = URLConnection.guessContentTypeFromName(file.getName());
+        if(mimeType != null) return mimeType;
+        return "*/*";
+    }
 
-        Intent sendIntent = Intent.createChooser(shareIntent, "latestlog.txt");
-        context.startActivity(sendIntent);
+    /**
+     * Open the path specified by a File in a file explorer or in a relevant application.
+     * @param context the current Context
+     * @param file the File to open
+     * @param share whether to open a "Share" or an "Open" dialog.
+     */
+    public static void openPath(Context context, File file, boolean share) {
+        Uri contentUri = DocumentsContract.buildDocumentUri(context.getString(R.string.storageProviderAuthorities), file.getAbsolutePath());
+        String mimeType = getMimeType(file);
+        Intent intent = new Intent();
+        if(share) {
+            intent.setAction(Intent.ACTION_SEND);
+            intent.setType(getMimeType(file));
+            intent.putExtra(Intent.EXTRA_STREAM, contentUri);
+        }else {
+            intent.setAction(Intent.ACTION_VIEW);
+            intent.setDataAndType(contentUri, mimeType);
+        }
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        Intent chooserIntent = Intent.createChooser(intent, file.getName());
+        context.startActivity(chooserIntent);
     }
 
     /** Mesure the textview height, given its current parameters */
@@ -1313,5 +1406,23 @@ public final class Tools {
     public static void releaseRenderersCache() {
         sCompatibleRenderers = null;
         System.gc();
+    }
+
+    public static boolean deviceSupportsGyro(@NonNull Context context) {
+        return ((SensorManager)context.getSystemService(Context.SENSOR_SERVICE)).getDefaultSensor(Sensor.TYPE_GYROSCOPE) != null;
+
+    }
+
+    public static void dialogForceClose(Context ctx) {
+        new android.app.AlertDialog.Builder(ctx)
+                .setMessage(R.string.mcn_exit_confirm)
+                .setNegativeButton(android.R.string.cancel, null)
+                .setPositiveButton(android.R.string.ok, (p1, p2) -> {
+                    try {
+                        Tools.fullyExit();
+                    } catch (Throwable th) {
+                        Log.w(Tools.APP_NAME, "Could not enable System.exit() method!", th);
+                    }
+                }).show();
     }
 }

@@ -1,6 +1,7 @@
 package net.kdt.pojavlaunch;
 
 import static net.kdt.pojavlaunch.Tools.currentDisplayMetrics;
+import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_ENABLE_GYRO;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_SUSTAINED_PERFORMANCE;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_USE_ALTERNATE_SURFACE;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_VIRTUAL_MOUSE_START;
@@ -27,17 +28,15 @@ import android.provider.DocumentsContract;
 import android.util.Log;
 import android.view.InputDevice;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.SeekBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Keep;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
@@ -55,9 +54,11 @@ import net.kdt.pojavlaunch.customcontrols.EditorExitable;
 import net.kdt.pojavlaunch.customcontrols.keyboard.LwjglCharSender;
 import net.kdt.pojavlaunch.customcontrols.keyboard.TouchCharInput;
 import net.kdt.pojavlaunch.customcontrols.mouse.GyroControl;
+import net.kdt.pojavlaunch.customcontrols.mouse.HotbarView;
 import net.kdt.pojavlaunch.customcontrols.mouse.Touchpad;
 import net.kdt.pojavlaunch.lifecycle.ContextExecutor;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
+import net.kdt.pojavlaunch.prefs.QuickSettingSideDialog;
 import net.kdt.pojavlaunch.services.GameService;
 import net.kdt.pojavlaunch.utils.JREUtils;
 import net.kdt.pojavlaunch.utils.MCOptionUtils;
@@ -84,7 +85,8 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
     private ListView navDrawer;
     private View mDrawerPullButton;
     private GyroControl mGyroControl = null;
-    public static ControlLayout mControlLayout;
+    private ControlLayout mControlLayout;
+    private HotbarView mHotbarView;
 
     MinecraftProfile minecraftProfile;
 
@@ -93,6 +95,8 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
     public ArrayAdapter<String> ingameControlsEditorArrayAdapter;
     public AdapterView.OnItemClickListener ingameControlsEditorListener;
     private GameService.LocalBinder mServiceBinder;
+
+    private QuickSettingSideDialog mQuickSettingSideDialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -106,7 +110,8 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         initLayout(R.layout.activity_basemain);
         CallbackBridge.addGrabListener(touchpad);
         CallbackBridge.addGrabListener(minecraftGLView);
-        if(LauncherPreferences.PREF_ENABLE_GYRO) mGyroControl = new GyroControl(this);
+
+        mGyroControl = new GyroControl(this);
 
         // Enabling this on TextureView results in a broken white result
         if(PREF_USE_ALTERNATE_SURFACE) getWindow().setBackgroundDrawable(null);
@@ -185,19 +190,16 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
                     android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.menu_ingame));
             gameActionClickListener = (parent, view, position, id) -> {
                 switch(position) {
-                    case 0: dialogForceClose(MainActivity.this); break;
-                    case 1: openLogOutput(); break;
-                    case 2: dialogSendCustomKey(); break;
-                    case 3: adjustMouseSpeedLive(); break;
-                    case 4: adjustGyroSensitivityLive(); break;
-                    case 5: openCustomControls(); break;
+                    case 0: openLogOutput(); break;
+                    case 1: dialogSendCustomKey(); break;
+                    case 2: openQuickSettings(); break;
+                    case 3: openCustomControls(); break;
                 }
                 drawerLayout.closeDrawers();
             };
             navDrawer.setAdapter(gameActionArrayAdapter);
             navDrawer.setOnItemClickListener(gameActionClickListener);
             drawerLayout.closeDrawers();
-
 
             final String finalVersion = version;
             minecraftGLView.setSurfaceReadyListener(() -> {
@@ -240,8 +242,12 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
 
     @Override
     public void onAttachedToWindow() {
+        // Post to get the correct display dimensions after layout.
         LauncherPreferences.computeNotchSize(this);
-        loadControls();
+        mControlLayout.post(()->{
+            Tools.getDisplayMetrics(this);
+            loadControls();
+        });
     }
 
     /** Boilerplate binding */
@@ -255,20 +261,24 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         mControlLayout = findViewById(R.id.main_control_layout);
         touchCharInput = findViewById(R.id.mainTouchCharInput);
         mDrawerPullButton = findViewById(R.id.drawer_button);
+        mHotbarView = findViewById(R.id.hotbar_view);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if(mGyroControl != null) mGyroControl.enable();
+        if(PREF_ENABLE_GYRO) mGyroControl.enable();
         CallbackBridge.nativeSetWindowAttrib(LwjglGlfwKeycode.GLFW_HOVERED, 1);
     }
 
     @Override
     protected void onPause() {
-        if(mGyroControl != null) mGyroControl.disable();
+        mGyroControl.disable();
         if (CallbackBridge.isGrabbing()){
             sendKeyPress(LwjglGlfwKeycode.GLFW_KEY_ESCAPE);
+        }
+        if(mQuickSettingSideDialog != null) {
+            mQuickSettingSideDialog.cancel();
         }
         CallbackBridge.nativeSetWindowAttrib(LwjglGlfwKeycode.GLFW_HOVERED, 0);
         super.onPause();
@@ -299,9 +309,16 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         super.onConfigurationChanged(newConfig);
 
         if(mGyroControl != null) mGyroControl.updateOrientation();
-        Tools.updateWindowSize(this);
-        minecraftGLView.refreshSize();
-        runOnUiThread(() -> mControlLayout.refreshControlButtonPositions());
+        // Layout resize is practically guaranteed on a configuration change, and `onConfigurationChanged`
+        // does not implicitly start a layout. So, request a layout and expect the screen dimensions to be valid after the]
+        // post.
+        mControlLayout.requestLayout();
+        mControlLayout.post(()->{
+            // Child of mControlLayout, so refreshing size here is correct
+            minecraftGLView.refreshSize();
+            Tools.updateWindowSize(this);
+            mControlLayout.refreshControlButtonPositions();
+        });
     }
 
     @Override
@@ -326,14 +343,6 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         }
     }
 
-    public static void fullyExit() {
-        android.os.Process.killProcess(android.os.Process.myPid());
-    }
-
-    public static boolean isAndroid8OrHigher() {
-        return Build.VERSION.SDK_INT >= 26;
-    }
-
     private void runCraft(String versionId, JMinecraftVersionList.Version version) throws Throwable {
         if(Tools.LOCAL_RENDERER == null) {
             Tools.LOCAL_RENDERER = LauncherPreferences.PREF_RENDERER;
@@ -346,8 +355,8 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
             Tools.releaseRenderersCache();
         }
         MinecraftAccount minecraftAccount = PojavProfile.getCurrentProfileContent(this, null);
-        Logger.appendToLog("--------- beginning with launcher debug");
-        printLauncherInfo(versionId, Tools.isValidString(minecraftProfile.javaArgs) ? minecraftProfile.javaArgs : LauncherPreferences.PREF_CUSTOM_JAVA_ARGS);
+        Logger.appendToLog("--------- Starting game with Launcher Debug!");
+        Tools.printLauncherInfo(versionId, Tools.isValidString(minecraftProfile.javaArgs) ? minecraftProfile.javaArgs : LauncherPreferences.PREF_CUSTOM_JAVA_ARGS);
         JREUtils.redirectAndPrintJRELog();
         LauncherProfiles.load();
         int requiredJavaVersion = 8;
@@ -355,15 +364,6 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         Tools.launchMinecraft(this, minecraftAccount, minecraftProfile, versionId, requiredJavaVersion);
         //Note that we actually stall in the above function, even if the game crashes. But let's be safe.
         Tools.runOnUiThread(()-> mServiceBinder.isActive = false);
-    }
-
-    private void printLauncherInfo(String gameVersion, String javaArguments) {
-        Logger.appendToLog("Info: Launcher version: " + BuildConfig.VERSION_NAME);
-        Logger.appendToLog("Info: Architecture: " + Architecture.archAsString(Tools.DEVICE_ARCHITECTURE));
-        Logger.appendToLog("Info: Device model: " + Build.MANUFACTURER + " " +Build.MODEL);
-        Logger.appendToLog("Info: API version: " + Build.VERSION.SDK_INT);
-        Logger.appendToLog("Info: Selected Minecraft version: " + gameVersion);
-        Logger.appendToLog("Info: Custom Java arguments: \"" + javaArguments + "\"");
     }
 
     private void dialogSendCustomKey() {
@@ -388,25 +388,35 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         loggerView.setVisibility(View.VISIBLE);
     }
 
+    private void openQuickSettings() {
+        if(mQuickSettingSideDialog == null) {
+            mQuickSettingSideDialog = new QuickSettingSideDialog(this, mControlLayout) {
+                @Override
+                public void onResolutionChanged() {
+                    minecraftGLView.refreshSize();
+                    mHotbarView.onResolutionChanged();
+                }
+
+                @Override
+                public void onGyroStateChanged() {
+                    mGyroControl.updateOrientation();
+                    if (PREF_ENABLE_GYRO) {
+                        mGyroControl.enable();
+                    } else {
+                        mGyroControl.disable();
+                    }
+                }
+            };
+        }
+        mQuickSettingSideDialog.appear(true);
+    }
+
     public static void toggleMouse(Context ctx) {
         if (CallbackBridge.isGrabbing()) return;
 
         Toast.makeText(ctx, touchpad.switchState()
                         ? R.string.control_mouseon : R.string.control_mouseoff,
                 Toast.LENGTH_SHORT).show();
-    }
-
-    public static void dialogForceClose(Context ctx) {
-        new AlertDialog.Builder(ctx)
-                .setMessage(R.string.mcn_exit_confirm)
-                .setNegativeButton(android.R.string.cancel, null)
-                .setPositiveButton(android.R.string.ok, (p1, p2) -> {
-                    try {
-                        fullyExit();
-                    } catch (Throwable th) {
-                        Log.w(Tools.APP_NAME, "Could not enable System.exit() method!", th);
-                    }
-                }).show();
     }
 
     @Override
@@ -433,134 +443,40 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         if(touchCharInput != null) touchCharInput.switchKeyboardState();
     }
 
-
-    int tmpMouseSpeed;
-    public void adjustMouseSpeedLive() {
-        AlertDialog.Builder b = new AlertDialog.Builder(this);
-        b.setTitle(R.string.mcl_setting_title_mousespeed);
-        View v = LayoutInflater.from(this).inflate(R.layout.dialog_live_mouse_speed_editor,null);
-        final SeekBar sb = v.findViewById(R.id.mouseSpeed);
-        final TextView tv = v.findViewById(R.id.mouseSpeedTV);
-        sb.setMax(275);
-        tmpMouseSpeed = (int) ((LauncherPreferences.PREF_MOUSESPEED*100));
-        sb.setProgress(tmpMouseSpeed-25);
-        tv.setText(getString(R.string.percent_format, tmpMouseSpeed));
-        sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                tmpMouseSpeed = i+25;
-                tv.setText(getString(R.string.percent_format, tmpMouseSpeed));
-            }
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {}
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {}
-        });
-        b.setView(v);
-        b.setPositiveButton(android.R.string.ok, (dialogInterface, i) -> {
-            LauncherPreferences.PREF_MOUSESPEED = ((float)tmpMouseSpeed)/100f;
-            LauncherPreferences.DEFAULT_PREF.edit().putInt("mousespeed",tmpMouseSpeed).apply();
-            dialogInterface.dismiss();
-            System.gc();
-        });
-        b.setNegativeButton(android.R.string.cancel, (dialogInterface, i) -> {
-            dialogInterface.dismiss();
-            System.gc();
-        });
-        b.show();
-    }
-
-    int tmpGyroSensitivity;
-    public void adjustGyroSensitivityLive() {
-        if(!LauncherPreferences.PREF_ENABLE_GYRO) {
-            Toast.makeText(this, R.string.toast_turn_on_gyro, Toast.LENGTH_LONG).show();
-            return;
-        }
-        AlertDialog.Builder b = new AlertDialog.Builder(this);
-        b.setTitle(R.string.preference_gyro_sensitivity_title);
-        View v = LayoutInflater.from(this).inflate(R.layout.dialog_live_mouse_speed_editor,null);
-        final SeekBar sb = v.findViewById(R.id.mouseSpeed);
-        final TextView tv = v.findViewById(R.id.mouseSpeedTV);
-        sb.setMax(275);
-        tmpGyroSensitivity = (int) ((LauncherPreferences.PREF_GYRO_SENSITIVITY*100));
-        sb.setProgress(tmpGyroSensitivity -25);
-        tv.setText(getString(R.string.percent_format, tmpGyroSensitivity));
-        sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                tmpGyroSensitivity = i+25;
-                tv.setText(getString(R.string.percent_format, tmpGyroSensitivity));
-            }
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {}
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {}
-        });
-        b.setView(v);
-        b.setPositiveButton(android.R.string.ok, (dialogInterface, i) -> {
-            LauncherPreferences.PREF_GYRO_SENSITIVITY = ((float) tmpGyroSensitivity)/100f;
-            LauncherPreferences.DEFAULT_PREF.edit().putInt("gyroSensitivity", tmpGyroSensitivity).apply();
-            dialogInterface.dismiss();
-            System.gc();
-        });
-        b.setNegativeButton(android.R.string.cancel, (dialogInterface, i) -> {
-            dialogInterface.dismiss();
-            System.gc();
-        });
-        b.show();
-    }
-
-    private static void setUri(Context context, String input, Intent intent) {
-        if(input.startsWith("file:")) {
-            int truncLength = 5;
-            if(input.startsWith("file://")) truncLength = 7;
-            input = input.substring(truncLength);
-            Log.i("MainActivity", input);
-            boolean isDirectory = new File(input).isDirectory();
-            if(isDirectory) {
-                intent.setType(DocumentsContract.Document.MIME_TYPE_DIR);
-            }else{
-                String type = null;
-                String extension = MimeTypeMap.getFileExtensionFromUrl(input);
-                if(extension != null) type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
-                if(type == null) type = "*/*";
-                intent.setType(type);
-            }
-            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-            intent.setData(DocumentsContract.buildDocumentUri(
-                    context.getString(R.string.storageProviderAuthorities), input
-            ));
-            return;
-        }
-        intent.setDataAndType(Uri.parse(input), "*/*");
-    }
-
+    @Keep
     public static void openLink(String link) {
         Context ctx = touchpad.getContext(); // no more better way to obtain a context statically
         ((Activity)ctx).runOnUiThread(() -> {
             try {
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                setUri(ctx, link, intent);
-                ctx.startActivity(intent);
+                if(link.startsWith("file:")) {
+                    int truncLength = 5;
+                    if(link.startsWith("file://")) truncLength = 7;
+                    String path = link.substring(truncLength);
+                    Tools.openPath(ctx, new File(path), false);
+                }else {
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setDataAndType(Uri.parse(link), "*/*");
+                    ctx.startActivity(intent);
+                }
             } catch (Throwable th) {
                 Tools.showError(ctx, th);
             }
         });
     }
+
     @SuppressWarnings("unused") //TODO: actually use it
     public static void openPath(String path) {
         Context ctx = touchpad.getContext(); // no more better way to obtain a context statically
         ((Activity)ctx).runOnUiThread(() -> {
             try {
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setDataAndType(DocumentsContract.buildDocumentUri(ctx.getString(R.string.storageProviderAuthorities), path), "*/*");
-                ctx.startActivity(intent);
+                Tools.openPath(ctx, new File(path), false);
             } catch (Throwable th) {
                 Tools.showError(ctx, th);
             }
         });
     }
 
+    @Keep
     public static void querySystemClipboard() {
         Tools.runOnUiThread(()->{
             ClipData clipData = GLOBAL_CLIPBOARD.getPrimaryClip();
@@ -579,6 +495,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         });
     }
 
+    @Keep
     public static void putClipboardData(String data, String mimeType) {
         Tools.runOnUiThread(()-> {
             ClipData clipData = null;
@@ -602,10 +519,10 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
     @Override
     public void exitEditor() {
         try {
-            MainActivity.mControlLayout.loadLayout((CustomControls)null);
-            MainActivity.mControlLayout.setModifiable(false);
+            mControlLayout.loadLayout((CustomControls)null);
+            mControlLayout.setModifiable(false);
             System.gc();
-            MainActivity.mControlLayout.loadLayout(
+            mControlLayout.loadLayout(
                     minecraftProfile.controlFile == null
                             ? LauncherPreferences.PREF_DEFAULTCTRL_PATH
                             : Tools.CTRLMAP_PATH + "/" + minecraftProfile.controlFile);
@@ -613,7 +530,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         } catch (IOException e) {
             Tools.showError(this,e);
         }
-        //((MainActivity) this).mControlLayout.loadLayout((CustomControls)null);
+
         navDrawer.setAdapter(gameActionArrayAdapter);
         navDrawer.setOnItemClickListener(gameActionClickListener);
         isInEditor = false;
@@ -649,7 +566,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
 
     @Override
     public boolean dispatchTrackballEvent(MotionEvent ev) {
-        if(MainActivity.isAndroid8OrHigher() && checkCaptureDispatchConditions(ev))
+        if(Tools.isAndroid8OrHigher() && checkCaptureDispatchConditions(ev))
             return minecraftGLView.dispatchCapturedPointerEvent(ev);
         else return super.dispatchTrackballEvent(ev);
     }

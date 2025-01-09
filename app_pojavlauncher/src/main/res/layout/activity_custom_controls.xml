@@ -15,8 +15,9 @@
 
 		<net.kdt.pojavlaunch.customcontrols.handleview.DrawerPullButton
 			android:id="@+id/drawer_button"
-			android:layout_width="32dp"
-			android:layout_height="16dp"
+			android:layout_width="40dp"
+			android:layout_height="20dp"
+			android:padding="6dp"
 			android:elevation="10dp"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"

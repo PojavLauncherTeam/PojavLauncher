@@ -20,6 +20,8 @@
 			android:layout_width="match_parent"
 			android:layout_height="match_parent">
 
+			<View style="@style/DimensionTracker"/>
+
 			<net.kdt.pojavlaunch.MinecraftGLSurface
 				android:id="@+id/main_game_render_view"
 				android:layout_width="fill_parent"
@@ -49,11 +51,13 @@
 
 			<net.kdt.pojavlaunch.customcontrols.handleview.DrawerPullButton
 				android:id="@+id/drawer_button"
-				android:layout_width="24dp"
-				android:layout_height="12dp"
+				android:layout_width="40dp"
+				android:layout_height="20dp"
+				android:padding="8dp"
 				android:elevation="10dp"
 				android:layout_gravity="center_horizontal"/>
 			<net.kdt.pojavlaunch.customcontrols.mouse.HotbarView
+				android:id="@+id/hotbar_view"
 				android:layout_width="0px"
 				android:layout_height="0px"/>
 
@@ -74,7 +78,6 @@
 		android:layout_gravity="right"
 		android:background="?attr/colorBackgroundFloating"
 		android:fitsSystemWindows="false"
-		app:menu="@menu/menu_runopt"
 		android:id="@+id/main_navigation_view"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>

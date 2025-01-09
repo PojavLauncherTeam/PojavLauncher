@@ -52,7 +52,7 @@ public class PojavApplication extends Application {
 			}
 
 			FatalErrorActivity.showError(PojavApplication.this, crashFile.getAbsolutePath(), storagePermAllowed, th);
-			MainActivity.fullyExit();
+			Tools.fullyExit();
 		});
 		
 		try {

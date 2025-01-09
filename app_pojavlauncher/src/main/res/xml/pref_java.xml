@@ -25,7 +25,8 @@
             android:summary="@string/mcl_memory_allocation_subtitle"
             android:title="@string/mcl_memory_allocation"
             app2:showSeekBarValue="true"
-            app2:seekBarIncrement="8"
+            app2:min="@integer/memory_seekbar_min"
+            app2:seekBarIncrement="@integer/memory_seekbar_increment"
             app2:selectable="false"/>
 
         <SwitchPreference

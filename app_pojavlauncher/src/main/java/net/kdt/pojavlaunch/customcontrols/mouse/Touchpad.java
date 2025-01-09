@@ -1,7 +1,6 @@
 package net.kdt.pojavlaunch.customcontrols.mouse;
 
 import static net.kdt.pojavlaunch.Tools.currentDisplayMetrics;
-import static net.kdt.pojavlaunch.prefs.LauncherPreferences.DEFAULT_PREF;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -29,8 +28,6 @@ public class Touchpad extends View implements GrabListener, AbstractTouchpad {
     /* Mouse pointer icon used by the touchpad */
     private Drawable mMousePointerDrawable;
     private float mMouseX, mMouseY;
-    /* Resolution scaler option, allow downsizing a window */
-    private final float mScaleFactor = DEFAULT_PREF.getInt("resolutionRatio",100)/100f;
     public Touchpad(@NonNull Context context) {
         this(context, null);
     }
@@ -68,7 +65,7 @@ public class Touchpad extends View implements GrabListener, AbstractTouchpad {
     }
 
     private void sendMousePosition() {
-        CallbackBridge.sendCursorPos((mMouseX * mScaleFactor), (mMouseY * mScaleFactor));
+        CallbackBridge.sendCursorPos((mMouseX * LauncherPreferences.PREF_SCALE_FACTOR), (mMouseY * LauncherPreferences.PREF_SCALE_FACTOR));
     }
 
     private void updateMousePosition() {
@@ -93,8 +90,8 @@ public class Touchpad extends View implements GrabListener, AbstractTouchpad {
         assert mMousePointerDrawable != null;
         mMousePointerDrawable.setBounds(
                 0, 0,
-                (int) (36 / 100f * LauncherPreferences.PREF_MOUSESCALE),
-                (int) (54 / 100f * LauncherPreferences.PREF_MOUSESCALE)
+                (int) (36 * LauncherPreferences.PREF_MOUSESCALE),
+                (int) (54 * LauncherPreferences.PREF_MOUSESCALE)
         );
         setFocusable(false);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

@@ -106,7 +106,7 @@
         <activity
             android:name=".MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|keyboard|navigation|uiMode"
-            android:launchMode="standard"
+            android:launchMode="singleTop"
             android:process=":game"
             android:screenOrientation="sensorLandscape" />
 

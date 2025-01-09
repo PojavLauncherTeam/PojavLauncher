@@ -9,16 +9,13 @@ import android.os.Handler;
 public abstract class ValidatorGesture implements Runnable{
     private final Handler mHandler;
     private boolean mGestureActive;
-    private final int mRequiredDuration;
 
     /**
      * @param mHandler the Handler that will be used for calling back the checkAndTrigger() method.
      *                 This Handler should run on the same thread as the callee of submit()/cancel()
-     * @param mRequiredDuration the duration after which the class will call checkAndTrigger().
      */
-    public ValidatorGesture(Handler mHandler, int mRequiredDuration) {
+    public ValidatorGesture(Handler mHandler) {
         this.mHandler = mHandler;
-        this.mRequiredDuration = mRequiredDuration;
     }
 
     /**
@@ -28,7 +25,7 @@ public abstract class ValidatorGesture implements Runnable{
      */
     public final boolean submit() {
         if(mGestureActive) return false;
-        mHandler.postDelayed(this, mRequiredDuration);
+        mHandler.postDelayed(this, getGestureDelay());
         mGestureActive = true;
         return true;
     }
@@ -55,7 +52,13 @@ public abstract class ValidatorGesture implements Runnable{
     }
 
     /**
-     * This method will be called after mRequiredDuration milliseconds, if the gesture was not cancelled.
+     * This method will be called during gesture submission to determine the gesture check duration.
+     * @return the required gesture check duration in milliseconds
+     */
+    protected abstract int getGestureDelay();
+
+    /**
+     * This method will be called after getGestureDelay() milliseconds, if the gesture was not cancelled.
      * @return false if you want to mark this gesture as "inactive"
      *         true otherwise
      */

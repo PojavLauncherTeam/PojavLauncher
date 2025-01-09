@@ -51,25 +51,6 @@ static const char** const_appclasspath = NULL;
 static const jboolean const_javaw = JNI_FALSE;
 static const jboolean const_cpwildcard = JNI_TRUE;
 static const jint const_ergo_class = 0; // DEFAULT_POLICY
-static struct sigaction old_sa[NSIG];
-
-void (*__old_sa)(int signal, siginfo_t *info, void *reserved);
-int (*JVM_handle_linux_signal)(int signo, siginfo_t* siginfo, void* ucontext, int abort_if_unrecognized);
-
-void android_sigaction(int signal, siginfo_t *info, void *reserved) {
-  printf("process killed with signal %d code %p addr %p\n", signal,info->si_code,info->si_addr);
-  if (JVM_handle_linux_signal == NULL) { // should not happen, but still
-      __old_sa = old_sa[signal].sa_sigaction;
-      __old_sa(signal,info,reserved);
-      exit(1);
-  } else {
-      // Based on https://github.com/PojavLauncherTeam/openjdk-multiarch-jdk8u/blob/aarch64-shenandoah-jdk8u272-b10/hotspot/src/os/linux/vm/os_linux.cpp#L4688-4693
-      int orig_errno = errno;  // Preserve errno value over signal handler.
-      JVM_handle_linux_signal(signal, info, reserved, true);
-      errno = orig_errno;
-  }
-}
-typedef jint JNI_CreateJavaVM_func(JavaVM **pvm, void **penv, void *args);
 
 typedef jint JLI_Launch_func(int argc, char ** argv, /* main argc, argc */
         int jargc, const char** jargv,          /* java args */
@@ -84,8 +65,79 @@ typedef jint JLI_Launch_func(int argc, char ** argv, /* main argc, argc */
         jint ergo                               /* ergonomics class policy */
 );
 
+struct {
+    sigset_t tracked_sigset;
+    int pipe[2];
+} abort_waiter_data;
+
+_Noreturn extern void nominal_exit(int code, bool is_signal);
+
+_Noreturn static void* abort_waiter_thread(void* extraArg) {
+    // Don't allow this thread to receive signals this thread is tracking.
+    // We should only receive them externally.
+    pthread_sigmask(SIG_BLOCK, &abort_waiter_data.tracked_sigset, NULL);
+    int signal;
+    // Block for reading the signal ID until it arrives
+    read(abort_waiter_data.pipe[0], &signal, sizeof(int));
+    // Die
+    nominal_exit(signal, true);
+}
+
+_Noreturn static void abort_waiter_handler(int signal) {
+    // Write the final signal into the pipe and block forever.
+    write(abort_waiter_data.pipe[1], &signal, sizeof(int));
+    while(1) {}
+}
+
+static void abort_waiter_setup() {
+    // Only abort on SIGABRT as the JVM either emits SIGABRT or SIGKILL (which we can't catch)
+    // when a fatal crash occurs. Still, keep expandability if we would want to add more
+    // user-friendly fatal signals in the future.
+    const static int tracked_signals[] = {SIGABRT};
+    const static int ntracked = (sizeof(tracked_signals) / sizeof(tracked_signals[0]));
+    struct sigaction sigactions[ntracked];
+    sigemptyset(&abort_waiter_data.tracked_sigset);
+    for(size_t i = 0; i < ntracked; i++) {
+        sigaddset(&abort_waiter_data.tracked_sigset, tracked_signals[i]);
+        sigactions[i].sa_handler = abort_waiter_handler;
+    }
+    if(pipe(abort_waiter_data.pipe) != 0) {
+        printf("Failed to set up aborter pipe: %s\n", strerror(errno));
+        return;
+    }
+    pthread_t waiter_thread; int result;
+    if((result = pthread_create(&waiter_thread, NULL, abort_waiter_thread, NULL)) != 0) {
+        printf("Failed to start up waiter thread: %s", strerror(result));
+        for(int i = 0; i < 2; i++) close(abort_waiter_data.pipe[i]);
+        return;
+    }
+    // Only set the sigactions *after* we have already set up the pipe and the thread.
+    for(size_t i = 0; i < ntracked; i++) {
+        if(sigaction(tracked_signals[i], &sigactions[i], NULL) != 0) {
+            // Not returning here because we may have set some handlers successfully.
+            // Some handling is better than no handling.
+            printf("Failed to set signal hander for signal %i: %s", i, strerror(errno));
+        }
+    }
+}
+
 static jint launchJVM(int margc, char** margv) {
    void* libjli = dlopen("libjli.so", RTLD_LAZY | RTLD_GLOBAL);
+
+   // Unset all signal handlers to create a good slate for JVM signal detection.
+   struct sigaction clean_sa;
+   memset(&clean_sa, 0, sizeof (struct sigaction));
+   for(int sigid = SIGHUP; sigid < NSIG; sigid++) {
+       // For some reason Android specifically checks if you set SIGSEGV to SIG_DFL.
+       // There's probably a good reason for that but the signal handler here is
+       // temporary and will be replaced by the Java VM's signal/crash handler.
+       // Work around the warning by using SIG_IGN for SIGSEGV
+       if(sigid == SIGSEGV) clean_sa.sa_handler = SIG_IGN;
+       else clean_sa.sa_handler = SIG_DFL;
+       sigaction(sigid, &clean_sa, NULL);
+   }
+   // Set up the thread that will abort the launcher with an user-facing dialog on a signal.
+   abort_waiter_setup();
 
    // Boardwalk: silence
    // LOGD("JLI lib = %x", (int)libjli);
@@ -130,35 +182,8 @@ static jint launchJVM(int margc, char** margv) {
  * Signature: ([Ljava/lang/String;)I
  */
 JNIEXPORT jint JNICALL Java_com_oracle_dalvik_VMLauncher_launchJVM(JNIEnv *env, jclass clazz, jobjectArray argsArray) {
-#ifdef TRY_SIG2JVM
-  void* libjvm = dlopen("libjvm.so", RTLD_LAZY | RTLD_GLOBAL);
-  if (NULL == libjvm) {
-      LOGE("JVM lib = NULL: %s", dlerror());
-      return -1;
-  }
-  JVM_handle_linux_signal = dlsym(libjvm, "JVM_handle_linux_signal");
-#endif
 
    jint res = 0;
-   // int i;
-   //Prepare the signal trapper
-   struct sigaction catcher;
-   memset(&catcher,0,sizeof(sigaction));
-   catcher.sa_sigaction = android_sigaction;
-   catcher.sa_flags = SA_SIGINFO|SA_RESTART;
-   // SA_RESETHAND;
-#define CATCHSIG(X) sigaction(X, &catcher, &old_sa[X])
-    CATCHSIG(SIGILL);
-    //CATCHSIG(SIGABRT);
-    CATCHSIG(SIGBUS);
-    CATCHSIG(SIGFPE);
-#ifdef TRY_SIG2JVM
-    CATCHSIG(SIGSEGV);
-#endif
-    CATCHSIG(SIGSTKFLT);
-    CATCHSIG(SIGPIPE);
-    CATCHSIG(SIGXFSZ);
-   //Signal trapper ready
 
     // Save dalvik JNIEnv pointer for JVM launch thread
     pojav_environ->dalvikJNIEnvPtr_ANDROID = env;

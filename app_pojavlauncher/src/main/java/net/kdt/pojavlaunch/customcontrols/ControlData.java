@@ -7,6 +7,7 @@ import android.util.ArrayMap;
 import androidx.annotation.Keep;
 
 import net.kdt.pojavlaunch.Tools;
+import net.kdt.pojavlaunch.customcontrols.buttons.ControlInterface;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.utils.JSONUtils;
 import net.objecthunter.exp4j.ExpressionBuilder;
@@ -240,7 +241,7 @@ public class ControlData {
         keyValueMap.put("height", "DUMMY_HEIGHT");
         keyValueMap.put("screen_width", "DUMMY_DATA");
         keyValueMap.put("screen_height", "DUMMY_DATA");
-        keyValueMap.put("margin", Integer.toString((int) Tools.dpToPx(2)));
+        keyValueMap.put("margin", Integer.toString((int) ControlInterface.getMarginDistance()));
         keyValueMap.put("preferred_scale", "DUMMY_DATA");
 
         conversionMap = new WeakReference<>(keyValueMap);

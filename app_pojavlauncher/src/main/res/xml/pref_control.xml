@@ -35,7 +35,9 @@
             android:title="@string/mcl_setting_title_longpresstrigger"
             app2:showSeekBarValue="true"
             app2:selectable="false"
-            app2:seekBarIncrement="10"
+            app2:min="@integer/gesture_delay_seekbar_min"
+            android:max="@integer/gesture_delay_seekbar_max"
+            app2:seekBarIncrement="@integer/gesture_delay_seekbar_increment"
             android:icon="@drawable/ic_setting_gesture_time"
             />
 
@@ -50,7 +52,9 @@
             android:summary="@string/mcl_setting_subtitle_buttonscale"
             app2:showSeekBarValue="true"
             app2:selectable="false"
-            app2:seekBarIncrement="5"
+            app2:min="@integer/button_scale_seekbar_min"
+            android:max="@integer/button_scale_seekbar_max"
+            app2:seekBarIncrement="@integer/button_scale_seekbar_increment"
             android:icon="@drawable/ic_setting_control_scale"
             />
         <SwitchPreference
@@ -71,7 +75,9 @@
             android:title="@string/mcl_setting_title_mousescale"
 
             app2:selectable="false"
-            app2:seekBarIncrement="5"
+            app2:min="@integer/mouse_scale_seekbar_min"
+            android:max="@integer/mouse_scale_seekbar_max"
+            app2:seekBarIncrement="@integer/mouse_scale_seekbar_increment"
             app2:showSeekBarValue="true"
             android:icon="@drawable/ic_setting_pointer_scale"
             />
@@ -82,7 +88,9 @@
             android:title="@string/mcl_setting_title_mousespeed"
             android:icon="@drawable/ic_setting_mouse_speed"
             app2:selectable="false"
-            app2:seekBarIncrement="5"
+            app2:min="@integer/mouse_speed_seekbar_min"
+            android:max="@integer/mouse_speed_seekbar_max"
+            app2:seekBarIncrement="@integer/mouse_speed_seekbar_increment"
             app2:showSeekBarValue="true" />
         <SwitchPreference
             android:key="mouse_start"
@@ -104,12 +112,16 @@
             android:title="@string/preference_gyro_sensitivity_title"
             android:summary="@string/preference_gyro_sensitivity_description"
             app2:selectable="false"
-            app2:seekBarIncrement="5"
+            app2:min="@integer/gyro_speed_seekbar_min"
+            android:max="@integer/gyro_speed_seekbar_max"
+            app2:seekBarIncrement="@integer/gyro_speed_seekbar_increment"
             app2:showSeekBarValue="true"/>
         <net.kdt.pojavlaunch.prefs.CustomSeekBarPreference
             android:key="gyroSampleRate"
             android:title="@string/preference_gyro_sample_rate_title"
             android:summary="@string/preference_gyro_sample_rate_description"
+            app2:min="@integer/gyro_rate_seekbar_min"
+            android:max="@integer/gyro_rate_seekbar_max"
             app2:selectable="false"
             app2:showSeekBarValue="true"/>
         <SwitchPreferenceCompat
@@ -145,7 +157,9 @@
             android:title="@string/preference_deadzone_scale_title"
             android:summary="@string/preference_deadzone_scale_description"
             app2:showSeekBarValue="true"
-            app2:seekBarIncrement="5"
+            app2:min="@integer/gamepad_deadzone_seekbar_min"
+            android:max="@integer/gamepad_deadzone_seekbar_max"
+            app2:seekBarIncrement="@integer/gamepad_deadzone_seekbar_increment"
             />
 
     </PreferenceCategory>

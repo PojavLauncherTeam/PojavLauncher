@@ -43,7 +43,7 @@ public class DownloadMirror {
             return;
         }catch (FileNotFoundException e) {
             Log.w("DownloadMirror", "Cannot find the file on the mirror", e);
-            Log.i("DownloadMirror", "Failling back to default source");
+            Log.i("DownloadMirror", "Falling back to default source");
         }
         DownloadUtils.downloadFileMonitored(urlInput, outputFile, buffer, monitor);
     }
@@ -63,9 +63,28 @@ public class DownloadMirror {
             return;
         }catch (FileNotFoundException e) {
             Log.w("DownloadMirror", "Cannot find the file on the mirror", e);
-            Log.i("DownloadMirror", "Failling back to default source");
+            Log.i("DownloadMirror", "Falling back to default source");
         }
         DownloadUtils.downloadFile(urlInput, outputFile);
+    }
+
+    /**
+     * Get the content length of a file on the current mirror. If the file is missing on the mirror,
+     * or the mirror does not give out the length, request the length from the original source
+     * @param downloadClass Class of the download. Can either be DOWNLOAD_CLASS_LIBRARIES,
+     *                      DOWNLOAD_CLASS_METADATA or DOWNLOAD_CLASS_ASSETS
+     * @param urlInput The original (Mojang) URL for the download
+     * @return the length of the file denoted by the URL in bytes, or -1 if not available
+     */
+    public static long getContentLengthMirrored(int downloadClass, String urlInput) throws IOException {
+        long length = DownloadUtils.getContentLength(getMirrorMapping(downloadClass, urlInput));
+        if(length < 1) {
+            Log.w("DownloadMirror", "Unable to get content length from mirror");
+            Log.i("DownloadMirror", "Falling back to default source");
+            return DownloadUtils.getContentLength(urlInput);
+        }else {
+            return length;
+        }
     }
 
     /**

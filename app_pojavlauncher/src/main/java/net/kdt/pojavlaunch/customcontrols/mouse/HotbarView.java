@@ -11,6 +11,7 @@ import android.view.ViewParent;
 
 import androidx.annotation.Nullable;
 
+import net.kdt.pojavlaunch.GrabListener;
 import net.kdt.pojavlaunch.LwjglGlfwKeycode;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.utils.MCOptionUtils;
@@ -26,9 +27,16 @@ public class HotbarView extends View implements MCOptionUtils.MCOptionListener, 
             LwjglGlfwKeycode.GLFW_KEY_4, LwjglGlfwKeycode.GLFW_KEY_5,   LwjglGlfwKeycode.GLFW_KEY_6,
             LwjglGlfwKeycode.GLFW_KEY_7, LwjglGlfwKeycode.GLFW_KEY_8, LwjglGlfwKeycode.GLFW_KEY_9};
     private final DropGesture mDropGesture = new DropGesture(new Handler(Looper.getMainLooper()));
-    private final float mScaleFactor = LauncherPreferences.PREF_SCALE_FACTOR/100f;
+    private final GrabListener mGrabListener = new GrabListener() {
+        @Override
+        public void onGrabState(boolean isGrabbing) {
+            mLastIndex = -1;
+            mDropGesture.cancel();
+        }
+    };
+
     private int mWidth;
-    private int mLastIndex;
+    private int mLastIndex = -1;
     private int mGuiScale;
 
     public HotbarView(Context context) {
@@ -67,6 +75,13 @@ public class HotbarView extends View implements MCOptionUtils.MCOptionListener, 
         }
         mGuiScale = MCOptionUtils.getMcScale();
         repositionView();
+        CallbackBridge.addGrabListener(mGrabListener);
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        CallbackBridge.removeGrabListener(mGrabListener);
     }
 
     private void repositionView() {
@@ -94,7 +109,8 @@ public class HotbarView extends View implements MCOptionUtils.MCOptionListener, 
         else mDropGesture.submit();
         // Determine the hotbar slot
         float x = event.getX();
-        if(x < 0 || x > mWidth) {
+        // Ignore positions equal to mWidth because they would translate into an out-of-bounds hotbar index
+        if(x < 0 || x >= mWidth) {
             // If out of bounds, cancel the hotbar gesture to avoid dropping items on last hotbar slots
             mDropGesture.cancel();
             return true;
@@ -121,7 +137,14 @@ public class HotbarView extends View implements MCOptionUtils.MCOptionListener, 
     }
 
     private int mcScale(int input) {
-        return (int)((mGuiScale * input)/ mScaleFactor);
+        return (int)((mGuiScale * input) / LauncherPreferences.PREF_SCALE_FACTOR);
+    }
+
+    /** Forces the view to reposition itself. */
+    public void onResolutionChanged() {
+        if(getParent() == null) return;
+        mGuiScale = MCOptionUtils.getMcScale();
+        post(this::repositionView);
     }
 
     @Override

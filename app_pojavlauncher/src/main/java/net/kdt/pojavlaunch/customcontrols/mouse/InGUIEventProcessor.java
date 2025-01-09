@@ -19,12 +19,10 @@ public class InGUIEventProcessor implements TouchEventProcessor {
     private AbstractTouchpad mTouchpad;
     private boolean mIsMouseDown = false;
     private float mStartX, mStartY;
-    private final float mScaleFactor;
     private final Scroller mScroller = new Scroller(FINGER_SCROLL_THRESHOLD);
 
-    public InGUIEventProcessor(float scaleFactor) {
+    public InGUIEventProcessor() {
         mSingleTapDetector = new TapDetector(1, TapDetector.DETECTION_METHOD_BOTH);
-        mScaleFactor = scaleFactor;
     }
 
     @Override
@@ -91,7 +89,7 @@ public class InGUIEventProcessor implements TouchEventProcessor {
     }
 
     private void sendTouchCoordinates(float x, float y) {
-        CallbackBridge.sendCursorPos( x * mScaleFactor, y * mScaleFactor);
+        CallbackBridge.sendCursorPos( x * LauncherPreferences.PREF_SCALE_FACTOR, y * LauncherPreferences.PREF_SCALE_FACTOR);
     }
 
     private void enableMouse() {
@@ -105,8 +103,8 @@ public class InGUIEventProcessor implements TouchEventProcessor {
     }
 
     private void setGestureStart(MotionEvent event) {
-        mStartX = event.getX() * mScaleFactor;
-        mStartY = event.getY() * mScaleFactor;
+        mStartX = event.getX() * LauncherPreferences.PREF_SCALE_FACTOR;
+        mStartY = event.getY() * LauncherPreferences.PREF_SCALE_FACTOR;
     }
 
     private void resetGesture() {

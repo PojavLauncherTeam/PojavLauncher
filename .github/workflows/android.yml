@@ -56,9 +56,9 @@ jobs:
           branch: buildjre17-21
           name: jre21-pojav
 
-      - uses: gradle/gradle-build-action@v2
+      - uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: 7.6.1
+          gradle-version: "8.11"
 
       - name: Build JRE JAR files
         run: |

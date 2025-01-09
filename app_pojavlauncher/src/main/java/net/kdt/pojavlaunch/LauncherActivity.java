@@ -156,7 +156,12 @@ public class LauncherActivity extends BaseActivity {
 
     @Override
     protected boolean shouldIgnoreNotch() {
-        return getResources().getConfiguration().orientation == ORIENTATION_PORTRAIT || super.shouldIgnoreNotch();
+        return getResources().getConfiguration().orientation == ORIENTATION_PORTRAIT;
+    }
+
+    @Override
+    public boolean setFullscreen() {
+        return false;
     }
 
     @Override
@@ -225,11 +230,6 @@ public class LauncherActivity extends BaseActivity {
         super.onPause();
         ContextExecutor.clearActivity();
         mInstallTracker.detach();
-    }
-
-    @Override
-    public boolean setFullscreen() {
-        return false;
     }
 
     @Override

@@ -3,13 +3,14 @@ package net.kdt.pojavlaunch.tasks;
 import net.kdt.pojavlaunch.JMinecraftVersionList;
 import net.kdt.pojavlaunch.extra.ExtraConstants;
 import net.kdt.pojavlaunch.extra.ExtraCore;
+import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 
 public class AsyncMinecraftDownloader {
     public static String normalizeVersionId(String versionString) {
         JMinecraftVersionList versionList = (JMinecraftVersionList) ExtraCore.getValue(ExtraConstants.RELEASE_TABLE);
         if(versionList == null || versionList.versions == null) return versionString;
-        if("latest-release".equals(versionString)) versionString = versionList.latest.get("release");
-        if("latest-snapshot".equals(versionString)) versionString = versionList.latest.get("snapshot");
+        if(MinecraftProfile.LATEST_RELEASE.equals(versionString)) versionString = versionList.latest.get("release");
+        if(MinecraftProfile.LATEST_SNAPSHOT.equals(versionString)) versionString = versionList.latest.get("snapshot");
         return versionString;
     }
 

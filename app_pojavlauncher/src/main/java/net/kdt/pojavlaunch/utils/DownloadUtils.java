@@ -155,6 +155,23 @@ public class DownloadUtils {
         return result;
     }
 
+    /**
+     * Get the content length for a given URL.
+     * @param url the URL to get the length for
+     * @return the length in bytes or -1 if not available
+     * @throws IOException if an I/O error occurs.
+     */
+    public static long getContentLength(String url) throws IOException {
+        HttpURLConnection urlConnection = (HttpURLConnection) new URL(url).openConnection();
+        urlConnection.setRequestMethod("HEAD");
+        urlConnection.setDoInput(false);
+        urlConnection.setDoOutput(false);
+        urlConnection.connect();
+        int responseCode = urlConnection.getResponseCode();
+        if(responseCode >= 200 && responseCode <= 299) return urlConnection.getContentLength();
+        return -1;
+    }
+
     public interface ParseCallback<T> {
         T process(String input) throws ParseException;
     }

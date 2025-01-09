@@ -1,7 +1,6 @@
 package net.kdt.pojavlaunch.customcontrols;
 
 import static android.content.Context.INPUT_METHOD_SERVICE;
-import static net.kdt.pojavlaunch.MainActivity.mControlLayout;
 import static net.kdt.pojavlaunch.Tools.currentDisplayMetrics;
 
 import static org.lwjgl.glfw.CallbackBridge.isGrabbing;
@@ -34,7 +33,7 @@ import net.kdt.pojavlaunch.customcontrols.buttons.ControlJoystick;
 import net.kdt.pojavlaunch.customcontrols.buttons.ControlSubButton;
 import net.kdt.pojavlaunch.customcontrols.handleview.ActionRow;
 import net.kdt.pojavlaunch.customcontrols.handleview.ControlHandleView;
-import net.kdt.pojavlaunch.customcontrols.handleview.EditControlPopup;
+import net.kdt.pojavlaunch.customcontrols.handleview.EditControlSideDialog;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 
 import java.io.File;
@@ -54,7 +53,7 @@ public class ControlLayout extends FrameLayout {
 	private boolean mIsModified;
 	private boolean mControlVisible = false;
 
-	private EditControlPopup mControlPopup = null;
+	private EditControlSideDialog mControlDialog = null;
 	private ControlHandleView mHandleView;
 	private ControlButtonMenuListener mMenuListener;
 	public ActionRow mActionRow = null;
@@ -297,9 +296,9 @@ public class ControlLayout extends FrameLayout {
     @Override
     public void onViewRemoved(View child) {
         super.onViewRemoved(child);
-        if(child instanceof ControlInterface && mControlPopup != null){
-            mControlPopup.disappearColor();
-            mControlPopup.disappear();
+        if(child instanceof ControlInterface && mControlDialog != null){
+			mControlDialog.disappearColor();
+            mControlDialog.disappear(false);
         }
     }
 
@@ -308,22 +307,23 @@ public class ControlLayout extends FrameLayout {
 	 * to the button at hand.
 	 */
 	public void editControlButton(ControlInterface button){
-		if(mControlPopup == null){
+		if(mControlDialog == null){
 			// When the panel is null, it needs to inflate first.
 			// So inflate it, then process it on the next frame
-			mControlPopup = new EditControlPopup(getContext(), this);
+			mControlDialog = new EditControlSideDialog(getContext(), this);
 			post(() -> editControlButton(button));
 			return;
 		}
 
-		mControlPopup.internalChanges = true;
-		mControlPopup.setCurrentlyEditedButton(button);
-		button.loadEditValues(mControlPopup);
+		mControlDialog.internalChanges = true;
+		mControlDialog.setCurrentlyEditedButton(button);
 
-		mControlPopup.internalChanges = false;
+		mControlDialog.appear(button.getControlView().getX() + button.getControlView().getWidth()/2f < currentDisplayMetrics.widthPixels/2f);
+		button.loadEditValues(mControlDialog);
 
-		mControlPopup.appear(button.getControlView().getX() + button.getControlView().getWidth()/2f < currentDisplayMetrics.widthPixels/2f);
-		mControlPopup.disappearColor();
+		mControlDialog.internalChanges = false;
+
+		mControlDialog.disappearColor();
 
 		if(mHandleView == null){
 			mHandleView = new ControlHandleView(getContext());
@@ -336,8 +336,7 @@ public class ControlLayout extends FrameLayout {
 
 	/** Swap the panel if the button position requires it */
 	public void adaptPanelPosition(){
-		if(mControlPopup != null)
-			mControlPopup.adaptPanelPosition();
+		if(mControlDialog != null) mControlDialog.adaptPanelPosition();
 	}
 
 
@@ -401,14 +400,14 @@ public class ControlLayout extends FrameLayout {
 	@SuppressLint("ClickableViewAccessibility")
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-		if (mModifiable && event.getActionMasked() != MotionEvent.ACTION_UP || mControlPopup == null)
+		if (mModifiable && event.getActionMasked() != MotionEvent.ACTION_UP || mControlDialog == null)
 			return true;
 
 		InputMethodManager imm = (InputMethodManager) getContext().getSystemService(INPUT_METHOD_SERVICE);
 
 		// When the input window cannot be hidden, it returns false
 		if(!imm.hideSoftInputFromWindow(getWindowToken(), 0)){
-			if(mControlPopup.disappearLayer()){
+			if(mControlDialog.disappearLayer()){
 				mActionRow.setFollowedButton(null);
 				mHandleView.hide();
 			}
@@ -421,9 +420,9 @@ public class ControlLayout extends FrameLayout {
 
 		// When the input window cannot be hidden, it returns false
 		imm.hideSoftInputFromWindow(getWindowToken(), 0);
-		if(mControlPopup != null) {
-			mControlPopup.disappearColor();
-			mControlPopup.disappear();
+		if(mControlDialog != null) {
+			mControlDialog.disappearColor();
+			mControlDialog.disappear(true);
 		}
 
 		if(mActionRow != null) mActionRow.setFollowedButton(null);

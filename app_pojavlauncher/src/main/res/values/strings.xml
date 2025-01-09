@@ -13,7 +13,7 @@
     <string name="login_online_login_label">Login</string>
 
     <!-- Hint -->
-    <string name="hint_control_mapping">"Tap the top center cog icon to open the context menu ⚙\nTap a button to customize: edit, resize, delete, or customize it's keybind."</string>
+    <string name="hint_control_mapping">"Touch the top center cogwheel to open the context menu ⚙\nTap a button to customize: edit, resize, remove, or change its keybind."</string>
 
     <!-- Warnings -->
     <string name="warning_remove_account">This account will be removed!</string>
@@ -93,6 +93,7 @@
 
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Application/Game exited with code %d, check latestlog.txt for more details.</string>
+    <string name="mcn_signal_title">Application/Game aborted by fatal signal %d, check latestlog.txt for more details.</string>
     <string name="mcn_exit_confirm">Are you sure want to force close?</string>
     <string name="mcn_check_fail_vulkan_support">Zink (Vulkan) renderer is not supported on this device!</string>
 
@@ -273,6 +274,7 @@
     <string name="preference_shader_dump_title">Enable shader dumping</string>
     <string name="preference_shader_dump_description">Log converted shaders into the log file.</string>
     <string name="percent_format">%d%%</string>
+    <string name="millisecond_format">%d ms</string>
     <string name="customctrl_editor_exit_title">Leaving?</string>
     <string name="customctrl_editor_exit_msg">Are you sure you want to exit?</string>
     <string name="customctrl_editor_exit">Leave editor</string>
@@ -321,6 +323,7 @@
 
     <string name="generic_install">Install</string>
     <string name="generic_apply">Apply</string>
+    <string name="generic_debug">Debug</string>
 
     <string name="search_modpack_no_result">No modpacks found</string>
     <string name="search_modpack_error">Failed to find modpacks</string>
@@ -371,7 +374,8 @@
     <string name="exception_failed_to_unpack_jre17">Failed to install JRE 17</string>
     <string name="newdl_starting">Reading game metadata…</string>
     <string name="newdl_downloading_metadata">Downloading game metadata (%s)</string>
-    <string name="newdl_downloading_game_files">Downloading game files… (%d/%d, %.2f MB)</string>
+    <string name="newdl_downloading_game_files">Downloading game… (%d/%d, %.2f MB/s)</string>
+    <string name="newdl_downloading_game_files_size">Downloading game… (%.2f/%.2f MB, %.2f MB/s)</string>
     <string name="cropper_title">Select image region</string>
     <string name="cropper_lock_vertical">V. lock</string>
     <string name="cropper_lock_horizontal">H. lock</string>
@@ -414,6 +418,14 @@
     <string name="preference_remap_controller_title">Change controller key bindings</string>
     <string name="preference_remap_controller_description">Allows you to modify the keyboard keys bound to each controller button</string>
     <string name="mcl_button_discord">Discord</string>
+
     <string name="ltw_render_distance_warning_msg">Your GPU is not capable of rendering above 7 render distance without Sodium or other similar mods. The render distance will be automatically reduced when you click "OK".</string>
     <string name="discord_invite" translatable="false">https://discord.gg/pojavlauncher-724163890803638273</string>
+
+    <string name="mcl_button_open_directory">Open game directory</string>
+    <string name="discord_invite" translatable="false">https://discord.com/invite/aenk3EUvER</string>
+    <string name="local_login_bad_username_title">Unsuitable username</string>
+    <string name="local_login_bad_username_text">The username must be between 3–16 characters long, and must only contain latin letters, arabic numerals and underscores.</string>
+    <string name="quick_setting_title">Quick settings</string>
+
 </resources>
