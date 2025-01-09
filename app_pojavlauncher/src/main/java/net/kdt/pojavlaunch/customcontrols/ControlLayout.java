@@ -57,17 +57,26 @@ public class ControlLayout extends FrameLayout {
 	private ControlHandleView mHandleView;
 	private ControlButtonMenuListener mMenuListener;
 	public ActionRow mActionRow = null;
+	private HideLayoutsOnRecord hideLayoutsOnRecord;
 	public String mLayoutFileName;
+	
+	/*
+	* added init(ctx); for hiding control layouts on recording or screenshot not for all devices!!
+	*/
 
 	public ControlLayout(Context ctx) {
 		super(ctx);
+		init(ctx);
 	}
 
 	public ControlLayout(Context ctx, AttributeSet attrs) {
 		super(ctx, attrs);
+		init(ctx);
 	}
-
-
+	/*
+	* added init(ctx); for hiding control layouts on recording or screenshot not for all devices!!
+	*/
+	
 	public void loadLayout(String jsonPath) throws IOException, JsonSyntaxException {
 		CustomControls layout = LayoutConverter.loadAndConvertIfNecessary(jsonPath);
 		if(layout != null) {
@@ -213,7 +222,26 @@ public class ControlLayout extends FrameLayout {
 		addView(view);
 
 	}
-
+	
+	/*
+    * hideonrecord
+    */
+	
+	private void init(Context ctx) {
+	    hideLayoutsOnRecord = new HideLayoutsOnRecord(this);
+	}
+	
+	@Override
+    protected void onDetachedFromWindow() {
+       super.onDetachedFromWindow();
+         if (hideLayoutsOnRecord != null) {
+           hideLayoutsOnRecord.unregisterReceiver(getContext());
+         }
+    }
+    
+    /*
+    * hideonrecord
+    */
 
 	private void removeAllButtons() {
 		for(ControlInterface button : getButtonChildren()){
