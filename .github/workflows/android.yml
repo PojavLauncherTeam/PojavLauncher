@@ -26,6 +26,15 @@ jobs:
           distribution: 'temurin'
           java-version: '8'
 
+      - name: Get LTW
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          github_token: ${{secrets.LTW_CLONER_SECRET}}
+          workflow: android.yml
+          workflow_conclusion: success
+          name: output-aar
+          path: app_pojavlauncher/libs
+
       - name: Get JRE 8
         uses: dawidd6/action-download-artifact@v2
         with:
