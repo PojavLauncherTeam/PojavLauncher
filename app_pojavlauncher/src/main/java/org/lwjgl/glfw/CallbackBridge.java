@@ -2,8 +2,10 @@ package org.lwjgl.glfw;
 
 import net.kdt.pojavlaunch.*;
 import android.content.*;
+import android.util.Log;
 import android.view.Choreographer;
 
+import androidx.annotation.Keep;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
@@ -102,6 +104,7 @@ public class CallbackBridge {
 
     // Called from JRE side
     @SuppressWarnings("unused")
+    @Keep
     public static @Nullable String accessAndroidClipboard(int type, String copy) {
         switch (type) {
             case CLIPBOARD_COPY:
@@ -164,6 +167,7 @@ public class CallbackBridge {
 
     //Called from JRE side
     @SuppressWarnings("unused")
+    @Keep
     private static void onGrabStateChanged(final boolean grabbing) {
         isGrabbing = grabbing;
         sChoreographer.postFrameCallbackDelayed((time) -> {
@@ -190,17 +194,17 @@ public class CallbackBridge {
         }
     }
 
-    @CriticalNative public static native void nativeSetUseInputStackQueue(boolean useInputStackQueue);
+    @Keep @CriticalNative public static native void nativeSetUseInputStackQueue(boolean useInputStackQueue);
 
-    @CriticalNative private static native boolean nativeSendChar(char codepoint);
+    @Keep @CriticalNative private static native boolean nativeSendChar(char codepoint);
     // GLFW: GLFWCharModsCallback deprecated, but is Minecraft still use?
-    @CriticalNative private static native boolean nativeSendCharMods(char codepoint, int mods);
-    @CriticalNative private static native void nativeSendKey(int key, int scancode, int action, int mods);
+    @Keep @CriticalNative private static native boolean nativeSendCharMods(char codepoint, int mods);
+    @Keep @CriticalNative private static native void nativeSendKey(int key, int scancode, int action, int mods);
     // private static native void nativeSendCursorEnter(int entered);
-    @CriticalNative private static native void nativeSendCursorPos(float x, float y);
-    @CriticalNative private static native void nativeSendMouseButton(int button, int action, int mods);
-    @CriticalNative private static native void nativeSendScroll(double xoffset, double yoffset);
-    @CriticalNative private static native void nativeSendScreenSize(int width, int height);
+    @Keep @CriticalNative private static native void nativeSendCursorPos(float x, float y);
+    @Keep @CriticalNative private static native void nativeSendMouseButton(int button, int action, int mods);
+    @Keep @CriticalNative private static native void nativeSendScroll(double xoffset, double yoffset);
+    @Keep @CriticalNative private static native void nativeSendScreenSize(int width, int height);
     public static native void nativeSetWindowAttrib(int attrib, int value);
     static {
         System.loadLibrary("pojavexec");

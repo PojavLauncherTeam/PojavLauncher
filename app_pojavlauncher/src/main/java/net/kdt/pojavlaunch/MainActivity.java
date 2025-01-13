@@ -36,6 +36,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.annotation.Keep;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
@@ -242,8 +243,8 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
     @Override
     public void onAttachedToWindow() {
         // Post to get the correct display dimensions after layout.
+        LauncherPreferences.computeNotchSize(this);
         mControlLayout.post(()->{
-            LauncherPreferences.computeNotchSize(this);
             Tools.getDisplayMetrics(this);
             loadControls();
         });
@@ -442,6 +443,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         if(touchCharInput != null) touchCharInput.switchKeyboardState();
     }
 
+    @Keep
     public static void openLink(String link) {
         Context ctx = touchpad.getContext(); // no more better way to obtain a context statically
         ((Activity)ctx).runOnUiThread(() -> {
@@ -461,6 +463,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
             }
         });
     }
+
     @SuppressWarnings("unused") //TODO: actually use it
     public static void openPath(String path) {
         Context ctx = touchpad.getContext(); // no more better way to obtain a context statically
@@ -473,6 +476,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         });
     }
 
+    @Keep
     public static void querySystemClipboard() {
         Tools.runOnUiThread(()->{
             ClipData clipData = GLOBAL_CLIPBOARD.getPrimaryClip();
@@ -491,6 +495,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         });
     }
 
+    @Keep
     public static void putClipboardData(String data, String mimeType) {
         Tools.runOnUiThread(()-> {
             ClipData clipData = null;

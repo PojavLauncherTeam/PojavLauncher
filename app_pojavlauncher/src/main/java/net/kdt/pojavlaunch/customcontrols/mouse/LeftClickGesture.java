@@ -13,23 +13,28 @@ import org.lwjgl.glfw.CallbackBridge;
 
 public class LeftClickGesture extends ValidatorGesture {
     public static final int FINGER_STILL_THRESHOLD = (int) Tools.dpToPx(9);
-    private float mGestureStartX, mGestureStartY;
+    private float mGestureStartX, mGestureStartY, mGestureEndX, mGestureEndY;
     private boolean mMouseActivated;
 
     public LeftClickGesture(Handler handler) {
-        super(handler, LauncherPreferences.PREF_LONGPRESS_TRIGGER);
+        super(handler);
     }
 
     public final void inputEvent() {
         if(submit()) {
-            mGestureStartX = CallbackBridge.mouseX;
-            mGestureStartY = CallbackBridge.mouseY;
+            mGestureStartX = mGestureEndX = CallbackBridge.mouseX;
+            mGestureStartY = mGestureEndY = CallbackBridge.mouseY;
         }
     }
 
     @Override
+    protected int getGestureDelay() {
+        return LauncherPreferences.PREF_LONGPRESS_TRIGGER;
+    }
+
+    @Override
     public boolean checkAndTrigger() {
-        boolean fingerStill = LeftClickGesture.isFingerStill(mGestureStartX, mGestureStartY, FINGER_STILL_THRESHOLD);
+        boolean fingerStill = LeftClickGesture.isFingerStill(mGestureStartX, mGestureStartY, mGestureEndX, mGestureEndY, FINGER_STILL_THRESHOLD);
         // If the finger is still, fire the gesture.
         if(fingerStill) {
             sendMouseButton(LwjglGlfwKeycode.GLFW_MOUSE_BUTTON_LEFT, true);
@@ -47,6 +52,11 @@ public class LeftClickGesture extends ValidatorGesture {
         }
     }
 
+    public void setMotion(float deltaX, float deltaY) {
+        mGestureEndX += deltaX;
+        mGestureEndY += deltaY;
+    }
+
     /**
      * Check if the finger is still when compared to mouseX/mouseY in CallbackBridge.
      * @param startX the starting X of the gesture
@@ -57,6 +67,15 @@ public class LeftClickGesture extends ValidatorGesture {
         return MathUtils.dist(
                 CallbackBridge.mouseX,
                 CallbackBridge.mouseY,
+                startX,
+                startY
+        ) <= threshold;
+    }
+
+    public static boolean isFingerStill(float startX, float startY, float endX, float endY, float threshold) {
+        return MathUtils.dist(
+                endX,
+                endY,
                 startX,
                 startY
         ) <= threshold;

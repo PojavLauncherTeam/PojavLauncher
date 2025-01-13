@@ -95,21 +95,21 @@ public class ProfileAdapter extends BaseAdapter {
         Drawable cachedIcon = ProfileIconCache.fetchIcon(v.getResources(), nm, minecraftProfile.icon);
         extendedTextView.setCompoundDrawablesRelative(cachedIcon, null, extendedTextView.getCompoundsDrawables()[2], null);
 
-        if(Tools.isValidString(minecraftProfile.name))
-            extendedTextView.setText(minecraftProfile.name);
-        else
-            extendedTextView.setText(R.string.unnamed);
+        // Historically, the profile name "New" was hardcoded as the default profile name
+        // We consider "New" the same as putting no name at all
+        String profileName = (Tools.isValidString(minecraftProfile.name) && !"New".equalsIgnoreCase(minecraftProfile.name)) ? minecraftProfile.name : null;
+        String versionName = minecraftProfile.lastVersionId;
 
-        if(minecraftProfile.lastVersionId != null){
-            if(minecraftProfile.lastVersionId.equalsIgnoreCase("latest-release")){
-                extendedTextView.setText( String.format("%s - %s", extendedTextView.getText(), v.getContext().getText(R.string.profiles_latest_release)));
-            } else if(minecraftProfile.lastVersionId.equalsIgnoreCase("latest-snapshot")){
-                extendedTextView.setText( String.format("%s - %s", extendedTextView.getText(), v.getContext().getText(R.string.profiles_latest_snapshot)));
-            } else {
-                extendedTextView.setText( String.format("%s - %s", extendedTextView.getText(), minecraftProfile.lastVersionId));
-            }
+        if (MinecraftProfile.LATEST_RELEASE.equalsIgnoreCase(versionName))
+            versionName = v.getContext().getString(R.string.profiles_latest_release);
+        else if (MinecraftProfile.LATEST_SNAPSHOT.equalsIgnoreCase(versionName))
+            versionName = v.getContext().getString(R.string.profiles_latest_snapshot);
 
-        } else extendedTextView.setText(extendedTextView.getText());
+        if (versionName == null && profileName != null)
+            extendedTextView.setText(profileName);
+        else if (versionName != null && profileName == null)
+            extendedTextView.setText(versionName);
+        else extendedTextView.setText(String.format("%s - %s", profileName, versionName));
 
         // Set selected background if needed
         if(displaySelection){

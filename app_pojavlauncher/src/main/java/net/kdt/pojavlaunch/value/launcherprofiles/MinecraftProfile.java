@@ -5,6 +5,9 @@ import androidx.annotation.Keep;
 @Keep
 public class MinecraftProfile {
 
+	public static String LATEST_RELEASE = "latest-release";
+	public static String LATEST_SNAPSHOT= "latest-snapshot";
+
 	public String name;
 	public String type;
 	public String created;
@@ -23,8 +26,8 @@ public class MinecraftProfile {
 
 	public static MinecraftProfile createTemplate(){
 		MinecraftProfile TEMPLATE = new MinecraftProfile();
-		TEMPLATE.name = "New";
-		TEMPLATE.lastVersionId = "latest-release";
+		TEMPLATE.name = "";
+		TEMPLATE.lastVersionId = LATEST_RELEASE;
 		return TEMPLATE;
 	}
 

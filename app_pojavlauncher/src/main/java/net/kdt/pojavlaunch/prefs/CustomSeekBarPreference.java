@@ -28,10 +28,10 @@ public class CustomSeekBarPreference extends SeekBarPreference {
     @SuppressLint("PrivateResource")
     public CustomSeekBarPreference(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        TypedArray a = context.obtainStyledAttributes(
-                attrs, R.styleable.SeekBarPreference, defStyleAttr, defStyleRes);
-        mMin = a.getInt(R.styleable.SeekBarPreference_min, 0);
-        a.recycle();
+        try (TypedArray a = context.obtainStyledAttributes(
+                attrs, R.styleable.SeekBarPreference, defStyleAttr, defStyleRes)) {
+            mMin = a.getInt(R.styleable.SeekBarPreference_min, 0);
+        }
     }
 
     public CustomSeekBarPreference(Context context, AttributeSet attrs, int defStyleAttr) {

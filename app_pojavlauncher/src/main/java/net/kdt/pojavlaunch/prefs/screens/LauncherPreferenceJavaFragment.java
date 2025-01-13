@@ -29,19 +29,18 @@ public class LauncherPreferenceJavaFragment extends LauncherPreferenceFragment {
         // Triggers a write for some reason
         addPreferencesFromResource(R.xml.pref_java);
 
-        CustomSeekBarPreference seek7 = requirePreference("allocation",
+        CustomSeekBarPreference memorySeekbar = requirePreference("allocation",
                 CustomSeekBarPreference.class);
 
         int maxRAM;
-        int deviceRam = getTotalDeviceMemory(seek7.getContext());
+        int deviceRam = getTotalDeviceMemory(memorySeekbar.getContext());
 
         if(is32BitsDevice() || deviceRam < 2048) maxRAM = Math.min(1024, deviceRam);
         else maxRAM = deviceRam - (deviceRam < 3064 ? 800 : 1024); //To have a minimum for the device to breathe
 
-        seek7.setMin(256);
-        seek7.setMax(maxRAM);
-        seek7.setValue(ramAllocation);
-        seek7.setSuffix(" MB");
+        memorySeekbar.setMax(maxRAM);
+        memorySeekbar.setValue(ramAllocation);
+        memorySeekbar.setSuffix(" MB");
 
         EditTextPreference editJVMArgs = findPreference("javaArgs");
         if (editJVMArgs != null) {

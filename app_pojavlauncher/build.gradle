@@ -1,5 +1,5 @@
 plugins {
-    id 'com.android.application' version '7.4.2'
+    id 'com.android.application' version '8.7.2'
 }
 
 static def getDate() { return new Date().format('yyyyMMdd') }
@@ -137,6 +137,10 @@ android {
             minifyEnabled true
             shrinkResources true
         }
+        proguardNoDebug {
+            initWith proguard
+            debuggable false
+        }
 
         release {
             // Don't set to true or java.awt will be a.a or something similar.
@@ -182,9 +186,15 @@ android {
 
     buildFeatures {
         prefab true
+        buildConfig true
     }
 
-    buildToolsVersion = '33.0.2'
+    buildToolsVersion = '34.0.0'
+}
+
+afterEvaluate {
+    // Explicit dependencies for which the apk relies on
+    tasks.mergeDebugAssets.dependsOn(":forge_installer:jar", ":arc_dns_injector:jar", ":jre_lwjgl3glfw:jar")
 }
 
 dependencies {
@@ -204,7 +214,7 @@ dependencies {
     implementation 'com.github.PojavLauncherTeam:portrait-ssp:6c02fd739b'
     implementation 'com.github.Mathias-Boulay:ExtendedView:1.0.0'
     implementation 'com.github.Mathias-Boulay:android_gamepad_remapper:2.0.3'
-    implementation 'com.github.Mathias-Boulay:virtual-joystick-android:2e7aa25e50'
+    implementation 'com.github.Mathias-Boulay:virtual-joystick-android:1.14'
 
     // implementation 'com.intuit.sdp:sdp-android:1.0.5'
     // implementation 'com.intuit.ssp:ssp-android:1.0.5'

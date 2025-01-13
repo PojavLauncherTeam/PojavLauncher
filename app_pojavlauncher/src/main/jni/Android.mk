@@ -33,6 +33,8 @@ LOCAL_SRC_FILES := \
     jre_launcher.c \
     utils.c \
     stdio_is.c \
+    java_exec_hooks.c \
+    lwjgl_dlopen_hook.c \
     driver_helper/nsbypass.c
 
 ifeq ($(TARGET_ARCH_ABI),arm64-v8a)

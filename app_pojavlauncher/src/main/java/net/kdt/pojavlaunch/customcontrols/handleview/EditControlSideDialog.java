@@ -332,6 +332,7 @@ public class EditControlSideDialog extends SideDialogView {
     /**
      * A long function linking all the displayed data on the popup and,
      * the currently edited mCurrentlyEditedButton
+     * @noinspection SuspiciousNameCombination
      */
     private void setupRealTimeListeners() {
         mNameEditText.addTextChangedListener((SimpleTextWatcher) s -> {
@@ -349,6 +350,10 @@ public class EditControlSideDialog extends SideDialogView {
             float width = safeParseFloat(s.toString());
             if (width >= 0) {
                 mCurrentlyEditedButton.getProperties().setWidth(width);
+                if (mCurrentlyEditedButton.getProperties() instanceof ControlJoystickData) {
+                    // Joysticks are square
+                     mCurrentlyEditedButton.getProperties().setHeight(width);
+                }
                 mCurrentlyEditedButton.updateProperties();
             }
         });
@@ -359,6 +364,10 @@ public class EditControlSideDialog extends SideDialogView {
             float height = safeParseFloat(s.toString());
             if (height >= 0) {
                 mCurrentlyEditedButton.getProperties().setHeight(height);
+                if (mCurrentlyEditedButton.getProperties() instanceof ControlJoystickData) {
+                    // Joysticks are square
+                    mCurrentlyEditedButton.getProperties().setWidth(height);
+                }
                 mCurrentlyEditedButton.updateProperties();
             }
         });

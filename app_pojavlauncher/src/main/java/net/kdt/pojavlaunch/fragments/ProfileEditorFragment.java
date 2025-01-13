@@ -107,7 +107,28 @@ public class ProfileEditorFragment extends Fragment implements CropperUtils.Crop
             Tools.removeCurrentFragment(requireActivity());
         });
 
-        mGameDirButton.setOnClickListener(v -> {
+
+        View.OnClickListener gameDirListener = getGameDirListener();
+        mGameDirButton.setOnClickListener(gameDirListener);
+        mDefaultPath.setOnClickListener(gameDirListener);
+
+        View.OnClickListener controlSelectListener = getControlSelectListener();
+        mControlSelectButton.setOnClickListener(controlSelectListener);
+        mDefaultControl.setOnClickListener(controlSelectListener);
+
+        // Setup the expendable list behavior
+        View.OnClickListener versionSelectListener = getVersionSelectListener();
+        mVersionSelectButton.setOnClickListener(versionSelectListener);
+        mDefaultVersion.setOnClickListener(versionSelectListener);
+
+        // Set up the icon change click listener
+        mProfileIcon.setOnClickListener(v -> CropperUtils.startCropper(mCropperLauncher));
+
+        loadValues(LauncherPreferences.DEFAULT_PREF.getString(LauncherPreferences.PREF_KEY_CURRENT_PROFILE, ""), view.getContext());
+    }
+
+    private View.OnClickListener getGameDirListener() {
+        return v -> {
             Bundle bundle = new Bundle(2);
             bundle.putBoolean(FileSelectorFragment.BUNDLE_SELECT_FOLDER, true);
             bundle.putString(FileSelectorFragment.BUNDLE_ROOT_PATH, Tools.DIR_GAME_HOME);
@@ -116,9 +137,11 @@ public class ProfileEditorFragment extends Fragment implements CropperUtils.Crop
 
             Tools.swapFragment(requireActivity(),
                     FileSelectorFragment.class, FileSelectorFragment.TAG, bundle);
-        });
+        };
+    }
 
-        mControlSelectButton.setOnClickListener(v -> {
+    private View.OnClickListener getControlSelectListener() {
+        return v -> {
             Bundle bundle = new Bundle(3);
             bundle.putBoolean(FileSelectorFragment.BUNDLE_SELECT_FOLDER, false);
             bundle.putString(FileSelectorFragment.BUNDLE_ROOT_PATH, Tools.CTRLMAP_PATH);
@@ -126,20 +149,14 @@ public class ProfileEditorFragment extends Fragment implements CropperUtils.Crop
 
             Tools.swapFragment(requireActivity(),
                     FileSelectorFragment.class, FileSelectorFragment.TAG, bundle);
-        });
+        };
+    }
 
-        // Setup the expendable list behavior
-        mVersionSelectButton.setOnClickListener(v -> VersionSelectorDialog.open(v.getContext(), false, (id, snapshot)->{
+    private View.OnClickListener getVersionSelectListener() {
+        return v -> VersionSelectorDialog.open(v.getContext(), false, (id, snapshot)-> {
             mTempProfile.lastVersionId = id;
             mDefaultVersion.setText(id);
-        }));
-
-        // Set up the icon change click listener
-        mProfileIcon.setOnClickListener(v -> CropperUtils.startCropper(mCropperLauncher));
-
-
-
-        loadValues(LauncherPreferences.DEFAULT_PREF.getString(LauncherPreferences.PREF_KEY_CURRENT_PROFILE, ""), view.getContext());
+        });
     }
 
 

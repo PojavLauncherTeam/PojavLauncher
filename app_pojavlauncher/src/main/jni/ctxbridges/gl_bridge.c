@@ -55,25 +55,6 @@ static void gl4esi_get_display_dimensions(int* width, int* height) {
     *height = 0;
 }
 
-static bool already_initialized = false;
-static void gl_init_gl4es_internals() {
-    if(already_initialized) return;
-    already_initialized = true;
-    void* gl4es = dlopen("libgl4es_114.so", RTLD_NOLOAD);
-    if(gl4es == NULL) return;
-    void (*set_getmainfbsize)(void (*new_getMainFBSize)(int* width, int* height));
-    set_getmainfbsize = dlsym(gl4es, "set_getmainfbsize");
-    if(set_getmainfbsize == NULL) goto warn;
-    set_getmainfbsize(gl4esi_get_display_dimensions);
-    goto cleanup;
-
-    warn:
-    printf("gl4esinternals warning: gl4es was found but internals not initialized. expect rendering issues.\n");
-    cleanup:
-    // dlclose just decreases a ref counter, so this is fine
-    dlclose(gl4es);
-}
-
 gl_render_window_t* gl_init_context(gl_render_window_t *share) {
     gl_render_window_t* bundle = malloc(sizeof(gl_render_window_t));
     memset(bundle, 0, sizeof(gl_render_window_t));
@@ -145,10 +126,6 @@ void gl_swap_surface(gl_render_window_t* bundle) {
 }
 
 void gl_make_current(gl_render_window_t* bundle) {
-    // Perform initialization here as the renderer may not be loaded when gl_init or gl_init_context is called.
-    // Yes, even though it is dlopened on MC startup by Pojav, due to linker namespacing weirdness
-    // on API 29/MIUI it may not be loaded at the point of the gl_init call in the current namespace.
-    gl_init_gl4es_internals();
 
     if(bundle == NULL) {
         if(eglMakeCurrent_p(g_EglDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT)) {
@@ -210,4 +187,21 @@ void gl_swap_interval(int swapInterval) {
     if(pojav_environ->force_vsync) swapInterval = 1;
 
     eglSwapInterval_p(g_EglDisplay, swapInterval);
+}
+
+JNIEXPORT void JNICALL
+Java_org_lwjgl_opengl_PojavRendererInit_nativeInitGl4esInternals(JNIEnv *env, jclass clazz,
+                                                            jobject function_provider) {
+    __android_log_print(ANDROID_LOG_INFO, g_LogTag, "GL4ES internals initializing...");
+    jclass funcProviderClass = (*env)->GetObjectClass(env, function_provider);
+    jmethodID method_getFunctionAddress = (*env)->GetMethodID(env, funcProviderClass, "getFunctionAddress", "(Ljava/lang/CharSequence;)J");
+#define GETSYM(N) ((*env)->CallLongMethod(env, function_provider, method_getFunctionAddress, (*env)->NewStringUTF(env, N)));
+
+    void (*set_getmainfbsize)(void (*new_getMainFBSize)(int* width, int* height)) = (void*)GETSYM("set_getmainfbsize");
+    if(set_getmainfbsize != NULL) {
+        __android_log_print(ANDROID_LOG_INFO, g_LogTag, "GL4ES internals initialized dimension callback");
+        set_getmainfbsize(gl4esi_get_display_dimensions);
+    }
+
+#undef GETSYM
 }

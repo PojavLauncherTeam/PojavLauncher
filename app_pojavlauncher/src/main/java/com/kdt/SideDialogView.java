@@ -186,6 +186,11 @@ public abstract class SideDialogView {
      */
     @CallSuper
     public final void disappear(boolean destroy) {
+        if(!mIsInstantiated) {
+            Log.w("SideDialogView", "Layout not inflated");
+            return;
+        }
+
         if (!mDisplaying) {
             if(destroy) {
                 onDisappear();

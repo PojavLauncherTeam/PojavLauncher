@@ -26,6 +26,8 @@
         android:id="@+id/editResolution_seekbar"
         android:layout_width="0dp"
         android:layout_height="@dimen/_36sdp"
+        android:min="@integer/resolution_seekbar_min"
+        app:seekBarIncrement="@integer/resolution_seekbar_increment"
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.538"
@@ -34,9 +36,9 @@
 
     <TextView
         android:id="@+id/editResolution_textView_percent"
-        android:layout_width="50dp"
+        android:layout_width="150dp"
         android:layout_height="0dp"
-        android:gravity="center"
+        android:gravity="end"
         tools:text="50%"
 
         app:layout_constraintBottom_toBottomOf="@id/editResolution_textView"
@@ -92,6 +94,10 @@
         android:layout_width="0dp"
         android:layout_height="@dimen/_36sdp"
 
+        android:min="@integer/gyro_speed_seekbar_min"
+        android:max="@integer/gyro_speed_seekbar_max"
+        app:seekBarIncrement="@integer/gyro_speed_seekbar_increment"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.538"
         app:layout_constraintStart_toStartOf="parent"
@@ -99,9 +105,9 @@
 
     <TextView
         android:id="@+id/editGyro_textView_percent"
-        android:layout_width="50dp"
+        android:layout_width="150dp"
         android:layout_height="0dp"
-        android:gravity="center"
+        android:gravity="end"
         tools:text="100%"
 
         app:layout_constraintBottom_toBottomOf="@id/editGyro_textView"
@@ -127,6 +133,10 @@
         android:layout_width="0dp"
         android:layout_height="@dimen/_36sdp"
 
+        android:min="@integer/mouse_speed_seekbar_min"
+        android:max="@integer/mouse_speed_seekbar_max"
+        app:seekBarIncrement="@integer/mouse_speed_seekbar_increment"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.538"
         app:layout_constraintStart_toStartOf="parent"
@@ -134,9 +144,9 @@
 
     <TextView
         android:id="@+id/editMouseSpeed_textView_percent"
-        android:layout_width="50dp"
+        android:layout_width="150dp"
         android:layout_height="0dp"
-        android:gravity="center"
+        android:gravity="end"
         tools:text="100%"
 
         app:layout_constraintBottom_toBottomOf="@id/editMouseSpeed_textView"
@@ -172,6 +182,10 @@
         android:layout_width="0dp"
         android:layout_height="@dimen/_36sdp"
 
+        android:min="@integer/gesture_delay_seekbar_min"
+        android:max="@integer/gesture_delay_seekbar_max"
+        app:seekBarIncrement="@integer/gesture_delay_seekbar_increment"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.538"
         app:layout_constraintStart_toStartOf="parent"
@@ -179,10 +193,10 @@
 
     <TextView
         android:id="@+id/editGestureDelay_textView_percent"
-        android:layout_width="50dp"
+        android:layout_width="150dp"
         android:layout_height="0dp"
-        android:gravity="center"
-        tools:text="270ms"
+        android:gravity="end"
+        tools:text="270 ms"
 
         app:layout_constraintBottom_toBottomOf="@id/editGestureDelay_textView"
         app:layout_constraintEnd_toEndOf="parent"

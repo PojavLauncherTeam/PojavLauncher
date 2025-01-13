@@ -2,6 +2,7 @@ package net.kdt.pojavlaunch.utils;
 
 
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.DEFAULT_PREF;
+import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_FORCE_ENGLISH;
 
 import android.content.*;
 import android.content.res.*;
@@ -24,7 +25,7 @@ public class LocaleUtils extends ContextWrapper {
             LauncherPreferences.loadPreferences(context);
         }
 
-        if(DEFAULT_PREF.getBoolean("force_english", false)){
+        if(PREF_FORCE_ENGLISH){
             Resources resources = context.getResources();
             Configuration configuration = resources.getConfiguration();
 

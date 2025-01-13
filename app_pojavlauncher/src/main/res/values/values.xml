@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="resolution_seekbar_increment">5</integer>
+    <integer name="resolution_seekbar_min">25</integer>
+
+    <integer name="gesture_delay_seekbar_increment">10</integer>
+    <integer name="gesture_delay_seekbar_min">100</integer>
+    <integer name="gesture_delay_seekbar_max">1000</integer>
+
+
+    <integer name="button_scale_seekbar_increment">5</integer>
+    <integer name="button_scale_seekbar_min">80</integer>
+    <integer name="button_scale_seekbar_max">250</integer>
+
+    <integer name="mouse_scale_seekbar_increment">5</integer>
+    <integer name="mouse_scale_seekbar_min">25</integer>
+    <integer name="mouse_scale_seekbar_max">300</integer>
+
+    <integer name="mouse_speed_seekbar_increment">5</integer>
+    <integer name="mouse_speed_seekbar_min">25</integer>
+    <integer name="mouse_speed_seekbar_max">300</integer>
+
+    <integer name="gyro_speed_seekbar_increment">5</integer>
+    <integer name="gyro_speed_seekbar_min">25</integer>
+    <integer name="gyro_speed_seekbar_max">300</integer>
+
+    <integer name="gyro_rate_seekbar_min">5</integer>
+    <integer name="gyro_rate_seekbar_max">50</integer>
+
+    <integer name="gamepad_deadzone_seekbar_increment">5</integer>
+    <integer name="gamepad_deadzone_seekbar_min">50</integer>
+    <integer name="gamepad_deadzone_seekbar_max">200</integer>
+
+    <integer name="memory_seekbar_increment">8</integer>
+    <integer name="memory_seekbar_min">256</integer>
+
+</resources>
