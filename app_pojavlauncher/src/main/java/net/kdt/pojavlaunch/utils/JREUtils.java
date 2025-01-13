@@ -30,6 +30,8 @@ import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.multirt.Runtime;
 import net.kdt.pojavlaunch.plugins.FFmpegPlugin;
 import net.kdt.pojavlaunch.prefs.*;
+
+import org.libsdl.app.SDLActivityComponent;
 import org.lwjgl.glfw.*;
 
 import javax.microedition.khronos.egl.EGL10;

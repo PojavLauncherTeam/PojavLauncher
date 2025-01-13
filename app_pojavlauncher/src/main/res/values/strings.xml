@@ -162,6 +162,8 @@
     <string name="dl_library_sha_fail">Library %s is damaged and will be redownloaded</string>
     <string name="dl_library_sha_unknown">Library %s can\'t be checked, have to assume it\'s good</string>
     <string name="dl_library_sha_pass">Library %s is fine and usable</string>
+    <string name="mcl_gamepad_passthru">Gamepad passthrough</string>
+    <string name="mcl_gamepad_passthru_subtitle">Designed for controller mods like Controlify; when enabled, Pojav does no controller to keyboard/mouse emulation and allows the game to process controllers.</string>
     <string name="mcl_disable_gestures">Disable gestures</string>
     <string name="mcl_disable_gestures_subtitle">Disables gestures, such as hold to break block, and tap to place a block.</string>
     <string name="mcl_disable_swap_hand">Disable double tap to swap hands</string>

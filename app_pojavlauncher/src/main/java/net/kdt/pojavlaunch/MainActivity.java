@@ -24,13 +24,12 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.provider.DocumentsContract;
 import android.util.Log;
 import android.view.InputDevice;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.webkit.MimeTypeMap;
+import android.view.WindowInsets;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -66,12 +65,14 @@ import net.kdt.pojavlaunch.value.MinecraftAccount;
 import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
 import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 
+import org.libsdl.app.SDLActivityComponent;
+import org.libsdl.app.SDLComponentReceiver;
 import org.lwjgl.glfw.CallbackBridge;
 
 import java.io.File;
 import java.io.IOException;
 
-public class MainActivity extends BaseActivity implements ControlButtonMenuListener, EditorExitable, ServiceConnection {
+public class MainActivity extends BaseActivity implements ControlButtonMenuListener, EditorExitable, ServiceConnection, SDLComponentReceiver, View.OnSystemUiVisibilityChangeListener {
     public static volatile ClipboardManager GLOBAL_CLIPBOARD;
     public static final String INTENT_MINECRAFT_VERSION = "intent_version";
 
@@ -98,9 +99,16 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
 
     private QuickSettingSideDialog mQuickSettingSideDialog;
 
+    private SDLActivityComponent sdlActivityComponent;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        sdlActivityComponent = new SDLActivityComponent(this);
+        sdlActivityComponent.setLibraries(new String[] { "SDL3" });
+        sdlActivityComponent.onCreate();
+
         minecraftProfile = LauncherProfiles.getCurrentProfile();
         MCOptionUtils.load(Tools.getGameDirPath(minecraftProfile).getAbsolutePath());
 
@@ -281,24 +289,32 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
             mQuickSettingSideDialog.cancel();
         }
         CallbackBridge.nativeSetWindowAttrib(LwjglGlfwKeycode.GLFW_HOVERED, 0);
+
+        sdlActivityComponent.onPause();
         super.onPause();
     }
 
     @Override
     protected void onStart() {
+        sdlActivityComponent.onStart();
         super.onStart();
+
         CallbackBridge.nativeSetWindowAttrib(LwjglGlfwKeycode.GLFW_VISIBLE, 1);
     }
 
     @Override
     protected void onStop() {
         CallbackBridge.nativeSetWindowAttrib(LwjglGlfwKeycode.GLFW_VISIBLE, 0);
+
+        sdlActivityComponent.onStop();
         super.onStop();
     }
 
     @Override
     protected void onDestroy() {
+        sdlActivityComponent.onDestroy();
         super.onDestroy();
+
         CallbackBridge.removeGrabListener(touchpad);
         CallbackBridge.removeGrabListener(minecraftGLView);
         ContextExecutor.clearActivity();
@@ -306,6 +322,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
 
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        sdlActivityComponent.onConfigurationChanged(newConfig);
         super.onConfigurationChanged(newConfig);
 
         if(mGyroControl != null) mGyroControl.updateOrientation();
@@ -330,6 +347,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        sdlActivityComponent.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
@@ -421,6 +439,10 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
 
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
+        if (!sdlActivityComponent.dispatchKeyEvent(event)) {
+            return false;
+        }
+
         if(isInEditor) {
             if(event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
                 if(event.getAction() == KeyEvent.ACTION_DOWN) mControlLayout.askToExit(this);
@@ -569,5 +591,40 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         if(Tools.isAndroid8OrHigher() && checkCaptureDispatchConditions(ev))
             return minecraftGLView.dispatchCapturedPointerEvent(ev);
         else return super.dispatchTrackballEvent(ev);
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        sdlActivityComponent.onWindowFocusChanged(hasFocus);
+        super.onWindowFocusChanged(hasFocus);
+    }
+
+    @Override
+    public void onTrimMemory(int level) {
+        sdlActivityComponent.onTrimMemory(level);
+        super.onTrimMemory(level);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (sdlActivityComponent.onBackPressed()) {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        sdlActivityComponent.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    @Override
+    public void onSystemUiVisibilityChange(int visibility) {
+        sdlActivityComponent.onSystemUiVisibilityChange(visibility);
+    }
+
+    @Override
+    public void superOnBackPressed() {
+        super.onBackPressed();
     }
 }

@@ -37,6 +37,7 @@ public class LauncherPreferences {
     public static final String PREF_VERSION_REPOS = "https://piston-meta.mojang.com/mc/game/version_manifest_v2.json";
     public static boolean PREF_CHECK_LIBRARY_SHA = true;
     public static boolean PREF_DISABLE_GESTURES = false;
+    public static boolean PREF_GAMEPAD_PASSTHRU = false;
     public static boolean PREF_DISABLE_SWAP_HAND = false;
     public static float PREF_MOUSESPEED = 1f;
     public static int PREF_RAM_ALLOCATION;
@@ -84,6 +85,7 @@ public class LauncherPreferences {
         PREF_FORCE_ENGLISH = DEFAULT_PREF.getBoolean("force_english", false);
         PREF_CHECK_LIBRARY_SHA = DEFAULT_PREF.getBoolean("checkLibraries",true);
         PREF_DISABLE_GESTURES = DEFAULT_PREF.getBoolean("disableGestures",false);
+        PREF_GAMEPAD_PASSTHRU = DEFAULT_PREF.getBoolean("gamepadPassthru",false);
         PREF_DISABLE_SWAP_HAND = DEFAULT_PREF.getBoolean("disableDoubleTap", false);
         PREF_RAM_ALLOCATION = DEFAULT_PREF.getInt("allocation", findBestRAMAllocation(ctx));
         PREF_CUSTOM_JAVA_ARGS = DEFAULT_PREF.getString("javaArgs", "");
