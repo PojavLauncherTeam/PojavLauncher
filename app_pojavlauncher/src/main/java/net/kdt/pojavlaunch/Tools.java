@@ -185,18 +185,17 @@ public final class Tools {
     }
 
     /**
-     * Optimization mods based on Soium can mitigate the render distance issue. Check if Sodium
+     * Optimization mods based on Sodium can mitigate the render distance issue. Check if Sodium
      * or its derivative is currently installed to skip the render distance check.
-     * @param gamedir current game directory
+     * @param gameDir current game directory
      * @return whether sodium or a sodium-based mod is installed
      */
-    private static boolean hasSodium(File gamedir) {
-        File modsDir = new File(gamedir, "mods");
-        File[] mods = modsDir.listFiles();
+    private static boolean hasSodium(File gameDir) {
+        File modsDir = new File(gameDir, "mods");
+        File[] mods = modsDir.listFiles(file -> file.isFile() && file.getName().endsWith(".jar"));
         if(mods == null) return false;
         for(File file : mods) {
             String name = file.getName();
-            if(!file.isFile() && !name.endsWith(".jar")) continue;
             if(name.contains("sodium") ||
                     name.contains("embeddium") ||
                     name.contains("rubidium")) return true;
@@ -206,8 +205,14 @@ public final class Tools {
 
     /**
      * Initialize OpenGL and do checks to see if the GPU of the device is affected by the render
-     * distance issue. Currently only checks whether the user has an Adreno GPU capable of OpenGL ES 3
+     * distance issue.
+
+     * Currently only checks whether the user has an Adreno GPU capable of OpenGL ES 3
      * and surfaceless rendering installed.
+
+     * This issue is caused by a very severe limit on the amount of GL buffer names that could be allocated
+     * by the Adreno properietary GLES driver.
+
      * @return whether the GPU is affected by the Large Thin Wrapper render distance issue on vanilla
      */
     private static boolean affectedByRenderDistanceIssue() {
