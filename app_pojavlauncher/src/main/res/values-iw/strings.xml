@@ -136,6 +136,7 @@
     <string name="customctrl_passthru">עכבר עובר דרך</string>
     <string name="customctrl_swipeable">ניתן להחלקה</string>
     <string name="customctrl_forward_lock">נעילת קדימה</string>
+    <string name="customctrl_absolute_tracking"></string>
     <string name="memory_warning_msg">הכמות הנוכחית של RAM פנוי (%d) נמוכה מכמות ה-RAM שהוקצתה (%d), מה שעלול לגרום למשחק לקרוס. הנך מתבקש לשנות את ההקצאה במידה והמשחק קורס.</string>
     <string name="mcl_memory_allocation">הקצאת זיכרון</string>
     <string name="mcl_memory_allocation_subtitle">שולט בכמה זיכרון ניתן ל מיינקראפט.</string>
