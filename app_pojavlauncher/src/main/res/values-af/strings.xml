@@ -1,23 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
     <string name="app_name"></string>
     <string name="app_short_name">PojavLauncher</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_online_login_label">Anmelden</string>
     <!-- Hint -->
     <!-- Warnings -->
+    <string name="warning_remove_account">Dieses Konto wird entfernt!</string>
     <!-- AlertDialog title -->
+    <string name="alerttitle_installmod">Wahlweise einen Mod-Installer</string>
     <!-- Error messages -->
+    <string name="error_fatal">PojavLauncher ist unerwartet abgestürzt</string>
+    <string name="error_no_version">Keine Version!</string>
+    <string name="error_show_more">Mehr anzeigen</string>
+    <string name="error_show_less">Weniger anzeigen</string>
     <!-- Toast messages -->
+    <string name="toast_permission_denied">Die Lese/Schreib-Berechtigung für den Speicher ist benötigt!</string>
+    <string name="toast_optifine_success">Installation erfolgreich</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_wiki">Wiki</string>
     <!-- MCLauncherActivity: Account status -->
     <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_launch_cleancache">Cache-Dateien bereinigen</string>
+    <string name="mcl_launch_downloading">Lade %s herunter</string>
+    <string name="mcl_launch_downloading_progress">"Lade %s herunter (%.2f MB / %.2f MB)"</string>
+    <string name="mcl_launch_download_assets">Bereite das Herunterladen der Ressourcen vor</string>
+    <string name="mcl_options">Optionen</string>
+    <string name="mcl_option_customcontrol">Benutzerdefinierte Steuerung</string>
+    <string name="mcl_setting_title_use_surface_view">Verwende alternatives Oberflächen-Rendering</string>
+    <string name="mcl_setting_subtitle_use_surface_view">Könnte die Leistung in GPU abhängigen Szenarien verbessern.</string>
+    <string name="mcl_setting_title_ignore_notch">Ignoriere die Kameraeinkerbung</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Ignoriert die Kammeraeinkerbung im Bildschirm und erweitert den Bildschirm unter ihr.\nErmöglicht eine immersiveres Erlebniss.</string>
+    <string name="mcl_setting_title_resolution_scaler">Auflösungsskalierer</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">Ermöglicht das Verringern der Spielauflösung. 100% entspricht der vollen Auflösung.</string>
+    <string name="mcl_setting_title_longpresstrigger">Verzögerung nach langem Drücken des Triggers</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Verzögerung für langes drücken des Triggers für das Zerstören von Blöcken oder fallen lassen von Gegenständen ändern.</string>
+    <string name="mcl_setting_title_buttonscale">Größe der Steuerelemente</string>
+    <string name="mcl_setting_subtitle_buttonscale">Tasten vergrößern, wenn sie zu klein sind.</string>
+    <string name="mcl_setting_title_mousescale">Größe der Maus</string>
+    <string name="mcl_setting_subtitle_mousescale">Größe der virtuellen Maus ändern.</string>
+    <string name="mcl_setting_title_javaargs">JVM-Startargumente</string>
+    <string name="mcl_setting_subtitle_javaargs">Achtung! Das Verändern dieser Argumente ohne Fachwissen kann zu Abstürzen führen.</string>
+    <string name="mcl_setting_category_renderer">Renderer</string>
+    <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (alle Versionen, schnell)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - (alle Versionen, mittel)</string>
+    <string name="mcl_setting_veroption_release">Vollversionen</string>
+    <string name="mcl_setting_veroption_snapshot">Entwicklungsversionen</string>
+    <string name="mcl_setting_veroption_oldalpha">Alte Alpha</string>
+    <string name="mcl_setting_veroption_oldbeta">Alte Beta</string>
+    <string name="mcl_setting_java_sandbox">.jar in einer Sandbox ausführen</string>
+    <string name="mcl_setting_java_sandbox_subtitle">Verfügbarkeit des Sandbox-Security-Managers beim Ausführen einer .jar-Datei einstellen.</string>
+    <string name="mcl_version_clone">Duplizieren</string>
     <!-- Global strings -->
+    <string name="global_error">I want to login</string>
+    <string name="global_load">Laden</string>
+    <string name="global_name">Name</string>
+    <string name="global_clone">Duplizieren</string>
+    <string name="global_restart">Neustart</string>
+    <string name="global_save">Speichern</string>
     <!-- MainActivity: strings -->
     <!-- MainActivity: Control buttons -->
     <!-- MainActivity: Menu advanced controls -->
@@ -26,4 +72,7 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
+    <string name="profiles_profile_name">Name</string>
+    <string name="pedit_renderer">Renderer</string>
+    <string name="of_dl_progress">Lade %s herunter</string>
 </resources>
