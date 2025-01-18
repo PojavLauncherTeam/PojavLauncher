@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition для Android)</string>
     <string name="app_short_name">PojavLauncher</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">Почта или имя пользователя</string>
     <string name="login_online_login_label">Войти</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Нажмите на иконку ⚙, дабы открыть панель дѣйствій.\nВыберите кнопку, дабы создать ​ея​ копію или удалить;\nизмѣнить свойства, размѣръ или привязанную клавишу."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Сіи документы будутъ удалены!</string>
     <!-- AlertDialog title -->
@@ -129,4 +127,6 @@
     <string name="profiles_profile_name">Имя</string>
     <string name="pedit_renderer">Визуализаторъ</string>
     <string name="of_dl_progress">Загрузка %s</string>
+    <string name="generic_debug">Отладка</string>
+    <string name="controller_button_select">Сдѣлать выборъ</string>
 </resources>
