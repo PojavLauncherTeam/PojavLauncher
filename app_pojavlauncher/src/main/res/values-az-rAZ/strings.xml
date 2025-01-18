@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition Android üçün)</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">E-poçt və ya istifadəçi adı</string>
+    <string name="login_online_username_hint">İstifadəçi adı</string>
     <string name="login_online_login_label">Daxil ol</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Kontekst menyusunu açmaq üçün yuxarı orta dişli ikonaya toxunun ⚙\nFərdiləşdirmə üçün düyməyə toxunun: onun klaviaturasını redaktə edin, ölçüsünü dəyişin, silin və ya fərdiləşdirin."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Bu hesab silinəcək!</string>
     <!-- AlertDialog title -->
@@ -51,7 +50,6 @@
     <string name="mcl_setting_category_renderer">Renderer</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (bütün versiyalar, sürətli)</string>
     <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - (bütün versiyalar, orta)</string>
-    <string name="mcl_setting_renderer_angle">ANGLE (Vulkan) - (yalnız 1.17+, orta)</string>
     <string name="mcl_setting_veroption_release">Buraxın</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Köhnə-alfa</string>
@@ -158,7 +156,6 @@
     <string name="multirt_config_setdefault">Defolt təyin edin</string>
     <string name="multirt_config_setdefault_already">Defolt</string>
     <string name="multirt_config_removeerror_last">Ən azı bir Java Runtime quraşdırılmış olmalıdır.</string>
-    <string name="multirt_nocompartiblert">Heç bir uyğun gələn Java Runtime tapılmadı. Bu versiya Java %d və ya daha yenisini tələb edir.</string>
     <string name="multirt_nojava8rt">Java 8-i tapmaq mümkün deyil. Bu seçimdən istifadə etmək üçün Java 8-i quraşdırmalısınız.</string>
     <string name="multirt_delete_runtime">Runtime-ı silin</string>
     <string name="pvc_gameDirectory">Oyun kataloqu</string>
@@ -281,6 +278,7 @@
     <string name="preference_vulkan_driver_system_description">Başladıcını Adreno GPU-larda Turnip əvəzinə sistem Vulkan sürücüsündən istifadə etməyə məcbur edin. Yalnız Zink və Vulkandan istifadə edən modlara təsir edir.</string>
     <string name="generic_install">Quraşdır</string>
     <string name="generic_apply">Tətbiq et</string>
+    <string name="generic_debug">Sazlama</string>
     <string name="search_modpack_no_result">Heç bir modpaket tapılmadı</string>
     <string name="search_modpack_error">Mod paketləri tapmaq alınmadı</string>
     <string name="search_modpack_download_error">Modpack metadatasını endirmək alınmadı</string>
@@ -327,5 +325,11 @@
     <string name="exception_failed_to_unpack_jre17">JRE 17 quraşdırmaq alınmadı</string>
     <string name="newdl_starting">Oyun metadatası oxunur…</string>
     <string name="newdl_downloading_metadata">Oyun metadatası endirilir (%s)</string>
-    <string name="newdl_downloading_game_files">Oyun faylları endirilir... (%d/%d, %.2f MB)</string>
+    <string name="controller_button_a">A</string>
+    <string name="controller_button_b">B</string>
+    <string name="controller_button_x">X</string>
+    <string name="controller_button_y">Y</string>
+    <string name="controller_button_start">Başlat</string>
+    <string name="controller_button_select">Seç</string>
+    <string name="customctrl_visibility_title">Görünüş</string>
 </resources>
