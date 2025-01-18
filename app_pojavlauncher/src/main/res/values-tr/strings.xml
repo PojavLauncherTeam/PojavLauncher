@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Android için Minecraft: Java Edition)</string>
     <string name="app_short_name">PojavLauncher</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">E-posta veya kullanıcı adı</string>
+    <string name="login_online_username_hint">Kullanıcı Adı</string>
     <string name="login_online_login_label">Giriş yap</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"içerik menüsünü açmak için orta üstteki çark ikonuna tıklayın. ⚙\nBir düğmeye tıklayarak özelleştirebilir: düzenleyebilir, silebilir veya tuş bağını değiştirebilirsiniz."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Bu hesap kaldırılacak!</string>
     <!-- AlertDialog title -->
@@ -45,19 +44,18 @@
     <string name="mcl_setting_subtitle_longpresstrigger">Blokları yok etmek ve eşyaları düşürmek için uzun basma tetiklenme gecikmesini değiştirin.</string>
     <string name="mcl_setting_title_buttonscale">Düğmelerin ölçeklemesini ayarla</string>
     <string name="mcl_setting_subtitle_buttonscale">Eğer düğmeler çok küçükse büyütün.</string>
-    <string name="mcl_setting_title_mousescale">Fare ölçeklemesi</string>
+    <string name="mcl_setting_title_mousescale">İmleç ölçeklemesi</string>
     <string name="mcl_setting_subtitle_mousescale">Sanal farenin boyutunu ayarlayın.</string>
-    <string name="mcl_setting_title_javaargs">JVM Başlatıcı değişkenleri</string>
+    <string name="mcl_setting_title_javaargs">JVM Başlatıcı argümanları</string>
     <string name="mcl_setting_subtitle_javaargs">Dikkatli olun, eğer bilgisizce değiştirilirse oyunun çökmesine sebep olabilir.</string>
-    <string name="mcl_setting_category_renderer">İşleyici</string>
-    <string name="mcl_setting_renderer_gles2_4">Kutsal GL4ES - (bütün sürümler için, hızlı)</string>
+    <string name="mcl_setting_category_renderer">Görüntü İşleyici</string>
+    <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (bütün sürümler, hızlı)</string>
     <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - (tüm sürümler için, orta)</string>
-    <string name="mcl_setting_renderer_angle">ANGLE (Vulkan) - (sadece 1.17+, orta)</string>
     <string name="mcl_setting_veroption_release">Sürümler</string>
     <string name="mcl_setting_veroption_snapshot">Test sürümleri</string>
     <string name="mcl_setting_veroption_oldalpha">Eski-alfa</string>
     <string name="mcl_setting_veroption_oldbeta">Eski-beta</string>
-    <string name="mcl_setting_java_sandbox">Sandbox .jar çalıştırma</string>
+    <string name="mcl_setting_java_sandbox">Sandbox .jar yürütme</string>
     <string name="mcl_setting_java_sandbox_subtitle">Bir .jar dosyasını çalıştırırken sandbox güvenlik yöneticisinin kullanılabilirliğini kontrol edin.</string>
     <string name="mcl_version_clone">Klonla</string>
     <!-- Global strings -->
@@ -93,13 +91,13 @@
     <string name="control_jump">⬛</string>
     <string name="control_thirdperson">3rd</string>
     <string name="control_listplayers">Tab</string>
-    <string name="control_mouse">Fare</string>
-    <string name="control_mouseoff">Fare: kpl</string>
-    <string name="control_mouseon">Fare: açık </string>
+    <string name="control_mouse">İmleç</string>
+    <string name="control_mouseoff">İmleç: kapalı</string>
+    <string name="control_mouseon">İmleç: açık </string>
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">Kapatmaya zorla</string>
     <string name="control_viewout">Konsol çıktısı</string>
-    <string name="control_adebug">Hata ayıklama tuşu gir</string>
+    <string name="control_adebug">Girdi hata ayıklaması</string>
     <string name="control_customkey">Özel anahtar kodu gönder</string>
     <!-- ImportControlActivity Strings -->
     <string name="import_control_label">Kontrolleri içeri aktar</string>
@@ -112,12 +110,12 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
-    <string name="customctrl_toggle">Değiştirilebilir</string>
+    <string name="customctrl_toggle">Açılıp kapanabilir</string>
     <string name="customctrl_size">Boyut</string>
     <string name="customctrl_mapping">Atama</string>
     <string name="customctrl_orientation">Yön</string>
-    <string name="customctrl_background_color">Arka plan rengi</string>
-    <string name="customctrl_corner_radius">Köşe alanı</string>
+    <string name="customctrl_background_color">Arkaplan rengi</string>
+    <string name="customctrl_corner_radius">Köşe yarıçapı</string>
     <string name="customctrl_stroke_width">Vurgu genişliği</string>
     <string name="customctrl_stroke_color">Vurgu rengi</string>
     <string name="customctrl_button_opacity">Düğme saydamlığı</string>
@@ -133,63 +131,62 @@
     <string name="autoram_info_msg">Bellek %d MB olarak ayarlandı</string>
     <string name="mcl_setting_check_libraries">İndirmeden sonra kütüphaneleri kontrol et</string>
     <string name="mcl_setting_check_libraries_subtitle">Bu seçenek mümkünse başlatıcıyı kütüphane hash\'ini kontrol etmeye zorlar. Bozuk indirmeleri engeller.</string>
-    <string name="dl_library_sha_fail">Kütüphane %s hasarlı ve yeniden indirilecek</string>
-    <string name="dl_library_sha_unknown">Kütüphane %s kontrol edilemez, düzgün olduğu varsayılmak zorunda</string>
-    <string name="dl_library_sha_pass">Kütüphane %s iyi durumda ve kullanılabilir</string>
-    <string name="mcl_disable_gestures">İşaretleri devre dışı bırak</string>
-    <string name="mcl_disable_gestures_subtitle">Blok kırmak için basılı tutma ve blok koymak için dokunma gibi işaretleri devre dışı bırakır.</string>
+    <string name="dl_library_sha_fail">\"%s\" kütüphanesi hasarlı ve yeniden indirilecek</string>
+    <string name="dl_library_sha_unknown">\"%s\" kütüphanesi kontrol edilemiyor, düzgün olduğu varsayılacak</string>
+    <string name="dl_library_sha_pass">\"%s\" kütüphanesi iyi durumda ve kullanılabilir</string>
+    <string name="mcl_disable_gestures">Hareketleri devre dışı bırak</string>
+    <string name="mcl_disable_gestures_subtitle">Blok kırmak için basılı tutma ve blok koymak için dokunma gibi hareketleri devre dışı bırakır.</string>
     <string name="mcl_disable_swap_hand">El değiştirmek için çift dokunmayı devre dışı bırak</string>
-    <string name="mcl_disable_swap_hand_subtitle">İkinci elde değiştirmek için kısayol çubuğu öğesine iki kez dokunmayı devre dışı bırakır.</string>
-    <string name="mcl_setting_title_mousespeed">Fare Hızı</string>
+    <string name="mcl_disable_swap_hand_subtitle">İkinci elde değiştirmek için kısayol çubuğu ögesine iki kez dokunmayı devre dışı bırakır.</string>
+    <string name="mcl_setting_title_mousespeed">İmleç Hızı</string>
     <string name="mcl_setting_subtitle_mousespeed">Sanal farenin hızını ayarlar.</string>
-    <string name="customctrl_passthru">Mouse geçişi</string>
+    <string name="customctrl_passthru">İmleç geçişi</string>
     <string name="customctrl_swipeable">Kaydırılabilir</string>
     <string name="customctrl_forward_lock">İleri kilit</string>
     <string name="customctrl_absolute_tracking">Mutlak parmak takibi</string>
-    <string name="memory_warning_msg">Şuanki boş bellek (%d) verilecek bellekten (%d) az, bu çökmeye sebep olacaktır. Eğer oyun çökerse verilen belleği değiştirin.</string>
+    <string name="memory_warning_msg">Şuanki boş bellek (%d) verilecek bellekten (%d) daha az, bu durum çökmelere sebep olabilir. Eğer oyun çökerse verilen belleği değiştirin.</string>
     <string name="mcl_memory_allocation">Bellek ayırma</string>
     <string name="mcl_memory_allocation_subtitle">Minecraft\'a ne kadar bellek verileceğini kontrol eder.</string>
     <string name="multirt_runtime_corrupt">Bozuk Java Runtime</string>
     <string name="multirt_runtime_incompatiblearch">Uyumsuz mimari: %s</string>
     <string name="multirt_config_title">Java Runtime\'lar</string>
     <string name="multirt_config_add">Yeni ekle</string>
-    <string name="multirt_title">Runtime yöneticisi</string>
+    <string name="multirt_title">Runtime Yöneticisi</string>
     <string name="multirt_subtitle">Yüklü Java Runtime\'larını yönet.</string>
     <string name="multirt_progress_caching">Önbelleğe alınıyor...</string>
     <string name="multirt_config_setdefault">Varsayılan olarak ayarla</string>
     <string name="multirt_config_setdefault_already">Varsayılan</string>
     <string name="multirt_config_removeerror_last">En az bir Java Runtime\'ın kurulu olması gerekmektedir.</string>
-    <string name="multirt_nocompartiblert">Hiç uyumlu Java Runtime bulunamadı. Bu sürüm Java %d ya da daha yenisini gerektiriyor.</string>
     <string name="multirt_nojava8rt">Java 8 bulunamadı. Bu seçeneği kullanabilmeniz için Java 8 kurmanız gerekiyor.</string>
     <string name="multirt_delete_runtime">Runtime\'ı sil</string>
     <string name="pvc_gameDirectory">Oyun dizini</string>
     <string name="pvc_jvmArgs">JVM değişkenleri</string>
-    <string name="preference_mouse_start_title">Sanal fare açık olarak başla</string>
+    <string name="preference_mouse_start_title">Sanal imleç açık olarak başla</string>
     <string name="preference_mouse_start_description">Bu seçenek açık olduğunda, başlangıçta Sanal Fare görünür olacak.</string>
-    <string name="preference_video_title">Video ve işleyici</string>
+    <string name="preference_video_title">Video ve görüntü işleyici</string>
     <string name="preference_video_description">Çözünürlük, işleyici ve performans</string>
     <string name="preference_control_title">Kontrol özelleştirmesi</string>
-    <string name="preference_control_description">Hareketler, butonlar ve ölçekleme</string>
+    <string name="preference_control_description">Hareketler, butonlar ve ölçeklendirme</string>
     <string name="preference_java_title">Java Ayarlamaları</string>
-    <string name="preference_java_description">Java Runtimeları, JVM Değişkenleri, Bellek miktarı ve sandbox</string>
+    <string name="preference_java_description">Java Runtime\'ları, JVM Değişkenleri, RAM miktarı ve sandbox</string>
     <string name="preference_misc_title">Çeşitli ayarlar</string>
     <string name="preference_misc_description">Sürüm listesi ve kütüphane kontrolü</string>
     <string name="preference_experimental_title">Deneysel Ayarlar</string>
     <string name="preference_experimental_description">Buradaki ayarları düşünerek kullanın, destek yoktur</string>
     <string name="preference_sustained_performance_title">Kısıtlı performans modunu aç</string>
     <string name="preference_sustained_performance_description">Üst performansı kısıtlayarak ısınmayı limitle.</string>
-    <string name="preference_force_vsync_title">VSync\'i zorla uygula</string>
+    <string name="preference_force_vsync_title">VSync\'i zorla</string>
     <string name="preference_force_vsync_description">Üst performansı kısıtlayarak ısınmayı limitle.</string>
     <string name="preference_force_english_title">Dili ingilizce\'ye zorla</string>
     <string name="preference_force_english_description">Geliştiriciler tarafından amaçlanan orijinal yazıları görmenizi sağlar. Yeniden başlatma gerektirir.</string>
     <string name="preference_edit_controls_title">Özel kontrolleri düzenle</string>
-    <string name="preference_edit_controls_summary">İhtiyaçlarınıza uyması amacıyla kontrol şemasını ayarlayın.</string>
+    <string name="preference_edit_controls_summary">İhtiyaçlarınıza göre kontrol şemasını ayarlayın.</string>
     <string name="preference_category_gyro_controls">Jiroskop kontrolleri</string>
     <string name="preference_category_virtual_mouse">Sanal Fare</string>
     <string name="preference_gyro_invert_x_axis">X eksenini ters çevir</string>
     <string name="preference_gyro_invert_y_axis">Y eksenini tersine çevir</string>
-    <string name="preference_gyro_invert_x_axis_description">Yatay ekseni tersine çevir.</string>
-    <string name="preference_gyro_invert_y_axis_description">Dikey ekseni tersine çevir.</string>
+    <string name="preference_gyro_invert_x_axis_description">Yatay ekseni ters çevir.</string>
+    <string name="preference_gyro_invert_y_axis_description">Dikey ekseni ters çevir.</string>
     <string name="preference_gyro_smoothing_title">Jiroskopik yumuşatmayı etkinleştir</string>
     <string name="preference_gyro_smoothing_description">Gecikme karşılığında titremeyi azaltın.</string>
     <string name="preference_back_title">Son ekrana geri dön</string>
@@ -200,9 +197,9 @@
     <string name="profiles_profile_version">Sürüm</string>
     <string name="global_delete">Sil</string>
     <string name="pedit_java_runtime">Java Runtime</string>
-    <string name="pedit_renderer">İşleyici</string>
+    <string name="pedit_renderer">Görüntü İşleyici</string>
     <string name="arc_capes_title">Cosmetica Pelerinleri</string>
-    <string name="arc_capes_desc">Cosmetica\'nın Pelerinlerini etkinleştirir (Önceden Arc). Daha fazla bilgi için lütfen https://cosmetica.cc\'u ziyaret edin. OptiFine gerektirir.</string>
+    <string name="arc_capes_desc">Cosmetica\'nın (eskiden Arc olarak biliniyordu) Pelerinlerini etkinleştirir. Daha fazla bilgi için lütfen https://cosmetica.cc\'u ziyaret edin. OptiFine gerektirir.</string>
     <string name="notif_channel_name">Genel</string>
     <string name="lazy_service_default_title">Pojav Önplan Hizmeti</string>
     <string name="mcl_setting_veroption_installed">Kuruldu</string>
@@ -219,9 +216,9 @@
     <string name="main_add_account">Hesap Ekle</string>
     <string name="tasks_ongoing">Görevler devam etmekte, lütfen bekleyin</string>
     <string name="no_saved_accounts">Kayıtlı hesap yok</string>
-    <string name="mc_download_failed">Minecraft indirmesi başarısız oldu! Bu kötü internet bağlantısı, yanlış yerleştirilmiş dosyalar vb.. sebebiyle olabilir.</string>
+    <string name="mc_download_failed">Minecraft\'ı indirmek başarısız oldu! Bu kötü internet bağlantısı, yanlış yerleştirilmiş dosyalar vb… sebebiyle olabilir.</string>
     <string name="xerr_unknown">Bilinmeyen XBOX Live API hatası %d</string>
-    <string name="xerr_no_account">Bir Xbox Live hesabına sahip değil gibisiniz. Lütfen bir kereliğine https://minecraft.net/ \'da giriş yapın ve tekrar deneyin.</string>
+    <string name="xerr_no_account">Bir Xbox Live hesabına sahip olmadığınız görünüyor. Lütfen bir kereliğine https://minecraft.net/ \'da giriş yapın ve tekrar deneyin.</string>
     <string name="xerr_adult_verification">Bir yetişkinin hesabınızı onaylaması gerekiyor.</string>
     <string name="xerr_child">Hesabınız bir çocuk hesabı ve giriş yapabilmek için bir aileye eklenmesi gerekiyor.</string>
     <string name="minecraft_not_owned">Görünüşe göre bu hesap bir Minecraft profiline sahip değil. Eğer Xbox Game Pass\'e sahip iseniz, lütfen https://minecraft.net/ \'den giriş yapın ve ayarlayın.</string>
@@ -238,7 +235,7 @@
     <string name="mcl_setting_title_buttonallcaps">Düğme etiketlerinde yalnızca büyük harfler kullanın</string>
     <string name="mcl_setting_subtitle_buttonallcaps">Kontrollerinizde küçük harfler kullanmak istiyorsanız bunu devre dışı bırakın.</string>
     <string name="create_profile">Yeni profil oluştur</string>
-    <string name="preference_shader_dump_title">Shader dumping\'i etkinleştir</string>
+    <string name="preference_shader_dump_title">Gölgelendirici bilgi göstergesini etkinleştir</string>
     <string name="preference_shader_dump_description">Dönüştürülen shader\'ları günlük dosyasına (log\'a) kaydedin.</string>
     <string name="percent_format">%d%%</string>
     <string name="customctrl_editor_exit_title">Çıkılsın mı?</string>
@@ -282,6 +279,7 @@
     <string name="preference_vulkan_driver_system_description">Başlatıcıyı Adreno GPU\'lardaki Turnip yerine sistem Vulkan sürücüsünü kullanmaya zorlayın. Sadece Zink ve Vulkan kullanan modları etkiler.</string>
     <string name="generic_install">Yükle</string>
     <string name="generic_apply">Uygula</string>
+    <string name="generic_debug">Hata Ayıklama</string>
     <string name="search_modpack_no_result">Hiçbir mod paketi bulunmadı</string>
     <string name="search_modpack_error">Mod paketi bulunamadı</string>
     <string name="search_modpack_download_error">Mod paketi meta verileri indirilemedi</string>
@@ -326,4 +324,13 @@
     <string name="preference_vsync_in_zink_title">Zink ile V-Sync\'ye izin ver</string>
     <string name="preference_vsync_in_zink_description">Başlatıcının Zink için V-Sync\'i etkinleştirmek üzere dahili sistem API\'lerini kullanmasına izin verir. Bir sistem güncellemesinden sonra başlatıcınız Zink ile aniden çökerse bunu kapatın.</string>
     <string name="exception_failed_to_unpack_jre17">JRE 17 yüklenemedi</string>
+    <string name="newdl_starting">Oyun meta verileri okunuyor…</string>
+    <string name="newdl_downloading_metadata">Oyun meta verileri indiriliyor (%s)</string>
+    <string name="controller_button_a">A</string>
+    <string name="controller_button_b">B</string>
+    <string name="controller_button_x">X</string>
+    <string name="controller_button_y">Y</string>
+    <string name="controller_button_start">Başla</string>
+    <string name="controller_button_select">Seç</string>
+    <string name="customctrl_visibility_title">Görünürlük</string>
 </resources>
