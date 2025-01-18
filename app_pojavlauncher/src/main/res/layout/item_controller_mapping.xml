@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/controller_mapper_default_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="true">
+
+        <!-- Content description is set in ViewHolder -->
+        <ImageView
+            android:id="@+id/controller_mapper_button"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="@dimen/padding_moderate"
+            android:layout_marginTop="@dimen/padding_small"
+            android:layout_marginBottom="@dimen/padding_small"
+            android:focusable="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/button_a"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/controller_mapper_expand_button"
+            android:layout_width="@dimen/padding_large"
+            android:layout_height="@dimen/padding_large"
+            android:layout_marginEnd="@dimen/padding_heavy"
+            android:rotation="180"
+            android:focusable="false"
+            android:contentDescription="@string/controller_remapper_expand_entry"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/spinner_arrow" />
+        <!-- Set in code -->
+        <TextView
+            android:id="@+id/controller_mapper_keycode_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/padding_large"
+            android:maxLines="2"
+            android:minLines="1"
+            android:singleLine="false"
+            android:ellipsize="end"
+            tools:text="MOUSE_LEFT"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/controller_mapper_expand_button"
+            app:layout_constraintStart_toEndOf="@+id/controller_mapper_button"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/controller_mapper_expanded_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_medium"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <Spinner
+            android:id="@+id/controller_mapper_key_spinner1"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginHorizontal="@dimen/padding_moderate"
+            android:background="@null"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/controller_mapper_plus_label1" />
+
+        <Spinner
+            android:id="@+id/controller_mapper_key_spinner2"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginHorizontal="@dimen/padding_moderate"
+            android:background="@null"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/controller_mapper_plus_label1"
+            />
+
+        <Spinner
+            android:id="@+id/controller_mapper_key_spinner3"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="@dimen/padding_moderate"
+            android:layout_marginHorizontal="@dimen/padding_moderate"
+            android:background="@null"
+            app:layout_constraintTop_toBottomOf="@id/controller_mapper_key_spinner1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/controller_mapper_plus_label2"/>
+
+        <Spinner
+            android:id="@+id/controller_mapper_key_spinner4"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="@dimen/padding_moderate"
+            android:layout_marginHorizontal="@dimen/padding_moderate"
+            android:background="@null"
+            app:layout_constraintTop_toBottomOf="@id/controller_mapper_key_spinner2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/controller_mapper_plus_label2"/>
+
+        <!-- A single "plus" sign does not need translation -->
+        <TextView
+            android:id="@+id/controller_mapper_plus_label1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+"
+            android:textColor="@color/primary_text"
+            app:layout_constraintBottom_toBottomOf="@id/controller_mapper_key_spinner1"
+            app:layout_constraintEnd_toEndOf="@id/guideline3"
+            app:layout_constraintStart_toStartOf="@id/guideline3"
+            app:layout_constraintTop_toTopOf="@id/controller_mapper_key_spinner1"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/controller_mapper_plus_label2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+"
+            android:textColor="@color/primary_text"
+            app:layout_constraintBottom_toBottomOf="@id/controller_mapper_key_spinner3"
+            app:layout_constraintEnd_toEndOf="@id/guideline3"
+            app:layout_constraintStart_toStartOf="@id/guideline3"
+            app:layout_constraintTop_toTopOf="@id/controller_mapper_key_spinner3"
+            tools:ignore="HardcodedText" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/controller_mapper_toggleable_switch"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:text="@string/customctrl_toggle"
+            android:layout_marginTop="@dimen/padding_moderate"
+            android:layout_marginHorizontal="@dimen/padding_moderate"
+            android:paddingHorizontal="@dimen/padding_medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/controller_mapper_key_spinner3" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
+

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition for Android)</string>
     <string name="app_short_name">PojavLauncher</string>
@@ -9,11 +9,11 @@
     <!-- Languages list part -->
 
     <!-- Login strings -->
-    <string name="login_online_username_hint">Email or username</string>
+    <string name="login_online_username_hint">Username</string>
     <string name="login_online_login_label">Login</string>
 
     <!-- Hint -->
-    <string name="hint_control_mapping">"Tap the top center cog icon to open the context menu ⚙\nTap a button to customize: edit, resize, delete, or customize it's keybind."</string>
+    <string name="hint_control_mapping">"Touch the top center cogwheel to open the context menu ⚙\nTap a button to customize: edit, resize, remove, or change its keybind."</string>
 
     <!-- Warnings -->
     <string name="warning_remove_account">This account will be removed!</string>
@@ -66,7 +66,7 @@
     <string name="mcl_setting_category_renderer">Renderer</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (all versions, fast)</string>
     <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - (all versions, mid)</string>
-    <string name="mcl_setting_renderer_angle">ANGLE (Vulkan) - (1.17+ only, mid)</string>
+    <string name="mcl_setting_renderer_ltw">LTW (OpenGL ES 3) - 1.17+ only</string>
     <string name="mcl_setting_veroption_release">Release</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
@@ -93,6 +93,7 @@
 
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Application/Game exited with code %d, check latestlog.txt for more details.</string>
+    <string name="mcn_signal_title">Application/Game aborted by fatal signal %d, check latestlog.txt for more details.</string>
     <string name="mcn_exit_confirm">Are you sure want to force close?</string>
     <string name="mcn_check_fail_vulkan_support">Zink (Vulkan) renderer is not supported on this device!</string>
 
@@ -170,7 +171,9 @@
     <string name="customctrl_passthru">Mouse pass-thru</string>
     <string name="customctrl_swipeable">Swipeable</string>
     <string name="customctrl_forward_lock">Forward lock</string>
+    <string name="customctrl_absolute_tracking">Absolute finger tracking</string>
     <string name="memory_warning_msg">The current amount of free RAM (%d) is lower than allocated RAM (%d), which may lead to crashes. Change the allocation if the game crashes.</string>
+    <string name="address_memory_warning_msg">The current amount of free addressable RAM space (%d) is lower than the allocated RAM (%d), which will lead to crashes. Change the allocation if the game crashes.</string>
     <string name="mcl_memory_allocation">Memory allocation</string>
     <string name="mcl_memory_allocation_subtitle">Controls how much memory is given to Minecraft.</string>
     <string name="multirt_runtime_corrupt">Corrupted Java Runtime</string>
@@ -183,7 +186,7 @@
     <string name="multirt_config_setdefault">Set default</string>
     <string name="multirt_config_setdefault_already">Default</string>
     <string name="multirt_config_removeerror_last">You must have at least one Java Runtime installed.</string>
-    <string name="multirt_nocompartiblert">Can\'t find any compartible Java Runtime. This version requires Java %d or newer.</string>
+    <string name="multirt_nocompatiblert">Can\'t find any compatible Java Runtime. This version requires Java %d or newer.</string>
     <string name="multirt_nojava8rt">Can\'t find Java 8. In order to use this option, you need to install Java 8.</string>
     <string name="multirt_delete_runtime">Delete runtime</string>
     <string name="pvc_gameDirectory">Game directory</string>
@@ -271,6 +274,7 @@
     <string name="preference_shader_dump_title">Enable shader dumping</string>
     <string name="preference_shader_dump_description">Log converted shaders into the log file.</string>
     <string name="percent_format">%d%%</string>
+    <string name="millisecond_format">%d ms</string>
     <string name="customctrl_editor_exit_title">Leaving?</string>
     <string name="customctrl_editor_exit_msg">Are you sure you want to exit?</string>
     <string name="customctrl_editor_exit">Leave editor</string>
@@ -319,6 +323,7 @@
 
     <string name="generic_install">Install</string>
     <string name="generic_apply">Apply</string>
+    <string name="generic_debug">Debug</string>
 
     <string name="search_modpack_no_result">No modpacks found</string>
     <string name="search_modpack_error">Failed to find modpacks</string>
@@ -338,4 +343,85 @@
     <string name="notif_error_occured">An error has occurred</string>
     <string name="notif_error_occured_desc">Click to see more details</string>
     <string name="fabric_dl_only_stable">Show only stable versions</string>
+    <string name="dl_tampered_manifest_title">File verification warning</string>
+    <string name="dl_tampered_manifest"><![CDATA[The game version manifest on the mirror does not match the official Mojang version manifest, which means it may have been tampered with.<br/>
+        <b>This is not safe. Your personal information may be at risk if you continue.</b><br/>
+        If you still want to use the mirror, press \"Turn off manifest checks\" and start the download again.<br/>
+        If you want to use the official download source, press \"Switch to official site\" and start the download again.<br/>]]>
+    </string>
+    <string name="dl_turn_off_manifest_checks">Turn off manifest checks</string>
+    <string name="dl_switch_to_official_site">Switch to official site</string>
+    <string name="preference_download_source_title">Game download source</string>
+    <string name="preference_download_source_description">Select a download mirror instead of using the official download server</string>
+    <string name="preference_verify_manifest_title">Verify game version manifest</string>
+    <string name="preference_verify_manifest_description">When enabled, the launcher will check the game version manifest along with the libraries.</string>
+    <string name="notif_download_finished">The game is ready to launch</string>
+    <string name="notif_download_finished_desc">Click here to start it!</string>
+    <string name="preference_category_gestures">Gestures</string>
+    <string name="preference_category_buttons">Buttons</string>
+    <string name="preference_category_experimental_settings">Experimental fuckury</string>
+    <string name="preference_category_java_tweaks">Java Tweaks</string>
+    <string name="preference_category_main_categories">Categories</string>
+    <string name="preference_category_miscellaneous">Miscellaneous settings</string>
+    <string name="preference_category_video">Video settings</string>
+    <string name="notification_permission_dialog_title">Permission request</string>
+    <string name="notification_permission_dialog_text">PojavLauncher requires a permission to post notifications to prevent game/modpack downloads from stopping when you leave the app. Without this permission, Android may shut down your downloads when you put PojavLauncher in background mode.</string>
+    <string name="notification_permission_toast">You can always change your mind later by going into Settings</string>
+    <string name="preference_ask_for_notification_title">Allow notifications</string>
+    <string name="preference_ask_for_notification_description">Click to re-request the notification permission, required for game/modpack background downloads to work properly.</string>
+    <string name="preference_vsync_in_zink_title">Allow V-Sync with Zink</string>
+    <string name="preference_vsync_in_zink_description">Allows the launcher to use internal system APIs to enable V-Sync for Zink. Turn this off if your launcher suddenly crashes with Zink after a system update.</string>
+    <string name="exception_failed_to_unpack_jre17">Failed to install JRE 17</string>
+    <string name="newdl_starting">Reading game metadata…</string>
+    <string name="newdl_downloading_metadata">Downloading game metadata (%s)</string>
+    <string name="newdl_downloading_game_files">Downloading game… (%d/%d, %.2f MB/s)</string>
+    <string name="newdl_downloading_game_files_size">Downloading game… (%.2f/%.2f MB, %.2f MB/s)</string>
+    <string name="cropper_title">Select image region</string>
+    <string name="cropper_lock_vertical">V. lock</string>
+    <string name="cropper_lock_horizontal">H. lock</string>
+    <string name="cropper_reset">Reset</string>
+    <string name="cropper_select_cancelled">Selection cancelled</string>
+    <string name="log_view_button_scroll_off">Autoscroll\nOFF</string>
+    <string name="log_view_button_scroll_on">Autoscroll\nON</string>
+    <string name="log_view_button_output_off">Output\nOFF</string>
+    <string name="log_view_button_output_on">Output\nON</string>
+    <string name="log_view_label_log_output">Log output:</string>
+    <string name="execute_jar_failed_to_read_file">Failed to read the .jar file</string>
+    <string name="execute_jar_incompatible_runtime">Execute .jar feature is not compatible with Java %d</string>
+    <string name="controller_button_a">A</string>
+    <string name="controller_button_b">B</string>
+    <string name="controller_button_x">X</string>
+    <string name="controller_button_y">Y</string>
+    <string name="controller_button_start">Start</string>
+    <string name="controller_button_select">Select</string>
+    <string name="controller_button_trigger_left">Left Trigger</string>
+    <string name="controller_button_trigger_right">Right Trigger</string>
+    <string name="controller_button_shoulder_left">Left Shoulder</string>
+    <string name="controller_button_shoulder_right">Right Shoulder</string>
+    <string name="controller_direction_forward">Stick Up</string>
+    <string name="controller_direction_backward">Stick Down</string>
+    <string name="controller_direction_left">Stick Left</string>
+    <string name="controller_direction_right">Stick Right</string>
+    <string name="controller_stick_press_l">Left Thumbstick (click)</string>
+    <string name="controller_stick_press_r">Right Thumbstick (click)</string>
+    <string name="controller_dpad_up">D-Pad Up</string>
+    <string name="controller_dpad_down">D-Pad Down</string>
+    <string name="controller_dpad_left">D-Pad Left</string>
+    <string name="controller_dpad_right">D-Pad Right</string>
+    <string name="controller_remapper_exit_part1">Hold</string>
+    <string name="controller_remapper_exit_part2">to exit</string>
+    <string name="controller_remapper_operating_mode">Current mode</string>
+    <string name="customctrl_visibility_title">Visibility</string>
+    <string name="customctrl_visibility_ingame">In-game</string>
+    <string name="customctrl_visibility_in_menus">In menus</string>
+    <string name="controller_remapper_expand_entry">Expand to change keycodes</string>
+    <string name="preference_remap_controller_title">Change controller key bindings</string>
+    <string name="preference_remap_controller_description">Allows you to modify the keyboard keys bound to each controller button</string>
+    <string name="mcl_button_discord">Discord</string>
+    <string name="ltw_render_distance_warning_msg">Your GPU is not capable of rendering above 7 render distance without Sodium or other similar mods. The render distance will be automatically reduced when you click "OK".</string>
+    <string name="mcl_button_open_directory">Open game directory</string>
+    <string name="discord_invite" translatable="false">https://discord.com/invite/aenk3EUvER</string>
+    <string name="local_login_bad_username_title">Unsuitable username</string>
+    <string name="local_login_bad_username_text">The username must be between 3–16 characters long, and must only contain latin letters, arabic numerals and underscores.</string>
+    <string name="quick_setting_title">Quick settings</string>
 </resources>

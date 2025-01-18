@@ -8,32 +8,8 @@ HERE_PATH := $(LOCAL_PATH)
 
 LOCAL_PATH := $(HERE_PATH)
 
-include $(CLEAR_VARS)
-LOCAL_MODULE := angle_gles2
-LOCAL_SRC_FILES := tinywrapper/angle-gles/$(TARGET_ARCH_ABI)/libGLESv2_angle.so
-include $(PREBUILT_SHARED_LIBRARY)
-
-include $(CLEAR_VARS)
-LOCAL_MODULE := tinywrapper
-LOCAL_SHARED_LIBRARIES := angle_gles2
-LOCAL_SRC_FILES := tinywrapper/main.c tinywrapper/string_utils.c
-LOCAL_C_INCLUDES := $(LOCAL_PATH)/tinywrapper
-include $(BUILD_SHARED_LIBRARY)
-
-include $(CLEAR_VARS)
-LOCAL_MODULE     := xhook
-        LOCAL_SRC_FILES  := xhook/xhook.c \
-                    xhook/xh_core.c \
-                    xhook/xh_elf.c \
-                    xhook/xh_jni.c \
-                    xhook/xh_log.c \
-                    xhook/xh_util.c \
-                    xhook/xh_version.c
-        LOCAL_C_INCLUDES := $(LOCAL_PATH)/xhook
-LOCAL_CFLAGS     := -Wall -Wextra -Werror -fvisibility=hidden
-LOCAL_CONLYFLAGS := -std=c11
-LOCAL_LDLIBS     := -llog
-include $(BUILD_SHARED_LIBRARY)
+$(call import-module,prefab/bytehook)
+LOCAL_PATH := $(HERE_PATH)
 
 include $(CLEAR_VARS)
 # Link GLESv2 for test
@@ -45,18 +21,32 @@ LOCAL_MODULE := pojavexec
 LOCAL_SRC_FILES := \
     bigcoreaffinity.c \
     egl_bridge.c \
+    ctxbridges/loader_dlopen.c \
     ctxbridges/gl_bridge.c \
+    ctxbridges/osm_bridge.c \
     ctxbridges/egl_loader.c \
     ctxbridges/osmesa_loader.c \
+    ctxbridges/swap_interval_no_egl.c \
     environ/environ.c \
     input_bridge_v3.c \
     jre_launcher.c \
     utils.c \
+    stdio_is.c \
+    java_exec_hooks.c \
+    lwjgl_dlopen_hook.c \
     driver_helper/nsbypass.c
+
 ifeq ($(TARGET_ARCH_ABI),arm64-v8a)
 LOCAL_CFLAGS += -DADRENO_POSSIBLE
 LOCAL_LDLIBS += -lEGL -lGLESv2
 endif
+include $(BUILD_SHARED_LIBRARY)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := exithook
+LOCAL_LDLIBS := -ldl -llog
+LOCAL_SHARED_LIBRARIES := bytehook pojavexec
+LOCAL_SRC_FILES := exit_hook.c
 include $(BUILD_SHARED_LIBRARY)
 
 #ifeq ($(TARGET_ARCH_ABI),arm64-v8a)
@@ -66,15 +56,6 @@ LOCAL_SRC_FILES := driver_helper/hook.c
 LOCAL_LDFLAGS := -z global
 include $(BUILD_SHARED_LIBRARY)
 #endif
-
-
-include $(CLEAR_VARS)
-LOCAL_MODULE := istdio
-LOCAL_SHARED_LIBRARIES := xhook
-LOCAL_SRC_FILES := \
-    stdio_is.c
-LOCAL_C_INCLUDES := $(LOCAL_PATH)/xhook
-include $(BUILD_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE := pojavexec_awt

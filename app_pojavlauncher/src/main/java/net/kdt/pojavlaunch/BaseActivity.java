@@ -37,16 +37,18 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if(!Tools.checkStorageRoot(this)) {
-            startActivity(new Intent(this, MissingStorageActivity.class));
-            finish();
-        }
+        Tools.checkStorageInteractive(this);
     }
 
     @Override
     protected void onPostResume() {
         super.onPostResume();
         Tools.setFullscreen(this, setFullscreen());
-        Tools.ignoreNotch(PREF_IGNORE_NOTCH,this);
+        Tools.ignoreNotch(shouldIgnoreNotch(),this);
+    }
+
+    /** @return Whether or not the notch should be ignored */
+    protected boolean shouldIgnoreNotch(){
+        return PREF_IGNORE_NOTCH;
     }
 }

@@ -59,11 +59,11 @@ public class GamepadJoystick {
     }
 
     public float getVerticalAxis(){
-        return applyDeadzone(mVerticalAxisValue);
+        return mVerticalAxisValue;
     }
 
     public float getHorizontalAxis(){
-        return applyDeadzone(mHorizontalAxisValue);
+        return mHorizontalAxisValue;
     }
 
     public static boolean isJoystickEvent(MotionEvent event){
@@ -73,33 +73,8 @@ public class GamepadJoystick {
 
 
     public int getHeightDirection(){
-        if(getMagnitude() <= getDeadzone()) return DIRECTION_NONE;
+        if(getMagnitude() == 0) return DIRECTION_NONE;
         return ((int) ((getAngleDegree()+22.5)/45)) % 8;
-    }
-
-    /**
-     * Get the deadzone from the Input device linked to this joystick
-     * Some controller aren't supported, fallback to 0.2 if that the case.
-     * @return the deadzone of the joystick
-     */
-    public float getDeadzone() {
-        try{
-            return mInputDevice.getMotionRange(mHorizontalAxis).getFlat() * PREF_DEADZONE_SCALE;
-        }catch (Exception e){
-            Log.e(GamepadJoystick.class.toString(), "Dynamic Deadzone is not supported ");
-            return 0.2f;
-        }
-    }
-
-    private float applyDeadzone(float value){
-        //This piece of code also modifies the value
-        //to make it seem like there was no deadzone in the first place
-
-        double magnitude = getMagnitude();
-        float deadzone = getDeadzone();
-        if (magnitude < deadzone) return 0;
-
-        return (float) ( (value / magnitude) * ((magnitude - deadzone) / (1 - deadzone)) );
     }
 
 

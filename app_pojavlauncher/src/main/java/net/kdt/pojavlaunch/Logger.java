@@ -15,6 +15,7 @@ public class Logger {
     public static native void begin(String logFilePath);
 
     /** Small listener for anything listening to the log */
+    @Keep
     public interface eventLogListener {
         void onEventLogged(String text);
     }

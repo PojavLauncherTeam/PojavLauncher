@@ -8,19 +8,25 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.Keep;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatSpinner;
+import androidx.core.content.res.ResourcesCompat;
 
 
 import net.kdt.pojavlaunch.PojavProfile;
@@ -39,6 +45,7 @@ import net.kdt.pojavlaunch.value.MinecraftAccount;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import fr.spse.extended_view.ExtendedTextView;
@@ -99,9 +106,15 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
 
     private final ErrorListener mErrorListener = errorMessage -> {
         mLoginBarPaint.setColor(Color.RED);
+        Context context = getContext();
         if(errorMessage instanceof PresentedException) {
             PresentedException exception = (PresentedException) errorMessage;
-            Tools.showError(getContext(), exception.toString(getContext()), exception.getCause());
+            Throwable cause = exception.getCause();
+            if(cause == null) {
+                Tools.dialog(context, context.getString(R.string.global_error), exception.toString(context));
+            }else {
+                Tools.showError(context, exception.toString(context), exception.getCause());
+            }
         }else {
             Tools.showError(getContext(), errorMessage);
         }
@@ -176,7 +189,10 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
     }
 
     public void removeCurrentAccount(){
-        int position = getSelectedItemPosition();
+        removeAccount(getSelectedItemPosition());
+    }
+
+    private void removeAccount(int position) {
         if(position == 0) return;
         File accountFile = new File(Tools.DIR_ACCOUNT_NEW, mAccountList.get(position)+".json");
         if(accountFile.exists()) accountFile.delete();
@@ -245,7 +261,7 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
         }
 
         String[] accountArray = mAccountList.toArray(new String[0]);
-        ArrayAdapter<String> accountAdapter = new ArrayAdapter<>(getContext(), R.layout.item_minecraft_account, accountArray);
+        AccountAdapter accountAdapter = new AccountAdapter(getContext(), R.layout.item_minecraft_account, accountArray);
         accountAdapter.setDropDownViewResource(R.layout.item_minecraft_account);
         setAdapter(accountAdapter);
 
@@ -300,29 +316,95 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
         }
 
         mSelectecAccount = selectedAccount;
+        setImageFromSelectedAccount();
+    }
+
+    @Deprecated()
+    /* Legacy behavior, update the head image manually for the selected account */
+    private void setImageFromSelectedAccount(){
         BitmapDrawable oldBitmapDrawable = mHeadDrawable;
 
         if(mSelectecAccount != null){
-            ExtendedTextView view = ((ExtendedTextView) getSelectedView());
-            if(view != null){
+            View layout = getSelectedView();
+            if(layout != null){
+                ExtendedTextView view = layout.findViewById(R.id.account_item);
                 Bitmap bitmap = mSelectecAccount.getSkinFace();
                 if(bitmap != null) {
-                    mHeadDrawable = new BitmapDrawable(bitmap);
-                    mHeadDrawable.setBounds(0, 0, bitmap.getWidth(), bitmap.getHeight());
-
+                    mHeadDrawable = new BitmapDrawable(getResources(), bitmap);
                     view.setCompoundDrawables(mHeadDrawable, null, null, null);
-                    view.postProcessDrawables();
                 }else{
                     view.setCompoundDrawables(null, null, null, null);
-                    view.postProcessDrawables();
                 }
+                view.postProcessDrawables();
             }
         }
 
         if(oldBitmapDrawable != null){
             oldBitmapDrawable.getBitmap().recycle();
         }
-
     }
+
+    private class AccountAdapter extends ArrayAdapter<String> {
+
+        private final HashMap<String, Drawable> mImageCache = new HashMap<>();
+        public AccountAdapter(@NonNull Context context, int resource, @NonNull String[] objects) {
+            super(context, resource, objects);
+        }
+
+        @Override
+        public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+            if(convertView == null){
+                convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_minecraft_account, parent, false);
+            }
+
+            ExtendedTextView textview = convertView.findViewById(R.id.account_item);
+            ImageView deleteButton = convertView.findViewById(R.id.delete_account_button);
+            textview.setText(super.getItem(position));
+
+            // Handle the "Add account section"
+            if(position == 0) {
+                textview.setCompoundDrawables(ResourcesCompat.getDrawable(parent.getResources(), R.drawable.ic_add, null), null, null, null);
+                deleteButton.setVisibility(View.GONE);
+            }
+            else {
+                String username = super.getItem(position);
+                Drawable accountHead = mImageCache.get(username);
+                if (accountHead == null){
+                    accountHead = new BitmapDrawable(parent.getResources(), MinecraftAccount.getSkinFace(username));
+                    mImageCache.put(username, accountHead);
+                }
+                textview.setCompoundDrawables(accountHead, null, null, null);
+
+                deleteButton.setVisibility(View.VISIBLE);
+                deleteButton.setOnClickListener(v -> {
+                    showDeleteDialog(getContext(), position);
+                });
+            }
+            return convertView;
+        }
+
+
+
+        @NonNull
+        @Override
+        public View getView(int position, View convertView, @NonNull ViewGroup parent) {
+            View view = getDropDownView(position, convertView, parent);
+            view.findViewById(R.id.delete_account_button).setVisibility(View.GONE);
+            return view;
+        }
+
+        private void showDeleteDialog(Context context, int position) {
+            new AlertDialog.Builder(context)
+                    .setMessage(R.string.warning_remove_account)
+                    .setPositiveButton(android.R.string.cancel, null)
+                    .setNeutralButton(R.string.global_delete, (dialog, which) -> {
+                        onDetachedFromWindow();
+                        removeAccount(position);
+                    })
+                    .show();
+        }
+    }
+
+
 
 }

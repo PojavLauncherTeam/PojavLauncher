@@ -12,6 +12,22 @@ public class Architecture {
 	public static final int ARCH_X86 = 0x4;
 	public static final int ARCH_X86_64 = 0x8;
 
+	/* On both 32-bit ARM and x86, the top 1GB is reserved for kernel use. */
+	public static final long ADDRESS_SPACE_LIMIT_32_BIT = 0xbfffffffL;
+	/*
+	 * Technically, this is supposed to be 48 bits on x86_64, but nobody's allocating
+	 * 524288 terabytes of RAM on Pojav any time soon.
+	 */
+	public static final long ADDRESS_SPACE_LIMIT_64_BIT = 0x7fffffffffL;
+
+	/**
+	 * Get the highest byte accessible within the process's address space.
+	 * @return the highest byte accessible within the process's address space.
+	 */
+	public static long getAddressSpaceLimit() {
+		return is64BitsDevice() ? ADDRESS_SPACE_LIMIT_64_BIT : ADDRESS_SPACE_LIMIT_32_BIT;
+	}
+
 	/**
 	 * Tell us if the device supports 64 bits architecture
 	 * @return If the device supports 64 bits architecture

@@ -1,11 +1,14 @@
 package net.kdt.pojavlaunch.modloaders.modpacks.api;
 
+import androidx.annotation.Nullable;
+
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.utils.DownloadUtils;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InterruptedIOException;
+import java.util.concurrent.Callable;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -34,10 +37,10 @@ public class ModDownloader {
         this.mUseFileCount = useFileCount;
     }
 
-    public void submitDownload(int fileSize, String relativePath, String... url) {
+    public void submitDownload(int fileSize, String relativePath, @Nullable String downloadHash, String... url) {
         if(mUseFileCount) mTotalSize += 1;
         else mTotalSize += fileSize;
-        mDownloadPool.execute(new DownloadTask(url, new File(mDestinationDirectory, relativePath)));
+        mDownloadPool.execute(new DownloadTask(url, new File(mDestinationDirectory, relativePath), downloadHash));
     }
 
     public void submitDownload(FileInfoProvider infoProvider) {
@@ -93,7 +96,7 @@ public class ModDownloader {
                 FileInfo fileInfo = mFileInfoProvider.getFileInfo();
                 if(fileInfo == null) return;
                 new DownloadTask(new String[]{fileInfo.url},
-                        new File(mDestinationDirectory, fileInfo.relativePath)).run();
+                        new File(mDestinationDirectory, fileInfo.relativePath), fileInfo.sha1).run();
             }catch (IOException e) {
                 downloadFailed(e);
             }
@@ -103,27 +106,31 @@ public class ModDownloader {
     class DownloadTask implements Runnable, Tools.DownloaderFeedback {
         private final String[] mDownloadUrls;
         private final File mDestination;
+        private final String mSha1;
         private int last = 0;
 
         public DownloadTask(String[] downloadurls,
-                            File downloadDestination) {
+                            File downloadDestination, String downloadHash) {
             this.mDownloadUrls = downloadurls;
             this.mDestination = downloadDestination;
+            this.mSha1 = downloadHash;
         }
 
         @Override
         public void run() {
-            IOException exception = null;
             for(String sourceUrl : mDownloadUrls) {
                 try {
-                    exception = tryDownload(sourceUrl);
-                    if(exception == null) return;
-                }catch (InterruptedException e) {
-                    return;
+                    DownloadUtils.ensureSha1(mDestination, mSha1, (Callable<Void>) () -> {
+                        IOException exception = tryDownload(sourceUrl);
+                        if(exception != null) {
+                            throw exception;
+                        }
+                        return null;
+                    });
+
+                }catch (IOException e) {
+                    downloadFailed(e);
                 }
-            }
-            if(exception != null) {
-                downloadFailed(exception);
             }
         }
 
@@ -159,10 +166,12 @@ public class ModDownloader {
     public static class FileInfo {
         public final String url;
         public final String relativePath;
+        public final String sha1;
 
-        public FileInfo(String url, String relativePath) {
+        public FileInfo(String url, String relativePath, @Nullable String sha1) {
             this.url = url;
             this.relativePath = relativePath;
+            this.sha1 = sha1;
         }
     }
 

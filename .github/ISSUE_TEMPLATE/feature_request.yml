@@ -11,7 +11,7 @@ body:
       Give us some details into the problem, and how this affects it.
     placeholder: 'Example: You should add a version selector because of the text box being too small.'
   validations:
-    required: false
+    required: true
 
 - type: textarea
   attributes:
@@ -20,7 +20,7 @@ body:
       What do you want to see changed, added, or removed? Make sure to be specific.
       placeholder: 'Example: A scrollable version picker.'
   validations:
-    required: false
+    required: true
 
 - type: textarea
   attributes:

@@ -6,6 +6,7 @@ import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.progresskeeper.ProgressKeeper;
 import net.kdt.pojavlaunch.utils.DownloadUtils;
+import net.kdt.pojavlaunch.utils.FileUtils;
 import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
 import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 
@@ -53,8 +54,7 @@ public class FabriclikeDownloadTask implements Runnable, Tools.DownloaderFeedbac
         }
         File versionJsonDir = new File(Tools.DIR_HOME_VERSION, versionId);
         File versionJsonFile = new File(versionJsonDir, versionId+".json");
-        if(versionJsonDir.isFile()) throw new IOException("Version destination directory is a file!");
-        if(!versionJsonDir.exists() && !versionJsonDir.mkdirs()) throw new IOException("Failed to create version directory");
+        FileUtils.ensureDirectory(versionJsonDir);
         Tools.write(versionJsonFile.getAbsolutePath(), fabricJson);
         if(mCreateProfile) {
             LauncherProfiles.load();

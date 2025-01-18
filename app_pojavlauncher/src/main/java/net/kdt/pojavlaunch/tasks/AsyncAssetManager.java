@@ -31,7 +31,7 @@ public class AsyncAssetManager {
     public static void unpackRuntime(AssetManager am) {
         /* Check if JRE is included */
         String rt_version = null;
-        String current_rt_version = MultiRTUtils.__internal__readBinpackVersion("Internal");
+        String current_rt_version = MultiRTUtils.readInternalRuntimeVersion("Internal");
         try {
             rt_version = Tools.read(am.open("components/jre/version"));
         } catch (IOException e) {

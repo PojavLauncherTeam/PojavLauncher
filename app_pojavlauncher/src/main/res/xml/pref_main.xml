@@ -10,7 +10,7 @@
     <net.kdt.pojavlaunch.prefs.BackButtonPreference/>
 
     <PreferenceCategory
-        android:title="Categories"
+        android:title="@string/preference_category_main_categories"
         >
 
         <Preference
@@ -58,6 +58,12 @@
         android:title="@string/preference_force_english_title"
         android:key="force_english"
         android:summary="@string/preference_force_english_description"
+        />
+
+    <Preference
+        android:title="@string/preference_ask_for_notification_title"
+        android:summary="@string/preference_ask_for_notification_description"
+        android:key="notification_permission_request"
         />
 
 

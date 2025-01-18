@@ -7,6 +7,7 @@ import android.util.ArrayMap;
 import androidx.annotation.Keep;
 
 import net.kdt.pojavlaunch.Tools;
+import net.kdt.pojavlaunch.customcontrols.buttons.ControlInterface;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.utils.JSONUtils;
 import net.objecthunter.exp4j.ExpressionBuilder;
@@ -44,7 +45,7 @@ public class ControlData {
     }
 
     // Internal usage only
-    public boolean isHideable;
+    public transient boolean isHideable;
     /**
      * Both fields below are dynamic position data, auto updates
      * X and Y position, unlike the original one which uses fixed
@@ -53,7 +54,7 @@ public class ControlData {
      * bigger device or vice versa.
      */
     public String dynamicX, dynamicY;
-    public boolean isDynamicBtn, isToggle, passThruEnabled;
+    public boolean isToggle, passThruEnabled;
     public String name;
     public int[] keycodes;      //Should store up to 4 keys
     public float opacity;       //Alpha value from 0 to 1;
@@ -93,7 +94,6 @@ public class ControlData {
 
     public ControlData(String name, int[] keycodes, float x, float y, float width, float height) {
         this(name, keycodes, Float.toString(x), Float.toString(y), width, height, false);
-        this.isDynamicBtn = false;
     }
 
     public ControlData(String name, int[] keycodes, String dynamicX, String dynamicY) {
@@ -109,17 +109,16 @@ public class ControlData {
     }
 
     public ControlData(String name, int[] keycodes, String dynamicX, String dynamicY, float width, float height, boolean isToggle) {
-        this(name, keycodes, dynamicX, dynamicY, width, height, isToggle, 1, 0x4D000000, 0xFFFFFFFF, 0, 0, true, true);
+        this(name, keycodes, dynamicX, dynamicY, width, height, isToggle, 1, 0x4D000000, 0xFFFFFFFF, 0, 0, true, true, false, false);
     }
 
-    public ControlData(String name, int[] keycodes, String dynamicX, String dynamicY, float width, float height, boolean isToggle, float opacity, int bgColor, int strokeColor, float strokeWidth, float cornerRadius, boolean displayInGame, boolean displayInMenu) {
+    public ControlData(String name, int[] keycodes, String dynamicX, String dynamicY, float width, float height, boolean isToggle, float opacity, int bgColor, int strokeColor, float strokeWidth, float cornerRadius, boolean displayInGame, boolean displayInMenu, boolean isSwipable, boolean mousePassthrough) {
         this.name = name;
         this.keycodes = inflateKeycodeArray(keycodes);
         this.dynamicX = dynamicX;
         this.dynamicY = dynamicY;
         this.width = width;
         this.height = height;
-        this.isDynamicBtn = false;
         this.isToggle = isToggle;
         this.opacity = opacity;
         this.bgColor = bgColor;
@@ -128,6 +127,8 @@ public class ControlData {
         this.cornerRadius = cornerRadius;
         this.displayInGame = displayInGame;
         this.displayInMenu = displayInMenu;
+        this.isSwipeable = isSwipable;
+        this.passThruEnabled = mousePassthrough;
     }
 
     //Deep copy constructor
@@ -146,7 +147,9 @@ public class ControlData {
                 controlData.strokeWidth,
                 controlData.cornerRadius,
                 controlData.displayInGame,
-                controlData.displayInMenu
+                controlData.displayInMenu,
+                controlData.isSwipeable,
+                controlData.passThruEnabled
         );
     }
 
@@ -238,7 +241,7 @@ public class ControlData {
         keyValueMap.put("height", "DUMMY_HEIGHT");
         keyValueMap.put("screen_width", "DUMMY_DATA");
         keyValueMap.put("screen_height", "DUMMY_DATA");
-        keyValueMap.put("margin", Integer.toString((int) Tools.dpToPx(2)));
+        keyValueMap.put("margin", Integer.toString((int) ControlInterface.getMarginDistance()));
         keyValueMap.put("preferred_scale", "DUMMY_DATA");
 
         conversionMap = new WeakReference<>(keyValueMap);

@@ -20,7 +20,7 @@ import net.kdt.pojavlaunch.GrabListener;
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.customcontrols.ControlData;
 import net.kdt.pojavlaunch.customcontrols.ControlLayout;
-import net.kdt.pojavlaunch.customcontrols.handleview.EditControlPopup;
+import net.kdt.pojavlaunch.customcontrols.handleview.EditControlSideDialog;
 
 import org.lwjgl.glfw.CallbackBridge;
 
@@ -30,7 +30,6 @@ import org.lwjgl.glfw.CallbackBridge;
  * sending keys has to be implemented by sub classes.
  */
 public interface ControlInterface extends View.OnLongClickListener, GrabListener {
-
     View getControlView();
 
     ControlData getProperties();
@@ -61,7 +60,7 @@ public interface ControlInterface extends View.OnLongClickListener, GrabListener
     /**
      * Load the values and hide non useful forms
      */
-    void loadEditValues(EditControlPopup editControlPopup);
+    void loadEditValues(EditControlSideDialog editControlDialog);
 
     @Override
     default void onGrabState(boolean isGrabbing) {
@@ -116,7 +115,7 @@ public interface ControlInterface extends View.OnLongClickListener, GrabListener
                 ? (GradientDrawable) getControlView().getBackground()
                 : new GradientDrawable();
         gd.setColor(getProperties().bgColor);
-        gd.setStroke((int) Tools.dpToPx(getProperties().strokeWidth), getProperties().strokeColor);
+        gd.setStroke((int) Tools.dpToPx(getProperties().strokeWidth * (getControlLayoutParent().getLayoutScale()/100f)), getProperties().strokeColor);
         gd.setCornerRadius(computeCornerRadius(getProperties().cornerRadius));
 
         getControlView().setBackground(gd);
@@ -214,7 +213,7 @@ public interface ControlInterface extends View.OnLongClickListener, GrabListener
      */
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     default boolean canSnap(ControlInterface button) {
-        float MIN_DISTANCE = Tools.dpToPx(8);
+        float MIN_DISTANCE = getSnapDistance();
 
         if (button == this) return false;
         return !(net.kdt.pojavlaunch.utils.MathUtils.dist(
@@ -237,7 +236,7 @@ public interface ControlInterface extends View.OnLongClickListener, GrabListener
      * @param y Coordinate on the y axis
      */
     default void snapAndAlign(float x, float y) {
-        float MIN_DISTANCE = Tools.dpToPx(8);
+        final float MIN_DISTANCE = getSnapDistance();
         String dynamicX = generateDynamicX(x);
         String dynamicY = generateDynamicY(y);
 
@@ -371,13 +370,10 @@ public interface ControlInterface extends View.OnLongClickListener, GrabListener
                         if (Math.abs(event.getRawX() - downRawX) > 8 || Math.abs(event.getRawY() - downRawY) > 8)
                             mCanTriggerLongClick = false;
                         getControlLayoutParent().adaptPanelPosition();
-
-                        if (!getProperties().isDynamicBtn) {
-                            snapAndAlign(
-                                    MathUtils.clamp(event.getRawX() - downX, 0, CallbackBridge.physicalWidth - view.getWidth()),
-                                    MathUtils.clamp(event.getRawY() - downY, 0, CallbackBridge.physicalHeight - view.getHeight())
-                            );
-                        }
+                        snapAndAlign(
+                                MathUtils.clamp(event.getRawX() - downX, 0, CallbackBridge.physicalWidth - view.getWidth()),
+                                MathUtils.clamp(event.getRawY() - downY, 0, CallbackBridge.physicalHeight - view.getHeight())
+                        );
                         break;
                 }
 
@@ -393,13 +389,8 @@ public interface ControlInterface extends View.OnLongClickListener, GrabListener
             setBackground();
 
             // Re-calculate position
-            if (!getProperties().isDynamicBtn) {
-                getControlView().setX(getControlView().getX());
-                getControlView().setY(getControlView().getY());
-            } else {
-                getControlView().setX(getProperties().insertDynamicPos(getProperties().dynamicX));
-                getControlView().setY(getProperties().insertDynamicPos(getProperties().dynamicY));
-            }
+            getControlView().setX(getControlView().getX());
+            getControlView().setY(getControlView().getY());
         });
     }
 
@@ -411,5 +402,13 @@ public interface ControlInterface extends View.OnLongClickListener, GrabListener
         }
 
         return true;
+    }
+
+    static float getSnapDistance() {
+        return Tools.dpToPx(6);
+    }
+
+    static float getMarginDistance() {
+        return Tools.dpToPx(2);
     }
 }

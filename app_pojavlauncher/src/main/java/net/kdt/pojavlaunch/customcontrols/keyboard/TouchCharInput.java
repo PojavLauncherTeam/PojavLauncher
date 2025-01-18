@@ -3,8 +3,9 @@ package net.kdt.pojavlaunch.customcontrols.keyboard;
 
 import static android.content.Context.INPUT_METHOD_SERVICE;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
+import android.text.Editable;
+import android.text.Selection;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.inputmethod.InputMethodManager;
@@ -33,31 +34,6 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
 
     private boolean mIsDoingInternalChanges = false;
     private CharacterSenderStrategy mCharacterSender;
-
-    /**
-     * We take the new chars, and send them to the game.
-     * If less chars are present, remove some.
-     * The text is always cleaned up.
-     */
-    @Override
-    protected void onTextChanged(CharSequence text, int start, int lengthBefore, int lengthAfter) {
-        super.onTextChanged(text, start, lengthBefore, lengthAfter);
-        if(mIsDoingInternalChanges)return;
-        if(mCharacterSender != null){
-            for(int i=0; i < lengthBefore; ++i){
-                mCharacterSender.sendBackspace();
-            }
-
-            for(int i=start, count = 0; count < lengthAfter; ++i){
-                mCharacterSender.sendChar(text.charAt(i));
-                ++count;
-            }
-        }
-
-        //Reset the keyboard state
-        if(text.length() < 1) clear();
-    }
-
 
     /**
      * When we change from app to app, the keyboard gets disabled.
@@ -102,13 +78,15 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
      * Clear the EditText from any leftover inputs
      * It does not affect the in-game input
      */
-    @SuppressLint("SetTextI18n")
     public void clear(){
         mIsDoingInternalChanges = true;
+        // Edit the Editable directly as it doesn't affect the state
+        // of the TextView.
+        Editable editable = getEditableText();
+        editable.clear();
         //Braille space, doesn't trigger keyboard auto-complete
-        //replacing directly the text without though setText avoids notifying changes
-        setText(TEXT_FILLER);
-        setSelection(TEXT_FILLER.length());
+        editable.append(TEXT_FILLER);
+        Selection.setSelection(editable, TEXT_FILLER.length());
         mIsDoingInternalChanges = false;
     }
 
@@ -142,6 +120,9 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
 
     /** This function deals with anything that has to be executed when the constructor is called */
     private void setup(){
+        // Using TextWatcher instead of overriding onTextChanged because some Huawei firmware
+        // calls setText in constructor, causing havoc for our listener
+        addTextChangedListener(new InputTextWatcher());
         setOnEditorActionListener((textView, i, keyEvent) -> {
             sendEnter();
             clear();
@@ -151,5 +132,38 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
         clear();
         disable();
     }
+    private class InputTextWatcher implements android.text.TextWatcher {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+        }
+
+        /**
+         * We take the new chars, and send them to the game.
+         * If less chars are present, remove some.
+         * The text is always cleaned up.
+         */
+        @Override
+        public void onTextChanged(CharSequence text, int start, int lengthBefore, int lengthAfter) {
+            if(mIsDoingInternalChanges) return;
+            if(mCharacterSender != null){
+                for(int i=0; i < lengthBefore; ++i){
+                    mCharacterSender.sendBackspace();
+                }
+
+                for(int i=start, count = 0; count < lengthAfter; ++i){
+                    mCharacterSender.sendChar(text.charAt(i));
+                    ++count;
+                }
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            if(mIsDoingInternalChanges) return;
+            // Moved from onTextChanged because "It is an error to attempt to make changes to s from this callback."
+            // reference: https://developer.android.com/reference/android/text/TextWatcher#onTextChanged(java.lang.CharSequence,%20int,%20int,%20int)
+            if(editable.length() < 1) clear();
+        }
+    }
 }

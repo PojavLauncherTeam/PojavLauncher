@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.preference.PreferenceViewHolder;
 import androidx.preference.SeekBarPreference;
 
@@ -27,10 +28,10 @@ public class CustomSeekBarPreference extends SeekBarPreference {
     @SuppressLint("PrivateResource")
     public CustomSeekBarPreference(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        TypedArray a = context.obtainStyledAttributes(
-                attrs, R.styleable.SeekBarPreference, defStyleAttr, defStyleRes);
-        mMin = a.getInt(R.styleable.SeekBarPreference_min, 0);
-        a.recycle();
+        try (TypedArray a = context.obtainStyledAttributes(
+                attrs, R.styleable.SeekBarPreference, defStyleAttr, defStyleRes)) {
+            mMin = a.getInt(R.styleable.SeekBarPreference_min, 0);
+        }
     }
 
     public CustomSeekBarPreference(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -54,7 +55,7 @@ public class CustomSeekBarPreference extends SeekBarPreference {
 
 
     @Override
-    public void onBindViewHolder(PreferenceViewHolder view) {
+    public void onBindViewHolder(@NonNull PreferenceViewHolder view) {
         super.onBindViewHolder(view);
         TextView titleTextView = (TextView) view.findViewById(android.R.id.title);
         titleTextView.setTextColor(Color.WHITE);

@@ -10,7 +10,7 @@ import com.kdt.mcgui.ProgressLayout;
 
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
-import net.kdt.pojavlaunch.utils.JREUtils;
+import net.kdt.pojavlaunch.utils.MathUtils;
 
 import org.apache.commons.compress.archivers.tar.TarArchiveEntry;
 import org.apache.commons.compress.archivers.tar.TarArchiveInputStream;
@@ -61,19 +61,11 @@ public class MultiRTUtils {
 
     public static String getNearestJreName(int majorVersion) {
         List<Runtime> runtimes = getRuntimes();
-        int diff_factor = Integer.MAX_VALUE;
-        String result = null;
-        for(Runtime r : runtimes) {
-            if(r.javaVersion < majorVersion) continue; // lower - not useful
-
-            int currentFactor = r.javaVersion - majorVersion;
-            if(diff_factor > currentFactor) {
-                result = r.name;
-                diff_factor = currentFactor;
-            }
-        }
-
-        return result;
+        MathUtils.RankedValue<Runtime> nearestRankedRuntime = MathUtils.findNearestPositive(majorVersion, runtimes, (runtime)->runtime.javaVersion);
+        if(nearestRankedRuntime == null) return null;
+        Runtime nearestRuntime = nearestRankedRuntime.value;
+        if(nearestRuntime == null) return null;
+        return nearestRuntime.name;
     }
 
     public static void installRuntimeNamed(String nativeLibDir, InputStream runtimeInputStream, String name) throws IOException {
@@ -121,11 +113,11 @@ public class MultiRTUtils {
     }
 
 
-    public static String __internal__readBinpackVersion(String name) {
-        File binpack_verfile = new File(RUNTIME_FOLDER,"/" + name + "/pojav_version");
+    public static String readInternalRuntimeVersion(String name) {
+        File versionFile = new File(RUNTIME_FOLDER,"/" + name + "/pojav_version");
         try {
-            if (binpack_verfile.exists()) {
-                return Tools.read(binpack_verfile.getAbsolutePath());
+            if (versionFile.exists()) {
+                return Tools.read(versionFile.getAbsolutePath());
             }else{
                 return null;
             }
@@ -224,8 +216,7 @@ public class MultiRTUtils {
     }
 
     private static void uncompressTarXZ(final InputStream tarFileInputStream, final File dest) throws IOException {
-        if(dest.isFile()) throw new IOException("Attempting to unpack into a file");
-        if(!dest.exists() && !dest.mkdirs()) throw new IOException("Failed to create destination directory");
+        net.kdt.pojavlaunch.utils.FileUtils.ensureDirectory(dest);
 
         byte[] buffer = new byte[8192];
         TarArchiveInputStream tarIn = new TarArchiveInputStream(
@@ -240,10 +231,8 @@ public class MultiRTUtils {
             ProgressLayout.setProgress(ProgressLayout.UNPACK_RUNTIME, 100, R.string.global_unpacking, tarEntryName);
 
             File destPath = new File(dest, tarEntry.getName());
-            File destParent = destPath.getParentFile();
+            net.kdt.pojavlaunch.utils.FileUtils.ensureParentDirectory(destPath);
             if (tarEntry.isSymbolicLink()) {
-                if(destParent != null && !destParent.exists() && !destParent.mkdirs())
-                    throw new IOException("Failed to create parent directory for symlink");
                 try {
                     // android.system.Os
                     // Libcore one support all Android versions
@@ -253,16 +242,11 @@ public class MultiRTUtils {
                 }
 
             } else if (tarEntry.isDirectory()) {
-                if(!destPath.exists() && !destPath.mkdirs())
-                    throw new IOException("Failed to create directory");
+                net.kdt.pojavlaunch.utils.FileUtils.ensureDirectory(destPath);
             } else if (!destPath.exists() || destPath.length() != tarEntry.getSize()) {
-                if(destParent != null && !destParent.exists() && !destParent.mkdirs())
-                    throw new IOException("Failed to create parent directory for file");
-
                 FileOutputStream os = new FileOutputStream(destPath);
                 IOUtils.copyLarge(tarIn, os, buffer);
                 os.close();
-
             }
             tarEntry = tarIn.getNextTarEntry();
         }

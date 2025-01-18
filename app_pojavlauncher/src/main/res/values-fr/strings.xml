@@ -297,8 +297,8 @@
     <string name="notif_error_occured_desc">Cliquez ici pour obtenir plus de détails</string>
     <string name="fabric_dl_only_stable">Afficher uniquement les versions stables</string>
     <string name="dl_tampered_manifest_title">Avertissement de vérification du fichier</string>
-    <string name="dl_tampered_manifest"><![CDATA[Le version_manifest.json du jeu sur le miroir ne correspond pas à celui officiel de la version de Mojang, ce qui signifie qu'il peut avoir été altéré.<br/>
-        <b>Ce n'est pas sûr. Si vous continuez, vos informations personnelles pourraient être à risque si vous continuez.</b><br/>
+    <string name="dl_tampered_manifest"><![CDATA[Le version_manifest.json du jeu sur le miroir ne correspond pas à celui officiel de la version de Mojang, ce qui signifie qu\'il peut avoir été altéré.<br/>
+        <b>Ce n\'est pas sûr. Si vous continuez, vos informations personnelles pourraient être à risque si vous continuez.</b><br/>
         Si vous voulez toujours utiliser ce miroir, appuyez sur \"Désactiver les vérifications des manifestes\" et recommencez le téléchargement.<br/>
         Si vous voulez utiliser la source officielle de téléchargement, appuyez sur \"Passer au site officiel\" et recommencez le téléchargement.<br/>]]></string>
     <string name="dl_turn_off_manifest_checks">Désactiver les vérifications des manifestes</string>

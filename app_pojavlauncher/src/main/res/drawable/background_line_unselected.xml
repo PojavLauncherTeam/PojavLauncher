@@ -7,9 +7,6 @@
 
             <corners android:radius="@dimen/_2sdp" />
 
-            <padding
-                android:bottom="@dimen/padding_input_bottom"
-                android:top="@dimen/padding_input_top" />
 
             <stroke
                 android:width="@dimen/_2sdp"
@@ -17,4 +14,13 @@
         </shape>
     </item>
     <item android:drawable="?attr/selectableItemBackground"/>
+    <item>
+        <shape
+            android:shape="rectangle">
+
+            <padding
+                android:bottom="@dimen/padding_input_bottom"
+                android:top="@dimen/padding_input_top" />
+        </shape>
+    </item>
 </layer-list>

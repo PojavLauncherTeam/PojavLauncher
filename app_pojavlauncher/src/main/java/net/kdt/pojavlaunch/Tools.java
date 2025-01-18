@@ -8,7 +8,6 @@ import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_NOTCH_SIZE;
 
 import android.app.Activity;
 import android.app.ActivityManager;
-import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.ProgressDialog;
@@ -20,7 +19,14 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.Cursor;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.net.Uri;
+import android.opengl.EGL14;
+import android.opengl.EGLConfig;
+import android.opengl.EGLContext;
+import android.opengl.EGLDisplay;
+import android.opengl.GLES30;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -33,29 +39,40 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.webkit.MimeTypeMap;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.core.view.WindowInsetsControllerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import net.kdt.pojavlaunch.contextexecutor.ContextExecutor;
+import net.kdt.pojavlaunch.lifecycle.ContextExecutor;
+import net.kdt.pojavlaunch.lifecycle.ContextExecutorTask;
+import net.kdt.pojavlaunch.lifecycle.LifecycleAwareAlertDialog;
+import net.kdt.pojavlaunch.memory.MemoryHoleFinder;
+import net.kdt.pojavlaunch.memory.SelfMapsParser;
 import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.multirt.Runtime;
 import net.kdt.pojavlaunch.plugins.FFmpegPlugin;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
+import net.kdt.pojavlaunch.utils.DateUtils;
 import net.kdt.pojavlaunch.utils.DownloadUtils;
+import net.kdt.pojavlaunch.utils.FileUtils;
 import net.kdt.pojavlaunch.utils.JREUtils;
 import net.kdt.pojavlaunch.utils.JSONUtils;
+import net.kdt.pojavlaunch.utils.MCOptionUtils;
 import net.kdt.pojavlaunch.utils.OldVersionsUtils;
 import net.kdt.pojavlaunch.value.DependentLibrary;
 import net.kdt.pojavlaunch.value.MinecraftAccount;
@@ -67,6 +84,7 @@ import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.io.IOUtils;
 import org.lwjgl.glfw.CallbackBridge;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -75,18 +93,23 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.lang.ref.WeakReference;
 import java.lang.reflect.Field;
+import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 @SuppressWarnings("IOStreamConstructor")
 public final class Tools {
     public  static final float BYTE_TO_MB = 1024 * 1024;
     public static final Handler MAIN_HANDLER = new Handler(Looper.getMainLooper());
-    public static String APP_NAME = "null";
+    public static String APP_NAME = "PojavLauncher";
 
     public static final Gson GLOBAL_GSON = new GsonBuilder().setPrettyPrinting().create();
 
@@ -117,7 +140,6 @@ public final class Tools {
     public static String OBSOLETE_RESOURCES_PATH;
     public static String CTRLMAP_PATH;
     public static String CTRLDEF_FILE;
-    public static final int RUN_MOD_INSTALLER = 2050;
     private static RenderersList sCompatibleRenderers;
 
 
@@ -141,47 +163,190 @@ public final class Tools {
     }
 
     /**
-     * Since some constant requires the use of the Context object
-     * You can call this function to initialize them.
-     * Any value (in)directly dependant on DIR_DATA should be set only here.
+     * Checks if the Pojav's storage root is accessible and read-writable. If it's not, starts
+     * the MissingStorageActivity and finishes the supplied activity.
+     * @param context the Activity that checks for storage availability
+     * @return whether the storage is available or not.
      */
-    public static void initContextConstants(Context ctx){
+    public static boolean checkStorageInteractive(Activity context) {
+        if(!Tools.checkStorageRoot(context)) {
+            context.startActivity(new Intent(context, MissingStorageActivity.class));
+            context.finish();
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Initialize context constants most necessary for launcher's early startup phase
+     * that are not dependent on user storage.
+     * All values that depend on DIR_DATA and are not dependent on DIR_GAME_HOME must
+     * be initialized here.
+     * @param ctx the context for initialization.
+     */
+    public static void initEarlyConstants(Context ctx) {
         DIR_CACHE = ctx.getCacheDir();
         DIR_DATA = ctx.getFilesDir().getParent();
-        MULTIRT_HOME = DIR_DATA+"/runtimes";
+        MULTIRT_HOME = DIR_DATA + "/runtimes";
+        DIR_ACCOUNT_NEW = DIR_DATA + "/accounts";
+        NATIVE_LIB_DIR = ctx.getApplicationInfo().nativeLibraryDir;
+    }
+
+    /**
+     * Initialize context constants that depend on user storage.
+     * Any value (in)directly dependent on DIR_GAME_HOME should be set only here.
+     * You ABSOLUTELY MUST check for storage presence using checkStorageRoot() before calling this.
+     */
+    public static void initStorageConstants(Context ctx){
+        initEarlyConstants(ctx);
         DIR_GAME_HOME = getPojavStorageRoot(ctx).getAbsolutePath();
         DIR_GAME_NEW = DIR_GAME_HOME + "/.minecraft";
         DIR_HOME_VERSION = DIR_GAME_NEW + "/versions";
         DIR_HOME_LIBRARY = DIR_GAME_NEW + "/libraries";
         DIR_HOME_CRASH = DIR_GAME_NEW + "/crash-reports";
         ASSETS_PATH = DIR_GAME_NEW + "/assets";
-        OBSOLETE_RESOURCES_PATH= DIR_GAME_NEW + "/resources";
+        OBSOLETE_RESOURCES_PATH = DIR_GAME_NEW + "/resources";
         CTRLMAP_PATH = DIR_GAME_HOME + "/controlmap";
         CTRLDEF_FILE = DIR_GAME_HOME + "/controlmap/default.json";
-        NATIVE_LIB_DIR = ctx.getApplicationInfo().nativeLibraryDir;
     }
 
+    /**
+     * Optimization mods based on Sodium can mitigate the render distance issue. Check if Sodium
+     * or its derivative is currently installed to skip the render distance check.
+     * @param gameDir current game directory
+     * @return whether sodium or a sodium-based mod is installed
+     */
+    private static boolean hasSodium(File gameDir) {
+        File modsDir = new File(gameDir, "mods");
+        File[] mods = modsDir.listFiles(file -> file.isFile() && file.getName().endsWith(".jar"));
+        if(mods == null) return false;
+        for(File file : mods) {
+            String name = file.getName();
+            if(name.contains("sodium") ||
+                    name.contains("embeddium") ||
+                    name.contains("rubidium")) return true;
+        }
+        return false;
+    }
 
-    public static void launchMinecraft(final Activity activity, MinecraftAccount minecraftAccount,
+    /**
+     * Initialize OpenGL and do checks to see if the GPU of the device is affected by the render
+     * distance issue.
+
+     * Currently only checks whether the user has an Adreno GPU capable of OpenGL ES 3
+     * and surfaceless rendering installed.
+
+     * This issue is caused by a very severe limit on the amount of GL buffer names that could be allocated
+     * by the Adreno properietary GLES driver.
+
+     * @return whether the GPU is affected by the Large Thin Wrapper render distance issue on vanilla
+     */
+    private static boolean affectedByRenderDistanceIssue() {
+        EGLDisplay eglDisplay = EGL14.eglGetDisplay(EGL14.EGL_DEFAULT_DISPLAY);
+        if(eglDisplay == EGL14.EGL_NO_DISPLAY || !EGL14.eglInitialize(eglDisplay, null, 0, null, 0)) return false;
+        int[] egl_attributes = new int[]  {
+                EGL14.EGL_BLUE_SIZE, 8,
+                EGL14.EGL_GREEN_SIZE, 8,
+                EGL14.EGL_RED_SIZE, 8,
+                EGL14.EGL_ALPHA_SIZE, 8,
+                EGL14.EGL_DEPTH_SIZE, 24,
+                EGL14.EGL_SURFACE_TYPE, EGL14.EGL_PBUFFER_BIT,
+                EGL14.EGL_RENDERABLE_TYPE, EGL14.EGL_OPENGL_ES2_BIT,
+                EGL14.EGL_NONE
+        };
+        EGLConfig[] config = new EGLConfig[1];
+        int[] num_configs = new int[]{0};
+        if(!EGL14.eglChooseConfig(eglDisplay, egl_attributes, 0, config, 0, 1, num_configs, 0) || num_configs[0] == 0) {
+            EGL14.eglTerminate(eglDisplay);
+            Log.e("CheckVendor", "Failed to choose an EGL config");
+            return false;
+        }
+        int[] egl_context_attributes = new int[] { EGL14.EGL_CONTEXT_CLIENT_VERSION, 3, EGL14.EGL_NONE };
+        EGLContext context = EGL14.eglCreateContext(eglDisplay, config[0], EGL14.EGL_NO_CONTEXT, egl_context_attributes, 0);
+        if(context == EGL14.EGL_NO_CONTEXT) {
+            Log.e("CheckVendor", "Failed to create a context");
+            EGL14.eglTerminate(eglDisplay);
+            return false;
+        }
+        if(!EGL14.eglMakeCurrent(eglDisplay, EGL14.EGL_NO_SURFACE, EGL14.EGL_NO_SURFACE, context)) {
+            Log.e("CheckVendor", "Failed to make context current");
+            EGL14.eglDestroyContext(eglDisplay, context);
+            EGL14.eglTerminate(eglDisplay);
+        }
+        boolean is_adreno = GLES30.glGetString(GLES30.GL_VENDOR).equals("Qualcomm") &&
+                            GLES30.glGetString(GLES30.GL_RENDERER).contains("Adreno");
+        Log.e("CheckVendor", "Running Adreno graphics: "+is_adreno);
+        EGL14.eglMakeCurrent(eglDisplay, EGL14.EGL_NO_SURFACE, EGL14.EGL_NO_SURFACE, EGL14.EGL_NO_CONTEXT);
+        EGL14.eglDestroyContext(eglDisplay, context);
+        EGL14.eglTerminate(eglDisplay);
+        return is_adreno;
+    }
+
+    private static boolean checkRenderDistance(File gamedir) {
+        if(!"opengles3_ltw".equals(Tools.LOCAL_RENDERER)) return false;
+        if(!affectedByRenderDistanceIssue()) return false;
+        if(hasSodium(gamedir)) return false;
+
+        int renderDistance;
+        try {
+            MCOptionUtils.load();
+            String renderDistanceString = MCOptionUtils.get("renderDistance");
+            renderDistance = Integer.parseInt(renderDistanceString);
+        }catch (Exception e) {
+            Log.e("Tools", "Failed to check render distance", e);
+            renderDistance = 12; // Assume Minecraft's default render distance
+        }
+        // 7 is the render distance "magic number" above which MC creates too many buffers
+        // for Adreno's OpenGL ES implementation
+        return renderDistance > 7;
+    }
+
+    public static void launchMinecraft(final AppCompatActivity activity, MinecraftAccount minecraftAccount,
                                        MinecraftProfile minecraftProfile, String versionId, int versionJavaRequirement) throws Throwable {
         int freeDeviceMemory = getFreeDeviceMemory(activity);
+        int localeString;
+        int freeAddressSpace = Architecture.is32BitsDevice() ? getMaxContinuousAddressSpaceSize() : -1;
+        Log.i("MemStat", "Free RAM: " + freeDeviceMemory + " Addressable: " + freeAddressSpace);
+        if(freeDeviceMemory > freeAddressSpace && freeAddressSpace != -1) {
+            freeDeviceMemory = freeAddressSpace;
+            localeString = R.string.address_memory_warning_msg;
+        } else {
+            localeString = R.string.memory_warning_msg;
+        }
+
         if(LauncherPreferences.PREF_RAM_ALLOCATION > freeDeviceMemory) {
-            Object memoryErrorLock = new Object();
-            activity.runOnUiThread(() -> {
-                androidx.appcompat.app.AlertDialog.Builder b = new androidx.appcompat.app.AlertDialog.Builder(activity)
-                        .setMessage(activity.getString(R.string.memory_warning_msg, freeDeviceMemory ,LauncherPreferences.PREF_RAM_ALLOCATION))
-                        .setPositiveButton(android.R.string.ok, (dialogInterface, i) -> {synchronized(memoryErrorLock){memoryErrorLock.notifyAll();}})
-                        .setOnCancelListener((i) -> {synchronized(memoryErrorLock){memoryErrorLock.notifyAll();}});
-                b.show();
-            });
-            synchronized (memoryErrorLock) {
-                memoryErrorLock.wait();
+            int finalDeviceMemory = freeDeviceMemory;
+            LifecycleAwareAlertDialog.DialogCreator dialogCreator = (dialog, builder) ->
+                builder.setMessage(activity.getString(localeString, finalDeviceMemory, LauncherPreferences.PREF_RAM_ALLOCATION))
+                        .setPositiveButton(android.R.string.ok, (d, w)->{});
+
+            if(LifecycleAwareAlertDialog.haltOnDialog(activity.getLifecycle(), activity, dialogCreator)) {
+                return; // If the dialog's lifecycle has ended, return without
+                // actually launching the game, thus giving us the opportunity
+                // to start after the activity is shown again
             }
         }
-        Runtime runtime = MultiRTUtils.forceReread(Tools.pickRuntime(minecraftProfile, versionJavaRequirement));
-        JMinecraftVersionList.Version versionInfo = Tools.getVersionInfo(versionId);
         LauncherProfiles.load();
         File gamedir = Tools.getGameDirPath(minecraftProfile);
+        if(checkRenderDistance(gamedir)) {
+            LifecycleAwareAlertDialog.DialogCreator dialogCreator = ((alertDialog, dialogBuilder) ->
+                    dialogBuilder.setMessage(activity.getString(R.string.ltw_render_distance_warning_msg))
+                            .setPositiveButton(android.R.string.ok, (d, w)->{}));
+            if(LifecycleAwareAlertDialog.haltOnDialog(activity.getLifecycle(), activity, dialogCreator)) {
+                return;
+            }
+            // If the code goes here, it means that the user clicked "OK". Fix the render distance.
+            try {
+                MCOptionUtils.set("renderDistance", "7");
+                MCOptionUtils.save();
+            }catch (Exception e) {
+                Log.e("Tools", "Failed to fix render distance setting", e);
+            }
+        }
+
+
+        Runtime runtime = MultiRTUtils.forceReread(Tools.pickRuntime(minecraftProfile, versionJavaRequirement));
+        JMinecraftVersionList.Version versionInfo = Tools.getVersionInfo(versionId);
 
 
         // Pre-process specific files
@@ -216,6 +381,8 @@ public final class Tools {
         if(Tools.isValidString(minecraftProfile.javaArgs)) args = minecraftProfile.javaArgs;
         FFmpegPlugin.discover(activity);
         JREUtils.launchJavaVM(activity, runtime, gamedir, javaArgList, args);
+        // If we returned, this means that the JVM exit dialog has been shown and we don't need to be active anymore.
+        // We never return otherwise. The process will be killed anyway, and thus we will become inactive
     }
 
     public static File getGameDirPath(@NonNull MinecraftProfile minecraftProfile){
@@ -238,7 +405,7 @@ public final class Tools {
     }
     public static void disableSplash(File dir) {
         File configDir = new File(dir, "config");
-        if(configDir.exists() || configDir.mkdirs()) {
+        if(FileUtils.ensureDirectorySilently(configDir)) {
             File forgeSplashFile = new File(dir, "config/splash.properties");
             String forgeSplashContent = "enabled=true";
             try {
@@ -338,6 +505,18 @@ public final class Tools {
         }
 
         String userType = "mojang";
+        try {
+            Date creationDate = DateUtils.getOriginalReleaseDate(versionInfo);
+            // Minecraft 22w43a which adds chat reporting (and signing) was released on
+            // 26th October 2022. So, if the date is not before that (meaning it is equal or higher)
+            // change the userType to MSA to fix the missing signature
+            if(creationDate != null && !DateUtils.dateBefore(creationDate, 2022, 9, 26)) {
+                userType = "msa";
+            }
+        }catch (ParseException e) {
+            Log.e("CheckForProfileKey", "Failed to determine profile creation date, using \"mojang\"", e);
+        }
+
 
         Map<String, String> varArgMap = new ArrayMap<>();
         varArgMap.put("auth_session", profile.accessToken); // For legacy versions of MC
@@ -403,7 +582,7 @@ public final class Tools {
         return libInfos[0].replaceAll("\\.", "/") + "/" + libInfos[1] + "/" + libInfos[2] + "/" + libInfos[1] + "-" + libInfos[2] + ".jar";
     }
 
-    public static String getPatchedFile(String version) {
+    public static String getClientClasspath(String version) {
         return DIR_HOME_VERSION + "/" + version + "/" + version + ".jar";
     }
 
@@ -424,27 +603,31 @@ public final class Tools {
     }
 
     private final static boolean isClientFirst = false;
-    public static String generateLaunchClassPath(JMinecraftVersionList.Version info,String actualname) {
-        StringBuilder libStr = new StringBuilder(); //versnDir + "/" + version + "/" + version + ".jar:";
+    public static String generateLaunchClassPath(JMinecraftVersionList.Version info, String actualname) {
+        StringBuilder finalClasspath = new StringBuilder(); //versnDir + "/" + version + "/" + version + ".jar:";
 
         String[] classpath = generateLibClasspath(info);
 
         if (isClientFirst) {
-            libStr.append(getPatchedFile(actualname));
+            finalClasspath.append(getClientClasspath(actualname));
         }
-        for (String perJar : classpath) {
-            if (!new File(perJar).exists()) {
-                Log.d(APP_NAME, "Ignored non-exists file: " + perJar);
+        for (String jarFile : classpath) {
+            if (!FileUtils.exists(jarFile)) {
+                Log.d(APP_NAME, "Ignored non-exists file: " + jarFile);
                 continue;
             }
-            libStr.append((isClientFirst ? ":" : "")).append(perJar).append(!isClientFirst ? ":" : "");
+            finalClasspath.append((isClientFirst ? ":" : "")).append(jarFile).append(!isClientFirst ? ":" : "");
         }
         if (!isClientFirst) {
-            libStr.append(getPatchedFile(actualname));
+            finalClasspath.append(getClientClasspath(actualname));
         }
 
-        return libStr.toString();
+        return finalClasspath.toString();
     }
+
+
+
+
 
     public static DisplayMetrics getDisplayMetrics(Activity activity) {
         DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -473,7 +656,10 @@ public final class Tools {
     public static void setFullscreen(Activity activity, boolean fullscreen) {
         final View decorView = activity.getWindow().getDecorView();
         View.OnSystemUiVisibilityChangeListener visibilityChangeListener = visibility -> {
-            if(fullscreen){
+            boolean multiWindowMode = SDK_INT >= 24 && activity.isInMultiWindowMode();
+            // When in multi-window mode, asking for fullscreen makes no sense (cause the launcher runs in a window)
+            // So, ignore the fullscreen setting when activity is in multi window mode
+            if(fullscreen && !multiWindowMode){
                 if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
                     decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                             | View.SYSTEM_UI_FLAG_FULLSCREEN
@@ -496,6 +682,21 @@ public final class Tools {
     public static void updateWindowSize(Activity activity) {
         currentDisplayMetrics = getDisplayMetrics(activity);
 
+        View dimensionView = activity.findViewById(R.id.dimension_tracker);
+
+        if(dimensionView != null) {
+            int width = dimensionView.getWidth();
+            int height = dimensionView.getHeight();
+            if(width != 0 && height != 0) {
+                Log.i("Tools", "Using dimension_tracker for display dimensions; W="+width+" H="+height);
+                CallbackBridge.physicalWidth = width;
+                CallbackBridge.physicalHeight = height;
+                return;
+            }else{
+                Log.e("Tools","Dimension tracker detected but dimensions out of date. Please check usage.", new Exception());
+            }
+        }
+
         CallbackBridge.physicalWidth = currentDisplayMetrics.widthPixels;
         CallbackBridge.physicalHeight = currentDisplayMetrics.heightPixels;
     }
@@ -516,9 +717,7 @@ public final class Tools {
 
     public static void copyAssetFile(Context ctx, String fileName, String output, String outputName, boolean overwrite) throws IOException {
         File parentFolder = new File(output);
-        if(!parentFolder.exists() && !parentFolder.mkdirs()) {
-            throw new IOException("Failed to create parent directory");
-        }
+        FileUtils.ensureDirectory(parentFolder);
         File destinationFile = new File(output, outputName);
         if(!destinationFile.exists() || overwrite){
             try(InputStream inputStream = ctx.getAssets().open(fileName)) {
@@ -550,12 +749,18 @@ public final class Tools {
     public static void showError(final Context ctx, final String rolledMessage, final Throwable e) {
         showError(ctx, R.string.global_error, rolledMessage, e, false, false);
     }
-
+    public static void showError(final Context ctx, final String rolledMessage, final Throwable e, boolean exitIfOk) {
+        showError(ctx, R.string.global_error, rolledMessage, e, exitIfOk, false);
+    }
     public static void showError(final Context ctx, final int titleId, final Throwable e, final boolean exitIfOk) {
         showError(ctx, titleId, null, e, exitIfOk, false);
     }
 
     private static void showError(final Context ctx, final int titleId, final String rolledMessage, final Throwable e, final boolean exitIfOk, final boolean showMore) {
+        if(e instanceof ContextExecutorTask) {
+            ContextExecutor.execute((ContextExecutorTask) e);
+            return;
+        }
         e.printStackTrace();
 
         Runnable runnable = () -> {
@@ -566,7 +771,7 @@ public final class Tools {
                     .setPositiveButton(android.R.string.ok, (p1, p2) -> {
                         if(exitIfOk) {
                             if (ctx instanceof MainActivity) {
-                                MainActivity.fullyExit();
+                                fullyExit();
                             } else if (ctx instanceof Activity) {
                                 ((Activity) ctx).finish();
                             }
@@ -575,10 +780,10 @@ public final class Tools {
                     .setNegativeButton(showMore ? R.string.error_show_less : R.string.error_show_more, (p1, p2) -> showError(ctx, titleId, rolledMessage, e, exitIfOk, !showMore))
                     .setNeutralButton(android.R.string.copy, (p1, p2) -> {
                         ClipboardManager mgr = (ClipboardManager) ctx.getSystemService(Context.CLIPBOARD_SERVICE);
-                        mgr.setPrimaryClip(ClipData.newPlainText("error", Log.getStackTraceString(e)));
+                        mgr.setPrimaryClip(ClipData.newPlainText("error", printToString(e)));
                         if(exitIfOk) {
                             if (ctx instanceof MainActivity) {
-                                MainActivity.fullyExit();
+                                fullyExit();
                             } else {
                                 ((Activity) ctx).finish();
                             }
@@ -599,6 +804,14 @@ public final class Tools {
         }
     }
 
+    /**
+     * Show the error remotely in a context-aware fashion. Has generally the same behaviour as
+     * Tools.showError when in an activity, but when not in one, sends a notification that opens an
+     * activity and calls Tools.showError().
+     * NOTE: If the Throwable is a ContextExecutorTask and when not in an activity,
+     * its executeWithApplication() method will never be called.
+     * @param e the error (throwable)
+     */
     public static void showErrorRemote(Throwable e) {
         showErrorRemote(null, e);
     }
@@ -643,7 +856,7 @@ public final class Tools {
         return true; // allow if none match
     }
 
-    private static void preProcessLibraries(DependentLibrary[] libraries) {
+    public static void preProcessLibraries(DependentLibrary[] libraries) {
         for (int i = 0; i < libraries.length; i++) {
             DependentLibrary libItem = libraries[i];
             String[] version = libItem.name.split(":")[2].split("\\.");
@@ -723,30 +936,33 @@ public final class Tools {
                         "releaseTime", "time", "type"
                 );
 
-                List<DependentLibrary> libList = new ArrayList<>(Arrays.asList(inheritsVer.libraries));
-                try {
-                    loop_1:
-                    for (DependentLibrary lib : customVer.libraries) {
-                        String libName = lib.name.substring(0, lib.name.lastIndexOf(":"));
-                        for (int i = 0; i < libList.size(); i++) {
-                            DependentLibrary libAdded = libList.get(i);
-                            String libAddedName = libAdded.name.substring(0, libAdded.name.lastIndexOf(":"));
+                // Go through the libraries, remove the ones overridden by the custom version
+                List<DependentLibrary> inheritLibraryList = new ArrayList<>(Arrays.asList(inheritsVer.libraries));
+                outer_loop:
+                for(DependentLibrary library : customVer.libraries){
+                    // Clean libraries overridden by the custom version
+                    String libName = library.name.substring(0, library.name.lastIndexOf(":"));
 
-                            if (libAddedName.equals(libName)) {
-                                Log.d(APP_NAME, "Library " + libName + ": Replaced version " +
-                                        libName.substring(libName.lastIndexOf(":") + 1) + " with " +
-                                        libAddedName.substring(libAddedName.lastIndexOf(":") + 1));
-                                libList.set(i, lib);
-                                continue loop_1;
-                            }
+                    for(DependentLibrary inheritLibrary : inheritLibraryList) {
+                        String inheritLibName = inheritLibrary.name.substring(0, inheritLibrary.name.lastIndexOf(":"));
+
+                        if(libName.equals(inheritLibName)){
+                            Log.d(APP_NAME, "Library " + libName + ": Replaced version " +
+                                    libName.substring(libName.lastIndexOf(":") + 1) + " with " +
+                                    inheritLibName.substring(inheritLibName.lastIndexOf(":") + 1));
+
+                            // Remove the library , superseded by the overriding libs
+                            inheritLibraryList.remove(inheritLibrary);
+                            continue outer_loop;
                         }
-
-                        libList.add(0, lib);
                     }
-                } finally {
-                    inheritsVer.libraries = libList.toArray(new DependentLibrary[0]);
-                    preProcessLibraries(inheritsVer.libraries);
                 }
+
+                // Fuse libraries
+                inheritLibraryList.addAll(Arrays.asList(customVer.libraries));
+                inheritsVer.libraries = inheritLibraryList.toArray(new DependentLibrary[0]);
+                preProcessLibraries(inheritsVer.libraries);
+
 
                 // Inheriting Minecraft 1.13+ with append custom args
                 if (inheritsVer.arguments != null && customVer.arguments != null) {
@@ -823,12 +1039,13 @@ public final class Tools {
         return read(new FileInputStream(path));
     }
 
+    public static String read(File path) throws IOException {
+        return read(new FileInputStream(path));
+    }
+
     public static void write(String path, String content) throws IOException {
         File file = new File(path);
-        File parent = file.getParentFile();
-        if(parent != null && !parent.exists()) {
-            if(!parent.mkdirs()) throw new IOException("Failed to create parent directory");
-        }
+        FileUtils.ensureParentDirectory(file);
         try(FileOutputStream outStream = new FileOutputStream(file)) {
             IOUtils.write(content, outStream);
         }
@@ -838,6 +1055,24 @@ public final class Tools {
         File file = new File(nameOutput);
         DownloadUtils.downloadFile(urlInput, file);
     }
+
+    public static boolean isAndroid8OrHigher() {
+        return SDK_INT >= 26;
+    }
+
+    public static void fullyExit() {
+        android.os.Process.killProcess(android.os.Process.myPid());
+    }
+
+    public static void printLauncherInfo(String gameVersion, String javaArguments) {
+        Logger.appendToLog("Info: Launcher version: " + BuildConfig.VERSION_NAME);
+        Logger.appendToLog("Info: Architecture: " + Architecture.archAsString(DEVICE_ARCHITECTURE));
+        Logger.appendToLog("Info: Device model: " + Build.MANUFACTURER + " " +Build.MODEL);
+        Logger.appendToLog("Info: API version: " + SDK_INT);
+        Logger.appendToLog("Info: Selected Minecraft version: " + gameVersion);
+        Logger.appendToLog("Info: Custom Java arguments: \"" + javaArguments + "\"");
+    }
+
     public interface DownloaderFeedback {
         void updateProgress(int curr, int max);
     }
@@ -886,6 +1121,23 @@ public final class Tools {
         return (int) (memInfo.availMem / 1048576L);
     }
 
+    private static int internalGetMaxContinuousAddressSpaceSize() throws Exception{
+        MemoryHoleFinder memoryHoleFinder = new MemoryHoleFinder();
+        new SelfMapsParser(memoryHoleFinder).run();
+        long largestHole = memoryHoleFinder.getLargestHole();
+        if(largestHole == -1) return -1;
+        else return (int)(largestHole / 1048576L);
+    }
+
+    public static int getMaxContinuousAddressSpaceSize() {
+        try {
+            return internalGetMaxContinuousAddressSpaceSize();
+        }catch (Exception e){
+            Log.w("Tools", "Failed to find the largest uninterrupted address space");
+            return -1;
+        }
+    }
+
     public static int getDisplayFriendlyRes(int displaySideRes, float scaling){
         displaySideRes *= scaling;
         if(displaySideRes % 2 != 0) displaySideRes --;
@@ -905,20 +1157,23 @@ public final class Tools {
 
     /** Swap the main fragment with another */
     public static void swapFragment(FragmentActivity fragmentActivity , Class<? extends Fragment> fragmentClass,
-                                    @Nullable String fragmentTag, boolean addCurrentToBackstack, @Nullable Bundle bundle) {
+                                    @Nullable String fragmentTag, @Nullable Bundle bundle) {
         // When people tab out, it might happen
         //TODO handle custom animations
-        FragmentTransaction transaction = fragmentActivity.getSupportFragmentManager().beginTransaction()
+        fragmentActivity.getSupportFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)
-                .replace(R.id.container_fragment, fragmentClass, bundle, fragmentTag);
-        if(addCurrentToBackstack) transaction.addToBackStack(null);
+                .addToBackStack(fragmentClass.getName())
+                .replace(R.id.container_fragment, fragmentClass, bundle, fragmentTag).commit();
+    }
 
-        transaction.commit();
+    public static void backToMainMenu(FragmentActivity fragmentActivity) {
+        fragmentActivity.getSupportFragmentManager()
+                .popBackStack("ROOT", 0);
     }
 
     /** Remove the current fragment */
     public static void removeCurrentFragment(FragmentActivity fragmentActivity){
-        fragmentActivity.getSupportFragmentManager().popBackStackImmediate();
+        fragmentActivity.getSupportFragmentManager().popBackStack();
     }
 
     public static void installMod(Activity activity, boolean customJavaArgs) {
@@ -928,12 +1183,10 @@ public final class Tools {
         }
 
         if(!customJavaArgs){ // Launch the intent to get the jar file
-            Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-            intent.addCategory(Intent.CATEGORY_OPENABLE);
-            String mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension("jar");
-            if(mimeType == null) mimeType = "*/*";
-            intent.setType(mimeType);
-            activity.startActivityForResult(intent, RUN_MOD_INSTALLER);
+            if(!(activity instanceof LauncherActivity))
+                throw new IllegalStateException("Cannot start Mod Installer without LauncherActivity");
+            LauncherActivity launcherActivity = (LauncherActivity)activity;
+            launcherActivity.modInstallerLauncher.launch(null);
             return;
         }
 
@@ -948,7 +1201,6 @@ public final class Tools {
                 .setView(editText)
                 .setPositiveButton(android.R.string.ok, (di, i) -> {
                     Intent intent = new Intent(activity, JavaGUILauncherActivity.class);
-                    intent.putExtra("skipDetectMod", true);
                     intent.putExtra("javaArgs", editText.getText().toString());
                     activity.startActivity(intent);
                 });
@@ -956,9 +1208,9 @@ public final class Tools {
     }
 
     /** Display and return a progress dialog, instructing to wait */
-    private static ProgressDialog getWaitingDialog(Context ctx){
+    public static ProgressDialog getWaitingDialog(Context ctx, int message){
         final ProgressDialog barrier = new ProgressDialog(ctx);
-        barrier.setMessage(ctx.getString(R.string.global_waiting));
+        barrier.setMessage(ctx.getString(message));
         barrier.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         barrier.setCancelable(false);
         barrier.show();
@@ -966,46 +1218,28 @@ public final class Tools {
         return barrier;
     }
 
-    /** Copy the mod file, and launch the mod installer activity */
-    public static void launchModInstaller(Activity activity, @NonNull Intent data){
-        final ProgressDialog alertDialog = getWaitingDialog(activity);
-
-        final Uri uri = data.getData();
-        alertDialog.setMessage(activity.getString(R.string.multirt_progress_caching));
-        sExecutorService.execute(() -> {
-            try {
-                final String name = getFileName(activity, uri);
-                final File modInstallerFile = new File(Tools.DIR_CACHE, name);
-                FileOutputStream fos = new FileOutputStream(modInstallerFile);
-                InputStream input = activity.getContentResolver().openInputStream(uri);
-                IOUtils.copy(input, fos);
-                input.close();
-                fos.close();
-                activity.runOnUiThread(() -> {
-                    alertDialog.dismiss();
-                    Intent intent = new Intent(activity, JavaGUILauncherActivity.class);
-                    intent.putExtra("modFile", modInstallerFile);
-                    activity.startActivity(intent);
-                });
-            }catch(IOException e) {
-                Tools.showError(activity, e);
-            }
-        });
+    /** Launch the mod installer activity. The Uri must be from our own content provider or
+     * from ACTION_OPEN_DOCUMENT
+     */
+    public static void launchModInstaller(Activity activity, @NonNull Uri uri){
+        Intent intent = new Intent(activity, JavaGUILauncherActivity.class);
+        intent.putExtra("modUri", uri);
+        activity.startActivity(intent);
     }
 
 
-    public static void installRuntimeFromUri(Activity activity, Uri uri){
+    public static void installRuntimeFromUri(Context context, Uri uri){
         sExecutorService.execute(() -> {
             try {
-                String name = getFileName(activity, uri);
+                String name = getFileName(context, uri);
                 MultiRTUtils.installRuntimeNamed(
                         NATIVE_LIB_DIR,
-                        activity.getContentResolver().openInputStream(uri),
+                        context.getContentResolver().openInputStream(uri),
                         name);
 
                 MultiRTUtils.postPrepare(name);
             } catch (IOException e) {
-                Tools.showError(activity, e);
+                Tools.showError(context, e);
             }
         });
     }
@@ -1059,17 +1293,55 @@ public final class Tools {
 
     /** Triggers the share intent chooser, with the latestlog file attached to it */
     public static void shareLog(Context context){
-        Uri contentUri = DocumentsContract.buildDocumentUri(context.getString(R.string.storageProviderAuthorities), Tools.DIR_GAME_HOME + "/latestlog.txt");
+        openPath(context, new File(Tools.DIR_GAME_HOME, "latestlog.txt"), true);
+    }
 
-        Intent shareIntent = new Intent();
-        shareIntent.setAction(Intent.ACTION_SEND);
-        shareIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
-        shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        shareIntent.setType("text/plain");
+    /**
+     * Determine the MIME type of a File.
+     * @param file The file to determine the type of
+     * @return the type, or the default value *slash* if cannot be determined
+     */
+    public static String getMimeType(File file) {
+        if(file.isDirectory()) return DocumentsContract.Document.MIME_TYPE_DIR;
+        String mimeType = null;
+        try (FileInputStream fileInputStream = new FileInputStream(file)){
+            // Theoretically we don't even need the buffer since we don't care about the
+            // contents of the file after the guess, but mark-supported streams
+            // are a requirement of URLConnection.guessContentTypeFromStream()
+            try(BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream)) {
+                mimeType = URLConnection.guessContentTypeFromStream(bufferedInputStream);
+            }
+        }catch (IOException e) {
+            Log.w("FileMimeType", "Failed to determine MIME type by stream", e);
+        }
+        if(mimeType != null) return mimeType;
+        mimeType = URLConnection.guessContentTypeFromName(file.getName());
+        if(mimeType != null) return mimeType;
+        return "*/*";
+    }
 
-        Intent sendIntent = Intent.createChooser(shareIntent, "latestlog.txt");
-        context.startActivity(sendIntent);
+    /**
+     * Open the path specified by a File in a file explorer or in a relevant application.
+     * @param context the current Context
+     * @param file the File to open
+     * @param share whether to open a "Share" or an "Open" dialog.
+     */
+    public static void openPath(Context context, File file, boolean share) {
+        Uri contentUri = DocumentsContract.buildDocumentUri(context.getString(R.string.storageProviderAuthorities), file.getAbsolutePath());
+        String mimeType = getMimeType(file);
+        Intent intent = new Intent();
+        if(share) {
+            intent.setAction(Intent.ACTION_SEND);
+            intent.setType(getMimeType(file));
+            intent.putExtra(Intent.EXTRA_STREAM, contentUri);
+        }else {
+            intent.setAction(Intent.ACTION_VIEW);
+            intent.setDataAndType(contentUri, mimeType);
+        }
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        Intent chooserIntent = Intent.createChooser(intent, file.getName());
+        context.startActivity(chooserIntent);
     }
 
     /** Mesure the textview height, given its current parameters */
@@ -1078,6 +1350,23 @@ public final class Tools {
         int heightMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
         t.measure(widthMeasureSpec, heightMeasureSpec);
         return t.getMeasuredHeight();
+    }
+
+    /**
+     * Check if the device is one of the devices that may be affected by the hanging linker issue.
+     * The device is affected if the linker causes the process to lock up when dlopen() is called within
+     * dl_iterate_phdr().
+     * For now, the only affected firmware that I know of is Android 5.1, EMUI 3.1 on MTK-based Huawei
+     * devices.
+     * @return if the device is affected by the hanging linker issue.
+     */
+    public static boolean deviceHasHangingLinker() {
+        // Android Oreo and onwards have GSIs and most phone firmwares at that point were not modified
+        // *that* intrusively. So assume that we are not affected.
+        if(SDK_INT >= Build.VERSION_CODES.O) return false;
+        // Since the affected function in LWJGL is rarely used (and when used, it's mainly for debug prints)
+        // we can make the search scope a bit more broad and check if we are running on a Huawei device.
+        return Build.MANUFACTURER.toLowerCase(Locale.ROOT).contains("huawei");
     }
 
     public static class RenderersList {
@@ -1098,6 +1387,11 @@ public final class Tools {
         return false;
     }
 
+    public static <T> T getWeakReference(WeakReference<T> weakReference) {
+        if(weakReference == null) return null;
+        return weakReference.get();
+    }
+
     /** Return the renderers that are compatible with this device */
     public static RenderersList getCompatibleRenderers(Context context) {
         if(sCompatibleRenderers != null) return sCompatibleRenderers;
@@ -1107,12 +1401,16 @@ public final class Tools {
         boolean deviceHasVulkan = checkVulkanSupport(context.getPackageManager());
         // Currently, only 32-bit x86 does not have the Zink binary
         boolean deviceHasZinkBinary = !(Architecture.is32BitsDevice() && Architecture.isx86Device());
+        boolean deviceHasOpenGLES3 = JREUtils.getDetectedVersion() >= 3;
+        // LTW is an optional proprietary dependency
+        boolean appHasLtw = new File(Tools.NATIVE_LIB_DIR, "libltw.so").exists();
         List<String> rendererIds = new ArrayList<>(defaultRenderers.length);
         List<String> rendererNames = new ArrayList<>(defaultRendererNames.length);
         for(int i = 0; i < defaultRenderers.length; i++) {
             String rendererId = defaultRenderers[i];
             if(rendererId.contains("vulkan") && !deviceHasVulkan) continue;
             if(rendererId.contains("zink") && !deviceHasZinkBinary) continue;
+            if(rendererId.contains("ltw") && (!deviceHasOpenGLES3 || !appHasLtw)) continue;
             rendererIds.add(rendererId);
             rendererNames.add(defaultRendererNames[i]);
         }
@@ -1131,5 +1429,23 @@ public final class Tools {
     public static void releaseRenderersCache() {
         sCompatibleRenderers = null;
         System.gc();
+    }
+
+    public static boolean deviceSupportsGyro(@NonNull Context context) {
+        return ((SensorManager)context.getSystemService(Context.SENSOR_SERVICE)).getDefaultSensor(Sensor.TYPE_GYROSCOPE) != null;
+
+    }
+
+    public static void dialogForceClose(Context ctx) {
+        new android.app.AlertDialog.Builder(ctx)
+                .setMessage(R.string.mcn_exit_confirm)
+                .setNegativeButton(android.R.string.cancel, null)
+                .setPositiveButton(android.R.string.ok, (p1, p2) -> {
+                    try {
+                        Tools.fullyExit();
+                    } catch (Throwable th) {
+                        Log.w(Tools.APP_NAME, "Could not enable System.exit() method!", th);
+                    }
+                }).show();
     }
 }

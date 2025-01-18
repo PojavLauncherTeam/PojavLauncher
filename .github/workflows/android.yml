@@ -26,6 +26,18 @@ jobs:
           distribution: 'temurin'
           java-version: '8'
 
+      - name: Get LTW
+        uses: dawidd6/action-download-artifact@v2
+        continue-on-error: true
+        with:
+          github_token: ${{secrets.LTW_CLONER_SECRET}}
+          repo: PojavLauncherTeam/BigTinyWrapper
+          workflow: android.yml
+          workflow_conclusion: success
+          name: output-aar
+          path: app_pojavlauncher/libs
+          allow_forks: false
+
       - name: Get JRE 8
         uses: dawidd6/action-download-artifact@v2
         with:
@@ -43,12 +55,22 @@ jobs:
           path: app_pojavlauncher/src/main/assets/components/jre-new
           workflow_conclusion: success
           repo: PojavLauncherTeam/android-openjdk-build-multiarch
-          branch: buildjre17
+          branch: buildjre17-21
           name: jre17-pojav
 
-      - uses: gradle/gradle-build-action@v2
+      - name: Get JRE21
+        uses: dawidd6/action-download-artifact@v2
         with:
-          gradle-version: 7.6.1
+          workflow: build.yml
+          path: app_pojavlauncher/src/main/assets/components/jre-21
+          workflow_conclusion: success
+          repo: PojavLauncherTeam/android-openjdk-build-multiarch
+          branch: buildjre17-21
+          name: jre21-pojav
+
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "8.11"
 
       - name: Build JRE JAR files
         run: |
@@ -80,19 +102,20 @@ jobs:
         run: |
           rm -r app_pojavlauncher/src/main/assets/components/jre
           rm -r app_pojavlauncher/src/main/assets/components/jre-new
+          rm -r app_pojavlauncher/src/main/assets/components/jre-21
           gradle assembleDebug
           mv app_pojavlauncher/build/outputs/apk/debug/app_pojavlauncher-debug.apk out/app-debug-noruntime.apk
       - name: Gen md5sums
         run: |
           md5sum out/app-debug.apk > out/app-debug.md5
           md5sum out/app-debug-noruntime.apk > out/app-debug-noruntime.md5
-          
+
       - name: Upload APK
         uses: actions/upload-artifact@v3
         with:
           name: app-debug
           path: out/app-debug.*
-      
+
       - name: Upload AAB
         uses: actions/upload-artifact@v3
         with:

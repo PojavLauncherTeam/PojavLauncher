@@ -4,7 +4,7 @@
 
     <net.kdt.pojavlaunch.prefs.BackButtonPreference/>
 
-    <PreferenceCategory android:title="Video settings" >
+    <PreferenceCategory android:title="@string/preference_category_video" >
         <androidx.preference.ListPreference
             android:title="@string/mcl_setting_category_renderer"
             android:key="renderer"
@@ -26,7 +26,8 @@
             android:title="@string/mcl_setting_title_resolution_scaler"
             app2:showSeekBarValue="true"
             app2:selectable="false"
-            app2:seekBarIncrement="5"
+            app2:min="@integer/resolution_seekbar_min"
+            app2:seekBarIncrement="@integer/resolution_seekbar_increment"
             android:icon="@drawable/ic_setting_screen_resolution"
             />
 
@@ -43,12 +44,17 @@
             android:summary="@string/mcl_setting_subtitle_use_surface_view"
             android:title="@string/mcl_setting_title_use_surface_view"
             />
-
         <androidx.preference.SwitchPreferenceCompat
             android:defaultValue="false"
             android:key="force_vsync"
             android:summary="@string/preference_force_vsync_description"
             android:title="@string/preference_force_vsync_title"
+            />
+        <androidx.preference.SwitchPreferenceCompat
+            android:defaultValue="true"
+            android:key="vsync_in_zink"
+            android:summary="@string/preference_vsync_in_zink_description"
+            android:title="@string/preference_vsync_in_zink_title"
             />
     </PreferenceCategory>
 </PreferenceScreen>

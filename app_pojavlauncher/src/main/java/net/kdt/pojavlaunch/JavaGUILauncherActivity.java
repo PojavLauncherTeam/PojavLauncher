@@ -1,9 +1,9 @@
 package net.kdt.pojavlaunch;
 
-import static net.kdt.pojavlaunch.MainActivity.fullyExit;
-
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.ClipboardManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
+import androidx.appcompat.app.AlertDialog;
 
 import com.kdt.LoggerView;
 
@@ -26,9 +27,11 @@ import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.utils.JREUtils;
 import net.kdt.pojavlaunch.utils.MathUtils;
 
+import org.apache.commons.io.IOUtils;
 import org.lwjgl.glfw.CallbackBridge;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
@@ -49,7 +52,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
     private ImageView mMousePointerImageView;
     private GestureDetector mGestureDetector;
 
-    private boolean mSkipDetectMod, mIsVirtualMouseEnabled;
+    private boolean mIsVirtualMouseEnabled;
     
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -86,8 +89,8 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
 
         mMousePointerImageView.post(() -> {
             ViewGroup.LayoutParams params = mMousePointerImageView.getLayoutParams();
-            params.width = (int) (36 / 100f * LauncherPreferences.PREF_MOUSESCALE);
-            params.height = (int) (54 / 100f * LauncherPreferences.PREF_MOUSESCALE);
+            params.width = (int) (36 * LauncherPreferences.PREF_MOUSESCALE);
+            params.height = (int) (54 * LauncherPreferences.PREF_MOUSESCALE);
         });
 
         mTouchPad.setOnTouchListener(new View.OnTouchListener() {
@@ -149,44 +152,23 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
         try {
 
             placeMouseAt(CallbackBridge.physicalWidth / 2f, CallbackBridge.physicalHeight / 2f);
-            
-            final File modFile = (File) getIntent().getExtras().getSerializable("modFile");
-            final String javaArgs = getIntent().getExtras().getString("javaArgs");
-            String jreName = LauncherPreferences.PREF_DEFAULT_RUNTIME;
-            if(modFile != null) {
-                int javaVersion = getJavaVersion(modFile);
-                if(javaVersion != -1) {
-                    String autoselectRuntime = MultiRTUtils.getNearestJreName(javaVersion);
-                    if (autoselectRuntime != null) jreName = autoselectRuntime;
-                }
-            }
-            final Runtime runtime = MultiRTUtils.forceReread(jreName);
-
-            mSkipDetectMod = getIntent().getExtras().getBoolean("skipDetectMod", false);
-            if(getIntent().getExtras().getBoolean("openLogOutput", false)) openLogOutput(null);
-            if (mSkipDetectMod) {
-                new Thread(() -> launchJavaRuntime(runtime, modFile, javaArgs), "JREMainThread").start();
+            Bundle extras = getIntent().getExtras();
+            if(extras == null) {
+                finish();
                 return;
             }
-
-            // No skip detection
-            openLogOutput(null);
-            new Thread(() -> {
-                try {
-                    final int exit = doCustomInstall(runtime, modFile, javaArgs);
-                    Logger.appendToLog(getString(R.string.toast_optifine_success));
-                    if (exit != 0) return;
-                    runOnUiThread(() -> {
-                        Toast.makeText(JavaGUILauncherActivity.this, R.string.toast_optifine_success, Toast.LENGTH_SHORT).show();
-                        fullyExit();
-                    });
-
-                } catch (Throwable e) {
-                    Logger.appendToLog("Install failed:");
-                    Logger.appendToLog(Log.getStackTraceString(e));
-                    Tools.showError(JavaGUILauncherActivity.this, e);
-                }
-            }, "Installer").start();
+            final String javaArgs = extras.getString("javaArgs");
+            final Uri resourceUri = (Uri) extras.getParcelable("modUri");
+            if(extras.getBoolean("openLogOutput", false)) openLogOutput(null);
+            if (javaArgs != null) {
+                startModInstaller(null, javaArgs);
+            }else if(resourceUri != null) {
+                ProgressDialog barrierDialog = Tools.getWaitingDialog(this, R.string.multirt_progress_caching);
+                PojavApplication.sExecutorService.execute(()->{
+                    startModInstallerWithUri(resourceUri);
+                    runOnUiThread(barrierDialog::dismiss);
+                });
+            }
         } catch (Throwable th) {
             Tools.showError(this, th, true);
         }
@@ -195,9 +177,91 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
         getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                MainActivity.dialogForceClose(JavaGUILauncherActivity.this);
+                Tools.dialogForceClose(JavaGUILauncherActivity.this);
             }
         });
+    }
+
+    private void startModInstallerWithUri(Uri uri) {
+        try {
+            File cacheFile = new File(getCacheDir(), "mod-installer-temp");
+            InputStream contentStream = getContentResolver().openInputStream(uri);
+            if(contentStream == null) throw new IOException("Failed to open content stream");
+            try (FileOutputStream fileOutputStream = new FileOutputStream(cacheFile)) {
+                IOUtils.copy(contentStream, fileOutputStream);
+            }
+            contentStream.close();
+            startModInstaller(cacheFile, null);
+        }catch (IOException e) {
+            Tools.showError(this, e, true);
+        }
+    }
+
+    public Runtime selectRuntime(File modFile) {
+        int javaVersion = getJavaVersion(modFile);
+        if(javaVersion == -1) {
+            finalErrorDialog(getString(R.string.execute_jar_failed_to_read_file));
+            return null;
+        }
+        String nearestRuntime = MultiRTUtils.getNearestJreName(javaVersion);
+        if(nearestRuntime == null) {
+            finalErrorDialog(getString(R.string.multirt_nocompatiblert, javaVersion));
+            return null;
+        }
+        Runtime selectedRuntime = MultiRTUtils.forceReread(nearestRuntime);
+        int selectedJavaVersion = Math.max(javaVersion, selectedRuntime.javaVersion);
+        // Don't allow versions higher than Java 17 because our caciocavallo implementation does not allow for it
+        if(selectedJavaVersion > 17) {
+            finalErrorDialog(getString(R.string.execute_jar_incompatible_runtime, selectedJavaVersion));
+            return null;
+        }
+        return selectedRuntime;
+    }
+
+    private File findModPath(List<String> argList) {
+        int argsSize = argList.size();
+        for(int i = 0; i < argsSize; i++) {
+            // Look for the -jar argument
+            if(!argList.get(i).equals("-jar")) continue;
+            int pathIndex = i+1;
+            // Check if the supposed path is out of the argument bounds
+            if(pathIndex >= argsSize) return null;
+            // Use the path as a file
+            return new File(argList.get(pathIndex));
+        }
+        return null;
+    }
+
+    private void startModInstaller(File modFile, String javaArgs) {
+        new Thread(() -> {
+            // Maybe replace with more advanced arg parsing logic later
+            List<String> argList = javaArgs != null ? Arrays.asList(javaArgs.split(" ")) : null;
+            File selectedMod = modFile;
+            if(selectedMod == null && argList != null) {
+                // If modFile is not specified directly, try to extract the -jar argument from the javaArgs
+                selectedMod = findModPath(argList);
+            }
+            Runtime selectedRuntime;
+            if(selectedMod == null) {
+                // We were unable to find out the path to the mod. In that case, use the default runtime.
+                selectedRuntime = MultiRTUtils.forceReread(LauncherPreferences.PREF_DEFAULT_RUNTIME);
+            }else {
+                // Autoselect it properly in the other case.
+                selectedRuntime = selectRuntime(selectedMod);
+                // If the selection failed, just return. The autoselect function has already shown the dialog.
+                if(selectedRuntime == null) return;
+            }
+            launchJavaRuntime(selectedRuntime, modFile, argList);
+        }, "JREMainThread").start();
+    }
+
+    private void finalErrorDialog(CharSequence msg) {
+        runOnUiThread(()-> new AlertDialog.Builder(this)
+                .setTitle(R.string.global_error)
+                .setMessage(msg)
+                .setPositiveButton(android.R.string.ok, (d,w)->this.finish())
+                .setCancelable(false)
+                .show());
     }
 
     @Override
@@ -272,7 +336,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
     }
 
     public void forceClose(View v) {
-        MainActivity.dialogForceClose(this);
+        Tools.dialogForceClose(this);
     }
 
     public void openLogOutput(View v) {
@@ -287,21 +351,20 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
                 Toast.LENGTH_SHORT).show();
     }
 
-    public int launchJavaRuntime(Runtime runtime, File modFile, String javaArgs) {
+    public void launchJavaRuntime(Runtime runtime, File modFile, List<String> javaArgs) {
         JREUtils.redirectAndPrintJRELog();
         try {
             List<String> javaArgList = new ArrayList<>();
 
             // Enable Caciocavallo
             Tools.getCacioJavaArgs(javaArgList,runtime.javaVersion == 8);
-            
-            if (javaArgs != null) {
-                javaArgList.addAll(Arrays.asList(javaArgs.split(" ")));
-            } else {
+            if(javaArgs != null) {
+                javaArgList.addAll(javaArgs);
+            }
+            if(modFile != null) {
                 javaArgList.add("-jar");
                 javaArgList.add(modFile.getAbsolutePath());
             }
-
             
             if (LauncherPreferences.PREF_JAVA_SANDBOX) {
                 Collections.reverse(javaArgList);
@@ -313,18 +376,10 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
 
             Logger.appendToLog("Info: Java arguments: " + Arrays.toString(javaArgList.toArray(new String[0])));
 
-            return JREUtils.launchJavaVM(this, runtime,null,javaArgList, LauncherPreferences.PREF_CUSTOM_JAVA_ARGS);
+            JREUtils.launchJavaVM(this, runtime,null,javaArgList, LauncherPreferences.PREF_CUSTOM_JAVA_ARGS);
         } catch (Throwable th) {
             Tools.showError(this, th, true);
-            return -1;
         }
-    }
-
-
-
-    private int doCustomInstall(Runtime runtime, File modFile, String javaArgs) {
-        mSkipDetectMod = true;
-        return launchJavaRuntime(runtime, modFile, javaArgs);
     }
 
     public void toggleKeyboard(View view) {
@@ -368,7 +423,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
             Log.i("JavaGUILauncher", majorVersion+","+minorVersion);
             return classVersionToJavaVersion(majorVersion);
         }catch (Exception e) {
-            e.printStackTrace();
+            Log.e("JavaVersion", "Exception thrown", e);
             return -1;
         }
     }

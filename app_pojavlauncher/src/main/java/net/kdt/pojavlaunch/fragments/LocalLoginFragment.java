@@ -1,5 +1,6 @@
 package net.kdt.pojavlaunch.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -14,26 +15,34 @@ import net.kdt.pojavlaunch.extra.ExtraConstants;
 import net.kdt.pojavlaunch.extra.ExtraCore;
 
 import java.io.File;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class LocalLoginFragment extends Fragment {
     public static final String TAG = "LOCAL_LOGIN_FRAGMENT";
 
+    private final Pattern mUsernameValidationPattern;
     private EditText mUsernameEditText;
 
     public LocalLoginFragment(){
         super(R.layout.fragment_local_login);
+        mUsernameValidationPattern = Pattern.compile("^[a-zA-Z0-9_]*$");
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mUsernameEditText = view.findViewById(R.id.login_edit_email);
         view.findViewById(R.id.login_button).setOnClickListener(v -> {
-            if(!checkEditText()) return;
+            if(!checkEditText()) {
+                Context context = v.getContext();
+                Tools.dialog(context, context.getString(R.string.local_login_bad_username_title), context.getString(R.string.local_login_bad_username_text));
+                return;
+            }
 
             ExtraCore.setValue(ExtraConstants.MOJANG_LOGIN_TODO, new String[]{
                     mUsernameEditText.getText().toString(), "" });
 
-            Tools.swapFragment(requireActivity(), MainMenuFragment.class, MainMenuFragment.TAG, false, null);
+            Tools.swapFragment(requireActivity(), MainMenuFragment.class, MainMenuFragment.TAG, null);
         });
     }
 
@@ -43,10 +52,11 @@ public class LocalLoginFragment extends Fragment {
 
         String text = mUsernameEditText.getText().toString();
 
+        Matcher matcher = mUsernameValidationPattern.matcher(text);
         return !(text.isEmpty()
                 || text.length() < 3
                 || text.length() > 16
-                || !text.matches("\\w+")
+                || !matcher.find()
                 || new File(Tools.DIR_ACCOUNT_NEW + "/" + text + ".json").exists()
         );
     }

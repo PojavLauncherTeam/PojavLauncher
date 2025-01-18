@@ -90,8 +90,8 @@ public class ProgressKeeper {
             public void onUpdateTaskCount(int taskCount) {
                 if(taskCount == 0) {
                     runnable.run();
+                    removeTaskCountListener(this);
                 }
-                removeTaskCountListener(this);
             }
         };
         addTaskCountListener(listener);

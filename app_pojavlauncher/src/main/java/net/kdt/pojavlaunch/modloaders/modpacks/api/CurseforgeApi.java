@@ -1,7 +1,9 @@
 package net.kdt.pojavlaunch.modloaders.modpacks.api;
 
-import android.content.Context;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -18,6 +20,7 @@ import net.kdt.pojavlaunch.modloaders.modpacks.models.SearchFilters;
 import net.kdt.pojavlaunch.modloaders.modpacks.models.SearchResult;
 import net.kdt.pojavlaunch.progresskeeper.ProgressKeeper;
 import net.kdt.pojavlaunch.utils.FileUtils;
+import net.kdt.pojavlaunch.utils.GsonJsonUtils;
 import net.kdt.pojavlaunch.utils.ZipUtils;
 
 import java.io.File;
@@ -29,6 +32,7 @@ import java.util.zip.ZipFile;
 
 public class CurseforgeApi implements ModpackApi{
     private static final Pattern sMcVersionPattern = Pattern.compile("([0-9]+)\\.([0-9]+)\\.?([0-9]+)?");
+    private static final int ALGO_SHA_1 = 1;
     // Stolen from
     // https://github.com/AnzhiZhang/CurseForgeModpackDownloader/blob/6cb3f428459f0cc8f444d16e54aea4cd1186fd7b/utils/requester.py#L93
     private static final int CURSEFORGE_MINECRAFT_GAME_ID = 432;
@@ -104,11 +108,14 @@ public class CurseforgeApi implements ModpackApi{
         String[] versionNames = new String[length];
         String[] mcVersionNames = new String[length];
         String[] versionUrls = new String[length];
+        String[] hashes = new String[length];
         for(int i = 0; i < allModDetails.size(); i++) {
             JsonObject modDetail = allModDetails.get(i);
             versionNames[i] = modDetail.get("displayName").getAsString();
+
             JsonElement downloadUrl = modDetail.get("downloadUrl");
             versionUrls[i] = downloadUrl.getAsString();
+
             JsonArray gameVersions = modDetail.getAsJsonArray("gameVersions");
             for(JsonElement jsonElement : gameVersions) {
                 String gameVersion = jsonElement.getAsString();
@@ -118,8 +125,10 @@ public class CurseforgeApi implements ModpackApi{
                 mcVersionNames[i] = gameVersion;
                 break;
             }
+
+            hashes[i] = getSha1FromModData(modDetail);
         }
-        return new ModDetail(item, versionNames, mcVersionNames, versionUrls);
+        return new ModDetail(item, versionNames, mcVersionNames, versionUrls, hashes);
     }
 
     @Override
@@ -135,9 +144,9 @@ public class CurseforgeApi implements ModpackApi{
         params.put("pageSize", CURSEFORGE_PAGINATION_SIZE);
 
         JsonObject response = mApiHandler.get("mods/"+modId+"/files", params, JsonObject.class);
-        if(response == null) return CURSEFORGE_PAGINATION_ERROR;
-        JsonArray data = response.getAsJsonArray("data");
+        JsonArray data = GsonJsonUtils.getJsonArraySafe(response, "data");
         if(data == null) return CURSEFORGE_PAGINATION_ERROR;
+
         for(int i = 0; i < data.size(); i++) {
             JsonObject fileInfo = data.get(i).getAsJsonObject();
             if(fileInfo.get("isServerPack").getAsBoolean()) continue;
@@ -167,7 +176,7 @@ public class CurseforgeApi implements ModpackApi{
                     if(url == null && curseFile.required)
                         throw new IOException("Failed to obtain download URL for "+curseFile.projectID+" "+curseFile.fileID);
                     else if(url == null) return null;
-                    return new ModDownloader.FileInfo(url, FileUtils.getFileName(url));
+                    return new ModDownloader.FileInfo(url, FileUtils.getFileName(url), getDownloadSha1(curseFile.projectID, curseFile.fileID));
                 });
             }
             modDownloader.awaitFinish((c,m)->
@@ -226,17 +235,40 @@ public class CurseforgeApi implements ModpackApi{
         return null;
     }
 
+    private @Nullable String getDownloadSha1(long projectID, long fileID) {
+        // Try the api endpoint, die in the other case
+        JsonObject response = mApiHandler.get("mods/"+projectID+"/files/"+fileID, JsonObject.class);
+        JsonObject data = GsonJsonUtils.getJsonObjectSafe(response, "data");
+        if(data == null) return null;
+        return getSha1FromModData(data);
+    }
+
+    private String getSha1FromModData(@NonNull JsonObject object) {
+        JsonArray hashes = GsonJsonUtils.getJsonArraySafe(object, "hashes");
+        if(hashes == null) return null;
+        for (JsonElement jsonElement : hashes) {
+            // The sha1 = 1; md5 = 2;
+            JsonObject jsonObject = GsonJsonUtils.getJsonObjectSafe(jsonElement);
+            if(GsonJsonUtils.getIntSafe(
+                    jsonObject,
+                    "algo",
+                    -1) == ALGO_SHA_1) {
+                return GsonJsonUtils.getStringSafe(jsonObject, "value");
+            }
+        }
+        return null;
+    }
+
     private boolean verifyManifest(CurseManifest manifest) {
         if(!"minecraftModpack".equals(manifest.manifestType)) return false;
         if(manifest.manifestVersion != 1) return false;
         if(manifest.minecraft == null) return false;
         if(manifest.minecraft.version == null) return false;
         if(manifest.minecraft.modLoaders == null) return false;
-        if(manifest.minecraft.modLoaders.length < 1) return false;
-        return true;
+        return manifest.minecraft.modLoaders.length >= 1;
     }
 
-    class CurseforgeSearchResult extends SearchResult {
+    static class CurseforgeSearchResult extends SearchResult {
         int previousOffset;
     }
 }

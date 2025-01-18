@@ -4,13 +4,12 @@ import android.annotation.SuppressLint;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.customcontrols.ControlData;
 import net.kdt.pojavlaunch.customcontrols.ControlDrawerData;
 import net.kdt.pojavlaunch.customcontrols.ControlLayout;
-import net.kdt.pojavlaunch.customcontrols.handleview.EditControlPopup;
+import net.kdt.pojavlaunch.customcontrols.handleview.EditControlSideDialog;
 
 import java.util.ArrayList;
 
@@ -62,26 +61,27 @@ public class ControlDrawer extends ControlButton {
     private void alignButtons(){
         if(buttons == null) return;
         if(drawerData.orientation == ControlDrawerData.Orientation.FREE) return;
+        int margin = (int) ControlInterface.getMarginDistance();
 
         for(int i = 0; i < buttons.size(); ++i){
             switch (drawerData.orientation){
                 case RIGHT:
-                    buttons.get(i).setDynamicX(generateDynamicX(getX() + (drawerData.properties.getWidth() + Tools.dpToPx(2))*(i+1) ));
+                    buttons.get(i).setDynamicX(generateDynamicX(getX() + (drawerData.properties.getWidth() + margin)*(i+1) ));
                     buttons.get(i).setDynamicY(generateDynamicY(getY()));
                     break;
 
                 case LEFT:
-                    buttons.get(i).setDynamicX(generateDynamicX(getX() - (drawerData.properties.getWidth() + Tools.dpToPx(2))*(i+1)));
+                    buttons.get(i).setDynamicX(generateDynamicX(getX() - (drawerData.properties.getWidth() + margin)*(i+1)));
                     buttons.get(i).setDynamicY(generateDynamicY(getY()));
                     break;
 
                 case UP:
-                    buttons.get(i).setDynamicY(generateDynamicY(getY() - (drawerData.properties.getHeight() + Tools.dpToPx(2))*(i+1)));
+                    buttons.get(i).setDynamicY(generateDynamicY(getY() - (drawerData.properties.getHeight() + margin)*(i+1)));
                     buttons.get(i).setDynamicX(generateDynamicX(getX()));
                     break;
 
                 case DOWN:
-                    buttons.get(i).setDynamicY(generateDynamicY(getY() + (drawerData.properties.getHeight() + Tools.dpToPx(2))*(i+1)));
+                    buttons.get(i).setDynamicY(generateDynamicY(getY() + (drawerData.properties.getHeight() + margin)*(i+1)));
                     buttons.get(i).setDynamicX(generateDynamicX(getX()));
                     break;
             }
@@ -183,7 +183,7 @@ public class ControlDrawer extends ControlButton {
     }
 
     @Override
-    public void loadEditValues(EditControlPopup editControlPopup) {
+    public void loadEditValues(EditControlSideDialog editControlPopup) {
         editControlPopup.loadValues(drawerData);
     }
 

@@ -5,7 +5,6 @@ import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -22,8 +21,8 @@ import net.kdt.pojavlaunch.R;
  */
 public class LoggerView extends ConstraintLayout {
     private Logger.eventLogListener mLogListener;
-    private ToggleButton mToggleButton;
-    private ScrollView mScrollView;
+    private ToggleButton mLogToggle;
+    private DefocusableScrollView mScrollView;
     private TextView mLogTextView;
 
 
@@ -40,7 +39,7 @@ public class LoggerView extends ConstraintLayout {
     public void setVisibility(int visibility) {
         super.setVisibility(visibility);
         // Triggers the log view shown state by default when viewing it
-        mToggleButton.setChecked(visibility == VISIBLE);
+        mLogToggle.setChecked(visibility == VISIBLE);
     }
 
     /**
@@ -56,8 +55,8 @@ public class LoggerView extends ConstraintLayout {
         mLogTextView.setVisibility(GONE);
 
         // Toggle log visibility
-        mToggleButton = findViewById(R.id.content_log_toggle_log);
-        mToggleButton.setOnCheckedChangeListener(
+        mLogToggle = findViewById(R.id.content_log_toggle_log);
+        mLogToggle.setOnCheckedChangeListener(
                 (compoundButton, isChecked) -> {
                     mLogTextView.setVisibility(isChecked ? VISIBLE : GONE);
                     if(isChecked) {
@@ -68,7 +67,7 @@ public class LoggerView extends ConstraintLayout {
                         // NOTE: was tested by rapidly smashing the log on/off button, no sync issues found :)
                     }
                 });
-        mToggleButton.setChecked(false);
+        mLogToggle.setChecked(false);
 
         // Remove the loggerView from the user View
         ImageButton cancelButton = findViewById(R.id.log_view_cancel);
@@ -76,13 +75,24 @@ public class LoggerView extends ConstraintLayout {
 
         // Set the scroll view
         mScrollView = findViewById(R.id.content_log_scroll);
+        mScrollView.setKeepFocusing(true);
+
+        //Set up the autoscroll switch
+        ToggleButton autoscrollToggle = findViewById(R.id.content_log_toggle_autoscroll);
+        autoscrollToggle.setOnCheckedChangeListener(
+                (compoundButton, isChecked) -> {
+                    if(isChecked) mScrollView.fullScroll(View.FOCUS_DOWN);
+                    mScrollView.setKeepFocusing(isChecked);
+                }
+        );
+        autoscrollToggle.setChecked(true);
 
         // Listen to logs
         mLogListener = text -> {
             if(mLogTextView.getVisibility() != VISIBLE) return;
             post(() -> {
                 mLogTextView.append(text + '\n');
-                mScrollView.fullScroll(View.FOCUS_DOWN);
+                if(mScrollView.isKeepFocusing()) mScrollView.fullScroll(View.FOCUS_DOWN);
             });
 
         };

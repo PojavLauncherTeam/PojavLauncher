@@ -39,7 +39,12 @@ public class ImportControlActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Tools.initContextConstants(getApplicationContext());
+        if(Tools.checkStorageInteractive(this)) {
+            Tools.initStorageConstants(getApplicationContext());
+        }else {
+            // Return early, no initialization needed.
+            return;
+        }
 
         setContentView(R.layout.activity_import_control);
         mEditText = findViewById(R.id.editText_import_control_file_name);
@@ -61,6 +66,12 @@ public class ImportControlActivity extends Activity {
     @Override
     protected void onPostResume() {
         super.onPostResume();
+        if(!Tools.checkStorageInteractive(this)) {
+            // Don't try to read the file as when this check fails, external storage paths
+            // are no longer valid (likely unmounted).
+            // checkStorageInteractive() will finish this activity for us.
+            return;
+        }
         if(!mHasIntentChanged) return;
         mIsFileVerified = false;
         getUriData();

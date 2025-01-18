@@ -118,6 +118,7 @@ public class EfficientAndroidLWJGLKeycode {
 
         add(KeyEvent.KEYCODE_CAPS_LOCK, LwjglGlfwKeycode.GLFW_KEY_CAPS_LOCK);
         add(KeyEvent.KEYCODE_BREAK, LwjglGlfwKeycode.GLFW_KEY_PAUSE);
+        add(KeyEvent.KEYCODE_MOVE_HOME, LwjglGlfwKeycode.GLFW_KEY_HOME);
         add(KeyEvent.KEYCODE_MOVE_END, LwjglGlfwKeycode.GLFW_KEY_END);
         add(KeyEvent.KEYCODE_INSERT, LwjglGlfwKeycode.GLFW_KEY_INSERT);
 
@@ -197,7 +198,7 @@ public class EfficientAndroidLWJGLKeycode {
         sendKeyPress(getValueByIndex(index));
     }
 
-    public static int getValueByIndex(int index) {
+    public static short getValueByIndex(int index) {
         return sLwjglKeycodes[index];
     }
 
