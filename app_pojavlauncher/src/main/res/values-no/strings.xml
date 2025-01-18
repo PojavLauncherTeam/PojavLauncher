@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition for Android)</string>
     <string name="app_short_name">PojavLauncher</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">E-post eller brukernavn</string>
     <string name="login_online_login_label">Logg inn</string>
     <!-- Hint -->
     <!-- Warnings -->
@@ -105,4 +104,5 @@
     <string name="profiles_profile_name">Navn</string>
     <string name="pedit_renderer">Gjengir</string>
     <string name="of_dl_progress">Laster ned %s</string>
+    <string name="generic_debug">Avlusing</string>
 </resources>
