@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition su Android)</string>
     <string name="app_short_name">PojavLauncher</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">Indirizzo email o nome utente</string>
+    <string name="login_online_username_hint">Nome utente</string>
     <string name="login_online_login_label">Accedi</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Tocca l'icona dell'ingranaggio in alto al centro per aprire il menu contestuale ⚙\nTocca un pulsante da personalizzare: modifica, ridimensiona, eliminare o cambia l'assegnazione di tasti."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">L\'account sarà cancellato!</string>
     <!-- AlertDialog title -->
@@ -36,10 +35,15 @@
     <string name="mcl_options">Impostazioni</string>
     <string name="mcl_option_customcontrol">Controlli personalizzati</string>
     <string name="mcl_setting_title_use_surface_view">Usa alternate surface rendering</string>
+    <string name="mcl_setting_subtitle_use_surface_view">Può aiutare le prestazioni in scenari legati alla GPU.</string>
     <string name="mcl_setting_title_ignore_notch">Ignora notch</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Estende lo schermo al di sotto del notch.\nOffre un\'esperienza più immersiva.</string>
     <string name="mcl_setting_title_resolution_scaler">Scala Risoluzione</string>
     <string name="mcl_setting_subtitle_resolution_scaler">Ti permette di diminuire la risoluzione del gioco.100% è la risoluzione  massima.</string>
+    <string name="mcl_setting_title_longpresstrigger">Ritardo pressione prolungata</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Cambia il ritardo di attivazione pressione prolungata per distruggere blocchi e rilasciare elementi.</string>
     <string name="mcl_setting_title_buttonscale">Dimensione controlli</string>
+    <string name="mcl_setting_subtitle_buttonscale">Aumenta le dimensioni dei pulsanti se sono troppo piccoli.</string>
     <string name="mcl_setting_title_mousescale">Dimensioni mouse</string>
     <string name="mcl_setting_subtitle_mousescale">Cambia la dimensione del mouse virtuale.</string>
     <string name="mcl_setting_title_javaargs">Argomenti di avvio della JVM</string>
@@ -47,11 +51,12 @@
     <string name="mcl_setting_category_renderer">Renderer</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (Tutte le versioni, veloce)</string>
     <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - (tutte le persone, med)</string>
-    <string name="mcl_setting_renderer_angle">ANGLE (Vulkan) - (solo 1.17+,med)</string>
     <string name="mcl_setting_veroption_release">Finale</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Vecchie-alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Vecchie-beta</string>
+    <string name="mcl_setting_java_sandbox">Esecuzione di .bar in Sandbox</string>
+    <string name="mcl_setting_java_sandbox_subtitle">Controlla la disponibilità del gestore di sicurezza di sandbox quando esegui un file .jar.</string>
     <string name="mcl_version_clone">Clona</string>
     <!-- Global strings -->
     <string name="global_edit">Modifica</string>
@@ -71,6 +76,7 @@
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">L\'applicazione/gioco si è chiuso con il codice %d, controlla il lastlog.txt per più dettagli.</string>
     <string name="mcn_exit_confirm">Sei sicuro di voler eseguire una chiusura forzata?</string>
+    <string name="mcn_check_fail_vulkan_support">Il renderer Zink (Vulkan) non è supportato su questo dispositivo!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_chat">Chat</string>
     <string name="control_debug">Debug</string>
@@ -117,45 +123,71 @@
     <string name="customctrl_addbutton_drawer">Aggiungi drawer pulsanti</string>
     <string name="customctrl_addbutton_joystick">Aggiungi joystick</string>
     <string name="customctrl_addsubbutton">Aggiungi sotto-pulsante</string>
+    <string name="customctrl_selectdefault">Seleziona i controlli default</string>
+    <string name="customctrl_export">Esporta i controlli</string>
     <string name="main_share_logs">Condividi file di log</string>
+    <string name="main_install_jar_file">Esegui un .jar</string>
     <string name="main_play">Gioca</string>
     <string name="autoram_info_msg">RAM impostata a %dMB</string>
     <string name="mcl_setting_check_libraries">Controlla le librerie dopo il download</string>
+    <string name="mcl_setting_check_libraries_subtitle">Questa opzione forza il launcher a controllare l\'integrità della libreria se è possibile. Previene i download corrotti.</string>
     <string name="dl_library_sha_fail">La libreria %s è danneggiata e sarà scaricata nuovamente</string>
     <string name="dl_library_sha_unknown">La libreria %s non può essere controllata, sarà ignorata e applicata comunque</string>
     <string name="dl_library_sha_pass">La libreria %s va bene ed è usabile</string>
     <string name="mcl_disable_gestures">Disattiva gestures</string>
     <string name="mcl_disable_gestures_subtitle">Disattiva gestures, ad esempio premere per rompere un blocco, e cliccare per piazzarlo.</string>
     <string name="mcl_disable_swap_hand">Disabilita il doppio tocco per cambiare mano</string>
+    <string name="mcl_disable_swap_hand_subtitle">Disabilita il doppio tocco sull\'elemento della hotbar per scambiarlo in seconda mano.</string>
     <string name="mcl_setting_title_mousespeed">Velocità mouse</string>
+    <string name="mcl_setting_subtitle_mousespeed">Cambia la velocità del mouse virtuale.</string>
     <string name="customctrl_passthru">Bypassa mouse</string>
     <string name="customctrl_swipeable">Swipeabile</string>
     <string name="customctrl_forward_lock">Forward lock</string>
+    <string name="customctrl_absolute_tracking">Tracciamento assoluto delle dita</string>
     <string name="memory_warning_msg">L\'attuale quantità di RAM libera (%d) è minore di quella allocata (%d), la quale potrebbe portare a crash inaspettati. Modifica la quantità di RAM allocata in caso di crash.</string>
     <string name="mcl_memory_allocation">Memoria allocata</string>
+    <string name="mcl_memory_allocation_subtitle">Controlla quanta memoria dedicare a Minecraft.</string>
     <string name="multirt_runtime_corrupt">Runtime Java corrotta</string>
     <string name="multirt_runtime_incompatiblearch">Architettura non compatibile: %s</string>
+    <string name="multirt_config_title">Runtime Java</string>
     <string name="multirt_config_add">Aggiungi</string>
     <string name="multirt_title">Runtime Manager</string>
+    <string name="multirt_subtitle">Gestisci Java Runtimes installati.</string>
     <string name="multirt_progress_caching">Memorizzando nella cache...</string>
     <string name="multirt_config_setdefault">Imposta predefinito</string>
     <string name="multirt_config_setdefault_already">Predefinito</string>
-    <string name="multirt_nocompartiblert">Impossibile trovare Java Runtime compatibili. Questa versione richiede almeno Java %d o successiva.</string>
+    <string name="multirt_config_removeerror_last">Devi avere almeno un Runtime Java installato.</string>
     <string name="multirt_nojava8rt">Impossibile trovare Java 8. Per usare questa opzione, è necessario installare Java 8.</string>
     <string name="multirt_delete_runtime">Cancella runtime</string>
     <string name="pvc_gameDirectory">Cartella gioco</string>
     <string name="pvc_jvmArgs">Argomenti JVM</string>
     <string name="preference_mouse_start_title">Inizia con il mouse virtuale attivo</string>
+    <string name="preference_mouse_start_description">Quando questa opzione è attiva, il mouse virtuale appare all\'avvio.</string>
     <string name="preference_video_title">Video e renderer</string>
+    <string name="preference_video_description">Risoluzione, render e performance</string>
     <string name="preference_control_title">Personalizza controlli</string>
+    <string name="preference_control_description">Gesti, pulsanti e ridimensionamento</string>
     <string name="preference_java_title">Tweaks Java</string>
+    <string name="preference_java_description">Java Runtime, argomenti JVM, quantità RAM e sandbox</string>
     <string name="preference_misc_title">Impostazioni varie</string>
+    <string name="preference_misc_description">Lista versioni e controllo librerie</string>
     <string name="preference_experimental_title">Funzioni sperimentali</string>
+    <string name="preference_experimental_description">Usa queste funzioni a tuo rischio, nessun supporto</string>
     <string name="preference_sustained_performance_title">Attiva modalità performance sostenute</string>
+    <string name="preference_sustained_performance_description">Limita il thermal throttling limitando le performance massime.</string>
+    <string name="preference_force_vsync_title">Forza sincronia verticale</string>
+    <string name="preference_force_vsync_description">Limita il thermal throttling limitando le performance massime.</string>
+    <string name="preference_force_english_title">Forza lingua inglese</string>
+    <string name="preference_force_english_description">Ti consente di vedere le stringhe originali, come previsto dagli sviluppatori. Richiede un riavvio dell\'app.</string>
     <string name="preference_edit_controls_title">Modifica i controlli personalizzati</string>
+    <string name="preference_edit_controls_summary">Regola lo schema di controllo per soddisfare le tue esigenze.</string>
+    <string name="preference_category_gyro_controls">Controlli giroscopio</string>
     <string name="preference_category_virtual_mouse">Mouse virtuale</string>
     <string name="preference_gyro_invert_x_axis">Inverti l\'asse X</string>
     <string name="preference_gyro_invert_y_axis">Inverti l\'asse Y</string>
+    <string name="preference_gyro_invert_x_axis_description">Inverti l\'asse orizzontale.</string>
+    <string name="preference_gyro_invert_y_axis_description">Inverti l\'asse verticale.</string>
+    <string name="preference_gyro_smoothing_title">Abilita livellamento giroscopio</string>
     <string name="preference_gyro_smoothing_description">Riduci il jitter a discapito della latenza.</string>
     <string name="preference_back_title">Ritorna alla schermata precedente</string>
     <string name="unnamed">Senza nome</string>
@@ -172,12 +204,14 @@
     <string name="lazy_service_default_title">Servizio di Foreground Pojav</string>
     <string name="mcl_setting_veroption_installed">Installato</string>
     <string name="use_global_default">(Utilizza il predefinito globale)</string>
+    <string name="default_control">Controlli default</string>
     <string name="progresslayout_tasks_in_progress">%d operazioni in corso</string>
     <string name="notification_terminate">Termina</string>
     <string name="notification_game_runs">Il gioco è in esecuzione!</string>
     <string name="folder_dialog_create">Crea</string>
     <string name="folder_dialog_insert_name">Inserisci il nome della cartella</string>
     <string name="folder_fragment_create">Crea cartella</string>
+    <string name="folder_fragment_select">Seleziona cartella</string>
     <string name="main_login_done">Login effettuato</string>
     <string name="main_add_account">Aggiungi un account</string>
     <string name="tasks_ongoing">Operazioni in corso, attendi</string>
@@ -191,11 +225,19 @@ Accedi almeno una volta su https://minecraft.net/ e riprova.</string>
     <string name="minecraft_not_owned">Sembra che questo account non abbia un profilo Minecraft. Se hai Xbox Game Pass, accedi su https://minecraft.net/ e impostalo.</string>
     <string name="xerr_not_available">Xbox Live non è disponibile nel tuo paese</string>
     <string name="preference_enable_gyro_title">Abilita controlli giroscopio</string>
+    <string name="preference_enable_gyro_description">Attivando questa opzione potrai girare nel gioco girando il telefono.</string>
     <string name="preference_gyro_sensitivity_title">Sensibilità giroscopio</string>
+    <string name="preference_gyro_sensitivity_description">Regola la sensibilità del giroscopio.</string>
+    <string name="toast_turn_on_gyro">Abilita i controlli del giroscopio prima di usarlo!</string>
     <string name="preference_gyro_sample_rate_title">Frequenza di campionamento giroscopio</string>
+    <string name="preference_gyro_sample_rate_description">Se avete problemi di prestazioni con i controlli del giroscopio, aumentare questo.</string>
     <string name="microsoft_login_retry_later">Troppe richieste, riprova più tardi.</string>
+    <string name="storage_required">PojavLauncher necessita della memoria esterna, connettila e riavvia l\'applicazione</string>
+    <string name="mcl_setting_title_buttonallcaps">Usa solo lettere maiuscole nelle etichette dei pulsanti</string>
+    <string name="mcl_setting_subtitle_buttonallcaps">Disabilita questa opzione se vuoi usare lettere minuscole nei tuoi controlli.</string>
     <string name="create_profile">Crea nuovo profilo</string>
     <string name="preference_shader_dump_title">Abilità shader dumping</string>
+    <string name="preference_shader_dump_description">Registra gli shader convertiti nel file di log.</string>
     <string name="percent_format">%d%%</string>
     <string name="customctrl_editor_exit_title">Uscire?</string>
     <string name="customctrl_editor_exit_msg">Sei sicuro di voler uscire?</string>
@@ -203,9 +245,14 @@ Accedi almeno una volta su https://minecraft.net/ e riprova.</string>
     <string name="global_save_and_exit">Salva ed esci</string>
     <string name="global_yes">Si</string>
     <string name="global_no">No</string>
+    <string name="preference_controller_map_wiped">La configurazione del controller è stata cancellata.</string>
     <string name="preference_category_controller_settings">Impostazioni controller</string>
     <string name="preference_wipe_controller_title">Ripristina mappatura controller</string>
+    <string name="preference_wipe_controller_description">Consente di rimappare i pulsanti del controller.</string>
     <string name="preference_deadzone_scale_title">Scala deadzone joystick</string>
+    <string name="preference_deadzone_scale_description">Aumentare in caso si verifichi drifting del joystick.</string>
+    <string name="preference_force_big_core_title">Forza il render a eseguire sul core grande</string>
+    <string name="preference_force_big_core_desc">Forza il thread di rendering Minecraft ad essere eseguito con la massima frequenza possibile.</string>
     <string name="version_select_hint">Seleziona versione</string>
     <string name="forge_dl_progress">Download installer %s</string>
     <string name="forge_dl_searching">Ricerca del numero della versione di Forge</string>
@@ -229,8 +276,11 @@ Accedi almeno una volta su https://minecraft.net/ e riprova.</string>
     <string name="of_dl_progress">Scaricando %s</string>
     <string name="create_profile_optifine">Crea profilo Optifine</string>
     <string name="hint_search_modpack">Cerca modpack</string>
+    <string name="preference_vulkan_driver_system_title">Usa driver Vulkan di sistema</string>
+    <string name="preference_vulkan_driver_system_description">Forza il launcher a utilizzare il driver Vulkan di sistema invece di Turnip su GPU Adreno. Ha effetti solo su Zink e mod che utilizzano Vulkan.</string>
     <string name="generic_install">Installa</string>
     <string name="generic_apply">Applica</string>
+    <string name="generic_debug">Debug</string>
     <string name="search_modpack_no_result">Nessun modpack trovato</string>
     <string name="search_modpack_error">La ricerca di modpack è fallita</string>
     <string name="search_modpack_download_error">Il download di modpack metadata è fallito</string>
@@ -247,6 +297,35 @@ Accedi almeno una volta su https://minecraft.net/ e riprova.</string>
     <string name="notif_error_occured">Si è verificato un errore</string>
     <string name="notif_error_occured_desc">Clicca per visualizzare più dettagli</string>
     <string name="fabric_dl_only_stable">Mostra solo le versioni stabili</string>
+    <string name="dl_tampered_manifest_title">Avviso verifica file</string>
+    <string name="dl_tampered_manifest"><![CDATA[Il manifesto della versione del gioco sul server mirror non corrisponde con quello ufficiale di Mojang, ciò significa che potrebbe essere stato manomesso<br/>
+<b>Questo non è sicuro, le tue informazione personale potrebbero essere a rischio se continui</b><br/>
+se vuoi continuare ad usare il server mirror, premi \"Disattiva controlli del manifesto"\ e riavvia il download<br/>
+se vuoi scaricare dalla sorgente ufficiale premi \"Passa al sito ufficiale"\ e riavvia il download<br/>]]></string>
+    <string name="dl_turn_off_manifest_checks">Disattiva controlli del manifesto</string>
+    <string name="dl_switch_to_official_site">Passa al sito ufficiale</string>
+    <string name="preference_download_source_title">Fonte di download del gioco</string>
+    <string name="preference_download_source_description">Selezionate un mirror di download invece di utilizzare il server di download ufficiale</string>
+    <string name="preference_verify_manifest_title">Verificare il manifesto della versione del gioco</string>
+    <string name="preference_verify_manifest_description">Se abilitato, il lanciatore controllerà il manifesto della versione del gioco insieme alle librerie.</string>
+    <string name="notif_download_finished">Il gioco è pronto per il lancio</string>
+    <string name="notif_download_finished_desc">Clicca qui per iniziare!</string>
+    <string name="preference_category_gestures">Gesti</string>
+    <string name="preference_category_buttons">Pulsanti</string>
+    <string name="preference_category_experimental_settings">Esperimento estremo</string>
     <string name="preference_category_java_tweaks">Tweaks Java</string>
+    <string name="preference_category_main_categories">Categorie</string>
     <string name="preference_category_miscellaneous">Impostazioni varie</string>
+    <string name="preference_category_video">Impostazioni del video</string>
+    <string name="notification_permission_dialog_title">Richiesta di autorizzazione</string>
+    <string name="notification_permission_dialog_text">PojavLauncher richiede l\'autorizzazione a inviare notifiche per evitare che i download di giochi/modpack si interrompano quando si lascia l\'applicazione. Senza questa autorizzazione, Android potrebbe interrompere i download quando si mette PojavLauncher in modalità di sfondo.</string>
+    <string name="notification_permission_toast">È sempre possibile cambiare idea in un secondo momento, accedendo a Impostazioni</string>
+    <string name="preference_ask_for_notification_title">Permettere le notifiche</string>
+    <string name="preference_ask_for_notification_description">Clicca per richiedere nuovamente il permesso di notifiche, necessario per il corretto funzionamento dei download in background di giochi/modpack.</string>
+    <string name="preference_vsync_in_zink_title">Abilita V-Sync con Zink</string>
+    <string name="preference_vsync_in_zink_description">Permette al launcher di usare le API interne del sistema per abilitare V-Sync per Zink. Disattivare questa opzione se il launcher si blocca improvvisamente con Zink dopo un aggiornamento del sistema.</string>
+    <string name="exception_failed_to_unpack_jre17">Installazione fallita di JRE 17</string>
+    <string name="newdl_starting">Lettura metadati del gioco…</string>
+    <string name="newdl_downloading_metadata">Download dei metadati di gioco (%s)</string>
+    <string name="controller_button_select">Seleziona</string>
 </resources>
