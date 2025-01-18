@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition за Андроид)</string>
     <string name="app_short_name">PojavLauncher</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">Е-пошта или ваше Минецрафт име</string>
     <string name="login_online_login_label">Пријава</string>
     <!-- Hint -->
     <!-- Warnings -->
@@ -25,6 +24,7 @@
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_wiki">Вики</string>
     <!-- MCLauncherActivity: Account status -->
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_launch_cleancache">Чишћење кеш фајлова</string>
@@ -115,4 +115,5 @@
     <string name="profiles_profile_name">Име</string>
     <string name="pedit_renderer">Рендерер</string>
     <string name="of_dl_progress">Преузимање %s</string>
+    <string name="generic_debug">Дебаг</string>
 </resources>
