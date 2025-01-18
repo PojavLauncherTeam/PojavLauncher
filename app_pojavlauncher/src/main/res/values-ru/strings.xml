@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition для Android)</string>
     <string name="app_short_name">PojavLauncher</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">Email или имя пользователя</string>
+    <string name="login_online_username_hint">Имя пользователя</string>
     <string name="login_online_login_label">Войти</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Нажмите значок ⚙, чтобы открыть панель действий.\nВыберите кнопку, чтобы создать её копию или удалить;\nизменить свойства, размер или привязанную клавишу."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Эта учётная запись будет удалена!</string>
     <!-- AlertDialog title -->
@@ -52,7 +51,6 @@
     <string name="mcl_setting_category_renderer">Визуализатор</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES (все версии, быстрый)</string>
     <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan; все версии, средний)</string>
-    <string name="mcl_setting_renderer_angle">ANGLE (Vulkan; 1.17 и новее, средний)</string>
     <string name="mcl_setting_veroption_release">Релизы</string>
     <string name="mcl_setting_veroption_snapshot">Снапшоты</string>
     <string name="mcl_setting_veroption_oldalpha">Старые альфа</string>
@@ -159,7 +157,6 @@
     <string name="multirt_config_setdefault">Выбрать</string>
     <string name="multirt_config_setdefault_already">По умолчанию</string>
     <string name="multirt_config_removeerror_last">Должна быть установлена хотя бы одна среда выполнения Java.</string>
-    <string name="multirt_nocompartiblert">Не удалось найти подходящую среду выполнения Java. Эта версия требует Java %d или новее.</string>
     <string name="multirt_nojava8rt">Не удалось найти Java 8. Чтобы использовать эту опцию, необходимо установить Java 8.</string>
     <string name="multirt_delete_runtime">Удалить</string>
     <string name="pvc_gameDirectory">Папка игры</string>
@@ -282,6 +279,7 @@
     <string name="preference_vulkan_driver_system_description">Принудительно использовать системный Vulkan вместо драйвера Turnip на графике Adreno. Повлияет только на Zink и моды, напрямую использующие Vulkan.</string>
     <string name="generic_install">Установить</string>
     <string name="generic_apply">Применить</string>
+    <string name="generic_debug">Отладка</string>
     <string name="search_modpack_no_result">Сборок не найдено</string>
     <string name="search_modpack_error">Не удалось выполнить поиск сборок</string>
     <string name="search_modpack_download_error">Не удалось загрузить метаданные сборки</string>
@@ -298,7 +296,7 @@
     <string name="notif_error_occured">Возникла ошибка</string>
     <string name="notif_error_occured_desc">Нажмите для получения дополнительных сведений</string>
     <string name="fabric_dl_only_stable">Только стабильные версии</string>
-    <string name="dl_tampered_manifest_title">File verification warning</string>
+    <string name="dl_tampered_manifest_title">Предупреждение о проверке файла</string>
     <string name="dl_tampered_manifest"><![CDATA[Манифест версии игры с зеркала не совпадает с манифестом официальной версии от Mojang, что сигнализирует о возможной подделке данных.<br/>
         <b>Это небезопасно. Если продолжить, ваши персональные данные могут оказаться под угрозой.</b><br/>
         Если вы всё же хотите продолжить загрузку с зеркала, нажмите «Отключить проверку манифеста» и попробуйте снова.<br/>
@@ -309,11 +307,11 @@
     <string name="preference_download_source_description">Загружать файлы с зеркала вместо загрузки с официального репозитория.</string>
     <string name="preference_verify_manifest_title">Проверка метаданных версии</string>
     <string name="preference_verify_manifest_description">Проверять манифест версии игры совместно с библиотеками.</string>
-    <string name="notif_download_finished">Игра готова к запуску</string>
-    <string name="notif_download_finished_desc">Нажмите, чтобы запустить</string>
+    <string name="notif_download_finished">Игра подготовлена</string>
+    <string name="notif_download_finished_desc">Нажмите для запуска</string>
     <string name="preference_category_gestures">Жесты</string>
     <string name="preference_category_buttons">Кнопки</string>
-    <string name="preference_category_experimental_settings">Экспериментальная хрень</string>
+    <string name="preference_category_experimental_settings">Экспериментальная функция</string>
     <string name="preference_category_java_tweaks">Настройки Java</string>
     <string name="preference_category_main_categories">Разделы</string>
     <string name="preference_category_miscellaneous">Другие настройки</string>
@@ -328,5 +326,11 @@
     <string name="exception_failed_to_unpack_jre17">Не удалось установить JRE 17</string>
     <string name="newdl_starting">Чтение метаданных игры…</string>
     <string name="newdl_downloading_metadata">Загрузка метаданных игры (%s)</string>
-    <string name="newdl_downloading_game_files">Загрузка файлов… (%d/%d, %.2f МБ)</string>
+    <string name="controller_button_a">A</string>
+    <string name="controller_button_b">B</string>
+    <string name="controller_button_x">X</string>
+    <string name="controller_button_y">Y</string>
+    <string name="controller_button_start">Старт</string>
+    <string name="controller_button_select">Выбрать</string>
+    <string name="customctrl_visibility_title">Отображение</string>
 </resources>
