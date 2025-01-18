@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition for Android)</string>
     <string name="app_short_name">PojavLauncher</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">メールアドレスまたはユーザー名</string>
+    <string name="login_online_username_hint">ユーザー名</string>
     <string name="login_online_login_label">ログイン</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"中央上部の歯車アイコンをタップするとコンテキストメニューを開けます。⚙\nボタンをタップすると、編集、サイズ変更、削除、キーバインドのカスタマイズをすることができます。"</string>
     <!-- Warnings -->
     <string name="warning_remove_account">このアカウントが削除されます！</string>
     <!-- AlertDialog title -->
@@ -114,7 +113,8 @@
     <string name="customctrl_addbutton_drawer">ボタンドロワーの追加</string>
     <string name="customctrl_addbutton_joystick">ジョイスティックを追加</string>
     <string name="customctrl_addsubbutton">サブボタンを追加</string>
-    <string name="main_share_logs">ログファイルを共有する</string>
+    <string name="main_share_logs">ログファイルを共有</string>
+    <string name="main_install_jar_file">.jar を実行する</string>
     <string name="main_play">プレイ</string>
     <string name="autoram_info_msg">メモリを %d MB に設定しました</string>
     <string name="mcl_setting_check_libraries">ダウンロード後にライブラリを確認する</string>
@@ -132,27 +132,37 @@
     <string name="mcl_memory_allocation">メモリ割り当て</string>
     <string name="multirt_runtime_corrupt">Javaのランタイムが破損しています</string>
     <string name="multirt_runtime_incompatiblearch">互換性のないアーキテクチャ: %s</string>
+    <string name="multirt_config_title">Javaランタイム</string>
     <string name="multirt_config_add">新規追加</string>
     <string name="multirt_title">ランタイムマネージャ</string>
+    <string name="multirt_subtitle">インストール済みJavaランタイムを管理する</string>
     <string name="multirt_progress_caching">キャッシュ中...</string>
     <string name="multirt_config_setdefault">デフォルトに設定</string>
     <string name="multirt_config_setdefault_already">デフォルト</string>
-    <string name="multirt_nocompartiblert">比較可能なJavaランタイムが見つかりません。このバージョンはJava %d 以降が必要です。</string>
     <string name="multirt_nojava8rt">Java 8が見つかりません。このオプションを使用するには、Java 8をインストールする必要があります。</string>
     <string name="multirt_delete_runtime">ランタイムを削除</string>
     <string name="pvc_gameDirectory">ゲームのディレクトリ</string>
     <string name="pvc_jvmArgs">JVM 引数</string>
     <string name="preference_mouse_start_title">仮想マウスをオンにして開始</string>
     <string name="preference_video_title">ビデオとレンダラー</string>
+    <string name="preference_video_description">解像度、レンダラー、パフォーマンス</string>
     <string name="preference_control_title">制御のカスタマイズ</string>
+    <string name="preference_control_description">ジェスチャー、ボタン、スケール</string>
     <string name="preference_java_title">Java の調整</string>
+    <string name="preference_java_description">Javaのバージョン、JVMの引数、RAM、サンドボックス</string>
     <string name="preference_misc_title">その他の設定</string>
     <string name="preference_experimental_title">実験的なもの</string>
     <string name="preference_sustained_performance_title">持続的なパフォーマンスモードを有効にする</string>
-    <string name="preference_edit_controls_title">カスタムコントロールの編集</string>
+    <string name="preference_force_vsync_title">強制的に垂直同期をオンにする</string>
+    <string name="preference_force_english_title">強制的に言語を英語にする</string>
+    <string name="preference_edit_controls_title">コントロールを編集</string>
+    <string name="preference_category_gyro_controls">ジャイロコントロール</string>
     <string name="preference_category_virtual_mouse">仮想マウス</string>
     <string name="preference_gyro_invert_x_axis">X軸を反転させる</string>
     <string name="preference_gyro_invert_y_axis">Y軸を反転させる</string>
+    <string name="preference_gyro_invert_x_axis_description">水平軸を反転させる.</string>
+    <string name="preference_gyro_invert_y_axis_description">縦軸を反転させる.</string>
+    <string name="preference_gyro_smoothing_title">ジャイロコントロールを滑らかにする</string>
     <string name="preference_gyro_smoothing_description">ジッターを減少させる代わりに遅延を増やす。</string>
     <string name="preference_back_title">最後の画面に戻る</string>
     <string name="unnamed">名前なし</string>
@@ -175,6 +185,7 @@
     <string name="folder_dialog_create">新規作成</string>
     <string name="folder_dialog_insert_name">フォルダー名を挿入</string>
     <string name="folder_fragment_create">フォルダーを作成</string>
+    <string name="folder_fragment_select">フォルダーを選択</string>
     <string name="main_login_done">ログイン完了</string>
     <string name="main_add_account">アカウントを追加</string>
     <string name="tasks_ongoing">タスクが進行中です。しばらくお待ちください。</string>
@@ -203,20 +214,32 @@
     <string name="preference_wipe_controller_title">コントローラーマッピングをリセット</string>
     <string name="preference_deadzone_scale_title">ジョイスティックの無反応範囲</string>
     <string name="version_select_hint">バージョン選択</string>
+    <string name="forge_dl_select_version">Forge のバージョンを選択</string>
     <string name="fabric_dl_game_version">Minecraft バージョン</string>
     <string name="fabric_dl_install">インストール</string>
     <string name="modloader_dl_install_fabric">Fabric プロファイルを作成する</string>
     <string name="modloader_dl_install_quilt">Quilt プロファイルを作成する</string>
     <string name="modloader_dl_install_forge">Forge プロファイルを作成する</string>
+    <string name="create_profile_vanilla">新規プロファイル(Vanilla) を作成する</string>
     <string name="fabric_dl_loader_title">バージョンの選択</string>
+    <string name="of_dl_select_version">OptiFine のバージョンを選択</string>
     <string name="of_dl_progress">%s をダウンロード中</string>
     <string name="preference_vulkan_driver_system_title">システム標準のVulkanドライバーを使用する</string>
     <string name="preference_vulkan_driver_system_description">ランチャーにAdreno GPUでTurnipの代わりにVulkanドライバを使用するよう強制します。Vulkanを使用するZinkとModにのみ影響します。</string>
     <string name="generic_install">インストール</string>
     <string name="generic_apply">適用</string>
+    <string name="generic_debug">デバッグ</string>
     <string name="notif_error_occured">エラーが発生しました</string>
     <string name="notif_error_occured_desc">タップして詳細を表示</string>
     <string name="fabric_dl_only_stable">安定したバージョンのみ表示</string>
+    <string name="preference_category_gestures">ジェスチャー</string>
     <string name="preference_category_java_tweaks">Java の調整</string>
     <string name="preference_category_miscellaneous">その他の設定</string>
+    <string name="controller_button_a">A</string>
+    <string name="controller_button_b">B</string>
+    <string name="controller_button_x">X</string>
+    <string name="controller_button_y">Y</string>
+    <string name="controller_button_start">Start</string>
+    <string name="controller_button_select">選択...</string>
+    <string name="customctrl_visibility_title">公開範囲</string>
 </resources>
