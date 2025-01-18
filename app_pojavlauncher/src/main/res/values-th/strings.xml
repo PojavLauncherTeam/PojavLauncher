@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: รุ่น Java สำหรับ Android)</string>
     <string name="app_short_name">PojavLauncher</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">อีเมลหรือชื่อผู้ใช้</string>
+    <string name="login_online_username_hint">ชื่อผู้ใช้</string>
     <string name="login_online_login_label">เข้าสู่ระบบ</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"กดปุ่มด้านบนกลางรูปฟันเพืองเพื่อเปิดหน้าต่าง ⚙\nเเตะปุ่มเพื่อปรับเเต่ง: เเก้ไข, ปรับขนาด, ลบ, หรือ ปรับเเต่งตัวคียลัด"</string>
     <!-- Warnings -->
     <string name="warning_remove_account">บัญชีนี้จะถูกลบ!</string>
     <!-- AlertDialog title -->
@@ -52,7 +51,6 @@
     <string name="mcl_setting_category_renderer">การแสดงผล</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (รองรับทุกเวอร์ชั่น, เร็ว)</string>
     <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - (รองรับทุกเวอร์ชั่น, กลาง)</string>
-    <string name="mcl_setting_renderer_angle">ANGLE (Vulkan) - (รองรับ 1.17+ เท่านั้น, กลาง)</string>
     <string name="mcl_setting_veroption_release">ปล่อย</string>
     <string name="mcl_setting_veroption_snapshot">ภาพรวม</string>
     <string name="mcl_setting_veroption_oldalpha">อัลฟ่าเก่า</string>
@@ -100,7 +98,7 @@
     <string name="control_forceclose">บังคับปิด</string>
     <string name="control_viewout">ประวัติที่บันทึกไว้</string>
     <string name="control_adebug">การดีบักอินพุต</string>
-    <string name="control_customkey">ส่งรหัสที่กำหนดเอง</string>
+    <string name="control_customkey">ส่งคำสั่งที่กำหนตเอง</string>
     <!-- ImportControlActivity Strings -->
     <string name="import_control_label">นำเข้า ควบคุม</string>
     <string name="import_control_invalid_file">ไฟล์ไม่ถูกต้องหรือเสียหาย</string>
@@ -145,6 +143,7 @@
     <string name="customctrl_passthru">เมาส์ผ่านได้</string>
     <string name="customctrl_swipeable">ลากได้</string>
     <string name="customctrl_forward_lock">ล็อคไปข้างหน้า</string>
+    <string name="customctrl_absolute_tracking">การตรวจจับนั้วเเบบสมบูรณ์</string>
     <string name="memory_warning_msg">ขณะนี้เเรมที่เหลือในเครืองของคุณ (%d) น้อยกว่าเเรมที่ตั้งไว้ (%d) อาจะทำให้เด้งได้ ปรับค่าเเรมที่ต้องการเมื่อเกมเด้ง</string>
     <string name="mcl_memory_allocation">การจัดสรรหน่วยความจำ</string>
     <string name="mcl_memory_allocation_subtitle">ควบคุมจำนวนหน่วยความจำที่มอบให้กับ Minecraft</string>
@@ -158,7 +157,6 @@
     <string name="multirt_config_setdefault">ตั้งค่าเริ่มต้น</string>
     <string name="multirt_config_setdefault_already">ค่าเรื่มต้น</string>
     <string name="multirt_config_removeerror_last">คุณต้องติดตั้งรันไทม์ Java อย่างน้อยหนึ่งรายการ</string>
-    <string name="multirt_nocompartiblert">ไม่สามารถหาตัวจาวาที่รองรับ เวอร์ชั่นนี้ตองการจาวา %d หรือใหม่กว่า</string>
     <string name="multirt_nojava8rt">ไม่สามารถหาจาวา 8 ในการใช้ออฟชั่นนี้คุณต้องติดตั้งจาวา 8</string>
     <string name="multirt_delete_runtime">ลบรันไทม์</string>
     <string name="pvc_gameDirectory">ตำเเหน่งโฟรเดอร์เกม</string>
@@ -281,6 +279,7 @@
     <string name="preference_vulkan_driver_system_description">บังคับให้ตัวเรียกใช้งานใช้ไดรเวอร์ระบบ Vulkan แทน Turnip บน Adreno GPU มีผลกับ Zink และ mod ที่ใช้ Vulkan เท่านั้น</string>
     <string name="generic_install">ติดตั้ง</string>
     <string name="generic_apply">นำมาใช้</string>
+    <string name="generic_debug">ดีบั๊ก</string>
     <string name="search_modpack_no_result">ไม่พบ modpacks</string>
     <string name="search_modpack_error">ไม่พบ modpacks</string>
     <string name="search_modpack_download_error">ดาวน์โหลดข้อมูลเมตาของ modpack ไม่สำเร็จ</string>
@@ -325,4 +324,7 @@
     <string name="preference_vsync_in_zink_title">อนุญาต V-Sync กับ Zink</string>
     <string name="preference_vsync_in_zink_description">อนุญาตให้ Launcher ใช้ API ระบบภายในเพื่อเปิดใช้งาน V-Sync สำหรับ Zink ปิดตัวเลือกนี้หาก Launcher ของคุณขัดข้องกับ Zink ทันทีหลังการอัปเดตระบบ</string>
     <string name="exception_failed_to_unpack_jre17">ไม่สามารถติดตั้ง JRE 17</string>
+    <string name="newdl_starting">กำลังอ่านข้อมูลไฟล์เกม...</string>
+    <string name="newdl_downloading_metadata">กำลังดาวโหลดข้อมูลไฟล์เกม (%s)</string>
+    <string name="controller_button_select">เลือก</string>
 </resources>
