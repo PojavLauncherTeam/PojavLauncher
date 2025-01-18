@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition untuk Android)</string>
     <string name="app_short_name">PojavLauncher</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">Email atau nama pengguna</string>
+    <string name="login_online_username_hint">Username</string>
     <string name="login_online_login_label">Login</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Ketuk ikon beroda gigi untuk membuka menu konteks \nKetuk tombol untuk menyesuaikan: ubah, ubah ukuran, atau ubah tombol pintasannya."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Akun ini akan dihapus!</string>
     <!-- AlertDialog title -->
@@ -36,14 +35,15 @@
     <string name="mcl_options">Opsi</string>
     <string name="mcl_option_customcontrol">Kontrol kustom</string>
     <string name="mcl_setting_title_use_surface_view">Gunakan alternatif rendering surface</string>
-    <string name="mcl_setting_subtitle_use_surface_view">Mungkin membantu perfoma dalam skenario-skenario GPU bound.</string>
+    <string name="mcl_setting_subtitle_use_surface_view">Mungkin membantu perfoma dalam skenario-skenario membutuhkan GPU.</string>
     <string name="mcl_setting_title_ignore_notch">Abaikan notch</string>
     <string name="mcl_setting_subtitle_ignore_notch">Mengabaikan notch dan memperluas layar ke bawahnya.\nMemberikanmu pengalaman yang lebih luas.</string>
     <string name="mcl_setting_title_resolution_scaler">Pengskala resolusi</string>
-    <string name="mcl_setting_subtitle_resolution_scaler">Membolehkanmu menurunkan resolusi permainan. 100% berarti resolusi penuh(mempengaruhi performa).</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">Membolehkanmu menurunkan resolusi permainan. 100% berarti resolusi penuh.</string>
+    <string name="mcl_setting_title_longpresstrigger">Pemicuan penundaan tekan lama</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Ubah delay tekan lama untuk menghancurkan block dan menjatuhkan item.</string>
     <string name="mcl_setting_title_buttonscale">Penskalaan tombol kontrol</string>
-    <string name="mcl_setting_subtitle_buttonscale">Tingkatkan ukuran tombol jika tombol tombol itu terlalu kecil.</string>
+    <string name="mcl_setting_subtitle_buttonscale">Tingkatkan ukuran tombol jika tombol-tombol itu terlalu kecil.</string>
     <string name="mcl_setting_title_mousescale">Penskalaan mouse</string>
     <string name="mcl_setting_subtitle_mousescale">Ubah ukuran penunjuk virtual.</string>
     <string name="mcl_setting_title_javaargs">Argumen peluncuran JVM</string>
@@ -51,7 +51,6 @@
     <string name="mcl_setting_category_renderer">Renderer</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (semua versi, cepat)</string>
     <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - (semua versi, menengah)</string>
-    <string name="mcl_setting_renderer_angle">ANGLE (Vulkan) - (hanya 1.17 keatas, menengah)</string>
     <string name="mcl_setting_veroption_release">Rilis</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Alpha-lama</string>
@@ -131,7 +130,7 @@
     <string name="main_play">Main</string>
     <string name="autoram_info_msg">Memori disetel ke %d MB</string>
     <string name="mcl_setting_check_libraries">Periksa library setelah mendownload</string>
-    <string name="mcl_setting_check_libraries_subtitle">Opsi ini memaksa peluncur untuk memeriksa hasb pustaka jika itu tersedia. Mencegah unduhan rusak.</string>
+    <string name="mcl_setting_check_libraries_subtitle">Opsi ini memaksa peluncur untuk memeriksa hash library jika tersedia. Mencegah unduhan yang rusak.</string>
     <string name="dl_library_sha_fail">Library %s rusak dan akan di-unduh ulang</string>
     <string name="dl_library_sha_unknown">Librry %s tidak dapat diperiksa, harus dianggap bagus</string>
     <string name="dl_library_sha_pass">Library %s baik-baik saja dan dapat digunakan</string>
@@ -140,10 +139,11 @@
     <string name="mcl_disable_swap_hand">Nonaktifkan ketuk dua kali untuk bertukar tangan</string>
     <string name="mcl_disable_swap_hand_subtitle">Nonaktifkan gestur ketuk dua kali pada item hotbar untuk menukarkannya di tangan kedua.</string>
     <string name="mcl_setting_title_mousespeed">Kecepatan Mouse</string>
-    <string name="mcl_setting_subtitle_mousespeed">Ubah kecepatan penunjuk virtual.</string>
+    <string name="mcl_setting_subtitle_mousespeed">Ubah kecepatan mouse virtual.</string>
     <string name="customctrl_passthru">Mouse pass-thru</string>
     <string name="customctrl_swipeable">Bisa digesek</string>
     <string name="customctrl_forward_lock">Kunci ke depan</string>
+    <string name="customctrl_absolute_tracking">Pelacakan jari absolut</string>
     <string name="memory_warning_msg">Jumlah RAM kosong saat ini (%d) lebih rendah dari RAM yang dialokasikan (%d), yang dapat menyebabkan crash. Ubah alokasi jika game crash.</string>
     <string name="mcl_memory_allocation">Alokasi Memori</string>
     <string name="mcl_memory_allocation_subtitle">Kontrol seberapa banyak memori yang diberikan untuk Minecraft.</string>
@@ -157,22 +157,22 @@
     <string name="multirt_config_setdefault">Set default</string>
     <string name="multirt_config_setdefault_already">Default</string>
     <string name="multirt_config_removeerror_last">Kamu harus punya setidaknya satu Runtime Java yang terpasang.</string>
-    <string name="multirt_nocompartiblert">Tidak dapat menemukan Java Runtime yang kompatibel. Versi ini membutuhkan Java %d atau yang lebih baru.</string>
     <string name="multirt_nojava8rt">Tidak dapat menemukan Java 8. Untuk menggunakan opsi ini, kamu perlu menginstal Java 8.</string>
     <string name="multirt_delete_runtime">Hapus runtime</string>
     <string name="pvc_gameDirectory">Direktori game</string>
     <string name="pvc_jvmArgs">Argumen JVM</string>
     <string name="preference_mouse_start_title">Mulai dengan mouse virtual nyala</string>
-    <string name="preference_mouse_start_description">Penunjuk virtual akan muncul ketika opsi ini aktif.</string>
+    <string name="preference_mouse_start_description">Mouse virtual akan muncul ketika opsi ini aktif.</string>
     <string name="preference_video_title">Video dan renderer</string>
     <string name="preference_video_description">Resolusi, renderer dan performa</string>
     <string name="preference_control_title">Kustomisasi kontrol</string>
-    <string name="preference_control_description">Gestur, Tombol, dan Skala</string>
+    <string name="preference_control_description">Gestur, tombol, dan skala</string>
     <string name="preference_java_title">Tweak Java</string>
     <string name="preference_java_description">Runtime Java, Argumen JVM, Jumlah RAM dan sandbox</string>
     <string name="preference_misc_title">Pengaturan lain-lain</string>
     <string name="preference_misc_description">Daftar versi dan pemeriksaan lib</string>
     <string name="preference_experimental_title">Barang Eksperimental</string>
+    <string name="preference_experimental_description">Gunakan hal-hal di sana dengan pertimbangan, tidak ada dukungan</string>
     <string name="preference_sustained_performance_title">Aktifkan mode kinerja berkelanjutan</string>
     <string name="preference_sustained_performance_description">Limit thermal throttling dengan me-limit performa.</string>
     <string name="preference_force_vsync_title">Paksa aktifkan VSync</string>
@@ -180,6 +180,7 @@
     <string name="preference_force_english_title">Paksa bahasa saat ini ke bahasa Inggris</string>
     <string name="preference_force_english_description">Memperbolehkan anda untuk melihat string asli, seperti kehendak pengembang. Membutuhkan muat ulang.</string>
     <string name="preference_edit_controls_title">Ubah kontrol kustom</string>
+    <string name="preference_edit_controls_summary">Atur skema kontrol untuk menyesuaikan kebutuhan Anda.</string>
     <string name="preference_category_gyro_controls">Kontrol Giro</string>
     <string name="preference_category_virtual_mouse">Mouse virtual</string>
     <string name="preference_gyro_invert_x_axis">Balikkan sumbu X</string>
@@ -223,11 +224,19 @@
     <string name="minecraft_not_owned">Sepertinya akun ini tidak mempunyai profil Minecraft. Jika kamu memiliki Xbox Game Pass, tolong login ke https://minecraft.net/ dan mengaturnya.</string>
     <string name="xerr_not_available">Xbox Live tidak tersedia dinegaramu</string>
     <string name="preference_enable_gyro_title">Hidupkan kontrol giroskop</string>
+    <string name="preference_enable_gyro_description">Pppp.</string>
     <string name="preference_gyro_sensitivity_title">Giroskop mengontrol sensitivitas</string>
+    <string name="preference_gyro_sensitivity_description">Atur sensitivitas kontrol giroskop.</string>
+    <string name="toast_turn_on_gyro">!</string>
     <string name="preference_gyro_sample_rate_title">Tingkat pengambilan sampel giroskop</string>
+    <string name="preference_gyro_sample_rate_description">Jika anda memiliki masalah perfoma dengan kontrol giroskop, tingkatkan ini.</string>
     <string name="microsoft_login_retry_later">Terlalu banyak permintaan, coba lagi nanti.</string>
+    <string name="storage_required">PojavLauncher membutuhkan penyimpanan eksternal. Mohon untuk dipasang kembali dan merestart aplikasi.</string>
+    <string name="mcl_setting_title_buttonallcaps">Hanya gunakan huruf kapital di label tombol</string>
+    <string name="mcl_setting_subtitle_buttonallcaps">Matikan ini jika kamu ingin menggunakan huruf kecil di kontrol.</string>
     <string name="create_profile">Buat profil baru</string>
     <string name="preference_shader_dump_title">Aktifkan shader dumping</string>
+    <string name="preference_shader_dump_description">Simpan catatan shader ke sebuah berkas.</string>
     <string name="percent_format">%d%%</string>
     <string name="customctrl_editor_exit_title">Meninggalkan?</string>
     <string name="customctrl_editor_exit_msg">Anda yakin ingin keluar?</string>
@@ -235,9 +244,14 @@
     <string name="global_save_and_exit">Simpan dan keluar</string>
     <string name="global_yes">Ya</string>
     <string name="global_no">Tidak</string>
+    <string name="preference_controller_map_wiped">Konfigurasi kontroler telah dihapus.</string>
     <string name="preference_category_controller_settings">Pengaturan kontroler</string>
     <string name="preference_wipe_controller_title">Setel ulang pemetaan kontroler</string>
+    <string name="preference_wipe_controller_description">Memperbolehkanmu untuk mengatur ulang tombol pengontrol.</string>
     <string name="preference_deadzone_scale_title">Skala Joystick deadzone</string>
+    <string name="preference_deadzone_scale_description">Tingkatkan jika terjadi \"joystick drift\".</string>
+    <string name="preference_force_big_core_title">Paksa renderer untuk berjalan di big core</string>
+    <string name="preference_force_big_core_desc">Paksa thread rendernya Minecraft untuk berjalan di core dengan frekuensi maksimal.</string>
     <string name="version_select_hint">Pilih sebuah versi</string>
     <string name="forge_dl_progress">Mengunduh installer dalam %s</string>
     <string name="forge_dl_searching">Mencari nomor versi Forge</string>
@@ -265,6 +279,7 @@
     <string name="preference_vulkan_driver_system_description">Paksa peluncur untuk menggunakan driver Vulkan sistem daripada Turnip di GPU Adreno. Hanya mempengaruhi Zink dan mod-mod yang menggunakan Vulkan.</string>
     <string name="generic_install">Pasang</string>
     <string name="generic_apply">Terapkan</string>
+    <string name="generic_debug">Debug</string>
     <string name="search_modpack_no_result">Tidak dapat menemukan paket modifikasi</string>
     <string name="search_modpack_error">Gagal mencari paket modifikasi</string>
     <string name="search_modpack_download_error">Gagal mengunduh metadata paket modifikasi</string>
@@ -281,7 +296,41 @@
     <string name="notif_error_occured">Terjadi sebuah kesalahan</string>
     <string name="notif_error_occured_desc">Pencet untuk melihat detail lebih lanjut</string>
     <string name="fabric_dl_only_stable">Hanya tunjukkan versi-versi stabil</string>
+    <string name="dl_tampered_manifest_title">Peringatan verifikasi berkas</string>
+    <string name="dl_tampered_manifest"><![CDATA[Manifes versi permainan di mirror tidak sama dengan yang resmi dari Mojang, yang kemungkinan berarti manifesnya telah dimodifikasi oleh pihak lain.<br/>
+        <b>Ini tidak aman. Informasi pribadi anda akan terbahayakan jika anda lanjut.</b><br/>
+        Jika anda masih mau menggunakan mirror, pencet \"Matikan cek manifes\" dan mulai pengunduhan lagi.<br/>
+        Jika anda mau menggunakan sumber pengunduhan resmi, pencet \"Ganti ke sumber resmi\" dan mulai pengunduhannya lagi.<br/>]]></string>
+    <string name="dl_turn_off_manifest_checks">Matikan cek manifes</string>
+    <string name="dl_switch_to_official_site">Beralih ke situs resmi</string>
+    <string name="preference_download_source_title">Sumber unduhan permainan</string>
+    <string name="preference_download_source_description">Pilih sebuah mirror pengunduhan daripada menggunakan server pengunduhan resmi</string>
+    <string name="preference_verify_manifest_title">Verifikasi manifes versi permainan</string>
+    <string name="preference_verify_manifest_description">Ketika diaktifkan, launcher akan mengecek manifest versi game bersamaan library.</string>
+    <string name="notif_download_finished">Game siap untuk diluncurkan</string>
+    <string name="notif_download_finished_desc">Klik disini untuk memulai nya!</string>
+    <string name="preference_category_gestures">Gestur</string>
+    <string name="preference_category_buttons">Tombol-tombol</string>
+    <string name="preference_category_experimental_settings">Fitur Eksperimental</string>
     <string name="preference_category_java_tweaks">Tweak Java</string>
+    <string name="preference_category_main_categories">Kategori</string>
     <string name="preference_category_miscellaneous">Pengaturan lain-lain</string>
+    <string name="preference_category_video">Pengaturan video</string>
+    <string name="notification_permission_dialog_title">Permintaan izin</string>
+    <string name="notification_permission_dialog_text">Pojav launcher memperlukan izin untuk post notifikasi untuk mencegah download game/modpack berhenti ketika keluar dari aplikasi. Tanpa izin ini, android mungkin membatalkan unduhan ketita menempatkan PojavLaunher dalam mode latar belakang.</string>
+    <string name="notification_permission_toast">kamu selalu dapat berubah pikiran nanti dengan masuk ke Pengaturan</string>
+    <string name="preference_ask_for_notification_title">Izinkan notifikasi</string>
+    <string name="preference_ask_for_notification_description">Pencet untuk request kembali izin notifikasi, dibutuhkan untuk pengunduhan latar belakang permainan/modpack untuk berjalan dengan benar.</string>
+    <string name="preference_vsync_in_zink_title">Membolehkan V-sync dengan Zink</string>
+    <string name="preference_vsync_in_zink_description">Perbolehkan peluncur untuk menggunakan API sistem internal untuk menyalakan V-Sync untuk Zink. Matikan ini jika peluncur anda tiba-tiba keluar sendiri setelah pembaruan sistem.</string>
     <string name="exception_failed_to_unpack_jre17">Gagal memasang JRE 17</string>
+    <string name="newdl_starting">Membaca metadata game…</string>
+    <string name="newdl_downloading_metadata">Mendownload metadata game (%s)</string>
+    <string name="controller_button_a">A</string>
+    <string name="controller_button_b">B</string>
+    <string name="controller_button_x">X</string>
+    <string name="controller_button_y">Y</string>
+    <string name="controller_button_start">Mulai</string>
+    <string name="controller_button_select">Pilih</string>
+    <string name="customctrl_visibility_title">Visibilitas</string>
 </resources>
