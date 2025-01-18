@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition pentru Android)</string>
     <string name="app_short_name">PojavLauncher</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">Email-ul sau numele de utilizator</string>
     <string name="login_online_login_label">Autentificare</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Atingeți pictograma cog centru sus pentru a deschide meniul contextual ⚙️\nApăsați un buton pentru a personaliza: edita, redimensionarea, ștergerea sau personaliza cheia acestuia."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Acest cont va fi eliminat!</string>
     <!-- AlertDialog title -->
@@ -133,7 +131,6 @@
     <string name="multirt_progress_caching">Caching...</string>
     <string name="multirt_config_setdefault">Setaţi ca prestabilit</string>
     <string name="multirt_config_setdefault_already">Prestabilit</string>
-    <string name="multirt_nocompartiblert">Nu s-a putut găsi niciun Java Runtime compatibil. Această versiune necesită Java %d sau o versiune mai nouă.</string>
     <string name="multirt_nojava8rt">Nu s-a putut găsi Java 8. Pentru a folosi această opțiune, trebuie să instalezi Java 8.</string>
     <string name="pvc_gameDirectory">Dosarul jocului</string>
     <string name="pvc_jvmArgs">Argumente JVM</string>
@@ -192,6 +189,8 @@
     <string name="global_yes">Da</string>
     <string name="global_no">Nu</string>
     <string name="of_dl_progress">Se descarcă %s</string>
+    <string name="generic_debug">Depanare</string>
     <string name="preference_category_java_tweaks">Ajustări Java</string>
     <string name="preference_category_miscellaneous">Setări diverse</string>
+    <string name="controller_button_select">Selectați</string>
 </resources>
