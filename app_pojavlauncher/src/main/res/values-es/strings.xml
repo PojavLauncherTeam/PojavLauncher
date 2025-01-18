@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition para Android)</string>
     <string name="app_short_name">PojavLauncher</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">Correo o nombre de usuario</string>
+    <string name="login_online_username_hint">Nombre de usuario</string>
     <string name="login_online_login_label">Iniciar sesión</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Pulsa el icono del engranaje en la parte superior central para abrir el menú contextual ⚙\nPulsa un botón para editar, redimensionar, eliminar o personalizarlo."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">¡Esta cuenta será borrada!</string>
     <!-- AlertDialog title -->
-    <string name="alerttitle_installmod">Seleccione un instalador de mods</string>
+    <string name="alerttitle_installmod">Seleccione un instalador de modificaciones</string>
     <!-- Error messages -->
-    <string name="error_fatal">PojavLauncher se ha detenido inesperadamente</string>
+    <string name="error_fatal">PojavLauncher se ha detenido de forma inesperada</string>
     <string name="error_no_version">¡No hay versiones!</string>
     <string name="error_show_more">Mostrar más</string>
     <string name="error_show_less">Mostrar menos</string>
@@ -47,12 +46,11 @@
     <string name="mcl_setting_subtitle_buttonscale">Auméntales el tamaño si los botones son muy pequeños.</string>
     <string name="mcl_setting_title_mousescale">Escala del ratón</string>
     <string name="mcl_setting_subtitle_mousescale">Cambia el tamaño del ratón virtual.</string>
-    <string name="mcl_setting_title_javaargs">JRE Argumentos de lanzamiento</string>
-    <string name="mcl_setting_subtitle_javaargs">Ten cuidado, esto puede hacer que el juego crashee si es modificado sin ningún conocimiento previo.</string>
+    <string name="mcl_setting_title_javaargs">Argumentos de lanzamiento JVM</string>
+    <string name="mcl_setting_subtitle_javaargs">Ten cuidado, esto puede hacer que el juego se cierre si es modificado sin ningún conocimiento previo.</string>
     <string name="mcl_setting_category_renderer">Renderizador</string>
-    <string name="mcl_setting_renderer_gles2_4">Santo GL4ES - (Todas las versiones, rápido)</string>
+    <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (Todas las versiones, rápido)</string>
     <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - (todas las versiones, medio)</string>
-    <string name="mcl_setting_renderer_angle">ANGLE (Vulkan) - (Solamente 1.17+, medio)</string>
     <string name="mcl_setting_veroption_release">Lanzamientos</string>
     <string name="mcl_setting_veroption_snapshot">Snapshots</string>
     <string name="mcl_setting_veroption_oldalpha">Alphas</string>
@@ -69,7 +67,7 @@
     <string name="global_clone">Clonar</string>
     <string name="global_restart">Reiniciar</string>
     <string name="global_save">Guardar</string>
-    <string name="global_unpacking">Descomprimiendo</string>
+    <string name="global_unpacking">Descomprimiendo %s</string>
     <string name="global_error_field_empty">Este campo es obligatorio</string>
     <string name="global_waiting">Espere</string>
     <string name="global_select">Seleccionar</string>
@@ -137,7 +135,7 @@
     <string name="dl_library_sha_unknown">La librería %s no puede ser revisada, se asumirá que está en buen estado</string>
     <string name="dl_library_sha_pass">La librería %s está en buen estado y se puede utilizar</string>
     <string name="mcl_disable_gestures">Desactivar gestos</string>
-    <string name="mcl_disable_gestures_subtitle">Deshabilita gestos, como mantener pulsado para romper el bloque y tocar para colocar un bloque.</string>
+    <string name="mcl_disable_gestures_subtitle">Quita los gestos, como mantener pulsado para romper el bloque y tocar para colocar un bloque.</string>
     <string name="mcl_disable_swap_hand">Desactivar doble toque para intercambiar manos</string>
     <string name="mcl_disable_swap_hand_subtitle">Deshabilita el doble toque sobre un item de la hotbar para cambiarlo a la mano secundaria.</string>
     <string name="mcl_setting_title_mousespeed">Velocidad del ratón</string>
@@ -159,7 +157,6 @@
     <string name="multirt_config_setdefault">Establecer como predeterminado</string>
     <string name="multirt_config_setdefault_already">Predeterminado</string>
     <string name="multirt_config_removeerror_last">Debes tener al menos un Runtime de Java instalado.</string>
-    <string name="multirt_nocompartiblert">No se pudo encontrar ningun runtime de Java compatible. Esta versión requiere Java %d o posterior.</string>
     <string name="multirt_nojava8rt">No se puede encontrar Java 8. Para utilizar esta opción, necesita instalar Java 8.</string>
     <string name="multirt_delete_runtime">Eliminar runtime</string>
     <string name="pvc_gameDirectory">Directorio del juego</string>
@@ -237,7 +234,7 @@
     <string name="storage_required">PojavLauncher necesita que el almacenamiento externo esté conectado, por favor reconéctalo y reinicia la aplicación.</string>
     <string name="mcl_setting_title_buttonallcaps">Usa únicamente letras mayúsculas en las etiquetas de los botones</string>
     <string name="mcl_setting_subtitle_buttonallcaps">Desactiva esta opción si quieres usar letras minúsculas en tus controles.</string>
-    <string name="create_profile">Crear una nueva instancia</string>
+    <string name="create_profile">Crear un perfil nuevo</string>
     <string name="preference_shader_dump_title">Activar dumpeo de shaders</string>
     <string name="preference_shader_dump_description">Registra shaders compilados (sic).</string>
     <string name="percent_format">%d%%</string>
@@ -248,12 +245,12 @@
     <string name="global_yes">Si</string>
     <string name="global_no">No</string>
     <string name="preference_controller_map_wiped">La configuración del control fue borrada.</string>
-    <string name="preference_category_controller_settings">Ajustes del mando</string>
+    <string name="preference_category_controller_settings">Ajustes del control</string>
     <string name="preference_wipe_controller_title">Restablecer mapeo del mando</string>
     <string name="preference_wipe_controller_description">Te permite cambiar los botones del control.</string>
     <string name="preference_deadzone_scale_title">Escala de la zona muerta del Joystick</string>
     <string name="preference_deadzone_scale_description">Auméntalo si el joystick tiene drift.</string>
-    <string name="preference_force_big_core_title">Fuerza al renderizador a usar el núcleo grande</string>
+    <string name="preference_force_big_core_title">Fuerza al juego para que use el núcleo más rápido</string>
     <string name="preference_force_big_core_desc">Fuerza el hilo de renderizado de Minecraft a correr en el núcleo con la mayor frecuencia máxima.</string>
     <string name="version_select_hint">Elige una versión</string>
     <string name="forge_dl_progress">Descargando instalador para %s</string>
@@ -282,6 +279,7 @@
     <string name="preference_vulkan_driver_system_description">Forzar al launcher a usar el controlador Vulkan del sistema en lugar de Turnip en GPUs Adreno. Sólo afecta a Zink y mods que usan Vulkan.</string>
     <string name="generic_install">Instalar</string>
     <string name="generic_apply">Aplicar</string>
+    <string name="generic_debug">Debug</string>
     <string name="search_modpack_no_result">No se encontraron modpacks</string>
     <string name="search_modpack_error">No se pudo encontrar modpacks</string>
     <string name="search_modpack_download_error">Error al descargar los metadatos del modpack</string>
@@ -289,7 +287,7 @@
     <string name="modpack_download_downloading_mods">Descargando mods (%.2f MB / %.2f MB)</string>
     <string name="modpack_download_downloading_mods_fc">Descargando mods (Archivo %d de %d)</string>
     <string name="modpack_download_applying_overrides">Aplicando sobrescrituras (%d/%d)</string>
-    <string name="modpack_install_notification_title">Pojav Modpack Installer</string>
+    <string name="modpack_install_notification_title">Instalador de mod pack</string>
     <string name="modpack_install_notification_success">Haz clic aquí para finalizar la instalación del modpack</string>
     <string name="modpack_install_notification_data_not_available">No se pudo descargar la información del mod loader</string>
     <string name="modpack_install_modloader_download_failed">Error al descargar los archivos del mod loader</string>
@@ -328,5 +326,11 @@
     <string name="exception_failed_to_unpack_jre17">Error al instalar JRE 17</string>
     <string name="newdl_starting">Leyendo metadatos…</string>
     <string name="newdl_downloading_metadata">Descargando metadatos del juego (%s)</string>
-    <string name="newdl_downloading_game_files">Descargando archivos del juego... (%d/%d, %.2f MB)</string>
+    <string name="controller_button_a">A</string>
+    <string name="controller_button_b">B</string>
+    <string name="controller_button_x">X</string>
+    <string name="controller_button_y">Y</string>
+    <string name="controller_button_start">Start</string>
+    <string name="controller_button_select">Seleccionar</string>
+    <string name="customctrl_visibility_title">Visibilidad</string>
 </resources>
