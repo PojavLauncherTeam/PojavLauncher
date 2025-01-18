@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition dla Androida)</string>
     <string name="app_short_name">PojavLauncher</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">E-mail lub nazwa użytkownika</string>
+    <string name="login_online_username_hint">Nazwa użytkownika</string>
     <string name="login_online_login_label">Zaloguj się</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Naciśnij na ikonę koła zębatego, aby otworzyć menu kontekstowe ⚙\nNaciśnij na przycisk, aby dostosować: edytuj, zmień rozmiar, usuń lub zmień przypisanie klawiszy."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">To konto zostanie usunięte!</string>
     <!-- AlertDialog title -->
@@ -51,13 +50,13 @@
     <string name="mcl_setting_subtitle_javaargs">Zachowaj ostrożność, ponieważ wprowadzenie zmian bez odpowiedniej wiedzy może doprowadzić do awarii.</string>
     <string name="mcl_setting_category_renderer">Silnik renderujący</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (wszystkie wersje, szybki)</string>
-    <string name="mcl_setting_renderer_vulkan_zink">Link (Vulcan) - (wszystkie wersje)</string>
-    <string name="mcl_setting_renderer_angle">ANGLE (Vulkan) - (tylko 1.17+, średnie)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - (wszystkie wersje, średni)</string>
     <string name="mcl_setting_veroption_release">Oficjalne wydanie</string>
     <string name="mcl_setting_veroption_snapshot">Wersja deweloperska</string>
     <string name="mcl_setting_veroption_oldalpha">Dawna Alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Dawna Beta</string>
     <string name="mcl_setting_java_sandbox">Wykonanie pliku .jar</string>
+    <string name="mcl_setting_java_sandbox_subtitle">Kontrola dostępności menedżera zabezpieczeń piaskownicy podczas uruchamiania instalatora .jar.</string>
     <string name="mcl_version_clone">Klonuj</string>
     <!-- Global strings -->
     <string name="global_edit">Edytuj</string>
@@ -131,6 +130,7 @@
     <string name="main_play">Graj</string>
     <string name="autoram_info_msg">Przydzielono %d MB pamięci</string>
     <string name="mcl_setting_check_libraries">Sprawdź biblioteki po pobraniu</string>
+    <string name="mcl_setting_check_libraries_subtitle">Ta opcja wymusza sprawdzanie sumy kontrolnej pliku, jeśli jest dostępna. Umożliwia to wykrycie uszkodzonych pobrań.</string>
     <string name="dl_library_sha_fail">Biblioteka %s jest uszkodzona i zostanie pobrana ponownie</string>
     <string name="dl_library_sha_unknown">Biblioteka %s nie może zostać sprawdzona i należy założyć, że jest dobra</string>
     <string name="dl_library_sha_pass">Biblioteka %s jest dobra i nadaje się do użytku</string>
@@ -142,11 +142,14 @@
     <string name="mcl_setting_subtitle_mousespeed">Zmienia szybkość wirtualnej myszy.</string>
     <string name="customctrl_passthru">Przekaz sygnału myszy</string>
     <string name="customctrl_swipeable">Przesuwalny</string>
+    <string name="customctrl_forward_lock">Zablokowanie w przód</string>
+    <string name="customctrl_absolute_tracking">Bezwzględne śledzenie palców</string>
     <string name="memory_warning_msg">Bieżąca ilość wolnej pamięci RAM (%d) jest mniejsza od przydzielonej pamięci RAM (%d), co może prowadzić do awarii. Zmień ilość, jeśli gra ulegnie awarii.</string>
     <string name="mcl_memory_allocation">Przydział pamięci</string>
     <string name="mcl_memory_allocation_subtitle">Dostosuj ilość pamięci przydzieloną do Minecrafta.</string>
     <string name="multirt_runtime_corrupt">Uszkodzone środowisko wykonawcze Java</string>
     <string name="multirt_runtime_incompatiblearch">Niezgodna architektura: %s</string>
+    <string name="multirt_config_title">Środowisko wykonawcze Javy</string>
     <string name="multirt_config_add">Dodaj nową</string>
     <string name="multirt_title">Menedżer środowiska wykonawczego</string>
     <string name="multirt_subtitle">Zarządzaj zainstalowanymi maszynami wirtualnymi Java.</string>
@@ -154,7 +157,6 @@
     <string name="multirt_config_setdefault">Ustaw jako domyślny</string>
     <string name="multirt_config_setdefault_already">Domyślny</string>
     <string name="multirt_config_removeerror_last">Należy mieć zainstalowane co najmniej jedno środowisko wykonawcze Java.</string>
-    <string name="multirt_nocompartiblert">Nie można znaleźć żadnej zgodnej wersji środowiska Java. Ta wersja wymaga Java %d lub nowszych.</string>
     <string name="multirt_nojava8rt">Nie można znaleźć Java 8. Aby korzystać z tej opcji, należy zainstalować Java 8.</string>
     <string name="multirt_delete_runtime">Usuń środowisko wykonawcze</string>
     <string name="pvc_gameDirectory">Katalog gry</string>
@@ -166,11 +168,17 @@
     <string name="preference_control_title">Sterowanie</string>
     <string name="preference_control_description">Gesty, przyciski i skalowanie</string>
     <string name="preference_java_title">Konfiguracja Java</string>
+    <string name="preference_java_description">Środowisko wykonawcze Javy, Argumenty JVM, ilość pamięci RAM i piaskownica</string>
     <string name="preference_misc_title">Pozostałe ustawienia</string>
+    <string name="preference_misc_description">Lista wersji oraz sprawdzanie bibliotek</string>
     <string name="preference_experimental_title">Eksperymentalne</string>
+    <string name="preference_experimental_description">Nie pomożemy Ci, jeśli coś zepsujesz używając tych opcji</string>
     <string name="preference_sustained_performance_title">Włącz tryb zrównoważonej wydajności</string>
+    <string name="preference_sustained_performance_description">Zmniejsz nagrzewanie urządzenia, ograniczając górny próg wydajności.</string>
     <string name="preference_force_vsync_title">Wymuś włączenie VSync</string>
+    <string name="preference_force_vsync_description">Zmniejsz nagrzewanie urządzenia, ograniczając górny próg wydajności.</string>
     <string name="preference_force_english_title">Wymuś język angielski</string>
+    <string name="preference_force_english_description">Pozwala na wyświetlanie oryginalnych ciągów, zgodnie z przeznaczeniem programistów. Wymaga ponownego uruchomienia.</string>
     <string name="preference_edit_controls_title">Edycja sterowania</string>
     <string name="preference_edit_controls_summary">Dostosuj schemat sterowania do swoich potrzeb.</string>
     <string name="preference_category_gyro_controls">Sterowanie żyroskopowe</string>
@@ -178,6 +186,7 @@
     <string name="preference_gyro_invert_x_axis">Odwróć oś X</string>
     <string name="preference_gyro_invert_y_axis">Odwróć oś Y</string>
     <string name="preference_gyro_invert_x_axis_description">Odwróć oś poziomą.</string>
+    <string name="preference_gyro_invert_y_axis_description">Odwróć oś pionową.</string>
     <string name="preference_gyro_smoothing_title">Włącz wygładzanie żyroskopu</string>
     <string name="preference_gyro_smoothing_description">Zmniejsz jitter w zamian za opóźnienie.</string>
     <string name="preference_back_title">Powrót do ostatniego ekranu</string>
@@ -222,9 +231,12 @@
     <string name="preference_gyro_sample_rate_title">Częstotliwość próbkowania żyroskopu</string>
     <string name="preference_gyro_sample_rate_description">Jeśli masz problemy z wydajnością sterowania żyroskopowego, zwiększ tę wartość.</string>
     <string name="microsoft_login_retry_later">Zbyt wiele zapytań. Spróbuj ponownie później.</string>
+    <string name="storage_required">PojavLauncher wymaga podłączonej pamięci zewnętrznej. Podłącz ją ponownie i zrestartuj aplikację.</string>
     <string name="mcl_setting_title_buttonallcaps">Używaj tylko dużych liter w etykietach przycisków</string>
+    <string name="mcl_setting_subtitle_buttonallcaps">Wyłącz tę opcję, jeśli chcesz używać małych liter w sterowaniu dotykowym.</string>
     <string name="create_profile">Utwórz nowy profil</string>
     <string name="preference_shader_dump_title">Włącz dumping shaderów</string>
+    <string name="preference_shader_dump_description">Rejestrowanie przekonwertowanych shaderów w pliku dziennika.</string>
     <string name="percent_format">%d%%</string>
     <string name="customctrl_editor_exit_title">Wychodzisz?</string>
     <string name="customctrl_editor_exit_msg">Czy na pewno chcesz wyjść?</string>
@@ -232,19 +244,27 @@
     <string name="global_save_and_exit">Zapisz i wyjdź</string>
     <string name="global_yes">Tak</string>
     <string name="global_no">Nie</string>
+    <string name="preference_controller_map_wiped">Konfiguracja kontrolera została wyczyszczona.</string>
     <string name="preference_category_controller_settings">Ustawienia kontrolera</string>
     <string name="preference_wipe_controller_title">Zresetuj mapowanie kontrolera</string>
+    <string name="preference_wipe_controller_description">Umożliwia zmianę mapowania przycisków kontrolera.</string>
     <string name="preference_deadzone_scale_title">Skala strefy martwej joysticka</string>
     <string name="preference_deadzone_scale_description">Zwiększ ją, jeśli joystick dryfuje.</string>
+    <string name="preference_force_big_core_title">Wymuszenie działania renderera na dużym rdzeniu</string>
+    <string name="preference_force_big_core_desc">Wymusza uruchomienie wątku renderowania Minecrafta na rdzeniu o najwyższej maksymalnej częstotliwości.</string>
     <string name="version_select_hint">Wybierz wersję</string>
     <string name="forge_dl_progress">Pobieranie instalatora dla %s</string>
     <string name="forge_dl_searching">Wyszukiwanie numeru wersji Forge</string>
     <string name="modloader_dl_failed_to_load_list">Nie udało się załadować listy wersji!</string>
     <string name="forge_dl_no_installer">Przepraszamy, ale ta wersja Forge nie posiada instalatora, który nie jest jeszcze obsługiwany.</string>
     <string name="forge_dl_select_version">Wybierz wersję Forge</string>
+    <string name="fabric_dl_progress">Pobieranie metadata ładowacza %s</string>
+    <string name="fabric_dl_loader_version">Wersja %s loadera</string>
     <string name="fabric_dl_game_version">Wersja Minecrafta</string>
     <string name="fabric_dl_install">Instaluj</string>
+    <string name="fabric_dl_cant_read_meta">Nie udało się odczytać metadanych %s. Spróbuj ponownie później.</string>
     <string name="modloader_dl_install_fabric">Stwórz profil Fabric</string>
+    <string name="modloader_dl_install_quilt">Utwórz profil Quilt</string>
     <string name="modloader_dl_install_forge">Stwórz profil Forge</string>
     <string name="create_profile_vanilla">Stwórz profil vanilla</string>
     <string name="create_profile_vanilla_like_versions">Wersje podobne do vanilli</string>
@@ -256,15 +276,61 @@
     <string name="create_profile_optifine">Stwórz profil OptiFine</string>
     <string name="hint_search_modpack">Szukaj paczek modów</string>
     <string name="preference_vulkan_driver_system_title">Użyj systemowego sterownika Vulkan</string>
+    <string name="preference_vulkan_driver_system_description">Zmuś launchera do używania sterownika Vulkan zamiast Turnip na procesorach Adreno. Dotyczy tylko Zink i modyfikacji, które używają Vulkan.</string>
     <string name="generic_install">Instaluj</string>
     <string name="generic_apply">Zastosuj</string>
+    <string name="generic_debug">Debug</string>
     <string name="search_modpack_no_result">Nie znaleziono paczek modów</string>
+    <string name="search_modpack_error">Nie udało się znaleźć paczek modów</string>
+    <string name="search_modpack_download_error">Nie udało się pobrać metadanych paczki modów</string>
+    <string name="modpack_download_downloading_metadata">Pobieranie metadanych paczki modów (%.2f MB / %.2f MB)</string>
+    <string name="modpack_download_downloading_mods">Pobieranie modyfikacji (%.2f MB / %.2f MB)</string>
+    <string name="modpack_download_downloading_mods_fc">Pobieranie modów (%d z %d)</string>
+    <string name="modpack_download_applying_overrides">Stosowanie nadpisania (%d/%d)</string>
+    <string name="modpack_install_notification_title">Instalator paczek modów Pojav</string>
+    <string name="modpack_install_notification_success">Kliknij tutaj, aby zakończyć instalację paczki modów</string>
+    <string name="modpack_install_notification_data_not_available">Nie udało się pobrać informacji o ładowarce modyfikacji</string>
+    <string name="modpack_install_modloader_download_failed">Nie udało się pobrać plików ładowarki modyfikacji</string>
     <string name="modpack_install_download_failed">Nie udało się pobrać plików paczki modów</string>
     <string name="modpack_install_button">Stwórz profil paczki modów</string>
     <string name="notif_error_occured">Wystąpił błąd</string>
     <string name="notif_error_occured_desc">Kliknij, aby zobaczyć więcej szczegółów</string>
     <string name="fabric_dl_only_stable">Pokaż tylko stabilne wersje</string>
+    <string name="dl_tampered_manifest_title">Ostrzeżenie o weryfikacji pliku</string>
+    <string name="dl_tampered_manifest"><![CDATA[Manifest wersji gry na lustrze serwerze nie pasuje do oficjalnego manifestu wersji Mojang, co oznacza, że mógł być naruszony.<br/>
+        <b>To nie jest bezpieczne. Dane osobowe mogą być zagrożone, jeśli kontynuujesz.</b><br/>
+        Jeśli nadal chcesz używać lustra serwera, naciśnij \"Wyłącz sprawdzanie manifestu\" i uruchom pobieranie ponownie.<br/>
+        Jeśli chcesz użyć oficjalnego źródła pobierania, Naciśnij \"Przełącz na oficjalną stronę\" i rozpocznij pobieranie ponownie.<br/>]]></string>
+    <string name="dl_turn_off_manifest_checks">Wyłącz sprawdzanie manifestu</string>
+    <string name="dl_switch_to_official_site">Przełącz na oficjalną stronę</string>
+    <string name="preference_download_source_title">Źródło pobierania gry</string>
+    <string name="preference_download_source_description">Wybierz plik pobierania z serwera lustrzanego, zamiast używać oficjalnego serwera pobierania</string>
+    <string name="preference_verify_manifest_title">Zweryfikuj wersję manifestu</string>
+    <string name="preference_verify_manifest_description">Po włączeniu launcher będzie sprawdzał manifest wersji gry wraz z bibliotekami.</string>
+    <string name="notif_download_finished">Gra jest gotowa do uruchomienia</string>
+    <string name="notif_download_finished_desc">Kliknij tutaj, aby rozpocząć!</string>
+    <string name="preference_category_gestures">Gesty</string>
+    <string name="preference_category_buttons">Przyciski</string>
+    <string name="preference_category_experimental_settings">Eksperymentalne</string>
     <string name="preference_category_java_tweaks">Konfiguracja Java</string>
+    <string name="preference_category_main_categories">Kategorie</string>
     <string name="preference_category_miscellaneous">Pozostałe ustawienia</string>
+    <string name="preference_category_video">Ustawienia wideo</string>
+    <string name="notification_permission_dialog_title">Prośba o pozwolenie</string>
+    <string name="notification_permission_dialog_text">PojavLauncher wymaga uprawnień do wysyłania powiadomień, aby zapobiec zatrzymaniu pobierania po opuszczeniu aplikacji. Bez tego zezwolenia Android może zatrzymać pobieranie po opuszczeniu PojavLauncher.</string>
+    <string name="notification_permission_toast">Zawsze możesz zmienić to później przechodząc do Ustawień</string>
+    <string name="preference_ask_for_notification_title">Zezwól na powiadomienia</string>
+    <string name="preference_ask_for_notification_description">Kliknij, aby ponownie poprosić o uprawnienia do powiadomień, wymagane do poprawnego działania pobierania w tle.</string>
+    <string name="preference_vsync_in_zink_title">Zezwalaj na synchronizację pionową V-Sync z Zink</string>
+    <string name="preference_vsync_in_zink_description">Pozwala launcher używać wewnętrznych systemowych API do włączenia synchronizacji pionowej V-Sync dla Zink. Wyłącz tę opcję, jeśli twój launcher nagle zawiesi się z Zink po aktualizacji systemu.</string>
     <string name="exception_failed_to_unpack_jre17">Nie udało się zainstalować JRE 17</string>
+    <string name="newdl_starting">Czytanie metadanych gry…</string>
+    <string name="newdl_downloading_metadata">Pobieranie metadanych gry (%s)</string>
+    <string name="controller_button_a">A</string>
+    <string name="controller_button_b">B</string>
+    <string name="controller_button_x">X</string>
+    <string name="controller_button_y">Y</string>
+    <string name="controller_button_start">Start</string>
+    <string name="controller_button_select">Wybierz</string>
+    <string name="customctrl_visibility_title">Widzialność</string>
 </resources>
