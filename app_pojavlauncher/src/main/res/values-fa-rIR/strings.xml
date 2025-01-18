@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
     <string name="app_name">پوجاو لانچر (ماینکرفت: جاوا ادیشن برای اندروید)</string>
     <string name="app_short_name">پوجاو لانچر</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">ایمیل یا یوزرنیم</string>
+    <string name="login_online_username_hint">نام کاربری</string>
     <string name="login_online_login_label">ورود</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"روی نماد چرخ دنده بالا ضربه بزنید تا منو باز شود ⚙\nبرای سفارشی کردن روی دکمه ضربه بزنید: ویرایش، تغییر اندازه، حذف یا سفارشی کردن keybind آن."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">این اکانت حذف خواهد شد!</string>
     <!-- AlertDialog title -->
@@ -26,6 +25,7 @@
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_wiki">ویکی</string>
     <!-- MCLauncherActivity: Account status -->
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_launch_cleancache">پاکسازی فایل‌های کَش</string>
@@ -35,18 +35,29 @@
     <string name="mcl_options">گزینه‌ها</string>
     <string name="mcl_option_customcontrol">کنترل‌های شخصی</string>
     <string name="mcl_setting_title_use_surface_view">از رندر گیر سطوح جایگزین استفاده کنید</string>
+    <string name="mcl_setting_subtitle_use_surface_view">ممکن است در فعالیت های GPU محور مؤثر باشد.</string>
     <string name="mcl_setting_title_ignore_notch">حفره دوربین را نادیده بگیر</string>
+    <string name="mcl_setting_subtitle_ignore_notch">حفره دوربین گوشی را نادیده میگیرد و صفحه را در زیر آن گسترش میدهد.\nمیتواند تجربه کامل‌تری از محتوای صفحه ارائه بدهد.</string>
     <string name="mcl_setting_title_resolution_scaler">تغییر مقیاس وضوح (رزولوشن)</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">به شما اجازه کمتر کردن رزولوشن بازی را میدهد.
+۱۰۰٪ رزولوشن کامل است.</string>
+    <string name="mcl_setting_title_longpresstrigger">تاخیر لمس بلند مدت را اعمال کنید</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">تاخیر لمس بلند مدت را برای کندن و گذاشتن بلاک ها و انداختن آیتم ها تغییر دهید.</string>
     <string name="mcl_setting_title_buttonscale">تغییر مقیاس دکمه های کنترل</string>
+    <string name="mcl_setting_subtitle_buttonscale">اگر دکمه ها کوچک هستند آنها را بزرگتر کنید.</string>
     <string name="mcl_setting_title_mousescale">تغییر مقیاس موس</string>
+    <string name="mcl_setting_subtitle_mousescale">اندازه نشانگر موس مجازی را تغییر دهید.</string>
     <string name="mcl_setting_title_javaargs">آرگومان‌های جاوا در هنگام اجرا</string>
     <string name="mcl_setting_subtitle_javaargs">مراقب باشید، این ممکن است باعث از کار افتادن بازی در صورت اصلاح بدون اطلاع شود.</string>
     <string name="mcl_setting_category_renderer">رندر کننده</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (همه ی نسخه ها، سریع)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">(همه نسخه ها، متوسط) - Zink (Vulkan)</string>
     <string name="mcl_setting_veroption_release">ریلیز</string>
     <string name="mcl_setting_veroption_snapshot">اسنپ‌شات</string>
     <string name="mcl_setting_veroption_oldalpha">آلفای-قدیمی</string>
     <string name="mcl_setting_veroption_oldbeta">بتای-قدیمی</string>
+    <string name="mcl_setting_java_sandbox">اجرای jar. سندباکس</string>
+    <string name="mcl_setting_java_sandbox_subtitle">وجود نظاره‌گر امنیت سند باکس هنگام اجرای jar. را کنترل کنید.</string>
     <string name="mcl_version_clone">شبیه‌سازی</string>
     <!-- Global strings -->
     <string name="global_edit">ویرایش</string>
@@ -61,10 +72,12 @@
     <string name="global_error_field_empty">این فیلد نمی‌تواند خالی باشد</string>
     <string name="global_waiting">صبر کنید</string>
     <string name="global_select">انتخاب</string>
+    <string name="global_retry">دوباره امتحان کنید</string>
     <string name="global_default">پیش‌فرض</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">برنامه یا بازی با کد مرجوعی %d خارج شد. برای جزئیات بیشتر به lastlog.text مراجعت کنید.</string>
     <string name="mcn_exit_confirm">آیا از خروج اجباری اطمینان دارید؟</string>
+    <string name="mcn_check_fail_vulkan_support">پردازشگر Zink (Vulkan) توسط این دستگاه پشتیبانی نمیشود!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_chat">چت</string>
     <string name="control_debug">دیباگ</string>
@@ -103,41 +116,71 @@
     <string name="customctrl_button_opacity">شفافیت دکمه</string>
     <string name="customctrl_addbutton">اضافه کردن دکمه</string>
     <string name="customctrl_addbutton_drawer">افزودن دکمه کشویی</string>
+    <string name="customctrl_addbutton_joystick">اضافه کردن جویستیک</string>
     <string name="customctrl_addsubbutton">افزودن زیر-دکمه</string>
+    <string name="customctrl_selectdefault">کنترلر پیشفرض را انتخاب کنید</string>
+    <string name="customctrl_export">کنترلر را استخراج کنید</string>
     <string name="main_share_logs">اشتراک گذاری فایل log</string>
+    <string name="main_install_jar_file">Jar. را اجرا کنید</string>
     <string name="main_play">شروع بازی</string>
     <string name="autoram_info_msg">مموری تنظیم شد روی %d مگابایت</string>
     <string name="mcl_setting_check_libraries">بررسی کتابخانه‌ها پس از دانلود</string>
+    <string name="mcl_setting_check_libraries_subtitle">این گزینه لانچر را مجبور به چک کردن اشکالات کتابخانه میکند. از دانلود های خراب جلوگیری میکند.</string>
     <string name="dl_library_sha_fail">کتابخانه %s آسیب دیده است و نیاز به دانلود مجدد دارد</string>
     <string name="dl_library_sha_unknown">کتابخانه %s نمی‌تواند بررسی شود، باید فرض کرد که سالم است</string>
     <string name="dl_library_sha_pass">کتابخانه %s سالم و قابل استفاده است</string>
     <string name="mcl_disable_gestures">غیرفعال کردن حسگر ها</string>
     <string name="mcl_disable_gestures_subtitle">حسگر ها را غیرفعال می‌کند، مانند نگه دارید تا بلاک کَنده شود و روی صفحه بزنید تا بلاک قرار داده شود.</string>
+    <string name="mcl_disable_swap_hand">دوبار کلیک برای دست به دست را خاموش کنید</string>
+    <string name="mcl_disable_swap_hand_subtitle">دوبار کلیک روی نوار ایتم برا گذاشتن در دست دوم را خاموش میکند.</string>
     <string name="mcl_setting_title_mousespeed">سرعت ماوس</string>
+    <string name="mcl_setting_subtitle_mousespeed">سرعت جابه‌جایی موس مجازی را تغییر میدهد.</string>
     <string name="customctrl_passthru">ماوس از آن رد شود</string>
     <string name="customctrl_swipeable">قابل سوایپ</string>
+    <string name="customctrl_forward_lock">قفل حرکت به جلو</string>
+    <string name="customctrl_absolute_tracking">تشخیص دقیق انگشت</string>
     <string name="memory_warning_msg">میزان رم آزاد فعلی (%d) از میزان رم اختصاص یافته (%d) کمتر است، که ممکن است باعث کرش شود. رم اختصاص یافته را تغییر دهید اگر بازی کرش خورد.</string>
     <string name="mcl_memory_allocation">میزان رم اختصاص یافته</string>
+    <string name="mcl_memory_allocation_subtitle">مقدار حافظه رم داده شده به ماینکرفت را کنترل میکند.</string>
     <string name="multirt_runtime_corrupt">جاوا ران‌ تایم خراب</string>
     <string name="multirt_runtime_incompatiblearch">معماری ناسازگار: %s</string>
+    <string name="multirt_config_title">جاوا ها</string>
     <string name="multirt_config_add">افزودن جدید</string>
     <string name="multirt_title">مدیریت ران تایم</string>
+    <string name="multirt_subtitle">جاوا های نصب شده را کنترل کنید.</string>
     <string name="multirt_progress_caching">در حال اعمال کَش...</string>
     <string name="multirt_config_setdefault">تنظیم پیش‌فرض</string>
     <string name="multirt_config_setdefault_already">پیش‌فرض</string>
-    <string name="multirt_nocompartiblert">هیچ جاوا سازگاری پیدا نمی شود. این نسخه به جاوای %d یا جدیدتر نیاز دارد.</string>
+    <string name="multirt_config_removeerror_last">شما باید حداقل یک جاوای نصب شده داشته باشید.</string>
     <string name="multirt_nojava8rt">جاوا 8 را نمی توان پیدا کرد. برای استفاده از این قابلیت باید جاوا 8 را نصب کنید.</string>
+    <string name="multirt_delete_runtime">حذف جاوا</string>
     <string name="pvc_gameDirectory">پوشه بازی</string>
     <string name="pvc_jvmArgs">آرگومان‌های JVM</string>
     <string name="preference_mouse_start_title">شروع با موسِ مجازیِ روشن</string>
+    <string name="preference_mouse_start_description">اگر این گزینه روشن باشد موس مجازی هنگام شروع بازی ظاهر میشود.</string>
     <string name="preference_video_title">ویدئو و رندر کننده</string>
+    <string name="preference_video_description">رزولوشن، پردازشگر و عملکرد</string>
     <string name="preference_control_title">شخصی سازی کنترلر</string>
+    <string name="preference_control_description">لمس، دکمه ها و اندازه ها</string>
     <string name="preference_java_title">ترفند های جاوا</string>
+    <string name="preference_java_description">جاوا، قاعده JVM، مقدار رم و سند باکس</string>
     <string name="preference_misc_title">تنظیمات متفرقه</string>
+    <string name="preference_misc_description">چک کردن لیست نسخه ها و کتابخانه</string>
     <string name="preference_experimental_title">چیز های تستی</string>
+    <string name="preference_experimental_description">از موارد اینجا با آگاهی استفاده کنید، ما پاسخ گو نیستیم</string>
     <string name="preference_sustained_performance_title">حالت عملکرد پایدار را فعال کنید</string>
+    <string name="preference_sustained_performance_description">با محدود کردن اوج عملکرد فشار حرارتی را محدود کنید.</string>
+    <string name="preference_force_vsync_title">روشن کردن VSync اجباری</string>
+    <string name="preference_force_vsync_description">با محدود کردن اوج عملکرد فشار حرارتی را محدود کنید.</string>
+    <string name="preference_force_english_title">اجبار زبان به انگلیسی</string>
+    <string name="preference_force_english_description">به شما اجازه میدهد متون اصلی ارائه شده توسط توسعه دهندگان را ببینید. نیاز به اجرای برنامه.</string>
     <string name="preference_edit_controls_title">ویرایش کنترل های شخصی</string>
+    <string name="preference_edit_controls_summary">طرح کنترل را متناسب با نیازهای خود تغییر دهید.</string>
+    <string name="preference_category_gyro_controls">کنترل با ژیروسکوپ</string>
     <string name="preference_category_virtual_mouse">ماوس مجازی</string>
+    <string name="preference_gyro_invert_x_axis">محور X را معکوس کنید</string>
+    <string name="preference_gyro_invert_y_axis">محور Y را معکوس کنید</string>
+    <string name="preference_gyro_invert_x_axis_description">محور افقی را معکوس کنید.</string>
     <string name="preference_back_title">بازگشت به صفحه آخر</string>
     <string name="unnamed">بی نام</string>
     <string name="profiles_latest_snapshot">جدیدترین اسنپ شات</string>
@@ -172,7 +215,48 @@
     <string name="preference_enable_gyro_title">فعال کردن کنترل های ژیروسکوپ</string>
     <string name="preference_gyro_sensitivity_title">حساسیت کنترلر های ژیروسکوپ</string>
     <string name="preference_gyro_sample_rate_title">نرخ نمونه برداری ژیروسکوپ</string>
+    <string name="forge_dl_no_installer">متأسفانه این نسخه Forge نصب کننده‌ای که پشتیبانی بشود ندارد.</string>
+    <string name="forge_dl_select_version">نسخه Forge را انتخاب کنید</string>
+    <string name="fabric_dl_progress">در حال دانلود %s لودر metadata</string>
+    <string name="fabric_dl_loader_version">%s نسخه لودر</string>
+    <string name="fabric_dl_game_version">ورژن ماینکرفت</string>
+    <string name="fabric_dl_install">نصب</string>
+    <string name="fabric_dl_cant_read_meta">موفق به خواندن %s لودر metadata نشدیم. لطفاً دوباره تلاش کنید.</string>
+    <string name="modloader_dl_install_fabric">ساختن پروفایل Fabric</string>
+    <string name="modloader_dl_install_quilt">ساختن پروفایل Quilt</string>
+    <string name="modloader_dl_install_forge">ساختن پروفایل Forge</string>
+    <string name="create_profile_vanilla">ساختن پروفایل Vanilla</string>
+    <string name="create_profile_vanilla_like_versions">نسخه های شبیه Vanilla</string>
+    <string name="create_profile_modded_versions">نسخه های سفارشی</string>
+    <string name="fabric_dl_loader_title">انتخاب نسخه ها</string>
+    <string name="of_dl_select_version">نسخه OptiFine را انتخاب کنید</string>
+    <string name="of_dl_failed_to_scrape">ناموفق در دریافت اطلاعات برای نصب OptiFine</string>
     <string name="of_dl_progress">در حال دانلود %s</string>
+    <string name="create_profile_optifine">ساختن پروفایل OptiFine</string>
+    <string name="hint_search_modpack">گشتن به دنبال مادپک ها</string>
+    <string name="preference_vulkan_driver_system_title">استفاده از Vulkan درایور دستگاه</string>
+    <string name="preference_vulkan_driver_system_description">اجبار لانچر برای استفاده از Vulkan درایور دستگاه به جای Turnip در GPU های Adreno. فقط بر Zink و ماد هایی که از Vulkan استفاده میکنند اثر دارد.</string>
+    <string name="generic_install">نصب</string>
+    <string name="generic_apply">اعمال</string>
+    <string name="generic_debug">دیباگ</string>
+    <string name="search_modpack_no_result">هیچ مادپکی یافت نشد</string>
+    <string name="search_modpack_error">ناموفق در یافتن مادپک ها</string>
+    <string name="search_modpack_download_error">ناموفق در دانلود metadata مادپک</string>
+    <string name="modpack_download_downloading_metadata">در حال دانلود metadata مادپک (%.2f MB / %.2f MB)</string>
+    <string name="modpack_download_downloading_mods">درحال دانلود مادها (%.2f MB / %.2f MB)</string>
+    <string name="modpack_download_downloading_mods_fc">درحال دانلود ماد ها (File %d out of %d)</string>
+    <string name="modpack_download_applying_overrides">اعمال جایگزین ها (%d/%d)</string>
+    <string name="modpack_install_notification_title">نصب کننده مادپک پوجاو</string>
+    <string name="modpack_install_notification_success">برای اتمام نصب مادپک اینجا کلیک کنید</string>
+    <string name="modpack_install_notification_data_not_available">ناموفق در دانلود اطلاعات اجرا کننده ماد</string>
+    <string name="modpack_install_modloader_download_failed">ناموفق در دانلود فایل‌های اجراکننده ماد</string>
+    <string name="modpack_install_download_failed">ناموفق در دانلود فایل‌های مادپک</string>
+    <string name="modpack_install_button">ساختن پروفایل مادپک</string>
+    <string name="notif_error_occured">مشکلی پیش آمد</string>
+    <string name="notif_error_occured_desc">برای اطلاعات بیشتر کلیک کنید</string>
+    <string name="fabric_dl_only_stable">فقط نسخه های پایدار را نشان بده</string>
+    <string name="dl_tampered_manifest_title">خطای تایید فایل</string>
     <string name="preference_category_java_tweaks">ترفند های جاوا</string>
     <string name="preference_category_miscellaneous">تنظیمات متفرقه</string>
+    <string name="controller_button_select">انتخاب</string>
 </resources>
