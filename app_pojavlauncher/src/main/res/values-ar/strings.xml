@@ -75,6 +75,7 @@
     <string name="global_default">الافتراضي</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">تم الخروج من التطبيق/اللعبة بخلل %d، تحقق من latestlog.txt لمزيد من التفاصيل.</string>
+    <string name="mcn_signal_title">تم الخروج من التطبيق/اللعبة بسبب بخلل %d، انظر في latestlog.txt لمزيد من التفاصيل.</string>
     <string name="mcn_exit_confirm">هل أنت متأكد من أنك تريد فرض الإغلاق؟</string>
     <string name="mcn_check_fail_vulkan_support">عارض الرسوميات Zink (Vulkan) غير مدعوم على هذا الجهاز!</string>
     <!-- MainActivity: Control buttons -->
@@ -329,5 +330,10 @@
     <string name="controller_button_y">Y</string>
     <string name="controller_button_start">Start</string>
     <string name="controller_button_select">اختر</string>
+    <string name="controller_remapper_exit_part2">للخروج</string>
+    <string name="controller_remapper_operating_mode">الوضع الحالي</string>
     <string name="customctrl_visibility_title">الظهور</string>
+    <string name="customctrl_visibility_in_menus">في القوائم</string>
+    <string name="mcl_button_discord">سيرفر الديسكورد</string>
+    <string name="ltw_render_distance_warning_msg">وحدة معالجة الرسوميات الخاصة بك غير قادرة على معالجة أكثر من 7 رندر ديستانس دون مود Sodium أو غيرها من المودات المشابهة. سيتم تخفيض الرندر ديستانس تلقائيًا عند النقر على \"موافق\".</string>
 </resources>
