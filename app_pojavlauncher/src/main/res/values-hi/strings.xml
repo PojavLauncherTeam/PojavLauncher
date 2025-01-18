@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition Android के लिए)</string>
     <string name="app_short_name">PojavLauncher</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">ईमेल या उपयोगकर्ता का नाम</string>
     <string name="login_online_login_label">लॉगिन</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Vdmgucg ugh TV FH hdbsotc I'll h cc ubuu"</string>
     <!-- Warnings -->
     <string name="warning_remove_account">यह खाता हटा दिया जाएगा!</string>
     <!-- AlertDialog title -->
