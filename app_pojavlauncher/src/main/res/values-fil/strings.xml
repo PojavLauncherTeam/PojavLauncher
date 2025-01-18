@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition for Android) Translation By Justine Victorino or EnderProJustine</string>
     <string name="app_short_name">PojavLauncher</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">Email o Username</string>
+    <string name="login_online_username_hint">Username</string>
     <string name="login_online_login_label">Mag-login</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Pindutin ang nasa gitnang taas na icon para buksan ang menu \nMagpindot ng pindutan para ibahin, palakihin/paliitin, alisin, o ibahin ang keybind nito."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Aalisin ang account na ito!</string>
     <!-- AlertDialog title -->
@@ -36,6 +35,7 @@
     <string name="mcl_options">Mga pilian</string>
     <string name="mcl_option_customcontrol">Pasadyang mga kontrol</string>
     <string name="mcl_setting_title_use_surface_view">Gumamit ng alternatibong surface rendering</string>
+    <string name="mcl_setting_subtitle_use_surface_view"></string>
     <string name="mcl_setting_title_ignore_notch">Huwag pansinin ang notch</string>
     <string name="mcl_setting_title_resolution_scaler">Resolution Scaler</string>
     <string name="mcl_setting_title_buttonscale">Pagkontrol sa pag-scale ng mga pindutan</string>
@@ -127,7 +127,6 @@
     <string name="multirt_progress_caching">Pag-cache...</string>
     <string name="multirt_config_setdefault">Itakda ang default</string>
     <string name="multirt_config_setdefault_already">Default</string>
-    <string name="multirt_nocompartiblert">Walang mahanap na anumang katugmang Java Runtime. Ang bersyon na ito ay nangangailangan ng Java %d o mas bago.</string>
     <string name="multirt_nojava8rt">Hindi mahanap ang Java 8. Upang magamit ang opsyong ito, kailangan mong i-install ang Java 8.</string>
     <string name="pvc_gameDirectory">Direktoryo ng laro</string>
     <string name="pvc_jvmArgs">Argumento ng JVM</string>
@@ -157,6 +156,8 @@
     <string name="lazy_service_default_title">Serbisyong Harapan ng Pojav</string>
     <string name="mcl_setting_veroption_installed">Naka-Install</string>
     <string name="of_dl_progress">Nagda-download %s</string>
+    <string name="generic_debug">Debug</string>
     <string name="preference_category_java_tweaks">Mga tweaks sa Java</string>
     <string name="preference_category_miscellaneous">Karagdagang setting</string>
+    <string name="controller_button_select">Iselekta</string>
 </resources>
