@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition для Android)</string>
     <string name="app_short_name">PojavLauncher</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">Email або ім\'я користувача</string>
+    <string name="login_online_username_hint">Ім\'я користувача</string>
     <string name="login_online_login_label">Увійти</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Натисніть верхню центральну шестерню, щоб відкрити контекстне меню ⚙\nНатисніть на кнопку, щоб: редагувати, змінювати розмір, щось стерти, чи налаштувати клавіатуру."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Цей обліковий запис буде видалено!</string>
     <!-- AlertDialog title -->
@@ -52,7 +51,6 @@
     <string name="mcl_setting_category_renderer">Візуалізатор</string>
     <string name="mcl_setting_renderer_gles2_4">Божий GL4ES - (всі версії, швидкі)</string>
     <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) — (усі версії, посереднє)</string>
-    <string name="mcl_setting_renderer_angle">ANGLE (Vulkan) — (лише 1.17+, посереднє)</string>
     <string name="mcl_setting_veroption_release">Релізи</string>
     <string name="mcl_setting_veroption_snapshot">Снапшоти</string>
     <string name="mcl_setting_veroption_oldalpha">Старі альфа</string>
@@ -159,7 +157,6 @@
     <string name="multirt_config_setdefault">Встановити за замовчуванням</string>
     <string name="multirt_config_setdefault_already">За замовчуванням</string>
     <string name="multirt_config_removeerror_last">У вас має бути встановлений принаймні один Java Runtime.</string>
-    <string name="multirt_nocompartiblert">Не вдалося знайти будь-який відповідний Java Runtime. Ця версія потребує Java %d версії або вище.</string>
     <string name="multirt_nojava8rt">Не вдалося знайти Java 8. Для того, щоб скористатися цією опцією, вам потрібно встановити Java 8.</string>
     <string name="multirt_delete_runtime">Видалити runtime</string>
     <string name="pvc_gameDirectory">Тека гри</string>
@@ -282,6 +279,7 @@
     <string name="preference_vulkan_driver_system_description">Примусово запускати драйвер Vulkan замість Turnip на Adreno GPU. Впливає лише на Zink і моди, які використовують Vulkan.</string>
     <string name="generic_install">Установити</string>
     <string name="generic_apply">Застосувати</string>
+    <string name="generic_debug">Налагодження</string>
     <string name="search_modpack_no_result">Модпаки не знайдено</string>
     <string name="search_modpack_error">Не вдалося знайти модпаки</string>
     <string name="search_modpack_download_error">Не вдалося завантажити метадані модпаку</string>
@@ -328,5 +326,11 @@
     <string name="exception_failed_to_unpack_jre17">Не вдалося установити JRE 17</string>
     <string name="newdl_starting">Зчитування метаданих гри…</string>
     <string name="newdl_downloading_metadata">Завантаження метаданих гри (%s)</string>
-    <string name="newdl_downloading_game_files">Завантаження файлів гри… (%d/%d, %.2f Мб)</string>
+    <string name="controller_button_a">A</string>
+    <string name="controller_button_b">B</string>
+    <string name="controller_button_x">X</string>
+    <string name="controller_button_y">Y</string>
+    <string name="controller_button_start">Почати</string>
+    <string name="controller_button_select">Обрати</string>
+    <string name="customctrl_visibility_title">Видимість</string>
 </resources>
