@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition for Android)</string>
     <string name="app_short_name">PojavLauncher</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">דוא\"ל או שם משתמש</string>
     <string name="login_online_login_label">התחבר</string>
     <!-- Hint -->
     <!-- Warnings -->
@@ -25,6 +24,7 @@
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_wiki">ויקי</string>
     <!-- MCLauncherActivity: Account status -->
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_launch_cleancache">מנקה קבצי מטמון</string>
@@ -33,17 +33,29 @@
     <string name="mcl_launch_download_assets">מתכונן להורדת משאבים</string>
     <string name="mcl_options">אפשרויות</string>
     <string name="mcl_option_customcontrol">פקדים מותאמים אישית</string>
+    <string name="mcl_setting_title_use_surface_view">השתמש ב רינדור משטח חלופי</string>
+    <string name="mcl_setting_subtitle_use_surface_view">\"יכול לעזור בביצועים בתרחישים מוגבלים על ידי ה GPU.</string>
     <string name="mcl_setting_title_ignore_notch">התעלם מהחתך</string>
+    <string name="mcl_setting_subtitle_ignore_notch">\"מתעלם מהמגרעת ומרחיב את המסך מתחת לה.\nנותן לך חווית צפייה משופרת.</string>
     <string name="mcl_setting_title_resolution_scaler">קנה מידה של רזולוציה</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">מאפשר לך להנמיך את רזולוציית המשחק. 100% זה רזולוציה מלאה.</string>
+    <string name="mcl_setting_title_longpresstrigger">הפעל השהיית לחיצה ארוכה</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">שנה עיכוב לחיצה ארוכה על ההדק להשמדת בלוקים והפלת פריטים.</string>
     <string name="mcl_setting_title_buttonscale">קנה המידה של כפתורי השליטה</string>
+    <string name="mcl_setting_subtitle_buttonscale">מגדיל את הכפתורים אם הם קטנים מדי.</string>
     <string name="mcl_setting_title_mousescale">קנה המידה של העכבר</string>
+    <string name="mcl_setting_subtitle_mousescale">שנה את גודל העכבר הווירטואלי.</string>
     <string name="mcl_setting_title_javaargs">פרמטרים להפעלת JVM</string>
     <string name="mcl_setting_subtitle_javaargs">זהירות! שינוי ערכים אלה ללא ידע מתאים עלול לגרום למשחק לקרוס.</string>
     <string name="mcl_setting_category_renderer">רינדור</string>
+    <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (כל הגרסאות, מהיר)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - (כל הגרסאות, בינוני)</string>
     <string name="mcl_setting_veroption_release">הפצה</string>
     <string name="mcl_setting_veroption_snapshot">סנאפשוט</string>
     <string name="mcl_setting_veroption_oldalpha">אלפא: גרסה ישנה</string>
     <string name="mcl_setting_veroption_oldbeta">בטא: גרסה ישנה</string>
+    <string name="mcl_setting_java_sandbox">הפעלת .jar בארגז חול</string>
+    <string name="mcl_setting_java_sandbox_subtitle">\"שלוט בנגישות של מנהל האבטחה sandbox בעת הפעלת קובץ .jar.\".</string>
     <string name="mcl_version_clone">שכפול</string>
     <!-- Global strings -->
     <string name="global_edit">ערוך</string>
@@ -57,10 +69,13 @@
     <string name="global_unpacking">מחלץ את %s</string>
     <string name="global_error_field_empty">שדה זה אינו יכול להיות ריק</string>
     <string name="global_waiting">המתן</string>
+    <string name="global_select">בחר</string>
+    <string name="global_retry">ניסיון חוזר</string>
     <string name="global_default">ברירת מחדל</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">היישומון / המשחק קרס, עם קוד שגיאה %d, בדוק את latestlog.txt למידע נוסף.</string>
     <string name="mcn_exit_confirm">האם אתה בטוח שאתה רוצה לכפות כיבוי?</string>
+    <string name="mcn_check_fail_vulkan_support">Zink (Vulkan) אינו נתמך במכשיר הזה!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_chat">צ\'אט</string>
     <string name="control_debug">נפה באגים</string>
@@ -99,38 +114,69 @@
     <string name="customctrl_button_opacity">שקיפות הכפתור</string>
     <string name="customctrl_addbutton">הוסף כפתור</string>
     <string name="customctrl_addbutton_drawer">הוסף צייר של כפתור</string>
+    <string name="customctrl_addbutton_joystick">הוסף בקר</string>
     <string name="customctrl_addsubbutton">הוסף תת-כפתור</string>
+    <string name="customctrl_selectdefault">בחר מפה בקרים ברירת מחדל</string>
+    <string name="customctrl_export">יצא מפת בקר</string>
+    <string name="main_share_logs">שתף קובץ יומן</string>
+    <string name="main_install_jar_file">הפעל קובץ .jar</string>
     <string name="main_play">הפעל</string>
     <string name="autoram_info_msg">זיכרון הוגדר ל %d MB</string>
     <string name="mcl_setting_check_libraries">בדוק ספריות לאחר ההורדה</string>
+    <string name="mcl_setting_check_libraries_subtitle">אפשרות זו מאלצת את המשגר ​​לבדוק את ה hash של הספרייה אם הוא זמין. מונע הורדות שבורות.</string>
     <string name="dl_library_sha_fail">הספרייה %s פגומה ולכן תורד מחדש</string>
     <string name="dl_library_sha_unknown">לא ניתן לבדוק את הספרייה %s, אנו מניחים שהיא בסדר</string>
     <string name="dl_library_sha_pass">הספרייה %s תקינה ואפשר להשתמש בה</string>
     <string name="mcl_disable_gestures">השבת מחוות</string>
     <string name="mcl_disable_gestures_subtitle">השבת מחוות, למשל: החזק כדי לשבור בלוק, וגע כדי לשים בלוק.</string>
+    <string name="mcl_disable_swap_hand">השבת לחיצה כפולה להעברת ידיים</string>
+    <string name="mcl_disable_swap_hand_subtitle">השבת לחיצה כפולה על פריט בסרגל הקיצורים להחליפו ביד השנייה.</string>
     <string name="mcl_setting_title_mousespeed">מהירות העכבר</string>
+    <string name="mcl_setting_subtitle_mousespeed">\"משנה את מהירות העכבר המדומה</string>
     <string name="customctrl_passthru">עכבר עובר דרך</string>
     <string name="customctrl_swipeable">ניתן להחלקה</string>
+    <string name="customctrl_forward_lock">נעילת קדימה</string>
+    <string name="customctrl_absolute_tracking"></string>
     <string name="memory_warning_msg">הכמות הנוכחית של RAM פנוי (%d) נמוכה מכמות ה-RAM שהוקצתה (%d), מה שעלול לגרום למשחק לקרוס. הנך מתבקש לשנות את ההקצאה במידה והמשחק קורס.</string>
     <string name="mcl_memory_allocation">הקצאת זיכרון</string>
+    <string name="mcl_memory_allocation_subtitle">שולט בכמה זיכרון ניתן ל מיינקראפט.</string>
     <string name="multirt_runtime_corrupt">Java Runtime פגומה</string>
     <string name="multirt_runtime_incompatiblearch">ארכיטקטורה לא נתמכת: %s</string>
+    <string name="multirt_config_title">ג\'אווה רנטיים</string>
     <string name="multirt_config_add">הוסף חדש</string>
     <string name="multirt_title">מנהל Runtime</string>
+    <string name="multirt_subtitle">נהל ג\'אווה רנטיים מותקנים</string>
     <string name="multirt_progress_caching">שומר במטמון...</string>
     <string name="multirt_config_setdefault">הגדר כברירת מחדל</string>
     <string name="multirt_config_setdefault_already">ברירת מחדל</string>
-    <string name="multirt_nocompartiblert">לא ניתן למצוא Java Runtime נתמכת. גרסת Java %d ומעלה נדרשת.</string>
+    <string name="multirt_config_removeerror_last">עליך שהיה לפחות ג\'אווה רנטיים אחד מותקן.</string>
     <string name="multirt_nojava8rt">לא מצאתי את Java 8. על מנת להשתמש באפשרות זו, עליך להתקין Java 8.</string>
+    <string name="multirt_delete_runtime">מחק רנטיים</string>
     <string name="pvc_gameDirectory">תיקיית המשחק</string>
     <string name="pvc_jvmArgs">פרמטרים של JVM</string>
     <string name="preference_mouse_start_title">התחל עם עכבר וירטואלי מופעל</string>
+    <string name="preference_mouse_start_description">העכבר המדומה מופיע בעת ההפעלה כאשר אפשרות זו מופעלת</string>
     <string name="preference_video_title">וידאו ועיבוד</string>
+    <string name="preference_video_description">רזולוציה רנדר וביצועים</string>
     <string name="preference_control_title">התאמה אישית של פקדים</string>
+    <string name="preference_control_description">מחוות, לחצנים וקנה מידה</string>
     <string name="preference_java_title">התאמות ל- Java</string>
+    <string name="preference_java_description">ג\'אווה רנטיים, JVM ארגומנטס כמות ראם וארגז חול</string>
     <string name="preference_misc_title">הגדרות שונות</string>
+    <string name="preference_misc_description">רשימת גרסאות ובדיקת ספריות</string>
     <string name="preference_experimental_title">דברים ניסיוניים</string>
+    <string name="preference_experimental_description">השתמש בדברים שם בשיקול דעת, ללא תמיכה</string>
     <string name="preference_sustained_performance_title">הפעל \"מצב מאוזן\"</string>
+    <string name="preference_sustained_performance_description">הגבלת התחממות יתר על ידי הגבלת הביצועים המרביים</string>
+    <string name="preference_force_vsync_title">לכפות הפעלת vsync</string>
+    <string name="preference_force_vsync_description">הגבלת התחממות יתר על ידי הגבלת הביצועים המרביים</string>
+    <string name="preference_force_english_title">אלץ שפה לאנגלית</string>
+    <string name="preference_force_english_description">מאפשר לך לראות את המחרוזות המקוריות כפי שמתוכנן על ידי המפתחים. דורש הפעלה מחדש.</string>
+    <string name="preference_edit_controls_title">עריכת בקרים מותאמות אישית</string>
+    <string name="preference_edit_controls_summary">כוונן את מערכת הבקרה כך שתתאים לצרכיך.</string>
+    <string name="preference_category_gyro_controls">בקריי גירוסקופ</string>
+    <string name="preference_gyro_smoothing_title">אפשר החלקת ג\'ירוסקופ</string>
+    <string name="preference_gyro_smoothing_description">הפחת רעידות תמורת עיכוב.</string>
     <string name="preference_back_title">חזרה אל המסך האחרון</string>
     <string name="unnamed">ללא שם</string>
     <string name="profiles_latest_snapshot">הסנאפשוט העדכני</string>
@@ -140,7 +186,70 @@
     <string name="global_delete">מחיקה</string>
     <string name="pedit_java_runtime">Java Runtime</string>
     <string name="pedit_renderer">רינדור</string>
+    <string name="arc_capes_title">שכמיות אסתטיות</string>
+    <string name="arc_capes_desc">מאפשר שכמיות מאת Cosmetica (לשעבר Arc). לקבלת מידע נוסף, בקרו ב- https://cosmetica.cc. דורש OptiFine.</string>
+    <string name="notif_channel_name">כללי</string>
+    <string name="lazy_service_default_title">שירות הרקע של Pojav</string>
+    <string name="use_global_default">(השתמש בהגדרות ברירת המחדל הגלובליות)</string>
+    <string name="default_control">מפת בקר ברירת מחדל</string>
+    <string name="progresslayout_tasks_in_progress">משימות בתהליך%d</string>
+    <string name="notification_terminate">להפסיק</string>
+    <string name="notification_game_runs">המשחק פועל!</string>
+    <string name="folder_dialog_create">צור</string>
+    <string name="folder_dialog_insert_name">הכנס שם תיקייה.</string>
+    <string name="folder_fragment_create">צור תיקייה</string>
+    <string name="folder_fragment_select">בחר תיקייה</string>
+    <string name="main_login_done">התחברות הושלמה.</string>
+    <string name="main_add_account">הוסף חשבון</string>
+    <string name="tasks_ongoing">משימות בתהליך, אנא המתן.</string>
+    <string name="no_saved_accounts">לא נשמר חשבון</string>
+    <string name="mc_download_failed">כשל בהורדת Minecraft! זה עלול להיות כתוצאה מקשר רשת לקוי, קבצים שלא הונחו נכון, וכו\'.</string>
+    <string name="xerr_unknown">שגיאה לא ידועה בממשק ה API של Xbox Live: %d</string>
+    <string name="xerr_no_account">נראה שאין לך חשבון Xbox Live. אנא התחבר פעם אחת ב- https://minecraft.net/ ונסה שוב.</string>
+    <string name="xerr_adult_verification">אדם בוגר צריך לאמת את חשבונך.</string>
+    <string name="xerr_child">חשבון שלך הוא חשבון ילדים וצריך להיכנס למשפחה על מנת להיכנס.</string>
+    <string name="minecraft_not_owned">נראה שאין לחשבון הזה פרופיל Minecraft. אם יש לך Xbox Game Pass, אנא התחבר ל- https://minecraft.net/ והגדר אותו.</string>
+    <string name="xerr_not_available">Xbox Live אינו זמין במדינה שלך</string>
+    <string name="preference_enable_gyro_title">אפשר את בקרי הג\'יירוסקופ</string>
+    <string name="preference_enable_gyro_description">הפעלת זה יאפשר לך להסתובב במשחק על ידי סיבוב הטלפון.</string>
+    <string name="preference_gyro_sensitivity_title">רגישות בקרי חיישן הכיוון</string>
+    <string name="preference_gyro_sensitivity_description">כוון את הרגישות של בקרי חיישן כיוון.</string>
+    <string name="toast_turn_on_gyro">הפעלו קודם את בקרי חיישן הכיוון בכדי להשתמש בזה!</string>
+    <string name="preference_gyro_sample_rate_title">קצב דגימת חיישן הכיוון</string>
+    <string name="preference_gyro_sample_rate_description">אם אתם חווים בעיות ביצועים עם בקרי חיישן הכיוון, הגדילו ערך זה.</string>
+    <string name="microsoft_login_retry_later">יותר מדי בקשות, נסו שוב מאוחר יותר.</string>
+    <string name="storage_required">PojavLauncher דורש אחסון חיצוני מחובר. אנא חבר אותו מחדש והפעל מחדש את האפליקציה.</string>
+    <string name="mcl_setting_title_buttonallcaps">השתמש באותיות גדולות בלבד בתוויות הכפתורים.</string>
+    <string name="mcl_setting_subtitle_buttonallcaps">השבת אפשרות זו אם ברצונך להשתמש באותיות קטנות בבקרים שלך.</string>
+    <string name="create_profile">צור פרופיל חדש</string>
+    <string name="preference_shader_dump_title">אפשר השלכת הצללה</string>
+    <string name="preference_shader_dump_description">רישום הצללות שהומרו לקובץ היומן.</string>
+    <string name="customctrl_editor_exit_title">עזיבה?</string>
+    <string name="customctrl_editor_exit_msg">האם אתה בטוח שברצונך לצאת?</string>
+    <string name="customctrl_editor_exit">עזוב את העורך.</string>
+    <string name="global_save_and_exit">שמור וצא</string>
+    <string name="global_yes">כן</string>
+    <string name="global_no">לא</string>
+    <string name="preference_controller_map_wiped">תצורת הבקר נמחקה.</string>
+    <string name="preference_category_controller_settings">הגדרות בקר</string>
+    <string name="preference_wipe_controller_title">איפוס מיפוי הבקר</string>
+    <string name="preference_wipe_controller_description">מאפשר לך למפות מחדש את כפתורי הבקר.</string>
+    <string name="preference_deadzone_scale_title">סולם אזור מת של ג\'ויסטיק</string>
+    <string name="preference_deadzone_scale_description">הגדל את הערך אם הג\'ויסטיק נסחף.</string>
+    <string name="preference_force_big_core_title">כפה על מנוע הרינדור לפעול על הליבה הגדולה.</string>
+    <string name="preference_force_big_core_desc">מאלץ על תהליכון הרינדור של Minecraft לפעול על הליבה עם תדר הפעולה המרבי הגבוה ביותר.</string>
+    <string name="version_select_hint">בחר גרסה</string>
+    <string name="forge_dl_progress">מוריד מתקין עבור %s</string>
+    <string name="forge_dl_searching">מחפש מספר גרסה של Forge</string>
+    <string name="modloader_dl_failed_to_load_list">טעינת רשימת הגרסאות נכשלה!</string>
+    <string name="forge_dl_no_installer">מצטערים, אך לגרסת Forge זו אין מתקין, והיא אינה נתמכת בשלב זה.</string>
+    <string name="forge_dl_select_version">בחר גירסת forge</string>
+    <string name="fabric_dl_progress">מוריד מטא נתונים של מטעין %s</string>
+    <string name="fabric_dl_loader_version">גרסת מטעין %s</string>
+    <string name="fabric_dl_game_version">גרסת מינקראפט</string>
     <string name="of_dl_progress">מוריד %s</string>
+    <string name="generic_debug">נפה באגים</string>
     <string name="preference_category_java_tweaks">התאמות ל- Java</string>
     <string name="preference_category_miscellaneous">הגדרות שונות</string>
+    <string name="controller_button_select">בחר</string>
 </resources>
