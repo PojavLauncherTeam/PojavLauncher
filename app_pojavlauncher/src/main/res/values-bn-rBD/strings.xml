@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
     <string name="app_name">পোজাভলন্চার(মাইনক্রাফট: জাভা এডিশন আ্যন্ডরয়েডের জন্য)</string>
     <string name="app_short_name">পোজাভলন্চার</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">ব্যবহারকারীর নাম বা ইমেল</string>
     <string name="login_online_login_label">লগইন</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"কনটেক্সট মেনু খুলতে টপ সেন্টার কগ আইকনে ট্যাপ করুন ⚙\nকাস্টমাইজ করতে একটি বোতামে ট্যাপ করুন: এর কীবাইন্ড এডিট, রিসাইজ, ডিলিট বা কাস্টমাইজ করুন."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">এই একাউন্টটি মুছে যাবে!</string>
     <!-- AlertDialog title -->
