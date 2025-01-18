@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition untuk Android)</string>
     <string name="app_short_name">PojavLauncher</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">E-mel atau nama pengguna</string>
     <string name="login_online_login_label">Log masuk</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Ketik ikon roda tengah atas untuk membuka menu konteks ⚙\nKetik butang untuk menyesuaikan: edit, ubah saiz, padam atau sesuaikan ikatan kekuncinya."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Akaun ini akan dihapus!</string>
     <!-- AlertDialog title -->
@@ -120,7 +118,6 @@
     <string name="multirt_runtime_incompatiblearch">Seni bina tidak serasi: %s</string>
     <string name="multirt_config_setdefault">Tetapkan lalai</string>
     <string name="multirt_config_setdefault_already">Lalai</string>
-    <string name="multirt_nocompartiblert">Tidak menemui sebarang Java Runtime yang serasi. Versi ini memerlukan Java %d atau lebih baru.</string>
     <string name="multirt_nojava8rt">Tidak menemui Java 8. Untuk menggunakan pilihan ini, anda perlu memasang Java 8.</string>
     <string name="pvc_gameDirectory">Direktori permainan</string>
     <string name="pvc_jvmArgs">Argumen JVM</string>
@@ -141,5 +138,6 @@
     <string name="progresslayout_tasks_in_progress">%d tugas sedang dijalankan</string>
     <string name="notification_terminate">Tamatkan</string>
     <string name="of_dl_progress">Memuat turun %s</string>
+    <string name="generic_debug">Nyahpepijat</string>
     <string name="preference_category_miscellaneous">Tetapan lain-lain</string>
 </resources>
