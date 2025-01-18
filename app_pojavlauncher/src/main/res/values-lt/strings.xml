@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition skirta Android)</string>
     <string name="app_short_name">PojavLauncher</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">El. paštas arba slapyvardis</string>
     <string name="login_online_login_label">Prisijungti</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Paspausk viršutini centrini krumpliarati kad atidaryti kontekstini meniu ⚙\nPasausk mygtuka kad pritaikyti: pakeisti, pakeisti dydį, ištrinti, arba pakeisti jo veiksma."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Ši paskyra bus pašalinta!</string>
     <!-- AlertDialog title -->
@@ -33,7 +31,7 @@
     <string name="mcl_launch_downloading">Atsisiunčiama %s</string>
     <string name="mcl_launch_downloading_progress">"Atsisiunčiama %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Rengiamasi atsisiųsti resursus</string>
-    <string name="mcl_options">Pasirinkimai</string>
+    <string name="mcl_options">Nustatymai</string>
     <string name="mcl_option_customcontrol">Kontrolės</string>
     <string name="mcl_setting_title_use_surface_view">Naudoti alternatyvų atvaizdų vaizdavimą</string>
     <string name="mcl_setting_subtitle_use_surface_view">Gali pagerinti našumą GPU surištuose scenarijuose.</string>
@@ -47,10 +45,13 @@
     <string name="mcl_setting_subtitle_javaargs">Būkite atsargūs, tai gali paveikti žaidimą jei modifikuota be išmonės.</string>
     <string name="mcl_setting_category_renderer">Vaizdo generatorius</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (visos versijos, greičiausias)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - (visos versijos, vidutinis)</string>
     <string name="mcl_setting_veroption_release">Leidimai</string>
     <string name="mcl_setting_veroption_snapshot">Naujinimai</string>
     <string name="mcl_setting_veroption_oldalpha">Alpha</string>
     <string name="mcl_setting_veroption_oldbeta">Beta</string>
+    <string name="mcl_setting_java_sandbox">.jar paleidimas</string>
+    <string name="mcl_setting_java_sandbox_subtitle">Valdykite smėlio dėžės saugos tvarkyklės prieinamumą paleidžiant .jar failą.</string>
     <string name="mcl_version_clone">Klonuoti</string>
     <!-- Global strings -->
     <string name="global_edit">Redaguoti</string>
@@ -65,7 +66,7 @@
     <string name="global_error_field_empty">Šis laukas negali būti tuščias</string>
     <string name="global_waiting">Palaukite</string>
     <string name="global_select">Pasirinkti</string>
-    <string name="global_retry">Hd</string>
+    <string name="global_retry">Kartoti</string>
     <string name="global_default">Numatytasis</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Applikacija išsijungė su kodu %d, patikrinkite latestlog.txt kad gautumėte detalių.</string>
@@ -116,7 +117,9 @@
     <string name="customctrl_addbutton_drawer">Pridėti mygtukų spintą</string>
     <string name="customctrl_addbutton_joystick">Pridėti vairasvirte</string>
     <string name="customctrl_addsubbutton">Pridetį mygtukų spintos mygtuką</string>
+    <string name="customctrl_export">Eksportuoti valdiklius</string>
     <string name="main_share_logs">Pasidalinti žurnalo failą</string>
+    <string name="main_install_jar_file">Įvykdyti .jar</string>
     <string name="main_play">Žaisti</string>
     <string name="autoram_info_msg">Atmintis pakeista į %d MB</string>
     <string name="mcl_setting_check_libraries">Patikrinti depozitoriumo bibliotekas po atsisiuntimo</string>
@@ -134,26 +137,36 @@
     <string name="mcl_memory_allocation">Atminties skirtstymas</string>
     <string name="multirt_runtime_corrupt">Sugadintas Java Modulis</string>
     <string name="multirt_runtime_incompatiblearch">Netinkama architektūra: %s</string>
+    <string name="multirt_config_title">Java paleidėjai</string>
     <string name="multirt_config_add">Pridėti naują</string>
     <string name="multirt_title">Java Modulių Tvarkytojas</string>
     <string name="multirt_progress_caching">Talpinama...</string>
     <string name="multirt_config_setdefault">Nustatyti numatytą</string>
     <string name="multirt_config_setdefault_already">Numatytasis</string>
-    <string name="multirt_nocompartiblert">Nerasta tinkamos Java Runtine. Šiai versijai reikalinga Java %d arba naujesnė.</string>
     <string name="multirt_nojava8rt">Nerasta Java 8. Kad naudotumėte šią funkciją, naudokite Java 8.</string>
     <string name="multirt_delete_runtime">Ištrinti runtime</string>
     <string name="pvc_gameDirectory">Žaidimo failų vieta</string>
     <string name="pvc_jvmArgs">JVM argumentai</string>
     <string name="preference_mouse_start_title">Pradėti su virtualia įjungta</string>
     <string name="preference_video_title">Vaizdas</string>
+    <string name="preference_video_description">Resoliucija, paišytojas ir našumas</string>
     <string name="preference_control_title">Kontrolių redagavimas</string>
+    <string name="preference_control_description">Gestai, mygtukai ir didinimas</string>
     <string name="preference_java_title">Java redagavimas</string>
     <string name="preference_misc_title">Kiti nustatymai</string>
     <string name="preference_experimental_title">Eksperimentiniai dalykai</string>
     <string name="preference_sustained_performance_title">Įjungti nuolatinio našumo režimą</string>
+    <string name="preference_force_vsync_title">Priverstinai įjungti VSync</string>
+    <string name="preference_force_english_title">Perjungti I Anglų kalbą</string>
+    <string name="preference_force_english_description">Leidžia matyti originalų tekstą, kaip numatyta kūrejų. Reikalingas paleidimas iš naujo.</string>
     <string name="preference_edit_controls_title">Redaguoti kontroliavimą</string>
+    <string name="preference_category_gyro_controls">Gyroskopo kontrolės</string>
+    <string name="preference_category_virtual_mouse">Virtuali pelė</string>
     <string name="preference_gyro_invert_x_axis">Invertuoti X ašį</string>
     <string name="preference_gyro_invert_y_axis">Invertuoti Y ašį</string>
+    <string name="preference_gyro_invert_x_axis_description">Invertuoti horizontaliąją ašį.</string>
+    <string name="preference_gyro_invert_y_axis_description">Invertuoti vertikaliąją ašį.</string>
+    <string name="preference_gyro_smoothing_title">Įjunkti gyroskopo išlyginimą</string>
     <string name="preference_back_title">Atgal į paskutinį ekraną</string>
     <string name="unnamed">Be pavadinimo</string>
     <string name="profiles_latest_snapshot">Naujausias Snapshotas</string>
@@ -166,16 +179,93 @@
     <string name="arc_capes_title">\"Cosmetica\" apvalkalai</string>
     <string name="arc_capes_desc">Įjungia apvalkalus iš \"Cosmetica\" (anksčiau \"Arc\"). Daugiau informacijos rasite https://cosmetica.cc. Reikalingas OptiFine.</string>
     <string name="notif_channel_name">Pagrindinis</string>
+    <string name="lazy_service_default_title">Pojav foninis servisas</string>
+    <string name="mcl_setting_veroption_installed">Instaliuota</string>
     <string name="notification_terminate">Nutraukti</string>
     <string name="notification_game_runs">Žaidimas bėga!</string>
     <string name="folder_dialog_create">Sukurti</string>
     <string name="folder_dialog_insert_name">Įterpti aplankos pavadinimą</string>
     <string name="folder_fragment_create">Sukurti aplanką</string>
+    <string name="folder_fragment_select">Pasirinkti aplanką</string>
+    <string name="main_login_done">Prisijungta</string>
     <string name="main_add_account">Pridėti accounta</string>
+    <string name="tasks_ongoing">Užduotis vykdoma, prašome palaukti</string>
+    <string name="no_saved_accounts">Nėra išsaugotų paskyrų</string>
+    <string name="mc_download_failed">Klaida parsisiunčiant Minecraft! Tai gali būti dėl to, kad blogas interneto ryšys, ne taip sudėti failai,..</string>
     <string name="xerr_unknown">Nežinomas Xbox Live API klaida %d</string>
     <string name="xerr_no_account">Atrodo kad tu neturi Xbox Live accounta. Prašau prisijungti kartą į https://minecraft.net/ ir pabandyt dar kartą.</string>
+    <string name="xerr_adult_verification">Suaugęs turi patvirtinti jūsų paskyrą.</string>
+    <string name="minecraft_not_owned">Rodosi ši paskyrą neturi Minecraft profilio. Jeigu turi Xbox Game Pass, prašome prisijungti į https://minecraft.net/ ir nustatyti.</string>
     <string name="xerr_not_available">Xbox Live nėra jūsų šalyje</string>
+    <string name="preference_enable_gyro_title">Įjungti gyroskopo kontroles</string>
+    <string name="preference_enable_gyro_description">Įjungus leis pasisukti žaidime pasukant telefoną.</string>
+    <string name="preference_gyro_sensitivity_title">Gyroskopo kontroliu sensityvumas</string>
+    <string name="microsoft_login_retry_later">Per daug užklausų, pabandykite dar kartą vėliau.</string>
+    <string name="create_profile">Sukurti naują profilį</string>
+    <string name="percent_format">%d%%</string>
+    <string name="customctrl_editor_exit_title">Išeinate?</string>
+    <string name="customctrl_editor_exit_msg">Ar tikrai norite išeiti?</string>
+    <string name="customctrl_editor_exit">Išeiti iš editoriaus</string>
+    <string name="global_save_and_exit">Išsaugoti ir išeiti</string>
+    <string name="global_yes">Taip</string>
+    <string name="global_no">Ne</string>
+    <string name="preference_category_controller_settings">Kontrolierių nustatymai</string>
+    <string name="preference_wipe_controller_title">Iš naujo nustatyti valdiklio atvaizdavimą</string>
+    <string name="version_select_hint">Pasirinkti versiją</string>
+    <string name="modloader_dl_failed_to_load_list">Klaida kraunant versijų sąrašą!</string>
+    <string name="forge_dl_select_version">Pasirinkite Forge versiją</string>
+    <string name="fabric_dl_game_version">Minecraft versija</string>
+    <string name="fabric_dl_install">Instaliuoti</string>
+    <string name="modloader_dl_install_fabric">Sukurti Fabric profilį</string>
+    <string name="modloader_dl_install_quilt">Sukurti Quilt profilį</string>
+    <string name="modloader_dl_install_forge">Sukurti Forge profilį</string>
+    <string name="create_profile_vanilla">Sukurti Vanilla profilį</string>
+    <string name="create_profile_modded_versions">Modifikuotos versijos</string>
+    <string name="fabric_dl_loader_title">Pasirinkti versiją</string>
+    <string name="of_dl_select_version">Pasirinkti OptiFine versiją</string>
+    <string name="of_dl_failed_to_scrape">Klaida surenkant informaciją Optifine instaliacijai</string>
     <string name="of_dl_progress">Atsisiunčiama %s</string>
+    <string name="create_profile_optifine">Sukurti Optifine profilį</string>
+    <string name="hint_search_modpack">Ieškoti Modpacks</string>
+    <string name="preference_vulkan_driver_system_title">Naudoti sistemos Vulkan driverį</string>
+    <string name="generic_install">Instaliuoti</string>
+    <string name="generic_apply">Priimti</string>
+    <string name="generic_debug">Taisyti</string>
+    <string name="search_modpack_no_result">Nerasta modpacks</string>
+    <string name="search_modpack_error">Nepavyksta rasti modpacks</string>
+    <string name="modpack_download_downloading_mods_fc">Atsiunčiamos modifikacijos (Failas %d iš %d)</string>
+    <string name="modpack_download_applying_overrides">Taikyti perašymus (%d/%d)</string>
+    <string name="modpack_install_notification_title">Pojav Modpack diegėjas</string>
+    <string name="modpack_install_notification_success">Paspausk čia norint pabaigti Modpack instaliaciją</string>
+    <string name="modpack_install_notification_data_not_available">Klaida atsiunčiant modifikacijų paleidėjo informaciją</string>
+    <string name="modpack_install_button">Sukurti Modpack profilį</string>
+    <string name="notif_error_occured">Įvyko klaida</string>
+    <string name="notif_error_occured_desc">Spustelėkite, dėl daugiau informacijos</string>
+    <string name="fabric_dl_only_stable">Rodyti tik stabilias versijas</string>
+    <string name="dl_tampered_manifest_title">Failo patikrinimo perspėjimas</string>
+    <string name="dl_turn_off_manifest_checks">Išjunkti manifiestų patikrinimus</string>
+    <string name="dl_switch_to_official_site">Perjungti į oficialų saitą</string>
+    <string name="preference_download_source_title">Žaidimo parsisiuntimo šaltinis</string>
+    <string name="notif_download_finished">Žaidimas yra paruoštas paleidimui</string>
+    <string name="notif_download_finished_desc">Paspauskite čia norint pradėti!</string>
+    <string name="preference_category_gestures">Gestai</string>
+    <string name="preference_category_buttons">Mygtukai</string>
+    <string name="preference_category_experimental_settings">Eksperimentiniai dalykai</string>
     <string name="preference_category_java_tweaks">Java redagavimas</string>
+    <string name="preference_category_main_categories">Kategorijos</string>
     <string name="preference_category_miscellaneous">Kiti nustatymai</string>
+    <string name="preference_category_video">Vaizdo nustatymai</string>
+    <string name="notification_permission_dialog_title">Leidimo užklausa</string>
+    <string name="preference_ask_for_notification_title">Leisti pranešimus</string>
+    <string name="preference_vsync_in_zink_title">Leisti V-Sync su Zink</string>
+    <string name="exception_failed_to_unpack_jre17">Klaida instaliuojant JRE 17</string>
+    <string name="newdl_starting">Skaitoma žaidimo metadata…</string>
+    <string name="newdl_downloading_metadata">Siunčiama žaidimo metadata (%s)</string>
+    <string name="controller_button_a">A</string>
+    <string name="controller_button_b">B</string>
+    <string name="controller_button_x">X</string>
+    <string name="controller_button_y">Y</string>
+    <string name="controller_button_start">Pradžios</string>
+    <string name="controller_button_select">Pasirinkti</string>
+    <string name="customctrl_visibility_title">Matomumas</string>
 </resources>
