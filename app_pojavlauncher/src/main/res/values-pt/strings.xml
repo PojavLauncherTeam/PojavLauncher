@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition para Android)</string>
     <string name="app_short_name">PojavLauncher</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">E-mail ou nome de utilizador</string>
     <string name="login_online_login_label">Iniciar sessão</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Toque no ícone de engrenagem central superior para abrir o menu de contexto ⚙\nToque num botão para personalizar: edite, redimensione, exclua ou personalize o seu atalho de teclado."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Esta conta será removida!</string>
     <!-- AlertDialog title -->
@@ -41,7 +39,10 @@
     <string name="mcl_setting_subtitle_ignore_notch">Ignora o entalhe e estende o ecrã por baixo dele.\nDá-lhe uma experiência mais imersiva.</string>
     <string name="mcl_setting_title_resolution_scaler">Escala da Resolução</string>
     <string name="mcl_setting_subtitle_resolution_scaler">Permite a diminuir a fidelidade gráfica do jogo. 100% é a resolução completa.</string>
+    <string name="mcl_setting_title_longpresstrigger">Ativar atraso de toque longo</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Altera a demora do gatilho de toque longo para partir blocos e soltar itens.</string>
     <string name="mcl_setting_title_buttonscale">Escala dos botões</string>
+    <string name="mcl_setting_subtitle_buttonscale">Redimensiona-os se os botões estiverem pequenos.</string>
     <string name="mcl_setting_title_mousescale">Escala do rato</string>
     <string name="mcl_setting_subtitle_mousescale">Muda o tamanho do rato virtual.</string>
     <string name="mcl_setting_title_javaargs">Argumentos JVM</string>
@@ -49,12 +50,12 @@
     <string name="mcl_setting_category_renderer">Renderizador</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (todas as versões, rápido)</string>
     <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - (todas as versões, médio)</string>
-    <string name="mcl_setting_renderer_angle">ANGLE (Vulkan) - (Somente 1.17+, médio)</string>
     <string name="mcl_setting_veroption_release">Oficial</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Alpha antiga</string>
     <string name="mcl_setting_veroption_oldbeta">Beta antiga</string>
     <string name="mcl_setting_java_sandbox">Execução de .jar em modo Sandbox</string>
+    <string name="mcl_setting_java_sandbox_subtitle">Controla a disponibilidade do gerenciador de segurança do sandbox ao executares um ficheiro .jar.</string>
     <string name="mcl_version_clone">Clonar</string>
     <!-- Global strings -->
     <string name="global_edit">Editar</string>
@@ -80,7 +81,13 @@
     <string name="control_debug">Depuração</string>
     <string name="control_primary">Pri</string>
     <string name="control_secondary">Seg</string>
+    <string name="control_shift">◇</string>
     <string name="control_inventory">Inv</string>
+    <string name="control_up">▲</string>
+    <string name="control_left">◀</string>
+    <string name="control_right">▶</string>
+    <string name="control_down">▼</string>
+    <string name="control_jump">⬛</string>
     <string name="control_thirdperson">terceira</string>
     <string name="control_listplayers">Tab</string>
     <string name="control_mouse">Rato</string>
@@ -115,33 +122,40 @@
     <string name="customctrl_addbutton_drawer">Adicionar desenhador de botão</string>
     <string name="customctrl_addbutton_joystick">Adicionar joystick</string>
     <string name="customctrl_addsubbutton">Adicionar sub-botão</string>
+    <string name="customctrl_selectdefault">Seleciona o controlmap padrão</string>
+    <string name="customctrl_export">Exporta controlmap</string>
     <string name="main_share_logs">Partilhar log</string>
     <string name="main_install_jar_file">Executar um .jar</string>
     <string name="main_play">Jogar</string>
     <string name="autoram_info_msg">Memória definida para %d MB</string>
     <string name="mcl_setting_check_libraries">Verificar as bibliotecas depois de transferir</string>
+    <string name="mcl_setting_check_libraries_subtitle">Está definição força o launcher a verificar o hash da biblioteca se estiver disponível. Impede downloads quebrados.</string>
     <string name="dl_library_sha_fail">A biblioteca %s está danificada e irá ser transferida novamente</string>
     <string name="dl_library_sha_unknown">A biblioteca %s não pôde ser verificada, vamos assumir que está utilizável</string>
     <string name="dl_library_sha_pass">Biblioteca %s está bem e utilizável</string>
     <string name="mcl_disable_gestures">Desativar gestos</string>
     <string name="mcl_disable_gestures_subtitle">Desativa gestos, como segurar para quebrar blocos e tocar para colocar um bloco.</string>
     <string name="mcl_disable_swap_hand">Desativar toque duplo para trocar de mãos</string>
+    <string name="mcl_disable_swap_hand_subtitle">Desliga o toque duplo na barra rápida e troca-o para a mão secundária.</string>
     <string name="mcl_setting_title_mousespeed">Velocidade do rato</string>
     <string name="mcl_setting_subtitle_mousespeed">Muda a velocidade do rato virtual.</string>
     <string name="customctrl_passthru">Rato pode passar através</string>
     <string name="customctrl_swipeable">Deslizável</string>
     <string name="customctrl_forward_lock">Bloqueio da Frente</string>
+    <string name="customctrl_absolute_tracking">Rastreamento absoluto do dedo</string>
     <string name="memory_warning_msg">A quantidade atual de memória RAM livre (%d) é menor do que a memória RAM alocada (%d), o que pode levar a falhas. Altera a alocação se o jogo falhar.</string>
     <string name="mcl_memory_allocation">Alocação de memória</string>
     <string name="mcl_memory_allocation_subtitle">Controla quanta memória é delegada ao Minecraft.</string>
     <string name="multirt_runtime_corrupt">Runtime do Java corrompida</string>
     <string name="multirt_runtime_incompatiblearch">Arquitetura incompatível: %s</string>
+    <string name="multirt_config_title">Runtimes Java</string>
     <string name="multirt_config_add">Adicionar nova</string>
     <string name="multirt_title">Gestor de Runtimes</string>
+    <string name="multirt_subtitle">Gerencia Runtimes Java instalados.</string>
     <string name="multirt_progress_caching">A colocar em cache...</string>
     <string name="multirt_config_setdefault">Definir como padrão</string>
     <string name="multirt_config_setdefault_already">Padrão</string>
-    <string name="multirt_nocompartiblert">Não foi possível encontrar uma Runtime do Java compatível. Esta versão requere Java %d ou superior.</string>
+    <string name="multirt_config_removeerror_last">Deves ter ao menos um Java Runtime instalado.</string>
     <string name="multirt_nojava8rt">Não foi possível encontrar o Java 8. Para usar esta opção, tu precisas de instalar o Java 8.</string>
     <string name="multirt_delete_runtime">Eliminar runtime</string>
     <string name="pvc_gameDirectory">Diretório do jogo</string>
@@ -174,6 +188,8 @@
     <string name="arc_capes_title">Capas da \'Comestica\'</string>
     <string name="arc_capes_desc">Habilitar capas da Cosmetica(antigamente Arc). Para mais informações por favor visite https://cosmetica.cc. Isto Requer OptiFine.</string>
     <string name="of_dl_progress">A transferir %s</string>
+    <string name="generic_debug">Depuração</string>
     <string name="preference_category_java_tweaks">Ajustes do Java</string>
     <string name="preference_category_miscellaneous">Definições diversas</string>
+    <string name="controller_button_select">Selecionar</string>
 </resources>
