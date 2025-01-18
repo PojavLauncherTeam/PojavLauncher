@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition for Android)</string>
     <string name="app_short_name">PojavLauncher</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">البريد الإلكتروني أو اسم المستخدم</string>
+    <string name="login_online_username_hint">اسم المستخدم</string>
     <string name="login_online_login_label">تسجيل الدخول</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"أضغط على أيقونة الإعداد لفتح قائمة التعديلات أضغط على زر \n ⚙: للتعديل، تغير الحجم، حذف 
-، أو تعديل ازرار التحكم."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">سيتم إزالة هذا الحساب!</string>
     <!-- AlertDialog title -->
@@ -38,28 +36,27 @@
     <string name="mcl_option_customcontrol">تخصيص التحكم</string>
     <string name="mcl_setting_title_use_surface_view">استخدام عرض الأسطح البديل</string>
     <string name="mcl_setting_subtitle_use_surface_view">قد يساعد الأداء في سيناريوهات المعتمدة على GPU.</string>
-    <string name="mcl_setting_title_ignore_notch">تجاهل النوتش</string>
+    <string name="mcl_setting_title_ignore_notch">تجاهل النوتش (الجزء المفقود من أعلى الشاشة مع الكاميرا الأمامية)</string>
     <string name="mcl_setting_subtitle_ignore_notch">تجاهل النوتش وتوسيع الشاشة أسفلها.\nيعطيك تجرِبة أكثر انغماساً.</string>
     <string name="mcl_setting_title_resolution_scaler">مقياس الدقة</string>
     <string name="mcl_setting_subtitle_resolution_scaler">يسمح لك بتخفيض دقة اللعبة. 100% هي الدقة الكاملة.</string>
     <string name="mcl_setting_title_longpresstrigger">فعل التأخير للضغط المطول</string>
     <string name="mcl_setting_subtitle_longpresstrigger">تغيير مدة \"تفعيل الضغط المطول\" عند تدمير الأشياء و إسقاط العناصر.</string>
     <string name="mcl_setting_title_buttonscale">ضبط حجم أزرار التحكم</string>
-    <string name="mcl_setting_subtitle_buttonscale">ضبط حجم الأزرار إذا كانت صغيرة جدآ.</string>
+    <string name="mcl_setting_subtitle_buttonscale">كَبِر حجم الأزرار إذا كانت صغيرة جداً.</string>
     <string name="mcl_setting_title_mousescale">ضبط حجم الفأرة</string>
-    <string name="mcl_setting_subtitle_mousescale">غير حجم مؤشر الفأرة الأفتراضية.</string>
-    <string name="mcl_setting_title_javaargs">حجج إطلاق JVM</string>
-    <string name="mcl_setting_subtitle_javaargs">كن حذرا، قد يجعل هذا اللعبة تتوقف إذا تم تعديلها بدون علم.</string>
+    <string name="mcl_setting_subtitle_mousescale">غير حجم مؤشر الفأرة الافتراضية.</string>
+    <string name="mcl_setting_title_javaargs">معلمات بَدْء تشغيل JVM</string>
+    <string name="mcl_setting_subtitle_javaargs">كن حذرا، تعديلها بغير علم قد يتسبب بتعطيل اللعبة.</string>
     <string name="mcl_setting_category_renderer">عارض الرسوميات</string>
-    <string name="mcl_setting_renderer_gles2_4">Holy Gl4es - (جميع الإصدارات، بسرعة)</string>
+    <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (جميع الإصدارات، سريع)</string>
     <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - (جميع الإصدارات، متوسط)</string>
-    <string name="mcl_setting_renderer_angle">ANGLE (Vulkan) - (1.17+ فقط، متوسط)</string>
     <string name="mcl_setting_veroption_release">إصدار نهائي</string>
-    <string name="mcl_setting_veroption_snapshot">اللمحات (سنابشوت)</string>
+    <string name="mcl_setting_veroption_snapshot">اللمحات \"سنابشوت\"</string>
     <string name="mcl_setting_veroption_oldalpha">نسخ ألفا قديمة</string>
     <string name="mcl_setting_veroption_oldbeta">نسخ بيتا قديمة</string>
-    <string name="mcl_setting_java_sandbox">تنفيذ Sandbox.jar</string>
-    <string name="mcl_setting_java_sandbox_subtitle">التحكم بقدرة وجود Sandbox Security Manger عند تشغيل ملف .jar</string>
+    <string name="mcl_setting_java_sandbox">تنفيذ ملف \".jar\" داخل Sandbox</string>
+    <string name="mcl_setting_java_sandbox_subtitle">التحكم بقدرة وجود Sandbox Security Manger عند تشغيل مِلَفّ .jar.</string>
     <string name="mcl_version_clone">نسخ</string>
     <!-- Global strings -->
     <string name="global_edit">تعديل</string>
@@ -71,15 +68,15 @@
     <string name="global_restart">اعادة تشغيل</string>
     <string name="global_save">حفظ</string>
     <string name="global_unpacking">جاري فك الضغط %s</string>
-    <string name="global_error_field_empty">لا يمكن لهذه الخانة ان تكون فارغة</string>
+    <string name="global_error_field_empty">لا يمكن لهذه الخانة أن تكون فارغة</string>
     <string name="global_waiting">انتظر</string>
     <string name="global_select">اختر</string>
     <string name="global_retry">أعد المحاولة</string>
-    <string name="global_default">مستخدم دائما</string>
+    <string name="global_default">الافتراضي</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">تم الخروج من التطبيق/اللعبة بخلل %d، تحقق من latestlog.txt لمزيد من التفاصيل.</string>
-    <string name="mcn_exit_confirm">هل أنت متأكد من أنك تريد الإغلاق؟</string>
-    <string name="mcn_check_fail_vulkan_support">عارض Zink (Vulkan) لا يدعم هذا الجهاز!</string>
+    <string name="mcn_exit_confirm">هل أنت متأكد من أنك تريد فرض الإغلاق؟</string>
+    <string name="mcn_check_fail_vulkan_support">عارض الرسوميات Zink (Vulkan) غير مدعوم على هذا الجهاز!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_chat">دردشة</string>
     <string name="control_debug">Debug</string>
@@ -95,19 +92,19 @@
     <string name="control_thirdperson">3rd</string>
     <string name="control_listplayers">Tab</string>
     <string name="control_mouse">الفأرة</string>
-    <string name="control_mouseoff">وضع الفأرة: موقفة</string>
+    <string name="control_mouseoff">وضع الفأرة: معطلة</string>
     <string name="control_mouseon">وضع الفأرة: مفعلة </string>
     <!-- MainActivity: Menu advanced controls -->
     <string name="control_forceclose">فرض الإغلاق</string>
-    <string name="control_viewout">سجل الإخراج</string>
+    <string name="control_viewout">سِجل الإخراج</string>
     <string name="control_adebug">مدخل التصحيح</string>
     <string name="control_customkey">إرسال رمز مفتاحي مخصص</string>
     <!-- ImportControlActivity Strings -->
-    <string name="import_control_label">استيراد مخطط التحكم</string>
-    <string name="import_control_invalid_file">المِلَفّ غير صالح أو تالف</string>
-    <string name="import_control_import_button">استيراد ازرار التحكم</string>
-    <string name="import_control_verifying_file">يتم التحقق من الملف، الرجاء الانتظار والمحاولة مرة أخرى…</string>
-    <string name="import_control_invalid_name">الاسم غير صالحا او المِلَفّ موجود مسبقًا</string>
+    <string name="import_control_label">استيراد مخطط أزرار تحكم</string>
+    <string name="import_control_invalid_file">المِلَفّ غير صالح أو تآلف</string>
+    <string name="import_control_import_button">استيراد مخطط لأزرار التحكم</string>
+    <string name="import_control_verifying_file">يتم التحقق من المِلَفّ، الرجاء الانتظار والمحاولة مرة أخرى…</string>
+    <string name="import_control_invalid_name">الاسم غير صالح أو المِلَفّ موجود مسبقًا</string>
     <string name="import_control_done">تم الاستيراد</string>
     <!--
     <string name="control_more3"></string>
@@ -116,72 +113,72 @@
     <string name="customctrl_toggle">تبديلي</string>
     <string name="customctrl_size">الحجم</string>
     <string name="customctrl_mapping">تخطيط الأزرار</string>
-    <string name="customctrl_orientation">الإتجاة</string>
+    <string name="customctrl_orientation">الاتجاه</string>
     <string name="customctrl_background_color">لون الخلفية</string>
-    <string name="customctrl_corner_radius">تقوس الزاوية</string>
+    <string name="customctrl_corner_radius">تقوس زاوية الأركان</string>
     <string name="customctrl_stroke_width">عرض الخط</string>
     <string name="customctrl_stroke_color">لون الخط</string>
     <string name="customctrl_button_opacity">شفافية الزر</string>
     <string name="customctrl_addbutton">إضافة زر</string>
-    <string name="customctrl_addbutton_drawer">اضافة درج</string>
+    <string name="customctrl_addbutton_drawer">إضافة درج</string>
     <string name="customctrl_addbutton_joystick">اضف عصا تحكم</string>
     <string name="customctrl_addsubbutton">إضافة زر فرعي</string>
-    <string name="customctrl_selectdefault">اختار مخطط التحكم</string>
+    <string name="customctrl_selectdefault">اختيار تخطيط تحكم افتراضي</string>
     <string name="customctrl_export">استخرج مخطط التحكم</string>
     <string name="main_share_logs">مشاركة ملف السجل</string>
-    <string name="main_install_jar_file">نفذ ملف .jar</string>
-    <string name="main_play">إبدأ اللعب</string>
+    <string name="main_install_jar_file">نفذ مِلَفّ .jar</string>
+    <string name="main_play">ابدأ اللعب</string>
     <string name="autoram_info_msg">تم تعيين الذاكرة إلى %d ميغابايت</string>
     <string name="mcl_setting_check_libraries">التحقق من المكتبات بعد التحميل</string>
-    <string name="mcl_setting_check_libraries_subtitle">هذا الخيار يجبر البرنامج على التحقق من بيانات الملف إذا كان متاحاً. يمنع الأخطاء من الحدوث اثناء التنزيل.</string>
-    <string name="dl_library_sha_fail">المكتبة %s تالفة وسيتم إعادة تحميلها</string>
-    <string name="dl_library_sha_unknown">لا يمكن التحقق من الملفات المكتبية %s ، يجب أن تفترض أنها جيدة</string>
-    <string name="dl_library_sha_pass">المكتبة %s جيدة وقابلة للاستخدام</string>
+    <string name="mcl_setting_check_libraries_subtitle">هذا الخِيار يجبر البرنامَج على التحقق من بيانات المِلَفّ إذا كان متاحاً. يمنع الأخطاء من الحدوث خلال التنزيل.</string>
+    <string name="dl_library_sha_fail">المكتبة %s تآلفه وسيتم إعادة تحميلها</string>
+    <string name="dl_library_sha_unknown">لا يمكن التحقق من ملفات المكتبة %s، يجب افتراض أنها بحالة جيدة</string>
+    <string name="dl_library_sha_pass">المكتبة %s بحالة جيدة وقابلة للاستخدام</string>
     <string name="mcl_disable_gestures">تعطيل الإيماءات</string>
     <string name="mcl_disable_gestures_subtitle">تعطيل الإيماءات، مثل تثبيت الضغط لكسر كتلة، والنقر لوضع كتلة.</string>
     <string name="mcl_disable_swap_hand">تعطيل الضغط مرتين لتبديل اليدين</string>
     <string name="mcl_disable_swap_hand_subtitle">يعطل تبديل العنصر المحمول لليد الأخرى عند الضغط مرتين.</string>
-    <string name="mcl_setting_title_mousespeed">سرعة الفأرة</string>
-    <string name="mcl_setting_subtitle_mousespeed">يغير سرعة مؤشر الفأرة الأفتراضية.</string>
-    <string name="customctrl_passthru">سماح تحريك أزرار الشاشة</string>
+    <string name="mcl_setting_title_mousespeed">سرعة تحرك الفأرة</string>
+    <string name="mcl_setting_subtitle_mousespeed">يغير سرعة مؤشر الفأرة الافتراضية.</string>
+    <string name="customctrl_passthru">سماح تحريك الشاشة في أثناء استخدام الزر</string>
     <string name="customctrl_swipeable">قابل للسحب</string>
     <string name="customctrl_forward_lock">قفل إلى الأمام</string>
-    <string name="memory_warning_msg">الكمية الحالية من ذاكرة الوصول العشوائي المجانية (%d) أقل من ذاكرة الوصول العشوائي المحددة (%d)، مما قد يؤدي إلى حدوث أعطال. قم بتغيير التخصيص إذا تحطمت اللعبة.</string>
-    <string name="mcl_memory_allocation">تخصيص الذاكرة.</string>
-    <string name="mcl_memory_allocation_subtitle">يتحكم في كمية الذاكرة المعطاة لـ Minecraft.</string>
-    <string name="multirt_runtime_corrupt">مشغل جافا فاسد</string>
+    <string name="customctrl_absolute_tracking">تتبع الأصابع بشكل مطلق</string>
+    <string name="memory_warning_msg">الكَمَيَّة الحالية من ذاكرة الوصول العشوائي المتاحة للاستخدام (%d) أقل من ذاكرة الوصول العشوائي المحددة (%d)، مما قد يؤدي إلى حدوث أعطال. غير الذاكرة المخصصة إذا توقفت اللعبة.</string>
+    <string name="mcl_memory_allocation">الذاكرة المخصصة للاستخدام</string>
+    <string name="mcl_memory_allocation_subtitle">يتحكم في كَمَيَّة الذاكرة المعطاة لـ Minecraft.</string>
+    <string name="multirt_runtime_corrupt">بيئة تشغيل Java تالفة</string>
     <string name="multirt_runtime_incompatiblearch">بنية غير متوافقة: %s</string>
-    <string name="multirt_config_title">أوقات تشغيل Java</string>
-    <string name="multirt_config_add">أضف واحدًا جديدا</string>
-    <string name="multirt_title">مدير مشغلات الجافا</string>
-    <string name="multirt_subtitle">تحكم بالJava Runtimes المثبتة.</string>
+    <string name="multirt_config_title">بيئة تشغيل Java</string>
+    <string name="multirt_config_add">إضافة جديد</string>
+    <string name="multirt_title">مدير بيئة تشغيل Java</string>
+    <string name="multirt_subtitle">إدارة مشغلات جافا المثبتة.</string>
     <string name="multirt_progress_caching">تخزين المعلومات...</string>
-    <string name="multirt_config_setdefault">تعيين لإستخدام دائم</string>
-    <string name="multirt_config_setdefault_already">مستخدم دائما</string>
-    <string name="multirt_config_removeerror_last">يجب ان يكون هناك Java runtime واحد مثبت على الأقل.</string>
-    <string name="multirt_nocompartiblert">لا يمكن العثور على أي اصدار جافا صالح. هذا الإصدار يتطلب جافا %d أو أحدث.</string>
-    <string name="multirt_nojava8rt">لا يمكن العثور على Java 8. لاستخدام هذا الخيار، تحتاج إلى تثبيت Java 8.</string>
-    <string name="multirt_delete_runtime">حذف Runtime</string>
+    <string name="multirt_config_setdefault">تعيين كافتراضي</string>
+    <string name="multirt_config_setdefault_already">الافتراضي</string>
+    <string name="multirt_config_removeerror_last">يجب أن يكون لديك على الأقل بيئة تشغيل جافا واحدة مثبتة.</string>
+    <string name="multirt_nojava8rt">لا يمكن العثور على Java 8. لاستخدام هذا الخِيار، تحتاج إلى تثبيت Java 8.</string>
+    <string name="multirt_delete_runtime">حذف بيئة التشغيل</string>
     <string name="pvc_gameDirectory">مكان تخزين اللعبة</string>
     <string name="pvc_jvmArgs">مدخلات JVM</string>
-    <string name="preference_mouse_start_title">البَدْء بالفأرة الافتراضية مشغله</string>
-    <string name="preference_mouse_start_description">سيظهر مؤشر الفأرة الأفتراضية عند التشغيل اذا فعلت هذا الخيار.</string>
+    <string name="preference_mouse_start_title">البَدْء بالفأرة الافتراضية مشغلة</string>
+    <string name="preference_mouse_start_description">عند تفعيل هذا الخِيار سوف تظهر الفأرة الافتراضية بمجرد التشغيل.</string>
     <string name="preference_video_title">الفيديو و عارض الرسوميات</string>
-    <string name="preference_video_description">الدقة، عارض الرسوميات، الأداء</string>
-    <string name="preference_control_title">تخصيص التحكم</string>
-    <string name="preference_control_description">الإيماءات، الازرار، و تغيير الحجم</string>
+    <string name="preference_video_description">الدِّقَّة، عارض الرسوميات، الأداء</string>
+    <string name="preference_control_title">تخصيص أزرار التحكم</string>
+    <string name="preference_control_description">الإيماءات، الأزرار، و تغيير الحجم</string>
     <string name="preference_java_title">تعديلات جافا</string>
     <string name="preference_java_description">Java Runtimes, Jvm Arguments, حجم الذاكرة العشوائية و Sandbox</string>
     <string name="preference_misc_title">أعدادات متنوعة</string>
     <string name="preference_misc_description">قائمة الإصدار، والتحقق من المكاتب</string>
-    <string name="preference_experimental_title">أشياء تجريبيه</string>
-    <string name="preference_experimental_description">استخدم هذا الخيار بحذر، لن يتم مساعدتك</string>
+    <string name="preference_experimental_title">أشياء تجريبية</string>
+    <string name="preference_experimental_description">استخدم هذه الخِيارات بحذر، لن يتم مساعدتك</string>
     <string name="preference_sustained_performance_title">تمكين وضع الأداء المستقر</string>
-    <string name="preference_sustained_performance_description">الحد من الاختناق الحراري عن طريق الحد من الأداء الأقصى.</string>
-    <string name="preference_force_vsync_title">اجبر تفعيل Vsync</string>
-    <string name="preference_force_vsync_description">الحد من الاختناق الحراري عن طريق الحد من الأداء الأقصى.</string>
+    <string name="preference_sustained_performance_description">الحد من الاختناق الحراري عن طريق حد الأداء الأقصى.</string>
+    <string name="preference_force_vsync_title">أجبار على تفعيل VSync</string>
+    <string name="preference_force_vsync_description">الحد من الاختناق الحراري عن طريق حد الأداء الأقصى.</string>
     <string name="preference_force_english_title">إجبار تحويل اللغة إلى اللغة الإنجليزية</string>
-    <string name="preference_force_english_description">يسمح لك برؤية النصوص الأصلية، مثلا ما ارادوه المطورين. يتطلب إعادة التشغيل.</string>
+    <string name="preference_force_english_description">يسمح لك برؤية النصوص الأصلية، كما أرادها المطورون. يتطلب إعادة التشغيل.</string>
     <string name="preference_edit_controls_title">تعديل مخطط التحكم</string>
     <string name="preference_edit_controls_summary">عدل مخطط التحكم لتلبي احتياجاتك.</string>
     <string name="preference_category_gyro_controls">تحكم باستخدام الجايروسكوب</string>
@@ -189,17 +186,17 @@
     <string name="preference_gyro_invert_x_axis">عكس المحور الأفقي</string>
     <string name="preference_gyro_invert_y_axis">عكس المحور العمودي</string>
     <string name="preference_gyro_invert_x_axis_description">اعكس المحور الأفقي.</string>
-    <string name="preference_gyro_invert_y_axis_description">اعكس المحور العامودي.</string>
-    <string name="preference_gyro_smoothing_title">فعل سلاسة الجايروسكوب</string>
+    <string name="preference_gyro_invert_y_axis_description">اعكس المحور العمودي.</string>
+    <string name="preference_gyro_smoothing_title">فعل تسليس حركة الجايروسكوب</string>
     <string name="preference_gyro_smoothing_description">سلاسة اكثر مقابل التأخير.</string>
     <string name="preference_back_title">العودة إلى الشاشة الأخيرة</string>
-    <string name="unnamed">بلا اسم</string>
-    <string name="profiles_latest_snapshot">أحدث اصدار تجريبي</string>
+    <string name="unnamed">غير مسمى</string>
+    <string name="profiles_latest_snapshot">آخر لمحة (سنابشوت)</string>
     <string name="profiles_latest_release">أحدث إصدار</string>
     <string name="profiles_profile_name">الاسم</string>
     <string name="profiles_profile_version">الإصدار</string>
     <string name="global_delete">حذف</string>
-    <string name="pedit_java_runtime">Java Runtime</string>
+    <string name="pedit_java_runtime">بيئة تشغيل Java</string>
     <string name="pedit_renderer">عارض الرسوميات</string>
     <string name="arc_capes_title">Cosmetica Capes</string>
     <string name="arc_capes_desc">يفعل أوشحه من Cosmetica, (المعروفة مسبقًا ب Arc). لمزيد من المعلومات، يرجى زيارة https://cosmetica.cc, يتطلب Optifine لكي يعمل.</string>
@@ -282,6 +279,7 @@
     <string name="preference_vulkan_driver_system_description">اجبر البرنامج على استخدام Vulkan driver الخاص بالنظام بدلاً من Turnip على Adreno GPUs، فقط يؤثر بZink و المودات المستخدمة ل Vulkan.</string>
     <string name="generic_install">تثبيت</string>
     <string name="generic_apply">طبّق</string>
+    <string name="generic_debug">Debug</string>
     <string name="search_modpack_no_result">لم يتم العثور على مودباك</string>
     <string name="search_modpack_error">فشل العثور على مودباك</string>
     <string name="search_modpack_download_error">فشل تنزيل البيانات التعريفية للمودباك</string>
@@ -320,4 +318,16 @@
     <string name="notification_permission_toast">O</string>
     <string name="preference_ask_for_notification_title">السماح بالإشعارات</string>
     <string name="preference_ask_for_notification_description">.</string>
+    <string name="preference_vsync_in_zink_title">السماح بتفعيل V-Sync مع Zink</string>
+    <string name="preference_vsync_in_zink_description">يسمح للمشغل باستخدام APIs النظام الداخلي لتمكين V-Sync للزنك. قم بإيقاف تشغيل هذا إذا تعطل المشغل فجأة مع الزنك بعد تحديث النظام.</string>
+    <string name="exception_failed_to_unpack_jre17">فشل تثبيت JRE 17</string>
+    <string name="newdl_starting">قراءة بيانات تعريف اللعبة…</string>
+    <string name="newdl_downloading_metadata">تحميل بيانات تعريف اللعبة (%s)</string>
+    <string name="controller_button_a">A</string>
+    <string name="controller_button_b">B</string>
+    <string name="controller_button_x">X</string>
+    <string name="controller_button_y">Y</string>
+    <string name="controller_button_start">Start</string>
+    <string name="controller_button_select">اختر</string>
+    <string name="customctrl_visibility_title">الظهور</string>
 </resources>
