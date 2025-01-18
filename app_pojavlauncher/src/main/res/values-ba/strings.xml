@@ -1,36 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Android өсөн Minecraft: Java Edition)</string>
     <string name="app_short_name">PojavLauncher</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">Email йәки ҡулланыусы исеме</string>
     <string name="login_online_login_label">Керергә</string>
     <!-- Hint -->
     <!-- Warnings -->
     <string name="warning_remove_account">Был хисап яҙма юйыла!</string>
     <!-- AlertDialog title -->
+    <string name="alerttitle_installmod">Мода ҡуйыусыһын һайлағыҙ</string>
     <!-- Error messages -->
+    <string name="error_fatal">Көтмәгәндә PojavLauncher программаһының эше боҙолоп китә</string>
     <string name="error_no_version">Версиялар юҡ!</string>
     <string name="error_show_more">Күберәк</string>
     <string name="error_show_less">Әҙерәк</string>
     <!-- Toast messages -->
+    <string name="toast_permission_denied">Уҡыу/яҙыу өсөн һаҡлағыста рөхсәт талап ителә!</string>
     <string name="toast_optifine_success">Урынлаштырылды</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_wiki">Вики</string>
     <!-- MCLauncherActivity: Account status -->
     <!-- MCLauncherActivity: Strings -->
+    <string name="mcl_launch_cleancache">Кэш файлдарын таҙартыу</string>
     <string name="mcl_launch_downloading">Йөкләү %s</string>
+    <string name="mcl_launch_downloading_progress">"Йөкләү %s (%.2f МБ/%.2f МБ)"</string>
+    <string name="mcl_launch_download_assets">Ресурстарҙы йөкләүгә әҙерлек</string>
     <string name="mcl_options">Опциялар</string>
+    <string name="mcl_option_customcontrol">Ҡулланыусы идара итеү элементтары</string>
+    <string name="mcl_setting_title_use_surface_view">Өҫкө йөҙҙөң альтернатив рендерын ҡулланығыҙ</string>
+    <string name="mcl_setting_subtitle_use_surface_view">График процессор менән бәйле сценарийҙарҙа етештереүсәнлекте арттыра ала.</string>
+    <string name="mcl_setting_title_ignore_notch">Зазубринаны һанға һуҡмау</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Экранды уның аҫтына сығара.\nБыл һеҙгә тағы ла мауыҡтырғыс тәжрибә бирә.</string>
+    <string name="mcl_setting_title_resolution_scaler">Резолюцияны арттырыу өсөн ҡоролма</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">Уйындың рөхсәтен кәметергә мөмкинлек бирә. 100% - тулы резолюция.</string>
+    <string name="mcl_setting_title_longpresstrigger">Асыу ырғағына баҫып тороуҙың оҙайлы тотҡарлығы</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Блоктарҙы юҡ итеү һәм әйберҙәрҙең төшөүе өсөн оҙаҡ баҫҡанда эшләтеү тотҡарлығын үҙгәртегеҙ.</string>
+    <string name="mcl_setting_title_buttonscale">Масштаблауҙы идара итеү төймәләре</string>
+    <string name="mcl_setting_subtitle_buttonscale">Төймәләре бик бәләкәй булһа, уларҙың ҙурлығын арттырығыҙ.</string>
+    <string name="mcl_setting_title_mousescale">Сысҡан ярҙамында масштаблау</string>
+    <string name="mcl_setting_subtitle_mousescale">Виртуаль сысҡандың ҙурлығын үҙгәртегеҙ.</string>
+    <string name="mcl_setting_title_javaargs">JVM-ды эшләтеп ебәреү аргументтары</string>
+    <string name="mcl_setting_subtitle_javaargs">Һаҡ булығыҙ, әгәр ҡулланыусы белмәһә, үҙгәрештәр индерһәгеҙ, уйындың боҙолоуына килтереүе ихтимал.</string>
     <string name="mcl_setting_category_renderer">Рендерер</string>
+    <string name="mcl_setting_renderer_gles2_4">Holy GL4ES (бөтә версиялар, тиҙ)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) (бөтә версиялар, уртаса)</string>
     <string name="mcl_setting_veroption_release">Релиздар</string>
     <string name="mcl_setting_veroption_snapshot">Снапшотттар</string>
     <string name="mcl_setting_veroption_oldalpha">Иҫке альфалар</string>
     <string name="mcl_setting_veroption_oldbeta">Иҫке беталар</string>
+    <string name="mcl_setting_java_sandbox">Sandbox Башҡарыуы .jar</string>
+    <string name="mcl_setting_java_sandbox_subtitle">Jar-файл эшләгәндә sandbox security manager-тың асыҡлығын контролдә тотоғоҙ.</string>
     <!-- Global strings -->
     <string name="global_edit">Үҙгәртергә</string>
     <string name="global_error">Хата</string>
