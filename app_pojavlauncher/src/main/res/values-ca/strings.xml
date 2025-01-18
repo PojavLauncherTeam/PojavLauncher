@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition per Android)</string>
     <string name="app_short_name">PojavLauncher</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">Email o usuari</string>
     <string name="login_online_login_label">Iniciar sessió</string>
     <!-- Hint -->
     <!-- Warnings -->
@@ -34,8 +33,17 @@
     <string name="mcl_options">Options</string>
     <string name="mcl_option_customcontrol">Custom controls</string>
     <string name="mcl_setting_title_use_surface_view">Utilitza la renderització de superfície alternativa</string>
+    <string name="mcl_setting_subtitle_use_surface_view">Pot millorar el rendiment a escenaris lligats al GPU.</string>
     <string name="mcl_setting_title_ignore_notch">Ignorar notch</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Ignora el \"notch\" i exté la pantalla per baix d\'aquest.\nEt dona una experiència més inmersiva.</string>
     <string name="mcl_setting_title_resolution_scaler">Escalador de resolució</string>
+    <string name="mcl_setting_title_longpresstrigger">Alterna el retard al mantenir premut</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Canvia el retard en mantenir premut per a destruir blocs i soltar objectes.</string>
+    <string name="mcl_setting_title_buttonscale">Escalat dels botons de control</string>
+    <string name="mcl_setting_subtitle_buttonscale">Escalar els botons si són molt menuts.</string>
+    <string name="mcl_setting_title_mousescale">Escalat del cursor</string>
+    <string name="mcl_setting_subtitle_mousescale">Canvia la mida del cursor virtual.</string>
+    <string name="mcl_setting_title_javaargs">Arguments de llançament del JVM</string>
     <string name="mcl_setting_subtitle_javaargs">Vés amb compte, això podria provocar un bloqueig del joc si es modifica sense coneixement.</string>
     <string name="mcl_setting_category_renderer">Renderitzador</string>
     <string name="mcl_setting_veroption_release">Release</string>
@@ -55,8 +63,12 @@
     <string name="global_unpacking">S\'està desempaquetant %s</string>
     <string name="global_error_field_empty">This field can\'t be empty</string>
     <string name="global_waiting">Espera</string>
+    <string name="global_select">Selecciona</string>
+    <string name="global_retry">Torna a provar</string>
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">Aplicació/Joc ha eixit amb codi %d, consulta el latestlog.txt per més detalls.</string>
     <string name="mcn_exit_confirm">Are you sure want to force close?</string>
+    <string name="mcn_check_fail_vulkan_support">El renderitzador Zink (Vulkan) no està suportat a aquest dispositiu!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_chat">Chat</string>
     <string name="control_debug">Debug</string>
@@ -80,14 +92,110 @@
     <string name="control_adebug">PointerCapture Debug</string>
     <string name="control_customkey">Send custom keycode</string>
     <!-- ImportControlActivity Strings -->
+    <string name="import_control_label">Importar controls</string>
+    <string name="import_control_invalid_file">Fitxer corrupte o invàlid</string>
+    <string name="import_control_import_button">Importar controls</string>
+    <string name="import_control_verifying_file">El fitxer està sent verificat, si us plau espereu per tornar-ho a intentar…</string>
+    <string name="import_control_invalid_name">Nom invàlid o el fitxer ja existeix</string>
+    <string name="import_control_done">Importació completada</string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
+    <string name="customctrl_toggle">Commutable</string>
     <string name="customctrl_size">Mida</string>
+    <string name="customctrl_mapping">Mapeigat</string>
+    <string name="customctrl_orientation">Orientació</string>
+    <string name="customctrl_background_color">Color de fons</string>
+    <string name="customctrl_corner_radius">Radi de cantó</string>
+    <string name="customctrl_stroke_width">Ample de traç</string>
+    <string name="customctrl_stroke_color">Color de traç</string>
+    <string name="customctrl_button_opacity">Opacitat de botó</string>
     <string name="customctrl_addbutton">Add button</string>
+    <string name="customctrl_addbutton_joystick">Afegeix joystick</string>
+    <string name="customctrl_addsubbutton">Afegeix subbotó</string>
+    <string name="customctrl_selectdefault">Selecciona mapa de control per defecte</string>
+    <string name="customctrl_export">Exportar mapa de control</string>
+    <string name="main_share_logs">Comparteix fitxer de registre</string>
+    <string name="main_install_jar_file">Executa un .jar</string>
     <string name="main_play">Play</string>
+    <string name="autoram_info_msg">Memòria fixada a %d MB</string>
+    <string name="mcl_setting_check_libraries">Comprova les llibreríes després de descarregar-les</string>
+    <string name="mcl_setting_check_libraries_subtitle">Aquesta opció força al llançador comprovar el hash de la llibreria si està disponible. Prevé baixades trencades.</string>
+    <string name="dl_library_sha_fail">La llibreria %s està danyada i es tornarà a baixar</string>
+    <string name="dl_library_sha_unknown">La llibreria %s no es pot comprovar, s\'ha d\'assumir que està bé</string>
+    <string name="dl_library_sha_pass">La llibreria %s està bé i és utilitzable</string>
+    <string name="mcl_disable_gestures">Desactiva gestos</string>
+    <string name="mcl_disable_gestures_subtitle">Desactiva els gestos, com mantenir per trencar blocs i tocar per col·locar-ne.</string>
+    <string name="preference_force_english_description">Et permet veure les cadenes de text originals, com volen els desenvolupadors. Cal reiniciar.</string>
+    <string name="preference_edit_controls_title">Edita controls personalitzats</string>
+    <string name="preference_edit_controls_summary">Canvia l\'esquema de control perquè s\'ajusti a les teves necessitats.</string>
+    <string name="preference_category_gyro_controls">Controls de giroscopi</string>
+    <string name="preference_gyro_invert_x_axis">Invertir l\'axis X</string>
+    <string name="preference_gyro_invert_y_axis">Invertir l\'axis Y</string>
+    <string name="preference_gyro_invert_x_axis_description">Invertir l\'axis horitzontal.</string>
+    <string name="preference_gyro_invert_y_axis_description">Invertir l\'axis vertical.</string>
+    <string name="preference_gyro_smoothing_title">Activa el suavitzador del giroscopi</string>
+    <string name="preference_gyro_smoothing_description">Redueix el \"jitter\" a canvi de latència.</string>
+    <string name="preference_back_title">Torna a l\'última pantalla</string>
+    <string name="unnamed">Sense nom</string>
+    <string name="profiles_latest_snapshot">Última snapshot</string>
+    <string name="profiles_latest_release">Últim llançament</string>
     <string name="profiles_profile_name">Name</string>
+    <string name="profiles_profile_version">Versió</string>
+    <string name="global_delete">Borrar</string>
+    <string name="pedit_java_runtime">Runtime de Java</string>
     <string name="pedit_renderer">Renderitzador</string>
+    <string name="arc_capes_title">Capes de Cosmetica</string>
+    <string name="arc_capes_desc">Activa les capes de Cosmetica (anteriorment Arc). Per a més informació visiteu https://cosmetica.cc. Requereix l\'OptiFine.</string>
+    <string name="notif_channel_name">General</string>
+    <string name="lazy_service_default_title">Servei de primer plà del Pojav</string>
+    <string name="use_global_default">(Usa el valor global per defecte)</string>
+    <string name="default_control">Mapa de control per defecte</string>
+    <string name="progresslayout_tasks_in_progress">%d tasques en procés</string>
+    <string name="notification_terminate">Tanca</string>
+    <string name="notification_game_runs">El joc s\'està executat!</string>
+    <string name="folder_dialog_create">Crea</string>
+    <string name="folder_dialog_insert_name">Inserta el nom de carpeta</string>
+    <string name="folder_fragment_create">Crea una carpeta</string>
+    <string name="folder_fragment_select">Tria una carpeta</string>
+    <string name="main_login_done">Inici de sessió completat</string>
+    <string name="main_add_account">Afegeix compte</string>
+    <string name="tasks_ongoing">Les tasques estan en progrés, espereu si us plau</string>
+    <string name="no_saved_accounts">No h han comptes guardats</string>
+    <string name="mc_download_failed">No s\'ha pogut descarregar el Minecraft! Açò pot ser a causa d\'una mala connexió a internet, arxius col·locats incorrectament, etc..</string>
+    <string name="xerr_unknown">Error desconegut de l\'API del Xbox Live %d</string>
+    <string name="xerr_no_account">Pareix que no tens cap compte del Xbox Live! Si us plau, inicieu sessió a https://minecraft.net/ i torneu-ho a intentar.</string>
+    <string name="xerr_adult_verification">Un adult necessita verificar el teu compte.</string>
+    <string name="xerr_child">El teu compte és un compte d\'infants, i s\'ha d\'afegir a una Família per poder iniciar la sessió.</string>
+    <string name="minecraft_not_owned">Pareix que aquest compte no té cap perfil del Minecraft. Si tens el Xbox Game Pass, si us plau, inicieu sessió a https://minecraft.net/ i torneu a provar.</string>
+    <string name="xerr_not_available">El Xbox Live no està disponible al seu país</string>
+    <string name="preference_enable_gyro_title">Activa els controls del giroscopi</string>
+    <string name="preference_enable_gyro_description">Activar açò permetrà girar-se en el joc girant el telèfon.</string>
+    <string name="preference_gyro_sensitivity_title">Sensibilitat de controls del giroscopi</string>
+    <string name="preference_gyro_sensitivity_description">Ajusta la sensibilitat dels controls del giroscopi.</string>
+    <string name="toast_turn_on_gyro">Primer has d\'activar els controls del giroscopi!</string>
+    <string name="preference_gyro_sample_rate_title">Tassa d\'actualització del giroscopi</string>
+    <string name="preference_gyro_sample_rate_description">Si tens problemes de rendiment amb el giroscopi, puja aquest valor.</string>
+    <string name="microsoft_login_retry_later">Massa peticions, si us plau, torneu-ho a intentar més tard.</string>
+    <string name="storage_required">El PojavLauncher requereix que hi hagi emmagatzemament extern connectat. Si us plau, reconnecteu-ho i reinicieu l\'app.</string>
     <string name="of_dl_progress">Downloading %s</string>
+    <string name="generic_debug">Debug</string>
+    <string name="modpack_download_downloading_mods_fc">Baixant mods (Fitxer %d de %d)</string>
+    <string name="modpack_download_applying_overrides">Aplicant anul·lacions (%d/%d)</string>
+    <string name="modpack_install_notification_title">Instal·lador de Modpacks del Pojav</string>
+    <string name="modpack_install_notification_success">Prem ací per acabar la instal·lació del modpack</string>
+    <string name="modpack_install_notification_data_not_available">No s\'ha pogut baixar la informació del carregador de mods</string>
+    <string name="modpack_install_modloader_download_failed">No s\'ha pogut baixar els fitxers del carregador de mods</string>
+    <string name="modpack_install_download_failed">No s\'han pogut baixar els fitxers del modpack</string>
+    <string name="modpack_install_button">Crear perfil de modpack</string>
+    <string name="notif_error_occured">Ha ocorregut un error</string>
+    <string name="notif_error_occured_desc">Prem per veure més detalls</string>
+    <string name="fabric_dl_only_stable">Mostra només versions estables</string>
+    <string name="dl_tampered_manifest_title">Advertència de verificació del fitxer</string>
+    <string name="dl_tampered_manifest"><![CDATA[El manifest de la versió del joc al servidor no coincideix amb la versió oficial de Mojang, el qual pot significar que podria haver-se modificat.<br/>
+        <b>Açó no és segur. La teva informació personal podria estar en risc si es continua.</b><br/>
+        Si encara vols utilitzar aquest servidor, prem \"Desactiva les comprovacions de servidor\" i torna a començar la baixada.<br/>
+        Si vols utilitzar la font oficial de baixades, prem \"Canviar al servidor oficial\" i torna a començar la baixada de nou.<br/>]]></string>
+    <string name="controller_button_select">Selecciona</string>
 </resources>
