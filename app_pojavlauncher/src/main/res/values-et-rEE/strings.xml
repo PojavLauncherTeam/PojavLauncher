@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Minecraft: Java Edition Androidile)</string>
     <string name="app_short_name">PojavLauncher</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
-    <string name="login_online_username_hint">E-post või kasutajanimi</string>
     <string name="login_online_login_label">Logi sisse</string>
     <!-- Hint -->
     <!-- Warnings -->
@@ -34,7 +33,6 @@
     <string name="mcl_setting_category_renderer">Renderdaja</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (kõik versioonid, kiire)</string>
     <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - (kõik versioonid, keskm.)</string>
-    <string name="mcl_setting_renderer_angle">ANGLE (Vulkan) - (ainult 1.17+, keskm.)</string>
     <string name="mcl_setting_veroption_release">Väljalase</string>
     <string name="mcl_setting_veroption_snapshot">Katsetus</string>
     <string name="mcl_setting_veroption_oldalpha">Vana alfa</string>
@@ -155,8 +153,10 @@
     <string name="create_profile_optifine">Loo OptiFine-profiil</string>
     <string name="generic_install">Paigalda</string>
     <string name="generic_apply">Rakenda</string>
+    <string name="generic_debug">Silur</string>
     <string name="modpack_install_notification_title">Pojav modipakipaigaldaja</string>
     <string name="modpack_install_button">Loo modipakiprofiil</string>
     <string name="preference_category_java_tweaks">Java trikid</string>
     <string name="preference_category_miscellaneous">Mitmesugused seaded</string>
+    <string name="controller_button_select">Vali</string>
 </resources>
