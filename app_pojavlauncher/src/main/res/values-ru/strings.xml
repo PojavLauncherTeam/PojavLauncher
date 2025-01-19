@@ -9,7 +9,6 @@
     <string name="login_online_username_hint">Имя пользователя</string>
     <string name="login_online_login_label">Войти</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Нажмите на шестерёнку по центру, чтобы открыть контекстное меню ⚙\nНажмите на кнопку, чтобы изменить её название, размер, или нажимаемые клавиши."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Эта учётная запись будет удалена!</string>
     <!-- AlertDialog title -->
@@ -161,7 +160,7 @@
     <string name="multirt_config_setdefault">Выбрать</string>
     <string name="multirt_config_setdefault_already">По умолчанию</string>
     <string name="multirt_config_removeerror_last">Должна быть установлена хотя бы одна среда выполнения Java.</string>
-    <string name="multirt_nocompatiblert">Невозможно найти совместимую Java Runtime. Данная версия требует Java %d или новее.</string>
+    <string name="multirt_nocompatiblert">Не удается найти совместимую среду выполнения Java. Эта версия требует Java %d или новее.</string>
     <string name="multirt_nojava8rt">Не удалось найти Java 8. Чтобы использовать эту опцию, необходимо установить Java 8.</string>
     <string name="multirt_delete_runtime">Удалить</string>
     <string name="pvc_gameDirectory">Папка игры</string>
@@ -335,9 +334,9 @@
     <string name="newdl_downloading_game_files">Загрузка файлов игры… (%d/%d, %.2f MB/s)</string>
     <string name="newdl_downloading_game_files_size">Загрузка файлов игры… (%.2f/%.2f MB, %.2f MB/s)</string>
     <string name="cropper_title">Выбрать часть изображения</string>
-    <string name="cropper_lock_vertical">Верт. блокировка</string>
-    <string name="cropper_lock_horizontal">Гор. блокировка</string>
-    <string name="cropper_reset">Сбросить</string>
+    <string name="cropper_lock_vertical">⬄</string>
+    <string name="cropper_lock_horizontal">⇳</string>
+    <string name="cropper_reset">Сброс</string>
     <string name="cropper_select_cancelled">Выбор отменён</string>
     <string name="log_view_button_scroll_off">Автопрокрутка\nВЫКЛ</string>
     <string name="log_view_button_scroll_on">Автопрокрутка\nВКЛ</string>
@@ -367,18 +366,17 @@
     <string name="controller_dpad_left">Крестовина влево</string>
     <string name="controller_dpad_right">Крестовина вправо</string>
     <string name="controller_remapper_exit_part1">Удерживайте</string>
-    <string name="controller_remapper_exit_part2">чтобы выйти</string>
+    <string name="controller_remapper_exit_part2">, чтобы выйти</string>
     <string name="controller_remapper_operating_mode">Текущий режим</string>
     <string name="customctrl_visibility_title">Отображение</string>
     <string name="customctrl_visibility_ingame">В игре</string>
     <string name="customctrl_visibility_in_menus">В меню</string>
     <string name="controller_remapper_expand_entry">Нажмите для изменения кодов клавиш</string>
     <string name="preference_remap_controller_title">Изменить назначения клавиш контроллера</string>
-    <string name="preference_remap_controller_description">Позволяет менять клавиатурные клавиши привязанные к каждой кнопке контроллера</string>
+    <string name="preference_remap_controller_description">Позволяет настраивать привязку клавиш клавиатуры к кнопкам контроллера</string>
     <string name="mcl_button_discord">Discord</string>
-    <string name="ltw_render_distance_warning_msg">Ваше видеоядро не поддерживает расстояние отрисовки более 7 без оптимизационных модов наподобие Sodium. При нажатии копки \"ОК\" расстояние отрисовки будет автоматически изменено.</string>
+    <string name="ltw_render_distance_warning_msg">Ваше видеоядро не поддерживает прорисовку более 7 чанков без использования Sodium или его аналогов. Нажмите «ОК», чтобы автоматически снизить прорисовку.</string>
     <string name="mcl_button_open_directory">Открыть папку игры</string>
     <string name="local_login_bad_username_title">Неподходящее имя пользователя</string>
-    <string name="local_login_bad_username_text">Имя пользователя должно быть от 3 до 16 символов в длину и должно содержать только латинские символы, арабские цифры и нижние подчёркивания.</string>
     <string name="quick_setting_title">Быстрые настройки</string>
 </resources>
