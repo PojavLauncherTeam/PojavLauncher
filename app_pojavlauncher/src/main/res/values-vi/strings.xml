@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
-    <string name="app_name">PojavLauncher</string>
+    <string name="app_name">PojavLauncher (Minecraft: Java Edition cho Android)</string>
     <string name="app_short_name">PojavLauncher</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
@@ -9,6 +9,7 @@
     <string name="login_online_username_hint">Tên người dùng</string>
     <string name="login_online_login_label">Đăng nhập</string>
     <!-- Hint -->
+    <string name="hint_control_mapping">"Chạm phím bánh răng ở giữa cạnh trên màn hình để mở menu ⚙\nChạm vào các phím để tùy chỉnh chúng: chỉnh sửa, thay đổi kích thước, xoá, hoặc thay đổi liên kết phím."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Tài khoản này sẽ bị xoá!</string>
     <!-- AlertDialog title -->
@@ -41,6 +42,7 @@
     <string name="mcl_setting_title_resolution_scaler">Độ phân giải</string>
     <string name="mcl_setting_subtitle_resolution_scaler">Cho phép bạn giảm độ phân giải của trò chơi. 100% là độ phân giải tối đa.</string>
     <string name="mcl_setting_title_longpresstrigger">Kích hoạt độ trễ cao</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">Thay đổi khoảng thời gian chạm giữ để phá khối và ném đồ vật.</string>
     <string name="mcl_setting_title_buttonscale">Độ rộng nút điều khiển</string>
     <string name="mcl_setting_subtitle_buttonscale">Tăng độ rộng nếu nút quá nhỏ.</string>
     <string name="mcl_setting_title_mousescale">Độ lớn của chuột</string>
@@ -50,10 +52,13 @@
     <string name="mcl_setting_category_renderer">Trình kết xuất</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (tất cả phiên bản, nhanh)</string>
     <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - (tất cả phiên bản, Hiệu suất cho: trung bình)</string>
+    <string name="mcl_setting_renderer_ltw">LTW (OpenGL ES 3) - 1.17 trở lên</string>
     <string name="mcl_setting_veroption_release">Bản phát hành</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Bản Alpha cũ</string>
     <string name="mcl_setting_veroption_oldbeta">Bản Beta cũ</string>
+    <string name="mcl_setting_java_sandbox">Thực thi tệp .jar trong hộp cát</string>
+    <string name="mcl_setting_java_sandbox_subtitle">Điều khiển tính khả dụng của trình quản lý bảo mật hộp cát khi thực thi tệp .jar.</string>
     <string name="mcl_version_clone">Nhân bản</string>
     <!-- Global strings -->
     <string name="global_edit">Chỉnh sửa</string>
@@ -72,6 +77,7 @@
     <string name="global_default">Mặc định</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Ứng dụng/Trò chơi đã thoát với mã %d, kiểm tra nhật kí trình khởi chạy (latestlog.txt) để biết thêm chi tiết.</string>
+    <string name="mcn_signal_title">Ứng dụng/Trò chơi đã thoát với mã %d, kiểm tra nhật kí trình khởi chạy (latestlog.txt) để biết thêm chi tiết.</string>
     <string name="mcn_exit_confirm">Bạn có chắc muốn bắt buộc thoát chương trình?</string>
     <string name="mcn_check_fail_vulkan_support">Trình kết xuất Zink (Vulkan) không được hỗ trợ trên thiết bị này!</string>
     <!-- MainActivity: Control buttons -->
@@ -127,17 +133,22 @@
     <string name="main_play">Chơi</string>
     <string name="autoram_info_msg">Bộ nhớ được đặt thành %d MB</string>
     <string name="mcl_setting_check_libraries">Kiểm tra các thư viện sau khi tải</string>
+    <string name="mcl_setting_check_libraries_subtitle">Tùy chọn này buộc trình khởi động kiểm tra hàm băm thư viện nếu có sẵn, ngăn chặn việc tải xuống lỗi.</string>
     <string name="dl_library_sha_fail">Thư viện %s bị hỏng và sẽ được tải lại</string>
     <string name="dl_library_sha_unknown">Thư viện %s không thể kiểm tra, cho rằng nó tốt</string>
     <string name="dl_library_sha_pass">Library %s tốt và có thể sử dụng được</string>
     <string name="mcl_disable_gestures">Tắt cử chỉ</string>
     <string name="mcl_disable_gestures_subtitle">Tắt cử chỉ, ví dụ như giữ để phá khối, và chạm để đặt khối.</string>
     <string name="mcl_disable_swap_hand">Tắt nhấn đúp để đổi tay</string>
+    <string name="mcl_disable_swap_hand_subtitle">Tắt việc nhấn đúp vào vật phẩm trên thanh công cụ để đổi nó vào tay phụ.</string>
     <string name="mcl_setting_title_mousespeed">Tốc độ chuột</string>
+    <string name="mcl_setting_subtitle_mousespeed">Thay đổi tốc độ của chuột ảo.</string>
     <string name="customctrl_passthru">Di chuyển chuột</string>
     <string name="customctrl_swipeable">Có thể vuốt</string>
     <string name="customctrl_forward_lock">Khoá di chuyển lên</string>
+    <string name="customctrl_absolute_tracking">Theo dõi chuyển động tuyệt đối của ngón tay</string>
     <string name="memory_warning_msg">Số lượng RAM trống hiện tại (%d) thấp hơn số lượng RAM được phân bổ (%d), có thể dẫn đến sự cố. Thay đổi số lượng phân bổ nếu trò chơi bị sập.</string>
+    <string name="address_memory_warning_msg">Bộ nhớ trống hiện có (%d) thấp hơn bộ nhớ được phân bổ (%d), điều này có thể gây ra sự cố. Thay đổi lượng bộ nhớ được phân bổ nếu trò chơi bị văng.</string>
     <string name="mcl_memory_allocation">Phân bổ bộ nhớ</string>
     <string name="mcl_memory_allocation_subtitle">Điều khiển lượng bộ nhớ tạm được đưa vào Minecraft.</string>
     <string name="multirt_runtime_corrupt">Java đã gặp xung đột</string>
@@ -150,6 +161,7 @@
     <string name="multirt_config_setdefault">Đặt làm mặc định</string>
     <string name="multirt_config_setdefault_already">Mặc định</string>
     <string name="multirt_config_removeerror_last">Bạn phải có ít nhất một hệ thống thời gian chạy Java đã được cài đặt.</string>
+    <string name="multirt_nocompatiblert">Không thể tìm thấy Java Runtime tương thích. Phiên bản này yêu cầu Java %d trở lên.</string>
     <string name="multirt_nojava8rt">Không thể tìm thấy Java 8. Để sử dụng tùy chọn này, bạn cần cài đặt Java 8.</string>
     <string name="multirt_delete_runtime">Xóa runtime</string>
     <string name="pvc_gameDirectory">Đường dẫn thư mục của trò chơi</string>
@@ -161,21 +173,26 @@
     <string name="preference_control_title">Tuỳ chỉnh bộ điều khiển</string>
     <string name="preference_control_description">Cử chỉ, nút bấm và kích cỡ</string>
     <string name="preference_java_title">Điều chỉnh Java</string>
+    <string name="preference_java_description">Các Java Runtime, chỉ số JVM, lượng RAM phân bổ và hộp cát</string>
     <string name="preference_misc_title">Các cài đặt khác</string>
     <string name="preference_misc_description">Kiểm tra danh sách phiên bản và thư viện</string>
     <string name="preference_experimental_title">Những cài đặt thử nghiệm</string>
     <string name="preference_experimental_description">Cân nhắc sử dụng các tuỳ chọn này, không hỗ trợ</string>
     <string name="preference_sustained_performance_title">Bật chế độ duy trì hiệu suất</string>
+    <string name="preference_sustained_performance_description">Hạn chế giảm hiệu suất vì quá nhiệt bằng cách giảm hiệu suất tối đa.</string>
     <string name="preference_force_vsync_title">Bắt buộc kích hoạt VSync</string>
+    <string name="preference_force_vsync_description">Hạn chế giảm hiệu suất vì quá nhiệt bằng cách giảm hiệu suất tối đa.</string>
     <string name="preference_force_english_title">Buộc ngôn ngữ Tiếng Anh</string>
     <string name="preference_force_english_description">Cho phép hiển thị các dòng chữ ban đầu, như theo ý của nhà phát triển. Yêu cầu khởi động lại.</string>
     <string name="preference_edit_controls_title">Tùy chỉnh điều khiển</string>
     <string name="preference_edit_controls_summary"></string>
+    <string name="preference_category_gyro_controls">Điều khiển con quay hồi chuyển</string>
     <string name="preference_category_virtual_mouse">Chuột ảo</string>
     <string name="preference_gyro_invert_x_axis">Đảo ngược trục X</string>
     <string name="preference_gyro_invert_y_axis">Đảo ngược trục Y</string>
     <string name="preference_gyro_invert_x_axis_description">Đảo ngược trục hoành.</string>
     <string name="preference_gyro_invert_y_axis_description">Đảo ngược trục tung.</string>
+    <string name="preference_gyro_smoothing_title">Bật làm mịn con quay hồi chuyển</string>
     <string name="preference_gyro_smoothing_description">Reduce jitter in exchange of latency.</string>
     <string name="preference_back_title">Quay về màn hình trước đó</string>
     <string name="unnamed">Chưa đặt tên</string>
@@ -224,18 +241,23 @@
     <string name="mcl_setting_subtitle_buttonallcaps">Tắt đi nếu bạn muốn sử dụng chữ cái thường trong mục điều khiển.</string>
     <string name="create_profile">Tạo cấu hình mới</string>
     <string name="preference_shader_dump_title">Kích hoạt đổ bóng</string>
+    <string name="preference_shader_dump_description">Ghi các trình đổ bóng đã chuyển đổi vào tệp nhật ký.</string>
     <string name="percent_format">%d%%</string>
+    <string name="millisecond_format">%d ms</string>
     <string name="customctrl_editor_exit_title">Rời đi?</string>
     <string name="customctrl_editor_exit_msg">Bạn có chắc bạn muốn thoát ra không?</string>
     <string name="customctrl_editor_exit">Rời khỏi trình chỉnh sửa</string>
     <string name="global_save_and_exit">Lưu và thoát</string>
     <string name="global_yes">Đồng ý</string>
     <string name="global_no">Không</string>
+    <string name="preference_controller_map_wiped">Cấu hình điều khiển đã bị xóa.</string>
     <string name="preference_category_controller_settings">Cài đặt điều khiển</string>
     <string name="preference_wipe_controller_title">Thiết đặt lại cấu hình điều khiển</string>
     <string name="preference_wipe_controller_description">Cho phép bạn thay đổi các cấu hình tay cầm.</string>
     <string name="preference_deadzone_scale_title">Độ rộng vùng chết cần điều khiển</string>
     <string name="preference_deadzone_scale_description">Tăng nếu cần điểu khiển bị lệch.</string>
+    <string name="preference_force_big_core_title">Buộc trình kết xuất chạy trên lõi lớn</string>
+    <string name="preference_force_big_core_desc">Buộc luồng kết xuất của Minecraft chạy trên lõi có tần số cao nhất.</string>
     <string name="version_select_hint">Chọn phiên bản</string>
     <string name="forge_dl_progress">Đang tải xuống %s</string>
     <string name="forge_dl_searching">Đang tìm số phiên bản của Forge</string>
@@ -280,11 +302,25 @@
     <string name="notif_error_occured">Đã xảy ra lỗi</string>
     <string name="notif_error_occured_desc">Nhấn để xem chi tiết</string>
     <string name="fabric_dl_only_stable">Chỉ hiện phiên bản ổn dịnh</string>
+    <string name="dl_tampered_manifest_title">Cảnh báo xác minh tập tin</string>
+    <string name="dl_tampered_manifest"><![CDATA[Danh sách phiên bản game trên nguồn bản sao này không khớp với danh sách phiên bản chính thức của Mojang, điều này có nghĩa là nó có thể bị can thiệp.<br/>
+
+<b>Điều này không an toàn. Nếu bạn tiếp tục, thông tin cá nhân của bạn có thể gặp nguy hiểm!</b><br/>
+
+Nếu bạn vẫn muốn sử dụng nguồn bản sao này, nhấn vào "Tắt kiểm tra danh sách phiên bản game" để bắt đầu tải xuống lại.<br/>
+
+Nếu bạn muốn sử dụng nguồn tải xuống chính thức, nhấn vào "Chuyển sang nguồn chính thức" để bắt đầu tải xuống lại.<br/>]]></string>
+    <string name="dl_turn_off_manifest_checks">Tắt kiểm tra danh sách phiên bản</string>
+    <string name="dl_switch_to_official_site">Chuyển sang nguồn chính thức</string>
     <string name="preference_download_source_title">Nguồn tải trò chơi</string>
+    <string name="preference_download_source_description">Chọn nguồn bản sao để tải xuống thay vì sử dụng máy chủ tải xuống chính thức</string>
+    <string name="preference_verify_manifest_title">Kiểm tra danh sách phiên bản trò chơi</string>
+    <string name="preference_verify_manifest_description">Khi bật, trình khởi chạy sẽ kiểm tra danh sách phiên bản trò chơi và thư viện.</string>
     <string name="notif_download_finished">Trò chơi đã sẵn sàng để chạy</string>
     <string name="notif_download_finished_desc">Nhấn vào đây để bắt đầu!</string>
     <string name="preference_category_gestures">Những cử chỉ</string>
     <string name="preference_category_buttons">Phím</string>
+    <string name="preference_category_experimental_settings">Những cài đặt thử nghiệm</string>
     <string name="preference_category_java_tweaks">Điều chỉnh Java</string>
     <string name="preference_category_main_categories">Danh mục</string>
     <string name="preference_category_miscellaneous">Các cài đặt khác</string>
@@ -293,13 +329,59 @@
     <string name="notification_permission_dialog_text">PojavLauncher yêu cầu quyền để gửi thông báo để ngăn chặn trò chơi/modpacks tải xuống mà không dừng lại khi bạn rời khỏi ứng dụng. Nếu không cấp quyền, Android có thể ngắt quá trình tải khi bạn để PojavLauncher ở chế độ nền.</string>
     <string name="notification_permission_toast">Bạn luôn có thể thay đổi ý định của mình bằng cách vào Cài đặt</string>
     <string name="preference_ask_for_notification_title">Cho phép Gửi thông báo</string>
+    <string name="preference_ask_for_notification_description">Nhấp để yêu cầu lại quyền thông báo, điều này là cần thiết để trò chơi/gói tích hợp tải xuống bình thường ở chế độ nền.</string>
     <string name="preference_vsync_in_zink_title">Cho phép V-Sync với trình kết xuất Zink</string>
+    <string name="preference_vsync_in_zink_description">Cho phép trình khởi chạy sử dụng API hệ thống nội bộ để kích hoạt đồng bộ dọc cho trình kết xuất Zink. Tắt cài đặt này nếu trình khởi chạy bất ngờ bị văng với Zink sau một bản cập nhật hệ thống.</string>
     <string name="exception_failed_to_unpack_jre17">Cài Đặt thất bại JRE 17</string>
+    <string name="newdl_starting">Đang đọc siêu dữ liệu trò chơi…</string>
     <string name="newdl_downloading_metadata">Đang tải xuống siêu dữ liệu trò chơi (%s)</string>
+    <string name="newdl_downloading_game_files">Đang tải xuống trò chơi… (%d/%d, %.2f MB)</string>
+    <string name="newdl_downloading_game_files_size">Đang tải xuống trò chơi… (%.2f/%.2f MB, %.2f MB)</string>
+    <string name="cropper_title">Chọn vùng hình ảnh</string>
+    <string name="cropper_lock_vertical">Khóa trục dọc</string>
+    <string name="cropper_lock_horizontal">Khóa trục ngang</string>
+    <string name="cropper_reset">Đặt lại</string>
+    <string name="cropper_select_cancelled">Lựa chọn đã bị hủy</string>
+    <string name="log_view_button_scroll_off">Tự động cuộn\nTắt</string>
+    <string name="log_view_button_scroll_on">Tự động cuộn\nBật</string>
+    <string name="log_view_button_output_off">In ra MH\nTắt</string>
+    <string name="log_view_button_output_on">In ra MH\nBật</string>
+    <string name="log_view_label_log_output">Đầu ra nhật ký:</string>
+    <string name="execute_jar_failed_to_read_file">Không thể đọc tệp .jar</string>
+    <string name="execute_jar_incompatible_runtime">Chức năng thực thi .jar không tương thích với Java %d</string>
     <string name="controller_button_a">A</string>
     <string name="controller_button_b">B</string>
     <string name="controller_button_x">X</string>
     <string name="controller_button_y">Y</string>
     <string name="controller_button_start">Bắt đầu</string>
     <string name="controller_button_select">Chọn</string>
+    <string name="controller_button_trigger_left">Nút nhấn trái</string>
+    <string name="controller_button_trigger_right">Nút nhấn phải</string>
+    <string name="controller_button_shoulder_left">Nút vai trái</string>
+    <string name="controller_button_shoulder_right">Nút vai phải</string>
+    <string name="controller_direction_forward">Cần điều khiển lên</string>
+    <string name="controller_direction_backward">Cần điều khiển xuống</string>
+    <string name="controller_direction_left">Cần điều khiển trái</string>
+    <string name="controller_direction_right">Cần điều khiển phải</string>
+    <string name="controller_stick_press_l">Cần điều khiển trái (nhấn)</string>
+    <string name="controller_stick_press_r">Cần điều khiển phải (nhấn)</string>
+    <string name="controller_dpad_up">Phím lên</string>
+    <string name="controller_dpad_down">Phím xuống</string>
+    <string name="controller_dpad_left">Phím trái</string>
+    <string name="controller_dpad_right">Phím phải</string>
+    <string name="controller_remapper_exit_part1">Giữ</string>
+    <string name="controller_remapper_exit_part2">để thoát ra</string>
+    <string name="controller_remapper_operating_mode">Chế độ hiện tại</string>
+    <string name="customctrl_visibility_title">Có thể nhìn thấy</string>
+    <string name="customctrl_visibility_ingame">Trong trò chơi</string>
+    <string name="customctrl_visibility_in_menus">Trong menu</string>
+    <string name="controller_remapper_expand_entry">Mở rộng để thay đổi mã phím</string>
+    <string name="preference_remap_controller_title">Thay đổi liên kết nút tay cầm</string>
+    <string name="preference_remap_controller_description">Cho phép bạn sửa đổi các phím bàn phím được gán cho mỗi nút điều khiển</string>
+    <string name="mcl_button_discord">Discord</string>
+    <string name="ltw_render_distance_warning_msg">GPU của bạn không thể kết xuất với khoảng cách trên 7 chunks nếu không có Sodium hoặc các mod tương tự khác. Khoảng cách kết xuất sẽ được tự điều chỉnh lại khi nhấn OK.</string>
+    <string name="mcl_button_open_directory">Mở thư mục trò chơi</string>
+    <string name="local_login_bad_username_title">Tên người dùng không phù hợp</string>
+    <string name="local_login_bad_username_text">Tên người dùng phải có từ 3 đến 16 kí tự, và chỉ có chữ cái Latinh, chữ số và dấu gạch chân.</string>
+    <string name="quick_setting_title">Cài đặt nhanh</string>
 </resources>
