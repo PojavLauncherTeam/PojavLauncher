@@ -51,6 +51,7 @@
     <string name="mcl_setting_category_renderer">Renderizador</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (Todas las versiones, rápido)</string>
     <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - (todas las versiones, medio)</string>
+    <string name="mcl_setting_renderer_ltw">LTW (OpenGL ES 3) - solo 1.17+</string>
     <string name="mcl_setting_veroption_release">Lanzamientos</string>
     <string name="mcl_setting_veroption_snapshot">Snapshots</string>
     <string name="mcl_setting_veroption_oldalpha">Alphas</string>
@@ -75,6 +76,7 @@
     <string name="global_default">Predeterminado</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">La aplicación/juego ha finalizado con el código %d, mira el archivo latestlog.txt para más detalles.</string>
+    <string name="mcn_signal_title">La aplicación/juego ha finalizado con código %d, revise latestlog.txt para más detalles.</string>
     <string name="mcn_exit_confirm">¿Estás seguro de que quieres forzar el cierre?</string>
     <string name="mcn_check_fail_vulkan_support">¡El renderizador Zink (Vulkan) no es compatible con este dispositivo!</string>
     <!-- MainActivity: Control buttons -->
@@ -145,6 +147,7 @@
     <string name="customctrl_forward_lock">Bloqueo hacia adelante</string>
     <string name="customctrl_absolute_tracking">Seguimiento absoluto del dedo</string>
     <string name="memory_warning_msg">La cantidad actual de memoria RAM libre (%d) es menor que la memoria RAM asignada (%d), lo que puede provocar cierres forzados. Cambia la asignación si el juego se cierra.</string>
+    <string name="address_memory_warning_msg">La cantidad actual de RAM libre (%d) es menor que la RAM asignada (%d), lo cual puede causar cierres forzados. Cambie la cantidad asignada si el juego se cierra.</string>
     <string name="mcl_memory_allocation">Asignación de memoria</string>
     <string name="mcl_memory_allocation_subtitle">Controla cuánta memoria se le da a Minecraft.</string>
     <string name="multirt_runtime_corrupt">Java Runtime Corrupto</string>
@@ -157,6 +160,7 @@
     <string name="multirt_config_setdefault">Establecer como predeterminado</string>
     <string name="multirt_config_setdefault_already">Predeterminado</string>
     <string name="multirt_config_removeerror_last">Debes tener al menos un Runtime de Java instalado.</string>
+    <string name="multirt_nocompatiblert">No se encontró ningún Java Runtime compatible. Esta versión requiere de Java %d o superior.</string>
     <string name="multirt_nojava8rt">No se puede encontrar Java 8. Para utilizar esta opción, necesita instalar Java 8.</string>
     <string name="multirt_delete_runtime">Eliminar runtime</string>
     <string name="pvc_gameDirectory">Directorio del juego</string>
@@ -246,7 +250,7 @@
     <string name="global_no">No</string>
     <string name="preference_controller_map_wiped">La configuración del control fue borrada.</string>
     <string name="preference_category_controller_settings">Ajustes del control</string>
-    <string name="preference_wipe_controller_title">Restablecer mapeo del mando</string>
+    <string name="preference_wipe_controller_title">Restablecer mapeo del control</string>
     <string name="preference_wipe_controller_description">Te permite cambiar los botones del control.</string>
     <string name="preference_deadzone_scale_title">Escala de la zona muerta del Joystick</string>
     <string name="preference_deadzone_scale_description">Auméntalo si el joystick tiene drift.</string>
@@ -326,11 +330,24 @@
     <string name="exception_failed_to_unpack_jre17">Error al instalar JRE 17</string>
     <string name="newdl_starting">Leyendo metadatos…</string>
     <string name="newdl_downloading_metadata">Descargando metadatos del juego (%s)</string>
+    <string name="newdl_downloading_game_files">Descargando el juego...(%d/%d,%.2f MB/s)</string>
+    <string name="newdl_downloading_game_files_size">Descargando el juego...(%.2f/%.2f MB, %.2f MB/s)</string>
+    <string name="log_view_button_output_off">Salida\nApagado</string>
+    <string name="log_view_button_output_on">Salida\nEncendido</string>
+    <string name="log_view_label_log_output">Salida del registro:</string>
+    <string name="execute_jar_failed_to_read_file">Falló al leer el archivo .jar</string>
+    <string name="execute_jar_incompatible_runtime">La característica para ejecutar .jar no es compatible con Java %d</string>
     <string name="controller_button_a">A</string>
     <string name="controller_button_b">B</string>
     <string name="controller_button_x">X</string>
     <string name="controller_button_y">Y</string>
     <string name="controller_button_start">Start</string>
     <string name="controller_button_select">Seleccionar</string>
+    <string name="controller_remapper_exit_part1">Mantenga</string>
+    <string name="controller_remapper_exit_part2">para salir</string>
     <string name="customctrl_visibility_title">Visibilidad</string>
+    <string name="ltw_render_distance_warning_msg">Su GPU no es capaz de renderizar más de 7 de distancia sin usar Sodium o mods similares. La distancia de renderizado será reducido automáticamente cuando haga click en \"OK\".</string>
+    <string name="mcl_button_open_directory">Abrir directorio del juego</string>
+    <string name="local_login_bad_username_text">El nombre de usuario debe de ser entre 3 a 16 caracteres, y solo contener letras latinas, números de 0 a 9 y guiones bajos.</string>
+    <string name="quick_setting_title">Configuraciones rápidas</string>
 </resources>
