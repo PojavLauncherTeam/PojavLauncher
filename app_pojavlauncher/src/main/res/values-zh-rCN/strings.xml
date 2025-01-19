@@ -9,6 +9,7 @@
     <string name="login_online_username_hint">用户名</string>
     <string name="login_online_login_label">登录</string>
     <!-- Hint -->
+    <string name="hint_control_mapping">"点按顶部中央齿轮以打开上下文菜单⚙\n点击按钮进行自定义：编辑、调整大小、删除或更改其按键绑定。"</string>
     <!-- Warnings -->
     <string name="warning_remove_account">此账户将被移除！</string>
     <!-- AlertDialog title -->
@@ -51,6 +52,7 @@
     <string name="mcl_setting_category_renderer">渲染器</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES -（全版本可用，速度较快）</string>
     <string name="mcl_setting_renderer_vulkan_zink">Zink（Vulkan）-（全版本可用，速度中等）</string>
+    <string name="mcl_setting_renderer_ltw">LTW (OpenGL ES 3) - 仅限 1.17+</string>
     <string name="mcl_setting_veroption_release">正式版</string>
     <string name="mcl_setting_veroption_snapshot">快照版</string>
     <string name="mcl_setting_veroption_oldalpha">远古 alpha 版</string>
@@ -75,6 +77,7 @@
     <string name="global_default">默认</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">应用程序/游戏以代码 %d退出，请查看 latestlog.txt 了解详情；如果你不知道发生了什么，请点击 “分享日志文件” 将日志文件发送给他人分析，而不是在此页面截屏。</string>
+    <string name="mcn_signal_title">应用程序/游戏以致命信号 %d 中止，请查看 latestlog.txt 以了解更多详情。</string>
     <string name="mcn_exit_confirm">您确定要强制关闭？</string>
     <string name="mcn_check_fail_vulkan_support">此设备不支持 Zink（Vulkan）渲染器！</string>
     <!-- MainActivity: Control buttons -->
@@ -145,6 +148,7 @@
     <string name="customctrl_forward_lock">允许锁定前进</string>
     <string name="customctrl_absolute_tracking">绝对手指跟踪</string>
     <string name="memory_warning_msg">当前可用内存（%d）低于所分配的内存（%d），这可能会导致崩溃！如果游戏崩溃请更改内存分配设置。</string>
+    <string name="address_memory_warning_msg">当前可用可寻址内存空间量 (%d) 低于已分配内存量 (%d)，这将导致游戏崩溃。如果游戏崩溃，请调整分配。</string>
     <string name="mcl_memory_allocation">内存分配</string>
     <string name="mcl_memory_allocation_subtitle">控制给应用程序/游戏分配多少内存</string>
     <string name="multirt_runtime_corrupt">Java 运行环境损坏</string>
@@ -157,6 +161,7 @@
     <string name="multirt_config_setdefault">设为默认</string>
     <string name="multirt_config_setdefault_already">默认</string>
     <string name="multirt_config_removeerror_last">您必须至少安装一个 Java 运行环境。</string>
+    <string name="multirt_nocompatiblert">找不到任何兼容的 Java 运行时。此版本需要 Java %d 或更新版本。</string>
     <string name="multirt_nojava8rt">无法找到 Java 8，如要使用此选项，您需要安装 Java 8。</string>
     <string name="multirt_delete_runtime">删除运行环境</string>
     <string name="pvc_gameDirectory">游戏目录</string>
@@ -238,6 +243,7 @@
     <string name="preference_shader_dump_title">启用着色器输出</string>
     <string name="preference_shader_dump_description">记录切换的着色器到日志文件中。</string>
     <string name="percent_format">%d%%</string>
+    <string name="millisecond_format">%d 毫秒</string>
     <string name="customctrl_editor_exit_title">您确定要离开？</string>
     <string name="customctrl_editor_exit_msg">您确定要退出？</string>
     <string name="customctrl_editor_exit">退出编辑器</string>
@@ -326,11 +332,53 @@
     <string name="exception_failed_to_unpack_jre17">JRE 17 安装失败！</string>
     <string name="newdl_starting">正在读取游戏元数据…</string>
     <string name="newdl_downloading_metadata">正在下载游戏元数据（%s）</string>
+    <string name="newdl_downloading_game_files">正在下载游戏… (%d/%d, %.2f MB/秒)</string>
+    <string name="newdl_downloading_game_files_size">正在下载游戏… (%.2f/%.2f MB, %.2f MB/秒)</string>
+    <string name="cropper_title">选择图像区域</string>
+    <string name="cropper_lock_vertical">纵向锁定</string>
+    <string name="cropper_lock_horizontal">横向锁定</string>
+    <string name="cropper_reset">重置</string>
+    <string name="cropper_select_cancelled">选择已取消</string>
+    <string name="log_view_button_scroll_off">自动滚动\n关</string>
+    <string name="log_view_button_scroll_on">自动滚动\n开</string>
+    <string name="log_view_button_output_off">输出\n关</string>
+    <string name="log_view_button_output_on">输出\n开</string>
+    <string name="log_view_label_log_output">日志输出：</string>
+    <string name="execute_jar_failed_to_read_file">无法读取 .jar 文件</string>
+    <string name="execute_jar_incompatible_runtime">执行 .jar 功能与 Java %d 不兼容</string>
     <string name="controller_button_a">A</string>
     <string name="controller_button_b">B</string>
     <string name="controller_button_x">X</string>
     <string name="controller_button_y">Y</string>
     <string name="controller_button_start">开始</string>
     <string name="controller_button_select">选择</string>
+    <string name="controller_button_trigger_left">左扳机</string>
+    <string name="controller_button_trigger_right">右扳机</string>
+    <string name="controller_button_shoulder_left">左肩键</string>
+    <string name="controller_button_shoulder_right">右肩键</string>
+    <string name="controller_direction_forward">摇杆上</string>
+    <string name="controller_direction_backward">摇杆下</string>
+    <string name="controller_direction_left">摇杆左</string>
+    <string name="controller_direction_right">摇杆右</string>
+    <string name="controller_stick_press_l">左摇杆（按下）</string>
+    <string name="controller_stick_press_r">右摇杆（按下）</string>
+    <string name="controller_dpad_up">方向键上</string>
+    <string name="controller_dpad_down">方向键下</string>
+    <string name="controller_dpad_left">方向键左</string>
+    <string name="controller_dpad_right">方向键右</string>
+    <string name="controller_remapper_exit_part1">长按</string>
+    <string name="controller_remapper_exit_part2">以退出</string>
+    <string name="controller_remapper_operating_mode">当前模式</string>
     <string name="customctrl_visibility_title">可见性</string>
+    <string name="customctrl_visibility_ingame">游戏内</string>
+    <string name="customctrl_visibility_in_menus">菜单内</string>
+    <string name="controller_remapper_expand_entry">展开以更改键码</string>
+    <string name="preference_remap_controller_title">更改手柄按键绑定</string>
+    <string name="preference_remap_controller_description">允许你修改绑定到每个手柄按钮的键盘按键</string>
+    <string name="mcl_button_discord">Discord</string>
+    <string name="ltw_render_distance_warning_msg">如果没有 Sodium 或其他类似模组，你的 GPU 将无法渲染 7 以上的渲染距离。点击“确定”后，渲染距离将自动缩短。</string>
+    <string name="mcl_button_open_directory">打开游戏目录</string>
+    <string name="local_login_bad_username_title">用户名不合适</string>
+    <string name="local_login_bad_username_text">用户名长度必须在 3–16 个字符之间，并且只能包含拉丁字母、数字 0–9 和下划线。</string>
+    <string name="quick_setting_title">快速设置</string>
 </resources>
