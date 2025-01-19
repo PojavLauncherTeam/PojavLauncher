@@ -9,6 +9,7 @@
     <string name="login_online_username_hint">Uživatelské jméno</string>
     <string name="login_online_login_label">Přihlásit se</string>
     <!-- Hint -->
+    <string name="hint_control_mapping">"Klikněte na ikonu zubatého kolečka nahoře uprostřed pro otevření menu ⚙\nKlikněte na tlačítko pro přizpůsobení: editaci, škálu, odstranění či změnu kláves."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Tento účet bude odstraněn!</string>
     <!-- AlertDialog title -->
@@ -51,6 +52,7 @@
     <string name="mcl_setting_category_renderer">Vykreslovač</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (všechny verze, rychlá)</string>
     <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - (všechny verze, střední)</string>
+    <string name="mcl_setting_renderer_ltw">LTW (OpenGL ES 3) - jen 1.17+</string>
     <string name="mcl_setting_veroption_release">Vydání</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Stará alfa</string>
@@ -75,6 +77,7 @@
     <string name="global_default">Výchozí</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Aplikace/Hra spadla s kódem %d, zkontroluj latestlog.txt pro více informací.</string>
+    <string name="mcn_signal_title">Aplikace/Hra skončila s fatálním signálem %d, zkontroluj latestlog.txt pro detaily.</string>
     <string name="mcn_exit_confirm">Opravdu chcete vynutit ukončení?</string>
     <string name="mcn_check_fail_vulkan_support">Vykreslovač Zink (Vulkan) není v tomto zařízení podporován!</string>
     <!-- MainActivity: Control buttons -->
@@ -145,6 +148,7 @@
     <string name="customctrl_forward_lock">Uzamknout chození vpřed</string>
     <string name="customctrl_absolute_tracking">Absolutní následování prstu</string>
     <string name="memory_warning_msg">Aktuální množství volné paměti RAM (%d) je nižší než přidělená paměť RAM (%d), což může vést k pádu. Spadne-li hra, snižte přidělení paměti.</string>
+    <string name="address_memory_warning_msg">Aktuální množství volné přístupné paměti RAM (%d) je nižší než přidělená paměť RAM (%d), což povede k pádu. Spadne-li hra, sniž přidělení paměti.</string>
     <string name="mcl_memory_allocation">Přidělení paměti</string>
     <string name="mcl_memory_allocation_subtitle">Určuje množství paměti přidělené Minecraftu.</string>
     <string name="multirt_runtime_corrupt">Poškozená Java Runtime</string>
@@ -157,6 +161,7 @@
     <string name="multirt_config_setdefault">Nastavit výchozí</string>
     <string name="multirt_config_setdefault_already">Výchozí</string>
     <string name="multirt_config_removeerror_last">Musíte mít nainstalovanou alespoň jednu verzi Javy.</string>
+    <string name="multirt_nocompatiblert">Nelze najít žádnou podporovanou Java Runtime. Tato verze vyžaduje Javu %d nebo novější.</string>
     <string name="multirt_nojava8rt">Nelze najít Javu 8. Chcete-li používat tuto možnost, musíte mít nainstalovanou Javu 8.</string>
     <string name="multirt_delete_runtime">Smazat runtime</string>
     <string name="pvc_gameDirectory">Složka hry</string>
@@ -238,6 +243,7 @@
     <string name="preference_shader_dump_title">Povolit vyhazování shaderů</string>
     <string name="preference_shader_dump_description">Zaznamenat převedené shadery do souboru záznamu.</string>
     <string name="percent_format">%d%%</string>
+    <string name="millisecond_format">%d ms</string>
     <string name="customctrl_editor_exit_title">Odcházíte?</string>
     <string name="customctrl_editor_exit_msg">Určitě chcete odejít?</string>
     <string name="customctrl_editor_exit">Opustit editor</string>
@@ -326,11 +332,53 @@
     <string name="exception_failed_to_unpack_jre17">Instalace JRE 17 selhala</string>
     <string name="newdl_starting">Čtení metadat hry…</string>
     <string name="newdl_downloading_metadata">Stahování metadat hry (%s)</string>
+    <string name="newdl_downloading_game_files">Stahování hry… (%d/%d, %.2f MB)</string>
+    <string name="newdl_downloading_game_files_size">Stahování hry… (%.2f/%.2f MB, %.2f MB/s)</string>
+    <string name="cropper_title">Vyberte oblast oříznutí</string>
+    <string name="cropper_lock_vertical">Zamknout svisle</string>
+    <string name="cropper_lock_horizontal">Zamknout Vodorovně</string>
+    <string name="cropper_reset">Resetovat</string>
+    <string name="cropper_select_cancelled">Výběr zrušen</string>
+    <string name="log_view_button_scroll_off">Samoskrolování\nVypnuto</string>
+    <string name="log_view_button_scroll_on">Samoskrolování\nZapnuto</string>
+    <string name="log_view_button_output_off">Výstup\nVypnuto</string>
+    <string name="log_view_button_output_on">Výstup\nZapnuto</string>
+    <string name="log_view_label_log_output">Výstup záznamu:</string>
+    <string name="execute_jar_failed_to_read_file">Selhalo čtení souboru .jar</string>
+    <string name="execute_jar_incompatible_runtime">Funkce spouštění .jar souboru není kompatibilní s Javou %d</string>
     <string name="controller_button_a">A</string>
     <string name="controller_button_b">B</string>
     <string name="controller_button_x">X</string>
     <string name="controller_button_y">Y</string>
     <string name="controller_button_start">Start</string>
     <string name="controller_button_select">Vybrat</string>
+    <string name="controller_button_trigger_left">Levá spoušť</string>
+    <string name="controller_button_trigger_right">Pravá spoušť</string>
+    <string name="controller_button_shoulder_left">Levé tlačítko</string>
+    <string name="controller_button_shoulder_right">Pravé tlačítko</string>
+    <string name="controller_direction_forward">Páčka nahoru</string>
+    <string name="controller_direction_backward">Páčka dolů</string>
+    <string name="controller_direction_left">Páčka doleva</string>
+    <string name="controller_direction_right">Páčka doprava</string>
+    <string name="controller_stick_press_l">Kliknutí levé páčky</string>
+    <string name="controller_stick_press_r">Kliknutí pravé páčky</string>
+    <string name="controller_dpad_up">D-Pad nahoru</string>
+    <string name="controller_dpad_down">D-Pad dolů</string>
+    <string name="controller_dpad_left">D-Pad doleva</string>
+    <string name="controller_dpad_right">D-Pad doprava</string>
+    <string name="controller_remapper_exit_part1">Drž</string>
+    <string name="controller_remapper_exit_part2">pro ukončení</string>
+    <string name="controller_remapper_operating_mode">Aktuální mód</string>
     <string name="customctrl_visibility_title">Viditelnost</string>
+    <string name="customctrl_visibility_ingame">Ve hře</string>
+    <string name="customctrl_visibility_in_menus">V menech</string>
+    <string name="controller_remapper_expand_entry">Rozbal pro změny kódů kláves</string>
+    <string name="preference_remap_controller_title">Změnit nastavení kláves ovladače</string>
+    <string name="preference_remap_controller_description">Umožňuje změnit jaké klávesy každé tlačítko ovladače produkuje</string>
+    <string name="mcl_button_discord">Discord</string>
+    <string name="ltw_render_distance_warning_msg">Tvá GPU není schopna vykreslovat víc než 7 chunků dohledu bez Sodium či podobnách módů. Vykreslovací vzdálenost bude snížena kliknete-li \"OK\".</string>
+    <string name="mcl_button_open_directory">Otevřít složku hry</string>
+    <string name="local_login_bad_username_title">Špatné uživatelské jméno</string>
+    <string name="local_login_bad_username_text">Uživatelské jméno musí být mezi 3 až 16 znaky, musí být pouze v latince s čísly a podtržítkem.</string>
+    <string name="quick_setting_title">Rychlá nastavení</string>
 </resources>
