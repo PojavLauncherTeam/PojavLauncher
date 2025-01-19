@@ -51,6 +51,7 @@
     <string name="mcl_setting_category_renderer">عارض الرسوميات</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (جميع الإصدارات، سريع)</string>
     <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - (جميع الإصدارات، متوسط)</string>
+    <string name="mcl_setting_renderer_ltw">LTW (OpenGL ES 3) - 1.17+ فقط</string>
     <string name="mcl_setting_veroption_release">إصدار نهائي</string>
     <string name="mcl_setting_veroption_snapshot">اللمحات \"سنابشوت\"</string>
     <string name="mcl_setting_veroption_oldalpha">نسخ ألفا قديمة</string>
@@ -75,7 +76,7 @@
     <string name="global_default">الافتراضي</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">تم الخروج من التطبيق/اللعبة بخلل %d، تحقق من latestlog.txt لمزيد من التفاصيل.</string>
-    <string name="mcn_signal_title">تم الخروج من التطبيق/اللعبة بسبب بخلل %d، انظر في latestlog.txt لمزيد من التفاصيل.</string>
+    <string name="mcn_signal_title">تم الخروج من التطبيق/اللعبة بخلل %d، انظر في latestlog.txt لمزيد من التفاصيل.</string>
     <string name="mcn_exit_confirm">هل أنت متأكد من أنك تريد فرض الإغلاق؟</string>
     <string name="mcn_check_fail_vulkan_support">عارض الرسوميات Zink (Vulkan) غير مدعوم على هذا الجهاز!</string>
     <!-- MainActivity: Control buttons -->
@@ -158,6 +159,7 @@
     <string name="multirt_config_setdefault">تعيين كافتراضي</string>
     <string name="multirt_config_setdefault_already">الافتراضي</string>
     <string name="multirt_config_removeerror_last">يجب أن يكون لديك على الأقل بيئة تشغيل جافا واحدة مثبتة.</string>
+    <string name="multirt_nocompatiblert">لم يتم العثور على أي بيئة تشغيل Java متوافقة، هذا الإصدار يتطلب Java %d أو أحدث.</string>
     <string name="multirt_nojava8rt">لا يمكن العثور على Java 8. لاستخدام هذا الخِيار، تحتاج إلى تثبيت Java 8.</string>
     <string name="multirt_delete_runtime">حذف بيئة التشغيل</string>
     <string name="pvc_gameDirectory">مكان تخزين اللعبة</string>
@@ -239,6 +241,7 @@
     <string name="preference_shader_dump_title">تمكين افراغ الشادر</string>
     <string name="preference_shader_dump_description">سجل الShaders المحولة داخل ملف السجل.</string>
     <string name="percent_format">%d%%</string>
+    <string name="millisecond_format">%d جزء من الثانية</string>
     <string name="customctrl_editor_exit_title">مغادرة؟</string>
     <string name="customctrl_editor_exit_msg">هل أنت متأكد من أنك تريد الخروج؟</string>
     <string name="customctrl_editor_exit">مغادرة المحرر</string>
@@ -324,16 +327,24 @@
     <string name="exception_failed_to_unpack_jre17">فشل تثبيت JRE 17</string>
     <string name="newdl_starting">قراءة بيانات تعريف اللعبة…</string>
     <string name="newdl_downloading_metadata">تحميل بيانات تعريف اللعبة (%s)</string>
+    <string name="newdl_downloading_game_files">جاري تحميل اللعبة… (%d/%d, %.2f MB/s)</string>
+    <string name="newdl_downloading_game_files_size">جاري تحميل اللعبة… (%.2f/%.2f MB، %.2f MB/s)</string>
+    <string name="cropper_select_cancelled">تم إلغاء الاختيار</string>
     <string name="controller_button_a">A</string>
     <string name="controller_button_b">B</string>
     <string name="controller_button_x">X</string>
     <string name="controller_button_y">Y</string>
     <string name="controller_button_start">Start</string>
     <string name="controller_button_select">اختر</string>
+    <string name="controller_dpad_up">D-Pad للأعلى</string>
+    <string name="controller_dpad_down">D-Pad للأسفل</string>
+    <string name="controller_dpad_left">D-Pad لليسار</string>
+    <string name="controller_dpad_right">D-Pad لليمين</string>
     <string name="controller_remapper_exit_part2">للخروج</string>
     <string name="controller_remapper_operating_mode">الوضع الحالي</string>
     <string name="customctrl_visibility_title">الظهور</string>
     <string name="customctrl_visibility_in_menus">في القوائم</string>
     <string name="mcl_button_discord">سيرفر الديسكورد</string>
     <string name="ltw_render_distance_warning_msg">وحدة معالجة الرسوميات الخاصة بك غير قادرة على معالجة أكثر من 7 رندر ديستانس دون مود Sodium أو غيرها من المودات المشابهة. سيتم تخفيض الرندر ديستانس تلقائيًا عند النقر على \"موافق\".</string>
+    <string name="local_login_bad_username_title">اسم المستخدم غير مناسب</string>
 </resources>
