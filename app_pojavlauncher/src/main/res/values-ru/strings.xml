@@ -9,6 +9,7 @@
     <string name="login_online_username_hint">Имя пользователя</string>
     <string name="login_online_login_label">Войти</string>
     <!-- Hint -->
+    <string name="hint_control_mapping">"Нажмите на центральную шестерёнку ⚙, чтобы открыть меню действий.\n Выберите кнопку, чтобы удалить её или скопировать;\nизменить её свойства, размер или привязанные клавиши."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Эта учётная запись будет удалена!</string>
     <!-- AlertDialog title -->
@@ -378,5 +379,6 @@
     <string name="ltw_render_distance_warning_msg">Ваше видеоядро не поддерживает прорисовку более 7 чанков без использования Sodium или его аналогов. Нажмите «ОК», чтобы автоматически снизить прорисовку.</string>
     <string name="mcl_button_open_directory">Открыть папку игры</string>
     <string name="local_login_bad_username_title">Неподходящее имя пользователя</string>
+    <string name="local_login_bad_username_text">Имя пользователя должно быть от 3 до 16 символов в длину и должно содержать только латинские символы, цифры 0–9 и нижние подчёркивания.</string>
     <string name="quick_setting_title">Быстрые настройки</string>
 </resources>
