@@ -51,6 +51,7 @@
     <string name="mcl_setting_category_renderer">渲染器</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES -（全版本可用，速度快）</string>
     <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) -（全版本支援，速度中等）</string>
+    <string name="mcl_setting_renderer_ltw">LTW（OpenGL ES 3）- 僅限 1.17+</string>
     <string name="mcl_setting_veroption_release">正式版</string>
     <string name="mcl_setting_veroption_snapshot">快照版</string>
     <string name="mcl_setting_veroption_oldalpha">舊版 Alpha</string>
@@ -238,6 +239,7 @@
     <string name="preference_shader_dump_title">啟用著色器傾印</string>
     <string name="preference_shader_dump_description">將轉換後的著色器記錄到記錄檔中。</string>
     <string name="percent_format">%d%%</string>
+    <string name="millisecond_format">%d 毫秒</string>
     <string name="customctrl_editor_exit_title">是否離開？</string>
     <string name="customctrl_editor_exit_msg">您確定要離開嗎？</string>
     <string name="customctrl_editor_exit">離開編輯器</string>
@@ -326,6 +328,8 @@
     <string name="exception_failed_to_unpack_jre17">無法安裝 JRE 17</string>
     <string name="newdl_starting">正在讀取遊戲中繼資料……</string>
     <string name="newdl_downloading_metadata">正在下載遊戲中繼資料 (%s)</string>
+    <string name="newdl_downloading_game_files">正在下載遊戲…… (%d/%d, %.2f MB/秒)</string>
+    <string name="cropper_reset">重設</string>
     <string name="controller_button_a">A</string>
     <string name="controller_button_b">B</string>
     <string name="controller_button_x">X</string>
@@ -333,4 +337,6 @@
     <string name="controller_button_start">開始</string>
     <string name="controller_button_select">選擇</string>
     <string name="customctrl_visibility_title">可見度</string>
+    <string name="mcl_button_discord">Discord</string>
+    <string name="quick_setting_title">快速設定</string>
 </resources>
