@@ -242,6 +242,7 @@
     <string name="preference_shader_dump_title">Activar dumpeo de shaders</string>
     <string name="preference_shader_dump_description">Registra shaders compilados (sic).</string>
     <string name="percent_format">%d%%</string>
+    <string name="millisecond_format">%d ms</string>
     <string name="customctrl_editor_exit_title">¿Vas a salir?</string>
     <string name="customctrl_editor_exit_msg">¿Estás seguro de que quieres salir?</string>
     <string name="customctrl_editor_exit">Salir del editor</string>
@@ -332,6 +333,11 @@
     <string name="newdl_downloading_metadata">Descargando metadatos del juego (%s)</string>
     <string name="newdl_downloading_game_files">Descargando el juego...(%d/%d,%.2f MB/s)</string>
     <string name="newdl_downloading_game_files_size">Descargando el juego...(%.2f/%.2f MB, %.2f MB/s)</string>
+    <string name="cropper_title">Seleccione la región de la imagen</string>
+    <string name="cropper_reset">Reiniciar</string>
+    <string name="cropper_select_cancelled">Selección cancelada</string>
+    <string name="log_view_button_scroll_off">Desplazamiento automático\nApagado</string>
+    <string name="log_view_button_scroll_on">Desplazamiento automático\nEncendido</string>
     <string name="log_view_button_output_off">Salida\nApagado</string>
     <string name="log_view_button_output_on">Salida\nEncendido</string>
     <string name="log_view_label_log_output">Salida del registro:</string>
@@ -343,11 +349,18 @@
     <string name="controller_button_y">Y</string>
     <string name="controller_button_start">Start</string>
     <string name="controller_button_select">Seleccionar</string>
+    <string name="controller_button_trigger_left">Activador izquierdo</string>
+    <string name="controller_button_trigger_right">Activador derecho</string>
     <string name="controller_remapper_exit_part1">Mantenga</string>
     <string name="controller_remapper_exit_part2">para salir</string>
+    <string name="controller_remapper_operating_mode">Modo actual</string>
     <string name="customctrl_visibility_title">Visibilidad</string>
+    <string name="preference_remap_controller_title">Cambiar configuración de teclas del controlador</string>
+    <string name="preference_remap_controller_description">Te permite modificar las teclas del teclado asignadas a cada botón del controlador</string>
+    <string name="mcl_button_discord">Discord</string>
     <string name="ltw_render_distance_warning_msg">Su GPU no es capaz de renderizar más de 7 de distancia sin usar Sodium o mods similares. La distancia de renderizado será reducido automáticamente cuando haga click en \"OK\".</string>
     <string name="mcl_button_open_directory">Abrir directorio del juego</string>
+    <string name="local_login_bad_username_title">Nombre de usuario inadecuado</string>
     <string name="local_login_bad_username_text">El nombre de usuario debe de ser entre 3 a 16 caracteres, y solo contener letras latinas, números de 0 a 9 y guiones bajos.</string>
     <string name="quick_setting_title">Configuraciones rápidas</string>
 </resources>
