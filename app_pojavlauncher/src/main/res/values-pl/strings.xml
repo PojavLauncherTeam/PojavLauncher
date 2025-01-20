@@ -9,6 +9,7 @@
     <string name="login_online_username_hint">Nazwa użytkownika</string>
     <string name="login_online_login_label">Zaloguj się</string>
     <!-- Hint -->
+    <string name="hint_control_mapping">"Dotknij ikony zębatki, aby otworzyć menu kontekstowe ⚙\nNaciśnij przycisk, aby dostosować: edytuj, zmień rozmiar, usuń lub zmień przypisanie klawiszy."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">To konto zostanie usunięte!</string>
     <!-- AlertDialog title -->
@@ -76,6 +77,7 @@
     <string name="global_default">Domyślny</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Aplikacja/gra zakończyła się błędem o kodzie %d, sprawdź latestlog.txt, aby uzyskać więcej informacji.</string>
+    <string name="mcn_signal_title">Aplikacja/gra zakończyła się błędem o kodzie %d, sprawdź plik latestlog.txt, aby uzyskać więcej informacji.</string>
     <string name="mcn_exit_confirm">Czy na pewno chcesz wymusić zamknięcie?</string>
     <string name="mcn_check_fail_vulkan_support">Renderer Zink (Vulkan) nie jest wspierany na tym urządzeniu!</string>
     <!-- MainActivity: Control buttons -->
@@ -146,6 +148,7 @@
     <string name="customctrl_forward_lock">Zablokowanie w przód</string>
     <string name="customctrl_absolute_tracking">Bezwzględne śledzenie palców</string>
     <string name="memory_warning_msg">Bieżąca ilość wolnej pamięci RAM (%d) jest mniejsza od przydzielonej pamięci RAM (%d), co może prowadzić do awarii. Zmień ilość, jeśli gra ulegnie awarii.</string>
+    <string name="address_memory_warning_msg">Bieżąca ilość wolnej pamięci RAM (%d) jest niższa od przydzielonej pamięci, (%d), co może prowadzić do awarii. Zmień przydzielenie, jeśli gra ulegnie awarii.</string>
     <string name="mcl_memory_allocation">Przydział pamięci</string>
     <string name="mcl_memory_allocation_subtitle">Dostosuj ilość pamięci przydzieloną do Minecrafta.</string>
     <string name="multirt_runtime_corrupt">Uszkodzone środowisko wykonawcze Java</string>
@@ -332,6 +335,8 @@
     <string name="newdl_downloading_game_files">Pobieranie gry... (%d/%d, %.2f MB/s)</string>
     <string name="newdl_downloading_game_files_size">Pobieranie gry... (%.2f/%.2f MB, %.2f MB/s)</string>
     <string name="cropper_title">Wybierz region obrazu</string>
+    <string name="cropper_lock_vertical">Blokada wertykalna</string>
+    <string name="cropper_lock_horizontal">Blokada horyzontalna</string>
     <string name="cropper_reset">Reset</string>
     <string name="cropper_select_cancelled">Zaznaczenie anulowane</string>
     <string name="log_view_button_scroll_off">Auto przewijanie\nOFF</string>
@@ -367,11 +372,13 @@
     <string name="customctrl_visibility_title">Widzialność</string>
     <string name="customctrl_visibility_ingame">W grze</string>
     <string name="customctrl_visibility_in_menus">W menu</string>
+    <string name="controller_remapper_expand_entry">Rozwiń, aby zmienić przypisania przycisków</string>
     <string name="preference_remap_controller_title">Zmień przypisania przycisków kontrolera</string>
     <string name="preference_remap_controller_description">Pozwala na modyfikację przycisków klawiatury przypisanych do każdego przycisku kontrolera</string>
     <string name="mcl_button_discord">Discord</string>
     <string name="ltw_render_distance_warning_msg">Twoje GPU nie jest kompatybilne z zasięgiem renderowania powyżej 7 bez Sodium lub innych podobnych modów. Zasięg renderowanie zostanie automatycznie zmniejszony, jeśli klikniesz \"OK\".</string>
     <string name="mcl_button_open_directory">Otwórz lokalizację plików gry</string>
     <string name="local_login_bad_username_title">Nieodpowiednia nazwa użytkownika</string>
+    <string name="local_login_bad_username_text">Nazwa użytkownika musi posiadać od 3 do 16 znaków, i musi zawierać tylko latyńskie litery, numery od 0 do 9 oraz podkreślenia.</string>
     <string name="quick_setting_title">Szybkie ustawienia</string>
 </resources>
