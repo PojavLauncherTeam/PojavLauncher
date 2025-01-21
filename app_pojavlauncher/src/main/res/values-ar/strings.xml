@@ -9,6 +9,7 @@
     <string name="login_online_username_hint">اسم المستخدم</string>
     <string name="login_online_login_label">تسجيل الدخول</string>
     <!-- Hint -->
+    <string name="hint_control_mapping">"أضغط على أيقونة الإعدادات في أعلى منتصف الشاشة لفتح قائمة التعديلات ⚙\nأضغط على زر للتخصيص: تغيير, تعديل الحجم، حذف، أو تعديل أزرار التحكم."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">سيتم إزالة هذا الحساب!</string>
     <!-- AlertDialog title -->
@@ -147,6 +148,7 @@
     <string name="customctrl_forward_lock">قفل إلى الأمام</string>
     <string name="customctrl_absolute_tracking">تتبع الأصابع بشكل مطلق</string>
     <string name="memory_warning_msg">الكَمَيَّة الحالية من ذاكرة الوصول العشوائي المتاحة للاستخدام (%d) أقل من ذاكرة الوصول العشوائي المحددة (%d)، مما قد يؤدي إلى حدوث أعطال. غير الذاكرة المخصصة إذا توقفت اللعبة.</string>
+    <string name="address_memory_warning_msg">الكَمَيَّة الحالية من ذاكرة الوصول العشوائي المتاحة للاستخدام (%d) أقل من ذاكرة الوصول العشوائي المحددة (%d)، مما قد يؤدي إلى حدوث أعطال. غير الذاكرة المخصصة إذا توقفت اللعبة.</string>
     <string name="mcl_memory_allocation">الذاكرة المخصصة للاستخدام</string>
     <string name="mcl_memory_allocation_subtitle">يتحكم في كَمَيَّة الذاكرة المعطاة لـ Minecraft.</string>
     <string name="multirt_runtime_corrupt">بيئة تشغيل Java تالفة</string>
@@ -323,28 +325,57 @@
     <string name="preference_ask_for_notification_title">السماح بالإشعارات</string>
     <string name="preference_ask_for_notification_description">.</string>
     <string name="preference_vsync_in_zink_title">السماح بتفعيل V-Sync مع Zink</string>
-    <string name="preference_vsync_in_zink_description">يسمح للمشغل باستخدام APIs النظام الداخلي لتمكين V-Sync للزنك. قم بإيقاف تشغيل هذا إذا تعطل المشغل فجأة مع الزنك بعد تحديث النظام.</string>
+    <string name="preference_vsync_in_zink_description">يسمع للمشغل </string>
     <string name="exception_failed_to_unpack_jre17">فشل تثبيت JRE 17</string>
     <string name="newdl_starting">قراءة بيانات تعريف اللعبة…</string>
     <string name="newdl_downloading_metadata">تحميل بيانات تعريف اللعبة (%s)</string>
     <string name="newdl_downloading_game_files">جاري تحميل اللعبة… (%d/%d, %.2f MB/s)</string>
     <string name="newdl_downloading_game_files_size">جاري تحميل اللعبة… (%.2f/%.2f MB، %.2f MB/s)</string>
+    <string name="cropper_title">اختيار منطقة الصورة</string>
+    <string name="cropper_lock_vertical">تأمين المحور العمودي</string>
+    <string name="cropper_lock_horizontal">تأمين المحور الأفقي</string>
+    <string name="cropper_reset">إعادة الضبط</string>
     <string name="cropper_select_cancelled">تم إلغاء الاختيار</string>
+    <string name="log_view_button_scroll_off">إيقاف التمرير التلقائي\n</string>
+    <string name="log_view_button_scroll_on">إيقاف التمرير التلقائي\n</string>
+    <string name="log_view_button_output_off">المخرجات\nمتوقفة</string>
+    <string name="log_view_button_output_on">المخرجات\nمفعلة</string>
+    <string name="log_view_label_log_output">سِجل الإخراج:</string>
+    <string name="execute_jar_failed_to_read_file">فشل في قراءة ملف .jar</string>
+    <string name="execute_jar_incompatible_runtime">تنفيذ وظيفة .jar غير متوافق مع Java %d</string>
     <string name="controller_button_a">A</string>
     <string name="controller_button_b">B</string>
     <string name="controller_button_x">X</string>
     <string name="controller_button_y">Y</string>
     <string name="controller_button_start">Start</string>
     <string name="controller_button_select">اختر</string>
+    <string name="controller_button_trigger_left">الزناد الأيسر</string>
+    <string name="controller_button_trigger_right">الزناد الأيمن</string>
+    <string name="controller_button_shoulder_left">الكتف الأيسر</string>
+    <string name="controller_button_shoulder_right">الكتف الأيمن</string>
+    <string name="controller_direction_forward">العصا للأعلى</string>
+    <string name="controller_direction_backward">العصا للأسفل</string>
+    <string name="controller_direction_left">العصا لليسار</string>
+    <string name="controller_direction_right">العصا لليمين</string>
+    <string name="controller_stick_press_l">انقر فوق عصا الأصبع الأيسر</string>
+    <string name="controller_stick_press_r">انقر فوق عصا الأصبع الأيمن</string>
     <string name="controller_dpad_up">D-Pad للأعلى</string>
     <string name="controller_dpad_down">D-Pad للأسفل</string>
     <string name="controller_dpad_left">D-Pad لليسار</string>
     <string name="controller_dpad_right">D-Pad لليمين</string>
+    <string name="controller_remapper_exit_part1">اثبت</string>
     <string name="controller_remapper_exit_part2">للخروج</string>
     <string name="controller_remapper_operating_mode">الوضع الحالي</string>
     <string name="customctrl_visibility_title">الظهور</string>
+    <string name="customctrl_visibility_ingame">داخل اللعبة</string>
     <string name="customctrl_visibility_in_menus">في القوائم</string>
+    <string name="controller_remapper_expand_entry">قم بالتوسعة لتغيير رمز الزر</string>
+    <string name="preference_remap_controller_title">تغيير إعدادات مفاتيح التحكم</string>
+    <string name="preference_remap_controller_description">يسمح لك بتعديل المفتاح المخصص لكل زر في وحدة التحكم</string>
     <string name="mcl_button_discord">سيرفر الديسكورد</string>
     <string name="ltw_render_distance_warning_msg">وحدة معالجة الرسوميات الخاصة بك غير قادرة على معالجة أكثر من 7 رندر ديستانس دون مود Sodium أو غيرها من المودات المشابهة. سيتم تخفيض الرندر ديستانس تلقائيًا عند النقر على \"موافق\".</string>
+    <string name="mcl_button_open_directory">فتح ملفات اللعبة</string>
     <string name="local_login_bad_username_title">اسم المستخدم غير مناسب</string>
+    <string name="local_login_bad_username_text">يجب أن يكون اسم المستخدم بين 3–16 حرفاً، ويجب أن يحتوي فقط على أحرف لاتينية وأرقام 0-9 وتسطيرات سفلية.</string>
+    <string name="quick_setting_title">قائمة الإعدادات السريعة</string>
 </resources>
