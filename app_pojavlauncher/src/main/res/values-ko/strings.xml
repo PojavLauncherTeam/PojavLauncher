@@ -9,6 +9,7 @@
     <string name="login_online_username_hint">사용자명</string>
     <string name="login_online_login_label">로그인</string>
     <!-- Hint -->
+    <string name="hint_control_mapping">"상단 중앙 톱니바퀴 아이콘을 탭하여 상황에 맞는 메뉴를 엽니다. ⚙\n버튼을 탭하여 키바인드를 편집, 크기 조정, 삭제, 사용자 지정합니다"</string>
     <!-- Warnings -->
     <string name="warning_remove_account">이 계정이 제거될 거예요!</string>
     <!-- AlertDialog title -->
