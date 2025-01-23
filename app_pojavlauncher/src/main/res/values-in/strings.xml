@@ -179,10 +179,10 @@
     <string name="preference_experimental_title">Barang Eksperimental</string>
     <string name="preference_experimental_description">Gunakan hal-hal di sana dengan pertimbangan, tidak ada dukungan</string>
     <string name="preference_sustained_performance_title">Aktifkan mode kinerja berkelanjutan</string>
-    <string name="preference_sustained_performance_description">Limit thermal throttling dengan me-limit performa.</string>
+    <string name="preference_sustained_performance_description">Batasi thermal throttling dengan cara membatasi performa maksimal.</string>
     <string name="preference_force_vsync_title">Paksa aktifkan VSync</string>
-    <string name="preference_force_vsync_description">Limit thermal throttling dengan me-limit performa.</string>
-    <string name="preference_force_english_title">Paksa bahasa saat ini ke bahasa Inggris</string>
+    <string name="preference_force_vsync_description">Batasi thermal throttling dengan cara membatasi performa maksimal.</string>
+    <string name="preference_force_english_title">Paksa bahasa ke bahasa Inggris</string>
     <string name="preference_force_english_description">Memperbolehkan anda untuk melihat string asli, seperti kehendak pengembang. Membutuhkan muat ulang.</string>
     <string name="preference_edit_controls_title">Ubah kontrol kustom</string>
     <string name="preference_edit_controls_summary">Atur skema kontrol untuk menyesuaikan kebutuhan Anda.</string>
@@ -229,10 +229,10 @@
     <string name="minecraft_not_owned">Sepertinya akun ini tidak mempunyai profil Minecraft. Jika kamu memiliki Xbox Game Pass, tolong login ke https://minecraft.net/ dan mengaturnya.</string>
     <string name="xerr_not_available">Xbox Live tidak tersedia dinegaramu</string>
     <string name="preference_enable_gyro_title">Hidupkan kontrol giroskop</string>
-    <string name="preference_enable_gyro_description">Pppp.</string>
+    <string name="preference_enable_gyro_description">Mengaktifkan ini dapat memperbolehkan anda untuk berputar dengan cara memutar ponsel anda.</string>
     <string name="preference_gyro_sensitivity_title">Giroskop mengontrol sensitivitas</string>
     <string name="preference_gyro_sensitivity_description">Atur sensitivitas kontrol giroskop.</string>
-    <string name="toast_turn_on_gyro">!</string>
+    <string name="toast_turn_on_gyro">Nyalakan kontrol giro sebelum menggunakan ini!</string>
     <string name="preference_gyro_sample_rate_title">Tingkat pengambilan sampel giroskop</string>
     <string name="preference_gyro_sample_rate_description">Jika anda memiliki masalah perfoma dengan kontrol giroskop, tingkatkan ini.</string>
     <string name="microsoft_login_retry_later">Terlalu banyak permintaan, coba lagi nanti.</string>
@@ -326,7 +326,7 @@
     <string name="notification_permission_dialog_text">Pojav launcher memperlukan izin untuk post notifikasi untuk mencegah download game/modpack berhenti ketika keluar dari aplikasi. Tanpa izin ini, android mungkin membatalkan unduhan ketita menempatkan PojavLaunher dalam mode latar belakang.</string>
     <string name="notification_permission_toast">kamu selalu dapat berubah pikiran nanti dengan masuk ke Pengaturan</string>
     <string name="preference_ask_for_notification_title">Izinkan notifikasi</string>
-    <string name="preference_ask_for_notification_description">Pencet untuk request kembali izin notifikasi, dibutuhkan untuk pengunduhan latar belakang permainan/modpack untuk berjalan dengan benar.</string>
+    <string name="preference_ask_for_notification_description">Tekan untuk meminta kembali izin notifikasi, dibutuhkan untuk pengunduhan latar belakang permainan/modpack untuk berjalan dengan benar.</string>
     <string name="preference_vsync_in_zink_title">Membolehkan V-sync dengan Zink</string>
     <string name="preference_vsync_in_zink_description">Perbolehkan peluncur untuk menggunakan API sistem internal untuk menyalakan V-Sync untuk Zink. Matikan ini jika peluncur anda tiba-tiba keluar sendiri setelah pembaruan sistem.</string>
     <string name="exception_failed_to_unpack_jre17">Gagal memasang JRE 17</string>
