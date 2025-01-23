@@ -363,6 +363,7 @@
     <string name="customctrl_visibility_ingame">No jogo</string>
     <string name="customctrl_visibility_in_menus">Nos menus</string>
     <string name="preference_remap_controller_title">Alterar mapeamento dos botões</string>
+    <string name="preference_remap_controller_description">Permite que você modifique as teclas do teclado vinculadas à cada botão do controle</string>
     <string name="mcl_button_discord">Discord</string>
     <string name="ltw_render_distance_warning_msg">A sua GPU não possui capacidade para renderizar a distância acima de 7 sem o Sodium ou outros mods semelhantes. A renderização de distância será reduzida automaticamente ao clicar em \"OK\".</string>
     <string name="mcl_button_open_directory">Abrir diretório do jogo</string>
