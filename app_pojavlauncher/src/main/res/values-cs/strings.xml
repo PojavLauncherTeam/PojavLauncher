@@ -9,7 +9,7 @@
     <string name="login_online_username_hint">Uživatelské jméno</string>
     <string name="login_online_login_label">Přihlásit se</string>
     <!-- Hint -->
-    <string name="hint_control_mapping">"Klikněte na ikonu zubatého kolečka nahoře uprostřed pro otevření menu ⚙\nKlikněte na tlačítko pro přizpůsobení: editaci, škálu, odstranění či změnu kláves."</string>
+    <string name="hint_control_mapping">"Klikněte na ikonu ozubeného kolečka nahoře uprostřed pro otevření menu ⚙\nKlikněte na tlačítko pro přizpůsobení: editaci, škálu, odstranění či změnu kláves."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Tento účet bude odstraněn!</string>
     <!-- AlertDialog title -->
@@ -21,7 +21,7 @@
     <string name="error_show_less">Zobrazit méně</string>
     <!-- Toast messages -->
     <string name="toast_permission_denied">Je vyžadováno oprávnění pro čtení/zápis do úložiště!</string>
-    <string name="toast_optifine_success">Instalace byla úspěšná</string>
+    <string name="toast_optifine_success">Instalace proběhla úspěšně</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
@@ -29,28 +29,28 @@
     <string name="mcl_tab_wiki">Wiki</string>
     <!-- MCLauncherActivity: Account status -->
     <!-- MCLauncherActivity: Strings -->
-    <string name="mcl_launch_cleancache">Čištění souborů mezipaměti</string>
+    <string name="mcl_launch_cleancache">Čištění mezipaměti</string>
     <string name="mcl_launch_downloading">Stahování %s</string>
     <string name="mcl_launch_downloading_progress">"Stahování %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Příprava ke stažení prostředků</string>
     <string name="mcl_options">Možnosti</string>
     <string name="mcl_option_customcontrol">Vlastní ovládací prvky</string>
     <string name="mcl_setting_title_use_surface_view">Použít jiné vykreslování povrchu</string>
-    <string name="mcl_setting_subtitle_use_surface_view">Může zvýšit výkon v situacích, kdy je zatížená GPU.</string>
+    <string name="mcl_setting_subtitle_use_surface_view">Může zvýšit výkon v situacích, kdy je více zatížené GPU.</string>
     <string name="mcl_setting_title_ignore_notch">Ignorovat výřez</string>
-    <string name="mcl_setting_subtitle_ignore_notch">Ignoruje výřez a rozšíří obrazovku pod ním.\nDá více celo-obrazný pohlcující zážitek.</string>
+    <string name="mcl_setting_subtitle_ignore_notch">Ignoruje výřez a rozšíří obrazovku pod ním.\nDodá více pohlcující zážitek.</string>
     <string name="mcl_setting_title_resolution_scaler">Škála rozlišení</string>
     <string name="mcl_setting_subtitle_resolution_scaler">Umožňuje snížit rozlišení hry. 100% je plné rozlišení.</string>
-    <string name="mcl_setting_title_longpresstrigger">Zpoždění dlouhého stisku</string>
+    <string name="mcl_setting_title_longpresstrigger">Zpoždění přidržení</string>
     <string name="mcl_setting_subtitle_longpresstrigger">Změní délku stisku ke zničení bloků a vyhazování itemů.</string>
     <string name="mcl_setting_title_buttonscale">Škálování kontrolních tlačítek</string>
-    <string name="mcl_setting_subtitle_buttonscale">Zvětšte je, jsou-li tlačítka příliš malá.</string>
-    <string name="mcl_setting_title_mousescale">Škálování myši</string>
-    <string name="mcl_setting_subtitle_mousescale">Změnit velikost virtuální myši.</string>
+    <string name="mcl_setting_subtitle_buttonscale">Zvětšete pokud jsou tlačítka příliš malá.</string>
+    <string name="mcl_setting_title_mousescale">Velikost myši</string>
+    <string name="mcl_setting_subtitle_mousescale">Změní velikost virtuální myši.</string>
     <string name="mcl_setting_title_javaargs">JVM spouštěcí argumenty</string>
     <string name="mcl_setting_subtitle_javaargs">Buďte opatrní, toto může způsobit pád hry, je-li upraveno bez znalostí.</string>
     <string name="mcl_setting_category_renderer">Vykreslovač</string>
-    <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (všechny verze, rychlá)</string>
+    <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (všechny verze, rychlý)</string>
     <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - (všechny verze, střední)</string>
     <string name="mcl_setting_renderer_ltw">LTW (OpenGL ES 3) - jen 1.17+</string>
     <string name="mcl_setting_veroption_release">Vydání</string>
