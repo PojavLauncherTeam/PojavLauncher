@@ -9,6 +9,7 @@
     <string name="login_online_username_hint">Nome utente</string>
     <string name="login_online_login_label">Accedi</string>
     <!-- Hint -->
+    <string name="hint_control_mapping">"Toccare la rotella dentata in alto al centro per aprire il menu contestuale ⚙ Toccare un pulsante per personalizzarlo: modificarlo, ridimensionarlo, rimuoverlo o cambiarne i tasti."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">L\'account sarà cancellato!</string>
     <!-- AlertDialog title -->
@@ -51,6 +52,7 @@
     <string name="mcl_setting_category_renderer">Renderer</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (Tutte le versioni, veloce)</string>
     <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - (tutte le persone, med)</string>
+    <string name="mcl_setting_renderer_ltw">LTW (OpenGL ES 3) - solo 1.17+</string>
     <string name="mcl_setting_veroption_release">Finale</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Vecchie-alpha</string>
@@ -75,6 +77,7 @@
     <string name="global_default">Predefinito</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">L\'applicazione/gioco si è chiuso con il codice %d, controlla il lastlog.txt per più dettagli.</string>
+    <string name="mcn_signal_title">Applicazione/gioco interrotto dal segnale fatale %d, controllare latestlog.txt per maggiori dettagli.</string>
     <string name="mcn_exit_confirm">Sei sicuro di voler eseguire una chiusura forzata?</string>
     <string name="mcn_check_fail_vulkan_support">Il renderer Zink (Vulkan) non è supportato su questo dispositivo!</string>
     <!-- MainActivity: Control buttons -->
@@ -145,6 +148,7 @@
     <string name="customctrl_forward_lock">Forward lock</string>
     <string name="customctrl_absolute_tracking">Tracciamento assoluto delle dita</string>
     <string name="memory_warning_msg">L\'attuale quantità di RAM libera (%d) è minore di quella allocata (%d), la quale potrebbe portare a crash inaspettati. Modifica la quantità di RAM allocata in caso di crash.</string>
+    <string name="address_memory_warning_msg">L\'attuale quantità di spazio libero indirizzabile nella RAM (%d) è inferiore alla RAM allocata (%d), il che provoca un crash. Modificare l\'allocazione se il gioco si blocca.</string>
     <string name="mcl_memory_allocation">Memoria allocata</string>
     <string name="mcl_memory_allocation_subtitle">Controlla quanta memoria dedicare a Minecraft.</string>
     <string name="multirt_runtime_corrupt">Runtime Java corrotta</string>
@@ -157,6 +161,7 @@
     <string name="multirt_config_setdefault">Imposta predefinito</string>
     <string name="multirt_config_setdefault_already">Predefinito</string>
     <string name="multirt_config_removeerror_last">Devi avere almeno un Runtime Java installato.</string>
+    <string name="multirt_nocompatiblert">Impossibile trovare un Runtime Java compatibile. Questa versione richiede Java %d o più recente.</string>
     <string name="multirt_nojava8rt">Impossibile trovare Java 8. Per usare questa opzione, è necessario installare Java 8.</string>
     <string name="multirt_delete_runtime">Cancella runtime</string>
     <string name="pvc_gameDirectory">Cartella gioco</string>
@@ -239,6 +244,7 @@ Accedi almeno una volta su https://minecraft.net/ e riprova.</string>
     <string name="preference_shader_dump_title">Abilità shader dumping</string>
     <string name="preference_shader_dump_description">Registra gli shader convertiti nel file di log.</string>
     <string name="percent_format">%d%%</string>
+    <string name="millisecond_format">%d ms</string>
     <string name="customctrl_editor_exit_title">Uscire?</string>
     <string name="customctrl_editor_exit_msg">Sei sicuro di voler uscire?</string>
     <string name="customctrl_editor_exit">Esci dall\'editor</string>
@@ -327,5 +333,17 @@ se vuoi scaricare dalla sorgente ufficiale premi \"Passa al sito ufficiale"\ e r
     <string name="exception_failed_to_unpack_jre17">Installazione fallita di JRE 17</string>
     <string name="newdl_starting">Lettura metadati del gioco…</string>
     <string name="newdl_downloading_metadata">Download dei metadati di gioco (%s)</string>
+    <string name="newdl_downloading_game_files">Download del gioco... (%d/%d, %.2f MB/s)</string>
+    <string name="newdl_downloading_game_files_size">Download del gioco... (%.2f/%.2f MB, %.2f MB/s)</string>
+    <string name="cropper_title">Selezionare la regione dell\'immagine</string>
+    <string name="cropper_select_cancelled">Selezione annullata</string>
+    <string name="execute_jar_failed_to_read_file">Impossibile leggere il file .jar</string>
+    <string name="execute_jar_incompatible_runtime">La funzione Esegui .jar non è compatibile con Java %d</string>
     <string name="controller_button_select">Seleziona</string>
+    <string name="preference_remap_controller_description">Consente di modificare i tasti della tastiera legati a ciascun pulsante del controller</string>
+    <string name="ltw_render_distance_warning_msg">La GPU non è in grado di eseguire il rendering a una distanza superiore a 7 senza Sodium o altre modifiche simili. La distanza di rendering verrà automaticamente ridotta quando si fa clic su \"OK\".</string>
+    <string name="mcl_button_open_directory">Aprire la directory del gioco</string>
+    <string name="local_login_bad_username_title">Nome utente non adatto</string>
+    <string name="local_login_bad_username_text">Il nome utente deve avere una lunghezza compresa tra 3 e 16 caratteri e deve contenere solo lettere latine, numeri 0-9 e trattini bassi.</string>
+    <string name="quick_setting_title">Impostazioni rapide</string>
 </resources>
