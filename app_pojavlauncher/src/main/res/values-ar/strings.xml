@@ -13,7 +13,7 @@
     <!-- Warnings -->
     <string name="warning_remove_account">سيتم إزالة هذا الحساب!</string>
     <!-- AlertDialog title -->
-    <string name="alerttitle_installmod">حدد مشغل مودات للتثبيت</string>
+    <string name="alerttitle_installmod">حدد مشغل مودات لتثبيته</string>
     <!-- Error messages -->
     <string name="error_fatal">لقد توقف PojavLauncher بشكل غير متوقع</string>
     <string name="error_no_version">لا يوجد إصدار!</string>
@@ -37,7 +37,7 @@
     <string name="mcl_option_customcontrol">تخصيص التحكم</string>
     <string name="mcl_setting_title_use_surface_view">استخدام عرض الأسطح البديل</string>
     <string name="mcl_setting_subtitle_use_surface_view">قد يساعد الأداء في سيناريوهات المعتمدة على GPU.</string>
-    <string name="mcl_setting_title_ignore_notch">تجاهل النوتش (الجزء المفقود من أعلى الشاشة مع الكاميرا الأمامية)</string>
+    <string name="mcl_setting_title_ignore_notch">تجاهل النوتش (الجزء المفقود من أعلى الشاشة قرب الكاميرا الأمامية)</string>
     <string name="mcl_setting_subtitle_ignore_notch">تجاهل النوتش وتوسيع الشاشة أسفلها.\nيعطيك تجرِبة أكثر انغماساً.</string>
     <string name="mcl_setting_title_resolution_scaler">مقياس الدقة</string>
     <string name="mcl_setting_subtitle_resolution_scaler">يسمح لك بتخفيض دقة اللعبة. 100% هي الدقة الكاملة.</string>
