@@ -149,7 +149,7 @@
     <string name="customctrl_absolute_tracking">絕對手指追蹤</string>
     <string name="memory_warning_msg">目前可用的剩餘記憶體 (%d) 比已配置的記憶體 (%d) 還低，這可能會導致程式崩潰。如果遊戲崩潰，請調整配置。</string>
     <string name="mcl_memory_allocation">記憶體配置</string>
-    <string name="mcl_memory_allocation_subtitle">控制配置給 Minecraft 的記憶體用量。</string>
+    <string name="mcl_memory_allocation_subtitle">控制配置給 Minecraft 的記憶體容量。</string>
     <string name="multirt_runtime_corrupt">Java 執行環境毀損</string>
     <string name="multirt_runtime_incompatiblearch">%s 與您的硬體架構不相容</string>
     <string name="multirt_config_title">Java 執行環境</string>
