@@ -35,7 +35,7 @@
     <string name="mcl_options">Mga pilian</string>
     <string name="mcl_option_customcontrol">Pasadyang mga kontrol</string>
     <string name="mcl_setting_title_use_surface_view">Gumamit ng alternatibong surface rendering</string>
-    <string name="mcl_setting_subtitle_use_surface_view"></string>
+    <string name="mcl_setting_subtitle_use_surface_view">Maaaring makatulong sa performance sa GPU bound scenario.</string>
     <string name="mcl_setting_title_ignore_notch">Huwag pansinin ang notch</string>
     <string name="mcl_setting_title_resolution_scaler">Resolution Scaler</string>
     <string name="mcl_setting_title_buttonscale">Pagkontrol sa pag-scale ng mga pindutan</string>
