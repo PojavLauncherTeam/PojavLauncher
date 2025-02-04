@@ -65,6 +65,7 @@ public class ControlData {
     public boolean isSwipeable;
     public boolean displayInGame;
     public boolean displayInMenu;
+    public boolean sendChar;
     private float width;         //Dp instead of Px now
     private float height;        //Dp instead of Px now
 
@@ -112,7 +113,7 @@ public class ControlData {
         this(name, keycodes, dynamicX, dynamicY, width, height, isToggle, 1, 0x4D000000, 0xFFFFFFFF, 0, 0, true, true, false, false);
     }
 
-    public ControlData(String name, int[] keycodes, String dynamicX, String dynamicY, float width, float height, boolean isToggle, float opacity, int bgColor, int strokeColor, float strokeWidth, float cornerRadius, boolean displayInGame, boolean displayInMenu, boolean isSwipable, boolean mousePassthrough) {
+    public ControlData(String name, int[] keycodes, String dynamicX, String dynamicY, float width, float height, boolean isToggle, float opacity, int bgColor, int strokeColor, float strokeWidth, float cornerRadius, boolean displayInGame, boolean displayInMenu, boolean sendChar, boolean isSwipable, boolean mousePassthrough) {
         this.name = name;
         this.keycodes = inflateKeycodeArray(keycodes);
         this.dynamicX = dynamicX;
@@ -127,6 +128,7 @@ public class ControlData {
         this.cornerRadius = cornerRadius;
         this.displayInGame = displayInGame;
         this.displayInMenu = displayInMenu;
+        this.sendChar = sendChar;
         this.isSwipeable = isSwipable;
         this.passThruEnabled = mousePassthrough;
     }
@@ -148,6 +150,7 @@ public class ControlData {
                 controlData.cornerRadius,
                 controlData.displayInGame,
                 controlData.displayInMenu,
+                controlData.sendChar,
                 controlData.isSwipeable,
                 controlData.passThruEnabled
         );
