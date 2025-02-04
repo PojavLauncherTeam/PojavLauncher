@@ -191,7 +191,11 @@ public class ControlButton extends TextView implements ControlInterface {
         setActivated(isDown);
         for(int keycode : mProperties.keycodes){
             if(keycode >= GLFW_KEY_UNKNOWN){
-                sendKeyPress(keycode, CallbackBridge.getCurrentMods(), isDown);
+                if(mProperties.sendChar) {
+                    sendKeyPress(keyCode, mProperties.name.charAt(0), 0, modifiers, status);
+                } else {
+                    sendKeyPress(keycode, CallbackBridge.getCurrentMods(), isDown);
+                }
                 CallbackBridge.setModifiers(keycode, isDown);
             }else{
                 Log.i("punjabilauncher", "sendSpecialKey("+keycode+","+isDown+")");
