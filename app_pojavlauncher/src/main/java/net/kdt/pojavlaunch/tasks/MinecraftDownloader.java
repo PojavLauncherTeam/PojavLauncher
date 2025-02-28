@@ -49,6 +49,7 @@ public class MinecraftDownloader {
     private File mSourceJarFile; // The source client JAR picked during the inheritance process
     private File mTargetJarFile; // The destination client JAR to which the source will be copied to.
     private boolean mUseFileCounter; // Whether a file counter or a size counter should be used for progress
+    private DownloadMirror mDownloader;
 
     private static final ThreadLocal<byte[]> sThreadLocalDownloadBuffer = new ThreadLocal<>();
 
@@ -93,6 +94,7 @@ public class MinecraftDownloader {
         mInternetUsageCounter = new AtomicLong(0);
         mDownloaderThreadException = new AtomicReference<>(null);
         mUseFileCounter = false;
+        mDownloader = DownloadMirror.getInstance();
 
         if(!downloadAndProcessMetadata(activity, verInfo, versionName)) {
             throw new RuntimeException(activity.getString(R.string.exception_failed_to_unpack_jre17));
@@ -176,7 +178,7 @@ public class MinecraftDownloader {
             DownloadUtils.ensureSha1(targetFile, LauncherPreferences.PREF_VERIFY_MANIFEST ? verInfo.sha1 : null, () -> {
                 ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT, 0,
                         R.string.newdl_downloading_metadata, targetFile.getName());
-                DownloadMirror.downloadFileMirrored(DownloadMirror.DOWNLOAD_CLASS_METADATA, verInfo.url, targetFile);
+                mDownloader.downloadFileMirrored(DownloadMirror.DOWNLOAD_CLASS_METADATA, verInfo.url, targetFile);
                 return null;
             });
         }catch (DownloadUtils.SHA1VerificationException e) {
@@ -194,7 +196,7 @@ public class MinecraftDownloader {
         DownloadUtils.ensureSha1(targetFile, assetIndex.sha1, ()-> {
             ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT, 0,
                     R.string.newdl_downloading_metadata, targetFile.getName());
-            DownloadMirror.downloadFileMirrored(DownloadMirror.DOWNLOAD_CLASS_METADATA, assetIndex.url, targetFile);
+            mDownloader.downloadFileMirrored(DownloadMirror.DOWNLOAD_CLASS_METADATA, assetIndex.url, targetFile);
             return null;
         });
         return Tools.GLOBAL_GSON.fromJson(Tools.read(targetFile), JAssets.class);
@@ -428,7 +430,7 @@ public class MinecraftDownloader {
         private void downloadFile() throws Exception {
             try {
                 DownloadUtils.ensureSha1(mTargetPath, mTargetSha1, () -> {
-                    DownloadMirror.downloadFileMirrored(mDownloadClass, mTargetUrl, mTargetPath,
+                    mDownloader.downloadFileMirrored(mDownloadClass, mTargetUrl, mTargetPath,
                             getLocalBuffer(), this);
                     return null;
                 });

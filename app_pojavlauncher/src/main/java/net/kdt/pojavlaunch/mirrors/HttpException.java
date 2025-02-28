@@ -3,10 +3,14 @@ package net.kdt.pojavlaunch.mirrors;
 import java.io.IOException;
 
 public class HttpException extends IOException {
-    // Do not change. Android really hates when this value changes for some reason.
-    private static final long serialVersionUID = -7372301619612640655L;
+    private final int httpErrorCode;
 
-    public HttpException(String msg) {
+    public HttpException(String msg, int httpErrorCode) {
         super(msg);
+        this.httpErrorCode = httpErrorCode;
+    }
+
+    public final int getHttpErrorCode() {
+        return this.httpErrorCode;
     }
 }

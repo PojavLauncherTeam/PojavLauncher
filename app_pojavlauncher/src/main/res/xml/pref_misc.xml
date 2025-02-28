@@ -24,6 +24,12 @@
             android:title="@string/preference_download_source_title"
             android:summary="@string/preference_download_source_description"
             app2:useSimpleSummaryProvider="true"/>
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="downloadRollback"
+            android:title="@string/preference_download_rollback_title"
+            android:summary="@string/preference_download_rollback_description"/>
         <SwitchPreference
             android:defaultValue="true"
             android:key="verifyManifest"

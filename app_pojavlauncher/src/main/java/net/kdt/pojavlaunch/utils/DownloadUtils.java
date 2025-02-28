@@ -32,7 +32,7 @@ public class DownloadUtils {
             conn.connect();
             if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
                 throw new HttpException("Server returned HTTP " + conn.getResponseCode()
-                        + ": " + conn.getResponseMessage());
+                        + ": " + conn.getResponseMessage(), conn.getResponseCode());
             }
             try (InputStream is = conn.getInputStream()) {
                 IOUtils.copy(is, os);
