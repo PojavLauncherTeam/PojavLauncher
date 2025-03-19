@@ -1,7 +1,12 @@
 package net.kdt.pojavlaunch;
 
 import android.content.*;
+import android.hardware.display.DisplayManager;
 import android.os.*;
+import android.view.Display;
+import android.view.Window;
+import android.view.WindowManager;
+
 import androidx.appcompat.app.*;
 import net.kdt.pojavlaunch.utils.*;
 
@@ -17,6 +22,21 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Window window = getWindow();
+        WindowManager.LayoutParams params = window.getAttributes();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            DisplayManager displayManager = (DisplayManager) getSystemService(Context.DISPLAY_SERVICE);
+            Display display = displayManager.getDisplay(Display.DEFAULT_DISPLAY);
+            Display.Mode[] modes = display.getSupportedModes();
+            float maxRefreshRate = 0f;
+            for (Display.Mode mode : modes) {
+                float refreshRate = mode.getRefreshRate();
+                if (refreshRate > maxRefreshRate) {
+                    maxRefreshRate = refreshRate;
+                }
+            }
+            params.preferredRefreshRate = maxRefreshRate;
+        }
         LocaleUtils.setLocale(this);
         Tools.setFullscreen(this, setFullscreen());
         Tools.updateWindowSize(this);
