@@ -27,16 +27,10 @@ jobs:
           java-version: '8'
 
       - name: Get LTW
-        uses: dawidd6/action-download-artifact@v2
-        continue-on-error: true
-        with:
-          github_token: ${{secrets.LTW_CLONER_SECRET}}
-          repo: PojavLauncherTeam/BigTinyWrapper
-          workflow: android.yml
-          workflow_conclusion: success
-          name: output-aar
-          path: app_pojavlauncher/libs
-          allow_forks: false
+        run: |
+          apt update && apt install wget
+          cd app_pojavlauncher/libs
+          wget https://github.com/PojavLauncherTeam/LTW/releases/latest/download/ltw-release.aar
 
       - name: Get JRE 8
         uses: dawidd6/action-download-artifact@v2
