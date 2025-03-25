@@ -223,18 +223,6 @@ public class JREUtils {
         envMap.put("AWTSTUB_WIDTH", Integer.toString(CallbackBridge.windowWidth > 0 ? CallbackBridge.windowWidth : CallbackBridge.physicalWidth));
         envMap.put("AWTSTUB_HEIGHT", Integer.toString(CallbackBridge.windowHeight > 0 ? CallbackBridge.windowHeight : CallbackBridge.physicalHeight));
 
-        File customEnvFile = new File(Tools.DIR_GAME_HOME, "custom_env.txt");
-        if (customEnvFile.exists() && customEnvFile.isFile()) {
-            BufferedReader reader = new BufferedReader(new FileReader(customEnvFile));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                // Not use split() as only split first one
-                int index = line.indexOf("=");
-                envMap.put(line.substring(0, index), line.substring(index + 1));
-            }
-            reader.close();
-        }
-
         GLInfoUtils.GLInfo info = GLInfoUtils.getGlInfo();
         if(!envMap.containsKey("LIBGL_ES") && LOCAL_RENDERER != null) {
             int glesMajor = info.glesMajorVersion;
@@ -256,6 +244,8 @@ public class JREUtils {
             envMap.put("POJAV_LOAD_TURNIP", "1");
         }
 
+        readCustomEnv(envMap); // Must be last so it overrides anything the user sets for obvious reasons.
+
         for (Map.Entry<String, String> env : envMap.entrySet()) {
             Logger.appendToLog("Added custom env: " + env.getKey() + "=" + env.getValue());
             try {
@@ -274,6 +264,19 @@ public class JREUtils {
         // return ldLibraryPath;
     }
 
+    private static void readCustomEnv(Map<String, String> envMap) throws IOException {
+        File customEnvFile = new File(Tools.DIR_GAME_HOME, "custom_env.txt");
+        if (customEnvFile.exists() && customEnvFile.isFile()) {
+            BufferedReader reader = new BufferedReader(new FileReader(customEnvFile));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                // Not use split() as only split first one
+                int index = line.indexOf("=");
+                envMap.put(line.substring(0, index), line.substring(index + 1));
+            }
+            reader.close();
+        }
+    }
     public static void launchJavaVM(final AppCompatActivity activity, final Runtime runtime, File gameDirectory, final List<String> JVMArgs, final String userArgsString) throws Throwable {
         String runtimeHome = MultiRTUtils.getRuntimeHome(runtime.name).getAbsolutePath();
 
