@@ -1,0 +1,8 @@
+//
+// Created by Swung 0x48 on 2024/10/10.
+//
+
+#ifndef MOBILEGLUES_LOADER_H
+#define MOBILEGLUES_LOADER_H
+
+#endif //FOLD_CRAFT_LAUNCHER_GL_LOADER_H

@@ -1,0 +1,3 @@
+[submodule "src/main/cpp/3rdparty/perfetto"]
+	path = src/main/cpp/3rdparty/perfetto
+	url = https://android.googlesource.com/platform/external/perfetto

@@ -1,0 +1,18 @@
+buffers: {
+    size_kb: 522240
+    fill_policy: RING_BUFFER
+}
+data_sources {
+  config {
+    name: "track_event"
+    track_event_config {
+        enabled_categories: "glcalls"
+        disabled_categories: "*"
+    }
+  }
+}
+duration_ms: 1800000
+flush_period_ms: 30000
+incremental_state_config {
+    clear_period_ms: 5000
+}
