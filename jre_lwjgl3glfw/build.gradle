@@ -12,7 +12,7 @@ jar {
     destinationDirectory.set(file("../app_pojavlauncher/src/main/assets/components/lwjgl3/"))
     // Auto update the version with a timestamp so the project jar gets updated by Pojav
     File versionFile = file("../app_pojavlauncher/src/main/assets/components/lwjgl3/version")
-    versionFile.write(String.valueOf(new Date().getTime()))
+    versionFile.write(getGitHash(project.name))
     from {
         configurations.default.collect {
             println(it.getName())
