@@ -88,6 +88,7 @@ jobs:
       - name: Set Java 17 as Default
         run: | 
           rm /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/11.0.26-4/x64
+          
       - name: Build Debug .apk
         run: |
           # Build the launcher
