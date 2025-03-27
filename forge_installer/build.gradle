@@ -15,8 +15,10 @@ jar {
     from {
         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
-    File versionFile = file("../app_pojavlauncher/src/main/assets/components/forge_installer/version")
-    versionFile.write(getGitHash(project.name))
+    if (gitUsed){
+      File versionFile = file("../app_pojavlauncher/src/main/assets/components/forge_installer/version")
+      versionFile.write(getGitHash(project.name))
+    }
     manifest {
         attributes("Manifest-Version": "1.0",
                 "PreMain-Class": "git.artdeell.installer_agent.Agent")
