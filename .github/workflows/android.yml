@@ -1,8 +1,13 @@
-name: Pojavlauncher-MobileGlues
+name: Android CI
 
 on:
+  pull_request:
+    branches-ignore:
+      - 'l10n_v3_openjdk2'
+    types: [ opened, reopened ]
   push:
-    branches: [main]
+    branches-ignore:
+      - 'l10n_v3_openjdk2'v5
   workflow_dispatch:
 
 jobs:
