@@ -211,11 +211,14 @@ public class JREUtils {
         if(FFmpegPlugin.isAvailable) {
             envMap.put("POJAV_FFMPEG_PATH", FFmpegPlugin.executablePath);
         }
-
+        if(LOCAL_RENDERER != null) {
+             envMap.put("POJAV_RENDERER", LOCAL_RENDERER);
+ 
         if (LOCAL_RENDERER.equals("opengles3_ltw")) {
         envMap.put("LIBGL_ES", "3");
         envMap.put("POJAVEXEC_EGL", "libltw.so"); // Use ANGLE EGL LTW
-    } else if (LOCAL_RENDERER.equals("opengles3_mobileglues")) {
+    } 
+        else if (LOCAL_RENDERER.equals("opengles3_mobileglues")) {
         envMap.put("LIBGL_ES", "3");
         envMap.put("POJAVEXEC_EGL", "libmobileglues.so"); // Use Angle EGL MG
     }
