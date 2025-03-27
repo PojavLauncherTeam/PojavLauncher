@@ -228,5 +228,7 @@ dependencies {
     // implementation 'net.sourceforge.streamsupport:streamsupport-cfuture:1.7.0'
 
     implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
-    implementation project(":MobileGlues")
+
+    include ':MobileGlues'
+project(':MobileGlues').projectDir = file('MobileGlues')
 }
