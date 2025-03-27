@@ -20,11 +20,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Set up JDK 8
+      - name: Set up JDK 11
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
-          java-version: '8'
+          java-version: '11'
 
       - name: Get LTW
         run: |
@@ -85,7 +85,9 @@ jobs:
         run: |
           gradle :app_pojavlauncher:bundleGplay
           mv app_pojavlauncher/build/outputs/bundle/gplay/app_pojavlauncher-gplay.aab out/app-gplay.aab
-
+      - name: Set Java 17 as Default
+        run: | 
+          rm /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/11.0.26-4/x64
       - name: Build Debug .apk
         run: |
           # Build the launcher
