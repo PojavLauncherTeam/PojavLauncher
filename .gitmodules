@@ -6,3 +6,4 @@
 	[submodule "gl4es"]
 	path = gl4es
 	url = https://github.com/ptitSeb/gl4es.git
+	branch = master
