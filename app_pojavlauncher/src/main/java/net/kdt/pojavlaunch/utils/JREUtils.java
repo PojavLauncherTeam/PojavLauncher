@@ -221,8 +221,8 @@ public class JREUtils {
         else if (LOCAL_RENDERER.equals("opengles3_mobileglues")) {
         envMap.put("LIBGL_ES", "3");
         envMap.put("POJAVEXEC_EGL", "libmobileglues.so"); // Use Angle EGL MG
-        envMap.put("DLOPEN", "libspirv-cross-c-shared.so,libshaderconv.so")
-        envMap.put("POJAV_RENDERER", "opengles3")
+        envMap.put("DLOPEN", "libspirv-cross-c-shared.so,libshaderconv.so");
+        envMap.put("POJAV_RENDERER", "opengles3");
     }
     }
         if(LauncherPreferences.PREF_BIG_CORE_AFFINITY) envMap.put("POJAV_BIG_CORE_AFFINITY", "1");
