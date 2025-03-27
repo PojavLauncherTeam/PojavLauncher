@@ -218,7 +218,7 @@ public class JREUtils {
         envMap.put("LIBGL_ES", "3");
         envMap.put("POJAVEXEC_EGL", "libltw.so"); // Use ANGLE EGL LTW
     } 
-        else if (LOCAL_RENDERER.equals("opengles3_mobileglues")) {
+        else if (LOCAL_RENDERER.equals("mobileglues")) {
         envMap.put("LIBGL_ES", "3");
         envMap.put("POJAVEXEC_EGL", "libmobileglues.so"); // Use Angle EGL MG
         envMap.put("DLOPEN", "libspirv-cross-c-shared.so,libshaderconv.so");
@@ -472,7 +472,7 @@ public class JREUtils {
             case "opengles3":
                 renderLibrary = "libgl4es_114.so"; break;
             case "vulkan_zink": renderLibrary = "libOSMesa.so"; break;
-            case "opengles3_mobileglues": renderLibrary = "libmobileglues.so"; break;
+            case "mobileglues": renderLibrary = "libmobileglues.so"; break;
             case "opengles3_ltw" : renderLibrary = "libltw.so"; break;
             default:
                 Log.w("RENDER_LIBRARY", "No renderer selected, defaulting to opengles2");
