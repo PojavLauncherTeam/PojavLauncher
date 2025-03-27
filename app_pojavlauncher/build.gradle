@@ -229,6 +229,5 @@ dependencies {
 
     implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
 
-    include ':MobileGlues'
-project(':MobileGlues').projectDir = file('MobileGlues')
+    implementation project(':MobileGlues')
 }
