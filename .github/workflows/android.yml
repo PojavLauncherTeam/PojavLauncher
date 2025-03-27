@@ -1,4 +1,4 @@
-zk9.name: Android CI
+name: Android CI
 
 on:
   push:
