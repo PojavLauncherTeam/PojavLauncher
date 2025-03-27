@@ -12,7 +12,7 @@ on:
 
 jobs:
   build:
-    runs-on: latest
+    runs-on: ubuntu-latest
     env:
       GPLAY_KEYSTORE_PASSWORD: ${{ secrets.GPLAY_KEYSTORE_PASSWORD }}
       CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
