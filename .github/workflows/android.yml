@@ -7,7 +7,7 @@ on:
     types: [ opened, reopened ]
   push:
     branches-ignore:
-      - 'l10n_v3_openjdk2'v5
+      - 'l10n_v3_openjdk2'
   workflow_dispatch:
 
 jobs:
