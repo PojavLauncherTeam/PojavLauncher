@@ -1,4 +1,4 @@
-[submodule "MobileGlues"]
-	path = MobileGlues
-	url = https://github.com/MobileGL-Dev/MobileGlues.git
+[submodule "MG"]
+	path = MG
+	url = https://github.com/MobileGL-Dev/MobileGlues
 	branch = plugin
