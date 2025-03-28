@@ -20,18 +20,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Set up JDK 8
+      - name: Set up JDK 21
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
-          java-version: '8'
+          java-version: '21'
 
       - name: Get LTW
         run: |
           apt update && apt install wget
           cd app_pojavlauncher/libs
           wget https://github.com/PojavLauncherTeam/LTW/releases/latest/download/ltw-release.aar
-
+      - name: Get MobileGlues
+        run: |
+          git https://github.com/MobileGL-Dev/MobileGlues
+          
       - name: Get JRE 8
         uses: dawidd6/action-download-artifact@v2
         with:
