@@ -20,18 +20,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Set up JDK 8
+      - name: Set up JDK 21
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
-          java-version: '8'
+          java-version: '21'
 
+      - name: Get MobileGlues
+        run: |
+          apt update && apt install git
+          git clone https://github.com/MobileGL-Dev/MobileGlues
+    
       - name: Get LTW
         run: |
           apt update && apt install wget
           cd app_pojavlauncher/libs
           wget https://github.com/PojavLauncherTeam/LTW/releases/latest/download/ltw-release.aar
-
+      
       - name: Get JRE 8
         uses: dawidd6/action-download-artifact@v2
         with:
@@ -89,21 +94,10 @@ jobs:
       - name: Build Debug .apk
         run: |
           # Build the launcher
-          gradle :app_pojavlauncher:assembleDebug
+          gradle :app_pojavlauncher:assembledebug
           mv app_pojavlauncher/build/outputs/apk/debug/app_pojavlauncher-debug.apk out/app-debug.apk
 
-      - name: Build APK without runtime
-        run: |
-          rm -r app_pojavlauncher/src/main/assets/components/jre
-          rm -r app_pojavlauncher/src/main/assets/components/jre-new
-          rm -r app_pojavlauncher/src/main/assets/components/jre-21
-          gradle assembleDebug
-          mv app_pojavlauncher/build/outputs/apk/debug/app_pojavlauncher-debug.apk out/app-debug-noruntime.apk
-      - name: Gen md5sums
-        run: |
-          md5sum out/app-debug.apk > out/app-debug.md5
-          md5sum out/app-debug-noruntime.apk > out/app-debug-noruntime.md5
-
+      
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:

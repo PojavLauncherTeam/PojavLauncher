@@ -2,7 +2,9 @@ plugins {
     id 'com.android.application' version '8.7.2'
 }
 
-static def getDate() { return new Date().format('yyyyMMdd') }
+static def getDate() {
+    return new Date().format('yyyyMMdd')
+}
 
 static def getDateSeconds() {
     if (System.getenv("GITHUB_ACTIONS") == "true") {
@@ -13,12 +15,9 @@ static def getDateSeconds() {
 }
 
 def getVersionName = {
-    // Get the last version tag, as well as the short head of the last commit
     ByteArrayOutputStream TAG = new ByteArrayOutputStream()
     ByteArrayOutputStream BRANCH = new ByteArrayOutputStream()
-    // Used by the fallback for github actions
     ByteArrayOutputStream TAG_PART_COMMIT = new ByteArrayOutputStream()
-    String TAG_STRING
 
     exec {
         try {
@@ -26,34 +25,31 @@ def getVersionName = {
             ignoreExitValue true
             standardOutput = TAG
         } catch (Exception e) {
-            e.printStackTrace();
+            e.printStackTrace()
         }
     }
 
-    if (TAG.toString() == "") {
+    if (TAG.toString().trim().isEmpty()) {
         exec {
-            // Fallback for action builds
             try {
                 commandLine 'git', 'describe', '--always', '--tags'
                 ignoreExitValue true
                 standardOutput = TAG_PART_COMMIT
             } catch (Exception e) {
+                e.printStackTrace()
             }
         }
     }
 
-
-    if(TAG.toString() != ""){
-        TAG_STRING = TAG.toString()
-    }else {
-        if(TAG_PART_COMMIT.toString().trim() == ""){
-             //Fallback no repo
-            return ("LOCAL-" + "${getDate()}")
-        }else {
-            // Used by github actions
-            TAG_STRING =  'gladiolus-' + "${getDate()}" + "-" + TAG_PART_COMMIT.toString().trim()
+    def TAG_STRING
+    if (!TAG.toString().trim().isEmpty()) {
+        TAG_STRING = TAG.toString().trim()
+    } else {
+        if (TAG_PART_COMMIT.toString().trim().isEmpty()) {
+            TAG_STRING = "LOCAL-${getDate()}"
+        } else {
+            TAG_STRING = "gladiolus-${getDate()}-${TAG_PART_COMMIT.toString().trim()}"
         }
-
     }
 
     exec {
@@ -62,22 +58,23 @@ def getVersionName = {
             ignoreExitValue true
             standardOutput = BRANCH
         } catch (Exception e) {
-            e.printStackTrace();
+            e.printStackTrace()
         }
     }
 
-    return TAG_STRING.trim().replace("-g", "-") + "-" + BRANCH.toString().trim()
+    return TAG_STRING.replace("-g", "-") + "-" + BRANCH.toString().trim()
 }
 
 def getCFApiKey = {
-    String key = System.getenv("CURSEFORGE_API_KEY");
-    if(key != null) return key;
-    File curseforgeKeyFile = new File("./curseforge_key.txt");
-    if(curseforgeKeyFile.canRead() && curseforgeKeyFile.isFile()) {
-        return curseforgeKeyFile.text;
+    String key = System.getenv("CURSEFORGE_API_KEY")
+    if (key != null) {
+        return key
     }
-    logger.warn('BUILD: You have no CurseForge key, the curseforge api will get disabled !');
-    return "DUMMY";
+    File curseforgeKeyFile = new File("./curseforge_key.txt")
+    if (curseforgeKeyFile.canRead()) {
+        return curseforgeKeyFile.text.trim()
+    }
+    return ""
 }
 
 configurations {
@@ -88,13 +85,9 @@ configurations {
 }
 
 android {
-    namespace 'net.kdt.pojavlaunch'
-
+    namespace = "net.kdt.pojavlaunch"
     compileSdk = 34
-
-    lintOptions {
-        abortOnError false
-    }
+    ndkVersion = "27.1.12297006"
 
     signingConfigs {
         customDebug {
@@ -117,7 +110,7 @@ android {
         targetSdkVersion 34
         versionCode getDateSeconds()
         versionName getVersionName()
-        multiDexEnabled true //important
+        multiDexEnabled true
         resValue 'string', 'curseforge_api_key', getCFApiKey()
     }
 
@@ -125,32 +118,11 @@ android {
         debug {
             applicationIdSuffix '.debug'
             minifyEnabled false
-            shrinkResources false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.customDebug
-            resValue 'string', 'application_package', 'net.kdt.pojavlaunch.debug'
-            resValue 'string', 'storageProviderAuthorities', 'net.kdt.pojavlaunch.scoped.gamefolder.debug'
-            resValue 'string', 'shareProviderAuthority', 'net.kdt.pojavlaunch.scoped.controlfolder.debug'
         }
-        proguard {
-            initWith debug
-            minifyEnabled true
-            shrinkResources true
-        }
-        proguardNoDebug {
-            initWith proguard
-            debuggable false
-        }
-
         release {
-            // Don't set to true or java.awt will be a.a or something similar.
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            // defaultConfig already set
-            // multiDexEnabled = true
-            // debuggable = true
-            resValue 'string', 'storageProviderAuthorities', 'net.kdt.pojavlaunch.scoped.gamefolder'
-            resValue 'string', 'application_package', 'net.kdt.pojavlaunch'
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         gplay {
             initWith release
@@ -158,23 +130,15 @@ android {
         }
     }
 
-    ndkVersion = "25.2.9519653"
-
-    externalNativeBuild {
-        ndkBuild {
-            path file('src/main/jni/Android.mk')
-        }
-    }
-
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 
-    bundle {
-        language {
-            enableSplit = false
-        }
+    buildFeatures {
+        buildConfig = true
+        viewBinding = true
+        prefab = true
     }
 
     packagingOptions {
@@ -184,17 +148,13 @@ android {
         pickFirst '**/libbytehook.so'
     }
 
-    buildFeatures {
-        prefab true
-        buildConfig true
+    externalNativeBuild {
+        ndkBuild {
+            path file('src/main/jni/Android.mk')
+        }
     }
 
     buildToolsVersion = '34.0.0'
-}
-
-afterEvaluate {
-    // Explicit dependencies for which the apk relies on
-    tasks.mergeDebugAssets.dependsOn(":forge_installer:jar", ":arc_dns_injector:jar", ":jre_lwjgl3glfw:jar")
 }
 
 dependencies {
@@ -228,4 +188,9 @@ dependencies {
     // implementation 'net.sourceforge.streamsupport:streamsupport-cfuture:1.7.0'
 
     implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+    implementation project(':MobileGlues')
+}
+                   
+afterEvaluate {
+    tasks.mergeDebugAssets.dependsOn(":forge_installer:jar", ":arc_dns_injector:jar", ":jre_lwjgl3glfw:jar")
 }
