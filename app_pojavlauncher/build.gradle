@@ -1,232 +1,147 @@
-plugins {
-    id 'com.android.application' version '8.7.2'
-}
+plugins { id 'com.android.application' version '8.7.2' id 'kotlin-android' }
 
 static def getDate() { return new Date().format('yyyyMMdd') }
 
-static def getDateSeconds() {
-    if (System.getenv("GITHUB_ACTIONS") == "true") {
-        return 9934841 + Integer.parseInt(System.getenv("GITHUB_RUN_NUMBER"))
-    } else {
-        return 172005
+static def getDateSeconds() { if (System.getenv("GITHUB_ACTIONS") == "true") { return 9934841 + Integer.parseInt(System.getenv("GITHUB_RUN_NUMBER")) } else { return 172005 } }
+
+def getVersionName = { ByteArrayOutputStream TAG = new ByteArrayOutputStream() ByteArrayOutputStream BRANCH = new ByteArrayOutputStream() ByteArrayOutputStream TAG_PART_COMMIT = new ByteArrayOutputStream() String TAG_STRING
+
+exec {
+    try {
+        commandLine 'git', 'describe', '--tags'
+        ignoreExitValue true
+        standardOutput = TAG
+    } catch (Exception e) {
+        e.printStackTrace();
     }
 }
 
-def getVersionName = {
-    // Get the last version tag, as well as the short head of the last commit
-    ByteArrayOutputStream TAG = new ByteArrayOutputStream()
-    ByteArrayOutputStream BRANCH = new ByteArrayOutputStream()
-    // Used by the fallback for github actions
-    ByteArrayOutputStream TAG_PART_COMMIT = new ByteArrayOutputStream()
-    String TAG_STRING
-
+if (TAG.toString() == "") {
     exec {
         try {
-            commandLine 'git', 'describe', '--tags'
+            commandLine 'git', 'describe', '--always', '--tags'
             ignoreExitValue true
-            standardOutput = TAG
+            standardOutput = TAG_PART_COMMIT
         } catch (Exception e) {
-            e.printStackTrace();
         }
     }
+}
 
-    if (TAG.toString() == "") {
-        exec {
-            // Fallback for action builds
-            try {
-                commandLine 'git', 'describe', '--always', '--tags'
-                ignoreExitValue true
-                standardOutput = TAG_PART_COMMIT
-            } catch (Exception e) {
-            }
-        }
-    }
-
-
-    if(TAG.toString() != ""){
-        TAG_STRING = TAG.toString()
+if(TAG.toString() != ""){
+    TAG_STRING = TAG.toString()
+}else {
+    if(TAG_PART_COMMIT.toString().trim() == ""){
+         return ("LOCAL-" + "${getDate()}")
     }else {
-        if(TAG_PART_COMMIT.toString().trim() == ""){
-             //Fallback no repo
-            return ("LOCAL-" + "${getDate()}")
-        }else {
-            // Used by github actions
-            TAG_STRING =  'gladiolus-' + "${getDate()}" + "-" + TAG_PART_COMMIT.toString().trim()
-        }
-
-    }
-
-    exec {
-        try {
-            commandLine 'git', 'branch', '--show-current'
-            ignoreExitValue true
-            standardOutput = BRANCH
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    return TAG_STRING.trim().replace("-g", "-") + "-" + BRANCH.toString().trim()
-}
-
-def getCFApiKey = {
-    String key = System.getenv("CURSEFORGE_API_KEY");
-    if(key != null) return key;
-    File curseforgeKeyFile = new File("./curseforge_key.txt");
-    if(curseforgeKeyFile.canRead() && curseforgeKeyFile.isFile()) {
-        return curseforgeKeyFile.text;
-    }
-    logger.warn('BUILD: You have no CurseForge key, the curseforge api will get disabled !');
-    return "DUMMY";
-}
-
-configurations {
-    instrumentedClasspath {
-        canBeConsumed = false
-        canBeResolved = true
+        TAG_STRING =  'gladiolus-' + "${getDate()}" + "-" + TAG_PART_COMMIT.toString().trim()
     }
 }
 
-android {
-    namespace 'net.kdt.pojavlaunch'
-
-    compileSdk = 34
-
-    lintOptions {
-        abortOnError false
+exec {
+    try {
+        commandLine 'git', 'branch', '--show-current'
+        ignoreExitValue true
+        standardOutput = BRANCH
+    } catch (Exception e) {
+        e.printStackTrace();
     }
-
-    signingConfigs {
-        customDebug {
-            storeFile file("debug.keystore")
-            storePassword "android"
-            keyAlias "androiddebugkey"
-            keyPassword "android"
-        }
-        googlePlayBuild {
-            storeFile file("upload.jks")
-            storePassword System.getenv("GPLAY_KEYSTORE_PASSWORD")
-            keyAlias "upload"
-            keyPassword System.getenv("GPLAY_KEYSTORE_PASSWORD")
-        }
-    }
-
-    defaultConfig {
-        applicationId "net.kdt.pojavlaunch"
-        minSdkVersion 21
-        targetSdkVersion 34
-        versionCode getDateSeconds()
-        versionName getVersionName()
-        multiDexEnabled true //important
-        resValue 'string', 'curseforge_api_key', getCFApiKey()
-    }
-
-    buildTypes {
-        debug {
-            applicationIdSuffix '.debug'
-            minifyEnabled false
-            shrinkResources false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.customDebug
-            resValue 'string', 'application_package', 'net.kdt.pojavlaunch.debug'
-            resValue 'string', 'storageProviderAuthorities', 'net.kdt.pojavlaunch.scoped.gamefolder.debug'
-            resValue 'string', 'shareProviderAuthority', 'net.kdt.pojavlaunch.scoped.controlfolder.debug'
-        }
-        proguard {
-            initWith debug
-            minifyEnabled true
-            shrinkResources true
-        }
-        proguardNoDebug {
-            initWith proguard
-            debuggable false
-        }
-
-        release {
-            // Don't set to true or java.awt will be a.a or something similar.
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            // defaultConfig already set
-            // multiDexEnabled = true
-            // debuggable = true
-            resValue 'string', 'storageProviderAuthorities', 'net.kdt.pojavlaunch.scoped.gamefolder'
-            resValue 'string', 'application_package', 'net.kdt.pojavlaunch'
-        }
-        gplay {
-            initWith release
-            signingConfig signingConfigs.googlePlayBuild
-        }
-    }
-
-    ndkVersion = "25.2.9519653"
-
-    externalNativeBuild {
-        ndkBuild {
-            path file('src/main/jni/Android.mk')
-        }
-    }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-
-    bundle {
-        language {
-            enableSplit = false
-        }
-    }
-
-    packagingOptions {
-        jniLibs {
-            useLegacyPackaging = true
-        }
-        pickFirst '**/libbytehook.so'
-    }
-
-    buildFeatures {
-        prefab true
-        buildConfig true
-    }
-
-    buildToolsVersion = '34.0.0'
 }
 
-afterEvaluate {
-    // Explicit dependencies for which the apk relies on
-    tasks.mergeDebugAssets.dependsOn(":forge_installer:jar", ":arc_dns_injector:jar", ":jre_lwjgl3glfw:jar")
+return TAG_STRING.trim().replace("-g", "-") + "-" + BRANCH.toString().trim()
+
 }
 
-dependencies {
-    implementation 'javax.annotation:javax.annotation-api:1.3.2'
-    implementation 'commons-codec:commons-codec:1.15'
-    // implementation 'com.wu-man:android-bsf-api:3.1.3'
-    implementation 'androidx.preference:preference:1.2.0'
-    //implementation 'androidx.core:core:1.7.0'
-    implementation 'androidx.drawerlayout:drawerlayout:1.2.0'
-    implementation 'androidx.viewpager2:viewpager2:1.1.0-beta01'
-    implementation 'androidx.annotation:annotation:1.5.0'
+def getCFApiKey = { String key = System.getenv("CURSEFORGE_API_KEY"); if(key != null) return key; File curseforgeKeyFile = new File("./curseforge_key.txt"); if(curseforgeKeyFile.canRead() && curseforgeKeyFile.isFile()) { return curseforgeKeyFile.text; } logger.warn('BUILD: You have no CurseForge key, the curseforge api will get disabled !'); return "DUMMY"; }
 
-    implementation "androidx.constraintlayout:constraintlayout:2.1.4"
+configurations { instrumentedClasspath { canBeConsumed = false canBeResolved = true } }
 
-    implementation 'com.github.duanhong169:checkerboarddrawable:1.0.2'
-    implementation 'com.github.PojavLauncherTeam:portrait-sdp:ed33e89cbc'
-    implementation 'com.github.PojavLauncherTeam:portrait-ssp:6c02fd739b'
-    implementation 'com.github.Mathias-Boulay:ExtendedView:1.0.0'
-    implementation 'com.github.Mathias-Boulay:android_gamepad_remapper:2.0.3'
-    implementation 'com.github.Mathias-Boulay:virtual-joystick-android:1.14'
+android { namespace = "net.kdt.pojavlaunch" compileSdk = 34 ndkVersion = "27.1.12297006"
 
-    // implementation 'com.intuit.sdp:sdp-android:1.0.5'
-    // implementation 'com.intuit.ssp:ssp-android:1.0.5'
-
-    implementation 'org.tukaani:xz:1.8'
-    // Our version of exp4j can be built from source at
-    // https://github.com/PojavLauncherTeam/exp4j
-    implementation 'net.sourceforge.htmlcleaner:htmlcleaner:2.6.1'
-    implementation 'com.bytedance:bytehook:1.0.9'
-
-    // implementation 'net.sourceforge.streamsupport:streamsupport-cfuture:1.7.0'
-
-    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
-    implementation project(':MobileGlues')
+signingConfigs {
+    customDebug {
+        storeFile file("debug.keystore")
+        storePassword "android"
+        keyAlias "androiddebugkey"
+        keyPassword "android"
+    }
+    googlePlayBuild {
+        storeFile file("upload.jks")
+        storePassword System.getenv("GPLAY_KEYSTORE_PASSWORD")
+        keyAlias "upload"
+        keyPassword System.getenv("GPLAY_KEYSTORE_PASSWORD")
+    }
 }
+
+defaultConfig {
+    applicationId "net.kdt.pojavlaunch"
+    minSdkVersion 21
+    targetSdkVersion 34
+    versionCode getDateSeconds()
+    versionName getVersionName()
+    multiDexEnabled true
+    resValue 'string', 'curseforge_api_key', getCFApiKey()
+}
+
+buildTypes {
+    debug {
+        applicationIdSuffix '.debug'
+        minifyEnabled false
+        signingConfig signingConfigs.customDebug
+    }
+    release {
+        minifyEnabled true
+        proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+    }
+    gplay {
+        initWith release
+        signingConfig signingConfigs.googlePlayBuild
+    }
+}
+
+compileOptions {
+    sourceCompatibility JavaVersion.VERSION_11
+    targetCompatibility JavaVersion.VERSION_11
+}
+
+kotlinOptions {
+    jvmTarget = "11"
+}
+
+buildFeatures {
+    buildConfig = true
+    viewBinding = true
+    prefab = true
+}
+
+packagingOptions {
+    jniLibs {
+        useLegacyPackaging = true
+    }
+    pickFirst '**/libbytehook.so'
+}
+
+externalNativeBuild {
+    ndkBuild {
+        path file('src/main/jni/Android.mk')
+    }
+}
+
+buildToolsVersion = '34.0.0'
+
+}
+
+dependencies { 
+    implementation 'javax.annotation:javax.annotation-api:1.3.2' 
+    implementation 'commons-codec:commons-codec:1.15' 
+    implementation 'androidx.preference:preference:1.2.0' 
+    implementation 'androidx.drawerlayout:drawerlayout:1.2.0' 
+    implementation 'androidx.viewpager2:viewpager2:1.1.0-beta01' 
+    implementation 'androidx.annotation:annotation:1.5.0' 
+    implementation "androidx.constraintlayout:constraintlayout:2.1.4" 
+    implementation 'com.github.duanhong169:checkerboarddrawable:1.0.2' 
+    implementation project(":MobileGlues") 
+}
+
+afterEvaluate { tasks.mergeDebugAssets.dependsOn(":forge_installer:jar", ":arc_dns_injector:jar", ":jre_lwjgl3glfw:jar") 
+}
+
