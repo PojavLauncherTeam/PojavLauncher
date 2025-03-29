@@ -2,9 +2,22 @@ package net.kdt.pojavlaunch.utils;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
-import android.content.ContentResolver; import android.content.Context; import android.net.Uri; import android.os.Build; import android.provider.DocumentsContract;
+import android.content.ContentResolver; 
+import android.content.Context; 
+import android.net.Uri; 
+import android.os.Build; 
+import android.provider.DocumentsContract;
 
-import java.io.BufferedOutputStream; import java.io.ByteArrayOutputStream; import java.io.File; import java.io.IOException; import java.io.InputStream; import java.io.OutputStream; import java.nio.charset.Charset; import java.nio.charset.StandardCharsets; import java.nio.file.Files; import java.nio.file.Path;
+import java.io.BufferedOutputStream; 
+import java.io.ByteArrayOutputStream; 
+import java.io.File; 
+import java.io.IOException; 
+import java.io.InputStream; 
+import java.io.OutputStream; 
+import java.nio.charset.Charset; 
+import java.nio.charset.StandardCharsets; 
+import java.nio.file.Files; 
+import java.nio.file.Path;
 
 public class FileUtils {
 
