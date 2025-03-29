@@ -26,16 +26,13 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
 
-      - name: Get LTW
+      - name: Get LTW&MobileGlues
         run: |
           apt update && apt install wget
           cd app_pojavlauncher/libs
           wget https://github.com/PojavLauncherTeam/LTW/releases/latest/download/ltw-release.aar
+          wget https://github.com/ItsWinterBush26/MobileGlues_AAR_Pojav/releases/download/MobileGlues.aar/MGR-release.aar
       
-      - name: Get MobileGlues
-        run: |
-          git clone https://github.com/MobileGL-Dev/MobileGlues
-          
       - name: Get JRE 8
         uses: dawidd6/action-download-artifact@v2
         with:

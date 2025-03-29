@@ -20,4 +20,3 @@ include ':app_pojavlauncher'
 
 include ':arc_dns_injector'
 include ':forge_installer'
-include ':MobileGlues'
