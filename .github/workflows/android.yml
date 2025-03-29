@@ -28,9 +28,8 @@ jobs:
 
       - name: Get MobileGlues
         run: |
-          apt update && apt install wget
-          cd app_pojavlauncher/libs
-          wget https://github.com/ItsWinterBush26/MobileGlues_AAR_Pojav/releases/download/MobileGlues.aar/MGR-release.aar
+          apt update && apt install git
+          git clone https://github.com/MobileGL-Dev/MobileGlues
     
       - name: Get LTW
         run: |
