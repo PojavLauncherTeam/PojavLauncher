@@ -1,0 +1,3 @@
+[submodule "gl4es"]
+	path = gl4es
+	url = https://github.com/PojavLauncherTeam/gl4es
