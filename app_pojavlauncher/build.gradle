@@ -188,11 +188,6 @@ dependencies {
     // implementation 'net.sourceforge.streamsupport:streamsupport-cfuture:1.7.0'
 
     implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
-    implementation 'libs.androidx.documentfile'
-    implementation 'libs.gson'
-    implementation 'libs.appcompat'
-    implementation 'libs.constraintlayout'
-    implementation 'libs.google.material'
     implementation project(':MobileGlues')
 }
                    
