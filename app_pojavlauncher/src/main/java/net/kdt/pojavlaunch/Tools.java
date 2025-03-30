@@ -255,7 +255,7 @@ public final class Tools {
         // for Adreno's OpenGL ES implementation
         return renderDistance > 7;
     }
-
+    
     public static void launchMinecraft(final AppCompatActivity activity, MinecraftAccount minecraftAccount,
                                        MinecraftProfile minecraftProfile, String versionId, int versionJavaRequirement) throws Throwable {
         int freeDeviceMemory = getFreeDeviceMemory(activity);
@@ -1367,6 +1367,8 @@ public final class Tools {
         // Currently, only 32-bit x86 does not have the Zink binary
         boolean deviceHasZinkBinary = !(Architecture.is32BitsDevice() && Architecture.isx86Device());
         boolean deviceHasOpenGLES3 = JREUtils.getDetectedVersion() >= 3;
+        // MobileGlues
+        boolean appHasMobileGlues = new File(Tools.NATIVE_LIB_DIR, "libmobileglues.so").exists();
         // LTW is an optional proprietary dependency
         boolean appHasLtw = new File(Tools.NATIVE_LIB_DIR, "libltw.so").exists();
         List<String> rendererIds = new ArrayList<>(defaultRenderers.length);
@@ -1376,7 +1378,7 @@ public final class Tools {
             if(rendererId.contains("vulkan") && !deviceHasVulkan) continue;
             if(rendererId.contains("zink") && !deviceHasZinkBinary) continue;
             if(rendererId.contains("ltw") && (!deviceHasOpenGLES3 || !appHasLtw)) continue;
-            if(rendererId.contains("mobileglues") && (!deviceHasOpenGLES3 || !appHasMobileGlues)) continue;
+            if(rendererId.contains("mobileglues") && (!deviceHasOpenGLES || !appHasMobileGlues)) continue;
             rendererIds.add(rendererId);
             rendererNames.add(defaultRendererNames[i]);
         }
