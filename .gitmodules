@@ -1,3 +1,6 @@
 [submodule "MobileGlues"]
 	path = MobileGlues
 	url = https://github.com/MobileGL-Dev/MobileGlues.git
+[submodule "gl4es"]
+        path = gl4es
+        url = https://github.com/ptitSeb/gl4es
