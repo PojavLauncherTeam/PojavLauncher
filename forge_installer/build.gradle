@@ -15,7 +15,7 @@ jar {
     from {
         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
-    if (gitUsed){
+    if (gitUsed()){
       File versionFile = file("../app_pojavlauncher/src/main/assets/components/forge_installer/version")
       versionFile.write(getGitHash(project.name))
     }

@@ -12,7 +12,7 @@ jar {
         attributes("Manifest-Version": "1.0",
                 "PreMain-Class": "git.artdeell.arcdns.ArcDNSInjectorAgent")
     }
-    if (gitUsed){
+    if (gitUsed()){
       File versionFile = file("../app_pojavlauncher/src/main/assets/components/arc_dns_injector/version")
       versionFile.write(getGitHash(project.name))
     }

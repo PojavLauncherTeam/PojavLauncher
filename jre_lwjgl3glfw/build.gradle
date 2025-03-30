@@ -10,7 +10,7 @@ jar {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     archiveBaseName = "lwjgl-glfw-classes"
     destinationDirectory.set(file("../app_pojavlauncher/src/main/assets/components/lwjgl3/"))
-    if (gitUsed){
+    if (gitUsed()){
       File versionFile = file("../app_pojavlauncher/src/main/assets/components/lwjgl3/version")
       versionFile.write(getGitHash(project.name))
     }
