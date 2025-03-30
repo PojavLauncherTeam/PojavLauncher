@@ -1378,7 +1378,7 @@ public final class Tools {
             if(rendererId.contains("vulkan") && !deviceHasVulkan) continue;
             if(rendererId.contains("zink") && !deviceHasZinkBinary) continue;
             if(rendererId.contains("ltw") && (!deviceHasOpenGLES3 || !appHasLtw)) continue;
-            if(rendererId.contains("mobileglues") && (!deviceHasOpenGLES || !appHasMobileGlues)) continue;
+            if(rendererId.contains("mobileglues") && (!deviceHasOpenGLES3 || !appHasMobileGlues)) continue;
             rendererIds.add(rendererId);
             rendererNames.add(defaultRendererNames[i]);
         }
