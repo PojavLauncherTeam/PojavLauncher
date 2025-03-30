@@ -9,6 +9,7 @@ import static net.kdt.pojavlaunch.Tools.shareLog;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_DUMP_SHADERS;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_VSYNC_IN_ZINK;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_ZINK_PREFER_SYSTEM_DRIVER;
+import static net.kdt.pojavlaunch.prefs.LauncherPreferences.*;
 
 import android.app.*;
 import android.content.*;
@@ -22,6 +23,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.oracle.dalvik.*;
 import java.io.*;
 import java.util.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.TimeZone;
 import net.kdt.pojavlaunch.*;
 import net.kdt.pojavlaunch.extra.ExtraConstants;
 import net.kdt.pojavlaunch.extra.ExtraCore;
@@ -30,6 +41,7 @@ import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.multirt.Runtime;
 import net.kdt.pojavlaunch.plugins.FFmpegPlugin;
 import net.kdt.pojavlaunch.prefs.*;
+import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import org.lwjgl.glfw.*;
 
 public class JREUtils {
@@ -177,14 +189,11 @@ public class JREUtils {
         envMap.put("TMPDIR", Tools.DIR_CACHE.getAbsolutePath());
         envMap.put("LIBGL_MIPMAP", "3");
 
-        // Prevent OptiFine (and other error-reporting stuff in Minecraft) from balooning the log
-        envMap.put("LIBGL_NOERROR", "1");
-
-        // On certain GLES drivers, overloading default functions shader hack fails, so disable it
-        envMap.put("LIBGL_NOINTOVLHACK", "1");
-
-        // Fix white color on banner and sheep, since GL4ES 1.1.5
-        envMap.put("LIBGL_NORMALIZE", "1");
+        if(LOCAL_RENDERER.startsWith("opengles2")) {
+            envMap.put("LIBGL_NOERROR", "1");
+            envMap.put("LIBGL_NOINTOVLHACK", "1");
+            envMap.put("LIBGL_NORMALIZE", "1");
+    }
 
         if(PREF_DUMP_SHADERS)
             envMap.put("LIBGL_VGPU_DUMP", "1");
@@ -219,6 +228,19 @@ public class JREUtils {
                 envMap.put("POJAVEXEC_EGL","libltw.so"); // Use ANGLE EGL
             }
         }
+
+        if (LOCAL_RENDERER.equals("opengles3_mges")) {
+            envMap.put("LIBGL_ES", "3");
+            envMap.put("POJAVEXEC_EGL","libmobileglues.so");
+            envMap.put("MG_DIR_PATH", Tools.DIR_CACHE.getAbsolutePath());
+            envMap.put("MG_maxGlslCacheSize", MG_GLSL_CACHE_SIZE);
+            envMap.put("MG_enableANGLE", MG_ANGLE_OPTION);
+            envMap.put("MG_enableNoError", MG_NOERROR_OPTION);
+            envMap.put("MG_multidrawMode", MG_MULTIDRAWMODE_OPTION);
+            envMap.put("MG_enableExtGL43", MG_EXT_GL43);
+            envMap.put("MG_enableExtComputeShader", MG_EXT_CS);
+        }
+
         if(LauncherPreferences.PREF_BIG_CORE_AFFINITY) envMap.put("POJAV_BIG_CORE_AFFINITY", "1");
         envMap.put("AWTSTUB_WIDTH", Integer.toString(CallbackBridge.windowWidth > 0 ? CallbackBridge.windowWidth : CallbackBridge.physicalWidth));
         envMap.put("AWTSTUB_HEIGHT", Integer.toString(CallbackBridge.windowHeight > 0 ? CallbackBridge.windowHeight : CallbackBridge.physicalHeight));
@@ -231,7 +253,7 @@ public class JREUtils {
             if (glesMajor < 3) {
                 //fallback to 2 since it's the minimum for the entire app
                 envMap.put("LIBGL_ES","2");
-            } else if (LOCAL_RENDERER.startsWith("opengles")) {
+            } else if (LOCAL_RENDERER.startsWith("opengles3")) {
                 envMap.put("LIBGL_ES", LOCAL_RENDERER.replace("opengles", "").replace("_5", ""));
             } else {
                 // TODO if can: other backends such as Vulkan.
@@ -469,18 +491,17 @@ public class JREUtils {
             case "opengles3":
                 renderLibrary = "libgl4es_114.so"; break;
             case "vulkan_zink": renderLibrary = "libOSMesa.so"; break;
+            case "opengles3_mges": renderLibrary = "libmobileglues.so"; break;
             case "opengles3_ltw" : renderLibrary = "libltw.so"; break;
             default:
                 Log.w("RENDER_LIBRARY", "No renderer selected, defaulting to opengles2");
                 renderLibrary = "libgl4es_114.so";
                 break;
         }
-
-        if (!dlopen(renderLibrary) && !dlopen(findInLdLibPath(renderLibrary))) {
-            Log.e("RENDER_LIBRARY","Failed to load renderer " + renderLibrary + ". Falling back to GL4ES 1.1.4");
-            LOCAL_RENDERER = "opengles2";
-            renderLibrary = "libgl4es_114.so";
-            dlopen(NATIVE_LIB_DIR + "/libgl4es_114.so");
+      
+        if (LOCAL_RENDERER.equals("opengles3_mges")) {
+            dlopen(NATIVE_LIB_DIR + "/libspirv-cross-c-shared.so");
+            dlopen(NATIVE_LIB_DIR + "/libshaderconv.so");
         }
         return renderLibrary;
     }

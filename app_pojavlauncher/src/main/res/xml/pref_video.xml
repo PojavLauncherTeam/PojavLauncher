@@ -11,6 +11,12 @@
             android:defaultValue="opengles2"
             android:icon="@drawable/ic_setting_engine"
             app2:useSimpleSummaryProvider="true"/>
+        
+        <Preference
+            android:key="renderer_mobileglues_settings"
+            android:title="@string/preference_renderer_mobileglues_settings"
+            android:icon="@drawable/ic_renderer_mg"
+            />
 
         <androidx.preference.SwitchPreferenceCompat
             android:defaultValue="false"
