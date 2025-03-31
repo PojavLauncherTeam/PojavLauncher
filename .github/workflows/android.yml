@@ -33,6 +33,7 @@ jobs:
           apt update && apt install wget
           cd app_pojavlauncher/libs
           wget https://github.com/PojavLauncherTeam/LTW/releases/latest/download/ltw-release.aar
+          wget https://github.com/ItsWinterBush26/LTW/releases/download/Rel/MobileGlues-release.aar
 
       - name: Get JRE 8
         uses: dawidd6/action-download-artifact@v2
