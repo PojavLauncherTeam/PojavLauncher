@@ -221,7 +221,7 @@ public class JREUtils {
                envMap.put("LIBGL_ES", "3");
                envMap.put("DLOPEN", "libspirv-cross-c-shared.so,libshaderconv.so");
                envMap.put("POJAV_RENDERER", "opengles3");
-               envMap.put("POJAVEXEC_EGL","libEGL.so");
+               envMap.put("POJAVEXEC_EGL","MobileGlues:libmobileglues.so:libEGL.so");
             }
         }
         if(LauncherPreferences.PREF_BIG_CORE_AFFINITY) envMap.put("POJAV_BIG_CORE_AFFINITY", "1");
