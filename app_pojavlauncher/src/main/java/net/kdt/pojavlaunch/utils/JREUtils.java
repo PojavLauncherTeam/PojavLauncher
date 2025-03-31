@@ -217,13 +217,16 @@ public class JREUtils {
             if(LOCAL_RENDERER.equals("opengles3_ltw")) {
                 envMap.put("LIBGL_ES", "3");
                 envMap.put("POJAVEXEC_EGL","libltw.so"); // Use ANGLE EGL
-            } else if(LOCAL_RENDERER.equals("opengles3_mobileglues")) {
-               envMap.put("LIBGL_ES", "3");
-               envMap.put("DLOPEN", "libspirv-cross-c-shared.so,libshaderconv.so");
-               envMap.put("POJAV_RENDERER", "opengles3");
-               envMap.put("POJAVEXEC_EGL","libEGL.so");
             }
         }
+        
+        if(LOCAL_RENDERER.equals("opengles3_mobileglues")) {
+            envMap.put("POJAV_RENDERER", "opengles3_mobileglues");
+            envMap.put("LIBGL_ES", "3");
+            envMap.put("DLOPEN", "libspirv-cross-c-shared.so,libshaderconv.so");
+            envMap.put("POJAVEXEC_EGL","libEGL.so");
+        }
+        
         if(LauncherPreferences.PREF_BIG_CORE_AFFINITY) envMap.put("POJAV_BIG_CORE_AFFINITY", "1");
         envMap.put("AWTSTUB_WIDTH", Integer.toString(CallbackBridge.windowWidth > 0 ? CallbackBridge.windowWidth : CallbackBridge.physicalWidth));
         envMap.put("AWTSTUB_HEIGHT", Integer.toString(CallbackBridge.windowHeight > 0 ? CallbackBridge.windowHeight : CallbackBridge.physicalHeight));
