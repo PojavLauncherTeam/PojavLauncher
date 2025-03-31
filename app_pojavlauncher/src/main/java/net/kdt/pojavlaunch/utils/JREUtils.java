@@ -247,7 +247,7 @@ public class JREUtils {
             }
         }
         
-        if (rendererId.startsWith("mg")) {
+        if (LOCAL_RENDERER.startsWith("mg")) {
             envMap.put("LIBGL_ES", "3");
         }
         if(info.isAdreno() && !PREF_ZINK_PREFER_SYSTEM_DRIVER) {
