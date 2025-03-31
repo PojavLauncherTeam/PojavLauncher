@@ -211,7 +211,7 @@ public class JREUtils {
         if(FFmpegPlugin.isAvailable) {
             envMap.put("POJAV_FFMPEG_PATH", FFmpegPlugin.executablePath);
         }
-
+        
         if(LOCAL_RENDERER != null) {
             envMap.put("POJAV_RENDERER", LOCAL_RENDERER);
             if(LOCAL_RENDERER.equals("opengles3_ltw")) {
@@ -220,9 +220,8 @@ public class JREUtils {
             }
         }
         
-        if(LOCAL_RENDERER.equals("opengles3_mobileglues")) {
-            envMap.put("POJAV_RENDERER", "opengles3_mobileglues");
-            envMap.put("LIBGL_ES", "3");
+        if(LOCAL_RENDERER.equals("mg_mobileglues")) {
+            envMap.put("POJAV_RENDERER", "mg_mobileglues");
             envMap.put("DLOPEN", "libspirv-cross-c-shared.so,libshaderconv.so");
             envMap.put("POJAVEXEC_EGL","libEGL.so");
         }
@@ -247,7 +246,10 @@ public class JREUtils {
                 envMap.put("LIBGL_ES", "3");
             }
         }
-
+        
+        if (rendererId.startsWith("mg")) {
+            envMap.put("LIBGL_ES", "3");
+        }
         if(info.isAdreno() && !PREF_ZINK_PREFER_SYSTEM_DRIVER) {
             envMap.put("POJAV_LOAD_TURNIP", "1");
         }
@@ -477,7 +479,7 @@ public class JREUtils {
             case "opengles3":
                 renderLibrary = "libgl4es_114.so"; break;
             case "vulkan_zink": renderLibrary = "libOSMesa.so"; break;
-            case "opengles3_mobileglues": renderLibrary = "libmobileglues.so"; break; // TODO: Add aarch64 detection because MG only supports aarch64
+            case "mg_mobileglues": renderLibrary = "libmobileglues.so"; break; // TODO: Add aarch64 detection because MG only supports aarch64
             case "opengles3_ltw" : renderLibrary = "libltw.so"; break;
             default:
                 Log.w("RENDER_LIBRARY", "No renderer selected, defaulting to opengles2");
