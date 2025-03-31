@@ -37,7 +37,10 @@ For more details, check out our [wiki](https://pojavlauncherteam.github.io/)!
 
 ## Introduction
 
-PojavLauncher is a Minecraft: Java Edition launcher for Android and iOS based on [Boardwalk](https://github.com/zhuowei/Boardwalk). This launcher can launch almost all available Minecraft versions ranging from rd-132211 to 1.21 snapshots (including Combat Test versions). Modding via Forge and Fabric are also supported. This repository contains source code for Android. For iOS/iPadOS, check out [PojavLauncher_iOS](https://github.com/PojavLauncherTeam/PojavLauncher_iOS).
+* PojavLauncher is a Minecraft: Java Edition launcher for Android and iOS based on [Boardwalk](https://github.com/zhuowei/Boardwalk)
+* This launcher can launch almost all available Minecraft versions ranging from rd-132211 to 1.21 snapshots (including Combat Test versions)
+* Modding via Forge and Fabric are also supported.
+* This repository contains source code for Android. For iOS/iPadOS, check out [PojavLauncher_iOS](https://github.com/PojavLauncherTeam/PojavLauncher_iOS).
 
 ## Getting PojavLauncher
 
@@ -95,6 +98,7 @@ If you need more control over the build process, follow these steps:
 * [x] Game surface zooming
 * [x] New input pipe rewritten to native code
 * [x] Rewritten entire controls system
+* [ ] More to come!
 
 ## Known Issues
 
@@ -137,15 +141,12 @@ PojavLauncher is licensed under [GNU LGPLv3](https://github.com/PojavLauncherTea
 
 We are currently focusing on:
 
-* Improving stability and performance.
-* Adding support for more Minecraft versions.
-* Enhancing the mod installation experience.
-* Addressing known issues.
+* Exploring new rendering technologies.
 
 Future plans include:
 
-* Implementing controller support.
-* Exploring new rendering technologies.
-* Expanding platform support.
+* Enhancing the mod installation experience.
+* Improving stability and performance.
+* Enhancing the mod installation experience.
 
 We welcome community feedback and suggestions for our roadmap.  Please feel free to open a feature request in our [issue tracker](https://github.com/PojavLauncherTeam/PojavLauncher/issues).
