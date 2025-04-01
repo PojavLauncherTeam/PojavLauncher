@@ -304,7 +304,7 @@ public class JREUtils {
 
         JREUtils.relocateLibPath(runtime, runtimeHome);
 
-        loadEnv(runtimeHome, runtime, versionInfo, gameDirectory != null);
+        loadEnv(runtimeHome, runtime, gameDirectory != null);
 
         setJavaEnvironment(activity, runtimeHome);
 
@@ -572,7 +572,7 @@ public class JREUtils {
         }
     }
 
-    private static void loadEnv(String jreHome, final Runtime runtime, VersionInfo versionInfo, boolean renderer) throws Throwable {
+    private static void loadEnv(String jreHome, final Runtime runtime, boolean renderer) throws Throwable {
         Map<String, String> envMap = new ArrayMap<>();
         envMap.put("JAVA_HOME", jreHome);
         envMap.put("LD_LIBRARY_PATH", LD_LIBRARY_PATH);
@@ -585,11 +585,6 @@ public class JREUtils {
             } else {
                 envMap.put("LIBGL_ES", "2");
             }
-        }
-
-        // Add version-specific environment variables
-        if (versionInfo != null) {
-            envMap.put("MC_VERSION", versionInfo.getVersion());
         }
 
         // Apply environment variables
