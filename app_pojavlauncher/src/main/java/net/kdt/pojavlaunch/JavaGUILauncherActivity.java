@@ -257,9 +257,10 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
 
     private void finalErrorDialog(CharSequence msg) {
         if (msg == null) msg = getString(R.string.global_error); // Fallback to a default message
+        final CharSequence finalMsg = msg; // Assign to a final variable
         runOnUiThread(() -> new AlertDialog.Builder(this)
                 .setTitle(R.string.global_error)
-                .setMessage(msg)
+                .setMessage(finalMsg) // Use the final variable here
                 .setPositiveButton(android.R.string.ok, (d, w) -> this.finish())
                 .setCancelable(false)
                 .show());
