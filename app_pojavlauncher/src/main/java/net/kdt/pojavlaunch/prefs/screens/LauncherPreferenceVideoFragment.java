@@ -31,8 +31,10 @@ import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.prefs.CustomSeekBarPreference;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
+import net.kdt.pojavlaunch.ui.CustomDialog;
 
 import java.util.Arrays;
+import java.util.ArrayList;
 
 /**
  * Fragment for any settings video related
