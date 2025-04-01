@@ -38,6 +38,13 @@ public class JREUtils {
     public static String LD_LIBRARY_PATH;
     public static String jvmLibraryPath;
 
+    // Define the missing constant
+    private static final String MG_GLSL_CACHE_SIZE = "128"; // Default value in MB
+    private static final String MG_ANGLE_OPTION = "1"; // Default value, adjust as needed
+    private static final String MG_NOERROR_OPTION = "1"; // Default value, adjust as needed
+    private static final String MG_EXT_GL43 = "1"; // Default value, adjust as needed
+    private static final String MG_EXT_CS = "1"; // Default value for compute shader extension
+
     public static String findInLdLibPath(String libName) {
         if(Os.getenv("LD_LIBRARY_PATH")==null) {
             try {

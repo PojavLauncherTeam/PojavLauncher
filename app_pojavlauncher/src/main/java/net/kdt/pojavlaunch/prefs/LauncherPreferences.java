@@ -18,6 +18,7 @@ import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.utils.JREUtils;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class LauncherPreferences {
     public static final String PREF_KEY_CURRENT_PROFILE = "currentProfile";
@@ -222,5 +223,13 @@ public class LauncherPreferences {
             LauncherPreferences.PREF_NOTCH_SIZE = -1;
         }
         Tools.updateWindowSize(activity);
+    }
+
+    public static ArrayList<String> getAngleOptions() {
+        ArrayList<String> angleOptions = new ArrayList<>();
+        angleOptions.add("Option 1");
+        angleOptions.add("Option 2");
+        angleOptions.add("Option 3");
+        return angleOptions;
     }
 }

@@ -126,29 +126,28 @@ public class LauncherPreferenceVideoFragment extends LauncherPreferenceFragment 
         enableExtGL43.setChecked(LauncherPreferences.MG_EXT_GL43.equals("1"));
         enableExtComputeShader.setChecked(LauncherPreferences.MG_EXT_CS.equals("1"));
 
-        new CustomDialog.Builder(getContext())
-                .setCustomView(view)
-                .setCancelable(false)
-                .setConfirmListener(R.string.alertdialog_done, customView -> {
-                    String cacheSize = maxGlslCacheSize.getText().toString();
+        new AlertDialog.Builder(getContext())
+            .setTitle("Dialog Title")
+            .setMessage("Dialog Message")
+            .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                String cacheSize = maxGlslCacheSize.getText().toString();
 
-                    LauncherPreferences.MG_GLSL_CACHE_SIZE = cacheSize;
-                    LauncherPreferences.MG_ANGLE_OPTION = Integer.toString(enableANGLE.getSelectedItemPosition());
-                    LauncherPreferences.MG_NOERROR_OPTION = Integer.toString(enableNoError.getSelectedItemPosition());
-                    LauncherPreferences.MG_EXT_GL43 = enableExtGL43.isChecked() ? "1" : "0";
-                    LauncherPreferences.MG_EXT_CS = enableExtComputeShader.isChecked() ? "1" : "0";
-                    LauncherPreferences.DEFAULT_PREF.edit()
-                            .putString("mg_glsl_cache_size", LauncherPreferences.MG_GLSL_CACHE_SIZE)
-                            .putString("mg_angle_option", LauncherPreferences.MG_ANGLE_OPTION)
-                            .putString("mg_noerror_option", LauncherPreferences.MG_NOERROR_OPTION)
-                            .putString("mg_ext_gl43", LauncherPreferences.MG_EXT_GL43)
-                            .putString("mg_ext_compute_shader", LauncherPreferences.MG_EXT_CS)
-                            .apply();
-                    return true;
-                })
-                .setCancelListener(R.string.alertdialog_cancel, customView -> true)
-                .setDraggable(true)
-                .build()
-                .show();
+                LauncherPreferences.MG_GLSL_CACHE_SIZE = cacheSize;
+                LauncherPreferences.MG_ANGLE_OPTION = Integer.toString(enableANGLE.getSelectedItemPosition());
+                LauncherPreferences.MG_NOERROR_OPTION = Integer.toString(enableNoError.getSelectedItemPosition());
+                LauncherPreferences.MG_EXT_GL43 = enableExtGL43.isChecked() ? "1" : "0";
+                LauncherPreferences.MG_EXT_CS = enableExtComputeShader.isChecked() ? "1" : "0";
+                LauncherPreferences.DEFAULT_PREF.edit()
+                        .putString("mg_glsl_cache_size", LauncherPreferences.MG_GLSL_CACHE_SIZE)
+                        .putString("mg_angle_option", LauncherPreferences.MG_ANGLE_OPTION)
+                        .putString("mg_noerror_option", LauncherPreferences.MG_NOERROR_OPTION)
+                        .putString("mg_ext_gl43", LauncherPreferences.MG_EXT_GL43)
+                        .putString("mg_ext_compute_shader", LauncherPreferences.MG_EXT_CS)
+                        .apply();
+            })
+            .setNegativeButton(android.R.string.cancel, (dialog, which) -> {
+                dialog.dismiss(); // Properly dismiss the dialog on cancel
+            })
+            .show();
     }
 }
