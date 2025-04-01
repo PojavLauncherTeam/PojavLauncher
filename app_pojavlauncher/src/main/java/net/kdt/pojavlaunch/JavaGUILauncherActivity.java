@@ -256,10 +256,11 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
     }
 
     private void finalErrorDialog(CharSequence msg) {
-        runOnUiThread(()-> new AlertDialog.Builder(this)
+        if (msg == null) msg = getString(R.string.global_error); // Fallback to a default message
+        runOnUiThread(() -> new AlertDialog.Builder(this)
                 .setTitle(R.string.global_error)
                 .setMessage(msg)
-                .setPositiveButton(android.R.string.ok, (d,w)->this.finish())
+                .setPositiveButton(android.R.string.ok, (d, w) -> this.finish())
                 .setCancelable(false)
                 .show());
     }

@@ -68,6 +68,13 @@ public class LauncherPreferences {
     public static boolean PREF_SKIP_NOTIFICATION_PERMISSION_CHECK = false;
     public static boolean PREF_VSYNC_IN_ZINK = true;
 
+    // MobileGlues Settings
+    public static String MG_GLSL_CACHE_SIZE = "30";
+    public static String MG_ANGLE_OPTION = "0";
+    public static String MG_NOERROR_OPTION = "0";
+    public static String MG_EXT_GL43 = "0";
+    public static String MG_EXT_CS = "0";
+
 
     public static void loadPreferences(Context ctx) {
         //Required for CTRLDEF_FILE and MultiRT
@@ -110,6 +117,13 @@ public class LauncherPreferences {
         PREF_SKIP_NOTIFICATION_PERMISSION_CHECK = DEFAULT_PREF.getBoolean(PREF_KEY_SKIP_NOTIFICATION_CHECK, false);
         PREF_VSYNC_IN_ZINK = DEFAULT_PREF.getBoolean("vsync_in_zink", true);
 
+        // MobileGlues Settings
+        MG_GLSL_CACHE_SIZE = DEFAULT_PREF.getString("mg_glsl_cache_size", "30");
+        MG_ANGLE_OPTION = DEFAULT_PREF.getString("mg_angle_option", "0");
+        MG_NOERROR_OPTION = DEFAULT_PREF.getString("mg_noerror_option", "0");
+        MG_EXT_GL43 = DEFAULT_PREF.getString("mg_ext_gl43", "0");
+        MG_EXT_CS = DEFAULT_PREF.getString("mg_ext_compute_shader", "0");
+
         String argLwjglLibname = "-Dorg.lwjgl.opengl.libname=";
         for (String arg : JREUtils.parseJavaArguments(PREF_CUSTOM_JAVA_ARGS)) {
             if (arg.startsWith(argLwjglLibname)) {
@@ -143,13 +157,6 @@ public class LauncherPreferences {
         int deviceRam = Tools.getTotalDeviceMemory(ctx);
         if (deviceRam < 1024) return 296;
         if (deviceRam < 1536) return 448;
-        if (deviceRam < 2048) return 656;
-        // Limit the max for 32 bits devices more harshly
-        if (is32BitsDevice()) return 696;
-
-        if (deviceRam < 3064) return 936;
-        if (deviceRam < 4096) return 1144;
-        if (deviceRam < 6144) return 1536;
         return 2048; //Default RAM allocation for 64 bits
     }
 

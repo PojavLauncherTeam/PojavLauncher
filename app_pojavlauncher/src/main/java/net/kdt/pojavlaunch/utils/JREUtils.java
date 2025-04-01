@@ -116,6 +116,7 @@ public class JREUtils {
                     byte[] buf = new byte[1024];
                     int len;
                     while ((len = p.getInputStream().read(buf)) != -1) {
+                        if (buf == null) break; // Add null check for safety
                         String currStr = new String(buf, 0, len);
                         Logger.appendToLog(currStr);
                     }
@@ -218,6 +219,14 @@ public class JREUtils {
                 envMap.put("LIBGL_ES", "3");
                 envMap.put("POJAVEXEC_EGL","libltw.so"); // Use ANGLE EGL
             }
+            if (LOCAL_RENDERER.equals("opengles3_mges")) {
+                envMap.put("MG_DIR_PATH", Tools.DIR_CACHE.getAbsolutePath());
+                envMap.put("MG_maxGlslCacheSize", MG_GLSL_CACHE_SIZE);
+                envMap.put("MG_enableANGLE", MG_ANGLE_OPTION);
+                envMap.put("MG_enableNoError", MG_NOERROR_OPTION);
+                envMap.put("MG_enableExtGL43", MG_EXT_GL43);
+                envMap.put("MG_enableExtComputeShader", MG_EXT_CS);
+            }
         }
         if(LauncherPreferences.PREF_BIG_CORE_AFFINITY) envMap.put("POJAV_BIG_CORE_AFFINITY", "1");
         envMap.put("AWTSTUB_WIDTH", Integer.toString(CallbackBridge.windowWidth > 0 ? CallbackBridge.windowWidth : CallbackBridge.physicalWidth));
@@ -232,7 +241,7 @@ public class JREUtils {
                 //fallback to 2 since it's the minimum for the entire app
                 envMap.put("LIBGL_ES","2");
             } else if (LOCAL_RENDERER.startsWith("opengles")) {
-                envMap.put("LIBGL_ES", LOCAL_RENDERER.replace("opengles", "").replace("_5", ""));
+                checkLIBGLESVersion(envMap);
             } else {
                 // TODO if can: other backends such as Vulkan.
                 // Sure, they should provide GLES 3 support.
@@ -281,6 +290,8 @@ public class JREUtils {
         String runtimeHome = MultiRTUtils.getRuntimeHome(runtime.name).getAbsolutePath();
 
         JREUtils.relocateLibPath(runtime, runtimeHome);
+
+        loadEnv(runtimeHome, runtime, versionInfo, gameDirectory != null);
 
         setJavaEnvironment(activity, runtimeHome);
 
@@ -470,6 +481,9 @@ public class JREUtils {
                 renderLibrary = "libgl4es_114.so"; break;
             case "vulkan_zink": renderLibrary = "libOSMesa.so"; break;
             case "opengles3_ltw" : renderLibrary = "libltw.so"; break;
+            case "opengles3_mges":
+                renderLibrary = "libmobileglues.so";
+                break;
             default:
                 Log.w("RENDER_LIBRARY", "No renderer selected, defaulting to opengles2");
                 renderLibrary = "libgl4es_114.so";
@@ -481,6 +495,10 @@ public class JREUtils {
             LOCAL_RENDERER = "opengles2";
             renderLibrary = "libgl4es_114.so";
             dlopen(NATIVE_LIB_DIR + "/libgl4es_114.so");
+        }
+        if (LOCAL_RENDERER.equals("opengles3_mges")) {
+            dlopen(NATIVE_LIB_DIR + "/libspirv-cross-c-shared.so");
+            dlopen(NATIVE_LIB_DIR + "/libshaderconv.so");
         }
         return renderLibrary;
     }
@@ -531,5 +549,43 @@ public class JREUtils {
         System.loadLibrary("exithook");
         System.loadLibrary("pojavexec");
         System.loadLibrary("pojavexec_awt");
+    }
+
+    private static void checkLIBGLESVersion(Map<String, String> envMap) {
+        if (LOCAL_RENDERER.startsWith("opengles3")) {
+            envMap.put("LIBGL_ES", "3");
+        } else {
+            envMap.put("LIBGL_ES", "2");
+        }
+    }
+
+    private static void loadEnv(String jreHome, final Runtime runtime, VersionInfo versionInfo, boolean renderer) throws Throwable {
+        Map<String, String> envMap = new ArrayMap<>();
+        envMap.put("JAVA_HOME", jreHome);
+        envMap.put("LD_LIBRARY_PATH", LD_LIBRARY_PATH);
+        envMap.put("PATH", jreHome + "/bin:" + Os.getenv("PATH"));
+
+        if (renderer && LOCAL_RENDERER != null) {
+            envMap.put("POJAV_RENDERER", LOCAL_RENDERER);
+            if (LOCAL_RENDERER.startsWith("opengles3")) {
+                envMap.put("LIBGL_ES", "3");
+            } else {
+                envMap.put("LIBGL_ES", "2");
+            }
+        }
+
+        // Add version-specific environment variables
+        if (versionInfo != null) {
+            envMap.put("MC_VERSION", versionInfo.getVersion());
+        }
+
+        // Apply environment variables
+        for (Map.Entry<String, String> env : envMap.entrySet()) {
+            try {
+                Os.setenv(env.getKey(), env.getValue(), true);
+            } catch (ErrnoException e) {
+                Log.e("JREUtils", "Failed to set environment variable: " + env.getKey(), e);
+            }
+        }
     }
 }

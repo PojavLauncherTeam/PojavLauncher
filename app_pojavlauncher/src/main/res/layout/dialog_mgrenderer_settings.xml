@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:singleLine="true"
+        android:textSize="19sp"
+        android:textStyle="bold"
+        android:text="@string/preference_renderer_mobileglues_settings" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/mg_option_glsl_cache" />
+
+    <EditText
+        android:id="@+id/mg_input_max_glsl_cache_size"
+        android:hint="@string/mg_option_glsl_cache_hint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberSigned" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/mg_option_angle" />
+
+    <Spinner
+        android:id="@+id/mg_spinner_angle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:minHeight="48dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/mg_option_no_error" />
+
+    <Spinner
+        android:id="@+id/mg_spinner_no_error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:minHeight="48dp" />
+
+    <Switch
+        android:id="@+id/mg_switch_ext_gl43"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/mg_option_ext_gl43" />
+
+    <Switch
+        android:id="@+id/mg_switch_ext_cs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/mg_option_ext_cs" />
+
+</LinearLayout>

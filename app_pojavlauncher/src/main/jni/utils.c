@@ -130,7 +130,8 @@ JNIEXPORT jint JNICALL Java_net_kdt_pojavlaunch_utils_JREUtils_executeBinary(JNI
 	char *exec_file_c = (char*) (*env)->GetStringUTFChars(env, execFile, 0);
 	void *exec_binary_handle = dlopen(exec_file_c, RTLD_LAZY);
 	
-	// (*env)->ReleaseStringUTFChars(env, ldLibraryPath, ld_library_path_c);
+	// Ensure all resources are released properly
+	(*env)->ReleaseStringUTFChars(env, ldLibraryPath, ld_library_path_c);
 	(*env)->ReleaseStringUTFChars(env, execFile, exec_file_c);
 	
 	char *exec_error_c = dlerror();
@@ -182,5 +183,4 @@ JNIEXPORT jint JNICALL Java_net_kdt_pojavlaunch_utils_JREUtils_executeForkedBina
 	}
 	return status;
 }
-*/
 

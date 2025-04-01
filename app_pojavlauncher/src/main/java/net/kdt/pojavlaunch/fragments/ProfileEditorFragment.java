@@ -264,6 +264,10 @@ public class ProfileEditorFragment extends Fragment implements CropperUtils.Crop
 
     @Override
     public void onCropped(Bitmap contentBitmap) {
+        if (contentBitmap == null) {
+            Tools.showErrorRemote(new Exception("Cropped bitmap is null"));
+            return;
+        }
         mProfileIcon.setImageBitmap(contentBitmap);
         Log.i("bitmap", "w="+contentBitmap.getWidth() +" h="+contentBitmap.getHeight());
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();

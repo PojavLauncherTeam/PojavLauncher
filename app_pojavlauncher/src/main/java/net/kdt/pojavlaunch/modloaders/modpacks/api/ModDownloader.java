@@ -78,9 +78,11 @@ public class ModDownloader {
     private void downloadFailed(IOException exception) {
         mTerminator.set(true);
         synchronized (mExceptionSyncPoint) {
-            if(mFirstIOException == null) {
+            if (mFirstIOException == null) {
                 mFirstIOException = exception;
-                mExceptionSyncPoint.notify();
+                if (Thread.holdsLock(mExceptionSyncPoint)) {
+                    mExceptionSyncPoint.notify();
+                }
             }
         }
     }

@@ -291,6 +291,10 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
 
     /** Pick the selected account, the one in settings if 0 is passed */
     private void pickAccount(int position){
+        if (mAccountList.isEmpty()) {
+            Tools.dialog(getContext(), getContext().getString(R.string.global_error), "No accounts available.");
+            return;
+        }
         MinecraftAccount selectedAccount;
         if(position != -1){
             PojavProfile.setCurrentProfile(getContext(), mAccountList.get(position));
