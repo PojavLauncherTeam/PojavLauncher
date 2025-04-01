@@ -38,6 +38,7 @@
         <item>opengles2</item> <!-- gl4es_extra 1.1.4 with OpenGL ES 2/"3" -->
         <item>vulkan_zink</item> <!-- virglrenderer with OpenGL ES 3 -->
         <item>opengles3_ltw</item>
+        <item>opengles3_mges</item>
     </string-array>
     <string-array name="download_source_names">
         <item>@string/global_default</item>
