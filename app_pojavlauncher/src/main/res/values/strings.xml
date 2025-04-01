@@ -430,30 +430,4 @@
     <string name="bta_installer_untested_versions">Untested BTA versions</string>
     <string name="bta_installer_nightly_versions">Nightly BTA versions</string>
     <string name="newdl_extracting_native_libraries">Extracting native libraries (%d/%d)</string>
-
-        <!-- MG Renderer Settings-->
-    <string name="preference_renderer_mobileglues_settings">MobileGlues Renderer Settings</string>
-
-    <string name="mg_option_glsl_cache">Max glsl cache size</string>
-    <string name="mg_option_glsl_cache_hint">enter -1 to disable</string>
-    <string name="mg_option_glsl_cache_helper">Unit: Megabytes (MB)</string>
-    <string name="mg_option_glsl_cache_error_invalid">Error: invalid number.</string>
-    <string name="mg_option_glsl_cache_error_unexpected">Error: unexpected error.</string>
-    <string name="mg_option_glsl_cache_error_range">Error: number cannot be 0 or less than -1.</string>
-
-    <string name="mg_option_angle">Use ANGLE as OpenGL ES driver</string>
-    <string name="mg_option_angle_disable_if_possible">Disable if possible</string>
-    <string name="mg_option_angle_enable_if_possible">Enable if possible</string>
-    <string name="mg_option_angle_disable">Disable</string>
-    <string name="mg_option_angle_enable">Enable</string>
-
-    <string name="mg_option_no_error">Error setting</string>
-    <string name="mg_option_no_error_auto">Auto</string>
-    <string name="mg_option_no_error_enable">Do not ignore</string>
-    <string name="mg_option_no_error_disable_pri">Ignore shader/program error</string>
-    <string name="mg_option_no_error_disable_sec">Ignore shader/program/framebuffer error</string>
-
-    <string name="mg_option_ext_gl43">Enable incomplete OpenGL43 extension</string>
-    <string name="mg_option_ext_cs">Enable incomplete ARB_compute_shader extension</string>
-</resources>
 </resources>
