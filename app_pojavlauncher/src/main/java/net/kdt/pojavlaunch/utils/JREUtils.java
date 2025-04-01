@@ -6,9 +6,7 @@ import static net.kdt.pojavlaunch.Tools.LOCAL_RENDERER;
 import static net.kdt.pojavlaunch.Tools.NATIVE_LIB_DIR;
 import static net.kdt.pojavlaunch.Tools.currentDisplayMetrics;
 import static net.kdt.pojavlaunch.Tools.shareLog;
-import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_DUMP_SHADERS;
-import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_VSYNC_IN_ZINK;
-import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_ZINK_PREFER_SYSTEM_DRIVER;
+import static net.kdt.pojavlaunch.prefs.LauncherPreferences.*;
 
 import android.app.*;
 import android.content.*;
