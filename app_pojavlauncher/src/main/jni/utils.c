@@ -154,7 +154,7 @@ JNIEXPORT jint JNICALL Java_net_kdt_pojavlaunch_utils_JREUtils_executeBinary(JNI
 	int cmd_argv = (*env)->GetArrayLength(env, cmdArgs);
 	char **cmd_args_c = convert_to_char_array(env, cmdArgs);
 	int result = Main_Function(cmd_argv, cmd_args_c);
-	free_char_array(env, cmdArgs, cmd_args_c);
+	free_char_array(env, cmdArgs, (const char **)cmd_args_c);
 	return result;
 }
 
@@ -183,4 +183,5 @@ JNIEXPORT jint JNICALL Java_net_kdt_pojavlaunch_utils_JREUtils_executeForkedBina
 	}
 	return status;
 }
+*/
 
