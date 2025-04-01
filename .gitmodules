@@ -1,0 +1,3 @@
+[submodule "MobileGlues"]
+	path = MobileGlues
+	url = https://github.com/MobileGL-Dev/MobileGlues.git

@@ -68,6 +68,12 @@ public class LauncherPreferences {
     public static boolean PREF_SKIP_NOTIFICATION_PERMISSION_CHECK = false;
     public static boolean PREF_VSYNC_IN_ZINK = true;
 
+	// MobileGlues Settings
+     public static String MG_GLSL_CACHE_SIZE = "128";
+     public static String MG_ANGLE_OPTION = "3";
+     public static String MG_NOERROR_OPTION = "0";
+     public static String MG_EXT_GL43 = "0";
+     public static String MG_EXT_CS = "0";
 
     public static void loadPreferences(Context ctx) {
         //Required for CTRLDEF_FILE and MultiRT
@@ -110,6 +116,13 @@ public class LauncherPreferences {
         PREF_SKIP_NOTIFICATION_PERMISSION_CHECK = DEFAULT_PREF.getBoolean(PREF_KEY_SKIP_NOTIFICATION_CHECK, false);
         PREF_VSYNC_IN_ZINK = DEFAULT_PREF.getBoolean("vsync_in_zink", true);
 
+	    // MobileGlues Settings
+         MG_GLSL_CACHE_SIZE = DEFAULT_PREF.getString("mg_glsl_cache_size", "30");
+         MG_ANGLE_OPTION = DEFAULT_PREF.getString("mg_angle_option", "0");
+         MG_NOERROR_OPTION = DEFAULT_PREF.getString("mg_noerror_option", "0");
+         MG_EXT_GL43 = DEFAULT_PREF.getString("mg_ext_gl43", "0");
+         MG_EXT_CS = DEFAULT_PREF.getString("mg_ext_compute_shader", "0");
+	    
         String argLwjglLibname = "-Dorg.lwjgl.opengl.libname=";
         for (String arg : JREUtils.parseJavaArguments(PREF_CUSTOM_JAVA_ARGS)) {
             if (arg.startsWith(argLwjglLibname)) {
@@ -128,8 +141,8 @@ public class LauncherPreferences {
             PREF_DEFAULT_RUNTIME = MultiRTUtils.getRuntimes().get(0).name;
             LauncherPreferences.DEFAULT_PREF.edit().putString("defaultRuntime",LauncherPreferences.PREF_DEFAULT_RUNTIME).apply();
         }
-    }
-
+    } 
+	
     /**
      * This functions aims at finding the best default RAM amount,
      * according to the RAM amount of the physical device.
@@ -192,7 +205,7 @@ public class LauncherPreferences {
         }
         return false;
     }
-
+	
     /** Compute the notch size to avoid being out of bounds */
     public static void computeNotchSize(Activity activity) {
         if (Build.VERSION.SDK_INT < P) return;
