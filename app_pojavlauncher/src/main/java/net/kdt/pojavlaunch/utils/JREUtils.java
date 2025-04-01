@@ -228,7 +228,7 @@ public class JREUtils {
                 envMap.put("LIBGL_ES", "3");
                 envMap.put("POJAVEXEC_EGL","libltw.so"); // Use ANGLE EGL
             }
-            if (LOCAL_RENDERER.equals("opengles3_mges")) {
+            else if (LOCAL_RENDERER.equals("opengles3_mges")) {
                 envMap.put("MG_DIR_PATH", Tools.DIR_CACHE.getAbsolutePath());
                 envMap.put("MG_maxGlslCacheSize", MG_GLSL_CACHE_SIZE);
                 envMap.put("MG_enableANGLE", MG_ANGLE_OPTION);
