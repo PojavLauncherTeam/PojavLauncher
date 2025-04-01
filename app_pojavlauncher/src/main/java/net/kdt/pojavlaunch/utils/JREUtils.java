@@ -31,21 +31,12 @@ import net.kdt.pojavlaunch.multirt.Runtime;
 import net.kdt.pojavlaunch.plugins.FFmpegPlugin;
 import net.kdt.pojavlaunch.prefs.*;
 import org.lwjgl.glfw.*;
-import android.util.ArrayMap; // Fix for ArrayMap
-import java.util.TimeZone; // Fix for TimeZone
 
 public class JREUtils {
     private JREUtils() {}
 
     public static String LD_LIBRARY_PATH;
     public static String jvmLibraryPath;
-
-    // Define the missing constant
-    private static final String MG_GLSL_CACHE_SIZE = "128"; // Default value in MB
-    private static final String MG_ANGLE_OPTION = "1"; // Default value, adjust as needed
-    private static final String MG_NOERROR_OPTION = "1"; // Default value, adjust as needed
-    private static final String MG_EXT_GL43 = "1"; // Default value, adjust as needed
-    private static final String MG_EXT_CS = "1"; // Default value for compute shader extension
 
     public static String findInLdLibPath(String libName) {
         if(Os.getenv("LD_LIBRARY_PATH")==null) {
@@ -125,7 +116,6 @@ public class JREUtils {
                     byte[] buf = new byte[1024];
                     int len;
                     while ((len = p.getInputStream().read(buf)) != -1) {
-                        if (buf == null) break; // Add null check for safety
                         String currStr = new String(buf, 0, len);
                         Logger.appendToLog(currStr);
                     }
@@ -228,13 +218,15 @@ public class JREUtils {
                 envMap.put("LIBGL_ES", "3");
                 envMap.put("POJAVEXEC_EGL","libltw.so"); // Use ANGLE EGL
             }
-            else if (LOCAL_RENDERER.equals("opengles3_mges")) {
+            else if(LOCAL_RENDERER.equals("opengles3_mges")) {
                 envMap.put("MG_DIR_PATH", Tools.DIR_CACHE.getAbsolutePath());
                 envMap.put("MG_maxGlslCacheSize", MG_GLSL_CACHE_SIZE);
                 envMap.put("MG_enableANGLE", MG_ANGLE_OPTION);
                 envMap.put("MG_enableNoError", MG_NOERROR_OPTION);
                 envMap.put("MG_enableExtGL43", MG_EXT_GL43);
                 envMap.put("MG_enableExtComputeShader", MG_EXT_CS);
+                dlopen(NATIVE_LIB_DIR + "/libspirv-cross-c-shared.so");
+                dlopen(NATIVE_LIB_DIR + "/libshaderconv.so");
             }
         }
         if(LauncherPreferences.PREF_BIG_CORE_AFFINITY) envMap.put("POJAV_BIG_CORE_AFFINITY", "1");
@@ -282,6 +274,14 @@ public class JREUtils {
         // return ldLibraryPath;
     }
 
+    private static void checkLIBGLESVersion(Map<String, String> envMap) {
+        if (LOCAL_RENDERER.startsWith("opengles3")) {
+            envMap.put("LIBGL_ES", "3");
+        } else {
+            envMap.put("LIBGL_ES", "2");
+        }
+    }
+
     private static void readCustomEnv(Map<String, String> envMap) throws IOException {
         File customEnvFile = new File(Tools.DIR_GAME_HOME, "custom_env.txt");
         if (customEnvFile.exists() && customEnvFile.isFile()) {
@@ -299,8 +299,6 @@ public class JREUtils {
         String runtimeHome = MultiRTUtils.getRuntimeHome(runtime.name).getAbsolutePath();
 
         JREUtils.relocateLibPath(runtime, runtimeHome);
-
-        loadEnv(runtimeHome, runtime, gameDirectory != null);
 
         setJavaEnvironment(activity, runtimeHome);
 
@@ -489,12 +487,12 @@ public class JREUtils {
             case "opengles3":
                 renderLibrary = "libgl4es_114.so"; break;
             case "vulkan_zink": renderLibrary = "libOSMesa.so"; break;
+            case "opengles3_mges" : renderLibrary = "libmobileglues.so"; break;
             case "opengles3_ltw" : renderLibrary = "libltw.so"; break;
-            case "opengles3_mges":
-                renderLibrary = "libmobileglues.so"; break;
             default:
                 Log.w("RENDER_LIBRARY", "No renderer selected, defaulting to opengles2");
-                renderLibrary = "libgl4es_114.so"; break;
+                renderLibrary = "libgl4es_114.so";
+                break;
         }
 
         if (!dlopen(renderLibrary) && !dlopen(findInLdLibPath(renderLibrary))) {
@@ -502,10 +500,6 @@ public class JREUtils {
             LOCAL_RENDERER = "opengles2";
             renderLibrary = "libgl4es_114.so";
             dlopen(NATIVE_LIB_DIR + "/libgl4es_114.so");
-        }
-        if (LOCAL_RENDERER.equals("opengles3_mges")) {
-            dlopen(NATIVE_LIB_DIR + "/libspirv-cross-c-shared.so");
-            dlopen(NATIVE_LIB_DIR + "/libshaderconv.so");
         }
         return renderLibrary;
     }
@@ -540,38 +534,7 @@ public class JREUtils {
         return false;
     }
 
-    private static void checkLIBGLESVersion(Map<String, String> envMap) {
-        if (LOCAL_RENDERER.startsWith("opengles3")) {
-            envMap.put("LIBGL_ES", "3");
-        } else {
-            envMap.put("LIBGL_ES", "2");
-        }
-    }
-
-    private static void loadEnv(String jreHome, final Runtime runtime, boolean renderer) throws Throwable {
-        Map<String, String> envMap = new ArrayMap<>();
-        envMap.put("JAVA_HOME", jreHome);
-        envMap.put("LD_LIBRARY_PATH", LD_LIBRARY_PATH);
-        envMap.put("PATH", jreHome + "/bin:" + Os.getenv("PATH"));
-
-        if (renderer && LOCAL_RENDERER != null) {
-            envMap.put("POJAV_RENDERER", LOCAL_RENDERER);
-            if (LOCAL_RENDERER.startsWith("opengles3")) {
-                envMap.put("LIBGL_ES", "3");
-            } else {
-                envMap.put("LIBGL_ES", "2");
-            }
-        }
-
-        // Apply environment variables
-        for (Map.Entry<String, String> env : envMap.entrySet()) {
-            try {
-                Os.setenv(env.getKey(), env.getValue(), true);
-            } catch (ErrnoException e) {
-                Log.e("JREUtils", "Failed to set environment variable: " + env.getKey(), e);
-            }
-        }
-        public static int getDetectedVersion() {
+    public static int getDetectedVersion() {
         return GLInfoUtils.getGlInfo().glesMajorVersion;
     }
     public static native int chdir(String path);
@@ -587,6 +550,5 @@ public class JREUtils {
         System.loadLibrary("exithook");
         System.loadLibrary("pojavexec");
         System.loadLibrary("pojavexec_awt");
-     }
-  }
+    }
 }
