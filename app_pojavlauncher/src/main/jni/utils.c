@@ -130,14 +130,21 @@ JNIEXPORT jint JNICALL Java_net_kdt_pojavlaunch_utils_JREUtils_executeBinary(JNI
 	char *exec_file_c = (char*) (*env)->GetStringUTFChars(env, execFile, 0);
 	void *exec_binary_handle = dlopen(exec_file_c, RTLD_LAZY);
 	
+	jstring ldLibraryPath = (*env)->NewStringUTF(env, getenv("LD_LIBRARY_PATH"));
+	if (ldLibraryPath == NULL) {
+		LOGE("Failed to retrieve LD_LIBRARY_PATH");
+		return -1;
+	}
 	const char *ld_library_path_c = (*env)->GetStringUTFChars(env, ldLibraryPath, NULL);
 	if (ld_library_path_c == NULL) {
 		// Handle error if GetStringUTFChars fails
+		(*env)->DeleteLocalRef(env, ldLibraryPath);
 		return -1;
 	}
 	
 	// Ensure all resources are released properly
 	(*env)->ReleaseStringUTFChars(env, ldLibraryPath, ld_library_path_c);
+	(*env)->DeleteLocalRef(env, ldLibraryPath);
 	(*env)->ReleaseStringUTFChars(env, execFile, exec_file_c);
 	
 	char *exec_error_c = dlerror();
