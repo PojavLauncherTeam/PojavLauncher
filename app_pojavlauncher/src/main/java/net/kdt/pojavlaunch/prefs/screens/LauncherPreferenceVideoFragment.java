@@ -23,6 +23,8 @@ import net.kdt.pojavlaunch.prefs.CustomSeekBarPreference;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_RENDERER;
 
+import java.util.ArrayList;
+
 /**
  * Fragment for any settings video related
  */

@@ -31,7 +31,12 @@ import net.kdt.pojavlaunch.multirt.Runtime;
 import net.kdt.pojavlaunch.plugins.FFmpegPlugin;
 import net.kdt.pojavlaunch.prefs.*;
 import org.lwjgl.glfw.*;
-import net.kdt.pojavlaunch.utils.VersionInfo;
+import android.util.ArrayMap; // Fix for ArrayMap
+import java.util.TimeZone; // Fix for TimeZone
+import net.kdt.pojavlaunch.bridge.CallbackBridge; // Fix for CallbackBridge
+import net.kdt.pojavlaunch.bridge.GLInfoUtils; // Fix for GLInfoUtils
+import net.kdt.pojavlaunch.bridge.Logger; // Fix for Logger
+import net.kdt.pojavlaunch.bridge.VersionInfo; // Fix for VersionInfo
 
 public class JREUtils {
     private JREUtils() {}
