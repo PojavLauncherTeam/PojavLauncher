@@ -1,29 +1,36 @@
 package net.kdt.pojavlaunch.prefs.screens;
 
+import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_RENDERER;
+
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.net.Uri;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+
+import androidx.preference.ListPreference;
+import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
+import androidx.preference.Preference;
+import android.text.InputFilter;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
-import android.view.LayoutInflater;
+import android.widget.Toast;
 
-import androidx.preference.ListPreference;
-import androidx.preference.SwitchPreference;
-import androidx.preference.SwitchPreferenceCompat;
-import androidx.preference.Preference;
-import androidx.appcompat.app.AlertDialog;
-
+import net.kdt.pojavlaunch.PojavApplication;
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.prefs.CustomSeekBarPreference;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
-import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_RENDERER;
-
-import java.util.ArrayList;
 
 /**
  * Fragment for any settings video related
@@ -34,7 +41,7 @@ public class LauncherPreferenceVideoFragment extends LauncherPreferenceFragment 
         addPreferencesFromResource(R.xml.pref_video);
         int resolution = (int) (LauncherPreferences.PREF_SCALE_FACTOR * 100);
 
-        // Disable notch checking behavior on android 8.1 and below.
+        //Disable notch checking behavior on android 8.1 and below.
         requirePreference("ignoreNotch").setVisible(Build.VERSION.SDK_INT >= Build.VERSION_CODES.P && LauncherPreferences.PREF_NOTCH_SIZE > 0);
 
         CustomSeekBarPreference resolutionSeekbar = requirePreference("resolutionRatio",
@@ -59,24 +66,25 @@ public class LauncherPreferenceVideoFragment extends LauncherPreferenceFragment 
 
         ListPreference rendererListPreference = requirePreference("renderer",
                 ListPreference.class);
+
+        Preference mgRendererSettingsPref = requirePreference("renderer_mobileglues_settings", Preference.class);
+        mgRendererSettingsPref.setOnPreferenceClickListener(preference -> {
+            mgRendererSettings();
+            return true;
+        });
+
         Tools.RenderersList renderersList = Tools.getCompatibleRenderers(getContext());
         rendererListPreference.setEntries(renderersList.rendererDisplayNames);
         rendererListPreference.setEntryValues(renderersList.rendererIds.toArray(new String[0]));
-
-        // Initialize mgRendererSettingsPref before usage
-        Preference mgRendererSettingsPref = requirePreference("renderer_mobileglues_settings", Preference.class);
-        rendererListPreference.setOnPreferenceChangeListener((preference, newValue) -> {
-            String currentRenderer = (String) newValue;
+        
+        rendererListPreference.setOnPreferenceChangeListener((preference, obj) -> {
+            String currentRenderer = (String) obj;
             Tools.LOCAL_RENDERER = currentRenderer;
             mgRendererSettingsPref.setVisible(currentRenderer.equals("opengles3_mges"));
             return true;
         });
 
-        mgRendererSettingsPref.setVisible(PREF_RENDERER.equals("opengles3_mges"));
-        mgRendererSettingsPref.setOnPreferenceClickListener(preference -> {
-            mgRendererSettings();
-            return true;
-        });
+        requirePreference("renderer_mobileglues_settings").setVisible(PREF_RENDERER.equals("opengles3_mges"));
 
         computeVisibility();
     }
@@ -129,28 +137,29 @@ public class LauncherPreferenceVideoFragment extends LauncherPreferenceFragment 
         enableExtGL43.setChecked(LauncherPreferences.MG_EXT_GL43.equals("1"));
         enableExtComputeShader.setChecked(LauncherPreferences.MG_EXT_CS.equals("1"));
 
-        new AlertDialog.Builder(getContext())
-            .setTitle("Dialog Title")
-            .setMessage("Dialog Message")
-            .setPositiveButton(android.R.string.ok, (dialog, which) -> {
-                String cacheSize = maxGlslCacheSize.getText().toString();
+        new CustomDialog.Builder(getContext())
+                .setCustomView(view)
+                .setCancelable(false)
+                .setConfirmListener(R.string.alertdialog_done, customView -> {
+                    String cacheSize = maxGlslCacheSize.getText().toString();
 
-                LauncherPreferences.MG_GLSL_CACHE_SIZE = cacheSize;
-                LauncherPreferences.MG_ANGLE_OPTION = Integer.toString(enableANGLE.getSelectedItemPosition());
-                LauncherPreferences.MG_NOERROR_OPTION = Integer.toString(enableNoError.getSelectedItemPosition());
-                LauncherPreferences.MG_EXT_GL43 = enableExtGL43.isChecked() ? "1" : "0";
-                LauncherPreferences.MG_EXT_CS = enableExtComputeShader.isChecked() ? "1" : "0";
-                LauncherPreferences.DEFAULT_PREF.edit()
-                        .putString("mg_glsl_cache_size", LauncherPreferences.MG_GLSL_CACHE_SIZE)
-                        .putString("mg_angle_option", LauncherPreferences.MG_ANGLE_OPTION)
-                        .putString("mg_noerror_option", LauncherPreferences.MG_NOERROR_OPTION)
-                        .putString("mg_ext_gl43", LauncherPreferences.MG_EXT_GL43)
-                        .putString("mg_ext_compute_shader", LauncherPreferences.MG_EXT_CS)
-                        .apply();
-            })
-            .setNegativeButton(android.R.string.cancel, (dialog, which) -> {
-                dialog.dismiss(); // Properly dismiss the dialog on cancel
-            })
-            .show();
+                    LauncherPreferences.MG_GLSL_CACHE_SIZE = cacheSize;
+                    LauncherPreferences.MG_ANGLE_OPTION = Integer.toString(enableANGLE.getSelectedItemPosition());
+                    LauncherPreferences.MG_NOERROR_OPTION = Integer.toString(enableNoError.getSelectedItemPosition());
+                    LauncherPreferences.MG_EXT_GL43 = enableExtGL43.isChecked() ? "1" : "0";
+                    LauncherPreferences.MG_EXT_CS = enableExtComputeShader.isChecked() ? "1" : "0";
+                    LauncherPreferences.DEFAULT_PREF.edit()
+                            .putString("mg_glsl_cache_size", LauncherPreferences.MG_GLSL_CACHE_SIZE)
+                            .putString("mg_angle_option", LauncherPreferences.MG_ANGLE_OPTION)
+                            .putString("mg_noerror_option", LauncherPreferences.MG_NOERROR_OPTION)
+                            .putString("mg_ext_gl43", LauncherPreferences.MG_EXT_GL43)
+                            .putString("mg_ext_compute_shader", LauncherPreferences.MG_EXT_CS)
+                            .apply();
+                    return true;
+                })
+                .setCancelListener(R.string.alertdialog_cancel, customView -> true)
+                .setDraggable(true)
+                .build()
+                .show();
     }
 }
