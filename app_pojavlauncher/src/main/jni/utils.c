@@ -130,6 +130,12 @@ JNIEXPORT jint JNICALL Java_net_kdt_pojavlaunch_utils_JREUtils_executeBinary(JNI
 	char *exec_file_c = (char*) (*env)->GetStringUTFChars(env, execFile, 0);
 	void *exec_binary_handle = dlopen(exec_file_c, RTLD_LAZY);
 	
+	const char *ld_library_path_c = (*env)->GetStringUTFChars(env, ldLibraryPath, NULL);
+	if (ld_library_path_c == NULL) {
+		// Handle error if GetStringUTFChars fails
+		return -1;
+	}
+	
 	// Ensure all resources are released properly
 	(*env)->ReleaseStringUTFChars(env, ldLibraryPath, ld_library_path_c);
 	(*env)->ReleaseStringUTFChars(env, execFile, exec_file_c);
