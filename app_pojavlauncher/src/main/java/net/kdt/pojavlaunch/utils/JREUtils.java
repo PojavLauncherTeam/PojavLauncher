@@ -31,6 +31,7 @@ import net.kdt.pojavlaunch.multirt.Runtime;
 import net.kdt.pojavlaunch.plugins.FFmpegPlugin;
 import net.kdt.pojavlaunch.prefs.*;
 import org.lwjgl.glfw.*;
+import net.kdt.pojavlaunch.utils.VersionInfo;
 
 public class JREUtils {
     private JREUtils() {}

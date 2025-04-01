@@ -15,6 +15,7 @@ import androidx.preference.ListPreference;
 import androidx.preference.SwitchPreference;
 import androidx.preference.SwitchPreferenceCompat;
 import androidx.preference.Preference;
+import androidx.appcompat.app.AlertDialog;
 
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
