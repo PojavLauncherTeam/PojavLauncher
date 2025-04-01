@@ -491,12 +491,10 @@ public class JREUtils {
             case "vulkan_zink": renderLibrary = "libOSMesa.so"; break;
             case "opengles3_ltw" : renderLibrary = "libltw.so"; break;
             case "opengles3_mges":
-                renderLibrary = "libmobileglues.so";
-                break;
+                renderLibrary = "libmobileglues.so"; break;
             default:
                 Log.w("RENDER_LIBRARY", "No renderer selected, defaulting to opengles2");
-                renderLibrary = "libgl4es_114.so";
-                break;
+                renderLibrary = "libgl4es_114.so"; break;
         }
 
         if (!dlopen(renderLibrary) && !dlopen(findInLdLibPath(renderLibrary))) {
@@ -542,24 +540,6 @@ public class JREUtils {
         return false;
     }
 
-    public static int getDetectedVersion() {
-        return GLInfoUtils.getGlInfo().glesMajorVersion;
-    }
-    public static native int chdir(String path);
-    public static native boolean dlopen(String libPath);
-    public static native void setLdLibraryPath(String ldLibraryPath);
-    public static native void setupBridgeWindow(Object surface);
-    public static native void releaseBridgeWindow();
-    public static native void initializeHooks();
-    public static native void setupExitMethod(Context context);
-    // Obtain AWT screen pixels to render on Android SurfaceView
-    public static native int[] renderAWTScreenFrame(/* Object canvas, int width, int height */);
-    static {
-        System.loadLibrary("exithook");
-        System.loadLibrary("pojavexec");
-        System.loadLibrary("pojavexec_awt");
-    }
-
     private static void checkLIBGLESVersion(Map<String, String> envMap) {
         if (LOCAL_RENDERER.startsWith("opengles3")) {
             envMap.put("LIBGL_ES", "3");
@@ -591,5 +571,22 @@ public class JREUtils {
                 Log.e("JREUtils", "Failed to set environment variable: " + env.getKey(), e);
             }
         }
+        public static int getDetectedVersion() {
+        return GLInfoUtils.getGlInfo().glesMajorVersion;
     }
+    public static native int chdir(String path);
+    public static native boolean dlopen(String libPath);
+    public static native void setLdLibraryPath(String ldLibraryPath);
+    public static native void setupBridgeWindow(Object surface);
+    public static native void releaseBridgeWindow();
+    public static native void initializeHooks();
+    public static native void setupExitMethod(Context context);
+    // Obtain AWT screen pixels to render on Android SurfaceView
+    public static native int[] renderAWTScreenFrame(/* Object canvas, int width, int height */);
+    static {
+        System.loadLibrary("exithook");
+        System.loadLibrary("pojavexec");
+        System.loadLibrary("pojavexec_awt");
+     }
+  }
 }
