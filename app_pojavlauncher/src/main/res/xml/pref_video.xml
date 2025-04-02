@@ -11,7 +11,11 @@
             android:defaultValue="opengles2"
             android:icon="@drawable/ic_setting_engine"
             app2:useSimpleSummaryProvider="true"/>
-
+    <Preference
+            android:key="renderer_mobileglues_settings"
+            android:title="@string/preference_renderer_mobileglues_settings"
+            android:icon="@drawable/ic_renderer_mg"
+            />
         <androidx.preference.SwitchPreferenceCompat
             android:defaultValue="false"
             android:key="ignoreNotch"
@@ -49,11 +53,6 @@
             android:key="force_vsync"
             android:summary="@string/preference_force_vsync_description"
             android:title="@string/preference_force_vsync_title"
-            />
-        <Preference
-            android:key="renderer_mobileglues_settings"
-            android:title="@string/preference_renderer_mobileglues_settings"
-            android:icon="@drawable/ic_renderer_mg"
             />
         <androidx.preference.SwitchPreferenceCompat
             android:defaultValue="true"
