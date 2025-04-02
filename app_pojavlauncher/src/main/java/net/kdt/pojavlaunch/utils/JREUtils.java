@@ -368,7 +368,7 @@ public class JREUtils {
         System.out.println(JVMArgs);
 
         initJavaRuntime(runtimeHome);
-        loadEnv(runtimeHome, runtime,  gameDirectory != null);
+        loadEnv(runtimeHome, runtime, gameDirectory != null);
         JREUtils.setupExitMethod(activity.getApplication());
         JREUtils.initializeHooks();
         chdir(gameDirectory == null ? Tools.DIR_GAME_NEW : gameDirectory.getAbsolutePath());

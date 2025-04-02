@@ -134,7 +134,7 @@ public final class Tools {
     public static String CTRLDEF_FILE;
     private static RenderersList sCompatibleRenderers;
 
-    public static string LIBGL_GL = null;
+    public static String LIBGL_GL = null;
     
     private static File getPojavStorageRoot(Context ctx) {
         if(SDK_INT >= 29) {
@@ -299,29 +299,6 @@ public final class Tools {
                 Log.e("Tools", "Failed to fix render distance setting", e);
             }
         }
-
-        Runtime runtime = MultiRTUtils.forceReread(Tools.pickRuntime(minecraftProfile, versionJavaRequirement));
-        JMinecraftVersionList.Version versionInfo = Tools.getVersionInfo(versionId);
-        LauncherProfiles.load(ProfilePathManager.getCurrentProfile());
-
-        File gamedir = Tools.getGameDirPath(minecraftProfile);
-
-        VersionInfo versionInfo1;
-        try {
-            versionInfo1 = VersionInfoUtils.parseJson(new File(getVersionJsonPath(versionId)));
-        } catch (RuntimeException e) {
-            versionInfo1 = null;
-        }
-
-        // Pre-process specific files
-        disableSplash(gamedir);
-        String[] launchArgs = getMinecraftClientArgs(minecraftAccount, versionInfo, gamedir);
-
-        // Select the appropriate openGL version
-        OldVersionsUtils.selectOpenGlVersion(versionInfo);
-
-
-        String launchClassPath = generateLaunchClassPath(versionInfo, versionId);
 
         List<String> javaArgList = new ArrayList<>();
 
