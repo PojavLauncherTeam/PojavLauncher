@@ -58,9 +58,13 @@ public class CustomDialog implements DraggableDialog.DialogInitializationListene
             // messageScrollView.setVisibility(View.VISIBLE);
         }
 
-        if (customView != null && customContainer != null) {
-            customContainer.addView(customView);
-            customContainer.setVisibility(View.VISIBLE);
+        if (customView != null) {
+            if (customContainer != null) { // Add null check for customContainer
+                customContainer.addView(customView);
+                customContainer.setVisibility(View.VISIBLE);
+            } else {
+                throw new IllegalStateException("Custom container is not found in the layout.");
+            }
         }
 
         if (items != null && items.length > 0) {
@@ -70,17 +74,19 @@ public class CustomDialog implements DraggableDialog.DialogInitializationListene
 
         if (confirmButtonText != null) {
             Button confirmButton = view.findViewById(R.id.custom_dialog_confirm_button); // Use the correct ID
-            confirmButton.setText(confirmButtonText);
-            confirmButton.setVisibility(View.VISIBLE);
-            confirmButton.setOnClickListener(v -> {
-                boolean shouldDismiss = true;
-                if (confirmListener != null) {
-                    shouldDismiss = confirmListener.onConfirm(customView);
-                }
-                if (shouldDismiss && dialog != null) { // Add null check for safety
-                    dialog.dismiss();
-                }
-            });
+            if (confirmButton != null) { // Add null check for confirmButton
+                confirmButton.setText(confirmButtonText);
+                confirmButton.setVisibility(View.VISIBLE);
+                confirmButton.setOnClickListener(v -> {
+                    boolean shouldDismiss = true;
+                    if (confirmListener != null) {
+                        shouldDismiss = confirmListener.onConfirm(customView);
+                    }
+                    if (shouldDismiss && dialog != null) { // Add null check for safety
+                        dialog.dismiss();
+                    }
+                });
+            }
         }
 
         builder.setView(view);
@@ -159,6 +165,17 @@ public class CustomDialog implements DraggableDialog.DialogInitializationListene
             //     itemClickListener.onItemClick(item, position);
             //     dialog.dismiss();
             // });
+        }
+    }
+
+    public CustomDialog(Context context) {
+        // Initialize dialog here
+        dialog = new AlertDialog.Builder(context).create(); // Fix incorrect initialization
+    }
+
+    public void someMethod(boolean shouldDismiss) {
+        if (shouldDismiss && dialog != null) {
+            dialog.dismiss();
         }
     }
 
