@@ -77,7 +77,9 @@ public class CustomDialog implements DraggableDialog.DialogInitializationListene
                 if (confirmListener != null) {
                     shouldDismiss = confirmListener.onConfirm(customView);
                 }
-                if (shouldDismiss) dialog.dismiss();
+                if (shouldDismiss && dialog != null) { // Add null check for safety
+                    dialog.dismiss();
+                }
             });
         }
 
