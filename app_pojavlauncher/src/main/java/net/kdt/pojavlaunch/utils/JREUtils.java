@@ -6,7 +6,9 @@ import static net.kdt.pojavlaunch.Tools.LOCAL_RENDERER;
 import static net.kdt.pojavlaunch.Tools.NATIVE_LIB_DIR;
 import static net.kdt.pojavlaunch.Tools.currentDisplayMetrics;
 import static net.kdt.pojavlaunch.Tools.shareLog;
-import static net.kdt.pojavlaunch.prefs.LauncherPreferences.*;
+import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_DUMP_SHADERS;
+import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_VSYNC_IN_ZINK;
+import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_ZINK_PREFER_SYSTEM_DRIVER;
 
 import android.app.*;
 import android.content.*;
@@ -28,24 +30,7 @@ import net.kdt.pojavlaunch.multirt.MultiRTUtils;
 import net.kdt.pojavlaunch.multirt.Runtime;
 import net.kdt.pojavlaunch.plugins.FFmpegPlugin;
 import net.kdt.pojavlaunch.prefs.*;
-import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import org.lwjgl.glfw.*;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.TimeZone;
-
-import javax.microedition.khronos.egl.EGL10;
-import javax.microedition.khronos.egl.EGLConfig;
-import javax.microedition.khronos.egl.EGLContext;
-import javax.microedition.khronos.egl.EGLDisplay;
 
 public class JREUtils {
     private JREUtils() {}
@@ -227,42 +212,42 @@ public class JREUtils {
             envMap.put("POJAV_FFMPEG_PATH", FFmpegPlugin.executablePath);
         }
 
-        if(LOCAL_RENDERER != null) {
-            envMap.put("POJAV_RENDERER", LOCAL_RENDERER);
-            if(LOCAL_RENDERER.equals("opengles3_ltw")) {
+        if(LOCAL_RENDERER.equals("opengles3_ltw")) {
                 envMap.put("LIBGL_ES", "3");
                 envMap.put("POJAVEXEC_EGL","libltw.so"); // Use ANGLE EGL
             }
-            else if(LOCAL_RENDERER.equals("opengles3_mges")) {
-                envMap.put("MG_DIR_PATH", Tools.DIR_CACHE.getAbsolutePath());
-                envMap.put("MG_maxGlslCacheSize", MG_GLSL_CACHE_SIZE);
-                envMap.put("MG_enableANGLE", MG_ANGLE_OPTION);
-                envMap.put("MG_enableNoError", MG_NOERROR_OPTION);
-                envMap.put("MG_enableExtGL43", MG_EXT_GL43);
-                envMap.put("MG_enableExtComputeShader", MG_EXT_CS);
-                dlopen(NATIVE_LIB_DIR + "/libspirv-cross-c-shared.so");
-                dlopen(NATIVE_LIB_DIR + "/libshaderconv.so");
-            }
+
+        if (LOCAL_RENDERER.equals("opengles3_mges")) {
+            envMap.put("MG_DIR_PATH", Tools.DIR_CACHE.getAbsolutePath());
+            envMap.put("MG_maxGlslCacheSize", MG_GLSL_CACHE_SIZE);
+            envMap.put("MG_enableANGLE", MG_ANGLE_OPTION);
+            envMap.put("MG_enableNoError", MG_NOERROR_OPTION);
+            envMap.put("MG_enableExtGL43", MG_EXT_GL43);
+            envMap.put("MG_enableExtComputeShader", MG_EXT_CS);
+
+            dlopen(NATIVE_LIB_DIR + "/libspirv-cross-c-shared.so");
+            dlopen(NATIVE_LIB_DIR + "/libshaderconv.so");
         }
+
         if(LauncherPreferences.PREF_BIG_CORE_AFFINITY) envMap.put("POJAV_BIG_CORE_AFFINITY", "1");
         envMap.put("AWTSTUB_WIDTH", Integer.toString(CallbackBridge.windowWidth > 0 ? CallbackBridge.windowWidth : CallbackBridge.physicalWidth));
         envMap.put("AWTSTUB_HEIGHT", Integer.toString(CallbackBridge.windowHeight > 0 ? CallbackBridge.windowHeight : CallbackBridge.physicalHeight));
 
         GLInfoUtils.GLInfo info = GLInfoUtils.getGlInfo();
         if(!envMap.containsKey("LIBGL_ES") && LOCAL_RENDERER != null) {
+            envMap.put("POJAVEXEC_EGL", eglName);
+            return;
             int glesMajor = info.glesMajorVersion;
             Log.i("glesDetect","GLES version detected: "+glesMajor);
 
             if (glesMajor < 3) {
                 //fallback to 2 since it's the minimum for the entire app
                 envMap.put("LIBGL_ES","2");
-            } else if (LOCAL_RENDERER.startsWith("opengles")) {
+            } else  if (LOCAL_RENDERER.startsWith("opengles")) {
                 checkLIBGLESVersion(envMap);
             } else {
-                // TODO if can: other backends such as Vulkan.
-                // Sure, they should provide GLES 3 support.
                 envMap.put("LIBGL_ES", "3");
-            }
+            } 
         }
 
         if(info.isAdreno() && !PREF_ZINK_PREFER_SYSTEM_DRIVER) {
@@ -310,6 +295,7 @@ public class JREUtils {
             reader.close();
         }
     }
+
     public static void launchJavaVM(final AppCompatActivity activity, final Runtime runtime, File gameDirectory, final List<String> JVMArgs, final String userArgsString) throws Throwable {
         String runtimeHome = MultiRTUtils.getRuntimeHome(runtime.name).getAbsolutePath();
 
@@ -502,8 +488,9 @@ public class JREUtils {
             case "opengles3":
                 renderLibrary = "libgl4es_114.so"; break;
             case "vulkan_zink": renderLibrary = "libOSMesa.so"; break;
-            case "opengles3_mges" : renderLibrary = "libmobileglues.so"; break;
             case "opengles3_ltw" : renderLibrary = "libltw.so"; break;
+            case "opengles3_mges":
+            renderLibrary = "libmobileglues.so"; break;
             default:
                 Log.w("RENDER_LIBRARY", "No renderer selected, defaulting to opengles2");
                 renderLibrary = "libgl4es_114.so";
