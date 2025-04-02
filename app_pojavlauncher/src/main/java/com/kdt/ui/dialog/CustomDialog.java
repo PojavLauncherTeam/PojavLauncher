@@ -14,7 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.movtery.ui.dialog.DraggableDialog;
+import com.kdt.ui.dialog.DraggableDialog;
 
 import net.kdt.pojavlaunch.R;
 
@@ -39,47 +39,49 @@ public class CustomDialog implements DraggableDialog.DialogInitializationListene
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.dialog_custom_layout, null);
 
-        TextView titleTextView = view.findViewById(R.id.custom_dialog_title);
-        TextView messageTextView = view.findViewById(R.id.custom_dialog_message);
-        TextView scrollmessageTextView = view.findViewById(R.id.custom_dialog_scroll_message_text);
-        ScrollView messageScrollView = view.findViewById(R.id.message_scroll_view);
+        // TextView titleTextView = view.findViewById(R.id.custom_dialog_title);
+        // TextView messageTextView = view.findViewById(R.id.custom_dialog_message);
+        // TextView scrollmessageTextView = view.findViewById(R.id.custom_dialog_scroll_message_text);
+        // ScrollView messageScrollView = view.findViewById(R.id.message_scroll_view);
         // ScrollView listScrollView = view.findViewById(R.id.list_scroll_view);
-        Button button1 = view.findViewById(R.id.custom_dialog_button_1);
-        Button button2 = view.findViewById(R.id.custom_dialog_button_2);
-        Button button3 = view.findViewById(R.id.custom_dialog_button_3);
-        Button button4 = view.findViewById(R.id.custom_dialog_button_4);
-        Button confirmButton = view.findViewById(R.id.custom_dialog_confirm_button);
-        Button cancelButton = view.findViewById(R.id.custom_dialog_cancel_button);
-        FrameLayout customContainer = view.findViewById(R.id.custom_view_container);
-        ListView listView = view.findViewById(R.id.custom_dialog_list_view);
+        // Button button1 = view.findViewById(R.id.custom_dialog_button_1);
+        // Button button2 = view.findViewById(R.id.custom_dialog_button_2);
+        // Button button3 = view.findViewById(R.id.custom_dialog_button_3);
+        // Button button4 = view.findViewById(R.id.custom_dialog_button_4);
+        // Button confirmButton = view.findViewById(R.id.custom_dialog_confirm_button);
+        // Button cancelButton = view.findViewById(R.id.custom_dialog_cancel_button);
+        // FrameLayout customContainer = view.findViewById(R.id.custom_view_container);
+        // ListView listView = view.findViewById(R.id.custom_dialog_list_view);
 
         if (title != null && !title.isEmpty()) {
-            titleTextView.setText(title);
-            titleTextView.setVisibility(View.VISIBLE);
+            // titleTextView.setText(title);
+            // titleTextView.setVisibility(View.VISIBLE);
         }
 
         if (message != null && !message.isEmpty()) {
-            messageTextView.setText(message);
-            messageTextView.setVisibility(View.VISIBLE);
+            // messageTextView.setText(message);
+            // messageTextView.setVisibility(View.VISIBLE);
         }
 
         if (scrollmessage != null && !scrollmessage.isEmpty()) {
-            scrollmessageTextView.setText(scrollmessage);
-            scrollmessageTextView.setVisibility(View.VISIBLE);
-            messageScrollView.setVisibility(View.VISIBLE);
+            // scrollmessageTextView.setText(scrollmessage);
+            // scrollmessageTextView.setVisibility(View.VISIBLE);
+            // messageScrollView.setVisibility(View.VISIBLE);
         }
 
         if (customView != null && customContainer != null) {
-            customContainer.addView(customView);
-            customContainer.setVisibility(View.VISIBLE);
+            // customContainer.addView(customView);
+            // customContainer.setVisibility(View.VISIBLE);
         }
 
         if (items != null && items.length > 0) {
-            listView.setVisibility(View.VISIBLE);
+            // listView.setVisibility(View.VISIBLE);
             // listScrollView.setVisibility(View.VISIBLE);
         }
 
-        if (confirmButtonText != null) confirmButton.setText(confirmButtonText);
+        if (confirmButtonText != null) {
+            // confirmButton.setText(confirmButtonText);
+        }
 
         builder.setView(view);
         dialog = builder.create();
@@ -89,64 +91,74 @@ public class CustomDialog implements DraggableDialog.DialogInitializationListene
         if (!cancelable) dialog.setCancelable(false);
 
         if (button1Listener != null) {
-            button1.setVisibility(View.VISIBLE);
-            if (button1Text != null) button1.setText(button1Text);
-            button1.setOnClickListener(v -> {
-                boolean shouldDismiss = button1Listener.onClick(customView);
-                if (shouldDismiss) dialog.dismiss();
-            });
+            // button1.setVisibility(View.VISIBLE);
+            if (button1Text != null) {
+                // button1.setText(button1Text);
+            }
+            // button1.setOnClickListener(v -> {
+            //     boolean shouldDismiss = button1Listener.onClick(customView);
+            //     if (shouldDismiss) dialog.dismiss();
+            // });
         }
 
         if (button2Listener != null) {
-            button2.setVisibility(View.VISIBLE);
-            if (button2Text != null) button2.setText(button2Text);
-            button2.setOnClickListener(v -> {
-                boolean shouldDismiss = button2Listener.onClick(customView);
-                if (shouldDismiss) dialog.dismiss();
-            });
+            // button2.setVisibility(View.VISIBLE);
+            if (button2Text != null) {
+                // button2.setText(button2Text);
+            }
+            // button2.setOnClickListener(v -> {
+            //     boolean shouldDismiss = button2Listener.onClick(customView);
+            //     if (shouldDismiss) dialog.dismiss();
+            // });
         }
 
         if (button3Listener != null) {
-            button3.setVisibility(View.VISIBLE);
-            if (button3Text != null) button3.setText(button3Text);
-            button3.setOnClickListener(v -> {
-                boolean shouldDismiss = button3Listener.onClick(customView);
-                if (shouldDismiss) dialog.dismiss();
-            });
+            // button3.setVisibility(View.VISIBLE);
+            if (button3Text != null) {
+                // button3.setText(button3Text);
+            }
+            // button3.setOnClickListener(v -> {
+            //     boolean shouldDismiss = button3Listener.onClick(customView);
+            //     if (shouldDismiss) dialog.dismiss();
+            // });
         }
 
         if (button4Listener != null) {
-            button4.setVisibility(View.VISIBLE);
-            if (button4Text != null) button4.setText(button4Text);
-            button4.setOnClickListener(v -> {
-                boolean shouldDismiss = button4Listener.onClick(customView);
-                if (shouldDismiss) dialog.dismiss();
-            });
+            // button4.setVisibility(View.VISIBLE);
+            if (button4Text != null) {
+                // button4.setText(button4Text);
+            }
+            // button4.setOnClickListener(v -> {
+            //     boolean shouldDismiss = button4Listener.onClick(customView);
+            //     if (shouldDismiss) dialog.dismiss();
+            // });
         }
 
         if (cancelListener != null) {
-            cancelButton.setVisibility(View.VISIBLE);
-            if (cancelButtonText != null) cancelButton.setText(cancelButtonText);
-            cancelButton.setOnClickListener(v -> {
-                boolean shouldDismiss = cancelListener.onCancel(customView);
-                if (shouldDismiss) dialog.dismiss();
-            });
+            // cancelButton.setVisibility(View.VISIBLE);
+            if (cancelButtonText != null) {
+                // cancelButton.setText(cancelButtonText);
+            }
+            // cancelButton.setOnClickListener(v -> {
+            //     boolean shouldDismiss = cancelListener.onCancel(customView);
+            //     if (shouldDismiss) dialog.dismiss();
+            // });
         }
 
-        confirmButton.setOnClickListener(v -> {
-            boolean shouldDismiss = true;
-            if (confirmListener != null) shouldDismiss = confirmListener.onConfirm(customView);
-            if (shouldDismiss) dialog.dismiss();
-        });
+        // confirmButton.setOnClickListener(v -> {
+        //     boolean shouldDismiss = true;
+        //     if (confirmListener != null) shouldDismiss = confirmListener.onConfirm(customView);
+        //     if (shouldDismiss) dialog.dismiss();
+        // });
 
         if (itemClickListener != null) {
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, items);
-            listView.setAdapter(adapter);
-            listView.setOnItemClickListener((parent, view1, position, id) -> {
-                String item = items[position];
-                itemClickListener.onItemClick(item, position);
-                dialog.dismiss();
-            });
+            // ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, items);
+            // listView.setAdapter(adapter);
+            // listView.setOnItemClickListener((parent, view1, position, id) -> {
+            //     String item = items[position];
+            //     itemClickListener.onItemClick(item, position);
+            //     dialog.dismiss();
+            // });
         }
     }
 
