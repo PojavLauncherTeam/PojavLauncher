@@ -9,7 +9,7 @@ import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 
-import com.movtery.ui.subassembly.view.DraggableViewWrapper;
+import com.kdt.ui.subassembly.view.DraggableViewWrapper;
 
 public abstract class DraggableDialog {
 
