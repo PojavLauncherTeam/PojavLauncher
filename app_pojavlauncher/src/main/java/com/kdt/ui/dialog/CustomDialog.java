@@ -22,6 +22,7 @@ public class CustomDialog implements DraggableDialog.DialogInitializationListene
     private final AlertDialog dialog;
     private final String[] items;
     private final OnItemClickListener itemClickListener;
+    private FrameLayout customContainer;  // Add this line
 
     private CustomDialog(Context context, String title, String message, String scrollmessage,
                          View customView, String confirmButtonText, String cancelButtonText,
@@ -39,19 +40,7 @@ public class CustomDialog implements DraggableDialog.DialogInitializationListene
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.dialog_custom_layout, null);
 
-        // TextView titleTextView = view.findViewById(R.id.custom_dialog_title);
-        // TextView messageTextView = view.findViewById(R.id.custom_dialog_message);
-        // TextView scrollmessageTextView = view.findViewById(R.id.custom_dialog_scroll_message_text);
-        // ScrollView messageScrollView = view.findViewById(R.id.message_scroll_view);
-        // ScrollView listScrollView = view.findViewById(R.id.list_scroll_view);
-        // Button button1 = view.findViewById(R.id.custom_dialog_button_1);
-        // Button button2 = view.findViewById(R.id.custom_dialog_button_2);
-        // Button button3 = view.findViewById(R.id.custom_dialog_button_3);
-        // Button button4 = view.findViewById(R.id.custom_dialog_button_4);
-        // Button confirmButton = view.findViewById(R.id.custom_dialog_confirm_button);
-        // Button cancelButton = view.findViewById(R.id.custom_dialog_cancel_button);
-        // FrameLayout customContainer = view.findViewById(R.id.custom_view_container);
-        // ListView listView = view.findViewById(R.id.custom_dialog_list_view);
+        customContainer = view.findViewById(R.id.custom_view_container); // Initialize the customContainer
 
         if (title != null && !title.isEmpty()) {
             // titleTextView.setText(title);
@@ -70,8 +59,8 @@ public class CustomDialog implements DraggableDialog.DialogInitializationListene
         }
 
         if (customView != null && customContainer != null) {
-            // customContainer.addView(customView);
-            // customContainer.setVisibility(View.VISIBLE);
+            customContainer.addView(customView);
+            customContainer.setVisibility(View.VISIBLE);
         }
 
         if (items != null && items.length > 0) {
