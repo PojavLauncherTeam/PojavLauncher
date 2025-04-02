@@ -240,8 +240,6 @@ public class JREUtils {
                 envMap.put("MG_enableNoError", MG_NOERROR_OPTION);
                 envMap.put("MG_enableExtGL43", MG_EXT_GL43);
                 envMap.put("MG_enableExtComputeShader", MG_EXT_CS);
-                dlopen(NATIVE_LIB_DIR + "/libspirv-cross-c-shared.so");
-                dlopen(NATIVE_LIB_DIR + "/libshaderconv.so");
             }
         }
         if(LauncherPreferences.PREF_BIG_CORE_AFFINITY) envMap.put("POJAV_BIG_CORE_AFFINITY", "1");
@@ -504,18 +502,14 @@ public class JREUtils {
             case "vulkan_zink": renderLibrary = "libOSMesa.so"; break;
             case "opengles3_mges" : renderLibrary = "libmobileglues.so"; break;
             case "opengles3_ltw" : renderLibrary = "libltw.so"; break;
-            default:
-                Log.w("RENDER_LIBRARY", "No renderer selected, defaulting to opengles2");
-                renderLibrary = "libgl4es_114.so";
-                break;
+        }
+       
+        if (LOCAL_RENDERER.equals("opengles3_mges"))
+        {
+            dlopen(NATIVE_LIB_DIR + "/libspirv-cross-c-shared.so");
+            dlopen(NATIVE_LIB_DIR + "/libshaderconv.so");
         }
 
-        if (!dlopen(renderLibrary) && !dlopen(findInLdLibPath(renderLibrary))) {
-            Log.e("RENDER_LIBRARY","Failed to load renderer " + renderLibrary + ". Falling back to GL4ES 1.1.4");
-            LOCAL_RENDERER = "opengles2";
-            renderLibrary = "libgl4es_114.so";
-            dlopen(NATIVE_LIB_DIR + "/libgl4es_114.so");
-        }
         return renderLibrary;
     }
 
