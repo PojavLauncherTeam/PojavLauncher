@@ -69,7 +69,7 @@ public class CustomDialog implements DraggableDialog.DialogInitializationListene
         }
 
         if (confirmButtonText != null) {
-            Button confirmButton = view.findViewById(R.id.confirm_button); // Ensure confirmButton is initialized
+            Button confirmButton = view.findViewById(R.id.custom_dialog_confirm_button); // Use the correct ID
             confirmButton.setText(confirmButtonText);
             confirmButton.setVisibility(View.VISIBLE);
             confirmButton.setOnClickListener(v -> {
