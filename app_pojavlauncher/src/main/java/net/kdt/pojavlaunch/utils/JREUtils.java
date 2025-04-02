@@ -15,7 +15,7 @@ import android.content.Context;
 import android.os.Build;
 import android.system.ErrnoException;
 import android.system.Os;
-import android.util.Log;
+import android.util.*;
 import android.widget.Toast;
 
 import com.oracle.dalvik.*;
@@ -32,8 +32,6 @@ import net.kdt.pojavlaunch.multirt.Runtime;
 import net.kdt.pojavlaunch.plugins.FFmpegPlugin;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 import net.kdt.pojavlaunch.prefs.*;
-
-import org.greenrobot.eventbus.EventBus;
 import org.lwjgl.glfw.CallbackBridge;
 import org.lwjgl.glfw.*;
 
@@ -54,7 +52,6 @@ import javax.microedition.khronos.egl.EGLContext;
 import javax.microedition.khronos.egl.EGLDisplay;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.collection.ArrayMap;
 import android.util.ArrayMap;
 
 import java.io.IOException;
