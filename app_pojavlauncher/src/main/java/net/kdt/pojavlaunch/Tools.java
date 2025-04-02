@@ -134,7 +134,8 @@ public final class Tools {
     public static String CTRLDEF_FILE;
     private static RenderersList sCompatibleRenderers;
 
-
+    public static string LIBGL_GL = null;
+    
     private static File getPojavStorageRoot(Context ctx) {
         if(SDK_INT >= 29) {
             return ctx.getExternalFilesDir(null);
@@ -299,10 +300,18 @@ public final class Tools {
             }
         }
 
-
         Runtime runtime = MultiRTUtils.forceReread(Tools.pickRuntime(minecraftProfile, versionJavaRequirement));
         JMinecraftVersionList.Version versionInfo = Tools.getVersionInfo(versionId);
+        LauncherProfiles.load(ProfilePathManager.getCurrentProfile());
 
+        File gamedir = Tools.getGameDirPath(minecraftProfile);
+
+        VersionInfo versionInfo1;
+        try {
+            versionInfo1 = VersionInfoUtils.parseJson(new File(getVersionJsonPath(versionId)));
+        } catch (RuntimeException e) {
+            versionInfo1 = null;
+        }
 
         // Pre-process specific files
         disableSplash(gamedir);
@@ -454,9 +463,9 @@ public final class Tools {
             for (Object arg : versionInfo.arguments.jvm) {
                 if (arg instanceof String) {
                     minecraftArgs.add((String) arg);
-                } //TODO: implement (?maybe?)
             }
         }
+    }
         return JSONUtils.insertJSONValueList(minecraftArgs.toArray(new String[0]), varArgMap);
     }
 
