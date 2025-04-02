@@ -69,7 +69,16 @@ public class CustomDialog implements DraggableDialog.DialogInitializationListene
         }
 
         if (confirmButtonText != null) {
-            // confirmButton.setText(confirmButtonText);
+            Button confirmButton = view.findViewById(R.id.confirm_button); // Ensure confirmButton is initialized
+            confirmButton.setText(confirmButtonText);
+            confirmButton.setVisibility(View.VISIBLE);
+            confirmButton.setOnClickListener(v -> {
+                boolean shouldDismiss = true;
+                if (confirmListener != null) {
+                    shouldDismiss = confirmListener.onConfirm(customView);
+                }
+                if (shouldDismiss) dialog.dismiss();
+            });
         }
 
         builder.setView(view);
