@@ -240,6 +240,7 @@ public class JREUtils {
                 envMap.put("MG_enableNoError", MG_NOERROR_OPTION);
                 envMap.put("MG_enableExtGL43", MG_EXT_GL43);
                 envMap.put("MG_enableExtComputeShader", MG_EXT_CS);
+                envMap.put("LIBGL_ES", "3");
             }
         }
         if(LauncherPreferences.PREF_BIG_CORE_AFFINITY) envMap.put("POJAV_BIG_CORE_AFFINITY", "1");
@@ -285,6 +286,12 @@ public class JREUtils {
         setLdLibraryPath(jvmLibraryPath+":"+LD_LIBRARY_PATH);
 
         // return ldLibraryPath;
+    }
+
+    if (LOCAL_RENDERER.equals("opengles3_mges"))
+    {
+        dlopen(NATIVE_LIB_DIR + "/libspirv-cross-c-shared.so");
+        dlopen(NATIVE_LIB_DIR + "/libshaderconv.so");
     }
 
     private static void checkLIBGLESVersion(Map<String, String> envMap) {
@@ -502,17 +509,15 @@ public class JREUtils {
             case "vulkan_zink": renderLibrary = "libOSMesa.so"; break;
             case "opengles3_mges" : renderLibrary = "libmobileglues.so"; break;
             case "opengles3_ltw" : renderLibrary = "libltw.so"; break;
+        default:
+            Log.w("RENDER_LIBRARY", "No renderer selected, defaulting to opengles2");
+            renderLibrary = "libgl4es_114.so";
+            break;
         }
-       
-        if (LOCAL_RENDERER.equals("opengles3_mges"))
-        {
-            dlopen(NATIVE_LIB_DIR + "/libspirv-cross-c-shared.so");
-            dlopen(NATIVE_LIB_DIR + "/libshaderconv.so");
-        }
-
-        return renderLibrary;
     }
-
+    return renderLibrary;
+    }
+    }
     /**
      * Remove the argument from the list, if it exists
      * If the argument exists multiple times, they will all be removed.
