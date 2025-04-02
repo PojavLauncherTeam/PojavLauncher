@@ -31,7 +31,7 @@ import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.prefs.CustomSeekBarPreference;
 import net.kdt.pojavlaunch.prefs.LauncherPreferences;
-import net.kdt.pojavlaunch.ui.CustomDialog;
+import com.kdt.ui.dialog.CustomDialog;
 
 import java.util.Arrays;
 import java.util.ArrayList;
