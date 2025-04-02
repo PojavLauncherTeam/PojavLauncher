@@ -3,11 +3,11 @@ package net.kdt.pojavlaunch.utils;
 import static net.kdt.pojavlaunch.Architecture.ARCH_X86;
 import static net.kdt.pojavlaunch.Architecture.is64BitsDevice;
 import static net.kdt.pojavlaunch.Tools.LOCAL_RENDERER;
-import static net.kdt.pojavlaunch.Tools.LIBGL_GL;
 import static net.kdt.pojavlaunch.Tools.NATIVE_LIB_DIR;
 import static net.kdt.pojavlaunch.Tools.currentDisplayMetrics;
 import static net.kdt.pojavlaunch.Tools.shareLog;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.*;
+import static net.kdt.pojavlaunch.Tools.LIBGL_GL;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -52,6 +52,12 @@ import javax.microedition.khronos.egl.EGL10;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.egl.EGLContext;
 import javax.microedition.khronos.egl.EGLDisplay;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.collection.ArrayMap;
+import android.util.ArrayMap;
+
+import java.io.IOException;
 
 public class JREUtils {
     private JREUtils() {}
