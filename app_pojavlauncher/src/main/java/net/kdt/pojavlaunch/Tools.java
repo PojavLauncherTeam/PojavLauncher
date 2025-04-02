@@ -133,12 +133,12 @@ public final class Tools {
     public static String CTRLMAP_PATH;
     public static String CTRLDEF_FILE;
     private static RenderersList sCompatibleRenderers;
+    public static String LIBGL_GL = JREUtils.getDetectedVersion() >= 3 ? "libGL.so.3" : "libGL.so.1";
 
-    public static String LIBGL_GL = null;
-    
     private static File getPojavStorageRoot(Context ctx) {
         if(SDK_INT >= 29) {
             return ctx.getExternalFilesDir(null);
+        }else{
         }else{
             return new File(Environment.getExternalStorageDirectory(),"games/PojavLauncher");
         }
@@ -192,6 +192,9 @@ public final class Tools {
      */
     public static void initStorageConstants(Context ctx){
         initEarlyConstants(ctx);
+        if (DIR_GAME_HOME == null) {
+            throw new IllegalStateException("DIR_GAME_HOME is not initialized.");
+        }
         DIR_GAME_HOME = getPojavStorageRoot(ctx).getAbsolutePath();
         DIR_GAME_NEW = DIR_GAME_HOME + "/.minecraft";
         DIR_HOME_VERSION = DIR_GAME_NEW + "/versions";
@@ -259,14 +262,11 @@ public final class Tools {
 
     public static void launchMinecraft(final AppCompatActivity activity, MinecraftAccount minecraftAccount,
                                        MinecraftProfile minecraftProfile, String versionId, int versionJavaRequirement) throws Throwable {
+        if (minecraftProfile == null) {
+            throw new IllegalArgumentException("minecraftProfile cannot be null.");
+        }
         int freeDeviceMemory = getFreeDeviceMemory(activity);
         int localeString;
-        int freeAddressSpace = Architecture.is32BitsDevice() ? getMaxContinuousAddressSpaceSize() : -1;
-        Log.i("MemStat", "Free RAM: " + freeDeviceMemory + " Addressable: " + freeAddressSpace);
-        if(freeDeviceMemory > freeAddressSpace && freeAddressSpace != -1) {
-            freeDeviceMemory = freeAddressSpace;
-            localeString = R.string.address_memory_warning_msg;
-        } else {
             localeString = R.string.memory_warning_msg;
         }
 
@@ -686,23 +686,31 @@ public final class Tools {
     }
 
     public static void showError(Context ctx, Throwable e) {
-        showError(ctx, e, false);
+        showError(ctx, e, false, null);
     }
 
-    public static void showError(final Context ctx, final Throwable e, final boolean exitIfOk) {
-        showError(ctx, R.string.global_error, null ,e, exitIfOk, false);
+    public static void showError(Context ctx, Throwable e, boolean exitIfOk) {
+        showError(ctx, e, exitIfOk, null);
     }
-    public static void showError(final Context ctx, final int rolledMessage, final Throwable e) {
-        showError(ctx, R.string.global_error, ctx.getString(rolledMessage), e, false, false);
+
+    public static void showError(Context ctx, int rolledMessage, Throwable e) {
+        showError(ctx, e, false, ctx.getString(rolledMessage));
     }
-    public static void showError(final Context ctx, final String rolledMessage, final Throwable e) {
-        showError(ctx, R.string.global_error, rolledMessage, e, false, false);
+
+    public static void showError(Context ctx, String rolledMessage, Throwable e) {
+        showError(ctx, e, false, rolledMessage);
     }
-    public static void showError(final Context ctx, final String rolledMessage, final Throwable e, boolean exitIfOk) {
-        showError(ctx, R.string.global_error, rolledMessage, e, exitIfOk, false);
+
+    public static void showError(Context ctx, String rolledMessage, Throwable e, boolean exitIfOk) {
+        showError(ctx, e, exitIfOk, rolledMessage);
     }
-    public static void showError(final Context ctx, final int titleId, final Throwable e, final boolean exitIfOk) {
+
+    public static void showError(Context ctx, int titleId, Throwable e, boolean exitIfOk) {
         showError(ctx, titleId, null, e, exitIfOk, false);
+    }
+
+    public static void showError(Context ctx, Throwable e, boolean exitIfOk, @Nullable String rolledMessage) {
+        showError(ctx, R.string.global_error, rolledMessage, e, exitIfOk, false);
     }
 
     private static void showError(final Context ctx, final int titleId, final String rolledMessage, final Throwable e, final boolean exitIfOk, final boolean showMore) {
