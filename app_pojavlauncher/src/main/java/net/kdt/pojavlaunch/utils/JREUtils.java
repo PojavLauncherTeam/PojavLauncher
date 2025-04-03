@@ -245,11 +245,9 @@ public class JREUtils {
             if (glesMajor < 3) {
                 //fallback to 2 since it's the minimum for the entire app
                 envMap.put("LIBGL_ES","2");
-            } else if (LOCAL_RENDERER.startsWith("opengles")) {
-                checkLIBGLESVersion(envMap);
+            } else if (LOCAL_RENDERER.startsWith("opengles3")) {
+                envMap.put("LIBGL_ES","3");
             } else {
-                // TODO if can: other backends such as Vulkan.
-                // Sure, they should provide GLES 3 support.
                 envMap.put("LIBGL_ES", "3");
             }
         }
@@ -289,18 +287,9 @@ public class JREUtils {
             envMap.put("MG_enableNoError", MG_NOERROR_OPTION);
             envMap.put("MG_enableExtGL43", MG_EXT_GL43);
             envMap.put("MG_enableExtComputeShader", MG_EXT_CS);
-            envMap.put("LIBGL_ES", "3");
         }
     }
 
-    private static void checkLIBGLESVersion(Map<String, String> envMap) {
-         if (LOCAL_RENDERER.startsWith("opengles3")) {
-             envMap.put("LIBGL_ES", "3");
-         } else {
-             envMap.put("LIBGL_ES", "2");
-         }
-    }
-    
     private static void readCustomEnv(Map<String, String> envMap) throws IOException {
         File customEnvFile = new File(Tools.DIR_GAME_HOME, "custom_env.txt");
         if (customEnvFile.exists() && customEnvFile.isFile()) {
