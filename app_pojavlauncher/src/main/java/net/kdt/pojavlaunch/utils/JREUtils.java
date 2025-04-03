@@ -246,7 +246,7 @@ public class JREUtils {
                 //fallback to 2 since it's the minimum for the entire app
                 envMap.put("LIBGL_ES","2");
             } else if (LOCAL_RENDERER.startsWith("opengles")) {
-                envMap.put("LIBGL_ES", LOCAL_RENDERER.replace("opengles", "").replace("_5", ""));
+                checkLIBGLESVersion(envMap);
             } else {
                 // TODO if can: other backends such as Vulkan.
                 // Sure, they should provide GLES 3 support.
@@ -291,6 +291,14 @@ public class JREUtils {
             envMap.put("MG_enableExtComputeShader", MG_EXT_CS);
             envMap.put("LIBGL_ES", "3");
         }
+    }
+
+    private static void checkLIBGLESVersion(Map<String, String> envMap) {
+         if (LOCAL_RENDERER.startsWith("opengles3")) {
+             envMap.put("LIBGL_ES", "3");
+         } else {
+             envMap.put("LIBGL_ES", "2");
+         }
     }
     
     private static void readCustomEnv(Map<String, String> envMap) throws IOException {
