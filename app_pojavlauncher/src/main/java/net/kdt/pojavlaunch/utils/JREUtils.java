@@ -227,9 +227,14 @@ public class JREUtils {
             if(LOCAL_RENDERER.equals("opengles3_ltw")) {
                 envMap.put("LIBGL_ES", "3");
                 envMap.put("POJAVEXEC_EGL","libltw.so"); // Use ANGLE EGL
-            } else if(LOCAL_RENDERER.equals("opengles3_mges")) {
-            dlopen(NATIVE_LIB_DIR + "/libspirv-cross-c-shared.so");
-            dlopen(NATIVE_LIB_DIR + "/libshaderconv.so");
+            } else if (LOCAL_RENDERER.equals("opengles3_mges")) {
+                envMap.put("LIBGL_ES", "3");
+                envMap.put("MG_DIR_PATH", Tools.DIR_CACHE.getAbsolutePath());
+                envMap.put("MG_maxGlslCacheSize", MG_GLSL_CACHE_SIZE);
+                envMap.put("MG_enableANGLE", MG_ANGLE_OPTION);
+                envMap.put("MG_enableNoError", MG_NOERROR_OPTION);
+                envMap.put("MG_enableExtGL43", MG_EXT_GL43);
+                envMap.put("MG_enableExtComputeShader", MG_EXT_CS);
             }
         }
         
@@ -245,8 +250,8 @@ public class JREUtils {
             if (glesMajor < 3) {
                 //fallback to 2 since it's the minimum for the entire app
                 envMap.put("LIBGL_ES","2");
-            } else if (LOCAL_RENDERER.startsWith("opengles3")) {
-                envMap.put("LIBGL_ES","3");
+            } else if (LOCAL_RENDERER.startsWith("opengles")) {
+                envMap.put("LIBGL_ES", LOCAL_RENDERER.replace("opengles", "").replace("_5", ""));
             } else {
                 envMap.put("LIBGL_ES", "3");
             }
@@ -276,20 +281,6 @@ public class JREUtils {
         // return ldLibraryPath;
     }
     
-    private static void setRendererEnv(Map<String, String> envMap) {
-        String eglName = null;
-        
-        if (LOCAL_RENDERER.equals("opengles3_mges"))
-        {
-            envMap.put("MG_DIR_PATH", Tools.DIR_CACHE.getAbsolutePath());
-            envMap.put("MG_maxGlslCacheSize", MG_GLSL_CACHE_SIZE);
-            envMap.put("MG_enableANGLE", MG_ANGLE_OPTION);
-            envMap.put("MG_enableNoError", MG_NOERROR_OPTION);
-            envMap.put("MG_enableExtGL43", MG_EXT_GL43);
-            envMap.put("MG_enableExtComputeShader", MG_EXT_CS);
-        }
-    }
-
     private static void readCustomEnv(Map<String, String> envMap) throws IOException {
         File customEnvFile = new File(Tools.DIR_GAME_HOME, "custom_env.txt");
         if (customEnvFile.exists() && customEnvFile.isFile()) {
@@ -334,7 +325,11 @@ public class JREUtils {
         if(LOCAL_RENDERER != null) {
             userArgs.add("-Dorg.lwjgl.opengl.renderertag=" + LOCAL_RENDERER);
             userArgs.add("-Dorg.lwjgl.opengl.libname=" + loadGraphicsLibrary());
+        } else if(LOCAL_RENDERER.equals("opengles3_mges")) {
+            dlopen(NATIVE_LIB_DIR + "/libspirv-cross-c-shared.so");
+            dlopen(NATIVE_LIB_DIR + "/libshaderconv.so");
         }
+        
         // Force LWJGL to use the Freetype library intended for it, instead of using the one
         // that we ship with Java (since it may be older than what's needed)
         userArgs.add("-Dorg.lwjgl.freetype.libname="+ NATIVE_LIB_DIR+"/libfreetype.so");
