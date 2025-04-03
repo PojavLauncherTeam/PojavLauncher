@@ -289,6 +289,7 @@ public class JREUtils {
             envMap.put("MG_enableNoError", MG_NOERROR_OPTION);
             envMap.put("MG_enableExtGL43", MG_EXT_GL43);
             envMap.put("MG_enableExtComputeShader", MG_EXT_CS);
+            envMap.put("LIBGL_ES", "3");
         }
     }
     
