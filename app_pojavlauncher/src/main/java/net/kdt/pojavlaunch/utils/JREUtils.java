@@ -42,11 +42,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.TimeZone;
 
-import javax.microedition.khronos.egl.EGL10;
-import javax.microedition.khronos.egl.EGLConfig;
-import javax.microedition.khronos.egl.EGLContext;
-import javax.microedition.khronos.egl.EGLDisplay;
-
 public class JREUtils {
     private JREUtils() {}
 
@@ -232,17 +227,12 @@ public class JREUtils {
             if(LOCAL_RENDERER.equals("opengles3_ltw")) {
                 envMap.put("LIBGL_ES", "3");
                 envMap.put("POJAVEXEC_EGL","libltw.so"); // Use ANGLE EGL
-            }
-            else if(LOCAL_RENDERER.equals("opengles3_mges")) {
-                envMap.put("LIBGL_ES", "3");
-                envMap.put("MG_DIR_PATH", Tools.DIR_CACHE.getAbsolutePath());
-                envMap.put("MG_maxGlslCacheSize", MG_GLSL_CACHE_SIZE);
-                envMap.put("MG_enableANGLE", MG_ANGLE_OPTION);
-                envMap.put("MG_enableNoError", MG_NOERROR_OPTION);
-                envMap.put("MG_enableExtGL43", MG_EXT_GL43);
-                envMap.put("MG_enableExtComputeShader", MG_EXT_CS);
+            } else if(LOCAL_RENDERER.equals("opengles3_mges")) {
+            dlopen(NATIVE_LIB_DIR + "/libspirv-cross-c-shared.so");
+            dlopen(NATIVE_LIB_DIR + "/libshaderconv.so");
             }
         }
+        
         if(LauncherPreferences.PREF_BIG_CORE_AFFINITY) envMap.put("POJAV_BIG_CORE_AFFINITY", "1");
         envMap.put("AWTSTUB_WIDTH", Integer.toString(CallbackBridge.windowWidth > 0 ? CallbackBridge.windowWidth : CallbackBridge.physicalWidth));
         envMap.put("AWTSTUB_HEIGHT", Integer.toString(CallbackBridge.windowHeight > 0 ? CallbackBridge.windowHeight : CallbackBridge.physicalHeight));
@@ -256,7 +246,7 @@ public class JREUtils {
                 //fallback to 2 since it's the minimum for the entire app
                 envMap.put("LIBGL_ES","2");
             } else if (LOCAL_RENDERER.startsWith("opengles")) {
-                checkLIBGLESVersion(envMap);
+                envMap.put("LIBGL_ES", LOCAL_RENDERER.replace("opengles", "").replace("_5", ""));
             } else {
                 // TODO if can: other backends such as Vulkan.
                 // Sure, they should provide GLES 3 support.
@@ -287,14 +277,20 @@ public class JREUtils {
 
         // return ldLibraryPath;
     }
-
-    private static void checkLIBGLESVersion(Map<String, String> envMap) {
-        if (LOCAL_RENDERER.startsWith("opengles3")) {
-            envMap.put("LIBGL_ES", "3");
-        } else {
-            envMap.put("LIBGL_ES", "2");
+    
+    private static void setRendererEnv(Map<String, String> envMap) {
+        String eglName = null;
+        
+        if (LOCAL_RENDERER.equals("opengles3_mges"))
+        {
+            envMap.put("MG_DIR_PATH", Tools.DIR_CACHE.getAbsolutePath());
+            envMap.put("MG_maxGlslCacheSize", MG_GLSL_CACHE_SIZE);
+            envMap.put("MG_enableANGLE", MG_ANGLE_OPTION);
+            envMap.put("MG_enableNoError", MG_NOERROR_OPTION);
+            envMap.put("MG_enableExtGL43", MG_EXT_GL43);
+            envMap.put("MG_enableExtComputeShader", MG_EXT_CS);
         }
-    }
+        
 
     private static void readCustomEnv(Map<String, String> envMap) throws IOException {
         File customEnvFile = new File(Tools.DIR_GAME_HOME, "custom_env.txt");
@@ -337,8 +333,10 @@ public class JREUtils {
         //Add automatically generated args
         userArgs.add("-Xms" + LauncherPreferences.PREF_RAM_ALLOCATION + "M");
         userArgs.add("-Xmx" + LauncherPreferences.PREF_RAM_ALLOCATION + "M");
-        if(LOCAL_RENDERER != null) userArgs.add("-Dorg.lwjgl.opengl.libname=" + graphicsLib);
-
+        if(LOCAL_RENDERER != null) {
+            userArgs.add("-Dorg.lwjgl.opengl.renderertag=" + LOCAL_RENDERER);
+            userArgs.add("-Dorg.lwjgl.opengl.libname=" + loadGraphicsLibrary());
+        }
         // Force LWJGL to use the Freetype library intended for it, instead of using the one
         // that we ship with Java (since it may be older than what's needed)
         userArgs.add("-Dorg.lwjgl.freetype.libname="+ NATIVE_LIB_DIR+"/libfreetype.so");
@@ -501,23 +499,12 @@ public class JREUtils {
             case "opengles3":
                 renderLibrary = "libgl4es_114.so"; break;
             case "vulkan_zink": renderLibrary = "libOSMesa.so"; break;
-            case "opengles3_mges" : 
-                renderLibrary = "libmobileglues.so";
-                dlopen(NATIVE_LIB_DIR + "/libspirv-cross-c-shared.so");
-                dlopen(NATIVE_LIB_DIR + "/libshaderconv.so");
-                break;
             case "opengles3_ltw" : renderLibrary = "libltw.so"; break;
+            case "opengles3_mges" : renderLibrary = "libmobileglues.so"; break;
             default:
                 Log.w("RENDER_LIBRARY", "No renderer selected, defaulting to opengles2");
                 renderLibrary = "libgl4es_114.so";
                 break;
-        }
-
-        if (!dlopen(renderLibrary) && !dlopen(findInLdLibPath(renderLibrary))) {
-            Log.e("RENDER_LIBRARY","Failed to load renderer " + renderLibrary + ". Falling back to GL4ES 1.1.4");
-            LOCAL_RENDERER = "opengles2";
-            renderLibrary = "libgl4es_114.so";
-            dlopen(NATIVE_LIB_DIR + "/libgl4es_114.so");
         }
         return renderLibrary;
     }
