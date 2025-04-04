@@ -236,7 +236,7 @@ public class JREUtils {
     private static void setRendererEnv(Map<String, String> envMap, String jreHome) {
         String eglName = null;
         if (LOCAL_RENDERER.startsWith("opengles2")) {
-            envMap.put("", "2");
+            envMap.put("LIBGL_ES", "2");
             envMap.put("LIBGL_MIPMAP", "3");
             envMap.put("LIBGL_NOERROR", "1");
             envMap.put("LIBGL_NOINTOVLHACK", "1");
