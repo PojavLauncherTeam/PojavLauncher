@@ -265,14 +265,7 @@ public class JREUtils {
                         checkLIBGLESVersion(envMap);
                     } else {
                         envMap.put("LIBGL_ES", "3");
-                    }
-                    if (!RendererUtils.isGalliumRenderer(envValue)) {
-                        JREUtils.initRendererTag(envValue);
-                    } else {
-                        JREUtils.initRendererTag("mesa_3d");
-                        envMap.put("LOCAL_DRIVER_MODEL", envValue);
-                    }
-                } else if (envKey.equals("LIB_MESA_NAME")) {
+                    } f (envKey.equals("LIB_MESA_NAME")) {
                     envMap.put(envKey, customRenderer.getPath() + "/" + envValue);
                 } else if (envKey.equals("MESA_LIBRARY")) {
                     envMap.put(envKey, customRenderer.getPath() + "/" + envValue);
@@ -326,7 +319,8 @@ public class JREUtils {
                 envMap.put("LIBGL_ES", "3");
             }
         
-        if(info.isAdreno() && !PREF_ZINK_PREFER_SYSTEM_DRIVER) {
+        DeviceInfo info = Tools.getDeviceInfo(); // Assuming Tools.getDeviceInfo() provides the required info object
+        if(info != null && info.isAdreno() && !PREF_ZINK_PREFER_SYSTEM_DRIVER) {
             envMap.put("POJAV_LOAD_TURNIP", "1");
         }
 

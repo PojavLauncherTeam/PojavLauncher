@@ -456,6 +456,12 @@
     <string name="mg_option_no_error_disable_pri">Ignore shader/program error</string>
     <string name="mg_option_no_error_disable_sec">Ignore shader/program/framebuffer error</string>
 
+    <string name="mg_option_multidraw_mode">MultiDraw emulation</string>
+    <string name="mg_option_multidraw_mode_auto">Auto</string>
+    <string name="mg_option_multidraw_mode_indirect">Prefer Indirect</string>
+    <string name="mg_option_multidraw_mode_basevertex">Prefer BaseVertex</string>
+    <string name="mg_option_multidraw_mode_multidraw_indirect">Prefer MultiDraw Indirect</string>
+    <string name="mg_option_multidraw_mode_drawelements">Forcing DrawElements</string>
     <string name="mg_option_ext_gl43">Enable incomplete OpenGL43 extension</string>
     <string name="mg_option_ext_cs">Enable incomplete ARB_compute_shader extension</string>
 </resources>

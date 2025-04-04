@@ -25,6 +25,7 @@ public class LauncherPreferences {
 
     public static SharedPreferences DEFAULT_PREF;
     public static String PREF_RENDERER = "opengles2";
+    public static String MG_MULTIDRAWMODE_OPTION = "0";
 
 	public static boolean PREF_IGNORE_NOTCH = false;
 	public static int PREF_NOTCH_SIZE = 0;
@@ -86,6 +87,8 @@ public class LauncherPreferences {
         MG_NOERROR_OPTION = DEFAULT_PREF.getString("mg_noerror_option", "0");
         MG_EXT_GL43 = DEFAULT_PREF.getString("mg_ext_gl43", "0");
         MG_EXT_CS = DEFAULT_PREF.getString("mg_ext_compute_shader", "0");
+        MG_MULTIDRAWMODE_OPTION = DEFAULT_PREF.getString("mg_multidraw_mode", "0");
+
 
         PREF_RENDERER = DEFAULT_PREF.getString("renderer", "opengles2");
         PREF_BUTTONSIZE = DEFAULT_PREF.getInt("buttonscale", 100);
