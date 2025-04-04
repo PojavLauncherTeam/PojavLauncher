@@ -232,29 +232,29 @@ public class JREUtils {
         }
     }
 
-        private static void setRendererEnv(Map<String, String> envMap) {
-            String eglName = null;
-    
-            if (LOCAL_RENDERER.startsWith("opengles2"))
-            {
-                envMap.put("LIBGL_ES", "2");
-                envMap.put("LIBGL_MIPMAP", "3");
-                envMap.put("LIBGL_NOERROR", "1");
-                envMap.put("LIBGL_NOINTOVLHACK", "1");
-                envMap.put("LIBGL_NORMALIZE", "1");
-            }
-    
-            if (LOCAL_RENDERER.equals("opengles3_mges"))
-            {
-                envMap.put("MG_DIR_PATH", Tools.DIR_CACHE.getAbsolutePath());
-                envMap.put("MG_maxGlslCacheSize", MG_GLSL_CACHE_SIZE);
-                envMap.put("MG_enableANGLE", MG_ANGLE_OPTION);
-                envMap.put("MG_enableNoError", MG_NOERROR_OPTION);
-                envMap.put("MG_multidrawMode", MG_MULTIDRAWMODE_OPTION);
-                envMap.put("MG_enableExtGL43", MG_EXT_GL43);
-                envMap.put("MG_enableExtComputeShader", MG_EXT_CS);
-            }
-                
+    private static void setRendererEnv(Map<String, String> envMap) {
+        String eglName = null;
+
+        if (LOCAL_RENDERER.startsWith("opengles2")) {
+            envMap.put("LIBGL_ES", "2");
+            envMap.put("LIBGL_MIPMAP", "3");
+            envMap.put("LIBGL_NOERROR", "1");
+            envMap.put("LIBGL_NOINTOVLHACK", "1");
+            envMap.put("LIBGL_NORMALIZE", "1");
+        }
+
+        if (LOCAL_RENDERER.equals("opengles3_mges")) {
+            envMap.put("MG_DIR_PATH", Tools.DIR_CACHE.getAbsolutePath());
+            envMap.put("MG_maxGlslCacheSize", MG_GLSL_CACHE_SIZE);
+            envMap.put("MG_enableANGLE", MG_ANGLE_OPTION);
+            envMap.put("MG_enableNoError", MG_NOERROR_OPTION);
+            envMap.put("MG_multidrawMode", MG_MULTIDRAWMODE_OPTION);
+            envMap.put("MG_enableExtGL43", MG_EXT_GL43);
+            envMap.put("MG_enableExtComputeShader", MG_EXT_CS);
+        }
+
+        RendererPlugin.Renderer customRenderer = RendererPlugin.getSelectedRenderer(); // Declare and initialize customRenderer
+
         if (LOCAL_RENDERER != null) {
             LOCAL_RENDERER.getEnv().forEach(envPair -> {
                 String envKey = envPair.getFirst();
@@ -265,22 +265,21 @@ public class JREUtils {
                         checkLIBGLESVersion(envMap);
                     } else {
                         envMap.put("LIBGL_ES", "3");
-                    } f (envKey.equals("LIB_MESA_NAME")) {
-                    envMap.put(envKey, customRenderer.getPath() + "/" + envValue);
-                } else if (envKey.equals("MESA_LIBRARY")) {
-                    envMap.put(envKey, customRenderer.getPath() + "/" + envValue);
+                    }
                 } else {
                     envMap.put(envKey, envValue);
                 }
             });
-            String customEglName = customRenderer.getEglName();
-            if (customEglName.startsWith("/")) {
-                eglName = customRenderer.getPath() + customEglName;
-            } else {
-                eglName = customEglName;
+            String customEglName = customRenderer != null ? customRenderer.getEglName() : null;
+            if (customEglName != null) {
+                if (customEglName.startsWith("/")) {
+                    eglName = customRenderer.getPath() + customEglName;
+                } else {
+                    eglName = customEglName;
+                }
+                envMap.put("POJAVEXEC_EGL", eglName);
+                return;
             }
-            envMap.put("POJAVEXEC_EGL", eglName);
-            return;
         }
 
         if (eglName != null) envMap.put("POJAVEXEC_EGL", eglName);
@@ -297,20 +296,19 @@ public class JREUtils {
         }
 
         if (!LOCAL_RENDERER.startsWith("opengles") && !PREF_EXP_SETUP) {
-            if(LOCAL_RENDERER.equals("opengles3_ltw")) 
-            {
+            if (LOCAL_RENDERER.equals("opengles3_ltw")) {
                 envMap.put("LIBGL_ES", "3");
-                envMap.put("POJAVEXEC_EGL","libltw.so"); // Use ANGLE EGL
+                envMap.put("POJAVEXEC_EGL", "libltw.so"); // Use ANGLE EGL
             }
         }
-       
+
         if (!envMap.containsKey("LIBGL_ES")) {
             int glesMajor = getDetectedVersion();
             Log.i("glesDetect", "GLES version detected: " + glesMajor);
 
             if (glesMajor < 3) {
-                //fallback to 2 since it's the minimum for the entire app
-                envMap.put("LIBGL_ES","2");
+                // fallback to 2 since it's the minimum for the entire app
+                envMap.put("LIBGL_ES", "2");
             } else if (LOCAL_RENDERER.startsWith("opengles")) {
                 checkLIBGLESVersion(envMap);
             } else {
@@ -318,9 +316,10 @@ public class JREUtils {
                 // Sure, they should provide GLES 3 support.
                 envMap.put("LIBGL_ES", "3");
             }
-        
+        }
+
         DeviceInfo info = Tools.getDeviceInfo(); // Assuming Tools.getDeviceInfo() provides the required info object
-        if(info != null && info.isAdreno() && !PREF_ZINK_PREFER_SYSTEM_DRIVER) {
+        if (info != null && info.isAdreno() && !PREF_ZINK_PREFER_SYSTEM_DRIVER) {
             envMap.put("POJAV_LOAD_TURNIP", "1");
         }
 
@@ -330,7 +329,7 @@ public class JREUtils {
             Logger.appendToLog("Added custom env: " + env.getKey() + "=" + env.getValue());
             try {
                 Os.setenv(env.getKey(), env.getValue(), true);
-            }catch (NullPointerException exception){
+            } catch (NullPointerException exception) {
                 Log.e("JREUtils", exception.toString());
             }
         }
@@ -340,10 +339,7 @@ public class JREUtils {
         Log.d("DynamicLoader","Base LD_LIBRARY_PATH: "+LD_LIBRARY_PATH);
         Log.d("DynamicLoader","Internal LD_LIBRARY_PATH: "+jvmLibraryPath+":"+LD_LIBRARY_PATH);
         setLdLibraryPath(jvmLibraryPath+":"+LD_LIBRARY_PATH);
-
-        // return ldLibraryPath;
     }
-}
 
     private static void checkLIBGLESVersion(Map<String, String> envMap) {
         if (LOCAL_RENDERER.startsWith("opengles3")) {
