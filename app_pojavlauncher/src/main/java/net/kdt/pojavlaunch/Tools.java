@@ -133,6 +133,7 @@ public final class Tools {
     public static String CTRLMAP_PATH;
     public static String CTRLDEF_FILE;
     private static RenderersList sCompatibleRenderers;
+    public static String LIBGL_GL = null;
 
 
     private static File getPojavStorageRoot(Context ctx) {
