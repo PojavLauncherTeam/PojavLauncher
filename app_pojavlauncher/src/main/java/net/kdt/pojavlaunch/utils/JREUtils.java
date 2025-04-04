@@ -232,7 +232,7 @@ public class JREUtils {
         }
         setRendererEnv(envMap, jreHome); // Pass jreHome to setRendererEnv
     }
-tring jreHome) {
+
     private static void setRendererEnv(Map<String, String> envMap, String jreHome) {
         String eglName = null;
         if (LOCAL_RENDERER.startsWith("opengles2")) {
@@ -367,15 +367,13 @@ tring jreHome) {
         if (!renderer) return;
 
         String rendererLib = loadGraphicsLibrary();
-        RendererPlugin.Renderer customRenderer = RendererPlugin.getSelectedRenderer();
-
-        if (customRenderer != null) {
-            rendererLib = customRenderer.getPath() + "/" + loadGraphicsLibrary();
-            customRenderer.getEnv().forEach(envPair -> {
+        if (LOCAL_RENDERER != null) {
+            rendererLib = LOCAL_RENDERER.getPath() + "/" + loadGraphicsLibrary();
+           LOCAL_RENDERER.getEnv().forEach(envPair -> {
                 if (envPair.getFirst().equals("DLOPEN")) {
                     String[] libs = envPair.getSecond().split(",");
                     for (String lib : libs) {
-                        dlopen(customRenderer.getPath() + "/" + lib);
+                        dlopen(LOCAL_RENDERER.getPath() + "/" + lib);
                     }
                 }
             });
