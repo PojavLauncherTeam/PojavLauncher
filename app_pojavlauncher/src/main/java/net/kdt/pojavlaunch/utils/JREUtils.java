@@ -230,13 +230,13 @@ public class JREUtils {
         if(FFmpegPlugin.isAvailable){
             envMap.put("POJAV_FFMPEG_PATH", FFmpegPlugin.executablePath);
         }
+        setRendererEnv(envMap, jreHome); // Pass jreHome to setRendererEnv
     }
-
-    private static void setRendererEnv(Map<String, String> envMap) {
+tring jreHome) {
+    private static void setRendererEnv(Map<String, String> envMap, String jreHome) {
         String eglName = null;
-
         if (LOCAL_RENDERER.startsWith("opengles2")) {
-            envMap.put("LIBGL_ES", "2");
+            envMap.put("", "2");
             envMap.put("LIBGL_MIPMAP", "3");
             envMap.put("LIBGL_NOERROR", "1");
             envMap.put("LIBGL_NOINTOVLHACK", "1");
@@ -252,8 +252,6 @@ public class JREUtils {
             envMap.put("MG_enableExtGL43", MG_EXT_GL43);
             envMap.put("MG_enableExtComputeShader", MG_EXT_CS);
         }
-
-        RendererPlugin.Renderer customRenderer = RendererPlugin.getSelectedRenderer(); // Declare and initialize customRenderer
 
         if (LOCAL_RENDERER != null) {
             LOCAL_RENDERER.getEnv().forEach(envPair -> {
@@ -336,9 +334,9 @@ public class JREUtils {
 
         File serverFile = new File(jreHome + "/" + Tools.DIRNAME_HOME_JRE + "/server/libjvm.so");
         jvmLibraryPath = jreHome + "/" + Tools.DIRNAME_HOME_JRE + "/" + (serverFile.exists() ? "server" : "client");
-        Log.d("DynamicLoader","Base LD_LIBRARY_PATH: "+LD_LIBRARY_PATH);
-        Log.d("DynamicLoader","Internal LD_LIBRARY_PATH: "+jvmLibraryPath+":"+LD_LIBRARY_PATH);
-        setLdLibraryPath(jvmLibraryPath+":"+LD_LIBRARY_PATH);
+        Log.d("DynamicLoader", "Base LD_LIBRARY_PATH: " + LD_LIBRARY_PATH);
+        Log.d("DynamicLoader", "Internal LD_LIBRARY_PATH: " + jvmLibraryPath + ":" + LD_LIBRARY_PATH);
+        setLdLibraryPath(jvmLibraryPath + ":" + LD_LIBRARY_PATH);
     }
 
     private static void checkLIBGLESVersion(Map<String, String> envMap) {
