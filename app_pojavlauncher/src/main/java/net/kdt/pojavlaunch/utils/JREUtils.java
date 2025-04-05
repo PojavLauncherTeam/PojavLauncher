@@ -233,8 +233,8 @@ public class JREUtils {
         }
 
         if (LOCAL_RENDERER.equals("opengles3_mges")) {
-            envMap.put("libgl_es", "3");
-            envMAp.put("POJAV_EXEC", "libmobileglues.so");
+            envMap.put("LIBGL_ES", "3");
+            envMap.put("POJAVEXEC_EGL","libmobileglues.so");
             envMap.put("MG_DIR_PATH", Tools.DIR_CACHE.getAbsolutePath());
             envMap.put("MG_maxGlslCacheSize", MG_GLSL_CACHE_SIZE);
             envMap.put("MG_enableANGLE", MG_ANGLE_OPTION);
