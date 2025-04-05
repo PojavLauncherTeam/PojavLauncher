@@ -82,17 +82,10 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Build Google Play .aab
-        if: github.repository_owner == 'PojavLauncherTeam' && github.ref_name == 'v3_openjdk'
+      - name: Build Google Play .abb
         run: |
           gradle :app_pojavlauncher:bundleGplay
           mv app_pojavlauncher/build/outputs/bundle/gplay/app_pojavlauncher-gplay.aab out/app-gplay.aab
-
-      - name: Build Release .apk
-        run: |
-          # Build the launcher
-          gradle :app_pojavlauncher:assemblerelease
-          mv app_pojavlauncher/build/outputs/apk/release/app_pojavlauncher-release.apk out/app-release.apk
 
       - name: Build Debug .apk\
         run: |
@@ -111,13 +104,7 @@ jobs:
         run: |
           md5sum out/app-debug.apk > out/app-debug.md5
           md5sum out/app-debug-noruntime.apk > out/app-debug-noruntime.md5
-
-      - name : Upload Release APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: app-release
-          path: out/release.*
-     
+          
       - name: Upload  Debug APK
         uses: actions/upload-artifact@v4
         with:
