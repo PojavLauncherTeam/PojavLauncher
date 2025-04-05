@@ -189,14 +189,11 @@ public class JREUtils {
         envMap.put("TMPDIR", Tools.DIR_CACHE.getAbsolutePath());
         envMap.put("LIBGL_MIPMAP", "3");
 
-        // Prevent OptiFine (and other error-reporting stuff in Minecraft) from balooning the log
-        envMap.put("LIBGL_NOERROR", "1");
-
-        // On certain GLES drivers, overloading default functions shader hack fails, so disable it
-        envMap.put("LIBGL_NOINTOVLHACK", "1");
-
-        // Fix white color on banner and sheep, since GL4ES 1.1.5
-        envMap.put("LIBGL_NORMALIZE", "1");
+        if(LOCAL_RENDERER.startsWith("opengles2")) {
+            envMap.put("LIBGL_NOERROR", "1");
+            envMap.put("LIBGL_NOINTOVLHACK", "1");
+            envMap.put("LIBGL_NORMALIZE", "1");
+    }
 
         if(PREF_DUMP_SHADERS)
             envMap.put("LIBGL_VGPU_DUMP", "1");
@@ -256,7 +253,7 @@ public class JREUtils {
             if (glesMajor < 3) {
                 //fallback to 2 since it's the minimum for the entire app
                 envMap.put("LIBGL_ES","2");
-            } else if (LOCAL_RENDERER.startsWith("opengles")) {
+            } else if (LOCAL_RENDERER.startsWith("opengles3")) {
                 envMap.put("LIBGL_ES", LOCAL_RENDERER.replace("opengles", "").replace("_5", ""));
             } else {
                 // TODO if can: other backends such as Vulkan.
@@ -505,13 +502,6 @@ public class JREUtils {
         if (LOCAL_RENDERER.equals("opengles3_mges")) {
             dlopen(NATIVE_LIB_DIR + "/libspirv-cross-c-shared.so");
             dlopen(NATIVE_LIB_DIR + "/libshaderconv.so");
-        }
-
-        if (!dlopen(renderLibrary) && !dlopen(findInLdLibPath(renderLibrary))) {
-            Log.e("RENDER_LIBRARY","Failed to load renderer " + renderLibrary + ". Falling back to GL4ES 1.1.4");
-            LOCAL_RENDERER = "opengles2";
-            renderLibrary = "libgl4es_114.so";
-            dlopen(NATIVE_LIB_DIR + "/libgl4es_114.so");
         }
         return renderLibrary;
     }
