@@ -1,16 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xx:android="http://schemas.android.com/apk/res/android"
     xmlns:app2="http://schemas.android.com/apk/res-auto">
-    
     <net.kdt.pojavlaunch.prefs.BackButtonPreference/>
-   
     <PreferenceCategory android:title="@string/preference_category_experimental_settings">
-        <Preference
-            android:key="renderer_mobileglues_settings"
-            android:title="@string/preference_renderer_mobileglues_settings"
-            android:icon="@drawable/ic_renderer_mg"
-            />
-
         <SwitchPreferenceCompat
             android:key="dump_shaders"
             android:title="@string/preference_shader_dump_title"
@@ -21,6 +13,11 @@
             android:key="bigCoreAffinity"
             android:title="@string/preference_force_big_core_title"
             android:summary="@string/preference_force_big_core_desc" />
-
+        
+        <SwitchPreference
+            android:key="renderer_mobileglues_settings"
+            android:title="@string/preference_renderer_mobileglues_settings"
+            android:icon="@drawable/ic_renderer_mg" />
+    
     </PreferenceCategory>
 </PreferenceScreen>
