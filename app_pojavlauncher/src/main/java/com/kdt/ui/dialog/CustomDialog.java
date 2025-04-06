@@ -287,3 +287,4 @@ public class CustomDialog implements DraggableDialog.DialogInitializationListene
         }
     }
 }
+//credits to vera-firefly
