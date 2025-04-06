@@ -70,8 +70,8 @@ public class LauncherPreferences {
     public static boolean PREF_VSYNC_IN_ZINK = true;
 
    // MobileGlues Settings
-    public static String MG_GLSL_CACHE_SIZE = "30";
-    public static String MG_ANGLE_OPTION = "0";
+    public static String MG_GLSL_CACHE_SIZE = "256";
+    public static String MG_ANGLE_OPTION = "3";
     public static String MG_NOERROR_OPTION = "0";
     public static String MG_EXT_GL43 = "0";
     public static String MG_EXT_CS = "0";
@@ -232,4 +232,4 @@ public class LauncherPreferences {
         }
         Tools.updateWindowSize(activity);
     }
-}
+}znpnxu
