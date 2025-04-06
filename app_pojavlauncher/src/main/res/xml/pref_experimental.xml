@@ -4,10 +4,10 @@
     <net.kdt.pojavlaunch.prefs.BackButtonPreference/>
     <PreferenceCategory android:title="@string/preference_category_experimental_settings">
 
-        <SwitchPre ference
+        <SwitchPreference
             android:key="renderer_mobileglues_settings"
             android:title="@string/preference_renderer_mobileglues_settings"
-       i     android:icon="@drawable/ic_renderer_mg"
+            android:icon="@drawable/ic_renderer_mg"
             />
 
         <SwitchPreferenceCompat
