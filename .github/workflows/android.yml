@@ -34,6 +34,14 @@ jobs:
           cd app_pojavlauncher/libs
           wget https://github.com/PojavLauncherTeam/LTW/releases/latest/download/ltw-release.aar
 
+      - name: Get MGES
+        run: |
+         apt update && apt install wget
+         cd app_pojavlauncher/src/main/jniLibs
+         wget https://github.com/ItsWinterBush26/MobileGlues/releases/download/v1.0.0/MG-ES.zip
+         unzip MG-ES.zip
+         rm MG-ES.zip    
+
       - name: Get JRE 8
         uses: dawidd6/action-download-artifact@v2
         with:
