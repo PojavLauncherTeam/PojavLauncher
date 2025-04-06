@@ -25,6 +25,7 @@ public class LauncherPreferences {
 
     public static SharedPreferences DEFAULT_PREF;
     public static String PREF_RENDERER = "opengles2";
+    public static String MG_MULTIDRAWMODE_OPTION = "0";
 
 	public static boolean PREF_IGNORE_NOTCH = false;
 	public static int PREF_NOTCH_SIZE = 0;
@@ -68,7 +69,7 @@ public class LauncherPreferences {
     public static boolean PREF_SKIP_NOTIFICATION_PERMISSION_CHECK = false;
     public static boolean PREF_VSYNC_IN_ZINK = true;
 
-     // MobileGlues Settings
+   // MobileGlues Settings
     public static String MG_GLSL_CACHE_SIZE = "30";
     public static String MG_ANGLE_OPTION = "0";
     public static String MG_NOERROR_OPTION = "0";
@@ -80,13 +81,14 @@ public class LauncherPreferences {
         Tools.initStorageConstants(ctx);
         boolean isDevicePowerful = isDevicePowerful(ctx);
 
-         // MobileGlues Settings
+       // MobileGlues Settings
         MG_GLSL_CACHE_SIZE = DEFAULT_PREF.getString("mg_glsl_cache_size", "30");
         MG_ANGLE_OPTION = DEFAULT_PREF.getString("mg_angle_option", "0");
         MG_NOERROR_OPTION = DEFAULT_PREF.getString("mg_noerror_option", "0");
         MG_EXT_GL43 = DEFAULT_PREF.getString("mg_ext_gl43", "0");
         MG_EXT_CS = DEFAULT_PREF.getString("mg_ext_compute_shader", "0");
         MG_MULTIDRAWMODE_OPTION = DEFAULT_PREF.getString("mg_multidraw_mode", "0");
+
 
         PREF_RENDERER = DEFAULT_PREF.getString("renderer", "opengles2");
         PREF_BUTTONSIZE = DEFAULT_PREF.getInt("buttonscale", 100);

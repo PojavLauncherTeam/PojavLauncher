@@ -67,6 +67,7 @@
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (all versions, fast)</string>
     <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - (all versions, mid)</string>
     <string name="mcl_setting_renderer_ltw">LTW (OpenGL ES 3) - 1.17+ only</string>
+    <string name="mcl_setting_renderer_mges">MobileGlues (OpenGL4.0) - 1.17+ only</string>
     <string name="mcl_setting_veroption_release">Release</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
@@ -289,7 +290,6 @@
     <string name="preference_deadzone_scale_title">Joystick deadzone scale</string>
     <string name="preference_deadzone_scale_description">Increase it if the joystick drifts.</string>
 
-
     <string name="preference_force_big_core_title">Force the renderer to run on the big core</string>
     <string name="preference_force_big_core_desc">Forces the Minecraft render thread to run on the core with the highest maximum frequency.</string>
     <string name="version_select_hint">Select a version</string>
@@ -424,12 +424,15 @@
     <string name="local_login_bad_username_title">Unsuitable username</string>
     <string name="local_login_bad_username_text">The username must be between 3–16 characters long, and must only contain latin letters, numbers 0–9 and underscores.</string>
     <string name="quick_setting_title">Quick settings</string>
-    <string name="create_bta_profile">Create \"Better than Adventure!\" profile</string>
-    <string name="select_bta_version">Select \"Better than Adventure!\" version</string>
+    <string name="create_bta_profile">Create "Better than Adventure!" profile</string>
+    <string name="select_bta_version">Select "Better than Adventure!" version</string>
     <string name="bta_installer_available_versions">Supported BTA versions</string>
     <string name="bta_installer_untested_versions">Untested BTA versions</string>
     <string name="bta_installer_nightly_versions">Nightly BTA versions</string>
     <string name="newdl_extracting_native_libraries">Extracting native libraries (%d/%d)</string>
+
+    <string name="alertdialog_cancel">Cancel</string>
+    <string name="alertdialog_done">Done</string>
 
         <!-- MG Renderer Settings-->
     <string name="preference_renderer_mobileglues_settings">MobileGlues Renderer Settings</string>
@@ -461,7 +464,4 @@
     <string name="mg_option_multidraw_mode_drawelements">Forcing DrawElements</string>
     <string name="mg_option_ext_gl43">Enable incomplete OpenGL43 extension</string>
     <string name="mg_option_ext_cs">Enable incomplete ARB_compute_shader extension</string>
-
-    <string name="alertdialog_cancel">Cancel</string>
-    <string name="alertdialog_done">Done</string>
 </resources>
