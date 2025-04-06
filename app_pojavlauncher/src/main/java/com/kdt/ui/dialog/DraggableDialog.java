@@ -54,3 +54,4 @@ public abstract class DraggableDialog {
         Window onInit();
     }
 }
+//credits to movtery
