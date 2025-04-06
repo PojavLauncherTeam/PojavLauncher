@@ -232,4 +232,4 @@ public class LauncherPreferences {
         }
         Tools.updateWindowSize(activity);
     }
-}znpnxu
+}

@@ -317,8 +317,6 @@ public final class Tools {
 
         List<String> javaArgList = new ArrayList<>();
 
-        javaArgList.add("-javaagent:" + DIR_GAME_HOME + "/patcher/MioLibPatcher.jar");
-        
         getCacioJavaArgs(javaArgList, runtime.javaVersion == 8);
 
         if (versionInfo.logging != null) {
