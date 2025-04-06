@@ -1,0 +1,136 @@
+name: Android CI
+
+on:
+  pull_request:
+    branches-ignore:
+      - 'l10n_v3_openjdk2'
+    types: [ opened, reopened ]
+  push:
+    branches-ignore:
+      - 'l10n_v3_openjdk2'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    env:
+      GPLAY_KEYSTORE_PASSWORD: ${{ secrets.GPLAY_KEYSTORE_PASSWORD }}
+      CURSEFORGE_API_KEY: ${{ secrets.CURSEFORGE_API_KEY }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: "recursive"
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Get LTW
+        run: |
+          apt update && apt install wget
+          cd app_pojavlauncher/libs
+          wget https://github.com/PojavLauncherTeam/LTW/releases/latest/download/ltw-release.aar
+
+      - name: Get JRE 8
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: build.yml
+          path: app_pojavlauncher/src/main/assets/components/jre
+          workflow_conclusion: success
+          repo: PojavLauncherTeam/android-openjdk-build-multiarch
+          branch: buildjre8
+          name: jre8-pojav
+
+      - name: Get JRE17
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: build.yml
+          path: app_pojavlauncher/src/main/assets/components/jre-new
+          workflow_conclusion: success
+          repo: PojavLauncherTeam/android-openjdk-build-multiarch
+          branch: buildjre17-21
+          name: jre17-pojav
+
+      - name: Get JRE21
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: build.yml
+          path: app_pojavlauncher/src/main/assets/components/jre-21
+          workflow_conclusion: success
+          repo: PojavLauncherTeam/android-openjdk-build-multiarch
+          branch: buildjre17-21
+          name: jre21-pojav
+
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "8.11"
+
+      - name: Build JRE JAR files
+        run: |
+          ./scripts/languagelist_updater.sh
+
+          mkdir out
+          # Build JRE JAR files (security manager, etc...)
+          gradle :jre_lwjgl3glfw:build --no-daemon
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Build Google Play .aab
+        if: github.repository_owner == 'PojavLauncherTeam' && github.ref_name == 'v3_openjdk'
+        run: |
+          gradle :app_pojavlauncher:bundleGplay
+          mv app_pojavlauncher/build/outputs/bundle/gplay/app_pojavlauncher-gplay.aab out/app-gplay.aab
+
+      - name: Build Debug .apk
+        run: |
+          # Build the launcher
+          gradle :app_pojavlauncher:assembleDebug
+          mv app_pojavlauncher/build/outputs/apk/debug/app_pojavlauncher-debug.apk out/app-debug.apk
+
+      - name: Build APK without runtime
+        run: |
+          rm -r app_pojavlauncher/src/main/assets/components/jre
+          rm -r app_pojavlauncher/src/main/assets/components/jre-new
+          rm -r app_pojavlauncher/src/main/assets/components/jre-21
+          gradle assembleDebug
+          mv app_pojavlauncher/build/outputs/apk/debug/app_pojavlauncher-debug.apk out/app-debug-noruntime.apk
+      - name: Gen md5sums
+        run: |
+          md5sum out/app-debug.apk > out/app-debug.md5
+          md5sum out/app-debug-noruntime.apk > out/app-debug-noruntime.md5
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-debug
+          path: out/app-debug.*
+
+      - name: Upload AAB
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-release-aab
+          path: out/app-gplay.aab
+
+      - name: Upload onto the Google Play testing track
+        continue-on-error: true
+        if: github.repository_owner == 'PojavLauncherTeam' && github.ref_name == 'v3_openjdk'
+        uses: r0adkll/upload-google-play@v1.1.2
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.GPLAY_SERVICE_JSON }}
+          packageName: net.kdt.pojavlaunch
+          releaseFiles: out/app-gplay.aab
+          track: internal
+          inAppUpdatePriority: 5
+
+      - name: Upload APK (without runtime)
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-debug-noruntime
+          path: out/app-debug-noruntime.*
