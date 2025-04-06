@@ -316,7 +316,7 @@ public final class Tools {
         String launchClassPath = generateLaunchClassPath(versionInfo, versionId);
 
         List<String> javaArgList = new ArrayList<>();
-        
+
         javaArgList.add("-javaagent:" + DIR_GAME_HOME + "/patcher/MioLibPatcher.jar");
         
         getCacioJavaArgs(javaArgList, runtime.javaVersion == 8);
