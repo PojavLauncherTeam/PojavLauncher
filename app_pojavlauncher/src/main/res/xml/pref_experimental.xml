@@ -13,11 +13,6 @@
             android:key="bigCoreAffinity"
             android:title="@string/preference_force_big_core_title"
             android:summary="@string/preference_force_big_core_desc" />
-        
-        <SwitchPreference
-            android:key="renderer_mobileglues_settings"
-            android:title="@string/preference_renderer_mobileglues_settings"
-            android:icon="@drawable/ic_renderer_mg" />
-    
+
     </PreferenceCategory>
 </PreferenceScreen>
