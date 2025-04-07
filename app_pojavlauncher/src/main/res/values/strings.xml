@@ -435,9 +435,9 @@
     <string name="alertdialog_done">Done</string>
 
         <!-- MG Renderer Settings-->
-    <string name="preference_renderer_mobileglues_settings">MobileGlues Renderer Settings Experimental</string>
+    <string name="preference_renderer_mobileglues_settings">MobileGlues Renderer Settings</string>
 
-    <string name="mg_option_glsl_cache">Max glsl cache size(Experimental)</string>
+    <string name="mg_option_glsl_cache">Max glsl cache size</string>
     <string name="mg_option_glsl_cache_hint">enter -1 to disable</string>
     <string name="mg_option_glsl_cache_helper">Unit: Megabytes (MB)</string>
     <string name="mg_option_glsl_cache_error_invalid">Error: invalid number.</string>
@@ -445,12 +445,12 @@
     <string name="mg_option_glsl_cache_error_range">Error: number cannot be 0 or less than -1.</string>
 
     <string name="mg_option_angle">Use ANGLE as OpenGL ES driver</string>
-    <string name="mg_option_angle_disable_if_possible">Disable if possible(Experimental)</string>
-    <string name="mg_option_angle_enable_if_possible">Enable if possible(Experimental)</string>
-    <string name="mg_option_angle_disable">Disable(Experimental)</string>
+    <string name="mg_option_angle_disable_if_possible">Disable if possible</string>
+    <string name="mg_option_angle_enable_if_possible">Enable if possible</string>
+    <string name="mg_option_angle_disable">Disable</string>
     <string name="mg_option_angle_enable">Enable</string>
 
-    <string name="mg_option_no_error">Error setting Experimental</string>
+    <string name="mg_option_no_error">Error setting</string>
     <string name="mg_option_no_error_auto">Auto</string>
     <string name="mg_option_no_error_enable">Do not ignore</string>
     <string name="mg_option_no_error_disable_pri">Ignore shader/program error</string>
@@ -458,10 +458,10 @@
 
     <string name="mg_option_multidraw_mode">MultiDraw emulation</string>
     <string name="mg_option_multidraw_mode_auto">Auto</string>
-    <string name="mg_option_multidraw_mode_indirect">Prefer Indirect(</string>
-    <string name="mg_option_multidraw_mode_basevertex">Prefer BaseVertex (Good For Old GPU)</string>
-    <string name="mg_option_multidraw_mode_multidraw_indirect">Prefer MultiDraw Indirect(Experimental)</string>
-    <string name="mg_option_multidraw_mode_drawelements">Forcing DrawElements(Experimental)</string>
-    <string name="mg_option_ext_gl43">Enable incomplete OpenGL43 extension(Experimental)</string>
-    <string name="mg_option_ext_cs">Enable incomplete ARB_compute_shader extension(Experimental)</string>
+    <string name="mg_option_multidraw_mode_indirect">Prefer Indirect</string>
+    <string name="mg_option_multidraw_mode_basevertex">Prefer BaseVertex</string>
+    <string name="mg_option_multidraw_mode_multidraw_indirect">Prefer MultiDraw Indirect</string>
+    <string name="mg_option_multidraw_mode_drawelements">Forcing DrawElements</string>
+    <string name="mg_option_ext_gl43">Enable incomplete OpenGL43 extension</string>
+    <string name="mg_option_ext_cs">Enable incomplete ARB_compute_shader extension</string>
 </resources>
