@@ -189,11 +189,14 @@ public class JREUtils {
         envMap.put("TMPDIR", Tools.DIR_CACHE.getAbsolutePath());
         envMap.put("LIBGL_MIPMAP", "3");
 
-        if(LOCAL_RENDERER.startsWith("opengles2")) {
-            envMap.put("LIBGL_NOERROR", "1");
-            envMap.put("LIBGL_NOINTOVLHACK", "1");
-            envMap.put("LIBGL_NORMALIZE", "1");
-    }
+         // Prevent OptiFine (and other error-reporting stuff in Minecraft) from balooning the log
+         envMap.put("LIBGL_NOERROR", "1");
+
+         // On certain GLES drivers, overloading default functions shader hack fails, so disable it
+         envMap.put("LIBGL_NOINTOVLHACK", "1");
+ 
+         // Fix white color on banner and sheep, since GL4ES 1.1.5
+         envMap.put("LIBGL_NORMALIZE", "1");
 
         if(PREF_DUMP_SHADERS)
             envMap.put("LIBGL_VGPU_DUMP", "1");
