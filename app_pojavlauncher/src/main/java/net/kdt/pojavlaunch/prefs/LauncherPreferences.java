@@ -82,12 +82,12 @@ public class LauncherPreferences {
         boolean isDevicePowerful = isDevicePowerful(ctx);
 
        // MobileGlues Settings
-        MG_GLSL_CACHE_SIZE = DEFAULT_PREF.getString("mg_glsl_cache_size", "30");
-        MG_ANGLE_OPTION = DEFAULT_PREF.getString("mg_angle_option", "0");
+        MG_GLSL_CACHE_SIZE = DEFAULT_PREF.getString("mg_glsl_cache_size", "256");
+        MG_ANGLE_OPTION = DEFAULT_PREF.getString("mg_angle_option", "3");
         MG_NOERROR_OPTION = DEFAULT_PREF.getString("mg_noerror_option", "0");
         MG_EXT_GL43 = DEFAULT_PREF.getString("mg_ext_gl43", "0");
         MG_EXT_CS = DEFAULT_PREF.getString("mg_ext_compute_shader", "0");
-        MG_MULTIDRAWMODE_OPTION = DEFAULT_PREF.getString("mg_multidraw_mode", "0");
+        MG_MULTIDRAWMODE_OPTION = DEFAULT_PREF.getString("mg_multidraw_mode", "2");
 
 
         PREF_RENDERER = DEFAULT_PREF.getString("renderer", "opengles2");
