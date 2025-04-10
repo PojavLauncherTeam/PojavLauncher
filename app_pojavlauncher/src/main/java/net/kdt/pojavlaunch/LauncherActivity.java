@@ -125,6 +125,14 @@ public class LauncherActivity extends BaseActivity {
         }
         String normalizedVersionId = AsyncMinecraftDownloader.normalizeVersionId(prof.lastVersionId);
         JMinecraftVersionList.Version mcVersion = AsyncMinecraftDownloader.getListedVersion(normalizedVersionId);
+
+        // Do not load when is a modded version or older than minecraft 1.3
+        if((mcVersion == null || AsyncMinecraftDownloader.isOlderThan13(mcVersion.releaseTime))
+                && PojavProfile.getCurrentProfileContent(this, null).isLocal()){
+            Toast.makeText(this, R.string.toast_not_available_demo, Toast.LENGTH_LONG).show();
+            return false;
+        }
+
         new MinecraftDownloader().start(
                 this,
                 mcVersion,

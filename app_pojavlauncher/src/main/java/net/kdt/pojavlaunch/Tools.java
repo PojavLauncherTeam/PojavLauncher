@@ -506,13 +506,13 @@ public final class Tools {
             }
         }
 
-        return JSONUtils.insertJSONValueList(
-                splitAndFilterEmpty(
-                        versionInfo.minecraftArguments == null ?
-                                fromStringArray(minecraftArgs.toArray(new String[0])):
-                                versionInfo.minecraftArguments
-                ), varArgMap
-        );
+        String mcArguments = versionInfo.minecraftArguments == null ?
+                fromStringArray(minecraftArgs.toArray(new String[0])):
+                versionInfo.minecraftArguments;
+
+        if(profile.isLocal()) mcArguments += " --demo";
+
+        return JSONUtils.insertJSONValueList(splitAndFilterEmpty(mcArguments), varArgMap);
     }
 
     public static String fromStringArray(String[] strArr) {
