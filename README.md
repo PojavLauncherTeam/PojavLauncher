@@ -10,9 +10,9 @@
 
 *From [Boardwalk](https://github.com/zhuowei/Boardwalk)'s ashes here comes PojavLauncher!*
 
-PojavLauncher is a launcher that allows you to play Minecraft: Java Edition on your Android and [iOS](https://github.com/PojavLauncherTeam/PojavLauncher_iOS).
+PojavLauncher is a launcher that allows you to play Minecraft: Java Edition on your Android and [iOS](https://github.com/PojavLauncherTeam/PojavLauncher_iOS) devices.
 
-For more details, check out our [wiki](https://pojavlauncherteam.github.io/)!
+For more details, check out our [wiki](https://pojavlauncher.app/)!
 
 ## Important Notes
 
@@ -88,6 +88,7 @@ If you need more control over the build process, follow these steps:
 
 * [x] OpenJDK 8 Mobile port: ARM32, ARM64, x86, x86_64
 * [x] OpenJDK 17 Mobile port: ARM32, ARM64, x86, x86_64
+* [x] OpenJDK 21 Mobile port: ARM32, ARM64, x86, x86_64
 * [x] Headless mod installer
 * [x] Mod installer with GUI
 * [x] OpenGL in OpenJDK environment
