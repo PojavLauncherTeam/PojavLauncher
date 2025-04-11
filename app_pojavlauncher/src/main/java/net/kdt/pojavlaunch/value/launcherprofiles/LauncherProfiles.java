@@ -16,7 +16,7 @@ import java.util.UUID;
 
 public class LauncherProfiles {
     public static MinecraftLauncherProfiles mainProfileJson;
-    private static final File launcherProfilesFile = new File(Tools.DIR_GAME_NEW, "launcher_profiles.json");
+    private static final File launcherProfilesFile = new File(Tools.GAME_PROFILES_FILE);
 
     /** Reload the profile from the file, creating a default one if necessary */
     public static void load(){

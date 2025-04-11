@@ -87,17 +87,15 @@ public class MicrosoftBackgroundLogin {
 
                 MinecraftAccount acc = MinecraftAccount.load(mcName);
                 if(acc == null) acc = new MinecraftAccount();
-                if (doesOwnGame) {
-                    acc.xuid = xsts[0];
-                    acc.clientToken = "0"; /* FIXME */
-                    acc.accessToken = mcToken;
-                    acc.username = mcName;
-                    acc.profileId = mcUuid;
-                    acc.isMicrosoft = true;
-                    acc.msaRefreshToken = msRefreshToken;
-                    acc.expiresAt = expiresAt;
-                    acc.updateSkinFace();
-                }
+                acc.xuid = xsts[0];
+                acc.clientToken = "0"; /* FIXME */
+                acc.accessToken = mcToken;
+                acc.username = mcName;
+                acc.profileId = mcUuid;
+                acc.isMicrosoft = true;
+                acc.msaRefreshToken = msRefreshToken;
+                acc.expiresAt = expiresAt;
+                acc.updateSkinFace();
                 acc.save();
 
                 if(doneListener != null) {
@@ -298,7 +296,9 @@ public class MicrosoftBackgroundLogin {
         }else{
             Log.i("MicrosoftLogin","It seems that this Microsoft Account does not own the game.");
             doesOwnGame = false;
-            throw new PresentedException(new RuntimeException(conn.getResponseMessage()), R.string.minecraft_not_owned);
+            mcName = "Demo.Player";
+            mcUuid = "00000000-0000-0000-0000-000000000000";
+            //throw new PresentedException(new RuntimeException(conn.getResponseMessage()), R.string.minecraft_not_owned);
             //throwResponseError(conn);
         }
     }
