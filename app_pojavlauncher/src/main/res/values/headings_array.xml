@@ -27,6 +27,7 @@
     </string-array>
 
     <string-array name="menu_ingame">
+        <item>@string/control_forceclose</item>
         <item>@string/control_viewout</item>
         <item>@string/control_customkey</item>
         <item>@string/quick_setting_title</item>

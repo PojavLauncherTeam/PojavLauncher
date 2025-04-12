@@ -1,6 +1,7 @@
 package net.kdt.pojavlaunch;
 
 import static net.kdt.pojavlaunch.Tools.currentDisplayMetrics;
+import static net.kdt.pojavlaunch.Tools.dialogForceClose;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_ENABLE_GYRO;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_SUSTAINED_PERFORMANCE;
 import static net.kdt.pojavlaunch.prefs.LauncherPreferences.PREF_USE_ALTERNATE_SURFACE;
@@ -190,10 +191,11 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
                     android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.menu_ingame));
             gameActionClickListener = (parent, view, position, id) -> {
                 switch(position) {
-                    case 0: openLogOutput(); break;
-                    case 1: dialogSendCustomKey(); break;
-                    case 2: openQuickSettings(); break;
-                    case 3: openCustomControls(); break;
+                    case 0: dialogForceClose(MainActivity.this); break;
+                    case 1: openLogOutput(); break;
+                    case 2: dialogSendCustomKey(); break;
+                    case 3: openQuickSettings(); break;
+                    case 4: openCustomControls(); break;
                 }
                 drawerLayout.closeDrawers();
             };
