@@ -321,13 +321,9 @@ public final class Tools {
 
         getCacioJavaArgs(javaArgList, runtime.javaVersion == 8);
 
-        if (versionInfo.logging != null) {
-            String configFile = Tools.DIR_DATA + "/security/" + versionInfo.logging.client.file.id.replace("client", "log4j-rce-patch");
-            if (!new File(configFile).exists()) {
-                configFile = Tools.DIR_GAME_NEW + "/" + versionInfo.logging.client.file.id;
-            }
-            javaArgList.add("-Dlog4j.configurationFile=" + configFile);
-        }
+        String configFile = Tools.DIR_DATA + "/security/log4j-rce-patch-" +
+                (isReleaseBefore(versionInfo.releaseTime, 2017, 5, 2) ? "1.7" : "1.12") + ".xml"; // if older than 1.12 release, use 1.7 config, otherwise use 1.12 config
+        javaArgList.add("-Dlog4j.configurationFile=" + configFile);
 
         File versionSpecificNativesDir = new File(Tools.DIR_CACHE, "natives/"+versionId);
         if(versionSpecificNativesDir.exists()) {
@@ -1437,5 +1433,13 @@ public final class Tools {
     public static boolean isLocalProfile(Context ctx){
         MinecraftAccount currentProfile = PojavProfile.getCurrentProfileContent(ctx, null);
         return currentProfile == null || currentProfile.isLocal();
+    }
+
+    private static boolean isReleaseBefore(String releaseTime, int year, int month, int day) {
+        try {
+            return DateUtils.dateBefore(DateUtils.parseReleaseDate(releaseTime), year, month, day);
+        } catch (ParseException e) {
+            return true; // consider old
+        }
     }
 }
