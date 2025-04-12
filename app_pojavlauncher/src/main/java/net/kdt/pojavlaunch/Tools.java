@@ -321,9 +321,10 @@ public final class Tools {
 
         getCacioJavaArgs(javaArgList, runtime.javaVersion == 8);
 
-        String configFile = Tools.DIR_DATA + "/security/log4j-rce-patch-" +
-                (isReleaseBefore(versionInfo.releaseTime, 2017, 5, 2) ? "1.7" : "1.12") + ".xml"; // if older than 1.12 release, use 1.7 config, otherwise use 1.12 config
-        javaArgList.add("-Dlog4j.configurationFile=" + configFile);
+        if (versionInfo.logging != null) {
+            String configFile = getLog4jConfiguration(activity, versionInfo.logging);
+            javaArgList.add("-Dlog4j.configurationFile=" + configFile);
+        }
 
         File versionSpecificNativesDir = new File(Tools.DIR_CACHE, "natives/"+versionId);
         if(versionSpecificNativesDir.exists()) {
@@ -1435,11 +1436,18 @@ public final class Tools {
         return currentProfile == null || currentProfile.isLocal();
     }
 
-    private static boolean isReleaseBefore(String releaseTime, int year, int month, int day) {
-        try {
-            return DateUtils.dateBefore(DateUtils.parseReleaseDate(releaseTime), year, month, day);
-        } catch (ParseException e) {
-            return true; // consider old
+    private static String getLog4jConfiguration(Context ctx, JMinecraftVersionList.LoggingConfig loggingConfig){
+        String configFilePath = Tools.DIR_DATA + "/security/" + loggingConfig.client.file.id.replace("client", "log4j-rce-patch");
+        File configFile = new File(configFilePath);
+        if (!configFile.exists()) {
+            // try unpacking a new configuration from an existing installation
+            try {
+                copyAssetFile(ctx,"components/security/" + loggingConfig.client.file.id.replace("client", "log4j-rce-patch"), Tools.DIR_DATA + "/security", false);
+            } catch (IOException ignored) {}
+
+            // use minecraft's default when still not existing
+            if(!configFile.exists()) configFilePath = Tools.DIR_GAME_NEW + "/" + loggingConfig.client.file.id;
         }
+        return configFilePath;
     }
 }
