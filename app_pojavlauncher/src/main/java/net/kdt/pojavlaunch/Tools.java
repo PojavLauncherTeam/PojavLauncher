@@ -1439,14 +1439,17 @@ public final class Tools {
     private static String getLog4jConfiguration(Context ctx, JMinecraftVersionList.LoggingConfig loggingConfig){
         String configFilePath = Tools.DIR_DATA + "/security/" + loggingConfig.client.file.id.replace("client", "log4j-rce-patch");
         File configFile = new File(configFilePath);
-        if (!configFile.exists()) {
-            // try unpacking a new configuration from an existing installation
-            try {
-                copyAssetFile(ctx,"components/security/" + loggingConfig.client.file.id.replace("client", "log4j-rce-patch"), Tools.DIR_DATA + "/security", false);
-            } catch (IOException ignored) {}
 
-            // use minecraft's default when still not existing
-            if(!configFile.exists()) configFilePath = Tools.DIR_GAME_NEW + "/" + loggingConfig.client.file.id;
+        // try unpacking the config (useful for new configurations in existing installations)
+        try {
+            copyAssetFile(ctx,"components/security/" + loggingConfig.client.file.id.replace("client", "log4j-rce-patch"), Tools.DIR_DATA + "/security", false);
+        } catch (IOException e) {
+            Log.w("log4j-unpack", e.getMessage(), e);
+        }
+
+        // use minecraft's default when not found the pojav's one
+        if (!configFile.exists()) {
+            configFilePath = Tools.DIR_GAME_NEW + "/" + loggingConfig.client.file.id;
         }
         return configFilePath;
     }
