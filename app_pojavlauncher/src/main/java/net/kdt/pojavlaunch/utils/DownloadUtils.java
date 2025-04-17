@@ -37,8 +37,6 @@ public class DownloadUtils {
             }
             is = conn.getInputStream();
             IOUtils.copy(is, os);
-        } catch (SocketTimeoutException e) {
-            throw new IOException("Download timed out: " + url, e);
         } catch (IOException e) {
             throw new IOException("Unable to download from " + url, e);
         } finally {
@@ -87,8 +85,8 @@ public class DownloadUtils {
                 monitor.updateProgress(overall, length);
             }
             conn.disconnect();
-        } catch (SocketTimeoutException e) {
-            throw new IOException("Download timed out: " + urlInput, e);
+        } catch (IOException e) {
+            throw new IOException("Unable to download from " + urlInput, e);
         }
     }
 
