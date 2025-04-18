@@ -322,7 +322,10 @@ public final class Tools {
         getCacioJavaArgs(javaArgList, runtime.javaVersion == 8);
 
         if (versionInfo.logging != null) {
-            String configFile = getLog4jConfiguration(activity, versionInfo.logging);
+            String configFile = Tools.DIR_DATA + "/security/" + versionInfo.logging.client.file.id.replace("client", "log4j-rce-patch");
+            if (!new File(configFile).exists()) {
+                configFile = Tools.DIR_GAME_NEW + "/" + versionInfo.logging.client.file.id;
+            }
             javaArgList.add("-Dlog4j.configurationFile=" + configFile);
         }
 
@@ -1434,23 +1437,5 @@ public final class Tools {
     public static boolean isLocalProfile(Context ctx){
         MinecraftAccount currentProfile = PojavProfile.getCurrentProfileContent(ctx, null);
         return currentProfile == null || currentProfile.isLocal();
-    }
-
-    private static String getLog4jConfiguration(Context ctx, JMinecraftVersionList.LoggingConfig loggingConfig){
-        String configFilePath = Tools.DIR_DATA + "/security/" + loggingConfig.client.file.id.replace("client", "log4j-rce-patch");
-        File configFile = new File(configFilePath);
-
-        // try unpacking the config (useful for new configurations in existing installations)
-        try {
-            copyAssetFile(ctx,"components/security/" + loggingConfig.client.file.id.replace("client", "log4j-rce-patch"), Tools.DIR_DATA + "/security", false);
-        } catch (IOException e) {
-            Log.w("log4j-unpack", e.getMessage(), e);
-        }
-
-        // use minecraft's default when not found the pojav's one
-        if (!configFile.exists()) {
-            configFilePath = Tools.DIR_GAME_NEW + "/" + loggingConfig.client.file.id;
-        }
-        return configFilePath;
     }
 }
