@@ -8,6 +8,7 @@
     <!-- Login strings -->
     <string name="login_online_login_label">Prihlásiť</string>
     <!-- Hint -->
+    <string name="hint_control_mapping">"Stlač ozubené koliesko v strede na otvorenie menu ⚙\nStlač ktorékoľvek tlačidlo pre jeho nastavenie alebo vymazanie."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Tento účet bude odstránený!</string>
     <!-- AlertDialog title -->
@@ -50,6 +51,7 @@
     <string name="mcl_setting_category_renderer">Vykresľovač</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (všetky verzie, rýchly)</string>
     <string name="mcl_setting_renderer_vulkan_zink">Zink - (všetky verzie, priemerný)</string>
+    <string name="mcl_setting_renderer_ltw">LTW (OpenGL ES 3) - iba 1.17+</string>
     <string name="mcl_setting_veroption_release">Vydanie</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Stará alfa</string>
@@ -74,6 +76,7 @@
     <string name="global_default">Predvolené</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Hra spadla. Skontroluj latestlog.txt pre viac podrobností.</string>
+    <string name="mcn_signal_title">Hra spadla. Skontroluj latestlog.txt pre viac podrobností.</string>
     <string name="mcn_exit_confirm">Ste si istí, že chcete ukončiť hru?</string>
     <string name="mcn_check_fail_vulkan_support">Zink (Vulkan) vykresľovač nie je podporovaný na tomto zariadení!</string>
     <!-- MainActivity: Control buttons -->
@@ -144,6 +147,7 @@
     <string name="customctrl_forward_lock">Zámok chodenia vpred</string>
     <string name="customctrl_absolute_tracking">Absolútne nasledovanie prsta</string>
     <string name="memory_warning_msg">Aktuálne množstvo voľnej RAM (%d) je nižšia ako pridelená RAM (%d), čo môže viesť k pádu. Zmeňte alokáciu, ak hra spadne.</string>
+    <string name="address_memory_warning_msg">Aktuálne množstvo voľnej RAM (%d) je nižšia ako pridelená RAM (%d). Znížte alokáciu RAM, ak hra spadne.</string>
     <string name="mcl_memory_allocation">Pridelenie pamäte</string>
     <string name="mcl_memory_allocation_subtitle">Určite, koľko pamäti bude dané Minecraftu.</string>
     <string name="multirt_runtime_corrupt">Poškodená Java Runtime</string>
@@ -156,6 +160,7 @@
     <string name="multirt_config_setdefault">Nastaviť predvolené</string>
     <string name="multirt_config_setdefault_already">Predvolené</string>
     <string name="multirt_config_removeerror_last">Musíte mať aspoň jednu inštaláciu Javy.</string>
+    <string name="multirt_nocompatiblert">Nebolo možné nájsť kompatibilnú verziu Javy. Táto verzia vyžaduje Javu %d alebo novšiu.</string>
     <string name="multirt_nojava8rt">Nebolo možné nájsť Javu 8. Ak chceš používať túto možnosť, musíš nainštalovať Javu 8.</string>
     <string name="multirt_delete_runtime">Vymaž runtime</string>
     <string name="pvc_gameDirectory">Zložka hry</string>
@@ -235,6 +240,7 @@
     <string name="preference_shader_dump_title">Povolenie shader dumpingu</string>
     <string name="preference_shader_dump_description">Všetky konvertované shadery sa vypíšu do logu.</string>
     <string name="percent_format">%d%%</string>
+    <string name="millisecond_format">%d ms</string>
     <string name="customctrl_editor_exit_title">Koniec?</string>
     <string name="customctrl_editor_exit_msg">Ste si istí, že chcete odísť?</string>
     <string name="customctrl_editor_exit">Opustiť editor</string>
@@ -323,5 +329,53 @@
     <string name="exception_failed_to_unpack_jre17">Nepodarilo sa nainštalovať Javu 17</string>
     <string name="newdl_starting">Čítanie metadát hry…</string>
     <string name="newdl_downloading_metadata">Sťahovanie metadát hry (%s)</string>
+    <string name="newdl_downloading_game_files">Sťahovanie súborov hry… (%d/%d, %.2f MB/s)</string>
+    <string name="newdl_downloading_game_files_size">Sťahovanie súborov hry… (%.2f/%.2f MB, %.2f MB/s)</string>
+    <string name="cropper_title">Orežte obrázok</string>
+    <string name="cropper_lock_vertical">V. ZÁMOK</string>
+    <string name="cropper_lock_horizontal">H. ZÁMOK</string>
+    <string name="cropper_reset">Reset</string>
+    <string name="cropper_select_cancelled">Výber zrušený</string>
+    <string name="log_view_button_scroll_off">Autoscroll\nVYP</string>
+    <string name="log_view_button_scroll_on">Autoscroll\nZAP</string>
+    <string name="log_view_button_output_off">Výstup\nVYP</string>
+    <string name="log_view_button_output_on">Výstup\nZAP</string>
+    <string name="log_view_label_log_output">Výstup logu:</string>
+    <string name="execute_jar_failed_to_read_file">Nebolo možné prečítať .jar súbor</string>
+    <string name="execute_jar_incompatible_runtime">Funkcia spustenia .jar súborov nie je kompatibilná s Javou %d</string>
     <string name="controller_button_select">Vyber</string>
+    <string name="controller_button_trigger_left">Ľavý trigger</string>
+    <string name="controller_button_trigger_right">Pravý trigger</string>
+    <string name="controller_button_shoulder_left">Ľavý shoulder</string>
+    <string name="controller_button_shoulder_right">Pravý shoulder</string>
+    <string name="controller_direction_forward">Páčka hore</string>
+    <string name="controller_direction_backward">Páčka dole</string>
+    <string name="controller_direction_left">Páčka doľava</string>
+    <string name="controller_direction_right">Páčka doprava</string>
+    <string name="controller_stick_press_l">Ľavý thumbstick (klik)</string>
+    <string name="controller_stick_press_r">Pravý thumbstick (klik)</string>
+    <string name="controller_dpad_up">D-Pad hore</string>
+    <string name="controller_dpad_down">D-Pad dole</string>
+    <string name="controller_dpad_left">D-Pad vľavo</string>
+    <string name="controller_dpad_right">D-Pad vpravo</string>
+    <string name="controller_remapper_exit_part1">Podrž</string>
+    <string name="controller_remapper_exit_part2">pre ukončenie</string>
+    <string name="controller_remapper_operating_mode">Režim</string>
+    <string name="customctrl_visibility_ingame">V hre</string>
+    <string name="customctrl_visibility_in_menus">V menu</string>
+    <string name="controller_remapper_expand_entry">Rozklikni pre zmenu bindov</string>
+    <string name="preference_remap_controller_title">Bindy ovládača</string>
+    <string name="preference_remap_controller_description">Umožnuje zmenu prednastavených bindov na ovládači</string>
+    <string name="mcl_button_discord">Discord</string>
+    <string name="ltw_render_distance_warning_msg">Tvoj grafický čip neutiahne viac ako 7 chunkov so Sodium alebo podobnými módami. Po stlačení \"OK\" sa automaticky zníži vykresľovacia vzdialenosť.</string>
+    <string name="mcl_button_open_directory">Otvoriť priečinok hry</string>
+    <string name="local_login_bad_username_title">Neplatné užívateľské meno</string>
+    <string name="local_login_bad_username_text">Užívateľské meno musí byť 3 až 16 písmen dlhé, nesmie obsahovať dĺžne ani iné špeciálne znaky s výnimkou čísel a podčiarkovníka.</string>
+    <string name="quick_setting_title">Rýchle nastavenia</string>
+    <string name="create_bta_profile">Vytvoriť BTA profil</string>
+    <string name="select_bta_version">Vyberte verziu BTA</string>
+    <string name="bta_installer_available_versions">Podporované verzie BTA</string>
+    <string name="bta_installer_untested_versions">Netestované verzie BTA</string>
+    <string name="bta_installer_nightly_versions">Nightly verzie BTA</string>
+    <string name="newdl_extracting_native_libraries">Rozbaľovanie natívnych knižníc (%d/%d)</string>
 </resources>

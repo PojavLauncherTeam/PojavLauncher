@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
-    <string name="app_name">PojavLauncher (Minecraft: รุ่น Java สำหรับ Android)</string>
+    <string name="app_name">PojavLauncher (Minecraft: Java สำหรับ Android)</string>
     <string name="app_short_name">PojavLauncher</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
@@ -9,6 +9,8 @@
     <string name="login_online_username_hint">ชื่อผู้ใช้</string>
     <string name="login_online_login_label">เข้าสู่ระบบ</string>
     <!-- Hint -->
+    <string name="hint_control_mapping">"แตะที่ล้อฟันเฟืองตรงกลางด้านบนเพื่อเปิดเมนูบริบท ⚙\nแตะที่ปุ่มเพื่อปรับแต่ง: แก้ไข, ปรับขนาด, ลบ, หรือเปลี่ยนการตั้งค่าปุ่ม
+"</string>
     <!-- Warnings -->
     <string name="warning_remove_account">บัญชีนี้จะถูกลบ!</string>
     <!-- AlertDialog title -->
@@ -34,25 +36,26 @@
     <string name="mcl_launch_download_assets">กำลังเตรียมดาวน์โหลดทรัพยากร</string>
     <string name="mcl_options">ตัวเลือก</string>
     <string name="mcl_option_customcontrol">การควบคุมกำหนดเอง</string>
-    <string name="mcl_setting_title_use_surface_view">ใช้การแสดงผลพื้นผิวแบบอื่น</string>
-    <string name="mcl_setting_subtitle_use_surface_view">อาจช่วยประสิทธิภาพในสถานการณ์ที่ผูกกับ GPU</string>
-    <string name="mcl_setting_title_ignore_notch">เต็มจอ</string>
+    <string name="mcl_setting_title_use_surface_view">ใช้การแสดงผลแบบอีกพื้นหนึ่ง (</string>
+    <string name="mcl_setting_subtitle_use_surface_view">อาจช่วยประสิทธิภาพในสถานการณ์ที่เกี่ยวกับ GPU</string>
+    <string name="mcl_setting_title_ignore_notch">เต็มจอ ( fullscreen )</string>
     <string name="mcl_setting_subtitle_ignore_notch">ไม่สนใจคัตเอาต์กล้องและขยายหน้าจอให้เต็ม\nมอบประสบการณ์ที่ดื่มด่ำยิ่งขึ้นให้กับคุณ</string>
-    <string name="mcl_setting_title_resolution_scaler">มาตราส่วนความละเอียด</string>
+    <string name="mcl_setting_title_resolution_scaler">ความละเอียดโดยรวม</string>
     <string name="mcl_setting_subtitle_resolution_scaler">ช่วยให้คุณลดความละเอียดของเกมได้ 100% คือความละเอียดเต็ม</string>
     <string name="mcl_setting_title_longpresstrigger">ทริกเกอร์การหน่วงเวลาการกดแบบยาว</string>
     <string name="mcl_setting_subtitle_longpresstrigger">เปลี่ยนการหน่วงเวลาทริกเกอร์แบบกดแบบยาวเพื่อทำลายบล็อกและวางไอเท็ม</string>
     <string name="mcl_setting_title_buttonscale">ปรับขนาดปุ่มควบคุม</string>
     <string name="mcl_setting_subtitle_buttonscale">เพิ่มสเกลหากปุ่มมีขนาดเล็กเกินไป</string>
-    <string name="mcl_setting_title_mousescale">การปรับขนาดเมาส์</string>
+    <string name="mcl_setting_title_mousescale">การปรับขนาดเมาส์เสมือน</string>
     <string name="mcl_setting_subtitle_mousescale">เปลี่ยนขนาดของเมาส์เสมือน</string>
     <string name="mcl_setting_title_javaargs">อาร์กิวเมนต์เปิดใช้ JVM</string>
     <string name="mcl_setting_subtitle_javaargs">ระวัง อาจทำให้เกมพังได้หากแก้ไขโดยขาดความรู้</string>
-    <string name="mcl_setting_category_renderer">การแสดงผล</string>
-    <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (รองรับทุกเวอร์ชั่น, เร็ว)</string>
-    <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - (รองรับทุกเวอร์ชั่น, กลาง)</string>
-    <string name="mcl_setting_veroption_release">ปล่อย</string>
-    <string name="mcl_setting_veroption_snapshot">ภาพรวม</string>
+    <string name="mcl_setting_category_renderer">ตัวแสดงผล</string>
+    <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (รองรับทุกเวอร์ชั่น, รวจเร็ว)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - (รองรับทุกเวอร์ชั่น, ปานกลาง)</string>
+    <string name="mcl_setting_renderer_ltw">LTW (openGL ES 3) - 1.17 ขึ้นไปเท่านั้น</string>
+    <string name="mcl_setting_veroption_release">ตัวเกมที่ถูกปล่อย และ เสถียร</string>
+    <string name="mcl_setting_veroption_snapshot">ตัวเกมพรีวิว ( snapshot )</string>
     <string name="mcl_setting_veroption_oldalpha">อัลฟ่าเก่า</string>
     <string name="mcl_setting_veroption_oldbeta">เบต้าเก่า</string>
     <string name="mcl_setting_java_sandbox">การดำเนินการแซนด์บ็อกซ์ .jar</string>
@@ -60,7 +63,7 @@
     <string name="mcl_version_clone">คัดลอก</string>
     <!-- Global strings -->
     <string name="global_edit">แก้ไข</string>
-    <string name="global_error">ผิดพลาด</string>
+    <string name="global_error">ข้อบกพร่อง</string>
     <string name="global_load">โหลด</string>
     <string name="global_name">ชื่อ</string>
     <string name="global_remove">ถอดออก</string>
@@ -68,14 +71,15 @@
     <string name="global_restart">เริ่มใหม่</string>
     <string name="global_save">บันทึก</string>
     <string name="global_unpacking">กำลังแยก… %s</string>
-    <string name="global_error_field_empty">สนามนี้ไม่สามารถว่าง</string>
+    <string name="global_error_field_empty">ช่วงนี้ไม่สามารถปล่อยว่างได้</string>
     <string name="global_waiting">รอ</string>
     <string name="global_select">เลือก</string>
     <string name="global_retry">ลองอีกครั้ง</string>
     <string name="global_default">ค่าเรื่มต้น</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">ออกจากแอปพลิเคชัน/เกมเด้งด้วยรหัส %d โปรดตรวจสอบที่ latestlog.txt สำหรับรายละเอียดเพิ่มเติม</string>
-    <string name="mcn_exit_confirm">คุณแน่ใจหรือไม่ว่าต้องการบังคับปิด?</string>
+    <string name="mcn_signal_title">เกมหยุดทำงานด้วยเหตุผลร้ายแรง(%d)กรุณาเช็ค latestlog.txt เพื่อข้อมูลเพิ่มเติม</string>
+    <string name="mcn_exit_confirm">คุณแน่ใจหรือไม่ว่าต้องการบังคับออก?</string>
     <string name="mcn_check_fail_vulkan_support">อุปกรณ์นี้ไม่รองรับการแสดงผล Zink (Vulkan) </string>
     <!-- MainActivity: Control buttons -->
     <string name="control_chat">แชต</string>
@@ -98,9 +102,9 @@
     <string name="control_forceclose">บังคับปิด</string>
     <string name="control_viewout">ประวัติที่บันทึกไว้</string>
     <string name="control_adebug">การดีบักอินพุต</string>
-    <string name="control_customkey">ส่งคำสั่งที่กำหนตเอง</string>
+    <string name="control_customkey">ส่งคีย์แบบกำหนดเอง</string>
     <!-- ImportControlActivity Strings -->
-    <string name="import_control_label">นำเข้า ควบคุม</string>
+    <string name="import_control_label">นำเข้า ปุ่มและแผงการควบคุม</string>
     <string name="import_control_invalid_file">ไฟล์ไม่ถูกต้องหรือเสียหาย</string>
     <string name="import_control_import_button">นำเข้าควบคุม</string>
     <string name="import_control_verifying_file">กำลังตรวจสอบไฟล์ โปรดรอและลองอีกครั้ง</string>
@@ -110,57 +114,59 @@
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
-    <string name="customctrl_toggle">ค้างไว้</string>
+    <string name="customctrl_toggle">สามารถกดค้าง</string>
     <string name="customctrl_size">ขนาด</string>
     <string name="customctrl_mapping">ปุ่มที่ให้กด</string>
-    <string name="customctrl_orientation">ทิคทางการหัน</string>
+    <string name="customctrl_orientation">ทิดทางการหัน</string>
     <string name="customctrl_background_color">สีพื้นหลัง</string>
-    <string name="customctrl_corner_radius">ระยะของมุม</string>
-    <string name="customctrl_stroke_width">ความกว้างของเส้นขึด</string>
-    <string name="customctrl_stroke_color">สีของเส้นขึด</string>
+    <string name="customctrl_corner_radius">ความกลมของปุ่ม</string>
+    <string name="customctrl_stroke_width">ความกว้างของเส้นขอบ</string>
+    <string name="customctrl_stroke_color">สีของเส้นขอบ</string>
     <string name="customctrl_button_opacity">ความเข้มของปุ่มทั้งหมด</string>
     <string name="customctrl_addbutton">เพิ่มปุ่ม</string>
-    <string name="customctrl_addbutton_drawer">เพื่มปุ่มรวมควบคุม</string>
-    <string name="customctrl_addbutton_joystick">เพิ่มจอยสติ๊ก</string>
+    <string name="customctrl_addbutton_drawer">เพื่มปุ่มรวมควบคุม ( drawer )</string>
+    <string name="customctrl_addbutton_joystick">เพิ่มจอยสติ๊ก ( สำหรับเคลื่อนที่ )</string>
     <string name="customctrl_addsubbutton">เพื่มปุ่มรอง</string>
     <string name="customctrl_selectdefault">เลือกปุ่มควบคุมเริ่มต้น</string>
     <string name="customctrl_export">ส่งออกปุ่มควบคุม</string>
     <string name="main_share_logs">แชร์ข้อมูลเเอป</string>
-    <string name="main_install_jar_file">ดำเนินการ .jar</string>
-    <string name="main_play">เล่น</string>
+    <string name="main_install_jar_file">ใช้งานไฟล์ .jar</string>
+    <string name="main_play">เริ่ม</string>
     <string name="autoram_info_msg">ตั้งหน่วยความจำเป็น %d MB</string>
     <string name="mcl_setting_check_libraries">ตรวจสอบไฟล์หลังจากดาวโหลด</string>
     <string name="mcl_setting_check_libraries_subtitle">ตัวเลือกนี้บังคับให้ตัวเรียกใช้งานตรวจสอบแฮชของไลบรารีหากมี\'sป้องกันการดาวน์โหลดที่เสียหาย</string>
     <string name="dl_library_sha_fail">ไลบรารี %s ได้เสียหายเเละจะทำการดาวโหลดใหม่</string>
     <string name="dl_library_sha_unknown">ไลบรารี %s ไม่สามารถตรวจสอบได้ ขอให้ดีก็พอ</string>
     <string name="dl_library_sha_pass">ไลบรารี %s ดีเเละใช้การได้</string>
-    <string name="mcl_disable_gestures">ปิดท่าทางสัมผัส</string>
+    <string name="mcl_disable_gestures">ปิดท่าทางสัมผัส เช่นกดค้างบนหน้าจอ</string>
     <string name="mcl_disable_gestures_subtitle">ปิดท่าทางสัมผัส เช่นเเตะค้างเพื่อทำลายบล็อกเเละ เเตะเพื่อวางบล็อก</string>
-    <string name="mcl_disable_swap_hand">ปิดกดสองครังเพื่อสลับของในมือ</string>
+    <string name="mcl_disable_swap_hand">ปิดกดสองครั้งที่ฮอตบาร์เพื่อสลับของในมือ</string>
     <string name="mcl_disable_swap_hand_subtitle">ปิดใช้งานการแตะสองครั้งบนรายการแถบลัดเพื่อสลับรายการในเข็มวินาที</string>
     <string name="mcl_setting_title_mousespeed">ความเร็วเมาส์</string>
     <string name="mcl_setting_subtitle_mousespeed">เปลี่ยนความเร็วของเมาส์เสมือน</string>
     <string name="customctrl_passthru">เมาส์ผ่านได้</string>
     <string name="customctrl_swipeable">ลากได้</string>
-    <string name="customctrl_forward_lock">ล็อคไปข้างหน้า</string>
+    <string name="customctrl_forward_lock">ล็อคไปข้างหน้า ( วิ่ง )</string>
     <string name="customctrl_absolute_tracking">การตรวจจับนั้วเเบบสมบูรณ์</string>
     <string name="memory_warning_msg">ขณะนี้เเรมที่เหลือในเครืองของคุณ (%d) น้อยกว่าเเรมที่ตั้งไว้ (%d) อาจะทำให้เด้งได้ ปรับค่าเเรมที่ต้องการเมื่อเกมเด้ง</string>
-    <string name="mcl_memory_allocation">การจัดสรรหน่วยความจำ</string>
+    <string name="address_memory_warning_msg">พื้นที่ RAM ที่สามารถใช้งานได้ในขณะนี้ (%d) น้อยกว่าจำนวน RAM ที่ถูกจัดสรรไว้ (%d) ซึ่งอาจทำให้เกมแครชได้ โปรดเปลี่ยนการจัดสรร RAM หากเกมแครช</string>
+    <string name="mcl_memory_allocation">จัดการแรม</string>
     <string name="mcl_memory_allocation_subtitle">ควบคุมจำนวนหน่วยความจำที่มอบให้กับ Minecraft</string>
     <string name="multirt_runtime_corrupt">ตัวรันไทม์จาวาเสียหาย</string>
     <string name="multirt_runtime_incompatiblearch">ไม่รองรับสถานปัตกรรมนี้: %s</string>
     <string name="multirt_config_title">รันไทม์ Java</string>
-    <string name="multirt_config_add">เพื่มใหม่</string>
+    <string name="multirt_config_add">เพื่มปุ่มใหม่</string>
     <string name="multirt_title">ตัวควบคุมรันไทม์</string>
     <string name="multirt_subtitle">จัดการรันไทม์ Java ที่ติดตั้งไว้</string>
-    <string name="multirt_progress_caching">กำลังเเคชชิง...</string>
+    <string name="multirt_progress_caching">กำลังเเคช...</string>
     <string name="multirt_config_setdefault">ตั้งค่าเริ่มต้น</string>
     <string name="multirt_config_setdefault_already">ค่าเรื่มต้น</string>
     <string name="multirt_config_removeerror_last">คุณต้องติดตั้งรันไทม์ Java อย่างน้อยหนึ่งรายการ</string>
+    <string name="multirt_nocompatiblert">ไม่พบ Java Runtime ที่รองรับ เวอร์ชันนี้ต้องใช้ Java %d ขึ้นไป</string>
     <string name="multirt_nojava8rt">ไม่สามารถหาจาวา 8 ในการใช้ออฟชั่นนี้คุณต้องติดตั้งจาวา 8</string>
     <string name="multirt_delete_runtime">ลบรันไทม์</string>
     <string name="pvc_gameDirectory">ตำเเหน่งโฟรเดอร์เกม</string>
-    <string name="pvc_jvmArgs">ตัวคำสั่ง เจวิเอ็ม</string>
+    <string name="pvc_jvmArgs">ตัวคำสั่ง JVM</string>
     <string name="preference_mouse_start_title">เปิดเกมด้วยเมาส์จำลอง</string>
     <string name="preference_mouse_start_description">เมาส์เสมือนจะปรากฏขึ้นเมื่อเริ่มต้นระบบเมื่อตัวเลือกนี้เปิดอยู่</string>
     <string name="preference_video_title">ภาพเเละการเร็นเดอร์</string>
@@ -171,7 +177,7 @@
     <string name="preference_java_description">รันไทม์ Java, อาร์กิวเมนต์ JVM, จำนวน RAM และแซนด์บ็อกซ์</string>
     <string name="preference_misc_title">การตั้งค่าเบ็ดเตล็ด</string>
     <string name="preference_misc_description">รายการเวอร์ชันและการตรวจสอบไลบรารี</string>
-    <string name="preference_experimental_title">การตั้งค่าที่ทดสอบ</string>
+    <string name="preference_experimental_title">การตั้งค่าที่กำลังอยู่ในการทดลอง</string>
     <string name="preference_experimental_description">ใช้ของตรงนั้นโดยคำนึงถึงไม่สนับสนุน</string>
     <string name="preference_sustained_performance_title">เปิดตัวควบคุมความสามารถ</string>
     <string name="preference_sustained_performance_description">จำกัดการควบคุมปริมาณความร้อนโดยการจำกัดประสิทธิภาพสูงสุด</string>
@@ -196,7 +202,7 @@
     <string name="profiles_profile_version">เวอร์ชัน</string>
     <string name="global_delete">ลบ</string>
     <string name="pedit_java_runtime">จาวา รันไทม์</string>
-    <string name="pedit_renderer">การแสดงผล</string>
+    <string name="pedit_renderer">ตัวแสดงผล</string>
     <string name="arc_capes_title">ผ้าคลุมที่มีภาพ</string>
     <string name="arc_capes_desc">เปิดผ้าคลุมจาก cosmetica (เเต่ก่อนเป็น arc) ข้อมูลเพิ่มเติมที่ https://cosmetica.cc ต้องมี optfine</string>
     <string name="notif_channel_name">ทั่วไป</string>
@@ -206,13 +212,13 @@
     <string name="default_control">ปุ่มควบคุมเริ่มต้น</string>
     <string name="progresslayout_tasks_in_progress">%d กำลังดำเนินงาน
 ไม่มีงานกำลังดำเนิน</string>
-    <string name="notification_terminate">บังคับปิด</string>
+    <string name="notification_terminate">หยุดเดี๋ยวนี้!!!!</string>
     <string name="notification_game_runs">เกมเปิดไว้อยู่</string>
     <string name="folder_dialog_create">สร้าง</string>
     <string name="folder_dialog_insert_name">ชื่อโฟลเดอร์</string>
     <string name="folder_fragment_create">สร้างโฟลเดอร์</string>
     <string name="folder_fragment_select">เลือกโฟลเดอร์</string>
-    <string name="main_login_done">ล็อกอินเเล้ว</string>
+    <string name="main_login_done">ล็อกอิน สำเร็จ ขอบคุณที่สนับสนุนเกม</string>
     <string name="main_add_account">เพิ่มบัญชี</string>
     <string name="tasks_ongoing">งานกำลังดำเนิน, โปรดรอสักครู่</string>
     <string name="no_saved_accounts">ไม่มีบัญชีที่เชฟไว้</string>
@@ -238,6 +244,7 @@
     <string name="preference_shader_dump_title">เปิดใช้งานบันทึกข้อมูลเชเดอร์</string>
     <string name="preference_shader_dump_description">บันทึกการแปลงเชเดอร์ลงในไฟล์บันทึก</string>
     <string name="percent_format">%d%%</string>
+    <string name="millisecond_format">%d เสี้ยววิ</string>
     <string name="customctrl_editor_exit_title">ออก?</string>
     <string name="customctrl_editor_exit_msg">คุณแน่ใจหรือไม่ว่าต้องการออก</string>
     <string name="customctrl_editor_exit">ออกจากการแก้ไข</string>
@@ -326,5 +333,47 @@
     <string name="exception_failed_to_unpack_jre17">ไม่สามารถติดตั้ง JRE 17</string>
     <string name="newdl_starting">กำลังอ่านข้อมูลไฟล์เกม...</string>
     <string name="newdl_downloading_metadata">กำลังดาวโหลดข้อมูลไฟล์เกม (%s)</string>
+    <string name="newdl_downloading_game_files">กำลังดาวน์โหลดตัวเกม... (%d/%d MB, %.2f MB/ต่อวิ</string>
+    <string name="newdl_downloading_game_files_size">กำลังดาวน์โหลดตัวเกม... (%.2f/%.2f MB, %.2f MB/ต่อวิ</string>
+    <string name="cropper_title">เลือกบริเวณของภาพ</string>
+    <string name="cropper_lock_vertical">ล้อคแนวตั้ง</string>
+    <string name="cropper_lock_horizontal">ล็อคแนวนอน</string>
+    <string name="cropper_reset">รีเซ็ต</string>
+    <string name="cropper_select_cancelled">การเลือกถูกยกเลิก</string>
+    <string name="log_view_button_scroll_off">เลื่อนอัตโนมัติ\nปิด</string>
+    <string name="log_view_button_scroll_on">เลื่อนอัตโนมัติ\nเปิด</string>
+    <string name="log_view_button_output_off">เอ้าพุต\nปิด</string>
+    <string name="log_view_button_output_on">เอ้าพุต\nเปิด</string>
+    <string name="log_view_label_log_output">Log output:</string>
+    <string name="execute_jar_failed_to_read_file">ไม่สามารถอ่านไฟล์ด้วยนามสกุล .jar</string>
+    <string name="execute_jar_incompatible_runtime">ไม่สามารถดำเนินการในฟีเจอร์นั้นได้ ด้วยเวอร์ชั่นของ Java %d</string>
     <string name="controller_button_select">เลือก</string>
+    <string name="controller_button_trigger_left">ไกซ้าย (Left Trigger)</string>
+    <string name="controller_button_trigger_right">ไกขวา (Right Trigger)</string>
+    <string name="controller_button_shoulder_left">ไหล่ซ้าย (Left Shoulder)</string>
+    <string name="controller_button_shoulder_right">ไหล่ขวา (Right Shoulder)</string>
+    <string name="controller_direction_forward">จอยขึ้น</string>
+    <string name="controller_direction_backward">จอยลง</string>
+    <string name="controller_direction_left">จอยไปซ้าย</string>
+    <string name="controller_direction_right">จอยไปขวา</string>
+    <string name="controller_stick_press_l">กดจอยซ้าย</string>
+    <string name="controller_stick_press_r">กดจอยขวา</string>
+    <string name="controller_dpad_up">ขึ้น</string>
+    <string name="controller_dpad_down">ลง</string>
+    <string name="controller_dpad_left">ซ้าย</string>
+    <string name="controller_dpad_right">ขวา</string>
+    <string name="controller_remapper_exit_part1">กดค้าง</string>
+    <string name="controller_remapper_exit_part2">ปุ่มออก</string>
+    <string name="controller_remapper_operating_mode">โหมดปัจจุบัน</string>
+    <string name="customctrl_visibility_ingame">แสดงขณะเล่น</string>
+    <string name="customctrl_visibility_in_menus">แสดงในหน้าเมนู</string>
+    <string name="controller_remapper_expand_entry">ขยายเพื่อเปลี่ยนรหัสปุ่ม (Keycodes)</string>
+    <string name="preference_remap_controller_title">เปลี่ยนปุ่มต่างๆในคอนโทรลเลอร์</string>
+    <string name="preference_remap_controller_description">อนุญาตให้คุณปรับเปลี่ยนปุ่มคีย์บอร์ดที่ผูกกับแต่ละปุ่มของจอยเกม</string>
+    <string name="mcl_button_discord">ดิสคอร์ด</string>
+    <string name="ltw_render_distance_warning_msg">การ์ดจอของคุณไม่รองรับระยะการมองเห็นเกิน 7 โดยไม่มี Sodium หรือม็อดอื่นๆ ระยะการมองเห็นจะถูกปรับลดลงอัตโนมัติเมื่อคุณกด \"ตกลง\".</string>
+    <string name="mcl_button_open_directory">เปิดโฟลเดอร์ของตัวเกม</string>
+    <string name="local_login_bad_username_title">ชื่อไม่เข้ากับกฏ</string>
+    <string name="local_login_bad_username_text">username ควรมีความยาวระหว่าง 3-16 ตัวอักษร และควรมีเพียงแค่เลข 0-9 และอันเดอร์สกอร์.</string>
+    <string name="quick_setting_title">การตั้งค่าแบบรวดเร็ว</string>
 </resources>

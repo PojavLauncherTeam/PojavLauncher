@@ -26,7 +26,7 @@
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
-    <string name="mcl_tab_wiki">Guia</string>
+    <string name="mcl_tab_wiki">Wiki</string>
     <!-- MCLauncherActivity: Account status -->
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_launch_cleancache">Limpando arquivos em cache</string>
@@ -36,7 +36,7 @@
     <string name="mcl_options">Opções</string>
     <string name="mcl_option_customcontrol">Controles personalizados</string>
     <string name="mcl_setting_title_use_surface_view">Usar renderização de superfície alternativa</string>
-    <string name="mcl_setting_subtitle_use_surface_view">Pode ajudar no desempenho em cenários de limitação no GPU.</string>
+    <string name="mcl_setting_subtitle_use_surface_view">Pode ajudar no desempenho em caso de limitações na GPU.</string>
     <string name="mcl_setting_title_ignore_notch">Ignorar entalhe</string>
     <string name="mcl_setting_subtitle_ignore_notch">Ignora o entalhe e estende a tela embaixo.\nDá a você uma experiência mais imersiva.</string>
     <string name="mcl_setting_title_resolution_scaler">Escala de resolução</string>
@@ -79,7 +79,7 @@
     <string name="mcn_exit_title">Aplicativo/jogo fechou com o código %d, verifique latestlog.txt para mais detalhes.</string>
     <string name="mcn_signal_title">Aplicativo/jogo fechou com o código %d, verifique latestlog.txt para mais detalhes.</string>
     <string name="mcn_exit_confirm">Tem certeza que deseja forçar o encerramento?</string>
-    <string name="mcn_check_fail_vulkan_support">O renderizador Zink (Vulkan) não é compatível com este dispositivo!</string>
+    <string name="mcn_check_fail_vulkan_support">Seu dispositivo não é compatível com o renderizador Zink (Vulkan)!</string>
     <!-- MainActivity: Control buttons -->
     <string name="control_chat">Chat</string>
     <string name="control_debug">Depuração</string>
@@ -362,12 +362,17 @@
     <string name="controller_direction_right">Analógico para a direita</string>
     <string name="controller_stick_press_l">Clique do analógico esquerdo</string>
     <string name="controller_stick_press_r">Analógico direito (clique)</string>
+    <string name="controller_dpad_up">D-Pad Cima</string>
+    <string name="controller_dpad_down">D-Pad Baixo</string>
+    <string name="controller_dpad_left">D-Pad Esquerdo</string>
+    <string name="controller_dpad_right">D-Pad Direito</string>
     <string name="controller_remapper_exit_part1">Segurar</string>
     <string name="controller_remapper_exit_part2">para sair</string>
     <string name="controller_remapper_operating_mode">Modo atual</string>
     <string name="customctrl_visibility_title">Visibilidade</string>
     <string name="customctrl_visibility_ingame">No jogo</string>
     <string name="customctrl_visibility_in_menus">Nos menus</string>
+    <string name="controller_remapper_expand_entry">Expandir para alterar as atribuições</string>
     <string name="preference_remap_controller_title">Alterar mapeamento dos botões</string>
     <string name="preference_remap_controller_description">Permite que você modifique as teclas do teclado vinculadas à cada botão do controle</string>
     <string name="mcl_button_discord">Discord</string>
@@ -376,4 +381,10 @@
     <string name="local_login_bad_username_title">Nome de usuário inadequado</string>
     <string name="local_login_bad_username_text">O nome de usuário deve ter entre 3 a 16 caracteres, deve conter somente letras latinas, número de 0 a 9 e sublinhados.</string>
     <string name="quick_setting_title">Configurações rápidas</string>
+    <string name="create_bta_profile">Criar perfil \"Better than Adventure!\"</string>
+    <string name="select_bta_version">Selecione a versão do \"Better than Adventure!\"</string>
+    <string name="bta_installer_available_versions">Versões suportadas</string>
+    <string name="bta_installer_untested_versions">Versões instáveis</string>
+    <string name="bta_installer_nightly_versions">Versões nightly</string>
+    <string name="newdl_extracting_native_libraries">Extraindo bibliotecas nativas (%d/%d)</string>
 </resources>

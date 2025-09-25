@@ -160,7 +160,7 @@
     <string name="multirt_progress_caching">Đang lưu vào bộ nhớ đệm...</string>
     <string name="multirt_config_setdefault">Đặt làm mặc định</string>
     <string name="multirt_config_setdefault_already">Mặc định</string>
-    <string name="multirt_config_removeerror_last">Bạn phải có ít nhất một hệ thống thời gian chạy Java đã được cài đặt.</string>
+    <string name="multirt_config_removeerror_last">Bạn cần có ít nhất một phiên bản Java Runtime đã được cài đặt.</string>
     <string name="multirt_nocompatiblert">Không thể tìm thấy Java Runtime tương thích. Phiên bản này yêu cầu Java %d trở lên.</string>
     <string name="multirt_nojava8rt">Không thể tìm thấy Java 8. Để sử dụng tùy chọn này, bạn cần cài đặt Java 8.</string>
     <string name="multirt_delete_runtime">Xóa runtime</string>
@@ -229,7 +229,7 @@
     <string name="minecraft_not_owned">Có vẻ như tài khoản của bạn chưa có hồ sơ Minecraft. Nếu bạn có Xbox Game Pass, đăng nhập vào https://minecraft.net/ và thiết lập hồ sơ.</string>
     <string name="xerr_not_available">Xbox Live không có sẵn ở quốc gia của bạn</string>
     <string name="preference_enable_gyro_title">Bật con quay hồi chuyển</string>
-    <string name="preference_enable_gyro_description">Bật cái này sẽ cho phép bạn quay trong trò chơi bằng cách quay điện thoại của bạn.</string>
+    <string name="preference_enable_gyro_description">Bật để quay góc nhìn trong trò chơi bằng cách nghiêng thiết bị.</string>
     <string name="preference_gyro_sensitivity_title">Độ nhạy con quay hồi chuyển</string>
     <string name="preference_gyro_sensitivity_description">Điều chỉnh độ nhạy khi điều khiển con quay hồi chuyển.</string>
     <string name="toast_turn_on_gyro">Bật chế độ con quay hồi chuyển trước khi sử dụng tính năng này!</string>
@@ -311,14 +311,14 @@ Nếu bạn vẫn muốn sử dụng nguồn bản sao này, nhấn vào "Tắt 
 
 Nếu bạn muốn sử dụng nguồn tải xuống chính thức, nhấn vào "Chuyển sang nguồn chính thức" để bắt đầu tải xuống lại.<br/>]]></string>
     <string name="dl_turn_off_manifest_checks">Tắt kiểm tra danh sách phiên bản</string>
-    <string name="dl_switch_to_official_site">Chuyển sang nguồn chính thức</string>
+    <string name="dl_switch_to_official_site">Chuyển sang nguồn tải xuống chính thức</string>
     <string name="preference_download_source_title">Nguồn tải trò chơi</string>
-    <string name="preference_download_source_description">Chọn nguồn bản sao để tải xuống thay vì sử dụng máy chủ tải xuống chính thức</string>
+    <string name="preference_download_source_description">Chọn nguồn tải xuống khác thay vì sử dụng nguồn tải xuống chính thức</string>
     <string name="preference_verify_manifest_title">Kiểm tra danh sách phiên bản trò chơi</string>
     <string name="preference_verify_manifest_description">Khi bật, trình khởi chạy sẽ kiểm tra danh sách phiên bản trò chơi và thư viện.</string>
     <string name="notif_download_finished">Trò chơi đã sẵn sàng để chạy</string>
     <string name="notif_download_finished_desc">Nhấn vào đây để bắt đầu!</string>
-    <string name="preference_category_gestures">Những cử chỉ</string>
+    <string name="preference_category_gestures">Cử chỉ</string>
     <string name="preference_category_buttons">Phím</string>
     <string name="preference_category_experimental_settings">Những cài đặt thử nghiệm</string>
     <string name="preference_category_java_tweaks">Điều chỉnh Java</string>
@@ -329,9 +329,9 @@ Nếu bạn muốn sử dụng nguồn tải xuống chính thức, nhấn vào 
     <string name="notification_permission_dialog_text">PojavLauncher yêu cầu quyền để gửi thông báo để ngăn chặn trò chơi/modpacks tải xuống mà không dừng lại khi bạn rời khỏi ứng dụng. Nếu không cấp quyền, Android có thể ngắt quá trình tải khi bạn để PojavLauncher ở chế độ nền.</string>
     <string name="notification_permission_toast">Bạn luôn có thể thay đổi ý định của mình bằng cách vào Cài đặt</string>
     <string name="preference_ask_for_notification_title">Cho phép Gửi thông báo</string>
-    <string name="preference_ask_for_notification_description">Nhấp để yêu cầu lại quyền thông báo, điều này là cần thiết để trò chơi/gói tích hợp tải xuống bình thường ở chế độ nền.</string>
+    <string name="preference_ask_for_notification_description">Nhấp để yêu cầu lại quyền thông báo, điều này là cần thiết để trò chơi/gói tích hợp tải xuống bình thường ở chế độ nền</string>
     <string name="preference_vsync_in_zink_title">Cho phép V-Sync với trình kết xuất Zink</string>
-    <string name="preference_vsync_in_zink_description">Cho phép trình khởi chạy sử dụng API hệ thống nội bộ để kích hoạt đồng bộ dọc cho trình kết xuất Zink. Tắt cài đặt này nếu trình khởi chạy bất ngờ bị văng với Zink sau một bản cập nhật hệ thống.</string>
+    <string name="preference_vsync_in_zink_description">Cho phép trình khởi chạy sử dụng API hệ thống nội bộ để kích hoạt đồng bộ dọc cho Zink. Nếu trình khởi chạy đang sử dụng Zink và hệ thống của bạn cập nhật dẫn đến trình khởi chạy bị sập, vui lòng tắt tính năng này</string>
     <string name="exception_failed_to_unpack_jre17">Cài Đặt thất bại JRE 17</string>
     <string name="newdl_starting">Đang đọc siêu dữ liệu trò chơi…</string>
     <string name="newdl_downloading_metadata">Đang tải xuống siêu dữ liệu trò chơi (%s)</string>
@@ -384,4 +384,10 @@ Nếu bạn muốn sử dụng nguồn tải xuống chính thức, nhấn vào 
     <string name="local_login_bad_username_title">Tên người dùng không phù hợp</string>
     <string name="local_login_bad_username_text">Tên người dùng phải có từ 3 đến 16 kí tự, và chỉ có chữ cái Latinh, chữ số và dấu gạch chân.</string>
     <string name="quick_setting_title">Cài đặt nhanh</string>
+    <string name="create_bta_profile">Tạo hồ sợ \"Better than Adventure!\"</string>
+    <string name="select_bta_version">Chọn phiên bản \"Better than Adventure!\"</string>
+    <string name="bta_installer_available_versions">Phiên bản BTA đã hỗ trợ</string>
+    <string name="bta_installer_untested_versions">Phiên bản BTA chưa được kiểm tra </string>
+    <string name="bta_installer_nightly_versions">Phiên bản BTA thử nghiêm</string>
+    <string name="newdl_extracting_native_libraries">Đang giải nén thư viện (%d/%d)</string>
 </resources>

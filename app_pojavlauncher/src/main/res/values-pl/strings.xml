@@ -381,4 +381,10 @@
     <string name="local_login_bad_username_title">Nieodpowiednia nazwa użytkownika</string>
     <string name="local_login_bad_username_text">Nazwa użytkownika musi posiadać od 3 do 16 znaków, i musi zawierać tylko latyńskie litery, numery od 0 do 9 oraz podkreślenia.</string>
     <string name="quick_setting_title">Szybkie ustawienia</string>
+    <string name="create_bta_profile">Utwórz profil \"Better than Adventure!\"</string>
+    <string name="select_bta_version">Wybierz wersję \"Better than Adventure!\"</string>
+    <string name="bta_installer_available_versions">Obsługiwane wersje BTA</string>
+    <string name="bta_installer_untested_versions">Nie przetestowane wersje BTA</string>
+    <string name="bta_installer_nightly_versions">Wersje Nightly BTA</string>
+    <string name="newdl_extracting_native_libraries">Rozpakowywanie natywnych bibliotek (%d/%d)</string>
 </resources>

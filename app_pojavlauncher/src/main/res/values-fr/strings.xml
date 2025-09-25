@@ -354,6 +354,8 @@
     <string name="controller_button_select">Sélectionner</string>
     <string name="controller_button_trigger_left">Gâchette gauche</string>
     <string name="controller_button_trigger_right">Gâchette droite</string>
+    <string name="controller_button_shoulder_left">Épaules Gauche</string>
+    <string name="controller_button_shoulder_right">Droite Gauche</string>
     <string name="controller_direction_forward">Stick (haut)</string>
     <string name="controller_direction_backward">Stick (bas)</string>
     <string name="controller_direction_left">Stick (gauche)</string>
@@ -371,4 +373,13 @@
     <string name="customctrl_visibility_ingame">En jeu</string>
     <string name="customctrl_visibility_in_menus">Dans les menus</string>
     <string name="controller_remapper_expand_entry">Développer pour changer les codes de touches</string>
+    <string name="preference_remap_controller_title">Changer les raccourcis des touches du contrôleur</string>
+    <string name="mcl_button_discord">Discord</string>
+    <string name="local_login_bad_username_title">Nom d\'utilisateur inapproprié</string>
+    <string name="create_bta_profile">Créez un profil \"Better Than Adventure!\"</string>
+    <string name="select_bta_version">Sélectioneez la version \"Better Than Adventure!\"</string>
+    <string name="bta_installer_available_versions">Versions BTA supportées</string>
+    <string name="bta_installer_untested_versions">Versions BTA non testées</string>
+    <string name="bta_installer_nightly_versions">Versions BTA nocturnes</string>
+    <string name="newdl_extracting_native_libraries">Extraction librairies natives (%d/%d)</string>
 </resources>

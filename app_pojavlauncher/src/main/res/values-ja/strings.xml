@@ -9,6 +9,7 @@
     <string name="login_online_username_hint">ユーザー名</string>
     <string name="login_online_login_label">ログイン</string>
     <!-- Hint -->
+    <string name="hint_control_mapping">"上部の歯車をタッチすると、コンテキストメニュー:歯車:\nボタンをタップすると、キーバインドを編集、サイズ変更、削除、または変更できます。"</string>
     <!-- Warnings -->
     <string name="warning_remove_account">このアカウントが削除されます！</string>
     <!-- AlertDialog title -->
@@ -36,7 +37,9 @@
     <string name="mcl_option_customcontrol">カスタムコントロール</string>
     <string name="mcl_setting_title_use_surface_view">別のサーフェスレンダリングを使用する</string>
     <string name="mcl_setting_title_ignore_notch">ノッチを無視する</string>
+    <string name="mcl_setting_subtitle_ignore_notch">ノッチを無視して画面を拡張し、その下にゲーム画面を表示します。\nより多くの没入型のある体験を提供します。</string>
     <string name="mcl_setting_title_resolution_scaler">解像度のスケール</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">ゲームの解像度を下げることができます。100% がフル解像度です。</string>
     <string name="mcl_setting_title_buttonscale">制御ボタンの拡大縮小</string>
     <string name="mcl_setting_title_mousescale">カーソルのサイズ</string>
     <string name="mcl_setting_title_javaargs">JVM 起動引数</string>
@@ -130,6 +133,7 @@
     <string name="customctrl_forward_lock">フォワードロック</string>
     <string name="memory_warning_msg">現在の空きメモリ量(%d)は割り当てられたRAM(%d)よりも低く、クラッシュする可能性があります. ゲームがクラッシュした場合は割り当てを変更します。</string>
     <string name="mcl_memory_allocation">メモリ割り当て</string>
+    <string name="mcl_memory_allocation_subtitle">Minecraftにいくつのメモリを割り当てるかをコントロールします。</string>
     <string name="multirt_runtime_corrupt">Javaのランタイムが破損しています</string>
     <string name="multirt_runtime_incompatiblearch">互換性のないアーキテクチャ: %s</string>
     <string name="multirt_config_title">Javaランタイム</string>
@@ -153,7 +157,9 @@
     <string name="preference_misc_title">その他の設定</string>
     <string name="preference_experimental_title">実験的なもの</string>
     <string name="preference_sustained_performance_title">持続的なパフォーマンスモードを有効にする</string>
+    <string name="preference_sustained_performance_description">最大パフォーマンスを制限することでサーマルスロットリングが発生するのを防ぐことができます。</string>
     <string name="preference_force_vsync_title">強制的に垂直同期をオンにする</string>
+    <string name="preference_force_vsync_description">最大パフォーマンスを制限することでサーマルスロットリングが発生するのを防ぐことができます。</string>
     <string name="preference_force_english_title">強制的に言語を英語にする</string>
     <string name="preference_edit_controls_title">コントロールを編集</string>
     <string name="preference_category_gyro_controls">ジャイロコントロール</string>
@@ -213,7 +219,9 @@
     <string name="preference_category_controller_settings">コントローラーの設定</string>
     <string name="preference_wipe_controller_title">コントローラーマッピングをリセット</string>
     <string name="preference_deadzone_scale_title">ジョイスティックの無反応範囲</string>
+    <string name="preference_force_big_core_desc">Minecraftで使用するレンダリング スレッドを、最大周波数が最も高いコアで実行するように強制します。</string>
     <string name="version_select_hint">バージョン選択</string>
+    <string name="forge_dl_searching">Forgeのバージョンナンバーを検索しています</string>
     <string name="forge_dl_select_version">Forge のバージョンを選択</string>
     <string name="fabric_dl_game_version">Minecraft バージョン</string>
     <string name="fabric_dl_install">インストール</string>
@@ -224,6 +232,7 @@
     <string name="fabric_dl_loader_title">バージョンの選択</string>
     <string name="of_dl_select_version">OptiFine のバージョンを選択</string>
     <string name="of_dl_progress">%s をダウンロード中</string>
+    <string name="create_profile_optifine">Optifine プロファイルを作成する</string>
     <string name="preference_vulkan_driver_system_title">システム標準のVulkanドライバーを使用する</string>
     <string name="preference_vulkan_driver_system_description">ランチャーにAdreno GPUでTurnipの代わりにVulkanドライバを使用するよう強制します。Vulkanを使用するZinkとModにのみ影響します。</string>
     <string name="generic_install">インストール</string>
@@ -235,11 +244,18 @@
     <string name="preference_category_gestures">ジェスチャー</string>
     <string name="preference_category_java_tweaks">Java の調整</string>
     <string name="preference_category_miscellaneous">その他の設定</string>
+    <string name="preference_ask_for_notification_title">通知を許可する</string>
+    <string name="preference_ask_for_notification_description">クリックして通知の権限を再リクエストします。ゲームまたはModパックのバックグラウンドでのダウンロードが正確に動くようにするにはこれが必要です。</string>
     <string name="controller_button_a">A</string>
     <string name="controller_button_b">B</string>
     <string name="controller_button_x">X</string>
     <string name="controller_button_y">Y</string>
     <string name="controller_button_start">Start</string>
     <string name="controller_button_select">選択...</string>
-    <string name="customctrl_visibility_title">公開範囲</string>
+    <string name="customctrl_visibility_title">透明度</string>
+    <string name="customctrl_visibility_ingame">ゲーム内</string>
+    <string name="customctrl_visibility_in_menus">メニュー内</string>
+    <string name="create_bta_profile">Better than Adventure! プロファイルを作成する</string>
+    <string name="select_bta_version">Better than Adventure! のバージョンを選択</string>
+    <string name="newdl_extracting_native_libraries">ネイティブライブラリを展開しています (%d/%d)</string>
 </resources>

@@ -378,4 +378,10 @@
     <string name="local_login_bad_username_title">اسم المستخدم غير مناسب</string>
     <string name="local_login_bad_username_text">يجب أن يكون اسم المستخدم بين 3–16 حرفاً، ويجب أن يحتوي فقط على أحرف لاتينية وأرقام 0-9 وتسطيرات سفلية.</string>
     <string name="quick_setting_title">قائمة الإعدادات السريعة</string>
+    <string name="create_bta_profile">إنشاء ملف شخصي جديد لـ\"Better Than Adventure\"</string>
+    <string name="select_bta_version">اختر إصدار \"Better Than Adventure\"</string>
+    <string name="bta_installer_available_versions">إصدارات BTA المدعومة</string>
+    <string name="bta_installer_untested_versions">إصدارات BTA الغير مُجربة</string>
+    <string name="bta_installer_nightly_versions">إصدارات BTA الليلية</string>
+    <string name="newdl_extracting_native_libraries">استحراج ملفات المكتبات المحلية (%d/%d)</string>
 </resources>

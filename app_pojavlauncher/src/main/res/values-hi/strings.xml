@@ -8,6 +8,7 @@
     <!-- Login strings -->
     <string name="login_online_login_label">लॉगिन</string>
     <!-- Hint -->
+    <string name="hint_control_mapping">"Touch the top centre cogwheel to open the context menu ⚙\nTap a button to customize: edit, resize, remove, or change its keybinds."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">यह खाता हटा दिया जाएगा!</string>
     <!-- AlertDialog title -->
@@ -24,19 +25,170 @@
     <string name="toast_3">Exit</string>
     -->
     <!-- MCLauncherActivity: Tabs -->
+    <string name="mcl_tab_wiki">विकि</string>
     <!-- MCLauncherActivity: Account status -->
     <!-- MCLauncherActivity: Strings -->
     <string name="mcl_launch_cleancache">कैशे फ़ाइलों की सफाई</string>
     <string name="mcl_launch_downloading">%s डाउनलोड हो रहा है</string>
+    <string name="mcl_launch_downloading_progress">"डाउनलोड हो रहा है %s (%.2f MB / %.2f MB)"</string>
+    <string name="mcl_launch_download_assets">संसाधन डाउनलोड करने की तैयारी </string>
+    <string name="mcl_options">विकल्प</string>
+    <string name="mcl_option_customcontrol">कस्टम कंट्रोल्स</string>
+    <string name="mcl_setting_title_use_surface_view">अलग सर्फेस रेंडरिंग</string>
+    <string name="mcl_setting_subtitle_use_surface_view">GPU संबंधित स्थितियों में परफॉर्मेंस को शायद मदद कर पाएं।</string>
+    <string name="mcl_setting_title_ignore_notch">नॉच को नज़रअंदाज़ करें</string>
+    <string name="mcl_setting_subtitle_ignore_notch">नॉट्च को इग्नोर करके स्क्रीन को नॉट्च के नीचे से बढ़ा देता हैं।\n ज्यादा इमर्सिव अनुभव दे सकता है।</string>
+    <string name="mcl_setting_title_resolution_scaler">रिज़ॉल्यूशन स्केलर</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">गेम का रेजोल्यूशन घटाने में मदद कर सकता हैं। 100% पूरा रेजोल्यूशन हैं।</string>
+    <string name="mcl_setting_title_longpresstrigger">लंबे प्रेस डिले को ट्रिगर करें</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">ब्लॉकों को नष्ट करने और वस्तुओं को गिराने के लिए लंबे समय तक प्रेस ट्रिगर विलंब को बदलें।</string>
+    <string name="mcl_setting_title_buttonscale">कंट्रोल बटन स्केलिंग</string>
+    <string name="mcl_setting_subtitle_buttonscale">यदि बटन बहुत छोटे हैं तो उन्हें बड़ा कर लें।</string>
+    <string name="mcl_setting_title_mousescale">माउस स्केलिंग</string>
+    <string name="mcl_setting_subtitle_mousescale">वर्चुअल माउस का आकार बदलें </string>
+    <string name="mcl_setting_title_javaargs">JVM लांच आर्गुमेंटस </string>
+    <string name="mcl_setting_subtitle_javaargs">सावधान रहें, यदि बिना जानकारी के इसमें संशोधन किया गया तो गेम क्रैश हो सकता है। </string>
+    <string name="mcl_setting_category_renderer">Renderer</string>
+    <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (all versions, fast)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - (all versions, mid)</string>
+    <string name="mcl_setting_renderer_ltw">LTW (OpenGl ES 3) - 1.17+ only</string>
+    <string name="mcl_setting_veroption_release">Release</string>
+    <string name="mcl_setting_veroption_snapshot">Snapshot</string>
+    <string name="mcl_setting_veroption_oldalpha">Old-alpha</string>
+    <string name="mcl_setting_veroption_oldbeta">Old-beta</string>
+    <string name="mcl_setting_java_sandbox">Sandbox .jar execution</string>
+    <string name="mcl_setting_java_sandbox_subtitle">.jar फ़ाइल निष्पादित करते समय सैंडबॉक्स सुरक्षा प्रबंधक की उपलब्धता को नियंत्रित करें। </string>
+    <string name="mcl_version_clone">Clone</string>
     <!-- Global strings -->
+    <string name="global_error">Error</string>
+    <string name="global_load">लोड </string>
+    <string name="global_name">नाम </string>
+    <string name="global_clone">Clone</string>
+    <string name="global_restart">रिस्टार्ट</string>
+    <string name="global_save">सेव </string>
+    <string name="global_unpacking">Unpacking </string>
+    <string name="global_error_field_empty">यह फ़ील्ड रिक्त नहीं रह सकती</string>
+    <string name="global_waiting">ठहरो</string>
+    <string name="global_select">चुनो</string>
+    <string name="global_retry">दोबारा कोशिश करो</string>
+    <string name="global_default">डिफ़ॉल्ट</string>
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">Application/Game exited with code %d, check latestlog.txt for more details. </string>
+    <string name="mcn_signal_title">Application/Game aborted by fatal signal %d check latestlog.txt for more details. </string>
+    <string name="mcn_exit_confirm">क्या आप वाकई बलपूर्वक बंद करना चाहते हैं? </string>
+    <string name="mcn_check_fail_vulkan_support">Zink (vulkan) renderer आपके डिवाइस को सपोर्ट नहीं करता हैं!</string>
     <!-- MainActivity: Control buttons -->
+    <string name="control_chat">Chat</string>
+    <string name="control_debug">Debug</string>
+    <string name="control_primary">Pri</string>
+    <string name="control_secondary">Sec</string>
+    <string name="control_shift">◇</string>
+    <string name="control_inventory">Inv</string>
+    <string name="control_up">▲</string>
+    <string name="control_right">▶</string>
+    <string name="control_down">▼</string>
+    <string name="control_jump">⬛</string>
+    <string name="control_thirdperson">3rd</string>
+    <string name="control_listplayers">Tab</string>
+    <string name="control_mouse">Mouse</string>
+    <string name="control_mouseoff">Mouse: off</string>
+    <string name="control_mouseon">Mouse: on </string>
     <!-- MainActivity: Menu advanced controls -->
+    <string name="control_forceclose">Force close</string>
     <string name="control_viewout">लॉग आउटपुट</string>
+    <string name="control_adebug">Input Debug</string>
+    <string name="control_customkey">कस्टम कीकोड भेजें</string>
     <!-- ImportControlActivity Strings -->
+    <string name="import_control_label">इंपोर्ट कंट्रोल्स </string>
+    <string name="import_control_invalid_file">Invalid or corrupted file</string>
+    <string name="import_control_import_button">import controls</string>
+    <string name="import_control_verifying_file">फ़ाइल को वेरिफाई किया जा रहा है, कृपया प्रतीक्षा करें और पुनः प्रयास करें। </string>
+    <string name="import_control_invalid_name">Invalid name or file already exists</string>
+    <string name="import_control_done">इंपोर्ट पूरा हुआ </string>
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
+    <string name="customctrl_toggle">Toggleable</string>
+    <string name="customctrl_size">Size</string>
+    <string name="customctrl_mapping">Mapping</string>
+    <string name="customctrl_orientation">Orientation </string>
+    <string name="customctrl_background_color">Background color</string>
+    <string name="customctrl_corner_radius">Corner radius</string>
+    <string name="customctrl_stroke_width">Stroke width </string>
+    <string name="customctrl_stroke_color">Stroke colour</string>
+    <string name="customctrl_button_opacity">Button Opacity </string>
+    <string name="customctrl_addbutton">Add button</string>
+    <string name="customctrl_addbutton_drawer">Add button drawer</string>
+    <string name="customctrl_addbutton_joystick">Add joystick</string>
+    <string name="customctrl_addsubbutton">Add sub-button</string>
+    <string name="customctrl_selectdefault">Select default controlmap</string>
+    <string name="customctrl_export">Export controlmap</string>
+    <string name="main_share_logs">लॉग फ़ाइल शेयर करें</string>
+    <string name="main_install_jar_file">.jar को निष्पादित करें</string>
+    <string name="main_play">खेलो</string>
+    <string name="autoram_info_msg">Memory set to %d MB</string>
+    <string name="mcl_setting_check_libraries">डाउनलोड करने के बाद लाइब्रेरी की जांच करें </string>
+    <string name="mcl_setting_check_libraries_subtitle">यह विकल्प लॉन्चर को लाइब्रेरी हैश की जाँच करने के लिए बाध्य करता है, भले ही वह उपलब्ध हो। टूटे हुए डाउनलोड को रोकता है</string>
+    <string name="dl_library_sha_fail">लाइब्रेरी %s खराब है और पुनः डाउनलोड किया जाएगा</string>
+    <string name="dl_library_sha_unknown">लाइब्रेरी %s जाँच नहीं की जा सकती, मान लेना होगा कि यह अच्छा है</string>
+    <string name="dl_library_sha_pass">लाइब्रेरी %s ठीक है और प्रयोग करने योग्य है</string>
+    <string name="mcl_disable_gestures">डिसेबल जेस्चर </string>
+    <string name="mcl_disable_gestures_subtitle">इशारों को अक्षम करता है, जैसे कि ब्लॉक तोड़ने के लिए होल्ड करना, और ब्लॉक रखने के लिए टैप करना</string>
+    <string name="mcl_disable_swap_hand">हाथ बदलने के लिए डबल टैप अक्षम करें</string>
+    <string name="mcl_disable_swap_hand_subtitle">हॉटबार आइटम पर डबल टैप करके उसे दूसरे हाथ में बदलने की सुविधा अक्षम करता है </string>
+    <string name="mcl_setting_title_mousespeed">माउस की गति</string>
+    <string name="mcl_setting_subtitle_mousespeed">वर्चुअल माउस की गति बदलता है</string>
+    <string name="customctrl_passthru">Mouse pass-thru</string>
+    <string name="customctrl_swipeable">Swipeable </string>
+    <string name="customctrl_forward_lock">Forward lock</string>
+    <string name="customctrl_absolute_tracking">Absolute finger tracking</string>
+    <string name="memory_warning_msg">वर्तमान में मुक्त RAM की मात्रा (%d) आवंटित RAM (%d) से कम है, जिससे गेम क्रैश हो सकता है। अगर गेम क्रैश हो जाए तो आवंटन बदलें।</string>
+    <string name="address_memory_warning_msg">वर्तमान में खाली एड्रेसेबल RAM स्पेस (%d) की मात्रा आवंटित RAM (%d) से कम है, जिसके कारण गेम क्रैश हो सकता है। अगर गेम क्रैश होता है तो आवंटन बदलें।</string>
+    <string name="mcl_memory_allocation">रैम आवंटन </string>
+    <string name="mcl_memory_allocation_subtitle">यह नियंत्रित करता है कि Minecraft को कितनी मेमोरी दी जाए।</string>
+    <string name="multirt_runtime_corrupt">वर्तमान जावा रनटाइम</string>
+    <string name="multirt_runtime_incompatiblearch">Incompatible architecture</string>
+    <string name="multirt_config_title">Java runtime</string>
+    <string name="multirt_config_add">नया जोड़ें</string>
+    <string name="multirt_title">रनटाइम मैनेजर</string>
+    <string name="multirt_subtitle">इंस्टॉल किए गए Java रनटाइम को मैनेज करे।</string>
+    <string name="multirt_progress_caching">कैशिंग...</string>
+    <string name="multirt_config_setdefault">सेट डिफ़ॉल्ट</string>
+    <string name="multirt_config_setdefault_already">डिफ़ॉल्ट</string>
+    <string name="multirt_config_removeerror_last">आपको कम से कम एक Java रणनाइम का इंस्टॉल होना जरूरी है।</string>
+    <string name="multirt_nocompatiblert">कोई भी संगत Java रनटाइम नहीं मिल पाया। इस वर्शन के लिए Java %d या उससे नए वर्शन की आवश्यकता है</string>
+    <string name="pvc_jvmArgs">JVM arguements </string>
+    <string name="preference_mouse_start_title">वर्चुअल माउस चालू करके प्रारंभ करें</string>
+    <string name="preference_mouse_start_description">जब यह विकल्प चालू होता है तो वर्चुअल माउस गेम स्टार्टअप पर दिखाई देता है।</string>
+    <string name="preference_video_description">रेजोल्यूशन, renderer और परफॉर्मेंस </string>
+    <string name="preference_control_title">Control customisation </string>
+    <string name="preference_control_description">गेस्चर, बटन और स्केलिंग </string>
+    <string name="preference_java_title">Java ट्वीक्स</string>
+    <string name="preference_java_description">Java Runtime, JVM arguements, RAM amount, and sandbox</string>
+    <string name="preference_experimental_title">प्रयोगात्मक सामान</string>
+    <string name="preference_force_english_title">भाषा को अंग्रेजी में लागू करे</string>
+    <string name="preference_edit_controls_title">Edit custom controls</string>
+    <string name="preference_back_title">पिछली स्क्रीन पर वापिस जाए</string>
+    <string name="unnamed">अज्ञात</string>
+    <string name="profiles_profile_name">नाम </string>
+    <string name="global_delete">Delete</string>
+    <string name="pedit_renderer">Renderer</string>
+    <string name="notification_terminate">समाप्त करें</string>
+    <string name="notification_game_runs">गेम चल रहा है</string>
+    <string name="folder_fragment_create">फोल्डर बनाएं</string>
+    <string name="main_add_account">अकाउंट जोड़े</string>
+    <string name="create_profile">नया प्रोफाइल बनाए</string>
+    <string name="customctrl_editor_exit_title">जा रहे हैं? </string>
+    <string name="customctrl_editor_exit_msg">क्या आप निश्चित हैं आपकी बाहर निकलने की इच्छा है? </string>
+    <string name="customctrl_editor_exit">Leave editor</string>
     <string name="of_dl_progress">%s डाउनलोड हो रहा है</string>
+    <string name="generic_debug">Debug</string>
+    <string name="preference_category_experimental_settings">प्रायोगिक बकवास</string>
+    <string name="preference_category_java_tweaks">Java ट्वीक्स</string>
+    <string name="notification_permission_dialog_text">PojavLauncher को आपके ऐप से बाहर निकलने पर गेम/मॉडपैक डाउनलोड को रोकने के लिए नोटिफ़िकेशन पोस्ट करने की अनुमति की आवश्यकता होती है। इस अनुमति के बिना, जब आप गेम/मॉडपैक डाउनलोड करते हैं तो Android आपके डाउनलोड को बंद कर सकता है।</string>
+    <string name="controller_button_select">चुनो</string>
+    <string name="customctrl_visibility_ingame">In-game</string>
+    <string name="customctrl_visibility_in_menus">In menus</string>
+    <string name="create_bta_profile">\"Better than Adventure!\" की प्रोफाइल बनाएं</string>
 </resources>

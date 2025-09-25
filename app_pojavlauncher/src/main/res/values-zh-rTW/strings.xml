@@ -350,7 +350,7 @@
     <string name="controller_button_b">B</string>
     <string name="controller_button_x">X</string>
     <string name="controller_button_y">Y</string>
-    <string name="controller_button_start">開始</string>
+    <string name="controller_button_start">開始鍵</string>
     <string name="controller_button_select">選擇</string>
     <string name="controller_button_trigger_left">左扳機</string>
     <string name="controller_button_trigger_right">右扳機</string>
@@ -381,4 +381,10 @@
     <string name="local_login_bad_username_title">不適當的使用者名稱</string>
     <string name="local_login_bad_username_text">使用者名稱長度必須介於 3 到 16 個字元之間，且僅能包含拉丁字母、數字 0 到 9 以及底線。</string>
     <string name="quick_setting_title">快速設定</string>
+    <string name="create_bta_profile">建立「Better than Adventure!」設定檔</string>
+    <string name="select_bta_version">選擇「Better than Adventure!」版本</string>
+    <string name="bta_installer_available_versions">支援的 BTA 版本</string>
+    <string name="bta_installer_untested_versions">未經測試的 BTA 版本</string>
+    <string name="bta_installer_nightly_versions">BTA 每日建構版</string>
+    <string name="newdl_extracting_native_libraries">正在解壓縮原生程式庫 (%d/%d)</string>
 </resources>

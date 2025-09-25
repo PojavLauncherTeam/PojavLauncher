@@ -6,8 +6,10 @@
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
+    <string name="login_online_username_hint">Cool name</string>
     <string name="login_online_login_label">logout</string>
     <!-- Hint -->
+    <string name="hint_control_mapping">"press top-center that cog-thingy button to see things menu⚙\npress and button to edit, resize 'n stuff the keyz."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Dis akownt wil be removed!</string>
     <!-- AlertDialog title -->
@@ -19,7 +21,7 @@
     <string name="error_show_less">Show les</string>
     <!-- Toast messages -->
     <string name="toast_permission_denied">Teh riid/rite 2 storage permishun iz requird!</string>
-    <string name="toast_optifine_success">Instal succesful</string>
+    <string name="toast_optifine_success">Instal sucesful</string>
     <!--
     <string name="toast_3">Exit</string>
     -->
@@ -32,9 +34,9 @@
     <string name="mcl_launch_downloading_progress">"Downloadin %s (%.2f MB / %.2f MB)"</string>
     <string name="mcl_launch_download_assets">Preparin 2 download resourcez</string>
     <string name="mcl_options">Opshuns</string>
-    <string name="mcl_option_customcontrol">Custom controls</string>
+    <string name="mcl_option_customcontrol">Costolum ctrls</string>
     <string name="mcl_setting_title_use_surface_view">USE ALTERNATE SURFACE RENDERIN</string>
-    <string name="mcl_setting_subtitle_use_surface_view">May halp purrformance in gpu bound skenarioz.</string>
+    <string name="mcl_setting_subtitle_use_surface_view">May halp purrformance in gpu bound scenarioz.</string>
     <string name="mcl_setting_title_ignore_notch">Ignoer notch</string>
     <string name="mcl_setting_subtitle_ignore_notch">Ignores da notch an extends da screen under it.\nGives yu a more immersive experience.</string>
     <string name="mcl_setting_title_resolution_scaler">Resolushun Scalah</string>
@@ -50,6 +52,7 @@
     <string name="mcl_setting_category_renderer">Renderer</string>
     <string name="mcl_setting_renderer_gles2_4">Holy gl4es - (awl versionz, fastz)</string>
     <string name="mcl_setting_renderer_vulkan_zink">Zink (vulkan) - (awl versionz, mid)</string>
+    <string name="mcl_setting_renderer_ltw">LTW(opengl ez 3)- 1.17 more only</string>
     <string name="mcl_setting_veroption_release">RELEASD</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Old-alaf</string>
@@ -64,16 +67,17 @@
     <string name="global_name">Naym</string>
     <string name="global_remove">Remoev</string>
     <string name="global_clone">Cloen</string>
-    <string name="global_restart">Re-start</string>
+    <string name="global_restart">Again</string>
     <string name="global_save">Saev</string>
-    <string name="global_unpacking">Unpacking %s</string>
+    <string name="global_unpacking">packin aut %s</string>
     <string name="global_error_field_empty">Dis field can\'t bees empty</string>
     <string name="global_waiting">Wait</string>
-    <string name="global_select">Select</string>
+    <string name="global_select">Selec</string>
     <string name="global_retry">Again bro</string>
     <string name="global_default">My favritz</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Applicashun/game exitd wif code %d, chek lastestlog.txt 4 moar details.</string>
+    <string name="mcn_signal_title">app/gaming app is fatal error %d, look at latestlog.txt if u want more details.</string>
     <string name="mcn_exit_confirm">R u suer u wantz 2 forec cloes?</string>
     <string name="mcn_check_fail_vulkan_support">Zink (vulkan) renderer is not supported on dis device!</string>
     <!-- MainActivity: Control buttons -->
@@ -113,12 +117,12 @@
     <string name="customctrl_size">Siez</string>
     <string name="customctrl_mapping">Mappin’</string>
     <string name="customctrl_orientation">Direksion</string>
-    <string name="customctrl_background_color">Bakground colour</string>
+    <string name="customctrl_background_color">Bekround coloure</string>
     <string name="customctrl_corner_radius">Cornur round saiz</string>
     <string name="customctrl_stroke_width">Strok witz</string>
     <string name="customctrl_stroke_color">Strok colour</string>
     <string name="customctrl_button_opacity">Buton Owpacity</string>
-    <string name="customctrl_addbutton">Add button</string>
+    <string name="customctrl_addbutton">meyk button</string>
     <string name="customctrl_addbutton_drawer">Add buton drawr’</string>
     <string name="customctrl_addbutton_joystick">Add stick control</string>
     <string name="customctrl_addsubbutton">Add b’low-buton</string>
@@ -144,7 +148,8 @@
     <string name="customctrl_forward_lock">Forward lock and keyz</string>
     <string name="customctrl_absolute_tracking">Absolute finger trackin\'</string>
     <string name="memory_warning_msg">WURNING: Catz iz becomin’ une of teh Memory Muncherz, wich may leid tu game crash! (Free %d, munch’d %d MB) Change teh allocasion if teh game crashez.</string>
-    <string name="mcl_memory_allocation">RAM allocasion</string>
+    <string name="address_memory_warning_msg">current free WAM space (%d) is lower than real WAM (%d), maybe game\'s gonna bye bye. cahnge the WAM size if the game is bye bye.</string>
+    <string name="mcl_memory_allocation">WAM allocasion</string>
     <string name="mcl_memory_allocation_subtitle">Controlz how much memory is given to block game.</string>
     <string name="multirt_runtime_corrupt">Derti Coffee Cup</string>
     <string name="multirt_runtime_incompatiblearch">Incompatible architecchur: %s</string>
@@ -156,6 +161,7 @@
     <string name="multirt_config_setdefault">Set favoritz</string>
     <string name="multirt_config_setdefault_already">My favritz</string>
     <string name="multirt_config_removeerror_last">Yyu have one Java Marathon here.</string>
+    <string name="multirt_nocompatiblert">where the heck is good jawa running time. this version needs jawa %d or beter.</string>
     <string name="multirt_nojava8rt">Ken´t find Java 8. In ordr 2 use dis opshun, u ned 2 install Java 8.</string>
     <string name="multirt_delete_runtime">Delete Marathon</string>
     <string name="pvc_gameDirectory">Gamez’ direktory</string>
@@ -181,6 +187,7 @@
     <string name="preference_edit_controls_title">Change custom controls</string>
     <string name="preference_edit_controls_summary">Tweak da control scheme to fit yor needz.</string>
     <string name="preference_category_gyro_controls">Moving Phone controls</string>
+    <string name="preference_category_virtual_mouse">Unreal mouse</string>
     <string name="preference_gyro_invert_x_axis">Invert Y axis</string>
     <string name="preference_gyro_invert_y_axis">Invert X axis</string>
     <string name="preference_gyro_invert_x_axis_description">Invert da vertical axis.</string>
@@ -200,6 +207,7 @@
     <string name="arc_capes_desc">Enablez capez from cosmetica (previously arc). For more informashun pleez visit https://cosmetica.cc. Requirez optifine.</string>
     <string name="notif_channel_name">Geneal</string>
     <string name="lazy_service_default_title">Pojav background police</string>
+    <string name="mcl_setting_veroption_installed">Got it</string>
     <string name="use_global_default">(Use Base Normal)</string>
     <string name="default_control">Default controlmap</string>
     <string name="progresslayout_tasks_in_progress">%d taskz in progress</string>
@@ -235,6 +243,7 @@
     <string name="preference_shader_dump_title">Enable shader dumping</string>
     <string name="preference_shader_dump_description">log converted shaderz into da log file.</string>
     <string name="percent_format">%d%%</string>
+    <string name="millisecond_format">%d ms lag</string>
     <string name="customctrl_editor_exit_title">Don\'t leave plz stay?</string>
     <string name="customctrl_editor_exit_msg">Are you sure don\'t leave plz?</string>
     <string name="customctrl_editor_exit">Leave editor</string>
@@ -323,5 +332,51 @@ if yu wanna use teh offishul download source, press "switch to offishul site" n 
     <string name="exception_failed_to_unpack_jre17">Failed to install JRE 17</string>
     <string name="newdl_starting">Reading game metadata…</string>
     <string name="newdl_downloading_metadata">Downloading game metadata (%s)</string>
-    <string name="controller_button_select">Select</string>
+    <string name="newdl_downloading_game_files">reaching the skyes for the game... (%d/%d, %.2f MB/s)</string>
+    <string name="newdl_downloading_game_files_size">reaching the skyes for the game... (%.2f/%.2f MB, %.2f MB/s)</string>
+    <string name="cropper_title">pick photo region</string>
+    <string name="cropper_lock_vertical">lock up-down</string>
+    <string name="cropper_lock_horizontal">lock right-left</string>
+    <string name="cropper_reset">again</string>
+    <string name="cropper_select_cancelled">selection cancelled</string>
+    <string name="log_view_button_scroll_off">cool scroll\nNAH</string>
+    <string name="log_view_button_scroll_on">cool scroll\n YEAH</string>
+    <string name="log_view_button_output_off">output\nNAH</string>
+    <string name="log_view_button_output_on">output\nYEAH</string>
+    <string name="log_view_label_log_output">a lot of text:</string>
+    <string name="execute_jar_failed_to_read_file">failed the jar</string>
+    <string name="execute_jar_incompatible_runtime">exe jar is not ok with jawa %d</string>
+    <string name="controller_button_a">A</string>
+    <string name="controller_button_b">B</string>
+    <string name="controller_button_x">X</string>
+    <string name="controller_button_start">Run</string>
+    <string name="controller_button_select">Selec</string>
+    <string name="controller_button_trigger_left">left triggred</string>
+    <string name="controller_button_trigger_right">right triggred</string>
+    <string name="controller_button_shoulder_left">left sholder</string>
+    <string name="controller_button_shoulder_right">right sholder</string>
+    <string name="controller_direction_forward">stick up</string>
+    <string name="controller_direction_backward">stick down</string>
+    <string name="controller_direction_left">stick left</string>
+    <string name="controller_direction_right">stick right</string>
+    <string name="controller_stick_press_l">L3</string>
+    <string name="controller_stick_press_r">R3</string>
+    <string name="controller_dpad_up">dpad up</string>
+    <string name="controller_dpad_down">dpad down</string>
+    <string name="controller_dpad_left">dpad left</string>
+    <string name="controller_dpad_right">dpad right</string>
+    <string name="controller_remapper_exit_part1">hold</string>
+    <string name="controller_remapper_exit_part2">to save</string>
+    <string name="controller_remapper_operating_mode">moede rn</string>
+    <string name="customctrl_visibility_ingame">in gaming</string>
+    <string name="customctrl_visibility_in_menus">in not gaming</string>
+    <string name="controller_remapper_expand_entry">expand is change fancy key things</string>
+    <string name="preference_remap_controller_title">change ctrler keys</string>
+    <string name="preference_remap_controller_description">say yes to changing keys to each ctrler button</string>
+    <string name="mcl_button_discord">dc</string>
+    <string name="ltw_render_distance_warning_msg">ur gpu so bad, cant even render more than 7 distance wirh no sodium. ur render distance will have cap\'s if u say ok.</string>
+    <string name="mcl_button_open_directory">open game files</string>
+    <string name="local_login_bad_username_title">illegal nick</string>
+    <string name="local_login_bad_username_text">ur name needs to be 3–16 chars long and must only contain latin letters, numbers 0–9 and these \"_\" to survive.</string>
+    <string name="quick_setting_title">fast settins</string>
 </resources>

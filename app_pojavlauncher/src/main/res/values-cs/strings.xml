@@ -381,4 +381,10 @@
     <string name="local_login_bad_username_title">Špatné uživatelské jméno</string>
     <string name="local_login_bad_username_text">Uživatelské jméno musí být mezi 3 až 16 znaky, musí být pouze v latince s čísly a podtržítkem.</string>
     <string name="quick_setting_title">Rychlá nastavení</string>
+    <string name="create_bta_profile">Vytvořit profil \"Better than Adventure!\"\"</string>
+    <string name="select_bta_version">Zvolte verzi \"Better than Adventure!\"\"</string>
+    <string name="bta_installer_available_versions">Podporované BTA verze</string>
+    <string name="bta_installer_untested_versions">Netestované BTA verze</string>
+    <string name="bta_installer_nightly_versions">Nightly BTA verze</string>
+    <string name="newdl_extracting_native_libraries">Rozbalování nativních knihoven (%d/%d)</string>
 </resources>

@@ -2,13 +2,14 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <!-- App name part -->
     <string name="app_name">PojavLauncher (Android için Minecraft: Java Edition)</string>
-    <string name="app_short_name">PojavLauncher</string>
+    <string name="app_short_name">Pojav.Launcher</string>
     <!-- Action bar part -->
     <!-- Languages list part -->
     <!-- Login strings -->
     <string name="login_online_username_hint">Kullanıcı Adı</string>
     <string name="login_online_login_label">Giriş yap</string>
     <!-- Hint -->
+    <string name="hint_control_mapping">"En üst merkezde bulunan Çarka dokunarak içerik menüsünü⚙ açın. \n Herhangi bir butona dokunarak kişiselleştirebilirsiniz, düzenleyebilirsiniz, boyutlandırabilirsiniz veya tuş atamalarını değiştirebilirsiniz."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Bu hesap kaldırılacak!</string>
     <!-- AlertDialog title -->
@@ -51,6 +52,7 @@
     <string name="mcl_setting_category_renderer">Görüntü İşleyici</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (bütün sürümler, hızlı)</string>
     <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - (tüm sürümler için, orta)</string>
+    <string name="mcl_setting_renderer_ltw">LTW (OpenGL ES 3) - Sadece 1.17.x Ve Sürümler için</string>
     <string name="mcl_setting_veroption_release">Sürümler</string>
     <string name="mcl_setting_veroption_snapshot">Test sürümleri</string>
     <string name="mcl_setting_veroption_oldalpha">Eski-alfa</string>
@@ -74,7 +76,8 @@
     <string name="global_retry">Tekrar deneyin</string>
     <string name="global_default">Varsayılan</string>
     <!-- MainActivity: strings -->
-    <string name="mcn_exit_title">Uygulama/Oyundan %d koduyla çıkıldı, daha fazla bilgi için latestlog.txt\'ye bakın.</string>
+    <string name="mcn_exit_title">Uygulama/Oyun %d koduyla kapandı, daha fazla bilgi için latestlog.txt\'ye bakın.</string>
+    <string name="mcn_signal_title">Uygulama/Oyun %d hata kodu ile çöktü. Daha fazla bilgi için lastestlog.txt dosyasını kontrol edin.</string>
     <string name="mcn_exit_confirm">Zorla kapatmak istediğinize emin misiniz?</string>
     <string name="mcn_check_fail_vulkan_support">Zink (Vulkan) işleyicisi bu cihazda desteklenmiyor!</string>
     <!-- MainActivity: Control buttons -->
@@ -145,6 +148,7 @@
     <string name="customctrl_forward_lock">İleri kilit</string>
     <string name="customctrl_absolute_tracking">Mutlak parmak takibi</string>
     <string name="memory_warning_msg">Şuanki boş bellek (%d) verilecek bellekten (%d) daha az, bu durum çökmelere sebep olabilir. Eğer oyun çökerse verilen belleği değiştirin.</string>
+    <string name="address_memory_warning_msg">Şuanki Mevcut bulunan Bellek miktarı (%d) Ayarlanmış Bellek miktarından (%d) daha az ve bu durum oyunun çökmesine sebeb olabilir. Eğer Oyun çökerse Belleği azaltmayı veya değiştirmeyi deneyin.</string>
     <string name="mcl_memory_allocation">Bellek ayırma</string>
     <string name="mcl_memory_allocation_subtitle">Minecraft\'a ne kadar bellek verileceğini kontrol eder.</string>
     <string name="multirt_runtime_corrupt">Bozuk Java Runtime</string>
@@ -157,6 +161,7 @@
     <string name="multirt_config_setdefault">Varsayılan olarak ayarla</string>
     <string name="multirt_config_setdefault_already">Varsayılan</string>
     <string name="multirt_config_removeerror_last">En az bir Java Runtime\'ın kurulu olması gerekmektedir.</string>
+    <string name="multirt_nocompatiblert">Uygun Sürümdeki Java Çalıştırma paketi bulunamıyor. Bu sürüm Java %d veya daha yeni bir sürümü gerektirir.</string>
     <string name="multirt_nojava8rt">Java 8 bulunamadı. Bu seçeneği kullanabilmeniz için Java 8 kurmanız gerekiyor.</string>
     <string name="multirt_delete_runtime">Runtime\'ı sil</string>
     <string name="pvc_gameDirectory">Oyun dizini</string>
@@ -238,6 +243,7 @@
     <string name="preference_shader_dump_title">Gölgelendirici bilgi göstergesini etkinleştir</string>
     <string name="preference_shader_dump_description">Dönüştürülen shader\'ları günlük dosyasına (log\'a) kaydedin.</string>
     <string name="percent_format">%d%%</string>
+    <string name="millisecond_format">%d milisaniye</string>
     <string name="customctrl_editor_exit_title">Çıkılsın mı?</string>
     <string name="customctrl_editor_exit_msg">Çıkmak istediğinizden emin misiniz?</string>
     <string name="customctrl_editor_exit">Düzenleyici\'den çık</string>
@@ -326,11 +332,59 @@
     <string name="exception_failed_to_unpack_jre17">JRE 17 yüklenemedi</string>
     <string name="newdl_starting">Oyun meta verileri okunuyor…</string>
     <string name="newdl_downloading_metadata">Oyun meta verileri indiriliyor (%s)</string>
+    <string name="newdl_downloading_game_files">Oyun indiriliyor.. (%d/%d, %.2f MB/sn)</string>
+    <string name="newdl_downloading_game_files_size">Oyun indiriliyor.. (%.2f/%.2f MB, %.2f MB/sn)</string>
+    <string name="cropper_title">Lütfen Oyun sürümü Bölgesini Seçiniz</string>
+    <string name="cropper_lock_vertical">Y. Kilit</string>
+    <string name="cropper_lock_horizontal">D. Kilit</string>
+    <string name="cropper_reset">Sıfırla</string>
+    <string name="cropper_select_cancelled">Seçim iptal edildi</string>
+    <string name="log_view_button_scroll_off">Otokaydırma\nKapalı</string>
+    <string name="log_view_button_scroll_on">Otokaydırma\nAçık</string>
+    <string name="log_view_button_output_off">Çıktı\nKapalı</string>
+    <string name="log_view_button_output_on">Çıktı\nAçık</string>
+    <string name="log_view_label_log_output">Kayıt Çıktısı:</string>
+    <string name="execute_jar_failed_to_read_file">.jar Dosyasını okuma başarısız</string>
+    <string name="execute_jar_incompatible_runtime">.jar dosyasını yürütme özelliği Java %d sürümü ile uyumsuz</string>
     <string name="controller_button_a">A</string>
     <string name="controller_button_b">B</string>
     <string name="controller_button_x">X</string>
     <string name="controller_button_y">Y</string>
     <string name="controller_button_start">Başla</string>
     <string name="controller_button_select">Seç</string>
+    <string name="controller_button_trigger_left">Sol Tetik</string>
+    <string name="controller_button_trigger_right">Sağ Tetik</string>
+    <string name="controller_button_shoulder_left">Sol Omuz</string>
+    <string name="controller_button_shoulder_right">Sağ Omuz</string>
+    <string name="controller_direction_forward">analog tuşu yukarı</string>
+    <string name="controller_direction_backward">analog tuşu aşağı</string>
+    <string name="controller_direction_left">analog tuşu Sağa</string>
+    <string name="controller_direction_right">analog tuşu Sola</string>
+    <string name="controller_stick_press_l">Sol Alt analog tuşu (Dokun)</string>
+    <string name="controller_stick_press_r">Sağ alt analog tuşu (Dokun)</string>
+    <string name="controller_dpad_up">D-Tuşu Yukarı</string>
+    <string name="controller_dpad_down">D-Tuşu Aşağı</string>
+    <string name="controller_dpad_left">D-Tuşu Sola</string>
+    <string name="controller_dpad_right">D-Tuşu Sağa</string>
+    <string name="controller_remapper_exit_part1">Basılı tut</string>
+    <string name="controller_remapper_exit_part2">Çıkmak için</string>
+    <string name="controller_remapper_operating_mode">Şuanki mod</string>
     <string name="customctrl_visibility_title">Görünürlük</string>
+    <string name="customctrl_visibility_ingame">Oyun-içi</string>
+    <string name="customctrl_visibility_in_menus">Menüde</string>
+    <string name="controller_remapper_expand_entry">Kontrol Kodunu değiştirmek için Genişletin</string>
+    <string name="preference_remap_controller_title">Kontrolcü tuş atamalarını Değiştirin</string>
+    <string name="preference_remap_controller_description">Her kontrolcü Tuşuna Ayrı bir Klavye Tuşu atamanı sağlar</string>
+    <string name="mcl_button_discord">Discord</string>
+    <string name="ltw_render_distance_warning_msg">Şuanki Entegre Ekran Kartın Sodium ve benzeri modlarla 7 chunk ve üzeri uzaklığı görüntülemek için uygun değil. \"Ok\" tuşuna bastığında otomatik olarak Görüş mesafesi düşürülecektir.</string>
+    <string name="mcl_button_open_directory">Oyun Dizinini aç</string>
+    <string name="local_login_bad_username_title">Uygunsuz Kullanıcı adı</string>
+    <string name="local_login_bad_username_text">Kullanıcı adı 3- 16 karakter arasında olmalı ve sadece Latin harfleri 0- 9 arasındaki rakamlar ve Alt çizgi içermelidir.</string>
+    <string name="quick_setting_title">Hızlı Ayarlar</string>
+    <string name="create_bta_profile">\"Better Than Adventure!\" profili Oluştur</string>
+    <string name="select_bta_version">\"Better Than Adventure!\" sürümünü seçiniz</string>
+    <string name="bta_installer_available_versions">Desteklenen BTA sürümü</string>
+    <string name="bta_installer_untested_versions">Test-Edilmemiş BTA sürümü</string>
+    <string name="bta_installer_nightly_versions">Deneysel (Gecelik) BTA sürümü</string>
+    <string name="newdl_extracting_native_libraries">Yerel kütüphane dosyaları ayıklanıyor (%d/%d)</string>
 </resources>

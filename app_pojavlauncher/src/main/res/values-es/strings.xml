@@ -9,6 +9,7 @@
     <string name="login_online_username_hint">Nombre de usuario</string>
     <string name="login_online_login_label">Iniciar sesión</string>
     <!-- Hint -->
+    <string name="hint_control_mapping">"Toque la rueda central superior para abrir el menú contextual ⚙️\nToque un botón para personalizar: editar, redimensionar, quitar o cambiar sus atajos de teclado."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">¡Esta cuenta será borrada!</string>
     <!-- AlertDialog title -->
@@ -31,9 +32,9 @@
     <string name="mcl_launch_cleancache">Limpiando archivos caché</string>
     <string name="mcl_launch_downloading">Descargando %s</string>
     <string name="mcl_launch_downloading_progress">"Descargando %s (%.2f MB / %.2f MB)"</string>
-    <string name="mcl_launch_download_assets">Preparando para descargar los recursos</string>
+    <string name="mcl_launch_download_assets">Empezando a descargar los recursos</string>
     <string name="mcl_options">Opciones</string>
-    <string name="mcl_option_customcontrol">Controles personalizados</string>
+    <string name="mcl_option_customcontrol">Personalización de Controles</string>
     <string name="mcl_setting_title_use_surface_view">Usar representación de superficie alternativa</string>
     <string name="mcl_setting_subtitle_use_surface_view">Podría mejorar el rendimiento en escenarios relacionados con la GPU.</string>
     <string name="mcl_setting_title_ignore_notch">Ignorar notch (Para teléfonos con pantalla irregular)</string>
@@ -334,6 +335,8 @@
     <string name="newdl_downloading_game_files">Descargando el juego...(%d/%d,%.2f MB/s)</string>
     <string name="newdl_downloading_game_files_size">Descargando el juego...(%.2f/%.2f MB, %.2f MB/s)</string>
     <string name="cropper_title">Seleccione la región de la imagen</string>
+    <string name="cropper_lock_vertical">Bloqueo v.</string>
+    <string name="cropper_lock_horizontal">Bloqueo h.</string>
     <string name="cropper_reset">Reiniciar</string>
     <string name="cropper_select_cancelled">Selección cancelada</string>
     <string name="log_view_button_scroll_off">Desplazamiento automático\nApagado</string>
@@ -351,10 +354,25 @@
     <string name="controller_button_select">Seleccionar</string>
     <string name="controller_button_trigger_left">Activador izquierdo</string>
     <string name="controller_button_trigger_right">Activador derecho</string>
+    <string name="controller_button_shoulder_left">Hombro izquierdo</string>
+    <string name="controller_button_shoulder_right">Hombro derecho</string>
+    <string name="controller_direction_forward">Joystick hacia arriba</string>
+    <string name="controller_direction_backward">Joystick hacia abajo</string>
+    <string name="controller_direction_left">Joystick hacia la izquierda</string>
+    <string name="controller_direction_right">Joystick hacia la derecha</string>
+    <string name="controller_stick_press_l">Palanca de mando izquierda (hacer clic)</string>
+    <string name="controller_stick_press_r">Palanca de mando derecha (hacer clic)</string>
+    <string name="controller_dpad_up">Botón direccional arriba</string>
+    <string name="controller_dpad_down">Botón direccional abajo</string>
+    <string name="controller_dpad_left">Botón direccional izquierda</string>
+    <string name="controller_dpad_right">Botón direccional derecha</string>
     <string name="controller_remapper_exit_part1">Mantenga</string>
     <string name="controller_remapper_exit_part2">para salir</string>
     <string name="controller_remapper_operating_mode">Modo actual</string>
     <string name="customctrl_visibility_title">Visibilidad</string>
+    <string name="customctrl_visibility_ingame">Dentro del juego</string>
+    <string name="customctrl_visibility_in_menus">En los menús</string>
+    <string name="controller_remapper_expand_entry">Expandir para cambiar códigos de teclas</string>
     <string name="preference_remap_controller_title">Cambiar configuración de teclas del controlador</string>
     <string name="preference_remap_controller_description">Te permite modificar las teclas del teclado asignadas a cada botón del controlador</string>
     <string name="mcl_button_discord">Discord</string>
@@ -363,4 +381,10 @@
     <string name="local_login_bad_username_title">Nombre de usuario inadecuado</string>
     <string name="local_login_bad_username_text">El nombre de usuario debe de ser entre 3 a 16 caracteres, y solo contener letras latinas, números de 0 a 9 y guiones bajos.</string>
     <string name="quick_setting_title">Configuraciones rápidas</string>
+    <string name="create_bta_profile">Crear perfil de \"Better than Adventure!\"</string>
+    <string name="select_bta_version">Seleccionar la versión de \"Better than Adventure!\"</string>
+    <string name="bta_installer_available_versions">Versiones de BTA compatibles</string>
+    <string name="bta_installer_untested_versions">Versiones de BTA no probadas</string>
+    <string name="bta_installer_nightly_versions">Versiones nocturnas de BTA</string>
+    <string name="newdl_extracting_native_libraries">Extrayendo librerías nativas (%d/%d)</string>
 </resources>

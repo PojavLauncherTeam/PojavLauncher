@@ -8,6 +8,7 @@
     <!-- Login strings -->
     <string name="login_online_login_label">লগইন</string>
     <!-- Hint -->
+    <string name="hint_control_mapping">"কনটেক্সট মেনুটি খুলতে হলে টপ সেন্টার কগ আইকনটিতে ট্যাপ করুন ⚙\n কাস্টোমাইজ করতে হলে যেকোনো একটি বাটনে ট্যাপ করুন: বাটনটির কীবইন্ড এডিট, রিসাইজ, ডিলেট বা কাস্টোমাইজ করুন."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">এই একাউন্টটি মুছে যাবে!</string>
     <!-- AlertDialog title -->
@@ -34,22 +35,108 @@
     <string name="mcl_options">অপশনসমূহ</string>
     <string name="mcl_option_customcontrol">কাস্টম কন্ট্রোল</string>
     <string name="mcl_setting_title_use_surface_view">বিকল্প সারফেস রেন্ডারিং ব্যবহার করুন</string>
+    <string name="mcl_setting_subtitle_use_surface_view">জিপিউ বাউন্ড ক্ষেত্রে কর্মক্ষমতা বৃদ্ধিতে সাহায্য করতে পারে.</string>
     <string name="mcl_setting_title_ignore_notch">খাঁজ উপেক্ষা করুন</string>
+    <string name="mcl_setting_subtitle_ignore_notch">নচ উপেক্ষা করে নিচের স্ক্রিনকে এক্সটেন্ড করুন। \n আপনাকে আরো ইমার্সিভ অভিজ্ঞতা দেয়.</string>
     <string name="mcl_setting_title_resolution_scaler">রেজল্যুশন স্কেলার</string>
+    <string name="mcl_setting_subtitle_resolution_scaler">আপনাকে গেমের রেজোলিউশন কমাতে দেয়। 100% হচ্ছে সম্পুর্ণ রেজোলিউশন.</string>
+    <string name="mcl_setting_title_longpresstrigger">ট্রিগার এর লং প্রেস ডিলে</string>
+    <string name="mcl_setting_subtitle_longpresstrigger">লং প্রেস ট্রিগার ডিলে চেঞ্জ করুন ব্লক ভাঙার বা আইটেম ড্রপ করবার জন্য.</string>
     <string name="mcl_setting_title_buttonscale">নিয়ন্ত্রণ বাটন স্কেলিং</string>
+    <string name="mcl_setting_subtitle_buttonscale">বাটনগুলি বড্ড ছোট হলে এদের আপস্কেল করুন.</string>
     <string name="mcl_setting_title_mousescale">মাউস স্কেলিং</string>
+    <string name="mcl_setting_subtitle_mousescale">ভার্চুয়াল মাউসটির আকারের পরিবর্তন করুন.</string>
     <string name="mcl_setting_title_javaargs">JVM লঞ্চ আর্গুমেন্ট</string>
     <string name="mcl_setting_subtitle_javaargs">সতর্কতা অবলম্বন করুন, জ্ঞান ছাড়াই পরিবর্তন করা হলে এটি গেম ক্র্যাশ করতে পারে.</string>
+    <string name="mcl_setting_category_renderer">রেন্ডারার</string>
+    <string name="mcl_setting_renderer_gles2_4">হোলি GL4ES - (সব ভার্সন, দ্রুত)</string>
+    <string name="mcl_setting_renderer_vulkan_zink">জিংক (ভুলকান) - (সব ভার্সন, মাঝারি)</string>
+    <string name="mcl_setting_renderer_ltw">LTW (OpenGL ES 3) - 1.17+ sudhu</string>
+    <string name="mcl_setting_veroption_release">প্রকাশ</string>
+    <string name="mcl_setting_veroption_snapshot">স্ন্যাপশট</string>
+    <string name="mcl_setting_veroption_oldalpha">পুরোনো-আলফা</string>
+    <string name="mcl_setting_veroption_oldbeta">পুরোনো-বেটা</string>
+    <string name="mcl_setting_java_sandbox">স্যান্ডবক্স .jar এক্সিকিউশন</string>
+    <string name="mcl_setting_java_sandbox_subtitle">স্যান্ডবক্স সিকিউরিটি ম্যানেজারের আভাইলাবিলিটি নিয়ন্ত্রণ করুন যখন .jar ফাইলটি এক্সিকিউট হচ্ছে.</string>
+    <string name="mcl_version_clone">ক্লোন</string>
     <!-- Global strings -->
+    <string name="global_error">এরর</string>
+    <string name="global_load">লোড</string>
+    <string name="global_name">নেম</string>
+    <string name="global_clone">ক্লোন</string>
+    <string name="global_restart">আবার চালু করুন</string>
+    <string name="global_save">সেভ</string>
+    <string name="global_unpacking">আনপ্যাক হচ্ছে %s</string>
+    <string name="global_error_field_empty">এই ফিল্ডটি ফাঁকা রাখা যাবেনা</string>
+    <string name="global_waiting">অপেক্ষা করুন</string>
+    <string name="global_select">বাছুন</string>
+    <string name="global_retry">আবার চেষ্টা করুন</string>
+    <string name="global_default">ডিফল্ট</string>
     <!-- MainActivity: strings -->
+    <string name="mcn_exit_title">অ্যাপ্লিকেশন/গেম %d কোড নিয়ে এক্সিট হয়েছে, latestlog.txt দেখুন আরো তথ্যের জন্য.</string>
+    <string name="mcn_signal_title">অ্যাপ্লিকেশন/গেম %d মারণ সিগন্যাল নিয়ে এক্সিট হয়েছে, latestlog.txt দেখুন আরো তথ্যের জন্য.</string>
+    <string name="mcn_exit_confirm">আপনি কি নিশ্চিত ফোর্স ক্লোজ করবার জন্য?</string>
+    <string name="mcn_check_fail_vulkan_support">জিংক (ভূলকান) রেন্ডারার এই ডিভাইসে সাপোর্টেড নয়!</string>
     <!-- MainActivity: Control buttons -->
+    <string name="control_chat">চ্যাট</string>
+    <string name="control_debug">ডিবাগ</string>
+    <string name="control_primary">প্রাইমারী</string>
+    <string name="control_secondary">সেকেন্ডারি</string>
+    <string name="control_shift">◇</string>
+    <string name="control_inventory">ইনভেন্টরি</string>
+    <string name="control_up">▲</string>
+    <string name="control_left">◀</string>
+    <string name="control_right">▶</string>
+    <string name="control_down">▼</string>
+    <string name="control_jump">⬛</string>
     <string name="control_thirdperson">৩য়</string>
+    <string name="control_listplayers">ট্যাব</string>
+    <string name="control_mouse">মাউস</string>
+    <string name="control_mouseoff">মাউস: বন্ধ</string>
+    <string name="control_mouseon">মাউস: অন </string>
     <!-- MainActivity: Menu advanced controls -->
+    <string name="control_forceclose">ফোর্স ক্লোজ করুন</string>
     <string name="control_viewout">লগ আউটপুট</string>
+    <string name="control_adebug">ইনপুট ডিবাগ</string>
     <!-- ImportControlActivity Strings -->
     <!--
     <string name="control_more3"></string>
     <string name="control_more4"></string>
 -->
+    <string name="multirt_subtitle">ইনস্টলড জাভা রানটাইম গুলি ম্যানেজ করুন.</string>
+    <string name="multirt_progress_caching">ক্যাশইং হচ্ছে...</string>
+    <string name="multirt_config_setdefault">ডিফল্ট নির্বাচন করুন</string>
+    <string name="multirt_config_setdefault_already">ডিফল্ট</string>
+    <string name="multirt_config_removeerror_last">অন্তত একটি জাভা রানটাইম ইনস্টলড থাকতে হবে.</string>
+    <string name="multirt_nocompatiblert">কোনো কম্প্যাটিবল জাভা রানটাইম ইনস্টলড নেই. এই ভার্সনটির জন্য জাভা %d বা নুতন জাভা প্রয়োজন.</string>
+    <string name="multirt_nojava8rt">জাভা 8 পাওয়া যায়নি. এই অপশনের ব্যবহারের জন্য আপনাকে জাভা 8 ইন্সটল করতে হবে.</string>
+    <string name="multirt_delete_runtime">রানটাইম ডিলেট করুন</string>
+    <string name="pvc_jvmArgs">JVM আরগুমেন্টস</string>
+    <string name="preference_mouse_start_title">ভার্চুয়াল মাউস অন করা অবস্থায় স্টার্ট করুন</string>
+    <string name="preference_mouse_start_description">ভার্চুয়াল মাউসটি স্টার্টআপ এর সময় দেখা যায় এই অপশনটি অন করলে.</string>
+    <string name="preference_video_title">ভিডিও এবং রেন্ডারার</string>
+    <string name="preference_video_description">রেজোলিউশন, রেন্ডারার এবং কর্মক্ষমতা</string>
+    <string name="preference_control_title">কন্ট্রোল কাস্টোমাইজ করুন</string>
+    <string name="preference_control_description">গেসচার, বাটন এবং স্কেলিং</string>
+    <string name="preference_java_title">জাভা tweaks</string>
+    <string name="preference_java_description">জাভা রানটাইমস, JVM অরগুমেন্টস, RAM এর পরিমাণ এবং স্যান্ডবক্স</string>
+    <string name="preference_misc_title">বিবিধ সেটিংসগুলি</string>
+    <string name="preference_misc_description">ভার্সনের লিস্ট এবং লাইব্রেরি চেক</string>
+    <string name="preference_experimental_title">গবেষণামূলক অপশনস</string>
+    <string name="preference_experimental_description">এখানকার জিনিস গুলিকে নিজের দায়িত্বে ব্যবহার করুন, এগুলির জন্য কোনো সাপোর্ট উপলব্ধ নয়</string>
+    <string name="preference_sustained_performance_title">মার্জিত কর্মদক্ষতা মোড অন করুন</string>
+    <string name="preference_sustained_performance_description">থার্মাল থ্রোটলিং সীমাবদ্ধ করুন সর্বোচ্চ কর্মক্ষমতা সীমাবদ্ধ করে.</string>
+    <string name="preference_force_vsync_title">জোর করে Vsync অন করুন</string>
+    <string name="preference_force_vsync_description">থার্মাল থ্রোটলিং সীমাবদ্ধ করুন সর্বোচ্চ কর্মক্ষমতা সীমাবদ্ধ করে.</string>
+    <string name="preference_force_english_title">জোর করে ল্যাঙ্গুয়েজ ইংলিশ করুন</string>
+    <string name="preference_force_english_description">আপনাকে অরিজিনাল স্ট্রিংগুলি দেখার সুযোগ দেয়, ডেভেলপারদের দ্বারা উপনীত. পুনরায় স্টার্ট করতে হয়.</string>
+    <string name="preference_edit_controls_title">কাস্টম কন্ট্রোলগুলি এডিট করুন</string>
+    <string name="preference_edit_controls_summary">কন্ট্রোল স্কিমটিকে টুয়েক করুন আপনার ব্যবহার পূরণ করার জন্য.</string>
+    <string name="profiles_profile_name">নেম</string>
+    <string name="pedit_renderer">রেন্ডারার</string>
     <string name="of_dl_progress">%s ডাউনলোড হচ্ছে</string>
+    <string name="generic_debug">ডিবাগ</string>
+    <string name="preference_category_java_tweaks">জাভা tweaks</string>
+    <string name="preference_category_miscellaneous">বিবিধ সেটিংসগুলি</string>
+    <string name="controller_button_select">বাছুন</string>
 </resources>

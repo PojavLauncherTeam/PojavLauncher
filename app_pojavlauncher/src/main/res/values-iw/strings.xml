@@ -8,6 +8,7 @@
     <!-- Login strings -->
     <string name="login_online_login_label">התחבר</string>
     <!-- Hint -->
+    <string name="hint_control_mapping">"נגע בגלגל השיניים במרכז למעלה כדי לפתוח את תפריט ההקשר ⚙\nהקש על כפתור כדי להתאים אישית: עריכה, שינוי גודל, הסרה או שינוי הקישורים שלו."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">החשבון יוסר!</string>
     <!-- AlertDialog title -->
@@ -50,6 +51,7 @@
     <string name="mcl_setting_category_renderer">רינדור</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (כל הגרסאות, מהיר)</string>
     <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - (כל הגרסאות, בינוני)</string>
+    <string name="mcl_setting_renderer_ltw">LTW (OpenGL ES 3) - רק ל-1.17+</string>
     <string name="mcl_setting_veroption_release">הפצה</string>
     <string name="mcl_setting_veroption_snapshot">סנאפשוט</string>
     <string name="mcl_setting_veroption_oldalpha">אלפא: גרסה ישנה</string>
@@ -74,6 +76,7 @@
     <string name="global_default">ברירת מחדל</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">היישומון / המשחק קרס, עם קוד שגיאה %d, בדוק את latestlog.txt למידע נוסף.</string>
+    <string name="mcn_signal_title">האפליקציה/המשחק הופסקה עקב אות קריטי %d, נא לבדוק את קובץ latestlog.txt לפרטים נוספים.</string>
     <string name="mcn_exit_confirm">האם אתה בטוח שאתה רוצה לכפות כיבוי?</string>
     <string name="mcn_check_fail_vulkan_support">Zink (Vulkan) אינו נתמך במכשיר הזה!</string>
     <!-- MainActivity: Control buttons -->
@@ -81,7 +84,13 @@
     <string name="control_debug">נפה באגים</string>
     <string name="control_primary">Pri</string>
     <string name="control_secondary">Sec</string>
+    <string name="control_shift">◇</string>
     <string name="control_inventory">Inv</string>
+    <string name="control_up">▲</string>
+    <string name="control_left">◀</string>
+    <string name="control_right">▶</string>
+    <string name="control_down">▼</string>
+    <string name="control_jump">⬛</string>
     <string name="control_thirdperson">3rd</string>
     <string name="control_listplayers">Tab</string>
     <string name="control_mouse">עכבר</string>
@@ -136,7 +145,9 @@
     <string name="customctrl_passthru">עכבר עובר דרך</string>
     <string name="customctrl_swipeable">ניתן להחלקה</string>
     <string name="customctrl_forward_lock">נעילת קדימה</string>
+    <string name="customctrl_absolute_tracking">מעקב מוחלט אחר האצבע</string>
     <string name="memory_warning_msg">הכמות הנוכחית של RAM פנוי (%d) נמוכה מכמות ה-RAM שהוקצתה (%d), מה שעלול לגרום למשחק לקרוס. הנך מתבקש לשנות את ההקצאה במידה והמשחק קורס.</string>
+    <string name="address_memory_warning_msg">כמות הזיכרון RAM הפנוי הנוכחי (%d) נמוכה יותר מהזיכרון שהוקצה (%d), מה שיגרום לקריסות. שנה את הקצאת הזיכרון אם המשחק קורס.</string>
     <string name="mcl_memory_allocation">הקצאת זיכרון</string>
     <string name="mcl_memory_allocation_subtitle">שולט בכמה זיכרון ניתן ל מיינקראפט.</string>
     <string name="multirt_runtime_corrupt">Java Runtime פגומה</string>
@@ -149,6 +160,7 @@
     <string name="multirt_config_setdefault">הגדר כברירת מחדל</string>
     <string name="multirt_config_setdefault_already">ברירת מחדל</string>
     <string name="multirt_config_removeerror_last">עליך שהיה לפחות ג\'אווה רנטיים אחד מותקן.</string>
+    <string name="multirt_nocompatiblert">לא נמצא Java Runtime תואם. הגרסה הזו דורשת Java %d או חדש יותר.</string>
     <string name="multirt_nojava8rt">לא מצאתי את Java 8. על מנת להשתמש באפשרות זו, עליך להתקין Java 8.</string>
     <string name="multirt_delete_runtime">מחק רנטיים</string>
     <string name="pvc_gameDirectory">תיקיית המשחק</string>
@@ -174,6 +186,10 @@
     <string name="preference_edit_controls_title">עריכת בקרים מותאמות אישית</string>
     <string name="preference_edit_controls_summary">כוונן את מערכת הבקרה כך שתתאים לצרכיך.</string>
     <string name="preference_category_gyro_controls">בקריי גירוסקופ</string>
+    <string name="preference_gyro_invert_x_axis">[[Not translated]</string>
+    <string name="preference_gyro_invert_y_axis">,</string>
+    <string name="preference_gyro_invert_x_axis_description">הפוך את הציר האופקי.</string>
+    <string name="preference_gyro_invert_y_axis_description">הפוך את הציר האנכי.</string>
     <string name="preference_gyro_smoothing_title">אפשר החלקת ג\'ירוסקופ</string>
     <string name="preference_gyro_smoothing_description">הפחת רעידות תמורת עיכוב.</string>
     <string name="preference_back_title">חזרה אל המסך האחרון</string>
@@ -223,6 +239,8 @@
     <string name="create_profile">צור פרופיל חדש</string>
     <string name="preference_shader_dump_title">אפשר השלכת הצללה</string>
     <string name="preference_shader_dump_description">רישום הצללות שהומרו לקובץ היומן.</string>
+    <string name="percent_format">%d%%</string>
+    <string name="millisecond_format">%d מילישניות</string>
     <string name="customctrl_editor_exit_title">עזיבה?</string>
     <string name="customctrl_editor_exit_msg">האם אתה בטוח שברצונך לצאת?</string>
     <string name="customctrl_editor_exit">עזוב את העורך.</string>
@@ -246,9 +264,108 @@
     <string name="fabric_dl_progress">מוריד מטא נתונים של מטעין %s</string>
     <string name="fabric_dl_loader_version">גרסת מטעין %s</string>
     <string name="fabric_dl_game_version">גרסת מינקראפט</string>
+    <string name="fabric_dl_install">התקנה</string>
+    <string name="fabric_dl_cant_read_meta">נכשלה קריאת ה metadata של %s loader. נא לנסות שוב מאוחר יותר.</string>
+    <string name="modloader_dl_install_fabric">יצירת פרופיל Fabric</string>
+    <string name="modloader_dl_install_quilt">יצירת פרופיל Quilt</string>
+    <string name="modloader_dl_install_forge">יצירת פרופיל Forge</string>
+    <string name="create_profile_vanilla">יצירת פרופיל Vanilla</string>
+    <string name="create_profile_vanilla_like_versions">גרסאות כמו Vanilla</string>
+    <string name="create_profile_modded_versions">גרסאות Modded</string>
+    <string name="fabric_dl_loader_title">בחירת גרסאות</string>
+    <string name="of_dl_select_version">בחירת גרסת OptiFine</string>
+    <string name="of_dl_failed_to_scrape">נכשל איסוף נתונים להתקנת OptiFine</string>
     <string name="of_dl_progress">מוריד %s</string>
+    <string name="create_profile_optifine">יצירת פרופיל OptiFine</string>
+    <string name="hint_search_modpack">חיפוש Modpacks</string>
+    <string name="preference_vulkan_driver_system_title">השתמש ב Vulkan Driver של המערכת</string>
+    <string name="preference_vulkan_driver_system_description">אלץ את הלאנצ\'ר להשתמש בדרייבר Vulkan של המערכת במקום Turnip על כרטיסי GPU של Adreno. משפיע רק על Zink ועל מודים שמשתמשים ב-Vulkan.</string>
+    <string name="generic_install">התקנה</string>
+    <string name="generic_apply">החל</string>
     <string name="generic_debug">נפה באגים</string>
+    <string name="search_modpack_no_result">לא נמצאו מודפאקים</string>
+    <string name="search_modpack_error">נכשל במציאת מודפאקים</string>
+    <string name="search_modpack_download_error">נכשל בהורדת מטאדאטא של מודפאקים</string>
+    <string name="modpack_download_downloading_metadata">מוריד מטאדאטא של מודפאקים (%.2f MB / %.2f MB)</string>
+    <string name="modpack_download_downloading_mods">מוריד מודים (%.2f MB / %.2f MB)</string>
+    <string name="modpack_download_downloading_mods_fc">מוריד מודים (קובץ %d מתוך %d)</string>
+    <string name="modpack_download_applying_overrides">מחיל עקיפות (%d/%d)</string>
+    <string name="modpack_install_notification_title">מתקין מודפאק של Pojav</string>
+    <string name="modpack_install_notification_success">לחץ כאן לסיום התקנת מודפאק</string>
+    <string name="modpack_install_notification_data_not_available">נכשל בהורדת מידע מטעין מוד</string>
+    <string name="modpack_install_modloader_download_failed">נכשל בהורדת קבצי מטעין מוד</string>
+    <string name="modpack_install_download_failed">נכשל בהורדת קבצי מודפאק</string>
+    <string name="modpack_install_button">יצירת פרופיל מודפאק</string>
+    <string name="notif_error_occured">אירעה שגיאה</string>
+    <string name="notif_error_occured_desc">לחץ כדי לראות פרטים נוספים</string>
+    <string name="fabric_dl_only_stable">הצג רק גרסאות יציבות</string>
+    <string name="dl_tampered_manifest_title">אזהרת אימות קובץ</string>
+    <string name="dl_tampered_manifest"><![CDATA[קובץ המניפסט של גרסת המשחק במראה אינו תואם את המניפסט הרשמי של מוג'אנג, מה שאומר שהוא עשוי להיות שונה או מושפע.<br/>
+<b>זה לא בטיחותי. המידע האישי שלך עשוי להיות בסיכון אם תמשיך.</b><br/>
+אם אתה עדיין רוצה להשתמש במראה, לחץ על \"כבה בדיקות מניפסט\" והפעל את ההורדה מחדש.<br/>
+אם ברצונך להשתמש במקור ההורדה הרשמי, לחץ על \"עבור לאתר רשמי\" והפעל את ההורדה מחדש.<br/>]]></string>
+    <string name="dl_turn_off_manifest_checks">כבה בדיקות מניפסט</string>
+    <string name="dl_switch_to_official_site">מעבר לאתר הרשמי</string>
+    <string name="preference_download_source_title">מקור הורדת המשחק</string>
+    <string name="preference_download_source_description">בחר מראה להורדה במקום להשתמש בשרת ההורדות הרשמי</string>
+    <string name="preference_verify_manifest_title">אמת את מניפסט גרסת המשחק</string>
+    <string name="preference_verify_manifest_description">כאשר מופעל, הלאנצ\'ר יבדוק את מניפסט גרסת המשחק יחד עם הספריות.</string>
+    <string name="notif_download_finished">המשחק מוכן להפעלה</string>
+    <string name="notif_download_finished_desc">לחץ כאן כדי להתחיל!</string>
+    <string name="preference_category_gestures">מחוות</string>
+    <string name="preference_category_buttons">כפתורים</string>
+    <string name="preference_category_experimental_settings">הגדרות ניסיוניות</string>
     <string name="preference_category_java_tweaks">התאמות ל- Java</string>
+    <string name="preference_category_main_categories">קטגוריות</string>
     <string name="preference_category_miscellaneous">הגדרות שונות</string>
+    <string name="preference_category_video">הגדרות וידאו</string>
+    <string name="notification_permission_dialog_title">בקשת הרשאה</string>
+    <string name="notification_permission_dialog_text">PojavLauncher דורש הרשאה לשלוח התראות כדי למנוע מהורדות משחק/מודפאק להיפסק כאשר אתה עוזב את האפליקציה. ללא ההרשאה הזו, אנדרואיד עשוי להפסיק את ההורדות שלך כאשר PojavLauncher עובר למצב רקע.</string>
+    <string name="notification_permission_toast">תמיד תוכל לשנות את דעתך בהמשך על ידי כניסה להגדרות.</string>
+    <string name="preference_ask_for_notification_title">אפשר התראות</string>
+    <string name="preference_ask_for_notification_description">לחץ כדי לבקש מחדש את הרשאת ההתראות, הנדרשת כדי שהורדות המשחק/מודפאק ברקע יעבדו כראוי.</string>
+    <string name="preference_vsync_in_zink_title">אפשר V-Sync עם Zink</string>
+    <string name="preference_vsync_in_zink_description">מאפשר ל-Launcher להשתמש ב-APIs פנימיים של המערכת כדי להפעיל V-Sync עבור Zink. כבה את זה אם ה-Launcher שלך פתאום קורס עם Zink לאחר עדכון מערכת.</string>
+    <string name="exception_failed_to_unpack_jre17">התקנת JRE 17 נכשלה</string>
+    <string name="newdl_starting">קורא מטאדאטא של המשחק…</string>
+    <string name="newdl_downloading_metadata">מוריד מטאדאטא של המשחק (%s)</string>
+    <string name="newdl_downloading_game_files">מוריד משחק… (%d/%d, %.2f MB/שניה)</string>
+    <string name="newdl_downloading_game_files_size">מוריד משחק… (%.2f/%.2f MB, %.2f MB/שניה)</string>
+    <string name="cropper_lock_vertical">נעילת ציר אנכי</string>
+    <string name="cropper_lock_horizontal">נעילת ציר אופקי</string>
+    <string name="cropper_reset">איפוס</string>
+    <string name="cropper_select_cancelled">הבחירה בוטלה</string>
+    <string name="log_view_button_scroll_off">גלילה אוטומטית\nכבוי</string>
+    <string name="log_view_button_scroll_on">גלילה אוטומטית\nפועל</string>
+    <string name="log_view_button_output_off">פלט\nכבוי</string>
+    <string name="log_view_button_output_on">פלט\nפועל</string>
+    <string name="log_view_label_log_output">פלט לוג:</string>
+    <string name="execute_jar_failed_to_read_file">נכשלה קריאת קובץ ה-.jar</string>
+    <string name="execute_jar_incompatible_runtime">קובץ .jar לא תואם ל-Java %d</string>
     <string name="controller_button_select">בחר</string>
+    <string name="controller_button_trigger_left">Trigger הימני</string>
+    <string name="controller_button_trigger_right">Trigger השמאלי</string>
+    <string name="controller_direction_forward">Stick העליון</string>
+    <string name="controller_direction_backward">Stick התחתון</string>
+    <string name="controller_direction_left">Stick השמאלי</string>
+    <string name="controller_direction_right">Stick הימני</string>
+    <string name="controller_stick_press_l">Thumbstick השמאלי</string>
+    <string name="controller_stick_press_r">Thumbstick הימני</string>
+    <string name="controller_dpad_up">D-Pad העליון</string>
+    <string name="controller_dpad_down">D-Pad התחתון</string>
+    <string name="controller_dpad_left">D-Pad השמאלי</string>
+    <string name="controller_dpad_right">D-Pad הימני</string>
+    <string name="controller_remapper_exit_part1">החזק</string>
+    <string name="controller_remapper_exit_part2">כדי לצאת</string>
+    <string name="controller_remapper_operating_mode">מצב נוכחי</string>
+    <string name="customctrl_visibility_ingame">במשחק</string>
+    <string name="customctrl_visibility_in_menus">בתפריטים</string>
+    <string name="controller_remapper_expand_entry">הרחב כדי לשנות מקשים</string>
+    <string name="preference_remap_controller_title">שנה קביעת מקשים</string>
+    <string name="preference_remap_controller_description">מאפשר לשנות את המקשים הקשורים לכפתורי הבקר</string>
+    <string name="mcl_button_discord">דיסקורד</string>
+    <string name="mcl_button_open_directory">פתח את תיקיית המשחק</string>
+    <string name="local_login_bad_username_title">שם משתמש לא מתאים</string>
+    <string name="local_login_bad_username_text">שם המשתמש חייב להיות באורך של 3-16 תווים, ויכול להכיל רק אותיות לטיניות, מספרים 0-9 וקו תחתון.</string>
+    <string name="quick_setting_title">הגדרות מהירות</string>
 </resources>

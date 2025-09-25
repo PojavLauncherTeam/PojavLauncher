@@ -381,4 +381,10 @@ Um die offizielle Download-Quelle zu verwenden, drücke \"Auf offizielle Seite u
     <string name="local_login_bad_username_title">Ungeeigneter Benutzername</string>
     <string name="local_login_bad_username_text">Der Benutzername muss zwischen 3–16 Zeichen lang sein und darf nur lateinische Buchstaben, Ziffern 0–9 und Unterstriche enthalten.</string>
     <string name="quick_setting_title">Schnelleinstellungen</string>
+    <string name="create_bta_profile">\"Better than Adventure!\"-Profil erstellen</string>
+    <string name="select_bta_version">\"Better than Adventure!\"-Version auswählen</string>
+    <string name="bta_installer_available_versions">Unterstützte BTA-Versionen</string>
+    <string name="bta_installer_untested_versions">Nicht getestete BTA-Versionen</string>
+    <string name="bta_installer_nightly_versions">Nightly BTA-Versionen</string>
+    <string name="newdl_extracting_native_libraries">Extrahiere native Bibliotheken (%d/%d)</string>
 </resources>

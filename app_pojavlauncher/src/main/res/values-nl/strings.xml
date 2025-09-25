@@ -8,6 +8,7 @@
     <!-- Login strings -->
     <string name="login_online_login_label">Aanmelden</string>
     <!-- Hint -->
+    <string name="hint_control_mapping">"Tik op het tandwielpictogram bovenin om het contextmenu te openen ⚙️\nTik op een knop om aan te passen: bewerken, verkleinen of verwijderen of aanpassen van een sneltoetsbinding."</string>
     <!-- Warnings -->
     <string name="warning_remove_account">Dit account wordt verwijderd!</string>
     <!-- AlertDialog title -->
@@ -50,6 +51,7 @@
     <string name="mcl_setting_category_renderer">Renderer</string>
     <string name="mcl_setting_renderer_gles2_4">Holy GL4ES - (alle versies, snel)</string>
     <string name="mcl_setting_renderer_vulkan_zink">Zink (Vulkan) - (alle versies, middelmatig)</string>
+    <string name="mcl_setting_renderer_ltw">LTW (OpenGL ES 3) - Alleen 1.17+</string>
     <string name="mcl_setting_veroption_release">Release</string>
     <string name="mcl_setting_veroption_snapshot">Snapshot</string>
     <string name="mcl_setting_veroption_oldalpha">Oud-alpha</string>
@@ -74,6 +76,7 @@
     <string name="global_default">Standaard</string>
     <!-- MainActivity: strings -->
     <string name="mcn_exit_title">Applicatie/Game is afgesloten met de code %d, controleer latestlog.txt voor meer details.</string>
+    <string name="mcn_signal_title">De applicatie/game is afgesloten met de code %d, controleer latestlog.txt voor meer details.</string>
     <string name="mcn_exit_confirm">Weet je zeker dat je sluiting wilt forceren?</string>
     <string name="mcn_check_fail_vulkan_support">Zink (Vulkan) renderer wordt niet ondersteund op dit apparaat!</string>
     <!-- MainActivity: Control buttons -->
@@ -144,6 +147,7 @@
     <string name="customctrl_forward_lock">Vooruit vergrendelen</string>
     <string name="customctrl_absolute_tracking">Absolute vingertracking</string>
     <string name="memory_warning_msg">De huidige hoeveelheid vrije RAM (%d) is lager dan toegewezen RAM (%d), wat kan leiden tot crashes. Verander de toewijzing als het spel crasht.</string>
+    <string name="address_memory_warning_msg">De huidige hoeveelheid vrije RAM (%d) is lager dan toegewezen RAM (%d), wat kan leiden tot crashes. Verander de toewijzing als het spel crasht.</string>
     <string name="mcl_memory_allocation">Geheugen toewijzen</string>
     <string name="mcl_memory_allocation_subtitle">Bepaalt hoeveel werkgeheugen er aan Minecraft wordt gegeven.</string>
     <string name="multirt_runtime_corrupt">Corrupte Java Runtime</string>
@@ -156,6 +160,7 @@
     <string name="multirt_config_setdefault">Zet standaard</string>
     <string name="multirt_config_setdefault_already">Standaard</string>
     <string name="multirt_config_removeerror_last">Je moet minstens één Java Runtime geïnstalleerd hebben.</string>
+    <string name="multirt_nocompatiblert">We kunnen geen compatibele Java runtimes vinden. Deze versie heeft Java %d of nieuwer nodig.</string>
     <string name="multirt_nojava8rt">We kunnen geen Java 8 vinden.</string>
     <string name="multirt_delete_runtime">Verwijder runtime</string>
     <string name="pvc_jvmArgs">JVM argumenten</string>
@@ -185,6 +190,7 @@
     <string name="preference_gyro_invert_x_axis_description">De horizontale as omkeren.</string>
     <string name="preference_gyro_invert_y_axis_description">De verticale as omkeren.</string>
     <string name="preference_gyro_smoothing_title">Activeer vloeiende gyroscoop besturing</string>
+    <string name="preference_gyro_smoothing_description">Verminder jitter in ruil voor latentie.</string>
     <string name="preference_back_title">Terug naar het laatste scherm</string>
     <string name="unnamed">Naamloos</string>
     <string name="profiles_latest_snapshot">Laatste Snapshot</string>
@@ -223,7 +229,55 @@
     <string name="preference_gyro_sensitivity_title">Gyroscoop bediening gevoeligheid</string>
     <string name="preference_gyro_sensitivity_description">Pas de gevoeligheid van gyroscoop aan.</string>
     <string name="toast_turn_on_gyro">Schakel gyroscoop eerst in om dit te gebruiken!</string>
+    <string name="preference_gyro_sample_rate_title">Samplefrequentie gyroscoop</string>
+    <string name="preference_gyro_sample_rate_description">Als u problemen heeft met de prestaties van gyroscoop, verhoog dit.</string>
+    <string name="microsoft_login_retry_later">Te veel verzoeken, probeer het later opnieuw.</string>
+    <string name="storage_required">PojavLauncher vereist externe opslagverbinding. Maak opnieuw verbinding en start de app opnieuw op.</string>
+    <string name="mcl_setting_title_buttonallcaps">Gebruik alleen hoofdletters in knoplabels</string>
+    <string name="mcl_setting_subtitle_buttonallcaps">Schakel dit uit als u kleine letters in uw besturingselementen wilt gebruiken.</string>
+    <string name="create_profile">Nieuw profiel aanmaken</string>
+    <string name="preference_shader_dump_title">Schaderdumping inschakelen</string>
+    <string name="preference_shader_dump_description">Log geconverteerde shaders in het logbestand.</string>
+    <string name="percent_format">%d%%</string>
+    <string name="millisecond_format">%d ms</string>
+    <string name="customctrl_editor_exit_title">Verlaten?</string>
+    <string name="customctrl_editor_exit_msg">Weet u zeker dat u wil afsluiten?</string>
+    <string name="customctrl_editor_exit">Bewerkmodus afsluiten</string>
+    <string name="global_save_and_exit">Opslaan en afsluiten</string>
+    <string name="global_yes">Ja</string>
+    <string name="global_no">Nee</string>
+    <string name="preference_controller_map_wiped">De controller configuratie is gewist.</string>
+    <string name="preference_category_controller_settings">Controller instellingen</string>
+    <string name="preference_wipe_controller_title">Controller mappings resetten</string>
+    <string name="preference_wipe_controller_description">Maakt het mogelijk om de controller knoppen opnieuw toe te wijzen.</string>
+    <string name="preference_deadzone_scale_title">Joystick deadzone schaal</string>
+    <string name="preference_deadzone_scale_description">Verhoog het als last hebt van stickdrift.</string>
+    <string name="preference_force_big_core_title">De renderer dwingen om op de grote kern te draaien</string>
+    <string name="preference_force_big_core_desc">Forceert de Minecraft render thread op de kern met de hoogste maximale frequentie.</string>
+    <string name="version_select_hint">Kies een versie</string>
+    <string name="forge_dl_progress">Installatieprogramma voor %s downloaden</string>
+    <string name="forge_dl_searching">Zoeken naar Forge versienummer</string>
+    <string name="modloader_dl_failed_to_load_list">Fout bij het laden van versie lijst!</string>
+    <string name="forge_dl_no_installer">Sorry, maar deze versie van Forge heeft geen installatieprogramma, wat nog niet wordt ondersteund.</string>
+    <string name="forge_dl_select_version">Kies Forge-versie</string>
+    <string name="fabric_dl_progress">Downloaden van %s lader metadata</string>
+    <string name="fabric_dl_loader_version">%s lader versie</string>
+    <string name="fabric_dl_game_version">Minecraft versie</string>
+    <string name="fabric_dl_install">Installeren</string>
+    <string name="fabric_dl_cant_read_meta">Lezen van %s lader metadata mislukt. Probeer het later opnieuw.</string>
+    <string name="modloader_dl_install_fabric">Maak Fabric profiel aan</string>
+    <string name="modloader_dl_install_quilt">Maak Quilt profiel aan</string>
+    <string name="modloader_dl_install_forge">Maak Forge profiel aan</string>
+    <string name="create_profile_vanilla">Maak Vanilla profiel aan</string>
+    <string name="create_profile_vanilla_like_versions">Vanilla-achtige versies</string>
+    <string name="create_profile_modded_versions">Gemodde versies</string>
+    <string name="fabric_dl_loader_title">Selecteer versies</string>
+    <string name="of_dl_select_version">Selecteer OptiFine versie</string>
+    <string name="of_dl_failed_to_scrape">Verzamelen van gegevens voor OptiFine installatie mislukt</string>
     <string name="of_dl_progress">Downloaden %s</string>
+    <string name="create_profile_optifine">Maak OptiFine profiel aan</string>
+    <string name="hint_search_modpack">Zoek naar modpacks</string>
+    <string name="generic_install">Installeren</string>
     <string name="generic_debug">Foutoplossing</string>
     <string name="search_modpack_no_result">Geen modpacks gevonden</string>
     <string name="search_modpack_error">Kan modpacks niet vinden</string>
