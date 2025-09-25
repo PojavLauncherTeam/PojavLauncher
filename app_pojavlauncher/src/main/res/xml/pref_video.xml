@@ -12,6 +12,12 @@
             android:icon="@drawable/ic_setting_engine"
             app2:useSimpleSummaryProvider="true"/>
 
+        <Preference
+            android:title="@string/mcl_setting_title_renderer_settings"
+            android:summary="@string/mcl_setting_title_renderer_subtitle"
+            android:fragment="net.kdt.pojavlaunch.prefs.screens.LauncherPreferenceRendererSettingsFragment"
+            />
+
         <androidx.preference.SwitchPreferenceCompat
             android:defaultValue="false"
             android:key="ignoreNotch"

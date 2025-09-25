@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app2="http://schemas.android.com/apk/res-auto">
+
+    <net.kdt.pojavlaunch.prefs.BackButtonPreference/>
+
+    <PreferenceCategory android:title="@string/preference_renderer_mobileglues_settings" android:icon="@drawable/ic_mg_renderer">
+        <EditTextPreference
+            android:title="@string/mg_renderer_glsl_cache"
+            android:key="mg_renderer_setting_glsl_cache_size"
+            android:inputType="number"
+            android:defaultValue="2048"
+            />
+        <androidx.preference.ListPreference
+            android:title="@string/mg_renderer_angle"
+            android:key="mg_renderer_setting_angle"
+            android:defaultValue="1"
+            android:entries="@array/mg_renderer_names_angle"
+            android:entryValues="@array/mg_renderer_values_angle"
+            app2:useSimpleSummaryProvider="true"/>
+        <androidx.preference.ListPreference
+            android:title="@string/mg_renderer_multidraw"
+            android:key="mg_renderer_setting_multidraw"
+            android:defaultValue="0"
+            android:entries="@array/mg_renderer_names_multidraw"
+            android:entryValues="@array/mg_renderer_values_multidraw"
+            app2:useSimpleSummaryProvider="true"/>
+        <androidx.preference.ListPreference
+            android:title="@string/mg_renderer_title_errorSetting"
+            android:key="mg_renderer_setting_errorSetting"
+            android:defaultValue="0"
+            android:entries="@array/mg_renderer_names_errorSetting"
+            android:entryValues="@array/mg_renderer_values_errorSetting"
+            app2:useSimpleSummaryProvider="true"/>
+        <PreferenceCategory android:title="@string/preference_experimental_title">
+            <SwitchPreference
+                android:title="@string/mg_renderer_title_gl43exts"
+                android:summary="@string/mg_renderer_summary_gl43exts"
+                android:key="mg_renderer_setting_gl43exts"
+                android:defaultValue="false"
+                />
+            <SwitchPreference
+                android:title="@string/mg_renderer_title_computeShaderext"
+                android:summary="@string/mg_renderer_summary_computeShaderext"
+                android:key="mg_renderer_computeShaderext"
+                android:defaultValue="false"
+                />
+        </PreferenceCategory>
+    </PreferenceCategory>
+</PreferenceScreen>

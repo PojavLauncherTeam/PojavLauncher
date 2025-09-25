@@ -5,7 +5,7 @@ plugins{
 }
 
 String getGitHash(String project) {
-    def command = Runtime.getRuntime().exec("git rev-list -1 HEAD " + project)
+    def command = Runtime.getRuntime().exec("git rev-list -1 HEAD " + project + "/src")
     def returnCode = command.waitFor()
     if (returnCode != 0) {
         throw new IOException("Command 'getGitHash()' exited with " + returnCode)

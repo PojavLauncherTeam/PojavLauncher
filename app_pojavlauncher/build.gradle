@@ -155,6 +155,7 @@ android {
         gplay {
             initWith release
             signingConfig signingConfigs.googlePlayBuild
+            matchingFallbacks = [ 'release' ]
         }
     }
 
@@ -228,4 +229,6 @@ dependencies {
     // implementation 'net.sourceforge.streamsupport:streamsupport-cfuture:1.7.0'
 
     implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+
+    implementation project(":MobileGlues")
 }

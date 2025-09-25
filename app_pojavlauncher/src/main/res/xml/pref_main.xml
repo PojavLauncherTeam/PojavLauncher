@@ -21,6 +21,7 @@
             android:icon="@drawable/ic_setting_video"
             />
 
+
         <Preference
             android:key="control_screen_setting"
             android:title="@string/preference_control_title"

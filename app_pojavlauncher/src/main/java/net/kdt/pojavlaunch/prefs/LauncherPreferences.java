@@ -15,9 +15,12 @@ import android.util.Log;
 
 import net.kdt.pojavlaunch.*;
 import net.kdt.pojavlaunch.multirt.MultiRTUtils;
+import net.kdt.pojavlaunch.utils.FileUtils;
 import net.kdt.pojavlaunch.utils.JREUtils;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.LinkedHashMap;
 
 public class LauncherPreferences {
     public static final String PREF_KEY_CURRENT_PROFILE = "currentProfile";
@@ -215,5 +218,33 @@ public class LauncherPreferences {
             LauncherPreferences.PREF_NOTCH_SIZE = -1;
         }
         Tools.updateWindowSize(activity);
+    }
+    public static void writeMGRendererSettings() throws IOException {
+        LinkedHashMap<String, Object> MGConfigJson = new LinkedHashMap<>();
+        // Copying the defaultValues from pref_renderer.xml to use as defaults here too
+
+        // We need to get the string and convert it to int because the android:defaultValues only takes in string-arrays.
+        // Using .getInt() leads to a class cast exception and using integer-arrays will just crash the layout/fragment.
+        MGConfigJson.put("enableANGLE", Integer.parseInt(DEFAULT_PREF.getString("mg_renderer_setting_angle", "0")));
+        MGConfigJson.put("enableNoError", Integer.parseInt(DEFAULT_PREF.getString("mg_renderer_setting_errorSetting", "0")));
+
+        // These guys are SwitchPreferences so they get special treatment, they need to be converted to ints
+        int gl43exts = DEFAULT_PREF.getBoolean("mg_renderer_setting_gl43ext", false) ? 1 : 0;
+        int computeShaderext = DEFAULT_PREF.getBoolean("mg_renderer_computeShaderext", false) ? 1 : 0;
+        MGConfigJson.put("enableExtGL43", gl43exts);
+        MGConfigJson.put("enableExtComputeShader", computeShaderext);
+
+        MGConfigJson.put("enableCompatibleMode", Integer.parseInt(DEFAULT_PREF.getString("", "0"))); // Placeholder, doesn't do anything on current MG
+        MGConfigJson.put("multidrawMode", Integer.parseInt(DEFAULT_PREF.getString("mg_renderer_setting_multidraw", "0")));
+        MGConfigJson.put("maxGlslCacheSize", Integer.parseInt(DEFAULT_PREF.getString("mg_renderer_setting_glsl_cache_size", "2048")));
+        File configFile = new File(Tools.DIR_DATA + "/MobileGlues", "config.json");
+        FileUtils.ensureParentDirectory(configFile);
+        try {
+            Tools.write(configFile.getAbsolutePath(),Tools.GLOBAL_GSON.toJson(MGConfigJson));
+            Logger.appendToLog("Writing MG configs to " + configFile.getAbsolutePath());
+            Logger.appendToLog("MG Config is " + Tools.GLOBAL_GSON.toJson(MGConfigJson));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
