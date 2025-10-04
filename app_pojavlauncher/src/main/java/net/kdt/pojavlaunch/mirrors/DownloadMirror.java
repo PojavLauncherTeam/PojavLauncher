@@ -12,6 +12,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 
 public class DownloadMirror {
     public static final int DOWNLOAD_CLASS_LIBRARIES = 0;
@@ -24,6 +26,15 @@ public class DownloadMirror {
             "https://bmclapi2.bangbang93.com",
             "https://bmclapi2.bangbang93.com/assets"
     };
+    private boolean mirroredFailed;
+
+    private DownloadMirror() {
+        this.mirroredFailed = false;
+    }
+
+    public static DownloadMirror getInstance() {
+        return new DownloadMirror();
+    }
 
     /**
      * Download a file with the current mirror. If the file is missing on the mirror,
@@ -35,14 +46,23 @@ public class DownloadMirror {
      * @param buffer The shared buffer
      * @param monitor The download monitor.
      */
-    public static void downloadFileMirrored(int downloadClass, String urlInput, File outputFile,
+    public void downloadFileMirrored(int downloadClass, String urlInput, File outputFile,
                                             @Nullable byte[] buffer, Tools.DownloaderFeedback monitor) throws IOException {
-        try {
-            DownloadUtils.downloadFileMonitored(getMirrorMapping(downloadClass, urlInput),
-                    outputFile, buffer, monitor);
-            return;
-        }catch (FileNotFoundException e) {
-            Log.w("DownloadMirror", "Cannot find the file on the mirror", e);
+        if (shouldNotRollback()) {
+            try {
+                DownloadUtils.downloadFileMonitored(getMirrorMapping(downloadClass, urlInput),
+                        outputFile, buffer, monitor);
+                return;
+            } catch (FileNotFoundException | SocketException
+                    /* Connection Reset and java.net.ConnectException */ e) {
+                Log.w("DownloadMirror", "Cannot find the file on the mirror", e);
+            } catch (HttpException | UnknownHostException e) {
+                Log.w("DownloadMirror", "Cannot find the file on the mirror", e);
+                if (e instanceof UnknownHostException ||
+                        ((HttpException) e).getHttpErrorCode() >= 500) {
+                    this.mirroredFailed = true;
+                }
+            }
             Log.i("DownloadMirror", "Falling back to default source");
         }
         DownloadUtils.downloadFileMonitored(urlInput, outputFile, buffer, monitor);
@@ -56,13 +76,22 @@ public class DownloadMirror {
      * @param urlInput The original (Mojang) URL for the download
      * @param outputFile The output file for the download
      */
-    public static void downloadFileMirrored(int downloadClass, String urlInput, File outputFile) throws IOException {
-        try {
-            DownloadUtils.downloadFile(getMirrorMapping(downloadClass, urlInput),
-                    outputFile);
-            return;
-        }catch (FileNotFoundException e) {
-            Log.w("DownloadMirror", "Cannot find the file on the mirror", e);
+    public void downloadFileMirrored(int downloadClass, String urlInput, File outputFile) throws IOException {
+        if (shouldNotRollback()) {
+            try {
+                DownloadUtils.downloadFile(getMirrorMapping(downloadClass, urlInput),
+                        outputFile);
+                return;
+            } catch (FileNotFoundException | SocketException
+                    /* Connection Reset and java.net.ConnectException */ e) {
+                Log.w("DownloadMirror", "Cannot find the file on the mirror", e);
+            } catch (HttpException | UnknownHostException e) {
+                Log.w("DownloadMirror", "Cannot find the file on the mirror", e);
+                if (e instanceof UnknownHostException ||
+                        ((HttpException) e).getHttpErrorCode() >= 500) {
+                    this.mirroredFailed = true;
+                }
+            }
             Log.i("DownloadMirror", "Falling back to default source");
         }
         DownloadUtils.downloadFile(urlInput, outputFile);
@@ -78,7 +107,7 @@ public class DownloadMirror {
      */
     public static long getContentLengthMirrored(int downloadClass, String urlInput) throws IOException {
         long length = DownloadUtils.getContentLength(getMirrorMapping(downloadClass, urlInput));
-        if(length < 1) {
+        if (length < 1) {
             Log.w("DownloadMirror", "Unable to get content length from mirror");
             Log.i("DownloadMirror", "Falling back to default source");
             return DownloadUtils.getContentLength(urlInput);
@@ -116,6 +145,10 @@ public class DownloadMirror {
      */
     public static boolean isMirrored() {
         return !LauncherPreferences.PREF_DOWNLOAD_SOURCE.equals("default");
+    }
+
+    private boolean shouldNotRollback() {
+        return !LauncherPreferences.PREF_ROLLBACK_OFFICIAL_IF_FAIL || !mirroredFailed;
     }
 
     private static String[] getMirrorSettings() {

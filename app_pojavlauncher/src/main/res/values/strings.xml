@@ -222,6 +222,8 @@
     <string name="preference_gyro_invert_y_axis_description">Invert the vertical axis.</string>
     <string name="preference_gyro_smoothing_title">Enable gyroscope smoothing</string>
     <string name="preference_gyro_smoothing_description">Reduce jitter in exchange of latency.</string>
+    <string name="preference_download_rollback_title">Rollback to official mirror</string>
+    <string name="preference_download_rollback_description">Roll back the official source when the mirror source experiences server failure.</string>
 
     <string name="preference_back_title">Back to the last screen</string>
     <string name="unnamed">Unnamed</string>
