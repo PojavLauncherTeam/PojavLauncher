@@ -1,5 +1,7 @@
 package net.kdt.pojavlaunch.modloaders.modpacks.api;
 
+import android.util.Log;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.kdt.mcgui.ProgressLayout;
@@ -64,13 +66,20 @@ public class ModrinthApi implements ModpackApi{
         ModItem[] items = new ModItem[responseHits.size()];
         for(int i=0; i<responseHits.size(); ++i){
             JsonObject hit = responseHits.get(i).getAsJsonObject();
+            String iconUrl;
+            try {
+                iconUrl = hit.get("icon_url").getAsString();
+            } catch (Exception e) {
+                Log.e("error", Tools.printToString(e));
+                iconUrl = null;
+            }
             items[i] = new ModItem(
                     Constants.SOURCE_MODRINTH,
                     hit.get("project_type").getAsString().equals("modpack"),
                     hit.get("project_id").getAsString(),
                     hit.get("title").getAsString(),
                     hit.get("description").getAsString(),
-                    hit.get("icon_url").getAsString()
+                    iconUrl
             );
         }
         if(modrinthSearchResult == null) modrinthSearchResult = new ModrinthSearchResult();
