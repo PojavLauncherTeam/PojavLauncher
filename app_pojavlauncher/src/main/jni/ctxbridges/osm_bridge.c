@@ -11,6 +11,7 @@
 static __thread osm_render_window_t* currentBundle;
 // a tiny buffer for rendering when there's nowhere t render
 static char no_render_buffer[4];
+static bool hasSetNoRendererBuffer = false;
 
 // Its not in a .h file because it is not supposed to be used outsife of this file.
 void setNativeWindowSwapInterval(struct ANativeWindow* nativeWindow, int swapInterval);
@@ -104,7 +105,11 @@ void osm_make_current(osm_render_window_t* bundle) {
         osm_swap_surfaces(bundle);
         if(hasSetMainWindow) pojav_environ->mainWindowBundle->state = STATE_RENDERER_ALIVE;
     }
-    osm_set_no_render_buffer(&bundle->buffer);
+    if (!hasSetNoRendererBuffer)
+    {
+        osm_set_no_render_buffer(&bundle->buffer);
+        hasSetNoRendererBuffer = true;
+    }
     osm_apply_current_ll();
     OSMesaPixelStore_p(OSMESA_Y_UP,0);
 }
